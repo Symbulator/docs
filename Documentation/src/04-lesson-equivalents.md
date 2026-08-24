@@ -35,7 +35,7 @@ called **3** and **5**, would be described as follows: `s1,3,5`{{i:short circuit
 No power is consumed, and no voltage is dropped, in a short circuit. For each
 short in a circuit, Symbulator stores only the current through it, flowing from
 the first node towards the second. For a short called sx, that is
-{{v7,8|`isx`}}{{v9|`res.i("sx")`}}.
+{{v7,8|`isx`}}{{v9|the **current through** line of the `sx` block in **Results**}}.
 
 ::: problem HK5's Drill Problem 1-13
 Find i1, i2, i3 and i4.
@@ -56,7 +56,7 @@ s\dc("r1,1,0,25:jd,0,2,.2v1:r2,2,3,10:ji,4,3,2.5:r3,4,5,100:s1,1,2:s2,2,4:s3,0,3
 ```
 ```field 9 Circuit Description
 r1,1,0,25
-jd,0,2,.2*v1
+jd,0,2,.2v1
 r2,2,3,10
 ji,4,3,2.5
 r3,4,5,100
@@ -65,12 +65,10 @@ s2,2,4
 s3,0,3
 s4,3,5
 ```
-```sym 9
-res = dc("r1,1,0,25:jd,0,2,.2*v_1:r2,2,3,10:ji,4,3,2.5:r3,4,5,100:"
-         "s1,1,2:s2,2,4:s3,0,3:s4,3,5")
-```
 
-We ask for the values of the variables:
+{{v7,8|We ask for the values of the variables:}}{{v9|Choose *Solve circuit* and
+*DC*, then run it. Each short has its own block in **Results**, and the
+number you want is on its **current through** line:}}
 
 ```sym 7
 approx({is1,is2,is3,is4})
@@ -78,12 +76,18 @@ approx({is1,is2,is3,is4})
 ```sym 8
 approx({is1,is2,is3,is4})
 ```
-```sym 9
-[float(res.i(s)) for s in ("s1", "s2", "s3", "s4")]
-```
-```out
+```out 7,8
 {–2., 3., –8., –.5}
 ```
+
+::: only 9
+| Short | Current through |
+|---|---|
+| `s1` | {{o:-2}} A |
+| `s2` | {{o:3}} A |
+| `s3` | {{o:-8}} A |
+| `s4` | {{o:-0.5}} A |
+:::
 
 These are correct. These answers can only be found using short circuits.
 :::

@@ -118,7 +118,12 @@ $pageTitle = $isHome ? $toc['name']
       </a>
       <a class="header-title" href="<?= url($v) ?>">
         <p class="brand-name">Symbulator <span class="vnum"><?= e($toc['label']) ?></span></p>
-        <p class="brand-sub">For <?= e($toc['platform']) ?></p>
+        <!-- Static, and identical to the line on symbulator.com and in
+             the app. It used to read "For <platform>", which made the
+             lockup say something different on every version of the
+             site; the version is already in the wordmark beside it and
+             in the menu. -->
+        <p class="brand-sub">the best portable symbolic simulator of linear circuits</p>
       </a>
     </div>
   </div>

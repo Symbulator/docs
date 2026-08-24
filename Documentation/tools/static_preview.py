@@ -157,7 +157,11 @@ def topbar(book, toc, v, page, ids):
             '</a>'
             f'<a class="header-title" href="{link(v)}">'
             f'<p class="brand-name">Symbulator <span class="vnum">{e(toc["label"])}</span></p>'
-            f'<p class="brand-sub">For {e(toc["platform"])}</p>'
+            # Static, matching web/index.php, the landing page and the
+            # app. This generator does not read index.php, so a change
+            # to the lockup there has to be made here as well or the
+            # preview quietly shows the superseded one.
+            '<p class="brand-sub">the best portable symbolic simulator of linear circuits</p>'
             '</a></div></div></header>'
             f'<div class="subbar"><div class="subbar-inner">{ribbon}'
             f'<details class="versions" id="version-picker">'
