@@ -348,22 +348,23 @@ very typical case, as functions of the **load** variable:
 - **prl** has the power consumed in the load
 :::
 ::: only 9
-Symbulator 9 does not ask, and it does not carry the load expressions on the
-result either: `th` returns `vth`, `ino`, `z` and `pmax`, and nothing else.
-That is no great loss, because each of the three load quantities is one line
-of SymPy, built from the Thévenin voltage and the equivalent impedance you
-already have:
+Symbulator 9 does not ask, and it does not carry the load quantities on the
+results either. **Results** shows four answers and no more: `vth`, `ino`,
+`req` and `pmax`.
 
-```sym 9
-from sympy import Symbol, simplify
-load = Symbol("load")
-irl = simplify(eq.vth / (eq.z + load))    # current in the load
-vrl = simplify(irl * load)                # voltage drop in the load
-prl = simplify(irl**2 * load)             # power consumed in the load
-```
+That is no great loss, because each load quantity is one line in
+**Evaluate**, built from the two answers you already have. Writing R for
+the load resistance:
 
-Define those three once, straight after the `th` call, and the rest of this
-section reads exactly as it does on the calculator.
+| To find | Type into Evaluate |
+|---|---|
+| the current in the load | `vth/(req+R)` |
+| the voltage drop in the load | `vth*R/(req+R)` |
+| the power consumed in the load | `vth^2*R/(req+R)^2` |
+
+Put the load's actual value where R is. The rest of this section reads
+exactly as it does on the calculator, with those three in place of the
+calculator's `irL`, `vrL` and `prL`.
 :::
 
 ::: problem B11's Example 9.6
@@ -383,11 +384,20 @@ s\th("e1,1,0,9:r1,1,2,3:r2,2,0,6",2,0):{vth,req}
 ```sym 8
 s\th("e1,1,0,9:r1,1,2,3:r2,2,0,6",2,0):{vth,req}
 ```
-```sym 9
-eq = th("e1,1,0,9:r1,1,2,3:r2,2,0,6", "2", "0", domain="dc")
-eq.vth, eq.z
+```field 9 Circuit Description
+e1,1,0,9
+r1,1,2,3
+r2,2,0,6
 ```
-```out
+
+::: only 9
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
+*Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0**
+in the second. Choose *DC* and run it.
+
+**Results** gives `vth` = {{o:6}} V and `req` = {{o:2}} Ω.
+:::
+```out 7,8
 {6, 2}
 ```
 
@@ -401,12 +411,16 @@ go:
 ```sym 8
 {irL|Load=2.,irL|Load=10.,irL|Load=100.}
 ```
-```sym 9
-from sympy import Symbol, simplify
-load = Symbol("load")
-irl = simplify(eq.vth / (eq.z + load))
-[float(irl.subs(load, x)) for x in (2, 10, 100)]
+::: only 9
+There is no single push here — you ask **Evaluate** three times, once per
+load, and the answers come back one at a time:
+
+```field 9 Evaluate
+vth/(req+2)
 ```
+
+Then `vth/(req+10)`, then `vth/(req+100)`.
+:::
 ```out
 {1.5, .5, .059}
 ```
@@ -442,14 +456,20 @@ equivalent connected, between nodes **n** and **0**, to a load called **rl**
 with a symbolic value of **load**, in ohms.
 :::
 ::: only 9
-Symbulator 9 has no ready-made `eqcir` string, but writing one is a single
-f-string, since you are already holding the two numbers it needs. This puts
-the Norton equivalent between nodes **n** and **0**, with a load called **rl**
-whose value is the symbol **load**:
+Symbulator 9 writes no such string for you, and does not need to: the
+equivalent is three lines, and you already have both numbers on screen.
+Type them into a fresh **Circuit Description**, putting `ino` and `req`
+where they belong:
 
-```sym 9
-eqcir = f"jN,0,n,{eq.ino}:rE,n,0,{eq.z}:rL,n,0,load"
+```field 9 Circuit Description
+jn,0,n,ino
+re1,n,0,req
+rl,n,0,load
 ```
+
+Replace `ino` and `req` with the numbers **Results** just gave you. The
+load is called `rl` and its value is the symbol `load`, so the answers
+come back in terms of it.
 
 You can use it as a starting point for a new simulation.
 :::
@@ -471,13 +491,28 @@ s\th("e,1,0,24:r1,1,2,120:r2,2,0,280:j,2,0,560'm",2,0):{ino,req}
 ```sym 8
 s\th("e,1,0,24:r1,1,2,120:r2,2,0,280:j,2,0,560'm",2,0):{ino,req}
 ```
-```sym 9
-eq = th("e,1,0,24:r1,1,2,120:r2,2,0,280:j,2,0,560'm", "2", "0", domain="dc")
-eq.ino, eq.z
+```field 9 Circuit Description
+e1,1,0,24
+r1,1,2,120
+r2,2,0,280
+j,2,0,560'm
 ```
-```out
+
+::: only 9
+*Find equivalent*, *Thévenin / Norton*, nodes **2** and **0**, in DC.
+:::
+```out 7,8
 {.36, 84.}
 ```
+
+::: only 9
+**Results** gives `ino` = {{o:-0.36}} A and `req` = {{o:84}} Ω.
+
+The sign differs from the calculator's, which prints {{o:0.36}}: version 9
+reports the Norton current in the direction it actually flows, from the
+first node to the second. Nothing else changes — carry the sign through and
+the load current below comes out the same.
+:::
 
 Correct. Now to the second part of the question. In order to find the current
 through RL, we cannot use the load expressions, because now the load is not the
@@ -500,13 +535,21 @@ s\dc("jN,0,n,iNo:rE,n,0,rEq:rL,n,0,168:j,0,n,180'm"):irL
 ```sym 8
 s\dc("jN,0,n,iNo:rE,n,0,rEq:rL,n,0,168:j,0,n,180'm"):irL
 ```
-```sym 9
-res = dc(f"jN,0,n,{eq.ino}:rE,n,0,{eq.z}:rL,n,0,168:j,0,n,180'm")
-float(res.i("rL"))
+```field 9 Circuit Description
+jn,0,n,-0.36
+re1,n,0,84
+rl,n,0,168
+j,0,n,180'm
 ```
-```out
+
+```out 7,8
 –.06
 ```
+
+::: only 9
+Run it in DC. The `rl` block's **current through** line reads
+{{o:-0.06}} A.
+:::
 
 Correct: there is a current of 60 mA flowing through RL from 0 to n.
 
