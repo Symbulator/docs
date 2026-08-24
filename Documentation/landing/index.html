@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Symbulator — a symbolic simulator of linear electric circuits</title>
+<meta name="description" content="Symbulator solves linear electric circuits symbolically. Give it letters instead of numbers and it hands back algebra. Free, and now open-source. Run it online, install it, or read the documentation.">
+<link rel="canonical" href="https://symbulator.com/">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Symbulator">
+<meta property="og:title" content="Symbulator — solve circuits with the letters still in them">
+<meta property="og:description" content="A symbolic simulator of linear electric circuits. Run it in a browser tab, install it on any device, or read fourteen lessons of worked problems.">
+<meta property="og:url" content="https://symbulator.com/">
+<meta property="og:image" content="https://symbulator.com/assets/banner.jpg">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
+<link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
+<meta name="theme-color" content="#203864">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Serif:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/banner.css">
+<link rel="stylesheet" href="/assets/landing.css">
+
+<script>
+/* Apply a saved theme before first paint, so the page never flashes the
+   wrong one. Same key and contract as the documentation site. */
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem("symbulator-docs-theme"); } catch (e) {}
+  if (saved === "dark" || saved === "light") {
+    document.documentElement.setAttribute("data-theme", saved);
+  }
+})();
+</script>
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="header-brand">
+      <a class="header-logo-link" href="https://symbulator.com"
+         aria-label="Symbulator home">
+        <img src="/assets/logo.png" alt="Symbulator logo" class="header-logo">
+      </a>
+      <a class="header-title" href="#main">
+        <p class="brand-name">Symbulator <span class="tm">9</span></p>
+        <p class="brand-sub">the best portable symbolic simulator of linear circuits</p>
+      </a>
+    </div>
+  </div>
+</header>
+
+<div class="subbar">
+  <div class="subbar-inner">
+    <!-- Outbound only. The in-page anchors that used to sit here (Start,
+         What it does) were the odd ones out: on the other two properties
+         every ribbon link leaves for somewhere else, and a reader already
+         on this page can scroll. -->
+    <nav>
+      <a href="https://symbulator.pythonanywhere.com">Online App</a>
+      <a href="https://learn.symbulator.com">Documentation</a>
+    </nav>
+    <span class="subbar-spacer"></span>
+    <button class="theme-toggle" id="themeToggle" type="button"
+            aria-label="Switch to dark mode" title="Switch to dark mode"><svg viewBox="0 0 24 24" style="width:1.2em;height:1.2em;flex:none" fill="#8ec7f5" aria-hidden="true"><path d="M20.4 14.7A8.5 8.5 0 1 1 9.3 3.6a7 7 0 1 0 11.1 11.1Z"/></svg></button>
+  </div>
+</div>
+
+<main id="main">
+
+  <!-- ============ hero ============ -->
+  <section class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <p class="eyebrow eyebrow-new"><span class="chip-new">New!</span>
+          <span>Symbulator 9 for Python and SymPy</span></p>
+        <h1>Solve circuits with the letters still in them.</h1>
+        <p class="hero-lede">Give Symbulator symbols instead of numbers and it hands
+          back algebra — every node voltage, every element current, every power, in
+          terms of whatever you left unknown. Describe the circuit an element at a
+          time and ask it what you want to know.</p>
+        <p class="hero-actions">
+          <a class="btn" href="https://symbulator.pythonanywhere.com">Use it online</a>
+          <a class="btn btn-quiet" href="https://learn.symbulator.com">Learn how to</a>
+        </p>
+      </div>
+
+      <div>
+        <div class="hero-art" role="img"
+             aria-label="Pen-and-ink engraving of a scorpion."></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ the ways in ============ -->
+  <section class="band" id="start">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Start here</p>
+        <h2>Run it in a browser tab, or put it on your own machine.</h2>
+        <p class="sub">Symbulator 9 is the current version, built on Python and
+          SymPy. Every route below runs the same program.</p>
+      </div>
+
+      <div class="cluster">
+        <p class="cluster-label">Use it</p>
+        <ul class="ways">
+          <li class="way way-primary way-wide">
+            <div>
+              <p class="way-kicker">Nothing to install</p>
+              <h3><a href="https://symbulator.pythonanywhere.com">Run Symbulator online</a></h3>
+            </div>
+            <div>
+              <p class="way-text">Opens in a browser tab and runs straight away, on
+                anything with a screen. The quickest way to try Symbulator, and
+                enough for most coursework.</p>
+              <p class="way-url">symbulator.pythonanywhere.com</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cluster">
+        <p class="cluster-label">Or install it, and work offline</p>
+        <ul class="ways ways-2">
+          <li class="way">
+            <p class="way-kicker">Including phones and tablets</p>
+            <h3><a href="https://install.symbulator.com">Install from the browser</a></h3>
+            <p class="way-text">A web page that installs Symbulator 9 onto your
+              device for you. It is the installer, not the program — once it has
+              done its job, Symbulator runs on your device and needs no connection.</p>
+            <p class="way-meta"><b>Works on</b> phones, tablets and computers</p>
+            <p class="way-url">install.symbulator.com</p>
+          </li>
+          <li class="way">
+            <p class="way-kicker">Unpack it yourself</p>
+            <h3><a href="https://symbulator.com/9/local.zip">Download the zip</a></h3>
+            <p class="way-text">The same program as a plain archive, to put where you
+              want it. Use this if you would rather see what you are installing, or
+              install it somewhere the browser cannot reach.</p>
+            <p class="way-meta"><b>Works on</b> Windows, macOS and Linux</p>
+            <p class="way-url">symbulator.com/9/local.zip</p>
+          </li>
+        </ul>
+      </div>
+
+      <div class="cluster">
+        <p class="cluster-label">Learn it</p>
+        <ul class="ways">
+          <li class="way way-wide">
+            <div>
+              <p class="way-kicker">Fourteen lessons, with worked problems</p>
+              <h3><a href="https://learn.symbulator.com">Read the documentation</a></h3>
+            </div>
+            <div>
+              <p class="way-text">From describing your first circuit to transient
+                analysis, three-phase and two-ports — every lesson worked through
+                against real textbook problems.</p>
+              <p class="way-url">learn.symbulator.com</p>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ what it does ============ -->
+  <section id="what">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">What it does</p>
+        <h2>Four analyses, every element you meet in Circuits I and II.</h2>
+      </div>
+
+      <dl class="cap-list">
+        <div>
+          <dt>Analyses</dt>
+          <dd><b>DC</b> and <b>AC</b> as phasor analysis, <b>transient</b> in the time
+            domain, and the <b>complex frequency domain</b>. Numerical circuits and,
+            more to the point, symbolic ones.</dd>
+        </div>
+        <div>
+          <dt>Answers</dt>
+          <dd>Voltages at every node; current, voltage drop and power in every
+            element. Real and complex power in AC, and the impedance each source
+            sees looking back into the circuit.</dd>
+        </div>
+        <div>
+          <dt>Equivalents</dt>
+          <dd><b>Thévenin</b> and <b>Norton</b> equivalents between any two nodes, and
+            two-port parameters in six varieties.</dd>
+        </div>
+        <div>
+          <dt>Elements</dt>
+          <dd>Resistors, inductors, capacitors, mutual inductance, independent and
+            dependent sources of both kinds, ideal operational amplifiers and ideal
+            transformers.</dd>
+        </div>
+        <div>
+          <dt>Plots</dt>
+          <dd>Time-domain plots, and Bode gain and phase against frequency on a
+            logarithmic axis.</dd>
+        </div>
+        <div>
+          <dt>Expert mode</dt>
+          <dd>Hand it the extra equations a problem gives you — a known current, a
+            resistance the source sees — and it will solve for the component values
+            you don't have.</dd>
+        </div>
+      </dl>
+
+      <div class="limits">
+        <h3>What it will not do</h3>
+        <p>Symbulator simulates linear circuits, so there are no diodes and no
+          transistors. It also will not help with problems that turn on applying a
+          formula selectively rather than solving the circuit through.</p>
+        <p>And it is not a replacement for your brain. You have to understand
+          circuit theory to use it.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ older calculators ============ -->
+  <section class="band" id="calculators">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">On a calculator</p>
+        <h2>Symbulator still runs on the calculators it grew up on.</h2>
+      </div>
+
+      <ul class="legacy">
+        <li>
+          <span class="legacy-num">7</span>
+          <div class="legacy-body">
+            <h3>TI-89 Titanium <span class="chip chip-stable">Stable</span></h3>
+            <p>Also the Voyage 200 and the classic TI-89. Transfer
+              <code>s7.tig</code> to the calculator; Laplace transforms come from
+              Lars Frederiksen's DiffEq alongside it.</p>
+            <p class="links">
+              <a href="/7/s7.tig">s7.tig</a>
+              <a href="/7/diffeq.zip">DiffEq</a>
+              <a href="https://learn.symbulator.com/?v=7">Documentation</a>
+            </p>
+          </div>
+        </li>
+        <li>
+          <span class="legacy-num">8</span>
+          <div class="legacy-body">
+            <h3>TI-Nspire CX II CAS <span class="chip chip-beta">Beta</span></h3>
+            <p>Transfer <code>s.tns</code> and refresh the libraries. Still in beta,
+              so expect the occasional bug.</p>
+            <p class="links">
+              <a href="/8/s.tns">s.tns</a>
+              <a href="/8/problems.zip">300 solved problems</a>
+              <a href="https://learn.symbulator.com/?v=8">Documentation</a>
+            </p>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </section>
+  <!-- ============ for developers ============ -->
+  <section id="build">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">For developers</p>
+        <h2>The engine underneath, if you want to build on it.</h2>
+        <p class="sub">Not needed to use Symbulator — this is for people who want to
+          call it from their own code, or fork it.</p>
+      </div>
+
+      <ul class="dev">
+        <li>
+          <h3><a href="https://pypi.org/project/symbulator/">The Python package</a></h3>
+          <p><code>pip install symbulator</code> — the core of Symbulator: the
+            description parser, the stamping engine and the solver. It is what powers
+            the app, exposed as a library you can import and call directly.</p>
+        </li>
+        <li>
+          <h3><a href="https://github.com/Symbulator">The source, on GitHub</a></h3>
+          <p>Both halves are there — the solver that does the algebra, and the
+            interface that wraps it. Symbulator is now open source under the MIT
+            licence, so ports and derivatives are welcome under the same licence,
+            with attribution.</p>
+        </li>
+      </ul>
+    </div>
+  </section>
+
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <img src="/assets/mark.png" alt="">
+    <div class="foot-text">
+      <p class="foot-name">Symbulator, by Roberto Perez-Franco</p>
+      <p>Born free, and forever free.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  /* ---- theme toggle, same contract as the documentation site:
+     data-theme on the root element, remembered in localStorage. ---- */
+  var root = document.documentElement;
+  var btn = document.getElementById("themeToggle");
+
+  function stored() {
+    try { return localStorage.getItem("symbulator-docs-theme"); }
+    catch (e) { return null; }
+  }
+  function isDark() {
+    var t = root.getAttribute("data-theme");
+    if (t) { return t === "dark"; }
+    return window.matchMedia("(prefers-color-scheme: dark)").matches;
+  }
+  var ICON_MOON = '<svg viewBox="0 0 24 24" style="width:1.2em;height:1.2em;flex:none" fill="#8ec7f5" aria-hidden="true"><path d="M20.4 14.7A8.5 8.5 0 1 1 9.3 3.6a7 7 0 1 0 11.1 11.1Z"/></svg>';
+  var ICON_SUN = '<svg viewBox="0 0 24 24" style="width:1.2em;height:1.2em;flex:none" fill="none" stroke="#8ec7f5" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>';
+
+  function sync() {
+    var dark = isDark();
+    btn.innerHTML = dark ? ICON_SUN : ICON_MOON;
+    var label = dark ? "Switch to light mode" : "Switch to dark mode";
+    btn.setAttribute("aria-label", label);
+    btn.title = label;
+  }
+
+  var saved = stored();
+  if (saved === "dark" || saved === "light") { root.setAttribute("data-theme", saved); }
+  sync();
+
+  btn.addEventListener("click", function () {
+    var next = isDark() ? "light" : "dark";
+    root.setAttribute("data-theme", next);
+    try { localStorage.setItem("symbulator-docs-theme", next); } catch (e) {}
+    sync();
+  });
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+\documentclass{symbulator}
+\booktitle{How to use this}
+\booksubtitle{Editing, building and publishing the Symbulator documentation}
+\bookversion{The documentation toolkit}
+\bookplatform{One source tree, three PDFs, one website}
+\bookauthor{Written for Roberto Perez-Franco}
+
+\begin{document}
+\maketitlepage
+\tableofcontents
+
+\frontchapter{Where everything lives}
+\chaptersummary{Unpack the zip once, and that folder becomes the source of
+truth for every version of the documentation. Everything else is generated
+from it.}
+
+Download \symcode{symbulator-docs.zip} and unpack it wherever you keep your
+projects. Inside you will find this:
+
+\begin{itemize}
+\item \symcode{src/} --- the chapters, one Markdown file each. \textbf{This is
+      what you edit.}
+\item \symcode{book.yaml} --- chapter order, the three versions, and the words
+      that change between them.
+\item \symcode{tex/symbulator.cls} --- the look of the PDFs.
+\item \symcode{web/} --- the look of the website: \symcode{index.php},
+      \symcode{assets/style.css}, \symcode{.htaccess}.
+\item \symcode{assets/} --- the figures.
+\item \symcode{tools/} --- helper scripts.
+\item \symcode{build/} --- generated output. \textbf{Never edit anything in
+      here}; the next build overwrites it.
+\end{itemize}
+
+\begin{calloutwarning}{The copy in the zip is a snapshot}
+The \symcode{build/} folder inside the zip is there so you can look at the
+results straight away. The moment you run a build it is replaced.
+\end{calloutwarning}
+
+\frontchapter{What you need installed}
+\chaptersummary{Python for everything, and XeLaTeX only if you want the PDFs.
+PHP is not needed on your machine at all.}
+
+\section{Python}
+
+Python 3.9 or newer. From inside the project folder, install the two libraries
+the build uses:
+
+\begin{symtype}
+pip install -r requirements.txt
+\end{symtype}
+
+That is PyYAML, which reads \symcode{book.yaml} and the front matter of each
+chapter, and Matplotlib, which is only used by the figure-placeholder script.
+
+\section{XeLaTeX, for the PDFs}
+
+The PDFs are typeset with XeLaTeX. On Windows, install MiKTeX and let it fetch
+packages on demand the first time you build. On macOS, install MacTeX. On
+Linux, install \symcode{texlive-xetex}, \symcode{texlive-fonts-recommended} and
+\symcode{texlive-latex-extra}.
+
+If you skip this, everything still works except the PDFs: build with
+\symcode{-{}-web} and you get the website only.
+
+\section{PHP}
+
+You do not need PHP on your own machine. It runs on the server, and your cPanel
+hosting already has it. To preview the site locally you use the static preview
+described later, which needs nothing but a browser.
+
+\frontchapter{Editing the source}
+\chaptersummary{The chapters are plain Markdown with a small set of additions.
+Any text editor will open them, but a code editor plus Claude Code will save
+you a great deal of typing.}
+
+\section{What to use}
+
+I would use \textbf{VS Code}, with \textbf{Claude Code} running in the same
+folder. You already use that pairing for the Android app, and it pays off more
+here: because every chapter is plain UTF-8 text in one tree, you can ask for
+sweeping changes --- ``convert Lesson 10 from this HTML page'', ``fix the
+version 9 code everywhere it appears'' --- and have them applied across all
+fifteen files at once.
+
+VS Code also gives you syntax colouring inside the fenced code blocks, and a
+project-wide search, which is how you will work through the outstanding items:
+
+\begin{symtype}
+grep -rn TODO src/
+\end{symtype}
+
+\begin{calloutnote}{The built-in Markdown preview will disappoint you}
+VS Code's preview pane does not understand the \symcode{:::} directives or the
+\symcode{\{\{v7|...\}\}} spans, and shows them as literal text. The real preview
+is the generated one, described in the next chapter.
+\end{calloutnote}
+
+\section{The markup, in one page}
+
+Ordinary Markdown handles headings, lists, bold, italic and links. On top of
+that:
+
+\begin{itemize}
+\item \symcode{\#\# Title} is a numbered section; \symcode{\#\#\# Title} is a
+      subsection.
+\item \symcode{\{\{v7|text\}\}} shows text only in version 7;
+      \symcode{\{\{v7,8|text\}\}} in two of them; \symcode{\{\{!v8|text\}\}} in
+      everything except version 8.
+\item \symcode{\{\{t:container\}\}} inserts a word that changes with the version
+      --- folder, document or session --- defined in \symcode{book.yaml}.
+\item \symcode{\{\{i:resistor\}\}} adds an index entry, invisibly.
+\item \symcode{\{\{ref:lesson-dc\}\}} cross-references another chapter or
+      section, and renders as ``Lesson 1'' or ``section 1.3'' with the right
+      number for that version.
+\item \symcode{:::~tip Title} opens a callout; also \symcode{note},
+      \symcode{warning} and \symcode{danger}. Close every one with
+      \symcode{:::} on its own line.
+\item \symcode{:::~problem}, \symcode{:::~answer}, \symcode{:::~figure} and
+      \symcode{:::~practice} build the worked examples.
+\item \symcode{:::~only 7,8} and \symcode{:::~not 8} gate whole blocks.
+\item A fence marked \symcode{sym 7} is something the reader types on version 7;
+      \symcode{out} is something the software returns. Consecutive fences with
+      different version tags are variants of the same instruction.
+\end{itemize}
+
+The full specification is in \symcode{SPEC.md} in the project folder.
+
+\section{The standfirst}
+
+Each chapter opens with a larger paragraph telling the reader what to expect.
+It comes from \symcode{summary:} in that chapter's front matter, and it is the
+same text that appears on the landing page card.
+
+\frontchapter{Building}
+\chaptersummary{One command produces all three PDFs and the whole website. A
+second one watches the folder and rebuilds as you type.}
+
+\section{Check before you build}
+
+\begin{symtype}
+python3 build.py -{}-check
+\end{symtype}
+
+This validates every cross-reference, every version term, every code-fence
+version tag and every figure, for all three versions, and tells you what is
+wrong. It also lists the figures still to be supplied. The same check runs at
+the start of every build, as a warning.
+
+\section{Build everything}
+
+\begin{symtype}
+python3 build.py
+\end{symtype}
+
+That writes:
+
+\begin{itemize}
+\item \symcode{build/pdf/} --- \symcode{symbulator-v7.pdf},
+      \symcode{-v8.pdf} and \symcode{-v9.pdf}
+\item \symcode{build/web/} --- the whole site, ready to upload
+\item \symcode{build/tex/} --- the generated LaTeX, kept for when something
+      goes wrong
+\end{itemize}
+
+Useful variations: \symcode{-{}-web} for the website only, which is fast;
+\symcode{-{}-pdf} for the PDFs only; \symcode{-{}-versions 8} to work on one
+version at a time.
+
+\section{While you write}
+
+\begin{symtype}
+python3 tools/watch.py
+\end{symtype}
+
+Leave this running in a terminal. It rebuilds about a second after you save a
+file in \symcode{src/}, and refreshes the preview. Open
+\symcode{build/preview/v7-home.html} in a browser and reload the tab as you go.
+Stop it with Ctrl-C.
+
+It skips the PDFs by default, because XeLaTeX takes roughly a minute for all
+three. Add \symcode{-{}-pdf} when you want those rebuilt too --- usually only
+before you publish.
+
+\begin{callouttip}{The preview is not the site}
+\symcode{build/preview/} is flat HTML, generated so you can look at the design
+without a PHP server. What you upload is \symcode{build/web/}.
+\end{callouttip}
+
+\frontchapter{Figures}
+\chaptersummary{Every schematic needs two files with the same name: an SVG for
+the website and a PDF for print. Until the real artwork exists, the build draws
+a labelled placeholder.}
+
+Put figures in \symcode{assets/circuit/}, as \symcode{name.svg} and
+\symcode{name.pdf}. The source refers to the SVG; the LaTeX side drops the
+extension so XeLaTeX picks up the PDF automatically.
+
+For anything referred to but not yet drawn:
+
+\begin{symtype}
+python3 tools/make\_placeholders.py
+\end{symtype}
+
+This draws a dashed box carrying the caption and the filename, in both formats,
+so the build stays green and every gap announces itself in the document. Drop
+the real artwork over a placeholder and the script will not touch it again.
+
+\frontchapter{Publishing}
+\chaptersummary{One upload serves all three versions. There are no build tools
+on the server.}
+
+Copy the contents of \symcode{build/web/} into the documentation folder on your
+cPanel hosting, and put the three PDFs beside \symcode{index.php} so the
+download links resolve.
+
+That is the whole deployment. \symcode{index.php} reads
+\symcode{content/v7}, \symcode{v8} or \symcode{v9} according to the
+\symcode{?v=} in the URL, so the version selector works server-side with no
+JavaScript. The bundled \symcode{.htaccess} turns that into tidier addresses
+such as \symcode{/7/lesson-dc}.
+
+\begin{calloutnote}{If the pretty URLs do not work}
+Some cPanel setups have \symcode{AllowOverride} switched off, which makes
+Apache ignore \symcode{.htaccess}. The plain \symcode{?v=7\&p=lesson-dc} form
+keeps working regardless, so nothing breaks --- the addresses are just longer.
+\end{calloutnote}
+
+\frontchapter{When something goes wrong}
+\chaptersummary{Three failures account for almost everything, and each one
+announces itself clearly.}
+
+\section{An unclosed directive}
+
+If the build stops with \emph{unclosed \symcode{:::} directive}, a block was
+opened and never closed. Every \symcode{:::~tip}, \symcode{:::~problem} and
+\symcode{:::~only} needs its own \symcode{:::} on a line by itself, including
+the nested ones.
+
+\section{A broken cross-reference}
+
+\symcode{-{}-check} reports the chapter, the label and the version. Either the
+label is misspelled, or it points at a chapter that does not exist in that
+version --- worth thinking about, because it may mean the sentence should be
+version-tagged too.
+
+\section{XeLaTeX stops}
+
+Read \symcode{build/tex/symbulator-v7.log} and search for a line starting with
+an exclamation mark. The generated \symcode{.tex} is kept beside it so you can
+see exactly what was fed to LaTeX.
+
+\end{document}

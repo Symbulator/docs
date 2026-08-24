@@ -1,0 +1,93 @@
+/* Symbulator design tokens
+   Shared by the documentation website and, where useful, the interface.
+   Sampled from the Symbulator 9 interface, 20 August 2026.
+   Dark Mode values added 21 August 2026, matching the interface's own
+   dark theme token-for-token wherever the two share a role -- see the
+   html[data-theme="dark"] block below. */
+
+:root {
+  /* --- blues, from the interface ------------------------------------- */
+  --navy:       #203864;   /* header band, PDF title                     */
+  --accent:     #2f5fa8;   /* buttons, links, section numbers, rules     */
+  --accent-bg:  #e9eff8;   /* selected row                               */
+  --accent-dk:  #24487e;   /* pressed / border                           */
+  --sky:        #8ec7f5;   /* version numeral, subtitle on navy          */
+
+  /* --- neutrals ------------------------------------------------------- */
+  --ink:        #1c2330;   /* body text, headings                        */
+  --ink-2:      #545d6d;   /* standfirsts, captions                      */
+  --ink-3:      #858d9c;   /* labels, page numbers                       */
+  --paper:      #ffffff;   /* cards                                      */
+  --paper-2:    #f4f6fa;   /* page background, output blocks             */
+  --rule:       #e2e5ea;   /* borders, dividers                          */
+  --rule-2:     #eef1f6;
+
+  /* --- signals: deliberately outside the blue family ------------------ */
+  --amber:      #b7791f;   /* warning — the one warm signal              */
+  --amber-bg:   #fbf3e2;
+  --green:      #2f7d4f;   /* tip — cannot be blue, or it reads as a link */
+  --green-bg:   #ecf5ef;
+  --danger:     #a13030;   /* caution, errors                            */
+  --danger-bg:  #fdf1f1;
+  --answer:     #a13030;   /* a value the software returned              */
+
+  /* --- highlight ------------------------------------------------------
+     Gold, for "new" and nothing else. Deliberately not --amber: amber is
+     the single warning signal above, and a colour that means both
+     "caution" and "look, this is new" means neither. Hue 43 against
+     amber's 36, and always used as a solid chip with --gold-ink on it
+     rather than as tinted text, so the two never read as the same
+     device. Added for the symbulator.com front door, 21 August 2026. */
+  --gold:       #d9a521;
+  --gold-ink:   #1c2330;   /* fixed dark text on gold, in both themes    */
+
+  /* --- code ----------------------------------------------------------- */
+  --lcd:        #f2f6fc;   /* a line you type                            */
+  --lcd-edge:   #dbe4f2;
+
+  /* --- type ----------------------------------------------------------- */
+  --sans:  "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --serif: "IBM Plex Serif", Georgia, serif;   /* long-form reading only  */
+  --mono:  "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  /* --- fixed-contrast chrome -------------------------------------------
+     A surface that is always dark with always-light text, regardless of
+     theme -- for the one or two elements (the primary button, the
+     skip-to-content link) that want a fixed dark chip rather than
+     something that inverts with --ink. In light mode this happens to
+     equal --ink; kept as its own token so dark mode can give it an
+     independent value instead of the (now light) --ink. */
+  --inverse-bg:  var(--ink);
+  --inverse-ink: #ffffff;
+}
+
+/* Dark Mode -- a real, toggled theme (matching the Symbulator 9 interface's
+   own #themeToggle), not just a prefers-color-scheme shadow. --navy and
+   --sky are deliberately absent here: the topbar stays navy in both
+   themes, same as the interface's header, so the one band of colour that
+   is shared pixel-for-pixel between the two products doesn't need a
+   second value. */
+html[data-theme="dark"] {
+  --accent:     #5b96e0;
+  --accent-bg:  #24344a;
+  --accent-dk:  #7fb0e8;
+  --ink:        #e4e8ee;
+  --ink-2:      #97a3b6;
+  --ink-3:      #6b7690;
+  --paper:      #1b212c;
+  --paper-2:    #12161d;
+  --rule:       #2b3341;
+  --rule-2:     #232a36;
+  --amber:      #e3b567;
+  --amber-bg:   #3a2f16;
+  --green:      #7fd9a4;
+  --green-bg:   #16301f;
+  --danger:     #ff9c9c;
+  --danger-bg:  #3a1f21;
+  --answer:     #ff9c9c;
+  --lcd:        #182534;
+  --lcd-edge:   #2f5170;
+  --inverse-bg:  #303c4e;
+  --inverse-ink: #ffffff;
+  --gold:       #e8b93a;   /* brighter, to hold against the dark ground */
+}

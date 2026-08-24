@@ -1,0 +1,618 @@
+/* ==========================================================================
+   Symbulator documentation
+   Palette taken from the Symbulator Py interface, so the documentation and
+   the software it documents read as one product. Amber survives from the
+   TI-89 keypad as the single warm signal, reserved for warnings.
+   ========================================================================== */
+
+:root {
+  /* Sampled from the Symbulator Py interface, so the documentation and the
+     software it documents read as one product. Amber survives from the TI-89
+     keypad as the single warm signal, reserved for warnings. */
+  --navy:       #203864;   /* the header band                          */
+  --accent:     #2f5fa8;   /* buttons, links, disclosure arrows        */
+  --accent-bg:  #e9eff8;
+  --accent-dk:  #24487e;
+  --sky:        #8ec7f5;   /* the "Py" in the wordmark                 */
+  --ink:        #1c2330;
+  --ink-2:      #545d6d;
+  --ink-3:      #858d9c;
+  --paper:      #ffffff;
+  --paper-2:    #f4f6fa;
+  --rule:       #e2e5ea;
+  --rule-2:     #eef1f6;
+  --amber:      #b7791f;   /* warnings only: the one warm signal       */
+  --amber-bg:   #fbf3e2;
+  --gold:       #d9a521;   /* "new" -- see DESIGN.md; never a warning     */
+  --gold-ink:   #1c2330;   /* fixed dark text on gold, in both themes     */
+  --green:      #2f7d4f;
+  --green-bg:   #ecf5ef;
+  --danger:     #a13030;
+  --danger-bg:  #fdf1f1;
+  --answer:     #a13030;   /* a value the software returned            */
+  --lcd:        #f2f6fc;   /* the input panel, tinted toward the accent */
+  --lcd-edge:   #dbe4f2;
+
+  --sans: "IBM Plex Sans", system-ui, -apple-system, sans-serif;
+  --serif: "IBM Plex Serif", Georgia, serif;
+  --mono: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+
+  --measure: 34rem;
+  --sidebar: 17rem;
+
+  /* A surface that is always dark with always-light text, regardless of
+     theme -- for the primary button and the skip-to-content link, which
+     want a fixed dark chip rather than something that inverts with --ink.
+     Equals --ink here, so light mode renders identically to before this
+     token existed; dark mode (below) gives it its own value. */
+  --inverse-bg: #1c2330;   /* equals --ink today; kept as a literal, like
+                              every other token here, so tools/check_palette.py
+                              can verify it against tokens.json the same way */
+  --inverse-ink: #ffffff;
+}
+
+/* ---------------------------------------------------------------- dark --- */
+/* Dark Mode -- the same switch as the Symbulator 9 interface's own
+   #themeToggle: a data-theme="dark" attribute on <html>, applied before
+   first paint from a saved preference (see the inline script in
+   index.php's <head>) so there's no flash of the wrong theme on load.
+
+   --navy and --sky are deliberately not overridden: the topbar stays navy
+   in both themes, same as the interface's header, which is a fixed band
+   rather than a themed one. */
+html[data-theme="dark"] {
+  --accent:     #5b96e0;
+  --accent-bg:  #24344a;
+  --accent-dk:  #7fb0e8;
+  --ink:        #e4e8ee;
+  --ink-2:      #97a3b6;
+  --ink-3:      #6b7690;
+  --paper:      #1b212c;
+  --paper-2:    #12161d;
+  --rule:       #2b3341;
+  --rule-2:     #232a36;
+  --amber:      #e3b567;
+  --amber-bg:   #3a2f16;
+  --gold:       #e8b93a;
+  --gold-ink:   #1c2330;
+  --green:      #7fd9a4;
+  --green-bg:   #16301f;
+  --danger:     #ff9c9c;
+  --danger-bg:  #3a1f21;
+  --answer:     #ff9c9c;
+  --lcd:        #182534;
+  --lcd-edge:   #2f5170;
+  --inverse-bg:  #303c4e;
+  --inverse-ink: #ffffff;
+}
+
+* { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; scroll-padding-top: 1.25rem; }
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: var(--serif);
+  font-size: 1.0625rem;
+  line-height: 1.66;
+  -webkit-font-smoothing: antialiased;
+  transition: background-color .15s ease, color .15s ease;
+}
+@media (prefers-reduced-motion: reduce) { body { transition: none; } }
+
+a { color: var(--ink); text-underline-offset: 0.18em; }
+a:focus-visible, .vkey:focus-visible, .btn:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px;
+}
+
+.skip {
+  position: absolute; left: -9999px;
+  background: var(--inverse-bg); color: var(--inverse-ink); padding: 0.6rem 1rem;
+}
+.skip:focus { left: 1rem; top: 1rem; z-index: 100; }
+
+/* ------------------------------------------------------------------ top -- */
+
+/* The lockup -- navy band, logo, wordmark, second line, sky keyline, theme
+   toggle -- lives in design/banner.css, one file shared with symbulator.com
+   and the app. build.py copies it to assets/banner.css and index.php links it
+   ahead of this file. Only this site's own controls are styled below: the two
+   ribbon buttons and the version picker. Do not restate banner rules here --
+   that duplication is exactly what design/banner.css exists to end. */
+
+
+
+/* version selector — a disclosure, so the options stay real links and the
+   whole thing still works with JavaScript switched off */
+.versions { position: relative; }
+
+.versions summary {
+  display: flex; align-items: center; gap: 0.45rem;
+  padding: 0.42rem 0.7rem 0.46rem 0.85rem;
+  list-style: none; cursor: pointer; white-space: nowrap; color: #fff;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.28); border-radius: 8px;
+  transition: background 0.12s ease;
+}
+.versions summary::-webkit-details-marker { display: none; }
+.versions summary:hover { background: rgba(255, 255, 255, 0.2); }
+.versions summary:focus-visible { outline: 2px solid var(--sky);
+                                  outline-offset: 3px; }
+.versions[open] summary { background: rgba(255, 255, 255, 0.2); }
+
+/* 0.875rem matches .subbar nav a in design/banner.css exactly: the picker
+   sits in the same row as the links and should read at the same size. It
+   keeps its border and background because it is a menu, not a link -- that
+   affordance is the one thing in this ribbon that should look different. */
+.vkey-full {
+  font-family: var(--sans); font-weight: 600; font-size: 0.875rem;
+  line-height: 1.1; letter-spacing: -0.005em;
+}
+.vkey-num { display: none; font-family: var(--sans); font-weight: 700;
+            font-size: 1rem; line-height: 1.1; }
+.chev { width: 0.85em; height: 0.85em; color: var(--sky); flex: none;
+        transition: transform 0.14s ease; }
+.versions[open] .chev { transform: rotate(180deg); }
+
+.version-list {
+  /* Hangs from the picker's left edge: on the controls ribbon the picker sits
+     at the left, under the wordmark, rather than at the right of the bar. */
+  position: absolute; left: 0; top: calc(100% + 0.4rem); z-index: 60;
+  min-width: 15rem; margin: 0; padding: 0.3rem; list-style: none;
+  background: var(--paper);
+  border: 1px solid var(--rule); border-radius: 10px;
+  box-shadow: 0 10px 28px rgba(22, 24, 26, 0.13);
+}
+.version-list a {
+  display: block; padding: 0.5rem 0.7rem; border-radius: 6px;
+  text-decoration: none; font-family: var(--sans);
+}
+.version-list a:hover { background: var(--paper-2); }
+.version-list a.is-current { background: var(--accent-bg); }
+.version-list .v-name { display: block; font-weight: 600; font-size: 0.9rem; }
+.version-list a.is-current .v-name { color: var(--accent); }
+.version-list .v-plat { display: block; font-size: 0.74rem; color: var(--ink-3); }
+
+@media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
+
+/* The ribbon's links are styled in design/banner.css, shared with
+   symbulator.com and the app -- see the note there. The .ribbon-btn chips
+   that used to live here were removed on 23 Aug 2026: they were the most
+   visible thing making this site look unrelated to the other two. Nothing
+   replaced them here, deliberately. If a control needs styling, ask first
+   whether the other two properties want it as well.
+
+   Still local, because only this site has them: .versions and its dropdown,
+   below. */
+
+/* ---------------------------------------------------------------- shell -- */
+
+.shell {
+  display: grid;
+  grid-template-columns: var(--sidebar) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 4rem);
+  /* Same track as the banner, so the sidebar's left edge lines up with the
+     logo above it. Both come from design/banner.css. */
+  width: min(var(--banner-w), 100%);
+  margin: 0 auto;
+  padding: 2.5rem var(--banner-pad) 4rem;
+}
+body.home .shell { grid-template-columns: minmax(0, 1fr); }
+body.home .sidebar { display: none; }
+
+/* -------------------------------------------------------------- sidebar -- */
+
+.sidebar {
+  position: sticky; top: 2rem;
+  align-self: start;
+  max-height: calc(100vh - 4rem);
+  overflow-y: auto;
+  font-family: var(--sans);
+  font-size: 0.875rem;
+}
+
+/* Scrollbars, themed (#79).
+   -------------------------------------------------------------------------
+   Left alone, the contents list gets the browser's default scrollbar: a pale
+   grey trough that looks fine on the light theme and glares on the dark one,
+   because it is drawn by the browser and knows nothing about the palette.
+
+   Two mechanisms, because no single one covers every browser. scrollbar-color
+   is the standard property -- Firefox has had it for years, Chrome since 121 --
+   and ::-webkit-scrollbar is the older WebKit and Blink way. Both are given
+   the same two tokens, so they stay in step, and both invert with the theme
+   for free because --rule and --ink-3 already do.
+
+   Thin rather than full width, and the track is transparent rather than a
+   painted trough: the bar should read as an edge to the column, not as a
+   piece of furniture. */
+.sidebar,
+.code pre,
+.chapter table {
+  scrollbar-width: thin;
+  scrollbar-color: var(--rule) transparent;
+}
+.sidebar::-webkit-scrollbar,
+.code pre::-webkit-scrollbar,
+.chapter table::-webkit-scrollbar {
+  width: 9px; height: 9px;
+}
+.sidebar::-webkit-scrollbar-track,
+.code pre::-webkit-scrollbar-track,
+.chapter table::-webkit-scrollbar-track {
+  background: transparent;
+}
+.sidebar::-webkit-scrollbar-thumb,
+.code pre::-webkit-scrollbar-thumb,
+.chapter table::-webkit-scrollbar-thumb {
+  background: var(--rule);
+  border-radius: 999px;
+  /* A transparent border inset by the background keeps the thumb clear of
+     the column edge without a second element to do it. */
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+.sidebar:hover, .code pre:hover, .chapter table:hover {
+  scrollbar-color: var(--ink-3) transparent;
+}
+.sidebar::-webkit-scrollbar-thumb:hover,
+.code pre::-webkit-scrollbar-thumb:hover,
+.chapter table::-webkit-scrollbar-thumb:hover {
+  background: var(--ink-3);
+  background-clip: content-box;
+}
+/* Contents is a disclosure, so it collapses without JavaScript and the
+   chapter list can be folded away on a narrow screen or a long read. The
+   small script after the nav restores the reader's last choice; nothing
+   here depends on it running. */
+.toc > summary.sidebar-title {
+  display: flex; align-items: center; gap: 0.4rem;
+  margin: 0 0 0.9rem;
+  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+  list-style: none; cursor: pointer;
+  border-radius: 6px;
+}
+.toc > summary.sidebar-title::-webkit-details-marker { display: none; }
+.toc > summary.sidebar-title:hover { color: var(--accent); }
+.toc > summary.sidebar-title:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 4px;
+}
+.toc-chev {
+  width: 0.9em; height: 0.9em; flex: none;
+  transform: rotate(-90deg);
+  transition: transform 0.14s ease;
+}
+.toc[open] > summary .toc-chev { transform: rotate(0deg); }
+@media (prefers-reduced-motion: reduce) { .toc-chev { transition: none; } }
+
+/* Folded away, Contents should not go on holding a 17rem column open. */
+.shell:has(.toc:not([open])) { grid-template-columns: max-content minmax(0, 1fr); }
+
+/* Kept for the plain <p class="sidebar-title"> the print stylesheet uses. */
+.sidebar-title {
+  margin: 0 0 0.9rem;
+  font-size: 0.68rem; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.chapters, .sections { list-style: none; margin: 0; padding: 0; }
+.chapters > li { border-left: 2px solid var(--rule-2); padding: 0.32rem 0 0.32rem 0.85rem; }
+.chapters > li.is-current { border-left-color: var(--accent); }
+.chapters a { text-decoration: none; display: block; }
+.chapters a:hover .ch-title { text-decoration: underline; }
+.ch-eyebrow {
+  display: block; font-size: 0.64rem; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.ch-title { display: block; line-height: 1.35; }
+.chapters > li.is-current > a .ch-title { font-weight: 600; }
+.chapters > li.is-absent .ch-title { color: var(--ink-3); }
+.chapters > li.is-absent .ch-title::after {
+  content: "not in this version";
+  display: block; font-size: 0.64rem; color: var(--amber);
+}
+.sections { margin: 0.45rem 0 0.2rem; }
+.sections li { padding: 0.16rem 0; }
+.sections a { color: var(--ink-2); font-size: 0.82rem; }
+.sections .secno { color: var(--ink-3); margin-right: 0.4rem; font-variant-numeric: tabular-nums; }
+
+/* --------------------------------------------------------------- prose --- */
+
+.chapter { max-width: var(--measure); }
+.chapter-head { margin-bottom: 2.25rem; }
+.eyebrow {
+  margin: 0 0 0.35rem;
+  font-family: var(--sans); font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent);
+}
+.chapter h1 {
+  margin: 0;
+  font-family: var(--sans); font-weight: 700;
+  font-size: clamp(1.9rem, 4vw, 2.5rem); line-height: 1.1;
+  letter-spacing: -0.025em;
+}
+.lede {                       /* standfirst: the "what to expect" paragraph */
+  margin: 1.1rem 0 0;
+  font-family: var(--sans); font-weight: 400;
+  font-size: clamp(1.15rem, 1.9vw, 1.3rem); color: var(--ink-2);
+  line-height: 1.45; letter-spacing: -0.011em;
+  max-width: 30rem;
+}
+.updated {
+  margin: 1rem 0 0;
+  font-family: var(--sans); font-size: 0.72rem; color: var(--ink-3);
+  letter-spacing: 0.04em;
+}
+
+.chapter h2 {
+  margin: 3rem 0 0.6rem;
+  font-family: var(--sans); font-weight: 700; font-size: 1.45rem;
+  letter-spacing: -0.015em; line-height: 1.25;
+  padding-top: 1.2rem; border-top: 1px solid var(--rule);
+}
+.chapter h2 .secno {
+  color: var(--accent); margin-right: 0.55rem; font-variant-numeric: tabular-nums;
+}
+/* A subsection heading must not be smaller than the text it introduces.
+   At 1.02rem it measured 16.32px against a 17px paragraph -- smaller, and
+   in --ink-2 lighter as well, which together read as a caption rather than
+   a heading. 1.15rem puts it a clear step above body text and still well
+   below h2 at 23.2px. Reported 24 Aug 2026. */
+.chapter h3 {
+  margin: 2rem 0 0.4rem;
+  font-family: var(--sans); font-weight: 600; font-size: 1.15rem;
+  color: var(--ink);
+}
+.chapter p { margin: 0 0 1.05rem; }
+.chapter ul, .chapter ol { margin: 0 0 1.05rem; padding-left: 1.25rem; }
+.chapter li { margin-bottom: 0.35rem; }
+
+code {
+  font-family: var(--mono); font-size: 0.86em;
+  background: var(--paper-2); border: 1px solid var(--rule-2);
+  border-radius: 4px; padding: 0.08em 0.32em;
+  word-break: break-word;
+}
+/* a value the software returned, as distinct from one you typed */
+.ans { color: var(--answer); font-weight: 600; font-family: var(--sans);
+       font-size: 0.95em; }
+
+.xref { color: var(--accent); text-decoration-color: rgba(15, 107, 92, 0.4); }
+.ix { scroll-margin-top: 6rem; }
+
+/* ---------------------------------------------------------------- code --- */
+
+/* Radii converged toward the app's softer treatment (DESIGN.md §6.4),
+   scaled a step down for a document page: 6px on panels, 8px on cards. */
+.code {
+  position: relative;
+  margin: 0 0 1.1rem;
+  background: var(--lcd);
+  border: 1px solid var(--lcd-edge);
+  border-left: 3px solid var(--accent);
+  border-radius: 6px;
+  padding: 0.85rem 0.9rem 0.75rem;
+}
+.code.out { border-left-color: var(--ink-3); background: var(--paper-2);
+            border-color: var(--rule); }
+.code-label {
+  position: absolute; top: 0; right: 0.5rem;
+  transform: translateY(-52%);
+  background: var(--paper); padding: 0 0.4rem;
+  font-family: var(--sans); font-size: 0.6rem; font-weight: 600;
+  letter-spacing: 0.13em; text-transform: uppercase; color: var(--ink-3);
+}
+.code pre { margin: 0; overflow-x: auto; }
+
+/* A field of the Symbulator 9 interface, and what the reader types into it.
+   -------------------------------------------------------------------------
+   Version 9 has no command line. Everything is entered into a named box, so
+   the documentation shows the box: the label is the field's real name as it
+   appears on screen, sitting above the panel the way the interface puts it
+   above its input, rather than floating on the rule like TYPE and RETURNS.
+
+   Deliberately not styled as a code block. A reader who has the app open
+   should be able to glance between page and screen and see the same object.
+   The tokens are the documentation's own -- matching the interface exactly
+   would mean importing its palette, and these are within a shade of it. */
+.code.field {
+  background: var(--paper);
+  border: 1px solid var(--rule);
+  border-left: 1px solid var(--rule);
+  border-radius: 8px;
+  padding: 1.5rem 0.9rem 0.7rem;
+}
+.code.field .code-label {
+  top: 0.5rem; left: 0.85rem; right: auto;
+  transform: none; background: none; padding: 0;
+  text-transform: none; letter-spacing: 0.01em;
+  font-size: 0.72rem; font-weight: 600; color: var(--ink-2);
+}
+/* One element per line is the point, so lines must not be re-wrapped: a
+   wrapped element would read as two. */
+.code.field code { white-space: pre; }
+
+
+.code code {
+  background: none; border: 0; padding: 0;
+  font-size: 0.86rem; line-height: 1.55; white-space: pre-wrap;
+  word-break: break-word;
+}
+
+/* ------------------------------------------------------------ callouts --- */
+/* Icon plus word, so the four kinds survive greyscale printing and don't rely
+   on colour alone to be told apart. */
+
+.callout {
+  margin: 0 0 1.2rem;
+  padding: 0.85rem 1.1rem 0.55rem;
+  border-left: 3px solid var(--ink-3);
+  background: var(--paper-2);
+  border-radius: 0 6px 6px 0;
+  --accent: var(--ink-3);
+}
+.callout p:last-child { margin-bottom: 0.4rem; }
+
+.callout-kind {
+  display: flex; align-items: center; gap: 0.4rem;
+  margin: 0 0 0.35rem !important;
+  color: var(--accent);
+  font-family: var(--sans); font-weight: 600; font-size: 0.66rem;
+  letter-spacing: 0.13em; text-transform: uppercase;
+}
+.callout-icon { width: 1em; height: 1em; flex: none; font-size: 1.15rem; }
+
+.callout-title {
+  margin: 0 0 0.4rem !important;
+  font-family: var(--sans); font-weight: 600; font-size: 0.98rem;
+  color: var(--ink);
+}
+
+.callout.tip     { --accent: var(--green);  border-left-color: var(--green);
+                   background: var(--green-bg); }
+.callout.warning { --accent: var(--amber);  border-left-color: var(--amber);
+                   background: var(--amber-bg); }
+.callout.danger  { --accent: var(--danger); border-left-color: var(--danger);
+                   background: var(--danger-bg); }
+.callout.absent  { --accent: var(--amber);  border-left-color: var(--amber);
+                   background: var(--amber-bg); }
+
+/* In print the tints wash out, so lean on the rule and the label instead. */
+@media print {
+  .callout { background: none; border-left-width: 2px; }
+}
+
+/* ------------------------------------------------- problems and figures -- */
+
+.problem {
+  margin: 1.6rem 0;
+  padding: 1.2rem 1.3rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: 8px;
+  /* the app's card shadow — problems are the one card-like thing here */
+  box-shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 3px 10px rgba(16, 24, 40, 0.05);
+}
+.problem-title {
+  margin: 0 0 0.7rem !important;
+  font-family: var(--sans); font-weight: 600; font-size: 1rem;
+}
+.answer { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule); }
+.answer-title {
+  margin: 0 0 0.6rem !important;
+  font-family: var(--sans); font-weight: 600; font-size: 0.68rem;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+}
+.practice { margin-top: 2rem; }
+.practice-title {
+  margin: 0 0 1rem;
+  font-family: var(--sans); font-weight: 600; font-size: 1.05rem;
+}
+
+figure { margin: 1.4rem 0; }
+figure img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
+/* The circuit diagrams are line art on a transparent background, drawn to
+   be read on paper -- black ink on the dark page would nearly disappear.
+   Rather than recolour the SVGs, dark mode frames each one in a small
+   white panel, the way a printed figure would look pasted onto a dark
+   page. Light mode is untouched. */
+html[data-theme="dark"] figure img {
+  background: #fff; border-radius: 8px; padding: 0.75rem;
+}
+figcaption {
+  margin-top: 0.55rem; text-align: center;
+  font-family: var(--sans); font-size: 0.78rem; color: var(--ink-3);
+}
+.mathblock { margin: 1.2rem 0; overflow-x: auto; }
+
+/* ---------------------------------------------------------------- home --- */
+
+.chapter-cards {
+  list-style: none; margin: 0 auto; padding: 0; max-width: 66rem;
+  display: grid; gap: 1px;
+  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  background: var(--rule); border: 1px solid var(--rule);
+}
+.chapter-cards li { background: var(--paper); }
+.chapter-cards a {
+  display: block; height: 100%; padding: 1.4rem 1.4rem 1.6rem;
+  text-decoration: none;
+}
+.chapter-cards a:hover { background: var(--paper-2); }
+.card-eyebrow {
+  margin: 0 0 0.4rem;
+  font-family: var(--sans); font-size: 0.66rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent);
+}
+.chapter-cards h2 {
+  margin: 0 0 0.5rem;
+  font-family: var(--sans); font-size: 1.1rem; font-weight: 600;
+  letter-spacing: -0.01em;
+}
+.card-summary { margin: 0; font-size: 0.92rem; color: var(--ink-2); line-height: 1.5; }
+.chapter-cards li.is-absent .card-eyebrow { color: var(--ink-3); }
+.chapter-cards li.is-absent h2 { color: var(--ink-3); }
+
+/* --------------------------------------------------------------- index --- */
+
+.book-index { list-style: none; margin: 0; padding: 0; columns: 2; column-gap: 2.5rem; }
+.book-index li {
+  break-inside: avoid; margin-bottom: 0.4rem;
+  font-family: var(--sans); font-size: 0.92rem;
+}
+.ix-term { margin-right: 0.4rem; }
+.book-index a { color: var(--accent); margin-right: 0.3rem; }
+
+/* --------------------------------------------------------------- pager --- */
+
+.pager {
+  display: flex; justify-content: space-between; gap: 1rem;
+  max-width: var(--measure);
+  margin: 3.5rem 0 0; padding-top: 1.2rem; border-top: 1px solid var(--rule);
+  font-family: var(--sans);
+}
+.pager a { text-decoration: none; font-weight: 600; font-size: 0.95rem; }
+.pager-next { margin-left: auto; text-align: right; }
+.pager span {
+  display: block; font-size: 0.66rem; font-weight: 600; letter-spacing: 0.14em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.pager a:hover { color: var(--accent); }
+
+.foot {
+  border-top: 1px solid var(--rule);
+  padding: 1.8rem var(--banner-pad);
+  font-family: var(--sans); font-size: 0.8rem; color: var(--ink-3);
+  text-align: center;
+}
+.foot p { margin: 0.2rem 0; }
+
+/* -------------------------------------------------------------- mobile --- */
+
+@media (max-width: 62rem) {
+  .shell { grid-template-columns: minmax(0, 1fr); }
+  .sidebar {
+    position: static; max-height: none; overflow: visible;
+    padding-bottom: 1.5rem; margin-bottom: 1.5rem;
+    border-bottom: 1px solid var(--rule);
+  }
+  /* One column here regardless: the max-content track above is a desktop
+     idea, and :has() outranks the plain .shell rule on specificity. */
+  .shell:has(.toc:not([open])) { grid-template-columns: minmax(0, 1fr); }
+  .sidebar:has(.toc:not([open])) { padding-bottom: 0.9rem; margin-bottom: 1.1rem; }
+  .toc:not([open]) > summary.sidebar-title { margin-bottom: 0; }
+  .chapter { max-width: none; }
+  .book-index { columns: 1; }
+}
+/* the full label stops fitting alongside the wordmark; keep the numeral */
+@media (max-width: 40rem) {
+  .vkey-full { display: none; }
+  .vkey-num { display: block; }
+  .versions summary { padding: 0.38rem 0.5rem 0.42rem 0.6rem; }
+}
+

@@ -1,0 +1,309 @@
+/* ============================================================
+   Symbulator — site front door
+   Palette and type are design/tokens.css verbatim; nothing new
+   is invented here. Dark values likewise, including the rule
+   from DESIGN.md §7 that the navy band stays navy in both
+   themes, so --navy and --sky have no dark counterpart.
+   ============================================================ */
+
+:root {
+  --navy:#203864; --accent:#2f5fa8; --accent-bg:#e9eff8; --accent-dk:#24487e;
+  --sky:#8ec7f5;
+  --ink:#1c2330; --ink-2:#545d6d; --ink-3:#858d9c;
+  --paper:#ffffff; --paper-2:#f4f6fa; --rule:#e2e5ea; --rule-2:#eef1f6;
+  --amber:#b7791f; --amber-bg:#fbf3e2;
+  --green:#2f7d4f; --green-bg:#ecf5ef;
+  --danger:#a13030; --danger-bg:#fdf1f1; --answer:#a13030;
+  --lcd:#f2f6fc; --lcd-edge:#dbe4f2;
+  --inverse-bg:#1c2330; --inverse-ink:#ffffff;
+
+  /* Highlight gold — "new", and only that. Deliberately NOT --amber:
+     amber is the system's single warning signal (DESIGN.md §1) and is
+     already carrying that job on this page. Hue 43 against amber's 36,
+     and delivered as a solid chip rather than tinted text, so the two
+     never read as the same thing. Text on it is always --gold-ink. */
+  --gold:#d9a521; --gold-ink:#1c2330;
+
+  --sans:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --serif:"IBM Plex Serif",Georgia,serif;
+  --mono:"IBM Plex Mono",ui-monospace,"SF Mono",Menlo,monospace;
+
+  --measure:34rem;
+  --gutter:clamp(1.25rem,4vw,2.75rem);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --accent:#5b96e0; --accent-bg:#24344a; --accent-dk:#7fb0e8;
+    --ink:#e4e8ee; --ink-2:#97a3b6; --ink-3:#6b7690;
+    --paper:#1b212c; --paper-2:#12161d; --rule:#2b3341; --rule-2:#232a36;
+    --amber:#e3b567; --amber-bg:#3a2f16;
+    --green:#7fd9a4; --green-bg:#16301f;
+    --danger:#ff9c9c; --danger-bg:#3a1f21; --answer:#ff9c9c;
+    --lcd:#182534; --lcd-edge:#2f5170;
+    --inverse-bg:#303c4e; --inverse-ink:#ffffff;
+    --gold:#e8b93a; --gold-ink:#1c2330;
+  }
+}
+:root[data-theme="dark"] {
+  --accent:#5b96e0; --accent-bg:#24344a; --accent-dk:#7fb0e8;
+  --ink:#e4e8ee; --ink-2:#97a3b6; --ink-3:#6b7690;
+  --paper:#1b212c; --paper-2:#12161d; --rule:#2b3341; --rule-2:#232a36;
+  --amber:#e3b567; --amber-bg:#3a2f16;
+  --green:#7fd9a4; --green-bg:#16301f;
+  --danger:#ff9c9c; --danger-bg:#3a1f21; --answer:#ff9c9c;
+  --lcd:#182534; --lcd-edge:#2f5170;
+  --inverse-bg:#303c4e; --inverse-ink:#ffffff;
+  --gold:#e8b93a; --gold-ink:#1c2330;
+}
+
+*,*::before,*::after { box-sizing:border-box; }
+
+body {
+  margin:0;
+  background:var(--paper-2);
+  color:var(--ink);
+  font-family:var(--sans);
+  font-size:17px;
+  line-height:1.6;
+  -webkit-font-smoothing:antialiased;
+}
+
+.wrap { width:min(72rem,100%); margin-inline:auto; padding-inline:var(--gutter); }
+
+a { color:var(--accent); text-underline-offset:.16em; }
+a:focus-visible, button:focus-visible {
+  outline:2px solid var(--accent); outline-offset:3px; border-radius:2px;
+}
+
+.skip {
+  position:absolute; left:-9999px;
+  background:var(--inverse-bg); color:var(--inverse-ink);
+  padding:.6rem 1rem; border-radius:4px; z-index:10;
+}
+.skip:focus { left:1rem; top:1rem; }
+
+/* The banner lives in assets/banner.css -- both bands, the navy lockup and
+   the lighter controls ribbon under it -- shared verbatim with
+   learn.symbulator.com and the app. design/banner.css in the Documentation
+   tree is the canonical copy; build.py --check fails if this one drifts.
+   The ribbon's links are styled there too, as of 23 Aug 2026 -- this page,
+   learn and the app all draw the same row of links from the same rules, so
+   nothing here restates them. Add a rule below only for something this site
+   alone has. */
+@media (max-width:520px) {
+  .subbar nav { gap:1rem; }
+}
+
+/* ---------- shared section furniture ---------------------------------- */
+section { padding-block:clamp(3rem,7vw,5.5rem); }
+.band { background:var(--paper); border-block:1px solid var(--rule); }
+
+.eyebrow {
+  font-size:.75rem; font-weight:600; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--ink-3);
+  margin:0 0 .9rem;
+}
+.eyebrow-new { display:flex; align-items:center; gap:.55rem; flex-wrap:wrap; }
+.chip-new {
+  background:var(--gold); color:var(--gold-ink);
+  font-size:.6875rem; font-weight:700; letter-spacing:.08em;
+  text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;
+}
+h1,h2,h3 { text-wrap:balance; margin:0; }
+.sec-head { max-width:var(--measure); margin-bottom:2.4rem; }
+.sec-head h2 { font-size:clamp(1.5rem,3vw,1.9rem); font-weight:600; letter-spacing:-.014em; }
+.sec-head p.sub { margin:.6rem 0 0; color:var(--ink-2); font-size:.9375rem; }
+
+/* ---------- hero ------------------------------------------------------- */
+.hero { padding-top:clamp(2.5rem,6vw,4.5rem); }
+.hero-grid {
+  display:grid; gap:clamp(2rem,5vw,3.5rem);
+  grid-template-columns:minmax(0,1fr); align-items:start;
+}
+@media (min-width:60rem) {
+  .hero-grid {
+    grid-template-columns:minmax(0,1.05fr) minmax(0,.95fr);
+    align-items:center;
+  }
+}
+.hero h1 {
+  font-size:clamp(2.1rem,5.2vw,3.15rem);
+  line-height:1.1; font-weight:600; letter-spacing:-.021em;
+  margin-bottom:1.1rem;
+}
+.hero-lede {
+  font-family:var(--serif);
+  font-size:1.0625rem; line-height:1.72; color:var(--ink-2);
+  max-width:var(--measure); margin:0 0 1.9rem;
+}
+.hero-actions { display:flex; flex-wrap:wrap; gap:.7rem; margin:0; }
+
+/* Decorative only. Two renderings of the same engraving — dark ink on the
+   light ground, light ink on the dark one — each drawn on the page's own
+   --paper-2 so the edges disappear into the page rather than sitting in a
+   visible plate. Swapped exactly the way the colour tokens are: a default
+   in the bare rule, a prefers-color-scheme rule guarded against an explicit
+   light choice, and a data-theme rule so the toggle wins in both
+   directions. */
+.hero-art {
+  display:block; width:100%; aspect-ratio:1000 / 642;
+  background-image:url("/assets/scorpion-light.jpg");
+  background-size:contain; background-position:center; background-repeat:no-repeat;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) .hero-art {
+    background-image:url("/assets/scorpion-dark.jpg");
+  }
+}
+:root[data-theme="dark"] .hero-art {
+  background-image:url("/assets/scorpion-dark.jpg");
+}
+
+/* Shared button geometry across symbulator.com and learn.symbulator.com:
+   8px radius and weight 600, per DESIGN.md §3's preference for the rounder
+   treatment. Only the colours differ between the two, and only because one
+   sits on the page and the other on the navy band. Sizes stay contextual --
+   a hero call to action is not a toolbar control. */
+.btn {
+  display:inline-block; font:inherit; font-size:.9375rem; font-weight:600;
+  padding:.62rem 1.1rem; border-radius:8px; text-decoration:none;
+  border:1px solid var(--inverse-bg);
+  background:var(--inverse-bg); color:var(--inverse-ink);
+  cursor:pointer;
+  transition:background-color .15s ease, border-color .15s ease, transform .06s ease;
+}
+.btn:hover { background:var(--accent); border-color:var(--accent); color:#fff; }
+.btn:active { transform:translateY(1px); }
+.btn:focus-visible { outline:2px solid var(--accent); outline-offset:2px; }
+.btn-quiet { background:none; color:var(--ink); border-color:var(--rule); }
+.btn-quiet:hover { background:var(--accent); border-color:var(--accent); color:#fff; }
+
+
+
+/* ---------- the ways in ------------------------------------------------ */
+.cluster + .cluster { margin-top:2.6rem; }
+.cluster-label {
+  display:flex; align-items:center; gap:.75rem;
+  font-size:.75rem; font-weight:600; letter-spacing:.09em;
+  text-transform:uppercase; color:var(--ink-3);
+  margin:0 0 1rem;
+}
+.cluster-label::after {
+  content:""; flex:1; height:1px; background:var(--rule);
+}
+.ways { display:grid; gap:1.1rem; margin:0; padding:0; list-style:none; }
+@media (min-width:48rem) { .ways-2 { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+
+.way {
+  display:flex; flex-direction:column; gap:.6rem;
+  background:var(--paper); border:1px solid var(--rule);
+  border-radius:6px; padding:1.3rem 1.3rem 1.4rem;
+}
+.way-primary { border-color:var(--accent); background:var(--accent-bg); }
+.way-kicker {
+  font-size:.6875rem; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--accent); margin:0;
+}
+.way h3 { font-size:1.0625rem; font-weight:600; }
+.way h3 a { text-decoration:none; color:var(--ink); }
+.way h3 a:hover { color:var(--accent); text-decoration:underline; }
+.way h3 a::after { content:" →"; color:var(--accent); font-weight:500; }
+.way p.way-text { margin:0; font-size:.9375rem; color:var(--ink-2); }
+.way-meta {
+  margin:0; padding-top:.15rem;
+  font-size:.8125rem; color:var(--ink-2);
+}
+.way-meta b {
+  font-size:.6875rem; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+  color:var(--ink-3); margin-right:.4rem;
+}
+.way-url {
+  margin:auto 0 0; padding-top:.5rem;
+  font-family:var(--mono); font-size:.8125rem; color:var(--ink-3);
+  overflow-wrap:anywhere;
+}
+.way code {
+  font-family:var(--mono); font-size:.8125rem;
+  background:var(--lcd); border:1px solid var(--lcd-edge);
+  border-radius:3px; padding:.12rem .34rem; color:var(--ink);
+}
+.way-wide { display:grid; gap:.6rem; }
+@media (min-width:56rem) {
+  .way-wide { grid-template-columns:minmax(0,1fr) minmax(0,1.1fr); align-items:center; column-gap:2.5rem; }
+  .way-wide .way-url { padding-top:0; margin:0; }
+}
+
+/* ---------- capability band -------------------------------------------- */
+.cap-list { display:grid; gap:0; margin:0; padding:0; border-top:1px solid var(--rule); }
+@media (min-width:48rem) { .cap-list { grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:clamp(2rem,5vw,4rem); } }
+.cap-list > div { display:grid; gap:.3rem; padding-block:1.15rem; border-bottom:1px solid var(--rule); }
+.cap-list dt {
+  font-size:.75rem; font-weight:600; letter-spacing:.085em;
+  text-transform:uppercase; color:var(--accent);
+}
+.cap-list dd { margin:0; color:var(--ink-2); font-size:.9375rem; line-height:1.6; }
+.cap-list dd b { color:var(--ink); font-weight:500; }
+
+.limits {
+  margin-top:2.75rem; padding:1.15rem 1.3rem;
+  background:var(--amber-bg); border-left:3px solid var(--amber);
+  border-radius:0 4px 4px 0; max-width:44rem;
+}
+.limits h3 {
+  font-size:.8125rem; font-weight:600; letter-spacing:.06em;
+  text-transform:uppercase; color:var(--amber); margin-bottom:.45rem;
+}
+.limits p { margin:0; color:var(--ink-2); font-size:.9375rem; }
+.limits p + p { margin-top:.6rem; }
+
+/* ---------- for developers ---------------------------------------------- */
+.dev { display:grid; gap:0; margin:0; padding:0; list-style:none; border-top:1px solid var(--rule); }
+@media (min-width:48rem) { .dev { grid-template-columns:repeat(2,minmax(0,1fr)); column-gap:clamp(2rem,5vw,4rem); } }
+.dev li { display:grid; gap:.35rem; padding-block:1.3rem; border-bottom:1px solid var(--rule); align-content:start; }
+.dev h3 { font-size:1rem; font-weight:600; }
+.dev h3 a { text-decoration:none; color:var(--ink); }
+.dev h3 a:hover { color:var(--accent); text-decoration:underline; }
+.dev h3 a::after { content:" \2192"; color:var(--accent); font-weight:500; }
+.dev p { margin:0; font-size:.9375rem; color:var(--ink-2); }
+.dev code {
+  font-family:var(--mono); font-size:.8125rem;
+  background:var(--lcd); border:1px solid var(--lcd-edge);
+  border-radius:3px; padding:.12rem .34rem; color:var(--ink);
+}
+
+/* ---------- older calculators ------------------------------------------ */
+.legacy { display:grid; gap:1.1rem; margin:0; padding:0; list-style:none; }
+@media (min-width:48rem) { .legacy { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+.legacy li {
+  display:flex; gap:1.1rem; align-items:flex-start;
+  background:var(--paper); border:1px solid var(--rule);
+  border-radius:6px; padding:1.2rem 1.25rem;
+}
+.legacy-num {
+  font-family:var(--mono); font-size:1.75rem; font-weight:500;
+  line-height:1; color:var(--accent); letter-spacing:-.02em;
+}
+.legacy-body { display:grid; gap:.35rem; }
+.legacy h3 { font-size:1rem; font-weight:600; display:flex; align-items:baseline; gap:.55rem; flex-wrap:wrap; }
+.chip {
+  font-size:.6875rem; font-weight:600; letter-spacing:.07em; text-transform:uppercase;
+  padding:.16rem .45rem; border-radius:3px; white-space:nowrap;
+}
+.chip-stable { background:var(--green-bg); color:var(--green); }
+.chip-beta   { background:var(--amber-bg); color:var(--amber); }
+.legacy p { margin:0; font-size:.875rem; color:var(--ink-2); }
+.legacy .links { display:flex; flex-wrap:wrap; gap:.2rem 1rem; font-size:.875rem; }
+
+/* ---------- footer ----------------------------------------------------- */
+.foot { background:var(--navy); padding-block:2.6rem; }
+.foot .wrap {
+  display:flex; flex-wrap:wrap; align-items:center; gap:1.4rem 2rem;
+}
+.foot img { width:56px; height:56px; display:block; border-radius:4px; flex:none; }
+.foot-text { display:grid; gap:.3rem; }
+.foot p { margin:0; font-size:.875rem; color:#c3d2e8; }
+.foot p.foot-name { color:#fff; font-weight:500; }
+.foot a { color:var(--sky); }
+
+@media (prefers-reduced-motion: reduce) { * { transition:none !important; animation:none !important; } }

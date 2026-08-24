@@ -1,0 +1,264 @@
+diff -u -r '--exclude=__pycache__' '--exclude=.pytest_cache' '--exclude=*.egg-info' symbulator-0.4.4/symbulator/engine.py symbulator-fix/symbulator/engine.py
+--- a/symbulator/engine.py	2026-08-20 14:13:33.871049200 +0000
++++ b/symbulator/engine.py	2026-08-21 12:23:24.815592182 +0000
+@@ -461,6 +461,97 @@
+     return sp.Eq(safe_sympify(text, reserve_imaginary=reserve_imaginary), 0)
+ 
+ 
++# Prefixes `analysis._derived` uses when it names a post-solve quantity.
++# Ordered longest-first so "ap_e" is read as ap/e, not as a/p_e.
++_DERIVED_PREFIXES = ("ap", "v", "p", "r", "z", "s")
++
++
++def _ac_power_unsupported(name: str, element: str) -> "CircuitError":
++    """The error raised when an expert-mode equation is written on one of
++    the AC power quantities. They are the one family of derived quantity
++    with no polynomial definition -- s = v * conj(i), and the real powers
++    are its real part -- and complex conjugation is not something
++    sympy.solve can carry through a system. Refusing here is deliberate:
++    the alternative is the silent phantom-unknown this whole function
++    exists to prevent."""
++    return CircuitError(
++        f"Cannot add an expert-mode equation on '{name}': the AC power "
++        f"quantities (s_, p_, ap_) are defined through complex conjugation, "
++        f"which cannot be solved as part of the system. Restate the "
++        f"constraint using node voltages (v_1, v_2, ...) and element "
++        f"currents (i_{element}, ...), which are solved for directly."
++    )
++
++
++def _derived_definition(circuit: "Circuit", name: str, domain: str):
++    """If `name` is one of the quantities `analysis._derived` computes
++    *after* the solve -- a branch voltage v_<element>, a power p_<element>,
++    or the impedance r_/z_<element> a source sees -- return
++    `(defining_equation, symbol)` expressing it in terms of the system's
++    own unknowns. Return None if `name` is not one of those, in which case
++    the caller treats it as an ordinary new unknown, as before.
++
++    This exists because those quantities are derived after the fact and so
++    are invisible to the solver. Without a definition, an equation like
++    "r_e = 12000" introduces a free variable that happens to share the
++    name, satisfies itself, and quietly leaves the circuit one equation
++    short -- the answer comes back correct but parametrized, with no
++    indication that the constraint did nothing. With the definition
++    stamped in, the equation constrains the circuit as the user meant.
++
++    The formulas here mirror `analysis._derived` exactly; test_expert.py
++    checks the two agree by asking for a quantity both ways."""
++    for prefix in _DERIVED_PREFIXES:
++        head = prefix + "_"
++        if not name.startswith(head):
++            continue
++        element = circuit._by_name.get(name[len(head):])
++        if element is None:
++            continue          # not an element of this circuit; keep looking
++
++        i_key = f"i_{element.name}"
++        # A `j` source's current, and a capacitor's in AC, are recorded in
++        # `known` rather than solved for; either way this is the same
++        # expression `_derived` would later use.
++        i = circuit.known.get(i_key) or circuit.i_symbol(element.name)
++        sym = _sym(name)
++
++        if element.kind == "o":
++            # Op-amp power is measured at the output node, on the current
++            # the amplifier drives out of it.
++            if prefix == "p" and domain != "ac":
++                return sp.Eq(sym, circuit.v(element.fields[2]) * (-i)), sym
++            if domain == "ac" and prefix in ("s", "ap", "p"):
++                raise _ac_power_unsupported(name, element.name)
++            return None
++
++        if element.kind not in "ejrcl":
++            return None
++        vdiff = circuit.v(element.n1) - circuit.v(element.n2)
++
++        if prefix == "v":
++            return sp.Eq(sym, vdiff), sym
++        if prefix == "p":
++            if domain == "ac":
++                raise _ac_power_unsupported(name, element.name)
++            return sp.Eq(sym, vdiff * i), sym
++        if prefix in ("s", "ap"):
++            if domain == "ac":
++                raise _ac_power_unsupported(name, element.name)
++            return None       # s_/ap_ are not derived outside ac
++        if prefix in ("r", "z"):
++            # Only sources get one, and only in their own domain. Written
++            # as sym * (-i) = vdiff rather than sym = vdiff / (-i) so the
++            # equation stays polynomial and a zero current does not put a
++            # division by zero into the system.
++            if element.kind not in "ej":
++                return None
++            if (prefix == "r") != (domain != "ac"):
++                return None
++            return sp.Eq(sym * (-i), vdiff), sym
++    return None
++
++
+ def solve_circuit(elements: List[Element], domain: str, omega=None,
+                    params: Optional[Dict[str, Dict[str, object]]] = None,
+                    equations=None, unknowns=None, conditions=None,
+@@ -517,18 +608,57 @@
+     if equations:
+         extra_eqs = [_parse_extra_equation(e, reserve_imaginary=reserve_imaginary)
+                      for e in equations]
++        # Quantities recorded in `known` (a `j` source's current, a
++        # capacitor's current in AC) are not solved for, so an equation
++        # naming one would otherwise introduce a same-named free variable
++        # instead of constraining anything. Substituting the stamped
++        # expression turns "i_j1 = 5" into a real constraint on whatever
++        # that current is made of.
++        if circuit.known:
++            known_map = {_sym(k): v for k, v in circuit.known.items()}
++            extra_eqs = [eq.subs(known_map) for eq in extra_eqs]
++        # That substitution can leave an equation with nothing left in it
++        # ("i_j1 = 5" on a 5 A source): either a tautology, which sympy
++        # cannot accept in a system and which constrains nothing anyway,
++        # or a flat contradiction, which is worth saying plainly rather
++        # than letting it surface as "could not solve the system". Only
++        # equations with no symbols left are checked, so the simplify
++        # cost never falls on a real one.
++        kept = []
++        for raw, eq in zip(equations, extra_eqs):
++            if eq.free_symbols:
++                kept.append(eq)
++                continue
++            if sp.simplify(eq) is sp.false:
++                raise CircuitError(
++                    f"Equation '{raw}' contradicts the circuit as described."
++                )
++        extra_eqs = kept
+         circuit.equations.extend(extra_eqs)
+         # Convenience beyond the original: a brand-new symbol appearing
+         # in an extra equation (e.g. "pout = v_2*i_r2") becomes an
+         # unknown automatically, so simple derived-quantity equations
+-        # don't require the separate unknowns list.
++        # don't require the separate unknowns list. A symbol that names
++        # one of the quantities computed after the solve gets its
++        # defining equation stamped in as well, so that the equation
++        # constrains the circuit rather than a variable of the same name
++        # -- see `_derived_definition`. Anything the caller listed under
++        # `unknowns` is already in `existing` and is left alone, so an
++        # explicit list still wins over this inference.
+         reserved = {"s", "t", str(circuit.omega)}
+         existing = {str(u) for u in circuit.unknowns}
+         for eq in extra_eqs:
+             for sym in sorted(eq.free_symbols, key=str):
+-                if str(sym) not in existing and str(sym) not in reserved:
++                if str(sym) in existing or str(sym) in reserved:
++                    continue
++                definition = _derived_definition(circuit, str(sym), domain)
++                if definition is not None:
++                    def_eq, def_sym = definition
++                    circuit.equations.append(def_eq)
++                    circuit.unknowns.append(def_sym)
++                else:
+                     circuit.unknowns.append(sym)
+-                    existing.add(str(sym))
++                existing.add(str(sym))
+ 
+     if conditions:
+         subs_map = {}
+diff -u -r '--exclude=__pycache__' '--exclude=.pytest_cache' '--exclude=*.egg-info' symbulator-0.4.4/symbulator/tests/test_expert.py symbulator-fix/symbulator/tests/test_expert.py
+--- a/symbulator/tests/test_expert.py	2026-08-18 11:27:32.843693500 +0000
++++ b/symbulator/tests/test_expert.py	2026-08-21 12:23:52.380649765 +0000
+@@ -67,3 +67,98 @@
+ def test_bad_condition_raises():
+     with pytest.raises(CircuitError):
+         dc("e1,1,0,12:r1,1,0,1'k", conditions=["r_a"])
++
++
++# -- equations written on derived quantities -------------------------------
++# The quantities in analysis._derived (branch voltage v_<element>, power
++# p_<element>, and the r_/z_ a source sees) are computed after the system is
++# solved, so the solver knows nothing about them. Before these, an equation
++# naming one introduced a free variable of the same name that satisfied
++# itself, leaving the circuit one equation short -- the answer came back
++# correct but parametrized, with nothing to say the constraint had been
++# ignored. solve_circuit now stamps the defining equation instead.
++
++def test_equation_on_r_of_a_source_constrains_the_circuit():
++    # From the documentation's own expert-mode example: the source sees
++    # 12k and R3 carries 6 mA, which pins e = 72 V and rx = 2 k.
++    res = ex("e,1,0,e:r1,1,2,rx:r2,2,3,4'k:r3,3,0,6'k", "dc",
++             equations=["r_e = 12000", "i_r3 = 0.006"],
++             unknowns=["e", "rx"])
++    assert sp.simplify(res.values["e"] - 72) == 0
++    assert sp.simplify(res.values["rx"] - 2000) == 0
++
++
++def test_derived_definition_agrees_with_what_derived_computes():
++    # The definitions in engine._derived_definition duplicate the formulas
++    # in analysis._derived; this is the guard against the two drifting.
++    # Ask for r_e as a constraint, then check the value _derived reports
++    # afterwards is the one that was asked for.
++    res = ex("e,1,0,e:r1,1,2,rx:r2,2,3,4'k:r3,3,0,6'k", "dc",
++             equations=["r_e = 12000", "i_r3 = 0.006"],
++             unknowns=["e", "rx"])
++    assert sp.simplify(res.values["r_e"] - 12000) == 0
++
++
++def test_equation_on_branch_voltage():
++    # v_r2 names the drop across r2, not a node -- half of 12 V puts the
++    # unknown leg at 4k, matching the fixed one.
++    res = dc("e1,1,0,12:r1,1,2,4'k:r2,2,0,rb",
++             equations=["v_r2 = 6"], unknowns=["rb"])
++    assert sp.simplify(res.values["rb"] - 4000) == 0
++
++
++def test_equation_on_dc_power():
++    # 8 mW in the lower leg of a 12 V divider with 4k on top: rb = 2k
++    # (8k is the other root; solve() returns one of the two).
++    res = dc("e1,1,0,12:r1,1,2,4'k:r2,2,0,rb",
++             equations=["p_r2 = 0.008"], unknowns=["rb"])
++    assert sp.simplify(res.values["rb"] - 2000) == 0
++
++
++def test_equation_on_impedance_seen_in_ac():
++    res = ac("e1,1,0,10:r1,1,2,100:l1,2,0,lx", omega=1000,
++             equations=["z_e1 = 100 + 100*I"], unknowns=["lx"])
++    assert sp.simplify(res.values["lx"] - sp.Rational(1, 10)) == 0
++
++
++def test_equation_on_op_amp_power():
++    res = dc("e1,1,0,1:r1,1,2,1'k:r2,2,3,rf:o1,0,2,3",
++             equations=["p_o1 = -0.002"], unknowns=["rf"])
++    assert sp.simplify(res.values["rf"] - 2000) == 0
++
++
++def test_ac_power_equation_is_refused_not_silently_ignored():
++    # s_/p_/ap_ in AC are defined through conjugation and cannot go into
++    # the system. Refusing beats the silent phantom this all guards against.
++    for bad in ("s_e1 = 5", "ap_e1 = 5", "p_e1 = 5"):
++        with pytest.raises(CircuitError):
++            ac("e1,1,0,10:r1,1,2,100:l1,2,0,lx", omega=1000, equations=[bad])
++
++
++def test_explicit_unknowns_still_win_over_the_inference():
++    # r_b here is a component value, not "the r_ of an element named b" --
++    # there is no element b, and it is listed under unknowns either way.
++    res = dc("e1,1,0,12:r1,1,2,4'k:r2,2,0,r_b",
++             equations=["v_2 = 6"], unknowns=["r_b"])
++    assert sp.simplify(res.values["r_b"] - 4000) == 0
++
++
++# -- equations on quantities recorded in `known` ---------------------------
++
++def test_equation_on_a_known_source_current():
++    # A j source's current is stamped into `known`, not solved for, so it
++    # was phantomed the same way. Substituting the stamped value makes the
++    # equation constrain the source's own symbolic value.
++    res = dc("j1,0,1,jx:r1,1,0,1'k", equations=["i_j1 = 0.005"], unknowns=["jx"])
++    assert sp.simplify(res.values["jx"] - sp.Rational(5, 1000)) == 0
++    assert sp.simplify(res.v("1") - 5) == 0
++
++
++def test_redundant_equation_on_a_known_current_is_harmless():
++    res = dc("j1,0,1,5:r1,1,0,1'k", equations=["i_j1 = 5"])
++    assert sp.simplify(res.v("1") - 5000) == 0
++
++
++def test_contradictory_equation_on_a_known_current_is_reported():
++    with pytest.raises(CircuitError):
++        dc("j1,0,1,5:r1,1,0,1'k", equations=["i_j1 = 7"])

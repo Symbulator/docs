@@ -1,0 +1,5 @@
+# Pretty URLs:  /7/            ->  index.php?v=7
+#               /7/lesson-dc   ->  index.php?v=7&p=lesson-dc
+RewriteEngine On
+RewriteRule ^([789])/?$              index.php?v=$1                 [L,QSA]
+RewriteRule ^([789])/([a-z0-9-]+)/?$ index.php?v=$1&p=$2            [L,QSA]

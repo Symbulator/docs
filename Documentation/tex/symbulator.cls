@@ -1,0 +1,254 @@
+% symbulator.cls -- look of the Symbulator documentation PDFs
+% Compile with xelatex.
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesClass{symbulator}[2026/08/20 Symbulator documentation]
+\LoadClass[11pt,twoside,openany]{report}
+
+\RequirePackage{geometry}
+\RequirePackage{fontspec}
+\RequirePackage{xcolor}
+\RequirePackage{titlesec}
+\RequirePackage{enumitem}
+\RequirePackage{graphicx}
+\RequirePackage{tcolorbox}
+\RequirePackage{microtype}
+\RequirePackage{fancyhdr}
+\RequirePackage{amsmath}
+\RequirePackage{imakeidx}
+\RequirePackage{etoolbox}
+\RequirePackage[hidelinks]{hyperref}
+
+\tcbuselibrary{skins,breakable}
+
+% ---------------------------------------------------------------- page ----
+\geometry{papersize={170mm,240mm},
+          inner=24mm, outer=30mm, top=22mm, bottom=24mm,
+          marginparwidth=0mm, footskip=12mm}
+
+% --------------------------------------------------------------- colour ---
+% Sampled from the Symbulator Py interface, so the documentation and the
+% software it documents read as one product. Amber survives from the TI-89
+% keypad as the single warm signal, reserved for warnings.
+\definecolor{navy}{HTML}{203864}
+\definecolor{accent}{HTML}{2F5FA8}
+\definecolor{accentbg}{HTML}{E9EFF8}
+\definecolor{sky}{HTML}{8EC7F5}
+\definecolor{ink}{HTML}{1C2330}
+\definecolor{slate}{HTML}{545D6D}
+\definecolor{rule}{HTML}{E2E5EA}
+\definecolor{amber}{HTML}{B7791F}
+\definecolor{amberbg}{HTML}{FBF3E2}
+\definecolor{green}{HTML}{2F7D4F}
+\definecolor{greenbg}{HTML}{ECF5EF}
+\definecolor{danger}{HTML}{A13030}
+\definecolor{dangerbg}{HTML}{FDF1F1}
+\definecolor{answer}{HTML}{A13030}
+\definecolor{lcd}{HTML}{F2F6FC}
+\definecolor{panel}{HTML}{F4F6FA}
+
+% ----------------------------------------------------------------- type ---
+% IBM Plex throughout, the same family the website loads, so the two outputs
+% are typographically the same document. If Plex is not installed the build
+% falls back to the TeX Gyre clones rather than failing.
+\IfFontExistsTF{IBM Plex Serif}{
+  \setmainfont{IBM Plex Serif}[Ligatures=TeX]
+  \setsansfont{IBM Plex Sans}[Ligatures=TeX]
+  \setmonofont{IBM Plex Mono}[Scale=0.86]
+}{
+  \ClassWarning{symbulator}{IBM Plex not found; falling back to TeX Gyre}
+  \setmainfont{TeX Gyre Schola}[Ligatures=TeX]
+  \setsansfont{TeX Gyre Heros}[Ligatures=TeX]
+  \setmonofont{DejaVu Sans Mono}[Scale=0.80]
+}
+\color{ink}
+\linespread{1.06}
+\setlength{\parskip}{0.55\baselineskip}
+\setlength{\parindent}{0pt}
+\setlength{\emergencystretch}{2em}
+\newlength{\figwidth}\setlength{\figwidth}{0.72\linewidth}
+
+% ------------------------------------------------------------- metadata ---
+\newcommand{\@booktitle}{}\newcommand{\booktitle}[1]{\renewcommand{\@booktitle}{#1}}
+\newcommand{\@booksubtitle}{}\newcommand{\booksubtitle}[1]{\renewcommand{\@booksubtitle}{#1}}
+\newcommand{\@bookversion}{}\newcommand{\bookversion}[1]{\renewcommand{\@bookversion}{#1}}
+\newcommand{\@bookplatform}{}\newcommand{\bookplatform}[1]{\renewcommand{\@bookplatform}{#1}}
+\newcommand{\@bookauthor}{}\newcommand{\bookauthor}[1]{\renewcommand{\@bookauthor}{#1}}
+
+\makeindex[intoc=true,title=Index,columns=2]
+
+% ------------------------------------------------------------ title page --
+\newcommand{\maketitlepage}{%
+  \thispagestyle{empty}
+  \vspace*{22mm}
+  {\sffamily\bfseries\fontsize{38}{40}\selectfont\color{navy} \@booktitle\par}
+  \vspace{2mm}
+  {\color{accent}\rule{34mm}{2.2pt}\par}
+  \vspace{5mm}
+  {\sffamily\fontsize{13}{17}\selectfont\color{slate}\@booksubtitle\par}
+  \vfill
+  {\sffamily\fontsize{20}{24}\selectfont\color{accent}\@bookversion\par}
+  {\sffamily\fontsize{12}{16}\selectfont\color{slate}\@bookplatform\par}
+  \vspace{9mm}
+  {\sffamily\fontsize{11}{14}\selectfont \@bookauthor\par}
+  \clearpage}
+
+% ------------------------------------------------------------- headings --
+\titleformat{\chapter}[display]
+  {\sffamily}
+  {\color{accent}\bfseries\fontsize{11}{13}\selectfont\MakeUppercase{\chaptertitlename\ \thechapter}}
+  {2mm}
+  {\bfseries\fontsize{26}{30}\selectfont}
+  [\vspace{1mm}{\color{rule}\titlerule[0.8pt]}]
+\titlespacing*{\chapter}{0pt}{0pt}{7mm}
+
+\titleformat{\section}
+  {\sffamily\bfseries\fontsize{15}{18}\selectfont}{\color{accent}\thesection}{3mm}{}
+\titlespacing*{\section}{0pt}{7mm}{2mm}
+
+\titleformat{\subsection}
+  {\sffamily\bfseries\fontsize{11.2}{14}\selectfont\color{slate}}{}{0pt}{}
+\titlespacing*{\subsection}{0pt}{5mm}{1mm}
+
+\setcounter{secnumdepth}{1}
+\setcounter{tocdepth}{1}
+
+% The contents is navigation, not prose, so it is set in the sans — matching
+% the sidebar on the website and the running feet here.
+\RequirePackage{titletoc}
+\renewcommand{\tableofcontents}{%
+  \setcounter{secnumdepth}{0}%
+  \chapter*{Contents}\markboth{Contents}{Contents}%
+  \begingroup\sffamily
+  \@starttoc{toc}%
+  \endgroup}
+\titlecontents{chapter}[0pt]
+  {\addvspace{3.2mm}\sffamily\bfseries}
+  {}{}
+  {\hfill\normalfont\sffamily\bfseries\contentspage}
+\titlecontents{section}[6mm]
+  {\addvspace{0.6mm}\sffamily\fontsize{10}{13}\selectfont\color{slate}}
+  {\contentslabel{8mm}}{}
+  {\titlerule*[0.7pc]{\color{rule}.}\normalfont\sffamily
+   \fontsize{10}{13}\selectfont\contentspage}
+\renewcommand{\chaptername}{Lesson}
+
+% Lessons carry numbered sections; front and back matter do not.
+\newcommand{\lesson}[2]{\setcounter{secnumdepth}{1}\chapter{#2}}
+\newcommand{\frontchapter}[1]{%
+  \setcounter{secnumdepth}{0}%
+  \chapter*{#1}\addcontentsline{toc}{chapter}{#1}%
+  \markboth{#1}{#1}}
+% standfirst: the "what to expect" paragraph that opens a chapter
+\newcommand{\chaptersummary}[1]{%
+  {\sffamily\fontsize{12.8}{17}\selectfont\color{slate}#1\par}\vspace{3mm}}
+\newcommand{\practicerule}{%
+  \vspace{3mm}{\color{rule}\hrule height 0.8pt}\vspace{2mm}}
+\newcommand{\practiceheading}[1]{%
+  \vspace{4mm}{\color{rule}\hrule height 0.8pt}\vspace{2mm}
+  {\sffamily\bfseries\fontsize{13}{16}\selectfont #1\par}}
+
+% -------------------------------------------------------------- running --
+\pagestyle{fancy}\fancyhf{}
+\renewcommand{\headrulewidth}{0pt}
+\fancyfoot[LE,RO]{\sffamily\small\thepage}
+\fancyfoot[RE]{\sffamily\footnotesize\color{slate}\@bookversion}
+\fancyfoot[LO]{\sffamily\footnotesize\color{slate}\nouppercase{\leftmark}}
+
+% ----------------------------------------------------------------- code ---
+\newcommand{\symcode}[1]{{\ttfamily\small #1}}
+% a value the software gave back, as distinct from one you typed
+\newcommand{\ans}[1]{{\bfseries\color{answer}#1}}
+
+\newenvironment{symtype}
+  {\par\vspace{1mm}\begin{tcolorbox}[breakable,enhanced,boxrule=0pt,
+     frame empty, colback=lcd, left=3mm,right=3mm,top=1.6mm,bottom=1.6mm,
+     borderline west={2.2pt}{0pt}{accent}, sharp corners]
+   \ttfamily\small\raggedright\setlength{\parskip}{0pt}}
+  {\end{tcolorbox}\vspace{1mm}}
+
+\newenvironment{symout}
+  {\par\vspace{1mm}\begin{tcolorbox}[breakable,enhanced,boxrule=0pt,
+     frame empty, colback=panel, left=3mm,right=3mm,top=1.6mm,bottom=1.6mm,
+     borderline west={2.2pt}{0pt}{slate}, sharp corners]
+   \ttfamily\small\raggedright\setlength{\parskip}{0pt}}
+  {\end{tcolorbox}\vspace{1mm}}
+
+% ------------------------------------------------------------- callouts ---
+% Every callout carries an icon and a word, so the four kinds remain
+% distinguishable in greyscale and on a black-and-white printout. The icons are
+% drawn in TikZ, in ex units, so they scale with the surrounding type.
+
+\newcommand{\@icotip}{%                                            lightbulb
+  \tikz[baseline=-0.45ex,x=1ex,y=1ex,line width=0.5pt,line join=round]{
+    \draw (0,0.35) circle (0.62);
+    \draw (-0.30,-0.42) -- (0.30,-0.42);
+    \draw (-0.20,-0.78) -- (0.20,-0.78);}}
+
+\newcommand{\@iconote}{%                                            circled i
+  \tikz[baseline=-0.45ex,x=1ex,y=1ex,line width=0.5pt]{
+    \draw (0,0) circle (0.82);
+    \draw (0,-0.42) -- (0,0.18);
+    \fill (0,0.46) circle (0.10);}}
+
+\newcommand{\@icowarning}{%                                  triangle and bang
+  \tikz[baseline=-0.45ex,x=1ex,y=1ex,line width=0.5pt,line join=round]{
+    \draw (0,0.92) -- (0.88,-0.62) -- (-0.88,-0.62) -- cycle;
+    \draw (0,0.42) -- (0,-0.08);
+    \fill (0,-0.34) circle (0.09);}}
+
+\newcommand{\@icodanger}{%                                    octagon and bang
+  \tikz[baseline=-0.45ex,x=1ex,y=1ex,line width=0.5pt,line join=round]{
+    \draw (22.5:0.92) \foreach \a in {67.5,112.5,157.5,202.5,247.5,292.5,337.5}
+      {-- (\a:0.92)} -- cycle;
+    \draw (0,0.40) -- (0,-0.12);
+    \fill (0,-0.40) circle (0.09);}}
+
+% #1 accent colour, #2 background, #3 icon, #4 word, #5 the author's title
+\newtcolorbox{@callout}[5]{breakable,enhanced,boxrule=0pt,frame empty,
+  colback=#2, left=4mm,right=4mm,top=2.5mm,bottom=2.5mm, sharp corners,
+  borderline west={2.6pt}{0pt}{#1},
+  title={},
+  before upper={%
+    {\sffamily\color{#1}#3\hspace{0.45em}%
+     \fontsize{7.6}{9}\selectfont\bfseries\MakeUppercase{#4}\par}%
+    \vspace{0.8mm}%
+    \ifstrempty{#5}{}{{\sffamily\bfseries\fontsize{10.6}{13}\selectfont
+                       #5\par}\vspace{0.6mm}}}}
+
+\newenvironment{callouttip}[1]
+  {\begin{@callout}{green}{greenbg}{\@icotip}{Tip}{#1}}{\end{@callout}}
+\newenvironment{calloutnote}[1]
+  {\begin{@callout}{slate}{panel}{\@iconote}{Note}{#1}}{\end{@callout}}
+\newenvironment{calloutwarning}[1]
+  {\begin{@callout}{amber}{amberbg}{\@icowarning}{Warning}{#1}}{\end{@callout}}
+\newenvironment{calloutdanger}[1]
+  {\begin{@callout}{danger}{dangerbg}{\@icodanger}{Caution}{#1}}{\end{@callout}}
+
+% ------------------------------------------------------ problems/figures --
+\newtcolorbox{problem}[1]{breakable,enhanced,boxrule=0.8pt,colframe=rule,
+  colback=white, left=4mm,right=4mm,top=3mm,bottom=3mm, sharp corners,
+  before upper={{\sffamily\bfseries\fontsize{11.5}{14}\selectfont #1\par}
+                \vspace{1mm}}}
+
+\newenvironment{solution}
+  {\par\vspace{1.5mm}{\sffamily\bfseries\footnotesize\color{accent}%
+   \MakeUppercase{Solution}\par}\vspace{-1mm}}
+  {\par}
+
+\newenvironment{symfigure}
+  {\par\vspace{2mm}\begin{center}\captionsetup{}}
+  {\end{center}\vspace{1mm}}
+\newcommand{\caption@sym}[1]{}
+\renewcommand{\caption}[1]{\par\vspace{1mm}%
+  {\sffamily\footnotesize\color{slate}#1\par}}
+\newcommand{\captionsetup}[1]{}
+
+% lists
+% parskip is generous for paragraphs; lists need their own, tighter, spacing
+\setlist{parsep=0pt, partopsep=0pt}
+\setlist[itemize]{leftmargin=5mm, itemsep=0.35\baselineskip,
+                  topsep=0.35\baselineskip}
+\setlist[enumerate]{leftmargin=6mm, itemsep=0.35\baselineskip,
+                    topsep=0.35\baselineskip}
+
+\newcommand{\printtheindex}{\clearpage\printindex}

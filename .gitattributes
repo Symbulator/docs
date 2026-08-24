@@ -1,0 +1,27 @@
+# core.autocrlf is on for this machine, so without this every file would be
+# checked out with CRLF -- while build.py, the tools and the deploy script
+# all write LF (io.open(..., newline="\n")). The two would disagree on every
+# line of every file, and each build would look like a rewrite of the whole
+# tree. Pin LF in the working tree, on every platform.
+#
+# It matters beyond noise for two of these: web/.htaccess and
+# guide/build-guide.sh are read by Apache and /bin/sh on the server, and a
+# CRLF copy of either fails there and not here.
+* text=auto eol=lf
+
+# Binary assets: never translate these. The figures are the bulk of the
+# repo and most are photographs or scans.
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.JPG  binary
+*.gif  binary
+*.pdf  binary
+*.ico  binary
+*.zip  binary
+*.ttf  binary
+*.otf  binary
+*.woff binary
+*.woff2 binary
+
+# SVG is text and diffs usefully, so it is deliberately not listed above.

@@ -1,0 +1,61 @@
+title: Symbulator
+subtitle: A symbolic simulator of linear electric circuits
+author: Roberto Perez-Franco
+copyright: "MIT licence"
+site_url: "https://www.symbulator.com"
+
+versions:
+  7:
+    name: Symbulator 7
+    label: "7"
+    platform: TI-89 Titanium
+    blurb: for the TI-89 Titanium and Voyage 200
+    status: stable
+  8:
+    name: Symbulator 8
+    label: "8"
+    platform: TI-Nspire CX II CAS
+    blurb: for the TI-Nspire CX II CAS
+    status: beta
+  9:
+    name: Symbulator 9
+    label: "9"
+    platform: Python / SymPy
+    blurb: for Python, on any computer
+    status: stable
+
+# Words that change with the version. Use as {{t:container}} in the source.
+terms:
+  container:
+    7: folder
+    8: document
+    9: session
+  container_the:
+    7: the current folder
+    8: the current document
+    9: the current session
+  laplace:
+    7: DiffEq
+    8: Laplace Functions
+    9: SymPy
+  machine:
+    7: calculator
+    8: calculator
+    9: computer
+
+chapters:
+  - 00-introduction.md
+  - 01-lesson-dc.md
+  - 02-lesson-symbolic.md
+  - 03-lesson-sources.md
+  - 04-lesson-equivalents.md
+  - 05-lesson-opamps.md
+  - 06-lesson-transient.md
+  - 07-lesson-ac.md
+  - 08-lesson-power.md
+  - 09-lesson-threephase.md
+  - 10-lesson-coupling.md
+  - 11-lesson-bode.md
+  - 12-lesson-fd.md
+  - 13-lesson-twoports.md
+  - 99-credits.md

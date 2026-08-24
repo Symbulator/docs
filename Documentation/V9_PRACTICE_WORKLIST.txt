@@ -1,0 +1,44 @@
+# Practice-problem prose that still speaks to a calculator
+#
+# Each line below sits inside a practice section and says
+# something a Symbulator 9 reader cannot do: press Enter,
+# evaluate a variable, wait for Done. Fix these BEFORE
+# running --unwrap on that chapter, or they go live.
+#
+# Line numbers are as of this run and shift as you edit.
+
+## 02-lesson-symbolic.md  (2 lines)
+
+   559  approx(-ie1)
+   617  Add these five variables to the list of first level variables:
+
+## 03-lesson-sources.md  (3 lines)
+
+   441  the calculator to provide us the values of three variables that – given the
+   462  The calculator returns **{12,4,3}**, meaning V{{sub:S}} is 12V, I{{sub:1}} is
+  1092  Select DC, and press Enter. Add equation `ir2=2'm.` Add unknown `is`. Run the
+
+## 04-lesson-equivalents.md  (9 lines)
+
+   504  `s\er(cir,0,c)` When prompted, choose DC as analysis type. Once it is done,
+   505  evaluate `approx(req)` The value is **2.89** Ω. This is correct. Below are
+   525  Choose DC. When *Done*, use `approx(req)` to find the equivalent resistance
+   538  We don't need to run a simulation for this. We can reduce it using s\pr.
+   559  We don't need to run a simulation for this. We can reduce it using s\pr.
+   580  We don't need to run a simulation for this. We can reduce it using s\pr.
+   601  We don't need to run a simulation for this. We can reduce it using s\pr.
+  1392  You choose DC, press Enter and wait. Symbulator reports the calculator was
+  1419  Now the calculator can solve just fine. Evaluate the answers: the expression
+
+## 05-lesson-opamps.md  (2 lines)
+
+  1368  Evaluating `approx({vo,iro})` we get the answer, **{.35,2.5e-5}**. This is
+  1638  them both, separately, into the calculator, and then ask the calculator to
+
+## 06-lesson-transient.md  (5 lines)
+
+  1916  function, `0` as the minimal time and `1.5` as the maximal time. Press Enter,
+  2366  s\plot(). Once the plot window opens, enter `vc` as function, `0` as minimal
+  2446  Finally, run `s\plot()` and enter `vl` as function, `0` as minimal time and
+  2656  shortcut to invoke DiffEq’s Laplace Transform to do so: `s\t2s`.
+  2860  And solve. When done, ask for the sanity check:
