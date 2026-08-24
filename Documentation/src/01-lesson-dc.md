@@ -129,7 +129,7 @@ circuit you want to analyse. That input goes inside the **Circuit Description** 
 and takes the form of a series of lines of text, each one describing an element.{{i:circuit description}}
 :::
 
-```sym 9
+```field 9 Circuit Description
 e1,1,0,36
 r1,1,2,1'k
 r2,2,3,3'k
@@ -144,7 +144,7 @@ also accepts a colon as a separator, which is how the calculator versions have
 always done it. This is the same circuit in one line: 
 :::
 
-```sym 9
+```field 9 Circuit Description
 e1,1,0,36:r1,1,2,1'k:r2,2,3,3'k:r3,3,0,2'k
 ```
 

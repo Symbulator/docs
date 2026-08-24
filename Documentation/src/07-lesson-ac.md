@@ -127,9 +127,16 @@ s\ac(cir,4)
 "e,1,0,10:r1,1,2,5:c,2,0,.1"→cir
 s\ac(cir,4)
 ```
-```sym 9
-res = ac("e,1,0,10:r1,1,2,5:c,2,0,.1", omega=4)
+```field 9 Circuit Description
+e1,1,0,10
+r1,1,2,5
+c,2,0,.1
 ```
+
+::: only 9
+Choose *AC — alternating current*, and put **4** in the **omega** box that
+appears beside it.
+:::
 
 Notice that, in our circuit description, the order we give to the nodes of the
 resistor and the capacitor is chosen to be convenient for the answers we will
@@ -141,12 +148,12 @@ what it found:
 - the usual voltages in the nodes, voltage drops in the elements, and currents
   through the elements, in variables that should be familiar by now
 - the *average power consumed* in the source and the resistor, in
-  {{v7,8|`ape` and `apr1`}}{{v9|`res["ap_e"]` and `res["ap_r1"]`}}. None is given
+  {{v7,8|`ape` and `apr1`}}{{v9|`ap_e1` and `ap_r1`}}. None is given
   for the capacitor, since capacitors and inductors do not consume real power.
 - the *complex power consumed* in all elements, in {{v7,8|`sc`, `se` and
-  `sr1`}}{{v9|`res["s_c"]`, `res["s_e"]` and `res["s_r1"]`}}
+  `sr1`}}{{v9|`s_c`, `s_e1` and `s_r1`}}
 - the *equivalent impedance* of the rest of the circuit as seen by the source,
-  in {{v7,8|`ze`}}{{v9|`res["z_e"]`}}
+  in {{v7,8|`ze`}}{{v9|`z_e1`}}
 
 To get the answers we need for this problem in particular, we ask for `ir1` and
 `vc`. It is likely that the {{t:machine}} will give you the answers in
@@ -167,16 +174,15 @@ s\aa(ir1)
 ```
 :::
 ::: only 9
-If we want to see them as an amplitude and angle, ask SymPy for the modulus and
-the argument:
+If we want to see them as an amplitude and angle, open the **Mini-tools**
+card under the results, leave the tool set to *aa — amplitude and angle*,
+and give it the answer's name:{{i:aa tool}}
 
-```sym 9
-from sympy import Abs, arg, deg
-Abs(res.i("r1")), deg(arg(res.i("r1")))
+```field 9 Value
+i_r1
 ```
-```out
-(1.789, 26.57)
-```
+
+It reads {{o:1.789}}∠{{o:26.57}}°.
 :::
 
 This is correct. You manually convert it to a sinusoid, by putting it back in
@@ -210,9 +216,22 @@ s\ac(cir,10)
 "e,1,0,(20∠30°):r1,1,2,4:l,2,0,.2"→cir
 s\ac(cir,10)
 ```
-```sym 9
-res = ac("e,1,0,20*exp(I*pi/6):r1,1,2,4:l,2,0,.2", omega=10)
+```field 9 Circuit Description
+e1,1,0,20*exp(j*pi/6)
+r1,1,2,4
+l,2,0,.2
 ```
+
+::: only 9
+The angle sign is one thing version 9 does not read: `(20∠30°)` is fine on
+the calculator and is refused here. Write the source in exponential form
+instead — `20*exp(j*pi/6)` is the same phasor, 20 volts at 30 degrees,
+since 30° is π/6 radians.
+
+Then AC, with **10** for omega. **Mini-tools** with *aa* reads
+`i_r1` as {{o:4.472}}∠{{o:3.43}}° and `v_l` as {{o:8.944}}∠{{o:93.43}}°.
+Both are correct.
+:::
 
 We ask for the current in the resistor and get 4.472∠3.43°, and for the voltage
 in the inductor and get 8.944∠93.43°. Both are correct.
@@ -238,10 +257,19 @@ s\er(cir,1,0)
 "ca,1,2,2'm:r1,2,3,3:cb,3,0,10'm:l1,2,4,.2:r2,4,0,8"→cir
 s\er(cir,1,0)
 ```
-```sym 9
-eq = er("ca,1,2,2'm:r1,2,3,3:cb,3,0,10'm:l1,2,4,.2:r2,4,0,8",
-        "1", "0", domain="ac", omega=50)
+```field 9 Circuit Description
+ca,1,2,2'm
+r1,2,3,3
+cb,3,0,10'm
+l1,2,4,.2
+r2,4,0,8
 ```
+
+::: only 9
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
+*Impedance*, with nodes **1** and **0**, in AC at omega **50**. The answer
+is called `zeq`.
+:::
 
 ::: only 7,8
 When asked what type of analysis, choose AC. Since there are capacitors in
@@ -293,8 +321,8 @@ admittance, so our answer will be the inverse of the equivalent impedance:
 ```sym 8
 1/(s\pr({4,𝐢8,-𝐢10}))
 ```
-```sym 9
-1 / pr(4, 8j, -10j)
+```field 9 Evaluate
+1/pr(4,8j,-10j)
 ```
 ```out
 0.25-0.025𝐢
@@ -334,10 +362,17 @@ s\er(cir,1,0)
 "c,1,0,c:r1,1,2,10:l,2,0,5'm"→cir
 s\er(cir,1,0)
 ```
-```sym 9
-eq = er("c,1,0,c:r1,1,2,10:l,2,0,5'm", "1", "0",
-        domain="ac", omega=2*pi*2e3)
+```field 9 Circuit Description
+c,1,0,c
+r1,1,2,10
+l,2,0,5'm
 ```
+
+::: only 9
+*Find equivalent*, *Impedance*, nodes **1** and **0**, AC. The problem gives
+2000 Hz and the omega box wants radians per second, so type `2*pi*2e3`
+straight into it — it takes an expression, not only a number.
+:::
 
 ::: only 7,8
 When asked, specify AC. Then we are asked for the frequency. The problem gives
@@ -376,10 +411,22 @@ solve(imag(zeq)=0,c)
 ```sym 8
 solve(imag(zeq)=0,c)
 ```
-```sym 9
-from sympy import im, solve, Symbol
-solve(im(eq.z), Symbol("c"))
+::: only 9
+Now open the **Solve** card and ask for the capacitance that leaves no
+imaginary part:
+
+```field 9 Equation(s) to solve in terms of the results
+im(zeq) = 0
 ```
+
+```field 9 Unknown(s) to solve for
+c
+```
+
+Tick **real only** before running it. Without it the answer comes back
+carrying an `im(c)` term, because nothing has told Symbulator that a
+capacitance is a real number.
+:::
 
 The answer is c = 0.000001235, or 1.235 µF. This is not the answer the book
 gives.
@@ -430,9 +477,17 @@ s\ac(cir,ω)
 "e,1,0,vs:c,1,2,c:r1,2,o,r:o,0,2,o"→cir
 s\ac(cir,ω)
 ```
-```sym 9
-res = ac("e,1,0,vs:c,1,2,c:r1,2,o,r:o,0,2,o", omega=Symbol("omega"))
+```field 9 Circuit Description
+e1,1,0,vs
+c,1,2,c
+r1,2,o,r
+o,0,2,o
 ```
+
+::: only 9
+The omega box takes a name as readily as a number: type `omega` into it and
+the answers come back as functions of it.
+:::
 
 We ask for `vo/vs` and get −c·ω·r·𝐢, which is correct.
 :::
