@@ -161,25 +161,34 @@ For the purpose of a transient analysis, Symbulator accepts many types of
 source values. The only thing you must do is describe these values properly.
 
 **Step values: symbolic.** A source with an unknown step value starting at t=0
-is described using a variable and the step function u(t). For example, a
+is described using a variable and the step function {{v7,8|u(t)}}{{v9|`Heaviside(t)`}}. For example, a
 voltage source e1, connected between nodes 1 and 0, with a value of V volts
-starting at t=0, would be `e1,1,0,V*u(t)`.
+starting at t=0, would be {{v7,8|`e1,1,0,V*u(t)`}}{{v9|`e1,1,0,V*Heaviside(t)`}}.
 
 **Step values: numerical.** A step source with a known numerical value can also
-be described as above, `e1,1,0,12*u(t)`. However, to save some typing, when
-your value is numerical you can skip the u(t), and Symbulator will assume it is
-a numerical step value: `e1,1,0,12`. The results are the same.
+be described as above, {{v7,8|`e1,1,0,12*u(t)`}}{{v9|`e1,1,0,12*Heaviside(t)`}}. However, to save some typing, when
+your value is numerical you can skip the step function altogether:
+`e1,1,0,12`. {{v7,8|The results are the same.}}{{v9|The answer is the same for $t \ge 0$; the only difference is
+that if you write `Heaviside(t)`, it stays as a factor in the answer.}}
 
 **Impulse values.** A source with an impulse value at t=0 is described using
-its value, symbolic or numerical, and the delta function δ(t). For example, a
+its value, symbolic or numerical, and the delta function {{v7,8|δ(t)}}{{v9|`DiracDelta(t)`}}. For example, a
 current source j1, connected between nodes 0 and 1, with an impulse value of i
-amperes at t=0, would be `j1,0,1,i*δ(t)`.
+amperes at t=0, would be {{v7,8|`j1,0,1,i*δ(t)`}}{{v9|`j1,0,1,i*DiracDelta(t)`}}.
 
 **Values as functions of time.** A source whose value is a function of time,
 such as a ramp, a sinusoid or an exponential, is described by writing the value
 as an expression in terms of t, as in `j,0,1,t`.
 {{v7,8|Values as functions of t will activate the Impala mode, in order to save
 time.}}
+
+::: only 9
+Two habits from the calculator will not survive the trip. An exponential is
+written `exp(...)`, not `e^(...)`: a decaying source is `j,0,1,2*exp(-4*t)`.
+And a multiplication is never assumed — `2t` is not two times t, it is a name
+Symbulator cannot read, so write `2*t`. The same goes for a value that leans on
+an answer: `3*ir1`, never `3ir1`.
+:::
 
 **Dependent values.** Sources with dependent values are described as we have
 seen before, for example {{v7,8|`j,0,1,3*vr1`}}{{v9|`j,0,1,3*v_r1`}}.
