@@ -8,7 +8,7 @@
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
     <dc:title>symbulator-placeholder</dc:title>
-    <dc:date>2026-08-24T22:02:10.373693</dc:date>
+    <dc:date>2026-08-25T09:38:15.443601</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -39,7 +39,7 @@ L 338.652 10.08288
 L 10.548 10.08288 
 L 10.548 148.46112 
 z
-" clip-path="url(#p0f04c42aa9)" style="fill: none; stroke-dasharray: 8.4,5.6; stroke-dashoffset: 0; stroke: #b7791f; stroke-width: 1.4; stroke-linejoin: miter"/>
+" clip-path="url(#p14b2b79718)" style="fill: none; stroke-dasharray: 8.4,5.6; stroke-dashoffset: 0; stroke: #b7791f; stroke-width: 1.4; stroke-linejoin: miter"/>
    </g>
    <g id="text_1">
     <!-- Screen grab of ir2 and vr2 -->
@@ -907,7 +907,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="p0f04c42aa9">
+  <clipPath id="p14b2b79718">
    <rect x="7.2" y="7.2" width="334.8" height="144.144"/>
   </clipPath>
  </defs>

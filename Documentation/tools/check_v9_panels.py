@@ -47,6 +47,12 @@ def main():
         for line, desc in panels(path):
             if not desc:
                 continue
+            # A single element is an illustration of the syntax, not a
+            # circuit -- "m1,l1,l2,1.5" shown to explain the fields. No
+            # real circuit has one element, so it cannot be solved and
+            # was never meant to be.
+            if desc.count(":") == 0:
+                continue
             # Symbolic circuits legitimately carry free symbols, so a
             # solve is not the test -- only whether the input is READ.
             # The panel does not say which analysis the reader picks, so
