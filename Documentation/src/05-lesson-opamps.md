@@ -114,9 +114,6 @@ r30,3,0,1'k
 r3o,3,o,20'k
 o,3,2,o
 ```
-```sym 9
-res = dc("e,1,0,.1:r12,1,2,1'k:r2o,2,o,10'k:r30,3,0,1'k:r3o,3,o,20'k:o,3,2,o")
-```
 
 We ask for the values of the variables `vo` and `po`:
 

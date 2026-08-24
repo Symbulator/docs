@@ -123,9 +123,6 @@ s\tr("j,0,1,t:c,1,0,2,0")
 j,0,1,t
 c,1,0,2,0
 ```
-```sym 9
-res = tr("j,0,1,t:c,1,0,2,0")
-```
 
 The description of the source has four terms: name (starting with j), first
 node, second node, and value. In this case the value is t. The description of
@@ -147,9 +144,23 @@ vc|t=2
 ```sym 8
 vc|t=2
 ```
-```sym 9
-res["v_c"].subs("t", 2)
+::: only 9
+There is no `|t=2` on the web, but the **Solve** card will do it. Put both
+lines in **Equation(s) to solve in terms of the results**, and name both
+unknowns:
+
+```field 9 Equation(s) to solve in terms of the results
+x = v_c
+t = 2
 ```
+
+```field 9 Unknown(s) to solve for
+x, t
+```
+
+Naming `t` as an unknown is what makes the second equation bite: without it
+the answer comes back still written in terms of t.
+:::
 
 We get a value of 1 volt, which is correct.
 :::
@@ -229,11 +240,13 @@ The s\only tool is valuable in TR analysis, because you can save time by not
 having Symbulator find the inverse Laplace of answers that are not needed.
 :::
 ::: only 9
-In case you don't want all the answers, but only a chosen few, pass the
-`variables` argument to `tr`, naming exactly the quantities you want:
+In case you don't want all the answers, but only a chosen few, tick **Do you
+want to limit the results to save time?** — it appears under the analysis
+menus once you choose TR. A box opens asking **What results are you after?**
+List them there, separated by commas:
 
-```sym 9
-res = tr("e,1,0,5/s:r1,1,2,1000:c1,2,0,1e-6", variables=["v_2"])
+```field 9 What results are you after? List the variables here
+v_2
 ```
 
 This matters most in TR analysis, where each answer costs an inverse Laplace
@@ -256,42 +269,31 @@ s\plot()
 ```
 :::
 ::: only 9
-Symbulator 9 has no plotting window of its own, because Python already has
-several better ones. Any answer is a SymPy expression, so SymPy's own plotting
-will draw it:
+Symbulator 9 draws the plot for you, in the **Plot** card below the results.
+Solve the circuit first — the plot is of an answer, so there has to be one —
+then open **Plot** and fill in four things:
 
-```sym 9
-from sympy import plot, Symbol
-t = Symbol("t", positive=True)
-plot(res["v_2"], (t, 0, 5e-3))
-```
+- **Plot type**: *Plot a function of time*
+- **Variable to plot**: the answer you want, such as `v_2`
+- **Start time (s)** and **End time (s)**: the window, for example 0 and
+  0.005
+- **Points**: how finely to sample it; 300 is the default and is usually
+  plenty
 
-::: warning The t you plot against must be the same t
-To SymPy, `Symbol("t")` and `Symbol("t", positive=True)` are two different
-symbols, and Symbulator's time-domain answers are written in the second one.
-Plot against a bare `Symbol("t")` and nothing goes wrong loudly — the
-substitution simply does not happen, and you get either a complaint about a
-free symbol or a picture of a straight line. Declare it with
-`positive=True` and the two match.
+Press **Run** and the curve appears under the card.
+
+The second field is worth a moment. It takes an answer's name, not an
+expression, and it must be one this circuit actually has — `v_2` and `i_r1`
+rather than `vc` or a formula of your own. If you are unsure of the spelling,
+**Results** lists every name above.
+
+::: warning A curve the inverse Laplace could not find
+Some circuits have an answer the inverse Laplace transform cannot close into
+an expression. Symbulator samples the s-domain answer numerically for the
+plot instead, so the picture still appears even when **Results** shows
+nothing for that variable. If a plot is blank where you expected a curve,
+check that the variable is spelled the way **Results** spells it.
 :::
-
-There is a second way, and for some circuits it is the only way. The inverse
-Laplace transform does not always close into an expression you can write down;
-when it does not, there is nothing for `plot` to draw. For those cases —
-and whenever all you want is numbers — `time_samples` evaluates the answer
-numerically instead:
-
-```sym 9
-from symbulator import time_samples
-t, v = time_samples("e,1,0,10/s:r1,1,2,1000:c1,2,0,1e-6", "v_2", 5e-3, n=5)
-```
-```out
-([0.0, 0.00125, 0.0025, 0.00375, 0.005],
- [0.0, 7.135, 9.179, 9.765, 9.933])
-```
-
-It hands back two ordinary Python lists — the times and the values — ready for
-Matplotlib or anything else that draws.
 :::
 
 ## Instructive solved examples {#practice-transient}
