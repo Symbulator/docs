@@ -203,7 +203,7 @@ the solved problems.
 ### The only tool
 
 Unless you indicate otherwise, a Symbulator simulation will give you a whole
-array of answers: voltages in all nodes, and voltage drops, currents and power
+set of answers: voltages in all nodes, and voltage drops, currents and power
 consumed in all elements. When the circuit has complicated symbolic
 expressions, storing all these answers takes time.
 

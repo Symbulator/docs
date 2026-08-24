@@ -1020,7 +1020,7 @@ r4,2,0,r2
 o,2,1,o
 ```
 
-Evaluating `vo` we get the correct answer, equivalent to the book's answer
+{{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}} the correct answer, equivalent to the book's answer
 above.
 
 :::
@@ -1051,7 +1051,7 @@ r4,6,0,15'k
 o,6,5,o
 ```
 
-Evaluating `vo` we get **3** **v2** **– ** **4** **v1**, which is the correct
+{{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}} **3** **v2** **– ** **4** **v1**, which is the correct
 answer.
 
 :::
@@ -1184,7 +1184,7 @@ r4,b,0,20'k
 o,b,a,o
 ```
 
-Evaluating `vo` gives us the desired output, **3\*v2-5\*v1**. The resistor
+{{v7,8|Evaluating `vo` gives us}}{{v9|`vo` is}} the desired output, **3\*v2-5\*v1**. The resistor
 values are correct.
 
 :::
@@ -1295,7 +1295,7 @@ o1,0,2,3
 o2,0,4,o
 ```
 
-Evaluating `vo` we get:
+{{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}}:
 
 which is correct, as can be seen by comparing it to the book's answer, shown
 below:
@@ -1335,7 +1335,7 @@ o1,0,2,3
 o2,3,4,o
 ```
 
-Evaluating `vo` we get: -**.75 vs**, which is correct.
+{{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}}: -**.75 vs**, which is correct.
 
 :::
 
@@ -1365,7 +1365,7 @@ r2,a,2,12'k
 r3,2,0,3'k
 ```
 
-Evaluating `approx({vo,iro})` we get the answer, **{.35,2.5e-5}**. This is
+{{v7,8|Evaluating `approx({vo,iro})` we get the answer, **{.35,2.5e-5}**.}}{{v9|`vo` is **.35** and `iro` is **2.5e-5**.}} This is
 correct.
 
 :::

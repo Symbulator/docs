@@ -737,15 +737,17 @@ you need:}}{{v9|Run it, and the answers are all on the page already:}}
   either resistor gives}} the current in the resistors: {{o:2}} A
 - {{v7,8|Evaluating `vr1` gets}}{{v9|The **voltage drop** line of `r1` gives}}
   the voltage drop in the 30Ω resistor: {{o:60}} V
-- Evaluating `vr2` gets the voltage drop in the 15Ω resistor: {{o:30}} V
-- Evaluating `pr1` gets the power consumed in the 30Ω resistor: {{o:120}} W
-- Evaluating `pr2` gets the power consumed in the 15Ω resistor: {{o:60}} W
+- {{v7,8|Evaluating `vr2` gets}}{{v9|`vr2` is}} the voltage drop in the 15Ω resistor: {{o:30}} V
+- {{v7,8|Evaluating `pr1` gets}}{{v9|`pr1` is}} the power consumed in the 30Ω resistor: {{o:120}} W
+- {{v7,8|Evaluating `pr2` gets}}{{v9|`pr2` is}} the power consumed in the 15Ω resistor: {{o:60}} W
 - {{v7,8|Evaluating }}{{v7|`-pe1`}}{{v8|`–pe1`}}{{v9|Flipping the sign of `pe1`}} gets the power delivered by the 120V source: {{o:240}} W
 - {{v7,8|Evaluating }}{{v7|`-pe2`}}{{v8|`–pe2`}}{{v9|Flipping the sign of `pe2`}} gets the power delivered by the 30V source: {{o:-60}} W. This means this source is actually consuming 60W.
-- Evaluating `pr1+pr2+pe1+pe2` gets the sum of powers: {{o:0}} W. As expected.
+- {{v7,8|Evaluating `pr1+pr2+pe1+pe2` gets}}{{v9|`pr1+pr2+pe1+pe2` is}} the sum of powers: {{o:0}} W. As expected.
 
-Wasn't that easy? We could also have asked for all the answers with one
-array:
+Wasn't that easy?
+
+::: only 7,8
+We could also have asked for all the answers with one array:
 
 ```sym 7
 {ir1,vr1,vr2,pr1,pr2,-pe1,-pe2,pr1+pr2+pe1+pe2}
@@ -753,6 +755,7 @@ array:
 ```sym 8
 {ir1,vr1,vr2,pr1,pr2,–pe1,–pe2,pr1+pr2+pe1+pe2}
 ```
+:::
 
 :::
 
@@ -783,8 +786,8 @@ r2,3,4,7
 r3,4,0,4
 ```
 
-When it's done, ask for the answers we need. Evaluating `ir1` gets the
-current I: {{o:2.5}} A. Evaluating `vr2` gets the voltage drop in the 7Ω
+When it's done, ask for the answers we need. {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} the
+current I: {{o:2.5}} A. {{v7,8|Evaluating `vr2` gets}}{{v9|`vr2` is}} the voltage drop in the 7Ω
 resistor: {{o:17.5}} W
 
 :::
@@ -811,9 +814,9 @@ r2,1,0,220
 r3,1,0,1.2'k
 ```
 
-- Evaluating {{v7,8|`re`}}{{v9|`re1`}} gets the total resistance: {{o:9.49}} Ω
+- {{v7,8|Evaluating `re` gets}}{{v9|`re1` is}} the total resistance: {{o:9.49}} Ω
 - {{v7,8|Evaluating }}{{v7|`-ie`}}{{v8|`–ie`}}{{v9|Flipping the sign of `ie1`}} gets us the source current: {{o:2.53}} A
-- Evaluating `ir1` gets I{{sub:1}}: {{o:2.4}} A, `ir2` gets I{{sub:2}}: {{o:0.11}} A, and `ir3` gets I{{sub:3}}: {{o:0.02}} A.
+- {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} I{{sub:1}}: {{o:2.4}} A, {{v7,8|`ir2` gets}}{{v9|`ir2` is}} I{{sub:2}}: {{o:0.11}} A, and {{v7,8|`ir3` gets}}{{v9|`ir3` is}} I{{sub:3}}: {{o:0.02}} A.
 
 :::
 
@@ -994,8 +997,8 @@ r2,1,0,20'k
 r3,1,0,56'k
 ```
 
-- Evaluating {{v7,8|`re`}}{{v9|`re1`}} gets the total resistance: {{o:1.44}} kΩ
-- Evaluating `ir1` gets {{o:17.5}} mA, `ir2` gets {{o:1.4}} mA, and `ir3` gets {{o:0.5}} mA
+- {{v7,8|Evaluating `re` gets}}{{v9|`re1` is}} the total resistance: {{o:1.44}} kΩ
+- {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} {{o:17.5}} mA, {{v7,8|`ir2` gets}}{{v9|`ir2` is}} {{o:1.4}} mA, and {{v7,8|`ir3` gets}}{{v9|`ir3` is}} {{o:0.5}} mA
 - {{v7,8|Evaluating }}{{v7|`-pe`}}{{v8|`–pe`}}{{v9|Flipping the sign of `pe1`}} gets the power: {{o:543}} mW
 
 These are the correct answers.
@@ -1059,8 +1062,10 @@ e2,0,2,40
 r2,a,2,5
 ```
 
+::: only 7,8
 Through an array, and using the `approx` command, we ask for all the three
 answers:
+:::
 
 ```sym 7
 approx({ir1,ir2,ir3})
