@@ -316,8 +316,204 @@ These are correct.
 :::
 :::
 
-::: practice Further power problems
-TODO: convert the remaining problems in this lesson from docs-page7:
-AS7's Practice Problem 11.10, Problem 11.97 and Problem 11.75 (which includes
-the nice trick of solving for the capacitance that gives unity power factor).
+::: practice
+
+::: problem AS7's Practice Problem 11.10
+Calculate the power factor of the entire circuit as seen by the source. What
+is the average power supplied by the source?
+
+::: figure assets/circuit/as7pp1110.png
+AS7's Practice Problem 11.10
+:::
+
+::: answer
+The values are RMS, so {{v7,8|set `true→s\rms`}}{{v9|tick **RMS phasors** in
+**Settings**}}.
+
+```sym 7
+true→s\rms:"e,1,0,165.:r,1,0,10.+[𝐢4.,8.-𝐢6.]"→cir:s\ac(cir,ω)
+```
+```sym 8
+true→s\rms:"e,1,0,165.:r,1,0,10.+[𝐢4.,8.–6.𝐢]"→cir:s\ac(cir,ω)
+```
+```field 9 Circuit Description
+e1,1,0,165
+r1,1,2,10
+r2,2,0,4j
+r3,2,3,8
+r4,3,0,-6j
+```
+
+::: only 9
+Written out as four elements rather than one, which is clearer and costs
+nothing here. The average power supplied is the opposite of the power the
+source consumes — `-p_e1` in **Evaluate** gives {{o:2007.1}} W.
+
+For the power factor, use **Mini-tools** with *pf*, giving it the source's
+voltage and the current it delivers — which is the opposite of the current
+through the source element:
+
+```field 9 Voltage
+v_e1
+```
+
+```field 9 Current
+-i_e1
+```
+:::
+
+```out 7,8
+-pe gives 2007.1 W;  s\pf("e") gives pf: 0.93595 leading
+```
+
+::: only 9
+It reads {{o:0.93595}} **lagging**.
+
+::: warning The printed answer says leading, and that is a mistake
+The magnitude is right and the direction is not. The impedance the source
+sees is `z_e1` = {{o:11.88}} + {{o:4.47}}j Ω — the reactance is *positive*,
+so the load is inductive and the current lags. Only a capacitive load gives
+a leading power factor.
+
+You can see it in the circuit without computing anything: 10 Ω in series
+with j4 Ω in parallel with (8 − j6) Ω comes out net inductive.
+:::
+:::
+:::
+:::
+
+::: problem AS7's Problem 11.97
+A power transmission system is modelled as shown. If V{{sub:s}} = 240 V rms,
+find the average power absorbed by the load.
+
+::: figure assets/circuit/as7p1197.png
+AS7's Problem 11.97
+:::
+
+::: answer
+Three impedances in series: the outgoing line, the load, and the return path.
+
+```sym 7
+true→s\rms:"evs,1,0,240.:rl1,1,2,.1+𝐢:rl,2,3,100+𝐢:rl2,3,0,.1+𝐢"→cir:s\ac(cir,ω):prl
+```
+```sym 8
+true→s\rms:"evs,1,0,240.:rl1,1,2,.1+𝐢:rl,2,3,100+𝐢:rl2,3,0,.1+𝐢"→cir:s\ac(cir,ω):prl
+```
+```field 9 Circuit Description
+evs,1,0,240
+rl1,1,2,.1+1j
+rl,2,3,100+1j
+rl2,3,0,.1+1j
+```
+
+::: only 9
+AC with **RMS phasors** ticked. The `rl` block's **power consumed** line reads
+{{o:573.2}} W.
+:::
+
+```out 7,8
+573.2 W
+```
+
+Correct.
+:::
+:::
+
+::: problem AS7's Problem 11.75
+Consider the power system shown. Calculate the total complex power, the power
+factor, and the parallel capacitance needed for a unity power factor.
+
+::: figure assets/circuit/as7p1175.png
+AS7's Problem 11.75
+:::
+
+::: answer
+Three loads in parallel across a 240 V rms source. The first two parts need no
+frequency at all, so leave omega as anything.
+
+```sym 7
+true→s\rms:"e,1,0,240:r1,1,0,80-𝐢50:r2,1,0,120+𝐢70:r3,1,0,60+𝐢0"→cir:s\ac(cir,ω)
+```
+```sym 8
+true→s\rms:"e,1,0,240:r1,1,0,80–𝐢50:r2,1,0,120+𝐢70:r3,1,0,60+𝐢0"→cir:s\ac(cir,ω)
+```
+```field 9 Circuit Description
+e1,1,0,240
+r1,1,0,80-50j
+r2,1,0,120+70j
+r3,1,0,60
+```
+
+**(a)** The complex power delivered is the opposite of the power the source
+consumes: {{v7,8|`-se`}}{{v9|`-s_e1` in **Evaluate**}} gives
+{{o:1835.9}} − {{o:114.7}}j VA.
+
+**(b)** The power factor, from {{v7,8|`s\pf("e")`}}{{v9|*pf* in **Mini-tools**
+with `v_e1` and `-i_e1`}}, is {{o:0.99805}} leading.
+
+**(c)** This one needs a frequency, because it needs a capacitor. Add one in
+parallel with a symbolic value, and run at the stated 50 Hz — which the omega
+box takes as an expression:
+
+```field 9 Circuit Description
+e1,1,0,240
+r1,1,0,80-50j
+r2,1,0,120+70j
+r3,1,0,60
+c,1,0,x
+```
+
+::: only 9
+Put `2*pi*50` in the **omega** box. Then ask the **Solve** card for the value
+of `x` that leaves no reactive power:
+
+```field 9 Equation(s) to solve in terms of the results
+im(s_e1) = 0
+```
+
+```field 9 Unknown(s) to solve for
+x
+```
+
+Tick **real only**.
+:::
+
+```out 7,8
+-6.3 μF
+```
+
+::: only 9
+It answers {{o:-6.34}} µF.
+:::
+
+A negative capacitance, and no positive value satisfies the equation — which
+is probably why the textbook gives no number for this part. It is not a
+failure of the method: the load is *already* leading, as part (b) said, so no
+capacitor can bring it to unity. What it needs is the opposite.
+
+Try an inductor instead:
+
+```field 9 Circuit Description
+e1,1,0,240
+r1,1,0,80-50j
+r2,1,0,120+70j
+r3,1,0,60
+l,1,0,x
+```
+
+```out 7,8
+1.5987 H
+```
+
+::: only 9
+Solving the same way gives {{o:1.5987}} H, which is positive and therefore
+the real answer.
+:::
+
+Check it by putting that number back in as the inductor's value: the power
+factor comes out {{o:1}}. An inductor of about 1.6 H in parallel is what
+brings this system to unity.
+:::
+:::
+
 :::
