@@ -36,10 +36,17 @@ s\th(cir,3,0)
 "e,1,0,10:r1,1,2,4:r2,2,0,8-6𝐢:r3,2,3,5𝐢"→cir
 s\th(cir,3,0)
 ```
-```sym 9
-eq = th("e,1,0,10:r1,1,2,4:r2,2,0,8-6j:r3,2,3,5j",
-        "3", "0", domain="ac")
+```field 9 Circuit Description
+e1,1,0,10
+r1,1,2,4
+r2,2,0,8-6j
+r3,2,3,5j
 ```
+
+::: only 9
+*Find equivalent*, *Thévenin / Norton*, nodes **3** and **0**, in AC. In AC
+the equivalent impedance is called `zeq` rather than `req`.
+:::
 
 ::: only 7,8
 When asked a type of analysis, specify AC. Then you will be asked if a load
@@ -77,26 +84,16 @@ It evaluates to the same answer.
 ::: only 9
 Now, here's the cool part. Symbulator 9 carries no load expressions on the
 result — `th` returns `vth`, `ino`, `z` and `pmax`, and nothing else — but you
-can build them yourself in two lines, exactly as in {{ref:lesson-equivalents}}.
-The AC case wants the *average* power in the load, which for magnitude values
-carries the familiar factor of one half:
+do not have to build anything: the maximum average power is one of the four
+answers the tool already gives you, in `pmax`.
 
-```sym 9
-from sympy import Symbol, conjugate, Abs, re, N
-load = Symbol("load")
-irl = eq.vth / (eq.z + load)
-aprl = Abs(irl)**2 * re(load) / 2
-```
-
-Note that `load` here is an ordinary SymPy symbol and so complex by default,
-which is what we want: the calculator needed the trailing underscore of
-`load_` to say the same thing. Now substitute the conjugate of the equivalent
-impedance and check that this really is the maximum power delivered:
-
-```sym 9
-N(aprl.subs(load, conjugate(eq.z)))
-```
-```out
+::: only 9
+**Results** shows `pmax` = {{o:2.367}} W, alongside `vth`, `ino` and `zeq`.
+That is the power delivered when the load is the conjugate of the equivalent
+impedance, which is the whole point of the exercise — Symbulator has done the
+conjugating and the halving for you.
+:::
+```out 7,8
 2.36742424242424
 ```
 
@@ -144,12 +141,11 @@ RMS values. Working in RMS values basically means that all the currents and
 voltages in the analysis are considered to be RMS. That's it.
 
 Where the calculator versions used a flag variable that persisted between runs,
-Symbulator 9 takes it as an argument to `ac`, so it can never be left set from
-a previous problem:
-
-```sym 9
-res = ac(cir, omega=omega, use_rms=True)
-```
+Symbulator 9 puts it in **Settings**, under **AC power convention**: tick
+**RMS phasors**. Off means peak amplitude, the convention with the divide-by-two,
+and the setting affects AC power only. Being a setting rather than a stored
+variable, it is always in view — it cannot be left set from a problem you
+finished an hour ago.
 :::
 
 ::: problem AS7's Example 11.10
@@ -173,10 +169,17 @@ true→userms
 "e,1,0,30.:r1,1,2,6.:r2,2,0,–𝐢2.:r3,2,0,4."→cir
 s\ac(cir,ω)
 ```
-```sym 9
-res = ac("e,1,0,30:r1,1,2,6:r2,2,0,-2j:r3,2,0,4",
-         omega=Symbol("omega"), use_rms=True)
+```field 9 Circuit Description
+e1,1,0,30
+r1,1,2,6
+r2,2,0,-2j
+r3,2,0,4
 ```
+
+::: only 9
+AC, with `omega` typed into the omega box, and **RMS phasors** ticked in
+**Settings**.
+:::
 
 Or, if you want to simplify the impedances, the resistors can be collapsed into
 a single parallel combination.
@@ -232,17 +235,19 @@ you get the value and a verbal description of lagging or leading. This second
 form only works if the expression can be evaluated numerically.
 :::
 ::: only 9
-Symbulator 9 has the same tool, spelled `pf`, but it takes the voltage and the
-current as two separate arguments rather than a single complex power or an
-element name:{{i:power factor}}
+Symbulator 9 has the same tool, in the **Mini-tools** card. Choose *pf —
+power factor*; it asks for the voltage and the current separately rather
+than for a single complex power or an element name:{{i:power factor}}
 
-```sym 9
-from symbulator import pf
-pf(res["v_e"], -res["i_e"])
+```field 9 Voltage
+v_e1
 ```
-```out
-pf: 0.97342 leading
+
+```field 9 Current
+-i_e1
 ```
+
+It answers {{o:0.97342}} leading.
 
 It returns the value and the verbal description together, in one string, just
 as the calculator prints them.
@@ -290,10 +295,15 @@ true→userms
 "e1,1,0,220.:r1,1,2,4.+2.𝐢:r2,2,0,15.–10.𝐢"→cir
 s\ac(cir,ω)
 ```
-```sym 9
-res = ac("e1,1,0,220:r1,1,2,4+2j:r2,2,0,15-10j",
-         omega=Symbol("omega"), use_rms=True)
+```field 9 Circuit Description
+e1,1,0,220
+r1,1,2,4+2j
+r2,2,0,15-10j
 ```
+
+::: only 9
+Again AC with `omega` and **RMS phasors** ticked.
+:::
 
 The complex power absorbed in the source, line and load are in `-se1`, `sr1`
 and `sr2`:

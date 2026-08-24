@@ -25,15 +25,22 @@ frequency, on a logarithmic axis.{{i:Bode plot}}
 The tool is called **s\bode**.
 :::
 ::: only 9
-The tool is called `bode_samples`. It does not draw anything itself — it hands
-you the three columns a Bode plot is made of, and you draw them with whatever
-you already use:
+Symbulator 9 draws it for you. Solve the circuit first, then open the
+**Plot** card and set **Plot type** to *Bode plot (magnitude & phase vs.
+frequency)*. The two time boxes become frequency boxes:
 
-```sym 9
-from symbulator import bode_samples
-f, mag_db, phase_deg = bode_samples(
-    "e,1,0,1:r1,1,2,1000:c1,2,0,1e-6", "v_2", 10, 100000, n=5)
+```field 9 Circuit Description
+e1,1,0,1
+r1,1,2,1000
+c1,2,0,1e-6
 ```
+
+- **Variable to plot**: `v_2`
+- **Start frequency (Hz)** and **End frequency (Hz)**: 10 and 100000
+- **Points**: 300
+
+Both curves appear together, magnitude in decibels above and phase in
+degrees below.
 ```out
 f        = [10.0, 100.0, 1000.0, 10000.0, 100000.0]
 mag_db   = [-0.02, -1.45, -16.07, -35.96, -55.96]
