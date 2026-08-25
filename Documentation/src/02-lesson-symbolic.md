@@ -120,34 +120,20 @@ once — symbolic circuits this small cost nothing.}} To find the current i, we
 read the **current through** line}}. To find the voltage drop on r2, we
 {{v7,8|ask for `vr2`}}{{v9|read the **voltage drop** line in the `r2` block}}.
 
-::: only 7,8
-::: figure assets/screen/001.svg
-Screen grab of ir2 and vr2
-:::
-:::
-::: only 9
 Both are expressions rather than numbers:
 
 $i_{r1} = \dfrac{v}{r1 + r2}$ and
 $v_{r2} = \dfrac{r2\,v}{r1 + r2}$
 
 which is the voltage divider you would have written by hand.
-:::
 
 To find the power consumed in r2, we {{v7,8|ask for `pr2`}}{{v9|read the
 **power consumed** line of the `r2` block}}. To find the power delivered by the
 source, we {{v7,8|ask for the negative of `pev`}}{{v9|take the opposite of the
 source's **power consumed** line — type `-pev` into **Evaluate**}}.
 
-::: only 7,8
-::: figure assets/screen/002.svg
-Screen grab of pr2 and pev
-:::
-:::
-::: only 9
 $p_{r2} = \dfrac{r2\,v^2}{(r1 + r2)^2}$ and
 $-p_{ev} = \dfrac{v^2}{r1 + r2}$
-:::
 
 It is this ability to simulate symbolically as if nothing that puts Symbulator
 in a league of its own. Getting symbolic answers from a symbolic circuit takes
