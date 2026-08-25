@@ -1611,6 +1611,14 @@ r,1,0,r
 
 Once the simulation completes, we ask for the variables of interest:
 
+::: only 9
+They are already in **Results**: `v_c` is {{o:i*exp(-t/(c*r))/c}} and `i_c`
+is {{o:i*DiracDelta(t) - i*exp(-t/(c*r))/(c*r)}}.
+
+The impulse survives in the capacitor's current, which is right — the
+charge arrives all at once, and the delta is that instant.
+:::
+
 ```sym 7
 vc
 ```
@@ -1971,7 +1979,13 @@ The answers you want are `vc` and `il`, in **Results**.
 
 {2,0}
 
-These conditions are used in the TR analysis of the second interval, for t≥0.
+These conditions are used in the TR analysis of the second interval,
+for t≥0.
+
+::: only 9
+The answers are `v_c` = {{o:2 - 3*exp(-2*t) + exp(-6*t)}} and `i_l` =
+{{o:2*exp(-2*t) - 2*exp(-6*t)}}, both in **Results**.
+:::
 
 ```sym 7
 s\only("vc,il"):s\tr("r3,1,0,3:r6,1,0,6:l,1,2,1/4,0:c,2,0,1/3,2")
@@ -2014,8 +2028,16 @@ Find i(t) and v(t) for the circuit shown below.
 
 :::
 
-I decided to simulate this using only fractions, not decimals. So I convert
-the 3.5V value to its exact fractional equivalent, thus:
+I decided to simulate this using only fractions, not decimals.
+
+::: only 7,8
+So I convert the 3.5V value to its exact fractional equivalent, thus:
+:::
+::: only 9
+So write the value as the fraction it is: `7/2` rather than `3.5`. Version
+9 needs no conversion step — a fraction stays exact, and it is the decimal
+point that would make the arithmetic approximate.
+:::
 
 ```sym 7
 exact(3.5)
@@ -2073,6 +2095,11 @@ The second interval, for t≥0, is analyzed using TR. I could have described
 the circuit again from scratch. But out of laziness I preferred to copy/paste
 the descriptions from the DC simulations. To avoid renaming the nodes, I
 simulated the right switch as a short circuit between nodes 2 and 3.
+
+::: only 9
+`v_c` comes back {{o:-(sin(4*t) + 7*cos(4*t))*exp(-3*t)/50}} and `i_l`
+{{o:(cos(4*t) - sin(4*t))*exp(-3*t)}}.
+:::
 
 ```sym 7
 s\only("vc,il"):s\tr("c,1,0,2,-7/50:r,1,0,[1/6,1/6]:l,1,0,1/50,1")
@@ -2236,6 +2263,14 @@ discussed yet here, to find the value of the inductor given the book's
 answer. Below is how I found the ½ H value myself, reverse-engineering the
 answer:
 
+::: only 9
+```field 9 Evaluate
+t2s(-16*t*e^(-4*t))
+```
+
+which gives {{o:-16/(s + 4)**2}}.
+:::
+
 ```sym 7
 s\t2s(-16*t*e^(-4*t)):
 ```
@@ -2280,6 +2315,16 @@ solve(-16/(s+4)^2=-16*l/(l*s^2+8*l*s+8),l)
 ```sym 8
 solve(–16/(s+4)^2=–16*l/(l*s^2+8*l*s+8),l)
 ```
+
+::: only 9
+That is what the **Solve** card is for — a system that is not a circuit:
+
+```field 9 Equation
+-16/(s+4)^2 = -16*l/(l*s^2+8*l*s+8)
+```
+
+with `l` as the unknown. It answers `l` = {{o:1/2}}.
+:::
 
 l=1/2
 
@@ -2424,6 +2469,11 @@ il
 ```sym 8
 il
 ```
+
+::: only 9
+`v_c` is {{o:(4*exp(3*t) - 3*sin(4*t) - 4*cos(4*t))*exp(-3*t)/10}} and `i_l`
+is {{o:exp(-3*t)*sin(4*t)/20}}.
+:::
 
 These are the right answers. To plot them, run the `plot` tool, thus:
 s\plot(). Once the plot window opens, enter `vc` as function, `0` as minimal
@@ -2703,6 +2753,12 @@ Set **Analysis** to *TR — transient / time domain*.
 
 Be patient. This took 78 seconds in my calculator, including over half a
 minute just to find the inverse Laplace of the two desired answers.
+
+::: only 9
+Version 9 answers this one in about a second. `v_1` and `v_2` are in
+**Results**; they are long enough that they are easier read on screen than
+in print.
+:::
 
 ```sym 7
 v1
@@ -3063,7 +3119,17 @@ r,1,2,2
 l,2,0,1,0
 ```
 
+::: only 7,8
 Choose TR, and add `,vs` to the unknowns and the following to the equations
+:::
+::: only 9
+Choose TR, put `vs` in **Add unknowns**, and give **Add equations** the
+answer you know — in time, as always here:
+
+```field 9 Add equations
+1-e^(-2*t) = i_l
+```
+:::
 
 ```sym 7
 and il=1/s-1/(s+2)
@@ -3082,7 +3148,14 @@ il
 il
 ```
 
+::: only 7,8
 Since that adds up, ask for the answers:
+:::
+::: only 9
+It does add up — `i_l` reads {{o:1 - exp(-2*t)}} — and the answers are on
+screen with it: `v_l` is {{o:2*exp(-2*t)}}, `v_r` is
+{{o:2 - 2*exp(-2*t)}}, and the source's value `vs` is {{o:2}} V.
+:::
 
 ```sym 7
 vl

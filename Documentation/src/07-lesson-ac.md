@@ -891,6 +891,26 @@ Let's now repeat the process, using what I suspect is the frequency they meant:
 is in the range of µF, we can declare the value of the capacitor as `c'µ`, so
 that the value of c we get will be in that scale:
 
+::: only 9
+```field 9 Circuit Description
+c,1,0,c'µ
+r1,1,2,10
+l,2,0,5'm
+```
+
+*Find equivalent*, *Impedance*, nodes **1** and **0**, in AC at omega
+**2000**. That gives `zeq` = {{o:500j/(-c + 25 + 25j)}}, and the condition
+goes to the **Solve** card:
+
+```field 9 Equation
+im(500j/(-c + 25 + 25j)) = 0
+```
+
+with `c` as the unknown and **real solutions only** ticked, which answers
+`c` = {{o:25}}. The calculator spells that function `imag`; version 9 uses
+`im`.
+:::
+
 ```sym 7
 "c,1,0,c'µ:r1,1,2,10:l,2,0,5'm"→cir
 s\er(cir,1,0)

@@ -900,6 +900,18 @@ Notice that both the voltage drop (given by va-vb) and the current (given by
 `ir4+ij`) are algebraic functions in terms of i4. Now you can find i4 solving
 by voltage drop:
 
+::: only 9
+Both routes go in the **Solve** card, which solves against the answers the
+circuit just produced:
+
+```field 9 Equation
+v_a-v_b = 12
+```
+
+with `i4` as the unknown — or `i_r4+i_j = 0.2` for the same answer by
+current instead.
+:::
+
 ```sym 7
 solve(va-vb=12.,i4)       …or by current flow…       solve(ir4+ij=0.2,i4)
 ```

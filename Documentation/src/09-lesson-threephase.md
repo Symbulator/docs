@@ -71,6 +71,23 @@ Some observations about my description:
   we use the names ag and ad, where the g reminds us a node is on the
   generation side and the d reminds us it is on the demand side.
 
+::: only 9
+```field 9 Circuit Description
+ea0,ag,0,(110∠0°)
+eb0,bg,0,(110∠-120°)
+ec0,cg,0,(110∠120°)
+rat,ag,ad,5-2j
+rbt,bg,bd,5-2j
+rct,cg,cd,5-2j
+ra0,ad,0,10+8j
+rb0,bd,0,10+8j
+rc0,cd,0,10+8j
+```
+
+AC, with **RMS phasors** ticked. Every value is already an impedance, so
+the frequency is asked for but never used.
+:::
+
 Once the simulation is completed, we ask for the currents on the transmission
 lines and get:
 
