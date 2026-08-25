@@ -874,9 +874,14 @@ def compile_pdf(texdir: str, stem: str, pdfdir: str) -> bool:
     build's PDFs sitting in build/pdf looking like the result."""
     env = dict(os.environ, TEXINPUTS=f".:{texdir}:")
     for i in range(3):
+        # encoding is explicit because text=True would decode through the
+        # Windows code page: xelatex writes UTF-8, cp1252 cannot represent
+        # byte 0x90, and the reader thread died mid-log rather than
+        # reporting anything useful.
         p = subprocess.run(["xelatex", "-interaction=nonstopmode",
                             "-halt-on-error", stem + ".tex"],
-                           cwd=texdir, capture_output=True, text=True, env=env)
+                           cwd=texdir, capture_output=True, text=True,
+                           encoding="utf-8", errors="replace", env=env)
         if p.returncode != 0:
             log = "\n".join(l for l in p.stdout.split("\n")
                             if l.startswith("!") or "l." == l[:2])[-2500:]
