@@ -1107,6 +1107,19 @@ expand(vo)|r2=r1 and r3=r4
 expand(vo)|r2=r1 and r3=r4
 ```
 
+::: only 9
+Version 9 has no `expand` and nothing to substitute into after the fact.
+Instead, put the two equalities where they belong — as conditions on the
+solve. Open **Expert Mode** and give **Add conditions**:
+
+```field 9 Conditions
+r2 = r1
+r3 = r4
+```
+
+Run it again and `vo` comes back already reduced.
+:::
+
 The answer we get, **v2-v1**, is correct.
 
 :::
@@ -1132,6 +1145,12 @@ Define v1=1:Define v2=0:expand(vo)=-5
 Define v1=1:Define v2=0:expand(vo)=–5
 ```
 
+::: only 9
+Conditions again, this time on the inputs rather than the resistors:
+`v1 = 1` and `v2 = 0`. Then `vo` is {{o:-r2/r1}}, and it is that which has
+to equal −5.
+:::
+
 We get **-r2/r1=-5**. Now make that part of v{{sub:o}} that is a factor of
 v{{sub:2}} equal to 3. Thus:
 
@@ -1141,6 +1160,12 @@ Define v1=0:Define v2=1:expand(vo)=3
 ```sym 8
 Define v1=0:Define v2=1:expand(vo)=3
 ```
+
+::: only 9
+With `v1 = 0` and `v2 = 1` instead, `vo` is
+{{o:r4*(r1 + r2)/(r1*(r3 + r4))}} — the same expression the calculator
+prints, gathered over one denominator.
+:::
 
 We get **r2\*r4/(r1\*(r3+r4))+r4/(r3+r4)=3** Now, since you have two
 equations, you can solve for two unknowns. Out of the four resistors whose
@@ -1155,8 +1180,23 @@ solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=20000
 solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=20000
 ```
 
+::: only 9
+There is no `ans(1)`, so write the two equations out. This is what the
+**Solve** card is for — it solves a system that is not a circuit:
+
+```field 9 Equation
+-r2/r1 = -5
+r4*(r1 + r2)/(r1*(r3 + r4)) = 3
+```
+
+with `r2, r4` as the unknowns. The answer is `r2` = {{o:5*r1}} and
+`r4` = {{o:r3}}: a design rule rather than a pair of numbers. Put the
+book's `r1` = 10 kΩ and `r3` = 20 kΩ into it and you get 50 kΩ and 20 kΩ.
+:::
+
 The expression above assumes that ans(1) and ans(2) are pointing to the two
-equations we found before. We get **r2=50000 and r4=20000**. This is correct.
+equations we found before. We get **r2=50000 and r4=20000**. This is
+correct.
 
 Now, if this problem was part of a test, I'd like to verify that the answer
 is correct. To confirm this, simulate the circuit using the four values given

@@ -759,9 +759,20 @@ s\er("r4,a,0,4:ri,a,0,6:ji,a,0,iri/2",a,0)
 ```sym 8
 s\er("r4,a,0,4:ri,a,0,6:ji,a,0,iri/2",a,0)
 ```
+```field 9 Circuit Description
+r4,a,0,4
+ri,a,0,6
+ji,a,0,i_ri/2
+```
 
+::: only 7,8
 Choose DC. Wait for *Done*. Evaluate `req` to find the equivalent resistance
 is **2** Ω.
+:::
+::: only 9
+*Find equivalent*, *Impedance*, nodes **a** and **0**, in DC: `req` is
+{{o:2}} Ω.
+:::
 
 :::
 
@@ -779,10 +790,22 @@ s\er("r4,a,0,4:rx,0,a,2:j,a,0,2irx",a,0)
 ```sym 8
 s\er("r4,a,0,4:rx,0,a,2:j,a,0,2irx",a,0)
 ```
+```field 9 Circuit Description
+r4,a,0,4
+rx,0,a,2
+j,a,0,2*i_rx
+```
 
+::: only 7,8
 Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 **-4** Ω. It may be surprising to have a negative resistance. This is the
 result of the dependent sources.
+:::
+::: only 9
+*Find equivalent*, *Impedance*, nodes **a** and **0**, in DC: `req` is
+{{o:-4}} Ω. It may be surprising to have a negative resistance. This is
+the result of the dependent sources.
+:::
 
 :::
 
@@ -800,9 +823,22 @@ s\er("r15,a,0,15:e,1,a,4vrx:r10,1,x,10:rx,x,0,5",a,0)
 ```sym 8
 s\er("r15,a,0,15:e,1,a,4vrx:r10,1,x,10:rx,x,0,5",a,0)
 ```
+```field 9 Circuit Description
+r15,a,0,15
+e1,1,a,4*v_rx
+r10,1,x,10
+rx,x,0,5
+```
 
+::: only 7,8
 Choose DC. Wait for *Done*. Evaluating `req` approximately, we find the
 equivalent resistance is **-7.5** Ω.
+:::
+::: only 9
+*Find equivalent*, *Impedance*, nodes **a** and **0**, in DC: `req` is
+{{o:-7.500}} Ω. The source is called `e1` rather than `e` here — version 9
+keeps `e` for Euler's number.
+:::
 
 :::
 
@@ -820,9 +856,22 @@ s\er("e,3,0,1.5is:r3,3,2,3:r2,2,0,2:s,2,1",1,0)
 ```sym 8
 s\er("e,3,0,1.5is:r3,3,2,3:r2,2,0,2:s,2,1",1,0)
 ```
+```field 9 Circuit Description
+e1,3,0,1.5*i_s1
+r3,3,2,3
+r2,2,0,2
+s1,2,1
+```
 
+::: only 7,8
 Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 **0.6** Ω.
+:::
+::: only 9
+*Find equivalent*, *Impedance*, nodes **1** and **0**, in DC: `req` is
+{{o:0.6000}} Ω. Both the source and the short are renamed, for the same
+reason: version 9 reserves `e` and `s`.
+:::
 
 :::
 
@@ -840,9 +889,21 @@ s\er("r10,1,2,10:r5,2,3,5:r1,2,0,30:e,1,0,20ir1",3,0)
 ```sym 8
 s\er("r10,1,2,10:r5,2,3,5:r1,2,0,30:e,1,0,20ir1",3,0)
 ```
+```field 9 Circuit Description
+r10,1,2,10
+r5,2,3,5
+r1,2,0,30
+e1,1,0,20*i_r1
+```
 
+::: only 7,8
 Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 **20** Ω.
+:::
+::: only 9
+*Find equivalent*, *Impedance*, nodes **3** and **0**, in DC: `req` is
+{{o:20}} Ω.
+:::
 
 :::
 
@@ -860,9 +921,20 @@ s\er("r1,1,0,6:r4,a,0,4:e,a,1,6ir1",a,0)
 ```sym 8
 s\er("r1,1,0,6:r4,a,0,4:e,a,1,6ir1",a,0)
 ```
+```field 9 Circuit Description
+r1,1,0,6
+r4,a,0,4
+e1,a,1,6*i_r1
+```
 
+::: only 7,8
 Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 **3** Ω.
+:::
+::: only 9
+*Find equivalent*, *Impedance*, nodes **a** and **0**, in DC: `req` is
+{{o:3}} Ω.
+:::
 
 :::
 
