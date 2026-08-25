@@ -155,6 +155,8 @@ function asset(string $name): string {
         <a href="https://symbulator.pythonanywhere.com">Online App</a>
       </nav>
 
+  
+      <span class="subbar-spacer"></span>
       <details class="versions" id="version-picker">
         <summary aria-label="Choose a version">
           <span class="vkey-full">Symbulator <?= e($toc['label']) ?></span>
@@ -175,8 +177,6 @@ function asset(string $name): string {
           <?php endforeach; ?>
         </ul>
       </details>
-  
-      <span class="subbar-spacer"></span>
 
       <button type="button" id="theme-toggle" class="theme-toggle"
               aria-label="Switch to dark mode" title="Switch to dark mode"><svg viewBox="0 0 24 24" fill="#8ec7f5" aria-hidden="true"><path d="M20.4 14.7A8.5 8.5 0 1 1 9.3 3.6a7 7 0 1 0 11.1 11.1Z"/></svg></button>
