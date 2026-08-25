@@ -1249,6 +1249,13 @@ Define v1=0:Define v2=1:expand(vo)=4
 Define v1=0:Define v2=1:expand(vo)=4
 ```
 
+::: only 9
+Exactly as in the previous problem: solve the circuit twice with
+conditions on the inputs — `v1 = 1, v2 = 0`, then `v1 = 0, v2 = 1` — and
+read `vo` each time. The two factors are the same as before, so the two
+design equations are the same shape with 4 in place of 5 and 3.
+:::
+
 This time the book asks that you use R{{sub:1}} = 10’k and R{{sub:3}} = 10’k.
 So we do that.
 
@@ -1258,6 +1265,18 @@ solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=10000
 ```sym 8
 solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=10000
 ```
+
+::: only 9
+In the **Solve** card:
+
+```field 9 Equation
+-r2/r1 = -4
+r4*(r1 + r2)/(r1*(r3 + r4)) = 4
+```
+
+with `r2, r4` as the unknowns. It answers `r2` = {{o:4*r1}} and
+`r4` = {{o:4*r3}} — at 10 kΩ each, {{o:40000}} and {{o:40000}}.
+:::
 
 We get **r2=40000 and r4=40000**, the correct values for the remaining
 resistors.

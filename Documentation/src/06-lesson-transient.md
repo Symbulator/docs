@@ -2771,6 +2771,14 @@ s\t2s(1-e^(-t/2))=vc
 ```sym 8
 s\t2s(1-e^(–t/2))=vc
 ```
+```field 9 Evaluate
+t2s(1-e^(-t/2))
+```
+
+::: only 9
+That gives {{o:1/(s*(2*s + 1))}}, which is the same thing written over one
+denominator.
+:::
 
 We have our new equation. Copy this equation into the clipboard, since we
 will want to paste it in the Expert window. Now let’s run the Expert
@@ -2790,9 +2798,20 @@ r,1,2,2
 c,2,0,1,0
 ```
 
+::: only 7,8
 When prompted, select TR as the desired option. Then you will see the typical
 Expert prompt. In the equations field, paste the new equation, adding the
 word` and `first:
+:::
+::: only 9
+Choose TR, then open **Expert Mode**. **Add equations** takes one per line,
+so there is no ` and ` to prefix — the word exists on the calculator only
+because the equation is being appended to a list:
+
+```field 9 Add equations
+t2s(1-e^(-t/2)) = v_c
+```
+:::
 
 ```sym 7
 and 1/s-2/(2*s+1)=vc
@@ -2801,7 +2820,16 @@ and 1/s-2/(2*s+1)=vc
 and 1/s-2/(2*s+1)=vc
 ```
 
+::: only 7,8
 In the unknown field, add the variable a, preceded by a comma:
+:::
+::: only 9
+**Add unknowns** likewise takes the name on its own, with no leading comma:
+
+```field 9 Add unknowns
+a
+```
+:::
 
 ```sym 7
 ,a
@@ -2815,6 +2843,10 @@ quick sanity check. If the system solved correctly, we should see that
 Symbulator has as voltage drop in the capacitor the expression we already
 know from the problem statement:
 
+::: only 9
+`v_c` in **Results** reads {{o:1 - exp(-t/2)}}, which it does.
+:::
+
 ```sym 7
 vc
 ```
@@ -2822,7 +2854,14 @@ vc
 vc
 ```
 
+::: only 7,8
 This is correct, so we proceed to ask for the answers we want:
+:::
+::: only 9
+This is correct, and the answers we want are on screen with it: `i_c` is
+{{o:exp(-t/2)/2}}, and the resistor's **voltage drop** line gives
+{{o:exp(-t/2)}}.
+:::
 
 ```sym 7
 ic

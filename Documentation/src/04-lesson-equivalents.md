@@ -675,6 +675,9 @@ We don't need to run a simulation for this. We can reduce it using s\pr.
 ```sym 8
 4+s\pr({1+5,2+s\pr({6,3})})+8
 ```
+```field 9 Evaluate
+4+pr(1+5,2+pr(6,3))+8
+```
 
 Evaluating approximately gives us the equivalent resistance: **14.4** Ω.
 
@@ -695,6 +698,9 @@ We don't need to run a simulation for this. We can reduce it using s\pr.
 ```
 ```sym 8
 2+s\pr({6,3+s\pr({4,4+5+3})})+1
+```
+```field 9 Evaluate
+2+pr(6,3+pr(4,4+5+3))+1
 ```
 
 Evaluating approximately gives us the equivalent resistance: **6** Ω.
@@ -717,6 +723,9 @@ We don't need to run a simulation for this. We can reduce it using s\pr.
 ```sym 8
 1/(s\pr({1/6,1/5+s\pr({1/8,1/12})}))
 ```
+```field 9 Evaluate
+1/(pr(1/6,1/5+pr(1/8,1/12)))
+```
 
 Evaluating approximately gives us the equivalent conductance: **10** S.
 
@@ -737,6 +746,9 @@ We don't need to run a simulation for this. We can reduce it using s\pr.
 ```
 ```sym 8
 1/(s\pr({1/8,1/4})+s\pr({1/2,1/12+1/6}))
+```
+```field 9 Evaluate
+1/(pr(1/8,1/4)+pr(1/2,1/12+1/6))
 ```
 
 Evaluating approximately gives us the equivalent conductance: **4** S.
