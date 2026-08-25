@@ -819,7 +819,11 @@ def build_web(book: Book, versions: list[int]):
     print(f"web:  {outroot}")
 
 
-def build_tex(book: Book, versions: list[int], run_pdf=True):
+def build_tex(book: Book, versions: list[int], run_pdf=True) -> list[int]:
+    """Write the .tex for each version and, unless asked not to, compile
+    it. Returns the versions whose PDF did not get built, so the caller
+    can fail the run rather than exiting 0 with nothing to show."""
+    failed: list[int] = []
     texdir = os.path.join(BUILD, "tex")
     pdfdir = os.path.join(BUILD, "pdf")
     os.makedirs(texdir, exist_ok=True)
@@ -850,10 +854,24 @@ def build_tex(book: Book, versions: list[int], run_pdf=True):
         open(texpath, "w", encoding="utf-8").write(doc)
         print(f"tex:  {texpath}")
         if run_pdf:
-            compile_pdf(texdir, f"symbulator-v{v}", pdfdir)
+            if not compile_pdf(texdir, f"symbulator-v{v}", pdfdir):
+                failed.append(v)
+
+    if failed:
+        missing = ", ".join(f"v{v}" for v in failed)
+        print(f"\nNO PDF PRODUCED for {missing}. Anything already in "
+              f"{os.path.join(BUILD, 'pdf')} is from an earlier run and is "
+              f"NOT this build.", file=sys.stderr)
+    return failed
 
 
-def compile_pdf(texdir: str, stem: str, pdfdir: str):
+def compile_pdf(texdir: str, stem: str, pdfdir: str) -> bool:
+    """Build one PDF. Returns True only if a PDF was actually written.
+
+    The return value is load-bearing: this used to print xelatex's error
+    and return None, which nothing checked, so a run where every pass
+    ended in "No pages of output" still exited 0 and left the previous
+    build's PDFs sitting in build/pdf looking like the result."""
     env = dict(os.environ, TEXINPUTS=f".:{texdir}:")
     for i in range(3):
         p = subprocess.run(["xelatex", "-interaction=nonstopmode",
@@ -865,13 +883,21 @@ def compile_pdf(texdir: str, stem: str, pdfdir: str):
             print(f"xelatex failed on {stem} (pass {i+1}):\n{log}", file=sys.stderr)
             tail = p.stdout[-2500:]
             print(tail, file=sys.stderr)
-            return
+            return False
         if i == 0:
             subprocess.run(["makeindex", "-q", stem + ".idx"], cwd=texdir,
                            capture_output=True)
-    shutil.copy2(os.path.join(texdir, stem + ".pdf"),
-                 os.path.join(pdfdir, stem + ".pdf"))
+    # xelatex can exit 0 and still write nothing -- a missing font ends in
+    # "No pages of output" without a non-zero status. Check for the file
+    # rather than trusting the exit code.
+    built = os.path.join(texdir, stem + ".pdf")
+    if not os.path.isfile(built):
+        print(f"xelatex produced no {stem}.pdf (see "
+              f"{os.path.join(texdir, stem + '.log')})", file=sys.stderr)
+        return False
+    shutil.copy2(built, os.path.join(pdfdir, stem + ".pdf"))
     print(f"pdf:  {os.path.join(pdfdir, stem + '.pdf')}")
+    return True
 
 
 def check(book: Book, versions: list[int], verbose: bool = False) -> int:
@@ -1096,7 +1122,8 @@ def main():
     if a.web or do_all:
         build_web(book, versions)
     if a.pdf or a.tex_only or do_all:
-        build_tex(book, versions, run_pdf=not a.tex_only)
+        if build_tex(book, versions, run_pdf=not a.tex_only):
+            sys.exit(1)
 
 
 if __name__ == "__main__":

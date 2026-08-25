@@ -25,15 +25,17 @@
      the largest thing on the page at the back of the queue. These fetch it
      alongside the CSS instead.
 
-     Each carries a media query, so a visitor downloads exactly one of the
-     two: the plate they are actually going to see. Without that, preloading
-     both would cost every visitor 266 KB to show 138 KB of it.
+     Each carries a media query, so a visitor with no saved theme downloads
+     exactly one of the two: the plate they are actually going to see.
+     Preloading both here would cost every visitor 265 KB to show 138 KB.
 
-     Note the limit: `media` is evaluated against the system preference, so
-     someone whose system is light and who then presses the theme toggle
-     still fetches the dark plate at that moment. Covering that as well
-     would mean an unconditional prefetch of the second image -- 128 KB for
-     everyone, most of whom never toggle -- which is not obviously worth it. -->
+     `media` is evaluated against the *system* preference, while the CSS
+     picks the plate from the effective theme -- which a saved data-theme
+     overrides. Those disagree for anyone who has used the toggle against
+     their system setting, and then this fetches the wrong plate eagerly
+     and leaves the right one to start late. The script below adds the
+     correct one whenever a saved preference exists; a duplicate URL is
+     free, so it needs no cleverness about which case it is in. -->
 <link rel="preload" as="image" href="/assets/scorpion-dark.jpg"
       media="(prefers-color-scheme: dark)">
 <link rel="preload" as="image" href="/assets/scorpion-light.jpg"
@@ -54,6 +56,50 @@
   if (saved === "dark" || saved === "light") {
     document.documentElement.setAttribute("data-theme", saved);
   }
+
+  /* Which plate is this visitor actually going to see? The preload links
+     above can only ask the system preference; this can see the saved
+     choice that overrides it. */
+  var dark = saved
+    ? saved === "dark"
+    : window.matchMedia("(prefers-color-scheme: dark)").matches;
+  var shown = dark ? "/assets/scorpion-dark.jpg" : "/assets/scorpion-light.jpg";
+  var other = dark ? "/assets/scorpion-light.jpg" : "/assets/scorpion-dark.jpg";
+
+  /* When a saved preference disagrees with the system one, the link above
+     is fetching the wrong plate. Ask for the right one too -- and when
+     they agree, this is the same URL and costs nothing. */
+  if (saved) {
+    var link = document.createElement("link");
+    link.rel = "preload";
+    link.as = "image";
+    link.href = shown;
+    document.head.appendChild(link);
+  }
+
+  /* And warm the other plate once the page is done, so the theme toggle
+     swaps instantly instead of showing an empty frame. Deliberately after
+     load and at idle: the whole reason a second image is affordable here
+     is that it never competes with first paint. */
+  function warm() {
+    /* The static link above may already have pulled this one -- it does
+       exactly that whenever a saved preference contradicts the system
+       setting. Re-requesting is not harmful, just pointless. */
+    try {
+      var already = performance.getEntriesByType("resource").some(
+        function (r) { return r.name.indexOf(other) !== -1; });
+      if (already) { return; }
+    } catch (e) { /* no Performance API: just fetch it */ }
+    var img = new Image();
+    img.src = other;
+  }
+  window.addEventListener("load", function () {
+    if (window.requestIdleCallback) {
+      window.requestIdleCallback(warm, {timeout: 3000});
+    } else {
+      window.setTimeout(warm, 1200);   /* Safari has no requestIdleCallback */
+    }
+  });
 })();
 </script>
 </head>
