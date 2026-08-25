@@ -130,7 +130,6 @@ Which are correct. The voltage in node o is –2.1 V, and the op amp is absorbin
 
 ::: practice
 
-::: only 7,8
 
 ### Solved Op Amp problems
 
@@ -163,7 +162,7 @@ The **th** script tells us it found the Thévenin voltage, but could not find
 the Norton current. This is not a surprise, since an ideal op amp has zero
 output resistance and a fixed voltage, an infinite current when
 short-circuited. So the Thévenin equivalent is given by V{{sub:TH}} and no
-resistance (or R{{sub:EQ}} = 0Ω). Evaluating `vth` results in
+resistance (or R{{sub:EQ}} = 0Ω). Evaluating `vth` results in
 
 This is correct, as can be seen by comparing it to the book's answer, shown
 below.
@@ -172,7 +171,7 @@ below.
 
 :::
 
-The Thevenin resistance, as explained above, is 0Ω.
+The Thevenin resistance, as explained above, is 0Ω.
 
 :::
 
@@ -274,7 +273,7 @@ correct:
 ::: problem AS2's Example 5.3 (Inverting)
 
 If v{{sub:i}} is 0.5V, calculate the output voltage v{{sub:o}} and the
-current in the 10’kΩ resistor.
+current in the 10’kΩ resistor.
 
 ::: figure assets/practice/as2s-example-5-3-inverting-6.jpg
 
@@ -348,7 +347,7 @@ answer is v{{sub:O}}=**-15**V for v{{sub:S}} = 6V.
 ::: problem AS2's Practice Problem 5.3 (Inverting)
 
 Find the output voltage of the op amp (e.g. v{{sub:o}}) and calculate the
-current through the feedback resistor (e.g. the 15’kΩ resistor).
+current through the feedback resistor (e.g. the 15’kΩ resistor).
 
 ::: figure assets/practice/as2s-practice-problem-5-3-inverting-8.jpg
 
@@ -1631,20 +1630,24 @@ This is exactly the answer from the book:
 
 :::
 
-If you are ever in doubt about whether two expressions are the same, enter
-them both, separately, into the calculator, and then ask the calculator to
-compare them using the equality sign. If the answer is '**true**', then they
-are the same.
+If you are ever in doubt about whether two expressions are the same,
+{{v7,8|enter them both, separately, into the calculator, and then ask the
+calculator to compare them using the equality sign. If the answer is
+'**true**', then they are the same.}}{{v9|subtract one from the other in
+**Evaluate**. If the answer is `0`, they are the same — an equality sign
+would only be read as a comparison to solve, not as a question about
+sameness.}}
 
-:::
 :::
 
 ::: only 9
-::: note These problems are still in calculator notation
-The solved problems below were written for the calculator versions, and their
-commands have not been translated to Symbulator 9 yet. The circuits and the
-answers are the same; only the way you ask for them differs. Until they are
-converted, read them alongside {{ref:introduction}} and translate as you go.
+::: note Some of this narration still describes the calculator
+Every problem below carries a **Circuit Description** panel you can type
+straight into Symbulator 9, and the circuits and answers are identical
+across the versions. What has not all been rewritten is the narration
+between them: where it says to evaluate a name or press a key, do the
+version 9 equivalent — the results are already on screen, and
+{{ref:introduction}} lists the correspondences.
 :::
 :::
 :::

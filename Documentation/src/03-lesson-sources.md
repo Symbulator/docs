@@ -408,7 +408,6 @@ polarity, and you are off to the races.
 
 ::: practice
 
-::: only 7,8
 
 ### Circuits with E, J and R
 
@@ -881,7 +880,7 @@ va-vb
 We find that the voltage drop is 12V and the current is 0.2A. These are the
 currents and voltages that we have to keep once we do the replacement.
 Simulate the circuit now replacing R{{sub:3}} with a resistor R{{sub:4}} of
-240Ω and a source **j** with value I{{sub:4}}. Run this:
+240Ω and a source **j** with value I{{sub:4}}. Run this:
 
 ```sym 7
 s\dc("e,0,b,20:r1,0,a,16:r2,a,b,40:r4,a,b,240:j,a,b,i4")
@@ -1074,9 +1073,17 @@ r2,1,0,3
 r3,1,0,1
 ```
 
+::: only 7,8
 Select DC, and press Enter. Add equation `ir2=2'm.` Add unknown `is`. Run the
-simulation. The answer, **{.009,.001,.006}**, is correct, since the currents
-are as follows: I{{sub:S}} is 9mA, I{{sub:1}} is 1mA and I{{sub:3}} is 6mA.
+simulation.
+:::
+::: only 9
+Choose DC. Open **Expert Mode**, put `ir2 = 2'm` in **Add equations** and
+`is` in **Add unknowns**, then **Run Symbulator**.
+:::
+
+The answer, **{.009,.001,.006}**, is correct, since the currents are as
+follows: I{{sub:S}} is 9mA, I{{sub:1}} is 1mA and I{{sub:3}} is 6mA.
 
 :::
 
@@ -1345,7 +1352,7 @@ Determine i, v and i{{sub:d}}.
 
 :::
 
-We are given an unnecessary piece of information: the 4V drop in the 2Ω
+We are given an unnecessary piece of information: the 4V drop in the 2Ω
 resistor.
 
 My solution is shown below the schematic.
@@ -1652,7 +1659,7 @@ and v{{sub:s}}=3.
 ::: problem Bo2's Drill Exercise 1.11
 
 Determine i, v and v{{sub:d}}. (Since all element values are known, the tip
-we are given by the book – namely, that the voltage drop in the 6Ω resistor
+we are given by the book – namely, that the voltage drop in the 6Ω resistor
 is 1.5V – is totally superfluous.)
 
 ::: figure assets/practice/bo2s-drill-exercise-1-11-35.jpg
@@ -1760,13 +1767,13 @@ The calculator versions wrap this in `approx` to get a decimal. Version 9 does t
 :::
 
 The answer, **{.904\*vs,10951.}**, is correct: *v*{{sub:O}}*=.904 v*{{sub:S}}
-and *R*{{sub:IN}}*=10.95'kΩ*.
+and *R*{{sub:IN}}*=10.95'kΩ*.
 
 :::
 
 ::: problem TR5's Figure 4-4
 
-Find the voltage drop, current, and power consumed by the 500Ω resistor, and
+Find the voltage drop, current, and power consumed by the 500Ω resistor, and
 the ratio of that power to that delivered by the independent source, all in
 terms of *i*{{sub:S}}.
 
@@ -2028,14 +2035,15 @@ Compare my answer, left, to the book's answer, right.
 :::
 
 ###
-:::
 
 ::: only 9
-::: note These problems are still in calculator notation
-The solved problems below were written for the calculator versions, and their
-commands have not been translated to Symbulator 9 yet. The circuits and the
-answers are the same; only the way you ask for them differs. Until they are
-converted, read them alongside {{ref:introduction}} and translate as you go.
+::: note Some of this narration still describes the calculator
+Every problem below carries a **Circuit Description** panel you can type
+straight into Symbulator 9, and the circuits and answers are identical
+across the versions. What has not all been rewritten is the narration
+between them: where it says to evaluate a name or press a key, do the
+version 9 equivalent — the results are already on screen, and
+{{ref:introduction}} lists the correspondences.
 :::
 :::
 :::

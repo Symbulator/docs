@@ -605,7 +605,8 @@ vrl2 = 20
 -ie = 0.050
 ```
 
-Add these five variables to the list of first level variables:
+{{v7,8|Add these five variables to the list of first level
+variables:}}{{v9|List these five as the unknowns to solve for:}}
 
 ```sym 7
 r1,r2,r3,rl1,rl2

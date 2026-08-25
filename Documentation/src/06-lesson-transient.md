@@ -300,7 +300,6 @@ check that the variable is spelled the way **Results** spells it.
 
 ::: practice
 
-::: only 7,8
 
 ### Transient analysis of RC circuit
 
@@ -1511,6 +1510,10 @@ This is optional: Symbulator 9 solves quickly enough that limiting the results r
 This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** in **Settings** and list `vc` in the box beside it.
 :::
 
+::: only 9
+This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** in **Settings** and list `vc` in the box beside it.
+:::
+
 Then we run the simulation for the first interval, just as we did before, but
 with the new capacitor and source values.
 
@@ -1544,6 +1547,10 @@ s\only("vc")
 ```sym 8
 s\only("vc")
 ```
+
+::: only 9
+This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** in **Settings** and list `vc` in the box beside it.
+:::
 
 ::: only 9
 This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** in **Settings** and list `vc` in the box beside it.
@@ -1779,7 +1786,7 @@ The answers you want are `il` and `vl`, in **Results**.
 
 ::: problem Bo2's Example 5.13 (Exponential)
 
-Find the voltage drop in the capacitor and the current in the 3 Ω resistor,
+Find the voltage drop in the capacitor and the current in the 3 Ω resistor,
 if the source value is v{{sub:S}}(t)=18*e*{{sup:-t/2}}.
 
 ::: figure assets/practice/bo2s-example-5-13-exponential-29.jpg
@@ -1903,16 +1910,26 @@ s\plot()
 s\plot()
 ```
 
+::: only 7,8
 A window opens, asking you to enter three things: first, a function of time;
 second, a minimal time; and third, a maximal time. Let's plot v{{sub:C}}(t)
 first. Unless you have deleted the value of the variable **vc**, you should
 have the answer to the simulation above stored in it. So enter `vc` as the
 function, `0` as the minimal time and `1.5` as the maximal time. Press Enter,
 and wait a little. The graph of the voltage drop in the capacitor between
-time 0 and 1.5 seconds should appear in the screen. Compare it to the graph
-given by the textbook, shown below. Repeat this procedure giving `ic` as the
-function. Compare the resulting graph to that given by the textbook, shown
-below.
+time 0 and 1.5 seconds should appear in the screen.
+:::
+::: only 9
+Open the **Plot** card, leave **Plot type** on *Plot a function of time*, and
+give it `vc` as the variable, `0` as the minimum and `1.5` as the maximum.
+The answers from the solve above are already in scope, so the name is all it
+needs. The graph of the capacitor's voltage drop between 0 and 1.5 seconds
+appears beneath.
+:::
+
+Compare it to the graph given by the textbook, shown below. Repeat this
+procedure giving `ic` as the function. Compare the resulting graph to that
+given by the textbook, shown below.
 
 ::: figure assets/practice/practice-problems-for-lesson-6-31.jpg
 Practice Problems for Lesson 6
@@ -2328,7 +2345,7 @@ ca,1,0,1,0:cb,2,o,1/4,4:o,0,2,o"):vo
 
 ::: problem Bo2's Example 6.5 (Plot)
 
-In the circuit below, use v{{sub:S}}=2/5V, R=12Ω, L=2H and C=1/50F. Find v(t)
+In the circuit below, use v{{sub:S}}=2/5V, R=12Ω, L=2H and C=1/50F. Find v(t)
 and i(t), and plot them for time 0<t<1.5 seconds.
 
 ::: figure assets/practice/bo2s-example-6-5-plot-38.jpg
@@ -2370,7 +2387,7 @@ below.
 
 ::: problem Bo2's Drill Exercise 6.7
 
-For the circuit in Bo2's Example 6.5, use v{{sub:S}}=3V, R=5Ω, L=1/2H and
+For the circuit in Bo2's Example 6.5, use v{{sub:S}}=3V, R=5Ω, L=1/2H and
 C=1/8F. Find v(t) and i(t).
 
 ```sym 7
@@ -2446,7 +2463,7 @@ volts!
 
 ::: problem Bo2's Drill Exercise 6.9
 
-For the circuit below, R=1Ω, L=2H, C=1/2F and i{{sub:S}}(t)=u(t). Find i(t)
+For the circuit below, R=1Ω, L=2H, C=1/2F and i{{sub:S}}(t)=u(t). Find i(t)
 and v(t).
 
 ::: figure assets/practice/bo2s-drill-exercise-6-9-41.jpg
@@ -2501,7 +2518,7 @@ ca,2,0,25/16,0:cb,1,o,1,0:o,2,o,o"):vo
 
 ::: problem Bo2's Drill Exercise 6.11 (p307)
 
-For the circuit below, suppose that R{{sub:1}} = R{{sub:2}} = 1Ω, L = 1H, C =
+For the circuit below, suppose that R{{sub:1}} = R{{sub:2}} = 1Ω, L = 1H, C =
 1F and v{{sub:S}}(t)= 2e{{sup:-2t}} u(t). Find i(t) if all initial conditions
 are zero.
 
@@ -2851,7 +2868,8 @@ and il=1/s-1/(s+2)
 and il=1/s-1/(s+2)
 ```
 
-And solve. When done, ask for the sanity check:
+{{v7,8|And solve. When done, ask for the sanity check:}}{{v9|Run it,
+then put the sanity check into **Evaluate**:}}
 
 ```sym 7
 il
@@ -2893,14 +2911,15 @@ vl*il
 This is the end of the TR section of the book.
 
 :::
-:::
 
 ::: only 9
-::: note These problems are still in calculator notation
-The solved problems below were written for the calculator versions, and their
-commands have not been translated to Symbulator 9 yet. The circuits and the
-answers are the same; only the way you ask for them differs. Until they are
-converted, read them alongside {{ref:introduction}} and translate as you go.
+::: note Some of this narration still describes the calculator
+Every problem below carries a **Circuit Description** panel you can type
+straight into Symbulator 9, and the circuits and answers are identical
+across the versions. What has not all been rewritten is the narration
+between them: where it says to evaluate a name or press a key, do the
+version 9 equivalent — the results are already on screen, and
+{{ref:introduction}} lists the correspondences.
 :::
 :::
 :::

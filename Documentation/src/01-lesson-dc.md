@@ -1374,7 +1374,7 @@ The calculator versions wrap this in `approx` to get a decimal. Version 9 does t
 :::
 
 The answer we get indicates that the equivalent resistance, given by
-(v{{sub:1}}-v{{sub:2}})/I{{sub:T}}, is {{o:7.2}} KΩ, and that
+(v{{sub:1}}-v{{sub:2}})/I{{sub:T}}, is {{o:7.2}} KΩ, and that
 I{{sub:T}}={{o:1.11}} **m**A, I{{sub:1}}=.{{o:133}} **m**A,
 I{{sub:2}}=.{{o:444}} **m**A and V{{sub:ab}}={{o:-0.8}} V. This is correct.
 

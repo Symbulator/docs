@@ -301,9 +301,17 @@ know what it's doing: first it runs one simulation and gives you the Thévenin
 voltage, then a second one for the Norton current and the equivalent
 resistance. In this case, VTH = 0.88 V, INO = 0.05 A and REQ = 17.6 Ω.
 :::
-At this point, when you press ENTER, Symbulator will ask whether you are
-planning to run a problem with a load connected to this equivalent circuit. For
-now, say No. After the script is done, the following variables are stored:
+
+::: only 9
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
+*Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in
+the second — the pair of terminals you are looking into. The answers are
+`vth` = 0.88 V, `ino` = 0.05 A and `req` = 17.6 Ω.
+:::
+{{v7,8|At this point, when you press ENTER, Symbulator will ask whether you
+are planning to run a problem with a load connected to this equivalent
+circuit. For now, say No. After the script is done, the following variables
+are stored:}}{{v9|The answers appear in **Results** under these names:}}
 
 - **vth** has the Thévenin voltage
 - **ino** has the Norton current
@@ -562,7 +570,6 @@ it confusing to use, just don't use it.
 
 ::: practice
 
-::: only 7,8
 
 ### Practice problems for resistive circuits
 
@@ -587,10 +594,26 @@ a variable.
 "r4,0,a,4:r2,0,b,2:r6,a,b,6:rb,a,c,3:ra,b,c,3"→cir
 ```
 
+```field 9 Circuit Description
+r4,0,a,4
+r2,0,b,2
+r6,a,b,6
+rb,a,c,3
+ra,b,c,3
+```
+
+::: only 7,8
 Run the **er** script, giving it as arguments the circuit and the nodes:
 `s\er(cir,0,c)` When prompted, choose DC as analysis type. Once it is done,
-evaluate `approx(req)` The value is **2.89** Ω. This is correct. Below are
-many practice examples of this type.
+evaluate `approx(req)` The value is **2.89** Ω.
+:::
+::: only 9
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
+*Impedance*, with nodes **0** and **c**, in DC. The answer is `req` =
+{{o:2.891}} Ω.
+:::
+
+This is correct. Below are many practice examples of this type.
 
 :::
 
@@ -609,8 +632,30 @@ s\er("rac,a,c,6:rad,a,d,9:rab,a,b,6:rcd,c,d,9:rbc,b,c,6:rbd,b,d,9",a,c)
 s\er("rac,a,c,6:rad,a,d,9:rab,a,b,6:rcd,c,d,9:rbc,b,c,6:rbd,b,d,9",a,c)
 ```
 
+```field 9 Circuit Description
+rac,a,c,6
+rad,a,0,9
+rab,a,b,6
+rcd,c,0,9
+rbc,b,c,6
+rbd,b,0,9
+```
+
+::: only 7,8
 Choose DC. When *Done*, use `approx(req)` to find the equivalent resistance
-is **3.27** Ω.
+is **3.27** Ω.
+:::
+::: only 9
+*Find equivalent*, *Impedance*, nodes **a** and **c**, in DC: `req` is
+{{o:3.273}} Ω.
+:::
+
+::: only 9
+The calculator description names its four nodes a, b, c and d. Version 9
+needs one of them to be the reference node, so d is called 0 here instead.
+Which node you ground makes no difference to the answer in a network with
+no sources — grounding b gives the same {{o:3.273}} Ω.
+:::
 
 :::
 
@@ -631,7 +676,7 @@ We don't need to run a simulation for this. We can reduce it using s\pr.
 4+s\pr({1+5,2+s\pr({6,3})})+8
 ```
 
-Evaluating approximately gives us the equivalent resistance: **14.4** Ω.
+Evaluating approximately gives us the equivalent resistance: **14.4** Ω.
 
 :::
 
@@ -652,7 +697,7 @@ We don't need to run a simulation for this. We can reduce it using s\pr.
 2+s\pr({6,3+s\pr({4,4+5+3})})+1
 ```
 
-Evaluating approximately gives us the equivalent resistance: **6** Ω.
+Evaluating approximately gives us the equivalent resistance: **6** Ω.
 
 :::
 
@@ -716,7 +761,7 @@ s\er("r4,a,0,4:ri,a,0,6:ji,a,0,iri/2",a,0)
 ```
 
 Choose DC. Wait for *Done*. Evaluate `req` to find the equivalent resistance
-is **2** Ω.
+is **2** Ω.
 
 :::
 
@@ -736,7 +781,7 @@ s\er("r4,a,0,4:rx,0,a,2:j,a,0,2irx",a,0)
 ```
 
 Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
-**-4** Ω. It may be surprising to have a negative resistance. This is the
+**-4** Ω. It may be surprising to have a negative resistance. This is the
 result of the dependent sources.
 
 :::
@@ -757,7 +802,7 @@ s\er("r15,a,0,15:e,1,a,4vrx:r10,1,x,10:rx,x,0,5",a,0)
 ```
 
 Choose DC. Wait for *Done*. Evaluating `req` approximately, we find the
-equivalent resistance is **-7.5** Ω.
+equivalent resistance is **-7.5** Ω.
 
 :::
 
@@ -777,7 +822,7 @@ s\er("e,3,0,1.5is:r3,3,2,3:r2,2,0,2:s,2,1",1,0)
 ```
 
 Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
-**0.6** Ω.
+**0.6** Ω.
 
 :::
 
@@ -797,7 +842,7 @@ s\er("r10,1,2,10:r5,2,3,5:r1,2,0,30:e,1,0,20ir1",3,0)
 ```
 
 Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
-**20** Ω.
+**20** Ω.
 
 :::
 
@@ -817,7 +862,7 @@ s\er("r1,1,0,6:r4,a,0,4:e,a,1,6ir1",a,0)
 ```
 
 Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
-**3** Ω.
+**3** Ω.
 
 :::
 
@@ -847,7 +892,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `vth` we find V{{sub:TH}} = **48** V. Via `req` we find
-R{{sub:EQ}} = **6** Ω.
+R{{sub:EQ}} = **6** Ω.
 
 :::
 
@@ -877,7 +922,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `ino` we find I{{sub:NO}} = **3** A. Via `req` we find
-R{{sub:EQ}} = **2** Ω.
+R{{sub:EQ}} = **2** Ω.
 
 :::
 
@@ -907,7 +952,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `ino` we find I{{sub:NO}} = **10** A. Via `req` we find
-R{{sub:EQ}} = **1** Ω.
+R{{sub:EQ}} = **1** Ω.
 
 :::
 
@@ -937,7 +982,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `ino` we find I{{sub:NO}} = **5.56** A. Via `req` we find
-R{{sub:EQ}} = **9** Ω.
+R{{sub:EQ}} = **9** Ω.
 
 :::
 
@@ -966,7 +1011,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `vth` we find V{{sub:TH}} = **125** V. Via `req` we find
-R{{sub:EQ}} = **25** Ω.
+R{{sub:EQ}} = **25** Ω.
 
 :::
 
@@ -996,7 +1041,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Via `vth` we find V{{sub:TH}} = **8** V. Via `req` we find R{{sub:EQ}} =
-**10** kΩ.
+**10** kΩ.
 
 :::
 
@@ -1030,7 +1075,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `vth` we get V{{sub:TH}}= **-4.8** V. Via `req` we get
-R{{sub:EQ}}= **2.4** Ω.
+R{{sub:EQ}}= **2.4** Ω.
 
 :::
 
@@ -1060,7 +1105,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `ino` we find I{{sub:NO}} = **-4** A. Via `req` we find
-R{{sub:EQ}} = **2** Ω.
+R{{sub:EQ}} = **2** Ω.
 
 :::
 
@@ -1090,7 +1135,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `ino` we find I{{sub:NO}} = **8** A. Via `req` we find
-R{{sub:EQ}} = **1** Ω.
+R{{sub:EQ}} = **1** Ω.
 
 :::
 
@@ -1120,7 +1165,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `vth` we find V{{sub:TH}} = **24** V. Via `req` we find
-R{{sub:EQ}} = **2.4** Ω.
+R{{sub:EQ}} = **2.4** Ω.
 
 :::
 
@@ -1150,7 +1195,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `ino` we find I{{sub:NO}} = **7** A. Via `req` we find
-R{{sub:EQ}} = **5** Ω.
+R{{sub:EQ}} = **5** Ω.
 
 :::
 
@@ -1186,7 +1231,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `vth` we find V{{sub:TH}} = -**3** V. Via `req` we find
-R{{sub:EQ}} = **2** kΩ.
+R{{sub:EQ}} = **2** kΩ.
 
 :::
 
@@ -1218,7 +1263,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `vth` we find V{{sub:TH}} = **6** V. Via `req` we find
-R{{sub:EQ}} = **5** Ω.
+R{{sub:EQ}} = **5** Ω.
 
 :::
 
@@ -1250,7 +1295,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `ino` we find I{{sub:NO}} = **1** A. Via `req` we find
-R{{sub:EQ}} = **4** Ω.
+R{{sub:EQ}} = **4** Ω.
 
 :::
 
@@ -1281,7 +1326,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `vth` we find V{{sub:TH}} = **130** V. Via `req` we find
-R{{sub:EQ}} = **30** Ω.
+R{{sub:EQ}} = **30** Ω.
 
 :::
 
@@ -1311,7 +1356,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `ino` we find I{{sub:NO}} = **8** A. Via `req` we find
-R{{sub:EQ}} = **4** Ω.
+R{{sub:EQ}} = **4** Ω.
 
 :::
 
@@ -1342,7 +1387,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `vth` we find V{{sub:TH}} = **5.33** V. Via `req` we find
-R{{sub:EQ}} = **0.44** Ω.
+R{{sub:EQ}} = **0.44** Ω.
 
 :::
 
@@ -1374,7 +1419,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `vth` we find V{{sub:TH}} = **20** V. Via `req` we find
-R{{sub:EQ}} = **6** Ω.
+R{{sub:EQ}} = **6** Ω.
 
 :::
 
@@ -1406,7 +1451,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `vth` we find V{{sub:TH}} = **2** V. Via `req` we find
-R{{sub:EQ}} = **4** Ω.
+R{{sub:EQ}} = **4** Ω.
 
 :::
 
@@ -1436,7 +1481,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Choose DC. Via `ino` we find I{{sub:NO}} = **-6.25** A. Via `req` we find
-R{{sub:EQ}} = **2.4** Ω.
+R{{sub:EQ}} = **2.4** Ω.
 
 :::
 
@@ -1476,13 +1521,15 @@ j,2,b,3*ir8
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
 :::
 
-You choose DC, press Enter and wait. Symbulator reports the calculator was
-unable to solve the equations. This often means there is a division by zero
-somewhere.
+{{v7,8|You choose DC, press Enter and wait. Symbulator reports the
+calculator was unable to solve the equations.}}{{v9|Run it in DC and it is
+refused: *Could not solve the system of equations.*}} This often means there
+is a division by zero somewhere.
 
-Clean the variables from the MAIN folder and try again, this time – following
-Symbulator's advise –using a symbolic value. We chose to use **x** instead of
-**3** in the dependent source.
+{{v7,8|Clean the variables from the MAIN folder and try again, this time –
+following Symbulator's advise –using a symbolic value.}}{{v9|Symbulator's own
+advice is to try again with a symbolic value, which is what we do.}} We chose
+to use **x** instead of **3** in the dependent source.
 
 ```sym 7
 s\th("r2,0,b,2:r8,0,2,8:r3,2,a,3:r1,1,a,1:e,1,0,1:j,2,b,x*ir8",a,b)
@@ -1503,13 +1550,21 @@ j,2,b,x*ir8
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
 :::
 
-Now the calculator can solve just fine. Evaluate the answers: the expression
-for `ino` is fine, but the expression for `req`, (**9\*x-35)/(4\*(x-3))**,
-will result in a division by zero.
+Now it solves. The expression for `ino` is fine, but the one for `req`,
+$(9x-35)/(4(x-3))$, will divide by zero at $x = 3$ — the very value we
+replaced.
 
+::: only 7,8
 Via `Define x=3: {ino,req} `we find that I{{sub:NO}} = **1** A, and
-R{{sub:EQ}} is undefined. This means the equivalent resistance is, for
-practical purposes, infinite. Your idea of fun, right?
+R{{sub:EQ}} is undefined.
+:::
+::: only 9
+Put `x = 3` in **Add conditions** and run it again: I{{sub:NO}} = **1** A,
+and R{{sub:EQ}} is undefined.
+:::
+
+This means the equivalent resistance is, for practical purposes, infinite.
+Your idea of fun, right?
 
 :::
 
@@ -1661,7 +1716,7 @@ do this.
 ::: problem AS2's Example 4.8
 
 Find the Thévenin equivalent of the circuit shown to the left of terminals
-a-b. Then find the current through RL = 6, 16 and 36Ω.
+a-b. Then find the current through RL = 6, 16 and 36Ω.
 
 ::: figure assets/practice/as2s-example-4-8-38.jpg
 
@@ -1708,7 +1763,7 @@ The answer, **{30.,4.,3.,1.5,.75}**, is correct.
 ::: problem Bo2's Example 3.10
 
 Find the Norton equivalent of the circuit left of the a-b terminals, and then
-find the voltage drop and the current through the ¼ Ω resistor. My one-line
+find the voltage drop and the current through the ¼ Ω resistor. My one-line
 solution below.
 
 ::: figure assets/practice/bo2s-example-3-10-39.jpg
@@ -1754,7 +1809,7 @@ The book gives the answers as fractions. We get it right:
 ::: problem RM3's Example 9-7
 
 Find the Norton equivalent of the circuit external to R{{sub:L}}. Then
-determine the load current I{{sub:L}} when R{{sub:L}} = 0 Ω, 2'k Ω and 5'k Ω.
+determine the load current I{{sub:L}} when R{{sub:L}} = 0 Ω, 2'k Ω and 5'k Ω.
 My one-line solution below.
 
 ::: figure assets/practice/rm3s-example-9-7-40.jpg
@@ -1798,8 +1853,8 @@ The answer, **{.0075,1500.**,**.0075,.00321,.00173}**, is correct.
 
 ::: problem Bo2's Example 3.5
 
-Find the Norton equivalent of the circuit external to the 1Ω resistor. Then
-determine the voltage drop across this 1Ω resistor.
+Find the Norton equivalent of the circuit external to the 1Ω resistor. Then
+determine the voltage drop across this 1Ω resistor.
 
 ::: figure assets/practice/bo2s-example-3-5-41.jpg
 
@@ -1894,7 +1949,7 @@ The answer, **{28.8,96.,.1}**, is correct.
 ::: problem Bo2's Example 3.7
 
 Find the Thévenin equivalent for the circuit left of a-b. Then find the
-voltage across the 3 Ω resistor, and also if it was 6 Ω. My answer is
+voltage across the 3 Ω resistor, and also if it was 6 Ω. My answer is
 presented below.
 
 ::: figure assets/practice/bo2s-example-3-7-43.jpg
@@ -2069,7 +2124,7 @@ The calculator versions wrap this in `approx` to get a decimal. Version 9 does t
 
 Select DC. You can answer N when asked about the load equations. The answer,
 **{9.,13.44}**, is correct: the maximum transfer of power occurs when the
-load is 9Ω. At this point, the power transferred is 13.44W. Now let's solve
+load is 9Ω. At this point, the power transferred is 13.44W. Now let's solve
 another one.
 
 :::
@@ -2153,16 +2208,16 @@ prl|load=8200.
 Select DC and answer Y about the load formulas. The answer we obtain,
 **{40000,1,.93,.57}**, is correct. Let's deconstruct it.
 
-Part (a) is answered by the first two values: a 40'k Ω resistor as load would
+Part (a) is answered by the first two values: a 40'k Ω resistor as load would
 receive 1W power. Since this is the maximum – this is the most that any load
 could receive ever.
 
 Parts (b) is answered by the third value. Making use of the variable **prL**,
 which contains the power delivered by the circuit equivalent to the load, as
-a function of the load value **L**, we find that a load of 68'kΩ receives
+a function of the load value **L**, we find that a load of 68'kΩ receives
 .93W, which is less than the maximum.
 
-Parts (c) is answered in similar manner by the fourth value. A load of 8.2'kΩ
+Parts (c) is answered in similar manner by the fourth value. A load of 8.2'kΩ
 receives .57W, which is less than the maximum. Any resistance other than 40'k
 gets less power.
 
@@ -2205,14 +2260,15 @@ Select DC. You can answer N. Answer is **{15.,273.07}. **Let's now see one
 that is a little different.
 
 :::
-:::
 
 ::: only 9
-::: note These problems are still in calculator notation
-The solved problems below were written for the calculator versions, and their
-commands have not been translated to Symbulator 9 yet. The circuits and the
-answers are the same; only the way you ask for them differs. Until they are
-converted, read them alongside {{ref:introduction}} and translate as you go.
+::: note Some of this narration still describes the calculator
+Every problem below carries a **Circuit Description** panel you can type
+straight into Symbulator 9, and the circuits and answers are identical
+across the versions. What has not all been rewritten is the narration
+between them: where it says to evaluate a name or press a key, do the
+version 9 equivalent — the results are already on screen, and
+{{ref:introduction}} lists the correspondences.
 :::
 :::
 :::
