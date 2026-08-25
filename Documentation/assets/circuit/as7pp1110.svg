@@ -8,7 +8,7 @@
    <cc:Work>
     <dc:type rdf:resource="http://purl.org/dc/dcmitype/StillImage"/>
     <dc:title>symbulator-placeholder</dc:title>
-    <dc:date>2026-08-25T12:15:29.454825</dc:date>
+    <dc:date>2026-08-25T12:35:36.417871</dc:date>
     <dc:format>image/svg+xml</dc:format>
     <dc:creator>
      <cc:Agent>
@@ -39,7 +39,7 @@ L 338.652 10.08288
 L 10.548 10.08288 
 L 10.548 148.46112 
 z
-" clip-path="url(#p0af0da7340)" style="fill: none; stroke-dasharray: 8.4,5.6; stroke-dashoffset: 0; stroke: #b7791f; stroke-width: 1.4; stroke-linejoin: miter"/>
+" clip-path="url(#p93ed4dddc8)" style="fill: none; stroke-dasharray: 8.4,5.6; stroke-dashoffset: 0; stroke: #b7791f; stroke-width: 1.4; stroke-linejoin: miter"/>
    </g>
    <g id="text_1">
     <!-- AS7's Practice Problem 11.10 -->
@@ -1047,7 +1047,7 @@ z
   </g>
  </g>
  <defs>
-  <clipPath id="p0af0da7340">
+  <clipPath id="p93ed4dddc8">
    <rect x="7.2" y="7.2" width="334.8" height="144.144"/>
   </clipPath>
  </defs>

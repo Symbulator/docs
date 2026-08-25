@@ -102,12 +102,369 @@ and Example 12.9 (unbalanced with a neutral line) from docs-page7.
 
 ## Wye-Delta {#wye-delta}
 
-TODO: convert this section from docs-page7, starting at AS7's Example 12.3.
+A wye source feeding a delta load. The source still has a centre to use as
+ground; the load does not, which is the only new thing here.
+
+### Balanced
+
+::: problem AS7's Example 12.3
+For the balanced Y-Δ circuit, find the phase currents and the line currents.
+
+::: figure assets/circuit/as7e1203.png
+AS7's Example 12.3
+:::
+
+::: answer
+Nothing says these values are RMS, so leave the convention alone — the
+question asks for no powers, so it makes no difference either way. The three
+sources get the angles of the abc sequence.
+
+```sym 7
+"ea0,a,0,(100.∠10°):eb0,b,0,(100.∠-110°):ec0,c,0,(100.∠130°):rab,a,b,8.+4.𝐢:rca,c,a,8.+4.𝐢:rbc,b,c,8.+4.𝐢"→cir:sc(cir,ω)
+```
+```field 9 Circuit Description
+ea0,a,0,100*exp(j*pi*10/180)
+eb0,b,0,100*exp(j*pi*-110/180)
+ec0,c,0,100*exp(j*pi*130/180)
+rab,a,b,8+4j
+rca,c,a,8+4j
+rbc,b,c,8+4j
+```
+
+::: only 9
+Version 9 does not read the angle sign, so each source is written in
+exponential form: 100 V at 10° is `100*exp(j*pi*10/180)`.
+:::
+
+The phase currents are the currents in the three load impedances:
+
+```sym 7
+{sa(irab),sa(irbc),sa(irca)}
+```
+```out 7,8
+{"19.36ᴐ00∠13.43°","19.36ᴐ00∠-106.57°","19.36ᴐ00∠133.43°"}
+```
+
+::: only 9
+`aa(i_rab)`, `aa(i_rbc)` and `aa(i_rca)` read {{o:19.36}}∠{{o:13.43}}°,
+{{o:19.36}}∠{{o:-106.57}}° and {{o:19.36}}∠{{o:133.43}}°.
+:::
+
+The line currents are the currents the sources deliver, which is the opposite
+of the current through each source element:
+
+```sym 7
+{sa(-iea0),sa(-ieb0),sa(-iec0)}
+```
+```out 7,8
+{"33.54ᴐ00∠-16.57°","33.54ᴐ00∠-136.57°","33.54ᴐ00∠103.43°"}
+```
+
+::: only 9
+`aa(-i_ea0)`, `aa(-i_eb0)` and `aa(-i_ec0)` read {{o:33.54}}∠{{o:-16.57}}°,
+{{o:33.54}}∠{{o:-136.57}}° and {{o:33.54}}∠{{o:103.43}}°.
+:::
+
+Both sets are correct, and they show the relationship you would expect of a
+delta load: the line current is √3 times the phase current, and lags it by 30°.
+:::
+:::
+
+::: problem AS7's Example 12.11
+For the balanced Y-Δ circuit, find the line current I{{sub:aA}}, the phase
+voltage V{{sub:AB}}, and the phase current I{{sub:AC}}. The source frequency
+is 60 Hz.
+
+::: figure assets/circuit/as7e1211.png
+AS7's Example 12.11
+:::
+
+::: answer
+This one has line impedances, so each source reaches the load through a
+resistor, and the load's three nodes are separate from the source's three.
+
+```field 9 Circuit Description
+ea1,na1,0,100
+eb1,nb1,0,100*exp(j*pi*-120/180)
+ec1,nc1,0,100*exp(j*pi*120/180)
+raa,na1,na2,1
+rbb,nb1,nb2,1
+rcc,nc1,nc2,1
+rac,na2,nc2,100+24*pi*j
+rcb,nc2,nb2,100+24*pi*j
+rba,nb2,na2,100+24*pi*j
+```
+
+The line current is the current in one of the line resistors, and the phase
+voltage is the difference between two load nodes:
+
+::: only 9
+`aa(i_raa)` reads {{o:2.35}}∠{{o:-36.2}}° and `aa(v_na2-v_nb2)` reads
+{{o:169.94}}∠{{o:30.81}}°. Both are correct.
+:::
+
+```out 7,8
+{"2.35∠-36.2°","169.94∠30.8°","1.36∠-6.2°"}
+```
+
+::: only 9
+For the phase current, `aa(i_rac)` reads {{o:1.357}}∠{{o:-66.2}}°.
+
+::: warning The printed third answer is the other phase current
+The documentation gives 1.36∠−6.2° for I{{sub:AC}}. The magnitude is right and
+the angle is not: −6.2° is the phase current from A to B, which is
+`aa(-i_rba)`, and A→C is 60° away from it.
+
+The three phase currents have to be 120° apart, and they are:
+{{o:-66.2}}°, {{o:53.8}}° and {{o:173.8}}°. A value at −6.2° cannot be one of
+them — it belongs to the other set, the same three currents taken in the
+opposite direction. So the number is real, it is simply labelled as the wrong
+one of the six.
+:::
+:::
+:::
+:::
+
+### Unbalanced
+
+If you find a simple unbalanced wye-delta problem, let me know.
 
 ## Delta-Delta {#delta-delta}
 
-TODO: convert this section from docs-page7.
+Until now, choosing a ground node was easy: the centre of the wye of sources.
+A delta has no centre, which is the first problem. It is solved by picking one
+of the delta's own nodes on the generator side and calling it 0.
+
+The second problem is subtler, and it is not Symbulator's alone — SPICE-like
+simulators dislike it too. **A triangle of three voltage sources cannot be
+solved.** The third source adds no information, because the first two already
+fix the voltages at all three nodes, but it does add an unknown: the current
+through it. Drop the redundant equation and the system has one unknown too
+many.
+
+::: warning Describe a delta source with two sources, not three
+The trick is to leave one source out — the one opposite the node you chose as
+ground. Two sources fix all three node voltages, so everything outside the
+delta behaves exactly as it should.
+
+The cost is that you learn nothing about the currents *inside* the sources:
+the currents you get for the two you kept are not the currents they would
+carry in a real three-source arrangement. Everything beyond the delta is
+right; the inside of the generator is not.
+:::
+
+### Balanced
+
+::: problem AS7's Example 12.4
+A balanced Δ-connected load of 20 − j15 Ω is fed by a Δ-connected,
+positive-sequence generator with V{{sub:ab}} = 330∠0° V. Find the phase
+currents of the load and the line currents.
+
+::: figure assets/circuit/as7e1204.png
+AS7's Example 12.4
+:::
+
+::: answer
+Node **c** becomes ground, so the source left out is the one opposite it. To
+read the line currents we add three shorts to act as the lines.
+
+```field 9 Circuit Description
+e0a,0,ag,330*exp(j*pi*120/180)
+eb0,bg,0,330*exp(j*pi*-120/180)
+sat,ag,ad
+sbt,bg,bd
+sct,0,cd
+rab,ad,bd,20-15j
+rbc,bd,cd,20-15j
+rca,cd,ad,20-15j
+```
+
+The line currents are the currents through the shorts:
+
+```out 7,8
+{"22.86ᴐ00∠6.87°","22.86ᴐ00∠-113.13°","22.86ᴐ00∠126.87°"}
+```
+
+::: only 9
+`aa(i_sat)`, `aa(i_sbt)` and `aa(i_sct)` read {{o:22.86}}∠{{o:6.87}}°,
+{{o:22.86}}∠{{o:-113.13}}° and {{o:22.86}}∠{{o:126.87}}°.
+:::
+
+Correct.
+:::
+:::
+
+### Unbalanced
+
+Nothing changes in the method. The load impedances simply differ, and the
+answers stop being three copies of one another.
+
+::: practice
+
+::: problem AS7's Practice Problem 12.9
+The unbalanced Δ-load is supplied by balanced line-to-line voltages of 440 V
+in positive sequence. Find the line currents, taking V{{sub:ab}} as the
+reference.
+
+::: figure assets/circuit/as7pp1209.png
+AS7's Practice Problem 12.9
+:::
+
+::: answer
+```field 9 Circuit Description
+e0a,0,ag,440*exp(j*pi*120/180)
+eb0,bg,0,440*exp(j*pi*-120/180)
+sla,ag,ad
+slb,bg,bd
+slc,0,cd
+rab,ad,bd,10-5j
+rbc,bd,cd,16
+rca,cd,ad,8+6j
+```
+
+```out 7,8
+{"39.71ᴐ00∠-41.07°","64.12ᴐ00∠-139.77°","70.13ᴐ00∠74.27°"}
+```
+
+::: only 9
+`aa(i_sla)`, `aa(i_slb)` and `aa(i_slc)` read {{o:39.71}}∠{{o:-41.07}}°,
+{{o:64.12}}∠{{o:-139.77}}° and {{o:70.13}}∠{{o:74.27}}°.
+:::
+
+Correct — and unlike the balanced case, all three differ in magnitude as well
+as angle.
+:::
+:::
+
+::: problem AS7's Practice Problem 12.10
+Find the line currents in the unbalanced three-phase circuit, and the real
+power absorbed by the load.
+
+::: figure assets/circuit/as7pp1210.png
+AS7's Practice Problem 12.10
+:::
+
+::: answer
+These values are RMS, so {{v7,8|set the flag}}{{v9|tick **RMS phasors** in
+**Settings**}} — this one does ask for power.
+
+```field 9 Circuit Description
+e0a,0,ag,220*exp(j*pi*-120/180)
+eb0,bg,0,220*exp(j*pi*120/180)
+sla,ag,ad
+slb,bg,bd
+slc,0,cd
+rab,ad,bd,-5j
+rbc,bd,cd,10j
+rca,cd,ad,10
+```
+
+```out 7,8
+{"64.00ᴐ00∠80.1°","38.11ᴐ00∠-60.°","42.50ᴐ00∠-135.°",4840.0}
+```
+
+::: only 9
+The three line currents read {{o:64.00}}∠{{o:80.1}}°,
+{{o:38.11}}∠{{o:-60}}° and {{o:42.50}}∠{{o:-135}}°.
+
+For the power, add the three loads' consumption in **Evaluate**:
+
+```field 9 Evaluate
+p_rca+p_rab+p_rbc
+```
+
+It gives {{o:4840}} W.
+:::
+
+Correct.
+:::
+:::
+
+::: problem AS7's Example 12.12
+For the unbalanced Δ-Δ circuit, find the generator current I{{sub:ab}}, the
+line current I{{sub:bB}} and the phase current I{{sub:BC}}.
+
+::: figure assets/circuit/as7e1212.png
+AS7's Example 12.12
+:::
+
+::: answer
+The first of the three is a current *inside* the generator, and the two-source
+trick cannot give it — see the warning above. The other two are ordinary
+element currents.
+
+```field 9 Circuit Description
+e0a,0,ag,208*exp(j*pi*130/180)
+eb0,bg,0,208*exp(j*pi*-110/180)
+rla,ag,ad,2+5j
+rlb,bg,bd,2+5j
+rlc,0,cd,2+5j
+rab,ad,bd,50
+rbc,bd,cd,30j
+rca,cd,ad,-40j
+```
+
+::: warning Version 9 does not finish this one
+The calculator solves it. Version 9 does not: the online app stops after 25
+seconds with *"The solver took longer than 25 seconds and was stopped"*, and
+it does not converge given several minutes offline either.
+
+It is the hardest circuit in this book — an unbalanced delta load behind three
+line impedances, with every branch different, which leaves a dense system of
+simultaneous complex equations for a symbolic solver to grind through. The
+handheld versions get there by working numerically at each step where version
+9 is still holding exact expressions.
+
+If you meet a circuit of this shape, solve it numerically, or reduce it by
+hand first. It is on the list to look at.
+:::
+:::
+:::
+
+:::
 
 ## Delta-Wye {#delta-wye}
 
-TODO: convert this section from docs-page7.
+The Δ-Y is the platypus of three-phase systems. The sensible route is usually
+to convert the Δ source into an equivalent Y and solve it as a Y-Y — and if
+you are doing this by hand, do that.
+
+Inside Symbulator there is another way: make the **centre of the wye load**
+the ground node, and describe the delta source with two sources as before.
+
+### Balanced
+
+::: problem AS7's Example 12.5
+For the balanced Δ-Y circuit, find the line currents.
+
+::: figure assets/circuit/as7e1205.png
+AS7's Example 12.5
+:::
+
+::: answer
+```field 9 Circuit Description
+eca,c,a,210*exp(j*pi*120/180)
+ebc,b,c,210*exp(j*pi*-120/180)
+ra,a,0,40+25j
+rb,b,0,40+25j
+rcc,c,0,40+25j
+```
+
+Node 0 here is the centre of the load's wye, not a node of the source at all.
+
+```out 7,8
+{"2.570ᴐ00∠-62.01°","2.570ᴐ00∠177.99°","2.570ᴐ00∠57.99°"}
+```
+
+::: only 9
+`aa(i_ra)`, `aa(i_rb)` and `aa(i_rcc)` read {{o:2.570}}∠{{o:-62.01}}°,
+{{o:2.570}}∠{{o:177.99}}° and {{o:2.570}}∠{{o:57.99}}°.
+:::
+
+Correct — balanced, so three equal magnitudes 120° apart.
+:::
+:::
+
+### Unbalanced
+
+If you find a simple unbalanced delta-wye problem, let me know.
