@@ -97,8 +97,22 @@ $pageTitle = $isHome ? $toc['name']
 <link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#203864">
-<link rel="stylesheet" href="/assets/banner.css">
-<link rel="stylesheet" href="/assets/style.css">
+<?php
+// A stamp that changes when the file does. Without one, the host's
+// `Cache-Control: max-age=604800` keeps a returning visitor on a
+// week-old stylesheet -- which on 25 Aug 2026 meant a phone still
+// showing the pre-fix banner a day after the fix was deployed and
+// verified. filemtime() means this page never needs remembering to
+// bump, unlike the landing page, which has no build step and is
+// stamped by tools/stamp_assets.py instead.
+function asset(string $name): string {
+    $path = __DIR__ . '/assets/' . $name;
+    $v = is_file($path) ? substr(md5_file($path), 0, 8) : '0';
+    return '/assets/' . $name . '?v=' . $v;
+}
+?>
+<link rel="stylesheet" href="<?= asset('banner.css') ?>">
+<link rel="stylesheet" href="<?= asset('style.css') ?>">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 </head>
 <body class="v<?= e($v) ?><?= $isHome ? ' home' : '' ?>">

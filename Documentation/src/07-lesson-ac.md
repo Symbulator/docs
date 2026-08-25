@@ -294,6 +294,68 @@ before you do that.
 :::
 :::
 
+::: problem AS7's Problem 9.35
+Find the steady-state current i in the circuit when
+v{{sub:s}}(t) = 50 cos 200t V.
+
+::: figure assets/circuit/as7p0935.png
+AS7's Problem 9.35
+:::
+
+::: answer
+The capacitor is in farads and the inductor in henries, so Symbulator needs the
+frequency, and the source is entered as its phasor: 50 cos 200t is `50` at an
+angular frequency of 200.
+
+```sym 7
+"e,1,0,50:r,1,2,10:c,2,3,5'm:l,3,0,20'm"→cir
+s\ac(cir,200)
+```
+```sym 8
+"e,1,0,50:r,1,2,10:c,2,3,5'm:l,3,0,20'm"→cir
+s\ac(cir,200)
+```
+```field 9 Circuit Description
+e1,1,0,50
+r,1,2,10
+c,2,3,5'm
+l,3,0,20'm
+```
+
+::: only 9
+AC, with **Angular frequency** set to **200**.
+:::
+
+::: only 7,8
+Choose AC. Symbulator asks for the frequency because of the farads and
+henries; enter 200. Then ask for `s\aa(ir)`.
+:::
+
+```sym 7
+s\aa(ir)
+```
+```sym 8
+s\aa(ir)
+```
+```out 7,8
+"4.789ᴇ0∠-16.7°"
+```
+
+::: only 9
+Read it with **Mini-tools** set to *aa*: `aa(i_r)` gives {{o:4.789}}∠{{o:-16.70}}°.
+:::
+
+That is 4.789 A at an angle of −16.7°, which is correct.
+
+::: tip Version 9 will not let you call an element `e`
+The version 7 description above names the source `e`. Version 9 refuses that
+one letter, because `e` is Euler's number and its answers would collide with
+it; every other single letter here — `r`, `c`, `l` — is still fine. `e1` is the
+usual fix, and it is the only change between the two descriptions.
+:::
+:::
+:::
+
 ### With values in Ω only
 
 When the values of all the capacitors and inductors in the circuit are given in
@@ -330,10 +392,341 @@ That is 0.25 − j0.025 S, which is correct.
 :::
 :::
 
-::: practice Further numerical examples
-TODO: convert the remaining problems in this section from docs-page7:
-AS7's Problem 9.35, 9.39, 9.73, Example 10.1, Practice Problem 10.1,
-Example 10.13 and Example 10.14.
+::: problem AS7's Problem 9.39
+For the circuit shown, find the equivalent impedance, and use that to find the
+current I. Let omega = 10 rad/s.
+
+::: figure assets/circuit/as7p0939.png
+AS7's Problem 9.39
+:::
+
+::: answer
+Notice that the question gives you a frequency and that it is entirely
+superfluous: every value is already in ohms, so there is nothing for a
+frequency to convert. You will not need it.
+
+Notice also that nothing here asks for a full simulation. The equivalent
+impedance falls out of one expression, using the shorthand for parallel
+combination:
+
+```sym 7
+4+𝐢20+s\pr({16,-𝐢14+𝐢25})→zeq
+```
+```sym 8
+4+𝐢20+s\pr({16,–𝐢14+𝐢25})→zeq
+```
+```field 9 Evaluate
+4+20j+pr(16,-14j+25j)
+```
+```out
+9.135+𝐢27.47
+```
+
+That is 9.135 + j27.47 Ω. The current is the source voltage divided by it:
+
+```sym 7
+s\aa(12/zeq)
+```
+```sym 8
+s\aa(12/zeq)
+```
+```out 7,8
+"414.5ᴇ-3∠-71.6°"
+```
+
+::: only 9
+There is no stored `zeq` to divide by, so put the whole thing in
+**Mini-tools** with *aa*: `aa(12/(4+20j+pr(16,-14j+25j)))` gives
+{{o:0.4145}}∠{{o:-71.60}}°.
+:::
+
+That is 414.5 mA at an angle of −71.6°, which is correct.
+
+::: tip The same answer from a simulation
+You can also let Symbulator do the reduction, using the square-bracket
+shorthand for parallel elements inside a value:
+
+```field 9 Circuit Description
+e1,1,0,12
+r1,1,0,4+20j+[16,-14j+25j]
+```
+
+No frequency is needed to solve this, but AC asks for one anyway — put in
+anything you like, because every value is already an impedance and none of them
+depends on it. Then `aa(i_r1)` gives the same {{o:0.4145}}∠{{o:-71.60}}°.
+:::
+:::
+:::
+
+::: problem AS7's Problem 9.73
+Determine the equivalent impedance for the circuit.
+
+::: figure assets/circuit/as7p0973.png
+AS7's Problem 9.73
+:::
+
+::: answer
+Eight impedances and no source, so this is a job for the equivalent-impedance
+tool rather than a solve. The names below carry the two nodes each element
+bridges, which is only a convenience — any unique names would do.
+
+```sym 7
+"r10,1,0,𝐢6:r20,2,0,𝐢8:r30,3,0,𝐢8:r40,4,0,𝐢12:r12,1,2,2:r23,2,3,-𝐢6:r34,3,4,4:r14,1,4,-𝐢4"→cir
+s\er(cir,1,0)
+```
+```sym 8
+"r10,1,0,𝐢6:r20,2,0,𝐢8:r30,3,0,𝐢8:r40,4,0,𝐢12:r12,1,2,2:r23,2,3,–𝐢6:r34,3,4,4:r14,1,4,–𝐢4"→cir
+s\er(cir,1,0)
+```
+```field 9 Circuit Description
+r10,1,0,6j
+r20,2,0,8j
+r30,3,0,8j
+r40,4,0,12j
+r12,1,2,2
+r23,2,3,-6j
+r34,3,4,4
+r14,1,4,-4j
+```
+
+::: only 9
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
+*Impedance*, with nodes **1** and **0**, in AC. The answer is called `zeq`.
+:::
+
+```out
+0.3794+𝐢1.46
+```
+
+That is 0.3794 + j1.46 Ω, which is correct.
+:::
+:::
+
+### With dependent sources
+
+A dependent source is described exactly like an independent one — the value is
+just an expression naming another element's answer instead of a
+number.{{i:dependent source}}
+
+The spelling of that name is the one thing that changed between the versions.
+Version 7 runs the quantity and the element together, as in `2icx`; version 9
+uses the same names it reports its answers under, so the current through `cx`
+is {{v7,8|`icx`}}{{v9|`i_cx`}} and the voltage across `rx` is
+{{v7,8|`vrx`}}{{v9|`v_rx`}}.
+
+::: practice
+
+::: problem AS7's Example 10.1
+Find i{{sub:x}} in the circuit.
+
+::: figure assets/circuit/as7e1001.png
+AS7's Example 10.1
+:::
+
+::: answer
+The current source is controlled by the current through the capacitor `cx`,
+which is what the last field of `j1` says.
+
+```sym 7
+"e1,1,0,20:r1,1,2,10:cx,2,0,.1:l1,2,3,1:j1,0,3,2icx:l2,3,0,.5"→cir
+s\ac(cir,4)
+```
+```sym 8
+"e1,1,0,20:r1,1,2,10:cx,2,0,.1:l1,2,3,1:j1,0,3,2icx:l2,3,0,.5"→cir
+s\ac(cir,4)
+```
+```field 9 Circuit Description
+e1,1,0,20
+r1,1,2,10
+cx,2,0,.1
+l1,2,3,1
+j1,0,3,2*i_cx
+l2,3,0,.5
+```
+
+::: only 9
+AC, with **Angular frequency** set to **4**.
+:::
+
+```sym 7
+s\aa(icx)
+```
+```sym 8
+s\aa(icx)
+```
+```out 7,8
+"7.59ᴇ0∠108.4°"
+```
+
+::: only 9
+`aa(i_cx)` gives {{o:7.589}}∠{{o:108.4}}°.
+:::
+
+That is 7.59 A at an angle of 108.4°, which is correct.
+:::
+:::
+
+::: problem AS7's Practice Problem 10.1
+Find v{{sub:1}} and v{{sub:2}} in the circuit.
+
+::: figure assets/circuit/as7pp1001.png
+AS7's Practice Problem 10.1
+:::
+
+::: answer
+This one is controlled by a *voltage* rather than a current — three times the
+voltage across `rx`.
+
+```sym 7
+"j,0,1,10:rx,1,0,2:c,1,2,.2:l,2,0,2:r,2,3,4:e,3,0,3vrx"→cir
+s\ac(cir,2)
+```
+```sym 8
+"j,0,1,10:rx,1,0,2:c,1,2,.2:l,2,0,2:r,2,3,4:e,3,0,3vrx"→cir
+s\ac(cir,2)
+```
+```field 9 Circuit Description
+j,0,1,10
+rx,1,0,2
+c,1,2,.2
+l,2,0,2
+r,2,3,4
+e1,3,0,3*v_rx
+```
+
+::: only 9
+AC, with **Angular frequency** set to **2**. The source had to be renamed `e1`,
+for the reason given under Problem 9.35.
+:::
+
+```sym 7
+{s\aa(v1),s\aa(v2)}
+```
+```sym 8
+{s\aa(v1),s\aa(v2)}
+```
+```out 7,8
+{"11.33ᴇ0∠60.02°","33.02ᴇ0∠57.13°"}
+```
+
+::: only 9
+`aa(v_1)` gives {{o:11.33}}∠{{o:60.02}}° and `aa(v_2)` gives
+{{o:33.02}}∠{{o:57.13}}°.
+:::
+
+Both are correct.
+:::
+:::
+
+::: problem AS7's Example 10.13
+Obtain v{{sub:o}} and i{{sub:o}} in the circuit.
+
+::: figure assets/circuit/as7e1013.png
+AS7's Example 10.13
+:::
+
+::: answer
+The book wants its answers in terms of cosine rather than sine, so the source
+is taken as 8 cos(1000t − 40°) — as a phasor, `(8∠-40°)`.
+
+Note the decimal points on the values. They make the arithmetic approximate,
+which here is what you want: an exact solve of this circuit carries surds
+through every step for no benefit.
+
+```sym 7
+"e1,1,0,(8.∠-40º):r1,1,2,4.'k:co,2,0,2.'µ:l1,2,3,50.'m:j1,0,3,.5ico:ro,3,0,2.'k"→cir
+s\ac(cir,1000.)
+```
+```sym 8
+"e1,1,0,(8.∠-40º):r1,1,2,4.'k:co,2,0,2.'µ:l1,2,3,50.'m:j1,0,3,.5ico:ro,3,0,2.'k"→cir
+s\ac(cir,1000.)
+```
+```field 9 Circuit Description
+e1,1,0,(8∠-40°)
+r1,1,2,4'k
+co,2,0,2'µ
+l1,2,3,50'm
+j1,0,3,.5*i_co
+ro,3,0,2'k
+```
+
+::: only 9
+AC, with **Angular frequency** set to **1000**.
+:::
+
+```sym 7
+{s\aa(vro),s\aa(ico)}
+```
+```sym 8
+{s\aa(vro),s\aa(ico)}
+```
+```out 7,8
+{"1.55ᴇ0∠-95.18°","3.26ᴇ-3∠-3.74°"}
+```
+
+::: only 9
+`aa(v_ro)` gives {{o:1.550}}∠{{o:-95.18}}° and `aa(i_co)` gives
+{{o:0.003264}}∠{{o:-3.743}}°.
+:::
+
+That is 1.55 V at −95.18° and 3.26 mA at −3.74°, both correct.
+:::
+:::
+
+::: problem AS7's Example 10.14
+Find V{{sub:1}} and V{{sub:2}} in the circuit.
+
+::: figure assets/circuit/as7e1014.png
+AS7's Example 10.14
+:::
+
+::: answer
+Every value here is already in ohms, so no frequency matters. Again the decimal
+points keep the arithmetic approximate.
+
+```sym 7
+"j1,0,1,3.:r1,1,0,1.:rx,1,0,-𝐢1.:r3,1,2,-𝐢2:j2,1,2,.2vrx:r4,1,2,2.+𝐢2.:r5,2,0,-𝐢1.:r6,2,3,2.+𝐢2.:e1,3,0,(18.∠30º)"→cir
+s\ac(cir,ω)
+```
+```sym 8
+"j1,0,1,3.:r1,1,0,1.:rx,1,0,–𝐢1.:r3,1,2,–𝐢2:j2,1,2,.2vrx:r4,1,2,2.+𝐢2.:r5,2,0,–𝐢1.:r6,2,3,2.+𝐢2.:e1,3,0,(18.∠30º)"→cir
+s\ac(cir,ω)
+```
+```field 9 Circuit Description
+j1,0,1,3
+r1,1,0,1
+rx,1,0,-1j
+r3,1,2,-2j
+j2,1,2,.2*v_rx
+r4,1,2,2+2j
+r5,2,0,-1j
+r6,2,3,2+2j
+e1,3,0,(18∠30°)
+```
+
+::: only 9
+AC. The frequency is asked for but never used, so anything will do.
+:::
+
+```sym 7
+{s\aa(v1),s\aa(v2)}
+```
+```sym 8
+{s\aa(v1),s\aa(v2)}
+```
+```out 7,8
+{"2.708ᴇ0∠-56.73°","6.914ᴇ0∠-80.70°"}
+```
+
+::: only 9
+`aa(v_1)` gives {{o:2.708}}∠{{o:-56.73}}° and `aa(v_2)` gives
+{{o:6.914}}∠{{o:-80.70}}°.
+:::
+
+That is 2.708 V at −56.73° and 6.914 V at −80.70°, both correct.
+:::
+:::
+
 :::
 
 ## Solved numerical-from-symbolic examples {#ac-numerical-from-symbolic}
@@ -532,7 +925,7 @@ Here is an example that takes Symbulator to the limit of what it can solve
 symbolically — everything in it is a symbol, including the frequency.
 
 ```sym 7
-"e,1,0,vs:r1,1,2,r1:ca,2,0,ca:r3,0,3,r3:o,2,3,o:cb,3,o,cb:r2,3,o,r2"→cir:sc(cir,ω)
+"e,1,0,vs:r1,1,2,r1:ca,2,0,ca:r3,0,3,r3:o,2,3,o:cb,3,o,cb:r2,3,o,r2"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
 e1,1,0,vs
@@ -572,7 +965,7 @@ The closed-loop gain, on a TI-89
 :::
 
 ::: only 9
-$$rac{V_o}{V_s} = rac{j\,c_b r_2 r_3 \omega + r_2 + r_3}
+$$\frac{V_o}{V_s} = \frac{j\,c_b r_2 r_3 \omega + r_2 + r_3}
 {r_3\left(-c_a c_b r_1 r_2 \omega^2 + j\,c_a r_1 \omega
 + j\,c_b r_2 \omega + 1
 ight)}$$

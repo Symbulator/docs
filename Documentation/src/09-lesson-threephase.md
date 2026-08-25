@@ -78,12 +78,12 @@ lines and get:
 {"6.809ᴇ0∠-21.8°","6.809ᴇ0∠-141.8°","6.809ᴇ0∠98.2°"}
 ```
 
-The complex power at the source is `sea0+seb0+sec0`, which gives
+The complex power at the source is {{v7,8|`sea0+seb0+sec0`}}{{v9|`s_ea0+s_eb0+s_ec0`}}, which gives
 −2086.2 − 834.5𝐢 VA. The real part is the average power absorbed by the source;
 since it is negative, the source is delivering an average power of 2086 W. The
 imaginary part is the reactive power: 834 VAR.
 
-The complex power at the load is `sra0+srb0+src0`, which gives
+The complex power at the load is {{v7,8|`sra0+srb0+src0`}}{{v9|`s_ra0+s_rb0+s_rc0`}}, which gives
 1390.8 + 1112.6𝐢 VA. The load is consuming an average power of 1391 W and a
 reactive power of 1113 VAR.
 
@@ -96,8 +96,260 @@ use 0 for both. When we solve an unbalanced system, we cannot.
 :::
 
 ::: practice Further wye-wye problems
-TODO: convert AS7's Practice Problem 12.2 & 12.6, Example 12.10 (unbalanced)
-and Example 12.9 (unbalanced with a neutral line) from docs-page7.
+
+::: problem AS7's Practice Problem 12.2 & 12.6
+Calculate the line voltages and the line currents. Also calculate the complex
+power at the source and at the load. Assume the source voltage is given as RMS.
+
+::: figure assets/circuit/as7pp1202.png
+AS7's Practice Problem 12.2 and 12.6
+:::
+
+::: answer
+The textbook does not say so, but you only get its answers if you take the
+values as RMS.
+
+There are **three** impedances in each line here: one inside the generator, one
+for the transmission line, and one for the load. The node names below say which
+is which — `ag` in the generator, `as` on the supply side, `ad` on the demand
+side.
+
+```sym 7
+true→s\rms
+"ea0,ag,0,(120.∠30°):eb0,bg,0,(120.∠-90°):ec0,cg,0,(120.∠150°):rag,ag,as,.4+𝐢.3:rbg,bg,bs,.4+𝐢.3:rcg,cg,cs,.4+𝐢.3:rat,as,ad,.6+𝐢.7:rbt,bs,bd,.6+𝐢.7:rct,cs,cd,.6+𝐢.7:ra0,ad,0,24.+19.𝐢:rb0,bd,0,24.+19.𝐢:rc0,cd,0,24.+19.𝐢"→cir
+s\ac(cir,ω)
+```
+```sym 8
+true→userms
+"ea0,ag,0,(120.∠30°):eb0,bg,0,(120.∠–90°):ec0,cg,0,(120.∠150°):rag,ag,as,.4+𝐢.3:rbg,bg,bs,.4+𝐢.3:rcg,cg,cs,.4+𝐢.3:rat,as,ad,.6+𝐢.7:rbt,bs,bd,.6+𝐢.7:rct,cs,cd,.6+𝐢.7:ra0,ad,0,24.+19.𝐢:rb0,bd,0,24.+19.𝐢:rc0,cd,0,24.+19.𝐢"→cir
+s\ac(cir,ω)
+```
+```field 9 Circuit Description
+ea0,ag,0,(120∠30°)
+eb0,bg,0,(120∠-90°)
+ec0,cg,0,(120∠150°)
+rag,ag,as,.4+.3j
+rbg,bg,bs,.4+.3j
+rcg,cg,cs,.4+.3j
+rat,as,ad,.6+.7j
+rbt,bs,bd,.6+.7j
+rct,cs,cd,.6+.7j
+ra0,ad,0,24+19j
+rb0,bd,0,24+19j
+rc0,cd,0,24+19j
+```
+
+::: only 9
+AC, with **RMS phasors** ticked. Every value is already an impedance, so the
+frequency is asked for but never used.
+:::
+
+The question asks for the line voltages — the differences between the lines.
+For the answers the textbook wants, ask for these:
+
+```sym 7
+{s\aa(vag-vbg),s\aa(vbg-vcg),s\aa(vcg-vag)}
+```
+```sym 8
+{s\aa(vag-vbg),s\aa(vbg-vcg),s\aa(vcg-vag)}
+```
+```out 7,8
+{"207.8ᴇ0∠60.°","207.8ᴇ0∠-60.°","207.8ᴇ0∠180.°"}
+```
+
+::: only 9
+In **Mini-tools** with *aa*, `aa(v_ag-v_bg)` gives {{o:207.8}}∠{{o:60.00}}°,
+and the other two the same magnitude at {{o:-60.00}}° and {{o:180.0}}°.
+:::
+
+::: tip Which line voltage did you want?
+If you ask me, that is not really the voltage between the lines, because the
+transmission line starts *after* the generator. At the start of the
+transmission line the answer is {{o:204.6}}∠{{o:60.03}}°, and at the end of it
+{{o:198.7}}∠{{o:59.71}}° — ask for
+{{v7,8|`s\aa(vas-vbs)`}}{{v9|`aa(v_as-v_bs)`}} and
+{{v7,8|`s\aa(vad-vbd)`}}{{v9|`aa(v_ad-v_bd)`}} respectively. All three are
+different, and which one you want depends on where you are standing.
+:::
+
+The line currents are the currents through the transmission-line impedances:
+
+```out 7,8
+{"3.748ᴇ0∠-8.66°","3.748ᴇ0∠-128.66°","3.748ᴇ0∠111.34°"}
+```
+
+::: only 9
+`aa(i_rat)` gives {{o:3.748}}∠{{o:-8.660}}°, and the other two lines follow at
+120° either side.
+:::
+
+Finally the complex power. At the source:
+
+```out 7,8
+-1053.7-842.9𝐢
+```
+
+::: only 9
+Evaluate {{v7,8|`sea0+seb0+sec0`}}{{v9|`s_ea0+s_eb0+s_ec0`}}, which gives
+{{o:-1054}} − {{o:842.9}}𝐢 VA.
+:::
+
+Note this does *not* include the power lost in the source's own internal
+impedances, which you could add if you wanted them. At the load:
+
+```out 7,8
+1011.5+800.8𝐢
+```
+
+::: only 9
+Evaluate {{v7,8|`sra0+srb0+src0`}}{{v9|`s_ra0+s_rb0+s_rc0`}}, which gives
+{{o:1012}} + {{o:800.8}}𝐢 VA.
+:::
+
+All correct.
+:::
+:::
+
+:::
+
+### Unbalanced wye-wye system
+
+The balanced case let you use node 0 for the centre of *both* wyes, because the
+voltage at the centre of the load is zero. Unbalanced, it is not — so the load
+needs a centre node of its own.{{i:unbalanced system}}
+
+::: practice
+
+::: problem AS7's Example 12.10
+For the unbalanced circuit, find (a) the line currents, (b) the total complex
+power absorbed by the load, and (c) the total complex power absorbed by the
+source.
+
+::: figure assets/circuit/as7e1210.png
+AS7's Example 12.10
+:::
+
+::: answer
+The centre of the generator's wye is ground, and the centre of the load's wye
+is a node of its own, called `n`.
+
+```sym 7
+true→s\rms
+"ea,a,0,(120.∠0°):eb,b,0,(120.∠-120°):ecc,c,0,(120.∠120°):ra,a,n,5.𝐢:rb,b,n,10.:rcc,c,n,-10.𝐢"→cir
+s\ac(cir,ω)
+```
+```sym 8
+true→userms
+"ea,a,0,(120.∠0°):eb,b,0,(120.∠–120°):ecc,c,0,(120.∠120°):ra,a,n,5.𝐢:rb,b,n,10.:rcc,c,n,–10.𝐢"→cir
+s\ac(cir,ω)
+```
+```field 9 Circuit Description
+ea,a,0,(120∠0°)
+eb,b,0,(120∠-120°)
+ecc,c,0,(120∠120°)
+ra,a,n,5j
+rb,b,n,10
+rcc,c,n,-10j
+```
+
+::: only 9
+AC, with **RMS phasors** ticked.
+:::
+
+```sym 7
+{s\aa(ira),s\aa(irb),s\aa(ircc),sra,srb,srcc,sea,seb,secc}
+```
+```sym 8
+{s\aa(ira),s\aa(irb),s\aa(ircc),sra,srb,srcc,sea,seb,secc}
+```
+```out 7,8
+{"56.78ᴇ0∠0.°","25.46ᴇ0∠135.°","42.76ᴇ0∠-155.1°",16122.𝐢,6480.,-18282.𝐢}
+```
+
+::: only 9
+The three line currents read {{o:56.78}}∠{{o:0}}°, {{o:25.46}}∠{{o:135.0}}° and
+{{o:42.76}}∠{{o:-155.1}}°. The complex powers in the load are
+{{o:16120}}𝐢, {{o:6480}} and {{o:-18280}}𝐢 VA.
+:::
+
+All correct. Two things are worth checking for yourself. Complex power is
+conserved, so {{v7,8|`sea+seb+secc+sra+srb+srcc`}}{{v9|`s_ea+s_eb+s_ecc+s_ra+s_rb+s_rcc`}}
+evaluates to zero. And the voltage at the centre of the load is *not* zero, as
+it was in the balanced case — {{v7,8|`vn`}}{{v9|`v_n`}} is
+{{o:120.0}} − {{o:283.9}}𝐢 V.
+
+::: tip Why `ecc` and `rcc` rather than `ec` and `rc`
+The third phase is named with a doubled letter throughout. On the calculator
+that avoided a clash with a reserved name, and version 9 keeps the convention
+so that the same description works everywhere.
+:::
+:::
+:::
+
+::: problem AS7's Example 12.9
+The unbalanced Y-load has balanced voltages of 100 V in the *acb* sequence.
+Calculate the line currents and the neutral current. Take Z{{sub:A}} = 15 Ω,
+Z{{sub:B}} = 10 + j5 Ω and Z{{sub:C}} = 6 − j8 Ω.
+
+::: figure assets/circuit/as7f1223.png
+AS7's Example 12.9
+:::
+
+::: answer
+Two things differ from the last one. The source values are *not* RMS this time.
+And there is a neutral line joining the centre of the load to the centre of the
+source, which you describe as a short circuit — an **s** element, which takes
+just a name and two nodes.
+
+Note also the angles: this is the *acb* sequence, so they run the other way
+round.
+
+```sym 7
+false→s\rms
+"ea,a,0,(100.∠0°):eb,b,0,(100.∠120°):ecc,c,0,(100.∠-120°):sn,0,n:ra,a,n,15:rb,b,n,10.+𝐢5.:rcc,c,n,6.-𝐢8."→cir
+s\ac(cir,ω)
+```
+```sym 8
+false→userms
+"ea,a,0,(100.∠0°):eb,b,0,(100.∠120°):ecc,c,0,(100.∠–120°):sn,0,n:ra,a,n,15:rb,b,n,10.+𝐢5.:rcc,c,n,6.–𝐢8."→cir
+s\ac(cir,ω)
+```
+```field 9 Circuit Description
+ea,a,0,(100∠0°)
+eb,b,0,(100∠120°)
+ecc,c,0,(100∠-120°)
+sn,0,n
+ra,a,n,15
+rb,b,n,10+5j
+rcc,c,n,6-8j
+```
+
+::: only 9
+AC, with **RMS phasors** left unticked this time.
+:::
+
+```sym 7
+{s\aa(ira),s\aa(irb),s\aa(ircc),s\aa(isn)}
+```
+```sym 8
+{s\aa(ira),s\aa(irb),s\aa(ircc),s\aa(isn)}
+```
+```out 7,8
+{"6.667ᴇ0∠0.°","8.944ᴇ0∠93.43°","10.000ᴇ0∠-66.87°","10.06ᴇ0∠178.47°"}
+```
+
+::: only 9
+The three line currents read {{o:6.667}}∠{{o:0}}°, {{o:8.944}}∠{{o:93.44}}° and
+{{o:10.00}}∠{{o:-66.87}}°, and the neutral current
+{{o:10.06}}∠{{o:178.5}}°.
+:::
+
+All four are correct. The neutral carries a current precisely because the load
+is unbalanced; in the balanced case it would be zero, which is why a balanced
+three-wire system needs no neutral at all.
+:::
+:::
+
 :::
 
 ## Wye-Delta {#wye-delta}
@@ -120,7 +372,7 @@ question asks for no powers, so it makes no difference either way. The three
 sources get the angles of the abc sequence.
 
 ```sym 7
-"ea0,a,0,(100.∠10°):eb0,b,0,(100.∠-110°):ec0,c,0,(100.∠130°):rab,a,b,8.+4.𝐢:rca,c,a,8.+4.𝐢:rbc,b,c,8.+4.𝐢"→cir:sc(cir,ω)
+"ea0,a,0,(100.∠10°):eb0,b,0,(100.∠-110°):ec0,c,0,(100.∠130°):rab,a,b,8.+4.𝐢:rca,c,a,8.+4.𝐢:rbc,b,c,8.+4.𝐢"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
 ea0,a,0,(100∠10°)
@@ -139,7 +391,7 @@ exponential form: 100 V at 10° is `(100∠10°)`.
 The phase currents are the currents in the three load impedances:
 
 ```sym 7
-{sa(irab),sa(irbc),sa(irca)}
+{s\aa(irab),s\aa(irbc),s\aa(irca)}
 ```
 ```out 7,8
 {"19.36ᴐ00∠13.43°","19.36ᴐ00∠-106.57°","19.36ᴐ00∠133.43°"}
@@ -154,7 +406,7 @@ The line currents are the currents the sources deliver, which is the opposite
 of the current through each source element:
 
 ```sym 7
-{sa(-iea0),sa(-ieb0),sa(-iec0)}
+{s\aa(-iea0),s\aa(-ieb0),s\aa(-iec0)}
 ```
 ```out 7,8
 {"33.54ᴐ00∠-16.57°","33.54ᴐ00∠-136.57°","33.54ᴐ00∠103.43°"}

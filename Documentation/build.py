@@ -28,6 +28,8 @@ import yaml
 
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "tools"))
 from check_palette import check_palette  # noqa: E402  (needs sys.path set first)
+from stamp_assets import check_asset_stamps  # noqa: E402
+from check_control_chars import check_control_chars  # noqa: E402
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, "src")
@@ -892,6 +894,13 @@ def check(book: Book, versions: list[int], verbose: bool = False) -> int:
     # tools/check_palette.py for the full explanation.
     problems.extend(check_palette())
     problems.extend(check_shared_banner())
+    # The landing page has no build step, so nothing else would
+    # notice that a changed stylesheet still carries its old stamp
+    # and will not reach anyone who has visited before.
+    problems.extend(check_asset_stamps())
+    # A heredoc-eaten backslash is invisible in an editor and
+    # survives every other check; chapter 9 shipped with one.
+    problems.extend(check_control_chars())
     problems.extend(check_nested_version_spans())
     problems.extend(check_buried_v9())
 
