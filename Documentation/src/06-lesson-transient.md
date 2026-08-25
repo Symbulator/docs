@@ -1890,6 +1890,11 @@ s\only("vc,il"):s\tr("r1,1,0,5:l,1,2,1/2,1:c,2,0,1/8,2"):{vc,il}
 ```sym 8
 s\only("vc,il"):s\tr("r1,1,0,5:l,1,2,1/2,1:c,2,0,1/8,2"):{vc,il}
 ```
+```field 9 Circuit Description
+r1,1,0,5
+l,1,2,1/2,1
+c,2,0,1/8,2
+```
 
 { , }
 
@@ -1973,6 +1978,12 @@ s\only("vc,il"):s\tr("r3,1,0,3:r6,1,0,6:l,1,2,1/4,0:c,2,0,1/3,2")
 ```
 ```sym 8
 s\only("vc,il"):s\tr("r3,1,0,3:r6,1,0,6:l,1,2,1/4,0:c,2,0,1/3,2")
+```
+```field 9 Circuit Description
+r3,1,0,3
+r6,1,0,6
+l,1,2,1/4,0
+c,2,0,1/3,2
 ```
 
 ```sym 7
@@ -2069,6 +2080,11 @@ s\only("vc,il"):s\tr("c,1,0,2,-7/50:r,1,0,[1/6,1/6]:l,1,0,1/50,1")
 ```sym 8
 s\only("vc,il"):s\tr("c,1,0,2,–7/50:r,1,0,[1/6,1/6]:l,1,0,1/50,1")
 ```
+```field 9 Circuit Description
+c,1,0,2,-7/50
+r,1,0,[1/6,1/6]
+l,1,0,1/50,1
+```
 
 ```sym 7
 vc
@@ -2127,6 +2143,12 @@ s\only("vc,il"):s\tr("r3,0,2,3:l,2,3,1,1:c,3,0,1,2:r1,3,0,1"):{vc,il}
 ```
 ```sym 8
 s\only("vc,il"):s\tr("r3,0,2,3:l,2,3,1,1:c,3,0,1,2:r1,3,0,1"):{vc,il}
+```
+```field 9 Circuit Description
+r3,0,2,3
+l,2,3,1,1
+c,3,0,1,2
+r1,3,0,1
 ```
 
 { , }
@@ -2187,6 +2209,11 @@ s\only("il,vc"):s\tr("r,1,0,1:l,1,0,1,2:c,1,0,1/8,0"):{il,vc}
 ```sym 8
 s\only("il,vc"):s\tr("r,1,0,1:l,1,0,1,2:c,1,0,1/8,0"):{il,vc}
 ```
+```field 9 Circuit Description
+r,1,0,1
+l,1,0,1,2
+c,1,0,1/8,0
+```
 
 The answer we get doesn't match the answer provided by the book. Now let's
 repeat the TR simulation using the ½ H value for the inductor:
@@ -2196,6 +2223,11 @@ s\only("il,vc"):s\tr("r,1,0,1:l,1,0,1/2,2:c,1,0,1/8,0"):{il,vc}
 ```
 ```sym 8
 s\only("il,vc"):s\tr("r,1,0,1:l,1,0,1/2,2:c,1,0,1/8,0"):{il,vc}
+```
+```field 9 Circuit Description
+r,1,0,1
+l,1,0,1/2,2
+c,1,0,1/8,0
 ```
 
 Now the answer we get matches the answer provided by the book. An expert user
@@ -2291,6 +2323,12 @@ s\only("il2"):s\tr("r6,0,1,6:l1,1,0,6,2:r3,1,2,3:l2,2,0,4,0"):il2
 ```sym 8
 s\only("il2"):s\tr("r6,0,1,6:l1,1,0,6,2:r3,1,2,3:l2,2,0,4,0"):il2
 ```
+```field 9 Circuit Description
+r6,0,1,6
+l1,1,0,6,2
+r3,1,2,3
+l2,2,0,4,0
+```
 
 :::
 
@@ -2340,6 +2378,14 @@ ca,1,0,1,0:cb,2,o,1/4,4:o,0,2,o"):vo
 s\only("vo"):s\tr("r1,0,1,1:r2,1,2,2:r3,1,o,2:
 ca,1,0,1,0:cb,2,o,1/4,4:o,0,2,o"):vo
 ```
+```field 9 Circuit Description
+r1,0,1,1
+r2,1,2,2
+r3,1,o,2
+ca,1,0,1,0
+cb,2,o,1/4,4
+o,0,2,o
+```
 
 :::
 
@@ -2357,6 +2403,12 @@ s\only("vc,il"):s\tr("e,1,0,2/5:r,1,2,12:l,2,3,2,0:c,3,0,1/50,0")
 ```
 ```sym 8
 s\only("vc,il"):s\tr("e,1,0,2/5:r,1,2,12:l,2,3,2,0:c,3,0,1/50,0")
+```
+```field 9 Circuit Description
+e1,1,0,2/5
+r,1,2,12
+l,2,3,2,0
+c,3,0,1/50,0
 ```
 
 ```sym 7
@@ -2396,6 +2448,12 @@ s\only("vc,il"):s\tr("e,1,0,3:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):{vc,il}
 ```sym 8
 s\only("vc,il"):s\tr("e,1,0,3:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):{vc,il}
 ```
+```field 9 Circuit Description
+e1,1,0,3
+r,1,2,5
+l,2,3,1/2,0
+c,3,0,1/8,0
+```
 
 { , }
 
@@ -2411,6 +2469,12 @@ s\only("vc"):s\tr("e,1,0,3t:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):vc
 ```
 ```sym 8
 s\only("vc"):s\tr("e,1,0,3t:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):vc
+```
+```field 9 Circuit Description
+e1,1,0,3t
+r,1,2,5
+l,2,3,1/2,0
+c,3,0,1/8,0
 ```
 
 :::
@@ -2453,6 +2517,12 @@ s\only("vl"):s\tr("e,1,0,12.:r,1,2,3:l,2,3,1,4:c,3,0,1'µ,0")
 ```sym 8
 s\only("vl"):s\tr("e,1,0,12.:r,1,2,3:l,2,3,1,4:c,3,0,1'µ,0")
 ```
+```field 9 Circuit Description
+e1,1,0,12.
+r,1,2,3
+l,2,3,1,4
+c,3,0,1'µ,0
+```
 
 Finally, run `s\plot()` and enter `vl` as function, `0` as minimal time and
 `0.005` as maximal time. In the resulting plot you will see something
@@ -2476,6 +2546,12 @@ s\only("il,vc"):s\tr("j,0,1,1:r,1,0,1:l,1,0,2,0:c,1,0,1/2,0"):{il,vc}
 ```sym 8
 s\only("il,vc"):s\tr("j,0,1,1:r,1,0,1:l,1,0,2,0:c,1,0,1/2,0"):{il,vc}
 ```
+```field 9 Circuit Description
+j,0,1,1
+r,1,0,1
+l,1,0,2,0
+c,1,0,1/2,0
+```
 
 { , }
 
@@ -2497,6 +2573,14 @@ ca,2,0,1/5,0:cb,1,o,1,0:o,2,o,o"):vo
 s\only("vo"):s\tr("e,3,0,1:r1,3,1,1:r2,1,2,1:
 ca,2,0,1/5,0:cb,1,o,1,0:o,2,o,o"):vo
 ```
+```field 9 Circuit Description
+e1,3,0,1
+r1,3,1,1
+r2,1,2,1
+ca,2,0,1/5,0
+cb,1,o,1,0
+o,2,o,o
+```
 
 :::
 
@@ -2512,6 +2596,14 @@ ca,2,0,25/16,0:cb,1,o,1,0:o,2,o,o"):vo
 ```sym 8
 s\only("vo"):s\tr("e,3,0,3:r1,3,1,1:r2,1,2,1:
 ca,2,0,25/16,0:cb,1,o,1,0:o,2,o,o"):vo
+```
+```field 9 Circuit Description
+e1,3,0,3
+r1,3,1,1
+r2,1,2,1
+ca,2,0,25/16,0
+cb,1,o,1,0
+o,2,o,o
 ```
 
 :::
@@ -2531,6 +2623,13 @@ s\only("il"):s\tr("e,3,0,2e^(-2t):r2,3,2,1:r1,2,1,1:c,2,0,1,0:l,1,0,1,0"):il
 ```
 ```sym 8
 s\only("il"):s\tr("e,3,0,2e^(–2t):r2,3,2,1:r1,2,1,1:c,2,0,1,0:l,1,0,1,0"):il
+```
+```field 9 Circuit Description
+e1,3,0,2e^(-2t)
+r2,3,2,1
+r1,2,1,1
+c,2,0,1,0
+l,1,0,1,0
 ```
 
 :::
@@ -2774,6 +2873,11 @@ s\ex("e,1,0,vs*u(t):r,1,2,1:c,2,0,1,0"):
 ```
 ```sym 8
 s\ex("e,1,0,vs*u(t):r,1,2,1:c,2,0,1,0"):
+```
+```field 9 Circuit Description
+e1,1,0,vs*u(t)
+r,1,2,1
+c,2,0,1,0
 ```
 
 When prompted, select TR. In the equations field, add the new equation you
