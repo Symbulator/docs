@@ -229,7 +229,7 @@ s\aa(ir1)
 ```
 :::
 ::: only 9
-If we want to see them as an amplitude and angle, open the **Mini-tools**
+If we want to see them as an amplitude and angle, open the **Mini-Tools**
 card under the results, leave the tool set to *aa — amplitude and angle*,
 and give it the answer's name:{{i:aa tool}}
 
@@ -284,7 +284,7 @@ l,2,0,.2
 The source is given in polar form, and version 9 reads it as written —
 magnitude, the angle sign, then the angle in degrees.
 
-Then AC, with **10** for omega. **Mini-tools** with *aa* reads
+Then AC, with **10** for omega. **Mini-Tools** with *aa* reads
 `i_r1` as {{o:4.472}}∠{{o:3.43}}° and `v_l` as {{o:8.944}}∠{{o:93.43}}°.
 Both are correct.
 :::
@@ -400,7 +400,7 @@ s\aa(ir)
 ```
 
 ::: only 9
-Read it with **Mini-tools** set to *aa*: `aa(i_r)` gives {{o:4.789}}∠{{o:-16.70}}°.
+Read it with **Mini-Tools** set to *aa*: `aa(i_r)` gives {{o:4.789}}∠{{o:-16.70}}°.
 :::
 
 That is 4.789 A at an angle of −16.7°, which is correct.
@@ -494,7 +494,7 @@ s\aa(12/zeq)
 
 ::: only 9
 There is no stored `zeq` to divide by, so put the whole thing in
-**Mini-tools** with *aa*: `aa(12/(4+20j+pr(16,-14j+25j)))` gives
+**Mini-Tools** with *aa*: `aa(12/(4+20j+pr(16,-14j+25j)))` gives
 {{o:0.4145}}∠{{o:-71.60}}°.
 :::
 

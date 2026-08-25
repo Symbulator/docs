@@ -235,7 +235,7 @@ you get the value and a verbal description of lagging or leading. This second
 form only works if the expression can be evaluated numerically.
 :::
 ::: only 9
-Symbulator 9 has the same tool, in the **Mini-tools** card. Choose *pf —
+Symbulator 9 has the same tool, in the **Mini-Tools** card. Choose *pf —
 power factor*; it asks for the voltage and the current separately rather
 than for a single complex power or an element name:{{i:power factor}}
 
@@ -349,7 +349,7 @@ Written out as four elements rather than one, which is clearer and costs
 nothing here. The average power supplied is the opposite of the power the
 source consumes — `-p_e1` in **Evaluate** gives {{o:2007.1}} W.
 
-For the power factor, use **Mini-tools** with *pf*, giving it the source's
+For the power factor, use **Mini-Tools** with *pf*, giving it the source's
 voltage and the current it delivers — which is the opposite of the current
 through the source element:
 
@@ -448,7 +448,7 @@ r3,1,0,60
 consumes: {{v7,8|`-se`}}{{v9|`-s_e1` in **Evaluate**}} gives
 {{o:1835.9}} − {{o:114.7}}j VA.
 
-**(b)** The power factor, from {{v7,8|`s\pf("e")`}}{{v9|*pf* in **Mini-tools**
+**(b)** The power factor, from {{v7,8|`s\pf("e")`}}{{v9|*pf* in **Mini-Tools**
 with `v_e1` and `-i_e1`}}, is {{o:0.99805}} leading.
 
 **(c)** This one needs a frequency, because it needs a capacitor. Add one in

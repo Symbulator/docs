@@ -101,7 +101,7 @@ r4,3,0,12
 
 ::: only 9
 AC, and leave **RMS phasors** unticked. Then read the two currents with
-**Mini-tools** set to *aa*:
+**Mini-Tools** set to *aa*:
 :::
 
 ```sym 7
@@ -312,7 +312,7 @@ power, and that is the convention it wants.
 ```
 
 ::: only 9
-Three readings from **Mini-tools** with *aa*: `i_r1` is
+Three readings from **Mini-Tools** with *aa*: `i_r1` is
 {{o:11.09}}∠{{o:33.69}}°, `v_ro` is {{o:110.9}}∠{{o:-146.31}}°, and
 `-s_e1` — the complex power *supplied*, so the opposite of the power consumed
 by the source — is {{o:1331}}∠{{o:-33.69}}°.

@@ -434,7 +434,7 @@ Correct.
 
 Network problems ask for gains: voltage gain, current gain, power gain, and
 the impedance seen at the input. {{v7,8|Symbulator has a tool for that, called
-**gain**.}}{{v9|Symbulator has a tool for that, in the **Mini-tools** card:
+**gain**.}}{{v9|Symbulator has a tool for that, in the **Mini-Tools** card:
 choose *gain*.}}{{i:gain tool}}
 
 It wants four values — the voltage and current at the input, then the voltage
@@ -476,7 +476,7 @@ yp21 = -5
 yp22 = 0.04
 ```
 
-Solve in DC, then open **Mini-tools**, choose *gain*, and give it the four:
+Solve in DC, then open **Mini-Tools**, choose *gain*, and give it the four:
 :::
 
 ```sym 7

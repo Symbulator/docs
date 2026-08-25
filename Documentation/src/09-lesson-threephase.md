@@ -158,7 +158,7 @@ For the answers the textbook wants, ask for these:
 ```
 
 ::: only 9
-In **Mini-tools** with *aa*, `aa(v_ag-v_bg)` gives {{o:207.8}}∠{{o:60.00}}°,
+In **Mini-Tools** with *aa*, `aa(v_ag-v_bg)` gives {{o:207.8}}∠{{o:60.00}}°,
 and the other two the same magnitude at {{o:-60.00}}° and {{o:180.0}}°.
 :::
 
