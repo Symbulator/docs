@@ -862,6 +862,23 @@ def build_tex(book: Book, versions: list[int], run_pdf=True) -> list[int]:
         print(f"\nNO PDF PRODUCED for {missing}. Anything already in "
               f"{os.path.join(BUILD, 'pdf')} is from an earlier run and is "
               f"NOT this build.", file=sys.stderr)
+
+    # index.php links /symbulator-v7.pdf and friends, so they belong at the
+    # document root -- which is build/web, the folder the deploy uploads.
+    # Without this they stayed in build/pdf and no rebuild ever reached the
+    # site. Only what was built this run is copied: a failed version must
+    # not silently promote the previous build's PDF.
+    webdir = os.path.join(BUILD, "web")
+    if run_pdf and os.path.isdir(webdir):
+        for v in versions:
+            if v in failed:
+                continue
+            built = os.path.join(pdfdir, f"symbulator-v{v}.pdf")
+            if os.path.isfile(built):
+                shutil.copy2(built, os.path.join(webdir,
+                                                 f"symbulator-v{v}.pdf"))
+                print(f"web:  {os.path.join(webdir, f'symbulator-v{v}.pdf')}")
+
     return failed
 
 
