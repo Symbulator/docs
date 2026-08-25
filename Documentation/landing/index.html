@@ -20,6 +20,25 @@
 <link rel="apple-touch-icon" href="/assets/apple-touch-icon.png">
 <meta name="theme-color" content="#203864">
 
+<!-- The hero scorpion is a CSS background, so the browser cannot see it
+     until the stylesheet has parsed and the rule has matched -- which puts
+     the largest thing on the page at the back of the queue. These fetch it
+     alongside the CSS instead.
+
+     Each carries a media query, so a visitor downloads exactly one of the
+     two: the plate they are actually going to see. Without that, preloading
+     both would cost every visitor 266 KB to show 138 KB of it.
+
+     Note the limit: `media` is evaluated against the system preference, so
+     someone whose system is light and who then presses the theme toggle
+     still fetches the dark plate at that moment. Covering that as well
+     would mean an unconditional prefetch of the second image -- 128 KB for
+     everyone, most of whom never toggle -- which is not obviously worth it. -->
+<link rel="preload" as="image" href="/assets/scorpion-dark.jpg"
+      media="(prefers-color-scheme: dark)">
+<link rel="preload" as="image" href="/assets/scorpion-light.jpg"
+      media="(prefers-color-scheme: light)">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Serif:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
