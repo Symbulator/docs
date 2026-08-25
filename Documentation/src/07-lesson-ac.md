@@ -521,4 +521,77 @@ try to chop a tree down with it. SPICE and its children — LTspice, PSpice,
 MultiSim — are the chainsaws of circuit simulation. They won't give you
 symbolic answers, but when you need to chop a tree down, they are the way to
 go.
+
+::: problem AS7's Problem 10.77
+Compute the closed-loop gain V{{sub:o}}/V{{sub:s}} for the op-amp circuit.
+
+::: figure assets/circuit/as7pr1077.png
+AS7's Problem 10.77
+:::
+
+::: answer
+Here is an example that takes Symbulator to the limit of what it can solve
+symbolically — everything in it is a symbol, including the frequency.
+
+```sym 7
+"e,1,0,vs:r1,1,2,r1:ca,2,0,ca:r3,0,3,r3:o,2,3,o:cb,3,o,cb:r2,3,o,r2"→cir:sc(cir,ω)
+```
+```field 9 Circuit Description
+e1,1,0,vs
+r1,1,2,r1
+ca,2,0,ca
+r3,0,3,r3
+o,2,3,o
+cb,3,o,cb
+r2,3,o,r2
+```
+
+{{v7,8|Notice `ca` and `cb`: `c1` and `c2` are reserved variables on the
+calculator.}}{{v9|The capacitors are called `ca` and `cb` because the
+calculator versions had to avoid the reserved `c1` and `c2`; version 9 has no
+such restriction, but the names are kept so the description matches.}}
+
+Then ask for the ratio:
+
+```sym 7
+vo/vs
+```
+
+::: only 9
+```field 9 Evaluate
+v_o/vs
+```
+:::
+
+```out 7
+(the expression below)
+```
+
+::: only 7
+::: figure assets/screen/ansas7p1077.png
+The closed-loop gain, on a TI-89
+:::
+:::
+
+::: only 9
+$$rac{V_o}{V_s} = rac{j\,c_b r_2 r_3 \omega + r_2 + r_3}
+{r_3\left(-c_a c_b r_1 r_2 \omega^2 + j\,c_a r_1 \omega
++ j\,c_b r_2 \omega + 1ight)}$$
+:::
+
+It looks different from the answer in the book, but evaluating both shows they
+are the same expression arranged differently.
+
+::: only 7
+This is the limit, and I know it because I have measured it: Symbulator solves
+this on my TI-89 Titanium in six minutes, and on my friend Qifan's Voyage 200
+it fails altogether unless the source is reduced to a nominal 1 V.
+:::
+::: only 9
+The same circuit takes version 9 about ten seconds, with every value still
+symbolic. That is the difference a desktop makes — the algebra is the same
+size, there is simply more room to do it in.
+:::
+:::
+:::
 :::
