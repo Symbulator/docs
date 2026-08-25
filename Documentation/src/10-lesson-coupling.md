@@ -316,6 +316,11 @@ Three readings from **Mini-tools** with *aa*: `i_r1` is
 {{o:11.09}}∠{{o:33.69}}°, `v_ro` is {{o:110.9}}∠{{o:-146.31}}°, and
 `-s_e1` — the complex power *supplied*, so the opposite of the power consumed
 by the source — is {{o:1331}}∠{{o:-33.69}}°.
+
+Three conversions in a row is the point at which the setting is less work
+than the tool: tick **Show AC answers as polar phasors** in **Settings** and
+the first two are already in that form when the circuit solves. The third
+still wants *aa*, because `-s_e1` is an expression rather than an answer.
 :::
 
 All three are correct.

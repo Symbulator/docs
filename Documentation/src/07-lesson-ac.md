@@ -93,6 +93,61 @@ You get the same answers you did in DC, except that now they are phasors. The
 one difference is that now, besides the real power consumed, you also get the
 complex power consumed. We will discuss this in {{ref:lesson-power}}.
 
+### Rectangular or polar {#polar-phasors}
+
+A phasor can be written two ways, and circuit problems use both: in
+*rectangular* form as `3 + 4j`, or in *polar* form as an amplitude and an
+angle, 5∠53.13°. They are the same number. Which one you want depends on
+the question — rectangular adds and subtracts easily, polar multiplies and
+divides easily, and textbook answers are usually quoted in
+polar.{{i:polar phasors}}
+
+::: only 7,8
+Symbulator answers in rectangular form, and the **aa** tool converts one
+answer at a time. You will see it used throughout this lesson.
+:::
+
+::: only 9
+Symbulator answers in rectangular form unless you ask otherwise. In
+**Settings**, under *Display*, tick **Show AC answers as polar phasors** and
+every answer is shown as an amplitude and an angle instead. The circuit is
+re-solved as soon as you tick it, so you can switch back and forth on a
+solved circuit and watch the same answers change form.
+
+Three things it deliberately leaves alone, and they are worth knowing so the
+setting does not look broken:
+
+- **Average power stays a plain number.** It is a real quantity, not a
+  phasor, so an angle would be meaningless — 1234 W is 1234 W. Complex
+  power *is* converted, because its polar form is the apparent power and
+  the power-factor angle, which is usually what you want. See
+  {{ref:lesson-power}}.
+- **Symbolic answers are left as they are**, exactly as SI prefixes leave
+  them. There is no angle to take of $v_{in} r_b/(r_a + r_b)$.
+- **It applies to AC only.** In DC every answer is real, and in the other
+  two analyses the answers are functions of *s* or *t*, so there is nothing
+  to take the angle of. The checkbox greys out there and tells you why.
+
+An answer that happens to be real still gets its angle, of 0° or 180°.
+That is deliberate: it is what the **aa** tool does, and it means a purely
+resistive circuit does not look as though the setting failed.
+
+::: tip It combines with SI prefixes
+Ticking both gives you the amplitude with a prefix and the angle in plain
+degrees — `632.5 m∠108.4°`. The angle is never prefixed, which would be
+nonsense.
+
+One consequence to expect: a polar answer is always a decimal, even under
+*exact*. An angle in degrees is a measurement rather than a closed form, so
+there is nothing exact to preserve. This is the same trade SI prefixes make.
+:::
+
+The **aa** tool has not gone anywhere, and it is still the better choice when
+you want one value converted — or when you want the amplitude and angle of
+something that is not an answer by itself, such as a difference between two
+node voltages. {{ref:lesson-threephase}} uses it that way throughout.
+:::
+
 ## Solved numerical examples {#ac-numerical}
 
 ### With values in F and H
@@ -183,6 +238,9 @@ i_r1
 ```
 
 It reads {{o:1.789}}∠{{o:26.57}}°.
+
+That is the one-value way of doing it. If you would rather see *every* answer
+in polar form, there is a setting for it — see *Rectangular or polar*, above.
 :::
 
 This is correct. You manually convert it to a sinusoid, by putting it back in
