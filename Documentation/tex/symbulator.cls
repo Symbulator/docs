@@ -55,10 +55,22 @@
   \setsansfont{IBM Plex Sans}[Ligatures=TeX]
   \setmonofont{IBM Plex Mono}[Scale=0.86]
 }{
-  \ClassWarning{symbulator}{IBM Plex not found; falling back to TeX Gyre}
-  \setmainfont{TeX Gyre Schola}[Ligatures=TeX]
-  \setsansfont{TeX Gyre Heros}[Ligatures=TeX]
-  \setmonofont{DejaVu Sans Mono}[Scale=0.80]
+  % Latin Modern, not TeX Gyre. The fallback used to name TeX Gyre
+  % Schola/Heros and DejaVu Sans Mono, none of which can be loaded by
+  % name on a stock MiKTeX -- so on a machine without Plex the build did
+  % not fall back, it failed outright with "No pages of output". Latin
+  % Modern ships with every TeX distribution and is registered for
+  % by-name loading, so this branch works anywhere xelatex does.
+  %
+  % The PDF then differs typographically from the websites, which serve
+  % Plex from Google Fonts to every reader. That is the point of the
+  % warning: the book still builds, and you can see that it is not the
+  % intended type.
+  \ClassWarning{symbulator}{IBM Plex not found; falling back to Latin
+    Modern. The PDF will not match the websites, which use Plex}
+  \setmainfont{Latin Modern Roman}[Ligatures=TeX]
+  \setsansfont{Latin Modern Sans}[Ligatures=TeX]
+  \setmonofont{Latin Modern Mono}[Scale=MatchLowercase]
 }
 \color{ink}
 \linespread{1.06}

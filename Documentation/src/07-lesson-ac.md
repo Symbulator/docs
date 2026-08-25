@@ -1025,8 +1025,7 @@ The closed-loop gain, on a TI-89
 ::: only 9
 $$\frac{V_o}{V_s} = \frac{j\,c_b r_2 r_3 \omega + r_2 + r_3}
 {r_3\left(-c_a c_b r_1 r_2 \omega^2 + j\,c_a r_1 \omega
-+ j\,c_b r_2 \omega + 1
-ight)}$$
++ j\,c_b r_2 \omega + 1\right)}$$
 :::
 
 It looks different from the answer in the book, but evaluating both shows they
