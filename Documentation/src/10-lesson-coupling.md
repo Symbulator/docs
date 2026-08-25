@@ -140,19 +140,13 @@ false→s\rms:"e,1,0,(200.∠45°):r1,1,2,4.:r2,2,0,𝐢8.:m,r2,r3,𝐢1.:r3,0,o
 false→s\rms:"e,1,0,(200.∠45°):r1,1,2,4.:r2,2,0,𝐢8.:m,r2,r3,𝐢1.:r3,0,o,𝐢5.:r4,o,0,10"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
-e1,1,0,200*exp(j*pi/4)
+e1,1,0,(200∠45°)
 r1,1,2,4
 r2,2,0,8j
 m,r2,r3,1j
 r3,0,o,5j
 r4,o,0,10
 ```
-
-::: only 9
-The source is given in polar form, 200 V at 45°. Version 9 does not read the
-angle sign, so write the same phasor as `200*exp(j*pi/4)` — 45° is π/4
-radians.
-:::
 
 ```out 7,8
 "20.00ᴇ0∠-134.43°"

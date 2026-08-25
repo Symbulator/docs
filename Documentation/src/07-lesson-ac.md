@@ -217,16 +217,14 @@ s\ac(cir,10)
 s\ac(cir,10)
 ```
 ```field 9 Circuit Description
-e1,1,0,20*exp(j*pi/6)
+e1,1,0,(20∠30°)
 r1,1,2,4
 l,2,0,.2
 ```
 
 ::: only 9
-The angle sign is one thing version 9 does not read: `(20∠30°)` is fine on
-the calculator and is refused here. Write the source in exponential form
-instead — `20*exp(j*pi/6)` is the same phasor, 20 volts at 30 degrees,
-since 30° is π/6 radians.
+The source is given in polar form, and version 9 reads it as written —
+magnitude, the angle sign, then the angle in degrees.
 
 Then AC, with **10** for omega. **Mini-tools** with *aa* reads
 `i_r1` as {{o:4.472}}∠{{o:3.43}}° and `v_l` as {{o:8.944}}∠{{o:93.43}}°.
@@ -576,7 +574,8 @@ The closed-loop gain, on a TI-89
 ::: only 9
 $$rac{V_o}{V_s} = rac{j\,c_b r_2 r_3 \omega + r_2 + r_3}
 {r_3\left(-c_a c_b r_1 r_2 \omega^2 + j\,c_a r_1 \omega
-+ j\,c_b r_2 \omega + 1ight)}$$
++ j\,c_b r_2 \omega + 1
+ight)}$$
 :::
 
 It looks different from the answer in the book, but evaluating both shows they

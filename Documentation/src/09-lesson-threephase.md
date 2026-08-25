@@ -123,9 +123,9 @@ sources get the angles of the abc sequence.
 "ea0,a,0,(100.∠10°):eb0,b,0,(100.∠-110°):ec0,c,0,(100.∠130°):rab,a,b,8.+4.𝐢:rca,c,a,8.+4.𝐢:rbc,b,c,8.+4.𝐢"→cir:sc(cir,ω)
 ```
 ```field 9 Circuit Description
-ea0,a,0,100*exp(j*pi*10/180)
-eb0,b,0,100*exp(j*pi*-110/180)
-ec0,c,0,100*exp(j*pi*130/180)
+ea0,a,0,(100∠10°)
+eb0,b,0,(100∠-110°)
+ec0,c,0,(100∠130°)
 rab,a,b,8+4j
 rca,c,a,8+4j
 rbc,b,c,8+4j
@@ -133,7 +133,7 @@ rbc,b,c,8+4j
 
 ::: only 9
 Version 9 does not read the angle sign, so each source is written in
-exponential form: 100 V at 10° is `100*exp(j*pi*10/180)`.
+exponential form: 100 V at 10° is `(100∠10°)`.
 :::
 
 The phase currents are the currents in the three load impedances:
@@ -185,8 +185,8 @@ resistor, and the load's three nodes are separate from the source's three.
 
 ```field 9 Circuit Description
 ea1,na1,0,100
-eb1,nb1,0,100*exp(j*pi*-120/180)
-ec1,nc1,0,100*exp(j*pi*120/180)
+eb1,nb1,0,(100∠-120°)
+ec1,nc1,0,(100∠120°)
 raa,na1,na2,1
 rbb,nb1,nb2,1
 rcc,nc1,nc2,1
@@ -269,8 +269,8 @@ Node **c** becomes ground, so the source left out is the one opposite it. To
 read the line currents we add three shorts to act as the lines.
 
 ```field 9 Circuit Description
-e0a,0,ag,330*exp(j*pi*120/180)
-eb0,bg,0,330*exp(j*pi*-120/180)
+e0a,0,ag,(330∠120°)
+eb0,bg,0,(330∠-120°)
 sat,ag,ad
 sbt,bg,bd
 sct,0,cd
@@ -312,8 +312,8 @@ AS7's Practice Problem 12.9
 
 ::: answer
 ```field 9 Circuit Description
-e0a,0,ag,440*exp(j*pi*120/180)
-eb0,bg,0,440*exp(j*pi*-120/180)
+e0a,0,ag,(440∠120°)
+eb0,bg,0,(440∠-120°)
 sla,ag,ad
 slb,bg,bd
 slc,0,cd
@@ -349,8 +349,8 @@ These values are RMS, so {{v7,8|set the flag}}{{v9|tick **RMS phasors** in
 **Settings**}} — this one does ask for power.
 
 ```field 9 Circuit Description
-e0a,0,ag,220*exp(j*pi*-120/180)
-eb0,bg,0,220*exp(j*pi*120/180)
+e0a,0,ag,(220∠-120°)
+eb0,bg,0,(220∠120°)
 sla,ag,ad
 slb,bg,bd
 slc,0,cd
@@ -394,8 +394,8 @@ trick cannot give it — see the warning above. The other two are ordinary
 element currents.
 
 ```field 9 Circuit Description
-e0a,0,ag,208*exp(j*pi*130/180)
-eb0,bg,0,208*exp(j*pi*-110/180)
+e0a,0,ag,(208∠130°)
+eb0,bg,0,(208∠-110°)
 rla,ag,ad,2+5j
 rlb,bg,bd,2+5j
 rlc,0,cd,2+5j
@@ -404,19 +404,10 @@ rbc,bd,cd,30j
 rca,cd,ad,-40j
 ```
 
-::: warning Version 9 does not finish this one
-The calculator solves it. Version 9 does not: the online app stops after 25
-seconds with *"The solver took longer than 25 seconds and was stopped"*, and
-it does not converge given several minutes offline either.
-
-It is the hardest circuit in this book — an unbalanced delta load behind three
-line impedances, with every branch different, which leaves a dense system of
-simultaneous complex equations for a symbolic solver to grind through. The
-handheld versions get there by working numerically at each step where version
-9 is still holding exact expressions.
-
-If you meet a circuit of this shape, solve it numerically, or reduce it by
-hand first. It is on the list to look at.
+::: only 9
+*Find equivalent* is not needed here — a plain AC solve gives both. `aa(i_rlb)`
+reads {{o:9.106}}∠{{o:168.48}}° and `aa(i_rbc)` reads
+{{o:5.500}}∠{{o:172.47}}°, matching the printed answers.
 :::
 :::
 :::
@@ -443,8 +434,8 @@ AS7's Example 12.5
 
 ::: answer
 ```field 9 Circuit Description
-eca,c,a,210*exp(j*pi*120/180)
-ebc,b,c,210*exp(j*pi*-120/180)
+eca,c,a,(210∠120°)
+ebc,b,c,(210∠-120°)
 ra,a,0,40+25j
 rb,b,0,40+25j
 rcc,c,0,40+25j
