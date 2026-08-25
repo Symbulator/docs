@@ -2738,9 +2738,24 @@ steps:
 
 Second, when Symbulator solves a problem using the expert tool, it freezes
 this process halfway between steps 1 and 2, so that you can tinkle with the
-equations and unknowns before they are solved. In the problems below, you
-will see that, when we tinkle with the equations, we have to do so in the
-frequency domain.
+equations and unknowns before they are solved.
+
+::: only 7,8
+In the problems below, you will see that, when we tinkle with the equations,
+we have to do so in the frequency domain.
+:::
+::: only 9
+That is where version 9 differs, and it is the more comfortable of the two.
+The equations are still solved in the frequency domain — that has not
+changed, and it is why initial conditions and impulses behave as they do —
+but what you *type* is read in the **time domain**, and converted for you on
+the way in. Write the answer you know the way you would write it on paper.
+
+The rule covers everything you add: equations, conditions and the
+expressions inside them. A relation between plain parameters, such as
+`x = 3`, is left alone — it fixes a symbol in the circuit rather than
+describing a signal, and there is nothing to transform.
+:::
 
 ::: problem Bo2's Drill Exercise 4.5 (Expert)
 
@@ -2759,11 +2774,38 @@ have one unknown value in the circuit (e.g. the value of the step source) and
 we have one known answer (e.g. the voltage drop in the capacitor.) So, the
 game plan here is to run this circuit through Symbulator’s expert mode, add
 one new equation and one new unknown, and then solve. First, let’s generate
-the new equation. A non-expert user would think that the new equation is
-1-e^(-t/2)=vc. But you know better. You know that Symbulator solves the
-equations of TR problems in the frequency domain. So we have to convert this
-expression from the time domain to the frequency domain. Symbulator has a
-shortcut to invoke DiffEq’s Laplace Transform to do so: `s\t2s`.
+the new equation.
+
+::: only 7,8
+A non-expert user would think that the new equation is 1-e^(-t/2)=vc. But you
+know better. You know that Symbulator solves the equations of TR problems in
+the frequency domain. So we have to convert this expression from the time
+domain to the frequency domain. Symbulator has a shortcut to invoke
+DiffEq’s Laplace Transform to do so: `s\t2s`.
+:::
+
+::: only 9
+The non-expert user is right here: the new equation is simply
+`1-e^(-t/2) = v_c`. Everything you type into expert mode in version 9 —
+equations, conditions, expressions — is read in the **time domain**, the
+same domain as the answers on screen. You do not convert, and you do not
+have to remember which side of the transform you are standing on.
+
+::: note The calculator does not offer this at all
+Expert mode on the calculator asks *Analysis? 1:DC 2:AC 3:FD* — TR is not
+among the choices, which is how it avoided the question. Version 9 keeps
+expert mode for TR and answers the question instead: everything is in time.
+:::
+
+If you would rather convert by hand, **t2s** is still there and an equation
+already written in s is left alone rather than transformed twice:
+
+```field 9 Evaluate
+t2s(1-e^(-t/2))
+```
+
+which gives {{o:1/(s*(2*s + 1))}} — the same statement, one domain over.
+:::
 
 ```sym 7
 s\t2s(1-e^(-t/2))=vc
@@ -2771,14 +2813,6 @@ s\t2s(1-e^(-t/2))=vc
 ```sym 8
 s\t2s(1-e^(–t/2))=vc
 ```
-```field 9 Evaluate
-t2s(1-e^(-t/2))
-```
-
-::: only 9
-That gives {{o:1/(s*(2*s + 1))}}, which is the same thing written over one
-denominator.
-:::
 
 We have our new equation. Copy this equation into the clipboard, since we
 will want to paste it in the Expert window. Now let’s run the Expert
@@ -2809,7 +2843,7 @@ so there is no ` and ` to prefix — the word exists on the calculator only
 because the equation is being appended to a list:
 
 ```field 9 Add equations
-t2s(1-e^(-t/2)) = v_c
+1-e^(-t/2) = v_c
 ```
 :::
 
@@ -2904,6 +2938,14 @@ vr=s\t2s(e^(-t))
 vr=s\t2s(e^(–t))
 ```
 
+::: only 9
+No transform this time either — write what you know:
+
+```field 9 Add equations
+v_r = e^(-t)
+```
+:::
+
 Then run the Expert simulation. I decided to use `vs` as the step value of
 the source:
 
@@ -2919,8 +2961,13 @@ r,1,2,1
 c,2,0,1,0
 ```
 
+::: only 7,8
 When prompted, select TR. In the equations field, add the new equation you
 found:
+:::
+::: only 9
+Choose TR, and put `vs` in **Add unknowns** beside the equation above.
+:::
 
 ```sym 7
 and vr=1/(s+1)
@@ -2929,7 +2976,9 @@ and vr=1/(s+1)
 and vr=1/(s+1)
 ```
 
+::: only 7,8
 In the unknowns field, add the new variable:
+:::
 
 ```sym 7
 ,vs
@@ -2938,7 +2987,13 @@ In the unknowns field, add the new variable:
 ,vs
 ```
 
+::: only 7,8
 Let Symbulator rip. Once it finishes solving, ask for the sanity check:
+:::
+::: only 9
+Run it. The sanity check is already on screen: `v_r` reads
+{{o:exp(-t)}}, which is what we told it.
+:::
 
 ```sym 7
 vr
@@ -2947,7 +3002,13 @@ vr
 vr
 ```
 
+::: only 7,8
 Looks good, so go ahead and ask for the answers:
+:::
+::: only 9
+And the answers with it: `i_r` is {{o:exp(-t)}} and the source's value
+`vs` is {{o:1}} V.
+:::
 
 ```sym 7
 ir
