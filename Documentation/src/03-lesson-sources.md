@@ -1091,7 +1091,7 @@ simulation.
 :::
 ::: only 9
 Choose DC. Open **Expert Mode**, put `ir2 = 2'm` in **Add equations** and
-`is` in **Add unknowns**, then **Run Symbulator**.
+`is1` in **Add unknowns**, then **Run Symbulator**.
 :::
 
 The answer, **{.009,.001,.006}**, is correct, since the currents are as
