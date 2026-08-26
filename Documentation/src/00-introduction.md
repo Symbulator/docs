@@ -2,7 +2,7 @@
 id: introduction
 kind: front
 title: Introduction
-updated: 2023-08-26
+updated: 2026-08-26
 summary: >
   Learn about Symbulator and how it can help you focus on learning how circuits
   work, instead of struggling with math. Get the latest version of Symbulator
