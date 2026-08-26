@@ -65,18 +65,19 @@ restarts (`NEXT_DOCS.md` and `repos/local/NEXT.md` share it, currently at #88).
 
 ## The single most useful resource
 
-`C:\Users\perez\OneDrive\_High Archive\_High Archive - Personal\Documents\Roberto\Creaciones\Symbulator\Websites\2023 Website\docs-page7.html`
-and `docs-page8.html`.
+`Sym Docum\Documentation\originals\` — `docs-page7.html` and
+`docs-page8.html`, Roberto's original version 7 and 8 documentation, now kept
+in the repo beside the sources. `originals/README.md` explains what they are
+and what they have already settled. The master copy is under OneDrive; these
+are byte-identical.
 
-These are Roberto's original version 7 and 8 documentation, and they are the
-source of truth for every printed answer and every piece of calculator code.
-The current `src/` was converted from them, and the conversion introduced most
-of the defects still open. **Check these before changing any answer.** They are
-his archive: read them, do not edit them.
+The whole of `src/` was converted from them, and the conversion introduced
+most of the defects still open. **Check them before changing any answer.**
+Read them; do not edit them.
 
 `tools/check_against_originals.py` verifies printed answers against them
-automatically — 59 of 83 confirmed verbatim, and the residual is understood and
-written up in #85 and #86.
+automatically — 59 of 83 confirmed verbatim, the residual understood and
+written up as #85 and #86.
 
 ## What the conversion got wrong, so you know the shape of it
 

@@ -28,10 +28,9 @@ import sys
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "src")
 
-DEFAULT_ORIGINALS = os.path.join(
-    os.path.expanduser("~"),
-    "OneDrive", "_High Archive", "_High Archive - Personal", "Documents",
-    "Roberto", "Creaciones", "Symbulator", "Websites", "2023 Website")
+# The copy that travels with the sources. The master is outside both
+# repos, under OneDrive; originals/README.md records where.
+DEFAULT_ORIGINALS = os.path.join(ROOT, "originals")
 
 FENCE = re.compile(r"^```([^\n]*)\n(.*?)^```", re.M | re.S)
 
