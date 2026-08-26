@@ -12,12 +12,14 @@ summary: >
 
 Both Symbulator and this documentation were made by me, **Roberto
 Perez-Franco**. I started working on it in April 1999, as an engineering
-student at the Universidad Tecnológica de Panamá. An early version won first
+student at the Technological University of Panama (Universidad Tecnológica de 
+Panamá) in [Azuero](https://ls.utp.ac.pa/). An early version won first
 place at the IEEE Student Paper Contest for Latin America in 2000, and version
-5 served as my graduation thesis in January 2001.
+5 (also known as Symbulator Q) served as my graduation thesis in January 2001.
 
 The first five versions were written between April 1999 and January 2001. The
-sixth came fifteen years later, in 2013, while I was a researcher at MIT.
+sixth came fifteen years later, in 2013, while I was a researcher at MIT. The 
+seventh and eighth a decade later, in 2023, and the ninth in 2026.  
 
 ### What Symbulator did for me
 
@@ -25,29 +27,32 @@ Thanks in great part to Symbulator, I landed my first job, received a
 Distinguished Alum award from UTP in 2008, and won a Fulbright Scholarship that
 took me to a Master of Engineering and later a PhD in Engineering Systems at
 the Massachusetts Institute of Technology. MIT then hired me, and I lived in
-Boston for almost twelve years. I now live in Australia.
-
-Symbulator changed my life.
+Boston for almost twelve years. I now live in Melbourne, Australia. You can say 
+that writing Symbulator changed my life. In a way, I think, when I am no more,
+Symbulator will preserve a part of my mind as it solves circuits for new generations,
+the same way a composer lives in the tunes or a writer in the words they conceived.
 
 ### Dedication
 
 Two people made Symbulator possible, with their love and support.
 
 The first is my wife **Monica**, who had the patience to live with a cyborg
-for all the years my mind was focused on coding and documenting. My attention
+for all the years my mind was focused on coding and documenting. *Mi reina*, my attention
 was elsewhere, but my heart was always with you.
 
 The second is my late father **Tito**, who invested time and money in my
-education and bought me every widget I needed or wanted for my studies, with a
-blind faith that one day something good would come of it. I'm happy to know
+education and bought me every gadget and widget I needed or wanted for my studies, 
+with a blind faith that one day something good would come of it. I'm happy to know
 that I made you proud, Dad, and I miss you every day.
 
 ### How to reach me
 
 If you liked Symbulator, let me know. My email is my given name, then my last
-name with a hyphen, as a dot-com address.
+name with a hyphen, as a dot-com address, like so: rxxxxxx@pxxxx-fxxxxx.cxx
 
 ## Acknowledgements {#acknowledgements}
+
+### Technology
 
 ::: only 7
 Symbulator 7 relies on **DiffEq**, by Lars Frederiksen, for its Laplace
@@ -61,14 +66,27 @@ TI-Nspire by Philippe Fortin. I have renamed that file **LF** here, in homage
 to Lars.
 :::
 ::: only 9
-Symbulator 9 owes its algebra to **SymPy**, and its existence to the
-maintainers who keep that library going.
+Symbulator 9 runs on Python and is powered by the algebraic capabilities of **SymPy**.
+I am thankful to the creators of such wonderful open-source software, and to the 
+maintainers who keep their development going. I am proud to honor the open-source
+community by making Symbulator free and open source software, from 2026.
+
+I also want to acknowledge that porting Symbulator to Python/SymPy, and creating
+its websites, would not have been possible without the coding prowess of Anthropic's
+artificial intelligence assistant. Claude allowed me to do in two weeks something that 
+I was unable to find the time to do in two decades: to port Symbulator to Python.
+
+AI is not without risks, and needs careful policies and oversight on fronts like ethics, 
+biases, its impact on labor, and its voracious use of water and energy. I believe there
+is a right way to deploy this technology, and — after working on Symbulator 9 with Claude — I am now convinced that AI will revolutionise the way we work.
 :::
 
-Over the past twenty-five years many people have made Symbulator better
+### Human collaborators
+
+Over the past decades years, many people have made Symbulator better
 through their suggestions and corrections, on both the software and the
 documentation. Many were complete strangers at first and became dear friends
-through our exchanges. Among them:
+through our exchanges. Among them are:
 
 José Vega (Panama), Tim Hutcheson (USA), Lars Frederiksen (Denmark), Joe Riel
 (USA), Arne Harstad (Norway), Erwin Baert (Belgium), Charles 'Chuck' Ware
@@ -76,11 +94,9 @@ José Vega (Panama), Tim Hutcheson (USA), Lars Frederiksen (Denmark), Joe Riel
 (Austria), Jake Adams (USA), Daniele Martini (Italy), Rozgonyi Szabolcs
 (Hungary), Michael Rans (UK), Alex Astashyn (Russia), Al Charpentier (USA),
 Nevin McChesney (USA), Ivan Oro Yu (Panama), Pepe Iborra (Spain), Dave Conklin
-(USA), and Carlos Perez Ortega (Chile).
+(USA), Carlos Perez Ortega (Chile) and Qifan Wang.
 
-**Qifan Wang** verified the answers to many of the problems in this
-documentation and caught several mistakes, and is collaborating with me on
-porting Symbulator. My thanks to him.
+My thanks to all of them.
 
 ## Problem credits {#problem-credits}
 

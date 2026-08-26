@@ -14,6 +14,8 @@
 \RequirePackage{microtype}
 \RequirePackage{fancyhdr}
 \RequirePackage{amsmath}
+\RequirePackage{tabularx}
+\RequirePackage{booktabs}
 \RequirePackage{imakeidx}
 \RequirePackage{etoolbox}
 \RequirePackage[hidelinks]{hyperref}
@@ -153,6 +155,23 @@
 % standfirst: the "what to expect" paragraph that opens a chapter
 \newcommand{\chaptersummary}[1]{%
   {\sffamily\fontsize{12.8}{17}\selectfont\color{slate}#1\par}\vspace{3mm}}
+% -------------------------------------------------------------- table ----
+% Emitted by build.py for a pipe table. booktabs rules only: the web side
+% is one rule under the header and a hairline between rows, and print
+% should read the same way rather than becoming a grid of boxes.
+\setlength{\tabcolsep}{0.6em}   % between columns; the emitter closes the ends with @{}
+\renewcommand{\arraystretch}{1.25}
+
+% ---------------------------------------------------------- quotation ----
+% A quotation and its attribution. The words are italic and the
+% attribution returns to the upright text face a size down, so the name
+% inside it -- which the source sets bold -- is the thing the eye finds.
+\newenvironment{symquote}
+  {\begin{quote}\itshape}
+  {\end{quote}}
+\newcommand{\quoteby}[1]{%
+  \par\smallskip{\normalfont\footnotesize #1}}
+
 \newcommand{\practicerule}{%
   \vspace{3mm}{\color{rule}\hrule height 0.8pt}\vspace{2mm}}
 \newcommand{\practiceheading}[1]{%

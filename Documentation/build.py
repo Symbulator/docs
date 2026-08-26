@@ -104,6 +104,9 @@ class SourceError(Exception):
 DIRECTIVES = {"tip", "note", "warning", "danger", "figure", "problem",
               "answer", "practice", "only", "not"}
 
+BS = chr(92)      # a LaTeX escape, spelled out so no editor eats it
+NL = chr(10)      # a real newline in the emitted .tex
+
 HEADING_RE = re.compile(r"^(#{2,3})\s+(.*?)(?:\s*\{#([\w-]+)\})?\s*$")
 # ```field 9 Circuit description  -- lang, versions, then a free-text
 # name for the interface field the reader types into. Only `field` uses
@@ -112,6 +115,16 @@ HEADING_RE = re.compile(r"^(#{2,3})\s+(.*?)(?:\s*\{#([\w-]+)\})?\s*$")
 FENCE_RE = re.compile(r"^```(\w+)?\s*([\d,]*)\s*(.*?)\s*$")
 DIRECTIVE_RE = re.compile(r"^:::\s*(\w+)?\s*(.*)$")
 ULI_RE = re.compile(r"^[-*]\s+(.*)$")
+#: A pipe table, GitHub style, and the `|---|---|` rule under its header.
+#: A row is only a row if the rule is on the line below the first one, so a
+#: paragraph that happens to start with a pipe is still a paragraph.
+TABLE_ROW_RE = re.compile(r"^\s*\|.*\|\s*$")
+TABLE_RULE_RE = re.compile(r"^\s*\|[\s:|-]+\|\s*$")
+#: A quotation. `>` alone separates its paragraphs, as in Markdown.
+QUOTE_RE = re.compile(r"^>\s?(.*)$")
+#: An em dash or an en dash: how an attribution opens. Either is accepted,
+#: because both are what people actually type.
+QUOTE_DASHES = "\u2014\u2013"
 OLI_RE = re.compile(r"^\d+[.)]\s+(.*)$")
 
 
@@ -153,6 +166,17 @@ def parse_chapter(path: str) -> Chapter:
     lines = body.split("\n")
     ch.blocks = parse_blocks(lines, path)
     return ch
+
+
+def split_row(line: str) -> list:
+    """One table row into its cells.
+
+    An escaped pipe is a literal pipe rather than a cell boundary, which
+    this book needs more than most: the calculator's "with" operator is a
+    pipe, and it is discussed in the text."""
+    body = line.strip().strip("|")
+    parts = re.split(r"(?<!\\)\|", body)
+    return [c.replace("\\|", "|").strip() for c in parts]
 
 
 def parse_blocks(lines: list[str], path: str, depth: int = 0) -> list[Node]:
@@ -212,6 +236,35 @@ def parse_blocks(lines: list[str], path: str, depth: int = 0) -> list[Node]:
             i = i + 1 + consumed
             continue
 
+        # table
+        if (TABLE_ROW_RE.match(line) and i + 1 < len(lines)
+                and TABLE_RULE_RE.match(lines[i + 1])):
+            head = split_row(line)
+            rows, j = [], i + 2
+            while j < len(lines) and TABLE_ROW_RE.match(lines[j]):
+                row = split_row(lines[j])
+                if len(row) != len(head):
+                    raise SourceError(
+                        f"{path}: this table row has {len(row)} cell(s) "
+                        f"where the header has {len(head)}:\n  "
+                        f"{lines[j].strip()}\n"
+                        f"  A cell holding a pipe has to write it as \\|.")
+                rows.append(row)
+                j += 1
+            out.append(Node("table", meta={"head": head, "rows": rows}))
+            i = j
+            continue
+
+        # quotation
+        if QUOTE_RE.match(line):
+            buf, j = [], i
+            while j < len(lines) and QUOTE_RE.match(lines[j]):
+                buf.append(QUOTE_RE.match(lines[j]).group(1))
+                j += 1
+            out.append(Node("quote", children=parse_blocks(buf, path, depth)))
+            i = j
+            continue
+
         # list
         if ULI_RE.match(line) or OLI_RE.match(line):
             ordered = bool(OLI_RE.match(line))
@@ -247,7 +300,9 @@ def parse_blocks(lines: list[str], path: str, depth: int = 0) -> list[Node]:
         while j < len(lines) and lines[j].strip() and not (
                 HEADING_RE.match(lines[j]) or lines[j].startswith("```")
                 or lines[j].startswith(":::") or ULI_RE.match(lines[j])
-                or OLI_RE.match(lines[j])):
+                or OLI_RE.match(lines[j]) or QUOTE_RE.match(lines[j])
+                or (TABLE_ROW_RE.match(lines[j]) and j + 1 < len(lines)
+                    and TABLE_RULE_RE.match(lines[j + 1]))):
             buf.append(lines[j].strip())
             j += 1
         out.append(Node("para", text=" ".join(buf)))
@@ -514,6 +569,36 @@ class HtmlRenderer:
             tag = "ol" if b.meta["ordered"] else "ul"
             items = "".join(f"<li>{self.inline(i)}</li>" for i in b.meta["items"])
             return f"<{tag}>{items}</{tag}>"
+        if k == "table":
+            # A blank header row means the table has no header -- see
+            # chapter 13's gain answers, which are a label against a value.
+            head = ("" if not any(c.strip() for c in b.meta["head"]) else
+                    "<thead><tr>"
+                    + "".join(f"<th>{self.inline(c)}</th>"
+                              for c in b.meta["head"])
+                    + "</tr></thead>")
+            body = "".join(
+                "<tr>" + "".join(f"<td>{self.inline(c)}</td>" for c in row)
+                + "</tr>" for row in b.meta["rows"])
+            # Wrapped, because a wide table has to scroll inside its own
+            # column rather than widen the page. The measure is the point of
+            # this layout, and a table is the one block that will not
+            # respect it on its own.
+            return (f'<div class="table-wrap"><table>{head}'
+                    f'<tbody>{body}</tbody></table></div>')
+        if k == "quote":
+            # The attribution is a paragraph starting with a dash. Detected
+            # rather than marked up, so the source stays ordinary Markdown --
+            # which is what someone writing a quotation types anyway, without
+            # having to be told a rule.
+            parts = []
+            for child in walk(b.children, self.v):
+                if child.kind == "para" and child.text.lstrip()[:1] in QUOTE_DASHES:
+                    parts.append(f'<p class="quote-by">'
+                                 f'{self.inline(child.text)}</p>')
+                else:
+                    parts.append(self.block(child))
+            return "<blockquote>" + "".join(parts) + "</blockquote>"
         if k == "code":
             body = "\n".join(html.escape(l) for l in b.text.split("\n"))
             if b.meta["lang"] == "field":
@@ -697,6 +782,37 @@ class TexRenderer:
             env = "enumerate" if b.meta["ordered"] else "itemize"
             items = "\n".join(r"\item " + self.inline(i) for i in b.meta["items"])
             return f"\\begin{{{env}}}\n{items}\n\\end{{{env}}}"
+        if k == "table":
+            # tabularx, so the last column takes up the slack and wraps.
+            # The tables in this book are a short key against a long line
+            # of prose, which a plain tabular runs off the page with.
+            cols = len(b.meta["head"])
+            # @{} at both ends so the table lines up with the text
+            # block instead of sitting a column-gap inside it.
+            spec = "@{}" + ("l" * (cols - 1) + "X" if cols > 1 else "X") + "@{}"
+            rows = [" & ".join(self.inline(c) for c in row)
+                    for row in b.meta["rows"]]
+            nl = " " + BS * 2 + NL
+            if any(c.strip() for c in b.meta["head"]):
+                header = (" & ".join(self.inline(c) for c in b.meta["head"])
+                          + nl + BS + "midrule" + NL)
+            else:
+                header = ""
+            return (BS + "begin{tabularx}{" + BS + "linewidth}{" + spec
+                    + "}" + NL + BS + "toprule" + NL + header
+                    + nl.join(rows) + nl
+                    + BS + "bottomrule" + NL + BS + "end{tabularx}")
+        if k == "quote":
+            parts = []
+            for child in walk(b.children, self.v):
+                if (child.kind == "para"
+                        and child.text.lstrip()[:1] in QUOTE_DASHES):
+                    parts.append(BS + "quoteby{"
+                                 + self.inline(child.text) + "}")
+                else:
+                    parts.append(self.block(child))
+            return (BS + "begin{symquote}" + NL + NL.join(parts)
+                    + NL + BS + "end{symquote}")
         if k == "code":
             # In print there is no interface to imitate, so a field is set as
             # typed input like any other. The sentence above it names the

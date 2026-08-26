@@ -234,23 +234,23 @@ body.home .sidebar { display: none; }
    piece of furniture. */
 .sidebar,
 .code pre,
-.chapter table {
+.chapter .table-wrap {
   scrollbar-width: thin;
   scrollbar-color: var(--rule) transparent;
 }
 .sidebar::-webkit-scrollbar,
 .code pre::-webkit-scrollbar,
-.chapter table::-webkit-scrollbar {
+.chapter .table-wrap::-webkit-scrollbar {
   width: 9px; height: 9px;
 }
 .sidebar::-webkit-scrollbar-track,
 .code pre::-webkit-scrollbar-track,
-.chapter table::-webkit-scrollbar-track {
+.chapter .table-wrap::-webkit-scrollbar-track {
   background: transparent;
 }
 .sidebar::-webkit-scrollbar-thumb,
 .code pre::-webkit-scrollbar-thumb,
-.chapter table::-webkit-scrollbar-thumb {
+.chapter .table-wrap::-webkit-scrollbar-thumb {
   background: var(--rule);
   border-radius: 999px;
   /* A transparent border inset by the background keeps the thumb clear of
@@ -258,12 +258,12 @@ body.home .sidebar { display: none; }
   border: 2px solid transparent;
   background-clip: content-box;
 }
-.sidebar:hover, .code pre:hover, .chapter table:hover {
+.sidebar:hover, .code pre:hover, .chapter .table-wrap:hover {
   scrollbar-color: var(--ink-3) transparent;
 }
 .sidebar::-webkit-scrollbar-thumb:hover,
 .code pre::-webkit-scrollbar-thumb:hover,
-.chapter table::-webkit-scrollbar-thumb:hover {
+.chapter .table-wrap::-webkit-scrollbar-thumb:hover {
   background: var(--ink-3);
   background-clip: content-box;
 }
@@ -320,8 +320,15 @@ body.home .sidebar { display: none; }
   border-radius: 7px;
 }
 .docsearch input[type="search"]::placeholder { color: var(--ink-3); }
+/* Focused, this has to read as one edge. With an offset the browser draws
+   three: the 1px --lcd-edge border, a 1px ring of page background, then the
+   2px accent outline -- and in dark mode the border and the accent are both
+   blues, so the gap between them looks like a seam rather than a focus ring.
+   Offset 0 closes the gap, and colouring the border to match turns the
+   remaining 3px into a single band that follows the corner radius. */
 .docsearch input[type="search"]:focus-visible {
-  outline: 2px solid var(--accent); outline-offset: 1px;
+  border-color: var(--accent);
+  outline: 2px solid var(--accent); outline-offset: 0;
 }
 .docsearch-status {
   margin: 0.5rem 0 0;
@@ -422,6 +429,59 @@ body.home .sidebar { display: none; }
   color: var(--ink);
 }
 .chapter p { margin: 0 0 1.05rem; }
+
+/* ---------------------------------------------------------------- table -- */
+/* Quiet: one rule under the header and a hairline between rows. A grid of
+   boxes would out-shout the prose it sits in, and every table in this book
+   is a short key against a line of text -- the textbook codes in the
+   credits, the answer tables in the lessons. */
+.chapter .table-wrap { overflow-x: auto; margin: 0 0 1.3rem; }
+.chapter table {
+  border-collapse: collapse;
+  width: 100%;
+  font-family: var(--sans); font-size: 0.92rem;
+  line-height: 1.45;
+}
+.chapter th {
+  text-align: left; vertical-align: bottom;
+  padding: 0 0.9rem 0.45rem 0;
+  font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-3); font-weight: 600;
+  border-bottom: 1px solid var(--rule);
+  white-space: nowrap;
+}
+.chapter td {
+  vertical-align: baseline;
+  padding: 0.5rem 0.9rem 0.5rem 0;
+  border-bottom: 1px solid var(--rule-2);
+}
+.chapter tr > *:last-child { padding-right: 0; }
+/* The key column names the thing; it should not wrap mid-code. */
+.chapter td:first-child { white-space: nowrap; }
+
+/* ------------------------------------------------------------ quotation -- */
+/* Set in the serif, a size up from the prose and in the softer ink: a
+   quotation is someone else speaking, so it should look like a different
+   voice rather than an indented paragraph. */
+blockquote {
+  margin: 1.5rem 0;
+  padding-left: 1.1rem;
+  border-left: 3px solid var(--rule);
+  font-family: var(--serif);
+  color: var(--ink-2);
+}
+blockquote p { margin: 0 0 0.5rem; }
+/* The attribution. Smaller and quieter than the words, with the name the
+   one thing in it set in full ink -- so the eye finds who said it without
+   the affiliation competing. */
+blockquote .quote-by {
+  margin: 0;
+  font-family: var(--sans); font-size: 0.82rem;
+  color: var(--ink-3);
+}
+blockquote .quote-by strong {
+  color: var(--ink); font-weight: 600;
+}
 .chapter ul, .chapter ol { margin: 0 0 1.05rem; padding-left: 1.25rem; }
 .chapter li { margin-bottom: 0.35rem; }
 

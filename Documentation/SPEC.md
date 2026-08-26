@@ -43,6 +43,50 @@ Markdown for the ordinary things:
 | `**bold**`, `*italic*`, `` `code` `` | inline |
 | `[text](url)` | link |
 | `$x^2$`, `$$...$$` | maths (LaTeX in the PDF, KaTeX on the web) |
+| `> quoted` | quotation (see below) |
+| `\| a \| b \|` | table (see below) |
+
+### Tables
+
+A pipe table, the ordinary Markdown kind. The rule under the header is what
+makes it a table -- without it, a line starting with a pipe is just a
+paragraph:
+
+```
+| Code | Textbook |
+|---|---|
+| **AS2** | *Fundamentals of Electric Circuits* (2nd ed.), 2004 |
+```
+
+Cells take inline markup. The first column is set tight and the last takes
+the slack and wraps, which is the shape every table in this book has: a short
+key against a line of prose.
+
+**Leave the header cells empty and there is no header** -- `| | |` over the
+rule. Chapter 13's gain answers do this, being a label against a value with
+nothing to call either column.
+
+A cell that needs a literal pipe writes `\|`. That matters here more than in
+most books: the calculator's "with" operator is a pipe and gets discussed.
+
+Every row must have as many cells as the header. A row that does not stops
+the build and names itself, rather than quietly losing a column.
+
+### Quotations
+
+Ordinary Markdown, one `>` per line, with `>` alone between paragraphs:
+
+```
+> The masterpiece of TI-89 programming.
+>
+> — **Alex Astashyn**, EE major, Polytechnic University, New York, USA
+```
+
+A final paragraph opening with an em dash (or an en dash) is treated as the
+**attribution** and set apart from the words -- smaller and quieter, with
+whatever is bold inside it, normally the person's name, in full-strength ink.
+Nothing marks it up as an attribution; it is recognised, because a dash is
+what a person writing a quotation types anyway.
 
 ### Braces — inline commands
 
