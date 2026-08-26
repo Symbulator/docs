@@ -2,7 +2,7 @@
 id: lesson-dc
 kind: lesson
 title: Direct current analysis
-updated: 2023-07-08
+updated: 2026-08-26
 summary: >
   Learn to describe a circuit in Symbulator, and how to run a *direct current*
   analysis using **dc**. Learn how to describe a *voltage source* using **e**,
@@ -12,9 +12,7 @@ summary: >
 I firmly believe one learns best by *doing*. Because of this, I have written this
 documentation of Symbulator as a tutorial, where you can learn how to use
 Symbulator by working through a series of progressively more diverse and more
-complex examples.
-
-In a minute, I'll teach you how to swim. But for now, let's jump right into the
+complex examples. In a moment, I'll teach you how to swim. But for now, let's jump right into the
 water!
 
 ## Run a direct current analysis {#run-dc}
