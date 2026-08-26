@@ -244,10 +244,17 @@ session without ever opening one.
 
 ### Loading one
 
-Symbulator arrives with a set of input files of its own, and opens on the
-first of them. **Built-in examples** lists the rest: click it and choose one
-by its title. That link is always there, so it is also how you move from one
-to the next.
+Symbulator arrives with a set of input files of its own: one for each lesson
+of this tutorial, holding an entry for every simulation that lesson runs.
+Not one per problem — a few problems are worked through with more than one
+simulation, and each of those gets its own entry — so a lesson file has
+rather more entries than the lesson has problems. Between them they let you
+follow the whole tutorial without typing a circuit at all, and try any of
+them again later without having to find the page it came from.
+
+Symbulator opens on the first of these. **Built-in examples** lists the
+rest: click it and choose one by its title. That link is always there, so it
+is also how you move from one to the next.
 
 To open a file of your own, press **Upload** and choose a `.cir`. Either way
 the dropdown beneath then reads *Entries in* whatever the file calls itself,
