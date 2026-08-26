@@ -796,7 +796,7 @@ The answers you want are `ir2` and `ir3`, in **Results**.
 The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
 :::
 
-Answer: **{3.33,-.666}**. This is correct.
+Answer: **{3.33,-.667}**. This is correct.
 
 :::
 
@@ -1778,7 +1778,7 @@ The answers you want are `vo` and `re`, in **Results**.
 The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
 :::
 
-The answer, **{.904\*vs,10951.}**, is correct: *v*{{sub:O}}*=.904 v*{{sub:S}}
+The answer, **{.904\*vs,10952.}**, is correct: *v*{{sub:O}}*=.904 v*{{sub:S}}
 and *R*{{sub:IN}}*=10.95'kΩ*.
 
 :::
