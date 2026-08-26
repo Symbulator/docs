@@ -1,0 +1,8 @@
+# These are an archive, not source. Their value is that they are byte-for-byte
+# what Roberto published in 2023, so git must not touch their line endings.
+#
+# Without this, the CRLF-to-LF normalisation silently dropped 2,563 bytes from
+# docs-page7.html and 2,537 from docs-page8.html: a fresh clone would have
+# produced files that no longer matched the master under OneDrive, and the
+# whole point of keeping them here is that they match.
+*.html -text
