@@ -610,6 +610,12 @@ class HtmlRenderer:
                 return (f'<div class="code field">'
                         f'<span class="code-label">{name}</span>'
                         f'<pre><code>{body}</code></pre></div>')
+            # A ```text fence is neither typed nor returned -- it is a
+            # listing, such as the contents of a .cir file. Labelling it
+            # "returns" would say it came out of Symbulator, which is the
+            # one thing it did not do. So it gets no label at all.
+            if b.meta["lang"] == "text":
+                return f'<div class="code plain"><pre><code>{body}</code></pre></div>'
             cls = "sym" if b.meta["lang"] == "sym" else "out"
             label = "type" if cls == "sym" else "returns"
             return (f'<div class="code {cls}"><span class="code-label">{label}'
@@ -819,11 +825,21 @@ class TexRenderer:
             # field anyway.
             env = ("symtype" if b.meta["lang"] in ("sym", "field")
                    else "symout")
-            # a line starting with "[" would be read as \\'s optional argument
-            lines = "\\\\\n".join(
-                ("{}" + tex_code(l)) if l.lstrip().startswith("[")
-                else tex_code(l)
-                for l in b.text.split("\n"))
+            def _listing_line(line):
+                # A blank line still has to be a line. These are joined with
+                # \\, and \\ after nothing at all is "There's no line here
+                # to end" -- which is how the .cir example in the
+                # introduction, the first fence in the book with a blank
+                # line in it, stopped the PDF build.
+                if not line.strip():
+                    return BS + "mbox{}"
+                # A line starting with "[" would be read as \\'s optional
+                # argument, so it is fenced off with an empty group.
+                return (("{}" + tex_code(line))
+                        if line.lstrip().startswith("[") else tex_code(line))
+
+            lines = (BS * 2 + NL).join(
+                _listing_line(l) for l in b.text.split(chr(10)))
             return f"\\begin{{{env}}}\n{lines}\n\\end{{{env}}}"
         if k in ("tip", "note", "warning", "danger"):
             title = self.inline(b.arg) if b.arg else ""

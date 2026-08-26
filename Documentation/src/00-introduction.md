@@ -2,7 +2,7 @@
 id: introduction
 kind: front
 title: Introduction
-updated: 2023-07-08
+updated: 2023-08-26
 summary: >
   Learn about Symbulator and how it can help you focus on learning how circuits
   work, instead of struggling with math. Get the latest version of Symbulator
@@ -12,7 +12,7 @@ summary: >
 ## What is Symbulator {#what-is-symbulator}
 
 Symbulator is a program to solve linear electric circuits symbolically and
-numerically {{v7,8|in a calculator}}{{v9|on your mobile device}}. It accepts inputs
+numerically {{v7,8|in a calculator}}{{v9|on your device}}. It accepts inputs
 with numerical and symbolic values, and provides numerical and symbolic
 results. The name is a portmanteau of *"symbolic simulator"*.
 Symbulator is widely regarded as the best symbolic simulator of linear
@@ -166,9 +166,10 @@ fitness for a particular purpose. Every time you use Symbulator, you do so at
 your own risk.
 
 If you have any problems downloading, installing or executing Symbulator, send
-us a message to this email: the word help at this domain.
+us a message to this email: the word help at this domain, like so: hxxx@sxxxxxxxxx.cxx
 :::
 
+::: only 7,8
 ## {{v7|Install}}{{v8|Before you start}} {#install}
 
 ::: only 7
@@ -220,4 +221,115 @@ variables before you run the simulation again.
 Start each simulation from a clean document, and clear out anything a failed
 simulation left behind before trying again.
 :::
+:::
+:::
+
+::: only 9
+
+## Input files and entries {#input-files}
+
+Everything you put into Symbulator — the circuit, the analysis, the settings,
+and whatever is in the **Evaluate** and **Solve** cards — can be kept and used
+again. There are two words for it.
+
+An **entry** is one set of inputs meant to be solved together: a circuit, the
+analysis to run on it, and the settings to run it with. It has a name.
+
+An **input file** holds as many entries as you like. It is plain text, its
+extension is `.cir`, and you will find it in the **Input File** card at the
+top of the page — marked *optional*, because nothing needs it. You can use
+Symbulator for a whole session without ever opening one.
+
+### Loading one
+
+Open **Input File** and press **Upload**, then choose a `.cir` file. The
+dropdown beside it changes from *Some examples you can try* to *Entries in*
+your file's name, and choosing an entry from it fills in every box on the page
+at once — circuit, analysis, settings and all. Then solve it exactly as you
+would something you had just typed.
+
+Symbulator opens on its own built-in examples, which are read-only: load one
+and change it as much as you like, but you cannot write back to it.
+**New file** starts an empty file of your own, and **Built-in examples**
+returns to the supplied set.
+
+### Saving your work
+
+Two links sit under the circuit box, and each appears only when it applies:
+
+- **Save inputs to new entry** adds what is on screen as a new entry and asks
+  you to name it. This is the one you want the first time.
+- **Update inputs in this entry** writes your changes back into the entry you
+  loaded. It appears once you have actually changed something.
+
+Beside the dropdown, **Rename** and **Delete** act on the entry itself.
+Neither is offered for the built-in examples.
+
+::: warning Nothing reaches your disk until you press Download
+Saving an entry writes it into the file open **in your browser**. The only
+thing that produces a `.cir` on your computer is **Download**.
+
+Symbulator does what it can in the meantime: your work is mirrored into the
+browser's own storage, so closing the tab does not lose it, and you are warned
+before anything replaces a file holding entries you have not downloaded. None
+of that is a file, though. Download when you are done.
+:::
+
+### What an entry remembers
+
+All of it, not just the circuit. The analysis and whatever that analysis needs
+— the frequency, the two node names for an equivalent, which kind of two-port
+— then the Expert Mode equations, unknowns and conditions, everything in
+**Settings**, whatever is in **Evaluate** and its **Conditions**, the **Solve**
+card, the plot, and a note of your own that is shown when the entry is loaded.
+
+So an entry is a piece of work rather than a circuit. Load one a year later
+and you are back where you left off, with the same rounding, asking the same
+question.
+
+### Writing one by hand
+
+Because it is plain text, you can write an input file in any editor, which is
+a convenient way to set a problem sheet. An entry is its name in square
+brackets, then the element lines, then `key: value` lines. Anything after a
+hash is a comment.
+
+```text
+# Lines that start with a hash are comments.
+
+[Divider]
+
+e1,1,0,20
+r1,1,2,5'k
+r2,2,0,15'k
+
+analysis: dc
+rounding: exact
+si: no
+units: yes
+
+
+[Series RL at 1 kHz]
+
+e1,1,0,10
+r1,1,2,50
+l1,2,0,0.02
+
+analysis: ac
+omega: 2*pi*1000
+rounding: approx
+si: no
+units: yes
+rms: no
+note: the current lags the voltage
+```
+
+Every `key: value` line is optional: leave one out and Symbulator's own
+default applies, exactly as though you had never touched that setting. Order
+does not matter either — a line whose key Symbulator knows is a setting, and
+anything else is an element, wherever in the entry it appears.
+
+**About input file (.cir) format**, inside the **Input File** card, lists
+every key the app reads and writes.
+
 :::

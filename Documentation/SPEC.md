@@ -165,6 +165,9 @@ Done
 ````
 
 `sym` = something the reader types. `out` = something the software returns.
+`text` = neither: a listing, such as the contents of a `.cir` input file. It
+is set like the others but carries no label, because "type" would be untrue
+and "returns" would say Symbulator produced it.
 A bare `sym` with no version applies to all versions. Consecutive fences
 tagged with different versions are variants of the same instruction: only the
 matching one is emitted.

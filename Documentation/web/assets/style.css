@@ -513,6 +513,11 @@ code {
 }
 .code.out { border-left-color: var(--ink-3); background: var(--paper-2);
             border-color: var(--rule); }
+/* A listing that is neither typed nor returned -- the contents of a file,
+   say. Quiet, and unlabelled, because there is nothing true to call it:
+   "type" would be a lie and "returns" says Symbulator produced it. */
+.code.plain { border-left-color: var(--rule); background: var(--paper-2);
+              border-color: var(--rule); }
 .code-label {
   position: absolute; top: 0; right: 0.5rem;
   transform: translateY(-52%);
