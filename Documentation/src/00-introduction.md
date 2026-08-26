@@ -235,23 +235,29 @@ again. There are two words for it.
 An **entry** is one set of inputs meant to be solved together: a circuit, the
 analysis to run on it, and the settings to run it with. It has a name.
 
-An **input file** holds as many entries as you like. It is plain text, its
-extension is `.cir`, and you will find it in the **Input File** card at the
-top of the page — marked *optional*, because nothing needs it. You can use
-Symbulator for a whole session without ever opening one.
+An **input file** holds as many entries as you like, and names itself: a
+file can say it is *Circuits for Lesson 1 of the Tutorial*, and that is what
+you will see it called. It is plain text, its extension is `.cir`, and you
+will find it in the **Input File** card at the top of the page — marked
+*optional*, because nothing needs it. You can use Symbulator for a whole
+session without ever opening one.
 
 ### Loading one
 
-Open **Input File** and press **Upload**, then choose a `.cir` file. The
-dropdown beside it changes from *Some examples you can try* to *Entries in*
-your file's name, and choosing an entry from it fills in every box on the page
-at once — circuit, analysis, settings and all. Then solve it exactly as you
-would something you had just typed.
+Symbulator arrives with a set of input files of its own, and opens on the
+first of them. **Built-in examples** lists the rest: click it and choose one
+by its title. That link is always there, so it is also how you move from one
+to the next.
 
-Symbulator opens on its own built-in examples, which are read-only: load one
-and change it as much as you like, but you cannot write back to it.
-**New file** starts an empty file of your own, and **Built-in examples**
-returns to the supplied set.
+To open a file of your own, press **Upload** and choose a `.cir`. Either way
+the dropdown beneath then reads *Entries in* whatever the file calls itself,
+and choosing an entry fills in every box on the page at once — circuit,
+analysis, settings and all. Then solve it exactly as you would something you
+had just typed.
+
+The supplied files are **read-only**. Load one and change it as much as you
+like, but you cannot write back to it: saving starts a file of your own, and
+**New file** starts an empty one.
 
 ### Saving your work
 
@@ -290,12 +296,14 @@ question.
 ### Writing one by hand
 
 Because it is plain text, you can write an input file in any editor, which is
-a convenient way to set a problem sheet. An entry is its name in square
-brackets, then the element lines, then `key: value` lines. Anything after a
-hash is a comment.
+a convenient way to set a problem sheet. A `title:` line above the first entry
+names the file. An entry is its own name in square brackets, then the element
+lines, then `key: value` lines. Anything after a hash is a comment.
 
 ```text
 # Lines that start with a hash are comments.
+
+title: Two problems to be going on with
 
 [Divider]
 
