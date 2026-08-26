@@ -1648,8 +1648,10 @@ Via `Define x=3: {ino,req} `we find that I{{sub:NO}} = **1** A, and
 R{{sub:EQ}} is undefined.
 :::
 ::: only 9
-Put `x = 3` in **Add conditions** and run it again: I{{sub:NO}} = **1** A,
-and R{{sub:EQ}} is undefined.
+The equivalent is already on screen, written in terms of x, so there is
+nothing to run again. Put `ino` in the **Evaluate** card with `x = 3` in its
+**Conditions** box: I{{sub:NO}} = **1** A. Ask for `req` the same way and the
+answer is infinite, the denominator being zero at that value.
 :::
 
 This means the equivalent resistance is, for practical purposes, infinite.
@@ -1689,9 +1691,17 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Exploring the answers, we see that the denominator of the expression for`
-req,` (x-1), given that x=1), results in a division by zero. Via
-`1→x:{ino,req} `we find that I{{sub:NO}} = -3A, and R{{sub:EQ}} is undefined
-or, for practical purposes, infinite:
+req,` (x-1), given that x=1), results in a division by zero.
+
+::: only 7,8
+Via `1→x:{ino,req} `we find that I{{sub:NO}} = -3A, and R{{sub:EQ}} is
+undefined or, for practical purposes, infinite.
+:::
+::: only 9
+Put `ino` in the **Evaluate** card with `x = 1` in its **Conditions** box:
+I{{sub:NO}} = **-3** A. Ask for `req` the same way and the answer is
+infinite, so R{{sub:EQ}} is undefined at that value.
+:::
 
 :::
 
