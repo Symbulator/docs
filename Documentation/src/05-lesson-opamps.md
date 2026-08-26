@@ -1426,8 +1426,8 @@ o2,0,4,o
 
 {{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}}:
 
+{{o:((g1-g2) vs)/(g3-g4)}}
 
-((g1-g2) vs)/(g3-g4)
 which is correct, as can be seen by comparing it to the book's answer, shown
 below:
 

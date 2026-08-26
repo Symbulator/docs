@@ -83,7 +83,7 @@ Some observations about my description:
 - Notice that I have specified the node at the centre of both Y's as node 0.
   This is something you can do only in the case of balanced Y-Y systems, not
   for other configurations and not for unbalanced systems.
-- Since the calculator does not differentiate between lower and upper case
+- Since Symbulator does not differentiate between lower and upper case
   variables, nodes called a and A would be considered the same node. Instead,
   we use the names ag and ad, where the g reminds us a node is on the
   generation side and the d reminds us it is on the demand side.
@@ -758,9 +758,8 @@ AS7's Example 12.12
 :::
 
 ::: answer
-The first of the three is a current *inside* the generator, and the two-source
-trick cannot give it — see the warning above. The other two are ordinary
-element currents.
+Two of the three are ordinary element currents. The first — the current
+*inside* the generator — is the awkward one, and it is dealt with after them.
 
 ```sym 7
 false→s\rms
@@ -795,6 +794,50 @@ rca,cd,ad,-40j
 *Find equivalent* is not needed here — a plain AC solve gives both. `aa(irlb)`
 reads {{o:9.106}}∠{{o:168.48}}° and `aa(irbc)` reads
 {{o:5.500}}∠{{o:172.47}}°, matching the printed answers.
+:::
+
+The remaining answer, the generator current, is trickier. They are asking for
+the current in the source we did not use in the simulation. And even if they
+had asked for the current in one of the sources we did have, we would not be
+able to trust it, since we only used two sources and in reality the circuit
+uses three.
+
+Now, I tried something, and I think I got lucky, because I got the answer the
+book gives. This is what I tried:
+
+```sym 7
+s\aa(-(ie0a+ieb0)/3)
+```
+```sym 8
+s\aa(–(ie0a+ieb0)/3)
+```
+
+::: only 9
+`-(ie0a+ieb0)/3` in the **Evaluate** card, with **Polar** switched on so
+the answer comes back as a magnitude and an angle.
+:::
+
+What I thought was: the current that I have coming out of the two sources in
+my simulation would, in reality, be coming out of three sources. So if I add
+those two currents together and divide them by three, I may get an
+approximation of the current that would be coming out of one source. I am
+confident that this should be the case in a balanced circuit. But this is not
+a balanced circuit. Still, it was the best I had to go by. So I tried it.
+
+```out 7,8
+"5.959ᴇ0∠-177.18°"
+```
+
+::: only 9
+{{o:5.959}}∠{{o:-177.18}}°
+:::
+
+And it worked. That is the answer in the book.
+
+::: warning Treat that as a guess that was checked, not as a method
+The argument holds in a balanced circuit. This one is not balanced; it was
+used because there was nothing better to hand, and it happened to land on the
+book's figure. Check it against something before trusting it elsewhere.
 :::
 :::
 :::

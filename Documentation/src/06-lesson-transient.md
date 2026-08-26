@@ -1337,6 +1337,12 @@ vc|t=to
 vc|t=to
 ```
 
+::: only 9
+Put `vc` in the **Evaluate** card and write `t = to` in its **Conditions**
+box. That is what the calculator's `|` does: evaluate this expression under
+this condition. The answer comes back {{o:V - V*exp(-to/(c*r))}}.
+:::
+
 The circuit description for the second interval uses the expression above as
 the initial condition of the capacitor. In this second interval, the source
 has a value of 0 volts, which is another way to say that it becomes a short,
@@ -1412,6 +1418,12 @@ il|t=to
 ```sym 8
 il|t=to
 ```
+
+::: only 9
+Put `il` in the **Evaluate** card and write `t = to` in its **Conditions**
+box. The answer comes back {{o:V/r - V*exp(-r*to/l)/r}}, which is the same
+expression gathered differently.
+:::
 
 The circuit description for the second interval uses the expression above as
 the initial condition of the inductor. In this second interval, the source

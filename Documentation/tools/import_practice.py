@@ -41,6 +41,7 @@ except ImportError:                                   # figures kept as-is
     Image = None
 
 W = "{http://schemas.openxmlformats.org/wordprocessingml/2006/main}"
+M = "{http://schemas.openxmlformats.org/officeDocument/2006/math}"
 R = "{http://schemas.openxmlformats.org/officeDocument/2006/relationships}"
 A = "{http://schemas.openxmlformats.org/drawingml/2006/main}"
 
@@ -55,6 +56,38 @@ OUT_RUN = "Calc-out-textChar"
 
 
 # ---------------------------------------------------------------- reading --
+
+# The OMML-to-markup renderer, borrowed rather than copied. It was
+# written for restore_practice_answers.py, which put back the 57 answers
+# this importer had dropped; keeping one copy means a fix to either
+# reaches both. Safe to import: that module guards its own main.
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from restore_practice_answers import render as render_omml  # noqa: E402
+
+
+def paragraph_items(p):
+    """(kind, element) for a paragraph's runs and equations, in order.
+
+    Word stores an equation as an <m:oMath> subtree, not as a run of text.
+    A walk that looks only for <w:r> therefore steps straight over it --
+    silently, because the sentence introducing the answer is ordinary text
+    and comes through fine. That is how 57 answers went missing, and why
+    chapter 6 carried a bare `{ , , }`.
+
+    Runs *inside* an equation are skipped: the equation is rendered whole,
+    and picking its pieces up again would print them twice.
+    """
+    maths = list(p.iter(M + "oMath"))
+    inside = {id(el) for m in maths for el in m.iter() if el is not m}
+    emitted = set()
+    for el in p.iter():
+        if el.tag == M + "oMath":
+            if id(el) not in emitted and id(el) not in inside:
+                emitted.add(id(el))
+                yield "math", el
+        elif el.tag == W + "r" and id(el) not in inside:
+            yield "run", el
+
 
 def load(path):
     with zipfile.ZipFile(path) as z:
@@ -176,7 +209,16 @@ def runs_to_markup(p) -> str:
             pieces.append(escape(text))
         buf = ""
 
-    for r in p.iter(f"{W}r"):
+    for kind_, r in paragraph_items(p):
+        if kind_ == "math":
+            # An equation is one whole thing, so it interrupts whatever run
+            # style was accumulating rather than joining it.
+            flush()
+            prev = None
+            rendered = re.sub(r"\s+", " ", render_omml(r)).strip()
+            if rendered:
+                pieces.append(rendered)
+            continue
         text = run_text(r)
         if not text:
             continue

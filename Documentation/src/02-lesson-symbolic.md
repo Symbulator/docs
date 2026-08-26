@@ -210,7 +210,7 @@ The problem also says that RT is 12 kΩ; the equivalent resistance as seen by
 the source e is {{v7,8|given by `re`, which when evaluated gives another
 algebraic expression in terms of r1}}{{v9|the **resistance seen** line,
 `re`, which is $r1 + 10000$}}. We can then write two new equations
-and solve them for e and r1:
+and solve them for e and r1{{v7,8|:}}{{v9|.}}
 
 ```sym 7
 solve(re=12000 and ir3=.006,{e,r1})
@@ -543,11 +543,21 @@ e, r2, r3
 Press Enter and Enter. When Symbulator is *Done*, find I{{sub:S}} and E by
 asking:
 
+```sym 7
 approx(-ie1)
+```
+```sym 8
+approx(-ie1)
+```
 
 We get that I{{sub:S}} is {{o:0.02}} A.
 
+```sym 7
 e
+```
+```sym 8
+e
+```
 
 We get that E is {{o:16}} V. These are correct.
 :::

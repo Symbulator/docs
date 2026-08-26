@@ -26,18 +26,10 @@ both.{{i:mutual inductance}}
 
 Either way the coupling itself is an **m** element with four fields: a name
 starting with `m`, the names of the two coupled elements, and the value of the
-coupling.
-
-```field 9 Circuit Description
-m1,l1,l2,1.5
-```
+coupling. For example: `m1,l1,l2,1.5`
 
 That is a mutual inductance of 1.5 H between inductors `l1` and `l2`. In jΩ it
-looks the same, naming two `r` elements instead:
-
-```field 9 Circuit Description
-m1,r1,r2,2j
-```
+looks the same, naming two `r` elements instead: `m1,r1,r2,2j`
 
 ::: warning Don't mix the two
 `m1,l1,r1,2` couples an inductor given in henries to one given in jΩ. It will
@@ -207,22 +199,15 @@ case where **one terminal on each side is grounded**, which covers the
 textbook problems; you name only the two live nodes.{{i:transformer}}
 
 A **t** element takes five fields: a name starting with `t`, the live node on
-the first side, the live node on the second side, and the turns on each side.
-
-```field 9 Circuit Description
-t1,1,2,80,800
-```
+the first side, the live node on the second side, and the turns on each
+side. For example: `t1,1,2,80,800`
 
 That is 80 turns on the side connected to node 1 and 800 on the side connected
 to node 2, wound the same way. Only the ratio matters, so `1,10` would describe
 the same transformer.
 
-**Polarity is a minus sign.** If the dots are on opposite ends, make one of the
-two turn counts negative:
-
-```field 9 Circuit Description
-t,a,b,1,-5
-```
+**Polarity is a minus sign.** If the dots are on opposite ends, make one of
+the two turn counts negative: `t,a,b,1,-5`
 
 It does not matter which of the two you make negative, as long as one of them
 is.

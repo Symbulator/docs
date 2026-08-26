@@ -8,7 +8,7 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #85 — Chapter 7's answers were dressed up as transcripts
+## #85 — Chapter 7's answers were dressed up as transcripts — no change needed
 
 Seven answers in `src/07-lesson-ac.md` appear in the 2023 pages as prose --
 "We get 4.789 angle -16.7, which is correct" -- and the conversion reformatted
@@ -44,7 +44,25 @@ documentation already said V for both, so nothing needed changing -- the slip
 lives only in the 2023 archive. The other two `mA` in the chapter are real
 currents and stay.
 
-## #89 — What the dangling-promise check still finds
+**Settled on 27 Aug 2026, by reading the chapter rather than the note above.**
+The premise had gone stale. Six of the seven already carry their units, in the
+sentence that follows the block — "That is 414.5 mA at an angle of −71.6°,
+which is correct." The seventh is a pair of node voltages, and the 2023 prose
+gives no units for those either, so the chapter matches the page.
+
+What remains true is narrower, and is a question rather than a defect: those
+`out 7,8` blocks are **reconstructions**, not quotes. The 2023 pages carry
+prose for these seven, so nobody transcribed a screen. The form is right — the
+same `ᴇ0∠` shape appears verbatim in the 2023 page for chapter 9's Example
+12.12, so that is genuinely what the calculator printed — but a reader cannot
+tell a reconstructed transcript from a real one, and here they are reading the
+former.
+
+Nothing was changed. If it should be, the change is presentational: drop the
+seven `out 7,8` blocks and let the prose carry the answers, the way the pages
+did.
+
+## #89 — What the dangling-promise check still finds — down to 5, all judgement calls
 
 `tools/check_dangling_promises.py` was tightened on 26 Aug 2026 (see #88) and
 now reports 18 rather than about 74. Most of the residue is real. Worth
@@ -67,7 +85,37 @@ fixing, in rough order of how badly it reads:
   list, `lesson-dc`'s "flows in the opposite direction:", `lesson-sources`'s
   "under Node voltages:". Judgement calls, not defects.
 
-## #90 — Gain Example 2 never made it into chapter 13
+**Worked through on 27 Aug 2026: 18 → 15 → 5.** What was fixed, and what each
+turned out to be:
+
+* **The op-amp `vo`.** Not missing after all — the restore had placed it. It
+  was *glued to the following sentence*, so it rendered as
+  "((g1-g2) vs)/(g3-g4) which is correct, as can be seen…" — one paragraph,
+  and therefore not marked as an answer. Now `{{o:…}}` on a line of its own.
+  Verified against the app: `v_o = vs*(g1 - g2)/(g3 - g4)`.
+* **`vc|t=to` and `il|t=to`.** Unblocked by #95 and #96 shipping, and now
+  written. Both say to put the name in **Evaluate** with `t = to` in
+  **Conditions**, which is exactly what the calculator's `|` did. Measured
+  first: `V - V*exp(-to/(c*r))` and `V/r - V*exp(-r*to/l)/r`, matching the
+  expressions the chapter prints.
+* **Chapter 10's two syntax sections.** Both illustrated the element layout
+  with a ```` ```field 9 ```` block, which renders for version 9 only — so
+  readers of 7 and 8 were told the field layout in prose and shown no example
+  at all. Now inline, the way *How to describe a resistor* has always shown
+  `r1,a,b,300`. This was the whole of it: a scan found no other section with
+  the same hole.
+* **Lesson 2's `approx(-ie1)` and `e`.** Two lines of calculator input set as
+  ordinary paragraphs rather than as fences. Now `sym 7`/`sym 8` fences.
+* **Lesson 2's "solve them for e and r1:".** The colon promised something a
+  version 9 reader only reaches after a paragraph of explanation. Split:
+  `{{v7,8|:}}{{v9|.}}`.
+
+The remaining **5 are the judgement calls** the note above already named — the
+credits list, `lesson-dc`'s "flows in the opposite direction:", and
+`lesson-sources`'s "under Node voltages:". Prose that hands off to the next
+sentence. Left alone.
+
+## #90 — Gain Example 2 never made it into chapter 13 — restored
 
 Both 2023 pages carry a second gain example after Gain Example 1 -- a two-port
 with z parameters 4, 1.5, 10 and 3, a source with 5 Ω in series and a 2 Ω
@@ -79,7 +127,19 @@ page 8.
 Restoring it means writing a version 9 panel and checking the four gains
 against the app, so it is a small piece of authoring rather than a copy.
 
-## #91 — Example 12.12's third answer was dropped
+**Written on 27 Aug 2026**, in the shape Gain Example 1 uses, with the version
+7 and 8 halves following the 2023 pages (`zp,1,2` on page 7, `z,1,2` on page 8;
+`izp1`/`izp2` for the currents) and a version 9 half using **Add equations**
+and the *gain* mini-tool.
+
+All four answers were computed before the panel was written, not copied:
+
+    Av = 4      Ai = -2      Ap = 8      Zi = 1 Ω
+
+which is what both 2023 pages print. There is no figure — the pages say so
+too — so no placeholder was needed. `Lesson_13.cir` carries a matching entry.
+
+## #91 — Example 12.12's third answer was dropped — restored
 
 `src/09-lesson-threephase.md` says the generator current Iab "cannot"
 be had from the two-source trick. The 2023 pages go further: Roberto tried
@@ -87,7 +147,28 @@ be had from the two-source trick. The 2023 pages go further: Roberto tried
 simulation would in reality leave three, got `"5.959ᴇ0∠-177.18°"`, and notes
 that it matches the book. A paragraph of his was lost, not just a value.
 
-## #92 — A calculator fact stated for all three versions
+**Restored on 27 Aug 2026**, the paragraph as well as the value. The chapter
+had come to say the two-source trick "cannot" give the generator current; the
+2023 pages show Roberto trying `-(ie0a+ieb0)/3`, reasoning that current
+leaving two sources in the simulation would leave three in reality, and
+getting the book's answer.
+
+Version 9 reproduces it exactly:
+
+    -(ie0a+ieb0)/3  =  -5.95184 - 0.29332j
+                    =  5.95906 ∠ -177.179°
+
+against the 5.959∠-177.18° both pages print. His reasoning is back in his own
+words, with a warning after it that this is a guess that was checked and not a
+method — the argument holds in a balanced circuit and this one is not
+balanced, which he says himself.
+
+One thing was **not** carried over: the pages call this "the third answer"
+having just called the same two answers "the second and third", which is a
+slip. The restored text says "the remaining answer, the generator current",
+which is unambiguous and does not put words in his mouth.
+
+## #92 — A calculator fact stated for all three versions — settled by measurement
 
 `src/09-lesson-threephase.md`, in the balanced wye-wye walkthrough: "Since the
 calculator does not differentiate between lower and upper case variables,
@@ -97,7 +178,18 @@ be measured and the bullet split -- the node names `ag` and `ad` are worth
 keeping either way, but the reason given has to be true for the version
 reading it.
 
-## #93 — `import_practice.py` still drops Word equations
+**Measured on 27 Aug 2026, and the fact is true of version 9 too**, so the
+bullet did not need splitting after all — only its attribution was wrong.
+
+    r1,a,A,5      ->  refused: both nodes of 'r1' can't be the same node
+    e,A,0,10 ...  ->  answers reported as v_a
+
+Version 9 folds case exactly as the calculator does. "Since the calculator
+does not differentiate…" now reads "Since Symbulator does not differentiate…",
+which is true for every version reading it, and the `ag`/`ad` names keep their
+reason.
+
+## #93 — `import_practice.py` still drops Word equations — fixed
 
 The importer reads runs of text. An answer Roberto set as a Word **equation**
 is not a run of text, so it was dropped -- silently, because the sentence
@@ -109,6 +201,25 @@ be re-run safely (it skips anything already present), but `import_practice.py`
 itself is unchanged: the next import of a practice file would lose them again.
 The OMML-to-markup renderer it needs is already written, in
 `restore_practice_answers.render()`.
+
+**Fixed on 27 Aug 2026.** `runs_to_markup` walked `p.iter(w:r)`, and an OMML
+equation is not a `w:r` — so it was stepped over silently, while the sentence
+introducing the answer came through fine.
+
+The walk is now `paragraph_items(p)`, which yields runs *and* `m:oMath`
+subtrees in document order, skipping anything inside an equation so it is not
+rendered twice. The renderer itself is imported from
+`restore_practice_answers.render` rather than copied, so a fix to either
+reaches both.
+
+Measured across the six practice files:
+
+    89 paragraphs carry an equation
+    62 of them have no ordinary text at all -- the old importer
+       emitted an empty line for each
+
+and the first few now render as `((r1+r2) vs)/r1`, `-(rf/r1)vi`,
+`((r1+rf)/r1)vi`, which is what they should always have been.
 
 ## #94 and #95 — moved to the app's list
 

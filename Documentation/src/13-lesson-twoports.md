@@ -569,3 +569,92 @@ Av 55.6, Ai -9.62, Ap 534, Zin 3.46 Ω
 These are correct.
 :::
 :::
+
+::: problem Gain Example 2
+Find G{{sub:v}}, G{{sub:i}}, G{{sub:p}} and Z{{sub:in}} for a two-port with
+z parameters z{{sub:11}} = 4, z{{sub:12}} = 1.5, z{{sub:21}} = 10 and
+z{{sub:22}} = 3, driven by a source V{{sub:s}} with 5 Ω in series and loaded
+with 2 Ω.
+
+There is no picture of this one — the description below is the whole circuit.
+
+::: answer
+The same shape as before, with z parameters instead of y.
+
+```sym 7
+"es,3,0,1:rs,3,1,5:rl,2,0,2:zp,1,2"→cir:s\dc(cir)
+```
+```sym 8
+"es,3,0,1:rs,3,1,5:rl,2,0,2:z,1,2"→cir:s\dc(cir)
+```
+```field 9 Circuit Description
+es,3,0,1
+rs,3,1,5
+rl,2,0,2
+z,1,2
+```
+
+::: only 7,8
+When prompted, specify DC as the analysis and **z** as the parameter type. You
+can store the parameters in variables beforehand or type them when asked.
+:::
+
+::: only 9
+Pin the four parameters in **Add equations**:
+
+```field 9 Add equations
+z11 = 4
+z12 = 1.5
+z21 = 10
+z22 = 3
+```
+
+Solve in DC, then open **Mini-Tools**, choose *gain*, and give it the four:
+:::
+
+```sym 7
+s\gain()
+```
+```sym 8
+s\gain()
+```
+
+::: only 7,8
+It asks for the in voltage, in current, out voltage and out current. Type
+`v1`, `izp1`, `v2` and `izp2` respectively.
+:::
+
+::: only 9
+```field 9 v1
+v1
+```
+
+```field 9 i1
+iz1
+```
+
+```field 9 v2
+v2
+```
+
+```field 9 i2
+iz2
+```
+:::
+
+```out 7,8
+Gv 4, Gi -2, Gp 8, Zin 1 Ω
+```
+
+::: only 9
+| | |
+|---|---|
+| Av — voltage gain | {{o:4}} |
+| Ai — current gain | {{o:-2}} |
+| Ap — power gain | {{o:8}} |
+| Zi — input impedance | {{o:1}} Ω |
+:::
+
+These are correct.
+:::
+:::
