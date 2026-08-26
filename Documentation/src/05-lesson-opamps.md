@@ -170,6 +170,7 @@ o,1,2,3
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
+::: only 7,8
 The **th** script tells us it found the Thévenin voltage, but could not find
 the Norton current. This is not a surprise, since an ideal op amp has zero
 output resistance and a fixed voltage, an infinite current when
@@ -180,12 +181,42 @@ resistance (or R{{sub:EQ}} = 0Ω). Evaluating `vth` results in
 
 This is correct, as can be seen by comparing it to the book's answer, shown
 below.
+:::
+
+::: only 9
+This is the one that catches people out, and Symbulator says so plainly:
+
+- `vth` = {{o:vs*(r1 + r2)/r1}}
+- `ino` = {{o:∞}}
+- `req` = {{o:0}}
+- `pmax` = {{o:∞}}
+
+with a note beneath the answers explaining that the short-circuit current is
+unbounded, so the equivalent is a voltage source with no impedance in series
+with it.
+
+None of that is a failure to solve, and none of it is guesswork. An ideal op
+amp holds its output voltage whatever current is drawn from it, so asking
+what flows through a short across that output has no answer as an equation —
+the two rounds Symbulator runs to build a Thévenin equivalent leave the
+second one unsolvable. What it does instead is put a resistance across the
+terminals rather than a short, and let that resistance fall to zero, which is
+what a short is. The current grows without bound, and an unbounded current
+through a short is precisely a source with nothing in the way of it: R{{sub:EQ}}
+= 0Ω.
+
+So V{{sub:TH}} is correct, as can be seen by comparing it to the book's
+answer, shown below — and the Thévenin resistance is not merely asserted
+here, it is the answer Symbulator gives.
+:::
 
 ::: figure assets/practice/bo2s-drill-exercise-3-11-thevenin-2.jpg
 
 :::
 
+::: only 7,8
 The Thevenin resistance, as explained above, is 0Ω.
+:::
 
 :::
 
@@ -345,13 +376,19 @@ o,0,2,o
 ```
 
 ::: only 9
-Ask **Evaluate** for:
+The calculator's `|` says "given"; version 9 says the same thing in the
+**Evaluate** card's own **Conditions** box. Put the answer you want in the
+first and the value you are giving it in the second:
 
 ```field 9 Evaluate
-vo|vs=2.
-vo|vs=-4.
-vo|vs=6.
+vo
 ```
+
+```field 9 Conditions
+vs = 2
+```
+
+Then run it again with `vs = -4` and once more with `vs = 6`.
 :::
 
 The answer, **{-6.6,13.2,-19.8}**, is correct within the linear realm, but
@@ -506,7 +543,7 @@ o,0,1,o
 Ask **Evaluate** for:
 
 ```field 9 Evaluate
-vo/is
+vo/is1
 ```
 :::
 
@@ -537,11 +574,18 @@ r3,2,o,r3
 o,0,1,o
 ```
 
+::: only 7,8
 Asking:
 
 `expand(vo/is)`
 
 gets **-r1\*r3/r2-r1-r3**, which is equivalent to the book's answer.
+:::
+::: only 9
+Ask **Evaluate** for `vo/is1`. It gives **-r1 - r1\*r3/r2 - r3**, which is
+equivalent to the book's answer — the same expression, gathered
+differently.
+:::
 
 ::: figure assets/practice/as2s-practice-problem-5-4b-transresistance-15.jpg
 
@@ -768,10 +812,11 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 
 The answer you want is `pmax`, in **Results**.
 
-Ask **Evaluate** for:
+The power in a 1 kΩ load is the expression {{ref:lesson-equivalents}}
+derives, with 1000 where R goes:
 
 ```field 9 Evaluate
-prL|L=1000
+vth^2*1000/(req+1000)^2
 ```
 :::
 
@@ -792,7 +837,8 @@ rl,o,0,1'k
 ```
 
 ::: only 9
-The answer you want is `prL`, in **Results**.
+The answer you want is `prl`, in **Results** — the power consumed by the
+load resistor `rl`.
 :::
 
 The answer,**.00225**, is correct. The explanation to the apparent paradox
@@ -926,11 +972,7 @@ o,0,a,o
 ```
 
 ::: only 9
-Ask **Evaluate** for:
-
-```field 9 Evaluate
-expand(vo)
-```
+The answer you want is `vo`, in **Results**.
 :::
 
 
@@ -1558,11 +1600,8 @@ r6,5,0,10'k
 ```
 
 ::: only 9
-Ask **Evaluate** for:
-
-```field 9 Evaluate
-expand(vo)
-```
+The answer you want is `vo`, in **Results**. It is arranged differently from
+the book's, which is a matter of presentation rather than of arithmetic.
 :::
 
 The answer, **-2.4** **v1 – 6**, is correct.
@@ -1599,11 +1638,7 @@ o2,0,7,o
 ```
 
 ::: only 9
-Ask **Evaluate** for:
-
-```field 9 Evaluate
-expand(vo)
-```
+The answer you want is `vo`, in **Results**.
 :::
 
 The answer, **8 v1 – 4 v2**, is correct.
@@ -1682,7 +1717,8 @@ below:
 
 :::
 
-Our answer, expanded via `expand(vo)`, is shown below:
+{{v7,8|Our answer, expanded via `expand(vo)`, is shown below:}}{{v9|Our
+answer, written out term by term, is shown below:}}
 
 (-r2 r4 v1)/(r1 r3)-(r4 v1)/r3+(r4 v2)/r3+v2
 

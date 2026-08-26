@@ -654,7 +654,7 @@ r12,2,0,12
 ```
 
 ::: only 9
-The answers you want are `il`, `vl` and `ir1`, in **Results**.
+The answers you want are `il`, `vl` and `ir4`, in **Results**.
 :::
 
 { 2 , 0 , 2 }
@@ -1528,14 +1528,6 @@ s\only("vc")
 This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** in **Settings** and list `vc` in the box beside it.
 :::
 
-::: only 9
-This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** in **Settings** and list `vc` in the box beside it.
-:::
-
-::: only 9
-This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** in **Settings** and list `vc` in the box beside it.
-:::
-
 Then we run the simulation for the first interval, just as we did before, but
 with the new capacitor and source values.
 
@@ -1569,14 +1561,6 @@ s\only("vc")
 ```sym 8
 s\only("vc")
 ```
-
-::: only 9
-This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** in **Settings** and list `vc` in the box beside it.
-:::
-
-::: only 9
-This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** in **Settings** and list `vc` in the box beside it.
-:::
 
 ::: only 9
 This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** in **Settings** and list `vc` in the box beside it.

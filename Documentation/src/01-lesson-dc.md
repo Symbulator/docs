@@ -467,15 +467,6 @@ I can now describe the voltage source as follows:
 {{v7,8|e}}{{v9|e}}, its positive node is called 1, its negative node is called
 0, and its value is 36 volts between these nodes in that order.
 
-::: only 9
-A bare `e` is one of the few names Symbulator 9 will not accept. It builds an
-answer's name out of the quantity and the element, so an element called `e`
-would report its resistance as `re` — and `re` already means something else to
-the mathematics underneath. Symbulator refuses the name rather than quietly
-reading it wrong, and suggests `e`. The same goes for a handful of other short
-names; you will be told plainly if you pick one.
-:::
-
 Now I describe the resistors. I named the first resistor r1, and I described it
 as follows: `r1,1,2,1'k`, because its name is r1, its first node is called 1,
 its second node is called 2, and its value is 1 kΩ. The second resistor we
@@ -819,9 +810,9 @@ r2,1,0,220
 r3,1,0,1.2'k
 ```
 
-- {{v7,8|Evaluating `re` gets}}{{v9|`re1` is}} the total resistance: {{o:9.49}} Ω
+- {{v7,8|Evaluating `re` gets}}{{v9|`re` is}} the total resistance: {{o:9.49}} Ω
 - {{v7,8|Evaluating }}{{v7|`-ie`}}{{v8|`–ie`}}{{v9|Flipping the sign of `ie`}} gets us the source current: {{o:2.53}} A
-- {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} I{{sub:1}}: {{o:2.4}} A, {{v7,8|`ir2` gets}}{{v9|`ir2` is}} I{{sub:2}}: {{o:0.11}} A, and {{v7,8|`ir3` gets}}{{v9|`ir3` is}} I{{sub:3}}: {{o:0.02}} A.
+- {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} I{{sub:1}}: {{o:2.4}} A, {{v7,8|`ir2` gets}}{{v9|`ir2` is}} I{{sub:2}}: {{o:109}} mA, and {{v7,8|`ir3` gets}}{{v9|`ir3` is}} I{{sub:3}}: {{o:0.02}} A.
 
 :::
 
@@ -1002,7 +993,7 @@ r2,1,0,20'k
 r3,1,0,56'k
 ```
 
-- {{v7,8|Evaluating `re` gets}}{{v9|`re1` is}} the total resistance: {{o:1.44}} kΩ
+- {{v7,8|Evaluating `re` gets}}{{v9|`re` is}} the total resistance: {{o:1.44}} kΩ
 - {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} {{o:17.5}} mA, {{v7,8|`ir2` gets}}{{v9|`ir2` is}} {{o:1.4}} mA, and {{v7,8|`ir3` gets}}{{v9|`ir3` is}} {{o:0.5}} mA
 - {{v7,8|Evaluating }}{{v7|`-pe`}}{{v8|`–pe`}}{{v9|Flipping the sign of `pe`}} gets the power: {{o:543}} mW
 

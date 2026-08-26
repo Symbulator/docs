@@ -449,8 +449,8 @@ concerns the power transfer to a load, particularly the maximum power transfer
 possible. Maximum power is transferred when the load RL equals the REQ of the
 equivalent. Symbulator's th script gives you the maximum power that can be
 delivered in {{v7,8|**pmax**}}{{v9|`pmax`}}, and the power transferred to the
-load as a function of its value in {{v7,8|**prl**}}{{v9|the `prl` expression
-derived above}}.
+load as a function of its value in {{v7,8|**prl**}}{{v9|the expression
+`vth^2*R/(req+R)^2` derived above}}.
 
 ### What if it's more than a load?
 
