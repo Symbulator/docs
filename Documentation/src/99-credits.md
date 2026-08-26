@@ -68,8 +68,8 @@ to Lars.
 ::: only 9
 Symbulator 9 runs on Python and is powered by the algebraic capabilities of **SymPy**.
 I am thankful to the creators of such wonderful open-source software, and to the 
-maintainers who keep their development going. I am proud to honor the open-source
-community by making Symbulator free and open source software, from 2026.
+maintainers who keep their development going. I am proud to honour the open-source
+community by making Symbulator free and open-source software, from 2026.
 
 I also want to acknowledge that porting Symbulator to Python/SymPy, and creating
 its websites, would not have been possible without the coding prowess of Anthropic's
@@ -77,13 +77,13 @@ artificial intelligence assistant. Claude allowed me to do in two weeks somethin
 I was unable to find the time to do in two decades: to port Symbulator to Python.
 
 AI is not without risks, and needs careful policies and oversight on fronts like ethics, 
-biases, its impact on labor, and its voracious use of water and energy. I believe there
+biases, its impact on labour, and its voracious use of water and energy. I believe there
 is a right way to deploy this technology, and — after working on Symbulator 9 with Claude — I am now convinced that AI will revolutionise the way we work.
 :::
 
 ### Human collaborators
 
-Over the past decades years, many people have made Symbulator better
+Over the past decades, many people have made Symbulator better
 through their suggestions and corrections, on both the software and the
 documentation. Many were complete strangers at first and became dear friends
 through our exchanges. Among them are:
