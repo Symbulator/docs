@@ -8,14 +8,6 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #78 — Talk through the answers in Lesson 8
-
-Roberto's request, 26 Aug 2026. Lesson 8 is `src/08-lesson-power.md`. He
-wants to talk through its answers. Not a freeze on the chapter -- the power
-factor word in #79 was fixed on his explicit instruction after this item was
-opened -- but no *further* answer in chapter 8 changes before the
-conversation.
-
 ## #80 — Array answers become named lines in version 9
 
 Roberto's second piece of feedback. Anywhere the older versions ask for a
@@ -33,30 +25,43 @@ follow") instead of naming each answer.
 
 ## #81 — Simplest names, where the calculator's reason is gone
 
-Roberto's third piece of feedback: a name that exists only to dodge a
-calculator restriction should be simplified in version 9. Meaningful names
-stay -- `ra0` is the resistor from a to 0, and `raa`/`rbb`/`rcc` in Example
-12.11 are the lines a-A, b-B, c-C.
+Roberto's rule: a name that exists only to dodge a calculator restriction
+should be simplified in version 9. Meaningful names stay -- `ra0` is the
+resistor from a to 0, and `raa`/`rbb`/`rcc` in Example 12.11 are the lines
+a-A, b-B, c-C, not dodges.
 
-| Name | Why it was doubled | Version 9 |
+**The restrictions are gone as of 26 Aug 2026** (server `e6c15b2`, local
+`385db30`, deployed to install.symbulator.com and the ZIP). The banned-name
+table was 129 entries guarding a namespace the parser does not have; it is
+now derived and comes to two, `s` and `eturn`. So all of these are legal:
+
+| Name | Was dodging | Version 9 |
 |---|---|---|
-| `rcc` (ch 9, three circuits) | dodges `rc` | `rc` -- **verified accepted** |
-| `rrc` (ch 3, two circuits) | dodges `rc` | `rc` -- **verified accepted** |
-| `ecc` (ch 9, three circuits) | dodges `ec` | **blocked, see below** |
+| `ecc` (ch 9, three circuits) | `ec` | **`ec`** -- verified |
+| `rcc` (ch 9, three circuits) | `rc` | **`rc`** -- verified |
+| `rrc` (ch 3, two circuits) | `rc` | **`rc`** -- verified |
 | `zp`, `yp` (ch 13) | the Titanium's table variables | `z`, `y` -- untested |
+| `e1` (113 circuits, all chapters) | `e` | **`e`** -- decision needed |
 
-`ec` is still refused: version 9 keeps calculator-style aliases (`sec` means
-`s_ec`, built by `answer_aliases()`), so the collision with SymPy's `sec` is
-real and the guard is correct. Not stale, as first thought. Either keep
-`ecc`, or relax the guard deliberately -- `_alias_pattern` already refuses to
-rewrite a name followed by `(`, so `sec(30)` works regardless.
+Version 7 and 8 keep their dodges: those calculators have the real
+restriction, and Roberto's instruction is to preserve per-version
+differences, since the two machines run different operating systems.
 
-The `zp`/`yp` case also carries a **per-version difference to restore**: page
-7 uses `zp`, `zp11`, `izp1`, `r`; page 8 uses `z`, `z11`, `iz1`, `r1`. The
-conversion gave page 7's spelling to both. Roberto: "keep those original
-differences" -- the two calculators run different operating systems and their
-restrictions differ independently. Four `sym 8` blocks, three prose spans,
-seven version 9 blocks.
+Watch for knock-on edits when renaming:
+
+* Derived answer names in version 9 prose -- `ircc` becomes `irc`, `srcc`
+  becomes `src`.
+* `src/09-lesson-threephase.md` line 293 currently reads
+  `` `sea+seb+secc+sra+srb+srcc` `` **ungated**. It was a version span whose
+  halves became identical after the underscore change; a version 9 rename
+  makes them differ again, so it has to be split back into
+  `{{v7,8|...srcc}}{{v9|...src}}`.
+* The tip at line 298, "Why `ecc` and `rcc` rather than `ec` and `rc`",
+  should now say what is true: on the calculator those names collided with
+  reserved ones; version 9 has no such restriction.
+* `e` -> `e1` is a separate decision. It touches 113 circuits and every
+  answer derived from them (`pe1` -> `pe`, `ie1` -> `ie`), so it is worth
+  agreeing before starting.
 
 ## #82 — Eleven examples lost their calculator code
 
@@ -91,14 +96,16 @@ Every `field 9` panel wants checking for the same thing.
 ## #85 — Chapter 7's answers were dressed up as transcripts
 
 Seven answers in `src/07-lesson-ac.md` appear in the 2023 pages as prose --
-"We get 4.789∠-16.7º, which is correct" -- and the conversion reformatted
-them into `out 7,8` blocks with quotes and `ᴇ0` exponents that were never
-there, **dropping the units**.
+"We get 4.789 angle -16.7, which is correct" -- and the conversion reformatted
+them into `out 7,8` blocks with quotes and `e0` exponents that were never
+there. What remains is whether those blocks should go back to reading as
+prose, since they are not transcripts of anything the calculator printed.
 
-One needs Roberto: the original reads "2.708∠-56.73º V and 6.914∠-80.70º
-**mA**" for `s\aa(v1)` and `s\aa(v2)`. Both look like node voltages, so the
-`mA` may be a slip in the original -- but it is his number and stays until he
-says otherwise.
+The unit question is **settled**: the 2023 page reads "2.708 V and 6.914 mA"
+for `sa(v1)` and `sa(v2)`, both of which are node voltages. Roberto
+confirmed on 26 Aug 2026 that the A should be a V. The documentation already
+said V for both, so nothing needed changing -- the slip lives only in the
+2023 archive. The other two `mA` in the chapter are real currents and stay.
 
 ## #86 — Example 12.10's answer array is truncated
 
@@ -134,6 +141,12 @@ tree in the 2023 Website folder.
 ---
 
 ## Settled on 26 Aug 2026
+
+**#78, Lesson 8's answers.** Talked through on 26 Aug 2026 and closed by
+Roberto. It produced the package-API sweep -- `eq.z`, `eq.pmax`, `res[...]`
+named a local variable inside `symbulator_ui.py` that no reader can type --
+the underscore rule, and naming the `th` tool where the 2023 page says `er`.
+
 
 **#79, the power factor in AS7's Practice Problem 11.10.** The page recorded
 `0.93595 leading`; the load is 11.88 + 4.47j, inductive, so it is **lagging**.
