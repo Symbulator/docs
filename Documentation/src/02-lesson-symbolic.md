@@ -185,7 +185,7 @@ s\dc(cir)
 s\dc(cir)
 ```
 ```field 9 Circuit Description
-e1,1,0,e
+e,1,0,e
 r1,1,2,r1
 r2,2,3,4'k
 r3,3,0,6'k
@@ -235,7 +235,7 @@ In the second, headed **Unknown(s) to solve for**, name what you want found, sep
 commas:
 
 ```field 9 Unknown(s) to solve for
-e1, r1
+e, r1
 ```
 
 Then press **Solve equations**.
@@ -366,7 +366,7 @@ additional equations: the source sees 12 kΩ, and the current through R3 is
 under — so `re=12'k` on the calculator becomes `re = 12000` here:
 
 ```field 9 Circuit Description
-e1,1,0,e
+e,1,0,e
 r1,1,2,rx
 r2,2,3,4'k
 r3,3,0,6'k
@@ -378,7 +378,7 @@ ir3 = 0.006
 ```
 
 ```field 9 Add unknowns
-e1, rx
+e, rx
 ```
 
 Run it in DC as usual. This time nothing comes back symbolic: Symbulator has
@@ -507,7 +507,7 @@ s\ex("e,1,0,e:r1,1,0,2'k:r2,1,0,r2:r3,1,0,r3")
 s\ex("e,1,0,e:r1,1,0,2'k:r2,1,0,r2:r3,1,0,r3")
 ```
 ```field 9 Circuit Description
-e1,1,0,e
+e,1,0,e
 r1,1,0,2'k
 r2,1,0,r2
 r3,1,0,r3
@@ -536,7 +536,7 @@ e,r2,r3
 e,r2,r3
 ```
 ```field 9 Add unknowns
-e1, r2, r3
+e, r2, r3
 ```
 
 ::: only 7,8
@@ -581,7 +581,7 @@ s\ex("e,a,c,72:r1,a,b,r1:r2,b,0,r2:r3,0,c,r3:rl1,a,0,rl1:rl2,b,0,rl2")
 s\ex("e,a,c,72:r1,a,b,r1:r2,b,0,r2:r3,0,c,r3:rl1,a,0,rl1:rl2,b,0,rl2")
 ```
 ```field 9 Circuit Description
-e1,a,c,72
+e,a,c,72
 r1,a,b,r1
 r2,b,0,r2
 r3,0,c,r3

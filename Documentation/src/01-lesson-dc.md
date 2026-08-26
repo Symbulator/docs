@@ -36,7 +36,7 @@ s\dc("e1,1,0,36:r1,1,2,1'k:r2,2,3,3'k:r3,3,0,2'k")
 s\dc("e1,1,0,36:r1,1,2,1'k:r2,2,3,3'k:r3,3,0,2'k")
 ```
 ```field 9 Circuit Description
-e1,1,0,36
+e,1,0,36
 r1,1,2,1'k
 r2,2,3,3'k
 r3,3,0,2'k
@@ -130,7 +130,7 @@ and takes the form of a series of lines of text, each one describing an element.
 :::
 
 ```field 9 Circuit Description
-e1,1,0,36
+e,1,0,36
 r1,1,2,1'k
 r2,2,3,3'k
 r3,3,0,2'k
@@ -145,7 +145,7 @@ always done it. This is the same circuit in one line:
 :::
 
 ```field 9 Circuit Description
-e1,1,0,36:r1,1,2,1'k:r2,2,3,3'k:r3,3,0,2'k
+e,1,0,36:r1,1,2,1'k:r2,2,3,3'k:r3,3,0,2'k
 ```
 
 ::: only 7,8
@@ -174,7 +174,7 @@ we can see that in this description there are four elements being
 described:}}{{v9|Study it, and you will see it has four lines. Each line describes
 one element.}}
 
-- The first one is `e1,1,0,36`
+- The first one is {{v7,8|`e1,1,0,36`}}{{v9|`e,1,0,36`}}
 - the second one is `r1,1,2,1'k`
 - the third one is `r2,2,3,3'k`
 - the fourth one is `r3,3,0,2'k`
@@ -223,7 +223,14 @@ reserved variables in the calculator.
 :::
 ::: only 9
 ::: tip No reserved names
-Pending.
+Version 9 reserves nothing. Any name starting with **r** will do, `rc`
+included, and the same goes for every other kind of element.
+
+Two names are refused, and neither is a resistor: a short circuit called `s`,
+whose current would be spelled `is`, and a source called `eturn`, whose
+resistance would be spelled `return`. Both of those spellings already mean
+something in Python, so the answer would be read as that rather than as your
+circuit. Symbulator says so and suggests `s1` or `eturn1`.
 :::
 :::
 
@@ -288,7 +295,7 @@ on the page, and reading them is a matter of scrolling and looking}}.
 ::: only 9
 The **Results** section comes in two parts. **Node voltages** first, one line
 per node, and then **Results by element**, which gives each element a small
-block of its own headed by its name and its kind — `r1` *resistor*, `e1`
+block of its own headed by its name and its kind — `r1` *resistor*, `e`
 *voltage source*.
 
 Every answer is written the way you would write it by hand, as a named quantity
@@ -456,10 +463,10 @@ After naming the nodes, I am ready to describe the elements of the circuit in
 Symbulator notation.
 
 Let's start with the source: when I only have one voltage source, like here, I
-enjoy {{v7,8|naming it with a single letter: e}}{{v9|giving it a short name: e1}}. Having chosen a name for it,
+enjoy {{v7,8|naming it with a single letter: e}}{{v9|giving it a short name: e}}. Having chosen a name for it,
 I can now describe the voltage source as follows:
-{{v7,8|`e,1,0,36`}}{{v9|`e1,1,0,36`}}, given that its name is
-{{v7,8|e}}{{v9|e1}}, its positive node is called 1, its negative node is called
+{{v7,8|`e,1,0,36`}}{{v9|`e,1,0,36`}}, given that its name is
+{{v7,8|e}}{{v9|e}}, its positive node is called 1, its negative node is called
 0, and its value is 36 volts between these nodes in that order.
 
 ::: only 9
@@ -467,7 +474,7 @@ A bare `e` is one of the few names Symbulator 9 will not accept. It builds an
 answer's name out of the quantity and the element, so an element called `e`
 would report its resistance as `re` — and `re` already means something else to
 the mathematics underneath. Symbulator refuses the name rather than quietly
-reading it wrong, and suggests `e1`. The same goes for a handful of other short
+reading it wrong, and suggests `e`. The same goes for a handful of other short
 names; you will be told plainly if you pick one.
 :::
 
@@ -502,7 +509,7 @@ the **Circuit description** box, one to a line:
 "e,1,0,36:r1,1,2,1'k:r2,2,3,3'k:r3,3,0,2'k"→cir
 ```
 ```field 9 Circuit Description
-e1,1,0,36
+e,1,0,36
 r1,1,2,1'k
 r2,2,3,3'k
 r3,3,0,2'k
@@ -577,7 +584,7 @@ attention to the details. For example:
 problem.
 
 *Answer to question (a).* The equivalent resistance as seen by the source
-{{v7,8|e}}{{v9|e1}}:
+{{v7,8|e}}{{v9|e}}:
 
 ```sym 7
 re
@@ -614,7 +621,7 @@ the source, which as you know flows in the opposite direction:
 ```
 
 ::: only 9
-The **current through** line in the same block reads ie1 = −6 mA. The answer
+The **current through** line in the same block reads ie = −6 mA. The answer
 we want is its opposite, 6 mA.
 :::
 
@@ -641,7 +648,7 @@ answers.
 
 *Answer to question (d).* Since the problem asks for the power supplied by the
 source, and we know that {{v7,8|`pe` has}}{{v9|the **power consumed** line of
-the source's block, `pe1`, holds}} the power consumed by it, we need
+the source's block, `pe`, holds}} the power consumed by it, we need
 {{v7,8|to evaluate the negative of it, and we get `.216`}}{{v9|its opposite,
 which is 216 mW}}, that is 216 mW delivered.
 
@@ -670,7 +677,7 @@ nothing. If the resistors consume exactly what the source delivers, then all
 four powers together must come to zero. In **Evaluate**:
 
 ```field 9 Evaluate
-pr1 + pr2 + pr3 + pe1
+pr1 + pr2 + pr3 + pe
 ```
 
 The answer is **0** — not a small number, but zero. If you want to be sure it
@@ -808,14 +815,14 @@ s\dc("e,1,0,24:r1,1,0,10:r2,1,0,220:r3,1,0,1.2'k")
 s\dc("e,1,0,24:r1,1,0,10:r2,1,0,220:r3,1,0,1.2'k")
 ```
 ```field 9 Circuit Description
-e1,1,0,24
+e,1,0,24
 r1,1,0,10
 r2,1,0,220
 r3,1,0,1.2'k
 ```
 
 - {{v7,8|Evaluating `re` gets}}{{v9|`re1` is}} the total resistance: {{o:9.49}} Ω
-- {{v7,8|Evaluating }}{{v7|`-ie`}}{{v8|`–ie`}}{{v9|Flipping the sign of `ie1`}} gets us the source current: {{o:2.53}} A
+- {{v7,8|Evaluating }}{{v7|`-ie`}}{{v8|`–ie`}}{{v9|Flipping the sign of `ie`}} gets us the source current: {{o:2.53}} A
 - {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} I{{sub:1}}: {{o:2.4}} A, {{v7,8|`ir2` gets}}{{v9|`ir2` is}} I{{sub:2}}: {{o:0.11}} A, and {{v7,8|`ir3` gets}}{{v9|`ir3` is}} I{{sub:3}}: {{o:0.02}} A.
 
 :::
@@ -836,14 +843,14 @@ s\dc("e,1,0,12:r1,1,2,6.8'k:r2,2,0,18'k:r3,2,0,2'k:r4,1,0,8.2'k")
 s\dc("e,1,0,12:r1,1,2,6.8'k:r2,2,0,18'k:r3,2,0,2'k:r4,1,0,8.2'k")
 ```
 ```field 9 Circuit Description
-e1,1,0,12
+e,1,0,12
 r1,1,2,6.8'k
 r2,2,0,18'k
 r3,2,0,2'k
 r4,1,0,8.2'k
 ```
 
-Answers: `v2` is {{o:2.51}} V, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie1`}} (e.g. I{{sub:S}}) is {{o:2.86}} mA and
+Answers: `v2` is {{o:2.51}} V, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} (e.g. I{{sub:S}}) is {{o:2.86}} mA and
 `ir4` is {{o:1.46}} mA.
 
 :::
@@ -893,7 +900,7 @@ s\dc("e,1,0,240:r1,1,2,5:r2,2,0,6:r3,2,3,4:r4,3,0,6:r5,3,4,1:r6,4,0,2")
 s\dc("e,1,0,240:r1,1,2,5:r2,2,0,6:r3,2,3,4:r4,3,0,6:r5,3,4,1:r6,4,0,2")
 ```
 ```field 9 Circuit Description
-e1,1,0,240
+e,1,0,240
 r1,1,2,5
 r2,2,0,6
 r3,2,3,4
@@ -930,14 +937,14 @@ r1,3,4,4'k
 r3,1,2,12'k
 r4,1,4,24'k
 r5,1,0,12'k
-e1,4,0,72
+e,4,0,72
 r6,4,5,12'k
 r7,5,0,9'k
 r8,5,6,3'k
 r9,0,6,6'k
 ```
 
-Answers: `ir5` is {{o:3}} mA, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie1`}} (e.g. I{{sub:S}}) is {{o:7.36}} mA, and
+Answers: `ir5` is {{o:3}} mA, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} (e.g. I{{sub:S}}) is {{o:7.36}} mA, and
 `vr7` is {{o:19.6}} V.
 
 :::
@@ -960,7 +967,7 @@ s\dc("e,1,0,16.8:r1,1,2,9:r2,1,2,6:r3,2,3,4:r4,3,0,6:r5,3,0,3:r6,2,0,3")
 s\dc("e,1,0,16.8:r1,1,2,9:r2,1,2,6:r3,2,3,4:r4,3,0,6:r5,3,0,3:r6,2,0,3")
 ```
 ```field 9 Circuit Description
-e1,1,0,16.8
+e,1,0,16.8
 r1,1,2,9
 r2,1,2,6
 r3,2,3,4
@@ -970,7 +977,7 @@ r6,2,0,3
 ```
 
 Current I{{sub:1}} is found via `ir1` = {{o:1.2}} A, I{{sub:2}} via `ir2` =
-{{o:1.8}} A, I{{sub:A}}, via {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie1`}} = {{o:3}} A, I{{sub:B}} via `ir3` =
+{{o:1.8}} A, I{{sub:A}}, via {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} = {{o:3}} A, I{{sub:B}} via `ir3` =
 {{o:1}} A and I{{sub:C}} via `ir6` = {{o:2}} A. The voltage drop in area A is
 `vr1` = {{o:10.8}} V; in both B and C it is `v2` = {{o:6}} V.
 
@@ -991,7 +998,7 @@ s\dc("e,1,0,28:r1,1,0,1.6'k:r2,1,0,20'k:r3,1,0,56'k")
 s\dc("e,1,0,28:r1,1,0,1.6'k:r2,1,0,20'k:r3,1,0,56'k")
 ```
 ```field 9 Circuit Description
-e1,1,0,28
+e,1,0,28
 r1,1,0,1.6'k
 r2,1,0,20'k
 r3,1,0,56'k
@@ -999,7 +1006,7 @@ r3,1,0,56'k
 
 - {{v7,8|Evaluating `re` gets}}{{v9|`re1` is}} the total resistance: {{o:1.44}} kΩ
 - {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} {{o:17.5}} mA, {{v7,8|`ir2` gets}}{{v9|`ir2` is}} {{o:1.4}} mA, and {{v7,8|`ir3` gets}}{{v9|`ir3` is}} {{o:0.5}} mA
-- {{v7,8|Evaluating }}{{v7|`-pe`}}{{v8|`–pe`}}{{v9|Flipping the sign of `pe1`}} gets the power: {{o:543}} mW
+- {{v7,8|Evaluating }}{{v7|`-pe`}}{{v8|`–pe`}}{{v9|Flipping the sign of `pe`}} gets the power: {{o:543}} mW
 
 These are the correct answers.
 
@@ -1024,7 +1031,7 @@ s\dc("e,a,0,120:r1,a,b,10:r2,b,c,20:r3,c,0,30:
 rl1,a,0,20:rl2,b,0,20:rl3,c,0,20")
 ```
 ```field 9 Circuit Description
-e1,a,0,120
+e,a,0,120
 r1,a,b,10
 r2,b,c,20
 r3,c,0,30
@@ -1128,7 +1135,7 @@ s\dc("e,1,0,24:r1,1,2,6:r2,1,2,6:r3,1,2,2:r4,2,0,8:r5,2,0,12")
 s\dc("e,1,0,24:r1,1,2,6:r2,1,2,6:r3,1,2,2:r4,2,0,8:r5,2,0,12")
 ```
 ```field 9 Circuit Description
-e1,1,0,24
+e,1,0,24
 r1,1,2,6
 r2,1,2,6
 r3,1,2,2
@@ -1136,7 +1143,7 @@ r4,2,0,8
 r5,2,0,12
 ```
 
-Answer: {{v7|`-ie`}}{{v8|`–ie`}}{{v9|The opposite of `ie1`}} is I{{sub:S}}={{o:4}} A, `ir2 `is I{{sub:2}}=.{{o:8}} A, `ir4`
+Answer: {{v7|`-ie`}}{{v8|`–ie`}}{{v9|The opposite of `ie`}} is I{{sub:S}}={{o:4}} A, `ir2 `is I{{sub:2}}=.{{o:8}} A, `ir4`
 is I{{sub:4}}={{o:2.4}} A, `vr1` is V{{sub:1}}={{o:4.8}} V, `vr5` is
 V{{sub:5}}={{o:19.2}} V.
 
@@ -1258,7 +1265,7 @@ s\dc("e,1,0,240:r1,1,2,3:r2,2,3,4:r3,3,4,1:
 r4,4,5,2:r5,3,5,6:r6,2,5,6:r7,5,0,9")
 ```
 ```field 9 Circuit Description
-e1,1,0,240
+e,1,0,240
 r1,1,2,3
 r2,2,3,4
 r3,3,4,1

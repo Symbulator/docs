@@ -67,7 +67,7 @@ time-domain value has to be converted where you type it:}}
 "e,1,0,u(t):r1,1,2,1:r2,2,o,5:c,2,0,1/3,0:l,o,0,1,0"→cir:s\tr(cir):vo
 ```
 ```field 9 Circuit Description
-e1,1,0,t2s(u(t))
+e,1,0,t2s(u(t))
 r1,1,2,1
 r2,2,o,5
 c,2,0,1/3,0
@@ -93,7 +93,7 @@ The extreme version describes everything as an impedance in s — the source as
 "e,1,0,1/s:r1,1,2,1:r2,2,o,5:r3,2,0,3/s:r4,o,0,s"→cir:s\fd(cir):vo
 ```
 ```field 9 Circuit Description
-e1,1,0,1/s
+e,1,0,1/s
 r1,1,2,1
 r2,2,o,5
 r3,2,0,3/s
@@ -110,7 +110,7 @@ and henrys, so give Symbulator farads and henrys and let it do the converting:
 "e,1,0,1/s:r1,1,2,1:r2,2,o,5:c,2,0,1/3,0:l,o,0,1,0"→cir:s\fd(cir):vo
 ```
 ```field 9 Circuit Description
-e1,1,0,1/s
+e,1,0,1/s
 r1,1,2,1
 r2,2,o,5
 c,2,0,1/3,0
@@ -159,7 +159,7 @@ the domain the schematic gave it to you in:
 "e,1,0,s\t2s(u(t)):r1,1,2,1:r2,2,o,5:c,2,0,1/3,0:l,o,0,1,0"→cir:s\fd(cir):s\s2t(vo)
 ```
 ```field 9 Circuit Description
-e1,1,0,t2s(u(t))
+e,1,0,t2s(u(t))
 r1,1,2,1
 r2,2,o,5
 c,2,0,1/3,0
@@ -228,7 +228,7 @@ with the source converted, then transform the answer back.
 "e,1,0,s\t2s(u(t)):r1,1,2,6:c,1,0,1/4,0:l,1,o,2,0:r2,o,0,3"→cir:s\fd(cir):s\s2t(vo)
 ```
 ```field 9 Circuit Description
-e1,1,0,t2s(u(t))
+e,1,0,t2s(u(t))
 r1,1,2,6
 c,1,0,1/4,0
 l,1,o,2,0
@@ -268,7 +268,7 @@ Give the source a symbolic value and solve in FD:
 "e,1,0,vs:r1,1,2,1'k:c,2,0,1'µ:r2,2,o,1'k"→cir:s\fd(cir):vo/vs
 ```
 ```field 9 Circuit Description
-e1,1,0,vs
+e,1,0,vs
 r1,1,2,1'k
 c,2,0,1'µ
 r2,2,o,1'k

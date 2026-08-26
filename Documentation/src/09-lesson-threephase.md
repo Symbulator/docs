@@ -88,12 +88,28 @@ Some observations about my description:
   we use the names ag and ad, where the g reminds us a node is on the
   generation side and the d reminds us it is on the demand side.
 
-Once the simulation is completed, we ask for the currents on the transmission
-lines and get:
+Once the simulation is completed, {{v7,8|we ask for the currents on the
+transmission lines and get:}}{{v9|we look in the results for the currents on
+the transmission lines:}}
 
-```out
+```sym 7
+{s\aa(irat),s\aa(irbt),s\aa(irct)}
+```
+```sym 8
+{s\aa(irat),s\aa(irbt),s\aa(irct)}
+```
+```out 7,8
 {"6.809ᴇ0∠-21.8°","6.809ᴇ0∠-141.8°","6.809ᴇ0∠98.2°"}
 ```
+
+::: only 9
+Tick **Show AC answers as polar phasors** in **Settings** and each line
+impedance's *current through* reads straight off:
+
+- `irat` = {{o:6.809}}∠{{o:-21.8}}° A
+- `irbt` = {{o:6.809}}∠{{o:-141.8}}° A
+- `irct` = {{o:6.809}}∠{{o:98.2}}° A
+:::
 
 The complex power at the source is `sea0+seb0+sec0`, which gives
 −2086.2 − 834.5𝐢 VA. The real part is the average power absorbed by the source;
@@ -175,8 +191,11 @@ For the answers the textbook wants, ask for these:
 ```
 
 ::: only 9
-In **Mini-Tools** with *aa*, `aa(vag-vbg)` gives {{o:207.8}}∠{{o:60.00}}°,
-and the other two the same magnitude at {{o:-60.00}}° and {{o:180.0}}°.
+In **Mini-Tools** with *aa*:
+
+- `aa(vag-vbg)` = {{o:207.8}}∠{{o:60.00}}°
+- `aa(vbg-vcg)` = {{o:207.8}}∠{{o:-60.00}}°
+- `aa(vcg-vag)` = {{o:207.8}}∠{{o:180.0}}°
 :::
 
 ::: tip Which line voltage did you want?
@@ -191,17 +210,33 @@ different, and which one you want depends on where you are standing.
 
 The line currents are the currents through the transmission-line impedances:
 
+```sym 7
+{s\aa(irat),s\aa(irbt),s\aa(irct)}
+```
+```sym 8
+{s\aa(irat),s\aa(irbt),s\aa(irct)}
+```
 ```out 7,8
 {"3.748ᴇ0∠-8.66°","3.748ᴇ0∠-128.66°","3.748ᴇ0∠111.34°"}
 ```
 
 ::: only 9
-`aa(irat)` gives {{o:3.748}}∠{{o:-8.660}}°, and the other two lines follow at
-120° either side.
+With polar phasors on, each transmission-line impedance's *current through*
+reads:
+
+- `irat` = {{o:3.748}}∠{{o:-8.660}}° A
+- `irbt` = {{o:3.748}}∠{{o:-128.66}}° A
+- `irct` = {{o:3.748}}∠{{o:111.34}}° A
 :::
 
 Finally the complex power. At the source:
 
+```sym 7
+sea0+seb0+sec0
+```
+```sym 8
+sea0+seb0+sec0
+```
 ```out 7,8
 -1053.7-842.9𝐢
 ```
@@ -214,6 +249,12 @@ Evaluate `sea0+seb0+sec0`, which gives
 Note this does *not* include the power lost in the source's own internal
 impedances, which you could add if you wanted them. At the load:
 
+```sym 7
+sra0+srb0+src0
+```
+```sym 8
+sra0+srb0+src0
+```
 ```out 7,8
 1011.5+800.8𝐢
 ```
@@ -263,10 +304,10 @@ s\ac(cir,ω)
 ```field 9 Circuit Description
 ea,a,0,(120∠0°)
 eb,b,0,(120∠-120°)
-ecc,c,0,(120∠120°)
+ec,c,0,(120∠120°)
 ra,a,n,5j
 rb,b,n,10
-rcc,c,n,-10j
+rc,c,n,-10j
 ```
 
 ::: only 9
@@ -280,25 +321,35 @@ AC, with **RMS phasors** ticked.
 {s\aa(ira),s\aa(irb),s\aa(ircc),sra,srb,srcc,sea,seb,secc}
 ```
 ```out 7,8
-{"56.78ᴇ0∠0.°","25.46ᴇ0∠135.°","42.76ᴇ0∠-155.1°",16122.𝐢,6480.,-18282.𝐢}
+{"56.78ᴇ0∠0.°","25.46ᴇ0∠135.°","42.76ᴇ0∠-155.1°",16122.𝐢,6480.,-18282.𝐢,-6814.,790.6-2951.𝐢,-456.5+5111.𝐢}
 ```
 
 ::: only 9
 The three line currents read {{o:56.78}}∠{{o:0}}°, {{o:25.46}}∠{{o:135.0}}° and
 {{o:42.76}}∠{{o:-155.1}}°. The complex powers in the load are
-{{o:16120}}𝐢, {{o:6480}} and {{o:-18280}}𝐢 VA.
+{{o:16120}}𝐢, {{o:6480}} and {{o:-18280}}𝐢 VA, and in the three sources
+{{o:-6814}}, {{o:790.6}} − {{o:2951}}𝐢 and {{o:-456.5}} + {{o:5111}}𝐢 VA.
 :::
 
 All correct. Two things are worth checking for yourself. Complex power is
-conserved, so `sea+seb+secc+sra+srb+srcc`
+conserved, so {{v7,8|`sea+seb+secc+sra+srb+srcc`}}{{v9|`sea+seb+sec+sra+srb+src`}}
 evaluates to zero. And the voltage at the centre of the load is *not* zero, as
 it was in the balanced case — `vn` is
 {{o:120.0}} − {{o:283.9}}𝐢 V.
 
+::: only 7,8
 ::: tip Why `ecc` and `rcc` rather than `ec` and `rc`
-The third phase is named with a doubled letter throughout. On the calculator
-that avoided a clash with a reserved name, and version 9 keeps the convention
-so that the same description works everywhere.
+The third phase is named with a doubled letter because on the calculator the
+short names collide with reserved ones. Version 9 has no such restriction and
+names the third phase like the other two.
+:::
+:::
+::: only 9
+::: tip Why `ec` and `rc` here, and `ecc` and `rcc` on the calculator
+The doubled letters exist only to dodge the calculator's reserved names.
+Version 9 has no reserved names to dodge, so the third phase is named like the
+other two.
+:::
 :::
 :::
 :::
@@ -334,11 +385,11 @@ s\ac(cir,ω)
 ```field 9 Circuit Description
 ea,a,0,(100∠0°)
 eb,b,0,(100∠120°)
-ecc,c,0,(100∠-120°)
+ec,c,0,(100∠-120°)
 sn,0,n
 ra,a,n,15
 rb,b,n,10+5j
-rcc,c,n,6-8j
+rc,c,n,6-8j
 ```
 
 ::: only 9
@@ -391,6 +442,9 @@ sources get the angles of the abc sequence.
 ```sym 7
 "ea0,a,0,(100.∠10°):eb0,b,0,(100.∠-110°):ec0,c,0,(100.∠130°):rab,a,b,8.+4.𝐢:rca,c,a,8.+4.𝐢:rbc,b,c,8.+4.𝐢"→cir:s\ac(cir,ω)
 ```
+```sym 8
+"ea0,a,0,(100.∠10°):eb0,b,0,(100.∠–110°):ec0,c,0,(100.∠130°):rab,a,b,8.+4.𝐢:rca,c,a,8.+4.𝐢:rbc,b,c,8.+4.𝐢"→cir:s\ac(cir,ω)
+```
 ```field 9 Circuit Description
 ea0,a,0,(100∠10°)
 eb0,b,0,(100∠-110°)
@@ -410,6 +464,9 @@ The phase currents are the currents in the three load impedances:
 ```sym 7
 {s\aa(irab),s\aa(irbc),s\aa(irca)}
 ```
+```sym 8
+{s\aa(irab),s\aa(irbc),s\aa(irca)}
+```
 ```out 7,8
 {"19.36ᴇ0∠13.43°","19.36ᴇ0∠-106.57°","19.36ᴇ0∠133.43°"}
 ```
@@ -424,6 +481,9 @@ of the current through each source element:
 
 ```sym 7
 {s\aa(-iea0),s\aa(-ieb0),s\aa(-iec0)}
+```
+```sym 8
+{s\aa(–iea0),s\aa(–ieb0),s\aa(–iec0)}
 ```
 ```out 7,8
 {"33.54ᴇ0∠-16.57°","33.54ᴇ0∠-136.57°","33.54ᴇ0∠103.43°"}
@@ -452,6 +512,12 @@ AS7's Example 12.11
 This one has line impedances, so each source reaches the load through a
 resistor, and the load's three nodes are separate from the source's three.
 
+```sym 7
+"ea1,na1,0,(100.∠0°):eb1,nb1,0,(100.∠-120°):ec1,nc1,0,(100.∠120°):raa,na1,na2,1:rbb,nb1,nb2,1:rcc,nc1,nc2,1:rac,na2,nc2,100.+24.*π*𝐢:rcb,nc2,nb2,100.+24.*π*𝐢:rba,nb2,na2,100.+24.*π*𝐢"→cir:s\ac(cir,ω)
+```
+```sym 8
+"ea1,na1,0,(100.∠0°):eb1,nb1,0,(100.∠–120°):ec1,nc1,0,(100.∠120°):raa,na1,na2,1:rbb,nb1,nb2,1:rcc,nc1,nc2,1:rac,na2,nc2,100.+24.*π*𝐢:rcb,nc2,nb2,100.+24.*π*𝐢:rba,nb2,na2,100.+24.*π*𝐢"→cir:s\ac(cir,ω)
+```
 ```field 9 Circuit Description
 ea1,na1,0,100
 eb1,nb1,0,(100∠-120°)
@@ -472,6 +538,12 @@ voltage is the difference between two load nodes:
 {{o:169.94}}∠{{o:30.81}}°. Both are correct.
 :::
 
+```sym 7
+{s\aa(iraa),s\aa(vna2-vnb2),s\aa(irac)}
+```
+```sym 8
+{s\aa(iraa),s\aa(vna2-vnb2),s\aa(irac)}
+```
 ```out 7,8
 {"2.35∠-36.2°","169.94∠30.8°","1.36∠-66.2°"}
 ```
@@ -525,6 +597,12 @@ AS7's Example 12.4
 Node **c** becomes ground, so the source left out is the one opposite it. To
 read the line currents we add three shorts to act as the lines.
 
+```sym 7
+"e0a,0,ag,(330.∠120°):eb0,bg,0,(330.∠-120°):sat,ag,ad:sbt,bg,bd:sct,0,cd:rab,ad,bd,20.-15.𝐢:rbc,bd,cd,20.-15.𝐢:rca,cd,ad,20.-15.𝐢"→cir:s\ac(cir,ω)
+```
+```sym 8
+"e0a,0,ag,(330.∠120°):eb0,bg,0,(330.∠–120°):sat,ag,ad:sbt,bg,bd:sct,0,cd:rab,ad,bd,20.–15.𝐢:rbc,bd,cd,20.–15.𝐢:rca,cd,ad,20.–15.𝐢"→cir:s\ac(cir,ω)
+```
 ```field 9 Circuit Description
 e0a,0,ag,(330∠120°)
 eb0,bg,0,(330∠-120°)
@@ -538,6 +616,12 @@ rca,cd,ad,20-15j
 
 The line currents are the currents through the shorts:
 
+```sym 7
+{s\aa(isat),s\aa(isbt),s\aa(isct)}
+```
+```sym 8
+{s\aa(isat),s\aa(isbt),s\aa(isct)}
+```
 ```out 7,8
 {"22.86ᴇ0∠6.87°","22.86ᴇ0∠-113.13°","22.86ᴇ0∠126.87°"}
 ```
@@ -568,6 +652,14 @@ AS7's Practice Problem 12.9
 :::
 
 ::: answer
+```sym 7
+false→s\rms
+"e0a,0,ag,(440.∠120°):eb0,bg,0,(440.∠-120°):sla,ag,ad:slb,bg,bd:slc,0,cd:rab,ad,bd,10.-𝐢5.:rbc,bd,cd,16.:rca,cd,ad,8.+𝐢6."→cir:s\ac(cir,ω)
+```
+```sym 8
+false→userms
+"e0a,0,ag,(440.∠120°):eb0,bg,0,(440.∠–120°):sla,ag,ad:slb,bg,bd:slc,0,cd:rab,ad,bd,10.–𝐢5.:rbc,bd,cd,16.:rca,cd,ad,8.+𝐢6."→cir:s\ac(cir,ω)
+```
 ```field 9 Circuit Description
 e0a,0,ag,(440∠120°)
 eb0,bg,0,(440∠-120°)
@@ -579,6 +671,12 @@ rbc,bd,cd,16
 rca,cd,ad,8+6j
 ```
 
+```sym 7
+{s\aa(isla),s\aa(islb),s\aa(islc)}
+```
+```sym 8
+{s\aa(isla),s\aa(islb),s\aa(islc)}
+```
 ```out 7,8
 {"39.71ᴇ0∠-41.07°","64.12ᴇ0∠-139.77°","70.13ᴇ0∠74.27°"}
 ```
@@ -605,6 +703,14 @@ AS7's Practice Problem 12.10
 These values are RMS, so {{v7,8|set the flag}}{{v9|tick **RMS phasors** in
 **Settings**}} — this one does ask for power.
 
+```sym 7
+true→s\rms
+"e0a,0,ag,(220.∠-120°):eb0,bg,0,(220.∠120°):sla,ag,ad:slb,bg,bd:slc,0,cd:rab,ad,bd,-𝐢5.:rbc,bd,cd,𝐢10.:rca,cd,ad,10."→cir:s\ac(cir,ω)
+```
+```sym 8
+true→userms
+"e0a,0,ag,(220.∠–120°):eb0,bg,0,(220.∠120°):sla,ag,ad:slb,bg,bd:slc,0,cd:rab,ad,bd,–𝐢5.:rbc,bd,cd,𝐢10.:rca,cd,ad,10."→cir:s\ac(cir,ω)
+```
 ```field 9 Circuit Description
 e0a,0,ag,(220∠-120°)
 eb0,bg,0,(220∠120°)
@@ -616,6 +722,12 @@ rbc,bd,cd,10j
 rca,cd,ad,10
 ```
 
+```sym 7
+{s\aa(isla),s\aa(islb),s\aa(islc),prca+prab+prbc}
+```
+```sym 8
+{s\aa(isla),s\aa(islb),s\aa(islc),prca+prab+prbc}
+```
 ```out 7,8
 {"64.00ᴇ0∠80.1°","38.11ᴇ0∠-60.°","42.50ᴇ0∠-135.°",4840.0}
 ```
@@ -650,6 +762,14 @@ The first of the three is a current *inside* the generator, and the two-source
 trick cannot give it — see the warning above. The other two are ordinary
 element currents.
 
+```sym 7
+false→s\rms
+"e0a,0,ag,(208.∠130°):eb0,bg,0,(208.∠-110°):rla,ag,ad,2.+𝐢5.:rlb,bg,bd,2.+𝐢5.:rlc,0,cd,2.+𝐢5.:rab,ad,bd,50.:rbc,bd,cd,𝐢30.:rca,cd,ad,-𝐢40."→cir:s\ac(cir,ω)
+```
+```sym 8
+false→userms
+"e0a,0,ag,(208.∠130°):eb0,bg,0,(208.∠–110°):rla,ag,ad,2.+𝐢5.:rlb,bg,bd,2.+𝐢5.:rlc,0,cd,2.+𝐢5.:rab,ad,bd,50.:rbc,bd,cd,𝐢30.:rca,cd,ad,–𝐢40."→cir:s\ac(cir,ω)
+```
 ```field 9 Circuit Description
 e0a,0,ag,(208∠130°)
 eb0,bg,0,(208∠-110°)
@@ -659,6 +779,16 @@ rlc,0,cd,2+5j
 rab,ad,bd,50
 rbc,bd,cd,30j
 rca,cd,ad,-40j
+```
+
+```sym 7
+{s\aa(irlb),s\aa(irbc)}
+```
+```sym 8
+{s\aa(irlb),s\aa(irbc)}
+```
+```out 7,8
+{"9.106ᴇ0∠168.48°","5.500ᴇ0∠172.47°"}
 ```
 
 ::: only 9
@@ -690,22 +820,36 @@ AS7's Example 12.5
 :::
 
 ::: answer
+```sym 7
+false→s\rms
+"eca,c,a,(210.∠120°):ebc,b,c,(210.∠-120°):ra,a,0,40.+𝐢25.:rb,b,0,40.+𝐢25.:rcc,c,0,40.+𝐢25."→cir:s\ac(cir,ω)
+```
+```sym 8
+false→userms
+"eca,c,a,(210.∠120°):ebc,b,c,(210.∠–120°):ra,a,0,40.+𝐢25.:rb,b,0,40.+𝐢25.:rcc,c,0,40.+𝐢25."→cir:s\ac(cir,ω)
+```
 ```field 9 Circuit Description
 eca,c,a,(210∠120°)
 ebc,b,c,(210∠-120°)
 ra,a,0,40+25j
 rb,b,0,40+25j
-rcc,c,0,40+25j
+rc,c,0,40+25j
 ```
 
 Node 0 here is the centre of the load's wye, not a node of the source at all.
 
+```sym 7
+{s\aa(ira),s\aa(irb),s\aa(ircc)}
+```
+```sym 8
+{s\aa(ira),s\aa(irb),s\aa(ircc)}
+```
 ```out 7,8
 {"2.570ᴇ0∠-62.01°","2.570ᴇ0∠177.99°","2.570ᴇ0∠57.99°"}
 ```
 
 ::: only 9
-`aa(ira)`, `aa(irb)` and `aa(ircc)` read {{o:2.570}}∠{{o:-62.01}}°,
+`aa(ira)`, `aa(irb)` and `aa(irc)` read {{o:2.570}}∠{{o:-62.01}}°,
 {{o:2.570}}∠{{o:177.99}}° and {{o:2.570}}∠{{o:57.99}}°.
 :::
 

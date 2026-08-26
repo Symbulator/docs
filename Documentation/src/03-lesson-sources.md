@@ -309,7 +309,7 @@ R5 to an equivalent resistor, since we do not need to know their individual
 currents or power use:
 
 ```field 9 Circuit Description
-e1,1,0,16.8
+e,1,0,16.8
 r1,1,2,9
 r2,1,2,6
 r3,2,3,4
@@ -435,7 +435,7 @@ s\dc("j,0,1,7:e,1,0,12:r1,1,0,4"):
 ```
 ```field 9 Circuit Description
 j,0,1,7
-e1,1,0,12
+e,1,0,12
 r1,1,0,4
 ```
 
@@ -677,7 +677,7 @@ approx({v1,v2,v3,–ie})
 ```
 ```field 9 Circuit Description
 j,0,1,3
-e1,3,2,3
+e,3,2,3
 r12,1,2,1/7
 r20,2,0,1/3
 r30,3,0,1/5
@@ -720,7 +720,7 @@ approx({v1,v2})
 ```field 9 Circuit Description
 j1,0,1,6
 r1,1,0,4
-e1,1,2,12
+e,1,2,12
 r3,1,2,10
 r2,2,0,2
 j2,2,0,4
@@ -754,7 +754,7 @@ s\dc("e,2,0,24:r1,1,2,6:r2,1,0,12:j,0,1,1"):approx({v1,ir1,ir2})
 s\dc("e,2,0,24:r1,1,2,6:r2,1,0,12:j,0,1,1"):approx({v1,ir1,ir2})
 ```
 ```field 9 Circuit Description
-e1,2,0,24
+e,2,0,24
 r1,1,2,6
 r2,1,0,12
 j,0,1,1
@@ -818,7 +818,7 @@ s\dc("e,3,0,64:r1,3,1,8:r2,1,2,4:j,1,2,2:r3,2,0,10"):
 approx({v1,v2,ir1,ir2,ir3})
 ```
 ```field 9 Circuit Description
-e1,3,0,64
+e,3,0,64
 r1,3,1,8
 r2,1,2,4
 j,1,2,2
@@ -861,7 +861,7 @@ s\dc("e,0,b,20:r1,0,a,16:r2,a,b,40:r3,a,b,60"):{va-vb,ir3}
 s\dc("e,0,b,20:r1,0,a,16:r2,a,b,40:r3,a,b,60"):{va-vb,ir3}
 ```
 ```field 9 Circuit Description
-e1,0,b,20
+e,0,b,20
 r1,0,a,16
 r2,a,b,40
 r3,a,b,60
@@ -889,7 +889,7 @@ s\dc("e,0,b,20:r1,0,a,16:r2,a,b,40:r4,a,b,240:j,a,b,i4")
 s\dc("e,0,b,20:r1,0,a,16:r2,a,b,40:r4,a,b,240:j,a,b,i4")
 ```
 ```field 9 Circuit Description
-e1,0,b,20
+e,0,b,20
 r1,0,a,16
 r2,a,b,40
 r4,a,b,240
@@ -985,7 +985,7 @@ s\dc("j,0,1,6:r1,1,2,2:r2,1,2,1:e,2,0,20"):
 j,0,1,6
 r1,1,2,2
 r2,1,2,1
-e1,2,0,20
+e,2,0,20
 ```
 
 ::: only 9
@@ -1014,7 +1014,7 @@ s\ex("e,1,0,60:r8,1,2,8:r10,2,0,10:r4,2,3,4:r2,3,0,2:j,0,3,ix"):
 {ix,v3}
 ```
 ```field 9 Circuit Description
-e1,1,0,60
+e,1,0,60
 r8,1,2,8
 r10,2,0,10
 r4,2,3,4
@@ -1687,7 +1687,7 @@ s\dc("e,1,0,12:r1,1,2,1:r4,2,0,4:r10,2,3,10:r6,3,0,6:
 r2,3,4,2:j,4,0,vr10/15"):approx({vr10,ir2,vj})
 ```
 ```field 9 Circuit Description
-e1,1,0,12
+e,1,0,12
 r1,1,2,1
 r4,2,0,4
 r10,2,3,10
@@ -1764,7 +1764,7 @@ s\dc("e,1,0,vs:r1,1,2,50:r2,2,o,1'k:r3,o,0,100:
 r4,o,0,5'k:j,0,o,100'm*vr2"):approx({vo,re})
 ```
 ```field 9 Circuit Description
-e1,1,0,vs
+e,1,0,vs
 r1,1,2,50
 r2,2,o,1'k
 r3,o,0,100
@@ -1836,8 +1836,8 @@ Find *v*{{sub:O}}.
 
 :::
 
-I did not label the nodes, so you can practice. Remember not using **rc**: it
-is reserved.
+I did not label the nodes, so you can practice.
+{{v7,8|Remember not using **rc**: it is reserved.}}
 
 ```sym 7
 s\dc("ei,1,0,vs:rs,1,2,rs:rx,2,0,rp:ed,0,3,r*irx:rrc,3,o,rrc:rl,o,0,rl"):vo
@@ -1850,7 +1850,7 @@ ei,1,0,vs
 rs,1,2,rs
 rx,2,0,rp
 ed,0,3,r*irx
-rrc,3,o,rrc
+rc,3,o,rc
 rl,o,0,rl
 ```
 
@@ -1891,7 +1891,7 @@ s\dc("e,a,0,v1:r1,a,3,r1:rg,3,0,rg:j,2,0,gm*vrg:rd,2,0,rd:rl,2,0,rl"):v2
 s\dc("e,a,0,v1:r1,a,3,r1:rg,3,0,rg:j,2,0,gm*vrg:rd,2,0,rd:rl,2,0,rl"):v2
 ```
 ```field 9 Circuit Description
-e1,a,0,v1
+e,a,0,v1
 r1,a,3,r1
 rg,3,0,rg
 j,2,0,gm*vrg
@@ -2026,7 +2026,7 @@ e1,1,0,vcc
 rb,1,b,rb
 e2,e,b,vgamma
 re1,e,0,re1
-rrc,1,c,rrc
+rc,1,c,rc
 j,c,e,beta*irb
 ```
 

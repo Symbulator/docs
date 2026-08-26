@@ -325,7 +325,7 @@ s\dc("e,1,0,V:r1,1,2,r1:c,2,0,c:r,2,0,r")
 s\dc("e,1,0,V:r1,1,2,r1:c,2,0,c:r,2,0,r")
 ```
 ```field 9 Circuit Description
-e1,1,0,V
+e,1,0,V
 r1,1,2,r1
 c,2,0,c
 r,2,0,r
@@ -351,6 +351,8 @@ r,2,0,r
 
 When the simulation is *Done*, we ask for `vc` again. We get the expression
 below, which is correct.
+
+e{{sup:-t/cr}} (r v)/(r+r1)
 
 :::
 
@@ -419,7 +421,7 @@ The answers you want are `vc` and `ic`, in **Results**.
 
 When the simulation is *Done*, we get the expressions below. They are right.
 
-{ , }
+{ 6e{{sup:-4t}} , -2e{{sup:-4t}} }
 
 :::
 
@@ -441,7 +443,7 @@ s\dc("e,1,0,12:r3,1,2,3:r6,2,0,6:r4,2,3,4:c,3,0,1/12"):{vc,ic,v2}
 s\dc("e,1,0,12:r3,1,2,3:r6,2,0,6:r4,2,3,4:c,3,0,1/12"):{vc,ic,v2}
 ```
 ```field 9 Circuit Description
-e1,1,0,12
+e,1,0,12
 r3,1,2,3
 r6,2,0,6
 r4,2,3,4
@@ -465,7 +467,7 @@ s\tr("e,1,0,0:r3,1,2,3:r6,2,0,6:r4,2,3,4:c,3,0,1/12,8"):{vc,ic,v2}
 s\tr("e,1,0,0:r3,1,2,3:r6,2,0,6:r4,2,3,4:c,3,0,1/12,8"):{vc,ic,v2}
 ```
 ```field 9 Circuit Description
-e1,1,0,0
+e,1,0,0
 r3,1,2,3
 r6,2,0,6
 r4,2,3,4
@@ -478,7 +480,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `v2`, in **Results**.
 :::
 
-{ , , }
+{ 8e{{sup:-2t}} , (-4/3)e{{sup:-2t}} , (8/3)e{{sup:-2t}} }
 
 :::
 
@@ -537,7 +539,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `v1`, in **Results**.
 :::
 
-{ , , }
+{ 6e{{sup:-5t}} , -3e{{sup:-5t}} , 3e{{sup:-5t}} }
 
 :::
 
@@ -574,7 +576,7 @@ The answers you want are `vl`, `il` and `vr`, in **Results**.
 
 After 22 seconds, we get the right answers:
 
-{ , , }
+{ -il0 r e{{sup:(-r t)/l}} , il0 e{{sup:(-r t)/l}} , -il0 r e{{sup:(-r t)/l}} }
 
 :::
 
@@ -595,7 +597,7 @@ s\dc("e,1,0,v:r1,1,2,r1:l,2,0,l:r2,2,0,r"):il
 s\dc("e,1,0,v:r1,1,2,r1:l,2,0,l:r2,2,0,r"):il
 ```
 ```field 9 Circuit Description
-e1,1,0,v
+e,1,0,v
 r1,1,2,r1
 l,2,0,l
 r2,2,0,r
@@ -606,6 +608,8 @@ The answer you want is `il`, in **Results**.
 :::
 
 For **t ≥ 0s**, simulate in TR, giving the inductor its initial condition.
+
+e{{sup:(-r t)/l}}v/r1
 
 ```sym 7
 s\tr("l,2,0,l,v/r1:r2,2,0,r"):il
@@ -643,7 +647,7 @@ s\dc("e,1,0,8:r4,1,2,4:l,2,0,1:r12,2,0,12"):{il,vl,ir1}
 s\dc("e,1,0,8:r4,1,2,4:l,2,0,1:r12,2,0,12"):{il,vl,ir1}
 ```
 ```field 9 Circuit Description
-e1,1,0,8
+e,1,0,8
 r4,1,2,4
 l,2,0,1
 r12,2,0,12
@@ -665,7 +669,7 @@ s\tr("e,1,0,0:r4,1,2,4:l,2,0,1,2:r12,2,0,12"):{il,vl,ir4}
 s\tr("e,1,0,0:r4,1,2,4:l,2,0,1,2:r12,2,0,12"):{il,vl,ir4}
 ```
 ```field 9 Circuit Description
-e1,1,0,0
+e,1,0,0
 r4,1,2,4
 l,2,0,1,2
 r12,2,0,12
@@ -677,7 +681,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il`, `vl` and `ir4`, in **Results**.
 :::
 
-{ , , }
+{ 2e{{sup:-3t}} , -6 e{{sup:-3t}} , (3/2)e{{sup:-3t}} }
 
 In my machine the simulation took 30 seconds, 12 seconds of these (40%) were
 used in finding the inverse Laplace of the answers. Later we will learn a
@@ -694,6 +698,8 @@ Find i{{sub:L}}(t) for t≥0, given that i{{sub:L}}(0) = 5A.
 :::
 
 We only run the transient simulation for t≥0, with initial condition 5A.
+
+5e{{sup:((-R t)/3L)}}
 
 ```sym 7
 s\tr("r,v,0,r:j,v,0,2ir:l,v,0,l,5"):il
@@ -766,7 +772,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il` and `vl`, in **Results**.
 :::
 
-{ , }
+{ 2 e{{sup:-2t}} , -64 e{{sup:-2t}} }
 
 :::
 
@@ -788,7 +794,7 @@ s\dc("e,3,0,4:r2,3,1,2:r5,1,o,5:c,1,o,1/20:o,0,1,o"):{vc,ic,vo}
 s\dc("e,3,0,4:r2,3,1,2:r5,1,o,5:c,1,o,1/20:o,0,1,o"):{vc,ic,vo}
 ```
 ```field 9 Circuit Description
-e1,3,0,4
+e,3,0,4
 r2,3,1,2
 r5,1,o,5
 c,1,o,1/20
@@ -822,7 +828,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
 :::
 
-{ , , }
+{ 10 e{{sup:-4t}} , -2 e{{sup:-4t}} , -10 e{{sup:-4t}} }
 
 :::
 
@@ -844,7 +850,7 @@ s\dc("e,2,0,4:o,2,1,o:c,o,1,1/20:r5,o,1,5:r2,1,0,2"):{vc,ic,vo}
 s\dc("e,2,0,4:o,2,1,o:c,o,1,1/20:r5,o,1,5:r2,1,0,2"):{vc,ic,vo}
 ```
 ```field 9 Circuit Description
-e1,2,0,4
+e,2,0,4
 o,2,1,o
 c,o,1,1/20
 r5,o,1,5
@@ -878,7 +884,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
 :::
 
-{ , , }
+{ 10 e{{sup:-4t}} , -2 e{{sup:-4t}} , 10 e{{sup:-4t}} }
 
 :::
 
@@ -904,7 +910,7 @@ s\dc("e,2,0,10:r1,2,1,1:c,1,0,1/4:r4,1,0,4"):{vc,ic}
 s\dc("e,2,0,10:r1,2,1,1:c,1,0,1/4:r4,1,0,4"):{vc,ic}
 ```
 ```field 9 Circuit Description
-e1,2,0,10
+e,2,0,10
 r1,2,1,1
 c,1,0,1/4
 r4,1,0,4
@@ -937,7 +943,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc` and `ic`, in **Results**.
 :::
 
-{ , }
+{ 8 e{{sup:-t}} , -2 e{{sup:-t}} }
 
 The voltage in the capacitor at the end of this second interval will serve as
 initial condition for the third interval. We can use its exact value, e.g.
@@ -958,6 +964,8 @@ re,1,0,[4,6]
 ```
 
 Ask for `{vc,ic}`. The expressions we get are equivalent to:
+
+{ 2.943 e{{sup:(-5(t-1))/3}} , -1.226 e{{sup:(-5(t-1))/3}} }
 
 These are the right answers, as can be seen by checking the book's answers.
 
@@ -990,7 +998,7 @@ s\dc("e,1,0,9:r9,1,0,9:r3,1,2,3:l,2,0,6"):{il,vl}
 s\dc("e,1,0,9:r9,1,0,9:r3,1,2,3:l,2,0,6"):{il,vl}
 ```
 ```field 9 Circuit Description
-e1,1,0,9
+e,1,0,9
 r9,1,0,9
 r3,1,2,3
 l,2,0,6
@@ -1023,7 +1031,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il` and `vl`, in **Results**.
 :::
 
-{ , }
+{ 3 e{{sup:-2t}} , -36 e{{sup:-2t}} }
 
 The current in the capacitor at the end of this second interval will serve as
 initial condition for the third interval. Find its approximate value thus:
@@ -1039,6 +1047,8 @@ iL|t=2.
 
 The third interval corresponds to t > 2 second. We simulate in TR. To make
 things easier for Symbulator, we replace the resistors by their equivalent.
+
+{ .055 e{{sup:(-(t-2)/2)}} , -.165 e{{sup:(-(t-2)/2)}} }
 
 ```sym 7
 s\tr("r,1,0,[9+3,4]:l,1,0,6,.055"):{il,vl}
@@ -1082,7 +1092,7 @@ s\tr("e,1,0,V*u(t):r,1,2,r:c,2,0,c,0"):{vc,vr,ic}
 s\tr("e,1,0,V*u(t):r,1,2,r:c,2,0,c,0"):{vc,vr,ic}
 ```
 ```field 9 Circuit Description
-e1,1,0,V*Heaviside(t)
+e,1,0,V*Heaviside(t)
 r,1,2,r
 c,2,0,c,0
 ```
@@ -1096,7 +1106,7 @@ The answers you want are `vc`, `vr` and `ic`, in **Results**.
 There is no need to ask for i{{sub:R}}, since i{{sub:R}}=i{{sub:C}}. We get
 the following expressions:
 
-{ , , }
+{ v-v e{{sup:(-t/(c r))}} , v e{{sup:(-t/(c r))}} , (v/r)e{{sup:(-t/(c r))}} }
 
 :::
 
@@ -1117,7 +1127,7 @@ s\tr("e,1,0,V*u(t):l,1,2,l,0:r,2,0,r"):{vl,vr,il}
 s\tr("e,1,0,V*u(t):l,1,2,l,0:r,2,0,r"):{vl,vr,il}
 ```
 ```field 9 Circuit Description
-e1,1,0,V*Heaviside(t)
+e,1,0,V*Heaviside(t)
 l,1,2,l,0
 r,2,0,r
 ```
@@ -1131,7 +1141,7 @@ The answers you want are `vl`, `vr` and `il`, in **Results**.
 There is no need to ask for i{{sub:R}}, since in a series circuit it will be
 identical to i{{sub:L}}.
 
-{ , , }
+{ v e{{sup:(-r t)/l}} , v (1-e{{sup:(-r t)/l}}) , (v/r)(1-e{{sup:(-r t)/l}}) }
 
 :::
 
@@ -1154,7 +1164,7 @@ s\tr("e,1,0,12:r4,1,2,4:l,2,3,2,0:r2,3,0,2"):{il,vl,v2}
 s\tr("e,1,0,12:r4,1,2,4:l,2,3,2,0:r2,3,0,2"):{il,vl,v2}
 ```
 ```field 9 Circuit Description
-e1,1,0,12
+e,1,0,12
 r4,1,2,4
 l,2,3,2,0
 r2,3,0,2
@@ -1166,7 +1176,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il`, `vl` and `v2`, in **Results**.
 :::
 
-{ , , }
+{ 2-2e{{sup:-3t}} , 12 e{{sup:-3t}} , 8 e{{sup:-3t}}+4 }
 
 :::
 
@@ -1202,7 +1212,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `v1`, `ir` and `ic`, in **Results**.
 :::
 
-{ , , }
+{ (i-i e{{sup:-t/(c r)}})*r , i-i e{{sup:-t/(c r)}} , i e{{sup:-t/(c r)}} }
 
 :::
 
@@ -1226,7 +1236,7 @@ s\tr("e,1,0,1:o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic,vo}
 s\tr("e,1,0,1:o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic,vo}
 ```
 ```field 9 Circuit Description
-e1,1,0,1
+e,1,0,1
 o,1,2,o
 c,2,o,1/8,0
 r2,2,o,2
@@ -1239,7 +1249,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
 :::
 
-{ , , }
+{ 2 e{{sup:-4t}}-2 , -e{{sup:-4t}} , 3-2e{{sup:-4t}} }
 
 :::
 
@@ -1262,7 +1272,7 @@ s\tr("e,1,0,1:r1,1,2,1:r2,2,o,2:c,2,o,1/8,0:o,0,2,o"):{vc,ic,vo}
 s\tr("e,1,0,1:r1,1,2,1:r2,2,o,2:c,2,o,1/8,0:o,0,2,o"):{vc,ic,vo}
 ```
 ```field 9 Circuit Description
-e1,1,0,1
+e,1,0,1
 r1,1,2,1
 r2,2,o,2
 c,2,o,1/8,0
@@ -1275,7 +1285,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
 :::
 
-{ , , }
+{ 2-2 e{{sup:-4t}} , e{{sup:-4t}} , 2 e{{sup:-4t}}-2 }
 
 :::
 
@@ -1301,7 +1311,7 @@ s\tr("e,1,0,V*u(t):r,1,2,r:c,2,0,c,0"):vc
 s\tr("e,1,0,V*u(t):r,1,2,r:c,2,0,c,0"):vc
 ```
 ```field 9 Circuit Description
-e1,1,0,V*Heaviside(t)
+e,1,0,V*Heaviside(t)
 r,1,2,r
 c,2,0,c,0
 ```
@@ -1313,6 +1323,8 @@ The answer you want is `vc`, in **Results**.
 :::
 
 The expression for the capacitor's voltage drop in the first interval is:
+
+v-v e{{sup:(-t/(c r))}}
 
 The second interval starts at t{{sub:0}}. In it, the initial condition of the
 capacitor is given by the value of the expression above when t=t{{sub:0}}.
@@ -1329,6 +1341,8 @@ The circuit description for the second interval uses the expression above as
 the initial condition of the capacitor. In this second interval, the source
 has a value of 0 volts, which is another way to say that it becomes a short,
 so there is no need to include it in the circuit description.
+
+(v-v e{{sup:(-to/(c r))}})e{{sup:((-t+to)/(c r))}}
 
 ```sym 7
 s\tr("r,0,2,r:c,2,0,c,v-e^(-to/(c*r))*v"):vc
@@ -1373,7 +1387,7 @@ s\tr("e,1,0,V*u(t):l,1,2,l,0:r,2,0,r"):il
 s\tr("e,1,0,V*u(t):l,1,2,l,0:r,2,0,r"):il
 ```
 ```field 9 Circuit Description
-e1,1,0,V*Heaviside(t)
+e,1,0,V*Heaviside(t)
 l,1,2,l,0
 r,2,0,r
 ```
@@ -1385,6 +1399,8 @@ The answer you want is `il`, in **Results**.
 :::
 
 The expression for the inductor's current in the first interval is:
+
+(v/r)(1-e{{sup:((-r t)/l)}})
 
 The second interval starts at t{{sub:0}}. In it, the initial condition of the
 inductor is given by the value of the expression above when t=t{{sub:0}}.
@@ -1401,6 +1417,8 @@ The circuit description for the second interval uses the expression above as
 the initial condition of the inductor. In this second interval, the source
 becomes a short, so there is no need to include it in the circuit
 description.
+
+(v/r)(1-e{{sup:((-to r)/l)}})e{{sup:((-r t)/l)}}
 
 ```sym 7
 s\tr("l,0,2,l,v/r-e^(-to*r/l)*v/r:r,2,0,r"):il
@@ -1421,6 +1439,8 @@ The answer you want is `il`, in **Results**.
 
 To put this in terms of the same t as the first interval, we replace **t**
 with **t-t**{{sub:o}}:
+
+(v/r)(1-e{{sup:((-to r)/l)}})e{{sup:((-r (t-to))/l)}}
 
 This is the expression for the inductor's current in the second interval.
 
@@ -1445,7 +1465,7 @@ s\dc("e,1,0,2:r3,1,2,3:r5,2,3,5:c,3,0,1:j,0,2,2ir3"):vc
 s\dc("e,1,0,2:r3,1,2,3:r5,2,3,5:c,3,0,1:j,0,2,2ir3"):vc
 ```
 ```field 9 Circuit Description
-e1,1,0,2
+e,1,0,2
 r3,1,2,3
 r5,2,3,5
 c,3,0,1
@@ -1461,6 +1481,8 @@ The answer you want is `vc`, in **Results**.
 This is the initial condition for the capacitor in the second interval, which
 we analyze using TR and a source value of -4 V.
 
+6e{{sup:( -t/6)}}-4
+
 ```sym 7
 s\tr("e,1,0,-4:r3,1,2,3:r5,2,3,5:c,3,0,1,2:j,0,2,2ir3"):vc
 ```
@@ -1468,7 +1490,7 @@ s\tr("e,1,0,-4:r3,1,2,3:r5,2,3,5:c,3,0,1,2:j,0,2,2ir3"):vc
 s\tr("e,1,0,–4:r3,1,2,3:r5,2,3,5:c,3,0,1,2:j,0,2,2ir3"):vc
 ```
 ```field 9 Circuit Description
-e1,1,0,-4
+e,1,0,-4
 r3,1,2,3
 r5,2,3,5
 c,3,0,1,2
@@ -1524,7 +1546,7 @@ s\dc("e,1,0,1:o,1,2,o:c,2,o,1/4:r2,2,o,2:r1,2,0,1"):vc
 s\dc("e,1,0,1:o,1,2,o:c,2,o,1/4:r2,2,o,2:r1,2,0,1"):vc
 ```
 ```field 9 Circuit Description
-e1,1,0,1
+e,1,0,1
 o,1,2,o
 c,2,o,1/4
 r2,2,o,2
@@ -1563,6 +1585,8 @@ This is optional: Symbulator 9 solves quickly enough that limiting the results r
 Then we run the simulation for the second interval, just as we did before,
 but with the new capacitor and source values.
 
+4e{{sup:(-2t)}}-6
+
 ```sym 7
 s\tr("e,1,0,3:o,1,2,o:c,2,o,1/4,-2:r2,2,o,2:r1,2,0,1"):vc
 ```
@@ -1570,7 +1594,7 @@ s\tr("e,1,0,3:o,1,2,o:c,2,o,1/4,-2:r2,2,o,2:r1,2,0,1"):vc
 s\tr("e,1,0,3:o,1,2,o:c,2,o,1/4,–2:r2,2,o,2:r1,2,0,1"):vc
 ```
 ```field 9 Circuit Description
-e1,1,0,3
+e,1,0,3
 o,1,2,o
 c,2,o,1/4,-2
 r2,2,o,2
@@ -1611,6 +1635,10 @@ r,1,0,r
 
 Once the simulation completes, we ask for the variables of interest:
 
+(i/c)e{{sup:(-t/(c r))}}
+
+(-i/(c r))e{{sup:(-t/(c r))}}
+
 ::: only 9
 They are already in **Results**: `vc` is {{o:i*exp(-t/(c*r))/c}} and `ic`
 is {{o:i*DiracDelta(t) - i*exp(-t/(c*r))/(c*r)}}.
@@ -1650,7 +1678,7 @@ s\tr("e,1,0,δ(t):o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic,vo}
 s\tr("e,1,0,δ(t):o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic,vo}
 ```
 ```field 9 Circuit Description
-e1,1,0,DiracDelta(t)
+e,1,0,DiracDelta(t)
 o,1,2,o
 c,2,o,1/8,0
 r2,2,o,2
@@ -1663,7 +1691,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
 :::
 
-{ , , }
+{ -8 e{{sup:-4t}} , 4 e{{sup:-4t}} , 8 e{{sup:-4t}} }
 
 :::
 
@@ -1694,7 +1722,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il` and `vl`, in **Results**.
 :::
 
-{ , }
+{ ((i l)/r)(e{{sup:((-r t)/l)}}-1)+i t , i l(1-e{{sup:((-r t)/l)}}) }
 
 :::
 
@@ -1712,7 +1740,7 @@ s\tr("e,1,0,t:o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic}
 s\tr("e,1,0,t:o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic}
 ```
 ```field 9 Circuit Description
-e1,1,0,t
+e,1,0,t
 o,1,2,o
 c,2,o,1/8,0
 r2,2,o,2
@@ -1725,7 +1753,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc` and `ic`, in **Results**.
 :::
 
-{ , }
+{ (1/2)(1-e{{sup:-4t}})-2t , (1/4)(e{{sup:-4t}}-1) }
 
 :::
 
@@ -1758,7 +1786,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il` and `vl`, in **Results**.
 :::
 
-{ , }
+{ 6 e{{sup:-3t}}-6 e{{sup:-4t}} , 48 e{{sup:-4t}}-36 e{{sup:-3t}} }
 
 :::
 
@@ -1788,7 +1816,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il` and `vl`, in **Results**.
 :::
 
-{ , }
+{ 6 t e{{sup:-3t}} , (12-36 t) e{{sup:-3t}} }
 
 :::
 
@@ -1808,7 +1836,7 @@ s\tr("e,1,0,18e^(-t/2):r3,1,2,3:r5,2,3,5:c,3,0,1,0:j,0,2,2ir3"):{vc,ir3}
 s\tr("e,1,0,18e^(–t/2):r3,1,2,3:r5,2,3,5:c,3,0,1,0:j,0,2,2ir3"):{vc,ir3}
 ```
 ```field 9 Circuit Description
-e1,1,0,18*exp(-t/2)
+e,1,0,18*exp(-t/2)
 r3,1,2,3
 r5,2,3,5
 c,3,0,1,0
@@ -1821,7 +1849,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc` and `ir3`, in **Results**.
 :::
 
-{ , }
+{ 9 e{{sup:(-t/6)}}-9 e{{sup:(-t/2)}} , (3/2) e{{sup:(-t/2)}}-(1/2)e{{sup:(-t/6)}} }
 
 :::
 
@@ -1838,7 +1866,7 @@ s\tr("e,1,0,2e^(-4t):o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic}
 s\tr("e,1,0,2e^(–4t):o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic}
 ```
 ```field 9 Circuit Description
-e1,1,0,2*exp(-4*t)
+e,1,0,2*exp(-4*t)
 o,1,2,o
 c,2,o,1/8,0
 r2,2,o,2
@@ -1851,7 +1879,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc` and `ic`, in **Results**.
 :::
 
-{ , }
+{ -16 t e{{sup:-4 t}} , (8 t-2) e{{sup:-4t}} }
 
 :::
 
@@ -1874,7 +1902,7 @@ s\dc("e,3,0,9:r2,3,1,5:r1,1,0,5:l,1,2,1/2:c,2,0,1/8:r3,2,0,2"):{vc,il}
 s\dc("e,3,0,9:r2,3,1,5:r1,1,0,5:l,1,2,1/2:c,2,0,1/8:r3,2,0,2"):{vc,il}
 ```
 ```field 9 Circuit Description
-e1,3,0,9
+e,3,0,9
 r2,3,1,5
 r1,1,0,5
 l,1,2,1/2
@@ -1904,7 +1932,7 @@ l,1,2,1/2,1
 c,2,0,1/8,2
 ```
 
-{ , }
+{ 4 e{{sup:-2t}}-2 e{{sup:-8t}} , 2 e{{sup:-8t}}-e{{sup:-2t}} }
 
 Notice that the use of the only tool saves approximately 10 seconds here.
 
@@ -1981,6 +2009,10 @@ The answers you want are `vc` and `il`, in **Results**.
 
 These conditions are used in the TR analysis of the second interval,
 for t≥0.
+
+3e{{sup:-2t}}-e{{sup:-6t}}
+
+2e{{sup:-6t}}-2e{{sup:-2t}}
 
 ::: only 9
 The answers are `vc` = {{o:2 - 3*exp(-2*t) + exp(-6*t)}} and `il` =
@@ -2060,7 +2092,7 @@ s\dc("e1,0,1,7/2:r1,1,2,4:c,2,0,2:r2,2,0,1/6"):vc
 s\dc("e1,0,1,7/2:r1,1,2,4:c,2,0,2:r2,2,0,1/6"):vc
 ```
 ```field 9 Circuit Description
-e1,0,1,7/2
+e,0,1,7/2
 r1,1,2,4
 c,2,0,2
 r2,2,0,1/6
@@ -2095,6 +2127,10 @@ The second interval, for t≥0, is analyzed using TR. I could have described
 the circuit again from scratch. But out of laziness I preferred to copy/paste
 the descriptions from the DC simulations. To avoid renaming the nodes, I
 simulated the right switch as a short circuit between nodes 2 and 3.
+
+(-7/50)e{{sup:-3t}}cos(4t)-(1/50)e{{sup:-3t}}sin(4t)
+
+e{{sup:-3t}}cos(4t)-e{{sup:-3t}}sin(4t)
 
 ::: only 9
 `vc` comes back {{o:-(sin(4*t) + 7*cos(4*t))*exp(-3*t)/50}} and `il`
@@ -2149,7 +2185,7 @@ s\dc("e,1,0,5:r3,1,2,3:l,2,3,1:c,3,0,1:r1,3,0,1:j,0,3,1"):{vc,il}
 s\dc("e,1,0,5:r3,1,2,3:l,2,3,1:c,3,0,1:r1,3,0,1:j,0,3,1"):{vc,il}
 ```
 ```field 9 Circuit Description
-e1,1,0,5
+e,1,0,5
 r3,1,2,3
 l,2,3,1
 c,3,0,1
@@ -2178,7 +2214,7 @@ c,3,0,1,2
 r1,3,0,1
 ```
 
-{ , }
+{ (3t+2)e{{sup:-2t}} , (1-3t)e{{sup:-2t}} }
 
 :::
 
@@ -2218,7 +2254,7 @@ s\dc("e,2,0,2:r,1,2,1:l,1,0,1:c,1,0,1/8"):{il,vc}
 s\dc("e,2,0,2:r,1,2,1:l,1,0,1:c,1,0,1/8"):{il,vc}
 ```
 ```field 9 Circuit Description
-e1,2,0,2
+e,2,0,2
 r,1,2,1
 l,1,0,1
 c,1,0,1/8
@@ -2349,7 +2385,7 @@ s\dc("e,3,0,12:r6,3,1,6:l1,1,0,6:r3,1,2,3:l2,2,0,4"):{il1,il2}
 s\dc("e,3,0,12:r6,3,1,6:l1,1,0,6:r3,1,2,3:l2,2,0,4"):{il1,il2}
 ```
 ```field 9 Circuit Description
-e1,3,0,12
+e,3,0,12
 r6,3,1,6
 l1,1,0,6
 r3,1,2,3
@@ -2375,6 +2411,8 @@ r3,1,2,3
 l2,2,0,4,0
 ```
 
+(12/11)(e{{sup:-3t}}-e{{sup:-t/4}})
+
 :::
 
 ::: problem Bo2's Drill Exercise 6.6 (Op Amp)
@@ -2398,7 +2436,7 @@ s\dc("e,3,0,2:r1,3,1,1:r2,1,2,2:r3,1,o,2:ca,1,0,1:
 cb,2,o,1/4:o,0,2,o"):{vca,vcb}
 ```
 ```field 9 Circuit Description
-e1,3,0,2
+e,3,0,2
 r1,3,1,1
 r2,1,2,2
 r3,1,o,2
@@ -2414,6 +2452,8 @@ The answers you want are `vca` and `vcb`, in **Results**.
 {0,4}
 
 Then simulate the second interval in TR, to find the voltage in node *o*.
+
+(-4t-4)e{{sup:-t}}
 
 ```sym 7
 s\only("vo"):s\tr("r1,0,1,1:r2,1,2,2:r3,1,o,2:
@@ -2450,7 +2490,7 @@ s\only("vc,il"):s\tr("e,1,0,2/5:r,1,2,12:l,2,3,2,0:c,3,0,1/50,0")
 s\only("vc,il"):s\tr("e,1,0,2/5:r,1,2,12:l,2,3,2,0:c,3,0,1/50,0")
 ```
 ```field 9 Circuit Description
-e1,1,0,2/5
+e,1,0,2/5
 r,1,2,12
 l,2,3,2,0
 c,3,0,1/50,0
@@ -2463,6 +2503,8 @@ vc
 vc
 ```
 
+-(2/5)e{{sup:-3t}}cos(4t)-(3/10)e{{sup:-3t}}sin(4t)+2/5
+
 ```sym 7
 il
 ```
@@ -2470,9 +2512,11 @@ il
 il
 ```
 
+(1/20)e{{sup:-3t}}sin(4t)
+
 ::: only 9
-`vc` is {{o:(4*exp(3*t) - 3*sin(4*t) - 4*cos(4*t))*exp(-3*t)/10}} and `il`
-is {{o:exp(-3*t)*sin(4*t)/20}}.
+We look in the results and see that `vc` is the first of those and `il` the
+second.
 :::
 
 These are the right answers. To plot them, run the `plot` tool, thus:
@@ -2499,13 +2543,13 @@ s\only("vc,il"):s\tr("e,1,0,3:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):{vc,il}
 s\only("vc,il"):s\tr("e,1,0,3:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):{vc,il}
 ```
 ```field 9 Circuit Description
-e1,1,0,3
+e,1,0,3
 r,1,2,5
 l,2,3,1/2,0
 c,3,0,1/8,0
 ```
 
-{ , }
+{ -4e{{sup:-2t}}+e{{sup:-8t}}+3 , e{{sup:-2t}}-e{{sup:-8t}} }
 
 :::
 
@@ -2514,6 +2558,8 @@ c,3,0,1/8,0
 For the circuit in Bo2's Drill Exercise 6.7, find the voltage drop in the
 capacitor v(t) if the source has a value v{{sub:S}}(t) = 3 r(t).
 
+2e{{sup:-2t}}-(e{{sup:-8t}})/8+3t-15/8
+
 ```sym 7
 s\only("vc"):s\tr("e,1,0,3t:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):vc
 ```
@@ -2521,7 +2567,7 @@ s\only("vc"):s\tr("e,1,0,3t:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):vc
 s\only("vc"):s\tr("e,1,0,3t:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):vc
 ```
 ```field 9 Circuit Description
-e1,1,0,3t
+e,1,0,3t
 r,1,2,5
 l,2,3,1/2,0
 c,3,0,1/8,0
@@ -2546,7 +2592,7 @@ s\dc("e,1,0,12:r,1,2,3:l,2,3,1:c,3,0,1'µ:s,3,0"):{il,vc}
 s\dc("e,1,0,12:r,1,2,3:l,2,3,1:c,3,0,1'µ:s,3,0"):{il,vc}
 ```
 ```field 9 Circuit Description
-e1,1,0,12
+e,1,0,12
 r,1,2,3
 l,2,3,1
 c,3,0,1'µ
@@ -2568,7 +2614,7 @@ s\only("vl"):s\tr("e,1,0,12.:r,1,2,3:l,2,3,1,4:c,3,0,1'µ,0")
 s\only("vl"):s\tr("e,1,0,12.:r,1,2,3:l,2,3,1,4:c,3,0,1'µ,0")
 ```
 ```field 9 Circuit Description
-e1,1,0,12.
+e,1,0,12.
 r,1,2,3
 l,2,3,1,4
 c,3,0,1'µ,0
@@ -2603,7 +2649,7 @@ l,1,0,2,0
 c,1,0,1/2,0
 ```
 
-{ , }
+{ (-t-1)e{{sup:-t}}+1 , 2te{{sup:-t}} }
 
 :::
 
@@ -2624,7 +2670,7 @@ s\only("vo"):s\tr("e,3,0,1:r1,3,1,1:r2,1,2,1:
 ca,2,0,1/5,0:cb,1,o,1,0:o,2,o,o"):vo
 ```
 ```field 9 Circuit Description
-e1,3,0,1
+e,3,0,1
 r1,3,1,1
 r2,1,2,1
 ca,2,0,1/5,0
@@ -2632,12 +2678,16 @@ cb,1,o,1,0
 o,2,o,o
 ```
 
+1-e{{sup:-t}} cos(2t)-(1/2)e{{sup:-t}} sin(2t)
+
 :::
 
 ::: problem Bo2's Drill Exercise 6.10 (Op Amp)
 
 In the circuit above, change capacitor's value from 1/5 F to 25/16 F. Find
 v{{sub:o}}(t) if v{{sub:S}}(t) = 3 u(t).
+
+-4e{{sup:-2t/5}}+e{{sup:-8t/5}}+3
 
 ```sym 7
 s\only("vo"):s\tr("e,3,0,3:r1,3,1,1:r2,1,2,1:
@@ -2648,7 +2698,7 @@ s\only("vo"):s\tr("e,3,0,3:r1,3,1,1:r2,1,2,1:
 ca,2,0,25/16,0:cb,1,o,1,0:o,2,o,o"):vo
 ```
 ```field 9 Circuit Description
-e1,3,0,3
+e,3,0,3
 r1,3,1,1
 r2,1,2,1
 ca,2,0,25/16,0
@@ -2675,12 +2725,14 @@ s\only("il"):s\tr("e,3,0,2e^(-2t):r2,3,2,1:r1,2,1,1:c,2,0,1,0:l,1,0,1,0"):il
 s\only("il"):s\tr("e,3,0,2e^(–2t):r2,3,2,1:r1,2,1,1:c,2,0,1,0:l,1,0,1,0"):il
 ```
 ```field 9 Circuit Description
-e1,3,0,2e^(-2t)
+e,3,0,2e^(-2t)
 r2,3,2,1
 r1,2,1,1
 c,2,0,1,0
 l,1,0,1,0
 ```
+
+-(e{{sup:t}} cos(t)-e{{sup:t}} sin(t)-1) e{{sup:-2t}}
 
 :::
 
@@ -2705,7 +2757,7 @@ s\dc("e,3,0,18:r8,3,1,8:ca,1,0,1/6:r12,1,0,12:
 r18,1,2,18:r6,2,0,6:cb,2,0,1/3"):{vca,vcb}
 ```
 ```field 9 Circuit Description
-e1,3,0,18
+e,3,0,18
 r8,3,1,8
 ca,1,0,1/6
 r12,1,0,12
@@ -2753,6 +2805,10 @@ Set **Analysis** to *TR — transient / time domain*.
 
 Be patient. This took 78 seconds in my calculator, including over half a
 minute just to find the inverse Laplace of the two desired answers.
+
+(53/17-20/17)e{{sup:-t}} cos(2t)+(-203/17-5/17)e{{sup:-t}} sin(2t)+(803/17+193/34)e{{sup:-t/2}}+(9/2-53)e{{sup:-t}}
+
+(-2453/34-20/17)e{{sup:-t}} cos(2t)+(245/34-203/17)e{{sup:-t}} sin(2t)+(803/17+193/34)e{{sup:-t/2}}+(53/2-9/4)e{{sup:-t}}
 
 ::: only 9
 Version 9 answers this one in about a second. `v1` and `v2` are in
@@ -2883,7 +2939,7 @@ s\ex("e,1,0,a*u(t):r,1,2,2:c,2,0,1,0")
 s\ex("e,1,0,a*u(t):r,1,2,2:c,2,0,1,0")
 ```
 ```field 9 Circuit Description
-e1,1,0,a*Heaviside(t)
+e,1,0,a*Heaviside(t)
 r,1,2,2
 c,2,0,1,0
 ```
@@ -2933,16 +2989,19 @@ quick sanity check. If the system solved correctly, we should see that
 Symbulator has as voltage drop in the capacitor the expression we already
 know from the problem statement:
 
-::: only 9
-`vc` in **Results** reads {{o:1 - exp(-t/2)}}, which it does.
-:::
-
 ```sym 7
 vc
 ```
 ```sym 8
 vc
 ```
+
+::: only 7,8
+1-e{{sup:-t/2}}
+:::
+::: only 9
+`vc` in **Results** reads {{o:1 - exp(-t/2)}}, which it does.
+:::
 
 ::: only 7,8
 This is correct, so we proceed to ask for the answers we want:
@@ -2960,12 +3019,20 @@ ic
 ic
 ```
 
+::: only 7,8
+(1/2)e{{sup:-t/2}}
+:::
+
 ```sym 7
 vr
 ```
 ```sym 8
 vr
 ```
+
+::: only 7,8
+e{{sup:-t/2}}
+:::
 
 ```sym 7
 a
@@ -3012,7 +3079,7 @@ s\ex("e,1,0,vs*u(t):r,1,2,1:c,2,0,1,0"):
 s\ex("e,1,0,vs*u(t):r,1,2,1:c,2,0,1,0"):
 ```
 ```field 9 Circuit Description
-e1,1,0,vs*u(t)
+e,1,0,vs*u(t)
 r,1,2,1
 c,2,0,1,0
 ```
@@ -3059,6 +3126,10 @@ vr
 ```
 
 ::: only 7,8
+e{{sup:-t}}
+:::
+
+::: only 7,8
 Looks good, so go ahead and ask for the answers:
 :::
 ::: only 9
@@ -3073,12 +3144,20 @@ ir
 ir
 ```
 
+::: only 7,8
+e{{sup:-t}}
+:::
+
 ```sym 7
 vc
 ```
 ```sym 8
 vc
 ```
+
+::: only 7,8
+1-e{{sup:-t}}
+:::
 
 ```sym 7
 vs
@@ -3114,7 +3193,7 @@ s\ex("e,1,0,vs*u(t):r,1,2,2:l,2,0,1,0")
 s\ex("e,1,0,vs*u(t):r,1,2,2:l,2,0,1,0")
 ```
 ```field 9 Circuit Description
-e1,1,0,vs*Heaviside(t)
+e,1,0,vs*Heaviside(t)
 r,1,2,2
 l,2,0,1,0
 ```
@@ -3149,6 +3228,10 @@ il
 ```
 
 ::: only 7,8
+1-e{{sup:-2t}}
+:::
+
+::: only 7,8
 Since that adds up, ask for the answers:
 :::
 ::: only 9
@@ -3164,12 +3247,20 @@ vl
 vl
 ```
 
+::: only 7,8
+2e{{sup:-2t}}
+:::
+
 ```sym 7
 vr
 ```
 ```sym 8
 vr
 ```
+
+::: only 7,8
+2-2e{{sup:-2t}}
+:::
 
 ```sym 7
 vs
@@ -3178,12 +3269,20 @@ vs
 vs
 ```
 
+::: only 7,8
+2
+:::
+
 ```sym 7
 vl*il
 ```
 ```sym 8
 vl*il
 ```
+
+::: only 7,8
+2e{{sup:-4t}}(e{{sup:2t}}-1)
+:::
 
 This is the end of the TR section of the book.
 

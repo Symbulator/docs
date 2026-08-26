@@ -107,7 +107,7 @@ s\dc("e,1,0,.1:r12,1,2,1'k:r2o,2,o,10'k:r30,3,0,1'k:r3o,3,o,20'k:o,3,2,o")
 s\dc("e,1,0,.1:r12,1,2,1'k:r2o,2,o,10'k:r30,3,0,1'k:r3o,3,o,20'k:o,3,2,o")
 ```
 ```field 9 Circuit Description
-e1,1,0,.1
+e,1,0,.1
 r12,1,2,1'k
 r2o,2,o,10'k
 r30,3,0,1'k
@@ -115,11 +115,23 @@ r3o,3,o,20'k
 o,3,2,o
 ```
 
-We ask for the values of the variables `vo` and `po`:
+{{v7,8|We ask for the values of the variables `vo` and `po`:}}{{v9|We look in
+the results and see `vo` and `po`:}}
 
-```out
+```sym 7
+{vo,po}
+```
+```sym 8
+{vo,po}
+```
+```out 7,8
 {–2.1, –.00063}
 ```
+
+::: only 9
+- `vo` = {{o:-2.1}} V
+- `po` = {{o:-0.00063}} W
+:::
 
 Which are correct. The voltage in node o is –2.1 V, and the op amp is absorbing
 –.63 mW, which is to say it is delivering .63 mW of power to the circuit.
@@ -148,7 +160,7 @@ s\th("e,1,0,vs:r1,2,0,r1:r2,2,3,r2:o,1,2,3",3,0)
 s\th("e,1,0,vs:r1,2,0,r1:r2,2,3,r2:o,1,2,3",3,0)
 ```
 ```field 9 Circuit Description
-e1,1,0,vs
+e,1,0,vs
 r1,2,0,r1
 r2,2,3,r2
 o,1,2,3
@@ -163,6 +175,8 @@ the Norton current. This is not a surprise, since an ideal op amp has zero
 output resistance and a fixed voltage, an infinite current when
 short-circuited. So the Thévenin equivalent is given by V{{sub:TH}} and no
 resistance (or R{{sub:EQ}} = 0Ω). Evaluating `vth` results in
+
+((r1+r2) vs)/r1
 
 This is correct, as can be seen by comparing it to the book's answer, shown
 below.
@@ -190,7 +204,7 @@ s\dc("e,2,0,1.:r5,1,0,5'k:r4,1,o,40'k:r2,o,0,20'k:o,2,1,o"):{vo,io}
 s\dc("e,2,0,1.:r5,1,0,5'k:r4,1,o,40'k:r2,o,0,20'k:o,2,1,o"):{vo,io}
 ```
 ```field 9 Circuit Description
-e1,2,0,1.
+e,2,0,1.
 r5,1,0,5'k
 r4,1,o,40'k
 r2,o,0,20'k
@@ -221,7 +235,7 @@ s\dc("e,2,0,vs:r1,2,1,r1:r2,1,o,r2:o,1,0,o"):vo/vs
 s\dc("e,2,0,vs:r1,2,1,r1:r2,1,o,r2:o,1,0,o"):vo/vs
 ```
 ```field 9 Circuit Description
-e1,2,0,vs
+e,2,0,vs
 r1,2,1,r1
 r2,1,o,r2
 o,1,0,o
@@ -255,7 +269,7 @@ s\dc("e,2,0,vi:r1,2,1,r1:rf,1,o,rf:o,0,1,o"):vo
 s\dc("e,2,0,vi:r1,2,1,r1:rf,1,o,rf:o,0,1,o"):vo
 ```
 ```field 9 Circuit Description
-e1,2,0,vi
+e,2,0,vi
 r1,2,1,r1
 rf,1,o,rf
 o,0,1,o
@@ -267,6 +281,8 @@ The answer you want is `vo`, in **Results**.
 
 This problem is almost identical to the one above. The answer we get is
 correct:
+
+-(rf/r1)vi
 
 :::
 
@@ -286,7 +302,7 @@ s\dc("e,2,0,.5:r1,2,1,10'k:rf,1,o,25'k:o,0,1,o"):{vo,ir1}
 s\dc("e,2,0,.5:r1,2,1,10'k:rf,1,o,25'k:o,0,1,o"):{vo,ir1}
 ```
 ```field 9 Circuit Description
-e1,2,0,.5
+e,2,0,.5
 r1,2,1,10'k
 rf,1,o,25'k
 o,0,1,o
@@ -322,7 +338,7 @@ s\dc("e,1,0,vs:r1,1,2,10'k:r2,2,o,33'k:o,0,2,o"):
 {vo|vs=2.,vo|vs=–4.,vo|vs=6.}
 ```
 ```field 9 Circuit Description
-e1,1,0,vs
+e,1,0,vs
 r1,1,2,10'k
 r2,2,o,33'k
 o,0,2,o
@@ -363,7 +379,7 @@ s\dc("e,2,0,40'm:r1,2,1,5'k:rf,1,o,15'k:o,0,1,o"):approx({vo,irf})
 s\dc("e,2,0,40'm:r1,2,1,5'k:rf,1,o,15'k:o,0,1,o"):approx({vo,irf})
 ```
 ```field 9 Circuit Description
-e1,2,0,40'm
+e,2,0,40'm
 r1,2,1,5'k
 rf,1,o,15'k
 o,0,1,o
@@ -420,7 +436,7 @@ s\dc("e,1,0,vs:r1,1,b,r1:r2,b,0,r2:r3,b,a,r3:r4,a,o,r4:o,0,a,o:rl,o,0,rl")
 s\dc("e,1,0,vs:r1,1,b,r1:r2,b,0,r2:r3,b,a,r3:r4,a,o,r4:o,0,a,o:rl,o,0,rl")
 ```
 ```field 9 Circuit Description
-e1,1,0,vs
+e,1,0,vs
 r1,1,b,r1
 r2,b,0,r2
 r3,b,a,r3
@@ -440,7 +456,7 @@ s\dc("e,1,0,1:r1,1,b,r1:r2,b,0,r2:r3,b,a,r3:r4,a,o,r4:o,0,a,o:rl,o,0,1")
 s\dc("e,1,0,1:r1,1,b,r1:r2,b,0,r2:r3,b,a,r3:r4,a,o,r4:o,0,a,o:rl,o,0,1")
 ```
 ```field 9 Circuit Description
-e1,1,0,1
+e,1,0,1
 r1,1,b,r1
 r2,b,0,r2
 r3,b,a,r3
@@ -548,7 +564,7 @@ s\dc("e,p,0,v2:r1,1,0,r1:r2,1,o,r2:o,p,1,o"):vo/v1
 s\dc("e,p,0,v2:r1,1,0,r1:r2,1,o,r2:o,p,1,o"):vo/v1
 ```
 ```field 9 Circuit Description
-e1,p,0,v2
+e,p,0,v2
 r1,1,0,r1
 r2,1,o,r2
 o,p,1,o
@@ -581,7 +597,7 @@ s\dc("e,2,0,vi:r1,0,1,r1:rf,1,o,rf:o,2,1,o"):vo
 s\dc("e,2,0,vi:r1,0,1,r1:rf,1,o,rf:o,2,1,o"):vo
 ```
 ```field 9 Circuit Description
-e1,2,0,vi
+e,2,0,vi
 r1,0,1,r1
 rf,1,o,rf
 o,2,1,o
@@ -593,6 +609,8 @@ The answer you want is `vo`, in **Results**.
 
 We get the right answer (below), an expression equivalent to the book's
 answer.
+
+((r1+rf)/r1)vi
 
 :::
 
@@ -606,6 +624,8 @@ Find Vo/Vs.
 
 We can solve this problem in one simulation, as shown below.
 
+(r2 (r3+r4))/((r1+r2) r4)
+
 ```sym 7
 s\dc("e,1,0,vs:r1,1,2,r1:r2,2,0,r2:o,2,3,o:r3,o,3,r3:r4,3,0,r4"):vo/vs
 ```
@@ -613,7 +633,7 @@ s\dc("e,1,0,vs:r1,1,2,r1:r2,2,0,r2:o,2,3,o:r3,o,3,r3:r4,3,0,r4"):vo/vs
 s\dc("e,1,0,vs:r1,1,2,r1:r2,2,0,r2:o,2,3,o:r3,o,3,r3:r4,3,0,r4"):vo/vs
 ```
 ```field 9 Circuit Description
-e1,1,0,vs
+e,1,0,vs
 r1,1,2,r1
 r2,2,0,r2
 o,2,3,o
@@ -639,6 +659,8 @@ below:
 We can also solve it in stages, as shown below. First, simulate the left
 half.
 
+r2/(r1+r2)
+
 ```sym 7
 s\dc("e,1,0,vs:r1,1,2,r1:r2,2,0,r2"):v2/vs
 ```
@@ -646,7 +668,7 @@ s\dc("e,1,0,vs:r1,1,2,r1:r2,2,0,r2"):v2/vs
 s\dc("e,1,0,vs:r1,1,2,r1:r2,2,0,r2"):v2/vs
 ```
 ```field 9 Circuit Description
-e1,1,0,vs
+e,1,0,vs
 r1,1,2,r1
 r2,2,0,r2
 ```
@@ -661,6 +683,8 @@ v2/vs
 
 Which is correct for this part. Then, simulate the right half.
 
+(r3+r4)/r4
+
 ```sym 7
 s\dc("e,2,0,1:o,2,3,o:r3,o,3,r3:r4,3,0,r4"):vo/v2
 ```
@@ -668,7 +692,7 @@ s\dc("e,2,0,1:o,2,3,o:r3,o,3,r3:r4,3,0,r4"):vo/v2
 s\dc("e,2,0,1:o,2,3,o:r3,o,3,r3:r4,3,0,r4"):vo/v2
 ```
 ```field 9 Circuit Description
-e1,2,0,1
+e,2,0,1
 o,2,3,o
 r3,o,3,r3
 r4,3,0,r4
@@ -703,7 +727,7 @@ s\dc("e,1,0,vi:o,1,o,o"):vo
 s\dc("e,1,0,vi:o,1,o,o"):vo
 ```
 ```field 9 Circuit Description
-e1,1,0,vi
+e,1,0,vi
 o,1,o,o
 ```
 
@@ -735,7 +759,7 @@ s\th("e,1,0,1.5:rs,1,2,2'k",2,0):{pmax,prL|L=1000}
 s\th("e,1,0,1.5:rs,1,2,2'k",2,0):{pmax,prL|L=1000}
 ```
 ```field 9 Circuit Description
-e1,1,0,1.5
+e,1,0,1.5
 rs,1,2,2'k
 ```
 
@@ -761,7 +785,7 @@ s\dc("e,1,0,1.5:rs,1,2,2'k:o,2,o,o:rl,o,0,1'k"):prL
 s\dc("e,1,0,1.5:rs,1,2,2'k:o,2,o,o:rl,o,0,1'k"):prL
 ```
 ```field 9 Circuit Description
-e1,1,0,1.5
+e,1,0,1.5
 rs,1,2,2'k
 o,2,o,o
 rl,o,0,1'k
@@ -824,7 +848,7 @@ s\dc("e,1,0,3:r4,1,2,4'k:r8,2,0,8'k:r2,3,0,2'k:r5,3,o,5'k:o,2,3,o")
 s\dc("e,1,0,3:r4,1,2,4'k:r8,2,0,8'k:r2,3,0,2'k:r5,3,o,5'k:o,2,3,o")
 ```
 ```field 9 Circuit Description
-e1,1,0,3
+e,1,0,3
 r4,1,2,4'k
 r8,2,0,8'k
 r2,3,0,2'k
@@ -863,6 +887,8 @@ o,0,1,o
 The answer you want is `vo`, in **Results**.
 :::
 
+
+-(r2/r1)(va+vb)
 which is correct, as can be seen by comparing it to the book's answer, shown
 below:
 
@@ -907,6 +933,8 @@ expand(vo)
 ```
 :::
 
+
+- rf v1/r1-rf v2/r2-rf v3/r3
 which is correct, as can be seen by comparing it to the book's answer, shown
 below:
 
@@ -1019,6 +1047,8 @@ o,2,1,o
 {{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}} the correct answer, equivalent to the book's answer
 above.
 
+((vb-va) r2)/r1
+
 :::
 
 ::: problem TR5's Exercise 4-13 (Difference or Differential)
@@ -1083,6 +1113,8 @@ o,b,a,o
 The answer you want is `vo`, in **Results**.
 :::
 
+
+(r1 r4 v2-r2 (r3 v1+r4 (v1-v2)))/(r1*(r3+r4))
 This expression is equivalent to the book's answer, better formatted, shown
 below:
 
@@ -1339,7 +1371,7 @@ s\dc("e,1,0,vs:r12,1,2,1/g1:r14,1,4,1/g2:r4o,4,o,1/g3:
 r2o,2,o,1/g4:r23,2,3,1/g:r34,3,4,1/g:o1,0,2,3:o2,0,4,o")
 ```
 ```field 9 Circuit Description
-e1,1,0,vs
+e,1,0,vs
 r12,1,2,1/g1
 r14,1,4,1/g2
 r4o,4,o,1/g3
@@ -1352,6 +1384,8 @@ o2,0,4,o
 
 {{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}}:
 
+
+((g1-g2) vs)/(g3-g4)
 which is correct, as can be seen by comparing it to the book's answer, shown
 below:
 
@@ -1380,7 +1414,7 @@ s\dc("e,1,0,vs:r1,2,o,1/1:r2,1,2,1/2:r3,2,3,1/3:
 r4,4,0,1/4:r5,4,o,1/5:o1,0,2,3:o2,3,4,o")
 ```
 ```field 9 Circuit Description
-e1,1,0,vs
+e,1,0,vs
 r1,2,o,1/1
 r2,1,2,1/2
 r3,2,3,1/3
@@ -1411,7 +1445,7 @@ s\dc("e,1,0,20'm:o1,1,2,a:o2,a,b,o:ro,o,b,10'k:
 r4,b,0,4'k:r2,a,2,12'k:r3,2,0,3'k")
 ```
 ```field 9 Circuit Description
-e1,1,0,20'm
+e,1,0,20'm
 o1,1,2,a
 o2,a,b,o
 ro,o,b,10'k
@@ -1440,7 +1474,7 @@ s\dc("e,1,0,4:o1,1,2,2:o2,2,3,o:ro,3,0,4'k:r6,3,o,6'k"):{vo,iro}
 s\dc("e,1,0,4:o1,1,2,2:o2,2,3,o:ro,3,0,4'k:r6,3,o,6'k"):{vo,iro}
 ```
 ```field 9 Circuit Description
-e1,1,0,4
+e,1,0,4
 o1,1,2,2
 o2,2,3,o
 ro,3,0,4'k
@@ -1650,8 +1684,12 @@ below:
 
 Our answer, expanded via `expand(vo)`, is shown below:
 
+(-r2 r4 v1)/(r1 r3)-(r4 v1)/r3+(r4 v2)/r3+v2
+
 Playing with it by hand we get a form that, in my opinion, is *prettier* ;-)
 than the book's:
+
+v2(r4/r3+1)-v1(r4/r3)(r2/r1+1)
 
 :::
 
@@ -1682,6 +1720,8 @@ r3,d,e,r3
 
 To find vo, we ask for `vb-ve`. We get an expression that can easily be
 rearranged to look like this:
+
+-((r1+r2+r3)/r2)(v1-v2)
 
 This is exactly the answer from the book:
 

@@ -56,7 +56,7 @@ s\dc("r1,1,0,25:jd,0,2,.2v1:r2,2,3,10:ji,4,3,2.5:r3,4,5,100:s1,1,2:s2,2,4:s3,0,3
 ```
 ```field 9 Circuit Description
 r1,1,0,25
-jd,0,2,.2v1
+jd,0,2,0.2*v1
 r2,2,3,10
 ji,4,3,2.5
 r3,4,5,100
@@ -115,7 +115,7 @@ s\dc("e,a,0,100:r13,a,1,13:r24,1,2,24:r10,1,3,10:r20,2,3,20:r30,2,0,30:r50,3,0,5
 s\dc("e,a,0,100:r13,a,1,13:r24,1,2,24:r10,1,3,10:r20,2,3,20:r30,2,0,30:r50,3,0,50"):re
 ```
 ```field 9 Circuit Description
-e1,a,0,100
+e,a,0,100
 r13,a,1,13
 r24,1,2,24
 r10,1,3,10
@@ -274,7 +274,7 @@ s\th(cir,2,0)
 s\th(cir,2,0)
 ```
 ```field 9 Circuit Description
-e1,1,0,3.3
+e,1,0,3.3
 r1,1,2,66
 r2,2,0,24
 ```
@@ -393,7 +393,7 @@ s\th("e1,1,0,9:r1,1,2,3:r2,2,0,6",2,0):{vth,req}
 s\th("e1,1,0,9:r1,1,2,3:r2,2,0,6",2,0):{vth,req}
 ```
 ```field 9 Circuit Description
-e1,1,0,9
+e,1,0,9
 r1,1,2,3
 r2,2,0,6
 ```
@@ -429,9 +429,14 @@ vth/(req+2)
 
 Then `vth/(req+10)`, then `vth/(req+100)`.
 :::
-```out
+```out 7,8
 {1.5, .5, .059}
 ```
+
+::: only 9
+The three answers come back one at a time: {{o:1.5}} A, {{o:.5}} A and
+{{o:.059}} A.
+:::
 
 {{v7,8|Where `|` is the "given" operator.}} The answers are correct.
 :::
@@ -500,7 +505,7 @@ s\th("e,1,0,24:r1,1,2,120:r2,2,0,280:j,2,0,560'm",2,0):{ino,req}
 s\th("e,1,0,24:r1,1,2,120:r2,2,0,280:j,2,0,560'm",2,0):{ino,req}
 ```
 ```field 9 Circuit Description
-e1,1,0,24
+e,1,0,24
 r1,1,2,120
 r2,2,0,280
 j,2,0,560'm
@@ -837,7 +842,7 @@ s\er("r15,a,0,15:e,1,a,4vrx:r10,1,x,10:rx,x,0,5",a,0)
 ```
 ```field 9 Circuit Description
 r15,a,0,15
-e1,1,a,4*vrx
+e,1,a,4*vrx
 r10,1,x,10
 rx,x,0,5
 ```
@@ -848,7 +853,7 @@ equivalent resistance is **-7.5** Ω.
 :::
 ::: only 9
 *Find equivalent*, *Impedance*, nodes **a** and **0**, in DC: `req` is
-{{o:-7.500}} Ω. The source is called `e1` rather than `e` here — version 9
+{{o:-7.500}} Ω. The source is called `e` rather than `e` here — version 9
 keeps `e` for Euler's number.
 :::
 
@@ -869,7 +874,7 @@ s\er("e,3,0,1.5is:r3,3,2,3:r2,2,0,2:s,2,1",1,0)
 s\er("e,3,0,1.5is:r3,3,2,3:r2,2,0,2:s,2,1",1,0)
 ```
 ```field 9 Circuit Description
-e1,3,0,1.5*is1
+e,3,0,1.5*is1
 r3,3,2,3
 r2,2,0,2
 s1,2,1
@@ -905,7 +910,7 @@ s\er("r10,1,2,10:r5,2,3,5:r1,2,0,30:e,1,0,20ir1",3,0)
 r10,1,2,10
 r5,2,3,5
 r1,2,0,30
-e1,1,0,20*ir1
+e,1,0,20*ir1
 ```
 
 ::: only 7,8
@@ -936,7 +941,7 @@ s\er("r1,1,0,6:r4,a,0,4:e,a,1,6ir1",a,0)
 ```field 9 Circuit Description
 r1,1,0,6
 r4,a,0,4
-e1,a,1,6*ir1
+e,a,1,6*ir1
 ```
 
 ::: only 7,8
@@ -996,7 +1001,7 @@ s\th("e,1,0,9:r1,1,2,3:r2,2,0,6",2,0)
 s\th("e,1,0,9:r1,1,2,3:r2,2,0,6",2,0)
 ```
 ```field 9 Circuit Description
-e1,1,0,9
+e,1,0,9
 r1,1,2,3
 r2,2,0,6
 ```
@@ -1028,7 +1033,7 @@ s\th("r6,1,0,6:j,0,1,10:r2,x,0,2:e,1,x,2vx",x,0)
 r6,1,0,6
 j,0,1,10
 r2,x,0,2
-e1,1,x,2*vx
+e,1,x,2*vx
 ```
 
 ::: only 9
@@ -1087,7 +1092,7 @@ s\th("j,0,2,0.01v1:r,0,2,20:e,1,2,100",1,0)
 ```field 9 Circuit Description
 j,0,2,0.01*v1
 r,0,2,20
-e1,1,2,100
+e,1,2,100
 ```
 
 ::: only 9
@@ -1114,7 +1119,7 @@ s\th("e,1,0,4:r2,1,2,2'k:r3,2,x,3'k:j,0,2,vx/4000",x,0)
 s\th("e,1,0,4:r2,1,2,2'k:r3,2,x,3'k:j,0,2,vx/4000",x,0)
 ```
 ```field 9 Circuit Description
-e1,1,0,4
+e,1,0,4
 r2,1,2,2'k
 r3,2,x,3'k
 j,0,2,vx/4000
@@ -1151,7 +1156,7 @@ s\th("r1,2,0,6:r2,2,1,4:r3,1,0,2:e,0,1,8",2,0)
 r1,2,0,6
 r2,2,1,4
 r3,1,0,2
-e1,0,1,8
+e,0,1,8
 ```
 
 ::: only 9
@@ -1208,7 +1213,7 @@ s\th("e,1,0,12:r6,1,2,6:j,0,2,3ir6:r3,2,0,3",2,0)
 s\th("e,1,0,12:r6,1,2,6:j,0,2,3ir6:r3,2,0,3",2,0)
 ```
 ```field 9 Circuit Description
-e1,1,0,12
+e,1,0,12
 r6,1,2,6
 j,0,2,3*ir6
 r3,2,0,3
@@ -1240,7 +1245,7 @@ s\th("j,b,0,10:r1,0,b,1:e,a,0,3ir1:r6,a,b,6",a,b)
 ```field 9 Circuit Description
 j,b,0,10
 r1,0,b,1
-e1,a,0,3*ir1
+e,a,0,3*ir1
 r6,a,b,6
 ```
 
@@ -1269,7 +1274,7 @@ s\th("rx,0,b,4:e,0,b,10:r5,0,a,5:j,0,a,2irx",a,b)
 ```
 ```field 9 Circuit Description
 rx,0,b,4
-e1,0,b,10
+e,0,b,10
 r5,0,a,5
 j,0,a,2*irx
 ```
@@ -1335,7 +1340,7 @@ s\th("e,1,0,72:r1,1,b,6:r2,1,a,12:r3,0,b,3:r4,0,a,4",b,a)
 s\th("e,1,0,72:r1,1,b,6:r2,1,a,12:r3,0,b,3:r4,0,a,4",b,a)
 ```
 ```field 9 Circuit Description
-e1,1,0,72
+e,1,0,72
 r1,1,b,6
 r2,1,a,12
 r3,0,b,3
@@ -1367,7 +1372,7 @@ s\th("j,0,2,2:e,4,0,12:r1,2,4,4:r2,2,3,8:r3,0,1,8:r4,3,1,5",3,1)
 ```
 ```field 9 Circuit Description
 j,0,2,2
-e1,4,0,12
+e,4,0,12
 r1,2,4,4
 r2,2,3,8
 r3,0,1,8
@@ -1459,7 +1464,7 @@ s\th("e,1,0,6:r5,1,2,5:rx,2,3,3:j,0,2,1.5irx:r4,3,0,4",3,0)
 s\th("e,1,0,6:r5,1,2,5:rx,2,3,3:j,0,2,1.5irx:r4,3,0,4",3,0)
 ```
 ```field 9 Circuit Description
-e1,1,0,6
+e,1,0,6
 r5,1,2,5
 rx,2,3,3
 j,0,2,1.5*irx
@@ -1495,7 +1500,7 @@ rx,0,b,4
 r1,0,1,2
 r2,1,b,6
 r3,1,a,2
-e1,1,0,2*vrx
+e,1,0,2*vrx
 ```
 
 ::: only 9
@@ -1554,7 +1559,7 @@ s\th("e1,1,0,7:r1,1,a,4:j,a,0,8:r2,a,0,6",a,0)
 s\th("e1,1,0,7:r1,1,a,4:j,a,0,8:r2,a,0,6",a,0)
 ```
 ```field 9 Circuit Description
-e1,1,0,7
+e,1,0,7
 r1,1,a,4
 j,a,0,8
 r2,a,0,6
@@ -1597,7 +1602,7 @@ r2,0,b,2
 r8,0,2,8
 r3,2,a,3
 r1,1,a,1
-e1,1,0,1
+e,1,0,1
 j,2,b,3*ir8
 ```
 
@@ -1626,7 +1631,7 @@ r2,0,b,2
 r8,0,2,8
 r3,2,a,3
 r1,1,a,1
-e1,1,0,1
+e,1,0,1
 j,2,b,x*ir8
 ```
 
@@ -1817,7 +1822,7 @@ s\th("e,1,0,32.:r4,1,2,4:r12,2,0,12:j,0,2,2:r1,2,3,1",3,0):
 {vth,req,irL|Load=6,irL|Load=16,irL|Load=36}
 ```
 ```field 9 Circuit Description
-e1,1,0,32.
+e,1,0,32.
 r4,1,2,4
 r12,2,0,12
 j,0,2,2
@@ -1863,7 +1868,7 @@ s\th("e,3,0,3:r31,3,1,1/2:r10,1,0,1/2:r12,1,2,1/4:j,2,0,v1/2",2,0):
 {ino,req,vrL|Load=1/4,irL|Load=1/4}
 ```
 ```field 9 Circuit Description
-e1,3,0,3
+e,3,0,3
 r31,3,1,1/2
 r10,1,0,1/2
 r12,1,2,1/4
@@ -1909,7 +1914,7 @@ s\th("e,1,0,15.:r1,1,2,6'k:j,0,2,5'm:r2,2,0,2'k",2,0):
 {ino,req, irL|Load=0,irL|Load=2000,irL|Load=5000}
 ```
 ```field 9 Circuit Description
-e1,1,0,15.
+e,1,0,15.
 r1,1,2,6'k
 j,0,2,5'm
 r2,2,0,2'k
@@ -1955,7 +1960,7 @@ s\th("e,1,0,24:r12,1,2,12:r20,2,0,4:r23,2,3,4:r34,3,4,2:
 j,4,0,3:r40,4,0,5",3,0):{ino,req,vrL|Load=1}
 ```
 ```field 9 Circuit Description
-e1,1,0,24
+e,1,0,24
 r12,1,2,12
 r20,2,0,4
 r23,2,3,4
@@ -2049,7 +2054,7 @@ s\th("e,1,0,20:r6,1,2,6:r1,1,3,1:r2,3,2,2:j32,3,2,15:j30,3,0,15",2,0):
 {vth,req,vrL|Load=3,vrL|Load=6.}
 ```
 ```field 9 Circuit Description
-e1,1,0,20
+e,1,0,20
 r6,1,2,6
 r1,1,3,1
 r2,3,2,2
@@ -2096,7 +2101,7 @@ s\th("e,1,0,8:r3,1,2,3:r12,1,3,12:r6,2,0,6:r2,2,3,2",3,0):
 {vth,req,vrL|Load=5.}
 ```
 ```field 9 Circuit Description
-e1,1,0,8
+e,1,0,8
 r3,1,2,3
 r12,1,3,12
 r6,2,0,6
@@ -2111,11 +2116,11 @@ The answers you want are `vth` and `req`, in **Results**.
 Ask **Evaluate** for:
 
 ```field 9 Evaluate
-vrL|Load=5.
+vth*5/(req+5)
 ```
 :::
 
-Select DC when asked. Answer Y when offered the load formulas.
+{{v7,8|Select DC when asked. Answer Y when offered the load formulas.}}
 
 The answer, **{6,3,3.75}**, is correct.
 
@@ -2153,17 +2158,18 @@ The answers you want are `ino` and `req`, in **Results**.
 Ask **Evaluate** for:
 
 ```field 9 Evaluate
-irL|Load=0
-irL|Load=1e4
-irL|Load=5e4
-irL|Load=1e5
+ino*req/(req+0)
+ino*req/(req+1e4)
+ino*req/(req+5e4)
+ino*req/(req+1e5)
 ```
+
+One line at a time, as before.
 :::
 
-Select DC when asked. Answer Y when offered the load formulas.
+{{v7,8|Select DC when asked. Answer Y when offered the load formulas.}}
 
-The answer, **{.001,42000**,**.001**,.**000808**,.**000457**,.**00296}**, is
-correct.
+The answer, **{.001,42000,.001,.000808,.000457,.000296}**, is correct.
 
 :::
 
@@ -2190,7 +2196,7 @@ s\th("e,1,0,12:r6,1,2,6:r12,2,0,12:r3,2,3,3:j,0,3,2:r2,3,4,2",4,0):
 approx({req,pmax})
 ```
 ```field 9 Circuit Description
-e1,1,0,12
+e,1,0,12
 r6,1,2,6
 r12,2,0,12
 r3,2,3,3
@@ -2329,7 +2335,7 @@ j,2,0,6
 r2,2,0,10
 r1,2,3,3
 r3,0,1,2
-e1,3,4,68
+e,3,4,68
 ```
 
 ::: only 9

@@ -24,6 +24,7 @@ See `SPEC.md` for the markup.
 Output:
 
     build/web/      upload this whole folder to the server
+                    (including content/v*/search.json -- see below)
     build/pdf/      symbulator-v7.pdf, -v8.pdf, -v9.pdf
     build/tex/      the generated LaTeX, kept for debugging
     build/preview/  flat HTML for looking at the site without PHP
@@ -44,6 +45,26 @@ Copy `build/web/` to the docs folder in cPanel and drop the three PDFs in
 beside `index.php`. That is the whole deployment: one upload serves all three
 versions, and `index.php` picks the right content from `content/v7`, `v8` or
 `v9` according to `?v=`. The bundled `.htaccess` turns that into `/7/lesson-dc`.
+
+## The sidebar search
+
+The box at the top of the Contents column searches **only the version being
+read**. It is three pieces:
+
+- `build.py` writes `build/web/content/v<N>/search.json`, one entry per
+  section and per worked problem, for that version alone.
+- `web/index.php` renders the box and fetches that file on the reader's first
+  keystroke -- a few hundred kilobytes, so it is not loaded before then.
+- `web/assets/style.css` styles it, under `.docsearch`.
+
+Nothing ties the three together but `build.py --check`, which fails if the
+path or the element ids in `index.php` stop matching what the build writes,
+if the stylesheet loses its rules, or if a built index is missing a chapter
+its own table of contents lists. **A deploy that leaves `search.json` behind
+gives every reader "Search is unavailable on this server."**
+
+`tools/static_preview.py` generates its own markup and does not read
+`index.php`, so the flat preview has no search box. That is expected.
 
 ## What to edit
 
@@ -83,8 +104,17 @@ The version 9 API claims have been checked against the real package and the
 source corrected to match. `VERIFIED-v9-api.md` has the findings, run rather
 than read — including two traps worth knowing about even now: `pf()` reports
 leading/lagging backwards for a source unless you negate the current, and
-time-domain answers use `Symbol("t", positive=True)`, so a bare `Symbol("t")`
-silently fails to substitute.
+time-domain answers use `Symbol("t", nonnegative=True)`, so a bare
+`Symbol("t")` silently fails to substitute.
+
+That second one said `positive=True` until 26 Aug 2026. It is `nonnegative`,
+and the difference is load-bearing rather than pedantic: SymPy evaluates
+DiracDelta of a strictly *positive* argument to 0, so under `positive` every
+impulse quietly disappeared, and `symbulator.laplace` says so at length.
+The same note, followed up in the app, turned out to be the whole of #95 in
+`Symbulator/repos/local/NEXT.md` — and to point the wrong way round: the
+boxes on the page parse `t` correctly and always did, and it is the answers
+that lose the assumption on the way back.
 
 ## The look
 

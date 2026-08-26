@@ -183,7 +183,7 @@ s\ac(cir,4)
 s\ac(cir,4)
 ```
 ```field 9 Circuit Description
-e1,1,0,10
+e,1,0,10
 r1,1,2,5
 c,2,0,.1
 ```
@@ -203,12 +203,12 @@ what it found:
 - the usual voltages in the nodes, voltage drops in the elements, and currents
   through the elements, in variables that should be familiar by now
 - the *average power consumed* in the source and the resistor, in
-  {{v7,8|`ape` and `apr1`}}{{v9|`ape1` and `apr1`}}. None is given
+  {{v7,8|`ape` and `apr1`}}{{v9|`ape` and `apr1`}}. None is given
   for the capacitor, since capacitors and inductors do not consume real power.
 - the *complex power consumed* in all elements, in {{v7,8|`sc`, `se` and
-  `sr1`}}{{v9|`sc`, `se1` and `sr1`}}
+  `sr1`}}{{v9|`sc`, `se` and `sr1`}}
 - the *equivalent impedance* of the rest of the circuit as seen by the source,
-  in {{v7,8|`ze`}}{{v9|`ze1`}}
+  in {{v7,8|`ze`}}{{v9|`ze`}}
 
 To get the answers we need for this problem in particular, we ask for `ir1` and
 `vc`. It is likely that the {{t:machine}} will give you the answers in
@@ -275,7 +275,7 @@ s\ac(cir,10)
 s\ac(cir,10)
 ```
 ```field 9 Circuit Description
-e1,1,0,(20∠30°)
+e,1,0,(20∠30°)
 r1,1,2,4
 l,2,0,.2
 ```
@@ -370,7 +370,7 @@ s\ac(cir,200)
 s\ac(cir,200)
 ```
 ```field 9 Circuit Description
-e1,1,0,50
+e,1,0,50
 r,1,2,10
 c,2,3,5'm
 l,3,0,20'm
@@ -401,11 +401,15 @@ Read it with **Mini-Tools** set to *aa*: `aa(ir)` gives {{o:4.789}}∠{{o:-16.70
 
 That is 4.789 A at an angle of −16.7°, which is correct.
 
-::: tip Version 9 will not let you call an element `e`
-The version 7 description above names the source `e`. Version 9 refuses that
-one letter, because `e` is Euler's number and its answers would collide with
-it; every other single letter here — `r`, `c`, `l` — is still fine. `e1` is the
-usual fix, and it is the only change between the two descriptions.
+::: tip Why the calculator could not call this source `e`
+The version 7 description above names the source `e`, which the calculator
+allows; the version 8 one cannot, because `e` is Euler's number there and the
+source's answers would collide with it. `e1` was the usual fix, and on the
+calculator it still is.
+
+Version 9 has no such collision — its reserved names are derived rather than
+listed, and come to two, neither of them `e` — so the panels here name the
+lone source `e` and nothing needs dodging.
 :::
 :::
 :::
@@ -501,7 +505,7 @@ You can also let Symbulator do the reduction, using the square-bracket
 shorthand for parallel elements inside a value:
 
 ```field 9 Circuit Description
-e1,1,0,12
+e,1,0,12
 r1,1,0,4+20j+[16,-14j+25j]
 ```
 
@@ -590,7 +594,7 @@ s\ac(cir,4)
 s\ac(cir,4)
 ```
 ```field 9 Circuit Description
-e1,1,0,20
+e,1,0,20
 r1,1,2,10
 cx,2,0,.1
 l1,2,3,1
@@ -645,11 +649,11 @@ rx,1,0,2
 c,1,2,.2
 l,2,0,2
 r,2,3,4
-e1,3,0,3*vrx
+e,3,0,3*vrx
 ```
 
 ::: only 9
-AC, with **Angular frequency** set to **2**. The source had to be renamed `e1`,
+AC, with **Angular frequency** set to **2**. The source had to be renamed `e`,
 for the reason given under Problem 9.35.
 :::
 
@@ -696,7 +700,7 @@ s\ac(cir,1000.)
 s\ac(cir,1000.)
 ```
 ```field 9 Circuit Description
-e1,1,0,(8∠-40°)
+e,1,0,(8∠-40°)
 r1,1,2,4'k
 co,2,0,2'µ
 l1,2,3,50'm
@@ -755,7 +759,7 @@ j2,1,2,.2*vrx
 r4,1,2,2+2j
 r5,2,0,-1j
 r6,2,3,2+2j
-e1,3,0,(18∠30°)
+e,3,0,(18∠30°)
 ```
 
 ::: only 9
@@ -943,7 +947,7 @@ s\ac(cir,ω)
 s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
-e1,1,0,vs
+e,1,0,vs
 c,1,2,c
 r1,2,o,r
 o,0,2,o
@@ -1002,7 +1006,7 @@ symbolically — everything in it is a symbol, including the frequency.
 "e,1,0,vs:r1,1,2,r1:ca,2,0,ca:r3,0,3,r3:o,2,3,o:cb,3,o,cb:r2,3,o,r2"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
-e1,1,0,vs
+e,1,0,vs
 r1,1,2,r1
 ca,2,0,ca
 r3,0,3,r3

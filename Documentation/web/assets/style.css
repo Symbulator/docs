@@ -295,6 +295,58 @@ body.home .sidebar { display: none; }
 /* Folded away, Contents should not go on holding a 17rem column open. */
 .shell:has(.toc:not([open])) { grid-template-columns: max-content minmax(0, 1fr); }
 
+/* ---------------------------------------------------------- search (#87) --
+   The one piece of furniture only this site has, so it is styled here and
+   not in design/banner.css, which the landing page and the app share.
+
+   It sits at the top of the sidebar rather than in the banner for that
+   reason, and it searches the version being read and nothing else: the
+   index is written per version by build.py, and the page fetches the one
+   for its own version. A version 8 reader is never shown a hit that only
+   exists in 9. */
+.docsearch { margin: 0 0 1rem; }
+.docsearch label {
+  position: absolute; width: 1px; height: 1px;
+  margin: -1px; padding: 0; border: 0;
+  clip-path: inset(50%); overflow: hidden; white-space: nowrap;
+}
+.docsearch input[type="search"] {
+  width: 100%; box-sizing: border-box;
+  padding: 0.42rem 0.6rem;
+  font-family: var(--sans); font-size: 0.84rem;
+  color: var(--ink);
+  background: var(--lcd);
+  border: 1px solid var(--lcd-edge);
+  border-radius: 7px;
+}
+.docsearch input[type="search"]::placeholder { color: var(--ink-3); }
+.docsearch input[type="search"]:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 1px;
+}
+.docsearch-status {
+  margin: 0.5rem 0 0;
+  font-size: 0.76rem; color: var(--ink-3);
+}
+.docsearch-results { list-style: none; margin: 0.4rem 0 0; padding: 0; }
+.docsearch-results li + li { border-top: 1px solid var(--rule-2); }
+.docsearch-results a {
+  display: block; padding: 0.45rem 0;
+  color: inherit; text-decoration: none;
+}
+.docsearch-results a:hover .docsearch-what,
+.docsearch-results a:focus-visible .docsearch-what { color: var(--accent); }
+.docsearch-where {
+  display: block;
+  font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase;
+  color: var(--ink-3);
+}
+.docsearch-what { display: block; font-size: 0.84rem; color: var(--ink); }
+.docsearch-snip { display: block; font-size: 0.78rem; color: var(--ink-2); }
+.docsearch-snip mark {
+  padding: 0 1px; border-radius: 2px;
+  background: var(--gold); color: var(--gold-ink);
+}
+
 /* Kept for the plain <p class="sidebar-title"> the print stylesheet uses. */
 .sidebar-title {
   margin: 0 0 0.9rem;

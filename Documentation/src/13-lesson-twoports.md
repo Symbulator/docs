@@ -47,13 +47,21 @@ r2,2,0,40
 r3,2,3,30
 ```
 
-::: only 7,8
+::: only 7
 When asked, specify DC as the analysis and `z` as the parameter type.
 
 Then it wants a name. Because `z11`, `z12`, `z21` and `z22` are reserved
 variables on the calculator, `z` alone is not available — you are asked to add
 between one and six more characters. The default offered is `p`, so pressing
 Enter gives you a two-port called `zp`.
+:::
+::: only 8
+When asked, specify DC as the analysis and `z` as the parameter type.
+
+Then it wants a name. You are offered the chance to add between one and six
+more characters to it, and you can leave that empty — the Nspire does not
+reserve `z11`, `z12`, `z21` and `z22`, so the two-port can simply be called
+`z`.
 :::
 ::: only 9
 *Find equivalent*, then *Two-port parameters*, with **Parameters** set to
@@ -83,7 +91,7 @@ fields: a name whose first letter says which kind it is, then the **top left**
 node and the **top right** node. Both bottom nodes are ground, always.
 
 ```field 9 Circuit Description
-zp,1,2
+z,1,2
 ```
 
 That is a z-type two-port between nodes 1 and 2.
@@ -100,7 +108,7 @@ and 22:
 40→zp11:𝐢*20→zp12:𝐢*30→zp21:50→zp22
 ```
 ```sym 8
-40→zp11:𝐢*20→zp12:𝐢*30→zp21:50→zp22
+40→z11:𝐢*20→z12:𝐢*30→z21:50→z22
 ```
 
 **Enter them when prompted.** If you run a simulation without storing them
@@ -114,16 +122,16 @@ variables in the answers.
 Two possibilities.
 
 **Leave them undefined**, in which case they stay symbolic and appear in the
-answers as `zp11`, `zp12`, `zp21` and `zp22`. That is often what you want —
+answers as `z11`, `z12`, `z21` and `z22`. That is often what you want —
 the answer as a formula in the parameters.
 
 **Pin them in Expert Mode**, one equation each, under **Add equations**:
 
 ```field 9 Add equations
-zp11 = 40
-zp12 = 20j
-zp21 = 30j
-zp22 = 50
+z11 = 40
+z12 = 20j
+z21 = 30j
+z22 = 50
 ```
 
 ::: warning Expert Mode is only there for a plain solve
@@ -135,8 +143,7 @@ Example 19.6 below does exactly that.
 :::
 
 **What answers do you get?** The current entering each port, named with the
-two-port and the port number — for a two-port `zp`, that is
-`izp1` and `izp2`.
+two-port and the port number — for a two-port {{v7|`zp`, that is `izp1` and `izp2`}}{{!v7|`z`, that is `iz1` and `iz2`}}.
 
 ::: problem AS7's Example 19.2
 Find I{{sub:1}} and I{{sub:2}} in the circuit.
@@ -150,11 +157,11 @@ AS7's Example 19.2
 "e,1,0,100:zp,1,2:r,2,0,10"→cir:s\ac(cir,ω)
 ```
 ```sym 8
-"e,1,0,100:zp,1,2:r,2,0,10"→cir:s\ac(cir,ω)
+"e,1,0,100:z,1,2:r1,2,0,10"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
-e1,1,0,100
-zp,1,2
+e,1,0,100
+z,1,2
 r,2,0,10
 ```
 
@@ -167,12 +174,12 @@ s\aa(izp1)
 s\aa(izp2)
 ```
 ```sym 8
-s\aa(izp1)
-s\aa(izp2)
+s\aa(iz1)
+s\aa(iz2)
 ```
 
 ::: only 9
-`aa(izp1)` reads {{o:2}}∠{{o:0}}° and `aa(izp2)` reads
+`aa(iz1)` reads {{o:2}}∠{{o:0}}° and `aa(iz2)` reads
 {{o:1}}∠{{o:-90}}°.
 :::
 :::
@@ -190,6 +197,12 @@ AS7's Example 19.3
 :::
 
 ::: answer
+```sym 7
+"r1,1,0,4:r2,1,2,2:r3,2,0,8"→cir:s\port(cir,1,2)
+```
+```sym 8
+"r1,1,0,4:r2,1,2,2:r3,2,0,8"→cir:s\port(cir,1,2)
+```
 ```field 9 Circuit Description
 r1,1,0,4
 r2,1,2,2
@@ -201,6 +214,12 @@ r3,2,0,8
 **2**, DC.
 :::
 
+```sym 7
+{yp11,yp12,yp21,yp22}
+```
+```sym 8
+{y11,y12,y21,y22}
+```
 ```out 7,8
 {3/4,-1/2,-1/2,5/8}
 ```
@@ -221,6 +240,12 @@ AS7's Example 19.4
 :::
 
 ::: answer
+```sym 7
+"r1,1,2,8:r2,2,0,2:r3,2,3,4:j,2,3,2*ir1"→cir:s\port(cir,1,3):{yp11,yp12,yp21,yp22}
+```
+```sym 8
+"r1,1,2,8:r2,2,0,2:r3,2,3,4:j,2,3,2*ir1"→cir:s\port(cir,1,3):{y11,y12,y21,y22}
+```
 ```field 9 Circuit Description
 r1,1,2,8
 r2,2,0,2
@@ -253,6 +278,12 @@ AS7's Example 19.5
 :::
 
 ::: answer
+```sym 7
+"r1,1,2,2:r2,2,0,6:r3,2,3,3"→cir:s\port(cir,1,3):{h11,h12,h21,h22}
+```
+```sym 8
+"r1,1,2,2:r2,2,0,6:r3,2,3,3"→cir:s\port(cir,1,3):{h11,h12,h21,h22}
+```
 ```field 9 Circuit Description
 r1,1,2,2
 r2,2,0,6
@@ -292,10 +323,10 @@ AS7's Example 19.6
 "e,1,0,60:r,1,2,40:h,2,3"→cir:1000.→h11:-2→h12:10→h21:2.ᴇ-4→h22:s\th(cir,3,0):{vth,zeq}
 ```
 ```sym 8
-"e,1,0,60:r,1,2,40:h,2,3"→cir:1000.→h11:-2→h12:10→h21:2.ᴇ-4→h22:s\th(cir,3,0):{vth,zeq}
+"e,1,0,60:r1,1,2,40:h,2,3"→cir:1000.→h11:-2→h12:10→h21:2.ᴇ-4→h22:s\th(cir,3,0):{vth,req}
 ```
 ```field 9 Circuit Description
-e1,1,0,60
+e,1,0,60
 r,1,2,40
 h,2,3
 ```
@@ -347,6 +378,12 @@ AS7's Example 19.7
 :::
 
 ::: answer
+```sym 7
+"l,1,2,1:r,2,0,1:c,2,3,1"→cir:s\port(cir,1,3):{{g11,g12},{g21,g22}}
+```
+```sym 8
+"l,1,2,1:r1,2,0,1:c,2,3,1"→cir:s\port(cir,1,3):{{g11,g12},{g21,g22}}
+```
 ```field 9 Circuit Description
 l,1,2,1
 r,2,0,1
@@ -377,6 +414,12 @@ AS7's Practice Problem 19.7
 :::
 
 ::: answer
+```sym 7
+"l1,1,2,1:r1,2,0,1:l2,2,3,1:r2,3,0,1"→cir:s\port(cir,1,3):{{g11,g12},{g21,g22}}
+```
+```sym 8
+"l1,1,2,1:r1,2,0,1:l2,2,3,1:r2,3,0,1"→cir:s\port(cir,1,3):{{g11,g12},{g21,g22}}
+```
 ```field 9 Circuit Description
 l1,1,2,1
 r1,2,0,1
@@ -406,10 +449,16 @@ AS7's Example 19.8
 :::
 
 ::: answer
+```sym 7
+"r1,1,2,10:r2,2,0,20:e,2,3,3ir1"→cir:s\port(cir,1,3):[[a11,a12][a21,a22]]
+```
+```sym 8
+"r1,1,2,10:r2,2,0,20:e,2,3,3ir1"→cir:s\port(cir,1,3):[[a11,a12][a21,a22]]
+```
 ```field 9 Circuit Description
 r1,1,2,10
 r2,2,0,20
-e1,2,3,3*ir1
+e,2,3,3*ir1
 ```
 
 ::: only 9
@@ -457,23 +506,23 @@ A symbolic `vs` would do just as well.
 "es,3,0,1:rs,3,1,2:rl,2,0,20:yp,1,2"→cir:s\dc(cir)
 ```
 ```sym 8
-"es,3,0,1:rs,3,1,2:rl,2,0,20:yp,1,2"→cir:s\dc(cir)
+"es,3,0,1:rs,3,1,2:rl,2,0,20:y,1,2"→cir:s\dc(cir)
 ```
 ```field 9 Circuit Description
 es,3,0,1
 rs,3,1,2
 rl,2,0,20
-yp,1,2
+y,1,2
 ```
 
 ::: only 9
 Pin the four parameters in **Add equations**:
 
 ```field 9 Add equations
-yp11 = 0.4
-yp12 = -0.002
-yp21 = -5
-yp22 = 0.04
+y11 = 0.4
+y12 = -0.002
+y21 = -5
+y22 = 0.04
 ```
 
 Solve in DC, then open **Mini-Tools**, choose *gain*, and give it the four:
@@ -492,7 +541,7 @@ v1
 ```
 
 ```field 9 i1
-iyp1
+iy1
 ```
 
 ```field 9 v2
@@ -500,7 +549,7 @@ v2
 ```
 
 ```field 9 i2
-iyp2
+iy2
 ```
 :::
 

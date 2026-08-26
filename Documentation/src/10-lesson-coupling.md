@@ -91,7 +91,7 @@ false→s\rms:"e,1,0,12:r1,1,2,-𝐢4:r2,2,0,𝐢5:m,r2,r3,𝐢3:r3,3,0,𝐢6:r4
 false→s\rms:"e,1,0,12:r1,1,2,–𝐢4:r2,2,0,𝐢5:m,r2,r3,𝐢3:r3,3,0,𝐢6:r4,3,0,12"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
-e1,1,0,12
+e,1,0,12
 r1,1,2,-4j
 r2,2,0,5j
 m,r2,r3,3j
@@ -140,7 +140,7 @@ false→s\rms:"e,1,0,(200.∠45°):r1,1,2,4.:r2,2,0,𝐢8.:m,r2,r3,𝐢1.:r3,0,o
 false→s\rms:"e,1,0,(200.∠45°):r1,1,2,4.:r2,2,0,𝐢8.:m,r2,r3,𝐢1.:r3,0,o,𝐢5.:r4,o,0,10"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
-e1,1,0,(200∠45°)
+e,1,0,(200∠45°)
 r1,1,2,4
 r2,2,0,8j
 m,r2,r3,1j
@@ -177,7 +177,7 @@ false→s\rms:"e,1,0,100.:r1,1,2,4.-𝐢3.:r2,2,0,𝐢6.:m,r2,r3,𝐢2.:r3,3,2,�
 false→s\rms:"e,1,0,100.:r1,1,2,4.–𝐢3.:r2,2,0,𝐢6.:m,r2,r3,𝐢2.:r3,3,2,𝐢8.:r4,3,0,5"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
-e1,1,0,100
+e,1,0,100
 r1,1,2,4-3j
 r2,2,0,6j
 m,r2,r3,2j
@@ -296,7 +296,7 @@ true→s\rms:"e,1,0,120.:r1,1,2,4.-𝐢6.:t,2,3,1,-2:ro,3,0,20."→cir:s\ac(cir,
 true→s\rms:"e,1,0,120.:r1,1,2,4.–𝐢6.:t,2,3,1,-2:ro,3,0,20."→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
-e1,1,0,120
+e,1,0,120
 r1,1,2,4-6j
 t,2,3,1,-2
 ro,3,0,20
@@ -314,13 +314,13 @@ power, and that is the convention it wants.
 ::: only 9
 Three readings from **Mini-Tools** with *aa*: `ir1` is
 {{o:11.09}}∠{{o:33.69}}°, `vro` is {{o:110.9}}∠{{o:-146.31}}°, and
-`-se1` — the complex power *supplied*, so the opposite of the power consumed
+`-se` — the complex power *supplied*, so the opposite of the power consumed
 by the source — is {{o:1331}}∠{{o:-33.69}}°.
 
 Three conversions in a row is the point at which the setting is less work
 than the tool: tick **Show AC answers as polar phasors** in **Settings** and
 the first two are already in that form when the circuit solves. The third
-still wants *aa*, because `-se1` is an expression rather than an answer.
+still wants *aa*, because `-se` is an expression rather than an answer.
 :::
 
 All three are correct.

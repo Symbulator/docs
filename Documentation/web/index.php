@@ -186,6 +186,126 @@ function asset(string $name): string {
 <div class="shell">
 
 <nav class="sidebar" aria-label="Contents">
+
+  <?php /* #87. Searches this version only -- the index is written per
+           version by build.py and fetched by the script below, so a reader
+           of 7 is never sent to a page that exists only in 9. It sits here
+           rather than in the banner because the banner is shared with
+           symbolator.com and the app, and only this site has a search. */ ?>
+  <form class="docsearch" role="search" onsubmit="return false;">
+    <label for="docsearch">Search Symbulator <?= e($toc['label']) ?></label>
+    <input type="search" id="docsearch" data-version="<?= e($v) ?>"
+           autocomplete="off" spellcheck="false"
+           placeholder="Search Symbulator <?= e($toc['label']) ?>">
+    <p class="docsearch-status" id="docsearch-status" role="status" hidden></p>
+    <ol class="docsearch-results" id="docsearch-results" hidden></ol>
+  </form>
+  <script>
+  /* The index is a few hundred kilobytes, so it is not fetched until the
+     reader actually types. Nothing here is required for the page to work:
+     without JavaScript the box simply does nothing, and Contents is still
+     the way around. */
+  (function () {
+    var box = document.getElementById('docsearch');
+    if (!box) return;
+    var list = document.getElementById('docsearch-results');
+    var note = document.getElementById('docsearch-status');
+    var version = box.getAttribute('data-version');
+    var index = null, loading = false, latest = '';
+
+    function say(msg) { note.textContent = msg; note.hidden = !msg; }
+
+    function esc(s) {
+      return s.replace(/[&<>]/g, function (c) {
+        return c === '&' ? '&amp;' : c === '<' ? '&lt;' : '&gt;';
+      });
+    }
+
+    function load() {
+      if (index || loading) return;
+      loading = true;
+      say('Loading…');
+      fetch('/content/v' + version + '/search.json')
+        .then(function (r) { return r.ok ? r.json() : Promise.reject(r.status); })
+        .then(function (data) {
+          index = data; loading = false; say(''); run(latest);
+        })
+        .catch(function () {
+          loading = false;
+          say('Search is unavailable on this server.');
+        });
+    }
+
+    function snippet(text, term) {
+      var i = text.toLowerCase().indexOf(term);
+      if (i < 0) { return esc(text.slice(0, 110)) + '…'; }
+      var from = Math.max(0, i - 40);
+      var to = Math.min(text.length, i + term.length + 80);
+      return (from > 0 ? '…' : '')
+           + esc(text.slice(from, i))
+           + '<mark>' + esc(text.substr(i, term.length)) + '</mark>'
+           + esc(text.slice(i + term.length, to))
+           + (to < text.length ? '…' : '');
+    }
+
+    function run(raw) {
+      latest = raw;
+      var q = raw.trim().toLowerCase();
+      list.innerHTML = '';
+      list.hidden = true;
+      if (q.length < 2) { say(''); return; }
+      if (!index) { load(); return; }
+
+      var terms = q.split(/\s+/);
+      var hits = [];
+      for (var k = 0; k < index.length; k++) {
+        var entry = index[k];
+        var head = ((entry.q || '') + ' ' + (entry.s || '') + ' '
+                    + (entry.c || '')).toLowerCase();
+        var body = head + ' ' + entry.t.toLowerCase();
+        var score = 0, all = true;
+        for (var t = 0; t < terms.length; t++) {
+          if (body.indexOf(terms[t]) < 0) { all = false; break; }
+          score += head.indexOf(terms[t]) >= 0 ? 4 : 1;
+        }
+        if (all) { hits.push([score, k, entry]); }
+      }
+      hits.sort(function (a, b) { return b[0] - a[0] || a[1] - b[1]; });
+
+      if (!hits.length) {
+        say('No match in Symbulator ' + version + '.');
+        return;
+      }
+      say(hits.length + (hits.length === 1 ? ' match' : ' matches')
+          + (hits.length > 12 ? ', showing the first 12' : ''));
+      var frag = document.createDocumentFragment();
+      hits.slice(0, 12).forEach(function (hit) {
+        var entry = hit[2];
+        var li = document.createElement('li');
+        var a = document.createElement('a');
+        a.href = '/' + version + '/' + entry.p
+               + (entry.a ? '#' + entry.a : '');
+        a.innerHTML =
+          '<span class="docsearch-where">' + esc(entry.c) + '</span>'
+          + '<span class="docsearch-what">'
+          + esc(entry.q || entry.s || entry.c) + '</span>'
+          + '<span class="docsearch-snip">'
+          + snippet(entry.t, terms[0]) + '</span>';
+        li.appendChild(a);
+        frag.appendChild(li);
+      });
+      list.appendChild(frag);
+      list.hidden = false;
+    }
+
+    box.addEventListener('input', function () { run(box.value); });
+    box.addEventListener('focus', load, { once: true });
+    box.addEventListener('keydown', function (ev) {
+      if (ev.key === 'Escape') { box.value = ''; run(''); }
+    });
+  })();
+  </script>
+
   <details class="toc" id="toc" open>
     <summary class="sidebar-title">Contents<svg class="toc-chev" viewBox="0 0 16 16"
       aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"

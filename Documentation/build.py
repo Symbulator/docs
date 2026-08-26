@@ -762,17 +762,66 @@ def load_book() -> Book:
     return Book(meta, chapters)
 
 
+#: Sections of the built page, for the sidebar search. One entry per `##`
+#: heading, plus one for whatever comes before the first -- so a hit can be
+#: linked to the anchor the reader wants, not just the page.
+SEARCH_SPLIT = re.compile(r'<h2 id="([^"]+)"[^>]*>(.*?)</h2>', re.S)
+
+
+def plain(html_text: str) -> str:
+    """The words of a rendered page, with the markup taken out."""
+    text = re.sub(r"(?is)<(script|style).*?</>", " ", html_text)
+    text = re.sub(r"<[^>]+>", " ", text)
+    return re.sub(r"\s+", " ", html.unescape(text)).strip()
+
+
+#: A worked problem inside a section. Not an anchor -- problems have no id --
+#: but the name a reader recognises, so a hit lands as "AS7's Example 12.10"
+#: rather than as "Further wye-wye problems".
+SEARCH_PROBLEM = re.compile(r'<p class="problem-title">(.*?)</p>', re.S)
+
+
+def search_entries(chapter_id: str, title: str, body: str) -> list[dict]:
+    """Entries for one built chapter: one per section, split again at each
+    worked problem so a hit can name the problem it is in."""
+    out = []
+
+    def add(anchor, heading, raw):
+        pos, label = 0, ""
+        for m in SEARCH_PROBLEM.finditer(raw):
+            chunk = plain(raw[pos:m.start()])
+            if chunk:
+                out.append({"p": chapter_id, "c": title, "a": anchor,
+                            "s": heading, "q": label, "t": chunk})
+            label = plain(m.group(1))
+            pos = m.end()
+        chunk = plain(raw[pos:])
+        if chunk:
+            out.append({"p": chapter_id, "c": title, "a": anchor,
+                        "s": heading, "q": label, "t": chunk})
+
+    pos, anchor, heading = 0, "", ""
+    for m in SEARCH_SPLIT.finditer(body):
+        add(anchor, heading, body[pos:m.start()])
+        anchor, heading = m.group(1), plain(m.group(2))
+        pos = m.end()
+    add(anchor, heading, body[pos:])
+    return out
+
+
 def build_web(book: Book, versions: list[int]):
     outroot = os.path.join(BUILD, "web")
     for v in versions:
         vdir = os.path.join(outroot, "content", f"v{v}")
         os.makedirs(vdir, exist_ok=True)
         r = HtmlRenderer(book, v)
-        toc = []
+        toc, search = [], []
         for ch, number, present in book.for_version(v):
             body = r.chapter(ch, number, present)
             open(os.path.join(vdir, ch.id + ".html"), "w",
                  encoding="utf-8").write(body)
+            if present:
+                search += search_entries(ch.id, ch.title, body)
             sections = []
             if present:
                 n = 0
@@ -798,6 +847,11 @@ def build_web(book: Book, versions: list[int]):
                 **{k: val for k, val in book.meta["versions"][v].items()}}
         json.dump(meta, open(os.path.join(vdir, "toc.json"), "w",
                              encoding="utf-8"), indent=1)
+        # The search index is per version, because the search is: a reader
+        # of version 8 must not be shown a hit that only exists in 9.
+        json.dump(search, open(os.path.join(vdir, "search.json"), "w",
+                               encoding="utf-8"), ensure_ascii=False,
+                  separators=(",", ":"))
     # copy the PHP front end and static assets next to the content
     for name in ("index.php", ".htaccess", "favicon.ico", "assets"):
         s, d = os.path.join(ROOT, "web", name), os.path.join(outroot, name)
@@ -951,6 +1005,10 @@ def check(book: Book, versions: list[int], verbose: bool = False) -> int:
     problems.extend(check_control_chars())
     problems.extend(check_nested_version_spans())
     problems.extend(check_buried_v9())
+    # The sidebar search is three pieces in three files with nothing else
+    # tying them together -- the index this file writes, the markup and
+    # script in web/index.php, and the rules in web/assets/style.css.
+    problems.extend(check_search(versions))
 
     missing: list[str] = []
     # figures need a pair: .svg for the web, .pdf for print
@@ -980,6 +1038,46 @@ def check(book: Book, versions: list[int], verbose: bool = False) -> int:
     print((f"check: {len(problems)} problem(s)" if problems else "check: clean")
           + tail)
     return len(problems)
+
+
+def check_search(versions: list[int]) -> list[str]:
+    """The search (#87) is written here and consumed there; keep them in step.
+
+    Nothing else would notice a rename. The index is emitted by build_web
+    into content/v<N>/search.json; web/index.php fetches that exact path and
+    fills two elements by id; web/assets/style.css styles them. Break any one
+    of those and the box still renders and simply never finds anything --
+    which is the failure this catches. Where a build already exists, the
+    index is also checked for covering every chapter of its version, so a
+    half-written index is not mistaken for a working one."""
+    out = []
+    php = os.path.join(ROOT, "web", "index.php")
+    css = os.path.join(ROOT, "web", "assets", "style.css")
+    php_text = open(php, encoding="utf-8").read() if os.path.isfile(php) else ""
+    css_text = open(css, encoding="utf-8").read() if os.path.isfile(css) else ""
+    for needle, where in (('/content/v' + "' + version + '" + '/search.json', php),
+                          ('id="docsearch"', php),
+                          ('id="docsearch-results"', php),
+                          ('id="docsearch-status"', php)):
+        if needle not in php_text:
+            out.append(f"search: {os.path.basename(where)} no longer has "
+                       f"{needle!r} -- the sidebar search cannot work")
+    for needle in (".docsearch", ".docsearch-results", ".docsearch-snip"):
+        if needle not in css_text:
+            out.append(f"search: style.css has no {needle} rule")
+
+    for v in versions:
+        built = os.path.join(BUILD, "web", "content", f"v{v}", "search.json")
+        toc = os.path.join(BUILD, "web", "content", f"v{v}", "toc.json")
+        if not (os.path.isfile(built) and os.path.isfile(toc)):
+            continue                      # nothing built yet; nothing to check
+        entries = json.load(open(built, encoding="utf-8"))
+        pages = {e.get("p") for e in entries}
+        for ch in json.load(open(toc, encoding="utf-8"))["chapters"]:
+            if ch["present"] and ch["id"] not in pages:
+                out.append(f"search: v{v}'s index has nothing for "
+                           f"{ch['id']} -- rebuild before deploying")
+    return out
 
 
 def check_buried_v9() -> list[str]:
