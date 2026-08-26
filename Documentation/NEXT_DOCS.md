@@ -133,6 +133,203 @@ too, and is fixed.
 
 ---
 
+## Found building the example input files, 26 Aug 2026
+
+Thirteen lessons' worth of `.cir` entries were written, one per simulation
+the tutorial runs, and every entry was run and read against the answer its
+chapter prints. These are what that turned up. Nothing below has been
+changed in the documentation.
+
+The app-side findings from the same pass -- #105, #107, #110, #112 and
+#114 -- are in `Symbulator/repos/local/NEXT.md`.
+
+---
+
+## #98 — Lesson 1 says version 9 refuses a bare `e`, and it does not
+
+`src/01-lesson-dc.md:471`, in an `only 9` note:
+
+> A bare `e` is one of the few names Symbulator 9 will not accept. […]
+> Symbulator refuses the name rather than quietly reading it wrong, and
+> suggests `e`.
+
+Three things are wrong with it. **The app accepts `e`** -- `e,1,0,36`
+solves. **The chapter's own panels use it**, including the very first
+circuit a reader types. And **the suggestion is the name it just
+refused**; something was lost there, presumably `e1`.
+
+The "No reserved names" tip 200 lines earlier is correct and says the
+opposite: two names are refused, `s` and `eturn`, and everything else
+including `e` and `rc` is fine. That matches the app exactly.
+
+**Suggested fix:** delete the note at :471.
+
+---
+
+## #99 — Two answer names in Lesson 1 survived the `e1` → `e` rename
+
+`src/01-lesson-dc.md:822` (B11's Example 6.13) and `:1005` (B11's Example
+6.15). Both read `{{v9|`re1` is}}` where the version 9 circuit names its
+source `e`, so the answer is `re`. The calculator half of the same
+sentence says `re`, correctly.
+
+**Suggested fix:** `re1` → `re` in both.
+
+Found by sweeping every panel in every chapter for names the version 9 text
+quotes that the circuit beside it does not produce. Those two are the only
+such cases in Lessons 1 and 2.
+
+---
+
+## #100 — Lesson 4 points at a `prl` expression that is never derived
+
+`src/04-lesson-equivalents.md:452`. The version 9 half of the sentence
+names `prl`, which does not exist in version 9. What was derived above is
+`vth^2*R/(req+R)^2`, unnamed. The calculator half is right -- **prl** is a
+real variable there.
+
+**Suggested fix:** name the expression rather than `prl`.
+
+---
+
+## #101 — Lesson 1's B11's Example 6.13 prints 0.11 A where the screen says 109 mA
+
+`src/01-lesson-dc.md:822`. The current is exactly 24/220 = 0.10909…, so at
+the lesson's own setting -- three significant digits, SI prefixes on -- the
+screen reads **109 mA**. The page says **0.11 A**, the same number rounded
+to two decimals.
+
+The most visible instance of a difference that also affects a handful of
+answers in Lessons 3 and 4: the calculator prints a fixed number of
+decimals, version 9 counts significant digits. No setting reproduces the
+page here -- n = 2 gives 110 mA, n = 3 gives 109 mA.
+
+**Left alone.** The number is not wrong, and it is the calculator's own
+display convention.
+
+---
+
+## #102 — Lesson 1's B11's Example 5.20 gives a voltage drop in watts
+
+`src/01-lesson-dc.md:796`: "`vr2` is the voltage drop in the 7Ω resistor:
+17.5 **W**". A voltage drop is in **V**, and the app shows 17.5 V. Shared
+text, so wrong for all three versions.
+
+**Suggested fix:** W → V.
+
+---
+
+## #103 — Lesson 5 asks for `vo/is` where the source is `is1`
+
+`src/05-lesson-opamps.md`, AS7's Practice Problems 5.4a and 5.4b. Both
+circuits name the source's value `is1`, and both instructions say `vo/is`,
+which fails outright -- `is` is a Python keyword:
+
+    vo/is   ->  Could not read the value 'vo/is': invalid syntax.
+    vo/is1  ->  -r                                  (the printed answer)
+
+The same rename that was settled in Lesson 3 today, missed in two more
+places. 5.4b carries #104 as well.
+
+**Suggested fix:** `is` → `is1` in both.
+
+---
+
+## #104 — `expand(...)` does not exist in version 9's Evaluate card
+
+Four places in Lesson 5 tell a version 9 reader to evaluate `expand(vo)`:
+AS7's Figure 5.21, TR5's Example 4-16, TR5's Exercise 4-14 and TR5's
+Example 4-17. All four fail with "'Symbol' object is not callable" -- the
+evaluator's namespace is a deliberately small list and `expand` is not in
+it.
+
+The chapter contradicts itself here: at AS2's Figure 5.24 (Subtractor) it
+says plainly *"Version 9 has no `expand`"*.
+
+**A decision rather than a typo.** Either add `expand` to the namespace --
+it is a pure function on expressions like the ones already there, and the
+calculator had it -- or drop it from the four instructions, since `vo` on
+its own gives the same expression differently arranged.
+
+---
+
+## #106 — Lesson 5's two remaining `|` panels
+
+The seven in Lesson 4 were converted on 26 Aug 2026. Two remain, both in
+Lesson 5: **TR5's Exercise 4-11**, `vo|vs=2.` and its two siblings, and
+**TR5's Figure 4-32**, `prL|L=1000`. Neither can be followed as written.
+
+The first is now straightforward -- `vo` in **Evaluate** with `vs = 2` in
+its **Conditions** box, which is what that box is for. The second takes the
+algebraic form Lesson 4 uses throughout: `vth^2*1000/(req+1000)^2`.
+
+---
+
+## #108 — Lesson 6's Drill Exercise 5.3 names a resistor that is not there
+
+`src/06-lesson-transient.md:657` asks for `ir1`; that circuit's resistors
+are `r4` and `r12`. The 2 A it prints is `ir4`, which is what the same
+problem's transient half says four paragraphs later.
+
+**Suggested fix:** `ir1` → `ir4`.
+
+---
+
+## #109 — Lesson 6 shows the same paragraph three times, twice over
+
+`src/06-lesson-transient.md:1528, 1532, 1536` and again at `1574, 1578,
+1582`. Six `only 9` blocks in two runs of three, each holding exactly the
+same sentence about limiting the results. A version 9 reader sees it three
+times running, then three times again further down.
+
+The calculator versions are fine: each block replaces one of three
+`s\only("vc")` calls, which do belong there individually.
+
+**Suggested fix:** keep one of each run.
+
+---
+
+## #111 — Lesson 6's Drill Exercise 6.1 prints answers that cannot be right
+
+`src/06-lesson-transient.md:1395`, an `only 9` sentence quoting
+`vc = 2 - 3*exp(-2*t) + exp(-6*t)` and `il = 2*exp(-2*t) - 2*exp(-6*t)`.
+
+Neither is what the app produces, and the first contradicts the problem's
+own set-up:
+
+|  | at t = 0 | as t → ∞ |
+|---|---|---|
+| the page's `vc` | 0 | **2** |
+| the app's `vc` | **2** | 0 |
+
+The initial condition two panels earlier is vc = 2, and the transient
+interval has no source in it, so the voltage must start at 2 and decay to
+nothing. `il` is out by a sign.
+
+**The calculator lines directly above are right** -- they print
+`3e^-2t - e^-6t` and `2e^-6t - 2e^-2t`, which is exactly what the app
+gives. Only the version 9 sentence is wrong.
+
+**Suggested fix:** quote the same two expressions the calculator lines do.
+
+---
+
+## #113 — Lesson 9 says version 9 cannot read the angle sign, then uses it
+
+`src/09-lesson-threephase.md:458`:
+
+> Version 9 does not read the angle sign, so each source is written in
+> exponential form: 100 V at 10° is `(100∠10°)`.
+
+Version 9 does read it -- Lesson 7 says so correctly, and every circuit
+panel in Lesson 9 uses it and solves. The example contradicts the claim in
+the same breath, and "exponential form" is the wrong name for polar form
+anyway.
+
+**Suggested fix:** delete it, or use the Lesson 7 wording.
+
+---
+
 ## Settled on 26 Aug 2026
 
 **#80, array answers become named lines in version 9.** The four untagged
