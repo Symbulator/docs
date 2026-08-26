@@ -905,10 +905,10 @@ Both routes go in the **Solve** card, which solves against the answers the
 circuit just produced:
 
 ```field 9 Equation
-v_a-v_b = 12
+va-vb = 12
 ```
 
-with `i4` as the unknown — or `i_r4+i_j = 0.2` for the same answer by
+with `i4` as the unknown — or `ir4+ij = 0.2` for the same answer by
 current instead.
 :::
 

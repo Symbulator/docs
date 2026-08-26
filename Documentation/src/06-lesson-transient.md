@@ -150,7 +150,7 @@ lines in **Equation(s) to solve in terms of the results**, and name both
 unknowns:
 
 ```field 9 Equation(s) to solve in terms of the results
-x = v_c
+x = vc
 t = 2
 ```
 
@@ -193,7 +193,7 @@ as an expression in terms of t, as in `j,0,1,t`.
 time.}}
 
 **Dependent values.** Sources with dependent values are described as we have
-seen before, for example {{v7,8|`j,0,1,3*vr1`}}{{v9|`j,0,1,3*v_r1`}}.
+seen before, for example `j,0,1,3*vr1`.
 
 ### A word on intervals
 
@@ -246,7 +246,7 @@ menus once you choose TR. A box opens asking **What results are you after?**
 List them there, separated by commas:
 
 ```field 9 What results are you after? List the variables here
-v_2
+v2
 ```
 
 This matters most in TR analysis, where each answer costs an inverse Laplace
@@ -274,7 +274,7 @@ Solve the circuit first — the plot is of an answer, so there has to be one —
 then open **Plot** and fill in four things:
 
 - **Plot type**: *Plot a function of time*
-- **Variable to plot**: the answer you want, such as `v_2`
+- **Variable to plot**: the answer you want, such as `v2`
 - **Start time (s)** and **End time (s)**: the window, for example 0 and
   0.005
 - **Points**: how finely to sample it; 300 is the default and is usually
@@ -283,7 +283,7 @@ then open **Plot** and fill in four things:
 Press **Run** and the curve appears under the card.
 
 The second field is worth a moment. It takes an answer's name, not an
-expression, and it must be one this circuit actually has — `v_2` and `i_r1`
+expression, and it must be one this circuit actually has — `v2` and `ir1`
 rather than `vc` or a formula of your own. If you are unsure of the spelling,
 **Results** lists every name above.
 
@@ -1612,7 +1612,7 @@ r,1,0,r
 Once the simulation completes, we ask for the variables of interest:
 
 ::: only 9
-They are already in **Results**: `v_c` is {{o:i*exp(-t/(c*r))/c}} and `i_c`
+They are already in **Results**: `vc` is {{o:i*exp(-t/(c*r))/c}} and `ic`
 is {{o:i*DiracDelta(t) - i*exp(-t/(c*r))/(c*r)}}.
 
 The impulse survives in the capacitor's current, which is right — the
@@ -1983,7 +1983,7 @@ These conditions are used in the TR analysis of the second interval,
 for t≥0.
 
 ::: only 9
-The answers are `v_c` = {{o:2 - 3*exp(-2*t) + exp(-6*t)}} and `i_l` =
+The answers are `vc` = {{o:2 - 3*exp(-2*t) + exp(-6*t)}} and `il` =
 {{o:2*exp(-2*t) - 2*exp(-6*t)}}, both in **Results**.
 :::
 
@@ -2097,7 +2097,7 @@ the descriptions from the DC simulations. To avoid renaming the nodes, I
 simulated the right switch as a short circuit between nodes 2 and 3.
 
 ::: only 9
-`v_c` comes back {{o:-(sin(4*t) + 7*cos(4*t))*exp(-3*t)/50}} and `i_l`
+`vc` comes back {{o:-(sin(4*t) + 7*cos(4*t))*exp(-3*t)/50}} and `il`
 {{o:(cos(4*t) - sin(4*t))*exp(-3*t)}}.
 :::
 
@@ -2471,7 +2471,7 @@ il
 ```
 
 ::: only 9
-`v_c` is {{o:(4*exp(3*t) - 3*sin(4*t) - 4*cos(4*t))*exp(-3*t)/10}} and `i_l`
+`vc` is {{o:(4*exp(3*t) - 3*sin(4*t) - 4*cos(4*t))*exp(-3*t)/10}} and `il`
 is {{o:exp(-3*t)*sin(4*t)/20}}.
 :::
 
@@ -2755,7 +2755,7 @@ Be patient. This took 78 seconds in my calculator, including over half a
 minute just to find the inverse Laplace of the two desired answers.
 
 ::: only 9
-Version 9 answers this one in about a second. `v_1` and `v_2` are in
+Version 9 answers this one in about a second. `v1` and `v2` are in
 **Results**; they are long enough that they are easier read on screen than
 in print.
 :::
@@ -2842,7 +2842,7 @@ DiffEq’s Laplace Transform to do so: `s\t2s`.
 
 ::: only 9
 The non-expert user is right here: the new equation is simply
-`1-e^(-t/2) = v_c`. Everything you type into expert mode in version 9 —
+`1-e^(-t/2) = vc`. Everything you type into expert mode in version 9 —
 equations, conditions, expressions — is read in the **time domain**, the
 same domain as the answers on screen. You do not convert, and you do not
 have to remember which side of the transform you are standing on.
@@ -2899,7 +2899,7 @@ so there is no ` and ` to prefix — the word exists on the calculator only
 because the equation is being appended to a list:
 
 ```field 9 Add equations
-1-e^(-t/2) = v_c
+1-e^(-t/2) = vc
 ```
 :::
 
@@ -2934,7 +2934,7 @@ Symbulator has as voltage drop in the capacitor the expression we already
 know from the problem statement:
 
 ::: only 9
-`v_c` in **Results** reads {{o:1 - exp(-t/2)}}, which it does.
+`vc` in **Results** reads {{o:1 - exp(-t/2)}}, which it does.
 :::
 
 ```sym 7
@@ -2948,7 +2948,7 @@ vc
 This is correct, so we proceed to ask for the answers we want:
 :::
 ::: only 9
-This is correct, and the answers we want are on screen with it: `i_c` is
+This is correct, and the answers we want are on screen with it: `ic` is
 {{o:exp(-t/2)/2}}, and the resistor's **voltage drop** line gives
 {{o:exp(-t/2)}}.
 :::
@@ -2998,7 +2998,7 @@ vr=s\t2s(e^(–t))
 No transform this time either — write what you know:
 
 ```field 9 Add equations
-v_r = e^(-t)
+vr = e^(-t)
 ```
 :::
 
@@ -3047,7 +3047,7 @@ In the unknowns field, add the new variable:
 Let Symbulator rip. Once it finishes solving, ask for the sanity check:
 :::
 ::: only 9
-Run it. The sanity check is already on screen: `v_r` reads
+Run it. The sanity check is already on screen: `vr` reads
 {{o:exp(-t)}}, which is what we told it.
 :::
 
@@ -3062,7 +3062,7 @@ vr
 Looks good, so go ahead and ask for the answers:
 :::
 ::: only 9
-And the answers with it: `i_r` is {{o:exp(-t)}} and the source's value
+And the answers with it: `ir` is {{o:exp(-t)}} and the source's value
 `vs` is {{o:1}} V.
 :::
 
@@ -3127,7 +3127,7 @@ Choose TR, put `vs` in **Add unknowns**, and give **Add equations** the
 answer you know — in time, as always here:
 
 ```field 9 Add equations
-1-e^(-2*t) = i_l
+1-e^(-2*t) = il
 ```
 :::
 
@@ -3152,8 +3152,8 @@ il
 Since that adds up, ask for the answers:
 :::
 ::: only 9
-It does add up — `i_l` reads {{o:1 - exp(-2*t)}} — and the answers are on
-screen with it: `v_l` is {{o:2*exp(-2*t)}}, `v_r` is
+It does add up — `il` reads {{o:1 - exp(-2*t)}} — and the answers are on
+screen with it: `vl` is {{o:2*exp(-2*t)}}, `vr` is
 {{o:2 - 2*exp(-2*t)}}, and the source's value `vs` is {{o:2}} V.
 :::
 

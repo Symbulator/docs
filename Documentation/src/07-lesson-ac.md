@@ -203,12 +203,12 @@ what it found:
 - the usual voltages in the nodes, voltage drops in the elements, and currents
   through the elements, in variables that should be familiar by now
 - the *average power consumed* in the source and the resistor, in
-  {{v7,8|`ape` and `apr1`}}{{v9|`ap_e1` and `ap_r1`}}. None is given
+  {{v7,8|`ape` and `apr1`}}{{v9|`ape1` and `apr1`}}. None is given
   for the capacitor, since capacitors and inductors do not consume real power.
 - the *complex power consumed* in all elements, in {{v7,8|`sc`, `se` and
-  `sr1`}}{{v9|`s_c`, `s_e1` and `s_r1`}}
+  `sr1`}}{{v9|`sc`, `se1` and `sr1`}}
 - the *equivalent impedance* of the rest of the circuit as seen by the source,
-  in {{v7,8|`ze`}}{{v9|`z_e1`}}
+  in {{v7,8|`ze`}}{{v9|`ze1`}}
 
 To get the answers we need for this problem in particular, we ask for `ir1` and
 `vc`. It is likely that the {{t:machine}} will give you the answers in
@@ -234,7 +234,7 @@ card under the results, leave the tool set to *aa — amplitude and angle*,
 and give it the answer's name:{{i:aa tool}}
 
 ```field 9 Value
-i_r1
+ir1
 ```
 
 It reads {{o:1.789}}∠{{o:26.57}}°.
@@ -285,7 +285,7 @@ The source is given in polar form, and version 9 reads it as written —
 magnitude, the angle sign, then the angle in degrees.
 
 Then AC, with **10** for omega. **Mini-Tools** with *aa* reads
-`i_r1` as {{o:4.472}}∠{{o:3.43}}° and `v_l` as {{o:8.944}}∠{{o:93.43}}°.
+`ir1` as {{o:4.472}}∠{{o:3.43}}° and `vl` as {{o:8.944}}∠{{o:93.43}}°.
 Both are correct.
 :::
 
@@ -331,10 +331,6 @@ is called `zeq`.
 When asked what type of analysis, choose AC. Since there are capacitors in
 farads and an inductor in henries, Symbulator will ask you for the frequency;
 enter 50. Once the program is done, ask for the equivalent impedance, `zeq`.
-:::
-::: only 9
-The domain and the frequency are arguments, so nothing is prompted. Read the
-equivalent impedance off the object with `eq.z`.
 :::
 
 ```out
@@ -400,7 +396,7 @@ s\aa(ir)
 ```
 
 ::: only 9
-Read it with **Mini-Tools** set to *aa*: `aa(i_r)` gives {{o:4.789}}∠{{o:-16.70}}°.
+Read it with **Mini-Tools** set to *aa*: `aa(ir)` gives {{o:4.789}}∠{{o:-16.70}}°.
 :::
 
 That is 4.789 A at an angle of −16.7°, which is correct.
@@ -511,7 +507,7 @@ r1,1,0,4+20j+[16,-14j+25j]
 
 No frequency is needed to solve this, but AC asks for one anyway — put in
 anything you like, because every value is already an impedance and none of them
-depends on it. Then `aa(i_r1)` gives the same {{o:0.4145}}∠{{o:-71.60}}°.
+depends on it. Then `aa(ir1)` gives the same {{o:0.4145}}∠{{o:-71.60}}°.
 :::
 :::
 :::
@@ -569,8 +565,8 @@ number.{{i:dependent source}}
 The spelling of that name is the one thing that changed between the versions.
 Version 7 runs the quantity and the element together, as in `2icx`; version 9
 uses the same names it reports its answers under, so the current through `cx`
-is {{v7,8|`icx`}}{{v9|`i_cx`}} and the voltage across `rx` is
-{{v7,8|`vrx`}}{{v9|`v_rx`}}.
+is `icx` and the voltage across `rx` is
+`vrx`.
 
 ::: practice
 
@@ -598,7 +594,7 @@ e1,1,0,20
 r1,1,2,10
 cx,2,0,.1
 l1,2,3,1
-j1,0,3,2*i_cx
+j1,0,3,2*icx
 l2,3,0,.5
 ```
 
@@ -617,7 +613,7 @@ s\aa(icx)
 ```
 
 ::: only 9
-`aa(i_cx)` gives {{o:7.589}}∠{{o:108.4}}°.
+`aa(icx)` gives {{o:7.589}}∠{{o:108.4}}°.
 :::
 
 That is 7.59 A at an angle of 108.4°, which is correct.
@@ -649,7 +645,7 @@ rx,1,0,2
 c,1,2,.2
 l,2,0,2
 r,2,3,4
-e1,3,0,3*v_rx
+e1,3,0,3*vrx
 ```
 
 ::: only 9
@@ -668,7 +664,7 @@ for the reason given under Problem 9.35.
 ```
 
 ::: only 9
-`aa(v_1)` gives {{o:11.33}}∠{{o:60.02}}° and `aa(v_2)` gives
+`aa(v1)` gives {{o:11.33}}∠{{o:60.02}}° and `aa(v2)` gives
 {{o:33.02}}∠{{o:57.13}}°.
 :::
 
@@ -704,7 +700,7 @@ e1,1,0,(8∠-40°)
 r1,1,2,4'k
 co,2,0,2'µ
 l1,2,3,50'm
-j1,0,3,.5*i_co
+j1,0,3,.5*ico
 ro,3,0,2'k
 ```
 
@@ -723,7 +719,7 @@ AC, with **Angular frequency** set to **1000**.
 ```
 
 ::: only 9
-`aa(v_ro)` gives {{o:1.550}}∠{{o:-95.18}}° and `aa(i_co)` gives
+`aa(vro)` gives {{o:1.550}}∠{{o:-95.18}}° and `aa(ico)` gives
 {{o:0.003264}}∠{{o:-3.743}}°.
 :::
 
@@ -755,7 +751,7 @@ j1,0,1,3
 r1,1,0,1
 rx,1,0,-1j
 r3,1,2,-2j
-j2,1,2,.2*v_rx
+j2,1,2,.2*vrx
 r4,1,2,2+2j
 r5,2,0,-1j
 r6,2,3,2+2j
@@ -777,7 +773,7 @@ AC. The frequency is asked for but never used, so anything will do.
 ```
 
 ::: only 9
-`aa(v_1)` gives {{o:2.708}}∠{{o:-56.73}}° and `aa(v_2)` gives
+`aa(v1)` gives {{o:2.708}}∠{{o:-56.73}}° and `aa(v2)` gives
 {{o:6.914}}∠{{o:-80.70}}°.
 :::
 
@@ -1028,7 +1024,7 @@ vo/vs
 
 ::: only 9
 ```field 9 Evaluate
-v_o/vs
+vo/vs
 ```
 :::
 

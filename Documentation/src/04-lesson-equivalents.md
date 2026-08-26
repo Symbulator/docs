@@ -443,7 +443,7 @@ Another type of problem often associated with the Thévenin / Norton equivalents
 concerns the power transfer to a load, particularly the maximum power transfer
 possible. Maximum power is transferred when the load RL equals the REQ of the
 equivalent. Symbulator's th script gives you the maximum power that can be
-delivered in {{v7,8|**pmax**}}{{v9|`eq.pmax`}}, and the power transferred to the
+delivered in {{v7,8|**pmax**}}{{v9|`pmax`}}, and the power transferred to the
 load as a function of its value in {{v7,8|**prl**}}{{v9|the `prl` expression
 derived above}}.
 
@@ -774,7 +774,7 @@ s\er("r4,a,0,4:ri,a,0,6:ji,a,0,iri/2",a,0)
 ```field 9 Circuit Description
 r4,a,0,4
 ri,a,0,6
-ji,a,0,i_ri/2
+ji,a,0,iri/2
 ```
 
 ::: only 7,8
@@ -805,7 +805,7 @@ s\er("r4,a,0,4:rx,0,a,2:j,a,0,2irx",a,0)
 ```field 9 Circuit Description
 r4,a,0,4
 rx,0,a,2
-j,a,0,2*i_rx
+j,a,0,2*irx
 ```
 
 ::: only 7,8
@@ -837,7 +837,7 @@ s\er("r15,a,0,15:e,1,a,4vrx:r10,1,x,10:rx,x,0,5",a,0)
 ```
 ```field 9 Circuit Description
 r15,a,0,15
-e1,1,a,4*v_rx
+e1,1,a,4*vrx
 r10,1,x,10
 rx,x,0,5
 ```
@@ -869,7 +869,7 @@ s\er("e,3,0,1.5is:r3,3,2,3:r2,2,0,2:s,2,1",1,0)
 s\er("e,3,0,1.5is:r3,3,2,3:r2,2,0,2:s,2,1",1,0)
 ```
 ```field 9 Circuit Description
-e1,3,0,1.5*i_s1
+e1,3,0,1.5*is1
 r3,3,2,3
 r2,2,0,2
 s1,2,1
@@ -905,7 +905,7 @@ s\er("r10,1,2,10:r5,2,3,5:r1,2,0,30:e,1,0,20ir1",3,0)
 r10,1,2,10
 r5,2,3,5
 r1,2,0,30
-e1,1,0,20*i_r1
+e1,1,0,20*ir1
 ```
 
 ::: only 7,8
@@ -936,7 +936,7 @@ s\er("r1,1,0,6:r4,a,0,4:e,a,1,6ir1",a,0)
 ```field 9 Circuit Description
 r1,1,0,6
 r4,a,0,4
-e1,a,1,6*i_r1
+e1,a,1,6*ir1
 ```
 
 ::: only 7,8

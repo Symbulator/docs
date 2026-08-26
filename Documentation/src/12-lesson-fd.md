@@ -171,7 +171,7 @@ Run that in FD, then put the answer back into the time domain from
 **Evaluate**:
 
 ```field 9 Evaluate
-s2t(v_o)
+s2t(vo)
 ```
 :::
 
@@ -236,7 +236,7 @@ r2,o,0,3
 ```
 
 ::: only 9
-FD, then `s2t(v_o)` in **Evaluate**.
+FD, then `s2t(vo)` in **Evaluate**.
 :::
 :::
 :::
@@ -278,7 +278,7 @@ r2,2,o,1'k
 Solve in FD, then ask **Evaluate** for the ratio:
 
 ```field 9 Evaluate
-v_o/vs
+vo/vs
 ```
 :::
 

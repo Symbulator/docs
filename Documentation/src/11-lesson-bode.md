@@ -75,7 +75,7 @@ r1,1,2,1000
 c1,2,0,1e-6
 ```
 
-- **Variable to plot**: `v_2`
+- **Variable to plot**: `v2`
 - **Start frequency (Hz)** and **End frequency (Hz)**: 10 and 100000
 - **Points**: 300
 
@@ -85,7 +85,7 @@ frequency, falling 20 dB per decade after the corner, with the phase heading
 for −90°.
 
 ::: warning The variable, not an expression
-The box takes an answer's *name* — `v_2`, `i_r1` — not a formula of your own,
+The box takes an answer's *name* — `v2`, `ir1` — not a formula of your own,
 and it has to be one this circuit actually has. **Results** lists every name
 above it.
 
@@ -263,7 +263,7 @@ There is no dedicated tool, and none is needed: solve the circuit in AC with
 
 Two things make it work, and both are easy to leave out:
 
-- **Tick *real only*.** Solving `im(z_e1) = 0` over the complex field returns
+- **Tick *real only*.** Solving `im(ze1) = 0` over the complex field returns
   answers written in terms of `re(w)` and `im(w)` rather than `w` — useless.
   Declaring the unknown real is what makes it solvable.
 - **Add `w > 0` as a condition.** The algebra gives ± the frequency, and only
@@ -333,7 +333,7 @@ Set up for the upper bandwidth frequency
 Put `w` in the **omega** box and solve in AC. Then, in the **Solve** card:
 
 ```field 9 Equation(s) to solve in terms of the results
-im(z_e1) = 0
+im(ze1) = 0
 ```
 
 ```field 9 Unknown(s) to solve for
@@ -350,7 +350,7 @@ The bandwidth frequencies are the half-power points, where the impedance
 magnitude is √2 times its resistance. Same circuit, different equation:
 
 ```field 9 Equation(s) to solve in terms of the results
-abs(z_e1) = sqrt(2)*2
+abs(ze1) = sqrt(2)*2
 ```
 
 With the condition `w<50000` that gives ω{{sub:1}} = {{o:49010}} rad/s, and
@@ -407,7 +407,7 @@ example's equation and change the bounds:
 :::
 ::: only 9
 ```field 9 Equation(s) to solve in terms of the results
-im(i_e1) = 0
+im(ie1) = 0
 ```
 
 with `w>0` and **real only**, giving ω{{sub:0}} = {{o:25000}} rad/s.
@@ -448,7 +448,7 @@ nSolve(imag(v1)=0,ω)|ω>0
 
 ::: only 9
 ```field 9 Equation(s) to solve in terms of the results
-im(v_1) = 0
+im(v1) = 0
 ```
 
 with `w>0` and **real only**.

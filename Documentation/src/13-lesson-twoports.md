@@ -136,7 +136,7 @@ Example 19.6 below does exactly that.
 
 **What answers do you get?** The current entering each port, named with the
 two-port and the port number — for a two-port `zp`, that is
-{{v7,8|`izp1` and `izp2`}}{{v9|`i_zp1` and `i_zp2`}}.
+`izp1` and `izp2`.
 
 ::: problem AS7's Example 19.2
 Find I{{sub:1}} and I{{sub:2}} in the circuit.
@@ -172,7 +172,7 @@ s\aa(izp2)
 ```
 
 ::: only 9
-`aa(i_zp1)` reads {{o:2}}∠{{o:0}}° and `aa(i_zp2)` reads
+`aa(izp1)` reads {{o:2}}∠{{o:0}}° and `aa(izp2)` reads
 {{o:1}}∠{{o:-90}}°.
 :::
 :::
@@ -225,7 +225,7 @@ AS7's Example 19.4
 r1,1,2,8
 r2,2,0,2
 r3,2,3,4
-j,2,3,2*i_r1
+j,2,3,2*ir1
 ```
 
 ::: only 9
@@ -409,7 +409,7 @@ AS7's Example 19.8
 ```field 9 Circuit Description
 r1,1,2,10
 r2,2,0,20
-e1,2,3,3*i_r1
+e1,2,3,3*ir1
 ```
 
 ::: only 9
@@ -488,19 +488,19 @@ s\gain()
 
 ::: only 9
 ```field 9 v1
-v_1
+v1
 ```
 
 ```field 9 i1
-i_yp1
+iyp1
 ```
 
 ```field 9 v2
-v_2
+v2
 ```
 
 ```field 9 i2
-i_yp2
+iyp2
 ```
 :::
 

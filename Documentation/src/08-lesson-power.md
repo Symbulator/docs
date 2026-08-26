@@ -54,12 +54,12 @@ problem is next. You don't have to answer Yes, but I invite you to, because I
 want to show you something cool.
 :::
 
-The tool saves the equivalent impedance in {{v7,8|`zeq`}}{{v9|`eq.z`}}, which
+{{v7,8|The **s\th** tool}}{{v9|*Thévenin / Norton*}} saves the equivalent impedance in `zeq`, which
 evaluates approximately to 2.933 + j4.467. The load that will deliver the
 maximum power is its conjugate, 2.933 − j4.467.
 
 The average maximum power delivered by the circuit is in
-{{v7,8|`apmax`}}{{v9|`eq.pmax`}}, which evaluates to 2.3674 W.
+{{v7,8|`apmax`}}{{v9|`pmax`}}, which evaluates to 2.3674 W.
 {{v9|There is no separate `apmax` in Symbulator 9: `pmax` looks at the domain
 you asked for, and in the AC domain it is already the *average* maximum power,
 computed from the real part of the equivalent impedance.}}
@@ -240,11 +240,11 @@ power factor*; it asks for the voltage and the current separately rather
 than for a single complex power or an element name:{{i:power factor}}
 
 ```field 9 Voltage
-v_e1
+ve1
 ```
 
 ```field 9 Current
--i_e1
+-ie1
 ```
 
 It answers {{o:0.97342}} leading.
@@ -253,15 +253,15 @@ It returns the value and the verbal description together, in one string, just
 as the calculator prints them.
 
 ::: warning Mind the sign for a source
-The minus sign in front of `res["i_e"]` is not a typo, and leaving it out will
+The minus sign in front of `ie1` is not a typo, and leaving it out will
 quietly give you the wrong word. Symbulator reports the power, voltage and
 current *consumed by* each element, source or not, so the current stored in
-`i_e` runs into the source rather than out of it. The calculator's pf tool
+`ie` runs into the source rather than out of it. The calculator's pf tool
 knew, from the element name you handed it, that `e` was a source, and flipped
 the sign for you. The Python function is given two bare phasors and cannot
-know where they came from, so it cannot. Call it with `-res["i_e"]` — the
+know where they came from, so it cannot. Call it with `-ie1` — the
 current the source *delivers* — and you get **0.97342 leading**; call it with
-`res["i_e"]` and you get 0.97342 lagging, which is the same magnitude and the
+`ie1` and you get 0.97342 lagging, which is the same magnitude and the
 wrong answer.
 
 The rule of thumb: negate the current for a source, leave it alone for a load.
@@ -347,37 +347,27 @@ r4,3,0,-6j
 ::: only 9
 Written out as four elements rather than one, which is clearer and costs
 nothing here. The average power supplied is the opposite of the power the
-source consumes — `-p_e1` in **Evaluate** gives {{o:2007.1}} W.
+source consumes — `-pe1` in **Evaluate** gives {{o:2007.1}} W.
 
 For the power factor, use **Mini-Tools** with *pf*, giving it the source's
 voltage and the current it delivers — which is the opposite of the current
 through the source element:
 
 ```field 9 Voltage
-v_e1
+ve1
 ```
 
 ```field 9 Current
--i_e1
+-ie1
 ```
 :::
 
 ```out 7,8
--pe gives 2007.1 W;  s\pf("e") gives pf: 0.93595 leading
+-pe gives 2007.1 W;  s\pf("e") gives pf: 0.93595 lagging
 ```
 
 ::: only 9
 It reads {{o:0.93595}} **lagging**.
-
-::: warning The printed answer says leading, and that is a mistake
-The magnitude is right and the direction is not. The impedance the source
-sees is `z_e1` = {{o:11.88}} + {{o:4.47}}j Ω — the reactance is *positive*,
-so the load is inductive and the current lags. Only a capacitive load gives
-a leading power factor.
-
-You can see it in the circuit without computing anything: 10 Ω in series
-with j4 Ω in parallel with (8 − j6) Ω comes out net inductive.
-:::
 :::
 :::
 :::
@@ -445,11 +435,11 @@ r3,1,0,60
 ```
 
 **(a)** The complex power delivered is the opposite of the power the source
-consumes: {{v7,8|`-se`}}{{v9|`-s_e1` in **Evaluate**}} gives
+consumes: {{v7,8|`-se`}}{{v9|`-se1` in **Evaluate**}} gives
 {{o:1835.9}} − {{o:114.7}}j VA.
 
 **(b)** The power factor, from {{v7,8|`s\pf("e")`}}{{v9|*pf* in **Mini-Tools**
-with `v_e1` and `-i_e1`}}, is {{o:0.99805}} leading.
+with `ve1` and `-ie1`}}, is {{o:0.99805}} leading.
 
 **(c)** This one needs a frequency, because it needs a capacitor. Add one in
 parallel with a symbolic value, and run at the stated 50 Hz — which the omega
@@ -468,7 +458,7 @@ Put `2*pi*50` in the **omega** box. Then ask the **Solve** card for the value
 of `x` that leaves no reactive power:
 
 ```field 9 Equation(s) to solve in terms of the results
-im(s_e1) = 0
+im(se1) = 0
 ```
 
 ```field 9 Unknown(s) to solve for

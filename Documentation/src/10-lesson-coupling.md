@@ -115,7 +115,7 @@ AC, and leave **RMS phasors** unticked. Then read the two currents with
 ```
 
 ::: only 9
-`aa(i_r2)` reads {{o:13.02}}∠{{o:-49.4}}° and `aa(i_r4)` reads
+`aa(ir2)` reads {{o:13.02}}∠{{o:-49.4}}° and `aa(ir4)` reads
 {{o:2.910}}∠{{o:14.04}}°.
 :::
 
@@ -153,7 +153,7 @@ r4,o,0,10
 ```
 
 ::: only 9
-`aa(v_o)` reads {{o:20.00}}∠{{o:-134.43}}°.
+`aa(vo)` reads {{o:20.00}}∠{{o:-134.43}}°.
 :::
 
 Correct.
@@ -190,7 +190,7 @@ r4,3,0,5
 ```
 
 ::: only 9
-`aa(i_r1)` reads {{o:20.30}}∠{{o:3.5}}° and `aa(i_r4)` reads
+`aa(ir1)` reads {{o:20.30}}∠{{o:3.5}}° and `aa(ir4)` reads
 {{o:8.693}}∠{{o:19.03}}°.
 :::
 
@@ -230,7 +230,7 @@ is.
 **What answers do you get?** The voltages at the two live nodes, as for any
 node in the circuit, and the current entering the transformer, named with the
 transformer and the node — for a transformer `t` on node 2, that is
-{{v7,8|`it2`}}{{v9|`i_t2`}}.
+`it2`.
 
 ## Instructive t problems {#practice-transformer}
 
@@ -312,15 +312,15 @@ power, and that is the convention it wants.
 ```
 
 ::: only 9
-Three readings from **Mini-Tools** with *aa*: `i_r1` is
-{{o:11.09}}∠{{o:33.69}}°, `v_ro` is {{o:110.9}}∠{{o:-146.31}}°, and
-`-s_e1` — the complex power *supplied*, so the opposite of the power consumed
+Three readings from **Mini-Tools** with *aa*: `ir1` is
+{{o:11.09}}∠{{o:33.69}}°, `vro` is {{o:110.9}}∠{{o:-146.31}}°, and
+`-se1` — the complex power *supplied*, so the opposite of the power consumed
 by the source — is {{o:1331}}∠{{o:-33.69}}°.
 
 Three conversions in a row is the point at which the setting is less work
 than the tool: tick **Show AC answers as polar phasors** in **Settings** and
 the first two are already in that form when the circuit solves. The third
-still wants *aa*, because `-s_e1` is an expression rather than an answer.
+still wants *aa*, because `-se1` is an expression rather than an answer.
 :::
 
 All three are correct.

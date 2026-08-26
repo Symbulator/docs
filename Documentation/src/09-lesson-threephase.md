@@ -61,16 +61,6 @@ true→userms
 s\ac(cir,ω)
 ```
 
-Some observations about my description:
-
-- Notice that I have specified the node at the centre of both Y's as node 0.
-  This is something you can do only in the case of balanced Y-Y systems, not
-  for other configurations and not for unbalanced systems.
-- Since the calculator does not differentiate between lower and upper case
-  variables, nodes called a and A would be considered the same node. Instead,
-  we use the names ag and ad, where the g reminds us a node is on the
-  generation side and the d reminds us it is on the demand side.
-
 ::: only 9
 ```field 9 Circuit Description
 ea0,ag,0,(110∠0°)
@@ -88,6 +78,16 @@ AC, with **RMS phasors** ticked. Every value is already an impedance, so
 the frequency is asked for but never used.
 :::
 
+Some observations about my description:
+
+- Notice that I have specified the node at the centre of both Y's as node 0.
+  This is something you can do only in the case of balanced Y-Y systems, not
+  for other configurations and not for unbalanced systems.
+- Since the calculator does not differentiate between lower and upper case
+  variables, nodes called a and A would be considered the same node. Instead,
+  we use the names ag and ad, where the g reminds us a node is on the
+  generation side and the d reminds us it is on the demand side.
+
 Once the simulation is completed, we ask for the currents on the transmission
 lines and get:
 
@@ -95,12 +95,12 @@ lines and get:
 {"6.809ᴇ0∠-21.8°","6.809ᴇ0∠-141.8°","6.809ᴇ0∠98.2°"}
 ```
 
-The complex power at the source is {{v7,8|`sea0+seb0+sec0`}}{{v9|`s_ea0+s_eb0+s_ec0`}}, which gives
+The complex power at the source is `sea0+seb0+sec0`, which gives
 −2086.2 − 834.5𝐢 VA. The real part is the average power absorbed by the source;
 since it is negative, the source is delivering an average power of 2086 W. The
 imaginary part is the reactive power: 834 VAR.
 
-The complex power at the load is {{v7,8|`sra0+srb0+src0`}}{{v9|`s_ra0+s_rb0+s_rc0`}}, which gives
+The complex power at the load is `sra0+srb0+src0`, which gives
 1390.8 + 1112.6𝐢 VA. The load is consuming an average power of 1391 W and a
 reactive power of 1113 VAR.
 
@@ -175,7 +175,7 @@ For the answers the textbook wants, ask for these:
 ```
 
 ::: only 9
-In **Mini-Tools** with *aa*, `aa(v_ag-v_bg)` gives {{o:207.8}}∠{{o:60.00}}°,
+In **Mini-Tools** with *aa*, `aa(vag-vbg)` gives {{o:207.8}}∠{{o:60.00}}°,
 and the other two the same magnitude at {{o:-60.00}}° and {{o:180.0}}°.
 :::
 
@@ -184,8 +184,8 @@ If you ask me, that is not really the voltage between the lines, because the
 transmission line starts *after* the generator. At the start of the
 transmission line the answer is {{o:204.6}}∠{{o:60.03}}°, and at the end of it
 {{o:198.7}}∠{{o:59.71}}° — ask for
-{{v7,8|`s\aa(vas-vbs)`}}{{v9|`aa(v_as-v_bs)`}} and
-{{v7,8|`s\aa(vad-vbd)`}}{{v9|`aa(v_ad-v_bd)`}} respectively. All three are
+{{v7,8|`s\aa(vas-vbs)`}}{{v9|`aa(vas-vbs)`}} and
+{{v7,8|`s\aa(vad-vbd)`}}{{v9|`aa(vad-vbd)`}} respectively. All three are
 different, and which one you want depends on where you are standing.
 :::
 
@@ -196,7 +196,7 @@ The line currents are the currents through the transmission-line impedances:
 ```
 
 ::: only 9
-`aa(i_rat)` gives {{o:3.748}}∠{{o:-8.660}}°, and the other two lines follow at
+`aa(irat)` gives {{o:3.748}}∠{{o:-8.660}}°, and the other two lines follow at
 120° either side.
 :::
 
@@ -207,7 +207,7 @@ Finally the complex power. At the source:
 ```
 
 ::: only 9
-Evaluate {{v7,8|`sea0+seb0+sec0`}}{{v9|`s_ea0+s_eb0+s_ec0`}}, which gives
+Evaluate `sea0+seb0+sec0`, which gives
 {{o:-1054}} − {{o:842.9}}𝐢 VA.
 :::
 
@@ -219,7 +219,7 @@ impedances, which you could add if you wanted them. At the load:
 ```
 
 ::: only 9
-Evaluate {{v7,8|`sra0+srb0+src0`}}{{v9|`s_ra0+s_rb0+s_rc0`}}, which gives
+Evaluate `sra0+srb0+src0`, which gives
 {{o:1012}} + {{o:800.8}}𝐢 VA.
 :::
 
@@ -290,9 +290,9 @@ The three line currents read {{o:56.78}}∠{{o:0}}°, {{o:25.46}}∠{{o:135.0}}�
 :::
 
 All correct. Two things are worth checking for yourself. Complex power is
-conserved, so {{v7,8|`sea+seb+secc+sra+srb+srcc`}}{{v9|`s_ea+s_eb+s_ecc+s_ra+s_rb+s_rcc`}}
+conserved, so `sea+seb+secc+sra+srb+srcc`
 evaluates to zero. And the voltage at the centre of the load is *not* zero, as
-it was in the balanced case — {{v7,8|`vn`}}{{v9|`v_n`}} is
+it was in the balanced case — `vn` is
 {{o:120.0}} − {{o:283.9}}𝐢 V.
 
 ::: tip Why `ecc` and `rcc` rather than `ec` and `rc`
@@ -356,7 +356,7 @@ AC, with **RMS phasors** left unticked this time.
 ```
 
 ::: only 9
-The three line currents read {{o:6.667}}∠{{o:0}}°, {{o:8.944}}∠{{o:93.44}}° and
+The three line currents read {{o:6.667}}∠{{o:0}}°, {{o:8.944}}∠{{o:93.43}}° and
 {{o:10.00}}∠{{o:-66.87}}°, and the neutral current
 {{o:10.06}}∠{{o:178.5}}°.
 :::
@@ -411,11 +411,11 @@ The phase currents are the currents in the three load impedances:
 {s\aa(irab),s\aa(irbc),s\aa(irca)}
 ```
 ```out 7,8
-{"19.36ᴐ00∠13.43°","19.36ᴐ00∠-106.57°","19.36ᴐ00∠133.43°"}
+{"19.36ᴇ0∠13.43°","19.36ᴇ0∠-106.57°","19.36ᴇ0∠133.43°"}
 ```
 
 ::: only 9
-`aa(i_rab)`, `aa(i_rbc)` and `aa(i_rca)` read {{o:19.36}}∠{{o:13.43}}°,
+`aa(irab)`, `aa(irbc)` and `aa(irca)` read {{o:19.36}}∠{{o:13.43}}°,
 {{o:19.36}}∠{{o:-106.57}}° and {{o:19.36}}∠{{o:133.43}}°.
 :::
 
@@ -426,11 +426,11 @@ of the current through each source element:
 {s\aa(-iea0),s\aa(-ieb0),s\aa(-iec0)}
 ```
 ```out 7,8
-{"33.54ᴐ00∠-16.57°","33.54ᴐ00∠-136.57°","33.54ᴐ00∠103.43°"}
+{"33.54ᴇ0∠-16.57°","33.54ᴇ0∠-136.57°","33.54ᴇ0∠103.43°"}
 ```
 
 ::: only 9
-`aa(-i_ea0)`, `aa(-i_eb0)` and `aa(-i_ec0)` read {{o:33.54}}∠{{o:-16.57}}°,
+`aa(-iea0)`, `aa(-ieb0)` and `aa(-iec0)` read {{o:33.54}}∠{{o:-16.57}}°,
 {{o:33.54}}∠{{o:-136.57}}° and {{o:33.54}}∠{{o:103.43}}°.
 :::
 
@@ -468,28 +468,16 @@ The line current is the current in one of the line resistors, and the phase
 voltage is the difference between two load nodes:
 
 ::: only 9
-`aa(i_raa)` reads {{o:2.35}}∠{{o:-36.2}}° and `aa(v_na2-v_nb2)` reads
+`aa(iraa)` reads {{o:2.35}}∠{{o:-36.2}}° and `aa(vna2-vnb2)` reads
 {{o:169.94}}∠{{o:30.81}}°. Both are correct.
 :::
 
 ```out 7,8
-{"2.35∠-36.2°","169.94∠30.8°","1.36∠-6.2°"}
+{"2.35∠-36.2°","169.94∠30.8°","1.36∠-66.2°"}
 ```
 
 ::: only 9
-For the phase current, `aa(i_rac)` reads {{o:1.357}}∠{{o:-66.2}}°.
-
-::: warning The printed third answer is the other phase current
-The documentation gives 1.36∠−6.2° for I{{sub:AC}}. The magnitude is right and
-the angle is not: −6.2° is the phase current from A to B, which is
-`aa(-i_rba)`, and A→C is 60° away from it.
-
-The three phase currents have to be 120° apart, and they are:
-{{o:-66.2}}°, {{o:53.8}}° and {{o:173.8}}°. A value at −6.2° cannot be one of
-them — it belongs to the other set, the same three currents taken in the
-opposite direction. So the number is real, it is simply labelled as the wrong
-one of the six.
-:::
+For the phase current, `aa(irac)` reads {{o:1.357}}∠{{o:-66.2}}°.
 :::
 :::
 :::
@@ -551,11 +539,11 @@ rca,cd,ad,20-15j
 The line currents are the currents through the shorts:
 
 ```out 7,8
-{"22.86ᴐ00∠6.87°","22.86ᴐ00∠-113.13°","22.86ᴐ00∠126.87°"}
+{"22.86ᴇ0∠6.87°","22.86ᴇ0∠-113.13°","22.86ᴇ0∠126.87°"}
 ```
 
 ::: only 9
-`aa(i_sat)`, `aa(i_sbt)` and `aa(i_sct)` read {{o:22.86}}∠{{o:6.87}}°,
+`aa(isat)`, `aa(isbt)` and `aa(isct)` read {{o:22.86}}∠{{o:6.87}}°,
 {{o:22.86}}∠{{o:-113.13}}° and {{o:22.86}}∠{{o:126.87}}°.
 :::
 
@@ -592,11 +580,11 @@ rca,cd,ad,8+6j
 ```
 
 ```out 7,8
-{"39.71ᴐ00∠-41.07°","64.12ᴐ00∠-139.77°","70.13ᴐ00∠74.27°"}
+{"39.71ᴇ0∠-41.07°","64.12ᴇ0∠-139.77°","70.13ᴇ0∠74.27°"}
 ```
 
 ::: only 9
-`aa(i_sla)`, `aa(i_slb)` and `aa(i_slc)` read {{o:39.71}}∠{{o:-41.07}}°,
+`aa(isla)`, `aa(islb)` and `aa(islc)` read {{o:39.71}}∠{{o:-41.07}}°,
 {{o:64.12}}∠{{o:-139.77}}° and {{o:70.13}}∠{{o:74.27}}°.
 :::
 
@@ -629,7 +617,7 @@ rca,cd,ad,10
 ```
 
 ```out 7,8
-{"64.00ᴐ00∠80.1°","38.11ᴐ00∠-60.°","42.50ᴐ00∠-135.°",4840.0}
+{"64.00ᴇ0∠80.1°","38.11ᴇ0∠-60.°","42.50ᴇ0∠-135.°",4840.0}
 ```
 
 ::: only 9
@@ -639,7 +627,7 @@ The three line currents read {{o:64.00}}∠{{o:80.1}}°,
 For the power, add the three loads' consumption in **Evaluate**:
 
 ```field 9 Evaluate
-p_rca+p_rab+p_rbc
+prca+prab+prbc
 ```
 
 It gives {{o:4840}} W.
@@ -674,8 +662,8 @@ rca,cd,ad,-40j
 ```
 
 ::: only 9
-*Find equivalent* is not needed here — a plain AC solve gives both. `aa(i_rlb)`
-reads {{o:9.106}}∠{{o:168.48}}° and `aa(i_rbc)` reads
+*Find equivalent* is not needed here — a plain AC solve gives both. `aa(irlb)`
+reads {{o:9.106}}∠{{o:168.48}}° and `aa(irbc)` reads
 {{o:5.500}}∠{{o:172.47}}°, matching the printed answers.
 :::
 :::
@@ -713,11 +701,11 @@ rcc,c,0,40+25j
 Node 0 here is the centre of the load's wye, not a node of the source at all.
 
 ```out 7,8
-{"2.570ᴐ00∠-62.01°","2.570ᴐ00∠177.99°","2.570ᴐ00∠57.99°"}
+{"2.570ᴇ0∠-62.01°","2.570ᴇ0∠177.99°","2.570ᴇ0∠57.99°"}
 ```
 
 ::: only 9
-`aa(i_ra)`, `aa(i_rb)` and `aa(i_rcc)` read {{o:2.570}}∠{{o:-62.01}}°,
+`aa(ira)`, `aa(irb)` and `aa(ircc)` read {{o:2.570}}∠{{o:-62.01}}°,
 {{o:2.570}}∠{{o:177.99}}° and {{o:2.570}}∠{{o:57.99}}°.
 :::
 

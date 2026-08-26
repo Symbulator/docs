@@ -395,7 +395,7 @@ following answers are calculated:
 ::: note This last one belongs to sources only
 That equivalent resistance is a property of the *view from a source*, not a
 per-element quantity, so it exists only for sources. There is no
-{{v7,8|`rr1`}}{{v9|`rr1`}} for a resistor — a resistor's resistance
+`rr1` for a resistor — a resistor's resistance
 is the value you gave it. {{v9|Look at any resistor's block in **Results by
 element** and you will see three lines, not four: current, voltage and power,
 and no resistance seen.}} The same applies to the impedance answers in AC

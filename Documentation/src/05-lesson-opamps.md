@@ -37,12 +37,12 @@ For each ideal op amp in a circuit, Symbulator will store the following
 answers:
 
 - The current through the output node, flowing from the output node outwards.
-  For an op amp called o, that is {{v7,8|`io`}}{{v9|`res.i("o")`}}.
+  For an op amp called o, that is `io`.
 - The power consumed by the visible part of the op amp. For an op amp called
-  o2, {{v7,8|`po2`}}{{v9|`res["p_o2"]`}}; the power delivered is the negative of
+  o2, `po2`; the power delivered is the negative of
   that.
 - And, as with every element's nodes, the voltage of each of its nodes with
-  reference to ground. For node o, {{v7,8|`vo`}}{{v9|`res.v("o")`}}.
+  reference to ground. For node o, `vo`.
 
 ### Livin' on the edge
 
@@ -84,8 +84,8 @@ the result object, so a node called o and an op amp called o never contend for
 the same name.
 
 ::: danger Never describe a source as e,#,0,v_#
-If you describe a source as `e1,1,0,v_1`, you are declaring the voltage of node
-1 to be the voltage of node 1. The resulting equation, v_1 = v_1, is trivially
+If you describe a source as `e1,1,0,v1`, you are declaring the voltage of node
+1 to be the voltage of node 1. The resulting equation, v1 = v1, is trivially
 true and carries no information, which leaves the system one equation short.
 :::
 :::
