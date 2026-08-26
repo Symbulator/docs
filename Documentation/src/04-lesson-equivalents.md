@@ -615,7 +615,7 @@ evaluate `approx(req)` The value is **2.89** Ω.
 ::: only 9
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
 *Impedance*, with nodes **0** and **c**, in DC. The answer is `req` =
-{{o:2.891}} Ω.
+{{o:2.889}} Ω.
 :::
 
 This is correct. Below are many practice examples of this type.
@@ -1837,9 +1837,9 @@ The answers you want are `vth` and `req`, in **Results**.
 Ask **Evaluate** for:
 
 ```field 9 Evaluate
-irL|Load=6
-irL|Load=16
-irL|Load=36
+vth/(req+6)
+vth/(req+16)
+vth/(req+36)
 ```
 :::
 
@@ -1883,8 +1883,8 @@ The answers you want are `ino` and `req`, in **Results**.
 Ask **Evaluate** for:
 
 ```field 9 Evaluate
-vrL|Load=1/4
-irL|Load=1/4
+vth*(1/4)/(req+1/4)
+vth/(req+1/4)
 ```
 :::
 
@@ -1928,9 +1928,9 @@ The answers you want are `ino` and `req`, in **Results**.
 Ask **Evaluate** for:
 
 ```field 9 Evaluate
-irL|Load=0
-irL|Load=2000
-irL|Load=5000
+vth/(req+0)
+vth/(req+2000)
+vth/(req+5000)
 ```
 :::
 
@@ -1977,7 +1977,7 @@ The answers you want are `ino` and `req`, in **Results**.
 Ask **Evaluate** for:
 
 ```field 9 Evaluate
-vrL|Load=1
+vth*1/(req+1)
 ```
 :::
 
@@ -2025,7 +2025,7 @@ The answers you want are `vth` and `req`, in **Results**.
 Ask **Evaluate** for:
 
 ```field 9 Evaluate
-irL|Load=192
+vth/(req+192)
 ```
 :::
 
@@ -2070,8 +2070,8 @@ The answers you want are `vth` and `req`, in **Results**.
 Ask **Evaluate** for:
 
 ```field 9 Evaluate
-vrL|Load=3
-vrL|Load=6.
+vth*3/(req+3)
+vth*6/(req+6.)
 ```
 :::
 
@@ -2290,8 +2290,8 @@ The answers you want are `req` and `pmax`, in **Results**.
 Ask **Evaluate** for:
 
 ```field 9 Evaluate
-prl|load=68000.
-prl|load=8200.
+vth^2*68000./(req+68000.)^2
+vth^2*8200./(req+8200.)^2
 ```
 :::
 
