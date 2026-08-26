@@ -2015,8 +2015,8 @@ for t≥0.
 2e{{sup:-6t}}-2e{{sup:-2t}}
 
 ::: only 9
-The answers are `vc` = {{o:2 - 3*exp(-2*t) + exp(-6*t)}} and `il` =
-{{o:2*exp(-2*t) - 2*exp(-6*t)}}, both in **Results**.
+The answers are `vc` = {{o:3*exp(-2*t) - exp(-6*t)}} and `il` =
+{{o:2*exp(-6*t) - 2*exp(-2*t)}}, both in **Results**.
 :::
 
 ```sym 7

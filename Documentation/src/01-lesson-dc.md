@@ -793,7 +793,7 @@ r3,4,0,4
 
 When it's done, ask for the answers we need. {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} the
 current I: {{o:2.5}} A. {{v7,8|Evaluating `vr2` gets}}{{v9|`vr2` is}} the voltage drop in the 7Ω
-resistor: {{o:17.5}} W
+resistor: {{o:17.5}} V
 
 :::
 
