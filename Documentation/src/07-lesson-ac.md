@@ -366,7 +366,7 @@ angular frequency of 200.
 s\ac(cir,200)
 ```
 ```sym 8
-"e,1,0,50:r,1,2,10:c,2,3,5'm:l,3,0,20'm"→cir
+"e,1,0,50:r1,1,2,10:c,2,3,5'm:l,3,0,20'm"→cir
 s\ac(cir,200)
 ```
 ```field 9 Circuit Description
@@ -380,20 +380,25 @@ l,3,0,20'm
 AC, with **Angular frequency** set to **200**.
 :::
 
-::: only 7,8
+::: only 7
 Choose AC. Symbulator asks for the frequency because of the farads and
 henries; enter 200. Then ask for `s\aa(ir)`.
+:::
+::: only 8
+Choose AC. Symbulator asks for the frequency because of the farads and
+henries; enter 200. Then ask for `s\aa(ir1)`.
 :::
 
 ```sym 7
 s\aa(ir)
 ```
 ```sym 8
-s\aa(ir)
+s\aa(ir1)
 ```
-```out 7,8
-"4.789ᴇ0∠-16.7°"
-```
+
+::: only 7,8
+We get {{o:4.789}}∠{{o:-16.7}}°.
+:::
 
 ::: only 9
 Read it with **Mini-Tools** set to *aa*: `aa(ir)` gives {{o:4.789}}∠{{o:-16.70}}°.
@@ -488,9 +493,9 @@ s\aa(12/zeq)
 ```sym 8
 s\aa(12/zeq)
 ```
-```out 7,8
-"414.5ᴇ-3∠-71.6°"
-```
+::: only 7,8
+We get {{o:414.5}}∠{{o:-71.6}}° mA.
+:::
 
 ::: only 9
 There is no stored `zeq` to divide by, so put the whole thing in
@@ -612,9 +617,9 @@ s\aa(icx)
 ```sym 8
 s\aa(icx)
 ```
-```out 7,8
-"7.59ᴇ0∠108.4°"
-```
+::: only 7,8
+We get {{o:7.59}}∠{{o:108.4}}°.
+:::
 
 ::: only 9
 `aa(icx)` gives {{o:7.589}}∠{{o:108.4}}°.
@@ -640,7 +645,7 @@ voltage across `rx`.
 s\ac(cir,2)
 ```
 ```sym 8
-"j,0,1,10:rx,1,0,2:c,1,2,.2:l,2,0,2:r,2,3,4:e,3,0,3vrx"→cir
+"j,0,1,10:rx,1,0,2:c,1,2,.2:l,2,0,2:r1,2,3,4:e,3,0,3vrx"→cir
 s\ac(cir,2)
 ```
 ```field 9 Circuit Description
@@ -663,9 +668,9 @@ for the reason given under Problem 9.35.
 ```sym 8
 {s\aa(v1),s\aa(v2)}
 ```
-```out 7,8
-{"11.33ᴇ0∠60.02°","33.02ᴇ0∠57.13°"}
-```
+::: only 7,8
+We get {{o:11.33}}∠{{o:60.02}}° and {{o:33.02}}∠{{o:57.13}}°.
+:::
 
 ::: only 9
 `aa(v1)` gives {{o:11.33}}∠{{o:60.02}}° and `aa(v2)` gives
@@ -718,9 +723,9 @@ AC, with **Angular frequency** set to **1000**.
 ```sym 8
 {s\aa(vro),s\aa(ico)}
 ```
-```out 7,8
-{"1.55ᴇ0∠-95.18°","3.26ᴇ-3∠-3.74°"}
-```
+::: only 7,8
+We get {{o:1.55}}∠{{o:-95.18}}° V and {{o:3.26}}∠{{o:-3.74}}° mA.
+:::
 
 ::: only 9
 `aa(vro)` gives {{o:1.550}}∠{{o:-95.18}}° and `aa(ico)` gives
@@ -772,9 +777,9 @@ AC. The frequency is asked for but never used, so anything will do.
 ```sym 8
 {s\aa(v1),s\aa(v2)}
 ```
-```out 7,8
-{"2.708ᴇ0∠-56.73°","6.914ᴇ0∠-80.70°"}
-```
+::: only 7,8
+We get {{o:2.708}}∠{{o:-56.73}}° V and {{o:6.914}}∠{{o:-80.70}}° V.
+:::
 
 ::: only 9
 `aa(v1)` gives {{o:2.708}}∠{{o:-56.73}}° and `aa(v2)` gives
@@ -1005,6 +1010,9 @@ symbolically — everything in it is a symbol, including the frequency.
 ```sym 7
 "e,1,0,vs:r1,1,2,r1:ca,2,0,ca:r3,0,3,r3:o,2,3,o:cb,3,o,cb:r2,3,o,r2"→cir:s\ac(cir,ω)
 ```
+```sym 8
+"e,1,0,vs:r1,1,2,r1:ca,2,0,ca:r3,0,3,r3:o,2,3,o:cb,3,o,cb:r2,3,o,r2"→cir:s\ac(cir,ω)
+```
 ```field 9 Circuit Description
 e,1,0,vs
 r1,1,2,r1
@@ -1025,6 +1033,9 @@ Then ask for the ratio:
 ```sym 7
 vo/vs
 ```
+```sym 8
+vo/vs
+```
 
 ::: only 9
 ```field 9 Evaluate
@@ -1032,17 +1043,13 @@ vo/vs
 ```
 :::
 
-```out 7
-(the expression below)
-```
-
 ::: only 7
 ::: figure assets/screen/ansas7p1077.png
 The closed-loop gain, on a TI-89
 :::
 :::
 
-::: only 9
+::: only 8,9
 $$\frac{V_o}{V_s} = \frac{j\,c_b r_2 r_3 \omega + r_2 + r_3}
 {r_3\left(-c_a c_b r_1 r_2 \omega^2 + j\,c_a r_1 \omega
 + j\,c_b r_2 \omega + 1\right)}$$

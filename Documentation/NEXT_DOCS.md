@@ -8,59 +8,56 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #85 — Chapter 7's answers were dressed up as transcripts — no change needed
+## #85 — Chapter 7's answers were dressed up as transcripts — settled
 
-Seven answers in `src/07-lesson-ac.md` appear in the 2023 pages as prose --
-"We get 4.789 angle -16.7, which is correct" -- and the conversion reformatted
-them into `out 7,8` blocks with quotes and `ᴇ0` exponents that were never
-there. Roberto asked to see all seven before deciding; they are listed in the
-session notes and are reproduced here so the decision has the evidence beside
-it. **Values are identical in every case.** What differs is the shape, and
-the units the prose carried and the transcript dropped.
+Seven answers in `src/07-lesson-ac.md` appeared as `out 7,8` transcript
+blocks — quoted strings with `ᴇ0` exponents and `{…}` set braces. **Both 2023
+pages carry prose for all of them and never a transcript:** "We get
+414.5∠-71.6º mA, which is correct." The quotes, the exponents and the braces
+were added by the conversion.
 
-| Where | 2023 page 7 says | `out 7,8` now says |
-|---|---|---|
-| `aa(ir)` | We ask for s\aa(ir) and get 4.789∠-16.7º, which is correct. | `"4.789ᴇ0∠-16.7°"` |
-| `aa(12/zeq)` | We get 414.5∠-71.6º **mA**, which is correct. | `"414.5ᴇ-3∠-71.6°"` |
-| `aa(icx)` | We get 7.59∠108.4º, which is correct. | `"7.59ᴇ0∠108.4°"` |
-| `{aa(v1),aa(v2)}` | We get 11.33∠60.02º and 33.02∠57.13º, which are correct. | `{"11.33ᴇ0∠60.02°","33.02ᴇ0∠57.13°"}` |
-| `{aa(vro),aa(ico)}` | We get 1.55∠-95.18º **V** and 3.26∠-3.74º **mA**, which are correct. | `{"1.55ᴇ0∠-95.18°","3.26ᴇ-3∠-3.74°"}` |
-| `{aa(v1),aa(v2)}` | We get 2.708∠-56.73º **V** and 6.914∠-80.70º **mA**, which are correct. | `{"2.708ᴇ0∠-56.73°","6.914ᴇ0∠-80.70°"}` |
-| one more, version 7 only | prose | (the expression below) |
+That mattered because the form is otherwise genuine — chapter 9's Example
+12.12 carries `{"9.106ᴇ0∠168.48°","5.500ᴇ0∠172.47°"}` verbatim in the 2023
+page, a real screen — so a reader had no way to tell a reconstruction from a
+transcript, and six of these were reconstructions.
 
-Two things fall out of the table whichever way it goes:
+**Roberto's decision, 27 Aug 2026: go back to the version 7 wording.** The six
+`out 7,8` blocks are gone, replaced by `::: only 7,8` prose in the pages' own
+words. The closing sentence that reads the answer with its units is unchanged,
+so nothing was lost.
 
-* **The transcripts dropped the units.** Four of the seven carry V or mA in
-  the 2023 prose and nothing in the block, and the version 9 lines beside
-  them carry nothing either.
-* **The `ᴇ-3` is the units in disguise.** `414.5ᴇ-3` and `3.26ᴇ-3` are the
-  prose's `mA` rewritten as an exponent, which is not what the calculator
-  printed for these.
+The units question was already closed and needed nothing: six of the seven
+carry V or mA in that closing sentence, and the seventh is a pair of node
+voltages the pages give no units for either. Page 7 reads "6.914∠-80.70º mA"
+for what is a node voltage; that slip stays in the archive only, per his
+26 Aug decision, and was not reintroduced.
 
-The unit question in the last row is **settled**: the 2023 page reads
-"2.708 V and 6.914 mA" for `sa(v1)` and `sa(v2)`, both of which are node
-voltages. Roberto confirmed on 26 Aug 2026 that the A should be a V. The
-documentation already said V for both, so nothing needed changing -- the slip
-lives only in the 2023 archive. The other two `mA` in the chapter are real
-currents and stay.
+**Two flattened version differences turned up while doing it**, which is the
+hazard the shared `out 7,8` blocks were always going to carry:
 
-**Settled on 27 Aug 2026, by reading the chapter rather than the note above.**
-The premise had gone stale. Six of the seven already carry their units, in the
-sentence that follows the block — "That is 414.5 mA at an angle of −71.6°,
-which is correct." The seventh is a pair of node voltages, and the 2023 prose
-gives no units for those either, so the chapter matches the page.
+* Page 8 names the resistor `r1` where page 7 names it `r`, in Problem 9.35
+  and in Practice Problem 10.1 — because version 8 reserves `r` as a resistor
+  name, as lesson 1 says in its own words. The conversion gave both versions
+  page 7's `r`, so version 8 was shown a description its own machine refuses,
+  and asked for `sa(ir)` instead of `sa(ir1)`. Both restored.
+* Problem 10.77 lost its `sym 8` fences entirely. Page 8 carries the problem
+  with the same description and the same ask; a version 8 reader was shown the
+  circuit in prose with nothing to type. Restored.
 
-What remains true is narrower, and is a question rather than a defect: those
-`out 7,8` blocks are **reconstructions**, not quotes. The 2023 pages carry
-prose for these seven, so nobody transcribed a screen. The form is right — the
-same `ᴇ0∠` shape appears verbatim in the 2023 page for chapter 9's Example
-12.12, so that is genuinely what the calculator printed — but a reader cannot
-tell a reconstructed transcript from a real one, and here they are reading the
-former.
+**The seventh answer** was not a reconstruction but a placeholder: an `out 7`
+block whose content was the literal text `(the expression below)`, so version 7
+read "type `vo/vs` returns **(the expression below)**". Roberto's call: version
+7 keeps its TI-89 photograph, which is its machine; versions 8 and 9 get the
+expression itself. Verified against the app first — `vo/vs` comes back as
 
-Nothing was changed. If it should be, the change is presentational: drop the
-seven `out 7,8` blocks and let the prose carry the answers, the way the pages
-did.
+    (1j*cb*omega*r2*r3 + r2 + r3)
+    / (r3*(-ca*cb*omega**2*r1*r2 + 1j*ca*omega*r1 + 1j*cb*omega*r2 + 1))
+
+which `simplify` confirms is the expression the chapter prints, and it took
+10.7 s — the chapter's "about ten seconds" is right.
+
+`check_against_originals.py` went from **24 unverifiable blocks to 11**, and
+chapter 7 no longer appears among them.
 
 ## #89 — What the dangling-promise check still finds — down to 5, all judgement calls
 
