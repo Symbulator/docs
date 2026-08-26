@@ -1759,7 +1759,9 @@ Find the Thévenin equivalent as seen by the load.
 
 :::
 
+::: only 7,8
 My answer starts by defining **v**{{sub:x}} as **va-vb**. This is done thus:
+:::
 
 ```sym 7
 Define vx=va-vb
@@ -1767,6 +1769,12 @@ Define vx=va-vb
 ```sym 8
 Define vx=va-vb
 ```
+
+::: only 9
+The dependent source's value is the difference between two node voltages, so
+version 9 writes that difference straight into the value — `va-vb`, exactly as
+{{ref:lesson-sources}} describes. There is nothing to define beforehand.
+:::
 
 Now I run the th script, with the circuit description shown below:
 
@@ -1780,7 +1788,7 @@ s\th("ei,a,0,vs:ed,1,0,μ*(vx):ro,b,1,ro",b,0):
 ```
 ```field 9 Circuit Description
 ei,a,0,vs
-ed,1,0,μ*(vx)
+ed,1,0,μ*(va-vb)
 ro,b,1,ro
 ```
 
