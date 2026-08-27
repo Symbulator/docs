@@ -189,6 +189,9 @@
 \newcommand{\symcode}[1]{{\ttfamily\small #1}}
 % a value the software gave back, as distinct from one you typed
 \newcommand{\ans}[1]{{\bfseries\color{answer}#1}}
+% An answer that is a symbolic expression: same answer colour, but set as
+% mathematics rather than bold text (build.py's answer_math decides which).
+\newcommand{\ansmath}[1]{{\color{answer}\(\displaystyle #1\)}}
 
 \newenvironment{symtype}
   {\par\vspace{1mm}\begin{tcolorbox}[breakable,enhanced,boxrule=0pt,

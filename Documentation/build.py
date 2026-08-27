@@ -371,6 +371,36 @@ def parse_inline(text: str) -> list[Node]:
     return out
 
 
+_ANSWER_MATH_CACHE: dict = {}
+
+
+def answer_math(text: str):
+    """LaTeX for an `{{o:...}}` value that is a symbolic expression, or None.
+
+    An answer the software gave back is quoted verbatim in the source --
+    `i*exp(-t/(c*r))/c` -- and until 27 Aug 2026 rendered as that plain
+    text. When the value parses to a SymPy expression that actually
+    contains symbols, it is typeset as mathematics instead (KaTeX on the
+    web, math mode in the PDFs); a bare number, a braced pair like
+    {4.77,7.18}, or anything else that does not parse keeps the plain
+    `.ans` treatment it always had. The source text is untouched either
+    way, so `tools/check_against_originals.py` and the verify harness
+    keep reading the value exactly as printed."""
+    if text in _ANSWER_MATH_CACHE:
+        return _ANSWER_MATH_CACHE[text]
+    result = None
+    if re.search(r"[a-zA-Z]", text) and not re.search(r"[{}\\]", text):
+        try:
+            import sympy as sp
+            expr = sp.sympify(text)
+            if getattr(expr, "free_symbols", None):
+                result = sp.latex(expr)
+        except Exception:                                     # noqa: BLE001
+            result = None
+    _ANSWER_MATH_CACHE[text] = result
+    return result
+
+
 def parse_brace(inner: str) -> Node:
     if inner.startswith("i:"):
         return Node("index", text=inner[2:].strip())
@@ -538,6 +568,9 @@ class HtmlRenderer:
             href = page_url(self.v, cid) + (f"#{anchor}" if anchor else "")
             return f'<a class="xref" href="{href}">{html.escape(name)}</a>'
         if n.kind == "answer_span":
+            ltx = answer_math(n.text)
+            if ltx:
+                return f'<span class="ans ans-math">\\({ltx}\\)</span>'
             return f'<span class="ans">{html.escape(n.text)}</span>'
         if n.kind == "sub":
             return f'<sub>{html.escape(n.text)}</sub>'
@@ -761,6 +794,9 @@ class TexRenderer:
             target = anchor or cid
             return (tex_escape(name) + r"~(page~\pageref{lbl:" + target + "})")
         if n.kind == "answer_span":
+            ltx = answer_math(n.text)
+            if ltx:
+                return r"\ansmath{" + ltx + "}"
             return r"\ans{" + tex_escape(n.text) + "}"
         if n.kind == "sub":
             return r"\textsubscript{" + tex_escape(n.text) + "}"

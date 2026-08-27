@@ -268,7 +268,7 @@ Symbulator 9 draws the plot for you, in the **Plot** card below the results.
 Solve the circuit first — the plot is of an answer, so there has to be one —
 then open **Plot** and fill in four things:
 
-- **Plot type**: *Plot a function of time*
+- **Plot type**: *Plot a function of time (TR)*
 - **Variable to plot**: the answer you want, such as `v2`
 - **Start time (s)** and **End time (s)**: the window, for example 0 and
   0.005
@@ -357,7 +357,9 @@ r,2,0,r
 When the simulation is *Done*, we ask for `vc` again. We get the expression
 below, which is correct.
 
-e{{sup:-t/cr}} (r v)/(r+r1)
+$$
+e^{-t/cr} (r v)/(r+r1)
+$$
 
 :::
 
@@ -426,7 +428,9 @@ The answers you want are `vc` and `ic`, in **Results**.
 
 When the simulation is *Done*, we get the expressions below. They are right.
 
-{ 6e{{sup:-4t}} , -2e{{sup:-4t}} }
+$$
+\{ 6e^{-4t} , -2e^{-4t} \}
+$$
 
 :::
 
@@ -485,7 +489,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `v2`, in **Results**.
 :::
 
-{ 8e{{sup:-2t}} , (-4/3)e{{sup:-2t}} , (8/3)e{{sup:-2t}} }
+$$
+\{ 8e^{-2t} , (-4/3)e^{-2t} , (8/3)e^{-2t} \}
+$$
 
 :::
 
@@ -544,7 +550,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `v1`, in **Results**.
 :::
 
-{ 6e{{sup:-5t}} , -3e{{sup:-5t}} , 3e{{sup:-5t}} }
+$$
+\{ 6e^{-5t} , -3e^{-5t} , 3e^{-5t} \}
+$$
 
 :::
 
@@ -581,7 +589,9 @@ The answers you want are `vl`, `il` and `vr`, in **Results**.
 
 We get the right answers:
 
-{ -il0 r e{{sup:(-r t)/l}} , il0 e{{sup:(-r t)/l}} , -il0 r e{{sup:(-r t)/l}} }
+$$
+\{ -il0 r e^{(-r t)/l} , il0 e^{(-r t)/l} , -il0 r e^{(-r t)/l} \}
+$$
 
 :::
 
@@ -631,7 +641,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answer you want is `il`, in **Results**.
 :::
 
-e{{sup:(-r t)/l}}v/r1
+$$
+e^{(-r t)/l}v/r1
+$$
 
 :::
 
@@ -686,7 +698,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il`, `vl` and `ir4`, in **Results**.
 :::
 
-{ 2e{{sup:-3t}} , -6 e{{sup:-3t}} , (3/2)e{{sup:-3t}} }
+$$
+\{ 2e^{-3t} , -6 e^{-3t} , (3/2)e^{-3t} \}
+$$
 
 {{v7,8|In my machine the simulation took 30 seconds, 12 seconds of these (40%)
 were used in finding the inverse Laplace of the answers — time that the *only*
@@ -722,7 +736,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answer you want is `il`, in **Results**.
 :::
 
-5e{{sup:((-R t)/3L)}}
+$$
+5e^{((-R t)/3L)}
+$$
 
 :::
 
@@ -777,7 +793,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il` and `vl`, in **Results**.
 :::
 
-{ 2 e{{sup:-2t}} , -64 e{{sup:-2t}} }
+$$
+\{ 2 e^{-2t} , -64 e^{-2t} \}
+$$
 
 :::
 
@@ -833,7 +851,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
 :::
 
-{ 10 e{{sup:-4t}} , -2 e{{sup:-4t}} , -10 e{{sup:-4t}} }
+$$
+\{ 10 e^{-4t} , -2 e^{-4t} , -10 e^{-4t} \}
+$$
 
 :::
 
@@ -889,7 +909,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
 :::
 
-{ 10 e{{sup:-4t}} , -2 e{{sup:-4t}} , 10 e{{sup:-4t}} }
+$$
+\{ 10 e^{-4t} , -2 e^{-4t} , 10 e^{-4t} \}
+$$
 
 :::
 
@@ -948,7 +970,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc` and `ic`, in **Results**.
 :::
 
-{ 8 e{{sup:-t}} , -2 e{{sup:-t}} }
+$$
+\{ 8 e^{-t} , -2 e^{-t} \}
+$$
 
 The voltage in the capacitor at the end of this second interval will serve as
 initial condition for the third interval. We can use its exact value, i.e.
@@ -970,7 +994,9 @@ re,1,0,[4,6]
 
 Ask for `{vc,ic}`. The expressions we get are equivalent to:
 
-{ 2.943 e{{sup:(-5(t-1))/3}} , -1.226 e{{sup:(-5(t-1))/3}} }
+$$
+\{ 2.943 e^{(-5(t-1))/3} , -1.226 e^{(-5(t-1))/3} \}
+$$
 
 These are the right answers, as can be seen by checking the book's answers.
 
@@ -1036,7 +1062,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il` and `vl`, in **Results**.
 :::
 
-{ 3 e{{sup:-2t}} , -36 e{{sup:-2t}} }
+$$
+\{ 3 e^{-2t} , -36 e^{-2t} \}
+$$
 
 The current in the inductor at the end of this second interval will serve as
 initial condition for the third interval. Find its approximate value thus:
@@ -1070,7 +1098,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il` and `vl`, in **Results**.
 :::
 
-{ .055 e{{sup:(-(t-2)/2)}} , -.165 e{{sup:(-(t-2)/2)}} }
+$$
+\{ .055 e^{(-(t-2)/2)} , -.165 e^{(-(t-2)/2)} \}
+$$
 
 These are the kind of expressions your book or professor are looking for.
 
@@ -1111,7 +1141,9 @@ The answers you want are `vc`, `vr` and `ic`, in **Results**.
 There is no need to ask for i{{sub:R}}, since i{{sub:R}}=i{{sub:C}}. We get
 the following expressions:
 
-{ v-v e{{sup:(-t/(c r))}} , v e{{sup:(-t/(c r))}} , (v/r)e{{sup:(-t/(c r))}} }
+$$
+\{ v-v e^{(-t/(c r))} , v e^{(-t/(c r))} , (v/r)e^{(-t/(c r))} \}
+$$
 
 :::
 
@@ -1146,7 +1178,9 @@ The answers you want are `vl`, `vr` and `il`, in **Results**.
 There is no need to ask for i{{sub:R}}, since in a series circuit it will be
 identical to i{{sub:L}}.
 
-{ v e{{sup:(-r t)/l}} , v (1-e{{sup:(-r t)/l}}) , (v/r)(1-e{{sup:(-r t)/l}}) }
+$$
+\{ v e^{(-r t)/l} , v (1-e^{(-r t)/l}) , (v/r)(1-e^{(-r t)/l}) \}
+$$
 
 :::
 
@@ -1181,7 +1215,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il`, `vl` and `v2`, in **Results**.
 :::
 
-{ 2-2e{{sup:-3t}} , 12 e{{sup:-3t}} , 8 e{{sup:-3t}}+4 }
+$$
+\{ 2-2e^{-3t} , 12 e^{-3t} , 8 e^{-3t}+4 \}
+$$
 
 :::
 
@@ -1217,7 +1253,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `v1`, `ir` and `ic`, in **Results**.
 :::
 
-{ (i-i e{{sup:-t/(c r)}})*r , i-i e{{sup:-t/(c r)}} , i e{{sup:-t/(c r)}} }
+$$
+\{ (i-i e^{-t/(c r)}) \cdot r , i-i e^{-t/(c r)} , i e^{-t/(c r)} \}
+$$
 
 :::
 
@@ -1254,7 +1292,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
 :::
 
-{ 2 e{{sup:-4t}}-2 , -e{{sup:-4t}} , 3-2e{{sup:-4t}} }
+$$
+\{ 2 e^{-4t}-2 , -e^{-4t} , 3-2e^{-4t} \}
+$$
 
 :::
 
@@ -1290,7 +1330,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
 :::
 
-{ 2-2 e{{sup:-4t}} , e{{sup:-4t}} , 2 e{{sup:-4t}}-2 }
+$$
+\{ 2-2 e^{-4t} , e^{-4t} , 2 e^{-4t}-2 \}
+$$
 
 :::
 
@@ -1329,7 +1371,9 @@ The answer you want is `vc`, in **Results**.
 
 The expression for the capacitor's voltage drop in the first interval is:
 
-v-v e{{sup:(-t/(c r))}}
+$$
+v-v e^{(-t/(c r))}
+$$
 
 The second interval starts at t{{sub:0}}. In it, the initial condition of the
 capacitor is given by the value of the expression above when t=t{{sub:0}}.
@@ -1353,7 +1397,9 @@ the initial condition of the capacitor. In this second interval, the source
 has a value of 0 volts, which is another way to say that it becomes a short,
 so there is no need to include it in the circuit description.
 
-(v-v e{{sup:(-to/(c r))}})e{{sup:((-t+to)/(c r))}}
+$$
+(v-v e^{(-to/(c r))})e^{((-t+to)/(c r))}
+$$
 
 ```sym 7
 s\tr("r,0,2,r:c,2,0,c,v-e^(-to/(c*r))*v"):vc
@@ -1411,7 +1457,9 @@ The answer you want is `il`, in **Results**.
 
 The expression for the inductor's current in the first interval is:
 
-(v/r)(1-e{{sup:((-r t)/l)}})
+$$
+(v/r)(1-e^{((-r t)/l)})
+$$
 
 The second interval starts at t{{sub:0}}. In it, the initial condition of the
 inductor is given by the value of the expression above when t=t{{sub:0}}.
@@ -1435,7 +1483,9 @@ the initial condition of the inductor. In this second interval, the source
 becomes a short, so there is no need to include it in the circuit
 description.
 
-(v/r)(1-e{{sup:((-to r)/l)}})e{{sup:((-r t)/l)}}
+$$
+(v/r)(1-e^{((-to r)/l)})e^{((-r t)/l)}
+$$
 
 ```sym 7
 s\tr("l,0,2,l,v/r-e^(-to*r/l)*v/r:r,2,0,r"):il
@@ -1457,7 +1507,9 @@ The answer you want is `il`, in **Results**.
 To put this in terms of the same t as the first interval, we replace **t**
 with **t-t**{{sub:o}}:
 
-(v/r)(1-e{{sup:((-to r)/l)}})e{{sup:((-r (t-to))/l)}}
+$$
+(v/r)(1-e^{((-to r)/l)})e^{((-r (t-to))/l)}
+$$
 
 This is the expression for the inductor's current in the second interval.
 
@@ -1518,7 +1570,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answer you want is `vc`, in **Results**.
 :::
 
-6e{{sup:( -t/6)}}-4
+$$
+6e^{( -t/6)}-4
+$$
 
 This is the expression for the voltage drop in the capacitor after t=0.
 
@@ -1606,7 +1660,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answer you want is `vc`, in **Results**.
 :::
 
-4e{{sup:(-2t)}}-6
+$$
+4e^{(-2t)}-6
+$$
 
 :::
 
@@ -1637,9 +1693,13 @@ r,1,0,r
 
 Once the simulation completes, we ask for the variables of interest:
 
-(i/c)e{{sup:(-t/(c r))}}
+$$
+(i/c)e^{(-t/(c r))}
+$$
 
-(-i/(c r))e{{sup:(-t/(c r))}}
+$$
+(-i/(c r))e^{(-t/(c r))}
+$$
 
 ::: only 9
 They are already in **Results**: `vc` is {{o:i*exp(-t/(c*r))/c}} and `ic`
@@ -1693,7 +1753,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
 :::
 
-{ -8 e{{sup:-4t}} , 4 e{{sup:-4t}} , 8 e{{sup:-4t}} }
+$$
+\{ -8 e^{-4t} , 4 e^{-4t} , 8 e^{-4t} \}
+$$
 
 :::
 
@@ -1724,7 +1786,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il` and `vl`, in **Results**.
 :::
 
-{ ((i l)/r)(e{{sup:((-r t)/l)}}-1)+i t , i l(1-e{{sup:((-r t)/l)}}) }
+$$
+\{ ((i l)/r)(e^{((-r t)/l)}-1)+i t , i l(1-e^{((-r t)/l)}) \}
+$$
 
 :::
 
@@ -1755,7 +1819,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc` and `ic`, in **Results**.
 :::
 
-{ (1/2)(1-e{{sup:-4t}})-2t , (1/4)(e{{sup:-4t}}-1) }
+$$
+\{ (1/2)(1-e^{-4t})-2t , (1/4)(e^{-4t}-1) \}
+$$
 
 :::
 
@@ -1788,7 +1854,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il` and `vl`, in **Results**.
 :::
 
-{ 6 e{{sup:-3t}}-6 e{{sup:-4t}} , 48 e{{sup:-4t}}-36 e{{sup:-3t}} }
+$$
+\{ 6 e^{-3t}-6 e^{-4t} , 48 e^{-4t}-36 e^{-3t} \}
+$$
 
 :::
 
@@ -1818,7 +1886,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `il` and `vl`, in **Results**.
 :::
 
-{ 6 t e{{sup:-3t}} , (12-36 t) e{{sup:-3t}} }
+$$
+\{ 6 t e^{-3t} , (12-36 t) e^{-3t} \}
+$$
 
 :::
 
@@ -1851,7 +1921,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc` and `ir3`, in **Results**.
 :::
 
-{ 9 e{{sup:(-t/6)}}-9 e{{sup:(-t/2)}} , (3/2) e{{sup:(-t/2)}}-(1/2)e{{sup:(-t/6)}} }
+$$
+\{ 9 e^{(-t/6)}-9 e^{(-t/2)} , (3/2) e^{(-t/2)}-(1/2)e^{(-t/6)} \}
+$$
 
 :::
 
@@ -1881,7 +1953,9 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc` and `ic`, in **Results**.
 :::
 
-{ -16 t e{{sup:-4 t}} , (8 t-2) e{{sup:-4t}} }
+$$
+\{ -16 t e^{-4 t} , (8 t-2) e^{-4t} \}
+$$
 
 :::
 
@@ -1934,7 +2008,9 @@ l,1,2,1/2,1
 c,2,0,1/8,2
 ```
 
-{ 4 e{{sup:-2t}}-2 e{{sup:-8t}} , 2 e{{sup:-8t}}-e{{sup:-2t}} }
+$$
+\{ 4 e^{-2t}-2 e^{-8t} , 2 e^{-8t}-e^{-2t} \}
+$$
 
 {{v7,8|Notice that the use of the only tool saves approximately 10 seconds
 here.}}
@@ -1964,7 +2040,7 @@ and wait a little. The graph of the voltage drop in the capacitor between
 time 0 and 1.5 seconds should appear in the screen.
 :::
 ::: only 9
-Open the **Plot** card, leave **Plot type** on *Plot a function of time*, and
+Open the **Plot** card, leave **Plot type** on *Plot a function of time (TR)*, and
 give it `vc` as the variable, `0` as the minimum and `1.5` as the maximum.
 The answers from the solve above are already in scope, so the name is all it
 needs. The graph of the capacitor's voltage drop between 0 and 1.5 seconds
@@ -2045,9 +2121,13 @@ il
 il
 ```
 
-3e{{sup:-2t}}-e{{sup:-6t}}
+$$
+3e^{-2t}-e^{-6t}
+$$
 
-2e{{sup:-6t}}-2e{{sup:-2t}}
+$$
+2e^{-6t}-2e^{-2t}
+$$
 
 {{v7,8|Using `only` saves about 13 seconds, or about a third of the
 calculation time, because only about 8 seconds are used finding the inverse
@@ -2163,9 +2243,13 @@ il
 il
 ```
 
-(-7/50)e{{sup:-3t}}cos(4t)-(1/50)e{{sup:-3t}}sin(4t)
+$$
+(-7/50)e^{-3t}\cos(4t)-(1/50)e^{-3t}\sin(4t)
+$$
 
-e{{sup:-3t}}cos(4t)-e{{sup:-3t}}sin(4t)
+$$
+e^{-3t}\cos(4t)-e^{-3t}\sin(4t)
+$$
 
 {{v7,8|The TR simulation took 30 s in my calculator. }}These are the right
 answers.
@@ -2219,7 +2303,9 @@ c,3,0,1,2
 r1,3,0,1
 ```
 
-{ (3t+2)e{{sup:-2t}} , (1-3t)e{{sup:-2t}} }
+$$
+\{ (3t+2)e^{-2t} , (1-3t)e^{-2t} \}
+$$
 
 :::
 
@@ -2414,7 +2500,9 @@ r3,1,2,3
 l2,2,0,4,0
 ```
 
-(12/11)(e{{sup:-3t}}-e{{sup:-t/4}})
+$$
+(12/11)(e^{-3t}-e^{-t/4})
+$$
 
 :::
 
@@ -2456,7 +2544,9 @@ The answers you want are `vca` and `vcb`, in **Results**.
 
 Then simulate the second interval in TR, to find the voltage in node *o*.
 
-(-4t-4)e{{sup:-t}}
+$$
+(-4t-4)e^{-t}
+$$
 
 ```sym 7
 s\only("vo"):s\tr("r1,0,1,1:r2,1,2,2:r3,1,o,2:
@@ -2515,7 +2605,9 @@ il
 il
 ```
 
-(1/20)e{{sup:-3t}}sin(4t)
+$$
+(1/20)e^{-3t}\sin(4t)
+$$
 
 ::: only 9
 We look in the results and see that `vc` is the first of those and `il` the
@@ -2552,7 +2644,9 @@ l,2,3,1/2,0
 c,3,0,1/8,0
 ```
 
-{ -4e{{sup:-2t}}+e{{sup:-8t}}+3 , e{{sup:-2t}}-e{{sup:-8t}} }
+$$
+\{ -4e^{-2t}+e^{-8t}+3 , e^{-2t}-e^{-8t} \}
+$$
 
 :::
 
@@ -2574,7 +2668,9 @@ l,2,3,1/2,0
 c,3,0,1/8,0
 ```
 
-2e{{sup:-2t}}-(e{{sup:-8t}})/8+3t-15/8
+$$
+2e^{-2t}-(e^{-8t})/8+3t-15/8
+$$
 
 :::
 
@@ -2652,7 +2748,9 @@ l,1,0,2,0
 c,1,0,1/2,0
 ```
 
-{ (-t-1)e{{sup:-t}}+1 , 2te{{sup:-t}} }
+$$
+\{ (-t-1)e^{-t}+1 , 2te^{-t} \}
+$$
 
 :::
 
@@ -2681,7 +2779,9 @@ cb,1,o,1,0
 o,2,o,o
 ```
 
-1-e{{sup:-t}} cos(2t)-(1/2)e{{sup:-t}} sin(2t)
+$$
+1-e^{-t} \cos(2t)-(1/2)e^{-t} \sin(2t)
+$$
 
 :::
 
@@ -2809,9 +2909,21 @@ Set **Analysis** to *TR — transient / time domain*.
 {{v7,8|Be patient. This took 78 seconds in my calculator, including over half
 a minute just to find the inverse Laplace of the two desired answers.}}
 
-(53/17-20/17)e{{sup:-t}} cos(2t)+(-203/17-5/17)e{{sup:-t}} sin(2t)+(803/17+193/34)e{{sup:-t/2}}+(9/2-53)e{{sup:-t}}
+$$
+\begin{aligned}
+&(53/17-20/17)e^{-t} \cos(2t) \\
+&+ (-203/17-5/17)e^{-t} \sin(2t) \\
+&+ (803/17+193/34)e^{-t/2}+(9/2-53)e^{-t}
+\end{aligned}
+$$
 
-(-2453/34-20/17)e{{sup:-t}} cos(2t)+(245/34-203/17)e{{sup:-t}} sin(2t)+(803/17+193/34)e{{sup:-t/2}}+(53/2-9/4)e{{sup:-t}}
+$$
+\begin{aligned}
+&(-2453/34-20/17)e^{-t} \cos(2t) \\
+&+ (245/34-203/17)e^{-t} \sin(2t) \\
+&+ (803/17+193/34)e^{-t/2}+(53/2-9/4)e^{-t}
+\end{aligned}
+$$
 
 ::: only 9
 Version 9 answers this one in about a second. `v1` and `v2` are in

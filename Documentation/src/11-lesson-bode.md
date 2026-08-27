@@ -66,7 +66,7 @@ trace — works normally. Just remember that `x` means your variable.
 ::: only 9
 Symbulator 9 draws it for you, in the **Plot** card below the results. Solve
 the circuit first — the plot is of an answer, so there has to be one — then
-set **Plot type** to *Bode plot (magnitude & phase vs. frequency)*. The two
+set **Plot type** to *Bode plot of a variable (FD)*. The two
 time boxes relabel themselves as frequencies.
 
 ```field 9 Circuit Description
@@ -100,7 +100,7 @@ is why it works from the circuit rather than from a result.
 
 The textbook often hands you the transfer function and no circuit — which is
 exactly what the calculator's tool took. Version 9 takes it too: set **Plot
-type** to *Bode plot of a transfer function H(s)*, and the variable box
+type** to *Bode plot of a transfer function H(s) (FD)*, and the variable box
 becomes **Transfer function H(s)**. Type the function there; the Circuit
 Description is ignored for this plot type, so it works on an empty page.
 
@@ -170,7 +170,7 @@ Phase zero at the gain peak
 :::
 ::: only 9
 Version 9 takes the expression directly, like the calculator: set **Plot
-type** to *Bode plot of a transfer function H(s)* and type the problem's
+type** to *Bode plot of a transfer function H(s) (FD)* and type the problem's
 function into the box, writing `s` wherever the textbook writes jω — no
 imaginary operator involved. The frequency boxes are in hertz, so the
 calculator's sweep of 0.1 to 300 rad/sec is about 0.016 to 48 Hz. Reading
@@ -220,7 +220,7 @@ The phase plot
 :::
 :::
 ::: only 9
-Solved the same way: the *Bode plot of a transfer function H(s)* type, with
+Solved the same way: the *Bode plot of a transfer function H(s) (FD)* type, with
 the function written in terms of `s`.
 :::
 :::
