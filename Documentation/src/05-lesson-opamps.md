@@ -972,7 +972,7 @@ o,0,a,o
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+Ask **Evaluate** for `expand(vo)`, exactly as on the calculator.
 :::
 
 
@@ -1182,16 +1182,13 @@ expand(vo)|r2=r1 and r3=r4
 ```
 
 ::: only 9
-Version 9 has no `expand` and nothing to substitute into after the fact.
-Instead, put the two equalities where they belong — as conditions on the
-solve. Open **Expert Mode** and give **Add conditions**:
+The calculator's `|` is Evaluate's **Conditions** box. Ask **Evaluate** for
+`expand(vo)` and give it both equalities:
 
 ```field 9 Conditions
 r2 = r1
 r3 = r4
 ```
-
-Run it again and `vo` comes back already reduced.
 :::
 
 The answer we get, **v2-v1**, is correct.
@@ -1221,8 +1218,18 @@ Define v1=1:Define v2=0:expand(vo)=–5
 
 ::: only 9
 Conditions again, this time on the inputs rather than the resistors:
-`v1 = 1` and `v2 = 0`. Then `vo` is {{o:-r2/r1}}, and it is that which has
-to equal −5.
+`v1 = 1` and `v2 = 0`. Then `vo` is
+
+$$
+-\frac{r_{2}}{r_{1}}
+$$
+
+which is equivalent to the book's expression, and it is that which has to
+equal −5.
+
+Version 9 will not always arrange an expression the way the book
+does. If you want it another way, the **Evaluate** card takes
+`simplify()`, `collect()`, `expand()`, `factor()` and `apart()`.
 :::
 
 We get **-r2/r1=-5**. Now make that part of v{{sub:o}} that is a factor of
@@ -1237,8 +1244,18 @@ Define v1=0:Define v2=1:expand(vo)=3
 
 ::: only 9
 With `v1 = 0` and `v2 = 1` instead, `vo` is
-{{o:r4*(r1 + r2)/(r1*(r3 + r4))}} — the same expression the calculator
-prints, gathered over one denominator.
+
+$$
+\frac{r_{4} \left(r_{1} + r_{2}\right)}
+{r_{1} \left(r_{3} + r_{4}\right)}
+$$
+
+which is equivalent to the book's expression, and it is that which has to
+equal 3.
+
+Version 9 will not always arrange an expression the way the book
+does. If you want it another way, the **Evaluate** card takes
+`simplify()`, `collect()`, `expand()`, `factor()` and `apart()`.
 :::
 
 We get **r2\*r4/(r1\*(r3+r4))+r4/(r3+r4)=3** Now, since you have two
@@ -1600,7 +1617,8 @@ r6,5,0,10'k
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**. It is arranged differently from
+Ask **Evaluate** for `expand(vo)` with **Approximate** on — that is what the
+calculator's `expand(approx(vo))` is doing. It is arranged differently from
 the book's, which is a matter of presentation rather than of arithmetic.
 :::
 
@@ -1638,7 +1656,7 @@ o2,0,7,o
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+Ask **Evaluate** for `expand(vo)`, as on the calculator.
 :::
 
 The answer, **8 v1 – 4 v2**, is correct.
@@ -1717,8 +1735,7 @@ below:
 
 :::
 
-{{v7,8|Our answer, expanded via `expand(vo)`, is shown below:}}{{v9|Our
-answer, written out term by term, is shown below:}}
+Our answer, expanded via `expand(vo)`, is shown below:
 
 (-r2 r4 v1)/(r1 r3)-(r4 v1)/r3+(r4 v2)/r3+v2
 

@@ -454,11 +454,6 @@ rca,c,a,8+4j
 rbc,b,c,8+4j
 ```
 
-::: only 9
-Version 9 does not read the angle sign, so each source is written in
-exponential form: 100 V at 10° is `(100∠10°)`.
-:::
-
 The phase currents are the currents in the three load impedances:
 
 ```sym 7
