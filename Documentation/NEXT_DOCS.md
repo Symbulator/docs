@@ -8,7 +8,7 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #119 — The full v9 read-through, 27 Aug 2026 — mechanical fixes live; rulings pending
+## #119 — The full v9 read-through, 27 Aug 2026 — closed; everything live
 
 Roberto asked for a complete read of the version 9 documentation for
 clarity, soundness and correspondence with the interface as deployed
@@ -42,14 +42,28 @@ panels (it works — measured), aligned 9.89's two passes on
 the same courtesy µ and δ already had (`repos/server` #121). The
 touched lesson files re-verified: 0 problems.
 
-**Awaiting Roberto's ruling — the A list** (Lesson 12's "TR reads
-sources in the s-domain" note and its "no curly brackets" claim, both
-contradicted by measurement; Lesson 4's two "version 9 reserves `e`"
-notes; Lesson 6's `ic`-for-`il` plot slip; Lesson 11's Bode practice
-problems that render empty for v9; the Introduction's "handheld
-device", ungated Bode claim and "fifteen years later"; Lesson 2's rx
-paragraph). The full list with recommendations is in the 27 Aug
-session transcript.
+**The A list is ruled on, fixed and live** (Roberto's rulings A1–A9,
+applied the same day, commit `cddffea` and its predecessors): Lesson
+12's TR note reads time-domain again and its curly-bracket denial
+became the shorthand's documentation (measurement showed v9 has it);
+Lesson 4 keeps only the real reservation (`s`, whose current would be
+`is`; `e` is not reserved); Lesson 6's plot slip reads `il`; the
+Introduction's Bode claim is gated `{{!v8|...}}` and "fifteen years"
+became "a dozen"; Lesson 7's `e`-naming tip was rewritten from the
+originals (the true v7→v8 difference is `r`→`r1`).
+
+**A7 was dissolved rather than patched:** instead of excusing Lesson
+11's five H(s)-only practice problems, the app grew a *Bode plot of a
+transfer function H(s)* plot type (`repos/server` #123), and the
+chapter now teaches it — a "When you have H(s) itself" subsection
+(write jω as `s`; the axis is Hz, rad/sec ÷ 2π) plus a v9 note on each
+of the six problems. `updated: 2026-08-27` on that chapter.
+
+All of it deployed with the 27 Aug evening batch (build `2026-08-27
+11:15 UTC`, PDFs 320/303/355 pages) and verified by fetching the live
+pages. Still open here: Roberto's announced edits to
+`src/99-credits.md`, which had not landed when the batch shipped —
+when they do, `build.py` + `py deploy_symbulator.py learn`.
 
 ---
 
