@@ -227,8 +227,8 @@ In the first, headed **Equation(s) to solve in terms of the results**, write
 one equation per line, using the same names the results use:
 
 ```field 9 Equation(s) to solve in terms of the results
-re = 12000
-ir3 = 0.006
+re = 12'k
+ir3 = 6'm
 ```
 
 In the second, headed **Unknown(s) to solve for**, name what you want found, separated by
@@ -247,6 +247,10 @@ Notice that you cannot use `'k` here as a shorthand for kilo, or any other SI
 prefix, because that shorthand only works within the values in the description
 of the circuit.
 :::
+:::
+::: only 9
+The calculator's restriction does not carry over: the shorthand works in
+these boxes too, so `re = 12'k` reads as 12000.
 :::
 
 An instant later we get the answers: {{v7,8|e = 72 V and r1 = 2000 Ω}}{{v9|the
@@ -362,8 +366,8 @@ before.
 
 The statement of the problem gives us the information we need to write the two
 additional equations: the source sees 12 kΩ, and the current through R3 is
-6 mA. Both go in as strings, written in the same names the answers come back
-under — so `re=12'k` on the calculator becomes `re = 12000` here:
+6 mA. Both are written in the same names the answers come back under, and the
+calculator's SI shorthand works here too:
 
 ```field 9 Circuit Description
 e,1,0,e
@@ -373,8 +377,8 @@ r3,3,0,6'k
 ```
 
 ```field 9 Add equations
-re = 12000
-ir3 = 0.006
+re = 12'k
+ir3 = 6'm
 ```
 
 ```field 9 Add unknowns
@@ -417,11 +421,12 @@ is the one the problem meant.
 :::
 
 ::: note Coming from a calculator version?
-Two of the calculator's precautions are gone. There is no need to avoid `r1` as
-a symbolic value — Symbulator 9 never writes answers into your namespace, so
-there is nothing to collide with — and there are no follow-up dialogs to click
-through. The rest maps across directly: "Add equations" is `equations=`, "Add
-unknowns" is `unknowns=`, "Add conditions" is `conditions=`.
+Two of the calculator's precautions are gone. There is no need to avoid `r1`
+as a symbolic value — Symbulator 9 keeps its answers to itself, so there is
+nothing to collide with — and there are no follow-up dialogs to click through.
+The rest maps across directly: the three boxes carry the calculator's own
+prompts as their names — **Add equations**, **Add unknowns** and
+**Add conditions**.
 :::
 :::
 
@@ -522,9 +527,9 @@ ir1=8'm and ir2=10'm and ir3=2'm
 ir1=8'm and ir2=10'm and ir3=2'm
 ```
 ```field 9 Add equations
-ir1 = 0.008
-ir2 = 0.010
-ir3 = 0.002
+ir1 = 8'm
+ir2 = 10'm
+ir3 = 2'm
 ```
 
 Add these unknowns:
@@ -608,11 +613,11 @@ irl1=20'm and vrl1=60 and irl2=10'm and vrl2=20 and -ie=50'm
 irl1=20'm and vrl1=60 and irl2=10'm and vrl2=20 and –ie=50'm
 ```
 ```field 9 Add equations
-irl1 = 0.020
+irl1 = 20'm
 vrl1 = 60
-irl2 = 0.010
+irl2 = 10'm
 vrl2 = 20
--ie = 0.050
+-ie = 50'm
 ```
 
 {{v7,8|Add these five variables to the list of first level

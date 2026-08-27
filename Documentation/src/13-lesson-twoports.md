@@ -338,24 +338,21 @@ equations — so the answers come back as formulas:
 
 $v_{th} = \dfrac{-60\,h_{21}}{h_{11}h_{22} - h_{12}h_{21} + 40\,h_{22}}$
 
-Which is more useful than it looks: substitute the numbers in the **Solve**
-card and you get both answers at once.
+Which is more useful than it looks: put `vth` in **Evaluate** with the four
+parameters in its **Conditions** box, and the number falls out.
 
-```field 9 Equation(s) to solve in terms of the results
-x = vth
-y = req
+```field 9 Evaluate
+vth
+```
+
+```field 9 Conditions
 h11 = 1000
 h12 = -2
 h21 = 10
 h22 = 2e-4
 ```
 
-```field 9 Unknown(s) to solve for
-x, y, h11, h12, h21, h22
-```
-
-Naming the four parameters as unknowns is what makes their equations bite —
-the same trick as pinning `t = 2` in {{ref:lesson-transient}}.
+Then ask for `req` under the same conditions.
 :::
 
 ```out 7,8
@@ -363,7 +360,7 @@ the same trick as pinning `t = 2` in {{ref:lesson-transient}}.
 ```
 
 ::: only 9
-`x` is {{o:-29.69}} V and `y` is {{o:51.46}} Ω.
+`vth` comes back {{o:-29.69}} V and `req` {{o:51.46}} Ω.
 :::
 
 Correct.

@@ -133,7 +133,7 @@ average real power consumed lands in a variable called **p** plus the element
 name.
 :::
 ::: only 9
-### The use_rms argument
+### The RMS setting
 
 You will learn in your circuits course that phasor analysis can be conducted
 using RMS values. There are certain advantages to this, and you will have to
@@ -259,7 +259,7 @@ quietly give you the wrong word. Symbulator reports the power, voltage and
 current *consumed by* each element, source or not, so the current stored in
 `ie` runs into the source rather than out of it. The calculator's pf tool
 knew, from the element name you handed it, that `e` was a source, and flipped
-the sign for you. The Python function is given two bare phasors and cannot
+the sign for you. The pf tool here is given two bare phasors and cannot
 know where they came from, so it cannot. Call it with `-ie` — the
 current the source *delivers* — and you get **0.97342 leading**; call it with
 `ie` and you get 0.97342 lagging, which is the same magnitude and the

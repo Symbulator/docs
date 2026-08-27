@@ -344,7 +344,7 @@ problem does not ask about.
 :::
 
 ::: note One difference worth knowing
-Where a hand-rolled `1 / sum(1/v for v in values)` would divide by zero,
+Where doing the reciprocal arithmetic by hand would divide by zero,
 Symbulator's `pr` checks for it: if any of the values you give it is exactly
 zero, the combination is zero, because a short circuit across a parallel
 network wins. The calculator tool did the same.
@@ -1748,6 +1748,8 @@ The answers you want are `vo` and `iro`, in **Results**.
 
 The answer, **{1000\*is,2\*is}**, is correct: *v*{{sub:O}}*=1000*
 *i*{{sub:S}} and *i*{{sub:O}}*=2 i*{{sub:S}}.
+{{v9|Version 9's panel names the source's value `is1`, so its answers read
+`1000*is1` and `2*is1`.}}
 
 :::
 
@@ -1833,6 +1835,8 @@ pro/(-pjs)
 
 The answers we get are correct: i{{sub:O}}=**-12is**, v{{sub:O}}=**-6000is**,
 p{{sub:O}}=**72000is**{{sup:2}}, and p{{sub:O}}/p{{sub:S}}=**4320**.
+{{v9|Version 9's panel names the source's value `is1`, so its answers carry
+`is1` where these carry is.}}
 
 :::
 
@@ -1942,7 +1946,7 @@ s\dc("ji,0,a,is:re,a,0,re:jd,b,a,β*is:rl,b,0,rl"):rji
 ```field 9 Circuit Description
 ji,0,a,is1
 re1,a,0,re1
-jd,b,a,beta*is1
+jd,b,a,β*is1
 rl,b,0,rl
 ```
 
@@ -1950,7 +1954,8 @@ rl,b,0,rl
 The answer you want is `rji`, in **Results**.
 :::
 
-The answer we get, `re*(β+1)`, is correct, as can be seen by comparing it to
+The answer we get — {{v7,8|`re*(β+1)`}}{{v9|`re1*(β+1)`, version 9's panel
+having renamed the element}} — is correct, as can be seen by comparing it to
 the textbook's answer, shown below.
 
 ::: figure assets/practice/tr5-example-4-7-symbolic-46.jpg
@@ -2026,10 +2031,10 @@ s\dc("e1,1,0,vcc:rb,1,b,rb:e2,e,b,vγ:re,e,0,re:rrc,1,c,rrc:j,c,e,β*irb"):irb
 ```field 9 Circuit Description
 e1,1,0,vcc
 rb,1,b,rb
-e2,e,b,vgamma
+e2,e,b,vγ
 re1,e,0,re1
 rc,1,c,rc
-j,c,e,beta*irb
+j,c,e,β*irb
 ```
 
 ::: only 9

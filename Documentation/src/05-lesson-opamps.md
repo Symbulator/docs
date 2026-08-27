@@ -78,10 +78,10 @@ as trivial by the calculator, and this leaves Symbulator one equation short.
 :::
 :::
 ::: only 9
-In Symbulator 9 the collision is impossible: node voltages are keyed `v_<node>`
-and element quantities `v_<element>`, `i_<element>`, `p_<element>`, all inside
-the result object, so a node called o and an op amp called o never contend for
-the same name.
+In Symbulator 9 the collision is impossible: **Results** lists node voltages
+and element quantities in separate sections, each labelled by its own node or
+element, so a node called o and an op amp called o never contend for the same
+name.
 
 ::: danger Never describe a source as e,#,0,v_#
 If you describe a source as `e1,1,0,v1`, you are declaring the voltage of node

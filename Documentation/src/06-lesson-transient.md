@@ -145,21 +145,16 @@ vc|t=2
 vc|t=2
 ```
 ::: only 9
-There is no `|t=2` on the web, but the **Solve** card will do it. Put both
-lines in **Equation(s) to solve in terms of the results**, and name both
-unknowns:
+The calculator's `|` says "given"; version 9 says the same thing in the
+**Evaluate** card's **Conditions** box:
 
-```field 9 Equation(s) to solve in terms of the results
-x = vc
+```field 9 Evaluate
+vc
+```
+
+```field 9 Conditions
 t = 2
 ```
-
-```field 9 Unknown(s) to solve for
-x, t
-```
-
-Naming `t` as an unknown is what makes the second equation bite: without it
-the answer comes back still written in terms of t.
 :::
 
 We get a value of 1 volt, which is correct.
@@ -1102,7 +1097,7 @@ s\tr("e,1,0,V*u(t):r,1,2,r:c,2,0,c,0"):{vc,vr,ic}
 s\tr("e,1,0,V*u(t):r,1,2,r:c,2,0,c,0"):{vc,vr,ic}
 ```
 ```field 9 Circuit Description
-e,1,0,V*Heaviside(t)
+e,1,0,V*u(t)
 r,1,2,r
 c,2,0,c,0
 ```
@@ -1137,7 +1132,7 @@ s\tr("e,1,0,V*u(t):l,1,2,l,0:r,2,0,r"):{vl,vr,il}
 s\tr("e,1,0,V*u(t):l,1,2,l,0:r,2,0,r"):{vl,vr,il}
 ```
 ```field 9 Circuit Description
-e,1,0,V*Heaviside(t)
+e,1,0,V*u(t)
 l,1,2,l,0
 r,2,0,r
 ```
@@ -1211,7 +1206,7 @@ s\tr("j,0,1,i*u(t):c,1,0,c,0:r,1,0,r"):{v1,ir,ic}
 s\tr("j,0,1,i*u(t):c,1,0,c,0:r,1,0,r"):{v1,ir,ic}
 ```
 ```field 9 Circuit Description
-j,0,1,i*Heaviside(t)
+j,0,1,i*u(t)
 c,1,0,c,0
 r,1,0,r
 ```
@@ -1321,7 +1316,7 @@ s\tr("e,1,0,V*u(t):r,1,2,r:c,2,0,c,0"):vc
 s\tr("e,1,0,V*u(t):r,1,2,r:c,2,0,c,0"):vc
 ```
 ```field 9 Circuit Description
-e,1,0,V*Heaviside(t)
+e,1,0,V*u(t)
 r,1,2,r
 c,2,0,c,0
 ```
@@ -1403,7 +1398,7 @@ s\tr("e,1,0,V*u(t):l,1,2,l,0:r,2,0,r"):il
 s\tr("e,1,0,V*u(t):l,1,2,l,0:r,2,0,r"):il
 ```
 ```field 9 Circuit Description
-e,1,0,V*Heaviside(t)
+e,1,0,V*u(t)
 l,1,2,l,0
 r,2,0,r
 ```
@@ -1635,7 +1630,7 @@ s\tr("j,0,1,i*δ(t):c,1,0,c,0:r,1,0,r")
 s\tr("j,0,1,i*δ(t):c,1,0,c,0:r,1,0,r")
 ```
 ```field 9 Circuit Description
-j,0,1,i*DiracDelta(t)
+j,0,1,i*δ(t)
 c,1,0,c,0
 r,1,0,r
 ```
@@ -1685,7 +1680,7 @@ s\tr("e,1,0,δ(t):o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic,vo}
 s\tr("e,1,0,δ(t):o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic,vo}
 ```
 ```field 9 Circuit Description
-e,1,0,DiracDelta(t)
+e,1,0,δ(t)
 o,1,2,o
 c,2,o,1/8,0
 r2,2,o,2
@@ -1782,7 +1777,7 @@ s\tr("j,0,1,2e^(-4t):r,0,1,6:l,1,0,2,0"):{il,vl}
 s\tr("j,0,1,2e^(–4t):r,0,1,6:l,1,0,2,0"):{il,vl}
 ```
 ```field 9 Circuit Description
-j,0,1,2*exp(-4*t)
+j,0,1,2e^(-4t)
 r,0,1,6
 l,1,0,2,0
 ```
@@ -1812,7 +1807,7 @@ s\tr("j,0,1,2e^(-3t):r,0,1,6:l,1,0,2,0"):{il,vl}
 s\tr("j,0,1,2e^(–3t):r,0,1,6:l,1,0,2,0"):{il,vl}
 ```
 ```field 9 Circuit Description
-j,0,1,2*exp(-3*t)
+j,0,1,2e^(-3t)
 r,0,1,6
 l,1,0,2,0
 ```
@@ -1843,7 +1838,7 @@ s\tr("e,1,0,18e^(-t/2):r3,1,2,3:r5,2,3,5:c,3,0,1,0:j,0,2,2ir3"):{vc,ir3}
 s\tr("e,1,0,18e^(–t/2):r3,1,2,3:r5,2,3,5:c,3,0,1,0:j,0,2,2ir3"):{vc,ir3}
 ```
 ```field 9 Circuit Description
-e,1,0,18*exp(-t/2)
+e,1,0,18e^(-t/2)
 r3,1,2,3
 r5,2,3,5
 c,3,0,1,0
@@ -1873,7 +1868,7 @@ s\tr("e,1,0,2e^(-4t):o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic}
 s\tr("e,1,0,2e^(–4t):o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic}
 ```
 ```field 9 Circuit Description
-e,1,0,2*exp(-4*t)
+e,1,0,2e^(-4t)
 o,1,2,o
 c,2,o,1/8,0
 r2,2,o,2
@@ -2804,7 +2799,7 @@ r12,1,0,12
 r18,1,2,18
 r6,2,0,6
 cb,2,0,1/3,9/4
-j,0,2,10*exp(-t)*sin(2*t+(30*pi/180))
+j,0,2,10e^(-t)*sin(2t+30*pi/180)
 ```
 
 ::: only 9
@@ -2947,7 +2942,7 @@ s\ex("e,1,0,a*u(t):r,1,2,2:c,2,0,1,0")
 s\ex("e,1,0,a*u(t):r,1,2,2:c,2,0,1,0")
 ```
 ```field 9 Circuit Description
-e,1,0,a*Heaviside(t)
+e,1,0,a*u(t)
 r,1,2,2
 c,2,0,1,0
 ```
@@ -3201,7 +3196,7 @@ s\ex("e,1,0,vs*u(t):r,1,2,2:l,2,0,1,0")
 s\ex("e,1,0,vs*u(t):r,1,2,2:l,2,0,1,0")
 ```
 ```field 9 Circuit Description
-e,1,0,vs*Heaviside(t)
+e,1,0,vs*u(t)
 r,1,2,2
 l,2,0,1,0
 ```

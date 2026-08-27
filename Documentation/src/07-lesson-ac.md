@@ -9,7 +9,7 @@ summary: >
   admittances*, and sources for AC analysis.
 ---
 
-In this lesson you will learn how to use the **ac** {{v7,8|program}}{{v9|function}}
+In this lesson you will learn how to use the **ac** {{v7,8|program}}{{v9|analysis}}
 to solve AC circuits in Symbulator. You will also learn how to describe the
 elements you already know so they are suitable inputs for AC analysis, and how
 to use tools you already know, such as **er** and **th**, in their AC mode.
@@ -42,16 +42,18 @@ selecting AC from the options when asked what type of analysis you want to
 conduct. In this lesson, we will see examples of all of these.
 :::
 ::: only 9
-### The ac function
+### The AC analysis
 
-Symbulator has a function dedicated to analysing AC circuits, called **ac**. As
-opposed to `dc` and `tr`, it takes a second argument: the frequency of the
-circuit in radians per second, passed as `omega`.
+Version 9 keeps AC on the same menu as the other analyses: set **Analysis**
+to *AC — alternating current*. Unlike DC and TR it needs one more input — the
+frequency of the circuit in radians per second, typed into the
+**ω — angular frequency** box that appears beside the menu.
 
 ### AC mode in the other tools
 
-The `er` and `th` tools also work in AC. Rather than prompting you, they take
-`domain="ac"` and, where the circuit needs it, `omega`.
+The equivalence tools work in AC the same way: choose *Find equivalent* as
+usual, set **Analysis** to *AC — alternating current*, and give the ω box a
+frequency where the circuit needs one.
 :::
 
 ### Describing elements for AC
@@ -908,10 +910,11 @@ l,2,0,5'm
 goes to the **Solve** card:
 
 ```field 9 Equation(s) to solve in terms of the results
-im(500j/(-c + 25 + 25j)) = 0
+im(zeq) = 0
 ```
 
-with `c` as the unknown and **real solutions only** ticked, which answers
+with `c` as the unknown and **real solutions only** ticked — the same
+equation as before, now against the new `zeq` — which answers
 `c` = {{o:25}}. The calculator spells that function `imag`; version 9 uses
 `im`.
 :::
