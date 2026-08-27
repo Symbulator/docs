@@ -42,7 +42,7 @@ it means you can describe a capacitor or an inductor *as an impedance*, writing
 its value in terms of s, as long as its initial condition is zero.
 
 Other than the domain, FD and TR are twins. Capacitors and inductors given in
-farads and henrys are described identically in both, and so is everything
+farads and henries are described identically in both, and so is everything
 else — shorts, op-amps, transformers, all of it.
 
 ::: problem AS7's Example 16.1
@@ -101,7 +101,7 @@ r4,o,0,s
 ```
 
 That was to prove it can be done. In practice the schematic gives you farads
-and henrys, so give Symbulator farads and henrys and let it do the converting:
+and henries, so give Symbulator farads and henries and let it do the converting:
 
 ```sym 7
 "e,1,0,1/s:r1,1,2,1:r2,2,o,5:c,2,0,1/3,0:l,o,0,1,0"→cir:s\fd(cir):vo

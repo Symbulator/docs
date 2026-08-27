@@ -142,6 +142,16 @@ Which are correct. The voltage in node o is –2.1 V, and the op amp is absorbin
 
 ::: practice
 
+::: only 9
+::: note Some of this narration still describes the calculator
+Every problem below carries a **Circuit Description** panel you can type
+straight into Symbulator 9, and the circuits and answers are identical
+across the versions. What has not all been rewritten is the narration
+between them: where it says to evaluate a name or press a key, do the
+version 9 equivalent — the results are already on screen.
+:::
+:::
+
 
 ### Solved Op Amp problems
 
@@ -343,7 +353,7 @@ o,0,1,o
 The answers you want are `vo` and `ir1`, in **Results**.
 :::
 
-The answer, **{-1.25,5.e**-**5}**, is correct.
+The answer, **{-1.25, 5e-5}**, is correct.
 
 :::
 
@@ -399,8 +409,8 @@ answer is v{{sub:O}}=**-15**V for v{{sub:S}} = 6V.
 
 ::: problem AS2's Practice Problem 5.3 (Inverting)
 
-Find the output voltage of the op amp (e.g. v{{sub:o}}) and calculate the
-current through the feedback resistor (e.g. the 15’kΩ resistor).
+Find the output voltage of the op amp (i.e. v{{sub:o}}) and calculate the
+current through the feedback resistor (i.e. the 15’kΩ resistor).
 
 ::: figure assets/practice/as2s-practice-problem-5-3-inverting-8.jpg
 
@@ -422,7 +432,7 @@ rf,1,o,15'k
 o,0,1,o
 ```
 
-The answer, **{-.12,8.e**-**6}**, is correct.
+The answer, **{-.12, 8e-6}**, is correct.
 
 :::
 
@@ -483,7 +493,7 @@ rl,o,0,rl
 ```
 
 However, since we are only interested in the ratio of the input to the
-output, a smarter (and faster – as in 49 seconds instead of 55 seconds) way
+output, a smarter{{v7,8| (and faster – as in 49 seconds instead of 55 seconds)}} way
 to *symbulate* it is this:
 
 ```sym 7
@@ -668,8 +678,6 @@ Find Vo/Vs.
 
 We can solve this problem in one simulation, as shown below.
 
-(r2 (r3+r4))/((r1+r2) r4)
-
 ```sym 7
 s\dc("e,1,0,vs:r1,1,2,r1:r2,2,0,r2:o,2,3,o:r3,o,3,r3:r4,3,0,r4"):vo/vs
 ```
@@ -693,6 +701,10 @@ vo/vs
 ```
 :::
 
+We get
+
+(r2 (r3+r4))/((r1+r2) r4)
+
 which is correct, as can be seen by comparing it to the book's answer, shown
 below:
 
@@ -702,8 +714,6 @@ below:
 
 We can also solve it in stages, as shown below. First, simulate the left
 half.
-
-r2/(r1+r2)
 
 ```sym 7
 s\dc("e,1,0,vs:r1,1,2,r1:r2,2,0,r2"):v2/vs
@@ -725,9 +735,11 @@ v2/vs
 ```
 :::
 
-Which is correct for this part. Then, simulate the right half.
+We get
 
-(r3+r4)/r4
+r2/(r1+r2)
+
+which is correct for this part. Then, simulate the right half.
 
 ```sym 7
 s\dc("e,2,0,1:o,2,3,o:r3,o,3,r3:r4,3,0,r4"):vo/v2
@@ -750,7 +762,11 @@ vo/v2
 ```
 :::
 
-Which is correct for this part. The product of these two partial answers
+We get
+
+(r3+r4)/r4
+
+which is correct for this part. The product of these two partial answers
 produces the same expression shown above after the big simulation, and is the
 right answer.
 
@@ -841,7 +857,7 @@ The answer you want is `prl`, in **Results** — the power consumed by the
 load resistor `rl`.
 :::
 
-The answer,**.00225**, is correct. The explanation to the apparent paradox
+The answer, **.00225**, is correct. The explanation to the apparent paradox
 that the load in (a) is drawing more power than the source in (b) seems able
 to provide evaporates once we remember that the ideal op amp shown in the
 schematic is only part of the truth: the real op amp has its own source of
@@ -935,6 +951,7 @@ The answer you want is `vo`, in **Results**.
 
 
 -(r2/r1)(va+vb)
+
 which is correct, as can be seen by comparing it to the book's answer, shown
 below:
 
@@ -976,7 +993,8 @@ Ask **Evaluate** for `expand(vo)`, exactly as on the calculator.
 :::
 
 
-- rf v1/r1-rf v2/r2-rf v3/r3
+-rf v1/r1 - rf v2/r2 - rf v3/r3
+
 which is correct, as can be seen by comparing it to the book's answer, shown
 below:
 
@@ -1119,8 +1137,8 @@ r4,6,0,15'k
 o,6,5,o
 ```
 
-{{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}} **3** **v2** **– ** **4** **v1**, which is the correct
-answer.
+{{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}} **3 v2 − 4 v1**, which is the
+correct answer.
 
 :::
 
@@ -1157,8 +1175,8 @@ The answer you want is `vo`, in **Results**.
 
 
 (r1 r4 v2-r2 (r3 v1+r4 (v1-v2)))/(r1*(r3+r4))
-This expression is equivalent to the book's answer, better formatted, shown
-below:
+
+This expression is equivalent to the book's answer, shown below:
 
 ::: figure assets/practice/as2s-figure-5-24-difference-or-differential-35.jpg
 
@@ -1252,10 +1270,6 @@ $$
 
 which is equivalent to the book's expression, and it is that which has to
 equal 3.
-
-Version 9 will not always arrange an expression the way the book
-does. If you want it another way, the **Evaluate** card takes
-`simplify()`, `collect()`, `expand()`, `factor()` and `apart()`.
 :::
 
 We get **r2\*r4/(r1\*(r3+r4))+r4/(r3+r4)=3** Now, since you have two
@@ -1275,7 +1289,7 @@ solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=20000
 There is no `ans(1)`, so write the two equations out. This is what the
 **Solve** card is for — it solves a system that is not a circuit:
 
-```field 9 Equation
+```field 9 Equation(s) to solve in terms of the results
 -r2/r1 = -5
 r4*(r1 + r2)/(r1*(r3 + r4)) = 3
 ```
@@ -1285,8 +1299,8 @@ with `r2, r4` as the unknowns. The answer is `r2` = {{o:5*r1}} and
 book's `r1` = 10 kΩ and `r3` = 20 kΩ into it and you get 50 kΩ and 20 kΩ.
 :::
 
-The expression above assumes that ans(1) and ans(2) are pointing to the two
-equations we found before. We get **r2=50000 and r4=20000**. This is
+{{v7,8|The expression above assumes that ans(1) and ans(2) are pointing to
+the two equations we found before. }}We get **r2=50000 and r4=20000**. This is
 correct.
 
 Now, if this problem was part of a test, I'd like to verify that the answer
@@ -1360,7 +1374,7 @@ solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=10000
 ::: only 9
 In the **Solve** card:
 
-```field 9 Equation
+```field 9 Equation(s) to solve in terms of the results
 -r2/r1 = -4
 r4*(r1 + r2)/(r1*(r3 + r4)) = 4
 ```
@@ -1408,7 +1422,7 @@ The answer you want is `ir5`, in **Results**.
 :::
 
 In the schematic, the current i{{sub:o}} corresponds to `ir5`. The answer,
-**2.e**-**6**, is correct.
+**2e-6**, is correct.
 
 :::
 
@@ -1583,7 +1597,7 @@ o3,0,6,o
 The answer you want is `vo`, in **Results**.
 :::
 
-The answer, **9**. , is correct.
+The answer, **9**, is correct.
 
 :::
 
@@ -1617,12 +1631,12 @@ r6,5,0,10'k
 ```
 
 ::: only 9
-Ask **Evaluate** for `expand(vo)` with **Approximate** on — that is what the
-calculator's `expand(approx(vo))` is doing. It is arranged differently from
+Ask **Evaluate** for `expand(vo)` with **Rounding** set to *approximate* in
+**Settings** — that is what the calculator's `expand(approx(vo))` is doing. It is arranged differently from
 the book's, which is a matter of presentation rather than of arithmetic.
 :::
 
-The answer, **-2.4** **v1 – 6**, is correct.
+The answer, **-2.4 v1 − 6**, is correct.
 
 :::
 
@@ -1792,14 +1806,4 @@ sameness.}}
 
 :::
 
-::: only 9
-::: note Some of this narration still describes the calculator
-Every problem below carries a **Circuit Description** panel you can type
-straight into Symbulator 9, and the circuits and answers are identical
-across the versions. What has not all been rewritten is the narration
-between them: where it says to evaluate a name or press a key, do the
-version 9 equivalent — the results are already on screen, and
-{{ref:introduction}} lists the correspondences.
-:::
-:::
 :::

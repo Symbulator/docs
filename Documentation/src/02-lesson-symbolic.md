@@ -39,10 +39,10 @@ Numerical-from-symbolic problems can be solved in two ways. If they are simple
 — just one or two unknown values, and only one or two numerical answers wanted
 — it is time-efficient to simulate the circuit symbolically and then solve for
 the numerical answers with the {{v7,8|**solve** command of the
-calculator}}{{v9|**Solve equations** card, which sits under the results and
+calculator}}{{v9|**Solve** card, which sits under the results and
 does exactly that job}}. If they are not simple, it is easier and more
-time-efficient to use **expert mode**{{v9|, which version 9 offers as a
-checkbox in **Settings**}}.
+time-efficient to use **expert mode**{{v9|, which version 9 offers in its
+**Expert Mode** box}}.
 
 Let's see an example of each.
 
@@ -135,8 +135,8 @@ source's **power consumed** line — type `-pev` into **Evaluate**}}.
 $p_{r2} = \dfrac{r2\,v^2}{(r1 + r2)^2}$ and
 $-p_{ev} = \dfrac{v^2}{r1 + r2}$
 
-It is this ability to simulate symbolically as if nothing that puts Symbulator
-in a league of its own. Getting symbolic answers from a symbolic circuit takes
+It is this ability to simulate symbolically, as if it were nothing, that puts
+Symbulator in a league of its own. Getting symbolic answers from a symbolic circuit takes
 no extra effort.
 :::
 :::
@@ -220,7 +220,7 @@ solve(re=12000 and ir3=.006,{e,r1})
 ```
 
 ::: only 9
-That is what the **Solve equations** card is for. You will find it under the
+That is what the **Solve** card is for. You will find it under the
 results, beside **Evaluate**. Open it and fill in two boxes.
 
 In the first, headed **Equation(s) to solve in terms of the results**, write
@@ -344,7 +344,7 @@ unknown values and of answers provided by the problem.
 
 The three things the calculator stopped to ask you for — extra equations, extra
 unknowns and extra conditions — are three boxes in Symbulator 9, and they are
-hidden until you ask for them. Open the **Settings** card and tick **Enable
+hidden until you ask for them. Open the **Expert Mode** box and tick **Enable
 Expert Mode**; three new fields appear:
 
 - **Add equations** — one per line, written in the names the results use.
@@ -484,7 +484,7 @@ We get that v{{sub:x}} is {{o:78}} V, which is correct.
 {{v7,8|Evaluating `ir6` we find}}{{v9|The `r6` block already shows}} that
 i{{sub:x}} is {{o:3}} A. The fact that we can find numerical answers in this
 problem can be quite puzzling until one realizes that ignoring the value of
-R{{sub:A}} doesn't matter: due to the circuit's structure, it is not needed it
+R{{sub:A}} doesn't matter: due to the circuit's structure, it is not needed
 to answer the two questions we have been asked.
 
 :::
@@ -636,7 +636,7 @@ correct.
 {{v7,8|Then we ask for the powers consumed in the resistors, and find
 that:}}{{v9|The **power consumed** line of each resistor's block gives:}}
 
-`pr1`is {{o:1.2}} W, `pr2` is {{o:0.4}} W , and `pr3` is {{o:0.6}} W
+`pr1` is {{o:1.2}} W, `pr2` is {{o:0.4}} W, and `pr3` is {{o:0.6}} W
 
 Since all are smaller than 2W, it is possible to use 2W resistors in the
 design.

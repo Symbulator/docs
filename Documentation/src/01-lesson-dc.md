@@ -63,8 +63,8 @@ with a series of cryptic messages. Then, after a few seconds, it should have
 displayed a short message of Done.
 :::
 ::: only 9
-If you typed everything correctly, the button reads *Solving…* for a moment.
-When it changes to "Solved!", the results are ready. Scroll down past the 
+If you typed everything correctly, the word *Solving…* appears beside the
+button for a moment. When it changes to "Solved!", the results are ready. Scroll down past the 
 Outputs heading and you will find a **Results** section that was not
 active before. It presents the results for every node and every element of 
 the circuit you just solved.
@@ -700,8 +700,7 @@ textbook as **HK5**.
 
 We are asked to determine the current, voltage drop and power consumed in
 each resistor, as well as the power *delivered* by each voltage source. We
-are also asked to check that the powers in the circuit add up to zero. Here
-is my solution.
+are also asked to check that the powers in the circuit add up to zero.
 
 ::: figure assets/practice/hk5s-figure-1-26-1.jpg
 
@@ -711,7 +710,7 @@ Here is my solution.
 
 I named the nodes thus: the bottom node is named **0**, the top nodes, from
 left to right, are named **1**, **2** and **3**. My description of the
-circuit is given below, followed after a colon by the DC simulation command.
+circuit is given below{{v7,8|, as the argument of the DC simulation command}}.
 
 ```sym 7
 s\dc("e1,1,0,120:r1,1,2,30:e2,2,3,30:r2,3,0,15")
@@ -839,7 +838,7 @@ r3,2,0,2'k
 r4,1,0,8.2'k
 ```
 
-Answers: `v2` is {{o:2.51}} V, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} (e.g. I{{sub:S}}) is {{o:2.86}} mA and
+Answers: `v2` is {{o:2.51}} V, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} (i.e. I{{sub:S}}) is {{o:2.86}} mA and
 `ir4` is {{o:1.46}} mA.
 
 :::
@@ -933,7 +932,7 @@ r8,5,6,3'k
 r9,0,6,6'k
 ```
 
-Answers: `ir5` is {{o:3}} mA, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} (e.g. I{{sub:S}}) is {{o:7.36}} mA, and
+Answers: `ir5` is {{o:3}} mA, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} (i.e. I{{sub:S}}) is {{o:7.36}} mA, and
 `vr7` is {{o:19.6}} V.
 
 :::
@@ -1089,23 +1088,9 @@ approx({ir1,ir2,ir3})
 s\dc("e1,1,0,15:r1,1,a,4:e3,3,0,20:r3,3,a,10:e2,0,2,40:r2,a,2,5"):
 approx({ir1,ir2,ir3})
 ```
-```field 9 Circuit Description
-e1,1,0,15
-r1,1,a,4
-e3,3,0,20
-r3,3,a,10
-e2,0,2,40
-r2,a,2,5
-```
 
-::: only 9
-The answers you want are `ir1`, `ir2` and `ir3`, in **Results**.
-
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
-:::
-
-Moving forward, we will often use this single-line approach for getting our
-answers.
+{{v7,8|Moving forward, we will often use this single-line approach for getting
+our answers.}}
 
 :::
 
@@ -1132,7 +1117,7 @@ r4,2,0,8
 r5,2,0,12
 ```
 
-Answer: {{v7|`-ie`}}{{v8|`–ie`}}{{v9|The opposite of `ie`}} is I{{sub:S}}={{o:4}} A, `ir2 `is I{{sub:2}}=.{{o:8}} A, `ir4`
+Answer: {{v7|`-ie`}}{{v8|`–ie`}}{{v9|The opposite of `ie`}} is I{{sub:S}}={{o:4}} A, `ir2` is I{{sub:2}} = {{o:.8}} A, `ir4`
 is I{{sub:4}}={{o:2.4}} A, `vr1` is V{{sub:1}}={{o:4.8}} V, `vr5` is
 V{{sub:5}}={{o:19.2}} V.
 
@@ -1370,9 +1355,9 @@ The calculator versions wrap this in `approx` to get a decimal. Version 9 does t
 :::
 
 The answer we get indicates that the equivalent resistance, given by
-(v{{sub:1}}-v{{sub:2}})/I{{sub:T}}, is {{o:7.2}} KΩ, and that
-I{{sub:T}}={{o:1.11}} **m**A, I{{sub:1}}=.{{o:133}} **m**A,
-I{{sub:2}}=.{{o:444}} **m**A and V{{sub:ab}}={{o:-0.8}} V. This is correct.
+(v{{sub:1}}-v{{sub:2}})/I{{sub:T}}, is {{o:7.2}} kΩ, and that
+I{{sub:T}}={{o:1.11}} mA, I{{sub:1}}=.{{o:133}} mA,
+I{{sub:2}}=.{{o:444}} mA and V{{sub:ab}}={{o:-0.8}} V. This is correct.
 
 :::
 

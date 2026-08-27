@@ -80,7 +80,7 @@ coupled element is named first.
 false→s\rms:"e,1,0,12:r1,1,2,-𝐢4:r2,2,0,𝐢5:m,r2,r3,𝐢3:r3,3,0,𝐢6:r4,3,0,12"→cir:s\ac(cir,ω)
 ```
 ```sym 8
-false→s\rms:"e,1,0,12:r1,1,2,–𝐢4:r2,2,0,𝐢5:m,r2,r3,𝐢3:r3,3,0,𝐢6:r4,3,0,12"→cir:s\ac(cir,ω)
+false→userms:"e,1,0,12:r1,1,2,–𝐢4:r2,2,0,𝐢5:m,r2,r3,𝐢3:r3,3,0,𝐢6:r4,3,0,12"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
 e,1,0,12
@@ -129,7 +129,7 @@ Again the dotted node of the coupled inductor comes first.
 false→s\rms:"e,1,0,(200.∠45°):r1,1,2,4.:r2,2,0,𝐢8.:m,r2,r3,𝐢1.:r3,0,o,𝐢5.:r4,o,0,10"→cir:s\ac(cir,ω)
 ```
 ```sym 8
-false→s\rms:"e,1,0,(200.∠45°):r1,1,2,4.:r2,2,0,𝐢8.:m,r2,r3,𝐢1.:r3,0,o,𝐢5.:r4,o,0,10"→cir:s\ac(cir,ω)
+false→userms:"e,1,0,(200.∠45°):r1,1,2,4.:r2,2,0,𝐢8.:m,r2,r3,𝐢1.:r3,0,o,𝐢5.:r4,o,0,10"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
 e,1,0,(200∠45°)
@@ -166,7 +166,7 @@ Notice the node order again, matching the dots.
 false→s\rms:"e,1,0,100.:r1,1,2,4.-𝐢3.:r2,2,0,𝐢6.:m,r2,r3,𝐢2.:r3,3,2,𝐢8.:r4,3,0,5"→cir:s\ac(cir,ω)
 ```
 ```sym 8
-false→s\rms:"e,1,0,100.:r1,1,2,4.–𝐢3.:r2,2,0,𝐢6.:m,r2,r3,𝐢2.:r3,3,2,𝐢8.:r4,3,0,5"→cir:s\ac(cir,ω)
+false→userms:"e,1,0,100.:r1,1,2,4.–𝐢3.:r2,2,0,𝐢6.:m,r2,r3,𝐢2.:r3,3,2,𝐢8.:r4,3,0,5"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
 e,1,0,100
@@ -278,7 +278,7 @@ polarity.
 true→s\rms:"e,1,0,120.:r1,1,2,4.-𝐢6.:t,2,3,1,-2:ro,3,0,20."→cir:s\ac(cir,ω)
 ```
 ```sym 8
-true→s\rms:"e,1,0,120.:r1,1,2,4.–𝐢6.:t,2,3,1,-2:ro,3,0,20."→cir:s\ac(cir,ω)
+true→userms:"e,1,0,120.:r1,1,2,4.–𝐢6.:t,2,3,1,-2:ro,3,0,20."→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
 e,1,0,120

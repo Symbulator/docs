@@ -300,6 +300,16 @@ check that the variable is spelled the way **Results** spells it.
 
 ::: practice
 
+::: only 9
+::: note Some of this narration still describes the calculator
+Every problem below carries a **Circuit Description** panel you can type
+straight into Symbulator 9, and the circuits and answers are identical
+across the versions. What has not all been rewritten is the narration
+between them: where it says to evaluate a name or press a key, do the
+version 9 equivalent — the results are already on screen.
+:::
+:::
+
 
 ### Transient analysis of RC circuit
 
@@ -391,10 +401,10 @@ called **vc**{{sub:0}}, to use it as initial condition of the capacitor for
 the second interval.
 
 ```sym 7
-vcvc0
+vc→vc0
 ```
 ```sym 8
-vcvc0
+vc→vc0
 ```
 
 For the second interval, when **0s ≤ t**, we do a transient simulation. The
@@ -574,7 +584,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vl`, `il` and `vr`, in **Results**.
 :::
 
-After 22 seconds, we get the right answers:
+We get the right answers:
 
 { -il0 r e{{sup:(-r t)/l}} , il0 e{{sup:(-r t)/l}} , -il0 r e{{sup:(-r t)/l}} }
 
@@ -609,8 +619,6 @@ The answer you want is `il`, in **Results**.
 
 For **t ≥ 0s**, simulate in TR, giving the inductor its initial condition.
 
-e{{sup:(-r t)/l}}v/r1
-
 ```sym 7
 s\tr("l,2,0,l,v/r1:r2,2,0,r"):il
 ```
@@ -627,6 +635,8 @@ Set **Analysis** to *TR — transient / time domain*.
 
 The answer you want is `il`, in **Results**.
 :::
+
+e{{sup:(-r t)/l}}v/r1
 
 :::
 
@@ -683,9 +693,9 @@ The answers you want are `il`, `vl` and `ir4`, in **Results**.
 
 { 2e{{sup:-3t}} , -6 e{{sup:-3t}} , (3/2)e{{sup:-3t}} }
 
-In my machine the simulation took 30 seconds, 12 seconds of these (40%) were
-used in finding the inverse Laplace of the answers. Later we will learn a
-trick to save time by specifying to Symbulator which answers are required.
+{{v7,8|In my machine the simulation took 30 seconds, 12 seconds of these (40%)
+were used in finding the inverse Laplace of the answers — time that the *only*
+tool, described above, can save.}}
 
 :::
 
@@ -698,8 +708,6 @@ Find i{{sub:L}}(t) for t≥0, given that i{{sub:L}}(0) = 5A.
 :::
 
 We only run the transient simulation for t≥0, with initial condition 5A.
-
-5e{{sup:((-R t)/3L)}}
 
 ```sym 7
 s\tr("r,v,0,r:j,v,0,2ir:l,v,0,l,5"):il
@@ -718,6 +726,8 @@ Set **Analysis** to *TR — transient / time domain*.
 
 The answer you want is `il`, in **Results**.
 :::
+
+5e{{sup:((-R t)/3L)}}
 
 :::
 
@@ -924,7 +934,7 @@ The answers you want are `vc` and `ic`, in **Results**.
 
 The voltage in the capacitor at the end of this interval will serve as the
 initial condition of the capacitor for the next interval. The second interval
-runs between 0 and 1 second, e.g. 0 < t ≤ 1 second. We simulate in TR.
+runs between 0 and 1 second, i.e. 0 < t ≤ 1 second. We simulate in TR.
 
 ```sym 7
 s\tr("c,1,0,1/4,8:r4,1,0,4"):{vc,ic}
@@ -946,8 +956,8 @@ The answers you want are `vc` and `ic`, in **Results**.
 { 8 e{{sup:-t}} , -2 e{{sup:-t}} }
 
 The voltage in the capacitor at the end of this second interval will serve as
-initial condition for the third interval. We can use its exact value, e.g.
-{{v7|`8*e^-1`}}{{v8|`8*e^–1`}}, but the textbook prefers using its approximate value, e.g. `2.943`.
+initial condition for the third interval. We can use its exact value, i.e.
+{{v7|`8*e^-1`}}{{v8|`8*e^–1`}}, but the textbook prefers using its approximate value, i.e. `2.943`.
 
 The third interval corresponds to t > 1 second. We simulate in TR. To make
 things easier for Symbulator, we replace the resistors by their equivalent.
@@ -1011,7 +1021,7 @@ The answers you want are `il` and `vl`, in **Results**.
 { 3 , 0 }
 
 The 3A current in the inductor is its initial condition for the second
-interval, which goes from 0 to 2 second, e.g. 0 < t ≤ 2 seconds. We simulate
+interval, which goes from 0 to 2 seconds, i.e. 0 < t ≤ 2 seconds. We simulate
 in TR.
 
 ```sym 7
@@ -1033,7 +1043,7 @@ The answers you want are `il` and `vl`, in **Results**.
 
 { 3 e{{sup:-2t}} , -36 e{{sup:-2t}} }
 
-The current in the capacitor at the end of this second interval will serve as
+The current in the inductor at the end of this second interval will serve as
 initial condition for the third interval. Find its approximate value thus:
 
 ```sym 7
@@ -1047,8 +1057,6 @@ iL|t=2.
 
 The third interval corresponds to t > 2 second. We simulate in TR. To make
 things easier for Symbulator, we replace the resistors by their equivalent.
-
-{ .055 e{{sup:(-(t-2)/2)}} , -.165 e{{sup:(-(t-2)/2)}} }
 
 ```sym 7
 s\tr("r,1,0,[9+3,4]:l,1,0,6,.055"):{il,vl}
@@ -1066,6 +1074,8 @@ Set **Analysis** to *TR — transient / time domain*.
 
 The answers you want are `il` and `vl`, in **Results**.
 :::
+
+{ .055 e{{sup:(-(t-2)/2)}} , -.165 e{{sup:(-(t-2)/2)}} }
 
 These are the kind of expressions your book or professor are looking for.
 
@@ -1493,8 +1503,6 @@ The answer you want is `vc`, in **Results**.
 This is the initial condition for the capacitor in the second interval, which
 we analyze using TR and a source value of -4 V.
 
-6e{{sup:( -t/6)}}-4
-
 ```sym 7
 s\tr("e,1,0,-4:r3,1,2,3:r5,2,3,5:c,3,0,1,2:j,0,2,2ir3"):vc
 ```
@@ -1514,6 +1522,8 @@ Set **Analysis** to *TR — transient / time domain*.
 
 The answer you want is `vc`, in **Results**.
 :::
+
+6e{{sup:( -t/6)}}-4
 
 This is the expression for the voltage drop in the capacitor after t=0.
 
@@ -1537,7 +1547,7 @@ s\only("vc")
 ```
 
 ::: only 9
-This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** in **Settings** and list `vc` in the box beside it.
+This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** — it sits under the analysis menus once TR is chosen — and list `vc` in the field it reveals.
 :::
 
 Then we run the simulation for the first interval, just as we did before, but
@@ -1575,13 +1585,11 @@ s\only("vc")
 ```
 
 ::: only 9
-This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** in **Settings** and list `vc` in the box beside it.
+This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** — it sits under the analysis menus once TR is chosen — and list `vc` in the field it reveals.
 :::
 
 Then we run the simulation for the second interval, just as we did before,
 but with the new capacitor and source values.
-
-4e{{sup:(-2t)}}-6
 
 ```sym 7
 s\tr("e,1,0,3:o,1,2,o:c,2,o,1/4,-2:r2,2,o,2:r1,2,0,1"):vc
@@ -1603,6 +1611,8 @@ Set **Analysis** to *TR — transient / time domain*.
 The answer you want is `vc`, in **Results**.
 :::
 
+4e{{sup:(-2t)}}-6
+
 :::
 
 ::: problem Bo2's Figure 5.38 (Impulse)
@@ -1615,7 +1625,8 @@ A, where δ(t) is the impulse function and I is a constant.
 :::
 
 As we mentioned before, impulse sources must be described using the δ(t)
-nomenclature. To save some typing time, you find it in the menu.
+nomenclature.{{v7,8| To save some typing time, you find it in the menu.}}{{v9|
+Typing `delta(t)` spells it without the Greek.}}
 
 ```sym 7
 s\tr("j,0,1,i*δ(t):c,1,0,c,0:r,1,0,r")
@@ -1930,7 +1941,8 @@ c,2,0,1/8,2
 
 { 4 e{{sup:-2t}}-2 e{{sup:-8t}} , 2 e{{sup:-8t}}-e{{sup:-2t}} }
 
-Notice that the use of the only tool saves approximately 10 seconds here.
+{{v7,8|Notice that the use of the only tool saves approximately 10 seconds
+here.}}
 
 :::
 
@@ -2006,10 +2018,6 @@ The answers you want are `vc` and `il`, in **Results**.
 These conditions are used in the TR analysis of the second interval,
 for t≥0.
 
-3e{{sup:-2t}}-e{{sup:-6t}}
-
-2e{{sup:-6t}}-2e{{sup:-2t}}
-
 ::: only 9
 The answers are `vc` = {{o:3*exp(-2*t) - exp(-6*t)}} and `il` =
 {{o:2*exp(-6*t) - 2*exp(-2*t)}}, both in **Results**.
@@ -2042,9 +2050,14 @@ il
 il
 ```
 
-Using `only` saves about 13 seconds, or about a third of the calculation
-time, because only about 8 seconds are used finding the inverse Laplace of
-the selected answers, instead of 21 seconds finding it for all the answers.
+3e{{sup:-2t}}-e{{sup:-6t}}
+
+2e{{sup:-6t}}-2e{{sup:-2t}}
+
+{{v7,8|Using `only` saves about 13 seconds, or about a third of the
+calculation time, because only about 8 seconds are used finding the inverse
+Laplace of the selected answers, instead of 21 seconds finding it for all the
+answers.}}
 
 :::
 
@@ -2124,10 +2137,6 @@ the circuit again from scratch. But out of laziness I preferred to copy/paste
 the descriptions from the DC simulations. To avoid renaming the nodes, I
 simulated the right switch as a short circuit between nodes 2 and 3.
 
-(-7/50)e{{sup:-3t}}cos(4t)-(1/50)e{{sup:-3t}}sin(4t)
-
-e{{sup:-3t}}cos(4t)-e{{sup:-3t}}sin(4t)
-
 ::: only 9
 `vc` comes back {{o:-(sin(4*t) + 7*cos(4*t))*exp(-3*t)/50}} and `il`
 {{o:(cos(4*t) - sin(4*t))*exp(-3*t)}}.
@@ -2159,7 +2168,12 @@ il
 il
 ```
 
-The TR simulation took 30 s in my calculator. These are the right answers.
+(-7/50)e{{sup:-3t}}cos(4t)-(1/50)e{{sup:-3t}}sin(4t)
+
+e{{sup:-3t}}cos(4t)-e{{sup:-3t}}sin(4t)
+
+{{v7,8|The TR simulation took 30 s in my calculator. }}These are the right
+answers.
 
 :::
 
@@ -2213,8 +2227,6 @@ r1,3,0,1
 { (3t+2)e{{sup:-2t}} , (1-3t)e{{sup:-2t}} }
 
 :::
-
-### 
 
 ### Is the textbook wrong?
 
@@ -2351,7 +2363,7 @@ solve(–16/(s+4)^2=–16*l/(l*s^2+8*l*s+8),l)
 ::: only 9
 That is what the **Solve** card is for — a system that is not a circuit:
 
-```field 9 Equation
+```field 9 Equation(s) to solve in terms of the results
 -16/(s+4)^2 = -16*l/(l*s^2+8*l*s+8)
 ```
 
@@ -2554,8 +2566,6 @@ c,3,0,1/8,0
 For the circuit in Bo2's Drill Exercise 6.7, find the voltage drop in the
 capacitor v(t) if the source has a value v{{sub:S}}(t) = 3 r(t).
 
-2e{{sup:-2t}}-(e{{sup:-8t}})/8+3t-15/8
-
 ```sym 7
 s\only("vc"):s\tr("e,1,0,3t:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):vc
 ```
@@ -2568,6 +2578,8 @@ r,1,2,5
 l,2,3,1/2,0
 c,3,0,1/8,0
 ```
+
+2e{{sup:-2t}}-(e{{sup:-8t}})/8+3t-15/8
 
 :::
 
@@ -2683,8 +2695,6 @@ o,2,o,o
 In the circuit above, change capacitor's value from 1/5 F to 25/16 F. Find
 v{{sub:o}}(t) if v{{sub:S}}(t) = 3 u(t).
 
--4e{{sup:-2t/5}}+e{{sup:-8t/5}}+3
-
 ```sym 7
 s\only("vo"):s\tr("e,3,0,3:r1,3,1,1:r2,1,2,1:
 ca,2,0,25/16,0:cb,1,o,1,0:o,2,o,o"):vo
@@ -2701,6 +2711,8 @@ ca,2,0,25/16,0
 cb,1,o,1,0
 o,2,o,o
 ```
+
+-4e{{sup:-2t/5}}+e{{sup:-8t/5}}+3
 
 :::
 
@@ -2799,8 +2811,8 @@ j,0,2,10*exp(-t)*sin(2*t+(30*pi/180))
 Set **Analysis** to *TR — transient / time domain*.
 :::
 
-Be patient. This took 78 seconds in my calculator, including over half a
-minute just to find the inverse Laplace of the two desired answers.
+{{v7,8|Be patient. This took 78 seconds in my calculator, including over half
+a minute just to find the inverse Laplace of the two desired answers.}}
 
 (53/17-20/17)e{{sup:-t}} cos(2t)+(-203/17-5/17)e{{sup:-t}} sin(2t)+(803/17+193/34)e{{sup:-t/2}}+(9/2-53)e{{sup:-t}}
 
@@ -2845,11 +2857,11 @@ steps:
 - Replace any dummy variable with the original source value, and convert the answers to the time domain.
 
 Second, when Symbulator solves a problem using the expert tool, it freezes
-this process halfway between steps 1 and 2, so that you can tinkle with the
+this process halfway between steps 1 and 2, so that you can tinker with the
 equations and unknowns before they are solved.
 
 ::: only 7,8
-In the problems below, you will see that, when we tinkle with the equations,
+In the problems below, you will see that, when we tinker with the equations,
 we have to do so in the frequency domain.
 :::
 ::: only 9
@@ -2868,7 +2880,7 @@ describing a signal, and there is nothing to transform.
 ::: problem Bo2's Drill Exercise 4.5 (Expert)
 
 For this circuit, we know that the capacitor’s initial condition is zero,
-that v{{sub:s}} is an unknown step source (e.g. of the form A *u(t)*, where A
+that v{{sub:s}} is an unknown step source (i.e. of the form A *u(t)*, where A
 is a constant value in volts) and that the voltage drop in the capacitor for
 t>0 is found to be 1-e^(-t/2). Find the voltage drop in the resistor, the
 current through the capacitor and the value of the source.
@@ -2878,8 +2890,8 @@ current through the capacitor and the value of the source.
 :::
 
 This problem is a match made in heaven for the **expert** tool, because we
-have one unknown value in the circuit (e.g. the value of the step source) and
-we have one known answer (e.g. the voltage drop in the capacitor.) So, the
+have one unknown value in the circuit (i.e. the value of the step source) and
+we have one known answer (i.e. the voltage drop in the capacitor.) So, the
 game plan here is to run this circuit through Symbulator’s expert mode, add
 one new equation and one new unknown, and then solve. First, let’s generate
 the new equation.
@@ -3280,18 +3292,8 @@ vl*il
 2e{{sup:-4t}}(e{{sup:2t}}-1)
 :::
 
-This is the end of the TR section of the book.
+This is the end of the TR section.
 
 :::
 
-::: only 9
-::: note Some of this narration still describes the calculator
-Every problem below carries a **Circuit Description** panel you can type
-straight into Symbulator 9, and the circuits and answers are identical
-across the versions. What has not all been rewritten is the narration
-between them: where it says to evaluate a name or press a key, do the
-version 9 equivalent — the results are already on screen, and
-{{ref:introduction}} lists the correspondences.
-:::
-:::
 :::

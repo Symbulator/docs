@@ -808,8 +808,8 @@ s\aa(–(ie0a+ieb0)/3)
 ```
 
 ::: only 9
-`-(ie0a+ieb0)/3` in the **Evaluate** card, with **Polar** switched on so
-the answer comes back as a magnitude and an angle.
+`-(ie0a+ieb0)/3` in **Mini-Tools** with *aa*, which takes an expression as
+readily as a name and answers with the magnitude and the angle.
 :::
 
 What I thought was: the current that I have coming out of the two sources in

@@ -81,23 +81,24 @@ aprl|load_=conj(zeq)
 
 It evaluates to the same answer.
 :::
-::: only 9
-Now, here's the cool part. Symbulator 9 carries no load expressions on the
-result — `th` returns `vth`, `ino`, `z` and `pmax`, and nothing else — but you
-do not have to build anything: the maximum average power is one of the four
-answers the tool already gives you, in `pmax`.
-
-::: only 9
-**Results** shows `pmax` = {{o:2.367}} W, alongside `vth`, `ino` and `zeq`.
-That is the power delivered when the load is the conjugate of the equivalent
-impedance, which is the whole point of the exercise — Symbulator has done the
-conjugating and the halving for you.
-:::
 ```out 7,8
 2.36742424242424
 ```
 
+::: only 7,8
 It is the same answer.
+:::
+
+::: only 9
+Now, here's the cool part. Symbulator 9 carries no load expressions on the
+result — the tool reports `vth`, `ino`, `zeq` and `pmax`, and nothing else —
+but you do not have to build anything: the maximum average power is one of the
+four answers it already gives you, in `pmax`.
+
+**Results** shows `pmax` = {{o:2.367}} W, alongside `vth`, `ino` and `zeq`.
+That is the power delivered when the load is the conjugate of the equivalent
+impedance, which is the whole point of the exercise — Symbulator has done the
+conjugating and the halving for you.
 :::
 :::
 :::
@@ -177,7 +178,7 @@ r3,2,0,4
 ```
 
 ::: only 9
-AC, with `omega` typed into the omega box, and **RMS phasors** ticked in
+AC, with `omega` typed into the ω box, and **RMS phasors** ticked in
 **Settings**.
 :::
 
@@ -348,7 +349,7 @@ The values are RMS, so {{v7,8|set `true→s\rms`}}{{v9|tick **RMS phasors** in
 true→s\rms:"e,1,0,165.:r,1,0,10.+[𝐢4.,8.-𝐢6.]"→cir:s\ac(cir,ω)
 ```
 ```sym 8
-true→s\rms:"e,1,0,165.:r,1,0,10.+[𝐢4.,8.–6.𝐢]"→cir:s\ac(cir,ω)
+true→userms:"e,1,0,165.:r,1,0,10.+[𝐢4.,8.–6.𝐢]"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
 e,1,0,165
@@ -401,7 +402,7 @@ Three impedances in series: the outgoing line, the load, and the return path.
 true→s\rms:"evs,1,0,240.:rl1,1,2,.1+𝐢:rl,2,3,100+𝐢:rl2,3,0,.1+𝐢"→cir:s\ac(cir,ω):prl
 ```
 ```sym 8
-true→s\rms:"evs,1,0,240.:rl1,1,2,.1+𝐢:rl,2,3,100+𝐢:rl2,3,0,.1+𝐢"→cir:s\ac(cir,ω):prl
+true→userms:"evs,1,0,240.:rl1,1,2,.1+𝐢:rl,2,3,100+𝐢:rl2,3,0,.1+𝐢"→cir:s\ac(cir,ω):prl
 ```
 ```field 9 Circuit Description
 evs,1,0,240
@@ -439,7 +440,7 @@ frequency at all, so leave omega as anything.
 true→s\rms:"e,1,0,240:r1,1,0,80-𝐢50:r2,1,0,120+𝐢70:r3,1,0,60+𝐢0"→cir:s\ac(cir,ω)
 ```
 ```sym 8
-true→s\rms:"e,1,0,240:r1,1,0,80–𝐢50:r2,1,0,120+𝐢70:r3,1,0,60+𝐢0"→cir:s\ac(cir,ω)
+true→userms:"e,1,0,240:r1,1,0,80–𝐢50:r2,1,0,120+𝐢70:r3,1,0,60+𝐢0"→cir:s\ac(cir,ω)
 ```
 ```field 9 Circuit Description
 e,1,0,240
@@ -456,9 +457,19 @@ consumes: {{v7,8|`-se`}}{{v9|`-se` in **Evaluate**}} gives
 with `ve` and `-ie`}}, is {{o:0.99805}} leading.
 
 **(c)** This one needs a frequency, because it needs a capacitor. Add one in
-parallel with a symbolic value, and run at the stated 50 Hz — which the omega
-box takes as an expression:
+parallel with a symbolic value (let's say x), and run at the stated 50 Hz —
+(2π)(50) in rad/s.
 
+```sym 7
+"e,1,0,240:r1,1,0,80-𝐢50:r2,1,0,120+𝐢70:r3,1,0,60+𝐢0:c,1,0,x"→cir
+s\ac(cir,2π50.)
+solve(s\pf(se)=1.,x)
+```
+```sym 8
+"e,1,0,240:r1,1,0,80-𝐢50:r2,1,0,120+𝐢70:r3,1,0,60+𝐢0:c,1,0,x"→cir
+s\ac(cir,2π50.)
+solve(s\pf(se)=1.,x)
+```
 ```field 9 Circuit Description
 e,1,0,240
 r1,1,0,80-50j
@@ -468,8 +479,9 @@ c,1,0,x
 ```
 
 ::: only 9
-Put `2*pi*50` in the **omega** box. Then ask the **Solve** card for the value
-of `x` that leaves no reactive power:
+Put `2*pi*50` in the **ω — angular frequency** box — it takes an expression.
+Then ask the **Solve** card for the value of `x` that leaves no reactive
+power:
 
 ```field 9 Equation(s) to solve in terms of the results
 im(se) = 0
@@ -479,7 +491,7 @@ im(se) = 0
 x
 ```
 
-Tick **real only**.
+Tick **real solutions only**.
 :::
 
 ```out 7,8
@@ -497,6 +509,16 @@ capacitor can bring it to unity. What it needs is the opposite.
 
 Try an inductor instead:
 
+```sym 7
+"e,1,0,240:r1,1,0,80-𝐢50:r2,1,0,120+𝐢70:r3,1,0,60+𝐢0:l,1,0,x"→cir
+s\ac(cir,2π50.)
+solve(s\pf(se)=1.,x)
+```
+```sym 8
+"e,1,0,240:r1,1,0,80-𝐢50:r2,1,0,120+𝐢70:r3,1,0,60+𝐢0:l,1,0,x"→cir
+s\ac(cir,2π50.)
+solve(s\pf(se)=1.,x)
+```
 ```field 9 Circuit Description
 e,1,0,240
 r1,1,0,80-50j

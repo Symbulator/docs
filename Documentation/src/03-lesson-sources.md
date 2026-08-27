@@ -408,6 +408,16 @@ polarity, and you are off to the races.
 
 ::: practice
 
+::: only 9
+::: note Some of this narration still describes the calculator
+Every problem below carries a **Circuit Description** panel you can type
+straight into Symbulator 9, and the circuits and answers are identical
+across the versions. What has not all been rewritten is the narration
+between them: where it says to evaluate a name or press a key, do the
+version 9 equivalent — the results are already on screen.
+:::
+:::
+
 
 ### Circuits with E, J and R
 
@@ -419,11 +429,10 @@ Determine the values of V{{sub:S}}, I{{sub:1}} and I{{sub:2}}.
 
 :::
 
-In the line below, we concatenate three commands using colons. The first
-stores the circuit's definition in a variable. The second asks Symbulator to
-run a DC simulation of the circuit described in that variable. The third asks
-the calculator to provide us the values of three variables that – given the
-circuit description – answer the questions.
+{{v7,8|In the line below, we concatenate two commands using a colon. The first
+asks Symbulator to run a DC simulation of the circuit described in the string.
+The second asks the calculator for the values of three variables that – given
+the circuit description – answer the questions.}}
 
 ```sym 7
 s\dc("j,0,1,7:e,1,0,12:r1,1,0,4"):
@@ -443,9 +452,9 @@ r1,1,0,4
 The answers you want are `v1`, `ie` and `ir1`, in **Results**.
 :::
 
-The calculator returns **{12,4,3}**, meaning V{{sub:S}} is 12V, I{{sub:1}} is
-4A and I{{sub:2}} is 3A. These are the correct answers. We will continue to
-use the single line instruction as we move on.
+{{v7,8|The calculator returns **{12,4,3}**, meaning}}{{v9|The answers show}} V{{sub:S}} is 12V, I{{sub:1}} is
+4A and I{{sub:2}} is 3A. These are the correct answers. {{v7,8|We will continue
+to use the single line instruction as we move on.}}
 
 :::
 
@@ -588,7 +597,7 @@ rx,3,4,rx
 ```
 
 ::: only 9
-Set **Analysis** to *DC — direct current*. This one needs **Enable Expert Mode** ticked in **Settings**; the equations and unknowns go in the boxes it reveals.
+Set **Analysis** to *DC — direct current*. This one needs **Enable Expert Mode** ticked in the **Expert Mode** box; the equations and unknowns go in the fields it reveals.
 
 The answers you want are `ir1` and `vrx`, in **Results**.
 :::
@@ -761,7 +770,7 @@ j,0,1,1
 ```
 
 The answer, **{20.,-.667,1.67}**, tells us that V{{sub:1}} is 20V, I{{sub:1}}
-is -.667A and I{{sub:2}} is 1.67V.
+is -.667A and I{{sub:2}} is 1.67 A.
 
 :::
 
@@ -802,7 +811,7 @@ Answer: **{3.33,-.667}**. This is correct.
 
 ::: problem B11's Example 8.20
 
-Determine V{{sub:1}}, V{{sub:2}}, , I{{sub:1}}, I{{sub:2}} and I{{sub:3}}. My
+Determine V{{sub:1}}, V{{sub:2}}, I{{sub:1}}, I{{sub:2}} and I{{sub:3}}. My
 solution is found below the circuit schematic:
 
 ::: figure assets/practice/b11s-example-8-20-12.jpg
@@ -904,7 +913,7 @@ by voltage drop:
 Both routes go in the **Solve** card, which solves against the answers the
 circuit just produced:
 
-```field 9 Equation
+```field 9 Equation(s) to solve in terms of the results
 va-vb = 12
 ```
 
@@ -919,7 +928,7 @@ solve(va-vb=12.,i4)       …or by current flow…       solve(ir4+ij=0.2,i4)
 solve(va-vb=12.,i4)       …or by current flow…       solve(ir4+ij=0.2,i4)
 ```
 
-The result is the same: i4 = **.15** A The required current source is .15A
+The result is the same: i4 = **.15** A. The required current source is .15A
 from **a** to **b**.
 
 :::
@@ -1023,7 +1032,7 @@ j,0,3,ix
 ```
 
 ::: only 9
-Set **Analysis** to *DC — direct current*. This one needs **Enable Expert Mode** ticked in **Settings**; the equations and unknowns go in the boxes it reveals.
+Set **Analysis** to *DC — direct current*. This one needs **Enable Expert Mode** ticked in the **Expert Mode** box; the equations and unknowns go in the fields it reveals.
 
 The answers you want are `ix` and `v3`, in **Results**.
 :::
@@ -1126,7 +1135,7 @@ r2,1,0,5
 The answers you want are `ir1`, `v1` and `ir2`, in **Results**.
 :::
 
-The answer, **{-5/26,-15/26,-3/26}, **is correct: I{{sub:1}}=-5/26,
+The answer, **{-5/26,-15/26,-3/26}**, is correct: I{{sub:1}}=-5/26,
 I{{sub:2}}=-3/26 and v=-15/26.
 
 :::
@@ -1232,8 +1241,7 @@ The answer, **{10,-5}**, is correct: v{{sub:x}} =10 and v{{sub:o}} =-5.
 
 :::
 
-Determine v{{sub:1}}, v{{sub:2}} and i. My solution below. The simulation
-took 14 seconds.
+Determine v{{sub:1}}, v{{sub:2}} and i. My solution below.{{v7,8| The simulation took 14 seconds.}}
 
 ```sym 7
 s\dc("ei,1,0,2:r1,1,2,1/3:ed,3,2,4*ir1:r2,3,0,1/5"):{ir1,vr1,vr2}
@@ -1651,7 +1659,7 @@ r4,1,2,4
 ```
 
 ::: only 9
-Set **Analysis** to *DC — direct current*. This one needs **Enable Expert Mode** ticked in **Settings**; the equations and unknowns go in the boxes it reveals.
+Set **Analysis** to *DC — direct current*. This one needs **Enable Expert Mode** ticked in the **Expert Mode** box; the equations and unknowns go in the fields it reveals.
 
 The answers you want are `ir1`, `vjd` and `vs`, in **Results**.
 
@@ -1716,7 +1724,7 @@ Find v{{sub:O}} and i{{sub:O}} in terms of i{{sub:S}}.
 
 :::
 
-This is my solution. The simulation took 14 seconds.
+This is my solution.{{v7,8| The simulation took 14 seconds.}}
 
 ```sym 7
 s\dc("ji,0,x,is:r1,x,0,1'k:r2,x,o,2'k:jd,0,o,vx/500:ro,o,0,500"):
@@ -1747,13 +1755,13 @@ The answer, **{1000\*is,2\*is}**, is correct: *v*{{sub:O}}*=1000*
 
 Find v{{sub:O}} and the equivalent resistance R{{sub:IN}}, in terms of
 v{{sub:S}}, when R{{sub:1}} is 50, R{{sub:2}} is 1'k, R{{sub:3}} is 100,
-R{{sub:4}} is 5'k and g is 100mA (e.g. 100'm).
+R{{sub:4}} is 5'k and g is 100mA (i.e. 100'm).
 
 ::: figure assets/practice/tr5s-example-4-4-37.jpg
 
 :::
 
-This is my solution. The simulation took 18 seconds.
+This is my solution.{{v7,8| The simulation took 18 seconds.}}
 
 ```sym 7
 s\dc("e,1,0,vs:r1,1,2,50:r2,2,o,1'k:r3,o,0,100:
@@ -1837,7 +1845,7 @@ Find *v*{{sub:O}}.
 :::
 
 I did not label the nodes, so you can practice.
-{{v7,8|Remember not using **rc**: it is reserved.}}
+{{v7,8|Remember not to use **rc**: it is reserved.}}
 
 ```sym 7
 s\dc("ei,1,0,vs:rs,1,2,rs:rx,2,0,rp:ed,0,3,r*irx:rrc,3,o,rrc:rl,o,0,rl"):vo
@@ -1903,7 +1911,7 @@ rl,2,0,rl
 The answer you want is `v2`, in **Results**.
 :::
 
-The simulation took 25 seconds. The answer I got is shown left (the
+{{v7,8|The simulation took 25 seconds. }}The answer I got is shown left (the
 textbook's right.)
 
 ::: figure assets/practice/bo2s-example-1-11-symbolic-43.jpg
@@ -1918,7 +1926,7 @@ textbook's right.)
 
 ::: problem TR5's Example 4-7 (Symbolic)
 
-Find R{{sub:IN}}, e.g. the resistance as seen by the current source. My
+Find R{{sub:IN}}, i.e. the resistance as seen by the current source. My
 solution below.
 
 ::: figure assets/practice/tr5-example-4-7-symbolic-45.jpg
@@ -1996,12 +2004,6 @@ answer.
 
 :::
 
-The last four problems show Symbulator at its DC best. I don't know of any
-calculator-based program that was able to provide this kind of purely
-symbolic answer to a circuit simulator back in 1999 when I made Symbulator.
-As a matter of fact, even today – a quarter of a century later - I know of no
-other calculator-based simulator that can do this.
-
 :::
 
 ::: problem TR5's Example 4.5 (Symbolic)
@@ -2012,8 +2014,8 @@ Find i{{sub:B}}.
 
 :::
 
-My solution is shown below. Be patient. This simulation takes more than one
-minute.
+My solution is shown below.{{v7,8| Be patient. This simulation takes more than
+one minute.}}
 
 ```sym 7
 s\dc("e1,1,0,vcc:rb,1,b,rb:e2,e,b,vγ:re,e,0,re:rrc,1,c,rrc:j,c,e,β*irb"):irb
@@ -2046,16 +2048,10 @@ Compare my answer, left, to the book's answer, right.
 
 :::
 
-###
+The last four problems show Symbulator at its DC best. I don't know of any
+calculator-based program that was able to provide this kind of purely
+symbolic answer to a circuit simulator back in 1999 when I made Symbulator.
+As a matter of fact, even today – a quarter of a century later - I know of no
+other calculator-based simulator that can do this.
 
-::: only 9
-::: note Some of this narration still describes the calculator
-Every problem below carries a **Circuit Description** panel you can type
-straight into Symbulator 9, and the circuits and answers are identical
-across the versions. What has not all been rewritten is the narration
-between them: where it says to evaluate a name or press a key, do the
-version 9 equivalent — the results are already on screen, and
-{{ref:introduction}} lists the correspondences.
-:::
-:::
 :::

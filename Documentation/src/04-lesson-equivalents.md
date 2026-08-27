@@ -302,12 +302,6 @@ voltage, then a second one for the Norton current and the equivalent
 resistance. In this case, VTH = 0.88 V, INO = 0.05 A and REQ = 17.6 Ω.
 :::
 
-::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
-*Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in
-the second — the pair of terminals you are looking into. The answers are
-`vth` = 0.88 V, `ino` = 0.05 A and `req` = 17.6 Ω.
-:::
 {{v7,8|At this point, when you press ENTER, Symbulator will ask whether you
 are planning to run a problem with a load connected to this equivalent
 circuit. For now, say No. After the script is done, the following variables
@@ -575,6 +569,16 @@ it confusing to use, just don't use it.
 
 ::: practice
 
+::: only 9
+::: note Some of this narration still describes the calculator
+Every problem below carries a **Circuit Description** panel you can type
+straight into Symbulator 9, and the circuits and answers are identical
+across the versions. What has not all been rewritten is the narration
+between them: where it says to evaluate a name or press a key, do the
+version 9 equivalent — the results are already on screen.
+:::
+:::
+
 
 ### Practice problems for resistive circuits
 
@@ -582,8 +586,8 @@ it confusing to use, just don't use it.
 
 Calculate the equivalent resistance of the circuit shown below.
 
-Let me solve this problem step by step, since it is the first time you see
-the **er** script.
+You saw this circuit solved step by step in the walkthrough above; here it is
+again, in the compact form the rest of these problems use.
 
 ::: figure assets/practice/b11s-example-8-29-1.jpg
 
@@ -614,7 +618,7 @@ evaluate `approx(req)` The value is **2.89** Ω.
 :::
 ::: only 9
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
-*Impedance*, with nodes **0** and **c**, in DC. The answer is `req` =
+*Resistance / impedance*, with nodes **0** and **c**, in DC. The answer is `req` =
 {{o:2.889}} Ω.
 :::
 
@@ -651,7 +655,7 @@ Choose DC. When *Done*, use `approx(req)` to find the equivalent resistance
 is **3.27** Ω.
 :::
 ::: only 9
-*Find equivalent*, *Impedance*, nodes **a** and **c**, in DC: `req` is
+*Find equivalent*, *Resistance / impedance*, nodes **a** and **c**, in DC: `req` is
 {{o:3.273}} Ω.
 :::
 
@@ -787,7 +791,7 @@ Choose DC. Wait for *Done*. Evaluate `req` to find the equivalent resistance
 is **2** Ω.
 :::
 ::: only 9
-*Find equivalent*, *Impedance*, nodes **a** and **0**, in DC: `req` is
+*Find equivalent*, *Resistance / impedance*, nodes **a** and **0**, in DC: `req` is
 {{o:2}} Ω.
 :::
 
@@ -819,7 +823,7 @@ Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 result of the dependent sources.
 :::
 ::: only 9
-*Find equivalent*, *Impedance*, nodes **a** and **0**, in DC: `req` is
+*Find equivalent*, *Resistance / impedance*, nodes **a** and **0**, in DC: `req` is
 {{o:-4}} Ω. It may be surprising to have a negative resistance. This is
 the result of the dependent sources.
 :::
@@ -852,7 +856,7 @@ Choose DC. Wait for *Done*. Evaluating `req` approximately, we find the
 equivalent resistance is **-7.5** Ω.
 :::
 ::: only 9
-*Find equivalent*, *Impedance*, nodes **a** and **0**, in DC: `req` is
+*Find equivalent*, *Resistance / impedance*, nodes **a** and **0**, in DC: `req` is
 {{o:-7.500}} Ω. The source is called `e` rather than `e` here — version 9
 keeps `e` for Euler's number.
 :::
@@ -885,7 +889,7 @@ Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 **0.6** Ω.
 :::
 ::: only 9
-*Find equivalent*, *Impedance*, nodes **1** and **0**, in DC: `req` is
+*Find equivalent*, *Resistance / impedance*, nodes **1** and **0**, in DC: `req` is
 {{o:0.6000}} Ω. Both the source and the short are renamed, for the same
 reason: version 9 reserves `e` and `s`.
 :::
@@ -918,7 +922,7 @@ Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 **20** Ω.
 :::
 ::: only 9
-*Find equivalent*, *Impedance*, nodes **3** and **0**, in DC: `req` is
+*Find equivalent*, *Resistance / impedance*, nodes **3** and **0**, in DC: `req` is
 {{o:20}} Ω.
 :::
 
@@ -949,7 +953,7 @@ Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 **3** Ω.
 :::
 ::: only 9
-*Find equivalent*, *Impedance*, nodes **a** and **0**, in DC: `req` is
+*Find equivalent*, *Resistance / impedance*, nodes **a** and **0**, in DC: `req` is
 {{o:3}} Ω.
 :::
 
@@ -1690,8 +1694,8 @@ jd,a,0,3*x*ir1
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
 :::
 
-Exploring the answers, we see that the denominator of the expression for`
-req,` (x-1), given that x=1), results in a division by zero.
+Exploring the answers, we see that the denominator of the expression for
+`req`, (x-1), results in a division by zero at x = 1.
 
 ::: only 7,8
 Via `1→x:{ino,req} `we find that I{{sub:NO}} = -3A, and R{{sub:EQ}} is
@@ -1711,7 +1715,7 @@ infinite, so R{{sub:EQ}} is undefined at that value.
 
 :::
 
-First let's find the input resistance, R{{sub:IN}}, e.g. the resistance as
+First let's find the input resistance, R{{sub:IN}}, i.e. the resistance as
 seen by the v{{sub:S}} source. We use **μ** for the constant in the dependent
 source.
 
@@ -1861,7 +1865,7 @@ vth/(req+36)
 ```
 :::
 
-Select DC when asked. Answer Y when offered the load formulas.
+Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 The answer, **{30.,4.,3.,1.5,.75}**, is correct.
 
@@ -1906,10 +1910,10 @@ vth/(req+1/4)
 ```
 :::
 
-Select DC when asked. Answer Y when offered the load formulas.
+Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 The book gives the answers as fractions. We get it right:
-**{21/8,4/9**,**21/50,42/25}. **
+**{21/8, 4/9, 21/50, 42/25}**. 
 
 :::
 
@@ -1952,9 +1956,9 @@ vth/(req+5000)
 ```
 :::
 
-Select DC when asked. Answer Y when offered the load formulas.
+Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
-The answer, **{.0075,1500.**,**.0075,.00321,.00173}**, is correct.
+The answer, **{.0075, 1500., .0075, .00321, .00173}**, is correct.
 
 :::
 
@@ -1999,7 +2003,7 @@ vth*1/(req+1)
 ```
 :::
 
-Select DC when asked. Answer Y when offered the load formulas.
+Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 The answer, **{-9/7,7/2,-1}**, is correct.
 
@@ -2047,7 +2051,7 @@ vth/(req+192)
 ```
 :::
 
-Select DC when asked. Answer Y when offered the load formulas.
+Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 The answer, **{28.8,96.,.1}**, is correct.
 
@@ -2093,7 +2097,7 @@ vth*6/(req+6.)
 ```
 :::
 
-Select DC when asked. Answer Y when offered the load formulas.
+Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 The answer we find, **{30,2,18,22.5}**, is correct.
 
@@ -2138,7 +2142,7 @@ vth*5/(req+5)
 ```
 :::
 
-{{v7,8|Select DC when asked. Answer Y when offered the load formulas.}}
+Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 The answer, **{6,3,3.75}**, is correct.
 
@@ -2185,7 +2189,7 @@ ino*req/(req+1e5)
 One line at a time, as before.
 :::
 
-{{v7,8|Select DC when asked. Answer Y when offered the load formulas.}}
+Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 The answer, **{.001,42000,.001,.000808,.000457,.000296}**, is correct.
 
@@ -2202,7 +2206,7 @@ transferred.
 
 :::
 
-R{{sub:L}} for maximum transfer is **rEq**. The maximum power is in **pMax**.
+R{{sub:L}} for maximum transfer is `req`. The maximum power is in `pmax`.
 My solution below:
 
 ```sym 7
@@ -2230,7 +2234,7 @@ The answers you want are `req` and `pmax`, in **Results**.
 The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
 :::
 
-Select DC. You can answer N when asked about the load equations. The answer,
+Choose DC.{{v7,8| You can answer N when asked about the load equations.}} The answer,
 **{9.,13.44}**, is correct: the maximum transfer of power occurs when the
 load is 9Ω. At this point, the power transferred is 13.44W. Now let's solve
 another one.
@@ -2270,8 +2274,8 @@ The answers you want are `req` and `pmax`, in **Results**.
 The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
 :::
 
-Select DC. You can answer N. The logic of this problem is identical to the
-previous one. The answer is **{4.22,2.901}**.
+Choose DC.{{v7,8| You can answer N.}} The logic of this problem is identical to
+the previous one. The answer is **{4.22,2.901}**.
 
 :::
 
@@ -2313,19 +2317,19 @@ vth^2*8200./(req+8200.)^2
 ```
 :::
 
-Select DC and answer Y about the load formulas. The answer we obtain,
-**{40000,1,.93,.57}**, is correct. Let's deconstruct it.
+Choose DC.{{v7,8| Answer Y about the load formulas.}} The answer we obtain,
+**{40000, 1, .93, .57}**, is correct. Let's deconstruct it.
 
 Part (a) is answered by the first two values: a 40'k Ω resistor as load would
 receive 1W power. Since this is the maximum – this is the most that any load
 could receive ever.
 
-Parts (b) is answered by the third value. Making use of the variable **prL**,
-which contains the power delivered by the circuit equivalent to the load, as
-a function of the load value **L**, we find that a load of 68'kΩ receives
+Part (b) is answered by the third value. {{v7,8|Making use of the variable
+**prL**, which contains the power delivered by the circuit equivalent to the
+load, as a function of the load value **L**, we}}{{v9|We}} find that a load of 68'kΩ receives
 .93W, which is less than the maximum.
 
-Parts (c) is answered in similar manner by the fourth value. A load of 8.2'kΩ
+Part (c) is answered in similar manner by the fourth value. A load of 8.2'kΩ
 receives .57W, which is less than the maximum. Any resistance other than 40'k
 gets less power.
 
@@ -2364,19 +2368,9 @@ The answers you want are `req` and `pmax`, in **Results**.
 The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
 :::
 
-Select DC. You can answer N. Answer is **{15.,273.07}. **Let's now see one
-that is a little different.
+Choose DC.{{v7,8| You can answer N.}} The answer is **{15., 273.07}**. Let's now
+see one that is a little different.
 
 :::
 
-::: only 9
-::: note Some of this narration still describes the calculator
-Every problem below carries a **Circuit Description** panel you can type
-straight into Symbulator 9, and the circuits and answers are identical
-across the versions. What has not all been rewritten is the narration
-between them: where it says to evaluate a name or press a key, do the
-version 9 equivalent — the results are already on screen, and
-{{ref:introduction}} lists the correspondences.
-:::
-:::
 :::

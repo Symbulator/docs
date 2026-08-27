@@ -189,7 +189,7 @@ c,2,0,.1
 ```
 
 ::: only 9
-Choose *AC — alternating current*, and put **4** in the **omega** box that
+Choose *AC — alternating current*, and put **4** in the **ω — angular frequency** box that
 appears beside it.
 :::
 
@@ -284,7 +284,7 @@ l,2,0,.2
 The source is given in polar form, and version 9 reads it as written —
 magnitude, the angle sign, then the angle in degrees.
 
-Then AC, with **10** for omega. **Mini-Tools** with *aa* reads
+Then AC, with **10** for ω. **Mini-Tools** with *aa* reads
 `ir1` as {{o:4.472}}∠{{o:3.43}}° and `vl` as {{o:8.944}}∠{{o:93.43}}°.
 Both are correct.
 :::
@@ -323,7 +323,7 @@ r2,4,0,8
 
 ::: only 9
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
-*Impedance*, with nodes **1** and **0**, in AC at omega **50**. The answer
+*Resistance / impedance*, with nodes **1** and **0**, in AC at ω **50**. The answer
 is called `zeq`.
 :::
 
@@ -377,7 +377,7 @@ l,3,0,20'm
 ```
 
 ::: only 9
-AC, with **Angular frequency** set to **200**.
+AC, with **ω — angular frequency** set to **200**.
 :::
 
 ::: only 7
@@ -554,7 +554,7 @@ r14,1,4,-4j
 
 ::: only 9
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
-*Impedance*, with nodes **1** and **0**, in AC. The answer is called `zeq`.
+*Resistance / impedance*, with nodes **1** and **0**, in AC. The answer is called `zeq`.
 :::
 
 ```out
@@ -608,7 +608,7 @@ l2,3,0,.5
 ```
 
 ::: only 9
-AC, with **Angular frequency** set to **4**.
+AC, with **ω — angular frequency** set to **4**.
 :::
 
 ```sym 7
@@ -658,7 +658,7 @@ e,3,0,3*vrx
 ```
 
 ::: only 9
-AC, with **Angular frequency** set to **2**. The source had to be renamed `e`,
+AC, with **ω — angular frequency** set to **2**. The source had to be renamed `e`,
 for the reason given under Problem 9.35.
 :::
 
@@ -714,7 +714,7 @@ ro,3,0,2'k
 ```
 
 ::: only 9
-AC, with **Angular frequency** set to **1000**.
+AC, with **ω — angular frequency** set to **1000**.
 :::
 
 ```sym 7
@@ -823,8 +823,8 @@ l,2,0,5'm
 ```
 
 ::: only 9
-*Find equivalent*, *Impedance*, nodes **1** and **0**, AC. The problem gives
-2000 Hz and the omega box wants radians per second, so type `2*pi*2e3`
+*Find equivalent*, *Resistance / impedance*, nodes **1** and **0**, AC. The problem gives
+2000 Hz and the ω box wants radians per second, so type `2*pi*2e3`
 straight into it — it takes an expression, not only a number.
 :::
 
@@ -877,7 +877,7 @@ im(zeq) = 0
 c
 ```
 
-Tick **real only** before running it. Without it the answer comes back
+Tick **real solutions only** before running it. Without it the answer comes back
 carrying an `im(c)` term, because nothing has told Symbulator that a
 capacitance is a real number.
 :::
@@ -903,11 +903,11 @@ r1,1,2,10
 l,2,0,5'm
 ```
 
-*Find equivalent*, *Impedance*, nodes **1** and **0**, in AC at omega
+*Find equivalent*, *Resistance / impedance*, nodes **1** and **0**, in AC at ω
 **2000**. That gives `zeq` = {{o:500j/(-c + 25 + 25j)}}, and the condition
 goes to the **Solve** card:
 
-```field 9 Equation
+```field 9 Equation(s) to solve in terms of the results
 im(500j/(-c + 25 + 25j)) = 0
 ```
 
@@ -959,7 +959,7 @@ o,0,2,o
 ```
 
 ::: only 9
-The omega box takes a name as readily as a number: type `omega` into it and
+The ω box takes a name as readily as a number: type `omega` into it and
 the answers come back as functions of it.
 :::
 

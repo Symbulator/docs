@@ -259,11 +259,11 @@ put the condition to the calculator's **Numeric Solver** (APPS, then 9), or to
 :::
 ::: only 9
 There is no dedicated tool, and none is needed: solve the circuit in AC with
-`w` in the **omega** box, then put the condition to the **Solve** card.
+`w` in the **ω — angular frequency** box, then put the condition to the **Solve** card.
 
 Two things make it work, and both are easy to leave out:
 
-- **Tick *real only*.** Solving `im(ze) = 0` over the complex field returns
+- **Tick *real solutions only*.** Solving `im(ze) = 0` over the complex field returns
   answers written in terms of `re(w)` and `im(w)` rather than `w` — useless.
   Declaring the unknown real is what makes it solvable.
 - **Add `w > 0` as a condition.** The algebra gives ± the frequency, and only
@@ -330,7 +330,7 @@ Set up for the upper bandwidth frequency
 ω{{sub:2}} is 51010 rad/sec.
 :::
 ::: only 9
-Put `w` in the **omega** box and solve in AC. Then, in the **Solve** card:
+Put `w` in the ω box and solve in AC. Then, in the **Solve** card:
 
 ```field 9 Equation(s) to solve in terms of the results
 im(ze) = 0
@@ -344,7 +344,7 @@ w
 w>0
 ```
 
-with **real only** ticked. It gives ω{{sub:0}} = {{o:50000}} rad/s.
+with **real solutions only** ticked. It gives ω{{sub:0}} = {{o:50000}} rad/s.
 
 The bandwidth frequencies are the half-power points, where the impedance
 magnitude is √2 times its resistance. Same circuit, different equation:
@@ -410,7 +410,7 @@ example's equation and change the bounds:
 im(ie) = 0
 ```
 
-with `w>0` and **real only**, giving ω{{sub:0}} = {{o:25000}} rad/s.
+with `w>0` and **real solutions only**, giving ω{{sub:0}} = {{o:25000}} rad/s.
 
 Version 9 solves this symbolically rather than by searching, so the sharpness
 of the peak costs it nothing — but the alternative equation is worth knowing
@@ -451,7 +451,7 @@ nSolve(imag(v1)=0,ω)|ω>0
 im(v1) = 0
 ```
 
-with `w>0` and **real only**.
+with `w>0` and **real solutions only**.
 :::
 
 ω{{sub:0}} is {{o:2}} rad/sec. Correct.
