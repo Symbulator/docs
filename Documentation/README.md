@@ -14,6 +14,28 @@ See `SPEC.md` for the markup.
   Skip it and `--web` still works.
 - PHP is *not* needed to build. It runs on the server, and cPanel already has it.
 
+
+## Deploying
+
+    cd "C:\Users\perez\Claude Code"
+    py deploy_symbulator.py learn
+
+Since 27 Aug 2026 this is how the site moves. It uploads only what changed
+out of `build/web/`, over SSH, and verifies over HTTPS afterwards — by hash
+for the assets, by content for the pages PHP renders. `--dry-run` first if
+you want to see what it would send.
+
+**Run `build.py` before deploying.** `build/web/` is generated; deploying
+without rebuilding publishes whatever was last built.
+
+The three PDFs are large (~27 MB each) and rarely change, so most deploys
+move only `content/` and `assets/`. Do not let that become an assumption on
+a deploy that touched `index.php` or `.htaccess`.
+
+The ZIPs beside this file — `learn_symbulator_com.zip`,
+`symbulator_com_landing.zip` — are how the site moved *before* that date.
+They are history and are now stale; do not deploy from them.
+
 ## Build
 
     python3 build.py              # everything
@@ -23,7 +45,7 @@ See `SPEC.md` for the markup.
 
 Output:
 
-    build/web/      upload this whole folder to the server
+    build/web/      what a `learn` deploy uploads (see below)
                     (including content/v*/search.json -- see below)
     build/pdf/      symbulator-v7.pdf, -v8.pdf, -v9.pdf
     build/tex/      the generated LaTeX, kept for debugging
@@ -39,12 +61,19 @@ Rebuilds the site the moment you save a file in `src/`, and refreshes
 you go. Add `--pdf` if you also want the PDFs rebuilt, though that is slow
 enough that you probably only want it before publishing.
 
-## Deploy
+## How one upload serves three versions
 
-Copy `build/web/` to the docs folder in cPanel and drop the three PDFs in
-beside `index.php`. That is the whole deployment: one upload serves all three
-versions, and `index.php` picks the right content from `content/v7`, `v8` or
-`v9` according to `?v=`. The bundled `.htaccess` turns that into `/7/lesson-dc`.
+`index.php` picks the right content from `content/v7`, `v8` or `v9` according
+to `?v=`, and the bundled `.htaccess` turns that into `/7/lesson-dc`. So a
+deploy is one folder, not three. The three PDFs sit beside `index.php` and are
+named `symbulator-v7.pdf`, `-v8`, `-v9` — the ribbon's **Download the PDF**
+button links to them by name and is version-aware.
+
+`.htaccess` is a dotfile, and file managers hide dotfiles by default. If it
+never arrives, `https://learn.symbulator.com/9/lesson-dc` 404s while
+`?v=9&p=lesson-dc` still works — so the home page looks fine and every pretty
+URL is broken. `deploy_symbulator.py` sends it like any other file, which is
+one reason to prefer it over a file manager.
 
 ## The sidebar search
 
