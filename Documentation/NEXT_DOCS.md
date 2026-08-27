@@ -73,7 +73,7 @@ fixing, in rough order of how badly it reads:
   workaround does not work.** Two places in `src/06-lesson-transient.md` say
   "Here is how we find it:" and then show a `sym 7`/`sym 8` fence using the
   calculator's `|` operator, so a version 9 reader is shown the promise and
-  nothing else. **Unblocked, and waiting on a deploy.** #95 and #96 in
+  nothing else. **Written, and live since 27 Aug 2026.** #95 and #96 in
   `Symbulator/repos/local/NEXT.md` were built on 26 Aug 2026: `t = to` now
   works in the Solve card, and **Evaluate** has a *Conditions* box that says
   `vc|t=to` directly. Neither is live yet, so writing it up now would
@@ -253,7 +253,7 @@ The app-side findings from the same pass -- #105, #107, #110, #112 and
 
 ---
 
-## #98 — Lesson 1 says version 9 refuses a bare `e`, and it does not
+## #98 — Lesson 1 says version 9 refuses a bare `e`, and it does not — fixed
 
 `src/01-lesson-dc.md:471`, in an `only 9` note:
 
@@ -270,18 +270,18 @@ The "No reserved names" tip 200 lines earlier is correct and says the
 opposite: two names are refused, `s` and `eturn`, and everything else
 including `e` and `rc` is fine. That matches the app exactly.
 
-**Suggested fix:** delete the note at :471.
+**Fixed** (deleted): the note at 01-lesson-dc.md:471 is gone.
 
 ---
 
-## #99 — Two answer names in Lesson 1 survived the `e1` → `e` rename
+## #99 — Two answer names in Lesson 1 survived the `e1` → `e` rename — fixed
 
 `src/01-lesson-dc.md:822` (B11's Example 6.13) and `:1005` (B11's Example
 6.15). Both read `{{v9|`re1` is}}` where the version 9 circuit names its
 source `e`, so the answer is `re`. The calculator half of the same
 sentence says `re`, correctly.
 
-**Suggested fix:** `re1` → `re` in both.
+**Fixed** (applied): `re1` reads `re` in both places.
 
 Found by sweeping every panel in every chapter for names the version 9 text
 quotes that the circuit beside it does not produce. Those two are the only
@@ -289,14 +289,14 @@ such cases in Lessons 1 and 2.
 
 ---
 
-## #100 — Lesson 4 points at a `prl` expression that is never derived
+## #100 — Lesson 4 points at a `prl` expression that is never derived — fixed
 
 `src/04-lesson-equivalents.md:452`. The version 9 half of the sentence
 names `prl`, which does not exist in version 9. What was derived above is
 `vth^2*R/(req+R)^2`, unnamed. The calculator half is right -- **prl** is a
 real variable there.
 
-**Suggested fix:** name the expression rather than `prl`.
+**Fixed** (applied): the expression is named rather than pointed at as `prl`.
 
 ---
 
@@ -317,17 +317,17 @@ display convention.
 
 ---
 
-## #102 — Lesson 1's B11's Example 5.20 gives a voltage drop in watts
+## #102 — Lesson 1's B11's Example 5.20 gives a voltage drop in watts — fixed
 
 `src/01-lesson-dc.md:796`: "`vr2` is the voltage drop in the 7Ω resistor:
 17.5 **W**". A voltage drop is in **V**, and the app shows 17.5 V. Shared
 text, so wrong for all three versions.
 
-**Suggested fix:** W → V.
+**Fixed** (applied): it reads 17.5 V.
 
 ---
 
-## #103 — Lesson 5 asks for `vo/is` where the source is `is1`
+## #103 — Lesson 5 asks for `vo/is` where the source is `is1` — fixed
 
 `src/05-lesson-opamps.md`, AS7's Practice Problems 5.4a and 5.4b. Both
 circuits name the source's value `is1`, and both instructions say `vo/is`,
@@ -339,7 +339,7 @@ which fails outright -- `is` is a Python keyword:
 The same rename that was settled in Lesson 3 today, missed in two more
 places. 5.4b carries #104 as well.
 
-**Suggested fix:** `is` → `is1` in both.
+**Fixed** (applied): version 9 asks for `vo/is1`; the calculator halves keep their own `is`.
 
 ---
 
@@ -373,17 +373,17 @@ algebraic form Lesson 4 uses throughout: `vth^2*1000/(req+1000)^2`.
 
 ---
 
-## #108 — Lesson 6's Drill Exercise 5.3 names a resistor that is not there
+## #108 — Lesson 6's Drill Exercise 5.3 names a resistor that is not there — fixed
 
 `src/06-lesson-transient.md:657` asks for `ir1`; that circuit's resistors
 are `r4` and `r12`. The 2 A it prints is `ir4`, which is what the same
 problem's transient half says four paragraphs later.
 
-**Suggested fix:** `ir1` → `ir4`.
+**Fixed** (applied, and completed on 27 Aug): `ir1` reads `ir4`. Only version 9 had been corrected until 27 Aug -- the two calculator fences still carried the typo, which is in the 2023 original too: lesson6.docx names `ir1` in the DC line and `ir4` in the TR line for the same circuit, and that circuit has no `r1`.
 
 ---
 
-## #109 — Lesson 6 shows the same paragraph three times, twice over
+## #109 — Lesson 6 shows the same paragraph three times, twice over — fixed
 
 `src/06-lesson-transient.md:1528, 1532, 1536` and again at `1574, 1578,
 1582`. Six `only 9` blocks in two runs of three, each holding exactly the
@@ -393,11 +393,11 @@ times running, then three times again further down.
 The calculator versions are fine: each block replaces one of three
 `s\only("vc")` calls, which do belong there individually.
 
-**Suggested fix:** keep one of each run.
+**Fixed** (applied): one of each run kept.
 
 ---
 
-## #111 — Lesson 6's Drill Exercise 6.1 prints answers that cannot be right
+## #111 — Lesson 6's Drill Exercise 6.1 prints answers that cannot be right — fixed
 
 `src/06-lesson-transient.md:1395`, an `only 9` sentence quoting
 `vc = 2 - 3*exp(-2*t) + exp(-6*t)` and `il = 2*exp(-2*t) - 2*exp(-6*t)`.
@@ -418,11 +418,11 @@ nothing. `il` is out by a sign.
 `3e^-2t - e^-6t` and `2e^-6t - 2e^-2t`, which is exactly what the app
 gives. Only the version 9 sentence is wrong.
 
-**Suggested fix:** quote the same two expressions the calculator lines do.
+**Fixed** (applied): the same two expressions the calculator lines quote.
 
 ---
 
-## #113 — Lesson 9 says version 9 cannot read the angle sign, then uses it
+## #113 — Lesson 9 says version 9 cannot read the angle sign, then uses it — fixed
 
 `src/09-lesson-threephase.md:458`:
 
@@ -434,7 +434,7 @@ panel in Lesson 9 uses it and solves. The example contradicts the claim in
 the same breath, and "exponential form" is the wrong name for polar form
 anyway.
 
-**Suggested fix:** delete it, or use the Lesson 7 wording.
+**Fixed** (applied 27 Aug): deleted. Versions 7 and 8 carry no such note and neither 2023 page mentions an angle sign; version 9 reads it fine (`v_1` comes back `100.0∠10.00°`).
 
 ---
 

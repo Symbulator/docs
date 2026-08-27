@@ -641,10 +641,10 @@ Find i{{sub:L}}(t), v{{sub:L}}(t) and i(t) for all t.
 **Solution. **For **t < 0s**, simulate in DC.
 
 ```sym 7
-s\dc("e,1,0,8:r4,1,2,4:l,2,0,1:r12,2,0,12"):{il,vl,ir1}
+s\dc("e,1,0,8:r4,1,2,4:l,2,0,1:r12,2,0,12"):{il,vl,ir4}
 ```
 ```sym 8
-s\dc("e,1,0,8:r4,1,2,4:l,2,0,1:r12,2,0,12"):{il,vl,ir1}
+s\dc("e,1,0,8:r4,1,2,4:l,2,0,1:r12,2,0,12"):{il,vl,ir4}
 ```
 ```field 9 Circuit Description
 e,1,0,8
