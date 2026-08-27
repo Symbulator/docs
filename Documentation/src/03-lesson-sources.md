@@ -280,17 +280,55 @@ places.{{i:parallel resistors}}
 Inside a circuit description, write it where a value goes — that is what the
 `re,3,0,[6,3]` shorthand below does, and `pr(6,3)` means the same thing.
 
-On its own, type it into the **Evaluate** card. It nests as deeply as you like:
+On its own, type it into the **Evaluate** card. To reduce three resistors in
+parallel with values of 10 Ω, 20 Ω and 30 Ω:
+
+```field 9 Evaluate
+pr(10, 20, 30)
+```
+
+You get {{o:60/11}} with **Rounding** on *exact*, or {{o:5.45}}
+approximately. It nests as deeply as you like — the two problems below lean
+on that — and it works on symbols as readily as on numbers: `pr(r1, r2)`
+evaluates to $r1 r2/(r1 + r2)$, useful when the resistors in your circuit
+are still unknowns.
+
+::: problem AS7's Example 2.10
+Find the equivalent resistance.
+
+::: figure assets/circuit/as7e0210.png
+AS7's Example 2.10
+:::
+
+::: answer
+No simulation is needed — the whole reduction is one nested expression in
+the **Evaluate** card, working from the far end of the ladder outward:
+
+```field 9 Evaluate
+10 + pr(3, 6, 1 + pr(12, 4, 1 + 5))
+```
+
+The answer is {{o:11.2}} Ω. This is correct.
+:::
+:::
+
+::: problem AS7's Practice Problem 2.10
+Find the equivalent resistance.
+
+::: figure assets/circuit/as7pp0210.png
+AS7's Practice Problem 2.10
+:::
+
+::: answer
+Again, no simulation:
 
 ```field 9 Evaluate
 16 + pr(18, 9, 2 + pr(20, 1 + pr(5, 20)))
 ```
 
-Press **Evaluate** and you get **19**.
-
-It works on symbols as readily as on numbers, so `pr(r1, r2)` evaluates to
-$r1 r2/(r1 + r2)$ — useful when the resistors in your circuit are still
-unknowns.
+The answer is {{o:19}} Ω. This is correct.
+:::
+:::
 
 ### The [r,r,r…] shorthand for descriptions
 
@@ -298,8 +336,10 @@ It may not be too practical to have to call `pr()` separately while you
 describe the circuit. So, to make it easier to call for the reduction of
 parallel resistors on the fly, there is a shorthand: Symbulator will recognise
 any values inside square brackets, such as `[10,20,30]` or `[r1,r2,r3,r4]`, as
-input to be passed to `pr`. This shorthand only works within the circuit
-description that is passed to Symbulator, and will not work outside of it.
+input to be passed to `pr`. The **Evaluate** card runs what you type through
+the same shorthand, so the brackets work there too; this book writes `pr(...)`
+outside descriptions anyway, where square brackets are easy to misread as a
+list.
 
 ### When to reduce resistors
 

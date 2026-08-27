@@ -128,12 +128,15 @@ appears without its file, and never overwrites real artwork).
 
 - `grep -rn TODO src/` — currently returns nothing; the conversion of the
   old site's chapters is complete.
-- Three problems (of 277) still have no version 9 content at all —
-  calculator blocks only: B11's Example 5.6 ("using ex") in
-  `02-lesson-symbolic.md`, and AS7's Example 2.10 with its Practice
-  Problem 2.10 in `03-lesson-sources.md`. This bullet used to say 217
-  imported problems were calculator-only; the rest have gained v9 panels
-  since (measured 27 Aug 2026).
+- Every problem now has version 9 content (measured 27 Aug 2026; this
+  bullet once said 217 imported problems were calculator-only). The last
+  two — AS7's Example 2.10 and Practice Problem 2.10, the nested parallel
+  reductions in `03-lesson-sources.md` — gained v9 answers through the
+  Evaluate card's `pr()` that day. A counting caution for whoever measures
+  next: some problems exist twice, as parallel `::: only 7,8` / `::: only
+  9` twins (B11's Example 5.6 "using ex" in `02-lesson-symbolic.md` is
+  one), so a per-block scan finds calculator-only blocks that are in fact
+  covered by their twin.
 
 - One correction to confirm: in `08-lesson-power.md`, the AC maximum-power
   example used to say the conjugate of the equivalent impedance was
