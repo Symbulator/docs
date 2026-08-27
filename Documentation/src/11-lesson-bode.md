@@ -3,7 +3,7 @@ id: lesson-bode
 kind: lesson
 title: Bode plots and resonance
 versions: [7, 9]
-updated: 2023-07-08
+updated: 2026-08-27
 absent_note: >
   Symbulator 8 has no Bode plotter. The Nspire's own graphing tools will plot a
   transfer function once you have it, and finding the transfer function itself
@@ -87,13 +87,32 @@ for −90°.
 ::: warning The variable, not an expression
 The box takes an answer's *name* — `v2`, `ir1` — not a formula of your own,
 and it has to be one this circuit actually has. **Results** lists every name
-above it.
+above it. The one place a formula does belong is the transfer-function plot
+type, next.
 
 It is also tempting to solve in AC and then plot against frequency. There is
 nothing to sweep: an AC result is a phasor computed at one fixed ω, a single
 point. The Plot card re-solves the circuit at every frequency instead, which
 is why it works from the circuit rather than from a result.
 :::
+
+### When you have H(s) itself
+
+The textbook often hands you the transfer function and no circuit — which is
+exactly what the calculator's tool took. Version 9 takes it too: set **Plot
+type** to *Bode plot of a transfer function H(s)*, and the variable box
+becomes **Transfer function H(s)**. Type the function there; the Circuit
+Description is ignored for this plot type, so it works on an empty page.
+
+- Write the function **in terms of `s`**. A textbook function of jω becomes
+  one of s by writing `s` wherever jω appears — a Bode plot sweeps the
+  imaginary axis, where s *is* jω.
+- The expression takes the same shorthand a circuit value does — `^` for
+  powers, implied multiplication, `1'k` — and it must be numeric apart from
+  `s`. A leftover symbol is refused by name.
+- The frequency boxes are in **hertz**. The calculator examples in this
+  lesson give their ranges in rad/sec; divide by 2π for the same sweep in Hz
+  (0.1 to 300 rad/sec is about 0.016 to 48 Hz).
 :::
 
 ::: practice
@@ -150,10 +169,14 @@ Phase zero at the gain peak
 :::
 :::
 ::: only 9
-Version 9 has no separate expression to type: give the **Plot** card the
-circuit and the answer's name, choose the Bode type, and set the frequency
-range. Reading a maximum off the curve is done by looking at it rather than
-with a Maximum command.
+Version 9 takes the expression directly, like the calculator: set **Plot
+type** to *Bode plot of a transfer function H(s)* and type the problem's
+function into the box, writing `s` wherever the textbook writes jω — no
+imaginary operator involved. The frequency boxes are in hertz, so the
+calculator's sweep of 0.1 to 300 rad/sec is about 0.016 to 48 Hz. Reading
+the answers off the curve: the maximum the calculator found at 4.47 rad/sec
+sits near 0.71 Hz, and the zero crossing it found at 199.8 rad/sec near
+31.8 Hz.
 :::
 :::
 
@@ -174,6 +197,10 @@ And this is the phase plot:
 The phase plot
 :::
 :::
+::: only 9
+The transfer-function plot type again: write the function in terms of `s`
+and sweep. The calculator's 0.1 to 100 rad/sec is about 0.016 to 16 Hz.
+:::
 :::
 
 ::: problem AS7's Example 14.4
@@ -192,6 +219,10 @@ And this is the phase plot:
 The phase plot
 :::
 :::
+::: only 9
+Solved the same way: the *Bode plot of a transfer function H(s)* type, with
+the function written in terms of `s`.
+:::
 :::
 
 ::: problem AS7's Practice Problem 14.4
@@ -204,6 +235,11 @@ gain and phase in one go:
 ::: figure assets/screen/as7pp1404s1.jpeg
 Both plots together
 :::
+:::
+::: only 9
+The calculator had to be asked for gain and phase together; version 9 always
+draws both, magnitude above and phase below, so there is nothing extra to
+ask for.
 :::
 :::
 
@@ -230,6 +266,12 @@ Now the phase. Press HOME, run the tool again, and ask for a Phase plot:
 The phase plot
 :::
 :::
+::: only 9
+The same transfer-function type. There is no typing the expression "outside
+the tool first" to check it — the box shows it in full as you type, and if a
+symbol other than `s` slips in, the error names it rather than plotting the
+wrong thing.
+:::
 :::
 
 ::: problem AS7's Practice Problem 14.5
@@ -242,6 +284,10 @@ use it instead to demonstrate plotting gain and phase together:
 ::: figure assets/screen/as7pp1405s1.jpeg
 Gain and phase together
 :::
+:::
+::: only 9
+Nothing new here either: the transfer-function type, the function written in
+terms of `s`, both curves drawn together.
 :::
 :::
 
