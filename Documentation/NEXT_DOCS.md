@@ -27,14 +27,29 @@ closed against the originals: the v8 page names its sources `e` (the
 real v7→v8 difference in Lesson 7's 9.35 is `r`→`r1`), and both pages
 list `pmax` as stored by the calculator's th script.
 
+**C and E are done too**, authorised the same day. C rewrote the
+Python-API leftovers in the interface's own language (Lesson 7's AC
+intro, Lesson 2's `equations=` mapping, Lesson 8's "use_rms argument"
+heading and "Python function", Lesson 5's "result object", Lesson 3's
+one-liner) and normalised Lesson 6's v9 panels to the calculator's own
+notation — `u(t)`, `δ(t)`, `2e^(-4t)` — which measurement showed
+version 9 reads identically. E moved the two pre-Conditions workarounds
+(Bo2 4.15's `t = 2`, Example 19.6's six-unknown trick) onto Evaluate +
+Conditions, put the calculator's SI shorthand into the expert and Solve
+panels (it works — measured), aligned 9.89's two passes on
+`im(zeq) = 0`, and restored the Greek glyphs (β, γ) the 2023 pages use
+— which needed the app's description whitelist widened to admit them,
+the same courtesy µ and δ already had (`repos/server` #121). The
+touched lesson files re-verified: 0 problems.
+
 **Awaiting Roberto's ruling — the A list** (Lesson 12's "TR reads
 sources in the s-domain" note and its "no curly brackets" claim, both
 contradicted by measurement; Lesson 4's two "version 9 reserves `e`"
 notes; Lesson 6's `ic`-for-`il` plot slip; Lesson 11's Bode practice
 problems that render empty for v9; the Introduction's "handheld
 device", ungated Bode claim and "fifteen years later"; Lesson 2's rx
-paragraph) — **and the C and E passes**, not yet authorised. The full
-list with recommendations is in the 27 Aug session transcript.
+paragraph). The full list with recommendations is in the 27 Aug
+session transcript.
 
 ---
 
