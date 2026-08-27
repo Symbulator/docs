@@ -731,5 +731,10 @@ figcaption {
   .vkey-full { display: none; }
   .vkey-num { display: block; }
   .versions summary { padding: 0.38rem 0.5rem 0.42rem 0.6rem; }
+  /* On a phone the picker ends up at the right of the wrapped ribbon, and
+     a menu hanging from its LEFT edge ran more than half its width off the
+     screen (measured 27 Aug 2026: 263..503 on a 375px viewport). Hang it
+     from the right edge instead, which keeps it on screen. */
+  .version-list { left: auto; right: 0; }
 }
 
