@@ -55,10 +55,8 @@ AS7's Example 16.1
 ::: answer
 Before we start: this problem does not need the s-domain at all. The source is
 given as a function of time and the answer is wanted as a function of time, so
-TR will do it in one step. {{v7,8|Notice that the source value is written in
-the time domain, because that is what TR reads:}}{{v9|Notice the `t2s` around
-the source value — TR in Symbulator 9 reads its sources in the s-domain, so a
-time-domain value has to be converted where you type it:}}
+TR will do it in one step. Notice that the source value is written in the
+time domain, because that is what TR reads:
 
 ```sym 7
 "e,1,0,u(t):r1,1,2,1:r2,2,o,5:c,2,0,1/3,0:l,o,0,1,0"→cir:s\tr(cir):vo
@@ -67,7 +65,7 @@ time-domain value has to be converted where you type it:}}
 "e,1,0,u(t):r1,1,2,1:r2,2,o,5:c,2,0,1/3,0:l,o,0,1,0"→cir:s\tr(cir):vo
 ```
 ```field 9 Circuit Description
-e,1,0,t2s(u(t))
+e,1,0,u(t)
 r1,1,2,1
 r2,2,o,5
 c,2,0,1/3,0
@@ -201,9 +199,12 @@ s\s2t(vo)
 Either way, the same answer.
 :::
 ::: only 9
-Symbulator 9 has no curly-bracket shorthand — its circuit descriptions do not
-accept braces at all. Write `t2s(...)` around the value instead; it is three
-characters longer and says what it does.
+### The curly-bracket shorthand
+
+Version 9 has the same shortcut: wrap the value in curly brackets — `{u(t)}` —
+and FD reads it as `t2s(u(t))`. As on the calculator, it works only inside a
+circuit description, so the answer still needs `s2t(...)` when you ask for it
+in **Evaluate**.
 :::
 
 ## Instructive FD problems {#practice-fd}

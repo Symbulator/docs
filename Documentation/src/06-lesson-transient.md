@@ -1972,7 +1972,7 @@ appears beneath.
 :::
 
 Compare it to the graph given by the textbook, shown below. Repeat this
-procedure giving `ic` as the function. Compare the resulting graph to that
+procedure giving `il` as the function. Compare the resulting graph to that
 given by the textbook, shown below.
 
 ::: figure assets/practice/practice-problems-for-lesson-6-31.jpg

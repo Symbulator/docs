@@ -24,7 +24,7 @@ Symbulator can solve circuits using four types of analysis: direct current (DC),
 frequency-domain (FD). Symbulator can analyse numerical and, more importantly, symbolic linear
 circuits. It will return the voltages in all nodes, and the currents, voltage
 drops and power in all elements. Symbulator can also find the passive, Thévenin, Norton and two-port equivalent of a
-circuit. It can do time domain and Bode plots.
+circuit. It can do time domain{{!v8| and Bode}} plots.
 
 ### What elements does it accept?
 

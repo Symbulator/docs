@@ -18,7 +18,7 @@ place at the IEEE Student Paper Contest for Latin America in 2000, and version
 5 (also known as Symbulator Q) served as my graduation thesis in January 2001.
 
 The first five versions were written between April 1999 and January 2001. The
-sixth came fifteen years later, in 2013, while I was a researcher at MIT. The 
+sixth came a dozen years later, in 2013, while I was a researcher at MIT. The 
 seventh and eighth a decade later, in 2023, and the ninth in 2026.  
 
 ### What Symbulator did for me

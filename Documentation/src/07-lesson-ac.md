@@ -408,15 +408,11 @@ Read it with **Mini-Tools** set to *aa*: `aa(ir)` gives {{o:4.789}}∠{{o:-16.70
 
 That is 4.789 A at an angle of −16.7°, which is correct.
 
-::: tip Why the calculator could not call this source `e`
-The version 7 description above names the source `e`, which the calculator
-allows; the version 8 one cannot, because `e` is Euler's number there and the
-source's answers would collide with it. `e1` was the usual fix, and on the
-calculator it still is.
-
-Version 9 has no such collision — its reserved names are derived rather than
-listed, and come to two, neither of them `e` — so the panels here name the
-lone source `e` and nothing needs dodging.
+::: tip Why the resistor is r on one calculator and r1 on the other
+The version 7 description above names its resistor `r`; the version 8 one
+cannot, because the Nspire reserves `r` (and `rr`), as {{ref:lesson-dc}}
+notes — `r1` is the usual fix there. Version 9 reserves neither, and its
+panel keeps the plain `r`.
 :::
 :::
 :::
@@ -660,8 +656,7 @@ e,3,0,3*vrx
 ```
 
 ::: only 9
-AC, with **ω — angular frequency** set to **2**. The source had to be renamed `e`,
-for the reason given under Problem 9.35.
+AC, with **ω — angular frequency** set to **2**.
 :::
 
 ```sym 7

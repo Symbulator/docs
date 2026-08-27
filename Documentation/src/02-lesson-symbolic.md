@@ -360,9 +360,9 @@ DC, AC, FD and TR.
 
 ::: problem B11's Example 5.6, using ex
 ::: answer
-We will use the same circuit description as before, with a single change: we
-will use rx for the value of resistor R1, instead of the r1 value we used
-before.
+We use the very same circuit description as before, `r1` as the symbolic
+value included — version 9 has no objection to it; the calculator needed a
+different name here, and the note below says why.
 
 The statement of the problem gives us the information we need to write the two
 additional equations: the source sees 12 kΩ, and the current through R3 is
@@ -371,7 +371,7 @@ calculator's SI shorthand works here too:
 
 ```field 9 Circuit Description
 e,1,0,e
-r1,1,2,rx
+r1,1,2,r1
 r2,2,3,4'k
 r3,3,0,6'k
 ```
@@ -382,7 +382,7 @@ ir3 = 6'm
 ```
 
 ```field 9 Add unknowns
-e, rx
+e, r1
 ```
 
 Run it in DC as usual. This time nothing comes back symbolic: Symbulator has
@@ -390,12 +390,10 @@ enough to pin every value down, so the whole circuit arrives in numbers. The
 node voltages read v{{sub:1}} = 72 V, v{{sub:2}} = 60 V and
 v{{sub:3}} = 36 V, and at the foot of **Results by element** you will find
 the two unknowns you asked for, listed like any other answer:
-*e* = 72 and r{{sub:x}} = 2000.
+*e* = 72 and *r1* = 2000.
 
 Both are right, and they arrived alongside everything else rather than in a
-separate step — the whole circuit is solved, not just the two unknowns. That is
-also why the rx-instead-of-r1 precaution the calculator needed does not apply
-here; see the note below.
+separate step — the whole circuit is solved, not just the two unknowns.
 
 The speed advantage of the expert mode is not necessarily evident in this
 simple problem. It does give you an idea of what the expert mode is all about:

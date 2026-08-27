@@ -324,8 +324,7 @@ step; all four answers arrive together:
 - **Maximum deliverable power**, pmax = 11 mW
 
 The first three are what you came for. The fourth is Symbulator being
-generous — the most this circuit could deliver into a matched load — and the
-calculator versions do not report it at all.
+generous — the most this circuit could deliver into a matched load.
 :::
 :::
 
@@ -856,9 +855,8 @@ Choose DC. Wait for *Done*. Evaluating `req` approximately, we find the
 equivalent resistance is **-7.5** Ω.
 :::
 ::: only 9
-*Find equivalent*, *Resistance / impedance*, nodes **a** and **0**, in DC: `req` is
-{{o:-7.500}} Ω. The source is called `e` rather than `e` here — version 9
-keeps `e` for Euler's number.
+*Find equivalent*, *Resistance / impedance*, nodes **a** and **0**, in DC:
+`req` is {{o:-7.500}} Ω.
 :::
 
 :::
@@ -889,9 +887,11 @@ Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 **0.6** Ω.
 :::
 ::: only 9
-*Find equivalent*, *Resistance / impedance*, nodes **1** and **0**, in DC: `req` is
-{{o:0.6000}} Ω. Both the source and the short are renamed, for the same
-reason: version 9 reserves `e` and `s`.
+*Find equivalent*, *Resistance / impedance*, nodes **1** and **0**, in DC:
+`req` is {{o:0.6000}} Ω. Only the short is renamed, `s` to `s1`: a short
+named bare `s` would have its current spelled `is`, which already means
+something in Python, so version 9 refuses that one name and suggests `s1`.
+The dependent value follows it — `is1`.
 :::
 
 :::
