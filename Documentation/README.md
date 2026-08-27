@@ -108,20 +108,32 @@ Never edit anything in `build/` — the next build overwrites it.
 
 ## Figures
 
-`assets/circuit/*.svg` for the web and `*.pdf` for print, same basename; the
-source refers to the `.svg` and the LaTeX emitter drops the extension so
-XeLaTeX picks up the PDF. The three figures currently there are stand-ins
-drawn by `tools/make_demo_figures.py`, to be replaced by the real schematics.
+**All real, since 27 Aug 2026 — verified by opening the built PDFs, not by
+build success.** Every one of the 314 `::: figure` references in `src/`
+cites a raster (`.jpg`/`.jpeg`/`.png`), every one of those files is genuine
+artwork, and both builds consume the raster directly: the HTML emitter
+writes the path verbatim, and the LaTeX emitter passes a raster path
+through unchanged (it only drops the extension — so XeLaTeX would pick a
+`.pdf` twin — for non-raster references, of which there are currently
+none).
+
+This section used to describe an `.svg`-for-web / `.pdf`-for-print scheme
+and "248 figures still to supply". That era ended when the real scans
+arrived; what it left behind were ~250 orphaned placeholder `.svg`/`.pdf`
+siblings in `assets/` that nothing referenced (removed 27 Aug 2026 —
+`tools/make_placeholders.py` can redraw a placeholder any time a reference
+appears without its file, and never overwrites real artwork).
 
 ## Outstanding
 
-- `grep -rn TODO src/` — the chapters still to be converted from the old site
-  (lessons 9 to 13 and the credits).
-- The 217 imported practice problems are still calculator-only, wrapped in
-  `::: only 7,8`. Translating them was blocked on the version 9 API question
-  and no longer is; it is roughly 295 commands.
-- 248 figures still to supply, almost all of them `assets/practice/*`. See the
-  tail of `python3 build.py --check`.
+- `grep -rn TODO src/` — currently returns nothing; the conversion of the
+  old site's chapters is complete.
+- Three problems (of 277) still have no version 9 content at all —
+  calculator blocks only: B11's Example 5.6 ("using ex") in
+  `02-lesson-symbolic.md`, and AS7's Example 2.10 with its Practice
+  Problem 2.10 in `03-lesson-sources.md`. This bullet used to say 217
+  imported problems were calculator-only; the rest have gained v9 panels
+  since (measured 27 Aug 2026).
 
 - One correction to confirm: in `08-lesson-power.md`, the AC maximum-power
   example used to say the conjugate of the equivalent impedance was
