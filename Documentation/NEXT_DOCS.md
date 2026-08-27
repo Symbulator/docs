@@ -8,6 +8,36 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #119 — The full v9 read-through, 27 Aug 2026 — mechanical fixes live; rulings pending
+
+Roberto asked for a complete read of the version 9 documentation for
+clarity, soundness and correspondence with the interface as deployed
+(build `2026-08-27 05:36 UTC`). Every checkable claim was checked by
+running, not by eye. Findings fell into: **A** wrong or
+self-contradicting claims, **B** interface mismatches, **C** leftovers
+of the Python-API era, **D** misplaced/duplicated content, **E**
+workflow harmonisations now that Evaluate has Conditions, **F** ungated
+calculator narration shown to v9, **G** typos and formatting.
+
+**B, D, F and G are fixed, built and deployed** — 151 edits, commit
+`694e3d3`, live on learn.symbulator.com with the three PDFs rebuilt.
+Also settled by Roberto: the v8 RMS flag is `userms` (v7 keeps
+`s\rms`), Impala mode is genuine and stays, and two questions were
+closed against the originals: the v8 page names its sources `e` (the
+real v7→v8 difference in Lesson 7's 9.35 is `r`→`r1`), and both pages
+list `pmax` as stored by the calculator's th script.
+
+**Awaiting Roberto's ruling — the A list** (Lesson 12's "TR reads
+sources in the s-domain" note and its "no curly brackets" claim, both
+contradicted by measurement; Lesson 4's two "version 9 reserves `e`"
+notes; Lesson 6's `ic`-for-`il` plot slip; Lesson 11's Bode practice
+problems that render empty for v9; the Introduction's "handheld
+device", ungated Bode claim and "fifteen years later"; Lesson 2's rx
+paragraph) — **and the C and E passes**, not yet authorised. The full
+list with recommendations is in the 27 Aug session transcript.
+
+---
+
 ## #85 — Chapter 7's answers were dressed up as transcripts — settled
 
 Seven answers in `src/07-lesson-ac.md` appeared as `out 7,8` transcript
