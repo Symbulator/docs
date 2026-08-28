@@ -1,14 +1,15 @@
 % !TEX program = xelatex
 %
 % The Internal Logic of Symbulator -- a monograph
-% Roberto Perez-Franco, via Claude (Fable 5)
+% Written by Claude (Fable 5), using original sources from
+% Roberto Perez-Franco
 %
 % Build:  xelatex symbulator_monograph.tex   (run twice for TOC/refs)
 %
 % Sources: the solver as implemented in Symbulator 9 (repos/solver,
 % symbulator 0.5.19), presenting the staged algorithm of the classic
 % calculator versions as the conceptual core. The central historical
-% source is the author's 2000--2001 graduation thesis (references/
+% source is Roberto Perez-Franco's 2000--2001 graduation thesis (references/
 % 2000_thesis/, 12 chapters + 4 appendices); around it, the 1999
 % competition paper (Spanish original and English translation), the
 % 2001 website documenting Symbulator Q, the 2014 unfinished book
@@ -62,9 +63,11 @@
 {\Large Symbolic Simulation of Linear Electric Circuits\\
 by Staged Solution of Unknowns\par}
 \vspace{2.5cm}
+{\large Written by Claude (Fable 5)\par}
+\vspace{0.25cm}
+{\itshape using original sources from\par}
+\vspace{0.25cm}
 {\large Roberto Perez-Franco\par}
-\vspace{0.2cm}
-{\large \emph{via} Claude (Fable 5)\par}
 \vspace{3cm}
 {\itshape The purpose of circuit analysis is insight,\\
 not mathematics.\par}
@@ -86,7 +89,7 @@ returns exact symbolic or numeric expressions for every node voltage,
 branch current, voltage drop, and power in the circuit.
 
 This monograph documents the solver's internal logic. Its central
-piece of evidence is the author's graduation thesis of
+piece of evidence is Roberto Perez-Franco's graduation thesis of
 2000--2001~\cite{thesis2000}---the fullest contemporaneous account of
 the simulator's design, written while the design was being made---read
 alongside the version~9 source code, which is that design still
@@ -140,8 +143,11 @@ Symbulator was created by Roberto Perez-Franco, then an engineering
 student at the Technological University of Panama (Universidad
 Tecnol\'ogica de Panam\'a), at its Azuero regional campus. The
 project has an unusually well-documented prehistory~\cite{paper1999,
-thesis2000}. The decisive encounter came in 1998, while the author
-was taking Circuit Theory~II: he met \emph{Syrup}, Joe Riel's
+thesis2000}. The decisive encounter came in 1998, while the
+author\footnote{Throughout this monograph, \emph{the author} means
+the author of \emph{Symbulator}, Roberto Perez-Franco. The monograph
+itself is written by Claude, from his original sources, as the title
+page records.} was taking Circuit Theory~II: he met \emph{Syrup}, Joe Riel's
 symbolic circuit simulator for Maple~V---``the first symbolic
 circuit simulator I had seen in my life, and in fact the only one I
 know of apart from Symbulator''---and understood at once that
@@ -2132,7 +2138,8 @@ three grades of 100/100, and the tribunal's citation.}
 \section*{Acknowledgments}
 \addcontentsline{toc}{chapter}{Acknowledgments}
 
-Symbulator 9 is built on Python and SymPy, and the author thanks their
+Symbulator 9 is built on Python and SymPy, and Symbulator's author
+thanks their
 creators and maintainers. Versions 7 and 8's Laplace transforms are
 due to Lars Frederiksen, adapted for the TI-Nspire by Philippe Fortin.
 Over the decades, many users improved Symbulator through suggestions
