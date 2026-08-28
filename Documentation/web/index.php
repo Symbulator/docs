@@ -110,6 +110,19 @@ function asset(string $name): string {
     $v = is_file($path) ? substr(md5_file($path), 0, 8) : '0';
     return '/assets/' . $name . '?v=' . $v;
 }
+
+// "(PDF, 27.0MB)", for the footer's download links -- Roberto asked on
+// 28 Aug 2026 for the size in the link text. Measured from the file at
+// request time rather than written into the page at build time, so a
+// rebuilt PDF can never disagree with the number beside it. Decimal
+// megabytes, one decimal place, matching how the landing page quotes
+// the same files. If the file is missing (a partial upload -- the link
+// would 404 anyway), say just "(PDF)" rather than lying or crashing.
+function pdf_note(string $name): string {
+    $path = __DIR__ . '/' . $name;
+    if (!is_file($path)) { return ' (PDF)'; }
+    return ' (PDF, ' . number_format(filesize($path) / 1e6, 1) . 'MB)';
+}
 ?>
 <link rel="stylesheet" href="<?= asset('banner.css') ?>">
 <link rel="stylesheet" href="<?= asset('style.css') ?>">
@@ -155,7 +168,7 @@ function asset(string $name): string {
         <a href="https://symbulator.pythonanywhere.com">Online App</a>
         <!-- Version-independent on purpose: the monograph documents the
              solver logic every version shares. -->
-        <a href="/monograph.pdf">How It Works</a>
+        <a href="/monograph.pdf">How it works</a>
       </nav>
 
   
@@ -422,11 +435,13 @@ function asset(string $name): string {
 <footer class="foot">
   <p><?= e($book['title']) ?> — <?= e($toc['name']) ?>, <?= e($toc['platform']) ?>.
      Documentation by Roberto Perez-Franco. MIT licence.</p>
-  <p><a href="/symbulator-v<?= e($v) ?>.pdf">This documentation as a PDF</a>
-     · <a href="/monograph.pdf"><em>The Internal Logic of
-     Symbulator</em> — a monograph on how the solver works</a>
-     · <a href="/book.pdf"><em>The Symbulator Book</em> — the English
-     edition of the 2001 thesis</a></p>
+  <?php /* Wording set by Roberto, 28 Aug 2026: name the version and the
+           size in each link, sentence-case the monograph's title, and no
+           book link here (the landing page still carries it). */ ?>
+  <p><a href="/symbulator-v<?= e($v) ?>.pdf">Download the documentation for
+     Symbulator <?= e($toc['label']) ?><?= pdf_note("symbulator-v$v.pdf") ?></a>
+     · <a href="/monograph.pdf">The internal logic of
+     Symbulator<?= pdf_note('monograph.pdf') ?></a></p>
 </footer>
 
 <script>

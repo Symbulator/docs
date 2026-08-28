@@ -737,10 +737,22 @@ figcaption {
   .vkey-full { display: none; }
   .vkey-num { display: block; }
   .versions summary { padding: 0.38rem 0.5rem 0.42rem 0.6rem; }
-  /* On a phone the picker ends up at the right of the wrapped ribbon, and
-     a menu hanging from its LEFT edge ran more than half its width off the
-     screen (measured 27 Aug 2026: 263..503 on a 375px viewport). Hang it
-     from the right edge instead, which keeps it on screen. */
-  .version-list { left: auto; right: 0; }
+  /* On a phone the ribbon wraps, and where the picker lands in the wrapped
+     row moves with the viewport and its own label width -- so no edge of
+     the summary is safe to hang a 15rem menu from. Hung left, it ran
+     263..503 on a 375px viewport (measured 27 Aug 2026); flipped to hang
+     right, it ran off the LEFT edge instead on a Galaxy S22 at 360px,
+     where the picker sits at the row's left (Roberto's screenshot, 28 Aug
+     2026: every option an unreadable sliver). Stop hanging it from the
+     summary at all: un-position .versions so the menu's containing block
+     becomes .subbar itself (position: relative in the shared banner.css),
+     and span the band's full content width just under the keyline. It
+     cannot leave the screen from there, wherever the picker wrapped to. */
+  .versions { position: static; }
+  .version-list {
+    left: var(--banner-pad); right: var(--banner-pad);
+    top: calc(100% + 0.4rem);
+    min-width: 0;
+  }
 }
 
