@@ -153,6 +153,9 @@ function asset(string $name): string {
       <nav>
         <a href="/symbulator-v<?= e($v) ?>.pdf">Download as PDF</a>
         <a href="https://symbulator.pythonanywhere.com">Online App</a>
+        <!-- Version-independent on purpose: the monograph documents the
+             solver logic every version shares. -->
+        <a href="/symbulator-monograph.pdf">How It Works</a>
       </nav>
 
   
@@ -419,7 +422,9 @@ function asset(string $name): string {
 <footer class="foot">
   <p><?= e($book['title']) ?> — <?= e($toc['name']) ?>, <?= e($toc['platform']) ?>.
      Documentation by Roberto Perez-Franco. MIT licence.</p>
-  <p><a href="/symbulator-v<?= e($v) ?>.pdf">This documentation as a PDF</a></p>
+  <p><a href="/symbulator-v<?= e($v) ?>.pdf">This documentation as a PDF</a>
+     · <a href="/symbulator-monograph.pdf"><em>The Internal Logic of
+     Symbulator</em> — a monograph on how the solver works</a></p>
 </footer>
 
 <script>

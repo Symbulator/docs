@@ -397,7 +397,10 @@ arguments all pass through one expression reader, which accepts:
   function calls such as \code{sqrt}, \code{exp}, \code{sin}).
   Implicit multiplication is inserted where the calculator allowed it
   (\code{2ir3} $\to$ \code{2*ir3}), and \code{e\^{}x} is read as
-  $e^x$.
+  $e^x$. Any name is an ordinary symbol---including, since version
+  0.5.19, names that happen to be reserved words of the host
+  language, such as \code{is}: the reader's language is circuit
+  analysis, not Python, and its natural names all work.
 \item \textbf{SI prefixes} in the calculator's quoted notation:
   \code{4.7'u} is $4.7\times10^{-6}$, \code{1'k} is $10^3$. A
   \emph{bare} suffix (\code{1k}) is inherently ambiguous---one
@@ -1234,7 +1237,7 @@ call. Naming the nodes \code{a}--\code{n} and the elements after
 their labels:
 
 \begin{quote}
-\code{es,e,0,Vs} \quad \code{js,0,d,Is} \\
+\code{es,e,0,vs} \quad \code{js,0,d,is} \\
 \code{r1,e,m,10} \quad \code{r2,a,e,20} \quad \code{r3,m,0,30} \quad
 \code{r4,b,m,40} \\
 \code{r5,n,m,50} \quad \code{r6,c,d,60} \quad \code{r7,n,d,70} \\

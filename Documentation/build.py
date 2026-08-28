@@ -1048,6 +1048,18 @@ def build_web(book: Book, versions: list[int]):
             "a sibling tree of Sym Docum -- see the top-level CLAUDE.md); "
             "without it this site cannot build its header.")
     shutil.copy2(SHARED_BANNER, os.path.join(outroot, "assets", "banner.css"))
+    # The monograph (paper/symbulator_monograph.pdf, tracked in this
+    # repository) ships beside the three tutorial PDFs, under the same
+    # hyphenated naming its shelf-mates use. The ribbon and footer of
+    # index.php link it on every version, and the landing page links
+    # the same URL.
+    monograph = os.path.join(ROOT, "paper", "symbulator_monograph.pdf")
+    if not os.path.isfile(monograph):
+        raise SystemExit(
+            f"build.py: {monograph} is missing. Build it with xelatex in "
+            "Documentation/paper/ (twice, for the TOC), or the site would "
+            "ship a dead link.")
+    shutil.copy2(monograph, os.path.join(outroot, "symbulator-monograph.pdf"))
     if os.path.isdir(ASSETS):
         shutil.copytree(ASSETS, os.path.join(outroot, "assets"),
                         dirs_exist_ok=True)
