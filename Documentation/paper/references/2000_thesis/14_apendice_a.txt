@@ -1,0 +1,20 @@
+Apéndice
+A
+Breve historia del Symbulator
+El autor del Symbulator es Roberto Pérez-Franco, estudiante de Ingeniería Electromecánica en la Universidad Tecnológica de Panamá, egresado del Centro Regional de Azuero. Inició la programación del Symbulator bajo el nombre SCS el 30 de marzo de 1999. La primera versión en aparecer públicamente fue la 0.92, colocada en Internet el 2 de abril de 1999. La versión 1 incluyó inductancias mutuas. La versión 2, presentada el 19 de agosto de 1999 en el Centro Regional de Azuero, incluyó bipuertos. La versión 3 incorporó el Modo (Experto). La versión 4, presentada en Internet el 9 de enero de 2001, incorporó el Modo (Impala). La versión más reciente, llamada Q, fue presentada el 30 de marzo de 2001 en la Internet; en ella se introdujeron grandes mejoras, modificando alrededor del 40% del código.
+El simulador se ha ofrecido permanentemente de forma gratuita en la Internet, y la retroalimentación de los usuarios ha permitido pulir el código, eliminar errores y agregar características novedosas.
+Hoy en día, a dos años de su aparición pública, el simulador es usado por miles de estudiantes y profesionales de la ingeniería eléctrica alrededor del mundo, y ha recibido varios honores, incluyendo el 1er lugar en el Concurso de Proyectos Estudiantiles del IEEE (Instituto de Ingenieros Eléctricos y Electrónicos), para el año 2000 en Latinoamérica (Región 9).
+Idioma
+El autor del Symbulator tiene el español como lengua nativa. Ha publicado múltiples libros en este idioma y se cuenta entre los escritores jóvenes más promisorios de su patria, Panamá. Aparte del español, maneja otros idiomas tales como el inglés y el Esperanto. Igualmente, ha cursado estudios de francés, y desea seguir ampliando y profundizando su espectro lingüístico en el futuro.
+Cuando se inició el proyecto Symbulator en 1999, las calculadoras TI eran prácticamente inexistentes en Panamá. En el desarrollo de un programa, los usuarios juegan un papel vital, para ayudar con su retroalimentación a purgar el código de errores, y para dar ánimos al programador con sus comentarios y agradecimientos. Debe mencionarse que este programa no ha representado ninguna regalía para su autor, pues siempre ha sido de distribución gratuita. 
+Dado que la mayoría de los usuarios de esta calculadora en el mundo hablan el inglés como primera o segunda lengua, se hizo forzoso utilizar esta lengua como la lengua de trabajo para el programa y su documentación. Así, usuarios del programa en los cinco continentes pudieron enviar sus comentarios y reportes al autor. Como las capacidades del programa han ido ampliándose vertiginosamente en estos dos años, el rápido cambio de las versiones no ha dejado tiempo disponible para traducirlas. Hasta el día de hoy el Symbulator no ha dejado de crecer, y por ello tanto el programa como la documentación siguen estando en inglés.
+Le expreso mis disculpas a cualquiera que se pueda sentir ofendido por esta situación. El deseo del autor siempre ha sido desarrollar una herramienta útil para todos los estudiantes de ingeniería del mundo. De hecho, el interés del autor en el Esperanto tiene su origen en su inconformidad con la falta de una verdadera lengua internacional neutra, común a todos los humanos.
+Es necesario notar que a todos los usuarios que han planteado preguntas en español, se les ha respondido en ese idioma. Igualmente, este escrito – el cual es la más completa documentación del Symbulator – ha sido originalmente redactada en español.
+ PAGE 10 
+
+A - PAGE 3 
+Breve historia del Symbulator
+
+Roberto Pérez-Franco - Symbulator
+
+Conceptos generales del Symbulator

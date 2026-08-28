@@ -1,0 +1,13 @@
+Apéndice
+B
+El Symbulator y la simulación simbólica
+Los conocimientos que tiene el hombre sobre la electricidad han venido desarrollándose durante siglos, desde las ranas de Volta hasta los transistores cuánticos. También se han desarrollado las herramientas de análisis de la ingeniería eléctrica. La simulación simbólica, por ser un invento muy reciente, está entre las más nuevas de estas herramientas.
+En 1998 me topé con el primer simulador simbólico de circuitos que había visto en mi vida (y de hecho el único que conozco aparte del Symbulator). Su nombre es Syrup, y está diseñado para ejecutarse en el entorno del programa matemático MapleV para computadora personal. Aunque nunca llegué a dominar este simulador, gracias a él comprendí que la simulación simbólica es una herramienta muy poderosa para el aprendizaje y el diseño. En aquel tiempo yo era estudiante del curso de Teoría de Circuitos II en el Centro Regional de la Universidad Tecnológica en Azuero, y sentí que sería muy útil tener un simulador simbólico disponible en el salón de clases. Entablé buena amistad con Joe Riel, el autor de Syrup, y él me explicó el concepto subyacente de este programa, un concepto extremadamente simple en verdad. A diferencia de los simuladores numéricos, incluso algunos que yo mismo había programado hasta la fecha, el Syrup no utilizaba matrices y análisis nodal modificado. Por el contrario, generaba ecuaciones nodales, las resolvía y las presentaba simbólicamente. Con esta idea en mente, el 30 de marzo de 1999 emprendí la programación de un simulador semejante en mi calculadora TI-89, al cual llamé inicialmente SCS (por Symbolic Circuit Simulator) y luego Symbulator. El Syrup fue una inspiración inicial, mas no un modelo a seguir, pues mi idea del simulador perfecto para el salón de clases discrepaba en algunos aspectos con el Syrup. Debido a que, durante los dos años que tardé en perfeccionarlo, no tuve contacto con ningún otro simulador simbólico, me ví forzado a inventar y desarrollar por mis propios medios las técnicas de la simulación simbólica que hoy presento, y que han rendido excelentes resultados a los miles de usuarios que el Symbulator tiene en el mundo entero. He hecho esta aclaración porque considero que el trabajo presentado en esta tesis debe tomarse como lo que es en verdad: una aportación pionera a un campo vírgen de la ingeniería eléctrica. Tal vez por eso mereció el primer lugar en el Concurso de Proyectos Estudiantiles IEEE 2000 para Latinoamérica (Región 9).
+ PAGE 10 
+
+B - PAGE 1 
+El Symbulator y la simulación simbólica
+
+Roberto Pérez-Franco - Symbulator
+
+Simulación avanzada en corriente directa

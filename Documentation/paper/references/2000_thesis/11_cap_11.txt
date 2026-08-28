@@ -1,0 +1,186 @@
+Capítulo
+11
+Simulación en el dominio del tiempo
+11.1 Relación entre FD y TR
+En este capítulo, veremos las técnicas de simulación para análisis en el dominio del tiempo, o sea análisis transitorio, en el Symbulator. Existe una íntima relación entre el análisis en el dominio de la frecuencia FD y el análisis en el dominio del tiempo TR. En TR, el Symbulator utiliza las técnicas de transformada de Laplace para obtener las respuestas completas en el dominio del tiempo, a partir de las respuestas en dominio de la frecuencia obtenidas con FD. La respuesta completa incluye la respuesta forzada y la transitoria. Como hemos aprendido en el salón de clases, la transformada de Laplace puede llevar una respuesta del dominio de la frecuencia al dominio del tiempo.
+11.1.1 DiffEq
+El Symbulator utiliza el poderoso programa DiffEq, escrito por Lars Frederiksen, quien es el mejor programador de calculadoras que he conocido, y mi amigo personal. DiffEq es un grupo de programas hechos para resolver ecuaciones diferenciales. La herramienta más avanzada para transformada de Laplace para calculadoras TI se llama Advanced Laplace, hecha también por Lars Frederiksen. Aunque menos poderosa, la transformada de Laplace del DiffEq es más rápida que la del Advanced Laplace. Por ello el Symbulator prefiere al DiffEq.
+El Symbulator utiliza la función laplace del DiffEq al inicio de cualquier simulación FD o TR, y la función ilaplace del mismo al final de cualquier simulación TR. Por ello es necesario tener este programa instalado cuando se use el Symbulator para realizar estos dos tipos de análisis.
+11.2 Dos maneras de obtener respuestas en el dominio del tiempo
+Existen dos maneras para que el usuario del Symbulator obtenga respuestas en el dominio del tiempo:
+La primera alternativa (véase el punto 11.3) es realizar un análisis en el dominio de la frecuencia, y luego convertir las respuestas que nos interesen al dominio del tiempo. Este análisis se realiza usando la puerta sq\fd. Este análisis resuelve el circuito en el dominio de la frecuencia, convirtiendo todos los valores de las fuentes que estén en el dominio del tiempo a su equivalente en el dominio de la frecuencia, pero no convierte las respuestas al dominio del tiempo. Nos entregará todas las respuestas en el dominio de la frecuencia. Como no se realiza una conversión automática de todas las respuestas al dominio del tiempo, se ahorra todo el tiempo que estas conversiones hubiesen consumido. Así, la simulación tardará el mínimo posible. Tras el análisis, el usuario puede llevar al dominio del tiempo aquellas respuestas que le interesen. Esta alternativa debe emplearse en dos casos: a) cuando deseamos respuestas tanto en el dominio del tiempo como en el dominio de la frecuencia, y b) cuando se desea una simulación lo más rápida posible, y deseamos solamente algunas respuestas en el dominio del tiempo, y no todo el conjunto.
+La segunda alternativa (véase del punto 11.5 en adelante) es realizar un análisis transitorio. Este análisis se realiza usando la puerta sq\tr, cuyo uso explicaremos más adelante. Este análisis resuelve el circuito en el dominio de la frecuencia, convirtiendo todos los valores de las fuentes que estén en el dominio del tiempo a su equivalente en el dominio de la frecuencia, y finalmente convierte todas las respuestas de vuelta al dominio del tiempo. Este análisis nos entregará todas las respuestas en el dominio del tiempo. El usuario nunca verá las respuestas en el dominio de la frecuencia. La conversión de todas las respuestas al dominio del tiempo puede consumir varios minutos, tanto más tiempo cuanto mayor sea el circuito. Por ello, esta alternativa debe emplearse únicamente en tres casos: a) cuando el circuito sea pequeño, b) cuando el usuario esté interesado en todas las respuestas en el dominio del tiempo y no sólo en algunas respuestas, y c) cuando al usuario no le importe que la simulación tarde algunos minutos. 
+11.3 Dos maneras de convertir respuestas al dominio del tiempo
+Cuando usemos la primera alternativa, tendremos que convertir nosotros las respuestas que nos interesen al dominio del tiempo. Podemos hacerlo de dos maneras.
+11.3.1 Función ilaplace del DiffEq
+El DiffEq convierte una función del dominio de la frecuencia al dominio del tiempo, usando la función ilaplace, así:
+dif\ilaplace(función de la frecuencia,s)
+Vale la pena señalar que el DiffEq también hace la operación inversa, es decir, convertir una función del dominio del tiempo al dominio de la frecuencia, usando la función laplace, así:
+dif\laplace(función del tiempo,t)
+11.3.2 Herramienta fd_to_tr del Symbulator
+La herramienta fd_to_tr del Symbulator es realmente una especie de atajo para el uso de la función ilaplace del DiffEq. La única función de esta herramienta es ahorrar al usuario la colocación de la ",s)" al final de la línea de comando. Es la función ilaplace la que hace todo el trabajo. Esta herramienta se usa así:
+sq\fd_to_tr(respuesta en dominio de la frecuencia)
+Nos entrega la respuesta en el dominio del tiempo.
+11.4 Menú del Symbulator
+El Symbulator incluye un programa para crear un menú personalizado, llamado en inglés un Custom Menu. El programa se ejecuta así:
+sq\makemenu()
+Al ejecutarse, este programa creará un menú personalizado, en el cual pueden encontrarse todas las puertas, herramientas y elementos del Symbulator. Así, el usuario evitará tener que escribir los nombres de las herramientas y puertas, pues podrá seleccionarlas usando las flechas del cursor.
+ 
+Figura 105. Menú personalizado del Symbulator.
+Para información sobre cómo restaurar el menú original de la calculadora, léase el Manual de Usuario.
+11.5 Puerta para el dominio del tiempo: tr
+Si escogemos la segunda alternativa, es decir realizar una simulación en el dominio del tiempo t, usaremos la puerta llamada sq\tr.
+11.6 Dato de entrada
+El único dato de entrada que hay que proporcionar a esta puerta es la descripción del circuito, usando la misma notación que se usa para una simulación en el dominio de la frecuencia. La simulación en dominio del tiempo se ordena así: sq\tr(circuito).
+11.7 Condiciones iniciales
+Al igual que la simulación en el dominio de la frecuencia, el quinto término en la descripción de un inductor o un capacitor es su condición inicial.
+11.8 Respuestas
+En el caso de la simulación en dominio del tiempo, las respuestas son: los voltajes en los nodos, las caídas de voltaje en los elementos y las corrientes en los elementos. No se entregan las potencias consumidas por los elementos. Como ya explicamos en el punto 11.2, todas estas respuestas serán entregadas en el dominio del tiempo. Por lo tanto, serán expresiones simbólicas en función del tiempo t.
+Veamos ahora varios problemas que ilustran cómo se resuelven en el Symbulator los problemas de análisis transitorio.
+Problema N( 075
+Planteamiento. a) Según la figura, encuentre la razón IL(s)/Vs(s). b) Haga vs(t)=100u(t) V y encuentre iL(t).
+ 
+Figura 106. Circuito para el Problema N° 075.
+Solución. Como el problema no nos especifica condiciones iniciales, ni tampoco nos da la manera de calcularlas, asumimos que son nulas. Este problema tiene dos partes. La primera nos solicita una respuesta en dominio de la frecuencia, mientras que la segunda nos solicita una respuesta en el dominio del tiempo. Existen dos buenas razones para resolver este problema utilizando la primera alternativa. (Como explicamos en el punto 11.2, la primera alternativa consiste en simular con sq\fd y luego transformar con sq\ft_to_tr.) La primera razón es que sólo nos interesa una respuesta en el dominio del tiempo. La segunda razón es que además nos interesa una respuesta en el dominio de la frecuencia. Como explicamos en el punto 11.2, ambas razones son causa suficiente para usar la primera alternativa en vez de la segunda. A continuación, el procedimiento para resolver este problema.
+Para efectos de responder la primera pregunta, no importa qué valor asignemos a la fuente de voltaje. Podríamos definir su valor como vs, o como 100u(t), y la respuesta sería la misma. Esto se debe a que la respuesta es una relación, y la fuente influirá tanto en el numerador como en el denominador, cancelándose su efecto. Ahora bien, si al principio utilizamos un valor como vs, cuando vayamos a responder la segunda pregunta, tendremos que volver a simular utilizando el nuevo valor de 100u(t). Sin embargo, si al principio utilizamos el valor de 100u(t), esta única simulación nos servirá para responder ambas preguntas. Así, aprovechamos el hecho de que la primera pregunta nos lo permite, y usamos el valor de la fuente como 100u(t). Es necesario decir que la función ilaplace del programa DiffEq entiende lo que significan u(t) y ((t). De hecho, esta función asume que cualquier valor numérico introducido está multiplicado por u(t). Por ello, no es necesario introducir el valor 100u(t), pues para ilaplace decir 100 y decir 100u(t) es lo mismo. A continuación, la descripción:
+sq\fd("e1,1,0,100,0;r1,1,2,15,0;r2,3,0,20,0;l1,2,0,5,0;l2,3,0,3,0;m1,l1,l2,2,0")
+Con ¸ð, s e e j e c u t a l a s i m u l a c i ó n . P a r a r e s p o n d e r l a p r i m e r a p r e g u n t a , s o l i c i t a m o s l a r e l a c i ó n i r 2 / v 1 y o b t e n e m o s 2 * s / ( 1 1 * s ^ 2 + 1 4 5 * s + 3 0 0 ) . P a r a r e s p o n d e r l a s e g u n d a p r e g u n t a , u s a m o s s q \ f d _ t o _ t r ( i r 2 ) y o b t e n e m o s 4 0 * ( ( 3 1 3 ) * e ^ ( ( 5 * ( ( 3 1 3 ) / 2 2 - 1 4 5 / 2 2 ) * t ) / 3 1 3 - 4 0 * ( ( 3 1 3 ) * e ^((-5*((313)/22-145/22)*t)/313. Estas son las respuestas correctas. ¿Desea el lector ver las respuestas en forma aproximada? Si solicitamos approx(ans(1)), obtendremos 2.26*(.0765)^t-2.26*(2.46E-5)^t (redondeando). Si solicitamos expand(ans(1)) , obtendremos 2.26/(e^t)^(2.57)-2.26/(e^t)^(10.6) (redondeando). Aprendamos más sobre este comportamiento de las respuestas aproximadas.
+11.9 Presentación aproximada con exponencial
+Cuando el modo Exact/Approx está en AUTO, la calculadora TI mantendrá una expresión en la forma e^(nt) sólo si n es un número exacto. Por ejemplo, si introducimos e^(2t/3) en la línea de entrada, veremos que en el área de historia la calculadora nos presenta también e^(2t/3). Esto se debe a que el número que acompaña a t, es decir 2/3, es un número exacto.
+ 
+Figura 107. La exponencial se mantiene como tal.
+La desventaja de esta manera exacta de presentar la respuesta reside en que en algunas ocasiones, como en el caso del problema que acabamos de resolver, la expresión exacta es tan voluminosa, que resulta incómodo su uso. Además, algunos libros de texto y profesores favorecen las respuestas en presentación aproximada.
+Si n es un número aproximado, la calculadora convertirá la expresión a un valor totalmente aproximado, al punto de eliminar las exponenciales. Por ejemplo, usemos la expresión en forma aproximada, ya sea introduciendo e^(2t/3.) o approx(e^(2t/3)) en la línea de entrada, (pues tanto el punto como el comando approx tienen el efecto de convertir la expresión en aproximada). Veremos que en el área de historia la calculadora nos presenta ahora (1.94773404)^t. Esto se debe a que el número que acompaña a t, es decir 2/3., es un número aproximado.
+ 
+Figura 108. La exponencial se convierte a un aproximado.
+La desventaja de esta manera totalmente aproximada de presentar la respuesta reside en que los exponenciales han sido reemplazados, diluídos en el número base aproximado. En los años que llevo estudiando ingeniería eléctrica, jamás he visto un libro de texto o un profesor que favorezca el uso de las respuestas en esta presentación aproximada sin exponenciales.
+Por lo tanto, es deseable obtener una combinación de las virtudes de ambas maneras: una expresión aproximada que sea más pequeña que la exacta, pero que conserve las exponenciales en su lugar. En la calculadora TI, es posible obtener este tipo de respuesta, utilizando el comando expand. Este comando se utiliza así: expand(expresión,variable), y su resultado es que la expresión será mostrada de manera expandida, con respecto a la variable. En nuestro ejemplo, si introducimos expand(e^(2t/3.),t) o expand(approx(e^(2t/3)),t) en la línea de entrada, veremos que en el área de historia la calculadora nos presenta (e^t)^.666666667.
+ 
+Figura 109. La expresión se expande.
+También en este caso, nosostros preferiríamos una presentación algo diferente, así como la siguiente: e.666666667t. Aún así, esa presentación es mucho mejor que las dos anteriores.
+Si expandimos una expresión exponencial cuyo número n es negativo, el comando expand mostrará un comportamiento interesante. Por ejemplo, con expand(e^(-2t/3.),t) en la línea de entrada, veremos que en el área de historia la calculadora nos presenta 1/(e^t)^.666666667.
+ 
+Figura 110. La exponencial aparece en el denominador.
+Ciertamente, nosostros preferiríamos una presentación diferente, así como la siguiente: e^-.666666667t. Pero teniendo la primera expresión, podemos obtener la segunda fácilmente.
+Problema N( 076
+Planteamiento. a) Para el circuito que se muestra en la figura, encuentre H(s)=vC2/vS. b) Sea vC1(0+)=0 y vC2(0+)=0. Encuentre vC2(t) si vS(t)=u(t).
+ 
+Figura 111. Circuito para el Problema N° 076.
+Solución. El problema nos especifica claramente que las condiciones iniciales son nulas. Como este problema es idéntico al anterior, nos ahorramos las explicaciones, pues resultarían redundantes. Sólo diremos que, para el DiffEq, y por ende para el Symbulator, u(t) es lo mismo que 1.
+sq\fd("es,1,0,1,0;r1,1,2,50,0;r2,2,3,20,0;cc1,2,0,.04,0;cc2,3,0,.01,0")
+Con ¸ð, s e e j e c u t a l a s i m u l a c i ó n . P a r a r e s p o n d e r l a p r i m e r a p r e g u n t a , s o l i c i t a m o s l a r e l a c i ó n v 3 / v 1 y o b t e n e m o s 2 . 5 / ( s ^ 2 + 6 . 7 5 * s + 2 . 5 ) . P a r a r e s p o n d e r l a s e g u n d a p r e g u n t a , u s a m o s e x p a n d ( s q \ f d _ t o _ t r ( v 3 ) , t ) y o b t e n e m o s - 1 . 0 6 6 / ( e ^ t ) ^ ( . 3 9 3 ) + . 0 6 5 9 / ( e ^ t ) ^ ( 6 . 3 6 ) + 1 . ( r e d ondeando). 
+En vez de haber usado expand(sq\fd_to_tr(v3),t), pudimos haber usado primero sq\fd_to_tr(v3) y luego expand(ans(1),t), y el resultado sería el mismo.
+11.10 Intervalos y simulaciones
+En el Symbulator, cada intervalo de tiempo requiere una simulación. Para simular el comportamiento de un circuito que tiene un interruptor, el cual conmuta en un tiempo dado, digamos t=0, debemos hacer dos simulaciones: una para t<0 y otra para t>0.
+El mismo principio rige para la función u(t). Matemáticamente, n*u(t) indica que para tiempos <t la función vale 0, y para tiempos >t la función vale n. De la misma forma, matemáticamente, n*u(-t) indica que para tiempos <t la función vale n, y para tiempos >t la función vale 0. Para efectos de la simulación, la u(t) no tiene ese significado. Debemos realizar una simulación para cada intervalo de tiempo.
+Veamos varios ejemplos.
+Problema N( 077
+Planteamiento. Después de permanecer cerrado por mucho tiempo, el interruptor en el circuito de la figura se abre en t=0. a) Encuentre iL(t) para t>0. b) Evalúe iL(10ms). c) Encuentre t1 si iL(t1)= 0.5iL(0).
+ 
+Figura 112. Circuito para el Problema N° 077.
+Solución. El problema nos indica que hay un interruptor que conmuta en t=0. Debemos realizar primero una simulación, en corriente directa, para t<0, la cual nos permitirá encontrar la condición inicial del inductor. Luego realizaremos una segunda simulación, en dominio de la frecuencia, para t>0, para responder las preguntas. El procedimiento es el siguiente:
+sq\dc("r1,1,0,20;r2,2,1,10; r 3 , 2 , 3 , 5 0 ; l 1 , 3 , 0 , . 2 ; e 1 , 2 , 0 , 1 0 0 " ) : i l 1 
+ S o l i c i t a m o s l a s i m u l a c i ó n e n c o r r i e n t e d i r e c t a , y s e g u i d a m e n t e p e d i m o s l a c o r r i e n t e e n e l i n d u c t o r . C o n ¸ð, s e e j e c u t a l a s i m u l a c i ó n . O b t e n e m o s 2 c o m o c o r r i e n t e e n e l i n d u c t o r . E s t a s e r á s u c o n d i c i ó n i n i c i a l p a r a l a s i m u l a c i ó n d e l s i g u i e n t e i n t e r v a l o . 
+ s q \ f d ( " r 1 , 1 , 0 , 2 0 , 0 ; r 2 , 2 , 1 , 1 0 , 0 ; r 3 , 2 , 3 , 5 0 , 0 ; l 1 , 3 , 0 , . 2 , 2 " ) : s q \ f d _ t o _ t r ( i l 1 ) 
+ S o l i c i t a m o s l a s i m u l a c i ó n e n d o m i n i o d e l a f r e c u e n c i a , y s e g u i d a m e n t e p e d i m o s l a c o r r i e n t e e n e l i n d u c t o r , e n d o m i n i o d e l t i e m p o . C o n ¸ð, s e e j e c u t a la simulación. Obtenemos 2*e^(-400*t) como expresión para la corriente en el inductor. Esto responde la pregunta a).
+Para responder la pregunta b), usamos ans(1)|t=10E-3 y obtenemos .0366 (redondeando).
+Para responder la pregunta c), usamos solve(ans(2)=.5*2,t). Nótese que la orden quiere decir: "Dime cuánto vale el tiempo cuando se cumple que la expresión 2*e^(-400*t), invocada por ans(2), es igual a 0.5 la corriente inicial, la cual es 2." Obtenemos t=.00173 (redondeando).
+En resumen, este problema no nos entregó las condiciones iniciales, pero nos entregó una manera para calcularlas mediante una simulación en corriente directa para antes de que conmutara el interruptor. Este problema requirió dos simulaciones, una para cada intervalo de tiempo.
+Problema N( 078
+Planteamiento. Si iL(0)=10 A en el circuito de la figura, encuentre iL(t) para t>0.
+ 
+Figura 113. Circuito para el Problema N° 078.
+Solución. El problema nos entrega la condición inicial del inductor. Por lo tanto, sólo necesitamos realizar una simula c i ó n : 
+ s q \ f d ( " j 1 , 0 , 1 , i l / 4 , 0 ; r 1 , 1 , 0 , 2 0 , 0 ; r 2 , 1 , 2 , 1 0 , 0 ; l , 2 , 0 , . 5 , 1 0 " ) : s q \ f d _ t o _ t r ( i l ) 
+ S o l i c i t a m o s l a s i m u l a c i ó n e n d o m i n i o d e l a f r e c u e n c i a , y s e g u i d a m e n t e p e d i m o s l a c o r r i e n t e e n e l i n d u c t o r e n d o m i n i o d e l t i e m p o . C o n ¸ð, s e e j e c u t a l a s i m u l a c i ó n . O b t e n e m o s 1 0 *e^(-50*t) como expresión para la corriente en el inductor.
+Este problema nos entregó las condiciones iniciales. Sólo requirió una simulación.
+Problema N( 079
+Planteamiento. a) Encuentre vC(t) para t>0. b) ¿En qué tiempo vC= 0.1vC(0)?
+ 
+Figura 114. Circuito para el Problema N° 079.
+Solución. Este problema es similar al Problema N( 076. Preferimos usar valores exactos.
+sq\dc("j1,0,1,8;r1,1,0,200;r2,1,2,20;r3,2,0,30;r4,2,3,24;c,3,0,(1/3)/1000"):vc
+Simulamos en corriente directa, y pedimos el voltaje en el capa c i t o r . P r e s i o n a m o s ¸ð. O b t e n e m o s 1 9 2 c o m o v o l t a j e e n e l c a p a c i t o r . E s t a s e r á s u c o n d i c i ó n i n i c i a l p a r a l a s i m u l a c i ó n d e l s i g u i e n t e i n t e r v a l o . S i m u l a m o s e n d o m i n i o d e l a f r e c u e n c i a , y p e d i m o s e l v o l t a j e e n e l c a p a c i t o r , e n d o m i n i o d e l t i e m p o . 
+ s q \ f d ( " j 1 , 0 , 1 , 8,0;r1,1,0,200,0;r2,1,2,20,0;r3,2,0,30,0;r4,2,3,24,0;c,3,0,(1/3)/1000,192;s1,2,0,0,0"):sq\fd_to_tr(vc)
+Nótese que para simular el interruptor cerrado, usamos un cortocircuito. Podríamos haber eliminado la parte del circuito que está a la izquierda del interruptor, pues no nos interesa. Así ahorraríamos trabajo al simulador. Pero seremos rigurosos, y la dejaremos. Presionamos ¸ð. O b t e n e m o s 1 9 2 * e ^ ( - 1 2 5 * t ) . E s t o r e s p o n d e l a p r e g u n t a a ) . 
+ P a r a r e s p o n d e r l a p r e g u n t a b ) , u s a m o s s o l v e ( a n s ( 1 ) = . 1 * a n s ( 2 ) , t ) . L a o r d e n q u i e r e d e c i r : " D i m e c u á n t o v a l e e l t i e m p o c u a n d o s e c u m p l e q u e l a e x p r e s i ó n 1 9 2 * e ^ ( - 1 2 5 * t ) , i n v o c a d a p o r a n s ( 1 ) , e s i g u a l a 0.1 el voltaje inicial, invocado por ans(2)". Obtenemos t=.01842 (redondeando).
+Este problema no nos entregó las condiciones iniciales, pero nos entregó una manera para calcularlas, mediante una simulación en corriente directa del intervalo anterior a la conmutación del interruptor. Este problema requirió dos simulaciones, una para cada intervalo de tiempo.
+Problema N( 080
+Planteamiento. Suponga que el circuito que se muestra en la figura se encuentra en esa forma desde hace mucho tiempo. Encuentre vC(t) para t>0.
+ 
+Figura 115. Circuito para el Problema N° 080.
+Solución. Veamos.
+sq\dc("e1,1,0,vc/4;r1,1,2,5;r2,2,0,10;c,2,0,10^-6; r3,2,3,4;e2,3,0,40"):vc
+Preferimos usar valores exactos. Recuérdese que el signo de 10^-6 es el de negativo, no el de resta. Presionamos ¸ð. O b t e n e m o s 2 0 c o m o v o l t a j e e n e l c a p a c i t o r . E s t a s e r á s u c o n d i c i ó n i n i c i a l p a r a l a s i m u l a c i ó n d e l s i g u i e n t e i n t e r v a l o . 
+ s q \ f d ( " e 1 , 1 , 0 , v c / 4 , 0 ; r 1 , 1 , 2 , 5 , 0 ; r 2 , 2 , 0 , 1 0 , 0 ; c , 2 , 0 , 1 0 ^ - 6 , 2 0 " ) : s q \ f d _ t o _ t r ( v c ) 
+ S i m u l a m o s e n d o m i n i o d e l a f r e c u e n c i a , y p e d i m o s e l v o l t a j e e n e l c a p a c i t o r , e n d o m i n i o d e l t i e m p o . P r e s i o n a m o s ¸ð. O b t e n e m o s 2 0 * e ^ ( - 2 5 0 0 0 0 * t ) . 
+ E s t e p r o b l e m a n o n o s e n t r e g ó l a s c o n d i c i o n e s i n i c i a l e s , p e r o n o s e n t r e g ó u n a m a n e r a p a r a c a l c u l a r l a s . E s t e p r o b l e m a r e q u i r i ó d o s s i m u l a c i o n e s , u n a p a r a c a d a i n t e r v a l o d e tiempo.
+Problema N( 081
+Planteamiento. Suponga que el op-amp es ideal. Encuentre vo(t).
+ 
+Figura 116. Circuito para el Problema N° 081.
+Solución. El problema nos da a entender que no hay condiciones iniciales. Por ello, realizaremos sólo una simulación. Simulamos en dominio de la frecuencia, y pedimos el voltaje en el capacitor, en dominio del tiempo. Preferimos usar valores exactos.
+sq\fd("j1,0,1,5/1000,0;r1,1,0,250,0;ca,1,2,8/1000,0;r2,2,0,1000,0;o1,2,3,3,0;r3,3,0,50,0"):sq\fd_to_tr(v3)
+Presionamos ¸ð. O b t e n e m o s e ^ ( - t / 1 0 ) . 
+ E s t e p r o b l e m a u s ó c o n d i c i o n e s i n i c i a l e s n u l a s . S ó l o r e q u i r i ó u n a s i m u l a c i ó n . 
+ P r o b l e m a N ( 0 8 2 
+ P l a n t e a m i e n t o . S u p o n g a q u e e l o p - a m p e s i d e a l . E n c u e n t r e v o ( t ) . 
+ 
+ F i g u r a 1 1 7 . C i r c u i t o p a r a e l P r o b l e m a N ° 0 8 2 . 
+ S o l u c i ó n . E s t e p r o b l e m a e s i g u a l a l a n t e r i o r . P r e f e r i m o s u s a r v a l o r e s a p r o x i m a d o s . 
+ s q \ f d ( " j 1 , 0 , 1 , . 5 E - 6 , 0 ; r 1 , 1 , 0 , 2 E 6 , 0 ; c a , 1 , 2 , . 5 E - 6 , 0 ; o 1 , 0 , 2 , 3 , 0 ; c b , 2 , 3 , . 1 E - 6 , 0 ; r 2 , 3 , 0 , 1 0 0 , 0 " ) : s q \ f d _ t o _ t r ( v 3 ) 
+ P r e s i o n a m o s ¸ð. O b t e n e m o s 5 . * e ^ ( - t ) - 5 . 
+ E s t e p r o b l e m a u s ó c o n d i c i o n e s i n i c i a l e s n u l a s . S ó l o r equirió una simulación.
+Problema N( 083
+Planteamiento. En el circuito mostrado, sea L=5H, R=8(, C=12.5mF y v(0+)=40V. Encuentre a) v(t) si i(0+)=8 A, b) i(t) si iC(0+)=8 A.
+ 
+Figura 118. Circuito para el Problema N° 083.
+Solución. El problema nos da la condición inicial del capacitor. Luego nos hace dos preguntas. Para la primera pregunta, nos indica también la condición inicial del inductor. Simulamos en dominio de la frecuencia, y pedimos el voltaje en dominio del tiempo.
+sq\fd("l,1,0,5,8;r,1,0,8,0;c,1,0,1 2 . 5 E - 3 , 4 0 " ) : s q \ f d _ t o _ t r ( v 1 ) 
+ P r e s i o n a m o s ¸ð. O b t e n e m o s 1 6 0 . * e ^ ( - 8 * t ) - 1 2 0 . * e ^ ( - 2 * t ) . E s t o r e s p o n d e l a p r e g u n t a a ) . 
+ P a r a l a s e g u n d a p r e g u n t a , e l p r o b l e m a n o n o s i n d i c a l a c o n d i c i ó n i n i c i a l d e l i n d u c t o r , p e r o n o s d a l a m a n e r a d e e n c o n t r a r l a . S i m u l a m o s e n d o m i n io de la frecuencia, y pedimos el voltaje en dominio del tiempo. Usamos un valor simbólico io como condición inicial para el inductor, ya que no conocemos su valor numérico. (La condición inicial del inductor que nos entregó el problema anteriormente era válida sólo para la pregunta a).
+sq\fd("l,1,0,5,io;r,1,0,8,0;c,1,0,12.5E-3,40")
+Presionamos ¸ð. S a b e m o s q u e l a c o r r i e n t e e n e l c a p a c i t o r v a l e 8 e n t = 0 . P e d i m o s s q \ f d _ t o _ t r ( i c ) y o b t e n e m o s u n a e x p r e s i ó n s i m b ó l i c a e n t é r m i n o s d e i o . D e b e m o s r e s o l v e r e s t a e x p r e s i ó n p a r a o b t e n e r e l v a l o r n u m é r i c o d e i o . L a r e s o l v e m o s a s í : s o l v e ( a n s ( 1 ) = 8 , i o ) | t = 0 . L o q ue estamos pidiendo es: "Dime cuánto vale io si la corriente en el capacitor, cuya expresión se encuentra en ans(1), en el tiempo cero vale 8." Esto es una manera de preguntar: ¿Cuánto tiene que ser la condición inicial del inductor para que la corriente en el capacitor en tiempo cero sea 8? Obtenemos: io=-13.. Esa es la condición inicial del capacitor. Ahora debemos encontrar la expresión para la corriente en el inductor. Podríamos simular nuevamente, usando la condición inicial numérica. Pero lo más sencillo es simplemente reemplazar en la expresión el valor que acabamos de encontrar con solve. Pedimos sq\fd_to_tr(il)|ans(1) y obtenemos 3.*e^(-8*t)-16.*e^(-2*t). Esto responde la pregunta b).
+Problema N( 084
+Planteamiento. Encuentre iL(t) para t>0 en el circuito que se muestra en la figura.
+ 
+Figura 119. Circuito para el Problema N° 084.
+Solución. Debemos entender la u(-t) como un interruptor: la fuente vale 100 para t<0, y vale 0 para t>0. Por lo tanto, usaremos el concepto de dos intervalos.
+sq\dc("r,1,0,5 0 ; c , 1 , 0 , 2 . 5 E - 6 ; l , 1 , 2 , ( 1 0 0 / 3 ) E - 3 ; e , 2 , 0 , 1 0 0 " ) 
+ R e c u é r d e s e q u e e l s i g n o q u e a p a r e c e e n E - 6 e s e l d e n e g a t i v o , n o e l d e r e s t a . P r e s i o n a m o s ¸ð. O b t e n g a m o s l a s c o n d i c i o n e s i n i c i a l e s . P a r a v c o b t e n e m o s 1 0 0 . P a r a i l o b t e n e m o s - 2 . S i m u l a m o s e n d o m i n i o d e l a f r e c u e ncia, y pedimos la corriente en el inductor, en dominio del tiempo.
+sq\fd("r,1,0,50,0;c,1,0,2.5E-6,100;l,1,2,(100/3)E-3,-2; e,2,0,0,0"):expand(sq\fd_to_tr(il))
+Nótese que a la fuente se le dió un valor de 0. Había otras dos alternativas: usar un cortocircuito, o eliminar la fuente y conectar el inductor al nodo de referencia. Presionamos ¸ð. O b t e n e m o s . 2 5 / ( e ^ t ) ^ 6 0 0 0 - 2 . 2 5 / ( e ^ t ) ^ ( 2 0 0 0 . ) . E s t o e s l o m i s m o q u e d e c i r . 2 5 e - 6 0 0 0 t - 2 . 2 5 e - 2 0 0 0 t 
+ P r o b l e m a N ( 0 8 5 
+ P l a n t e a m i e n t o . E n c u e n t r e i s ( t ) p a r a t > 0 e n e l c i r c u i t o d e l a f i g u r a s i v s ( t ) e s a ) 1 0 u ( - t ) V , b ) 1 0 u ( t ) V . 
+ 
+ F i g u r a 1 2 0 . C i r c u i t o p a r a e l Problema N° 085.
+Solución. Respondamos la pregunta a). Debemos entender la u(-t) como un interruptor que hace que la fuente valga 10 para t<0, y 0 para t>0. Por lo tanto, usaremos el concepto de dos intervalos.
+sq\dc("e,1,0,10;r,1,2,500;l,1,2,4/3;c,2,0,1/10^6")
+Presionamos ¸ð. O b t e n g a m o s l a s c o n d i c i o n e s i n i c i a l e s . P a r a v c o b t e n e m o s 1 0 . P a r a i l o b t e n e m o s 0 . 
+ s q \ f d ( " e , 1 , 0 , 0 , 0 ; r , 1 , 2 , 5 0 0 , 0 ; l , 1 , 2 , 4 / 3 , 0 ; c , 2 , 0 , 1 / 1 0 ^ 6 , 1 0 " ) : s q \ f d _ t o _ t r ( - i e ) 
+ U s a m o s e l n e g a t i v o e n i e p o r q u e i s e s t á d e f i n i d a e n s e n t i d o c o n t r a r i o a i e . P r e s i o n a m o s ¸ð. O b t enemos e^(-500*t)/400-9*e^(-1500*t)/400. Si queremos ver la respuesta en forma aproximada, en vez de sq\fd_to_tr(-ie), usamos expand(approx(sq\fd_to_tr(-ie))). Obtenemos la expresión .0025/(e^t)^500-.0225/(e^t)^1500. Esto es lo mismo que decir .0025e-500t- .0225e-1500t . Esto responde la pregunta a).
+Respondamos la pregunta b). Debemos entender la u(t) como un interruptor que hace que la fuente valga 0 para t<0, y 10 para t>0. Por lo tanto, sólo necesitaremos un intervalo, pues la fuente está muerta antes d e t . U s a m o s c o n d i c i o n e s i n i c i a l e s n u l a s . 
+ s q \ f d ( " e , 1 , 0 , 1 0 , 0 ; r , 1 , 2 , 5 0 0 , 0 ; l , 1 , 2 , 4 / 3 , 0 ; c , 2 , 0 , 1 / 1 0 ^ 6 , 0 " ) : s q \ f d _ t o _ t r ( - i e ) 
+ P r e s i o n a m o s ¸ð. O b t e n e m o s 9 * e ^ ( - 1 5 0 0 * t ) / 4 0 0 - e ^ ( - 5 0 0 * t ) / 4 0 0 . S i q u e r e m o s v e r l a r e s p u e s t a e n f o r m a a p r o x i m a d a , u s a m o s e l m i s m o p r o c e d i m i e n t o explicado arriba. Obtendríamos .0225e-1500 t - .0025e-500 t . Esto responde la pregunta b).
+11.11 El Modo (Impala)
+Al igual que el Modo (Experto), el Modo (Impala) es una variante en la manera en que el Symbulator resuelve un problema. Pero a diferencia del (Experto) que debe ser activado por el usuario a voluntad, el (Impala) se activa automáticamente cuando es necesario.
+El Modo (Impala) se activa cuando el usuario introduce alguna fuente cuyo valor está en función del tiempo, es decir que contiene exponenciales, funciones trigonométricas, etc. Ejemplos de estas fuentes serían: 100e-80t, 10e-tsen(2t+30() y otras por el estilo.
+Lo que hace este modo es escribir y resolver las ecuaciones utilizando el valor de la fuente como una variable simbólica, llamada (nombre, donde nombre es el de la fuente. Una vez se han resuelto las ecuaciones, antes de almacenar las respuestas, el Impala reemplaza la variable (nombre por el valor de la fuente en dominio de la frecuencia. Esta simple sustitución ahorra una considerable cantidad de tiempo. En el siguiente ejemplo, y en un ejemplo del siguiente capítulo, veremos el Modo (Impala) en acción. Sabremos que este modo se activa cuando en la pantalla aparezcan los mensajes que así lo indican.
+Este modo recibe su nombre en honor a un antílope africano, el cual al verse amenazado por sus depredadores, escapa dando prodigiosos saltos. Así también el Symbulator, al encontrarse con fuentes muy complejas, salta, evitando el uso de su valor complicado y resuelve las ecuaciones usando un valor simbólico simple; luego aterriza, reemplazando la fuente por su valor complicado en dominio de la frecuencia.
+
+Problema N( 086
+Planteamiento. Sean vs=100e-80t y v1(0)=20V en el circuito de la figura. a) Encuentre i(t). b) Encuentre v1(t). c) Encuentre v2(t).
+ 
+Figura 121. Circuito para el Problema N° 086.
+Solución. El problema nos da la condición inicial del capacitor de 1(F, sin embargo no nos indica las de los capacitores de 4(F y de 2(F. Ejecutar una simulación en DC de este circuito no nos ayudará a encontrar estas condiciones iniciales. Pero podemos deducirlas fácilmente, usando la Ley de los Voltajes de Kirchhoff. Así, deducimos que la condición inicial del capacitor de 4(F es 80V, y la del capacitor de 2(F es 100V.
+Como el problema nos pide tres respuestas en el dominio del tiempo, y el circuito es pequeño, usaremos TR en vez de FD. Usaremos valores exactos.
+sq\tr("e,1,0,100e^(-80t),0;cc1,1,2,1*10^-6,20; cc2,2,0,4*10^-6,80;cc3,1,0,2*10^-6,100")
+Nótese que el orden en que se han definido los no d o s d e l o s c a p a c i t o r e s e s t á d e a c u e r d o c o n l a p o l a r i d a d d e l v o l t a j e i n i c i a l d e c l a r a d o . P r e s i o n a m o s ¸ð. V e m o s q u e e l M o d o ( I m p a l a ) t o m a p a r t e e n l a s i m u l a c i ó n . P e d i m o s i c c 1 y o b t e n e m o s - 4 * e ^ ( - 8 0 * t ) / 6 2 5 . P e d i m o s v c c 1 y o b t e n e m o s 8 0 * e ^ ( - 8 0 * t ) - 6 0 . P e d i m o s v c c 2 y obtenemos 20*e^(-80*t)+60. Estas son las respuestas correctas.
+ PAGE 10 
+
+11 - PAGE 20 
+Simulación en el dominio del tiempo
+
+Roberto Pérez-Franco - Symbulator
+
+Conceptos generales del Symbulator

@@ -1,0 +1,28 @@
+Apéndice
+C
+¿Cuándo es preferible no usar el Symbulator ?
+Una importante habilidad que debe desarrollar un usuario del Symbulator es la de reconcer cuándo la simulación le representa un ahorro de tiempo y cuándo no. Esta habilidad se manifiesta como una especie de olfato, de intuición, que le dice si, debido a la naturaleza de un problema, le resultará más complicado resolverlo con una simulación simbólica que con técnicas manuales. Se adquiere tras mucha práctica. Sólo la propia experiencia nos proporcionará esta intuición especial.
+A continuación, presento un ejemplo que ilustra un caso en el cual es recomendable declinar el uso del simulador. Se trata de un circuito que, a primera vista, parece ser un candidato perfecto para la simulación simbólica en el Symbulator. Sin embargo, resulta mucho más sencillo usar una simple línea con el comando solve de la calculadora para resolverlo.
+Problema N( 089
+Planteamiento. En el circuito mostrado, se sabe que abs(I1)=5 A y abs(I2)=7 A. Encuentre I1 e I2.
+ 
+Figura 140. Circuito para el problema N° 089.
+Solución. Simplemente, usaremos el comando solve:
+cSolve(abs(i1)=7 and abs(i2)=5 and i1+i2=10, {i1=1+1i,i2=1-1i})
+Nótense dos aspectos de esta línea:
+Hemos escrito tres ecuaciones para encontrar dos incógnitas. Este podría parecer un error, pues se debe tener igual número de ecuaciones que de incógnitas. Sin embargo, cuando recordamos que cada incógnita compleja es en verdad dos incógnitas, comprendemos que deseamos resolver cuatro incógnitas y no dos. La tercera ecuación puede ser considerada, desde esta perspectiva, como dos ecuaciones en lugar de una, pues en ella se expresan implícitamente las siguientes dos ecuaciones: real(i1)+real(i2)=10 and imag(i1)+imag(i2)=0. Así, en la línea de comando mostrada arriba tenemos virtualmente cuatro ecuaciones con cuatro incógnitas.
+Hemos agregado un signo de igualdad y un valor seguido al nombre de cada variable, al listar las incógnitas. En vez de decir {i1,i2}, hemos dicho {i1=1+1i,i2=1-1i}. Estos valores se conocen como condiciones iniciales, y su función es darle a la calculadora un punto de partida para la resolución numérica de las ecuaciones. Mientras más cercano al valor real sea el punto de partida, más rápido se encontrará la respuesta. Obsérvese que hemos dado un valor imaginario positivo a I1, y un valor imaginario negativo a I2. La razón es simple: sabemos de antemano que, como la rama de I2 tiene un capacitor, su parte imaginaria será negativa, mientras que la parte imaginaria de I1 será positiva, pues hay una inductancia e n e s a r a m a . 
+ P r e s i o n a m o s ¸ð. A p a r e c e n l a s r e s p u e s t a s . D e p e n d i e n d o d e l o s m o d o s d e l a c a l c u l a d o r a , l a s r e s p u e s t a s s e m o s t r a r á n e n f o r m a r e c t a n g u l a r o p o l a r . C o m o d e s e a m o s v e r l a s e n f o r m a p o l a r , s i n i m p o r t a r l o s m o d o s , u s a m o s l a h e r r a m i e n t a a b s a n g , a s í : 
+ s q \ a b s a n g ( i 1 ) | a n s ( 1 ) 
+ a n s ( 1 ) s e r e f i e r e a l a s r e s p u e s t a s o b t e n i d a s p o r e l c o m a n d o a n t e r i o r . E l n ú m e r o q u e e s t á e n t r e p a r é n t e s i s i n d i c a a q u é r e s p u e s t a a n t e r i o r n o s r e f e r i m o s . P r e s i o n a m o s ¸ð. O b t e n e m o s 7 . ( 2 7 . 6 6 ( . 
+ s q \ a b s a n g ( i 2 ) | a n s ( 2 ) 
+ P r e s i o n a m o s ¸ð. O b t e n e m o s 5 . (-40.54(.
+Nótese cómo hemos obtenido estas respuestas fácilmente, usando solve. Usando el Symbulator, el esfuerzo hubiese sido mucho mayor. Por eso, en este caso y en muchos otros casos similares a éste, es preferible declinar el uso del simulador, y tomar otro camino más sencillo.
+ PAGE 10 
+
+C - PAGE 2 
+¿Cuándo es preferible no usar el Symbulator?
+
+Roberto Pérez-Franco - Symbulator
+
+Simulación avanzada en corriente directa

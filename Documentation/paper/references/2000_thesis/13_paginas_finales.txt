@@ -1,0 +1,32 @@
+Conclusiones
+
+El Symbulator es una herramienta útil para el análisis de circuitos lineales. Permite el uso de valores numéricos y simbólicos. Puede simular en corriente directa, corriente alterna, dominio de la frecuencia y análisis transitorio. Entrega como respuestas todos los valores que interesan al usuario: voltajes en nodos, corrientes, caídas de voltajes y potencias en elementos. Facilita encontrar los equivalentes Thévenin, Norton y de bipuerto de una red.
+Debido a sus capacidades, el Symbulator puede ser de gran ayuda en la enseñanza, aprendizaje y ejercicio de la Ingeniería Eléctrica, en el área de análisis de circuitos lineales, especialmente en aquellos problemas de circuitos que requieran de respuestas simbólicas.
+Es de esperarse que la tecnología desarrollada en el Symbulator, y madurada durante estos dos años de pulimiento, sirva de base para desarrollar más y mejores productos en el futuro, incluyendo programas para nuevas plataformas tales como computadoras personales y computadoras portátiles.
+ Recomendaciones
+
+No escribo estas recomendaciones como autor, sino basándome en mi propia experiencia como usuario, y en los testimonios que he recibido por escrito de los cientos de estudiantes y profesionales que han empleado el Symbulator como una herramienta de aprendizaje y verificación, durante los dos años de desarrollo.
+Recomiendo que los profesores empleen el Symbulator como un instrumento de enseñanza en sus cursos de teoría de circuitos. Creo que este simulador tiene cabida en el salón de clases, debido a sus características y portabilidad. Los profesores pueden utilizarlo para verificar las claves de sus exámenes antes de calificarlos, y como parte de sus clases.
+Considero que el estudiante debe aprender en primer lugar las técnicas manuales de resolución de circuitos, y que en las evaluaciones los profesores deben exigirle presentar todos los cálculos y pasos manualmente. Al mismo tiempo, recomiendo que se le permita al estudiante emplear instrumentos como el Symbulator, a manera de herramienta de verificación en clases, tareas y exámenes. Pienso que el tener una manera de verificar sus respuestas, favorecerá el aprendizaje y la confianza del estudiante en sí mismo. Especialmente porque los libros de textos de teoría de circuitos no incluyen respuestas a todos los problemas que presentan, y porque algunas de las respuestas que presentan están erradas.
+ Referencias
+
+Análisis de circuitos en ingeniería
+Hyat & Kemmerly
+Quinta edición (Tercera edición en español)
+Editora McGraw-Hill
+1993
+
+Manual de Usuario - Calculadora TI-89
+Texas Instruments
+Banta Book Group
+1998
+
+Manual de Usuario - Calculadora TI-92Plus
+Texas Instruments
+Banta Book Group
+1999
+ PAGE 10 
+
+ PAGE 
+
+ PAGE xxiv

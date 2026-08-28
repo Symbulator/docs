@@ -1,0 +1,295 @@
+Capítulo
+6
+Simulación numérica en corriente alterna
+
+6.1 Fasores en la calculadora TI
+En el análisis en corriente alterna, se utilizan fasores. La calculadora TI es una magnífica herramienta para manejar números complejos, ya sea en operaciones sencillas tales como suma, resta, multiplicación y división, o en operaciones realmente complicadas, tales como manipulación de matrices y resolución de ecuaciones simultáneas no lineales con términos simbólicos y complejos.
+El operador imaginario se distingue en la calculadora TI con un símbolo distinto a la i minúscula, que luce algo así: i, y se escribe con las teclas ( (.
+La calculadora puede presentar los números complejos en tres maneras: rectangular, polar y exponencial. La manera que usa en un momento dado depende de los modos de la calculadora en ese momento. Si el modo llamado Complex Format está ajustado en RECTANGULAR, los números complejos se presentarán en forma rectangular, así: real+imaginario. Si Complex Format está ajustado a POLAR, la manera de presentación dependerá entonces de otro modo, llamado Angle. Si el modo Angle está ajustado a RADIAN, los números complejos se presentarán en forma exponencial, así: valorevalori. Si por el contrario, Angle está ajustado a DEGREE, se presentarán en forma polar, así: (magnitud ( ángulo en grados).
+Para más información sobre las capacidades de la calculadora TI, sus modos de operación y las maneras en que puede presentar los números complejos, véase el Manual de Usuario.
+Debido a necesidades propias de su operación interna, el Symbulator siempre ajusta estos dos modos, durante la simulación, a RECTANGULAR y RADIAN. Sin embargo, el Symbulator respeta los modos que el usuario tiene seleccionados antes de la simulación. Así que recordará cómo tenía el usuario ajustados estos modos antes de la simulación, y cuando haya terminado su trabajo, volverá a ajustarlos tal como los encontró en un principio.
+Aunque la calculadora puede entregarnos los números complejos en tres presentaciones, normalmente los ingenieros eléctricos los manejamos solamente en dos de ellas: en forma rectangular y en forma polar. Con frecuencia, después de una simulación en corriente alterna, desearemos ver respuestas que están en estos dos formatos. Entonces surge una duda: si deseamos ver los números complejos tanto en forma rectangular como en forma polar, ¿cómo debemos ajustar los modos de la calculadora? La respuesta es que no hay ninguna combinación que permita ver los números en ambos formatos, porque la calculadora no puede adivinar cuándo el usuario los desea en una forma y cuándo en la otra.
+Existen alternativas sencillas para ver los números complejos en presentación rectangular y en presentación polar, sin necesidad de cambiar los modos, y sin importar cómo se encuentran los mismos.
+6.1.1 El comando (Rect
+Si queremos ver un número complejo en forma rectangular, sin importar cómo estén ajustados los modos de la calculadora, podemos usar el comando (Rect. Este comando se puede encontrar en el catálogo de funciones de la calculadora. 
+El catálogo de funciones de la calculadora puede ser accesado a través de la tecla ( en la TI-89, y de la combinación ( ( en la TI-92Plus. Al accesar el catálogo, el usuario verá una lista de todos los comandos disponibles en la calculadora. Presionando la tecla [R], el usuario podrá saltar hasta la parte de esta lista en la cual se encuentran los comandos que empiezan con R. Ahí podrá ver el comando (Rect. Seleccionandolo con el cursor y presionando ( podemos llevarlo hasta la línea de entrada.
+Veamos cómo se utiliza este comando. Supongamos que tenemos una variable llamada sr5, que contiene un valor complejo. Queremos ver este valor en presentación rectangular, y para ello vamos a utilizar el comando (Rect, porque los modos de la calculadora no están ajustados en la forma adecuada. Escribimos en la línea de entrada:
+sr5(Rect.
+En el área de historia aparecerá el valor de sr5 en presentación rectangular.
+6.1.2 La herramienta absang
+Existe un comando (Polar, que es el equivalente del comando (Rect para presentación polar. Sin embargo, este comando nos presentará los números complejos en forma exponencial si el modo Angle está ajustado en RADIAN. Así, pues, no es una solución universal.
+Mi amigo Erwin Baert programó para el primer Symbulator una pequeña función, llamada absang, cuyo algoritmo modifiqué para convertirla en una solución universal a la necesidad de presentar un número complejo en forma polar, sin importar cómo estén los modos de la calculadora. Veamos cómo se utiliza. Supongamos que tenemos una variable llamada sr5, que contiene un valor complejo. Queremos ver este valor en presentación polar, y como no queremos preocuparnos sobre cómo están ajustados los modos de la calculadora, vamos a utilizar la herramienta absang. Escribimos en la línea de entrada:
+sq\absang(sr5)
+En el área de historia aparecerá el valor de sr5 en presentación polar, en formato de texto. Esta es una diferencia entre la herramienta absang y el comando (Rect: el número se presenta en forma de texto.
+Otra de las características de la herramienta absang es que no importa si el valor de entrada es exacto, siempre la salida será aproximada. Esto es así intencionalmente. Su utilidad se verá más adelante, en el Problema N( 031.
+6.1.3 Mi recomendación personal
+Personalmente, yo prefiero mantener el modo Complex Format ajustado en RECTANGULAR, para que así los números complejos siempre se presenten en forma rectangular. Y cuando deseo verlos en forma polar, utilizo la herramienta absang.
+6.2 Puerta para corriente alterna: ac
+Para realizar una simulación en corriente alterna, se usa la puerta llamada sq\ac.
+6.3 Datos de entrada: el circuito y la frecuencia radial
+Al utilizar esta puerta es necesario suministrar, a manera de datos de entrada, el circuito que se quiere simular y la frecuencia angular, en radianes/segundo. Esta frecuencia es la que se designa usualmente como (, y no debe confundirse con la frecuencia f que está dada en Hz. Para obtener ( a partir de f, se usa la fórmula (=2(f. La simulación en corriente alterna se ordena así: sq\ac(circuito,().
+6.4 Respuestas
+En el caso de la simulación de corriente alterna, las respuestas son muy parecidas a las que obtenemos con la simulación en corriente directa: los voltajes en los nodos, las caídas de voltaje en los elementos, las corrientes en los elementos y las potencias consumidas por los elementos. Existen solamente dos diferencias. La primera es que en este caso las respuestas serán valores complejos. La segunda es que las potencias consumidas que nos entrega el simulador son las potencias complejas, en voltamperios (VA). Estas potencias se almacenan en variables cuyo nombre es s más el nombre del elemento. Por ejemplo, si el elemento se llama r5, el nombre de la variable en la cual se almacena la potencia compleja consumida por el elemento es sr5.
+6.5 Comandos real, imag y conj
+La calculadora TI ofrece algunos comandos especiales para trabajar con números complejos. Veamos tres de ellos.
+Para obtener la componente real de esta potencia compleja, y en general de cualquier número complejo, podemos utilizar el comando real de la calculadora, así:
+real(sr5)
+Por otro lado, para obtener la componente imaginaria de esta potencia compleja o de cualquier otro número complejo, podemos utilizar el comando imag de la calculadora, así:
+imag(sr5)
+Si quisiéramos encontrar el conjugado de una corriente compleja o de cualquier otro número complejo, podemos utilizar el comando conj de la calculadora, así:
+conj(ir5)
+Ha llegado el momento de conocer la descripción de algunos elementos usados en el análisis en corriente alterna.
+6.6 Impedancias
+Una impedancia es un elemento resistivo con un valor complejo dado en (. En las descripciones de circuito usadas en el Symbulator, las impedancias se describen exactamente igual que las resistencias, con la única diferencia de que sus valores serán complejos.
+
+6.7 Admitancias
+Una admitancia es un elemento conductivo con un valor complejo dado en siemens. En las descripciones de circuito usadas en el Symbulator, las admitancias se describen con la misma técnica usada para las conductancias, con la única diferencia de que sus valores serán complejos.
+6.8 Capacitores
+Un capacitor es un elemento de circuito que almacena energía en forma de un campo eléctrico y que se opone a cambios bruscos de voltaje.
+6.8.1 Notación
+En el caso del capacitor, la mínima información necesaria para describirlo por completo es la siguiente:
+¿Qué clase de elemento es? Es un capacitor. La letra que identifica a los capacitores es la c.
+¿Cómo se llama el capacitor? Para diferenciar un capacitor dado de cualquier otro capacitor, se le debe dar un nombre cualquiera, que empiece con c. Debe recordarse que la variables llamadas c#, en donde # es un número entre el 1 y el 99, son variables reservadas de la calculadora TI y no pueden ser utilizadas como nombre.
+¿Dónde se encuentra conectado el capacitor? Un capacitor tiene dos extremos, cada uno de ellos conectado a un nodo distinto. Es necesario darle al simulador los nombres de los dos nodos a los cuales está conectado el capacitor. El orden de estos nodos establece la dirección que tendrá en la respuesta el flujo de corriente y la caída del voltaje a través del capacitor.
+¿Cuánto vale el capacitor? Un capacitor tiene un valor. Este valor debe entregarse al Symbulator en faradios. 
+A veces nos encontramos en los libros de texto con problemas en corriente alterna, en los cuales aparecen capacitores cuyos valores están dados en (. Para efectos de la simulación, estos elementos son impedancias, y deben ser tratados como tales en la descripción del circuito, aunque aparezcan dibujados como capacitancias.
+Esto tiende a confundir al usuario novato, quien trata por la fuerza de definir en el Symbulator estos elementos como capacitancias, pero declarando su valor en (. Esto es un error. Los elementos cuyos valores se vayan a declarar en ohmios deben ser tratados como impedancias. Para definirlos como capacitancias, habría que obtener primero su valor en faradios.
+Debe tenerse la precaución de no introducir el valor de la capacitancia en una unidad distinta a los faradios (F). Por ejemplo, si el valor se introduce en microfaradios ((F), las respuestas estarán equivocadas.
+Así, los capacitores se definen como se muestra a continuación:
+cnombre, nodo 1, nodo 2, valor en faradios
+En el análisis en corriente alterna, solamente se declaran estos cuatro términos. Veremos en capítulos posteriores que el análisis en dominio de la frecuencia y el análisis transitorio requieren un quinto término, para declarar el voltaje inicial del capacitor. Cuando el capacitor tenga un voltaje inicial, debemos colocarlo en el quinto término, y dar los nodos en el orden adecuado que indique la polaridad que deseamos darle a este voltaje inicial: el primer nodo con respecto al segundo nodo de la descripción. El dibujo del circuito nos indicará, con los signos de positivo y negativo, la polaridad que debemos darle al capacitor. Ejemplo:
+cnombre, nodo 1, nodo 2, valor, voltaje inicial
+Este voltaje inicial es captado por el simulador considerándolo como el voltaje del nodo 1 con respecto al nodo 2.
+En el análisis en corriente directa, el Symbulator considera a los capacitores como circuitos abiertos.
+6.8.2 Respuestas relacionadas
+En el caso de un capacitor en análisis en corriente alterna, se entregan tres respuestas relacionadas: la corriente a través del capacitor, la caída de voltaje en el capacitor y la potencia compleja consumida por él. La corriente se almacena en una variable llamada inombre, donde nombre es el del capacitor. La caída de voltaje se almacena en una variable llamada vnombre, donde nombre es el del capacitor. La potencia compleja consumida, por su parte, se almacena en una variable llamada snombre, donde nombre es el del capacitor. Son aplicables a las respuestas de este elemento todas las convenciones antes expuestas sobre dirección, polaridad y consumo.
+6.9 Inductores
+Un inductor es un elemento de circuito que almacena energía en forma de un campo magnético y que se opone a cambios bruscos de corriente.
+6.9.1 Notación
+En el caso del inductor, la mínima información necesaria para describirlo por completo es la siguiente:
+¿Qué clase de elemento es? Es un inductor. La letra que identifica a los inductores es la l (o sea L minúscula).
+¿Cómo se llama el inductor? Para diferenciar un inductor dado de cualquier otro inductor, se le debe dar un nombre cualquiera, que empiece con l.
+¿Dónde se encuentra conectado el inductor? Un inductor tiene dos extremos, cada uno de ellos conectado a un nodo distinto. Es necesario darle al simulador los nombres de los dos nodos a los cuales está conectado el inductor. El orden de estos nodos establece la dirección que tendrá en la respuesta el flujo de corriente y la caída del voltaje a través del inductor.
+¿Cuánto vale el inductor? Un inductor tiene un valor. Este valor debe entregarse al Symbulator en henrios. 
+Al igual que con los capacitores, a veces nos encontramos en los libros de texto problemas en corriente alterna que muestran inductores con valores dados en (. Para efectos de la simulación, estos elementos deberán ser tratados como impedancias, aunque aparezcan dibujados como inductancias.
+Debe tenerse la precaución de no introducir el valor de la inductancia en una unidad distinta a los henrios (H). Por ejemplo, si el valor se introduce en milihenrios (mH), las respuestas estarán equivocadas.
+Así, los inductores se definen como se muestra a continuación:
+lnombre, nodo 1, nodo 2, valor en henrios
+En el análisis en corriente alterna, solamente se declaran estos cuatro términos. El análisis en dominio de la frecuencia y el análisis transitorio requieren que se declare también la corriente inicial del inductor. Cuando el inductor tenga una corriente inicial, debemos dar estos nodos en el orden adecuado que indique la dirección que deseamos darle a esta corriente inicial: desde el primer nodo hacia el segundo nodo de la descripción. El dibujo del circuito nos indicará, con una flecha, la dirección que debemos darle al inductor. Ejemplo:
+lnombre, nodo 1, nodo 2, valor, corriente inicial
+Esta corriente inicial es captado por el simulador considerándola como fluyendo a través del inductor desde el nodo 1 hacia el nodo 2.
+En el análisis en corriente directa, el Symbulator considera a los inductores como cortocircuitos.
+6.9.2 Respuestas relacionadas
+En el caso de un inductor en análisis en corriente alterna, se entregan tres respuestas relacionadas: la corriente a través del inductor, la caída de voltaje en el inductor y la potencia compleja consumida por él. La corriente se almacena en una variable llamada inombre, donde nombre es el del inductor. La caída de voltaje se almacena en una variable llamada vnombre, donde nombre es el del inductor. La potencia compleja consumida se almacena en una variable llamada snombre, donde nombre es el del inductor. Son aplicables a las respuestas de este elemento todas las convenciones antes expuestas sobre dirección, polaridad y consumo.
+Veamos algunos ejemplos.
+Problema N( 026
+Planteamiento. Encuentre la corriente i(t) en el circuito.
+ 
+Figura 42. Circuito para el Problema N° 026.
+Solución:
+El valor de la fuente, 40sen(3000t), puede ser expresado también como 40cos(3000t-90(). Al llevar a fasor este valor, es (40(-90(). Nombramos los tres nodos superiores, de izquierda a derecha, así: 1, 2 y 3. El nodo inferior es el de referencia. Nombramos los elementos, damos la descripción del circuito y ejecutamos la simulación con la puerta sq\ac.
+sq\ac("e1,1,0,(40(-90();r1,1,2,1.5E3;r2,2,3,1E3;l1,2,0,1/3; ca,3,0,(1/6)E-6",3000)
+Nótese que se usó ca como nombre de la capacitancia, pues las variable c1 es una variable reservada. No es important e l a d i r e c c i ó n e n q u e s e d e f i n e n l o s e l e m e n t o s e n e s t e p r o b l e m a , e x c e p t o l a r e s i s t e n c i a r 1 , q u e s e h i z o c o i n c i d i r c o n l a d i r e c c i ó n d e i ( t ) . I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a l a s i m u l a c i ó n , y l u e g o aparece Done. Para ver el valor de i(t), podemos solicitar el valor de ir1, utilizando la herramienta absang. 
+sq\absang(ir1)
+ ".015989779(-126.842333("
+Esta es la respuesta correcta. Si quisieramos expresar esta corriente en función del tiempo, sería .015989779 cos(3000t-126.842333().
+También la herramienta thevenin puede hacer uso del análisis en corriente alterna. Veamos dos ejemplos.
+Problema N( 027
+Planteamiento. Si (=1000 rad/s, encuentre la impedancia de entrada que se mediría entre las terminales: 1) a y g; 2) b y g; 3) a y b.
+ 
+Figura 43. Circuito para el Problema N° 027.
+Solución:
+Tomaremos al nodo inferior como referencia, y dejaremos a los nodos a y b con los mismos nombres que les ha dado el dibujo. Nombramos los elementos, damos la descripción de la red y ejecutamos la herramienta thevenin.
+sq\thevenin("l1,a,0,5E-3;r1,a,0,10;ca,a,b,200E-6; cb,b,0,100E-6;l2,b,0,20E-3",a,0)
+Presionamos ¸ð. E s c o g e m o s P a s s i v e c o m o t i p o d e c i r c u i t o y A C c o m o t i p o d e a n á l i s i s . P r e s i o n a m o s ¸ð. L a h e r r a m i e n t a t h e v e n i n n o s p r e g u n t a a h o r a e l v a l o r d e l a f r e c u e n c i a r a d i a l ( e n r a d / s . P r e s i o n a m o s ( p a r a d e s a c t i v a r e l m o d o a l f a b é t i c o , i n t r o d u c i m o s 1 0 0 0 , y p r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a u n a s i m u l a c i ó n . C o m o t e n e m o s e l m o d o C o m p l e x F o r m a t a j u s t a d o e n R E C T A N G U L A R , n o t e n e m o s q u e u s a r e l c o m a n d o ( R e c t p a r a v e r l a r e s p u e s t a e n p r e s e n t a c i ó n r e c t a n g u l a r . P a r a z t h o b t e n e m o s 2 . 8 0 8 98876+4.49438202i ohmios, que es la respuesta correcta. Sigamos entonces con el siguiente par de nodos.
+sq\thevenin("l1,a,0,5E-3;r1,a,0,10;ca,a,b,200E-6; cb,b,0,100E-6;l2,b,0,20E-3",b,0)
+Nótese que sólo cambiamos el nodo a por el nodo b en el final de la orden. Presionamos ¸ð. E s c o g e m o s P a s s i v e y A C , y p r e s i o n a m o s ¸ð. I n t r o d u c i m o s 1 0 0 0 , y p r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a u n a s i m u l a c i ó n . P a r a z t h o b t e n e m o s 1 . 7 9 7 7 5 2 8 1 - 1 . 1 2 3 5 9 5 5 i o h m i o s , q u e e s l a r e s p u e s t a c o r r e c t a . S i g a m o s . 
+ s q \ t h e v e n i n ( " l 1 , a , 0 , 5 E - 3 ; r 1 , a , 0 , 1 0 ; c a , a , b , 2 0 0 E - 6 ; c b , b , 0 , 1 0 0 E - 6 ; l 2 , b , 0 , 2 0 E - 3 " , a , b ) 
+ I g u a l m e n t e , s ó l o c a m b i a m o s l o s n o d o s d e l f i n a l . P r e s i o n a m o s ¸ð. E s c o g e m o s P a s s i v e y A C , y p r e s i o n a m o s ¸ð. I n t r o d u c i m o s 1 0 0 0 , y p r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n dican que se ejecuta una simulación. Para zth obtenemos .112359551-3.82022472i ohmios, que es la respuesta correcta.
+Problema N( 028
+Planteamiento. Si (=100 rad/s, encuentre: 1) Zent; 2) Zent si se conecta en cortocircuito de x a y.
+ 
+Figura 44. Circuito para el Problema N° 028.
+Solución:
+Tomaremos al nodo inferior como referencia, dejaremos a los nodos x y y con los mismos nombres que les ha dado el dibujo y nombraremos al nodo del medio 1. Nombramos los elementos, damos la descripción de la red y ejecutamo s l a h e r r a m i e n t a t h e v e n i n . 
+ s q \ t h e v e n i n ( " r 1 , x , 1 , 2 0 ; c a , 1 , 0 , 2 E - 3 ; r 2 , 1 , y , 1 0 ; l 1 , y , 0 , . 1 " , x , 0 ) 
+ P r e s i o n a m o s ¸ð. E s c o g e m o s P a s s i v e y A C , y p r e s i o n a m o s ¸ð. I n t r o d u c i m o s 1 0 0 , y p r e s i o n a m o s ¸ð. P a r a z t h o b t e n e m o s 2 2 . - 6 . i o h m i o s , q u e e s l a r e s p u e s t a c o r r e c t a . 
+ P a r a l a s e gunda parte de este problema, el enunciado nos solicita que conectemos un cortocircuito entre x y y. El propósito es hacer, de ambos nodos, uno solo. Para efectos de la simulación, podríamos conectar un cortocircuito entre estos dos nodos. Esto agregaría un nuevo elemento a la simulación. Pero podríamos también hacer algo mejor: reemplazar por una x toda y que aparezca en la descripción. Así, simularemos como si x y y fuesen el mismo nodo, lo que para todos los efectos prácticos es equivalente a un cortocirc u i t o , p u e s n o n o s i n t e r e s a l a c o r r i e n t e a t r a v é s d e e s t e c o r t o . N o s o l a m e n t e e s t a m o s e v i t a n d o e l a g r e g a r u n n u e v o e l e m e n t o , s i n o q u e e s t a m o s e l i m i n a n d o u n n o d o d e l c i r c u i t o . 
+ s q \ t h e v e n i n ( " r 1 , x , 1 , 2 0 ; c a , 1 , 0 , 2 E - 3 ; r 2 , 1 , x , 1 0 ; l 1 , x , 0 , . 1 " , x , 0 ) 
+ P r e s i o n a m o s ¸ð. E s c o g e m o s P a s s i v e y A C , y p r e s i o n a m o s ¸ð. I n t r o d u c i m o s 1 0 0 , y p r e s i o n a m o s ¸ð. P a r a z t h o b t e n e m o s 9 . 6 + 2 . 8 i o h m i o s , q u e e s l a r e s p u e s t a c o r r e c t a . 
+ H e m o s v i s t o e n e s t o s d o s e j e m p l o s q u e l a h e r r a m i e n t a t h e v e n i n u t i l i z a t a m b i é n e l a n á l i s i s e n c o r r i e n t e a l t e r n a , c o n é x ito. Veamos ahora un ejemplo de circuito en el cual los inductores y capacitores deben ser simulados como impedancias, pues sus valores nos son entregados en (.
+Problema N( 029
+Planteamiento. Encuentre I1, I2 e I3.
+ 
+Figura 45. Circuito para el Problema N° 029.
+Solución:
+El valor de la fuente ya está en fasor, y puede reducirse de (100(0() a simplemente 100. El circuito muestra tres elementos pasivos: un capacitor, un resistor y un inductor. Los valores de todos ellos, sin embargo, han sido definidos en el circuito como impedancias. Por lo tanto, deben simularse como impedancias. Tendremos la precaución de hacer coincidir la numeración y la dirección de nuestras impedancias con las corrientes I1, I2 e I3. Con el nodo inferior como referencia, nombramos los otros nodos y los elementos, damos la descripción del circuito y ejecutamos la simulación. Como tenemos que dar al programa una frecuencia radial como dato de entrada y no tenemos ninguna, le damos cualquier valor. Nosotros usamos x, por ejemplo.
+sq\ac("e1,1 , 0 , 1 0 0 ; r 1 , 1 , 2 , - 5 i ; r 2 , 2 , 0 , 5 ; r 3 , 2 , 0 , 5 i " , x ) 
+ R e c u é r d e s e q u e e l s i g n o d e n e g a t i v o d e b e e s c r i b i r s e c o n l a t e c l a d e n e g a t i v o , y n o c o n l a d e r e s t a . E l o p e r a d o r i m a g i n a r i o i s e e s c r i b e c o m o l o i n d i c a m o s e n e l p u n t o 6 . 1 . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r ases que nos indican que se ejecuta la simulación, y luego aparece Done. Para el valor de I1, con absang(ir1) obtenemos "28.2842712(45.(" amperios. Para el valor de I2, con absang(ir2) obtenemos "20.(90.(" amperios. Para el valor de I3, con absang(ir3) obtenemos "20.(0.(" amperios. Estas son las respuestas correctas.
+En este problema hemos aprendido que, cuando un problema nos presente impedancias, no importa si estas fueron obtenidas de capacitores o inductores, deben ser simuladas como impedancias.
+6.10 El separador :
+En la calculadora TI, dos órdenes separadas pueden unirse en una sola línea, mediante el separador : (o sea dos puntos). Por ejemplo, las dos órdenes:
+sq\ac("e1,1,0,100;r1,1,0,30i",x)
+absang(ir1)
+...pueden unirse en una sola línea, así:
+sq\ac("e1,1,0,100;r1,1,0,30i",x):absang(ir1)
+Este separador será utilizado en el siguiente problema.
+Como vimos en el punto 6.3, cuando la frecuencia se nos entrega en Hz, hay que convertirla primero a radianes/segundo para alimentarla al simulador. El siguiente problema ilustra este punto, y también demuestra que el Symbulator maneja con éxito las fuentes dependientes en el análisis en corriente alterna.
+Problema N( 030
+Planteamiento. Sea Vs=100(0(V en f=50Hz en el circuito que se muestra en la figura. Encuentre el voltaje fasorial Vx, si el elemento X es un: a) resisitor de 30(; b) inductor de 0.5H; c) capacitor de 50(F.
+ 
+Figura 46. Circuito para el Problema N° 030.
+Solución:
+De ahora en adelante, redondearemos las respuestas a cuatro cifras. Realicemos la primera simulación:
+sq\ac("e1,1,0,100;r1,1,2,10;r2,2,3,20;r3,3,4,30;j1,0,2,.05*v4;r4,3,0,60;rx,4,0,30",2(50):sq\absang(v4)
+Nótese que la frecuencia no se introdujo en Hz, sino que se convirtió a radianes/segundo. Nótese también el uso del separador : para unir ambas órdenes en una línea. Presionamos ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a l a s i m u l a c i ó n . A l t e r m i n a r l a s i m u l a c i ó n , e n v e z d e a p a r e c e r D o n e , a p a r e c e l a r e s p u e s t a a l a ú l t i m a o r d e n d e l a l í n e a , e s d e c i r e l v o l t a j e v 4 . E s t e e s e l v a l o r d e V x , 2 8 . 5 7 ( 0 . ( v o l t i o s ( r e d o n d e a d o ) . E s t a e s l a r e s p u e s t a c o r r e c t a . R e a l i c e m o s l a s e g u n d a s i m u l a c i ó n , m o d i f i c a n d o e l ú l t i m o e l e m e n t o d e l a d e s c r i p c i ó n : 
+ s q \ a c ( " e 1 , 1 , 0 , 1 0 0 ; r 1 , 1 , 2 , 1 0 ; r 2 , 2 , 3 , 2 0 ; r 3 , 3 , 4 , 3 0 ; j 1 , 0 , 2 , . 0 5 * v 4 ; r 4 , 3 , 0 , 6 0 ; l x , 4 , 0 , . 5 " , 2 ( 5 0 ) : s q \ a b s a n g ( v 4 ) 
+ P r e s i o n a m o s ¸ð. P a r a e l v a l o r de Vx, obtenemos 90.24(25.52( voltios, que es la respuesta correcta. Realicemos la tercera simulación, modificando el último elemento de la descripción:
+sq\ac("e1,1,0,100;r1,1,2,10;r2,2,3,20;r3,3,4,30;j1,0,2,.05*v4;r4,3,0,60;cx,4,0,50E-6",2(50):sq\absang(v4)
+Presionamos ¸ð. P a r a e l v a l o r d e V x , o b t e n e m o s 6 4 . 7 1 ( - 4 9 . 6 7 ( v o l t i o s , q u e e s l a r e s p u e s t a c o r r e c t a . 
+ C o n o z c a m o s d o s n u e v o s e l e m e n t o s d e l S y m b u l a t o r , r e l a c i o n a d o s c o n e l a c o p l a m i e n t o m a g n é t i c o : l a i n d u c t a n c i a m u t u a y e l t r a n s f o r m a d o r i d e a l . 
+ 6 . 1 1 I n d u c t a n c i a m u t u a 
+ U n a i n d uctancia mutua es un acoplamiento magnético mutuo entre dos inductores. No es un "elemento" físico, pero sí es un elemento para los efectos de la simulación.
+6.11.1 Notación
+En el caso de la inductancia mutua, la mínima información necesaria para describirla por completo es la siguiente:
+Identificación. La letra que identifica a las inductancias mutuas es la m.
+Nombre. Es válido cualquier nombre que empiece con m.
+Nombre de las dos inductancias acopladas. En el Symbulator, una inductancia mutua acopla dos inductancias solamente, cada una de ellas con un nombre distinto. Es necesario darle al simulador los nombres de las dos inductancias que están acopladas por la inductancia mutua. 
+Es importante que estas dos inductancias que están acopladas por la inductancia mutua, estén definidas en la dirección correcta. En el dibujo del circuito, cuando dos inductancias están acopladas, se utiliza un punto en un extremo de cada inductancia para indicar el sentido del acoplamiento. Así, cada inductancia tiene un extremo con punto y el otro extremo sin punto. 
+Al momento de definir estas dos inductancias en el Symbulator, sus direcciones deben definirse de manera consistente con los puntos. Si al definir la primera inductancia, se introdujo primero el nodo que tiene el punto en el dibujo, entonces al definir la segunda inductancia, el primer nodo que se defina también debe ser el que tiene el punto en el dibujo. Es muy importante definir los nodos de las inductancias en el orden correcto. O viceversa.
+Valor. Para cada acoplamiento, existe un coeficiente de inductancia mutua.
+Este coeficiente se simboliza por M si su valor está dado en henrios, y por k si su valor está dado adimensionalmente. Existe una fórmula que relaciona a estas dos presentaciones: k=M/((L1L2). Así, conociendo uno de ellos, siempre es posible conocer el otro. Para efectos de la descripción de una inductancia mutua en el Symbulator, el valor utilizado es M y debe entregarse en henrios. Por lo tanto, si el problema nos entrega el valor de k, debemos convertirlo a M, antes de utilizarlo en la descripción.
+Debe tenerse la precaución de no introducir el valor de una inductancia mutua en una unidad distinta a los henrios (H). Por ejemplo, si el valor se introduce en milihenrios (mH), las respuestas estarán equivocadas.
+Así, una inductancia se define como se muestra a continuación:
+mnombre, inductancia 1, inductancia 2, valor en henrios
+De haber necesidad, se rellena el quinto espacio con 0.
+En el análisis en corriente directa, el Symbulator ignora las inductancias mutuas.
+
+6.11.2 Respuestas relacionadas
+No hay respuestas relacionadas a la inductancia mutua en sí misma. Sin embargo, cada una de las dos inductancias involucradas tendrá las respuestas relacionadas propias de cualquier inductancia, y que vimos en el punto 6.9.2.
+Veamos algunos ejemplos.
+Problema N( 031
+Planteamiento. Con el circuito de la figura, presente en forma polar la corriente en el resistor de 400( y la relación V2/V1.
+ 
+Figura 47. Circuito para el Problema N° 031.
+Solución:
+Nombramos los nodos de izquierda a derecha, 1, 3 y 2, con el propósito de que v1 y v2 conserven en las respuestas los mismos nombres que en el dibujo. Léase la descripción de circuito que está bajo estas líneas, y los comentarios que siguen:
+sq\ac("e1,1,0,10;r1,1,3,1;l1,3,0,1;l2,2,0,100;r2,2,0,400;m1,l1,l2,9",10)
+Nótese que el primer nodo en la descripción de cada inductancia es el nodo que tiene el punto en el dibujo. Una alternativa igualmente correcta hubiese sido hacer lo inverso: que el primer nodo en la descripción de cada inductancia hubiese sido el nodo que no tiene el punto en el dibujo. Lo importante es que en ambas inductancias se utilice la misma convención. Nótese que la inductancia mutua no tiene que definirse inmediatamente a continuación de las inductancias que relaciona. Nótese también que el valor de la inductancia mutua se introdujo en henrios. Presionamos ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a l a s i m u l a c i ó n . A l t e r m i n a r l a s i m u l a c i ó n , a p a r e c e D o n e . P a r a e n c o n t r a r l a s r e s p u e s t a s , p e d i m o s a b s a n g ( i r 2 ) y o b t e n e m o s . 1 7 2 4 ( - 1 6 . 7 ( a m p e r i o s ( r e d o n d e a d o ) , y a b s a n g ( v 2 / v 1 ) y o b t e n e m o s 6 . 8 9 6 (-16.7( (redondeado). Estas son las respuestas correctas.
+Problema N( 032
+Planteamiento. En el circuito de la figura, encuentre la potencia real promedio absorbida por la fuente y los dos resistores.
+ 
+Figura 48. Circuito para el Problema N° 032.
+Solución:
+He aquí la descripción que usé:
+sq\ac("e1,1,0,100;r1,1,2,50;l1,2,0,2;l2,0,3,5;m1,l1,l2,3;r2,3,0,2–3",100)
+Nótese que el primer nodo en la descripción de cada inductancia es el nodo que tiene el punto en el dibujo. Nótese también que el valor de la inductan c i a m u t u a s e i n t r o d u j o e n h e n r i o s . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a l a s i m u l a c i ó n . A l t e r m i n a r , a p a r e c e D o n e . S e n o s s o l i c i t a l a p o t e n c i a r e a l p r o m e d i o a b s o r b i d a . E n e l a n á l i s i s d e c o r r i e n t e a l t e r n a , l a s v a r i a b les en las cuales el Symbulator nos da la potencia absorbida empiezan con s. Tal y como nos enseña la teoría, la potencia promedio es la mitad de la potencia máxima. Como se nos solicita la potencia real, usamos el comando real de la calculadora. Para encontrar las respuestas, pedimos real(se1)/2 y obtenemos –10.4 vatios; pedimos real(sr1)/2 y obtenemos 5.63 vatios; pedimos real(sr2)/2 y obtenemos 4.77 vatios. Estas son las respuestas correctas, redondeadas a tres cifras.
+Problema N( 033
+Planteamiento. Si (=100 rad/s, encuentre la potencia real promedio: a) entregada a la carga de 10(, b) a la de 20(, y c) entregada por la fuente.
+ 
+Figura 49. Circuito para el Problema N° 033.
+Solución:
+He aquí la descripción que usé:
+sq\ac("e1,1,0,100((2);l1,1,2,1;l2,2,0,1;l3,3,0,1;r1,3,0,10; m1,l1,l3,.5((1*1);l4,4,0,1;r2,4,0,20;m2,l2,l4,.2((1*1)" ,100)
+Nótese lo siguiente:
+En un tratamiento riguroso, en el Symbulator, se debe introducir el valor normal de la fuente y no su valor RMS. Por ello, multiplicamos el valor RMS por raíz de dos, para convertirlo en su valor normal. Es perfectamente válido hacer esta multiplicación directamente en el campo de entrada.
+El primer nodo en la descripción de cada inductancia es el nodo que tiene el punto en el dibujo.
+El valor de la inductancia mutua se convirtió a henrios, directamente en el campo de entrada. Ahora bien, este problema no es el mejor para ilustrar esta conversión, porque obviamente .2((1*1) es igual a .2. A pesar de que en este problema resulte innecesario colocar la conversión, en otros casos no será así. Por ello, coloqué la conversión para ilustrar el proceso. 
+El circuito del ejemplo está compuesto por tres pequeños circuitos. Estos tres circuitos están acoplados por inductancias mutuas. Sin embargo, cada uno de ellos tiene un nodo de referencia. Estos tres nodos de referencia deben ser el nodo 0. Es necesario que los tres compartan el mismo nodo de referencia, aunque en el dibujo los nodos no estén conectados físicamente.
+Presionamos ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a l a s i m u l a c i ó n . A l t e r m i n a r , a p a r e c e D o n e . A l i g u a l q u e e n e l p r o b l e m a a n t e r i o r , s e n o s s o l i c i t a l a p o t e n c i a r e a l p r o m e d i o a b s o r b i d a . P e d i m o s r e a l ( s r 1 ) / 2 y o b t e n e m o s . 8 4 2 v a t i o s ; p e d i m o s r e a l ( sr2)/2 y obtenemos .262 vatios; pedimos real(se1)/2 y obtenemos -1.104 vatios. Estas son las respuestas correctas (redondeadas).
+Problema N( 034
+Planteamiento. Encuentre IL en el circuito que se muestra.
+ 
+Figura 50. Circuito para el Problema N° 034.
+Solución:
+Este es un problema muy particular, y por ello lo guardé para el final. En él se presenta algo que el Symbulator no maneja por sí solo: inductancias acopladas cuyos valores están dados en (. Antes de resolver este problema, tenemos que llevar el circuito a una forma que el Symbulator pueda manejar. Tenemos dos alternativas:
+La primera alternativa es simular usando impedancias. ¿Cómo? Reemplazando las inductancias mutuas por un equivalente hecho de impedancias. Aprovechamos el hecho de que los inductores acoplados están funcionando como un transformador lineal, para reemplazarlos por su equivalente T. Para un transformador lineal con valores de L1, L2 y M, el equivalente T se obtiene haciendo una T con elementos con valores de L1-M a un lado, L2-M al otro lado, y M como base de la T. En el caso de nuestra simulación, esta T se hará con impedancias, y no habrá inductores en el circuito. A continuación, la descripción que usé para resolver el problema con esta alternativa. Nótese que puede usarse cualquier frecuencia radial, y cualquier orden de los nodos de las impedancias.
+sq\ac("e1,1,0,100;r1,1,2,-5i;r2,2,3,85i;rm1,2,0,15i; r3,3,4,85i;r4,4,5,-5i;rm2,4,0,15i;rL,5,0,5",x)
+La segunda alternativa es simular usando inductores. ¿Cómo? Dado que el problema no nos ha especificado un valor para la frecuencia radial, inventamos un valor cualquiera. Yo usé un valor unitario: 1 rad/seg. Luego, convierto todos los valores de las inductancias e inductancias mutuas de ( a H, usando la frecuencia radial. Si la frecuencia es unitaria, el valor en ohmios será el mismo valor en henrios (sin el operador imaginario, obviamente). A continuación, la descripción que se debe usar para resolver el problema con esta alternativa. Nótese que el orden de los nodos de las inductancias se escogió cuidadosamente, para cumplir la convención de los puntos.
+sq\ac("e1,1,0,100;l1,1,0,10;l2,2,0,100;m1,l1,l2,15;l3,2,0,100;l4,3,0,10;m2,l3,l4,15;rL,3,0,5",1)
+En ambos casos, llamé rL a la resistencia de 5(. Escoja el lector cuál de las alternativas prefiere. Presionamos ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a l a s i m u l a c i ó n . A l t e r m i n a r , a p a r e c e D o n e . P e d i m o s a b s a n g ( i r L ) y o b t e n e m o s 1 . 2 6 ( - 6 0 . 2 ( a m p e r i o s ( r e d o n d e a d o ) , q u e e s l a r e s p u e s t a c o r r e c t a . 
+ E n l o s e j e m p l o s a n t e r i o r e s , h e m o s v i s t o c ó m o s i m u l a r en el Symbulator las inductancias mutuas, en diferentes tipos de problemas. Aprendamos ahora sobre un nuevo elemento.
+6.12 Transformador ideal
+Un transformador ideal es un modelo idealizado de acoplamiento unitario de un transformador físico. Se supone que no tiene pérdidas.
+6.12.1 Notación
+En el caso del transformador ideal, la mínima información necesaria para describirlo por completo es la siguiente:
+Identificación. La letra que identifica a un transformador ideal es la t.
+Nombre. Se le debe dar un nombre cualquiera, que empiece con t.
+Nodos. Un transformador ideal tiene cuatro puntos de conexión, dos superiores y dos inferiores. Para una simulación en el Symbulator, los dos inferiores se asumen siempre conectados al nodo de referencia. Los superiores deben estar cada uno conectado a un nodo distinto. Es necesario darle al simulador los nombres de estos dos nodos superiores a los cuales está conectado el transformador. 
+Relación de vueltas. Un transformador ideal tiene una relación de vueltas de un lado con respecto al otro. Este valor debe entregarse al Symbulator, en la forma de dos números, uno para cada lado.
+Cuando un transformador tenga los puntos de ambos lados en los nodos superiores, o los dos puntos en los extremos inferiores, los dos números de la relación de vueltas deben ser del mismo signo, por ejemplo ambos positivos. Por el contrario, cuando el transformador tenga el punto de un lado en el nodo superior pero el punto del otro lado en el nodo inferior, los dos números de la relación de vueltas deben tener distinto signo, por ejemplo uno positivo y uno negativo.
+Así, los transformadores ideales se definen como se muestra a continuación:
+tnombre, nodo 1, nodo 2, vueltas 1, vueltas 2
+La descripción del transformador ideal siempre tiene 5 términos, por lo que nunca habrá necesidad de agregar un cero al final.
+En el análisis en corriente directa, el Symbulator ignora los transformadores ideales.
+6.12.2 Respuestas relacionadas
+En el caso de un transformador ideal, se entregan dos respuestas relacionadas: la corriente que entra al transformador por el primer nodo, y la corriente que entra al transformador por el segundo nodo. Recuérdese que estos dos nodos son los superiores, pues el inferior en ambos lados es el nodo de referencia. Estas corrientes se almacenan en variables llamadas inombreNODO, donde nombre es el nombre del transformador ideal, y NODO es el nombre del nodo. Así, para un transformador ideal que se llame t1, y que esté conectada a los nodos 1 y 2, las respuestas relacionadas serán it11 e it12. Nótese que ambas corrientes se consideran entrando al transformador por los nodos superiores. Por lo tanto, si una de ellas vale, por ejemplo, -5 amperios, significa que están entrando -5 amperios, o sea que están saliendo 5 amperios.
+Es importante notar que si alguno de los extremos del transformador ideal se encuentra en circuito abierto, ambas corrientes resultarán nulas.
+Veamos algunos ejemplos.
+Problema N( 035
+Planteamiento. Para el circuito que se muestra, encuentre el valor RMS de I1, I2, I3, y las potencias reales promedio consumidas en las tres resistencias.
+ 
+Figura 51. Circuito para el Problema N° 035.
+Solución:
+A continuación, la descripción que usé para resolver el problema.
+sq\ac("e1,1,0,100((2),0;r1,1,2,25,0;t1,2,3,3,1;r2,3,4,2,0;t2,4,5,4,-3;r3,5,0,3,0",x)
+Nótese lo siguiente:
+El valor de la fuente se convirtió de valor RMS a valor normal.
+Puede usarse cualquier frecuencia radial.
+Rellené con ceros las descripciones de aquellos elementos cuyas descripciones no tienen 5 términos. Si nos o l v i d a m o s d e h a c e r e s t o , o b t e n d r e m o s u n e r r o r d e s i n t a x i s . 
+ E n e l c a s o d e l t r a n s f o r m a d o r t 2 , c o m o l o s p u n t o s e s t á n u n o a r r i b a y o t r o a b a j o , u n o d e l o s d o s n ú m e r o s d e l a r e l a c i ó n d e v u e l t a s e n l a d e s c r i p c i ó n s e c o l o c ó n e g a t i v o . 
+ P r e s i o n a m o s ¸ð. V e m o s e n l a p a ntalla las frases que nos indican que se ejecuta la simulación. Al terminar, aparece Done. Para obtener el valor RMS de I1, tenemos tres alternativas: pedir ya sea absang(-ie1/((2)), absang(ir1/((2)) o absang(it12/((2)), y obtenemos 1.099(0.( amperios. Para obtener el valor RMS de I2, también tenemos tres alternativas: pedir ya sea absang(-it13/((2)), absang(ir2/((2)) o absang(it24/((2)), y obtenemos 1.30(0.( amperios. Para el valor RMS de I3, tenemos dos alternativas: pedir ya sea absang(-it25/((2)) o absang(ir3/((2)), y obtenemos 4.40(180.( amperios.
+Recuérdese que el Symulator siempre definirá las dos corrientes de un transformador ideal entrando al transformador por los dos nodos superiores, y el nombre de cada una es i seguido del nombre del transformador y del nombre del nodo por el cual entra la corriente.
+Se nos solicita la potencia real promedio absorbida por las tres resistencias. Con real(sr1)/2. obtenemos 30.2 vatios; con real(sr2)/2. obtenemos 21.7 vatios; y con real(sr3)/2. obtenemos 58.0 vatios. Estas son las respuestas correctas (redondeadas). Usamos /2. en vez de /2 porque deseábamos obtener respuestas en formato aproximado.
+Veamos dos problemas similares, pero antes aprendamos algunos conceptos nuevos sobre los valores RMS.
+
+6.13 Problemas con valores RMS
+En dos problemas que hemos visto en este Capítulo, el valor de la fuente independiente se nos entregó como valor RMS. Como respuestas, nos pidieron las corrientes RMS y las potencias promedio. Son muy frecuentes en análisis de corriente alterna este tipo de problemas que usan valores de voltaje y corriente en RMS, y potencias promedio. Estos problemas pueden recibir dos tratamientos en el Symbulator: el riguroso y el informal.
+6.13.1 Tratamiento riguroso
+Los dos problemas que hemos visto anteriormente han sido resueltos con el tratamiento riguroso. Este tratamiento asume que los valores de las fuentes independientes se introducen en forma normal, y los voltajes, corrientes y potencias de las respuestas también están en forma normal. Por ello:
+Cuando el problema nos entregue el valor de alguna fuente en RMS, debemos convertirlo a valor normal al introducirlo en la descripción.
+Si deseamos los valores en RMS de las corrientes y voltajes que fueron entregados como respuestas, debemos dividir el valor normal entre raíz de dos para tenerlo en RMS.
+Si deseamos los valores promedios de las potencias que fueron entregadas como respuestas, debemos dividir el valor normal entre dos para tenerlo en promedio.
+6.13.2 Tratamiento informal
+Los dos problemas que veremos a continuación serán resueltos con el tratamiento informal. Este tratamiento se fundamenta en el hecho de que, si los valores de todas las fuentes independientes se introducen en RMS, entonces todos los voltajes y corrientes de las respuestas estarán en RMS, y todas las potencias de las respuestas estarán en valor promedio. Por ello:
+Cuando el problema nos entregue el valor de alguna fuente en RMS, debemos introducirlo tal como está. Si, por el contrario, nos lo entrega en valor normal, debemos convertirlo a RMS antes de introducirlo.
+Recibiremos las corrientes y voltajes de las respuestas en valores RMS.
+Recibiremos las potencias de las respuestas en valores promedio.
+Veamos ahora dos problemas, resueltos con el tratamiento informal.
+Problema N( 036
+Planteamiento. Para el circuito que se muestra, encuentre las potencias reales promedio consumidas en las resistencias.
+ 
+Figura 52. Circuito para el Problema N° 036.
+Solución:
+A continuación, la descripción que usé para resolver el problema, con el trata m i e n t o i n f o r m a l . 
+ s q \ a c ( " e 1 , 1 , 0 , 1 0 , 0 ; r 1 , 1 , 2 , 1 , 0 ; t 1 , 2 , 3 , 1 , 2 ; r 2 , 3 , 4 , 4 , 0 ; r 3 , 4 , 0 , 4 8 , 0 ; t 2 , 4 , 5 , 1 , 5 ; r 4 , 5 , 0 , 4 0 0 , 0 " , x ) 
+ N ó t e s e q u e e l v a l o r d e l a f u e n t e s e d e j ó e n R M S . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a l a s i m u l a c i ó n . A l t erminar, aparece Done. Podríamos obtener el valor RMS de cualquier corriente instantáneamente. Sin embargo, el problema no nos solicita ninguna corriente. Se nos solicita la potencia real promedio absorbida por las tres resistencias. Como estamos usando el método informal, las potencias ya están en promedio. Con real(sr1) obtenemos 4 vatios; con real(sr2) obtenemos 4 vatios; con real(sr3) obtenemos 3 vatios; y con real(sr4) obtenemos 9 vatios. Nótese que no hubo necesidad de usar /2 porque las respuestas ya estaban en promedio.
+Problema N( 037
+Planteamiento. Para el circuito que se muestra, encuentre las potencias reales promedio consumidas por las resistencias de 10(. Repita conectando A y C, y B y D.
+ 
+Figura 53. Circuito para el Problema N° 037.
+Solución:
+Por la disposición vertical del dibujo de este circuito, y por la posición de la fuente en él, podría resultar algo complicado el escoger el nodo de referencia para cada sección del circuito. Es necesario usar los nodos de la derecha del circuito (entre ellos B y D) como referencia en cada uno de los tres circuitos, porque los dos transformadores deben tener cada uno los dos extremos inferiores conectados en el nodo de referencia. Los nodos de la izquierda, de abajo hacia arriba, los nombré C=1, 2, 3 y A=4. A continuación, la descripción que usé para resolver la primera parte del problema, con el tratamiento informal.
+sq\ac("r1,1,0,10,0;r2,1,0,50,0;t1,1,2,1,3;j1,2,3,1,0;t2,3,4,4,1;r3,4,0,50,0;r4,4,0,10,0",x)
+El valor de la fuente se dejó en RMS. Presionamos ¸ð. A l t e r m i n a r l a s i m u l a c i ó n , a p a r e c e D o n e . L a s p o t e n c i a s y a e s t á n e n p r o m e d i o . C o n r e a l ( s r 1 ) , ( + ¸ð o b t e n e m o s 6 2 . 5 v a t i o s ; y c o n r e a l ( s r 4 ) , ( + ¸ð o b t e n e m o s 1 1 1 . 1 v a t i o s . A c o n t i n u a c i ó n , l a d e s c r i p c i ó n q u e u s é p a r a r e s o l v e r l a s e g u n d a p a r t e d e l p r o b l e m a , c o n el tratamiento informal.
+sq\ac("r1,1,0,10,0;r2,1,0,50,0;t1,1,2,1,3;j1,2,3,1,0;t2,3,4,4,1;r3,4,0,50,0;r4,4,0,10,0",x)
+Nótese que no utilicé un cortocircuito para conectar A con C, sino que reemplacé el nodo 4 por el nodo 1 en la descripción. No hay necesidad de conectar B con D, porque ambos son el nodo de referencia. Presionamos ¸ð. A l t e r m i n a r l a s i m u l a c i ó n , a p a r e c e D o n e . C o n r e a l ( s r 1 ) , ( + ¸ð o b t e n e m o s 1 . 7 3 6 v a t i o s ; y c o n r e a l ( s r 4 ) , ( + ¸ð o b t e n e m o s e l m i s m o v a l o r d e s r 1 . 
+ H e m o s v i s t o e n e s t o s d o s p r o b l e m a s l a m a n e r a e n q u e s e p u e d e n u t i l i z a r , c o n e l t r a t a m i e n t o i n f o r m a l , l o s v a l o r e s d e las fuentes en RMS para obtener directamente respuestas en RMS, y las potencias en promedio.
+Veamos un último ejemplo, de la herramienta thevenin aplicada a un circuito con transformadores ideales.
+Problema N( 038
+Planteamiento. Encuentre el equivalente de Thévenin en las terminales a y b para la red mostrada en la figura.
+ 
+Figura 54. Circuito para el Problema N° 038.
+Solución:
+A continuación, la descripción:
+sq\thevenin("rx,a,0,20,0;t1,a,1,1,4;r1,1,2,60,0;e1,2,0,20*irx,0",a,0)
+Presionamos ¸ð. E s c o g e m o s P a s s i v e y A C , y p r e s i o n a m o s ¸ð. I n t r o d u c i m o s x , o c u a l q u i e r o t r o v a l o r c o m o f r e c u e n c i a r a d i a l y p r e s i o n a m o s ¸ð. P a r a z t h o b t e n e m o s 4 o h m i o s , q u e e s e l v a l o r c o r r e c t o . 
+ C o n e s t e e j e m p l o , h e m o s t e r m i n a d o e l c a p í t u l o d e s i m u l a c i ó n n u m é r i c a e n c o r r i e nte alterna.
+ PAGE 5 PAGE 5 PAGE 5 NUMPAGES 32 PAGE 10 
+
+6 - PAGE 32 
+Simulación numérica en corriente alterna 
+
+ PAGE 10 
+
+Roberto Pérez-Franco - Symbulator

@@ -1,0 +1,150 @@
+Capítulo
+5
+Equivalentes de Thévenin y Norton
+5.1 Introducción a la herramienta thevenin
+Los teoremas de Thévenin-Helmholtz y Norton-Mayer son parte importante en los cursos de teoría de circuitos. El Symbulator posee una herramienta especial para encontrar los equivalentes de Thévenin y Norton de una red. Esta herramienta se llama thevenin, y se le ejecuta así:
+thevenin(red,nodo 1,nodo 2)
+Como podemos ver, toma tres datos de entrada: la descripción de la red en formato de texto, y los nombres de los dos nodos entre los cuales se desea encontrar el equivalente.
+Como datos de salida, nos entrega tres variables almacenadas en la carpeta actual. Estas variables son la impedancia Thévenin zth, el voltaje Thévenin vth y la corriente Norton ino. Con estos tres valores, el usuario puede entonces construir el equivalente Thévenin colocando una impedancia de valor zth en serie con una fuente de voltaje de valor vth, y el equivalente Norton colocando una impedancia de valor zth en paralelo con una fuente de corriente de valor ino.
+En algunos casos, como veremos más adelante, la herramienta también nos da como respuesta el valor de la máxima potencia que la red puede entregar.
+5.2 Teoría
+Tras haber introducido en la línea de entrada la orden de ejecutar la herramienta, con sus respectivos datos de entrada, aparecerá una pantalla en la cual el usuario debe escoger dos parámetros:
+ 
+Figura 30. Herramienta thevenin, en la TI-89
+Qué tipo de red se desea analizar. Las opciones son Auto-Detectar y Pasiva. Debe usarse Pasiva si la red no posee fuentes independientes, y Auto-Detectar cuando las posea o cuando el usuario no esté seguro.
+Es importante escoger bien el tipo de red que se va a analizar. Si escogemos Auto-Detectar, la herramienta ejecutará dos simulaciones, sin importar el tipo de red, y obtendremos los equivalentes correctos. Escoger Pasiva para aquellas redes que lo sean, tiene la ventaja de que la herramienta nos ahorrará tiempo, pues obtendrá los equivalentes correctos con una sola simulación. Sin embargo, si por error escogemos Pasiva y la red no lo es, obtendremos respuestas equivocadas. Nunca debe escogerse Pasiva si la red no es pasiva, o si tenemos dudas. Recuérdese que una red pasiva es aquella que no tiene fuentes independientes.
+ 
+Figura 31. Tipo de red, en la TI-89
+Qué tipo de análisis desea realizar. Las opciones son análisis en corriente directa (DC), análisis en corriente alterna (AC) y análisis en dominio de la frecuencia (FD).
+ 
+Figura 32. Tipo de análisis, en la TI-89
+Tras haber seleccionado los valores de s e a d o s , e l u s u a r i o p r e s i o n a ¸ð. E n e s t e m o m e n t o , e l S y m b u l a t o r e j e c u t a r á u n a o d o s s i m u l a c i o n e s , c u y a s f r a s e s d e s c r i p t i v a s v e r e m o s e n l a p a n t a l l a . L u e g o a p a r e c e r á u n a p a n t a l l a d e r e s p u e s t a s . E n e s t a p a n t a l l a d e r e s p u e s t a s , e l p r o g r a m a n o s m o s t r a r á , u n o a u n o , l o s v a l o r e s e n c o n t r a d o s : l a i m p e d a n c i a T h é v e n i n z t h , e l v o l t a j e T h é v e n i n v t h y l a c o r r i e n t e N o r t o n i n o . P a r a v e r e l s i g u i e n t e v a l o r , e l u s u a r i o p r e s i o n a ¸ð. A l f i n a l , c u a n d o t o d o s l o s v a l o r e s h a n s i d o p r e s e n t a d o s , a p a r e c e D o n e . A l m a c e n a d a s e n l a c a r p e t a actual, están todas estos valores en variables con los mismos nombres.
+En el caso de que se utilice Pasivo, la herramienta no mostrará en la pantalla los valores de vth e ino, pues siempre serán cero.
+En el caso de que se utilice Auto-Detectar, la herramienta también entregará, como respuesta a los análisis en corriente directa, la máxima potencia real que puede entregar la red, en la pantalla de respuestas y en una variable llamada pmax; y como respuesta a los análisis en corriente alterna, la máxima potencia compleja que puede entregar la red, en la pantalla de respuestas y en una variable llamada smax.
+5.3 Práctica
+Veamos algunos problemas. 
+
+Problema N( 017
+Planteamiento. Determine los equivalentes de Thévenin y Norton para aquella parte del circuito que está a la izquierda de RL. 
+ 
+Figura 33. Circuito para el Problema N° 017.
+Solución:
+Nombramos los nodos y elementos de la parte del circuito que está a la izquierda de RL. El elemento RL no desempeña ningún papel en nuestra simulación. Nombramos a los nodos de izquierda a derecha, así: 1, 2 y 3. El nodo inferior es el de referencia. Por lo tanto, los nodos entre los cuales deseamos encontrar los equivalentes son el nodo 3 y el nodo 0. Damos la descripción de la parte del circuito que está a la izquierda de RL. Ejecutamos la herramienta thevenin. 
+sq\thevenin("e1,1,0,12;r1,1,2,3;r2,2,0,6;r3,2,3,7",3,0)
+Iniciamos la simulación con ¸ð. C o m o l a r e d q u e d e s e a m o s a n a l i z a r p o s e e u n a f u e n t e i n d e p e n d i e n t e , e s c o g e m o s A u t o - D e t e c t c o m o t i p o d e c i r c u i t o . E s c o g e m o s D C c o m o t i p o d e a n á l i s i s . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a n d o s s i m u l a c i o n e s . E n l a p a n talla de respuestas aparecen los valores de los equivalentes de Thévenin y Norton. Para zth obtenemos 9. Para vth obtenemos 8. Para ino obtenemos 8/9. Con estos valores, el usuario puede construir los equivalentes de Thévenin y Norton de la red en cuestión. En cuanto a la máxima potencia que puede entregar la red, para pmax obtenemos 16/9. Finalmente, aparece Done.
+
+Problema N( 018
+Planteamiento. Determine los equivalentes de Thévenin y Norton de la red frente al resistor de 1k(. 
+ 
+Figura 34. Circuito para el Problema N° 018.
+Solución:
+Nombramos los nodos y elementos de la red que está a la izquierda del resistor de 1k(. Este resistor no desempeña ningún papel en nuestra simulación. Nombramos a los nodos de izquierda a derecha, así: 1, 2 y 3. El nodo inferior es el de referencia. Por lo tanto, los nodos entre los cuales deseamos encontrar los equivalentes son el nodo 3 y el nodo 0. Damos la descripción de la parte del circuito que nos interesa. Ejecutamos la herramienta. 
+sq\thevenin("e1,1,0,4;r1,1,2,2E3;j1, 0 , 2 , 2 E - 3 ; r 2 , 2 , 3 , 3 E 3 " , 3 , 0 ) 
+ I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. L a r e d q u e d e s e a m o s a n a l i z a r p o s e e f u e n t e s i n d e p e n d i e n t e s , a s í q u e e s c o g e m o s A u t o - D e t e c t c o m o t i p o d e c i r c u i t o . E s c o g e m o s D C c o m o t i p o d e a n á l i s i s . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e nos indican que se ejecutan dos simulaciones. En la pantalla recibimos los valores de los equivalentes de Thévenin y Norton. Para zth obtenemos 5000. ohmios, para vth obtenemos 8. voltios, para ino obtenemos .0016 amperios, y para pmax obtenemos .0032 vatios. Finalmente, aparece Done.
+
+Problema N( 019
+Planteamiento. Determine los equivalentes de Thévenin y Norton de la red que se muestra en la figura. 
+ 
+Figura 35. Circuito para el Problema N° 019.
+Solución:
+Nombramos los nodos y elementos de la red. Nombramos a los nodos de izquierda a derecha, así: 1, 2 y x. El nodo inferior es el de referencia. Por lo tanto, los nodos entre los cuales deseamos encontrar los equivalentes son el nodo x y el nodo 0. Damos la descripción de la red. Ejecutamos la herramienta. 
+sq\thevenin("e1,1,0,4;r1,1,2,2E3;j1,0,2,vx/4E3;r2,2,x,3E3",x,0)
+Iniciamos la simulación con ¸ð. L a r e d q u e d e s e a m o s a n a l i z a r p o s e e u n a f u e n t e i n d e p e n d i e n t e , a s í q u e e s c o g e m o s A u t o - D e t e c t c o m o t i p o d e c i r c u i t o . E s c o g e m o s D C c o m o t i p o d e a n á l i s i s . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a n d o s s i m u l a c i o n e s . L u e g o aparecen los valores de los equivalentes de Thévenin y Norton. Para zth obtenemos 10000. ohmios, para vth obtenemos 8. voltios, para ino obtenemos .0008 amperios, y para pmax obtenemos .0016 vatios. Finalmente, aparece Done.
+Problema N( 020
+Planteamiento. Encuentre: 1) REq si R=80(, 2) R si REq=80(, y 3) R si R= REq.
+ 
+Figura 36. Circuito para el Problema N° 020.
+Solución:
+Para resolver este problema, usaremos la herramienta thevenin y algunos comandos. Nombramos los nodos y elementos de la red. Nombramos a los nodos de izquierda a derecha, así: 1, 2, 3 y 4. El nodo inferior es el de referencia. Por lo tanto, los nodos entre los cuales buscaremos la resistencia equivalente son el nodo 1 y el nodo 0. Damos la descripción de la red. Ejecutamos la herramienta. 
+sq\thevenin("r1,1,2,10;r2,2,0,100;r,2,3,r;r3,3,0,30;r4,3,4,40;r5,4,0,20",1,0)
+Iniciamos la simulación con ¸ð. L a r e d q u e d e s e a m o s a n a l i z a r n o p o s e e f u e n t e s i n d e p e n d i e n t e s , a s í q u e e s c o g e m o s P a s s i v e c o m o t i p o d e c i r c u i t o . E s c o g e m o s D C c o m o t i p o d e a n á l i s i s . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a u n a s i m u l a c i ó n . P a r a z t h , o b tenemos una función de r, como era de esperarse. Finalmente, aparece Done. Se nos ha pedido encontrar: 1) REq si R=80(, 2) R si REq=80(, y 3) R si R= REq. Para encontrar estas respuestas, usaremos el comando solve y el comando ( .
+Recordemos que zth está almacenada en la memoria. Para obtener la primera respuesta, escribimos en la línea de entrada lo siguiente:
+zth(r=80
+Aquí estamos preguntando: ¿Cuánto vale zth si r=80? Lo preguntamos de esta manera, y no con solve, porque zth es función de r, y no a la inv e r s a . P r e s i o n a m o s ¸ð. O b t e n e m o s 6 0 . 
+ P a r a o b t e n e r l a s e g u n d a r e s p u e s t a , a p r o v e c h a m o s q u e z t h e s f u n c i ó n d e r , y e s c r i b i m o s e n l a l í n e a d e e n t r a d a l o s i g u i e n t e : 
+ s o l v e ( z t h = 8 0 , r ) 
+ A q u í e s t a m o s p r e g u n t a n d o : ¿ C u á n t o v a l e r s i z t h = 8 0 ? P r e s i o n a m o s ¸ð. O b t e n e m o s r = 6 4 0 / 3 . 
+ P a r a o b t e n e r l a t e r c e r a r e s p u e s t a , e s c r i b i m o s e n l a l í n e a d e e n t r a d a l o s i g u i e n t e : 
+ s o l v e ( z t h = r , r ) 
+ A q u í e s t a m o s p r e g u n t a n d o : ¿ C u á n t o v a l e r s i z t h = r ? P r e s i o n a m o s ¸ð. O b t e n e m o s d o s r e s p u e s t a s . U n a d e e l l a s e s p o s i t i v a y l a o t r a n e g a t i v a . E s t o s i g n i f i c a q ue la ecuación tiene más de una solución. Obviamente, no existen resistencias negativas, así que limitaremos el rango que deseamos como respuestas con un operador condicional. Igualmente, aprovecharemos para solicitar la respuesta en forma aproximada. 
+solve(zth=r,r)(r>0
+Aquí estamos preguntando: ¿Cuánto vale r si zth=r y r es mayor que 0? Presionamos ( y ¸ð. O b t e n e m o s r = 5 1 . 7 8 9 0 8 3 5 . 
+ E s t a s s o n l a s r e s p u e s t a s c o r r e c t a s . 
+ H a g a m o s u n a p a u s a y c o n o z c a m o s u n a n u e v a h e r r a m i e n t a . 
+ 5 . 4 L a h e r r a m i e n t a p a r 
+ L a h e r r a m i e n t a p a r e s u n a f u n c i ó n , y f u e e s c r i t a e n s u p r i m e r a v e r s i ó n p o r m i a m i g o b e l g a E r w i n B a e r t , p a r a u n a d e l as versiones tempranas del Symbulator, como una herramienta sencilla y rápida para encontrar el equivalente de dos resistencias conectadas en paralelo. Aunque luego introduje algunas mejoras en el algoritmo, la función sigue siendo muy sencilla en su naturaleza y uso.
+Para encontrar el equivalente de dos resistencias, digamos una de 3( y otra de 5(, que están conectadas en paralelo, se escribe sq\par(3,5).
+Esta herramienta se puede utilizar ya sea sola o incluida en una descripción de circuito.
+5.4.1 Verificación de la fórmula para reducir resistencias en paralelo
+Para mostrar el uso de esta herramienta, verifiquemos la fórmula para reducir resistencias en paralelo. El equivalente de dos resistencias, digamos R1 y R2, que están conectadas en paralelo, se encuentra mediante la fórmula REq = R1R2/(R1+R2). Verifiquemos esta fórmula con la herramienta par.
+sq\par(r1,r2).
+Obtenemos r1*r2/(r1+r2). Esto es correcto.
+5.4.2 Aplicación
+Es fácil encontrar en la práctica aplicaciones sencillas para la herramienta par. Me interesa aquí mostrar un ejemplo de aplicación un poco más compleja. Resolveremos nuevamente el Problema N( 020, esta vez usando la herramienta par en vez de la herramienta thevenin.
+Problema N( 020
+Planteamiento. Encuentre: 1) REq si R=80(, 2) R si REq=80(, y 3) R si R= REq.
+ 
+Figura 36. Circuito para el Problema N° 020.
+Solución:
+Definamos la resistencia equivalente req, como la suma de estas resistencias. 
+Define req=10+sq\par(100,r+sq\par(30,40+20))
+Presionamos ¸ð. O b t e n e m o s u n a f u n c i ó n d e r , c o m o e r a d e e s p e r a r s e . 
+ r e q ( r = 8 0 
+ P r e s i o n a m o s ¸ð. O b t e n e m o s 6 0 . 
+ s o l v e ( r e q = 8 0 , r ) 
+ P r e s i o n a m o s ¸ð. O b t e n e m o s r = 6 4 0 / 3 . 
+ s o l v e ( r e q = r , r ) ( r > 0 
+ P r e s i o n a m o s ( y ¸ð. O b t e n e m o s r = 5 1 . 7 8 9 0 8 3 5 . 
+ E s t a s s o n l a s r e s p u e s t a s c o r r e c t a s . H e m o s v i s t o e n e ste problema que la herramienta par puede ser muy útil para reducir algunas redes resistivas a su equivalente. Sin embargo, hay algunas redes resistivas que se resisten a ser reducidas con simplificaciones serie-paralelo, y que requieren forzosamente de la herramienta thevenin. Este es el caso de las redes que requieren transformaciones delta-estrella, o (-Y. Veamos un ejemplo.
+Problema N( 021
+Planteamiento. Encuentre la resistencia equivalente de la red mostrada.
+ 
+Figura 37. Circuito para el Problema N° 021.
+Solución:
+Manualmente, este problema requiere de transformaciones (-Y. Nosotros usaremos la herramienta thevenin. Nombramos los tres nodos superiores, de izquierda a derecha, así: 1, 2 y 3. Nombramos los dos nodos intermedios, de izquierda a derecha, así: 4 y 5. El nodo inferior es el de referencia. Por lo tanto, los nodos entre los cuales buscaremos la resistencia equivalente son el nodo 1 y el nodo 0. Nombramos los elementos, damos la descripción de la red y ejecutamos la herramienta. 
+sq\thevenin("r1, 1 , 2 , 5 ; r 2 , 2 , 3 , 6 ; r 3 , 4 , 2 , 7 5 ; r 4 , 2 , 5 , 4 ; r 5 , 5 , 3 , 2 ; r 6 , 4 , 5 , 9 ; r 7 , 3 , 0 , 3 ; r 8 , 4 , 0 , 1 0 0 ; r 9 , 5 , 0 , 1 2 " , 1 , 0 ) 
+ I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. L a r e d q u e d e s e a m o s a n a l i z a r n o p o s e e f u e n t e s i n d e p e n d i e n t e s , a s í q u e e s c o g e m o s P a s s i v e c o m o t i p o d e c i r c u i t o . E s c o g e m o s D C c o m o t i p o d e a n á l i s i s . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a u n a s i m u l a c i ó n . C o m o v a l o r d e l a r e s i s t e n c i a e q u i v a l e n t e , z t h , o b t e n e m o s 6 3 6 5 / 6 4 3 . F i n a l m e n t e , a p a r e c e D o n e . P o d e m o s o b t e n e r u n v a l o r a p r o x i m a d o p i d i e n d o e n l a l í n e a d e e n t r a d a z t h y ( y ¸ð, e l c u a l s e r í a 9 . 8 9 8 9 1 1 3 5 . 
+ N ó t e s e q u e , p o r t r a t a r s e d e u n c i r c u i t o p a s i v o , e s c o g i m o s l a o p c i ó n P a s s i v e . E s t o i m p l i c a q u e n o s e c r e a u n a v a r i a b l e p m a x , p u e s u n c i r c u i t o p a s i v o n o p u e d e e n t r e g a r p o t e n c i a , p o r n o t e n e r f u e n t e s i n d e p e n d i e ntes.
+Hemos dicho que los circuitos que no tienen fuentes independientes son considerados pasivos. La presencia de fuentes dependientes no cambia este hecho. Veamos seguidamente cuatro problemas en los cuales los circuitos contienen únicamente fuentes dependientes y por lo tanto son pasivos.
+Problema N( 022
+Planteamiento. Encuentre el equivalente Thévenin de la red mostrada en la figura.
+ 
+Figura 38. Circuito para el Problema N° 022.
+Solución:
+Nótese que la fuente dependiente está controlada por una corriente i que no atraviesa ningún elemento. Tenemos dos opciones. La primera es colocar un cortocircuito donde está i, para luego definir a i como la corriente a través de ese cortocircuito. La segunda es entender a i como la suma de las corrientes de las dos resistencias, las cuales tendrían que ser definidas en las direcciones apropiadas para que sus corrientes desemboquen hacia i. Usaremos esta segunda alternativa, pues no requiere un nuevo elemento.
+Nombramos los dos nodos superiores, de izquierda a derecha, así: 1 y 2. El nodo inferior es el de referencia. Por lo tanto, los nodos entre los cuales buscaremos la resistencia equivalente son el nodo 2 y el nodo 0. Nombramos los elementos, damos la descripción de la red y ejecutamos la herramienta thevenin.
+sq\thevenin("e1,1,0,1.5*(ir1+ir2);r1,1,2,3;r2,0,2,2",2,0)
+Nótese que ambas resistencias "desembocan" en el nodo 2. Iniciamos la simulación con ¸ð. L a r e d q u e d e s e a m o s a n a l i z a r n o p o s e e f u e n t e s i n d e p e n d i e n t e s , a s í q u e e s c o g e m o s P a s s i v e c o m o t i p o d e c i r c u i t o . E s c o g e m o s D C c o m o t i p o d e a n á l i s i s . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a u n a s i m u l a c i ó n . P a r a z t h o b t enemos .6 ohmios. Finalmente, aparece Done.
+Problema N( 023
+Planteamiento. Encuentre el equivalente Norton de la red mostrada en la figura.
+ 
+Figura 39. Circuito para el Problema N° 023.
+Solución:
+Nombramos los dos nodos superiores, de izquierda a derecha, así: 1 y 2. El nodo inferior es el de referencia. Buscaremos la resistencia equivalente entre el nodo 1 y el nodo 0. Nombramos los elementos, damos la descripción de la red y ejecutamos la herramienta thevenin.
+sq\thevenin("r1,1,0,100;r2,1,2,50;r3,2,0,200; j 1 , 2 , 0 , 0 . 1 * v 1 " , 1 , 0 ) 
+ I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. E s c o g e m o s P a s s i v e c o m o t i p o d e c i r c u i t o y D C c o m o t i p o d e a n á l i s i s . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a u n a s i m u l a c i ó n . P a r a z t h o b t e n e m o s 1 0 . 6 3 8 2 9 7 9 o h m i o s . 
+ P r o b lema N( 024
+Planteamiento. Encuentre la impedancia de entrada, Zent, de la red mostrada en la figura.
+ 
+Figura 40. Circuito para el Problema N° 024.
+Solución:
+Los nodos de la malla superior fueron nombrados en el sentido de las manecillas del reloj, empezando en la izquierda, así: 1, 2, 3 y 4. El nodo inferior es la referencia. Nombramos a la resistencia de 8 ohms como rx, y la definimos en la polaridad adecuada, entre 3 y 2, para usar su caída de voltaje vrx como control para la fuente dependiente. Damos la d e s c r i p c i ó n d e l a r e d y e j e c u t a m o s l a h e r r a m i e n t a t h e v e n i n , e n t r e 1 y 0 . 
+ s q \ t h e v e n i n ( " r 1 , 1 , 2 , 2 0 ; r x , 3 , 2 , 8 ; r 2 , 1 , 4 , 1 0 ; r 3 , 4 , 3 , 1 2 ; r 4 , 3 , 0 , 5 ; e 1 , 4 , 0 , . 6 * v r x " , 1 , 0 ) 
+ I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. E s c o g e m o s P a s s i v e c o m o t i p o d e c i r c u i t o y D C c o m o t i p o d e a n á l i s i s . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a u n a s i m u l a c i ó n . P a r a z t h o b t e n e m o s 6 . 7 0 5 0 8 1 1 9 o h m i o s . 
+ P r o b l e m a N ( 0 2 5 
+ P l a n t e a m i e n t o . E n c u e n t r e e l e q u i v a l e n t e T h é v e n i n d e l a r e d m o s t r a d a e n l a f i g u r a . 
+ 
+ F i g u r a 4 1 . C i r c u i t o p a r a el Problema N° 025.
+Solución:
+Ignoraremos los nombres a y b que muestra el dibujo. Nombramos los tres nodos superiores, de izquierda a derecha, así: 1, 2 y 3. El nodo inferior es el de referencia. Buscaremos la resistencia equivalente entre el nodo 3 y el nodo 0. Nombramos los elementos, damos la descripción de la red y ejecutamos la herramienta thevenin.
+sq\thevenin("j1,0,1,.01*v3;r1,1,0,200;r2,1,2,50;e1,3,2,.2*v3;r3,3,0,100",3,0)
+Iniciamos la simulación con ¸ð. E s c o g e m o s P a s s i v e c o m o t i p o d e c i r c u i t o y D C c o m o t i p o d e a n á l i s i s . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e s e e j e c u t a u n a s i m u l a c i ó n . P a r a z t h o b t e n e m o s 1 9 2 . 3 0 7 6 9 2 o h m i o s . 
+ C o n s i d e r a m o s q u e c o n l o s p r o b l e m a s m o s t r a d o s , e l l e c t or tendrá en este momento un dominio completo de la herramienta thevenin.
+ PAGE 10 
+
+5- PAGE 15 
+Equivalentes de Thévenin y Norton
+
+Roberto Pérez-Franco - Symbulator
+
+Simulación avanzada en corriente directa

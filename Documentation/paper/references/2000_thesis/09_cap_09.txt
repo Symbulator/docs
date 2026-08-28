@@ -1,0 +1,112 @@
+Capítulo
+9
+Algunos conceptos nuevos
+9.1 Problemas con gráficas
+En ocasiones, es necesario construir una grafica con las respuestas. Existen, básicamente, cuatro tipos de gráficas relacionadas con una simulación del Symbulator:
+Valor de una respuesta obtenida en un análisis AC, en función de la frecuencia j wð. 
+ V a l o r d e u n a r e s p u e s t a o b t e n i d a e n u n a n á l i s i s F D , e n f u n c i ó n d e l a f r e c u e n c i a c o m p l e j a s . 
+ V a l o r d e u n a r e s p u e s t a o b t e n i d a e n u n a n á l i s i s T R , e n f u n c i ó n d e l t i e m p o t . 
+ V a l o r d e c u a l q u i e r r e s p u e s t a , e n f u n c i ó n d e u n v a l o r d e c i r c u i t o s i m b ó l i c o . 
+ L a c a l c u l a dora TI tiene extensas capacidades de gráficación. La descripción detallada de su diversidad y uso está más allá del propósito de este escrito; sin embargo, está disponible en el Manual de Usuario de la calculadora.
+En el Capítulo 12 veremos un ejemplo del segundo tipo de gráfica usando la herramienta bode, y un ejemplo del tercer tipo de gráfica, usando la herramienta plot.
+A continuación, veremos un ejemplo del primer tipo de gráfica, usando las capacidades propias de la calculadora. La técnica que se expo n d r á e s a p l i c a b l e t a m b i é n p a r a e l c u a r t o t i p o d e g r á f i c a s . 
+ P r o b l e m a N ( 0 6 4 
+ P l a n t e a m i e n t o . G r a f i q u e a b s ( V S a l i d a ) c o n t r a wð p a r a e l c i r c u i t o q u e s e m u e s t r a e n l a f i g u r a . C u b r a u n i n t e r v a l o d e f r e c u e n c i a d e wð=ð8ð0ð0ð ða wð=ð1ð2ð0ð0ð ð r a d / s e g .ð
+ 
+ F i g u r a 9 0 . C i r c u i t o p a r a el Problema N° 064.
+Solución. Simplemente usaremos el comando solve:
+sq\ac("e,1,0,1;l,1,2,1;r,2,3,10;c,3,0,1E-6",x)
+Se usó una frecuencia x con la intención de que el voltaje de salida quede como función de la variable x. El propósito de esto es satisfacer el requerimiento de la calculadora TI, la cual requiere que las funciones y# que se vayan a graficar, donde # es un número, estén dadas como función de x, donde x es la variable independiente.
+Presionamos ¸ð. L a s i m u l a c i ó n t o m a a l g o d e t i e m p o . F i n a l m e n t e a p a r e c e D o n e . E l s i g u i e n t e p a s o e s h a c e r a p a r e c e r e n e l á r e a d e h i s t o r i a , e l v a l o r d e a b s ( V S a l i d a ) . P o d e m o s u s a r c o m o V S a l i d a a v 3 o a v c . 
+ a b s ( v 3 ) 
+ P r e s i o n a m o s ¸ð. O b t e n e m o s u n a f u n c i ó n d e x , l a c u a l a l m a c e n a r e m o s e n c u a l q u i e r a d e l a s f u n c i o n e s y # ( x ) , d o n d e # e s u n n ú m e r o . 
+ a n s ( 1 ) ( y 1 ( x ) 
+ P r e s i o n a m o s ¸ð y l a f u n c i ó n s e a l m a c e n a e n l a v a r i a b l e e s p e c i f i c a d a . P r e s i o n a n d o ( ( p o d e m o s v e r i f i c a r q u e a s í e s . A h o r a p o d e m o s e s p e c i f i c a r e l r a n g o d e f r e c u e n c i a s p a r a e l c u a l d eseamos graficar. Presionamos ( ( y especificamos para xmin un valor de 800 y para xmax un valor de 1200. Presionamos ( ( y vemos la gráfica. Podemos presionar ( ( A en la TI-89 y ( A en la TI-92+ para ajustar el alto de la gráfica al mejor valor:
+ 
+Figura 91. Gráfica obtenida para el problema, en una TI-89.
+Hemos aprendido cómo graficar una respuesta como función de la frecuencia, usando las capacidades propias de la calculadora.
+9.2 Problemas con múltiples incógnitas
+Para resolver un circuito con valores simbólicos, necesitamos tener una respuesta conocida de antemano por cada valor simbólico cuyo valor numérico es desconocido y se desee obtener. Para resolver un sistema, requerimos el mismo número de ecuaciones que de incógnitas. Veremos un problema en el cual ambos axiomas se cumplen al mismo tiempo, pero antes, una aclaración teórica. Explicamos en el Capítulo 7 que antes de simular un circuito que contenga un bipuerto, debemos haber almacenado en la memoria los valores de los cuatro parámetros de este bipuerto, en los nombres correspondientes. Pero, ¿qué sucede si no almacenamos estos valores? El Symbulator simulará el circuito usando los parámetros que no estén almacenados antes de la simulación, como fueran variables simbólicas.
+Problema N( 065
+Planteamiento. Complete la tabla dada, y también dé los valores de los parámetros y.
+ 
+Figura 92. Circuito para el Problema N° 065.
+Solución:
+Este es un problema muy especial, el cual nos permite disfrutar de las capacidades simbólicas del Symbulator. Existen varias formas de resolverlo. Aquí presentaremos la manera más lineal y simple, que sin embargo no es la más sofisticada.
+Aunque el planteamiento nos presente las dos preguntas en ese orden, para responderlas nosotros las invertiremos. Es decir, primero encontraremos los valores de los parámetros y, y luego completaremos la tabla. Para encontrar los parámetros y, aprovecharemos las dos primeras filas de la tabla, las cuales están completas ya. Es precisamente gracias a estas filas completas que podremos generar las cuatro ecuaciones, necesarias para encontrar los cuatro valores numéricos de los parámetros y11, y12, y21 y y22. Los pasos que seguiremos son los siguientes:
+Simular el circuito, sin parámetros definidos.
+Usar las dos filas completas de la tabla para generar las cuatro ecuaciones que necesitamos.
+Obtener los cuatro valores numéricos de los parámetros, resolviendo estas cuatro ecuaciones.
+Completar la tabla, usando los parámetros que hemos encontrado y los valores que nos dan las filas incompletas.
+El p r o c e d i m i e n t o e s c o m o s i g u e : 
+ s q \ d c ( " j 1 , 0 , 1 , j 1 ; j 2 , 0 , 2 , j 2 ; y p , 1 , 2 , 0 " ) 
+ P r e s i o n a m o s ¸ð. L a s i m u l a c i ó n s e e j e c u t a y a p a r e c e D o n e . G e n e r a m o s l a p r i m e r a e c u a c i ó n c o n l a s i g u i e n t e o r d e n : 
+ v 1 = 1 0 0 | j 1 = 5 a n d j 2 = - 3 2 . 5 
+ C o n ¸ð o b t e n e m o s l a e c u a c i ó n . G e n e r a m o s l a s e g u n d a e c u a c i ó n a s í : 
+ v 2 = 5 0 | j 1 = 5 a n d j 2 = - 3 2 . 5 
+ C o n ¸ð o b t e n e m o s l a e c u a c i ó n . G e n e r a m o s l a t e r c e r a e c u a c i ó n a s í : 
+ v 1 = 5 0 | j 1 = - 2 0 a n d j 2 = - 5 
+ C o n ¸ð o b t e n e m o s l a e c u a c i ó n . G e n e r a m o s l a c u a r t a e c u a c i ó n a s í : 
+ v 2 = 1 0 0 | j 1 = - 2 0 a n d j 2 = - 5 
+ H a b i e n d o g e n e r a d o l a s c u a t r o e c u a c i o n e s , p r o c e d e m o s a r e s o l v e r l a s p a r a e n c o n t r a r l o s c u a t r o p a r á m e t r o s y . 
+ s o l v e ( a n s ( 1 ) a n d a n s ( 2 ) a n d a n s ( 3 ) a n d a n s ( 4 ) , { y p 1 1 , y p 1 2 , y p 2 1 , y p 2 2 } ) 
+ C o n ¸ð o b t e n e m o s l o s p a r á m e t r o s : y p 1 1 = . 2 a n d y p 1 2 = - . 3 a n d y p 2 1 = - . 4 a n d y p 2 2 = . 1 5 . A h o r a , p r o c e d e m o s a c o m p l e t a r l a t a b l a . P a r a c o m p l e t a r l a t e r c e r a f i l a , u s a m o s l a s i g u i e n t e o r d e n : 
+ s o l v e ( v 1 = 2 0 a n d v 2 = 0 , { j 1 , j 2 } ) | a n s ( 1 ) 
+ C o n ¸ð o b t e n e m o s l o s v a l o r e s f a l t a n t e s e n l a f i l a : j 1 = 4 . a n d j 2 = - 8 . P a r a c o m p l e t a r l a c u a r t a f i l a , u s a m o s l a s s i g u i e n t e s ó r d e n e s : 
+ v 1 | a n s ( 2 ) a n d j 1 = 5 a n d j 2 = 0 
+ v 2 | a n s ( 3 ) a n d j 1 = 5 a n d j 2 = 0 
+ N ó t e s e c ó m o e l n ú m e r o # q u e a p a r e c e e n a n s ( # ) c a m b i a p a r a r e f l e j a r a c a d a m o m e n t o l a n u e v a p o s i c i ó n d e l a s r e s p u e s t a s d e l o s p a r á m e t r o s y . C o n ¸ð o b t e n e m o s l o s v a l o r e s - 8 . 3 3 3 3 3 y - 2 2 . 2 2 2 2 2 , r e s p e c t i v a m e n t e . P a r a c o m p l e t a r l a q u i n t a f i l a , u s a m o s l a s s i g u i e n t e s ó r d e n e s : 
+ v 1 | a n s ( 4 ) a n d j 1 = 5 a n d j 2 = 1 5 
+ v 2 | a n s ( 5 ) a n d j 1 = 5 a n d j 2 = 1 5 
+ C o n ¸ð o b t e n e m o s l o s v a l o r e s - 5 8 . 3 3 3 3 3 y - 5 5 . 5 5 5 5 5 , r e s p e c t i v a m e n t e . A s í , h e m o s c o m p l e t a d o l a t a b l a . 
+ P e r s o n a l m e n t e , c o n s i d e r o q u e é s t e e s u n o d e l o s p r o b l e m a s m á s i n t e r e s a ntes que he resuelto jamás, usando el Symbulator.
+Aprendamos a usar un nuevo elemento.
+9.3 Amplificador operacional ideal (op-amp ideal)
+Un op-amp ideal es, en esencia, una fuente de voltaje dependiente de voltaje. Al decir que es ideal, nos referimos a que sus parámetros se consideran como Ri=(, Ro=0 y A=(.
+9.3.1 Notación
+En el caso del op-amp ideal, la mínima información necesaria para describirlo por completo es la siguiente:
+Identificación. La letra que identifica a un op-amp ideal es la o.
+Nombre. Se le debe dar un nombre cualquiera, que empiece con la letra o.
+Nodos. Un op-amp ideal, tal y como lo entiende el Symbulator, tiene tres puntos de conexión: uno positivo, uno negativo y uno de salida. 
+Así, los op-amp ideales se definen como se muestra a continuación:
+onombre, nodo +, nodo -, nodo salida
+La descripción del op-amp ideal siempre tiene 4 términos, por lo que podría haber necesidad de agregar un cero al final.
+9.3.2 Respuestas relacionadas
+En el caso de un op-amp ideal, se entrega una respuesta relacionada: la corriente que sale del op-amp por el nodo de salida. Esta corriente se almacena en una variable llamada inombre, donde nombre es el nombre del op-amp ideal. Así, para un op-amp ideal que se llame o1, la respuesta relacionada será io1. Recuérdese que esta corriente se considera saliendo del op-amp.
+Veamos algunos ejemplos.
+Problema N( 066
+Planteamiento. Dado el siguiente circuito, encuentre el voltaje en el nodo de salida del op-amp ideal.
+ 
+Figura 93. Circuito para el Problema N° 066.
+Solución. T r a s l i m p i a r l a s v a r i a b l e s s i m b ó l i c a s q u e v a m o s a e m p l e a r , o r d e n a m o s l a s i m u l a c i ó n , y s o l i c i t a m o s e l v o l t a j e e n e l n o d o d e s a l i d a d e l o p - a m p . 
+ D e l V a r r 1 , r 2 , v i n : s q \ d c ( " e 1 , 1 , 0 , v i n ; r 1 , 1 , 2 , r 1 ; r 2 , 2 , 3 , r 2 ; o 1 , 0 , 2 , 3 " ) : v 3 
+ C o n ¸ð, i n i c i a l a s i m u l a c i ó n y o b t e n e m o s l a respuesta: -r2*vin/r1
+Problema N( 067
+Planteamiento. Si se supone que el op-amp mostrado es ideal, encuentre Rent.
+ 
+Figura 94. Circuito para el Problema N° 067.
+Solución. Usemos la herramienta thevenin.
+DelVar rx:sq\Thevenin("rx,1,0,rx;r1,1,2,2E4;r2,2,3,2E4; o1,3,1,2",3,0)
+Con ¸ð, s e e j e c u t a l a h e r r a m i e n t a . E s c o g e m o s P a s s i v e y D C . ¸ð. O b t e n e m o s l a r e s p u e s t a e n l a p a n t a l l a ( y e n l a m e m o r i a ) : z t h = - r x 
+ E s t o s e j e m p l o s i l u s t r a n l a f a c i l i d a d c o n q u e s e s i m u l a n l o s o p - a m p s i d e a l e s e n e l S y m b u l a t o r . 
+ 9 . 4 C o n s i d e r a c i o n e s f i n a l e s p a r a e l M o d o (Experto)
+Este punto debe ser leído por aquellos usuarios que hayan leído ya el Capítulo 4.
+9.4.1 Restricciones del Modo (Experto) con op-amps
+Como hemos dicho, el Modo (Experto) permite al usario escoger si desea resolver las ecuaciones, resolverlas y guardarlas, o simplemente guardarlas. Aquellos circuitos que contengan amplificadores operacionales ideales generarán ecuaciones no comprensibles por el usuario, pues contienen un término que se usará luego para la aplicación del comando de límite de la calculadora. Por lo tanto, cuando el circuito que se resuelva en el Modo (Experto) incluya op-amps, debe escogerse siempre Symbulate, y nunca Just Keep, cuando el diálogo nos solicite el procedimiento que deseamos seguir.
+9.4.2 Restricciones del Modo (Experto) en análisis transitorio
+En el Capítulo 10 aprenderemos a realizar simulaciones en dominio de la frecuencia FD. En el Capítulo 11 aprenderemos a realizar simulaciones de análisis transitorio TR. Durante un análisis transitorio, el simulador generará ecuaciones en dominio de la frecuencia. Tras haber resuelto estas ecuaciones, todas las respuestas son convertidas a dominio del tiempo. Por lo tanto, cuando la simulación en el Modo (Experto) sea en análisis transitorio, debemos escoger siempre Symbulate, y nunca Just Keep, si deseamos obtener respuestas en el dominio del tiempo. Guardar las ecuaciones generadas y resolverlas luego, nos llevaría a respuestas en el dominio de la frecuencia.
+9.4.3 Más variables de primer nivel
+Algunos elementos de circuito fueron presentados después del Capítulo 4. Conozcamos cuáles tienen variables de primer nivel relacionadas a ellos. 
+Inductores. La corriente a través de ellos es una variable de primer nivel. Su caída de voltaje es una variable de segundo nivel que no es reemplazada por su valor al final de la simulación. Su potencia es una variable de tercer nivel.
+Capacitores. La corriente a través de ellos es una variable de segundo nivel que sí es reemplazada por su valor al final de la simulación. Su caída de voltaje es una variable de segundo nivel que no es reemplazada por su valor al final de la simulación. Su potencia es una variable de tercer nivel.
+Transformadores ideales. La corriente que entra al transformador por el lado primario es una variable de primer nivel. La corriente que entra al transformador por el lado secundario es una variable de segundo nivel que no es reemplazada por su valor al final de la simulación.
+Bipuertos. Las corrientes que entran al transformador por ambos extremos son variables de primer nivel.
+Amplificadores operacionales ideales. La corriente que sale del op-amp por el nodo de salida es una variable de primer nivel.
+ PAGE 10 
+
+9 - PAGE 9 
+Algunos conceptos nuevos
+
+Roberto Pérez-Franco - Symbulator
+
+Conceptos generales del Symbulator

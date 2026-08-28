@@ -1,0 +1,463 @@
+Apéndice
+D
+Origen de los problemas usados
+Los problemas de esta tesis fueron, en su mayoría, extraídos del siguiente libro: Análisis de circuitos en ingeniería, Hyat & Kemmerly - Quinta edición (Tercera edición en español). Editora McGraw-Hill. 1993. Las excepciones han sido señaladas. A continuación un listado de las páginas en las cuales se pueden encontrar los problemas usados en la tesis.
+
+Capítulo
+Problema
+Fuente
+Comentario
+
+2
+001
+Hyat & Kemmerly
+Página 56 Circuito a)
+
+2
+002
+Hyat & Kemmerly
+Página 57 Circuito b)
+
+2
+003
+Hyat & Kemmerly
+Página 34 Circuito a)
+
+2
+004
+Hyat & Kemmerly
+Página 34 Circuito b)
+
+2
+005
+Hyat & Kemmerly
+Página 33
+
+2
+006
+Hyat & Kemmerly
+Página 49 Problema 1-25
+
+2
+007
+Hyat & Kemmerly
+Página 30
+
+2
+008
+Hyat & Kemmerly
+Página 32 Figura 1-28b)
+
+2
+009
+Hyat & Kemmerly
+Página 48 Problema 1-23
+
+2
+010
+Hyat & Kemmerly
+Página 74 Figura 2-17
+
+2
+011
+Hyat & Kemmerly
+Página 47 Problema 1-15
+
+3
+012
+Hyat & Kemmerly
+Página 22
+
+3 y 4
+013
+Hyat & Kemmerly
+Página 27 Figura 1-24
+
+3 y 4
+014
+Hyat & Kemmerly
+Página 28 Figura 1-24b)
+
+3 y 4
+015
+Hyat & Kemmerly
+Página 28 Figura 1-24c)
+
+3 y 4
+016
+Hyat & Kemmerly
+Página 101 Problema 2-8
+
+5
+017
+Hyat & Kemmerly
+Página 81
+
+5
+018
+Hyat & Kemmerly
+Página 84 Figura 2-26a)
+
+5
+019
+Hyat & Kemmerly
+Página 85 Figura 2-27a)
+
+5
+020
+Hyat & Kemmerly
+Página 50 Problema 1-31
+
+5
+021
+Hyat & Kemmerly
+Página 493 Problema 15-17
+
+5
+022
+Hyat & Kemmerly
+Página 87 Figura 2-29a)
+
+5
+023
+Hyat & Kemmerly
+Página 106 Problema 2-29
+
+5
+024
+Hyat & Kemmerly
+Página 490 Problema 15-5
+
+5
+025
+Hyat & Kemmerly
+Página 106 Problema 2-31
+
+6
+026
+Hyat & Kemmerly
+Página 260 Figura 8-10a)
+
+6
+027
+Hyat & Kemmerly
+Página 261 Figura 8-11a)
+
+6
+028
+Hyat & Kemmerly
+Página 264 Problema 8-15
+
+6
+029
+Hyat & Kemmerly
+Página 261 Figura 8-11b)
+
+6
+030
+Hyat & Kemmerly
+Página 266 Problema 8-29
+
+6
+031
+Hyat & Kemmerly
+Página 432
+
+6
+032
+Hyat & Kemmerly
+Página 451 Problema 14-3
+
+6
+033
+Hyat & Kemmerly
+Página 453 Problema 14-15
+
+6
+034
+Hyat & Kemmerly
+Página 452 Problema 14-11
+
+6
+035
+Hyat & Kemmerly
+Página 456 Problema 14-31
+
+6
+036
+Hyat & Kemmerly
+Página 457 Problema 14-33
+
+6
+037
+Hyat & Kemmerly
+Página 457 Problema 14-35
+
+6
+038
+Hyat & Kemmerly
+Página 456 Problema 14-29
+
+7
+039
+Hyat & Kemmerly
+Página 494 Problema 15-19
+
+7
+040
+Hyat & Kemmerly
+Página 483 Figura 15-19d)
+
+7
+041
+Hyat & Kemmerly
+Página 466 Figura 15-6a)
+
+7
+042
+Hyat & Kemmerly
+Página 469
+
+7
+043
+Hyat & Kemmerly
+Página 470
+
+7
+044
+Hyat & Kemmerly
+Página 473 Figura 15-12
+
+7
+045
+Hyat & Kemmerly
+Página 483 Figura 15-19a)
+
+7
+046
+Hyat & Kemmerly
+Página 483 Figura 15-19b)
+
+7
+047
+Hyat & Kemmerly
+Página 483 Figura 15-19c)
+
+7
+048
+Hyat & Kemmerly
+Página 495 Problema 15-25
+
+7
+049
+Hyat & Kemmerly
+Página 484 Figura 15-20
+
+7
+050
+Hyat & Kemmerly
+Página 495 Problema 15-27
+
+7
+051
+Hyat & Kemmerly
+Página 495 Problema 15-23
+
+7
+052
+Hyat & Kemmerly
+Página 486 Figura 15-23
+
+7
+053
+Hyat & Kemmerly
+Página 496 Problema 15-33
+
+7
+054
+Hyat & Kemmerly
+Página 487 Figura 15-24a
+
+7
+055
+Hyat & Kemmerly
+Página 488 Figura 15-26
+
+7
+056
+Hyat & Kemmerly
+Página 497 Problema 15-37
+
+8
+057
+Nevin McChesney (US)
+-
+
+8
+058
+Hyat & Kemmerly
+Página 263 Problema 8-9
+
+8
+059
+Hyat & Kemmerly
+Página 264 Problema 8-11
+
+8
+060
+Hyat & Kemmerly
+Página 265 Problema 8-19
+
+8
+061
+Hyat & Kemmerly
+Página 266 Problema 8-25
+
+8
+062
+Hyat & Kemmerly
+Página 418 Problema 13-7
+
+8
+063
+Hyat & Kemmerly
+Página 418 Problema 13-3
+
+9
+064
+Hyat & Kemmerly
+Página 286 Problema 9-19
+
+9
+065
+Hyat & Kemmerly
+Página 492 Problema 15-15
+
+9
+066
+Ing. Jake Adams (US)
+-
+
+9
+067
+Hyat & Kemmerly
+Página 491 Problema 15-7
+
+10
+068
+Hyat & Kemmerly
+Página 375 Problema 12-19
+
+10
+069
+Hyat & Kemmerly
+Página 455 Problema 14-23
+
+10
+070
+Hyat & Kemmerly
+Página 423 Problema 13-41
+
+10
+071
+Hyat & Kemmerly
+Página 373 Problema 12-7
+
+10
+072
+Hyat & Kemmerly
+Página 373 Problema 12-11
+
+10
+073
+Hyat & Kemmerly
+Página 374 Problema 12-13
+
+10
+074
+Hyat & Kemmerly
+Página 374 Problema 12-15
+
+11
+075
+Hyat & Kemmerly
+Página 455 Problema 14-21
+
+11
+076
+Hyat & Kemmerly
+Página 376 Problema 12-27
+
+11
+077
+Hyat & Kemmerly
+Página 161 Problema 4-1
+
+11
+078
+Hyat & Kemmerly
+Página 162 Problema 4-11
+
+11
+079
+Hyat & Kemmerly
+Página 163 Problema 4-15
+
+11
+080
+Hyat & Kemmerly
+Página 165 Problema 4-23
+
+11
+081
+Hyat & Kemmerly
+Página 191 Problema 5-31
+
+11
+082
+Hyat & Kemmerly
+Página 191 Problema 5-33
+
+11
+083
+Hyat & Kemmerly
+Página 223 Problema 6-3
+
+11
+084
+Hyat & Kemmerly
+Página 223 Problema 6-5
+
+11
+085
+Hyat & Kemmerly
+Página 227 Problema 6-29
+
+11
+086
+Hyat & Kemmerly
+Página 144 Problema 3-19
+
+12
+087
+Dr. Eliane Boulet de Cabrera (UTP)
+-
+
+12
+088
+Prof. Edilberto Yee (UTP)
+-
+
+Ap. C
+089
+Hyat & Kemmerly
+Página 286 Problema 9-17
+
+ PAGE 10 
+
+D - PAGE 5 
+Origen de los problemas usados
+
+Roberto Pérez-Franco - Symbulator
+
+Simulación avanzada en corriente directa

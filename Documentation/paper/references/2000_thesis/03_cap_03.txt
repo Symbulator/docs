@@ -1,0 +1,137 @@
+Capítulo
+3
+Simulación simbólica en corriente directa
+3.1 Definición de simulación numérica
+En el capítulo anterior realizamos una gran cantidad de simulaciones, en las cuales todos los valores de los elementos de circuito eran numéricos. También las respuestas obtenidas en la simulación fueron todas numéricas. Este tipo de simulación se conoce como simulación numérica, y es posible realizarla usando cualquiera de los simuladores numéricos convencionales, tales como el Electronic Workbench, PSpice y otros. En ellos, son posibles las tareas tales como describir circuitos con fuentes dependientes y obtener las respuestas en todos los nodos y elementos, pero ofrecen un mayor grado de dificultad que en el Symbulator.
+Una razón por la cual estas tareas resultan más sencillas en el Symbulator que en otros simuladores es precisamente que el primero es un simulador simbólico. Por ejemplo, las fuentes dependientes son manejadas simbólicamente al momento de la resolución del circuito, aún cuando al final sus valores terminen siendo numéricos. La otra razón es que fue diseñado y desarrollado por un estudiante, con la idea clara de proporcionar a los estudiantes lo que estos desean recibir como respuesta en una simulación.
+El pleno potencial del Symbulator se hace verdaderamente manifiesto sólo cuando ejecutamos simulaciones simbólicas.
+3.2 Definición de simulación simbólica
+Una simulación simbólica es una simulación en la cual al menos uno de los valores del circuito no es un valor numérico – ya sea real o complejo -, sino un valor simbólico. Este valor simbólico puede ser una variable desconocida, una expresión algebraica, una función del tiempo, una función de la frecuencia u otro tipo de expresión no numérica.
+Aprendimos ya que el tipo de entrada determinará el tipo de salida. La naturaleza de los valores de los elementos del circuito se refleja en la naturaleza de las respuestas de la simulación. Valores exactos producirán respuestas exactas. Valores numéricos producirán respuestas numéricas. Así también, valores simbólicos producirán respuestas simbólicas. Podemos asegurar que una simulación simbólica, por tener algún valor simbólico en el circuito de entrada, tendrá algunas respuestas simbólicas.
+3.3 Simulación simbólica para obtener respuesta simbólica
+Una simulación es considerada simbólica si la descripción del circuito que se utiliza contiene algún valor simbólico. Hay básicamente dos tipos de simulación simbólica: la que busca una respuesta simbólica y la que busca una respuesta numérica. La simulación del primer tipo, cuyo objetivo es una respuesta simbólica, es muy útil en problemas de diseño, y para la obtención de expresiones que describan simbólicamente el comportamiento de alguna característica del circuito, como por ejemplo la potencia consumida, en función de los valores de sus elementos. También podría usarse con propósitos académicos, para demostrar algunas leyes del analisis de circuitos. La ley de Ohm, por ejemplo, puede demostrarse mediante una simulación simbólica en el Symbulator. Para aprender cómo simular simbólicamente, veamos algunos problemas.
+
+Problema N( 012
+Planteamiento. Mediante la simulación simbólica del siguiente circuito básico, demuestre la ley de Ohm y la fórmula de la potencia consumida por una resistencia. 
+ 
+Figura 15. Circuito para el Problema N° 012.
+Solución:
+Este es el circuito más básico posible. El primer paso es nombrar los nodos y elementos del circuito. El segundo paso es ordenar la simulación, con la descripción del circuito.
+sq\dc("r,1,0,r;j,0,1,i")
+Nótese la manera novedosa e n q u e s e h a n n o m b r a d o l o s e l e m e n t o s : c o m o s ó l o h a y u n e l e m e n t o d e c a d a t i p o , h e m o s u s a d o s ó l o l a l e t r a i n i c i a l c o m o n o m b r e d e l o s e l e m e n t o s . I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. T r a s l a s f r a s e s e n l a p a n t a l l a , a p a r e c e D o n e e n e l á r e a d e h i s t o r i a . M i c a l c u l a d o r a tomó 6 segundos en simular este circuito. Por ser este el circuito más básico posible, este es el menor tiempo posible para una simulación en el Symbulator. En la carpeta actual están todas las respuestas.
+Podemos demostrar la ley de Ohm solicitando a la calculadora el valor de vr. Obtenemos i*r voltios, como era de esperarse. Para demostrar la fórmula de la potencia consumida por una resistencia, solicitamos el valor de pr. Obtenemos i2*r vatios, que es correcto.
+La verificación de la ley de Ohm también pudo haberse logrado usando una fuente de voltaje en vez de una fuente de corriente, con la siguiente descripción:
+sq\dc("r,1,0,r;e,1,0,v")
+Mi calculadora tomó 7 segundos en simular este circuito. Nótese cómo una fuente de voltaje toma más tiempo que una fuente de corriente en ser simulada. Aunque en este caso la diferencia en tiempo es despreciable (sólo 1 segundo), al trabajar con circuitos más complejos esta diferencia puede ser considerable.
+Demostramos la ley de Ohm solicitando ir. Obtenemos v/r voltios, que es otra manera de expresar la ley. Demostramos la fórmula de la potencia consumida por una resistencia solicitando pr. Obtenemos v2/r vatios, que es la otra fórmula para obtener esta potencia.
+Este ejercicio nos enseña que la simulación simbólica es una manera fácil de demostrar y aprender las leyes básicas del análisis de circuitos.
+3.4 Simulación simbólica para obtener respuesta numérica
+Algunas otras simulaciones simbólicas tienen como objetivo el obtener al final una respuesta numérica. En estos casos, se utiliza el comando solve, la herramienta solves y el Modo (Experto).
+Usualmente, para obtener una respuesta numérica, se requiere por cada valor simbólico que tenga el circuito, conocer de antemano el valor numérico de una respuesta, es decir un voltaje, corriente o potencia. 
+3.5 Comando solve
+Veamos un ejemplo simple del segundo tipo de simulación simbólica, que busca una respuesta numérica, utilizando el comando solve.
+Problema N( 013
+Planteamiento. Determine los valores numéricos de vx e ix en el siguiente circuito. 
+ 
+Figura 16. Circuito para el Problema N° 013.
+Solución:
+Cuando se le compara con otros circuitos resueltos anteriormente, este circuito muestra dos diferencias notorias. La primera es que mezcla elementos con valor simbólico y elementos con valor numérico. La segunda es que tenemos de antemano el valor numérico de una de las corrientes del circuito: 12 amperios a través de la resistencia de 5 ohms.
+Nombramos los nodos y elementos. Hemos definido la dirección de corriente de las resistencias de 5 y 6 ohmios en la misma dirección de las flechas en el dibujo. Como valores de los elementos simbólicos, hemos introducido las mismas variables que aparecen en el dibujo. Debemos tener la precaución de que en la carpeta actual no existan ya estas variables. Es decir, debemos asegurarnos de que no existan variables con los nombres ra y vx, porque de existir, la calculadora reemplazaría automáticamente el nombre simbólico por este valor numérico almacenado, trastornando la simulación. Para ello, podemos utilizar el comando DelVar de la calculadora TI. Así:
+DelVar ra,vx
+Con ello, estamos ordenando: “Borra de la carpeta actual las variables llamadas ra y vx”. Si estas variables existen, serán borradas. Si no existen, nada sucede. Otra forma en que pudimos haber borrado estas variables es entrar al entorno Var-Link, y luego buscarlas y borrarlas manualmente. La forma que hemos mostrado arriba es más rápida.
+Habiendo borrado estas variables, damos la descripción del circuito y ordenamos la simulación . 
+ s q \ d c ( " e 1 , 1 , 0 , 1 8 ; r a , 1 , 0 , r a ; r 1 , 1 , 0 , 6 ; r 2 , 2 , 1 , 5 ; e x , 2 , 0 , v x " ) 
+ I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. T r a s l a s f r a s e s e n l a p a n t a l l a , a p a r e c e D o n e . M i c a l c u l a d o r a t o m ó 1 6 s e g u n d o s e n s i m u l a r e s t e c i r c u i t o . E n l a c a r p e t a a c t u a l e s t á n t o d a s l a s r e s p u e s t a s . 
+ E n c o n t r a m o s ix solicitando el valor de ir1. Obtenemos 3 amperios. Hasta aquí no hay nada nuevo.
+La variante se presenta a la hora de encontrar vx. En primera instancia, nos parece que podríamos encontrar vx solicitando el valor de v2. Lo hacemos y obtenemos vx voltios. Obviamente, una respuesta así no nos aporta nada nuevo, pues requerimos una respuesta numérica. Entonces recordamos que el dibujo, en el planteamiento del problema, nos advirtió que la corriente a través de la resistencia de 5 ohmios es de 12 amperios. ¿Cuánto vale esta corriente según nuestro simulador? Solicitamos el valor de ir2. Obtenemos (vx-18)/5 amperios. Esta expresión simbólica, producto de la simulación simbólica, nos ayudará a encontrar el valor de vx. ¿Cómo? Veamos.
+Sabemos que la corriente vale 12 y tenemos su expresión en función de vx. Basta con unir ambos términos mediante una igualdad para obtener una ecuación. Al resolver esta ecuación para la incógnita vx, tendremos el valor numérico de la fuente de voltaje desconocida. Podríamos resolver la ecuación manualmente, pero aprovecharemos la tecnología y utilizaremos el comando solve de la calculadora TI. Una explicación detallada del uso de este comando puede encontrarse en el Manual de Usuario de la calculadora. Este es un comando muy poderoso, el cual es utilizado extensamente por el Symbulator en sus cálculos internos. Ahora lo utilizaremos manualmente nosotros. Introducimos lo siguiente en la línea de entrada:
+solve(ir2=12,vx)
+Con este comando estamos diciéndole a la máquina: “Resuelve la ec u a c i ó n i r 2 = 1 2 p a r a l a i n c ó g n i t a v x , y d i m e l a r e s p u e s t a , o e n o t r a s p a l a b r a s : D i m e c u á n t o v a l e v x s i i r 2 v a l e 1 2 . P r e s i o n a m o s ¸ð, y c a s i i n s t a n t á n e a m e n t e o b t e n e m o s l a r e s p u e s t a : v x = 7 8 v o l t i o s . ¡ A s í d e f á c i l ! L a i n c ó g n i t a q u e r e s o l v i m o s e s l a r e s p u e s t a que faltaba.
+Habiendo terminado este problema, hay tres aclaraciones que deben hacerse.
+El comando solve de la calculadora nos ha dicho que vx vale 78, pero no ha almacenado el valor 78 en la variable vx. Esto se debe a que este comando resuelve ciertas ecuaciones para ciertas incógnicas y presenta el resultado en el área de historia, pero no almacena en la memoria estas respuestas en las variables que resolvió como incógnitas. ¿Desea verificarlo? Preguntemos a la calculadora cuánto vale la variable vx. Escriba en el área de entrada vx, y obtendrá vx como respuesta. Esto significa que no hay ningún valor almacenado en la variable vx.
+En este problema, la incógnita simbólica del circuito era también una de las respuestas que nos solicitaba el problema. En otros problemas, sin embargo, las incógnitas simbólicas del circuito y las respuestas no son la misma cosa. Un ejemplo con esta característica es el que veremos a continuación.
+El valor de ra queda indefinido. No hay ninguna manera matemática en que se pueda obtener un valor numérico que lo describa. La razón es simple: para obtener el valor numérico de un elemento simbólico, necesitamos conocer una pista que lo involucre, es decir una corriente, voltaje o potencia que esté en función de éste valor simbólico. Por ejemplo, pudimos encontrar el valor numérico de vx porque teníamos una pista que lo involucraba: conocíamos el valor numérico de una corriente que es función de este valor. Pero no podemos encontrar el valor numérico de ra, porque nos falta una pista: no conocemos el valor numérico de ninguna corriente, voltaje o potencia que lo involucre.
+Le recomendamos al lector releer este Problema N( 013 hasta que sienta haber entendido a cabalidad los conceptos que en él se exponen. Sólo entonces, prosiga con la lectura.
+3.6 Herramienta solves
+La herramienta solves es parte del Symbulator. Está programada utilizando tecnología desarrollada para el Symbulator, y su propósito es cumplir dos tareas al mismo tiempo: 1) resolver ecuaciones haciendo uso interno del coman d o s o l v e , y 2 ) a l m a c e n a r t o d a s l a s r e s p u e s t a s e n s u s r e s p e c t i v a s v a r i a b l e s . E s t a h e r r a m i e n t a s e e j e c u t a s i n c o l o c a r n i n g ú n a r g u m e n t o d e e n t r a d a e n t r e l o s p a r é n t e s i s , a s í : 
+ s q \ s o l v e s ( ) 
+ P r e s i o n a m o s ¸ð. A p a r e c e r á e n l a p a n t a l l a u n a f o r m a c o n d o s c a m p o s y c o n dos opciones. El primer campo es para escribir la ecuación o las ecuaciones que se desean resolver. El segundo campo es para introducir la incógnita o las incógnitas para las cuales se desea resolver. Y las dos opciones son para escoger entre si las ecuaciones se resolverán como reales o complejas, y si se desea utilizar ecuaciones condicionales, es decir valores previamente conocidos. Presionemos ( para volver a la pantalla hogar.
+A continuación veamos un problema, semejante al anterior, que nos permitirá aprender el uso básico de la herramienta solves.
+Problema N( 014
+Planteamiento. Determine los valores numéricos de vx e ix en el siguiente circuito. 
+ 
+Figura 17. Circuito para el Problema N° 014.
+Solución:
+Nótese que en este circuito, la incógnita simbólica es rx, mientras que las respuestas solicitadas son ix y vx. Muy probablemente, estas respuestas serán funciones de la incógnita. Por ello, la estrategia que debemos seguir es primero simular el circuito, resolver la incógnita, y luego solicitar las respuestas para obtener sus valores numéricos.
+Nombremos los nodos y elementos. Definamos la dirección de corriente de las resistencias de 1 y 2 ohmios en la misma dirección de las flechas en el dibujo. Como valor del elemento simbólico, introduzcamos la misma variable que aparece en el dibujo, para asegurarnos de que no exista ya una variable con el nombre rx.
+DelVar rx
+Tomamos como referencia el nodo de la esquina inferior izquierda. Damos la descripción del circuito y ordenamos la simulación.
+sq\dc("j1,0,1,6 ; r 1 , 1 , 2 , 1 ; r 2 , 1 , 3 , 5 ; j 2 , 3 , 2 , 1 0 ; r 3 , 3 , 0 , 2 ; r x , 2 , 4 , r x ; r 4 , 4 , 0 , 3 " ) 
+ I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. T r a s l a s f r a s e s e n l a p a n t a l l a , a p a r e c e D o n e . M i c a l c u l a d o r a t o m ó 3 0 s e g u n d o s e n s i m u l a r e s t e c i r c u i t o . A e s t e p u n t o , e l l e c t o r d e b e h a b e r n o t a d o y a q u e e l t i e m p o c o nsumido por una simulación es proporcional al número de nodos que tiene el circuito. La razón de esto es que el Symbulator “piensa” nodalmente, y creará una ecuación para cada nodo del circuito (excepto el nodo de referencia). Así, este circuito con 4 nodos distintos al de referencia, toma aproximadamente cuatro veces más tiempo que un circuito con 1 nodo distinto al de referencia. Obviamente, hay otros factores que también influyen en el tiempo de ejecución, tales como el tipo de análisis, la presencia de fuentes de voltaje y elementos especiales, y los valores simbólicos.
+Volviendo al problema, en la carpeta actual están todas las respuestas de nuestra simulación simbólica. Encontramos ix solicitando el valor de ir1. Obtenemos no un valor numérico, sino una función de rx. También para vx, al solicitar el valor de vrx, obtenemos una función de rx. Tal como supusimos, las respuestas que necesitamos numéricamente se encuentran en este momento como funciones de la incógnita. Para conocer los valores numéricos de ix y vx, primero debemos resolver el valor numérico de rx. Para permitirnos encontrar este valor, el problema nos ha dicho de antemano que la corriente a través de la resistencia de 2 ohmios (a la cual nosotros hemos llamado r3) es de 4 amperios.
+El comando solve no es el más apropiado para esta tarea. Como hemos visto, este comando es sumamente rápido y eficaz para resolver ecuaciones, y sin duda podría resolver esta pequeña ecuación en unas milésimas de segundo. Sin embargo, a manera de respuesta sólo nos mostraría el valor de rx en el área de historia, sin almacenar el valor numérico en esta variable. Por ello, resulta más apropiado utilizar la herramienta solves.
+Primero, veamos cuál hubiese sido el procedimiento usando el comando solve. Resolvamos la ecuación:
+solve(ir3=4,rx)
+Obtenemos como respuesta rx = 40. Como tenemos que evaluar otros valores que son función de esta incógnita, debemos tomar la respuesta que nos da el comando solve y almacenarla manualmente en su variable, utilizando el comando Define de la calculadora, así:
+Define rx = 40
+O sino, utilizando el comando ( de la calculadora, el cual es equivalente al comando Define y se escribe con la tecla (. Así:
+40(rx 
+Almacenado el valor numérico de rx, se puede solicitar a la calculadora los valores numéricos de ix y vx. Para ir1 obtenemos –8 amperios. Para vrx obtenemos 80 voltios.
+Esta manera de resolver el problema nos lleva a las respuestas, pero requiere de cuatro pasos para encontrarlas: 1) simular el circuito, 2) resolver la incógnita, 3) almacenar la incógnita y 4) evaluar las respuestas que son funciones de esta incógnita.
+Utilizando la herramienta solves, encontramos estas respuestas en tres pasos: 1) simular el circuito, 2) resolver y almacenar la incógnita en un paso y 3) evaluar las respuestas que son funciones de esta incógnita. Para ver cómo, primero debemos borrar la variable rx, para empezar desde el inicio.
+DelVar rx
+Recuérdese que las respuestas de la simulación todavía están almacenadas en la memoria. Ejecútese la herramienta:
+sq\solves()
+Aparece la forma. En el primer campo, titulado “Equations”, introduciremos la ecuación:
+ir3=4
+En el segundo campo, titulado “Unknowns”, introduciremos la incógnita:
+rx
+Como las opciones de abajo están ajustadas a los valores que deseamos, es decir ecuaciones reales y sin condicionales, los dejamos tal como están. Presionamos ¸ð, d o s v e c e s s i e s n e c e s a r i o . A p a r e c e r á u n t e x t o q u e n o s i n d i c a q u e l a h e r r a m i e n t a e s t á r e s o l v i e n d o l a s e c u a c i o n e s , y l u e g o a l m a c e n a n d o l a s r e s p u e s t a s . A b a j o a p a r e c e l a r e s p u e s t a : r x = 4 0 . E s o e s t o d o . P r e s i o n a m o s ¸ð, p a r a v o l v e r a l a p a n t a l l a h o g a r . E n e s t e momento, ya se encuentra almacenado el valor de 40 en la variable rx. Si lo desea, verifíquelo preguntando a la máquina el valor de vx, y verá que responde 40. 
+El tercer paso es, simplemente, evaluar las respuestas que el problema nos ha solicitado, es decir los valores numéricos de ix y vx. Para ir1 obtenemos –8 amperios. Para vrx obtenemos 80 voltios.
+Existe una manera aún más rápida de encontrar estas mismas respuestas en un sólo paso, utilizando el Modo (Experto). Dado que el uso de este modo requiere mucho más conocimiento y experiencia, le dedicaremos el siguiente capítulo. Veamos, a continuación, otro problema semejante al que recién resolvimos, para afianzar los conceptos aprendidos.
+Problema N( 015
+Planteamiento. Determine los valores numéricos de vx e ix en el siguiente circuito. 
+ 
+Figura 18. Circuito para el Problema N° 015.
+
+Solución:
+Nótese que en este circuito, la incógnita simbólica es ix, la cual al mismo tiempo es una de las respuestas solicitadas. La otra respuesta solicitada es vx, la cual seguramente será una función de ix. Simularemos el circuito, resolveremos la incógnita, y luego solicitaremos las respuestas para obtener sus valores numéricos.
+Nombremos los nodos y elementos. Definamos la dirección de corriente de la resistencias de 8 ohmios en la misma dirección de la flecha en el dibujo. Limpiemos el nombre ix.
+DelVar ix
+Tomando como referencia el nodo inferior, damos la descripción del circuito y ordenamos la simulación.
+sq\dc("e1,1,0,60;r1,1,2,8;r2,2,0,10;r3,2,3,4;r4,3,0,2;jx,0,3, i x " ) 
+ I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. T r a s l a s f r a s e s e n l a p a n t a l l a , a p a r e c e D o n e . M i c a l c u l a d o r a t o m ó 1 9 s e g u n d o s e n s i m u l a r e s t e c i r c u i t o . E n l a c a r p e t a a c t u a l e s t á n t o d a s l a s r e s p u e s t a s d e n u e s t r a s i m u l a c i ó n s i m b ó l i c a . C o m o s a b e m o s q u e l a s r e s p u e s t a s s o n actualmente simbólicas, debemos resolver la incógnita ix. Dado que una de las respuestas es una función de ix, la mejor forma de resolver este problema es usando la herramienta solves.
+sq\solves()
+Aparece la forma. Si no hemos borrado la carpeta actual después de la última vez que utilizamos la herramienta, es posible que en los campos veamos el texto que introdujimos anteriormente. En “Equations” introducimos la nueva ecuación, reemplazando la anterior:
+ir1=5
+En el segundo campo, titulado “Unknowns”, intr o d u c i r e m o s l a i n c ó g n i t a : 
+ i x 
+ L a s o p c i o n e s d e a b a j o e s t á n e n l o s v a l o r e s q u e d e s e a m o s , a s í q u e l a s d e j a m o s t a l c o m o e s t á n . P r e s i o n a m o s ¸ð, d o s v e c e s s i e s n e c e s a r i o . E l t e x t o n o s i n d i c a q u e l a r e s p u e s t a e s : i x = 1 . E s a e s u n a d e l a s r e s p u e s t a s . P r e s i o n a m o s ¸ð, para volver a la pantalla hogar. Evaluamos la respuesta restante. Para v3 obtenemos 8 voltios. Veamos otro ejemplo de simulación simbólica con respuesta numérica.
+Problema N( 016
+Planteamiento. Determine el valor de k que provocará que el voltaje vy sea cero. 
+ 
+Figura 19. Circuito para el Problema N° 016.
+Solución:
+Nombremos los nodos y elementos. Nombraremos x y y a los nodos centrales, por razones obvias. Limpiemos el nombre k.
+DelVar k
+Tomando como referencia el nodo inferior, damos la descripción del c i r c u i t o y o r d e n a m o s l a s i m u l a c i ó n . 
+ s q \ d c ( " e 1 , 1 , 0 , 6 ; r 1 , 1 , x , 1 ; r 2 , x , 0 , 4 ; r 3 , x , y , 2 ; j 1 , 0 , y , 2 ; r 4 , y , 2 , 3 ; e 2 , 2 , 0 , k * v x " ) 
+ I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. T r a s l a s f r a s e s e n l a p a n t a l l a , a p a r e c e D o n e . M i c a l c u l a d o r a t o m ó 3 6 s e g u n d o s e n s i m u l a r e s t e c i r c u i t o . E n l a c a rpeta actual están todas las respuestas de nuestra simulación simbólica. Como la única incógnita es también la respuesta que se nos ha solicitado, no habrá necesidad de evaluar otras variables en función de esta incógnita. Esto nos permite usar el comanso solve.
+solve(vy=0,k)
+Obtenemos como respuesta k = -13/4. Esta es la respuesta correcta. Pero, ¿cómo podemos estar seguros de esto, digamos, en medio de un exámen semestral?
+3.7 Verificación de una simulación simbólica con respuesta numérica
+Hay una manera muy fácil de verificar si son correctas las respuestas numéricas que hemos obtenido tras nuestra simulación simbólica. Lo único que hay que hacer es tomar del área de historia la descripción que se usó (asumiendo que no desea escribir la descripción nuevamente), y reemplazar en ella todos los valores simbólicos por los respectivos valores numéricos que se encontraron. Para tomar la descripción del área de historia, úsese el método para corregir errores en la descripción, aprendido al final del capítulo anterior.
+Una vez ejecutada esta simulación con valores numéricos, evaluamos los valores que anteriormente conocíamos, tales como voltajes y corrientes. Si obtenemos los mismos valores que conocíamos anteriormente, entonces las respuestas obtenidas tras la simulación simbólica son correctas.
+Como ejemplo, podemos verificar el valor de la k que obtuvimos en el problema anterior, mediante la siguiente simulación numérica:
+sq\dc("e1,1,0,6;r1,1,x,1;r2,x,0,4;r3,x,y,2;j1,0,y,2;r4,y,2,3;e2,2,0,-13/4*vx")
+Nótese que lo único que ha cambiado es el valor de e2, el cual ahora tiene un valor numérico en vez de la k simbólica usada anteriormente. Recuérdese que anteriormente se nos pidió encontrar el valor de k para que vy valiese cero voltios. Por lo tanto, si el valor que encontramos para k, es decir -13/4, es el valor correcto, entonces el voltaje en el nodo y, debe ser cero voltios. Evaluemos este voltaje. Para vy obtenemos 0 voltios. Por lo tanto, la respuesta ha sido verificada.
+Estar en la capacidad de verificar las respuestas es de especial importancia para un estudiante en medio de un exámen importante. El Symbulator ha sido reconocido por muchos de sus usuarios como una excelente herramienta para verificar respuestas, en tareas y exámenes. Esta es, probablemente, una de sus fortalezas más significativas.
+Aprendamos ahora a simular como expertos en el Symbulator.
+ PAGE 10 
+
+3 - PAGE 16 
+Simulación simbólica en corriente directa
+
+Roberto Pérez-Franco - Symbulator
+
+Simulación avanzada en corriente directa

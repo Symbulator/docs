@@ -1,0 +1,56 @@
+Capítulo
+1
+Conceptos generales del Symbulator
+1.1 ¿Qué es Symbulator?
+Symbulator es un simulador de circuitos lineales, con capacidad de respuestas simbólicas y numéricas, el cual permite el análisis en corriente directa, corriente alterna, dominio de la frecuencia y análisis transitorio. Acepta una gran variedad de elementos lineales. Ocupa menos de 60KB, está programado en Basic y usa como plataforma cierto tipo de calculadoras Texas Instruments.
+1.2 Requisitos
+La calculadora Texas Instruments en la cual se ejecuta el Symbulator debe ser modelo TI-89 o una calculadora equivalente, tener instalado un AMS (Sistema de Matemáticas Avanzadas, es decir un Sistema Operativo) versión 2.05 o superior, y tener el programa DiffEq versión 2.06 o superior correctamente archivado. También el Symbulator debe estar correctamente archivado. En adelante, nos referiremos a esta calculadora como “la calculadora TI”.
+1.2.1 Fuentes de información para la instalación
+Si su calculadora no cumple alguno de estos requisitos, debe actualizarla antes de proseguir. Como esta tesis trata del Symbulator, no de la operación de calculadoras TI, no entraremos en detalles sobre cómo realizar esta actualización. Listamos a continuación las fuentes de información que pueden ser útiles:
+Para actualizar el Sistema Operativo de una calculadora TI, consúltese la documentación que ofrece el fabricante en su sitio en la Internet: http://education.ti.com.
+Los programas Symbulator y DiffEq pueden obtenerse gratuitamente en el sitio oficial del Symbulator, cuya dirección se presenta en el punto 1.3. Para instalar en la calculadora estos programas se debe utilizar el programa de computadora Graph-Link, producido por TI, el cual se puede obtener gratuitamente en la dirección que hemos presentado en el párrafo anterior. 
+1.2.2 Fuentes de información para archivar los programas
+Los programas se ejecutan más rápidamente en la calculadora TI cuando están correctamente archivados en la memoria Flash ROM. Tanto el Symbulator como el DiffEq poseen un programa para archivarse automáticamente. Instrucciones detalladas sobre cómo ejecutarlo se incluyen en la documentación que los acompaña cuando se les baja del sitio oficial
+1.3 Sitio en la Internet
+El Symbulator posee un sitio oficial en la Internet en http://paxm.org/symbulator. Este sitio está en inglés. Aparte de la documentación completa y muchos problemas resueltos paso a paso, también se puede encontrar ahí la versión más reciente del programa, de forma gratuita.
+1.4 Concepto del algoritmo
+Para analizar un circuito eléctrico, el Symbulator utiliza un método que emula las técnicas manuales de análisis de circuito que aprenden los estudiantes en el salón de clases. De hecho, el simulador se comporta como un excelente estudiante que prestó atención y aprendió su lección. Como el programa sigue un camino reproducible por el estudiante, es también una herramienta de aprendizaje muy poderosa.
+El Symbulator conoce la ley de Ohm-Cavendish, y la ley de las corrientes de Kirchhoff. Con estas dos leyes, el programa analiza los circuitos utilizando solamente el análisis de nodos. Aunque no conoce la ley de los voltajes de Kirchhoff, siempre la cumple, porque esta ley se cumple automáticamente al cumplir las dos anteriores. El programa nunca utiliza análisis de mallas. Gracias al poderoso programa de matemática avanzada de la calculdadora TI, el análisis de nodos es suficiente para todos los casos, aún los más complejos.
+El Symbulator también conoce los teoremas de Thévenin-Helmholtz y Norton-Mayer. Y sabe realizar gráficas de Bode. Para poder realizar la transformada y la transformada inversa de LaPlace, el Symbulator utiliza el programa DiffEq, que es el programa de transformada de LaPlace más rápido jamás escrito para una calculadora, fruto de la mente genial del programador danés Lars Frederiksen, a quien el autor tiene el orgullo de contar entre sus amigos.
+El Symbulator genera las ecuaciones de cada nodo y cada fuente de voltaje, así como ecuaciones especiales para elementos especiales, y al mismo tiempo va identificando las incógnitas primarias del circuito. Al final, encuentra el valor (ya sea simbólico o numérico) de todas estas incógnitas primarias resolviendo las ecuaciones, y luego obtiene a partir de las primarias los valores de las incógnitas secundarias y terciarias. Así, al final ofrece toda la información sobre el circuito que un estudiante pudiese desear. 
+1.5 Puertas
+El corazón del Symbulator está compuesto por varios archivos llamados step#, los cuales se encargan de realizar la simulación. El usuario, sin embargo, nunca toca directamente estos archivos, sino que utiliza diferentes programas que actúan como puertas de acceso que lo conducen a esos otros programas indirectamente. Existen cuatro puertas de acceso, una para cada tipo de análisis: 1) para corriente directa se usa dc, 2) para corriente alterna se usa ac, 3) para dominio de la frecuencia se usa fd, y 4) para análisis transitorio se usa tr.
+1.6 Herramientas
+Existen también ocho herramientas, que son auxiliares ya sea para la simulación de circuitos o bien para el entendimiento de los resultados de las simulaciones: 1) para reducir resistencias en paralelo se usa par, 2) para mostrar respuestas complejas en forma polar se usa absang, 3) para graficar una función del tiempo se usa plot, 4) para dibujar gráficos de Bode se usa bode, 5) para encontrar el equivalente Thévenin de un circuito se usa thevenin, 6) para encontrar los parámetros equivalentes de bipuerto de un circuito se usa port, 7) para encontrar la ganancia de un amplificador se usa gain, y 8) para llevar una respuesta del dominio de la frecuencia al dominio del tiempo se usa fd_to_tr. En su momento, veremos las capacidades y la notación propia de cada una de estas puertas y herramientas.
+Para una referencia rápida, el Symbulator incluye un file de ayuda breve. Basta escribir scs\help() en la calculadora y el menú de ayuda aparecerá. Esta ayuda está en inglés.
+1.7 Comandos
+A veces, para resolver un problema usando el Symbulator, el usuario debe usar comandos propios de la calculadora, tales como los comandos para resolver ecuaciones, o funciones de programas auxiliares como las de transformada de Laplace del programa DiffEq.
+1.8 Sobre la notación
+1.8.1 Filosofía
+La filosofía de la notación empleada por el Symbulator para describir un circuito se basa en el principio de que el usuario debe proporcionar al simulador sólo el mínimo de información necesaria para describir completamente cada elemento del circuito.
+1.8.2 Descripción textual
+Dado que es un programa diseñado para ser tan veloz como lo requiere su uso en el salón de clases, la descripción del circuito se hace con texto. No se utiliza una interfaz gráfica, pues recargaría de trabajo al procesador de la calculadora, el cual es un Motorola 68000 de 12MHz, y haría lento el proceso de descripción del circuito. 
+La descripción del circuito es una cadena textual de elementos, compuestos por una fila para cada elemento del circuito, casi siempre de cinco columnas. El primer término de cada fila es el nombre del elemento, el cual debe empezar con una letra que indentifique al elemento que aquella fila representa. Luego se colocan los nombres de los nodos a los cuales está conectado el elemento, pudiendo ser estos nombres tanto números como letras. Finalmente se coloca el valor del elemento, en su unidad de medida correspondiente, el cual puede ser un valor numérico, simbólico, o incluso una expresión algebraica. En el caso de elementos que almacenan energía (o sea inductores y capacitores) con condiciones iniciales, éstas se colocan al final de la fila como último elemento en la descripción.
+Los elementos de cada fila se separan entre sí mediante comas “ , ”. El límite entre una fila y otra, es decir entre la descripción de un elemento y la de otro, se indica por medio de punto-coma “ ; ”. Ejemplo, para un circuito de tres elementos y cinco términos por fila:
+"a1,b1,c1,d1,e1;a2,b2,c2,d2,e2;a3,b3,c3,d3,e3"
+Internamente, el Symbulator convertirá esta descripción a una matriz, para trabajar rápidamente con ella.
+1.8.3 Nodos
+1.8.3.1 Orden de los nodos
+El orden en que se introducen los nombres de los nodos en la descripción de un elemento no es aleatorio. Este orden indica la dirección en la cual se está definiendo el flujo de la corriente y la caída de voltaje en ese elemento. Esto es especialmente importante en el caso de fuentes, de elementos que controlan fuentes dependientes, de elementos almacenadores de energía con condiciones iniciales y de inductancias con inductancia mutua.
+1.8.3.2 Nombres de los nodos
+Antes de correr cualquier simulación, el usuario debe identificar a cada uno de los nodos y de los elementos del circuito con un nombre único.
+En el caso de los nodos, el nombre puede ser un número, una letra, o una combinación de ambos. Cada nodo debe recibir un solo nombre. Esto quiere decir que, cada vez que se mencione este nodo en la descripción del circuito, se le debe nombrar de la misma manera.
+Es normal que aquellos usuarios que no están acostumbrados a usar un simulador de circuitos, olviden al momento de ver las respuestas el nombre que le han dado a algún nodo o elemento. Por eso, mientras se adquiere experiencia, es una práctica recomendable anotar los nombres en algún papel, de preferencia sobre el dibujo mismo del circuito, al lado de cada nodo y elemento.
+1.8.3.3 Nodo de referencia
+Siempre debe existir un nodo que sirva de referencia. Para esta función, su voltaje siempre es de 0 voltios. Este nodo se conoce como tierra (o ground) y debe identificarse siempre con el nombre 0 - es decir, cero.
+1.8.4 Variables reservadas
+El sistema operativo de la calculadora mantiene algunas variables ocupadas contínuamente para su uso interno propio. Estas variables se conocen como variables reservadas, pues la máquina las reserva para sí misma. Una lista completa de estas variables reservadas puede encontrarse al final del Manual del Usuario de la calculadora. Vale mencionar aquí aquellas que un usuario del Symbulator podría intentar usar en un descuido: nc, ok, rc, sx, tc, yc, zc, y aquellas entre c1 y c99.
+El Symbulator, a su vez, utiliza muchas variables internas para propósitos de realizar la simulación. Estas variables son muchas, y se generan de acuerdo a los nombres de los elementos del circuito, lo que hace imposible listarlas de antemano. Sin embargo, tienen algo en común: todas empiezan con letras griegas. Esto hace que resulte una tarea fácil evitar su uso accidental; basta con recordar no usar variables que empiecen con letras griegas.
+ PAGE 10 
+
+1 - PAGE 2 
+Conceptos generales del Symbulator
+
+Roberto Pérez-Franco - Symbulator
+
+Conceptos generales del Symbulator

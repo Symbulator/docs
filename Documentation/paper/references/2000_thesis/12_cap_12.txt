@@ -1,0 +1,98 @@
+Capítulo
+12
+Herramientas para graficar
+12.1 Introducción
+La calculadora TI posee poderosas capacidades para graficar. A su vez, el Symbulator incluye dos herramientas útiles para graficar diagramas de Bode y funciones del tiempo t.
+12.2 La herramienta bode
+La herramienta bode permite hacer diagramas de Bode. Se ejecuta así:
+sq\bode()
+Es muy fácil de usar. Aprendamos a usar esta herramienta resolviendo un problema real. Utilicemos uno que el Profesor Edilberto Yee, de la Universidad Tecnológica de Panamá, nos presentó como tarea final del curso de Electrónica III.
+Problema N( 087
+Planteamiento. Haga el diagrama de Bode de ganancia para Vo/Vg, desde 104 hasta 1013 rad/seg, para el siguiente circuito.
+ 
+Figura 122. Circuito para el Problema N° 087.
+Solución. Como hemos explicado ya, cuando se trata de circuitos grandes, una simulación con valores exactos nos dará respuestas precisas, mientras que una simulación con valores aproximados nos dará respuestas rápidas. Como este problema fue una tarea para resolver en casa, el tiempo no era crítico, y preferimos emplear valores exactos, para asegurar la precisión de las respuestas.
+Damos la orden de ejecutar la simulación en dominio de la frecuencia, y ordenamos seguidamente la ejecución de la herramienta bode.
+sq\fd("e1,5,0,vg,0;r1,5,1,150,0;r2,1,0,1000,0;cc1,1,0, 10^-10,0;cc2,1,2,3*10^-12,0;jd1,2,0,5/100*v1,0;r3,2,0,2000 ,0;r4,2,3,100,0;r5,3,0,1000,0;cc3,3,0,10^-10,0;cc4,3,4, 3*10^-12,0;jd2,4,0,5/100*v3,0;r6,4,0,2000,0"):sq\bode()
+ 
+Figura 123. Orden del Problema N( 08 7 , e n l a T I - 8 9 . 
+ P r e s i o n a m o s ¸ð. L a s i m u l a c i ó n t a r d a a l r e d e d o r d e 3 m i n u t o s . A l f i n a l , s e e j e c u t a l a h e r r a m i e n t a b o d e . L a h e r r a m i e n t a n o s p r e s e n t a u n p e q u e ñ o m e n ú , e l c u a l n o s p i d e e s c o g e r e n t r e h a c e r u n g r á f i c o d e B o d e o l i m p i a r l a s v a r i a b l e s c r e a d a s . 
+ 
+ F igura 124. Primera selección de la herramienta bode, en la TI-89.
+Escogemos la primera opción de este menú. La segunda se usa cuando, después de haber realizado algunas gráficas, deseamos terminar el trabajo y limpiar las variables que la herramienta haya creado. Por lo tanto, seleccionamos Bode Plot y presionamos ¸ð. A p a r e c e u n m e n ú . 
+ 
+ F i g u r a 1 2 5 . M e n ú d e l a h e r r a m i e n t a b o d e , e n l a T I - 8 9 . 
+ E n e s t e m e n ú d e b e m o s i n t r o d u c i r l o s i g u i e n t e : 
+ F u n c i ó n d e t r a n s f e r e n c i a . A q u í c o l o c a m o s l a f u n c i ó n d e t r a n s f e r e n c i a c u y a g r á f i c a d e s e a m o s h a c e r . P o d e m o s e s c r i b i r l a f u n c i ó n m i s m a , o colocar el nombre de las variables que la definen. En nuestro caso, colocamos v4/v5, o sea Vo/Vg.
+Variable independiente. Es la variable que representa a la frecuencia. Casi siempre es s. Colocamos s.
+Tipo de diagrama. Hay tres tipos: ganancia (Gain Plot), fase (Phase Plot) y ambos (Both Plots). Si se escoge ganancia o fase, la pantalla completa mostrará la gráfica. Si se escoge ambos, la pantalla se dividirá en dos para mostrar ganancia arriba y fase abajo. En nuestro caso, seleccionamos Gain Plot. Para regresar la pantalla a su forma original, vamos a ( y ponemos el modo Split Screen en FULL.
+Frecuencia mínima. Debe ser mayor que cero. En nuestro caso, colocamos 1E4.
+Frecuencia máxima. Debe ser mayor que la mínima. En nuestro caso, colocamos 1E13.
+Unidades de la frecuencia. Sirve para especificar en qué unidades introdujimos las frecuencias arriba. En nuestro caso, seleccionamos rad/sec.
+Presionamos ¸ð. A p a r e c e u n m e n s a j e , a n u n c i á n d o n o s q u e l a s u n i d a d e s d e l e j e v e r t i c a l s o n d e c i b e l e s ( d B ) , y l a s d e l e j e h o r i z o n t a l s o n e l l o g a r i t m o d e l a f r e c u e n c i a e n r a d i a n e s / s e g u n d o s . 
+ 
+ F i g u r a 1 2 6 . A n u n c i o d e l a s u n i d a d e s d e l o s e j e s , e n l a T I - 8 9 . 
+ P r e s i o n a m o s ¸ð. T r a s un minuto aproximadamente, aparece el diagrama.
+ 
+Figura 127. Gráfica de ganancia, en la TI-89.
+Esta gráfica es la correcta. Obtenerla me permitió recibir todos los puntos en la tarea asignada. Haberla obtenido con un simulador hecho por mí mismo, me hizo además ser merecedor del respeto del Profesor Yee, a quien tengo en muy alta estimación.
+Aquí termina la tarea. Sin embargo, supongamos que se nos hubiese pedido también el diagrama de fase. No hay necesidad de ejecutar nuevamente la simulación, pues las variables v4 y v5 siguen estando en la memoria. Basta con ejecutar nuevamente la herramienta bode.
+sq\bode()
+ 
+Figura 128. Ejecutando nuevamente la herramienta bode, en la TI-89.
+Los valores previamente introducidos aún están ahí. Esto es gracias a ciertas variables que genera la herramienta, las cuales pueden ser borradas al final. Dejamos todo igual, pero seleccionamos Phase Plot.
+ 
+Figura 129. Menú en la herramienta bode, en la TI-89.
+Presionamos ¸ð. A p a r e c e u n m e n s a j e , a n u n c i á n d o n o s q u e l a s u n i d a d e s d e l e j e v e r t i c a l s o n r a d i a n e s , y l a s d e l e j e h o r i z o n t a l s o n e l l o g a r i t m o d e l a f r e c u e n c i a e n r a d i a n e s / s e g u n d o s . 
+ 
+ F i g u r a 1 3 0 . H e r r a m i e n t a b o d e , e n l a T I - 8 9 . 
+ P r e s i o n a m o s ¸ð. T r a s u n m i n u t o a p r o x i m a d a m e n t e , aparece el diagrama.
+ 
+Figura 131. Herramienta bode, en la TI-89.
+Habiendo terminado, ejecutamos nuevamente la herramienta y escogemos Clean & Exit para limpiar las variables creadas.
+ 
+Figura 132. Limpiando las variables, en la TI-89.
+12.3 La herramienta plot
+La herramienta plot permite graficar funciones del tiempo t. Se ejecuta así:
+sq\plot()
+También es muy fácil de usar. Aprendamos a usar esta herramienta resolviendo un problema real. Utilicemos un problema que la Profesora Eliane Boulet de Cabrera, de la Universidad Tecnológica de Panamá, presentó a sus estudiantes en un examen. En este examen no se solicitaba la gráfica de las respuestas, pero nosotros podemos emplearlo para ilustrar el uso de la herramienta.
+Problema N( 088
+Planteamiento. Dado el siguiente circuito, encuentre la respuesta completa para v2(t) y v1(t) para t>0. Luego, grafique el valor de v2(t) y v1(t) vs tiempo, de 0 a 7 segundos.
+ 
+Figura 133. Circuito para el Problema N° 088.
+Solución. Usaremos valores exactos para la precisión, pero ahorraremos tiempo usando FD en vez de TR, pues en medio de un exámen el tiempo es muy valioso. Damos la orden de ejecutar la simulación en corriente directa, para encontrar las condiciones iniciales.
+sq\dc("e1,3,0,18;r1,3,1,8;cc1,1,0,1/6;r2,1,0,12;r3,1,2,18;r4,2,0,6;cc2,2,0,1/3")
+Para vcc1 obtenemos 9. Para vcc2 obtenemos 9/4. Estas serán nuestras condiciones iniciales para el siguiente intervalo. Damos la orden de ejecutar la simulación en dominio de la frecuencia.
+sq\fd("cc1,1,0,1/6,9;r2,1,0,12,0;r3,1,2 , 1 8 , 0 ; r 4 , 2 , 0 , 6 , 0 ; c c 2 , 2 , 0 , 1 / 3 , 9 / 4 ; j s , 0 , 2 , 1 0 * e ^ ( - t ) * s i n ( 2 t + 3 0 ( ) , 0 " ) 
+ P r e s i o n a m o s ¸ð. L a s i m u l a c i ó n s e e j e c u t a , c o n l a p a r t i c i p a c i ó n d e l M o d o ( I m p a l a ) . A h o r a v a m o s a o b t e n e r l a s r e s p u e s t a s , y a l m i s m o t i e m p o l a s a l m a c e n a r e m o s e n s u s v a r i a b l e s , p a r a p o d e r i n v o c arlas luego desde la herramienta plot. Utilizamos sq\fd_to_tr(v1). Obtenemos una expresión simbólica muy voluminosa. Por ello, utilizamos, expand(approx(ans(1)),t)(v1t obtenemos la respuesta completa en forma aproximada para el voltaje en el capacitor de la izquierda: -.667*e^(-t)*cos(2.*t)-2.33*e^(-t)*sin(2.*t)+13.8*e^(-t/2)-4.16*e^(-t). Con expand(approx(sq\fd_to_tr(v2)),t)(v2t obtenemos la respuesta completa aproximada para el voltaje en el capacitor de la derecha: -13.7*e^(-t)*cos(2.*t)+5.17*e^(-t)*sin(2.*t)+13.8*e^(-t/2)+2.08*e^(-t).
+Ahora podemos ejecutar la herramienta plot.
+sq\plot()
+ 
+Figura 134. Ejecutando la herramienta plot, en la TI-89.
+Aparece un menú, en el cual debemos insertar tres datos:
+Función. Es la función del tiempo t que deseamos graficar. En nuestro caso, v2t. Este es el nombre que dimos a la variable en la cual almacenamos el voltaje en dominio del tiempo.
+Tiempo mínimo. Es el tiempo mínimo de la gráfica, o sea el extremo izquiero del eje horizontal. En nuestro caso, 0.
+Tiempo máximo. E s e l t i e m p o m á x i m o d e l a g r á f i c a , o s e a e l e x t r e m o d e r e c h o d e l e j e h o r i z o n t a l . D e b e s e r m a y o r q u e e l m í n i m o . E n n u e s t r o c a s o , 7 . 
+ 
+ F i g u r a 1 3 5 . M e n ú d e l a h e r r a m i e n t a p l o t , e n l a T I - 8 9 . 
+ P r e s i o n a m o s ¸ð. A p a r e c e l a g r á f i c a . 
+ 
+ F i g u r a 1 3 6 . G r á f i c a d e l v o l t a j e v2, en la TI-89.
+Una vez tenemos esta gráfica lista en la pantalla, podemos aplicar sobre ella todos los comandos gráficos que posee la calculadora TI. Por ejemplo, el de valor máximo. Para mayor información sobre estos comandos, consúltese el Manual de Usuario.
+ 
+Figura 137. Comando de máximo, en la TI-89.
+Para obtener la gráfica del voltaje v1, se repite el mismo procedimiento, pero introduciendo v1 como la función que se desea graficar.
+ 
+Figura 138. Gráfica del voltaje v1, en la TI-89.
+Con esto, hemos terminado el problema. Como era de esperarse, la herramienta plot también puede graficar funciones que no sean respuestas del Symbulator. Por ejemplo, si introducimos como función la siguiente: e-tsen(10t), y graficamos entre 0 y 3 segundos, obtendremos la siguiente gráfica.
+ 
+Figura 139. Gráfica de una función, en la TI-89.
+De esta forma, hemos terminado este capítulo sobre el Symbulator. 
+ PAGE 10 
+
+12 - PAGE 6 
+Herramientas para graficar
+
+Roberto Pérez-Franco - Symbulator
+
+Conceptos generales del Symbulator

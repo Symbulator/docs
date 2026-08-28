@@ -1,0 +1,128 @@
+Capítulo
+10
+Simulación en el dominio de la frecuencia
+10.1 Puerta para el dominio de la frecuencia: fd
+Para realizar una simulación en el dominio de la frecuencia compleja s, se usa la puerta llamada sq\fd.
+10.2 Dato de entrada
+El único dato de entrada que hay que proporcionar a esta herramienta es la descripción del circuito, usando la misma notación que hemos visto hasta ahora. Existe una única diferencia: si el circuito que se va a simular tiene algún inductor o capacitor, entonces la descripción de cada elemento debe tener cinco términos. Aquellas descripciones que sólo requieran de cuatro términos, deberán tener un 0 al final, para mantener la simetría. La simulación en dominio de la frecuencia se ordena así: sq\fd(circuito).
+10.3 Condiciones iniciales
+El quinto término en la descripción de un inductor o un capacitor es su condición inicial. Inicial quiere decir en tiempo t=0+. 
+La condición inicial de un inductor es su corriente inicial, y por lo tanto su valor debe darse en amperios. Se considera esta corriente como fluyendo a través del elemento del primer nodo hacia el segundo nodo en la descripción.
+La condición inicial de un capacitor es su voltaje inicial, y por lo tanto su valor debe darse en voltios. Se considera este voltaje como del primer nodo con respecto al segundo nodo en la descripción.
+Si el circuito no especifica la condición inicial del elemento ni proporciona medios para obtenerla, se asume que su condición inicial es nula, o sea 0.
+10.4 Respuestas
+En el caso de la simulación en el dominio de la frecuencia, las respuestas son: los voltajes en los nodos, las caídas de voltaje en los elementos y las corrientes en los elementos. No se entregan las potencias consumidas por los elementos. Existe una diferencia: las respuestas serán expresiones simbólicas en función de la frecuencia compleja s.
+10.5 Función de transferencia
+Los problemas que nos solicitan encontrar la función de transferencia, H(s), son muy comunes cuando se estudia el análisis en el dominio de la frecuencia compleja. En el caso de que el problema sólo nos dé la red pasiva cuya función de transferencia se desee encontrar, debemos agregar nosotros una fuente a la entrada, preferiblemente una fuente de corriente de valor simbólico o unitario.
+Veamos algunos ejemplos.
+Problema N( 068
+Planteamiento. Encuentre H(s) = Vsal/Vent para la red de la figura, y localice todas sus frecuencias críticas.
+ 
+Figura 95. Circuito para el Problema N° 068.
+Solución. Agregamos una fuente, y ordenamos la simulación. Nótese que empleamos cinco términos p o r e l e m e n t o . 
+ s q \ f d ( " j 1 , 0 , 1 , 1 , 0 ; r 1 , 1 , 2 , 2 0 , 0 ; r 2 , 2 , 3 , 2 0 , 0 ; c a , 1 , 3 , . 1 , 0 ; c b , 2 , 0 , . 1 , 0 " ) 
+ C o n ¸ð, s e e j e c u t a l a s i m u l a c i ó n . S o l i c i t a m o s l a f u n c i ó n d e t r a n s f e r e n c i a v 3 / v 1 y o b t e n e m o s ( s ^ 2 + s + . 2 5 ) / ( s ^ 2 + 1 . 5 * s + . 2 5 ) . P a r a e n c o n t r a r l a s f r e c u e n c i a s c r í t i c a s , o s e a l o s p o l os y ceros, usaremos un comando de la calculadora TI.
+10.6 Polos, ceros y el comando zeros
+La calculadora TI tiene un comando llamado zeros, el cual permite encontrar los ceros de un polinomio, para una determinada variable. Se utiliza así:
+zeros(polinomio,variable)
+La versión compleja de este comando es otro comando llamado cZeros, el cual se utiliza de la misma forma.
+Podemos encontrar los ceros de una función de transferencia usando este comando, así: zeros(función de transferencia). Podemos encontrar los polos de una función de transferencia usando este comando, así: zeros(inverso de la función de transferencia). El inverso de la función de transferencia es 1 entre la función, o sino la función elevada a –1.
+Resolvamos la segunda pregunta del problema. Solicitamos los ceros así: zeros(v3/v1,s) y obtenemos {-1/2}. Aunque el comando no nos lo indica, este es un doble cero. Solicitamos los polos así: zeros(v1/v3,s) y obtenemos {-1.31,-.191}. Así, hemos terminado nuestro primer problema en dominio de la frecuencia.
+Problema N( 069
+Planteamiento. Encuentre H(s) = Vo/Vs para el circuito de la figura.
+ 
+Figura 96. Circuito para el Problema N° 069.
+Solución. No hay necesidad de agregar una fuente, pues el circuito la incluye. Ordenamos la simulación, usando cinco términos por elemento, y dando el valor de las inductancias mutuas en M en vez de k.
+sq\fd("es,1,0,vs,0;l1,1,0,8,0;l2,2,0,2,0;r1,2,3,5,0;l3,3,0,4,0;l4,4,0,1,0;r2,4,0,3,0;m1,l1,l2,((8*2),0;m2,l3,l4,( (4*1),0")
+Con ¸ð, s e e j e c u t a l a s i m u l a c i ó n . S o l i c i t a m o s l a f u n c i ó n d e t r a n s f e r e n c i a v 4 / v 1 y o b t e n e m o s 3 * s / ( 1 7 * s + 1 5 ) . V e a m o s a h o r a u n e j e m p l o d e m a y o r g r a d o d e d i f i c u l t a d , p e r o a n t e s a p r e n d a m o s u n n u e v o c o n c e p t o . 
+ 1 0 . 7 E x a c t o v s a p r o x i m a d o 
+ E n e l p u n t o 2 . 9 a p r e n d i m o s q u e e x isten dos maneras en que la calculadora TI puede manejar un número: como exacto y como aproximado. Lo que determina cuál modo utilizará la calculadora para resolver un circuito es la manera en que se introducen los datos. Veamos cuáles son las ventajas y desventajas de cada uno de estos dos modos.
+Modo Exacto:
+Desventaja. Generalmente, la solución de las ecuaciones toma más tiempo.
+Ventaja. Se pueden resolver de forma precisa algunos sistemas de ecuaciones que en modo aproximado podrían resultar irresolubles o resueltos de forma imprecisa.
+Modo Aproximado:
+Ventaja. Generalmente, la solución de las ecuaciones toma menos tiempo.
+Desventaja. En algunos casos particulares, es posible que un sistema de ecuaciones no pueda ser resuelto en este modo, aunque en modo exacto si hubiese sido resuelto. En otros casos particulares, es posible que las respuestas pierdan precisión, especialmente en caso de números grandes.
+En la gran mayoría de los casos, se puede usar cualquiera de los dos modos indistintamente. Sin embargo, cuando se trata de circuitos grandes, es preferible escoger el modo que mejor se ajuste a nuestra necesidad.
+Problema N( 070
+Planteamiento. Encuentre H(s) = Vsal/Vent para la red de la figura. Los op-amps son ideales.
+ 
+Figura 97. Circuito para el Problema N° 070.
+Solución. Ordenamos la simulación, usando cinco términos por elemento. Preferimos emplear todos los valores en forma exacta, para garantizar la mejor probabilidad de obtener una solución, sin importar el tiempo de resolución.
+sq\fd("e1,1,0,1,0;c c 1 , 1 , 2 , 1 0 ^ - 6 , 0 ; r 1 , 2 , 3 , 1 0 ^ 4 , 0 ; o 1 , 0 , 2 , 3 , 0 ; r 2 , 3 , 4 , 1 0 ^ 5 , 0 ; r 3 , 4 , 5 , 1 0 ^ 5 , 0 ; c c 2 , 4 , 5 , 1 0 ^ - 6 , 0 ; o 2 , 0 , 4 , 5 , 0 ; r 4 , 5 , 6 , 1 0 ^ 5 , 0 ; r 5 , 6 , 7 , 1 0 ^ 5 , 0 ; c c 3 , 6 , 7 , 1 0 ^ - 6 , 0 ; o 3 , 0 , 6 , 7 , 0 " ) 
+ C o n ¸ð, s e e j e c u t a l a s i m u l a c i ó n . E s t a s i m u l a c i ó n t o m a m á s t i e m p o q u e c u a l q u i e r a q u e h a y a m o s v i s t o h a sta ahora. Este aumento en el tiempo no solamente se debe a que las ecuaciones generadas son enormes, sino a que se le aplica límite a todas las respuestas, pues existen op-amps en el circuito. El lector, al ordenar esta simulación, puede dejar la calculadora ejecutándola e irse a almorzar. Al regresar, encontrará que la simulación ha terminado. Solicitamos la función de transferencia v7/v1 y obtenemos la expresión -s/(s+10)^2.
+Aquí hay que hacer una anotación. Un simulador numérico, tal como SPICE, podría encontrar el valor numérico del voltaje de salida, si le damos un valor numérico para el voltaje de entrada y un valor numérico para la frecuencia. Pero para obtener una expresión simbólica para la función de transferencia, en términos de s, es necesario usar un simulador simbólico, como el Symbulator.
+Veamos ahora cuatro ejemplos que ilustran que la herramienta thevenin también puede emplearse en el dominio de la frecuencia compleja.
+Problema N( 071
+Planteamiento. Encuentre: a) Zent para la red de la figura, en términos de s, b) Zent(j8) en forma rectangular, c) Zent(-2+j6) en forma polar, d) a qué valor debe cambiarse el resistor de 16( para que Zent=0 en s= -5+j0, e) a qué valor debe cambiarse el resistor de 16( para que Zent=( en s= -5+j0.
+ 
+Figura 98. Circuito para el Problema N° 071.
+Solución. Ejecutamos la herramienta, usando cinco términos por elemento.
+sq\thevenin("c,1,2,.02,0;r,2,0,16,0;l,2,0,.2,0",1,0)
+Presionamos ¸ð. E s c o g e m o s P a s s i v e y F D . P r e s i o n a m o s ¸ð. R e s p o n d e m o s l a p r e g u n t a a ) e n e s t e p r i m e r p a s o . V e m o s e n l a p a n t a l l a e l v a l o r d e z t h . S a l i m o s c o n ¸ð. P o d e m o s s o l i c i t a r z t h y o b t e n e m o s l a e x p r e s i ó n 1 6 . * ( s ^ 2 + 3 . 1 2 5 * s + 2 5 0 . ) / ( s * ( s + 8 0 . ) ) . 
+ R e s p o n d e m o s l a p r e g u n t a b ) a s í : zth|s=8i(Rect y obtenemos .158-4.67*i.
+Respondemos la pregunta c) así: sq\absang(zth|s=-2+6i) y obtenemos 6.85(-114.(.
+Para responder las dos siguientes preguntas, volvemos a simular, usando un valor simbólico para el resistor.
+sq\thevenin("c,1,2,.02,0;r,2,0,r,0;l,2,0,.2,0",1,0)
+Con ¸ð, s e e j e c u t a l a h e r r a m i e n t a . E s c o g e m o s P a s s i v e y F D . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a e l v a l o r d e z t h . S a l i m o s c o n ¸ð. R e s p o n d e m o s l a p r e g u n t a d ) a s í : c S o l v e ( z t h = 0 , r ) | s = - 5 y o b t e n e m o s r = . 9 0 9 . 
+ P a r a r e s p o n d e r l a p r e g u n t a e ) , r e q u e r i m o s d o s p a s o s : 
+ c S o l v e ( z th=x,r)|s=-5
+Obtenemos r=(x+10.)/(x+11.). Ahora el segundo paso:
+limit(ans(1),x,()
+Obtenemos 1. Esta es la respuesta correcta.
+Problema N( 072
+Planteamiento. Este problema no tiene figura. Una red está compuesta por un capacitor de 1(F en paralelo con la combinación en serie de un inductor de 20mH y de un resistor de 500(. a) Encuentre Zent(s) para la red, en términos de s. b) Si s=(-j0, encuentre el valor de (, entre –20 y –10 kNp/s, en donde abs(Zent) es un mínimo. c) de nuevo con s=(-j0, encuentre el valo r d e ( , m e n o r q u e 3 0 k N p / s , e n d o n d e a b s ( Z e n t ) e s u n m á x i m o . 
+ S o l u c i ó n . E j e c u t a m o s l a h e r r a m i e n t a . 
+ s q \ t h e v e n i n ( " c , 1 , 0 , 1 E - 6 , 0 ; l , 1 , 2 , . 0 2 , 0 ; r , 2 , 0 , 5 0 0 , 0 " , 1 , 0 ) 
+ P r e s i o n a m o s ¸ð. E s c o g e m o s P a s s i v e y F D . P r e s i o n a m o s ¸ð. R e s p o n d e m o s l a p r e g u n t a a ) e n e s t e p r i m e r p a s o . V e m o s e n l a p a n t a l l a e l v a l o r d e z t h . S a l i m o s c o n ¸ð. D e t o d a s f o r m a s , l o s o l i c i t a m o s c o m o z t h y o b t e n e m o s l a e x p r e s i ó n : 
+ 1 0 0 0 0 0 0 . * ( s + 2 5 0 0 0 . ) / ( s ^ 2 + 2 5 0 0 0 . * s + 5 0 0 0 0 0 0 0 . ) 
+ P a r a r e s p o n d e r l a s p r e g u n t a s b ) y c ) , r e c o r d a m o s q u e t a n t o e l m í n i m o c o m o e l m á x i m o s o n puntos en los cuales la pendiente de la gráfica es 0. Usando la derivada, podemos resolver con solve para aquellas frecuencias en las cuales la derivada se hace 0.
+solve(d(abs(zth),s)=0,s)
+La d es la derivada, y se escribe con la combinación de teclas (( (la ( se encuentra arriba de la tecla del número 8. El comando significa: "Encuentra los valores de s en los cuales la derivada del valor absoluto de zth con respecto a s, vale cero." Obtenemos s=-17929. or s=-32071.. Según lo que nos dice el encabezado, el primer valor es un mínimo y el segundo es un máximo. Con esto, hemos respondido a las preguntas.
+Problema N( 073
+Planteamiento. Encuentre: a) Zent(() como una función de ( para la red de la figura, en términos de s, b) encuentre todos los ceros y polos, c) Grafique abs(Zent(()) vs (, d) Grafique ang(Zent(()) vs (.
+ 
+Figura 99. Circuito para el Problema N° 073.
+Solución. Ejecutamos la herramienta.
+sq\thevenin("r1,1,2,20,0;l1,2,0,8,0;r2,2,3,40,0;l2,3,0,2,0",1,0)
+Presionamos ¸ð. E s c o g e m o s P a s s i v e y F D . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a e l v a l o r d e z t h , c o m o f u n c i ó n d e s . P r e s i o n a m o s ¸ð p a r a s a l i r . S o l i c i t a n d o : z t h | s = ( ( z t h y o b t e n e m o s l a e x p r e s i ó n 4 * ( 2 * ( ^ 2 + 6 5 * ( + 1 0 0 ) / ( 5 * ( ( + 4 ) ) . 
+ R e s p o n d a m o s l a p r e g u n t a b ) . P e d i m o s l o s c e r o s c o n z eros(zth, () y obtenemos {5*(((137)-13)/4,-5*(((137)+13)/4}. Si preferimos ver estos ceros en forma aproximada, usamos (( y recibimos {-1.62,-30.9}. Pedimos los polos con zeros(1/zth, () y obtenemos {-4}.
+Para hacer la gráfica que nos solicita la pregunta c), seguimos los siguientes pasos.
+abs(zth)|(=x
+ans(1)(y1(x)
+Usamos ans(1) porque arriba tenemos la expresión. Presionamos ((. Aquí podemos especificar el rango que deseamos graficar. Usamos xmin=-50 y xmax=20. Presionamos ((. La calculadora grafica la función, pero usando una escala vertical inapropiada. Presionamos ((A en la TI-89 y (A en la TI-92Plus, para aplicar el comando ZoomFit. Vemos la gráfica, en la escala correcta.
+ 
+Figura 100. Gráfica solicitada por la pregunta c) del Problema N° 073.
+Para hacer la gráfica que nos solicita la pregunta d), seguimos los siguientes pasos.
+angle(zth)| (=x
+ans(1)(y1(x)
+Presionamos ((. Aquí podemos especificar el rango que deseamos graficar. Usamos xmin=0 y xmax=4.
+ 
+Figura 101. Especificando los límites de la gráfica.
+Presionamos ((. Aparece la gráfica, con una escala inapropiada. Aplicamos el comando ZoomFit. Vemos la gráfica, en la escala correcta.
+ 
+Figura 102. Gráfica solicitada por la pregunta d) del Problema N° 073.
+Así, hemos respondido a todas las preguntas.
+Problema N( 074
+Planteamiento. Encuentre: a) Zent(s) para la red de la figura, b) encuentre todas las frecuencias críticas, c) Grafique abs(Zent(s)) vs s.
+ 
+Figura 103. Circuito para el Problema N° 074.
+Solución. Ejecutamos la herramienta.
+sq\Thevenin("r1,1 , 2 , 4 , 0 ; l 1 , 2 , 0 , 1 , 0 ; l 2 , 1 , 3 , 5 , 0 ; r 2 , 3 , 0 , 5 , 0 " , 1 , 0 ) : z t h 
+ P r e s i o n a m o s ¸ð. E s c o g e m o s P a s s i v e y F D . P r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a e l v a l o r d e z t h , p e r o c o m o f u n c i ó n d e s . S a l i m o s c o n ¸ð. E n e l á r e a d e h i s t o r i a v e m o s 5 * ( s + 1 ) * ( s + 4 ) / ( 3 * ( 2 * s + 3 ) ) . E s t a e x p r e s i ó n a p a reció ahora, pues usamos :zth al final de la línea de comando.
+Para la pregunta b), pedimos los ceros con cZeros(zth,s) y obtenemos {-4,-1}. Pedimos los polos con cZeros(1/zth,s) y obtenemos {-3/2,-(,(}. Usamos el comando cZeros en vez del comando zeros, porque a diferencia del problema anterior, esta vez estamos buscando polos en s, los cuales pueden ser complejos. En el caso de los polos para (, como la parte imaginaria es nula, los polos son enteros. Así, usamos el comando cZeros cuando vamos a encontrar frecuencias críticas complejas, y el comando zeros cuando vamos a encontrar frecuencias críticas reales.
+Para hacer la gráfica que nos solicita la pregunta c), seguimos los siguientes pasos.
+abs(zth)|s=x
+ans(1)(y1(x)
+Usamos ans(1) porque arriba tenemos la expresión. Presionamos ((. Aquí podemos especificar el rango que deseamos graficar. Usamos xmin=-7 y xmax=2. Presionamos ((. La calculadora grafica la función, pero usando una escala vertical inapropiada. Presionamos ((A en la TI-89 y (A en la TI-92Plus, para aplicar el comando ZoomFit. Vemos la gráfica, en la escala correcta.
+ 
+Figura 104. Gráfica solicitada por la pregunta c) del Problema N° 074.
+Así, hemos respondido a todas las preguntas.
+ PAGE 10 
+
+10 - PAGE 13 
+Simulación en el dominio de la frecuencia
+
+Roberto Pérez-Franco - Symbulator
+
+Conceptos generales del Symbulator

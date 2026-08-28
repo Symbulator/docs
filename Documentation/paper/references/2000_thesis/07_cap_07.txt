@@ -1,0 +1,277 @@
+Capítulo
+7
+Bipuertos
+7.1 Introducción
+Un bipuerto es una red que tiene dos pares de terminales. En el Symbulator, se pueden simular los bipuertos como elementos de circuito, asumiendo que:
+la red está compuesta sólo de elementos lineales,
+la red no contiene fuentes independientes (puede contener fuentes dependientes),
+los dos nodos superiores de las terminales están conectados a nodos distintos del circuito
+los dos nodos inferiores de las terminales se consideran conectadas al nodo de referencia, 0
+El Symbulator acepta bipuertos con parámetros de 6 tipos diferentes:
+Parámetros de admitancia
+Parámetros de impedancia
+Parámetros híbridos
+Parámetros de ganancia
+Parámetros de transmisión
+Parámetros de transmisión inversa
+Hay tres procedimientos que se pueden realizar en el Symbulator, relacionados con los bipuertos:
+Simular circuitos que contienen bipuertos. Para ello, se usan los bipuertos como elementos de circuito.
+Encontrar las ganancias en un bipuerto. Para ello, se usa la herramienta gain tras una simulación de un circuito.
+Encontrar el bipuerto equivalente de una red. Para ello, se usa la herramienta port y la descripción de una red.
+En este capítulo aprenderemos todo lo relacionado con los bipuertos en el Symbulator.
+7.2 Notación
+En el caso de los bipuertos, la mínima información necesaria para describirlos por completo es la siguiente:
+Identificación. Las letras que identifican a los diferentes bipuertos son:
+Parámetros de impedancia, la letra z
+Parámetros de admitancia, la letra y
+Parámetros híbridos, la letra h
+Parámetros de ganancia, la letra g
+Parámetros de transmisión, la letra a
+Parámetros de transmisión inversa, la letra b
+Nombre. Es válido cualquier nombre que empiece con la letra que identifica al bipuerto que se quiere describir, y que no sea una variable reservada, como aquellas listadas en el Manual de Usuario y el punto 1.8.5 de este texto. Ejemplo: zc y yc son variables reservadas que no pueden ser usadas como nombres.
+Nodos. Un bipuerto tiene cuatro puntos de conexión, dos superiores y dos inferiores. Para una simulación en el Symbulator, los dos inferiores se asumen siempre conectados al nodo de referencia. Los superiores deben estar conectados a nodos distintos entre sí. Sólo es necesario darle al simulador los nombres de estos dos nodos superiores a los cuales está conectado el bipuerto. 
+Así, los bipuertos se definen como se muestra a continuación:
+letranombre, nodo 1, nodo 2
+Según sea necesario, se agregan uno o dos ceros al final.
+Valor de los parámetros. Los bipuertos son elementos únicos, porque requieren algo que ningún otro elemento requiere en el Symbulator: variables almacenadas previas a la simulación. Cada bipuerto que se simule como parte de un circuito, requiere que los valores de sus 4 parámetros estén almacenados en 4 variables, una para cada parámetro, de la siguiente forma:
+Parámetro 11, en la variable letranombre11
+Parámetro 12, en la variable letranombre12
+Parámetro 21, en la variable letranombre21
+Parámetro 22, en la variable letranombre22
+Debe tenerse la precaución de introducir estos valor en unidades enteras, y no en sus múltiplos. Esto significa que no se deben introducir en milis (m), micros ((), kilos (k), megas (M), etc.
+7.3 Respuestas relacionadas
+En el caso de un bipuerto, se entregan dos respuestas relacionadas. Se trata de dos corrientes: la corriente que entra al bipuerto por el primer nodo, y la corriente que entra por el segundo nodo. Recuérdese que estos dos nodos son los superiores, pues el inferior en ambos lados es el nodo de referencia. Estas corrientes se almacenan en variables llamadas iletranombreNODO, donde letranombre es el nombre del bipuerto, y NODO es el nombre del nodo. Así, para un bipuerto que se llame yp, y que esté conectada a los nodos 1 y 2, las respuestas relacionadas serán iyp1 e iyp2. Recuérdese que ambas corrientes se consideran entrando al bipuerto por los nodos superiores.
+Veamos nuestro primer problema de bipuertos.
+Problema N( 039
+Planteamiento. En el siguiente circuito, los parámetros del bipuerto mostrado son zp11=20/3, zp12=1/3, zp21=2500/3, zp22=200/3. Encuentre: a) el voltaje en el nodo de carga y las corrientes que entran al bipuerto por ambos extremos, b) la impedancia de entrada y las ganancias de corriente, voltaje y potencia del bipuerto, c) la impedancia de salida de la red, vista por la carga, y d) los equivalentes de este bipuerto en los otros cinco tipos de parámetros.
+ 
+Figura 55. Circuito para el Problema N° 039.
+Solución:
+Este problema, especialmente diseñado para inaugurar nuestra experiencia con los bipuertos, será resuelto en cuatro partes.
+La pregunta a) será respondida simulando el circuito usando un análisis de corriente directa. Llamaremos al bipuerto zp. Primero, definimos las variables que describen los parámetros del bipuerto.
+20/3(zp11:1/3(zp12:2500/3(zp21:200/3(zp22
+Tras insertar esta línea y presionar ¸ð, v e r e m o s e n e l á r e a d e h i s t o r i a e l v a l o r d e l ú l t i m o d e e s t o s p a r á m e t r o s c o m o r e s p u e s t a a n u e s t r o c o m a n d o . L o q u e a n o s o t r o s n o s i n t e r e s a e s q u e s e a l m a c e n a r o n l o s v a l o r e s e n l a s v a r i a b l e s . N ó t e s e q u e u s a m o s e l o p e r a d o r : y e l c o m a n d o ( . U n a v e z q u e e s t á n almacenadas las variables de los parámetros del bipuerto, procedemos a ordenar la simulación. A continuación, la descripción que utilizamos:
+sq\dc("e1,1,0,1;r1,1,2,2;r2,3,0,20;zp,2,3,0")
+Nótese que, como la descripción del bipuerto sólo require tres términos, rellenamos con un cero para mantener la simetría. Presionamos ¸ð. T r a s l a s f r a s e s , a p a r e c e D o n e . E l p r o b l e m a n o s h a p r e g u n t a d o e l v o l t a j e e n e l n o d o d e c a r g a y l a s c o r r i e n t e s q u e e n t r a n a l b i p u e r t o p o r a m b o s e x t r e m o s . O b t e n e m o s e s t o s v a l o r e s a s í : e l v o l t a j e e n e l n o d o d e c a r g a l o o b t e n e m o s c o n v 3 , y v a l e 2 5 0 0 / 7 1 v o l t i os; la corriente que entra al bipuerto por la izquierda la obtenemos con izp2, y vale 13/71 amperios; y la corriente que entra al bipuerto por la derecha la obtenemos con izp3, y vale -125/71 amperios. El signo negativo de esta última corriente nos indica que la corriente realmente está saliendo del bipuerto por la derecha, y no entrando.
+Hemos aprendido que un bipuerto puede simularse fácilmente en el Symbulator como un elemento de circuito más. Para responder a la pregunta b), usaremos una nueva herramienta.
+7.4 La herramienta gain
+Esta herramienta nos ayuda a encontrar las ganancias de corriente, voltaje y potencia, y la impedancia de entrada de una red. Esta red puede contener o no bipuertos. Aprendamos a usar esta herramienta al mismo tiempo que respondemos la segunda pregunta. La herramienta gain se ejecuta así:
+sq\gain()
+No toma argumentos de entrada entre los paréntesis. Sin embargo, al ejecutarla, se abre un formulario en el cual debemos introducir cuatro valores de entrada.
+ 
+Figura 56. Formulario de entrada de la herramienta gain, en la TI-89.
+Los cuatro valores solicitados son:
+El voltaje en el nodo de la terminal de entrada. En el caso de nuestro problema, este voltaje es v2, pues éste es el voltaje en el nodo de entrada al bipuerto, pues es el que está hacia la fuente.
+La corriente que entra por la terminal de entrada. En el caso de nuestro problema, esta corriente es izp2, pues ésta es la corriente que entra al bipuerto en el lado de entrada, o sea el lado que está hacia la fuente.
+El voltaje en el nodo de la terminal de salida. En el caso de nuestro problema, este voltaje es v3, pues éste es el voltaje en el nodo de salida del bipuerto, pues es el que está hacia la carga.
+La corriente que entra por la terminal de salida. En el caso de nuestro problema, esta corriente es izp3, pues ésta es la corriente que entra al bipuerto en el lado de salida, o sea el lado que está hacia la carga. Nótese que el decir corriente de salida no significa corriente que está saliendo. La corriente se debe definir como e n t r a n d o a l b i p u e r t o , p e r o e n e l l a d o d e s a l i d a . 
+ E l f o r m u l a r i o , u n a v e z l l e n o , d e b e l u c i r a s í : 
+ 
+ F i g u r a 5 7 . E l f o r m u l a r i o l l e n o , e n l a T I - 8 9 . 
+ P r e s i o n a m o s ¸ð, d o s v e c e s s i e s n e c e s a r i o . A c o n t i n u a c i ó n a p a r e c e u n a p a n t a l l a , q u e f u n c i o n a d e f o r m a s e m e j a n t e a l a d e l a h e r r a m i e n t a t h e v e n i n , e n l a c u a l d e b e m o s p r e s i o n a r ¸ð t a n t a s v e c e s c o m o v a l o r e s b u s c a m o s . 
+ 
+ F i g u r a 5 8 . P a n t a l l a d e r e s p u e s t a s d e g a i n , e n l a T I - 8 9 , t r a s p r e s i o n a r ¸ð u n a , d o s y c u a t r o v e c e s . 
+ V e m o s e n l a p a n t a l l a q u e l a g a n a n c i a d e v o l t a j e , l l amada Av o Gv dependiendo del libro de texto, vale 500/9; la ganancia de corriente, llamada Ai o Gi, vale –125/13; la ganancia de potencia, llamada Ap o Gp, vale 62500/117; y la impedancia de entrada, llamada Zi o Ri, vale 45/13. Además de mostrar estos valores en pantalla, la herramienta también los almacena en variables con los nombres av, ai, ap, y zi, respectivamente. Todos estos valores, por estar almacenados en la memoria, pueden solicitarse luego, incluso en forma de valores aproximados si se desea.
+Hemos aprendido el uso de la herramienta gain. Respondamos ahora la siguiente pregunta.
+7.5 Impedancia de salida
+La pregunta c) requiere de algunos conocimientos teóricos. La teoría nos enseña que la impedancia de salida de la red, vista por la carga, es la impedancia equivalente de la red, desde las terminales en donde está conectada la carga, cuando se ha eliminando la carga y se han matado las fuentes independientes. Matar una fuente independiente de voltaje es convertirla en un cortocircuito. Matar una fuente independiente de corriente es convertirla en un circuito abierto. Ya definimos los parámetros de este bipuerto cuando respondimos a la primera pregunta, y estos se encuentran en la memoria. Por ello, no hay necesidad de volver a definirlos. A continuación, la descripción que utilizamos:
+sq\thevenin("e1,1,0,0;r1,1,2,2;zp,2,3,0",3,0)
+Nótese que la carga ha sido removida de la descripción, y que la fuente se ha matado, es decir que su valor se ha hecho nulo. Esto es lo mismo que haberla convertido en cor t o c i r c u i t o . P r e s i o n a m o s ¸ð, e s c o g e m o s P a s s i v e y D C , y p r e s i o n a m o s ¸ð. E n l a p a n t a l l a d e r e s p u e s t a s , a p a r e c e q u e z t h e s 4 5 0 / 1 3 o h m i o s , q u e e s l a i m p e d a n c i a d e s a l i d a c o r r e c t a . 
+ H e m o s a p r e n d i d o c ó m o e n c o n t r a r l a i m p e d a n c i a d e s a l i d a d e u n a r e d . T a m b i é n h e m o s visto que la herramienta thevenin trabaja también con bipuertos. Respondamos ahora la última pregunta, usando una nueva herramienta.
+7.6 La herramienta port
+Esta herramienta nos entrega los parámetros del bipuerto equivalente de cualquier red con dos terminales. Aprendamos a usar esta herramienta, al mismo tiempo que respondemos la cuarta pregunta. La herramienta port se ejecuta así:
+sq\port(descripción de la red,nodo1,nodo2)
+Se entregan tres argumentos de entrada entre los paréntesis:
+La descripción de la red de dos terminales, cuyo equivalente en bipuerto se desea encontrar. Esta red debe ser un circuito compuesto sólo de elementos pasivos, y no puede contener fuentes independientes. Esta red puede estar compuesta, digamos, de resistencias solamente. También puede estar compuesta de uno o más bipuertos. O de una mezcla de elementos resistivos y bipuertos. Como esta red puede contener otros bipuertos, la herramienta port es un poderoso aliado para encontrar el equivalente de un bipuerto dado en otros parámetros distintos, y para reducir un conjunto de varios bipuertos (en serie, en paralelo o en combinación) a un único bipuerto equivalente.
+El nodo superior de la terminal de entrada de la red.
+El nodo superior de la terminal de salida de la red.
+Se asume que los nodos inferiores de las dos terminales es el nodo de referencia.
+Una vez que hemos escrito la línea mostrada, presionamos ¸ð. A l e j e c u t a r l a , s e a b r e u n f o r m u l a r i o e n e l c u a l d e b e m o s h a c e r a l g u n a s s e l e c c i o n e s . 
+ 
+ F i g u r a 5 9 . F o r m u l a r i o d e l a h e r r a m i e n t a p o r t , e n l a T I - 8 9 . 
+ L a s t r e s s e l e c c i o n e s s o n : 
+ E l t i p o d e p a r á m e t r o q u e q u e r e m o s e n c o n t r a r . L a s o p c i o n e s s o n z , y , h , g , a y b , c u yos significados ya listamos en el punto 7.2.
+ 
+Figura 60. Selección del tipo de parámetro, en la TI-89.
+El nombre que deseamos darle al bipuerto, sin incluir la letra que identifica el tipo de bipuerto. Por ejemplo, si queremos que el bipuerto se llame zp1, el nombre que debemos introducir aquí es sólo p1, pues la z ya la hemos escogido arriba. Podemos usar cualquier nombre, excepto aquellos que, al combinarse con la letra del bipuerto que hallamos escogido, resulte ser el nombre de una variable reservada. Por ejemplo, si escogemos un bipuerto tipo z o y, no podemos usar un nombre como c, porque el nombre completo del bipuerto sería zc o yc, que son ambas variables reservadas, como lo señalamos en el punto 1.8.5. Existe un gran número de variables reservadas que empiezan con z y con y. Se puede encontrar un listado completo de ellas en el Manual de Usuario. Como recomendación general, debe usarse una letra o un número como nombre, y que esta letra no sea la letra c.
+ 
+Figura 61. Introducción del nombre del bipuerto, en la TI-89.
+El tipo de análisis que deseamos. Podemos escoger entre análisis en corriente directa DC, en corriente alterna AC y en dominio de la frecuencia FD.
+ 
+Figura 62. Selección del tipo de análisis, en la TI-89.
+A continuación, se ejecuta una simulación de la red. Luego aparece una pantalla de respuestas que funciona de forma semejante a las anteriores. Debemos presionar ¸ð c u a t r o v e c e s p a r a v e r l o s c u a t r o p a r á m e t r o s b u s c a d o s p r e s e n t a d o s e n l a p a n t a l l a . 
+ E s t o s p a r á m e t r o s q u e d a r á n t a m b i é n a l m a c e n a d o s e n l a m e m o r i a d e l a c a l c u l a d o r a , e n v a r i a b l e s c o n l o s n o m b r e s q u e c o r r e s p o n d e n a l n o m b r e d e l b i p u e r t o , s e g ú n l a c o n v e n c i ó n d e n ombres que expusimos en el punto 7.2.
+Con este conocimiento, veamos ahora cómo podemos responder la pregunta d) utilizando la herramienta port. La pregunta nos solicita encontrar los equivalentes del bipuerto en todos los demás tipos de parámetros. A continuación, la solución a esta pregunta. 
+Encontremos primero el equivalente en parámetros de admitancia del bipuerto dado. Introdúzcase la siguiente línea de comando en el área de entrada.
+sq\port("zp,1,2,0",1,2)
+Esta línea ordena utilizar la herramienta port para encontrar el equivalente de la red descrita, que es el bipuerto zp, cuyos parámetros de impedancia ya son conocidos y se llaman zp11, zp12, zp21 y zp22. Estos parámetros ya se encuentran almacenados en la memoria, desde que respondimos la primera pregunta. Si el usuario tiene alguna duda sobre si estos parámetros están o no almacenados en la memoria, puede usar el entorno Var-Link para verificar. Si estos parámetros fueron borrados por el usuario, se hace necesario introducirlos nuevamente, como se mostró en la pregunta anterior. El hecho es que los parámetros de un bipuerto deben estar almacenados antes de ejecutar cualquier simulación que involucre a este bipuerto.
+El bipuerto se encuentra conectado entre los nodos 1 y 2, y esto se indica en la línea del comando. Aunque parezca innecesario en este caso, los dos nodos extremos de la red que quiere reducirse deben especificarse, pues no siempre esta red estará compuesta por un elemento únicamente, como veremos más adelante.
+Así, presionamos ¸ð. E s p e c i f i c a m o s y c o m o t i p o d e b i p u e r t o d e s e a d o , p c o m o n o m b r e y D C c o m o a n á l i s i s . A c o n t i n u a c i ó n m o s t r a m o s l a s r e s p u e s t a s . 
+ 
+ F i g u r a 6 3 . P a r á m e t r o s Y e n c o n t r a d o s , e n l a T I - 8 9 . 
+ E s t e e s e l e q u i v a l e n t e c o r r e c t o . R e c u é r d e s e q u e e s t o s p a r á m e t r o s d e l a r e s p u e s ta, además de aparecer en pantalla, también se almacenan en variables con los nombres correspondientes. Encontremos ahora otro equivalente del bipuerto en otro tipo de parámetros.
+Para encontrar el equivalente en parámetros híbridos del bipuerto dado, el procedimiento es idéntico. Sólo por propósitos didácticos, usaremos ahora como bipuerto de partida el recién encontrado bipuerto yp cuyos parámetros están almacenados ya en la memoria, en lugar del bipuerto zp que utilizamos en la línea anterior. Introdúzcas e l a s i g u i e n t e l í n e a d e c o m a n d o e n e l á r e a d e e n t r a d a . 
+ s q \ p o r t ( " y p , 1 , 2 , 0 " , 1 , 2 ) 
+ P r e s i o n a m o s ¸ð. E s p e c i f i c a m o s h c o m o t i p o d e b i p u e r t o d e s e a d o , p c o m o n o m b r e y D C c o m o a n á l i s i s . A c o n t i n u a c i ó n m o s t r a m o s l a s r e s p u e s t a s . 
+ 
+ F i g u r a 6 4 . P a r á m e t r o s H e n c o n t r a d o s , en la TI-89.
+Para encontrar el equivalente en parámetros de ganancia del bipuerto dado, el procedimiento es igual. Usaremos como bipuerto de partida el bipuerto hp, cuyos parámetros están en la memoria. Introdúzcase la siguiente línea de comando en el área de entrada.
+sq\port("hp,1,2,0",1,2)
+Presionamos ¸ð. E s p e c i f i c a m o s g c o m o t i p o d e b i p u e r t o d e s e a d o , p c o m o n o m b r e y D C c o m o a n á l i s i s . A c o n t i n u a c i ó n m o s t r a m o s l a s r e s p u e s t a s . 
+ 
+ F i g u r a 6 5 . P a r á m e t r o s G e n c o n t r a d o s , e n l a T I - 8 9 . 
+ E n c o n t r e m o s e l e q u i v a l e n t e e n p a r á m e t r o s d e t r a n s m i s i ó n d e l b i p u e r t o , u s a n d o c o m o b i p u e r t o d e p a r t i d a e l b i p u e r t o g p . I n t r o d ú z c a s e l a s i g u i e n t e l í n e a d e c o m a n d o e n e l á r e a d e e n t r a d a . 
+ s q \ p o r t ( " g p , 1 , 2 , 0 " , 1 , 2 ) 
+ P r e s i o n a m o s ¸ð. E s p e c i f i c a m o s a c o m o t i p o d e b i p u e r t o d e s e a d o , p c o m o n o m b r e y D C c o m o a n á l i s i s . A c o n t i n u a c i ó n m o s t r a m o s l a s r e spuestas.
+ 
+Figura 66. Parámetros A encontrados, en la TI-89.
+Encontremos el equivalente en parámetros de transmisión inversa del bipuerto, usando como bipuerto de partida el bipuerto ap. Aquí encontramos una variante en el procedimiento. Cuando resolvimos la pregunta a), hace un momento, la herramienta gain generó una variable llamada Ap, la cual contenía la ganancia de potencia. Esta variable todavía está en la memoria. Si nos olvidamos de esto, y tratamos de ejecutar la herramienta usando el ap como nombre del bipuerto, recibiremos un error del Symbulator indicándonos que el nombre que le hemos asignado al elemento #1 de nuestra descripción de circuito no es apropiado, y que por favor corrijamos esta descripción. El nombre es inapropiado porque es el nombre de una variable en uso. El mensaje se muestra a continuación:
+ 
+Figura 67. Mensaje de error por nombre de elemento inapropiado, en la TI-89.
+Por ello, debemos borrar la variable antes de ejecutar la herramienta. Podemos poner ambas órdenes en una sola lí n e a , u s a n d o e l s e p a r a d o r . P o r e j e m p l o , i n t r o d ú z c a s e l a s i g u i e n t e l í n e a d e c o m a n d o e n e l á r e a d e e n t r a d a . 
+ D e l V a r a p : s q \ p o r t ( " a p , 1 , 2 , 0 " , 1 , 2 ) 
+ C o m o l a v a r i a b l e a p h a s i d o b o r r a d a , a h o r a s í p o d e m o s e m p l e a r e s t a v a r i a b l e c o m o n o m b r e d e l b i p u e r t o . P r e s i o n a m o s ¸ð. Especificamos b como tipo de bipuerto deseado, p como nombre y DC como análisis. A continuación mostramos las respuestas.
+ 
+Figura 68. Parámetros B encontrados, en la TI-89.
+Así, hemos encontrado los cinco equivalentes del bipuerto que nos fue entregado.
+7.7 Verificación
+Pero, ¿cómo podríamos verificar que estos bipuertos son los equivalentes correctos de nuestro bipuerto original? Sencillo. Encontremos el equivalente en parámetros de impedancia, es decir en el tipo original, usando como bipuerto de partida el bipuerto bp, que fue el último equivalente encontrado. Cualquier error que se haya generado en el camino, impactará nuestra respuesta final. Así, si obtenemos ahora el equivalente correcto, significará que todos los equivalentes intermedios fueron correctos. Introdúzcase la siguiente línea de comando en el área de entrada.
+sq\port("bp,1,2,0",1,2)
+Presionamos ¸ð. E s p e c i f i c a m o s z c o m o t i p o d e b i p u e r t o d e s e a d o , p c o m o n o m b r e y D C c o m o a n á l i s i s . A c o n t i n u a c i ó n m o s t r a m o s l a s r e s p u e s t a s . 
+ 
+ F i g u r a 6 9 . P a r á m e t r o s Z e n c o n t r a d o s , e n l a T I - 8 9 . 
+ P o d e m o s v e r q u e e s t o s p a r á m e t r o s d e i m p e d a n c i a c o i n c i d e n p e r f e c t a m e n t e c o n l o s que nos entregó el problema como datos iniciales. Esto significa que todos los equivalentes que hemos encontrado son correctos. Veamos más problemas resueltos, como práctica para dominar el uso de los bipuertos en el Symbulator.
+Problema N( 040
+Planteamiento. Los parámetros del bipuerto mostrado son zp11=20, zp12=3, zp21=100, zp22=5. Encuentre: a) la impedancia de entrada y las ganancias de corriente, voltaje y potencia del bipuerto, b) la impedancia de salida de la red, vista por la carga.
+ 
+Figura 70. Circuito para el Problema N° 040.
+Solución. A continuación, la descripción que utilizamos para la primera pregunta:
+20.(zp11:3.(zp12:100.(zp21:5.(zp22:sq\dc("j1,0,1,is;r1,1,0,50.;zp,1,2,0;r2,2,0,100."):sq\gain()
+En esta línea, está la definición de los parámetros, la órden de ejecutar la simulación y la órden de ejecutar la herramienta gain. Presionamos ¸ð. T r a s l a s f r a s e s , a p a r e c e e l f o r m u l a r i o d e l a h e r r a m i e n t a , e n e l c u a l i n t r o d u c i m o s v 1 , i z p 1 , v 2 , i z p 2 . P r e s i o n a m o s ¸ð. R e c i b i m o s e n l a p a n t a l l a , y e n l a m e m o r i a , l a s r e s p u e s t a s : a i = - . 9 5 2 , a v = 5 . 5 6 , a p = 5 . 2 9 , z i = 1 7 . 1 . 
+ A c o n t i n u a c i ó n , l a d e s c r i p c i ó n p a r a l a s e g u n d a p r e g u n t a : 
+ s q \ t h e v e n i n ( " r 1 , 1 , 0 , 5 0 . ; z p , 1 , 2 , 0 " , 2 , 0 ) 
+ N ó t e s e q u e l a f u e n t e d e c o r r i e n t e s e e l i m i n ó . E s t a f o r m a d e m a t a r l a e s e q u i v a l e n t e a h a b e r l a i n t r o d u c i d o c o n v a l o r n u l o , y t i e n e l a v e n t a j a d e a h o r r a r l e m o l e s t i a s a l s i m u l a d o r . P r e s i o n a m o s ¸ð. S e l e c c i o n a m o s P a s s i v e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s : z t h = . 7 1 4 . E s t a s s o n l a s r e s p u e s t a s c o r r e c t a s . 
+ P r o b l e m a N ( 0 4 1 
+ P l a n t e a m i e n t o . E n c u e n t r e e l e q u i v a l e n t e d e l a s i g u i e n t e r e d , e n p a r á m e t r o s d e a d m i t a n c i a . 
+ 
+ F i g u r a 7 1 . C i r c u i t o p a r a e l P r o b l e m a N ° 0 4 1 . 
+ S o l u c i ó n . A c o n t i n u a c i ó n , l a d e s c r i p c i ó n q u e u t i l i z a m o s : 
+ s q \ p o r t ( " r 1 , 1 , 2 , 1 0 . ; r 2 , 1 , 0 , 5 . ; r 3 , 2 , 0 , 2 0 . " , 1 , 2 ) 
+ P r e s i o n a m o s ¸ð. S e l e c c i o n a m o s y , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s d e a d m i t a n c i a : . 3 , - . 1 , - . 1 , . 1 5 . 
+ P r o b l e m a N ( 0 4 2 
+ P l a n t e a m i e n t o . E n c u e n t r e e l e q u i v a l e n t e d e l a s i g u i e n t e r e d , e n p a r á m e t r o s d e a d m i t a n c i a . 
+ 
+ F i g u r a 7 2 . C i r c u i t o p a r a e l P r o b l e m a N ° 0 4 2 . 
+ S o l u c i ó n . A c o n t i n u a c i ó n , l a d e s c r i p c i ó n q u e u t i l i z a m o s : 
+ s q \ p o r t ( " r 1 , 1 , 2 , 1 0 . ; r 2 , 2 , 3 , 5 ; r 3 , 1 , 3 , 2 0 ; r 4 , 2 , 0 , 4 0 " , 1 , 3 ) 
+ P r e s i o n a m o s ¸ð. S e l e c c i o n a m o s y , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s d e a d m i t a n c i a : . 1 1 9 2 , - . 1 1 1 5 , - . 1 1 1 5 , . 1 2 6 9 . 
+ P r o b l e m a N ( 0 4 3 
+ P l a n t e a m i e n t o . E n c u e n t r e e l e q u i v a l e n t e d e l a s i g u i e n t e r e d , e n p a r á m e t r o s d e a d m i t a n c i a . 
+ 
+ F i g u r a 7 3 . C i r cuito para el Problema N° 043.
+Solución. A continuación, la descripción que utilizamos:
+sq\port("s1,x,1,0;j1,1,0,.2*v2;r1,1,0,10.;j2,1,0,.5*is1;r2,2,1,5.",x,2)
+Nótese que introdujimos un cortocircuito con el propósito de utilizar su corriente como corriente de control para la fuente j2. Presionamos ¸ð. S e l e c c i o n a m o s y , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s d e a d m i t a n c i a : . 6 , 0 . , - . 2 , . 2 . 
+ P r o b l e m a N ( 0 4 4 
+ P l a n t e a m i e n t o . E l s i g u i e n t e c i r c u i t o e s e l e q u i v a l e n t e l i n e a l d e u n t r a n s i s t o r e n l a c o n f i g u r a c i ó n d e e m i s o r c o m ú n c on retroalimentación resistiva entre el colector y la base. Encuentre el equivalente, en parámetros de admitancia.
+ 
+Figura 74. Circuito para el Problema N° 044.
+Solución. A continuación, la descripción que utilizamos:
+sq\port("r1,1,0,5E2;r2,1,2,2E3;j1,2,0,.0395*v1; r3,2,0,1E4",1,2)
+Presionamos ¸ð. S e l e c c i o n a m o s y , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s d e a d m i t a n c i a : . 0 0 2 5 , - 5 . E - 4 , . 0 3 9 , 6 . E - 4 . 
+ P r o b l e m a N ( 0 4 5 
+ P l a n t e a m i e n t o . E n c u e n t r e e l e q u i v a l e n t e d e l a s i g u i e n t e r e d , e n p a r á m e t r o s d e i m p e d a n c i a . 
+ 
+ F i g u r a 7 5 . C i r c u i t o p a r a e l P r o b l e m a N ° 0 4 5 . 
+ S o l u c i ó n . A c o n t i n u a c i ó n , l a d e s c r i p c i ó n q u e u t i l i z a m o s : 
+ s q \ p o r t ( " r 1 , 1 , 3 , 2 0 . ; r 2 , 3 , 2 , 5 0 . ; r 3 , 3 , 0 , 2 5 . " , 1 , 2 ) 
+ P r e s i o n a m o s ¸ð. S e l e c c i o n a m o s z , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s d e i m p e d a n c i a : 45., 25., 25., 75..
+Problema N( 046
+Planteamiento. Encuentre el equivalente de la siguiente red, en parámetros de impedancia.
+ 
+Figura 76. Circuito para el Problema N° 046.
+Solución. A continuación, la descripción que utilizamos:
+sq\port("r1,1,0,40.;r2,1,3,20.;r3,3,0,25.;r4,3,2,50.",1,2)
+Presionamos ¸ð. S e l e c c i o n a m o s z , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s d e i m p e d a n c i a : 2 1 . 2 , 1 1 . 8 , 1 1 . 8 , 6 7 . 6 . 
+ P r o b l e m a N ( 0 4 7 
+ P l a n t e a m i e n t o . E n c u e n t r e e l e q u i v a l e n t e d e l a s i g u i e n t e r e d , e n p a r á m e t r o s d e i m p e d a n c i a . 
+ 
+ F i g u r a 7 7 . C i r c u i t o p a r a e l P r o b l e m a N ° 0 4 7 . 
+ S o l u c i ó n . A c o n t i n u a c i ó n , l a d e s c r i p c i ó n q u e u t i l i z a m o s : 
+ s q \ p o r t ( " r 1 , 1 , 3 , 2 0 . ; r 2 , 3 , 2 , 5 0 . ; r 3 , 3 , 4 , 2 5 . ; e 1 , 4 , 0 , . 5 * v 2 " , 1 , 2 ) 
+ P r e s i o n a m o s ¸ð. S e l e c c i o n a m o s z , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s d e i m p edancia: 70., 100., 50., 150..
+Problema N( 048
+Planteamiento. Este problema no tiene figura. Encuentre la impedancia de entrada y las ganancias de corriente, voltaje y potencia de un bipuerto, con parámetros de impedancia z11=4, z12=1.5, z21=10 and z22=3, si tiene una fuente de entrada Vs en su entrada en serie con una resistencia de 5(, mientras que la carga es de 2(.
+Solución. A continuación, la orden que utilizamos:
+4(zp11:1.5(zp12:10(zp21:3(zp22:sq\dc("e1,1,0,vs;r1,1,2,5;r2,3,0,2;zp,2,3,0"):sq\gain()
+En e s t a l í n e a e s t á l a d e f i n i c i ó n d e l o s p a r á m e t r o s , l a ó r d e n d e e j e c u t a r l a s i m u l a c i ó n y l a ó r d e n d e e j e c u t a r l a h e r r a m i e n t a g a i n . P r e s i o n a m o s ¸ð. T r a s l a s f r a s e s , a p a r e c e e l f o r m u l a r i o d e l a h e r r a m i e n t a , e n e l c u a l i n t r o d u c i m o s v 2 , i z p 2 , v 3 , i z p 3 . P r e s i o n a m o s ¸ð. R e c i b i m o s e n l a p a n t a l l a y e n l a m e m o r i a , l a s r e s p u e s t a s : a i = - 2 . , a v = 4 . , a p = 8 . , z i = 1 . 
+ P r o b l e m a N ( 0 4 9 
+ P l a n t e a m i e n t o . E n c u e n t r e e l e q u i v a l e n t e d e l a s i g u i e n t e r e d , e n p a r á m e t r o s h í b r i d o s . 
+ 
+ F i g u r a 7 8 . C i r c u i t o p a r a e l P r o b l e m a N ° 0 4 9 . 
+ S o l u c i ó n . A c o n t i n u a c i ó n , l a d e s c r i p c i ó n q u e u t i l i z a m o s : 
+ s q \ p o r t ( " r 1 , 1 , 3 , 1 . ; r 2 , 3 , 2 , 6 . ; r 3 , 3 , 0 , 4 . " , 1 , 2 ) 
+ P r e s i o n a m o s ¸ð. S e l e c c i o n a m o s h , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s h í b r i d o s : 3 . 4 , . 4 , - . 4 , . 1 . 
+ P r o b l e m a N ( 0 5 0 
+ P l a n t e a m i e n t o . E l s i g u i ente circuito es el equivalente de un transistor de alta frecuencia. Encuentre el equivalente, en parámetros de impedancia.
+ 
+Figura 79. Circuito para el Problema N° 050.
+Solución. A continuación, la descripción que utilizamos:
+sq\port("r1,1,0,1E5;ca,1,0,5E-12;cb,1,2,1E-12; j1,2,0,.01*v1;r2,2,0,1E4",1,2)
+Presionamos ¸ð. S e l e c c i o n a m o s z , a l g ú n n o m b r e y A C , y p r e s i o n a m o s ¸ð. C o m o f r e c u e n c i a , i n t r o d u c i m o s 1 E 8 , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s d e i m p e d a n c i a : 8 9 . 7 - 9 8 . 4 * i , 9 4 . 1 - 4 . 3 4 * i , 5 2 8 . + 9 4 0 1 . * i , 5 6 4 . - 3 5 . 5 * i . C o m o e s t o s v a l o r e s e s t á n a l m a c e n a d o s e n l a m emoria, podemos usar la herramienta absang para verlos en forma polar: 133.1(-47.6(, 94.2(-2.64(, 9416.(86.8(, 565.(-3.60(.
+Problema N( 051
+Planteamiento. Encuentre el equivalente de la siguiente red, en parámetros de impedancia.
+ 
+Figura 80. Circuito para el Problema N° 051.
+Solución. A continuación, la descripción que utilizamos:
+sq\port("r1,1,3,8.;e1,3,0,.1*v2;j1,2,0,.05*v1;r2,2,0,12.",1,2)
+Presionamos ¸ð. S e l e c c i o n a m o s z , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s d e i m p e d a n c i a : 7 . 5 5 , 1 . 1 3 , - 4 . 5 3 , 1 1 . 3 . 
+ P r o b l e m a N ( 0 5 2 
+ P l a n t e a m i e n t o . E l s i g u i e n t e c i r c u i t o e s e l e q u i v a l e n t e d e u n t r a n s i s t o r d e a l t a f r e c u e n c i a . E n c u e n t r e e l e q u i v a l e n t e , e n p a r á m e t r o s h í b r i d o s . 
+ 
+ F i g u r a 8 1 . C i r c u i t o p a r a e l P r o b l e m a N ° 0 5 2 . 
+ S o l u c i ó n . A c o n t i n u a c i ó n , l a d e s c r i p c i ó n q u e u t i l i z a m o s : 
+ s q \ p o r t ( " r 1 , 1 , 0 , 2 E 3 ; c a , 1 , 0 , 5 E - 1 2 ; c b , 1 , 2 , 2 . 5 E - 1 2 ; j 2 , 2 , 0 , . 0 0 5 * v 1 " , 1 , 2 ) 
+ P r e s i o n a m o s ¸ð. S e l e c c i o n a m o s h , a l g ú n n o m b r e y A C , y p r e s i o n a m o s ¸ð. C o m o f r e c u e n c i a , i n t r o d u c i m o s 1 E 8 , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s h í b r i d o s : 6 1 5 . - 9 2 3 . * i , . 2 3 1 + . 1 5 4 * i , 2 . 8 5 - 4 . 7 7 * i , . 0 0 1 1 9 + 9 . 6 2 E - 4 * i . C o m o e s t o s v a l o r e s e s t á n a l m a c e n a d o s e n l a m e m o r i a , p o d e m o s u s a r l a h e r r a m i e n t a a bsang para verlos en forma polar: 1109(-56.3(, .277(33.7(, 5.55(-59.2(, .00153(38.9(.
+
+Problema N( 053
+Planteamiento. Encuentre a) el equivalente de la siguiente red, en parámetros híbridos, y b) la impedancia de salida de la red, vista desde la perspectiva de la carga, si la entrada contiene Vs en serie con Rs=200(.
+ 
+Figura 82. Circuito para el Problema N° 053.
+Solución:
+A continuación, la descripción que utilizamos para la primera parte:
+sq\port("r1,1,0,1E3;j1,0,1,1E-5*v2;e1,0,3,100*v1; r2,3,2,1E4",1,2)
+P r e s i o n a m o s ¸ð. S e l e c c i o n a m o s h , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s h í b r i d o s : 1 0 0 0 . , . 0 1 , 1 0 . , 2 . E - 4 . 
+ A c o n t i n u a c i ó n , l a d e s c r i p c i ó n q u e u t i l i z a m o s p a r a l a s e g u n d a p a r t e : 
+ s q \ t h e v e n i n ( " r s , 0 , 1 , 2 0 0 ; r 1 , 1 , 0 , 1 E 3 ; j 1 , 0 , 1 , 1 E - 5 * v 2 ;e1,0,3,100*v1;r2,3,2,1E4",2,0)
+Nótese que hemos agregado únicamente la resistencia rs. No se agregó la fuente vs pues, para encontrar la impedancia de salida, la fuente de voltaje debe estar muerta, y una fuente de voltaje muerta es simplemente un cortocircuito. No es necesario colocar este cortocircuito en serie con la resistencia, pues colocar sólo la resistencia tiene el mismo efecto. Presionamos ¸ð. S e l e c c i o n a m o s P a s s i v e y D C , y p r e s i o n a m o s ¸ð. V e m o s q u e z t h e s 8 5 7 1 . 
+ P r o b l e m a N ( 0 5 4 
+ P l a n t e a m i e n t o . E n c u e n t r e e l e q u i v a l e n t e d e l a s i g u i e n t e r e d , e n p a r á m e t r o s d e t r a n s m i s i ó n . 
+ 
+ F i g u r a 8 3 . C i r c u i t o p a r a e l P r o b l e m a N ° 0 5 4 . 
+ S o l u c i ó n . A c o n t i n u a c i ó n , l a d e s c r i p c i ó n q u e u t i l i z a m o s : 
+ s q \ p o r t ( " r 1 , 1 , 3 , 2 . ; r 2 , 3 , 2 , 4 . ; r 3 , 3 , 0 , 1 0 . " , 1 , 2 ) 
+ P r e s i o n a m o s ¸ð. S e l e c c i o n a m o s a , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s d e t r a n s m i s i ó n : 1 . 2 , 6 . 8 , . 1 , 1 . 4 . 
+ P r o b l e m a N ( 0 5 5 
+ P l a n t e a m i e n t o . E n c u e n t r e e l e quivalente de la siguiente red, en parámetros de transmisión.
+ 
+Figura 84. Circuito para el Problema N° 055.
+Solución. Nótese que la red, en este caso, está compuesta por dos grupos de resistencias en arreglo T. A continuación, la descripción que utilizamos:
+sq\port("r1,1,2,2.;r2,2,0,10.;r3,2,3,4.;r4,3,4,4.;r5,4,0,20.;r6,4,5,8.",1,5)
+Presionamos ¸ð. S e l e c c i o n a m o s a , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s d e t r a n s m i s i ó n : 1 . 7 8 , 2 5 . 8 4 , . 1 9 , 3 . 3 2 . E s t e e s u n e j e m p l o d e c ó m o , c o n l a h e r r a m i e n t a p o r t , s e p u e d e n r e d u c i r a u n s ó l o b i p u e r t o u n a r e d q u e u s u a l m e n t e h u b i e s e t o mado dos bipuertos.
+Problema N( 056
+Planteamiento. Encuentre el equivalente de la siguiente red, en parámetros de transmisión.
+ 
+Figura 85. Circuito para el Problema N° 056.
+Solución. A continuación, la descripción que utilizamos:
+sq\port("r1,1,3,5.;j1,3,0,.1*v2;e1,2,3,.3*v1;r2,2,0,4.",1,2)
+Presionamos ¸ð. S e l e c c i o n a m o s a , a l g ú n n o m b r e y D C , y p r e s i o n a m o s ¸ð. O b t e n e m o s l o s s i g u i e n t e s p a r á m e t r o s d e t r a n s m i s i ó n : 2 . 1 2 , 3 . 8 5 , . 3 5 , 1 . . 
+ P A G E 1 0 
+ 
+ 
+ 7 - P A G E 2 6 
+ B i p u e r t o s 
+ 
+ R o b e r t o P é r e z - F r a n c o - S y m b u l a t o r 
+ 
+ C o n c e p t o s g e n e r a l e s d e l S y m b u l a t o r

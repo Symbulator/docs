@@ -1,0 +1,527 @@
+UNIVERSIDAD TECNOLÓGICA DE PANAMÁ
+
+FACULTAD DE INGENIERÍA ELÉCTRICA
+
+SYMBULATOR
+
+UN SIMULADOR DE CIRCUITOS LINEALES PARA CALCULADORAS
+
+Trabajo de Graduación para optar por el título de
+Licenciado en Ingeniería Electromecánica
+
+Roberto Pérez-Franco
+6-700-1101
+
+2001 
+Página de Calificación del Tribunal Examinador
+
+Profesor Medardo Logreira: 100/100
+Profesora Eliane Boulet de Cabrera: 100/100
+Profesora Marcela Paredes: 100/100
+Observaciones Generales del Tribunal Calificador: Es un excelente trabajo que provee un aporte innovador en el campo de la simulación numérica y simbólica de los circuitos eléctricos, y que ha recibido reconocimiento a nivel mundial. Este trabajo es un orgullo para la Facultad de Ingeniería Eléctrica y para la Universidad Tecnológica de Panamá. Los miembros del jurado recomiendan que se promocione este trabajo entre la comunidad Tecnológica.
+
+ Advertencia
+
+El autor del Symbulator es fundador del Movimiento Pax . Es decisión del autor que este programa solamente puede ser usado para aplicaciones pacíficas, y nunca para aplicaciones bélicas. Es deber del usuario respetar esta decisión.
+ 
+Agradecimientos
+
+A los profesores Medardo Logreira, Eliane Boulet de Cabrera y Marcela Paredes de la Universidad Tecnológica de Panamá, por apoyarme incondicionalmente en el desarrollo de este proyecto.
+Deseo agradecer a todos los que me aman: Dios, por darme todo; mi esposa Mónica, por mantenerme vivo; mi madre Eka, por darme la vida; mi padre Tito, por darme dos alas amplias y fuertes, y un cielo enorme para probarlas; y mi hermana Ekita, por darme poesía.
+Agradezco a mi padre la revisión gramatical y a José Vega la revisión técnica de este texto, a Miguel Latorraca la confección de las imágenes de los circuitos presentados, y a mi esposa su ayuda en la confección del índice y la lista de figuras. Estoy en deuda igualmente, con Doug Burkett y Tim Hutcheson por la buena voluntad, el esfuerzo y las muchísimas horas de su valioso tiempo que han dedicado a la traducción cuidadosa de esta tesis al inglés, bajo el título de "The Symbulator Book". Mi eterna gratitud a todos los amigos y usuarios que me estimularon con sus sugerencias y comentarios, para desarrollar, mejorar y probar el Symbulator durante estos años: Tim Hutcheson (EUA); Lars Frederiksen (Dinamarca); Joe Riel (EUA); Arne Harstad (Noruega); Erwin Baert (Bélgica); Charles Ware (EUA); Doug Burkett (EUA); Reinhard Willinski (Alemania); Kamil Malinski (Austria); Jake Adams (EUA); Daniele Martini (Italia); Rozgonyi Szabolcs (Hungría); Michael Rans (Reino Unido); Alex Astashyn (Rusia); Al Charpentier (EUA); Nevin McChesney (EUA); Ivan Oro Yu (Panamá); y Pepe Iborra (España).
+
+Tabla de Contenido
+
+Calificación del Tribunal Examinador, ii
+
+Advertencia, iii
+
+Agradecimientos, iv
+
+Tabla de Contenido, v
+
+Lista de Figuras, xiv
+
+Resumen, xviii
+
+Introducción, xxi
+
+Introducción, 1
+
+Resumen, 
+
+Capítulo 1 - Conceptos generales del Symbulator
+
+ 1.1 ¿Qué es Symbulator?, 1-1
+ 1.2 Requisitos, 1-1
+ 1.2.1 Fuentes de información para la instalación, 1-1
+ 1.2.2 Fuentes de información para archivar los programas, 1-2
+ 1.3 Sitio en la Internet, 1-2
+ 1.4 Concepto del algoritmo, 1-2
+ 1.5 Puertas, 1-3
+ 1.6 Herramientas, 1-4
+ 1.7 Comandos, 1-4
+ 1.8 Sobre la notación, 1-4
+ 1.8.1 Filosofía, 1-4
+ 1.8.2 Descripción textual, 1-4
+ 1.8.3 Nodos, 1-5
+ 1.8.3.1 Orden de los nodos, 1-5
+ 1.8.3.2 Nombres de los nodos, 1-6
+ 1.8.3.3 Nodo de referencia, 1-6
+ 1.8.4 Variables reservadas, 1-6
+
+Capítulo 2 - Simulación numérica en corriente directa
+
+ 2.1 Antes de ejecutar cualquier simulación, 2-1
+ 2.1.1 Carpeta actual, 2-1
+ 2.1.2 Variables innecesarias, 2-2
+ 2.1.3 Procedimiento, 2-2
+ 2.2 Primer paso universal, 2-4
+ 2.3 Puerta para corriente directa: dc, 2-5
+ 2.4 Dato de entrada: el circuito, 2-5
+ 2.5 Respuestas, 2-5
+ 2.5.1 Filosofía, 2-5
+ 2.5.2 Voltajes en los nodos, 2-6
+ 2.5.3 Caídas de voltaje en los elementos, 2-6
+ 2.5.4 Corrientes, 2-6
+ 2.5.5 Potencias, 2-6
+ 2.6 Cortocircuito, 2-7
+ 2.6.1 Notación, 2-7
+ 2.6.2 Simetría de la descripción, 2-8
+ 2.6.3 Respuestas relacionadas, 2-9
+ 2.7 Resistencia, 2-10
+ 2.7.1 Notación, 2-10
+ 2.7.2 Conductancia, 2-11
+ 2.7.3 Respuestas relacionadas, 2-12
+ 2.8 Fuente de corriente, 2-12
+ 2.8.1 Notación, 2-12
+ 2.8.2 Respuestas relacionadas, 2-14
+ Problema N° 001, 2-15
+ Problema N° 002, 2-19
+ 2.9 Modos de operación, 2-21
+ 2.10 Fuentes dependientes, 2-22
+ 2.10.1 Fuentes dependientes de voltaje. 2-23
+ Problema N° 003, 2-24
+ Problema N° 004, 2-26
+ 2.10.2 Fuentes dependientes de corriente, 2-28
+ Problema N° 005, 2-29
+ Problema N° 006, 2-31
+ 2.11 Fuente de voltaje, 2-32
+ 2.11.1 Notación, 2-32
+ 2.11.2 Respuestas relacionadas, 2-35
+ Problema N° 007, 2-35
+ 2.11.3 Fuentes dependientes, 2-37
+ Problema N° 008, 2-37
+ Problema N° 009, 2-39
+ Problema N° 010, 2-40
+ Problema N° 011, 2-41
+ 2.12 Descripción errada, 2-42
+
+Capítulo 3 - Simulación simbólica en corriente directa
+
+ 3.1 Definición de simulación numérica, 3-1
+ 3.2 Definición de simulación simbólica, 3-2
+ 3.3 Simulación simbólica para obtener respuesta simbólica, 3-2
+ Problema N° 012, 3-3
+ 3.4 Simulación simbólica para obtener respuesta numérica, 3-4
+ 3.5 Comando solve, 3-4
+ Problema N° 013, 3-4
+ 3.6 Herramienta solves. 3-8
+ Problema N° 014, 3-8
+ Problema N° 015, 3-12
+ Problema N° 016, 3-14
+ 3.7 Verificación de una simulación simbólica con respuesta numérica, 3-15
+
+Capítulo 4 - Simulación experta en corriente directa
+
+ 4.1 Introducción al Modo (Experto), 4-1
+ 4.2 Teoría, 4-2
+ 4.2.1 El procedimiento, de forma general, 4-2
+ 4.2.2 Ecuaciones de primer nivel, 4-2
+ 4.2.3 Variables de primer nivel, 4-4
+ 4.2.4 Variables de segundo nivel, 4-5
+ 4.2.5 Expresiones de segundo nivel, 4-6
+ 4.2.6 Variables de tercer nivel, 4-6
+ 4.2.7 El procedimiento normal, en forma detallada, 4-7
+ 4.2.8 Variaciones del procedimiento en el Modo (Experto), 4-7
+ 4.2.9 Sólo almacenar, 4-10
+ 4.2.10 Simular y almacenar, 4-12
+ 4.2.11 Sólo simular, 4-12
+ 4.3 Práctica, 4-12
+ Problema N° 013 con el Modo (Experto), 4-12
+ 4.3.1 Pasos iniciales, 4-13
+ 4.3.2 Eliminando una incógnita, 4-14
+ 4.3.3 Agregando una ecuación, 4-15
+ Problema N° 014 con el Modo (Experto), 4-16
+ Problema N° 015 con el Modo (Experto), 4-20
+ Problema N° 016 con el Modo (Experto), 4-22
+ 4.4 La herramienta solves tras la simulación experta, 4-23
+ 4.5 Verificación de las respuestas numéricas de una simulación experta, 4-25
+
+Capítulo 5 - Equivalentes de Thévenin y Norton
+
+ 5.1 Introducción a la herramienta thevenin, 5-1
+ 5.2 Teoría, 5-2
+ 5.3 Práctica, 5-3
+ Problema N° 017, 5-4
+ Problema N° 018, 5-5
+ Problema N° 019, 5-6
+ Problema N° 020, 5-6
+ 5.4 La herramienta par, 5-8
+ 5.4.1 Verificación de la fórmula para reducir resistencias en paralelo, 5-9
+ 5.4.2 Aplicación, 5-9
+ Problema N° 021, 5-10
+ Problema N° 022, 5-12
+ Problema N° 023, 5-13
+ Problema N° 024, 5-14
+ Problema N° 025, 5-14
+
+Capítulo 6 - Simulación numérica en corriente alterna
+
+ 6.1 Fasores en la calculadora TI, 6-1
+ 6.1.1 El comando (OJO)Rect, 6-2
+ 6.1.2 La herramienta absang, 6-3
+ 6.1.3 Mi recomendación personal, 6-4
+ 6.2 Puerta para corriente alterna: ac, 6-4
+ 6.3 Datos de entrada: el circuito y la frecuencia radial, 6-4
+ 6.4 Respuestas, 6-4
+ 6.5 Comandos real, imag y conj, 6-5
+ 6.6 Impedancias, 6-5
+ 6.7 Admitancias, 6-6
+ 6.8 Capacitores, 6-6
+ 6.8.1 Notación, 6-6
+ 6.8.2 Respuestas relacionadas, 6-8
+ 6.9 Inductores, 6-8
+ 6.9.1 Notación, 6-8
+ 6.9.2 Respuestas relacionadas, 6-9
+ Problema N° 026, 6-10
+ Problema N° 027, 6-11
+ Problema N° 028, 6-13
+ Problema N° 029, 6-14
+ 6.10 El separador :, 6-15
+ Problema N° 030, 6-16
+ 6.11 Inductancia mutua, 6-17
+ 6.11.1 Notación, 6-17
+ 6.11.2 Respuestas relacionadas, 6-19
+ Problema N° 031, 6-19
+ Problema N° 032, 6-20
+ Problema N° 033, 6-21
+ Problema N° 034, 6-22
+ 6.12 Transformador ideal, 6-24
+ 6.12.1 Notación, 6-24
+ 6.12.2 Respuestas relacionadas, 6-25
+ Problema N° 035, 6-26
+ 6.13 Problemas con valores RMS, 6-28
+ 6.13.1 Tratamiento riguroso, 6-28
+ 6.13.2 Tratamiento informal, 6-28
+ Problema N° 036, 6-29
+ Problema N° 037, 6-30
+ Problema N° 038, 6-32
+
+Capítulo 7 - Bipuertos
+
+ 7.1 Introducción, 7-1
+ 7.2 Notación, 7-2
+ 7.3 Respuestas relacionadas, 7-3
+ Problema N° 039, 7-4
+ 7.4 La herramienta gain, 7-5
+ 7.5 Impedancia de salida, 7-7
+ 7.6 La herramienta port, 7-8
+ 7.7 Verificación, 7-14
+ Problema N° 040, 7-15
+ Problema N° 041, 7-16
+ Problema N° 042, 7-16
+ Problema N° 043, 7-17
+ Problema N° 044, 7-18
+ Problema N° 045, 7-18
+ Problema N° 046, 7-19
+ Problema N° 047, 7-20
+ Problema N° 048, 7-20
+ Problema N° 049, 7-21
+ Problema N° 050, 7-21
+ Problema N° 051, 7-22
+ Problema N° 052, 7-23
+ Problema N° 053, 7-24
+ Problema N° 054, 7-25
+ Problema N° 055, 7-25
+ Problema N° 056, 7-26
+
+Capítulo 8 - Simulación simbólica en corriente alterna
+
+ 8.1 Conceptos generales, 8-1
+ 8.2 Comando cSolve, 8-1
+ 8.3 Incógnitas complejas, 8-1
+ Problema N° 057, 8-2
+ Problema N° 058, 8-3
+ Problema N° 059, 8-4
+ Problema N° 060, 8-4
+ Problema N° 061, 8-5
+ Problema N° 062, 8-6
+ Problema N° 063, 8-8
+
+Capítulo 9 - Algunos conceptos nuevos
+
+ 9.1 Problemas con gráficas, 9-1
+ Problema N° 064, 9-2
+ 9.2 Problemas con múltiples incógnitas, 9-3
+ Problema N° 065, 9-3
+ 9.3 Amplificador operacional ideal (op-amp ideal), 9-6
+ 9.3.1 Notación, 9-6
+ 9.3.2 Respuestas relacionadas, 9-7
+ Problema N° 066, 9-7
+ Problema N° 067, 9-8
+ 9.4 Consideraciones finales para el Modo (Experto), 9-8
+ 9.4.1 Restricciones del Modo (Experto) con op-amps, 9-8
+ 9.4.2 Restricciones del Modo (Experto) en análisis transitorio, 9-9
+ 9.4.3 Más variables de primer nivel, 9-9
+
+Capítulo 10 - Simulación en el dominio de la frecuencia
+
+ 10.1 Puerta para el dominio de la frecuencia: fd, 10-1
+ 10.2 Dato de entrada, 10-1
+ 10.3 Condiciones iniciales, 10-1
+ 10.4 Respuestas, 10-2
+ 10.5 Función de transferencia, 10-2
+ Problema N° 068, 10-2
+ 10.6 Polos, ceros y el comando zeros, 10-3
+ Problema N° 069, 10-4
+ 10.7 Exacto vs aproximado, 10-5
+ Problema N° 070, 10-5
+ Problema N° 071, 10-7
+ Problema N° 072, 10-8
+ Problema N° 073, 10-9
+ Problema N° 074, 10-11
+
+Capítulo 11 - Simulación en el dominio del tiempo
+
+ 11.1 Relación entre FD y TR, 11-1
+ 11.1.1 DiffEq, 11-1
+ 11.2 Dos maneras de obtener respuestas en el dominio del tiempo, 11-2
+ 11.3 Dos maneras de convertir respuestas al dominio del tiempo, 11-3
+ 11.3.1 Función ilaplace del DiffEq, 11-3
+ 11.3.2 Herramienta fd_to_tr del Symbulator, 11-3
+ 11.4 Menú del Symbulator, 11-4
+ 11.5 Puerta para el dominio del tiempo: tr, 11-4
+ 11.6 Dato de entrada, 11-5
+ 11.7 Condiciones iniciales, 11-5
+ 11.8 Respuestas, 11-5
+ Problema N° 075, 11-5
+ 11.9 Presentación aproximada con exponencial, 11-7
+ Problema N° 076, 11-9
+ 11.10 Intervalos y simulaciones, 11-10
+ Problema N° 077, 11-10
+ Problema N° 078, 11-12
+ Problema N° 079, 11-12
+ Problema N° 080, 11-14
+ Problema N° 081, 11-15
+ Problema N° 082, 11-15
+ Problema N° 083, 11-16
+ Problema N° 084, 11-17
+ Problema N° 085, 11-18
+ 11.11 El Modo (Impala), 11-20
+ Problema N° 086, 11-21
+
+Capítulo 12 - Herramientas para graficar
+
+ 12.1 Introducción, 12-1
+ 12.2 La herramienta bode, 12-1
+ Problema N° 087, 12-1
+ 12.3 La herramienta plot, 12-6
+ Problema N° 088, 12-6
+
+Conclusiones, xxii
+
+Recomendaciones, xxiii
+
+Referencias, xxiv
+
+Apéndice A - Breve historia del Symbulator, A-1
+
+Apéndice B - El Symbulator y la simulación simbólica, B-1
+
+Apéndice C - ¿Cuándo es preferible no usar el Symbulator?, C-1
+
+ Problema N° 089, C-1
+
+Apéndice D - Origen de los problemas usados, D-1
+ 
+Lista de Figuras
+
+Figura 1. Pantalla hogar, en la TI-89. Página 2-2
+Figura 2. Entorno Var-Link, en la TI-89. Página 2-3
+Figura 3. Circuito para el Problema N° 001. Página 2-15
+Figura 4. Circuito simplificado para el Problema N° 001. Página 2-16
+Figura 5. Circuito para el Problema N° 002. Página 2-19
+Figura 6. Circuito para el Problema N° 003. Página 2-24
+Figura 7. Circuito para el Problema N° 004. Página 2-26
+Figura 8. Circuito para el Problema N° 005. Página 2-29
+Figura 9. Circuito para el Problema N° 006. Página 2-31
+Figura 10. Circuito para el Problema N° 007. Página 2-36
+Figura 11. Circuito para el Problema N° 008. Página 2-37
+Figura 12. Circuito para el Problema N° 009. Página 2-39
+Figura 13. Circuito para el Problema N° 010. Página 2-40
+Figura 14. Circuito para el Problema N° 011. Página 2-41
+Figura 15. Circuito para el Problema N° 012. Página 3-2
+Figura 16. Circuito para el Problema N° 013. Página 3-5
+Figura 17. Circuito para el Problema N° 014. Página 3-9
+Figura 18. Circuito para el Problema N° 015. Página 3-12
+Figura 19. Circuito para el Problema N° 016. Página 3-14
+Figura 20. Pantalla ilustrativa, en la TI-89. Página 4-8
+Figura 21. Pantalla ilustrativa, en la TI-89. Página 4-8
+Figura 22. Primer Nivel del Modo (Experto), en la TI-89. Página 4-9
+Figura 23. Las tres opciones, en la TI-89. Página 4-10
+Figura 24. Anuncio del Modo (Experto), en la TI-89. Página 4-11
+Figura 25. Segundo Nivel del Modo (Experto), en la TI-89. Página 4-11
+Figura 26. Tercer Nivel del Modo (Experto), en la TI-89. Página 4-11
+Figura 16. Circuito para el Problema N° 013. Página 4-12
+Figura 17. Circuito para el Problema N° 014. Página 4-17
+Figura 18. Circuito para el Problema N° 015. Página 4-20
+Figura 19. Circuito para el Problema N° 016. Página 4-22
+Figura 27. Campos en blanco de solves, en la TI-89. Página 4-24
+Figura 28. Ecuaciones en campos de solves, en la TI-89. Página 4-25
+Figura 29. Campos para valores conocidos, en la TI-89. Página 4-25
+Figura 30. Herramienta thevenin, en la TI-89. Página 5-2
+Figura 31. Tipo de red, en la TI-89. Página 5-2
+Figura 32. Tipo de análisis, en la TI-89. Página 5-3
+Figura 30. Circuito para el Problema N° 017. Página 5-4
+Figura 34. Circuito para el Problema N° 018. Página 5-5
+Figura 35. Circuito para el Problema N° 019. Página 5-6
+Figura 36. Circuito para el Problema N° 020. Página 5-7
+Figura 36. Circuito para el Problema N° 020. Página 5-9
+Figura 37. Circuito para el Problema N° 021. Página 5-11
+Figura 38. Circuito para el Problema N° 022. Página 5-12
+Figura 39. Circuito para el Problema N° 023. Página 5-13
+Figura 40. Circuito para el Problema N° 024. Página 5-14
+Figura 41. Circuito para el Problema N° 025. Página 5-15
+Figura 42. Circuito para el Problema N° 026. Página 6-10
+Figura 43. Circuito para el Problema N° 027. Página 6-11
+Figura 44. Circuito para el Problema N° 028. Página 6-13
+Figura 45. Circuito para el Problema N° 029. Página 6-14
+Figura 46. Circuito para el Problema N° 030. Página 6-16
+Figura 47. Circuito para el Problema N° 031. Página 6-19
+Figura 48. Circuito para el Problema N° 032. Página 6-20
+Figura 49. Circuito para el Problema N° 033. Página 6-21
+Figura 50. Circuito para el Problema N° 034. Página 6-23
+Figura 51. Circuito para el Problema N° 035. Página 6-26
+Figura 52. Circuito para el Problema N° 036. Página 6-29
+Figura 53. Circuito para el Problema N° 037. Página 6-30
+Figura 54. Circuito para el Problema N° 038. Página 6-32
+Figura 55. Circuito para el Problema N° 039. Página 7-4
+Figura 56. Formulario de entrada de la herramienta gain, en la TI-89. Página 7-6
+Figura 57. El formulario lleno, en la TI-89. Página 7-7
+Figura 58. Pantalla de respuestas de gain, en la TI-89. Página 7-7
+Figura 59. Formulario de la herramienta port, en la TI-89. Página 7-9
+Figura 60. Selección del tipo de parámetro, en la TI-89. Página 7-9
+Figura 61. Introducción del nombre del bipuerto, en la TI-89. Página 7-10
+Figura 62. Selección del tipo de análisis, en la TI-89. Página 7-10
+Figura 63. Parámetros Y encontrados, en la TI-89. Página 7-11
+Figura 64. Parámetros H encontrados, en la TI-89. Página 7-12
+Figura 65. Parámetros G encontrados, en la TI-89. Página 7-13
+Figura 66. Parámetros A encontrados, en la TI-89. Página 7-13
+Figura 67. Mensaje de error por nombre de elem. inapropiado, en la TI-89. Página 7-13
+Figura 68. Parámetros B encontrados, en la TI-89. Página 7-14
+Figura 69. Parámetros Z encontrados, en la TI-89. Página 7-15
+Figura 70. Circuito para el Problema N° 040. Página 7-15
+Figura 71. Circuito para el Problema N° 041. Página 7-16
+Figura 72. Circuito para el Problema N° 042. Página 7-17
+Figura 73. Circuito para el Problema N° 043. Página 7-18
+Figura 74. Circuito para el Problema N° 044. Página 7-18
+Figura 75. Circuito para el Problema N° 045. Página 7-19
+Figura 76. Circuito para el Problema N° 046. Página 7-20
+Figura 77. Circuito para el Problema N° 047. Página 7-20
+Figura 78. Circuito para el Problema N° 049. Página 7-21
+Figura 79. Circuito para el Problema N° 050. Página 7-22
+Figura 80. Circuito para el Problema N° 051. Página 7-22
+Figura 81. Circuito para el Problema N° 052. Página 7-23
+Figura 82. Circuito para el Problema N° 053. Página 7-24
+Figura 83. Circuito para el Problema N° 054. Página 7-25
+Figura 84. Circuito para el Problema N° 055. Página 7-25
+Figura 85. Circuito para el Problema N° 056. Página 7-26
+Figura 86. Circuito para el Problema N° 058. Página 8-3
+Figura 87. Circuito para el Problema N° 061. Página 8-6
+Figura 88. Circuito para el Problema N° 062. Página 8-7
+Figura 89. Circuito para el Problema N° 063. Página 8-8
+Figura 90. Circuito para el Problema N° 064. Página 9-2
+Figura 91. Gráfica obtenida para el problema, en una TI-89. Página 9-3
+Figura 92. Circuito para el Problema N° 065. Página 9-4
+Figura 93. Circuito para el Problema N° 066. Página 9-7
+Figura 94. Circuito para el Problema N° 067. Página 9-8
+Figura 95. Circuito para el Problema N° 068. Página 10-3
+Figura 96. Circuito para el Problema N° 069. Página 10-4
+Figura 97. Circuito para el Problema N° 070. Página 10-6
+Figura 98. Circuito para el Problema N° 071. Página 10-7
+Figura 99. Circuito para el Problema N° 073. Página 10-9
+Figura 100. Gráfica solicitada por la pregunta c) del Problema N° 073. Página 10-10
+Figura 101. Especificando los límites de la gráfica. Página 10-11
+Figura 102. Gráfica solicitada por la pregunta d) del Problema N° 073. Página 10-11
+Figura 103. Circuito para el Problema N° 074. Página 10-12
+Figura 104. Gráfica solicitada por la pregunta c) del Problema N° 074. Página 10-13
+Figura 105. Menú personalizado del Symbulator. Página 11-4
+Figura 106. Circuito para el Problema N° 075. Página 11-5
+Figura 107. La exponencial se mantiene como tal. Página 11-7
+Figura 108. La exponencial se convierte a un aproximado. Página 11-8
+Figura 109. La expresión se expande. Página 11-8
+Figura 110. La exponencial aparece en el denominador. Página 11-9
+Figura 111. Circuito para el Problema N° 076. Página 11-9
+Figura 112. Circuito para el Problema N° 077. Página 11-11
+Figura 113. Circuito para el Problema N° 078. Página 11-12
+Figura 114. Circuito para el Problema N° 079. Página 11-13
+Figura 115. Circuito para el Problema N° 080. Página 11-14
+Figura 116. Circuito para el Problema N° 081. Página 11-15
+Figura 117. Circuito para el Problema N° 082. Página 11-16
+Figura 118. Circuito para el Problema N° 083. Página 11-16
+Figura 119. Circuito para el Problema N° 084. Página 11-18
+Figura 120. Circuito para el Problema N° 085. Página 11-19
+Figura 121. Circuito para el Problema N° 086. Página 11-21
+Figura 122. Circuito para el Problema N° 087. Página 12-2
+Figura 123. Orden del Problema N° 087, en la TI-89. Página 12-2
+Figura 124. Primera selección de la herramienta bode, en la TI-89. Página 12-3
+Figura 125. Menú de la herramienta bode, en la TI-89. Página 12-3
+Figura 126. Anuncio de las unidades de los ejes, en la TI-89. Página 12-4
+Figura 127. Gráfica de ganancia, en la TI-89. Página 12-4
+Figura 128. Ejecutando nuevamente la herramienta bode, en la TI-89. Página 12-5
+Figura 129. Menú en la herramienta bode, en la TI-89. Página 12-5
+Figura 130. Herramienta bode, en la TI-89. Página 12-5
+Figura 131. Herramienta bode, en la TI-89. Página 12-6
+Figura 132. Limpiando las variables, en la TI-89. Página 12-6
+Figura 133. Circuito para el Problema N° 088. Página 12-7
+Figura 134. Ejecutando la herramienta plot, en la TI-89. Página 12-8
+Figura 135. Menú de la herramienta plot, en la TI-89. Página 12-8
+Figura 136. Gráfica del voltaje v2, en la TI-89. Página 12-8
+Figura 137. Comando de máximo, en la TI-89. Página 12-9
+Figura 138. Gráfica del voltaje v1, en la TI-89. Página 12-9
+Figura 139. Gráfica de una función, en la TI-89. Página 12-9
+Figura 140. Circuito para el problema N° 089. Página C-2
+ 
+
+Resumen
+
+Tiene el lector en sus manos la documentación completa del Symbulator, el cual es un simulador simbólico de circuitos lineales para calculadoras TI. Presenta detalladamente los conceptos teóricos de la simulación en el Symbulator, acompañados de casi un centenar de problemas, resueltos paso a paso.
+El Capítulo 1 presenta los conceptos generales que el usuario debe conocer antes de realizar cualquier simulación: los requisitos que debe cumplir la calculadora, la filosofía de la notación empleada para nombrar los nodos y describir el circuito, y los usos de comandos, herramientas y funciones.
+La lectura del Capítulo 2 es imprescindible, pues éste presenta paso a paso y con todo detalle, todas las técnicas que el usuario necesita conocer para realizar simulaciones numéricas en corriente directa. Esta es la simulación básica. Se instruye al lector en el empleo de los elementos de circuito sencillos: cortocircuitos, resistencias, fuentes de corriente y fuentes de voltaje. Estas fuentes se presentan tanto en su forma independiente y también en su forma dependiente de corriente y voltaje.
+El Capítulo 3 discute los aspectos teóricos y prácticos necesarios para realizar una simulación simbólica, para encontrar ya sea respuestas numéricas o respuestas simbólicas. En este tipo de simulación, el Symbulator realmente se destaca.
+La lectura del Capítulo 4 es opcional. En él se presentan en profundidad las técnicas de simulación en Modo (Experto). Este tipo de simulación requiere de un conocimiento claro del funcionamiento interno del Symbulator, y permite obtener respuestas numéricas en simulaciones simbólicas, con menos esfuerzo y en menos tiempo.
+El Capítulo 5 explica el uso de la herramienta thevenin, la cual permite encontrar los circuitos equivalentes de Thévenin y Norton de una red. Además de los problemas numéricos, algunos problemas simbólicos se desarrollan para ilustrar la obtención de equivelantes numéricos de redes que incluyen elementos de valor desconocido.
+En el Capítulo 6 se trata la simulación en corriente alterna. Esta simulación se lleva a cabo utilizando fasores. En este capítulo se introducen nuevos elementos: la capacitancia, la inductancia, la inductancia mutua y el transformador ideal. Igualmente, se ilustran las dos maneras en que se pueden manejar los problemas con valores RMS.
+El Capítulo 7 aborda, de forma completa, el tema de los bipuertos en el Symbulator. Describe cómo realizar simulaciones utilizando seis diferentes tipos de bipuertos. Igualmente, explica cómo obtener los parámetros, en estos seis tipos de bipuertos, para una red de dos terminales cualquiera. Numerosos ejemplos complementan la teoría.
+El Capítulo 8 muestra cómo se pueden realizar simulaciones simbólicas en corriente alterna. Esta simulación, más avanzada que las anteriores, requiere de nuevos e interesantes conceptos, que son presentados claramente y sustentados con múltiples ejemplos. Ellos incluyen los equivalentes Thévenin en corriente alterna y la frecuencia de resonancia.
+El Capítulo 9 está dedicado a disecar unos cuantos casos de particular interés, los cuales por su novedad o complejidad requieren de una explicación más minuciosa que el resto de los problemas. El uso de gráficas, soluciones simbólicas que requieren más de una simulación y el uso del amplificador operacional ideal, son algunos de los nuevos conceptos que se aprenderán en sus páginas.
+En el Capítulo 10 aprenderá el lector a simular en el dominio de la frecuencia compleja. Múltiples ejemplos de problemas con polos y ceros, amplificadores operacionales ideales, equivalentes de Thévenin y gráficas de respuesta a la frecuencia, acompañan a los conceptos que se presentan.
+El Capítulo 11 es uno de los capítulos más valiosos de este trabajo. En él se explica en detalle cómo obtener respuestas en el dominio del tiempo en el Symbulator. Éste es otro de los temas en los cuales el potencial del simulador se hace manifiesto. Múltiples ejemplos ilustran el uso de condiciones iniciales y la resolución de circuitos con interruptores en varias simulaciones.
+En el Capítulo 12 se muestra el uso de dos herramientas que incluye el Symbulator para graficar respuestas: una para confeccionar gráficas de Bode y la otra para graficar funciones del tiempo. Ilustran su uso dos problemas de profesores de la Universidad Tecnológica de Panamá.
+El primer apéndice trata sobre la historia del simulador; el segundo, sobre el origen autóctono de las técnicas que aparecen en esta tesis; el tercero, sobre cuándo declinar el uso del simulador; y el cuarto, presenta una lista completa de los problemas presentados, indicando su origen.
+En las últimas páginas, presentamos nuestras conclusiones y damos algunas recomendaciones finales.
+ Introducción
+
+El propósito general de esta tesis es instruir al lector en el hermoso y recién creado arte de la simulación simbólica de circuitos lineales. En forma particular, pretende transmitir el conocimiento y las técnicas que permitirán aprovechar al máximo el Symbulator, como una poderosa herramienta para el aprendizaje de teoría de circuitos.
+Se asume que el lector posee ya o está obteniendo de otra fuente los conceptos básicos de teoría de circuitos. Se asume también que el lector posee una calculadora TI-89 ó TI-92Plus y su respectivo Manual de Usuario. No es necesario que el lector posea experiencia en el uso de esta máquina. Esta tesis debe leerse con la calculadora a la mano. Se asume que la calculadora cumple los requisitos del Symbulator. Léanse los capítulos cuidadosamente, en estricto orden, empezando por el primero y ejecutando todos los ejemplos.
+Las dudas pueden ser presentadas al autor a través del sitio http://www.todoexpertos.com, buscando “Symbulator”. Si se encuentra algún error, por favor repórtelo al correo electrónico: symbulator@perez-franco.com
+El texto completo de esta tesis y la última versión del programa, pueden encontrarse en la Internet en http://perez-franco.com/symbulator
+ El Movimiento Pax es un movimiento pacifista conformado por científicos, ingenieros y técnicos de diferentes nacionalidades, comprometidos ante ellos mismos y ante las generaciones venideras con la paz en el mundo, el progreso pacífico de la raza humana y el desarrollo sostenible de todos los pueblos. Rompe las reglas. Únete a PAX. http://paxm.org
+ Actualmente también esta dirección http://sq.calc.org
+
+ PAGE 10 
+
+ PAGE 
+
+ PAGE ii

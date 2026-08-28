@@ -1,0 +1,243 @@
+Capítulo
+4
+Simulación experta en corriente directa
+4.1 Introducción al Modo (Experto)
+Si el lector no está interesado en aprender a simular como un experto, puede omitir la lectura de este capítulo. En él se expone una serie de conocimientos teóricos avanzados sobre la simulación con el Symbulator, y luego se muestran ejemplos de cómo este conocimiento, a través del Modo (Experto), puede ahorrar tiempo en simulaciones simbólicas. Este capítulo, de ser leído, debe leerse con atención y detenimiento.
+En el capítulo anterior realizamos varias simulaciones simbólicas, y aprendimos a usar el comando solve y la herramienta solves. En este capítulo vamos a aprender a simular en el Modo (Experto). Este modo apareció en la versión 3 del Symbulator, con el propósito de darle más poder al usuario sobre la manera en que se realiza la simulación.
+En las simulaciones que hemos visto anteriormente, el Symbulator se comporta como una caja negra, en la cual el estudiante introduce una descripción de un circuito como dato de entrada y obtiene una serie de respuestas como datos de salida. Y eso es todo: mientras el usuario se dedica a piropear a la muchacha de al lado o a pensar en la inmortalidad del cangrejo, el simulador se dedica a generar las ecuaciones, resolverlas y almacenar las respuestas. Es decir, el usuario sólo alimenta el circuito, mientras que la responsabilidad total de la simulación recae en el simulador. 
+El Modo (Experto) le da al usuario el poder para desempeñar un papel más importante, pues le habilita para modificar las ecuaciones que el simulador ha generado, antes de que la calculadora las resuelva. A cambio, el usuario asume parte de la responsabilidad de la simulación, por lo que debe actuar con cuidado. Utilizar el Symbulator como un experto requiere de un conocimiento más profundo, y no es una necesidad para el usuario regular. Sin embargo, para aquellos dispuestos a aprender un poco más, el simular como experto puede resultar un objetivo atractivo, pues brinda una simulación más rápida.
+4.2 Teoría
+4.2.1 El procedimiento, de forma general
+Una simulación experta, como hemos dicho, requiere que el usuario sea un experto. No sólo en el uso del Symbulator, sino también en cómo éste funciona internamente. Aprendamos, entonces, sobre los procesos internos de una simulación. A grandes rasgos, una simulación en el Symbulator consiste en lo siguiente:
+Se generan ecuaciones para describir el circuito.
+Se resuelven estas ecuaciones.
+Se almacenan las respuestas.
+En el marco de esta generalización, podemos decir que el Modo (Experto) nos permite manipular las ecuaciones generadas en el paso 1, antes de resolverlas en el paso 2, para que cuando las respuestas se almacenen en el paso 3 estén en la forma deseada.
+4.2.2 Ecuaciones de primer nivel
+Las ecuaciones indispensables que el Symbulator utiliza para resolver un circuito, se conocen como ecuaciones de primer nivel. El Symbulator genera dos tipos de ecuaciones de primer nivel: ecuaciones de nodo y ecuaciones especiales.
+Habrá una ecuación de nodo por cada nodo que tenga el circuito. Estas ecuaciones se generan usando, en general, dos leyes básicas: la ley de Ohm y la ley de las corrientes de Kirchhoff. El Symbulator generará para cada nodo una ecuación que cumpla con la ley de las corrientes de Kirchhoff, como la suma de las corrientes de todos los elementos en contacto con ese nodo, igualada a cero. Para describir las corrientes de los elementos resistivos, el Symbulator usa la ley de Ohm.
+Además, habrá una ecuación especial por cada elemento especial que tenga el circuito. Estas ecuaciones se generan de acuerdo a las fórmulas teóricas que describen el comportamiento de estos elementos. Aunque pueda parecer extraño, elementos tales como una fuente de voltaje y un cortocircuito son elementos especiales. Esto se debe simplemente al hecho de que el Symbulator usa un análisis de tipo nodal y, por ello, los únicos elementos que no son especiales, de los que hemos visto hasta ahora, son la resistencia y la fuente de corriente. Los demás son considerados especiales y tendrán una ecuación especial asociada, que engrosará la lista de ecuaciones generadas por el Symbulator para simularlo.
+Por ejemplo, para resolver un circuito con 5 nodos, 2 fuentes de voltaje y 1 cortocircuito, el Symbulator generará un total de 8 ecuaciones de primer nivel. No importa si este circuito tiene mil resistencias y setecientas fuentes de corriente: seguirá teniendo 8 ecuaciones de primer nivel. Eso sí: la complejidad de estas 8 ecuaciones será mayor mientras más resistencias y fuentes de corriente haya conectadas a los nodos.
+¿Cuántas ecuaciones de primer nivel generará el Symbulator para simular un circuito con 3 nodos y 1 fuente de voltaje? Es fácil responder que generará 4 ecuaciones de primer nivel.
+Ahora bien, en nuestros cursos de álgebra aprendimos que para resolver completamente un sistema de n incógnitas, necesitamos n ecuaciones. Esto significa que en el primer circuito, al tener 8 ecuaciones, podremos encontrar el valor de 8 incógnitas. Y en el segundo, al tener 4 ecuaciones, podemos resolver 4 incógnitas. Estas incógnitas que pueden resolverse con las ecuaciones de primer nivel, se conocen como variables de primer nivel.
+4.2.3 Variables de primer nivel
+Como era de esperarse, el Symbulator genera las ecuaciones de primer nivel en función de las variables de primer nivel. Y habrá tantas variables de primer nivel como ecuaciones de primer nivel. Esto significa, indirectamente, que habrá tantas variables de primer nivel como nodos, fuentes de voltaje y cortocircuitos haya en el circuito. Con los elementos que hemos visto hasta ahora, el Symbulator genera tres tipos de variables de primer nivel: voltajes en los nodos, corrientes en fuentes de voltaje y corrientes en los cortocircuitos.
+El voltaje de cada nodo del circuito es una variable de primer nivel. Al resolver un circuito que tenga tres nodos llamados 1, 2 y 3, el Symbulator creará para ellas tres variables de primer nivel llamadas v1, v2 y v3.
+La corriente a través de cada fuente de voltaje del circuito es una variable de primer nivel. Al resolver un circuito que tenga dos fuentes de voltaje, llamadas e1 y ex, el Symbulator creará para ellas dos variables de primer nivel llamadas ie1 e iex.
+Igualmente, la corriente a través de cada cortocircuito es una variable de primer nivel. Así, al resolver un circuito que tenga un cortocircuito, llamado s1, el Symbulator creará para él una variable de primer nivel llamada is1.
+Tras resolver las ecuaciones de primer nivel, en las variables de primer nivel se almacenarán las respuestas. ¿Puede el lector adivinar cómo se llaman estas respuestas? ¡Claro! Se llaman respuestas de primer nivel. 
+En el ejemplo del circuito con 5 nodos, 2 fuentes de voltaje y 1 cortocircuito, las 8 ecuaciones de primer nivel estarán escritas en función de 8 variables de primer nivel, y al ser resueltas nos darán 8 respuestas de primer nivel. Estas respuestas y variables serán también 5 de voltajes en los nodos, 2 de corrientes en las fuentes y 1 de corriente en el cortocircuito.
+¿Cuántas variables de primer nivel generará el Symbulator para el circuito con 3 nodos y 1 fuente de voltaje? Obviamente, serán 4 ecuaciones de primer nivel, repartidas así: 1 para la fuente de voltaje y 3 para los nodos. Tras resolver las 4 ecuaciones de primer nivel, se encontrarán 4 respuestas de primer nivel, que serán 1 de la corriente de la fuente de voltaje, y 3 de los voltajes en los nodos.
+4.2.4 Variables de segundo nivel
+Hemos dicho que las corrientes de las fuentes de voltaje y de los cortocircuitos son consideradas variables de primer nivel. En cambio, las corrientes en otros elementos tales como las fuentes de corriente y resistencias, son llamadas variables de segundo nivel. 
+Igualmente, las caídas de voltaje en resistencias y fuentes son también variables de segundo nivel.
+Así pues, en un circuito con 4 nodos, 3 resistencias, 2 fuentes de corriente, 2 fuentes de voltaje y 1 cortocircuito, habrá las siguientes variables de primer nivel:
+4 voltajes en los nodos
+2 corrientes en las fuentes de voltaje
+1 corriente en el cortocircuito
+Y las siguientes variables de segundo nivel:
+3 corrientes en las resistencias
+2 corrientes en las fuentes de corriente
+7 caídas de voltaje en las 3 resistencias y las 4 fuentes
+Esto da un total de 4+2+1=7 variables de primer nivel, con sus respectivas ecuaciones de primer nivel, y 3+2+7=12 variables de segundo nivel. Nótese que para el cortocircuito no se genera caída de voltaje (véase el punto 2.6.3 sobre las respuestas relacionadas a un cortocircuito).
+Las variables de segundo nivel no se mencionan en las ecuaciones de primer nivel. Entonces, ¿cómo se relacionan estas variables de segundo nivel con las respuestas de la simulación?
+4.2.5 Expresiones de segundo nivel
+La respuesta es fácil. Para cada variable de segundo nivel, el Symbulator genera una expresión de segundo nivel, la cual está dada en función de variables de primer nivel exclusivamente. Así, teniendo las respuestas de primer nivel, todas las variables de segundo nivel quedan definidas por medio de estas expresiones.
+Existen dos tipos de expresiones de segundo nivel: las que se reemplazan por sus respuestas luego de la solución, y las que se dejan permanentemente expresadas en términos de variables de primer nivel. Es decir, después de haber resuelto las ecuaciones de primer nivel, y almacenado las respuestas en sus variables, el Symbulator evalúa algunas expresiones de segundo nivel, generando así respuestas de segundo nivel que son almacenadas en sus variables. Sin embargo, otras expresiones de segundo nivel no serán evaluadas y seguirán siendo expresiones en vez de respuestas. Las expresiones de segundo nivel que no son evaluadas, son las que corresponden a las corrientes en las fuentes de corriente, y a las caídas de voltaje. Estas últimas seguirán siendo expresiones algebraicas en función de los voltajes de los nodos.
+ 4.2.6 Variables de tercer nivel
+En las simulaciones de corriente directa (DC) y corriente alterna (AC), existe otro grupo de variables que se conoce como variables de tercer nivel. Reciben este nombre porque se generan sólo después de la resolución de las ecuaciones de primer nivel y de la evaluación de las expresiones de segundo nivel. Es decir: aparecen sólo cuando ya se han resuelto los dos niveles anteriores de variables.
+Las variables de este grupo son, exclusivamente, las potencias consumidas por los elementos. Se definen al final por la naturaleza misma de la potencia. Como potencia es el producto de caída de voltaje y corriente, se define usando variables de primer nivel (los voltajes) y de segundo nivel (las corrientes), las cuales ya deben estar definidas con anterioridad.
+4.2.7 El procedimiento normal, en forma detallada
+Hemos aprendido lo que son las ecuaciones, variables y respuestas de primer nivel, las expresiones y variables de segundo nivel, y las variables de tercer nivel. Ahora, veamos nuevamente el procedimiento de una simulación, pero esta vez en forma más detallada. Primero, el procedimiento de una simulación normal, es decir aquella que no utiliza el Modo (Experto).
+Se generan ecuaciones de primer nivel para describir el circuito que el usuario ha introducido, en función de variables de primer nivel. Se generan también expresiones de segundo nivel, en función también de las variables de primer nivel.
+Se resuelven las ecuaciones de primer nivel, para las variables de primer nivel. 
+Se almacenan las respuestas de primer nivel en las variables de primer nivel. Se evalúan algunas expresiones de segundo nivel, y se almacenan sus respuestas en las variables de segundo nivel.
+En los análisis de corriente directa y alterna, se generan las variables de tercer nivel, es decir las potencias consumidas por los elementos.
+4.2.8 Variaciones del procedimiento en el Modo (Experto)
+En el caso de que la simulación se esté ejecutando en el Modo (Experto), existen algunas variantes en este procedimiento.
+Al inicio el usuario debe escoger qué tipo de análisis desea realizar. Las opciones son análisis en corriente directa (DC), análisis en corriente alterna (AC), análisis en dominio de la frecuencia (FD) y análisis transitorio (TR).
+ 
+Figura 20. Pantalla ilustr a t i v a , e n l a T I - 8 9 
+ E l u s u a r i o e s c o g e e l a n á l i s i s d e s e a d o , y p r e s i o n a ¸ð. E n e s t e p u n t o , l a c a l c u l a d o r a m o s t r a r á u n f o r m u l a r i o p a r a q u e e l u s u a r i o e s t a b l e z c a d o s p a r á m e t r o s r e l a c i o n a d o s c o n l a m a n e r a e n q u e l a c a l c u l a d o r a m a n e j a r á l o s n ú m e r o s d e p u n t o f l o t a nte, que son los siguientes:
+ 
+Figura 21. Pantalla ilustrativa, en la TI-89
+Qué nivel de precisión desea en los cálculos. En las simulaciones normales, este valor se ajusta en 9 dígitos. Se recomienda usar 9, a menos que por alguna razón se desee mayor o menor precisión. 
+Qué formato desea darle a los números de punto flotante. En las simulaciones normales, se escoge formato Normal. Si lo desea, el usuario puede cambiar este formato a Ingeniería o Científico.
+Tras haber seleccionado los valores deseados, el u s u a r i o p r e s i o n a ¸ð. E n e s t e m o m e n t o , e l S y m b u l a t o r e j e c u t a r á e l p r i m e r p a s o d e l a s i m u l a c i ó n , q u e h e m o s d e t a l l a d o a r r i b a . A n t e s d e l l e g a r a l s e g u n d o p a s o , e l p r o g r a m a h a c e u n a p a u s a y m u e s t r a u n f o r m u l a r i o e n l a p a n t a l l a , q u e l e o f r e c e a l u s u a r i o l a o p o r t unidad de manipular las ecuaciones e incógnitas de primer nivel. El usuario puede modificarlas o no, según su necesidad.
+Esta pantalla se llama Primer Nivel del Modo (Experto). En ella aparecen cuatro campos y un menú de opciones.
+ 
+Figura 22. Primer Nivel del Modo (Experto), en la TI-89
+El primer campo muestra las incógnitas de primer nivel. Si hay más de una incógnita, las incógnitas aparecerán separadas con comas, y estarán encerradas en llaves {}.
+El segundo campo muestra las ecuaciones de primer nivel. Si hay más de una ecuación, las ecuaciones aparecerán unidas por operadores and.
+El tercero y cuarto campos son utilizados cuando queremos especificar el valor de alguna variable de primer nivel, en el caso de que este valor ya sea conocido.
+El tercer campo es para colocar el nombre de alguna variable de primer nivel cuyo valor sea conocido. Estas variables se conocen como variables condicionales. Si hay más de una, los nombres se deben introducir separados por comas, así: nombre1,nombre2,nombre3
+El cuarto campo es para declarar el valor de esta variable de primer nivel ya conocida, que hemos listado arriba. Estos valores declarados se conocen como ecuaciones condicionales. Si hay uno solo, su valor debe introducirse, por ejemplo, así: v1=3.5. Si hubiese más de una variable conocida, sus valores deben introducirse usando el operador and. Así: v1=3.5 and v2=5 and ie1=-2. Téngase claro que sólo pueden declararse aquí los valores conocidos de variables de primer nivel.
+El menú de opciones que aparece debajo de estos cuatro campos ofrece tres opciones para que el usuario, ya sea que haya modificado las ecuaciones o no, pueda decidir qué camino desea seguir. Existen tres opciones: simular, simular y guardar las ecuaciones, y simplemente guardar las ecuaciones.
+ 
+Figura 23. Las tres opciones, en la TI-89
+Veamos a continuación en qué consiste cada una.
+4.2.9 Sólo almacenar
+Si el usuario escoge la tercera opción, Just Keep, o sea sólo guardar las ecuaciones, el Symbulator simplemente creará cuatro variables:
+Unknown, en la cual se almacena la lista de las incógnitas de primer nivel.
+Equation, en la cual se almacenan las ecuaciones de primer nivel.
+Wheneq, en la cual se almacenan las ecuaciones condicionales.
+Whenvar, en la cual se almacenan las variables condicionales.
+Las cuatro variables se almacenan en forma de cadenas de texto. Cualquier modificación que haya hecho el usuario, aparecerá reflejada en estas variables. La idea de guardar estas ecuaciones es poder resolverlas luego con la herramienta solves.
+En algunos casos excepcionales, si el circuito es muy grande, las ecuaciones generadas son más de lo que la calculadora puede presentar en la pantalla. De ser así, en vez de aparecer la pantalla del Primer Nivel del Modo (Experto), se presentará un mensaje anunciando que las ecuaciones son muy grandes y que se almacenarán automáticamente. Sin embargo, en la mayoría de los casos, las ecuaciones generadas no serán muy voluminosas y se presentarán en la pantalla sin problemas.
+ 
+Figura 24. Anuncio del Modo (Experto), en la TI-89
+Tras haber creado estas cuatro variables, el Symbulator mostrará una nueva pantalla, llamada Segundo Nivel del Modo (Experto). En ella se preguntará al usuario si desea conservar las expresiones de segundo nivel que, como hemos dicho, ya se han generado.
+ 
+Figura 25. Segundo Nivel del Modo (Experto), en la TI-89
+El usuario puede escoger entre borrar estas variables o conservarlas. Si decide borrarlas, el Symbulator las borrará y dará por terminado su trabajo. Si el usuario decide conservarlas, el Symbulator las conservará, y mostrará una nueva pantalla, llamada Tercer Nivel del Modo (Experto), la cual preguntará al usuario si desea que genere las expresiones de tercer nivel. 
+ 
+Figura 26. Tercer Nivel del Modo (Experto), en la TI-89
+El usuario puede escoger entre generar estas expresiones o no. Si decide no generarlas, el Symbulator dará por terminado su trabajo. Si, por el contrario, decide generarlas, el Symbulator las generará y dará por terminado su trabajo.
+4.2.10 Simular y almacenar
+Si el usuario escoge la segunda opción, Symbulate+Keep, o sea simular y guardar las ecuaciones, el Symbulator creará las mismas cuatro variables mencionadas anteriormente, y seguidamente proseguirá con la simulación normalmente. Es decir, ejecutará los pasos 2, 3 y 4, como lo hubiese hecho normalmente, tomando en consideración los cambios que haya podido hacer el usuario.
+4.2.11 Sólo simular
+Si el usuario escoge la primera opción, Symbulate, o sea simular solamente, el Symbulator proseguirá con la simulación normalmente, sin crear las cuatro variables. Ejecutará los pasos 2, 3 y 4, tal y como lo hubiese hecho normalmente, tomando en consideración los cambios que haya podido hacer el usuario, obviamente.
+Ahora que hemos aprendido la teoría, veamos todos estos nuevos conceptos aplicados en la práctica. Resolvamos los mismos problemas del capítulo anterior, pero esta vez como expertos.
+4.3 Práctica
+Problema N( 013 con el Modo (Experto)
+Planteamiento. Determine los valores numéricos de vx e ix en el siguiente circuito. 
+ 
+Figura 16. Circuito para el Problema N° 013.
+Solución:
+4.3.1 Pasos iniciales
+Nombramos los nodos y elementos. Limpiamos los nombres simbólicos.
+DelVar ra,vx
+Damos la descripción del circuito y ordenamos la simulación experta.
+sq\expert("e1,1,0,18;ra,1,0,ra;r1,1,0,6;r2,2,1,5;ex,2,0,vx")
+Iniciamos la simulación con ¸ð. C o m o t i p o d e a n á l i s i s , e s c o g e m o s D C y p r e s i o n a m o s ¸ð. E n c u a n t o a l o s f o r m a t o s d e p u n t o f l o t a n t e , l o s d e j a m o s c o m o e s t á n , y p r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e e l M o d o ( E x p e r t o ) e s t á a c t i v a d o y q u e s e e j e c u t a e l p r i m e r p a s o . Aparece la pantalla del Primer Nivel de Modo (Experto). En ella podemos ver las ecuaciones que ha generado el Symbulator, y las incógnitas en función de las cuales las pretende resolver.
+Recordemos que la resistencia r5 fue definida de forma tal que su corriente coincida con la corriente de 12A que nos da el problema como dato conocido. Sin embargo, si leemos la lista de incógnitas de primer nivel que aparece en el primero de los campos, veremos que la corriente de esta resistencia no es una variable de primer nivel. Por otro lado, las corrientes de las dos fuentes de voltaje, ie1 e iex sí son variables de primer nivel. 
+Como la corriente de la fuente ex está definida del nodo 2 al nodo 0, podemos decir que la corriente iex es igual a -12 amperios. El cambio de signo responde a que la corriente de la fuente está definida en el sentido contrario a la flecha del problema.
+Ahora ha llegado el momento de analizar qué nos da el problema y qué nos pide. Vemos que el Symbulator ha generado para nosotros un sistema de 4 ecuaciones con 4 incógnitas, el cual también posee 1 valor simbólico. Podemos decir que este valor simbólico es una incógnita más, pues debe ser resuelto para poder obtener respuestas numéricas. Entonces, en verdad tenemos un sistema de 4 ecuaciones con 5 incógnitas. Podemos ver esta situación desde dos perspectivas: nos sobra una incógnita, o nos falta una ecuación.
+Resolveremos este problema desde la primera perspectiva, y luego desde la segunda.
+4.3.2 Eliminando una incógnita
+Si nos sobra una incógnita, debemos eliminarla, para poder tener un sistema de 4 ecuaciones y 4 incógnitas.
+Para eliminar esta incógnita del sistema, debemos hacer tres cosas. Primero, eliminar a iex de la lista de incógnitas de primer nivel que aparece en el primer campo. No debe aparecer en esta lista, pues es un valor conocido. Segundo, agregar a esta lista de incógnitas de primer nivel la variable vx, que de ahora en adelante será una incógnita de primer nivel. Y tercero, agregar el nombre de iex al tercer campo, y su valor conocido de iex=-12 al cuarto campo, donde el signo – se escribe con la tecla (. Tal y como nos lo explica el manual de usuario, para escribir letras o números, debemos presionar ( para activar y desactivar el modo alfabético y numérico de la calculadora. Tras hacer estas modificaciones en los campos, el contenido de estos debe ser como sigue:
+Incógnitas de primer nivel: {v1,ie1,v2,vx}
+Las ecuaciones de primer nivel no fueron modificadas.
+Nombres de variables conocidas: iex
+Valores de variables conocidas: i e x = - 1 2 
+ U n a v e z h e c h o e s t o , p r e s i o n a m o s ¸ð. L a s f r a s e s e n l a p a n t a l l a n o s i n d i c a n l a e j e c u c i ó n d e l o s t r e s p a s o s r e s t a n t e s d e l a s i m u l a c i ó n . F i n a l m e n t e , a p a r e c e D o n e . 
+ A d i f e r e n c i a d e l a s t é c n i c a s a n t e r i o r e s , e m p l e a n d o e l c o m a n d o s o l v e y l a h e r r a m i e n t a s o l v e s, esta simulación que hemos realizado con el Modo (Experto) no requiere más manipulación para obtener respuestas numéricas. Pues lo que hicimos al modificar la lista de incógnitas y agregar el valor conocido, fue simplemente reducir el sistema de 4 ecuaciones con 5 incógnitas, a un sistema de 4 ecuaciones con 4 incógnitas. Así, todas las respuestas que hemos obtenido, y que ahora nos esperan en la carpeta actual, serán respuestas numéricas.
+Solicitando el valor de ir1, encontramos que ix es 3 amperios. Para encontrar el valor de vx, tenemos tres opciones: solicitar el voltaje del nodo v2, solicitar la caída de voltaje en la fuente de voltaje vex, o simplemente solicitar el valor de nuestra incógnita de primer nivel vx. Recuérdese que habíamos incluído vx en la lista de incógnitas de primer nivel, y por ello el Symbulator encontró su valor como si fuese cualquier otra incógnita de primer nivel. Por cualquiera de los tres caminos, encontramos que vx es 78 voltios.
+Usemos ahora la otra perspectiva desde la cual pudo haberse atacado este problema.
+4.3.3 Agregando una ecuación.
+Si nos falta una ecuación, debemos agregarla, para poder tener un sistema de 5 ecuaciones y 5 incógnitas.
+Como queremos hacer este problema otra vez desde esta nueva perspectiva, ejecutamos todos los pasos del punto 4.3.1, hasta llegar a la pantalla de Primer Nivel. 
+DelVar ra,vx
+sq\expert("e1,1,0,18;ra,1,0,ra;r1,1,0,6;r2,2,1,5;ex,2,0,vx")
+Iniciamos la simulación con ¸ð. C o m o t i p o d e a n á l i s i s , e s c o g e m o s D C y p r e s i o n a m o s ¸ð. D e j a m o s l o s f o r m a t o s d e p u n t o f l o t a n t e c o m o e s t á n , y p r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e e l M o d o ( E x p e r t o ) e s t á a c t i v a d o y q u e s e e j e c u t a e l p r i m e r p a s o . A p a r e c e l a p a n t alla del Primer Nivel de Modo (Experto).
+Para agregar una ecuación al sistema, debemos hacer dos cosas. Primero, agregar a la lista de incógnitas de primer nivel la variable vx, que de ahora en adelante será una incógnita de primer nivel. Y segundo, agregar una ecuación a la lista de ecuaciones de primer nivel, así: and iex=-12. Tras hacer esto, el contenido de los campos debe ser como sigue:
+Incógnitas de primer nivel: {v1,ie1,v2,iex,vx}
+Ecuaciones de primer nivel: (5*ie1*ra-ra*(vx-33)+90)/ra=0 and 5*iex+vx=18 and v1=18 and v2=vx and iex=-12
+Nombres de variables conocidas: en blanco.
+Valores de variables conocidas: en blanco.
+Hemos aumentado el sistema de 4 ecuaciones con 5 incógnitas, a un sistema de 5 ecuaciones con 5 incógnitas. Una vez hecho esto, presionamos ¸ð. L a s f r a s e s e n l a p a n t a l l a n o s i n d i c a n l a e j e c u c i ó n d e l o s t r e s p a s o s r e s t a n t e s d e l a s i m u l a c i ó n . F i n a l m e n t e , a p a r e c e D o n e , y e n l a c a r p e t a a c t u a l n o s e s p e r a n n u e s t r a s r e s p u e s t a s n u m é r i c a s . 
+ S o l i c i t a n d o e l v a l o r d e i r 1 , e n c o n t r a m o s q u e i x e s 3 a m p e r i o s . S olicitando el valor de v2, vx o vex, encontramos que vx es 78 voltios.
+Este problema ilustra que el Modo (Experto) puede ahorrar tiempo al usuario experto, pero requiere buenos conocimientos sobre circuitos, álgebra y el uso del Symbulator.
+Veamos ahora otro problema del capítulo anterior.
+Problema N( 014 con el Modo (Experto)
+Planteamiento. Determine los valores numéricos de vx e ix en el siguiente circuito. 
+ 
+Figura 17. Circuito para el Problema N° 014.
+Solución:
+Nombramos los nodos y elementos. Limpiamo s l o s n o m b r e s s i m b ó l i c o s . 
+ D e l V a r r x 
+ D a m o s l a d e s c r i p c i ó n d e l c i r c u i t o y o r d e n a m o s l a s i m u l a c i ó n e x p e r t a . 
+ s q \ e x p e r t ( " j 1 , 0 , 1 , 6 ; r 1 , 1 , 2 , 1 ; r 2 , 1 , 3 , 5 ; j 2 , 3 , 2 , 1 0 ; r 3 , 3 , 0 , 2 ; r x , 2 , 4 , r x ; r 4 , 4 , 0 , 3 " ) 
+ I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. C o m o t i p o d e a n á l i s i s , e s c o g e m o s D C y p r e s i o n a m o s ¸ð. D e j a m o s l o s f o r m a t o s d e p u n t o f l o t a n t e c o m o e s t á n y p r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e e l M o d o ( E x p e r t o ) e s t á a c t i v a d o y q u e s e e j e c u t a e l p r i m e r p a s o . A p a r e c e l a p a n t a l l a d e l P r i m e r N i v e l d e M o d o ( E x p e r t o ) . 
+ T e n e mos un sistema de 4 ecuaciones con 5 incógnitas (la quinta incógnita es el valor simbólico de rx, que requiere ser resuelto para obtener valores numéricos). Resolveremos este problema con la técnica de agregar una ecuación al sistema, pues es el camino más simple. Para convertirlo en un sistema de 5 ecuaciones con 5 incógnitas, agregamos una ecuación al sistema. Primero, agregamos a la lista de incógnitas de primer nivel la variable rx, que de ahora en adelante será una incógnita de primer nivel. Y segundo, agregamos una ecuación a la lista de ecuaciones de primer nivel, así: and ir3=4. Tras hacer esto, el contenido de los campos debe ser como sigue:
+Incógnitas de primer nivel: {v1,v2,v3,v4,rx}
+Ecuaciones de primer nivel: (rx*(v1-v2+10)-v2+v4)/rx=0 and (rx*v4-3*(v2-v4))/rx=0 and 6*v1-5*v2-v3-30=0 and 2*v1-7*v3-100=0 and ir3=4
+Nombres de variables conocidas: en blanco.
+Valores de variables conocidas: en blanco.
+Aquí hay que hacer una aclaración sobre lo que es lícito en el Modo (Experto) y lo que no lo es. Nótese que ahora ir3 forma parte de las ecuaciones. Pero, ¿acaso es ir3 una incógnita de primer nivel? Claro que no. Es una variable de segundo nivel. Pero a este punto ya se ha ejecutado el paso 1 de la simulación, en el cual se han generado expresiones de segundo nivel que expresan las variables de segundo nivel en función de variables de primer nivel. Por lo tanto, es lícito incluir en las ecuaciones de primer nivel a variables de segundo nivel, pues éstas se encuentran expresadas internamente en función de incógnitas de primer nivel. 
+Por otro lado, no es lícito incluir en el tercero y cuarto campos, variables de segundo nivel cuyo valor sea conocido. Pues el tercer y cuarto campo son para especificar el valor conocido de variables de primer nivel solamente.
+Volvamos al problema. Una vez hemos aumentado el sistema de 4 ecuaciones con 5 incógnitas, a un sistema de 5 ecuaciones con 5 incógnitas, presionamos ¸ð. L a s f r a s e s e n l a p a n t a l l a n o s i n d i c a n l a e j e c u c i ó n d e l o s t r e s p a s o s r e s t a n t e s d e l a s i m u l a c i ó n . F i n a l m e n t e , a p a r e c e D o n e , y e n l a c a r p e t a a c t u a l n o s e s p e r a n n u e s t r a s r e s p u e s t a s n u m é r i c a s . 
+ S o l i c i t a n d o e l v a l o r d e i r 1 , e n c o n t r a m o s q u e i x e s - 8 a m p e r i o s . Solicitando el valor de vrx, encontramos que vx es 80 voltios.
+Es posible resolver este problema con la otra técnica, la de eliminar una incógnita, pero hubiese resultado en un procedimiento un poco más complicado. Tendríamos que agregar el valor de alguna variable de primer nivel como valor conocido, en el tercer y cuarto campos. Para expresar la corriente de 4 amperios como una incógnita de primer nivel, hubiesemos tenido que relacionar el voltaje del nodo 3 y el valor de la resistencia de 2 ohmios mediant e l a l e y d e O h m , p a r a d e s p e j a r e l v a l o r d e v 3 a s í : v 3 = ( 4 A ) ( 2 ( ) o s e a v 3 = 8 . E l p r o c e d i m i e n t o , p u e s , s e r í a c o m o s i g u e . 
+ D e l V a r r x 
+ s q \ e x p e r t ( " j 1 , 0 , 1 , 6 ; r 1 , 1 , 2 , 1 ; r 2 , 1 , 3 , 5 ; j 2 , 3 , 2 , 1 0 ; r 3 , 3 , 0 , 2 ; r x , 2 , 4 , r x ; r 4 , 4 , 0 , 3 " ) 
+ I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. C o m o t i p o d e a n á l i s i s , e s c o g e m o s D C y p r e s i o n a m o s ¸ð. D e j a m o s l o s f o r m a t o s d e p u n t o f l o t a n t e c o m o e s t á n y p r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n q u e e l M o d o ( E x p e r t o ) e s t á a c t i v a d o y q u e s e e j e c u t a e l p r i m e r p a s o . A p a r e c e l a p a n t a l l a d e l P r i m e r N i v e l de Modo (Experto).
+Para eliminar una incógnita del sistema, debemos hacer dos cosas. Primero, eliminar a v3 de la lista de incógnitas de primer nivel que aparece en el primer campo. No debe aparecer en esta lista, pues es un valor conocido. Segundo, agregar a esta lista de incógnitas de primer nivel la variable rx, que de ahora en adelante será una incógnita de primer nivel. Y tercero, agregar el nombre de v3 al tercer campo, y su valor conocido de v3=8 al cuarto campo. Tras hacer estas modificaciones, el c o n t e n i d o d e l o s c a m p o s d e b e s e r c o m o s i g u e : 
+ I n c ó g n i t a s d e p r i m e r n i v e l : { v 1 , v 2 , r x , v 4 } 
+ L a s e c u a c i o n e s d e p r i m e r n i v e l n o f u e r o n m o d i f i c a d a s . 
+ N o m b r e s d e v a r i a b l e s c o n o c i d a s : v 3 
+ V a l o r e s d e v a r i a b l e s c o n o c i d a s : v 3 = 8 
+ U n a v e z h e c h o e s t o , p r e s i o n a m o s ¸ð. L a s f r a ses en la pantalla nos indican la ejecución de los tres pasos restantes de la simulación. Finalmente, aparece Done.
+Solicitando el valor de ir1, encontramos que ix es -8 amperios. Solicitando el valor de vrx, encontramos que vx es 80 voltios.
+En este problema hemos visto que, cuando sea difícil declarar un valor previamente conocido como una variable de primer nivel, el método de agregar una ecuación es más fácil que el método de eliminar una incógnita. Sin embargo, el método de eliminar una incógnita tiene la ventaja de que el sistema de ecuaciones se reduce y puede ser resuelto más fácilmente por la calculadora. Esto cobra importancia en el caso de circuitos grandes, mucho mayores a los que vemos en estas páginas.
+Problema N( 015 con el Modo (Experto)
+Planteamiento. Determine los valores numéricos de vx e ix en el siguiente circuito. 
+ 
+Figura 18. Circuito para el Problema N° 015.
+Solución:
+Nombramos los nodos y elementos. Limpiamos el nombre ix.
+DelVar ix
+Damos la descripción del circuito y ordenamos la si m u l a c i ó n e x p e r t a . 
+ s q \ e x p e r t ( " e 1 , 1 , 0 , 6 0 ; r 1 , 1 , 2 , 8 ; r 2 , 2 , 0 , 1 0 ; r 3 , 2 , 3 , 4 ; r 4 , 3 , 0 , 2 ; j x , 0 , 3 , i x " ) 
+ I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. C o m o t i p o d e a n á l i s i s , e s c o g e m o s D C y p r e s i o n a m o s ¸ð. D e j a m o s l o s f o r m a t o s d e p u n t o f l o t a n t e c o m o e s t á n y p r e s i o n a m o s ¸ð. V e m o s e n l a p a n t alla las frases que nos indican que el Modo (Experto) está activado y que se ejecuta el primer paso. Aparece la pantalla del Primer Nivel de Modo (Experto). Este problema, al igual que los anteriores, puede ser resuelto agregando una ecuación o eliminando una incógnita. 
+Para resolverlo con la técnica de agregar una ecuación, el contenido de los campos debe modificarse para tener un sistema de 5 ecuaciones con 5 incógnitas, como sigue:
+Incógnitas de primer nivel: {v1,ie1,v2,v3,ix}
+Ecuaciones de primer nivel: 8*ie1-v2+60=0 and 4*ix+v2-3*v3=0 and v1=60 and 19*v2-10*(v3+30)=0 and ir1=5
+Nombres de variables conocidas: en blanco.
+Valores de variables conocidas: en blanco.
+Por otro lado, para resolverlo con la técnica de eliminar una incógnita, el contenido de los campos debe modificarse para tener un sistema de 4 ecuaciones con 4 incógnitas, con el valor de una variable de primer nivel declarado como conocida, así:
+Incógnitas de primer nivel: {v1,v2,v3,ix}
+Las ecuaciones de primer nivel no fueron modificadas.
+Nombr e s d e v a r i a b l e s c o n o c i d a s : i e 1 
+ V a l o r e s d e v a r i a b l e s c o n o c i d a s : i e 1 = - 5 
+ E s c o j a e l l e c t o r l a t é c n i c a q u e p r e f i e r a e n t r e e s t a s d o s . L u e g o , p r e s i o n a m o s ¸ð. L a s f r a s e s e n l a p a n t a l l a n o s i n d i c a n l a e j e c u c i ó n d e l o s t r e s p a s o s r e s t a n t e s d e l a s i m u l a c i ó n . F i n a l m e n te, aparece Done.
+Solicitando el valor de ix, encontramos que ix es 1 amperio. Solicitando el valor de -vjx o de v3, encontramos que vx es 8 voltios. Veamos un último problema.
+Problema N( 016 con el Modo (Experto)
+Planteamiento. Determine el valor de k que provocará que el voltaje vy sea cero. 
+ 
+Figura 19. Circuito para el Problema N° 016.
+Solución:
+Nombramos los nodos y elementos. Limpiamos el nombre k.
+DelVar k
+Damos la descripción del circuito y ordenamos la simulación experta.
+sq\experto("e1,1,0,6;r1, 1 , x , 1 ; r 2 , x , 0 , 4 ; r 3 , x , y , 2 ; j 1 , 0 , y , 2 ; r 4 , y , 2 , 3 ; e 2 , 2 , 0 , k * v x " ) 
+ I n i c i a m o s l a s i m u l a c i ó n c o n ¸ð. C o m o t i p o d e a n á l i s i s , e s c o g e m o s D C y p r e s i o n a m o s ¸ð. D e j a m o s l o s f o r m a t o s d e p u n t o f l o t a n t e c o m o e s t á n y p r e s i o n a m o s ¸ð. V e m o s e n l a p a n t a l l a l a s f r a s e s q u e n o s i n d i c a n que el Modo (Experto) está activado y que se ejecuta el primer paso. Aparece la pantalla del Primer Nivel de Modo (Experto). Este problema puede ser resuelto agregando una ecuación o eliminando una incógnita. 
+Para resolverlo agregando una ecuación, el contenido de los campos debe modificarse para tener un sistema de 7 ecuaciones con 7 incógnitas, como sigue:
+Incógnitas de primer nivel: {v1,ie1,vx,vy,v2,ie2,k}
+Ecuaciones de primer nivel: 2*k*vx+3*vx-5*vy+12=0 and k*vx+3*ie2-vy=0 and ie1-vx+6=0 and v1=6 and v2=k*vx and 7*vx-2*(vy+12)=0 and vy=0
+Nombres de variables conocidas: en blanco.
+Valores de variables conocidas: en blanco.
+Por otra parte, para resolverlo eliminando una incógnita, el contenido de los campos debe modificarse para tener un sistema de 6 ecuaciones con 6 incógnitas, con el valor de una variable de primer nivel declarado como conocida, así:
+Incógnitas de primer nivel: {v1,ie1,vx,v2,ie2,k}
+Las ecuaciones de primer nivel no fueron modificadas.
+Nombres de variables conocidas: vy
+Valores de variabl e s c o n o c i d a s : v y = 0 
+ E s c o j a e l l e c t o r l a t é c n i c a q u e p r e f i e r a e n t r e e s t a s d o s . L u e g o , p r e s i o n a m o s ¸ð. L a s f r a s e s e n l a p a n t a l l a n o s i n d i c a n l a e j e c u c i ó n d e l o s t r e s p a s o s r e s t a n t e s d e l a s i m u l a c i ó n . F i n a l m e n t e , a p a r e c e D o n e . S o l i c i t a n d o e l v a l o r d e k , e n c o n t ramos que es -13/4.
+4.4 La herramienta solves tras la simulación experta
+La herramienta solves puede ser utilizada en cualquier momento. En el capítulo anterior mostramos su uso tras una simulación simbólica. En ese momento, no existían en la carpeta actual las variables Equation y Unknown. Cuando ejecutamos solves por primera vez, los campos de la herramienta aparecían en blanco, sin ningún contenido, y el usuario ingresaba manualmente las ecuaciones que deseaba resolver.
+ 
+Figura 27. Campos en blanco de solves, en la TI-89
+Las siguientes veces que la ejecutábamos, si no se había borrado el contenido de la carpeta actual, los campos aparecían mostrando inicialmente aquellas ecuaciones que habían sido ingresadas manualmente por el usuario la vez anterior.
+Hasta ahora hemos realizado nuestras simulaciones expertas utilizando la primera opción del Modo (Experto), solamente simular, sin guardar las ecuaciones. Por eso, no se crean en la carpeta actual las variables Equation y Unknown.
+Si, por el contrario, hubiésemos utilizado cualquiera de las otras dos opciones, es decir simular y guardar las ecuaciones, o simplemente guardar las ecuaciones, entonces tendríamos en la carpeta actual las variables Equation y Unknown.
+La herramienta solves se comporta de manera distinta cuando se le ejecuta justo después de una simulación experta que ha guardado las ecuaciones generadas. En este caso, los campos no aparecen vacíos, sino que muestran las ecuaciones e incógnitas que fueron almacenadas por el Modo (Experto) en las variables Equation y Unknown.
+Por ejemplo, si simulamos un circuito en Modo (Experto) y escogemos la opción Just Keep, el Symbulator almacenará las ecuaciones y las incógnitas, y nosotros podemos luego resolverlas con la herramienta solves. Nótese que si se pretende insertar alguna variable de segundo nivel en las ecuaciones de primer nivel, debe solicitarse al Modo (Experto) que conserve las expresiones de segundo nivel que generó el Symbulator.
+Al ejecutar la herramienta solves después de una simulación experta, en los campos aparecerían las ecuaciones e incógnitas, así:
+ 
+Figura 28. Ecuaciones en campos de solves, en la TI-89
+La herramienta solves muestra dos menús de selección múltiple en su parte inferior. El superior es para que el usuario especifique si desea resolver las ecuaciones como reales o como complejas. Excepto si se están resolviendo las ecuaciones de un análisis AC, debe solicitarse siempre que las resuelva como reales. El menú inferior es para especificar si se desean usar condiciones. ¿Qué son las condiciones? No son más que los valores ya conocidos de variables de primer nivel. Si pedimos usar condiciones, la herramienta nos mostrará una nueva pantalla para introducir estos valores y sus nombres.
+ 
+Figura 29. Campos para valores conocidos, en la TI-89
+En el campo etiquetado como When eq’s, deben introducirse los valores conocidos de las variables de primer nivel. En el campo etiquetado como When var’s, deben introducirse los nombres de estas variables de primer nivel.
+4.5 Verificación de las respuestas numéricas de una simulación experta
+Para verificar si son correctas las respuestas numéricas que hemos obtenido tras nuestra simulación experta, podemos utilizar el mismo procedimiento que explicamos en el punto 3.7.
+Antes de cerrar este capítulo, quiero felicitar al lector por haber decidido convertirse en un experto en el uso del Symbulator. Ahora que ya conoce los conceptos teóricos, falta que los utilice en la práctica durante algún tiempo. La recompensa, en satisfacciones y ahorro de tiempo, no se hará esperar.
+ PAGE 10 
+
+4 - PAGE 26 
+Simulación experta en corriente directa
+
+Roberto Pérez-Franco - Symbulator
+
+Simulación avanzada en corriente directa

@@ -6,12 +6,14 @@
 % Build:  xelatex symbulator_monograph.tex   (run twice for TOC/refs)
 %
 % Sources: the solver as implemented in Symbulator 9 (repos/solver,
-% symbulator 0.5.18 on PyPI), presenting the staged algorithm of the
-% classic calculator versions as the conceptual core. Historical
-% claims are drawn from the primary sources preserved in references/:
-% the 1999 competition paper (Spanish original and English
-% translation), the 2001 website documenting Symbulator Q, the 2014
-% unfinished book (Symbulator 6), and the version 9 documentation.
+% symbulator 0.5.19), presenting the staged algorithm of the classic
+% calculator versions as the conceptual core. The central historical
+% source is the author's 2000--2001 graduation thesis (references/
+% 2000_thesis/, 12 chapters + 4 appendices); around it, the 1999
+% competition paper (Spanish original and English translation), the
+% 2001 website documenting Symbulator Q, the 2014 unfinished book
+% (Symbulator 6), and the version 9 documentation. Appendix A
+% reproduces the 2001 jury record and the 2000 IEEE award.
 
 \documentclass[11pt,oneside]{report}
 
@@ -21,6 +23,7 @@
 \usepackage{algpseudocode}
 \usepackage{booktabs}
 \usepackage{array}
+\usepackage{graphicx}
 \usepackage{microtype}
 \usepackage[hidelinks]{hyperref}
 
@@ -82,10 +85,16 @@ current (AC), complex frequency domain (FD), or transient (TR)---it
 returns exact symbolic or numeric expressions for every node voltage,
 branch current, voltage drop, and power in the circuit.
 
-This monograph documents the solver's internal logic. A history
-chapter traces the program from its 1999 origins on the TI-89 to the
-2026 computer-algebra port. The core chapter explains, first in words
-and then in thoroughly annotated pseudo-code, how a DC analysis
+This monograph documents the solver's internal logic. Its central
+piece of evidence is the author's graduation thesis of
+2000--2001~\cite{thesis2000}---the fullest contemporaneous account of
+the simulator's design, written while the design was being made---read
+alongside the version~9 source code, which is that design still
+running a quarter century later. A history chapter traces the program
+from its 1999 origins on the TI-89 to the 2026 computer-algebra port.
+The core chapter explains, first in words and then in thoroughly
+annotated pseudo-code intended to be complete enough that a reader
+could implement a simulator of their own from it, how a DC analysis
 proceeds: parsing and validation; the \emph{stamping} of each element
 into a system of equations; and the staged solution of unknowns by
 \emph{degree}---first-degree unknowns (node voltages, and the currents
@@ -98,8 +107,12 @@ the DC template, the historical \emph{Impala} mode, and the expert
 mode, including multiple solutions. A further chapter presents the
 equivalence tools (Th\'evenin/Norton, equivalent resistance, two-port
 extraction, and gain) as thin orchestrations of the same engine. The
-monograph closes with worked exemplars of difficult circuits, and with
-the voices of Symbulator's users across more than two decades.
+monograph closes with worked exemplars of difficult circuits---one of
+them solved identically, to the third decimal place, by the 2001
+calculator and the 2026 port---and with the voices of Symbulator's
+users across more than two decades. An appendix reproduces the
+historical record: the 2001 thesis jury's verdict and the 2000 IEEE
+Region~9 award.
 \end{abstract}
 
 \tableofcontents
@@ -125,8 +138,24 @@ circuit itself.
 
 Symbulator was created by Roberto Perez-Franco, then an engineering
 student at the Technological University of Panama (Universidad
-Tecnol\'ogica de Panam\'a) in Azuero. The project has an unusually
-well-documented prehistory~\cite{paper1999}. When circuits are solved
+Tecnol\'ogica de Panam\'a), at its Azuero regional campus. The
+project has an unusually well-documented prehistory~\cite{paper1999,
+thesis2000}. The decisive encounter came in 1998, while the author
+was taking Circuit Theory~II: he met \emph{Syrup}, Joe Riel's
+symbolic circuit simulator for Maple~V---``the first symbolic
+circuit simulator I had seen in my life, and in fact the only one I
+know of apart from Symbulator''---and understood at once that
+symbolic simulation belonged in the classroom. He befriended Riel,
+who explained Syrup's underlying concept, ``an extremely simple
+concept in truth'': not matrices and modified nodal analysis, but
+\emph{generating the nodal equations, solving them, and presenting
+them symbolically}~\cite[App.~B]{thesis2000}. Syrup was an initial
+inspiration rather than a model; during the two years that followed,
+the author worked without contact with any other symbolic simulator,
+and the techniques this monograph documents were, in his words,
+``invented and developed by my own means\ldots\ a pioneering
+contribution to a virgin field of electrical
+engineering''~\cite[App.~B]{thesis2000}. When circuits are solved
 by hand, innumerable small details---an unseen negative sign, a
 misplaced decimal point---separate a right answer from a wrong one;
 professional engineers reach for a numerical simulator such as SPICE,
@@ -182,36 +211,99 @@ purchases.
 
 \section{The calculator years: versions 1 to 5 (1999--2001)}
 
-Programming began on 30 March 1999, over the Holy Week break: first a
-minimal DC analysis accepting only resistors and independent sources;
-then, cloned from it, the AC, FD, and TR analyses, while the element
-catalog grew to essentially its present form---inductors, capacitors,
-op-amps, ideal transformers, mutual inductances, and the six two-port
-families. By the author's own accounting, the concept took a week of
-thought and consultation, and the program about a hundred hours spread
-over ten months~\cite{paper1999}.
+Programming began on 30 March 1999, over the Holy Week break, under
+the working name \emph{SCS}---Symbolic Circuit Simulator---soon
+renamed Symbulator: first a minimal DC analysis accepting only
+resistors and independent sources; then, cloned from it, the AC, FD,
+and TR analyses, while the element catalog grew to essentially its
+present form---inductors, capacitors, op-amps, ideal transformers,
+mutual inductances, and the six two-port families. By the author's
+own accounting, the concept took a week of thought and consultation,
+and the program about a hundred hours spread over ten
+months~\cite{paper1999}.
+
+The version chronology is recorded in the thesis's own history
+appendix~\cite[App.~A]{thesis2000}. The first public release,
+version~0.92, went onto the Internet on 2 April 1999---three days
+after the first line of code. Version~1 added mutual inductances.
+Version~2, presented on 19 August 1999 at the Azuero regional campus,
+added two-ports. Version~3 introduced the \emph{(Expert)} mode;
+version~4, released 9 January 2001, the \emph{(Impala)} mode
+(\S\ref{sec:impala}). The last calculator version of this line,
+called \emph{Q} and counted as version~5, appeared on 30 March
+2001---two years to the day after programming began---with roughly
+40\% of the code rewritten.
 
 The young simulator spread at the speed of the early web. By November
 1999 it had been downloaded more than 5{,}700 times from
 \code{ticalc.org} alone, with users writing from some twenty
 countries; a student in Texas reported twelve classmates using it in
 one circuits course. A paper describing it, submitted under the
-pseudonym \emph{Th\'evenin}, won first place at the IEEE Student Paper
-Contest for Latin America in 2000~\cite{paper1999}. Version~5, also
-known as \emph{Symbulator~Q}, served as the author's graduation thesis
-in January 2001, and was documented by \emph{The Symbulator Book}, a
-complete twelve-chapter reference in Spanish whose first four chapters
-were translated to English by users Tim Hutcheson and Doug
-Burkett~\cite{website2001}.
+pseudonym \emph{Th\'evenin}, won first place at the IEEE Student
+Paper Contest for Latin America (Region~9) in 2000~\cite{paper1999};
+the award certificate is reproduced in
+Appendix~\ref{app:documents}. The program was, and has remained,
+free of charge; its author never received a royalty for
+it~\cite[App.~A]{thesis2000}.
 
 In these versions the circuit was described in a five-column
 matrix---name, two nodes, value, and a fifth column holding initial
 conditions (or transformer turns), zero-filled elsewhere---and each
-analysis was invoked as a program call, \code{scs\char`\\dc(...)},
+analysis was invoked as a program call, \code{sq\char`\\dc(...)},
 whose answers were stored in calculator variables under mnemonic
 names: \code{v3} for a node voltage, \code{ir1} for a current,
 \code{pe} for a power. That naming, and the architecture beneath it,
 survive to the present day.
+
+\section{The thesis of 2001}
+\label{sec:thesis}
+
+Symbulator~Q became the subject of the author's graduation
+thesis---\emph{Symbulator: un simulador de circuitos lineales para
+calculadoras}~\cite{thesis2000}---written through 2000 and defended
+on 9~July 2001 at the Technological University of Panama. It is the
+central historical source of this monograph, for a simple reason: it
+is the fullest account of the simulator's internal design written
+\emph{while that design was being made}, by the person making it.
+Across twelve chapters and four appendices it works through all four
+analyses, the expert and Impala modes, and every tool, with 89
+problems solved keystroke by keystroke---most drawn from Hayt \&
+Kemmerly's \emph{Engineering Circuit Analysis}, each source recorded
+in an appendix of provenance~\cite[App.~D]{thesis2000}. Wherever
+this monograph states what the classic Symbulator did, the thesis is
+the evidence; and wherever version~9's behaviour is described, the
+thesis is the standard it is being compared against.
+
+The examining tribunal---Professors Medardo Logreira, Eliane Boulet
+de Cabrera, and Marcela Paredes de V\'asquez---graded the work
+100/100 apiece, with a verdict worth quoting in full: ``It is an
+excellent work that provides an innovative contribution to the field
+of numerical and symbolic simulation of electric circuits, and that
+has received recognition at the world level. This work is a source
+of pride for the Faculty of Electrical Engineering and for the
+Technological University of Panama. The members of the jury
+recommend that this work be promoted within the University
+community.'' The original record of the defense is reproduced in
+Appendix~\ref{app:documents}. One member of that tribunal, Prof.\
+Eliane Boulet, appears again in this monograph: her exam problem is
+worked as an exemplar in \S\ref{sec:boulet}, solved by the thesis in
+2001 and by version~9 in 2026, with identical answers.
+
+Two more features of the thesis deserve notice. Its front matter
+carries a clause unique in the genre: the author, a founder of the
+pacifist Pax Movement, declared that ``this program may only be used
+for peaceful applications, and never for warlike applications''---a
+condition of use stated before the table of contents. And its
+closing recommendations take a stance on pedagogy that has guided
+the project since: students should learn the manual techniques
+first and be required to show them; the simulator's place is as a
+learning and \emph{verification} tool---``especially because circuit
+theory textbooks do not include answers to all the problems they
+pose, and because some of the answers they do print are
+wrong''~\cite[Recs.]{thesis2000}. The thesis was later translated
+to English by two of Symbulator's own users, Doug Burkett and Tim
+Hutcheson, under the title \emph{The Symbulator
+Book}~\cite[Acks.]{thesis2000}.
 
 \section{The long pause, and version 6 (2013)}
 
@@ -275,6 +367,28 @@ solves them, and stores all the answers in variables with their
 respective names.} Everything else is the careful working-out of that
 sentence.
 
+The thesis states the governing idea in terms this monograph will
+honor throughout~\cite[\S1.4]{thesis2000}: ``To analyze an electric
+circuit, Symbulator uses a method that \emph{emulates the manual
+circuit-analysis techniques that students learn in the
+classroom}. In fact, the simulator behaves like an excellent student
+who paid attention and learned the lesson. Since the program follows
+a path reproducible by the student, it is also a very powerful
+learning tool.'' The same passage fixes the method's austerity:
+Symbulator knows the Ohm--Cavendish law and Kirchhoff's current law,
+and with those two laws alone it analyzes circuits using nodal
+analysis exclusively. It never uses mesh analysis; and ``although it
+does not know Kirchhoff's voltage law, it always satisfies it,
+because that law is satisfied automatically when the other two
+are.'' KVL, in other words, is \emph{emergent} in this architecture:
+every voltage is expressed from the start as a node potential (or a
+difference of two), so no loop sum can ever fail to close. A second
+principle governs the input side~\cite[\S1.8.1]{thesis2000}: ``the
+user must provide the simulator with only the \emph{minimum
+information necessary} to completely describe each element of the
+circuit''---a philosophy visible in every line of the description
+language of \S\ref{sec:input}.
+
 \emph{Reading} means parsing a plain-text description in which each
 line names one element, its terminals, and its value---the value being
 a number, a symbol, or an expression; a dependent source is simply a
@@ -313,24 +427,50 @@ the derived quantities of element $e$ --- and it is by these names
 that dependent sources, expert-mode equations, and the user's own
 follow-up questions refer to them.
 
-The original documentation describes the same machinery operationally,
-in terms of \emph{levels}~\cite{website2001}: the program ``first
-generates a set of 1st level equations and a list of 1st level
-unknowns''---node voltages, plus the currents that must be solved
-simultaneously (those of voltage sources and, in DC, inductors); once
-solved, ``2nd level expressions,'' generated during the same pass, are
-\emph{evaluated} rather than solved---the locally computable currents;
-and finally the ``3rd level expressions''---the powers---are built
-from everything before them. Degrees classify answers by what they
-are; levels, by how they are obtained. They coincide except at the
-seam: a voltage source's current is a second-degree answer that the
-calculator had to place in the first-level \emph{solve}, while a
-current source's current is first-degree precisely because it never
-needs solving at all. Keeping the simultaneous set small was what made
-symbolic solving feasible on a late-1990s calculator; version~9, with
-SymPy underneath, solves the joined system in one call and keeps the
-staged view as what it always really was---the right way to
-\emph{understand} the solver.
+The original documentation describes the same machinery
+operationally, in terms of \emph{levels}, and the thesis devotes its
+theory chapter to the doctrine~\cite[\S4.2]{thesis2000}. The
+\emph{first-level equations} are ``the indispensable equations
+Symbulator uses to solve a circuit,'' and come in exactly two kinds:
+one \emph{node equation} per node---the KCL sum, with resistive
+currents written out by Ohm's law---and one \emph{special equation}
+per \emph{special element}. The thesis is charmingly precise about
+what ``special'' means: since the analysis is nodal, ``the only
+elements that are \emph{not} special\ldots\ are the resistor and the
+current source''; a voltage source and even a short circuit are
+special, each contributing one equation. The count is therefore
+knowable in advance---``for a circuit with 5~nodes, 2~voltage
+sources and 1~short circuit, Symbulator will generate a total of
+8~first-level equations. It does not matter if this circuit has a
+thousand resistors and seven hundred current sources: it will still
+have 8~first-level equations''---and the \emph{first-level
+variables} match them one for one: the node voltages, plus the
+currents of the special elements. Everything else is expressed, not
+solved: for each remaining answer the same pass generates a
+\emph{second-level expression} ``given exclusively in terms of
+first-level variables,'' of which some (resistor and capacitor
+currents) are \emph{evaluated} into numbers after the solve while
+others (current-source currents, voltage drops) are kept as standing
+expressions; and finally the \emph{third-level variables}---the
+powers, in DC and AC only---are built from everything before them,
+``defined at the end by the very nature of power: the product of a
+voltage drop and a current''~\cite[\S4.2.6]{thesis2000}. The thesis
+even carries the census forward as new elements
+appear~\cite[\S9.4.3]{thesis2000}: an inductor's current is first
+level; a capacitor's is a second-level expression that is evaluated;
+an ideal transformer's primary current is first level, its secondary
+a kept expression; both currents of a two-port are first level; an
+op-amp's output current is first level.
+
+Degrees classify answers by what they are; levels, by how they are
+obtained. They coincide except at the seam: a voltage source's
+current is a second-degree answer that the calculator had to place in
+the first-level \emph{solve}, while a current source's current is
+first-degree precisely because it never needs solving at all. Keeping
+the simultaneous set small was what made symbolic solving feasible on
+a late-1990s calculator; version~9, with SymPy underneath, solves the
+joined system in one call and keeps the staged view as what it always
+really was---the right way to \emph{understand} the solver.
 
 \section{The input language}
 \label{sec:input}
@@ -385,6 +525,89 @@ nodes. The six two-port letters denote a black box characterized only
 by its four $z$/$y$/$h$/$g$/$a$/$b$ parameters, each port's second
 terminal being implicitly ground.
 
+\subsection{Sign conventions}
+\label{sec:signs}
+
+The description language carries one piece of information that is
+easy to miss and impossible to reimplement the solver without: the
+\emph{order of the nodes is data}. The thesis states the convention
+as a single uniform rule~\cite[\S2.11.1]{thesis2000}: for every
+element, the current reported in the answers is defined as flowing
+\emph{through the element from the first listed node to the second},
+and the voltage drop as the potential of \emph{the first listed node
+with respect to the second}. For a current source, the first-to-second
+direction must therefore match the arrow in the schematic; for a
+voltage source, the first node is the $+$ terminal; for a resistor
+the order is free, chosen for convenience (typically to make a
+requested current come out with the expected sign); for coupled
+inductors the order encodes the dot convention (\S\ref{sec:ac}); for
+an initial condition it fixes the polarity of $v(0)$ or the direction
+of $i(0)$.
+
+Two corollaries the thesis spells out at length, because they are
+where beginners stumble. First, defining a polarity is not asserting
+a sign: ``the voltage of node~A is $-5$ volts with respect to
+node~B'' defines the drop from A to B and simultaneously tells us B
+is the more positive---a negative answer is the convention doing its
+job, not an error. Second, \emph{power is reported as consumed}: a
+source that delivers 80~W reports $p = -80$~W. Both conventions are
+load-bearing in what follows---the KCL bookkeeping of
+Algorithm~\ref{alg:stampdc} adds each current at its first node and
+subtracts it at its second, and the third-degree round of
+Algorithm~\ref{alg:solvedc} computes $p = (v_{n_1}-v_{n_2})\,i$ with
+no sign adjustment, precisely because the two conventions agree.
+
+\subsection{Answer names, and the spelling equivalence}
+\label{sec:names}
+
+Every quantity the solver produces is stored under a systematic name,
+and these names are part of the input language too: a dependent
+source's value, an expert equation, and a user's follow-up question
+all refer to answers by name. Table~\ref{tab:names} gives the
+complete inventory. The scheme is the calculator's, unchanged since
+1999 except for one typographic reform: version~9 writes an
+underscore between the prefix and the element name (\code{i\_r1}
+where the calculator wrote \code{ir1}), so that machine-generated
+output is unambiguous to read back.
+
+\begin{table}[htbp]
+\caption{The complete answer inventory for a circuit element or node.
+Names on the left are version~9's canonical spellings; the
+calculator's flat spellings (right) remain valid everywhere.}
+\label{tab:names}
+\centering
+\begin{tabular}{@{}llll@{}}
+\toprule
+Answer & Meaning & v9 name & classic name \\
+\midrule
+node voltage & potential of node $n$ vs.\ ground & \code{v\_$n$} & \code{v$n$} \\
+current & through element $e$, $n_1 \to n_2$ & \code{i\_$e$} & \code{i$e$} \\
+voltage drop & across $e$, $n_1$ vs.\ $n_2$ & \code{v\_$e$} & \code{v$e$} \\
+power (DC) & absorbed by $e$ & \code{p\_$e$} & \code{p$e$} \\
+complex power (AC) & absorbed by $e$ & \code{s\_$e$} / \code{ap\_$e$} & \code{s$e$} \\
+seen resistance & looking out from source $e$ & \code{r\_$e$} & \code{r$e$} \\
+seen impedance (AC) & looking out from source $e$ & \code{z\_$e$} & \code{z$e$} \\
+transformer current & into winding at node $n$ & \code{i\_$t$$n$} & \code{i$t$$n$} \\
+two-port current & into port at node $n$ & \code{i\_$p$$n$} & \code{i$p$$n$} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+Since solver 0.5.19, the two spelling traditions are formally
+\emph{one namespace}. Each circuit builds an alias map from its own
+inventory---its nodes and elements---and any name that
+\emph{normalizes} to a known answer name (comparison is
+case-insensitive and ignores underscores) is canonicalized to it
+wherever expressions are read: element values, expert equations,
+unknowns, and conditions alike. \code{ir1}, \code{i\_r1},
+\code{IR1}, and \code{I\_R1} are the same current, exactly as they
+were one calculator variable in 1999; a netlist from the thesis runs
+verbatim today (\S\ref{sec:amplifier}). Names that match nothing in
+the circuit are left untouched and pass through as free symbols, so
+the design keeps its other virtue: a symbol the user invents is
+never captured by accident, only spellings of answers the circuit
+actually has.
+
 \subsection{The value language}
 \label{sec:values}
 
@@ -400,7 +623,9 @@ arguments all pass through one expression reader, which accepts:
   $e^x$. Any name is an ordinary symbol---including, since version
   0.5.19, names that happen to be reserved words of the host
   language, such as \code{is}: the reader's language is circuit
-  analysis, not Python, and its natural names all work.
+  analysis, not Python, and its natural names all work. Names that
+  spell an answer of the circuit, in either the underscored or the
+  flat tradition, resolve to that answer (\S\ref{sec:names}).
 \item \textbf{SI prefixes} in the calculator's quoted notation:
   \code{4.7'u} is $4.7\times10^{-6}$, \code{1'k} is $10^3$. A
   \emph{bare} suffix (\code{1k}) is inherently ambiguous---one
@@ -499,6 +724,20 @@ We now walk the full DC pipeline in pseudo-code. Everything in this
 section is the template; the other analyses (Chapter~\ref{ch:variations})
 change only the per-element stamping rules and the transforms around
 the solve.
+
+A word on ambition before we begin. This section, together with the
+element catalog (Table~\ref{tab:elements}), the sign conventions
+(\S\ref{sec:signs}), the answer inventory (Table~\ref{tab:names}),
+and the per-domain stamping rules of Chapter~\ref{ch:variations}, is
+intended as a \emph{complete} specification: a reader who works
+through it with care should be able to implement a symbolic circuit
+simulator of their own, needing from their platform only what
+Symbulator has always needed from its own---an equation solver
+(\code{solve()} on the TI-89; \code{sympy.solve} today), and, for
+the transient analysis, a Laplace transform pair. That was the test
+the thesis set itself in 2001, teaching the internals well enough
+that an expert user could take over the machinery mid-flight
+(\S\ref{sec:expert}); it is the test this monograph sets itself now.
 
 \subsection{Stamping}
 
@@ -613,6 +852,15 @@ voltage-defining element (0\,$\Omega$, 0\,H, 0\,V) collapses to the
 short-circuit rule; a 0\,F capacitor, by contrast, is already an open
 circuit under the capacitor rule, with no special case needed.
 
+At DC, a mutual inductance contributes nothing: its induced-voltage
+term rides on $j\omega$ (or $s$), which is zero here, and the classic
+versions simply ignored the element in this
+analysis~\cite[\S6.11]{thesis2000}, as version~9 effectively does
+through the inductor's short-circuit stamp. The classic versions
+ignored the ideal transformer at DC as well~\cite[\S6.12]{thesis2000};
+version~9 stamps its ratio equations in every domain, since they
+contain no frequency term to vanish.
+
 \subsection{Closing references to known answers}
 \label{sec:closure}
 
@@ -693,9 +941,13 @@ version~9 the split survives only for the two always-local cases
 to \code{sympy.solve}. Either way the third-degree round is the same
 plain algebra: drops, powers, and---for sources only, where the
 question ``what does this source see?'' is meaningful---the seen
-resistance. The answers are stored under systematic names, mirroring
-the calculator variables (\code{v2}, \code{ir1}, \code{pe},
-\code{re}) under which the original stored them.
+resistance. The answers are stored under the systematic names of
+Table~\ref{tab:names}, mirroring the calculator variables
+(\code{v2}, \code{ir1}, \code{pe}, \code{re}) under which the
+original stored them---and this store of named, reusable answers was
+the program's declared output philosophy from the start: ``give the
+user, as output, all the answers they could desire,'' shown only on
+request so as not to overwhelm~\cite[\S2.5.1]{thesis2000}.
 
 \subsection{Diagnosing the unsolvable}
 \label{sec:diagnose}
@@ -757,6 +1009,19 @@ sources also receive the impedance $z_e$ they see. The names $i, j$
 are reserved as the imaginary unit only here---in every other domain
 they remain free for the user.
 
+The two conventions are themselves an inheritance. The thesis
+teaches both as the \emph{rigorous} and the \emph{informal}
+treatments of RMS problems~\cite[\S6.13]{thesis2000}: rigorously,
+sources are entered at amplitude and every answer divided down
+($\sqrt2$ for RMS voltages and currents, $2$ for average powers);
+informally, one enters every independent source already in RMS,
+whereupon---by linearity---``all the voltages and currents of the
+answers will be in RMS, and all the powers in average,'' with no
+division at all. Version~9 keeps both roads open by naming the two
+power conventions differently, so a description whose sources are
+RMS phasors reads its \code{p} answers as averages directly, exactly
+as the informal treatment promises.
+
 \section{Frequency domain}
 \label{sec:fd}
 
@@ -769,20 +1034,38 @@ elements carry their initial conditions into the equations:
 \text{capacitor:}\quad & i_e = sC\,(v_{n_1} - v_{n_2}) - C\,v_e(0),
 \end{align}
 the transforms of $v = L\,di/dt$ and $i = C\,dv/dt$ with the initial
-state folded in. Source values are expected already written in $s$ (a
-step of amplitude $k$ is $k/s$), with the brace shorthand
-\code{\{expr\}} transforming a time-domain value on entry. No third
-degree is computed in FD: an $s$-domain power has no established
-meaning in the curriculum Symbulator serves, and the original made the
-same choice.
+state folded in. The initial condition rides in the element's fifth
+field, its polarity fixed by the node order (\S\ref{sec:signs}), and
+is taken as zero when absent---all three conventions stated in the
+thesis exactly as they stand today~\cite[\S10.3]{thesis2000}. Source
+values are expected already written in $s$ (a step of amplitude $k$
+is $k/s$), with the brace shorthand \code{\{expr\}} transforming a
+time-domain value on entry. No third degree is computed in FD: an
+$s$-domain power has no established meaning in the curriculum
+Symbulator serves, and the original made the same
+choice~\cite[\S10.4]{thesis2000}.
 
 \section{Transient analysis: a Laplace round trip}
 \label{sec:tr}
 
 TR is FD wrapped in two transforms (Algorithm~\ref{alg:tr}): sources
 are carried \emph{into} the $s$-domain, the FD engine solves, and
-every answer is carried \emph{back} to time. Both crossings have case
-analyses that are easy to get wrong and are worth stating exactly.
+every answer is carried \emph{back} to time. The thesis presents the
+relationship candidly as the architecture it
+is~\cite[\S11.1--11.2]{thesis2000}: TR ``solves the circuit in the
+frequency domain\ldots\ and finally converts all the answers back to
+the time domain,'' and the user is offered the two halves separately
+when that is cheaper---run \code{fd} and convert only the answers of
+interest (through the \code{fd\_to\_tr} helper, a thin wrapper on
+the inverse transform), or run \code{tr} and receive everything in
+$t$ at the cost of inverting every answer. On the calculator the
+transform pair came from Lars Frederiksen's \emph{DiffEq}---in the
+thesis's estimation ``the fastest Laplace transform program ever
+written for a calculator''---invoked at the start of every FD or TR
+run and at the end of every TR run~\cite[\S11.1.1]{thesis2000};
+version~9 calls SymPy's pair at the same two seams. Both crossings
+have case analyses that are easy to get wrong and are worth stating
+exactly.
 
 \begin{algorithm}[htbp]
 \caption{\kw{TR}: transient analysis via the $s$-domain}
@@ -844,6 +1127,22 @@ inverse transform has no closed form are omitted individually rather
 than failing the analysis, since the rest of the circuit's answers
 remain valid and useful.
 
+One doctrine completes the transient picture, and the thesis states
+it as a rule of method rather than of code~\cite[\S11.10]{thesis2000}:
+\emph{each interval of time requires its own simulation}. A circuit
+with a switch that acts at $t=0$ is two circuits---one before, one
+after---and the answers of the first supply the initial conditions
+of the second: typically a DC run for $t<0$ (capacitors open,
+inductors shorted, the steady state emerging automatically) whose
+node voltages and inductor currents are typed into the fifth fields
+of the $t>0$ description. Even $u(-t)$ in a source value is to be
+read this way---``for the purposes of simulation, $u(t)$ does not
+have that [mathematical] meaning; one must perform one simulation
+per interval''---the step function marking where one circuit ends
+and the next begins, not a value the solver should juggle across the
+boundary. The Boulet exemplar of \S\ref{sec:boulet} is this doctrine
+practiced exactly as taught.
+
 \section{The Impala mode}
 \label{sec:impala}
 
@@ -851,16 +1150,25 @@ Time-dependent sources posed a particular threat on the calculators: a
 value like $10\,e^{-t}\sin(2t + \pi/6)$, carried symbolically through
 every equation of a transient solve, could stall the CAS. The remedy,
 affectionately documented as the \emph{(Impala)}
-mode~\cite{website2001}---named for the antelope that leaps over
-obstacles rather than running through them---exploits linearity. On
-entry, each complicated source value is replaced by a fresh
-placeholder symbol (``a nickname''); the system, now small and clean,
-is solved; and on the way out, the Laplace transform of the original
-value is substituted for the placeholder \emph{in every answer}.
-Because the circuit is linear, every answer is linear in the source
-values, and the late substitution is exact. The mode was always
-automatic---``the (Impala) is always there\ldots you have to do
-nothing at all''---waking only when such a source was present.
+mode~\cite[\S11.11]{thesis2000}, exploits linearity. On entry, each
+complicated source value is replaced by a fresh placeholder
+symbol---the thesis specifies the scheme: a variable
+$\sigma_{\mathit{name}}$, its Greek initial marking it as one of the
+simulator's internal variables, which all begin with Greek letters
+precisely so they can never collide with a user's
+own~\cite[\S1.8.4]{thesis2000}. The system, now small and clean, is
+solved; and before the answers are stored, the Laplace transform of
+the original value is substituted for the placeholder \emph{in every
+answer}. Because the circuit is linear, every answer is linear in
+the source values, and the late substitution is exact. Unlike the
+(Expert) mode, which the user must invoke, the (Impala) wakes by
+itself whenever such a source is present; and the thesis records the
+origin of the name: the African antelope that, threatened, escapes
+by prodigious leaps---``so too Symbulator, on meeting very complex
+sources, leaps: it avoids using the complicated value and solves the
+equations with a simple symbolic one; then it lands, replacing the
+source by its complicated value in the frequency
+domain''~\cite[\S11.11]{thesis2000}.
 
 Version~9 no longer needs the mechanism as an optimization: SymPy
 carries the expressions directly. But the idea---abstract the messy
@@ -899,15 +1207,57 @@ accepted, mirroring the prompts the calculator versions used:
   restriction disagree, which is an answer rather than a failure.
 \end{itemize}
 
-The original \emph{(Expert)} mode was explicitly framed as making ``a
-hole in that box'': it displayed the generated first-level equation
-set and unknowns list, and let the user read, modify, and keep them
-before the solve proceeded~\cite{website2001}. Its companion
-\code{solves()} tool---a general simultaneous-equation solver ``based
-in the Symbulator core's technology''---already had today's shape:
-equations, unknowns in braces, and \emph{conditional equations}
-(``when'' values) applied as known substitutions, the direct ancestor
-of the \code{conditions} argument.
+The original \emph{(Expert)} mode was explicitly framed as opening
+the black box: in a normal simulation ``the user only feeds in the
+circuit, while the entire responsibility for the simulation falls on
+the simulator''; the expert mode ``gives the user the power to play
+a more important role, enabling them to modify the equations the
+simulator has generated, before the calculator solves them---in
+exchange, the user assumes part of the responsibility for the
+simulation''~\cite[\S4.1]{thesis2000}. Operationally, after the
+first-level equations were generated the calculator paused at a
+screen of four fields---the first-level unknowns, the first-level
+equations, and a pair of fields for \emph{conditional} variables and
+their known values---plus a three-way menu: \emph{Symbulate} (solve
+now), \emph{Symbulate+Keep} (solve, and also store the system in
+variables \code{Equation}, \code{Unknown}, \code{Wheneq},
+\code{Whenvar} for later reuse), or \emph{Just Keep} (store without
+solving, to be solved later by the companion \code{solves()}
+tool)~\cite[\S4.2.8--4.2.11]{thesis2000}.
+
+The thesis then teaches, with worked examples, the two symmetric
+techniques that expert work reduces to. When a circuit carries one
+symbolic value and one known measurement, the generated system has
+$n$ equations and $n{+}1$ unknowns, and the expert may either
+\emph{add an equation} (append \code{and ir3=4} to the system, and
+the symbolic value to the unknowns) or \emph{eliminate an unknown}
+(declare a first-level variable's known value in the conditional
+fields and remove it from the unknowns list). The trade-off is
+stated with an engineer's economy: adding an equation is the easier
+road, but eliminating an unknown ``has the advantage that the system
+of equations shrinks and can be solved more easily by the
+calculator---which matters for circuits much larger than those in
+these pages''~\cite[\S4.3]{thesis2000}. Two rules of legality guard
+the box's edges: a \emph{second-level} variable may appear in an
+added equation (its defining expression exists by then, so the name
+resolves), but only \emph{first-level} variables may be declared in
+the conditional fields~\cite[\S4.3.2]{thesis2000}; and circuits with
+op-amps, or transient runs, must choose \emph{Symbulate}---the
+former because their equations carry the internal limit term
+(\S\ref{sec:portchanges}), the latter because equations kept and
+solved later would yield answers still in the frequency
+domain~\cite[\S9.4.1--9.4.2]{thesis2000}.
+
+Version~9's \code{equations}/\code{unknowns}/\code{conditions}
+arguments are these four fields, minus the screen: an expert
+equation is the ``add an equation'' technique, an equality condition
+is the ``eliminate an unknown'' technique (a substitution applied
+before the solve), and both may name any answer of the circuit,
+first level or not, because the closure of \S\ref{sec:closure} and
+the on-demand stamping below resolve whatever the name refers to.
+The restrictions fell away with the hardware: op-amps are stamped
+ideally rather than limited, and TR conversion happens inside the
+call.
 
 \begin{algorithm}[htbp]
 \caption{\kw{Expert-Augment}: fold user mathematics into the system}
@@ -1036,6 +1386,24 @@ extras, because it is the same code path throughout.
 \end{algorithmic}
 \end{algorithm}
 
+The classic tool asked its user one question version~9's does not:
+whether the network is \emph{active} or \emph{passive}. On
+Auto-Detect it ran two simulations regardless and reported
+$v_\mathrm{th}$, $i_\mathrm{no}$, $z_\mathrm{th}$, and the maximum
+deliverable power ($p_\mathrm{max}$ in DC, complex $s_\mathrm{max}$
+in AC); on Passive it saved a whole simulation---one round
+sufficed---at a price the thesis flags in italics: choose Passive on
+a network that is not passive and ``the answers will be wrong. Never
+choose Passive if the network is not passive, or if in
+doubt''~\cite[\S5.2]{thesis2000}. The passive case survives in
+version~9 as the separate \kw{er} tool (\S\ref{sec:er}); the active
+case is Algorithm~\ref{alg:th}. A definitional point the thesis
+makes twice, because students trip on it: a network containing only
+\emph{dependent} sources is passive---such a network has a perfectly
+good equivalent resistance (possibly negative, as one thesis problem
+delights in showing with $z_\mathrm{th} = -r_x$) and no Th\'evenin
+voltage at all~\cite[\S5.3, \S9.3]{thesis2000}.
+
 Algorithm~\ref{alg:th} runs two rounds: the circuit as given yields
 the open-circuit voltage $v_\mathrm{th}$ between the chosen terminals,
 and a copy with a test short across them yields the short-circuit
@@ -1091,6 +1459,21 @@ round, no ratios.
 \end{algorithmic}
 \end{algorithm}
 
+The classic \kw{port} tool was the pride of the two-port chapter,
+and the thesis demonstrates it with a flourish worth
+retelling~\cite[\S7.6--7.7]{thesis2000}: given a bipuerto in $z$
+parameters, it extracts the $y$ equivalent \emph{of that two-port as
+a network}; then the $h$ equivalent of the $y$; then $g$ of $h$, $a$
+of $g$, $b$ of $a$---each extraction consuming the previous tool
+output as its input circuit---and finally, closing the loop, the $z$
+equivalent of the $b$, which lands exactly on the four numbers the
+problem began with. ``Any error generated along the way would impact
+the final answer; obtaining the correct equivalent now means every
+intermediate equivalent was correct.'' Six conversions through five
+parameter families, verified by round trip: the habit of
+\emph{verification by re-derivation} that runs through the whole
+thesis, applied to the tool itself.
+
 \kw{port} (Algorithm~\ref{alg:port}) characterizes a circuit as a
 two-port of any of the six families. Its trick is to make the test
 sources' values \emph{symbolic}: with excitations $x_1, x_2$ left as
@@ -1109,15 +1492,37 @@ identities rather than a bespoke excitation.
 \section{Small tools}
 \label{sec:smalltools}
 
-Three helpers round out the toolkit. \code{pr} is the parallel
-combination $(\sum_k 1/z_k)^{-1}$ with a dominant-zero rule, available
-both as a function and as the \code{[a,b]} value shorthand. \code{pf}
-reports the power factor $|\cos(\angle V - \angle I)|$ of a
-voltage--current phasor pair, labelled \emph{leading}, \emph{lagging},
-or \emph{in phase} by the sign of the angle difference. \code{gain}
-computes, from input and output voltage--current pairs, the voltage
-gain $A_v = v_2/v_1$, current gain $A_i = i_2/i_1$, power gain
-$A_p = \Re(-A_v \overline{A_i})$, and input impedance $Z_i = v_1/i_1$.
+Three helpers round out the toolkit, each with a history. \code{pr}
+is the parallel combination $(\sum_k 1/z_k)^{-1}$ with a
+dominant-zero rule, available both as a function and as the
+\code{[a,b]} value shorthand; its ancestor \code{par} was written in
+first version by Erwin Baert of Belgium, one of the early users who
+became collaborators, and improved by the
+author~\cite[\S5.4]{thesis2000}---the thesis uses it to
+\emph{derive} the parallel-resistor formula symbolically
+(\code{par(r1,r2)} $\to r_1 r_2/(r_1+r_2)$) before ever using it
+numerically. \code{pf} reports the power factor
+$|\cos(\angle V - \angle I)|$ of a voltage--current phasor pair,
+labelled \emph{leading}, \emph{lagging}, or \emph{in phase} by the
+sign of the angle difference. \code{gain} computes, from input and
+output voltage--current pairs, the voltage gain $A_v = v_2/v_1$,
+current gain $A_i = i_2/i_1$, power gain
+$A_p = \Re(-A_v \overline{A_i})$, and input impedance
+$Z_i = v_1/i_1$; the classic version was a four-field form whose
+answers (\code{av}, \code{ai}, \code{ap}, \code{zi}) were stored as
+variables like any others~\cite[\S7.4]{thesis2000}.
+
+Two display and plotting tools complete the classic
+inventory. \code{absang}---also Baert's in origin, reworked by the
+author---printed any complex answer in polar form regardless of how
+the calculator's display modes were set, the universal answer to
+``the book wants magnitude and angle''~\cite[\S6.1.2]{thesis2000};
+version~9's polar display option is its descendant. And the
+\code{bode} and \code{plot} tools turned an FD or TR answer into a
+graph on the calculator screen---the thesis demonstrates each on a
+problem from a professor at the author's own university
+(\S\ref{sec:amplifier}, \S\ref{sec:boulet}), and version~9's plot
+menu covers the same ground with the host platform's graphics.
 
 \section{What the port to version 9 changed}
 \label{sec:portchanges}
@@ -1165,6 +1570,14 @@ each is instructive.
   be declared; the port passes extras through the tools' rounds and
   adopts new symbols automatically, with the explicit list still
   winning.
+\item \textbf{The two spelling traditions were reunified.} Version~9
+  introduced underscored answer names (\code{i\_r1}) for
+  machine-readability, which briefly split every answer's identity in
+  two; solver 0.5.19 restored the calculator's reality by alias
+  mapping (\S\ref{sec:names})---any spelling that normalizes to an
+  answer of the circuit \emph{is} that answer, in values, equations,
+  unknowns, and conditions alike, so the thesis's own 2001 netlists
+  run verbatim.
 \end{enumerate}
 
 % ======================================================================
@@ -1172,24 +1585,25 @@ each is instructive.
 \label{ch:exemplars}
 % ======================================================================
 
-% NOTE (draft): this chapter awaits two circuits from the author ---
-% one to be provided, and the one by Prof. Eliane Boulet. The 1999
-% two-stage amplifier below is included as the first exemplar.
-
 Symbulator's value shows best on circuits that are painful by hand and
 effortless once described. This chapter collects a few such exemplars,
-each solved by a single call.
+each solved by a single call---and two of them come with a rare kind
+of evidence: the thesis solved the same circuits on a TI-89 in 2001
+and printed the answers~\cite{thesis2000}, so the reader can watch
+the 2001 calculator and the 2026 port agree to the last digit.
 
 \section{The two-stage amplifier of 1999}
 \label{sec:amplifier}
 
-The circuit that closed the original 1999 paper~\cite{paper1999} was
-the author's own final project for his Electronics II course: a
-two-stage small-signal amplifier model---source resistance, two RC
-loading networks, two voltage-controlled current sources
-($0.05\,v_1$ and $0.05\,v_3$), coupling capacitors of picofarads
-against load resistors of kilohms---whose gain Bode diagram was
-requested over $10^{4}$ to $10^{13}$~rad/s. In Symbulator notation:
+The circuit that closed the original 1999 paper~\cite{paper1999}
+returns in the thesis as Problem~87, the final course assignment set
+by Prof.\ Edilberto Yee of the Technological University of
+Panama~\cite[\S12.2]{thesis2000}: a two-stage small-signal amplifier
+model---source resistance, two RC loading networks, two
+voltage-controlled current sources ($0.05\,v_1$ and $0.05\,v_3$),
+coupling capacitors of picofarads against load resistors of
+kilohms---whose gain Bode diagram was requested over $10^{4}$ to
+$10^{13}$~rad/s. In Symbulator notation:
 
 \begin{quote}
 \code{e1,5,0,vg} \\
@@ -1203,14 +1617,26 @@ requested over $10^{4}$ to $10^{13}$~rad/s. In Symbulator notation:
 
 An FD analysis returns every node voltage as a rational function of
 $s$; the transfer function is one division, $v_4/v_5$, and the Bode
-plot follows. On the 1999 TI-89 this took three minutes to solve and
-another 52 seconds to plot---against ``around half an hour, or more''
+plot follows. On the TI-89 this took about three minutes to solve and
+another minute to plot---against ``around half an hour, or more''
 by hand, as any electrical engineering student of the era would
 attest~\cite{paper1999}. On version~9 the same description solves in
-under a second. The circuit makes a fine exemplar because it exercises
-so much at once: dependent sources written exactly as the textbook
-writes them, mixed magnitudes across nine orders, and a symbolic
-source riding through the whole analysis untouched.
+under a second. The thesis's account of this problem ends on a note
+no benchmark can match: the plot ``earned me full marks on the
+assigned homework---and, having obtained it with a simulator I had
+built myself, the respect of Professor Yee, whom I hold in the
+highest esteem''~\cite[\S12.2]{thesis2000}.
+
+The circuit makes a fine exemplar because it exercises so much at
+once: dependent sources written exactly as the textbook writes them,
+mixed magnitudes across nine orders, and a symbolic source riding
+through the whole analysis untouched. It also carries the spelling
+equivalence of \S\ref{sec:names} as a live test: the thesis's own
+description of this circuit is in version~9's test suite element for
+element as printed in 2001---controls written \code{5/100*v1},
+powers written \code{10\^{}-10}, names run together, only the line
+separator modernised---and must keep producing the same transfer
+function for every release.
 
 \section{One of each: the 2013 showcase}
 \label{sec:showcase2013}
@@ -1293,14 +1719,18 @@ that produced them.
 \section{Prof.\ Eliane Boulet's switching transient}
 \label{sec:boulet}
 
-This transient problem, from Prof.\ Eliane Boulet, is a classic of the
-two-switch genre. For $t<0$, an 18~V source behind 8~$\Omega$ feeds a
-resistive ladder (12~$\Omega$, 18~$\Omega$, 6~$\Omega$) holding two
-capacitors ($\tfrac16$~F at node $a$, voltage $v_1$;
-$\tfrac13$~F at node $b$, voltage $v$); a waveform source
-$10\,e^{-t}\sin(2t+30^{\circ})$~A waits behind an open switch. At
-$t=0$ both switches act: the DC source disconnects, the waveform
-source connects. \emph{Find $v_1$ for $t>0$.}
+This transient problem is a classic of the two-switch genre, set by
+Prof.\ Eliane Boulet de Cabrera in an examination at the
+Technological University of Panama---the same Prof.\ Boulet who
+would later sit on the thesis tribunal (\S\ref{sec:thesis})---and
+worked in the thesis as Problem~88, the closing problem of its
+closing chapter~\cite[\S12.3]{thesis2000}. For $t<0$, an 18~V source
+behind 8~$\Omega$ feeds a resistive ladder (12~$\Omega$,
+18~$\Omega$, 6~$\Omega$) holding two capacitors ($\tfrac16$~F at
+node $a$, voltage $v_1$; $\tfrac13$~F at node $b$, voltage $v$); a
+waveform source $10\,e^{-t}\sin(2t+30^{\circ})$~A waits behind an
+open switch. At $t=0$ both switches act: the DC source disconnects,
+the waveform source connects. \emph{Find $v_1$ for $t>0$.}
 
 The problem is an exemplar because Symbulator solves \emph{both}
 halves of it, and the halves chain. The $t<0$ circuit is a DC
@@ -1347,12 +1777,32 @@ The structure is legible at a glance: the circuit's two natural modes
 ($e^{-t/2}$ and $e^{-t}$) and the forced response riding on the
 source's own $e^{-t}$ envelope. And the answer carries its own check:
 evaluating at $t=0$ gives exactly $9$~V---the capacitor voltage is
-continuous across the switching instant, as physics demands. Done by
-hand, this problem is an afternoon of Laplace algebra with two initial
-conditions threaded through every step; with Symbulator it is two
-descriptions and two calls, and the student's attention stays where
-Prof.\ Boulet presumably wanted it---on the switching, the steady
-states, and the modes.
+continuous across the switching instant, as physics demands.
+
+Now the comparison this exemplar exists for. The thesis solved this
+same problem on a TI-89 in 2001---same DC run for the initial
+conditions ($9$~V and $\tfrac94$~V, printed), then an FD run with
+the (Impala) mode waking for the waveform source---and printed the
+expanded answer~\cite[\S12.3]{thesis2000}:
+\[
+v_1(t) \approx -0.667\,e^{-t}\cos 2t - 2.33\,e^{-t}\sin 2t
++ 13.8\,e^{-t/2} - 4.16\,e^{-t}.
+\]
+Expanding version~9's exact answer above into the same form gives
+$-0.667\,e^{-t}\cos 2t - 2.332\,e^{-t}\sin 2t + 13.83\,e^{-t/2} -
+4.16\,e^{-t}$: every coefficient agrees with the 2001 printout to
+the digits the calculator displayed. Twenty-five years apart, one
+machine a 12~MHz handheld and the other a computer algebra system,
+the two implementations of the logic this monograph documents return
+the same circuit answer---which is the strongest single piece of
+evidence we can offer that the logic, and not any one program, is
+the durable thing.
+
+Done by hand, this problem is an afternoon of Laplace algebra with
+two initial conditions threaded through every step; with Symbulator
+it is two descriptions and two calls, and the student's attention
+stays where Prof.\ Boulet presumably wanted it---on the switching,
+the steady states, and the modes.
 
 \section{Three-phase: wye--delta with line impedances}
 \label{sec:threephase}
@@ -1512,6 +1962,26 @@ a manual ``perfectly well explained''~\cite{website2001}. Users
 reported from over twenty countries on five continents, and the
 program spread the way student tools spread: one classmate at a time.
 
+The thesis's acknowledgments page is a snapshot of that community at
+its two-year mark, and reads like a map~\cite[Acks.]{thesis2000}: Tim
+Hutcheson, Joe Riel, Charles Ware, Doug Burkett, Jake Adams, Al
+Charpentier, and Nevin McChesney in the United States; Lars
+Frederiksen in Denmark; Arne Harstad in Norway; Erwin Baert in
+Belgium; Reinhard Willinski in Germany; Kamil Malinski in Austria;
+Daniele Martini in Italy; Rozgonyi Szabolcs in Hungary; Michael Rans
+in the United Kingdom; Alex Astashyn in Russia; Pepe Iborra in Spain;
+Ivan Oro~Yu in Panama---thanked by name ``for stimulating me with
+their suggestions and comments, to develop, improve and test
+Symbulator during these years.'' Several appear elsewhere in this
+monograph as more than names: Frederiksen wrote the Laplace engine
+the calculator versions ran on, Baert the first \code{par} and
+\code{absang}, Riel the simulator that inspired the whole project,
+Burkett and Hutcheson the English translation of the thesis itself.
+Two of the thesis's 89 problems came from users (McChesney's and
+Adams's), recorded in its provenance appendix like any textbook
+source~\cite[App.~D]{thesis2000}: the community was, from the start,
+inside the documentation and not merely around it.
+
 \section{The long run}
 
 A quarter century later, the collected praise reads like a single
@@ -1566,7 +2036,22 @@ Symbulator's teaching corpus is machine-checkable against the
 documentation's printed answers---and is checked, example by example.
 A student can trust that the tool and the book agree, and an
 instructor can extend the corpus knowing that regressions announce
-themselves.
+themselves. This, too, is the thesis's stance carried forward: the
+simulator's first duty is \emph{verification}---of the student's own
+hand work, and even of the textbook's printed answers, ``some of
+which are wrong''~\cite[Recs.]{thesis2000}.
+
+\emph{Knowing when to decline.} The thesis's most disarming appendix
+asks when it is better \emph{not} to use
+Symbulator~\cite[App.~C]{thesis2000}, and answers with a worked
+problem that a single \code{solve} command dispatches faster than
+any simulation could. The skill it names---``a kind of intuition
+that tells you whether, given the nature of a problem, it will be
+more complicated to solve by simulation than by hand''---is one a
+tool's own author rarely thinks to teach, and its presence in the
+foundational document says much about the project's temperament:
+the tool was built to serve the analysis, never to replace the
+judgment.
 
 There is also a lesson in the project's longevity. The same internal
 logic has now run on 1990s calculator hardware and on a modern
@@ -1582,6 +2067,57 @@ original cost, so long as its logic was worth preserving in the first
 place. \emph{The purpose of circuit analysis is insight, not
 mathematics}---and the purpose of Symbulator, across every platform it
 has lived on, has been to keep the two in their right order.
+
+% ======================================================================
+\appendix
+\chapter{The historical record}
+\label{app:documents}
+% ======================================================================
+
+Two documents anchor the history told in Chapter~\ref{ch:history},
+and both are reproduced here in facsimile from the author's papers.
+
+The first (Figure~\ref{fig:jury}) is the official record of the
+thesis defense---\emph{Informe de Sustentaci\'on del Trabajo de
+Graduaci\'on}, Universidad Tecnol\'ogica de Panam\'a, Facultad de
+Ingenier\'ia El\'ectrica---for the graduation work titled
+\emph{Symbulator: un simulador de circuitos lineales para
+calculadoras}, defended 9~July 2001. The examining tribunal's three
+members---Medardo Logreira, Eliane de Cabrera, and Marcela de
+V\'asquez---each recorded the grade \emph{A, 100}, for a final
+average of 100, and wrote the general observations quoted in
+translation in \S\ref{sec:thesis}: an excellent work, an innovative
+contribution to numerical and symbolic circuit simulation,
+recognized at the world level, a pride of the Faculty and of the
+University, recommended for promotion within the University
+community.
+
+The second (Figure~\ref{fig:ieee}) is the certificate of the IEEE
+award mentioned in that verdict's ``recognition at the world
+level'': First Place in the 2000 Region~9 Student Paper Competition,
+for the paper \emph{Symbulator: A Simbolic Simulator of Circuits for
+Calculators}---the 1999 competition paper~\cite{paper1999},
+submitted under the pseudonym \emph{Th\'evenin} and unmasked at the
+awarding. The certificate, dated October 2000 and signed by the
+IEEE's Secretary and President, spells \emph{Simbolic} with the
+Spanish \emph{i}: a small orthographic fingerprint of a
+Panamanian student's English-language debut, preserved here as
+issued.
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=0.88\textwidth]{references/2001_jury_record.jpg}
+\caption{The jury record of the thesis defense, 9 July 2001:
+three grades of 100/100, and the tribunal's citation.}
+\label{fig:jury}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{references/2000_ieee_award.jpg}
+\caption{First Place, IEEE Region 9 Student Paper Competition, 2000.}
+\label{fig:ieee}
+\end{figure}
 
 % ======================================================================
 % Back matter
@@ -1608,6 +2144,17 @@ calculadoras,'' competition paper, IEEE Student Paper Contest for
 Latin America, Nov.\ 1999 (first place, 2000). English translation:
 ``Symbulator: the calculator-based symbolic circuit simulator.''
 Both preserved in this monograph's \code{references/} archive.
+
+\bibitem{thesis2000}
+R.~P\'erez-Franco, \emph{Symbulator: un simulador de circuitos
+lineales para calculadoras}, Trabajo de Graduaci\'on (Licenciatura en
+Ingenier\'ia Electromec\'anica), Universidad Tecnol\'ogica de
+Panam\'a, written 2000--2001, defended 9~July 2001 (graded 100/100;
+jury record in Appendix~\ref{app:documents}). Twelve chapters and
+four appendices; 89 worked problems with provenance. English
+translation by D.~Burkett and T.~Hutcheson as \emph{The Symbulator
+Book}. Preserved in this monograph's \code{references/} archive
+(\code{2000\_thesis/}).
 
 \bibitem{website2001}
 R.~Perez-Franco, \emph{Symbulator: Symbolic Circuit Simulator ---
