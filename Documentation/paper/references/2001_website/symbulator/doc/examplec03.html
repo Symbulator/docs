@@ -1,0 +1,102 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"></i><font color="#004080"><em>C03</em>
+AC analysis:<b> Find Z parameters of net with one dependent source</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. Find the four z parameters for w=1E8 rad/s for the equivalent
+circuit of the transistor of high frequency, shown below. Give parameters in polar form.</font></small></p>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><img src="ex22cir.jpg"
+width="400" height="114"></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>1) Label nodes and elements. Define a variable containing circuit description. I used this
+description:</small></font></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0000A0"><small>&quot;r1,1,0,1E5; </small><small>cx,1,0,5E-12</small></font></font><font color="#0000A0"
+FACE="Courier New"><small>; </small><small>cy,1,2,1E-12; </small><small>jd,2,0,0.01*v1;
+</small><small>r2,2,0,1E4&quot; <font FACE="Wingdings"><small>à</small></font>cir</small></font><font FACE="Courier New"></p>
+</font>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"
+face="Times New Roman"><small>2) Run the ports tools, specifying the terminal nodes, which
+are 1 and 2.</small></font><font FACE="Courier New"> 
+
+<ol START="2">
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>sq\port(cir,1,2)</small></font></p>
+  </font>
+</ol>
+
+<p style="margin-left: 100; margin-right: 100"></font><small><font color="#0080FF"
+face="Times New Roman">Now the program displays a dialog box, in which you have to specify
+the desired parameters (which you set to </font><font face="Times New Roman"
+color="#0000A0">z</font><font color="#0080FF" face="Times New Roman">), give a name to the
+parameters (</font><font face="Times New Roman" color="#0000A0">p</font><font
+color="#0080FF" face="Times New Roman"> is a good name) and specify the analysis you want
+to perform (in this case </font><font face="Times New Roman" color="#0000A0">AC</font><font
+color="#0080FF" face="Times New Roman">). When done, press Enter. The process is complex,
+so you have to wait some time. After a while, the calculator displays...</font></small><font
+FACE="Courier New"></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Done</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"></font><font color="#0080FF"
+face="Times New Roman"><small>3) Since your parameters are z and their name is p, the
+answers are stored in the following variables: zp11, zp12, zp21 and zp22.&nbsp; They are
+also shown in screen. Suppose you want to retrieve them after they've been displayed in
+screen. You can ask for them, using the absang() tool to display them in polar form.</small></font><font
+FACE="Courier New"></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>sq\absang(zp11)</small></font></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+color="#0000A0" face="Courier New">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font FACE="Courier New"><font color="#0000A0">&quot;133.149 &lt; -47.6442º&quot;</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>sq\absang(zp12)</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0000A0" face="Courier New">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font color="#0000A0">&quot;94.1503 &lt; -2.6442º&quot;</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>sq\absang(zp21)</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0000A0" face="Courier New">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font color="#0000A0">&quot;9415.51 &lt; -86.7829º&quot;</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>sq\absang(zp22)</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0000A0" face="Courier New">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font color="#0000A0">&quot;564.98 &lt; -3.59904º&quot;</font></small></p>
+<i>
+
+<p style="margin-left: 100; margin-right: 100"></font><font color="#0080FF"
+face="Times New Roman"><small>Answer:</i> The parameters obtained are the right ones.</small></font><font
+FACE="Courier New"></p>
+</font>
+</body>
+</html>

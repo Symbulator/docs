@@ -1,0 +1,42 @@
+<html>
+
+<head>
+<title>Solved Problems</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body>
+
+<p align="center"><font color="#004080" size="3"><strong> Problem #6</strong></font></p>
+
+<p><strong><em><font color="#0080FF"><small>Question.</small></font></em></strong></p>
+
+<p align="left"><font color="#0080FF"><small>Let's say you have three resistors. R2 and R3
+are in paralell and R1 is in series w/ the paralell branch (R1 is on the top of the page
+and the paralell branch is under R1). The voltage level on top of R1 is 12 V. you want
+.25mA to go throuh R3. R1 is 30 K and R3 is 5 K. What is R2?</small> </font></p>
+
+<p><strong><em><small><font color="#0080FF">Answer.</font></small></em></strong></p>
+
+<p><font color="#0080FF"><small>Clean r2.</small></font></p>
+<font
+FACE="Courier New">
+<p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><font color="#0000A0"><small>DelVar
+r2</small></font></p>
+</font>
+
+<p><small><font color="#0080FF">Using a one-line command in Symbulator:</font></small><font
+FACE="Courier New"></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><font color="#0000A0"><small>sq\dc(&quot;e1,1,0,12;
+r1,1,2,3E4; r2,2,0,r2; r3,2,0,5E3&quot;) :solve(ir3=.25E-3,r2)</font></font><font
+color="#0000A0" face="Courier New"><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </font><font FACE="Courier New"><font
+color="#0000A0">r2=11520.7</font></small></p>
+</font>
+
+<p align="right">&nbsp;</p>
+<p align="right"><font size="2"><a href="http://paxm.org/symbulator"><img src="microscs.gif" alt="Symbolic Circuit Simulator by Roberto Perez-Franco" border="0" hspace="2" vspace="2" width="30" ></a><a href="http://paxm.org"><img src="../doc/dove.jpg" border="0"  border="0"></a></font></p>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><font color="#004080">A05</i>
+TR analysis:<b> RCL circuit with given initial values</font></p>
+</b><i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. </i>Given the following circuit, find a symbolic expression for
+current in inductor.</font></small><i></p>
+</i>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><img
+SRC="image15.jpg" width="340" height="142"></font></small></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></i><small><font
+color="#0080FF">Due to the u(-t) in current source, this circuit needs two simulations.
+The first is for times before t=0, and the second is for times after t=0<i>. </font></small></p>
+</i>
+
+<ol>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Label nodes
+    and elements.&nbsp; Define variable <font
+    FACE="Courier New">cir</font> containing circuit description. I used this
+    description:</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>&quot;j10,0,1,10; </small><small>r2,1,2,2; </small><small>cf,1,0,2/10;
+  </small><small>l25,2,0,1/4&quot;<font
+  FACE="Wingdings">à</font> cir</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0080FF"><small>Notice that I did not defined c as c1 or any other c followed with a
+  number because variables from c1 to c99 are reserved variables. The fifth terms in
+  capacitor cf and inductor are ignored</small><small>, since neither initial conditions
+  are specified nor they matter in this part.</small></font></p>
+  <li><p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>The first
+    analysis we must perform is a direct current analysis to find out initial conditions for
+    the second analysis. The reason of this can be found in circuits text books. Remember that
+    Symbulator</small><small> may be the most powerful tool for circuit simulation ever made for a calculator, but
+    it still requires you to learn the basic circuit analysis concepts in order to achieve
+    good results.</small></font></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0000A0">s</font></small><font color="#0000A0"><small>q</small></font></font><small><font color="#0000A0" FACE="Courier New">\</font><font
+  FACE="Courier New"><font color="#0000A0">dc(cir)</font></small></p>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">After the dc
+    analysis have finished, ask for the values that will be the initial conditions in second
+    analysis: voltage in capacitor and current through inductor. Type the variables names and
+    write down the results.</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>v1</small></font></p>
+  <p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>il25</small></font></p>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Now rewrite
+    circuit description for second part of analysis. Since the current source has an u(-t)
+    then that source basically does not exist after t=0. Therefore, you must eliminate it from
+    description. </small></font></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>&quot;r2,1,2,2,0; </small><small>cf,1,0,2/10,20; </small><small>l25,2,0,1/4,10&quot;
+  <font
+  FACE="Wingdings">à</font> cir</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0080FF">The fifth terms in capacitor cf and inductor l25 descriptions now are
+  different from zero, since this elements have gained initial conditions while the current
+  source existed before t=0. Initial conditions are extremely important in this part.</font></small></p>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">The second
+    analysis we must perform is a transient analysis. </font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0000A0">s</font></small><font color="#0000A0"><small>q</small></font></font><small><font color="#0000A0" FACE="Courier New">\</font><font
+  FACE="Courier New"><font color="#0000A0">tr(cir)</font></small></p>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">After the
+    transient analysis have finished, retrieve your answer.</font></small></p>
+  </li>
+</ol>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>&nbsp;&nbsp;&nbsp;
+il25</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><i><small><font
+color="#0080FF">Answer: </font> </i><font
+color="#0080FF">There you go! This is the right answer... :oD Just scroll the
+answer to the right.</font></small></p>
+</body>
+</html>

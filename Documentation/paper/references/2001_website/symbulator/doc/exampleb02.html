@@ -1,0 +1,72 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><font color="#004080"><i>B02</i>
+AC analysis:<b> Input impedance at given frequency</b></font></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. </i>Given the following circuit, find Z between the two white
+nodes at a frequency of 100 rad/s.</font></small></p>
+<b>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><img
+SRC="image20.jpg" width="234" height="106"></font></small></p>
+</b><i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>There are different ways to solve this problem using </small><small>Symbulator</small><small>. I'll present
+here the easiest way, using one of the latest tools of </small><small>Symbulator</small><small>:<em> 
+thevenin</small><small>()</em>. This tool
+will provide us with the Zth, which is the input impedance of the circuit.</small></font></p>
+
+<ol>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Label nodes
+    and elements. Define a variable containing circuit description.&nbsp; I used this description:</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>&quot;r20,x,2,20; r10,2,y,10; </small><small>cx2,2,0,2/1000;
+  </small><small>l01,y,0,1/10&quot;<font
+  FACE="Wingdings">à</font> cir</small></font></p>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Run the
+    Thevenin/Norton tool:</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>sq\thevenin</small><small>(cir,x,0)</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0" FACE="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Done</small></font></p>
+  <p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0080FF">When asked, select </font><font color="#0000A0">AC</font><font
+  color="#0080FF"> (alternating current) analysis, and input </font><font color="#0000A0">100</font><font
+  color="#0080FF"> as frequency.</font></small></p>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Ask for the
+    input impedance.</font></small></p>
+  </li>
+</ol>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>zth</small></font></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+FACE="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+22-6*i</small></font></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>Answer:</small></i> <small> The answer </small><small>Symbulator</small><small>
+gives is the right one...</small></font></p>
+</body>
+</html>

@@ -1,0 +1,107 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<font size="4">
+
+<p ALIGN="CENTER"></font><font face="BankGothic Lt BT" size="2" color="#0080FF">Power
+Examples</font><font size="4"></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"></font><font color="#004080">P-1a
+AC analysis:<b> Load's power-factor correction</b></font><font size="4"></p>
+</font><i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. </i>Given the following circuit, calculate the value of the
+capacitor needed (in parallel) to obtain a circuit power factor of 100 percent.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><img src="exp1a1.jpg"
+width="198" height="164"></small></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<ol>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">We know that
+    when power factor is one, the angle between current and voltage is zero, since they are in
+    phase. Voltage has a reference phase of 0°. Therefore, power factor will be 1.00 when the
+    imaginary part of current is zero. Since we plan to solve this problem by simulating the
+    circuit, the first step is to find the value of the complex load of the motor. We make
+    this task by using a SCS Power tool called <font face="Courier New">load().</font><font
+    face="Times New Roman">From the drawing, we have the following monophasic data: |P|=1200W,
+    V=120&lt;0°, and lagging power factor of 0.7. We assume 100% of load. Run the tool:</font></font></small></p>
+  </li>
+</ol>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><font face="Courier New"
+color="#0000A0"><small>scs/load()</small></font></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">A
+drop-down dialog box appears, asking you to choose the type of data you know about the
+load. In our case, we know the monophasic real power, voltage, fp and percent of load.
+Therefore, we choose the fourth option: </font><font color="#0000A0">P1 + VLN + fp</font><font
+color="#0080FF">. After this, the program prompts a dialog box, where you must enter the
+values of these known variables. Input </font><font color="#0000A0">1200</font><font
+color="#0080FF">, </font><font color="#0000A0">120.</font><font color="#0080FF">, </font><font
+color="#0000A0">0.7</font><font color="#0080FF">,</font><font color="#0000A0"> lagging</font><font
+color="#0080FF"> and </font><font color="#0000A0">100 </font><font color="#0080FF">(we are
+using the whole load). At this point, the program displays in the IO area and also stores
+in variables the phasorial values of S, V, I and Z that match the requested fp and
+percent.</font></small></p>
+
+<p align="center" style="margin-left: 100; margin-right: 100"><small><img src="Exp1a3.gif"
+width="164" height="104" alt="Exp1a3.gif (1085 bytes)"></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font
+face="Times New Roman" color="#0080FF">Here is the Z value we were looking for. Write it
+down... 5.88+6.00*<strong><em>i</em></strong></font></small></p>
+
+<ol start="2">
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Now we will
+    simulate the circuit. Draw a circuit with the source, the complex load of the motor and a
+    capacitor with symbolic value cv. Label nodes and elements. Define variable <font
+    face="Courier New">cir</font> as a matrix containing circuit description. I used this
+    description:</font></small></p>
+  </li>
+  <font face="Courier New"><p style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>[[e1,1,0,120,0][r1,1,0,5.88+6.00*<strong><em>i</em></strong>,0][cx,1,0,cv,0]]<font
+  FACE="Wingdings">à</font> cir</small></font></p>
+  </font>
+</ol>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Simulate this
+circuit using direct current analysis.</font> </small>
+
+<ol start="3">
+  <font face="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>scs/ac(cir,2*Pi*60)</small></font></p>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Solve for cv
+    when the imaginary part of expression of current through voltage source equals zero.</font></small></p>
+  </li>
+  <font face="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>solve(imag(ie1)=0,cv)</small></font></p>
+  </font><p ALIGN="center" style="margin-left: 100; margin-right: 100"><small><img
+  src="Exp1a4.gif" width="164" height="104"></small></p>
+</ol>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Answer:</i> 225 microFarads. This is the right answer for value of
+capacitor. Notice that using SCS this problem have been solved in only three steps, while
+by hand it takes a lot of steps.</font></small></p>
+
+<p align="right" style="margin-left: 100; margin-right: 100"><font size="2"><a
+href="http://paxm.org/symbulator"><img src="../../microscs.gif"
+alt="Symbolic Circuit Simulator by Roberto Perez-Franco" border="0" hspace="2" vspace="2"
+width="30" ></a><a href="http://paxm.org"><img src="../../doc/dove.jpg" border="0" 
+ border="0"></a></font></p>
+</body>
+</html>

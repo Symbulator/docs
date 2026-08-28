@@ -1,0 +1,76 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><font color="#004080"><i>A02</i>
+DC analysis:<b> Circuit with dependent source</b></font></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. </i>Given the following circuit, find currents iA, iB and iC.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><img
+SRC="image6.jpg" width="327" height="97"></font></small></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<ol>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Label nodes
+    and elements.&nbsp; Specially, be sure
+    to erase the variable v1, since you'll use it to define a dependent source. Define a
+    variable containing circuit description. I used this description:</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>&quot;j56,0,1,5.6; </small><small>r18,1,0,18; </small><small>jd,1,0,-0.1*v1;
+  </small><small>r9,1,0,9; </small><small>j2,1,0,2&quot; <font FACE="Wingdings">à</font> cir</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0080FF">The value of dependent current source is defined as <font
+  FACE="Courier New">-0.1*v1 </font>because it is 0.1 times the voltage of vx, and
+  vx=(v0-v1). Remember that v0=0.</font></small></p>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Simulate
+    this circuit using direct current analysis.</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>sq\dc(cir)</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0" FACE="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Done</small></font></p>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Ask for
+    currents you wish.</font></small></p>
+  </li>
+</ol>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>ir18</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+color="#0000A0" FACE="Courier New">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font FACE="Courier New"><font color="#0000A0">3.</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>ijd</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0000A0" FACE="Courier New">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font color="#0000A0">-5.4</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>ir9</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+color="#0000A0" FACE="Courier New">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font FACE="Courier New"><font color="#0000A0">6.</font></font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><i><small><font
+color="#0080FF">Answer:</font></i> <font
+color="#0080FF"> iA=3 amperes, iB= -5.4 amperes and iC=6 amperes. These are the
+right answers.</font></small></p>
+</body>
+</html>

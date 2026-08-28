@@ -1,0 +1,136 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><font color="#004080"><i>B0</i>1
+FD analysis<big>:<b> </big>Transfer function, and poles and zeros ploting</b></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. Given the following circuit, find function h(s)=v<sub>input</sub>/i<sub>input</sub>,
+its poles and zeros, and plot its absolute value vs. <font FACE="Symbol">s</font> .
+(Remember that <font FACE="Symbol">s</font> is a real number).</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><img
+SRC="image23.jpg" width="200" height="104"></font></small></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>There are different ways to solve this problem using
+Symbulator</small><small>. I'll present
+here the easiest way, using one of the latest tools of Symbulator</small><small>:<em> 
+thevenin</small><small>()</em>. This tool
+will provide us with the Zth, which is the input impedance of the circuit.</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Realize that the requested transfer function is really the input impedance
+of circuit: v<sub>input</sub>/i<sub>input</sub></font></small></p>
+
+<ol>
+  <li><p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Label nodes
+    and elements. Define a variable
+    containing circuit description.&nbsp; I used this description:</small></font></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>&quot;r20,1,2,20,0; </small><small>r40,2,3,40,0; </small><small>l8,2,0,8,0;
+  </small><small>l2,3,0,2,0&quot;<font
+  FACE="Wingdings">à</font> cir</small></font></p>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Run the
+    Thevenin/Norton tool:</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>sq</small><small>\thevenin</small><small>(cir,1,0)</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0080FF">When asked, select </font><font color="#0000A0">FD</font><font
+  color="#0080FF"> (frequency domain) analysis.</font></small></p>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Now get the
+    impedance (or transferencee function) of the circuit:</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+  color="#0000A0" FACE="Courier New">z</font><font color="#0000A0">th</font><font
+  FACE="Wingdings" color="#0000A0">à</font></small><font color="#0000A0" size="1"
+  FACE="Courier New">h</font><font FACE="Courier New" size="1"></p>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Look for the
+    zeros of the function. Since we are not interested in a fraction expression of zero, but
+    in a floating point expression of zero, we ask for approximation.</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>approx(zeros(h,s))</small></font></p>
+  </font><p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0080FF"><img SRC="image26.gif" width="164" height="104"></font></small></p>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Look for the
+    poles of the function. Be aware that, since expression has a greater degree of s in the
+    numerator than in the denominator, <font FACE="UniversalMath1 BT">:</font> and -<font
+    FACE="UniversalMath1 BT">:</font> are poles of it. Since we are not interested in a
+    fraction expression of poles, but in a floating point expression of poles, we ask for
+    approximation.</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>approx(zeros(1/h,s))</small></font></p>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Now we want
+    to graph h(s)&#146;s absolute magnitude in function of <font FACE="Symbol">s</font> <i>.</font></small></p>
+  </li>
+</ol>
+</i><font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+color="#0000A0" FACE="Courier New">Graph abs(h)|s=</font><i><font color="#0000A0"><font
+FACE="Symbol">s</font> ,<font FACE="Symbol">s</font> </font></small></p>
+</i>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><img
+SRC="image27.gif" width="164" height="104"></font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+color="#0080FF" FACE="Courier New">ZoomFit</font><font color="#0080FF"> will present the
+graph in a good view. You can <font FACE="Courier New">ZoomBox</font> as you wish to get a
+closer view to any interesting part on it.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><img
+SRC="image28.gif" width="164" height="104"></font></small></p>
+<i>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Answer:</i>
+The answers and graph obtained are the right ones.</font></small></p>
+<b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Note:</small><font
+size="1"> </font></font></b></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Assume you have to calulate the transfert function of example 7, with
+Vin=v1-v0 and Vout=v3-v0.&nbsp; Then describe the circuit...</font></small></p>
+<font FACE="Courier New">
+
+<p style="margin-left: 100; margin-right: 100"></font><font color="#0000A0"
+FACE="Courier New"><small>&quot;e1,1,0,Vin,0; </small><small>r1,1,2,20,0; </small><small>l1,2,0,8,0;
+</small><small>r2,2,3,40,0; </small><small>l1,3,0,2,0&quot;</small></font><small><font
+color="#0000A0"> <font FACE="Wingdings">à</font> </font><font color="#0000A0"
+FACE="Courier New">cir</font></small><font FACE="Courier New"></p>
+</font>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Run </small><small>Symbulator</small><small>&#146;s
+fd()...</small></font></p>
+<font FACE="Courier New">
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>sq\</small><small>fd(cir)</small></font></p>
+</font>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">And</font><font
+color="#0000A0"> <font FACE="Courier New">v3/v1</font></font><font color="#0080FF"> gives
+the requested transfert function. It is that easy!</font></small></p>
+</body>
+</html>

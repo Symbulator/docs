@@ -1,0 +1,66 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><font color="#004080">A08</i>
+DC analysis:<b> Ideal OpAmp problem</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. Given the following circuit, find voltage in out node of OpAmp.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img src="image29.gif"
+width="255" height="145"></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Clean
+symbolic</small><small> variables.</small></font></p>
+<font FACE="Courier New">
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>DelVar
+r1,r2,vin</small></font></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Label nodes and elements.&nbsp; Define variable <font FACE="Courier New">cir</font> containing
+circuit description. I used this description:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>&quot;e1,1,0,vin;
+</small><small>r1,1,2,rr1; </small><small>r2,2,3,rr2; </small><small>o1,0,2,3&quot; <font
+FACE="Wingdings">à</font>cir</small></font></p>
+</font>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Simulate
+    this circuit using direct current analysis. </font></small></p>
+
+<ol START="2">
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0000A0">s</font></small><font color="#0000A0"><small>q</small></font></font><small><font color="#0000A0" FACE="Courier New">\</font><font
+  FACE="Courier New"><font color="#0000A0">dc(cir)</font>
+  </font>
+  </small></p>
+</ol>
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>No</small><small>w ask for
+    the voltage by typing:</small></font></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>v3</small></font></p>
+</font>
+
+<i>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Answer:</font></i>
+<font color="#0080FF">
+The answer obtained is the right one.</font></small></p>
+</body>
+</html>

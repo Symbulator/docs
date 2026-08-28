@@ -1,0 +1,315 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 3.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<font size="4">
+
+<p ALIGN="CENTER"></font><font face="BankGothic Lt BT" size="2" color="#0080FF">Power
+Examples</font><font size="4"></p>
+</font>
+
+<p ALIGN="CENTER"><font color="#004080">P-2a. easytran() tool:<b> Transformer tests,
+eficiency and voltage regulation at different fractions of load</b></font></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question.</i> A transformer with 500KVA, 2300/208V, 60 Hz, had the
+following results in tests:</font></small></p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="20%" align="center"><small><em><font color="#0080FF">Test</font></em></small></td>
+    <td width="20%" align="center"><small><em><font color="#0080FF">Voltage in V</font></em></small></td>
+    <td width="20%" align="center"><small><em><font color="#0080FF">Current in A</font></em></small></td>
+    <td width="20%" align="center"><small><em><font color="#0080FF">Real power in W</font></em></small></td>
+    <td width="20%" align="center"><small><em><font color="#0080FF">Side measured</font></em></small></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">Open circuit</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">208</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">85</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">1800</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">Low voltage</font></small></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">Short circuit</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">95</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">217.4</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">8200</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">High voltage</font></small></td>
+  </tr>
+</table>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Fill
+the following table:</font></small></p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="20%" align="center"><font color="#0080FF"><em><small>Load</small></em></font></td>
+    <td width="20%" align="center"><em><small><font color="#0080FF">Loss in copper in kW</font></small></em></td>
+    <td width="20%" align="center"><em><small><font color="#0080FF">Loss in iron in kW</font></small></em></td>
+    <td width="20%" align="center"><em><small><font color="#0080FF">% of voltage regulation</font></small></em></td>
+    <td width="20%" align="center"><em><small><font color="#0080FF">% of efficiency</font></small></em></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">25% @ FP=1</font></small></td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">50% @ FP=1</font></small></td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">75% @ FP=1</font></small></td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">100% @ FP=1</font></small></td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">125% @ FP=1</font></small></td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">25% @ FP=0.8 lagging</font></small></td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">50% @ FP=0.8 lagging</font></small></td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">75% @ FP=0.8 lagging</font></small></td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">100% @ FP=0.8 lagging</font></small></td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">125% @ FP=0.8 lagging</font></small></td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+    <td width="20%" align="center">&nbsp;</td>
+  </tr>
+</table>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><em>Solution.</em>
+The easytran() power tool is designed for this kind of problems. The first step is to run
+the tool and provide all the information that it requests.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+face="Courier New"><small>scs/easytran()</small></font></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">The
+first data asked is the alfa relation between high and low voltage. You can enter it
+either as a number or as a cocient. We entered </font><font color="#0000A0">2300/208.</font><font
+color="#0080FF">. Placing a dot after the number prevents the calculator of using exact
+manipulation, since in this case floating point is the apropiate. Then the program prompts
+for the information about <strong>open circuit test</strong>: select </font><font
+color="#0000A0"><em>low tension</em></font><font color="#0080FF"> and enter </font><font
+color="#0000A0">208.</font><font color="#0080FF">, </font><font color="#0000A0">85.</font><font
+color="#0080FF"> and </font><font color="#0000A0">1800.</font><font color="#0080FF"> in
+their respective spaces, and press Enter. Then the program prompts for the information
+about <strong>short circuit test</strong>: select </font><font color="#0000A0"><em>high
+tension</em></font><font color="#0080FF"> and enter </font><font color="#0000A0">95.</font><font
+color="#0080FF">, </font><font color="#0000A0">217.4</font><font color="#0080FF"> and</font><font
+color="#0000A0"> 8200.</font><font color="#0080FF"> in their respective spaces, and press
+Enter. After this, the program provides the different impedances used to describe the
+equivalent circuit of the transformer. This impedances are shown in the IO area and also
+stored in variables. Press Enter until the next dialog box appears.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Then,
+the program focuses on the load. A drop-down dialog box appears, asking you to choose the
+type of data you know about the load. In our case, we know the monophasic power, voltage,
+fp and percent of load. Therefore, we choose the second option: </font><font
+color="#0000A0">S1 + VLN + fp</font><font color="#0080FF">. After this, the program
+prompts a dialog box, where you must enter the values of these known variables. Supose we
+wish to start calculating the answers for the first load: 25% at fp 1.0. For this load,
+input </font><font color="#0000A0">5E5</font><font color="#0080FF">, </font><font
+color="#0000A0">208.</font><font color="#0080FF">, </font><font color="#0000A0">1.0</font><font
+color="#0080FF">,</font><font color="#0000A0"> lagging</font><font color="#0080FF"> (or
+leading, its the same for fp=1.0) and </font><font color="#0000A0">25</font><font
+color="#0080FF">. At this point, the program displays in the IO area and also stores in
+variables the phasorial values of S, V, I and Z that match the requested fp and percent.
+Press Enter until the next dialog box appears.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Now,
+the program is getting ready to simulate. It requests the value of the source: input</font><font
+color="#0000A0"> 2300.</font><font color="#0080FF"> and press Enter. After this, the
+program simulates the equivalent circuit of the transformer, with the specified source as
+input and the calculated load. This takes about 12 seconds, until it starts showing
+answers.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">The
+first answer it shows you is the Power Input, provided by the source; for the load we
+described it is</font><font color="#0000A0"> 1.261E5</font><font color="#0080FF"> Watts.
+Then, the Power Output, consumed by the load, which in this case is</font><font
+color="#0000A0"> 1.238E5</font><font color="#0080FF"> Watts. Press Enter and the program
+will display the loss in Fe, </font><font color="#0000A0">1790</font><font color="#0080FF">
+Watts; and the loss in Cu, </font><font color="#0000A0">515.1</font><font color="#0080FF">
+Watts. Press Enter and the program will present the % of efficiency, </font><font
+color="#0000A0">98.19</font><font color="#0080FF">%; and the % of voltage regulation, </font><font
+color="#0000A0">0.4763</font><font color="#0080FF">%. The last answer given is the percent
+of actual load (actual meaning the Z you are using now at the fp you are using now, not
+necessarly the 100% nominal load at FP=1.0) you need to use to get the greatest efficiency
+at the given power factor: </font><font color="#0000A0">186.4</font><font color="#0080FF">%.
+Press enter and the program goes back to the Home display. All answers are stored in
+variables. Also, the data you introduced is stored, so that the next time you run the
+program, it will appear already written in the spaces. This saves a lot of time, specially
+in problems like this one, in which you have to calculate several times <em>almost</em>
+the same thing, but with one thing changing: load percent. That's why load percent value
+is automatically returned to a value of 100%.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">So,
+we fill the first row of the table, with rounded values:</font></small></p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="20%" align="center"><font color="#0080FF"><em><small>Load</small></em></font></td>
+    <td width="20%" align="center"><em><small><font color="#0080FF">Loss in copper in W</font></small></em></td>
+    <td width="20%" align="center"><em><small><font color="#0080FF">Loss in iron in kW</font></small></em></td>
+    <td width="20%" align="center"><em><small><font color="#0080FF">% of voltage regulation</font></small></em></td>
+    <td width="20%" align="center"><em><small><font color="#0080FF">% of efficiency</font></small></em></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">25% @ FP=1</font></small></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>0.515</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.79</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>0.48</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>98.2</small></font></td>
+  </tr>
+</table>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">To
+fill the rest of the table, just run the program again and press Enter several times until
+you reach a value you want to change (normally, the load percent and/or the load percent).
+Change just the values that are new. You'll find the rest of the values (and drop-down
+selections) intact, just as you left them the last time you ran the program, and that's
+how they'll remain. Do it for the rest of the loads. We did it and here are our results,
+rounded to three digits:</font></small></p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="20%" align="center"><font color="#0080FF"><em><small>Load</small></em></font></td>
+    <td width="20%" align="center"><em><small><font color="#0080FF">Loss in copper in kW</font></small></em></td>
+    <td width="20%" align="center"><em><small><font color="#0080FF">Loss in iron in kW</font></small></em></td>
+    <td width="20%" align="center"><em><small><font color="#0080FF">% of voltage regulation</font></small></em></td>
+    <td width="20%" align="center"><em><small><font color="#0080FF">% of efficiency</font></small></em></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">25% @ FP=1</font></small></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>0.52</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.79</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>0.48</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>98.2</small></font></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">50% @ FP=1</font></small></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>2.03</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.78</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>0.90</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>98.5</small></font></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">75% @ FP=1</font></small></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>4.50</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.78</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.33</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>98.3</small></font></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">100% @ FP=1</font></small></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>7.97</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.77</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.79</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>98.0</small></font></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">125% @ FP=1</font></small></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>12.3</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.76</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>2.25</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>97.7</small></font></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">25% @ FP=0.8 lagging</font></small></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>0.47</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.77</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>0.88</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>97.9</small></font></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">50% @ FP=0.8 lagging</font></small></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.89</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.75</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.77</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>98.3</small></font></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">75% @ FP=0.8 lagging</font></small></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>4.23</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.74</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>2.67</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>98.5</small></font></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">100% @ FP=0.8 lagging</font></small></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>7.50</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.73</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>3.58</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>97.4</small></font></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">125% @ FP=0.8 lagging</font></small></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>11.6</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>1.71</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>4.52</small></font></td>
+    <td width="20%" align="center"><font color="#0000A0"><small>97.5</small></font></td>
+  </tr>
+</table>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">These
+are the right answers! By hand, filling the whole table would have taken hours. With <em>easytran()</em>,
+it is matter of 12 minutes.</font></small></p>
+
+<p align="right"><font size="2"><a href="http://paxm.org/symbulator"><img
+src="../../microscs.gif" alt="Symbolic Circuit Simulator by Roberto Perez-Franco"
+border="0" hspace="2" vspace="2" width="30" ></a><a href="http://paxm.org"><img
+src="../doc/dove.jpg" border="0"  border="0"></a></font></p>
+</body>
+</html>

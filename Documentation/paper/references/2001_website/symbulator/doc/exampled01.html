@@ -1,0 +1,56 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><font color="#004080">D01</font></i>
+<font color="#004080">
+AC analysis: <b>Symbolic values - tricky problem</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF"><em>Question.</em> A circuit consists of a resistance in serie with a
+capacitance. What are their values if a voltage of 240V r.m.s., 200Hz is applied, the
+current taken from the supply is 2A with a phase angle of 53.1 degrees? (Note: This
+current is 1.2 + 1.6*i in rectangular form.). No image is given.</font></small></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i><font FACE="Courier New">
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"></font><small><font
+color="#0080FF">Solving this problem by hand may be a pain in the hand (or somewhere
+else). Solving it with Symbulator is just a pleasure! First step, symbulate the circuit:<br>
+<br>
+</font><font color="#0000A0" face="Courier New">sq\ac(&quot;e1,1,0,240.*sqrt(2);
+r1,1,2,r; cx,2,0,c&quot;,2*Pi*200.)</small></font><font
+FACE="Courier New"></p>
+</font>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><small><font
+color="#0000A0" face="Courier New">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Done</font><font color="#0080FF"><br>
+<br>
+Second and last step, ask for the values that fit the current you're given. This is the
+tricky part:<br>
+<br>
+</font><font color="#0000A0" face="Courier New">solve(real(ir1)=1.2 and
+imag(ir1)=1.6,{r,c}) </font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0" face="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</small><small>r=101.8 </font><font color="#0080FF" face="Times New Roman">(in ohms)</font><font
+color="#0000A0" face="Courier New"> and c=5.86E-6 </font><font color="#0080FF"
+face="Times New Roman">(in faradays)</font><font color="#0080FF"><br>
+<br>
+<strong>P.S.</strong><em> I'll pay you a beer if you find ANY program that solves this
+easier and faster than Symbulator (try with SPICE, hehehe!). You'll pay me an orange juice
+(I don't drink alcoholic beverages) if you don't... ;o) Deal? </em></font></small></p>
+</body>
+</html>

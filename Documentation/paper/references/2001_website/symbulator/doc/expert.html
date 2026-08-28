@@ -1,0 +1,287 @@
+<html>
+
+<head>
+<title>Instructions - Symbolic Circuit Simulator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body link="#0080FF">
+<font size="4">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"></font><font
+face="BankGothic Lt BT" size="2" color="#0080FF">on-line documentation</font><br>
+<font color="#000080" face="BankGothic Lt BT" size="5">(Expert)</font><font size="4"></p>
+</font>
+
+<table border="1" width="100%" bgcolor="#FFFFFF" bordercolor="#FFFFFF"
+bordercolorlight="#FF0000" bordercolordark="#FFFFFF">
+  <tr>
+    <td width="100%" bgcolor="#FFEAEA"><p ALIGN="left"
+    style="margin-left: 100; margin-right: 100"><font color="#FF0000"><small><strong>Warning!</strong>
+    &nbsp; Symbulator's </small><small>(</small><small>Expert) mode is <u><strong>for expert users only</strong></u>. A
+    considerable amount of knowledge on a) circuits theory, b) Symbulator's concepts and c)
+    TI-89 use are required. Novice users should NOT attempt to use it until enough experience
+    is acquired, or else..</small><small>.</small></font></td>
+  </tr>
+</table>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>For the novice user, Symbulator is sort</small><small> of a black box, in which you enter
+a circuit description and receive some</small><small> answers. The </small></font><small><font color="#000080">(Expert) mode</font></small><small> <font
+color="#0080FF"> allows
+expert users</font></small><font
+color="#0080FF"><small> to make a hole
+in that box to cast some light in the process, in order to read</small><small>, modify
+and keep the equations
+involved in the symbulation process.</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Previous
+to the </small><small>(Expert) mode</small><small> explanations, I want to teach you two things that any expert Symbulator
+user&nbsp; must know:</small></font></p>
+
+<p ALIGN="left"
+style="background-color: rgb(255,230,242); margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small><strong><em>First lesson</em></strong><br>
+<br>
+<em>1. When symbulating <strong>AC or DC</strong> analysis, you don't need to use five
+terms in elements description if there are no ideal transformers in the circuit</em></small><small><em>.</em><br>
+<br>
+2. When symbulating in <strong>AC</strong>, if you plan to manipulate later the symbolic
+expressions you obtain, you <strong>must</strong> give complex names to elements and
+nodes, and complex values to those symbolic valued elements to avoid unexpected results.
+Remember that the TI-89 will only recognize a variable as complex if its name ends in
+&quot;_&quot;. So, <strong>in AC symbulations in </small><small>(Expert) mode</small><small>
+that imply manipulation </strong>after
+the Symbulator ends, you must name elements as described below:<br>
+<br>
+</font><font face="Courier New" color="#000080">e1_,a_,0,vs_</font></small><font
+color="#0080FF"><br>
+<br>
+<small>You can see that element's name (</font><font face="Courier New" color="#000080">e1_</font><font
+color="#0080FF">), node's name (</font><font face="Courier New" color="#000080">a_</font><font
+color="#0080FF">) and element's symbolic value (</font><font face="Courier New"
+color="#000080">vs_</font><font color="#0080FF">) end all in </font><font
+face="Courier New" color="#000080">_</font><font color="#0080FF">.&nbsp; This implies that
+all variables created, such as voltages, currents and powers, will also end in _. As I
+said, this is only necessary if you will manipulate the equations.</small></p>
+
+<p ALIGN="JUSTIFY"
+style="background-color: rgb(232,243,255); margin-left: 100; margin-right: 100"><small><strong><em>Second
+lesson</em></strong><br>
+<br>
+Under normal operation, my software first generates a set of 1st level equations and a
+list of 1st level unknowns. These <strong>1st level unknowns are voltages of nodes and
+currents of voltage sources and inductors</strong>, among others. After these equations
+are solved for these unknowns, a bunch of 2nd level expressions for 2nd level unknowns,
+which were generated while the first set was being written, will also be evaluated.&nbsp;
+These <strong>2nd level unknowns are currents in resistors and capacitors</strong>, among
+others. After this, a bunch of 3rd level expressions for 3rd level unknowns will be
+generated and evaluated. These <strong>3rd level unknowns are the real or complex powers</strong>
+of DC or AC analysis.<br>
+<br>
+<strong>1st level equations</strong> are functions of 1st level unknowns and elements
+values.&nbsp; <strong>2nd level expressions</strong> are also functions of 1st level
+unkowns and elements values. <strong>3rd level expressions</strong> are functions of 1st
+and 2nd level unknowns and elements values.</small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>Now, let's learn how to use the </small><small>(Expert) mode</small><small>.</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small>To symbulate using
+the </small><small>(Expert) mode</small><small>, run</small><small>.</small></p>
+
+</font>
+
+<ul>
+  <li><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0" face="Courier New"><small>sq\E</small></font><font color="#0000A0" face="Courier New"><small>xpert()</small></font></p>
+  </li>
+</ul>
+
+<font color="#0080FF">
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>You
+can help yourself with the typing using the Custom Menu's F5 items.</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small>Instantly,
+a prompt appears asking you to select between DC and AC symbulations. Select the
+one you need. </small><small>After
+some seconds, a Dialog box appears, asking you to select the work settings. These settings
+are the number of display digits and the format.</small></p>
+
+</font>
+
+<table border="1" width="99%" bgcolor="#FFFFFF" bordercolor="#FFFFFF"
+bordercolorlight="#FFFFFF" bordercolordark="#008000">
+  <tr>
+    <td width="100%" bgcolor="#E1FFE1"><p ALIGN="JUSTIFY"
+    style="margin-left: 100; margin-right: 100"><font color="#004000"><small><strong>Suggestion!</strong>
+    I recommend you to use <strong>9</strong> and <strong>Normal</strong>,
+    unless you have specific reasons for choosing another settings.</small></font></td>
+  </tr>
+</table>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>After
+some seconds, another Dialog will appear.</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><strong><em>If the
+1st level equations set is smaller than 250 characters</em></strong>, the dialog will
+include the following fields:</small></p>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><strong><small>1.
+1st level var's</small><small> </strong>or<em> First level unknowns</em>. These are the unknowns for
+which Symbulator will solve first. They are: a) the voltages of the nodes, b) the currents
+for the voltage sources, inductors and other special elements. You can replace one or more
+of these variables for others, but in a 1 for 1 rate.</small></font></p>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><strong><small>2.
+1st level eq's </strong>or <em>First level equations</em>. These are the equations for
+which Symbulator will solve first. They are: a) the nodal analysis equations of each node,
+b) the special equations of voltage sources, inductors and other special elements. You can
+edit these equations if you wish, but that would alter the answer.</small></font></p>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>The
+number of 1st level unknowns and 1st level equations must be equal in order to find a
+solution. You can add a new variable for each new equation you add.</small></p>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><strong><small>3. Known
+var'</small><small>s
+names</strong> or <em>Known answers names</em>. This are the names of those answers which
+value we already know, for the problem statement declares them. In the case there is more
+than one name, the names must be entered separated by commas, as shown: <font
+color="#000080">name,name,name</font>.</small></p>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><strong><small>4. Known
+var'</small><small>s values</small></strong><small> or <em>Known answers values</em></small><small>. This are the definitions of the
+answers listed above. Definitions must be as follow:<font color="#000080"> name=value</font>.
+In the case there is more than one definition, they must be separated by and's, as shown: <font
+color="#000080">name=value<strong> and</strong> name=value<strong> and</strong> name=value</font>.</small></p>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Below
+these, is a drop down menu:</font></small></p>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><strong><small>5. Do
+in </small><small>1st level</small><small>?</strong> or <em>What do you want me to do with 1st level equations and unknowns?</em>
+You can choose from three options:</small></p>
+
+<blockquote>
+  <p ALIGN="left" style="margin-left: 100; margin-right: 100"><strong><small>a.
+  Symbulate</small></strong><small>.
+  or <em>Only Symbulate them</em>. If you choose this, <strong>the Symbulator will symbulate</strong>
+  the equations and unknowns, considering of course any modification you've made to them,
+  and any condition of known answer you've defined. At the end, you'll have stored in memory
+  the voltages, currents and powers as usually.</small></p>
+  <p ALIGN="left" style="margin-left: 100; margin-right: 100"><strong><small>b.
+  Symbulate+ Keep</strong> or <em>Symbulate, keeping a string copy of the equations, the unknowns and
+  the known conditions</em>. If you choose this, <strong>the Symbulator will symbulate</strong>
+  as above, storing in memory the answers as above, but <strong>it will also save two or
+  three new variables</strong> called <font color="#000080">equation</font>, <font
+  color="#000080">unknown </font>and <font color="#000080">whenequs</font>. The first is a
+  string of the equations, the second is a string of a list of the unknowns, and the third
+  is a string of the equations of known answers.</small></p>
+  <p ALIGN="left" style="margin-left: 100; margin-right: 100"><strong><small>c.
+  Just</small><small> Keep</strong>
+  or <em>Do not symbulate, just keep a string copy of the equations, the unknowns and the
+  known conditions</em>. If you choose this,<strong> the Symbulator will NOT symbulate</strong>,
+  but only save two or three new variables called <font color="#000080">equation</font>, <font
+  color="#000080">unknown </font>and <font color="#000080">whenequs</font>, meaning the same
+  exposed above. </small></p>
+</blockquote>
+<i>
+
+<table border="1" bgcolor="#FFFFFF" bordercolor="#FFFFFF" bordercolorlight="#800080"
+bordercolordark="#FFFFFF">
+  <tr>
+    <td bgcolor="#F2E6FF"><p ALIGN="left" style="margin-left: 100; margin-right: 100"></i><font
+    color="#400040"><small><strong>Notice!</strong> &nbsp; The<em> input fields</em> of TI-89
+    Dialog boxes are limited to 255 characters. So, to avoid clogging them, the Symbulator
+    will activate an auxiliar mode in case the 1st level equations set is larger than 250
+    characters. If you experience that you cannot add new characters in the field, but still
+    prefer the input fields dialog box, try again with a smaller <em>display digits</em>
+    number (changing it in the first Dialog).</small></font></td>
+  </tr>
+</table>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><small><em><strong>If the 1st
+level equations set is larger than 250 characters</strong></em>, this set will be <strong><em>Only
+Kept </em></strong>by default and a dialog will appear with a warning: <strong>1st level
+equations set is too large to display, so it will be kept.</strong></small></p>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><small>Whether if <strong>you
+choosed <em>Only Keep</em></strong> or if <strong>your set was kept by default</strong>
+for being too large, you will be prompted a new dialog.</small></p>
+
+<blockquote>
+  <blockquote>
+    <p ALIGN="left" style="margin-left: 100; margin-right: 100"><strong><small>Choose</small></strong><small>
+    or <em>What do you want me to do with 2nd level unknowns expressions?</em> 2nd level
+    unknowns are those which are neither 1st level unknowns (which you can saw in the previous
+    dialog) nor powers. E.g. currents in resistors, capacitors and so. Expressions for these
+    unknowns as functions of 1st level unknowns have been generated, and you can decide wheter
+    to keep them or not. If you choose Delete, the program will delete them. If you choose
+    Keep, the program will keep them. <em>(Hehe! You cannot say my documentations are not
+    clear, right?)</em> If you choose <strong>Keep</strong>, a new Dialog will appear.</small></p>
+  </blockquote>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <blockquote>
+      <p ALIGN="left" style="margin-left: 100; margin-right: 100"><strong><small>Choose</small></strong><small>
+      or </small><em><small>Do you want me to generate</small><small> 3rd level unknowns expressions?</em> 3rd level
+      unknowns are consumed powers. E.g. variables starting with p or s. Expressions for these
+      unknowns as functions of 1st and 2nd level unknowns have <strong>not</strong> been
+      generated yet, but you can decide wheter to generate them or not. If you choose Do
+      nothing, the program will not generate them. If you choose Generate, the program will...
+      well, I'll let you guess what it will do.</small></p>
+    </blockquote>
+  </blockquote>
+</blockquote>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">You
+should keep (2nd level) and generate (3rd level) expressions only if you have reasons to
+think that you will use those expressions later. Otherwise, it is not necessary.</font></small></p>
+<i>
+
+<table border="1" width="100%" bgcolor="#FFFFFF" bordercolor="#FFFFFF"
+bordercolorlight="#FF0000" bordercolordark="#FFFFFF">
+  <tr>
+    <td width="100%" bgcolor="#FFEAEA"><p ALIGN="left"
+    style="margin-left: 100; margin-right: 100"></i>
+</font>
+    <font color="#FF0000"><small><strong>Warning!</strong>
+    The equations kept by this </small><small>Just</small><small> Keep feature of the
+    </small><small>(Expert) mode</small><small>  </small><small>should not</small><small> be
+    used for symbulations </small><small>of</small><small> circuit</small></font><font color="#FF0000"><small>s that include OpAmps. The reason is simple:
+    OpAmps require all answers to be
+    applied a limit() command, and both of these tasks are made when the answers are solved
+    and stored, in a posterior command line inside the code, which is not the case here,
+    because you are keeping them before they are solved.</small></font></td>
+  </tr>
+</table>
+
+<font color="#0080FF">
+
+<table border="1" width="99%" bgcolor="#FFFFFF" bordercolor="#FFFFFF"
+bordercolorlight="#FFFFFF" bordercolordark="#008000">
+  <tr>
+    <td width="100%" bgcolor="#E1FFE1"><p ALIGN="JUSTIFY"
+    style="margin-left: 100; margin-right: 100"><font color="#008000"><small><strong>Suggestion!</strong>
+    Do not worry if you feel this is messy by now: read the solved </small></font>
+</font>
+      <font color="#008000"><small><a href="advexam.html">advanced</a></small></font>
+
+<font color="#0080FF">
+
+<font color="#008000"><small><a href="advexam.html"> examples</a> and you'll see all clear.</small></font></td>
+  </tr>
+</table>
+
+<p style="margin-left: 100; margin-right: 100" align="right"><font size="2"><a
+href="http://paxm.org/symbulator"><img src="../microscs.gif"
+alt="Symbolic Circuit Simulator by Roberto Perez-Franco" border="0" hspace="2" vspace="2"
+width="30" ></a><a href="http://paxm.org"><img src="../doc/dove.jpg" border="0" border="0"
+></a></font></p>
+</font>
+</body>
+</html>

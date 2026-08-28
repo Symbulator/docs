@@ -1,0 +1,75 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"></i><font color="#004080"><em>B05</em>
+DC analysis: <b>Find input resistance of a net with dependent source</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. Given the following net, find the entry resistance.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img src="ex14cir.jpg"
+width="250" height="163"></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>There are different ways to solve this problem using Symbulator</small><small>. I'll present
+here the easiest way, using one of the latest tools of Symbulator:<em>  thevenin</small><small>()</em>. This tool
+will provide us with the Zth, which is the input impedance of the circuit.</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">1) Label nodes and elements. Define a variable containing circuit description. I used this
+description:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0000A0"><small>&quot;r10,1,2,10; </small><small>r12,2,3,12</small></font></font><font color="#0000A0"
+FACE="Courier New"><small>; </small><small>r5,3,0,5; </small><small>r20,1,4,20; </small><small>r8,3,4,8;
+</small><small>ed,2,0,0.6*vr8</small><small>&quot; <font FACE="Wingdings"><small>à</small></font>cir</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"
+face="Times New Roman">2) </font><font color="#0080FF">Run the Thevenin/Norton tool:</font></small><font
+FACE="Courier New"> 
+
+<ol START="2">
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0000A0">s</font></small><font color="#0000A0"><small>q</small></font></font></font><small><font color="#0000A0" FACE="Courier New">\</font><font
+  FACE="Courier New"><font FACE="Courier New"><font color="#0000A0">thevenin</small><small>(cir,1,0)</small></font></p>
+  </font>
+</ol>
+
+<p style="margin-left: 100; margin-right: 100"></font><small><font color="#0080FF"
+face="Times New Roman">When asked, select </font><font color="#0000A0"
+face="Times New Roman">DC</font><font color="#0080FF" face="Times New Roman"> (direct
+current) analysis.</font></small><font FACE="Courier New"></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"
+face="Times New Roman"><small>3) Now, find the value you need. </small></font></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>zth</small></font></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+color="#0000A0" face="Courier New">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font FACE="Courier New"><font color="#0000A0">6.705</font></small></p>
+<i>
+
+<p style="margin-left: 100; margin-right: 100"></font><font color="#0080FF"
+face="Times New Roman"><small>Answer:</i> The answer obtained is the right one.</small></font><font
+FACE="Courier New"></p>
+</font>
+</body>
+</html>

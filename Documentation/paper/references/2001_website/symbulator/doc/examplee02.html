@@ -1,0 +1,59 @@
+<html>
+
+<head>
+<title>Solved Problems</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body>
+
+<p align="center"><font color="#004080" size="3"><i>E02</i> DC analysis: <strong>Problem #5
+revisited: symbolic dependant source</strong></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>In the following circuit, find the value of k which will
+produce that vy equals zero. <em>(Hayt-Kemmerly)</em></small></font></p>
+
+<p align="center"><img src="pr04cir.jpg" width="300" height="130"></p>
+
+<i>
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><strong><small><font color="#0080FF">Solution.</font></small></strong></p>
+</i>
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>As
+we saw in problem ·5</small><small>, this problem can be solved in few steps usign the normal
+mode of Symbulator. Although, I want to use it to illustrate</small><small> Expert Mode
+use</small><small>.</small></font>  <font color="#0080FF"> <small>Define (Expert) Mode and run the symbulation, asking for the </font><font color="#0000A0">k</font><font color="#0080FF">
+at the end</font></small><font color="#0080FF"><small>:</small></font></p>
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Clear
+the symbolic variable.</small></font></p>
+  <font FACE="Courier New">
+  <p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0" face="Courier New"><small>DelVar
+  rx</small></font></p>
+</font>
+  <p style="margin-left: 100; margin-right: 100"><font color="#0000A0" FACE="Courier New"><small>sq\expert(&quot;e6,1,0,6;
+  </small><small>j2,0,y,2;
+  </small><small>ed,4,0,k*vx; </small><small>r1,1,x,1; </small><small>r4,x,0,4; </small><small>r2,x,y,2;
+  </small><small>r3,y,4,3&quot;):k</small></font></p>
+  <p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Press
+</font><font color="#000080">Enter</font><font color="#0080FF">, choose </font><font color="#000080">DC</font><font color="#0080FF">,
+  </font></small><small><font color="#0080FF">and wait until
+the first Dialog appears. We will leave </font><font color="#000080">9</font><font color="#0080FF"> 
+  and </font><font color="#000080">Normal</font><font color="#0080FF">, so just
+press Enter again and a second Dialog appears.&nbsp; In the 1st level unknowns
+list, replace</font><font color="#000080"> vy</font></small><font color="#0080FF"><small>
+  (which value we</small><small> know) for </small></font><small><font color="#000080">k</font><font color="#0080FF">
+  (which value we</small><small> don't know). Leave the second field as is. In the third field,
+enter</small></font><font color="#000080"> <small> vy</small></font><small><font color="#0080FF">. In the
+fourth field, enter </font></small><font color="#000080"><small>vy</small><small>=0</small></font><font color="#0080FF"><small>. In the fifth, choose
+  <strong>Symbulate</strong></small><small> because
+there is no need for further manipulation. Press </font><font color="#0000A0"> Enter</font><font color="#0080FF"> and prepare to smile.
+  A few s</small><small>econds later, it is done!</small></font></p>
+<i>
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></i><font color="#0000A0" FACE="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-13/4</small></font></p>
+  <p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small><strong>P.S.
+  </strong>(Expert)</small><small> Mode is not necessary here, but is a faster and more elegant way
+  to find the answer. A pleasure hard to explain... maybe it is just vanity.</small></font></p>
+
+</body>
+</html>

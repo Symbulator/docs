@@ -1,0 +1,120 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<font size="4">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"></font><font color="#004080"
+size="3"><i>A00</i> DC analysis: <strong>Circuit with numeric values</strong></font><font
+size="4"></p>
+</font><i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><strong><small><font
+color="#0080FF">Question.</font></small></strong></i></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Given the following circuit, find the value of i2 and the consumed power P
+in all elements.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img src="ex00cir.jpg"
+width="300" height="99"></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><strong><small><font
+color="#0080FF">Solution.</font></small></strong></p>
+</i>
+
+<ol>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Label nodes
+    and elements. Define a variable containing circuit description. I used this description:</font></small></p>
+  </li>
+</ol>
+
+<ol>
+  <font FACE="Courier New"><p style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>&quot;j1,0,1,1; e1,2,1,100;</small></font>
+  </font>
+  <font FACE="Courier New"><font
+  color="#0000A0"><small>r1,1,0,200; r2,2,0,50; j2,2,0,0.5&quot; <font
+  FACE="Wingdings">à</font>cir</small></font></p>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Simulate
+    this circuit using direct current analysis.</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>sq\dc(cir)</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0" face="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Done</small></font></p>
+  <li><p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Ask for the
+    current i2, which is the negative of the current through the voltage source. The name of
+    the current through an element is the letter i followed by the name of the element.</small></font></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>-ie1</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0" face="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  1.3</small></font></p>
+  <li><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Ask
+    for the consumed powers. The name of the power consumed in an element is the letter p
+    followed by the name of the element.</small></font></p>
+  </li>
+</ol>
+<font FACE="Courier New">
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0000A0">pj1</font></small></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+face="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+60</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>This
+value is positive. This means that the source j1 is consuming power.</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" face="Courier New"><small>pe1</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+face="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-130</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>This
+value is negative. This means that the source e1 is delivering power.</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" face="Courier New"><small>pr1</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+face="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+18</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" face="Courier New"><small>pr2</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+face="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+32</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" face="Courier New"><small>pj2</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+face="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+20</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>This
+value is positive. This means that the source j2 is consuming power.</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF"><i>Answer:</i> This are the right values. You can verify that the
+summatory of powers in the circuit equals zero.</font></small></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" face="Courier New"><small>pj1+pe1+pr1+pr2+pj2=0</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+face="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+true</small></font></p>
+</body>
+</html>

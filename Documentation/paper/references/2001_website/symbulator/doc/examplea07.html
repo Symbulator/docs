@@ -1,0 +1,94 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"></i><font color="#004080"><em>A07</em>
+AC analysis:<b> Mutual inductances</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><strong><em><small><font
+color="#0080FF">Question.</font></small></em></strong></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Given the following circuit (I know it's ugly, ok!), find the power
+consumed in source and in the resistors. Radial frequency is 100 r/s.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><img src="staped.jpg"
+width="261" height="197" alt="Wuahh!!"></small></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><strong><small><font
+color="#0080FF">Solution.</font></small></strong></p>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">We will solve this problem using the latest <em>ac()</em> tool.</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">1) Label nodes and elements. Define variable containing circuit description. I used this
+description:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>&quot;e1,1,0,100*sqrt(2);
+</small><small>l1,1,4,1; </small><small>l2,4,0,1; </small><small>l3,2,0,1; </small><small>l4,3,0,1;
+</small><small>r1,2,0,10; </small><small>r2,3,0,20; </small><small>m1,l1,l3,0.5;
+</small><small>m2,l2,l4,0.2&quot; <font FACE="Wingdings">à</font>cir</small></font></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Notice that the mutual inductance must be entered in H. Therefore, use the
+formula M=k*sqrt(L1*L2). Since all L's are 1H, k's values are the same that m's values.
+But this is only in this case. Notice also that the source value was entered as
+100*sqrt(2) since Vmax is the value you must enter, and Vmax=Vrms*sqrt(2). Notice,
+finally, that all inductors were defined from dot node to no-dot node. This is necessary
+when you use mutual inductances.</font></small></p>
+
+<ol START="2">
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Simulate
+    this circuit using alternating current analysis.</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>sq\ac(cir,100)</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0" FACE="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Done</small></font></p>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">The program
+    ac() has stored in variables the voltage in all nodes, the current in all elements and the
+    complex power in all elements.. Remember that <em>consumed rms</em> power is the half of
+    the real part of the complex power. Let's fir</font></small></p>
+  </li>
+</ol>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Let's first
+ask for the consumed rms power in voltage source.</font></small></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" FACE="Courier New"><small>real(se1)/2</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" FACE="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-1.10401 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">The negative
+sign means that the source is actually delivering power, instead of consuming it. Now,
+let's ask for the consumed rms power in resistors.</font></small></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" FACE="Courier New"><small>real(sr1)/2</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" FACE="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.842239</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" FACE="Courier New"><small>real(sr2)/2</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" FACE="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+0.261742</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><i>Answer:</i>
+The answers obtained are the right ones.</font></small></p>
+</body>
+</html>

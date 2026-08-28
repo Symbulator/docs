@@ -1,0 +1,68 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><font color="#004080"><i>A04</i>
+TR analysis<b>: RC circuit with given initial values</b></font></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. </i>Given the following circuit, find a symbolic expression for
+voltage in capacitor if <i>vs=9*cos(t)</i> and <i>vc(0)=2 volts.</font></small></p>
+</i>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><img
+SRC="image12.jpg" width="276" height="131"></font></small></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<ol>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Label nodes
+    and elements.&nbsp; Define variable <font
+    FACE="Courier New">cir</font> containing circuit description. I used this
+    description:</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>&quot;es,1,0,9*cos(t),0; </small><small>r3,1,2,3,0; </small><small>r6,2,0,6,0;
+  </small><small>cv,2,0,1/10,2&quot; <font
+  FACE="Wingdings">à</font> cir</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0080FF">Notice that I did not define c as c1 or any other c followed with a
+  number because variables from c1 to c99 are reserved variables. The fifth term in
+  capacitor cv description is 2 volts, the initial voltage in capacitor.</font></small></p>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Simulate
+    this circuit using transient analysis.</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0000A0">s</font></small><font color="#0000A0"><small>q</small></font></font><small><font color="#0000A0" FACE="Courier New">\</font><font
+  FACE="Courier New"><font color="#0000A0">tr(cir)</font></small></p>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Ask for
+    voltage you wish.</font></small></p>
+  </li>
+</ol>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>v2</small></font></p>
+</font>
+
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>Answer:</small></font></i> <font
+color="#0080FF"> <small> The answer Symbulator</small><small> gives is the right one, and is partially shown
+in the screen. You can see the rest in the calculator by scrolling to the right. Up to
+date, there is no other circuit simulator for any calculator that finds this answer.
+Symbulator</small><small>
+presents it in fraction form.</small></font></p>
+</body>
+</html>

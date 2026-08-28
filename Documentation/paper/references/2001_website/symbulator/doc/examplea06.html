@@ -1,0 +1,68 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"></i><font color="#004080"><em>A06</em>
+FD analysis:<b> Mutual inductances</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. Given the following circuit, find the value of current I3 when s
+= - 2 Np.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><img src="i149.jpg"
+width="227" height="163"></small></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">1) Label nodes and elements.&nbsp; Define variable <font FACE="Courier New">cir</font> containing
+circuit description. I used this description:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>&quot;e1,1,0,100*</small></font></font><small><font color="#0000A0" face="Symbol">d</font></small><font color="#0000A0"><small>(t),0;
+</small></font><font FACE="Courier New"><font color="#0000A0"><small>l5,1,2,5,0; </small><small>l6,2,3,6,0; </small><small>r6,2,0,6,0;
+</small><small>r5,3,0,5,0; </small><small>r4,1,4,4,0; </small><small>l4,4,3,4,0;
+</small><small>m3,l5,l4,3,0; </small><small>m2,l4,l6,2,0&quot;<font FACE="Wingdings">à</font> cir</small></font></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small> Notice that every inductance have been defined from
+the node with the dot to the node without the dot. Also notice that the 0 H mutual
+inductance was not defined, for it has no effect on the circuit. It is necessary to define
+it well in order to get right answers using the mutual inductance.</small></font></p>
+
+<ol START="2">
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Simulate
+    this circuit using frequency domain analysis.</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0000A0">s</font></small><font color="#0000A0"><small>q</small></font></font><small><font color="#0000A0" FACE="Courier New">\</font><font
+  FACE="Courier New"><font color="#0000A0">fd(cir)</font></small></p>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Now ask for
+    the current by typing, evaluating the answer when s equals -2:</font></small></p>
+  </li>
+</ol>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>ir5|s=-2</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color="#0000A0"><small>
+ -5</small></font></p>
+</font><i>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Answer:</i>
+The answer obtained is the right one.</font></small></p>
+</body>
+</html>

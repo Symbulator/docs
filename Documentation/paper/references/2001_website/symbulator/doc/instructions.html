@@ -1,0 +1,653 @@
+<html>
+
+<head>
+<title>Instructions - Symbolic Circuit Simulator</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body link="#0080FF">
+<font size="4">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"></font><font
+face="BankGothic Lt BT" size="2" color="#0080FF">on-line documentation</font><br>
+<font color="#0080FF" face="BankGothic Lt BT" size="5">Instructions</font><font size="4"></p>
+</font><i>
+
+<table border="1" width="100%" height="86" bordercolor="#FFCCFF" bordercolorlight="#FFECEC" bordercolordark="#FFEAFF">
+  <tr>
+    <td width="100%" bgcolor="#FFEAEA" height="80" bordercolor="#FFE8E8" bordercolorlight="#FFCCFF" bordercolordark="#FFEAFF"><p ALIGN="left"
+    style="margin-left: 100; margin-right: 100"><font color="#FF0000"><small><strong>Warning!</strong>
+    Before, during and after solving a problem with Symbulator, be sure to<strong>
+      turn</strong></small><small><strong> your
+    brain </strong></small><strong><small>&quot;ON&quot;</small></strong><small>. Symbulator will
+      symbulate the circuit for you with ease, accuracy and
+    speed, but you have to describe the circuit well, and ask for the right answers. Know
+    what you're doing and why you're doing it. Think when you use Symbulator, pay attention to
+    your teacher and practice a lot at home with a good textbook before your tests!&nbsp; Ok?
+    And quit playing games in your calculator... instead, </small><small>buy a GameBoy! Hum!</small></font></i></td>
+  </tr>
+</table>
+
+<i>
+
+<table border="1" width="100%" height="86" bordercolor="#FFCCFF" bordercolorlight="#FFECEC" bordercolordark="#FFEAFF">
+  <tr>
+    <td width="100%" bgcolor="#E1FFE1" height="80" bordercolor="#66FF66" bordercolorlight="#CCFF99" bordercolordark="#669900"><p ALIGN="left"
+    style="margin-left: 100; margin-right: 100"><font color="#669900"><strong><small>Notice</small><small>!</small></strong>
+      <small> I have good news and bad new.</small></font>
+      <p ALIGN="left" style="margin-left: 100; margin-right: 100"><i>
+
+<font color="#669900"><b><small>Good news 1.</small></b><small> The Symbulator
+is fully documented. The Impala Mode, the Expert Mode and every other detail of
+its capacities are explained in the complete reference for this software: <b>The
+Symbulator Book</b>, which comprises 12 chapters, has already been finished.</small></font></i></p>
+      <p ALIGN="left" style="margin-left: 100; margin-right: 100"><font color="#669900"><small><b>Bad
+      news.</b> The Symbulator Book is complete only in Spanish.</small></font></p>
+      <p ALIGN="left"
+    style="margin-left: 100; margin-right: 100"><font color="#669900"><b><small>Good
+      news 2.</small></b><small> You can download the first third of The
+      Symbulator book here: <a href="../english/notice.zip">Notice</a>, <a href="../english/preface.zip">Preface</a>,
+      <a href="../english/chapter1.zip">Chapter 1</a>, <a href="../english/chapter2.zip">Chapter
+      2</a>, <a href="../english/chapter3.zip">Chapter 3</a> and <a href="../english/chapter4.zip">Chapter
+      4</a>. You will have to install this <a href="../english/fonts.zip">Fonts</a>
+      in your PC Font folder. We all need to thank Tim Hutcheson and Doug
+      Burkett for translating these first 4 chapters.</small></font><i>
+
+<p ALIGN="left"
+    style="margin-left: 100; margin-right: 100"><font color="#669900"><b><small>Good
+news 3.</small></b><small> For the rest of it, the online documentation that is
+available in this site, should do the trick. It is not half as detailed as The
+Symbulator Book, but it is in English.</small></font><p ALIGN="left"
+    style="margin-left: 100; margin-right: 100"><font color="#669900"><small>In
+the future, I hope I can complete the translation of this book.</small></font></i></i></td>
+  </tr>
+</table>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>Here are the instructions on how</small><small> to describe a circuit,
+symbulate it and retrieve
+the answers using <em>Symbulator</em>.</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>After you've read all these instructions, please check out the examples
+section to get a deeper understanding</small><small>. There</small><small> are three steps in any circuit simulation (with any
+circuit simulator):</small> </font> </p>
+
+<ol>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Describe the
+    circuit.</font></small></p>
+  </li>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Simulate the
+    circuit.</font></small></p>
+  </li>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Retrieve the
+    answers.</font></small></p>
+  </li>
+</ol>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>In <em>Symbulator</em>,
+depending on the case, </small><small>these three steps can be typed </small><small>separately</small><small> or in one line.</small></font></p>
+
+<hr width="400" color="#0080FF">
+
+<p style="margin-left: 100; margin-right: 100"><strong><font color="#0080FF">Describe the
+circuit</font></strong></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Name
+each node and element in the circuit (you may write down </small><small>these names
+in the paper </small><small>circuit drawing, in
+order to remember them later). Then describe the circuit in a </small><small>matrix-like
+string</small><small>.
+You may store
+this string</small><small> in a variable, for example one called <font FACE="Courier New">cir</font>.</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>The circuit
+description must follow this</small><small> notation (the reason for the 0's is explained below):</small></font>
+</p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="18%" align="center"><strong><font color="#0080FF"><small>Element</small></font></strong></td>
+    <td width="48%" align="center"><strong><font color="#0080FF"><small>Description in
+      Symbulator</small></font></strong></td>
+    <td width="34%" align="center"><strong><font color="#0080FF"><small>Additional
+      </small><small>comment</small></font></strong></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><em><font color="#0080FF"><small>Resistor</small></font></em></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>r#,node1,node2,real</small><small>value,0</small></font></td>
+    <td width="34%" align="center"><small><font color="#0080FF">This element's value is
+    assumed to be in ohms. It can be a number (e.g. 3.4) or it can be a variable (e.g. r3).</font></small></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><em><font color="#0080FF"><small>Impedance</small></font></em></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>r#,node1,node2,complexvalue,0</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>This element's value should be
+    complex and is assumed to be in ohms.&nbsp; It can be a number (e.g. 3.4+2.5*<strong><em>i</em></strong>)
+    or it can be a variable (e.g. r3_). Notice the _ after the variable to indicate it is
+    complex. This is not an obligation in must cases, but is a healthy habit.</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><em><font color="#0080FF"><small>Voltage source</small></font></em></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>e#,+node,-node,value,0</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>This element's value is
+    assumed to be in volts. The current in this source is defined from +node to -node. Values
+    of sources in AC analysis should always be complex valued phasors, not time dependent
+    functions. The instructions to describe dependent source are presented below.</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><em><font color="#0080FF"><small>Current source</small></font></em></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>j#,node1,node2,value,0</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>This element's value is
+    assumed to be in amperes. The current in this source is defined from node1 to node2.
+    Values of sources in AC analysis should always be complex valued phasors, not time
+    dependent functions. The instructions to describe dependent source are presented below.</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><em><font color="#0080FF"><small>Short circuit</small></font></em></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>s#,node1,node2,0,0</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>You can know the current
+      </small><small>through</small><small> it.</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><em><font color="#0080FF"><small>Inductance</small></font></em></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>l#,node1,node2,value,initialCurrent</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>This element's value is
+    assumed to be in henrys. This element behaves as short circuit in DC analysis.</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><em><font color="#0080FF"><small>Mutual inductance</small></font></em></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>m#,1stInductorName,2ndInductorName,value,0</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>The mutual inductance value
+    should be entered in henrie</small><small>s. Any <strong><em>k</em></strong> value must be translated to
+    henrys using the formula H=k*sqrt(L1*L2).</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><em><font color="#0080FF"><small>Capacitance</small></font></em></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>c$,+node,-node,value,initialVoltage</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>This element's value is
+    assumed to be in farads. Behaves as open circuit in DC analysis.</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><em><font color="#0080FF"><small>Ideal Op. Amp.</small></font></em></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>o#,+node,-node,outnode,0</small></font></td>
+    <td width="34%" align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><em><font color="#0080FF" face="Times New Roman"><small>Ideal
+    Transformer</small></font></em></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>t#,node1,node2,N1,N2</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>Does not defines inductances.
+    Node1 and node2 are the upper nodes of transformer, and lower node of both sides is
+    reference node 0.</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><font color="#0080FF" face="Times New Roman"><em><small>Impedance
+    parameters two-port</small></em></font></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>z#,node1,node2,0,0</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>Node1 and node2 are the upper
+    nodes of the two-port, and lower node of both sides is reference node 0. This element uses
+    the following variables: z#11,&nbsp; z#12,&nbsp; z#21,&nbsp; z#22. This variables may have
+    stores values.</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><font color="#0080FF" face="Times New Roman"><em><small>Admittance</small><small>
+      parameters two-port</small></em></font></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>y#,node1,node2,0,0</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>Node1 and node2 are the upper
+    nodes of the two-port, and lower node of both sides is reference node 0. This element uses
+    the following variables: y#11,&nbsp; y#12,&nbsp; y#21,&nbsp; y#22. This variables may have
+    stores values.</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><font color="#0080FF" face="Times New Roman"><em><small>Hybrid
+    parameters two-port</small></em></font></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>h#,node1,node2,0,0</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>Node1 and node2 are the upper
+    nodes of the two-port, and lower node of both sides is reference node 0. This element uses
+    the following variables: h#11, h#12, h#21, h#22. This variables may have stores values.</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><font color="#0080FF" face="Times New Roman"><em><small>Gain
+    parameters two-port</small></em></font></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>g#,node1,node2,0,0</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>Node1 and node2 are the upper
+    nodes of the two-port, and lower node of both sides is reference node 0. This element uses
+    the following variables: g#11,&nbsp; g#12,&nbsp; g#21,&nbsp; g#22. This variables may have
+    stores values.</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><font color="#0080FF" face="Times New Roman"><em><small>Transmission
+    or ABCD parameters two-port</small></em></font></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>a#,node1,node2,0,0</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>Node1 and node2 are the upper
+    nodes of the two-port, and lower node of both sides is reference node 0. This element uses
+    the following variables: a#11,&nbsp; a#12,&nbsp; a#21,&nbsp; a#22. This variables may have
+    stores values.</small></font></td>
+  </tr>
+  <tr>
+    <td width="18%" align="center"><font color="#0080FF" face="Times New Roman"><em><small>Inverse
+    transmission two-port</small></em></font></td>
+    <td width="48%" align="center"><font FACE="Courier New" color="#0000A0"><small>b#,node1,node2,0,0</small></font></td>
+    <td width="34%" align="center"><font color="#0080FF"><small>Node1 and node2 are the upper
+    nodes of the two-port, and lower node of both sides is reference node 0. This element uses
+    the following variables: b#11, b#12, b#21, b#22. This variables may have stores values.</small></font></td>
+  </tr>
+</table>
+<i>
+
+<table border="1" width="100%" height="47">
+  <tr>
+    <td width="100%" bgcolor="#FFE8E8" height="41"><p ALIGN="JUSTIFY"
+    style="margin-left: 100; margin-right: 100"><font color="#FF0000"><small><em><strong>Warning!</strong>
+    </em>Since all rows in a matrix must have the same number of terms, you must fill with
+    zeroes the remaining spaces in the description of an element until you have all rows of
+    equal lenght. The row size of circuits description</small><small> will be, therefore, determined by the
+    largest element you describe. Some analysis, such as FD and TR,</small><small>
+      require 5 elements-per-row descriptions</small><small>, and will
+    return Dimention or Syntax </small><small> errors when you try to use them with 4 elements-per-row
+      description</small><small>s.
+      On the other hand, DC and AC a</small><small>llow you to use 4
+      elements-per-row, as
+      long as there are not ideal transformers in the circuit, which require 5
+      elements to be described.</small><small> Therefore...</small></font></td>
+  </tr>
+</table>
+
+<table border="1" width="100%" height="66">
+  <tr>
+    <td width="100%" bgcolor="#F0FFF0" height="60"><p
+    style="margin-left: 100; margin-right: 100"><font color="#008000"><em><small><b>Suggestion!
+      </b>Unless you are an expert user, </small><small>I strongly recommend you to use 5 elements-per-row
+      descriptions</small><small> at all times. So fill
+    with 0's until the row has 5 elements, as shown in the table above.</small></em></font></td>
+  </tr>
+</table>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><b><font color="#0080FF" size="3">About
+the names you should not use</font></b></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>You
+should avoid using the following variables in your circuit description (you should also
+erase all these variables before any analysis).</small></font></p>
+
+<table BORDER="1" CELLSPACING="1" CELLPADDING="4" WIDTH="756">
+  <tr>
+    <td WIDTH="364" VALIGN="top" bgcolor="#FFECEC"><p ALIGN="center"
+    style="margin-left: 0; margin-right: 0"><strong><font color="#FF0000"><small>Do not use...</small></font></strong></td>
+    <td WIDTH="368" VALIGN="TOP"><p ALIGN="center" style="margin-left: 0; margin-right: 0"><strong><small><font
+    color="#0080FF">...because</font></small></strong></td>
+  </tr>
+  <tr>
+    <td WIDTH="364" VALIGN="top" bgcolor="#FFECEC"><p ALIGN="center"
+    style="margin-left: 0; margin-right: 0"><small><font color="#FF0000">variables that begin
+    with greek letters</font></small></td>
+    <td WIDTH="368" VALIGN="TOP"><p ALIGN="center" style="margin-left: 0; margin-right: 0"><small><font
+    color="#0080FF">they are used internally in the program</font></small></td>
+  </tr>
+  <tr>
+    <td WIDTH="364" VALIGN="top" bgcolor="#FFECEC"><p ALIGN="center"
+    style="margin-left: 0; margin-right: 0"><font color="#FF0000"><small>variables that begin
+    with i, v, p and s</small></font></td>
+    <td WIDTH="368" VALIGN="TOP"><p ALIGN="center" style="margin-left: 0; margin-right: 0"><small><font
+    color="#0080FF">they are used by Symbulator to store answer values or expressions</font></small></td>
+  </tr>
+  <tr>
+    <td WIDTH="364" VALIGN="top" bgcolor="#FFECEC"><p ALIGN="center"
+    style="margin-left: 0; margin-right: 0"><font color="#FF0000"><small>variables with
+    &quot;floor&quot; string in their name</small></font></td>
+    <td WIDTH="368" VALIGN="TOP"><p ALIGN="center" style="margin-left: 0; margin-right: 0"><small><font
+    color="#0080FF">Symbulator may be confused by them</font></small></td>
+  </tr>
+  <tr>
+    <td WIDTH="364" VALIGN="top" bgcolor="#FFECEC"><p ALIGN="center"
+    style="margin-left: 0; margin-right: 0"><font color="#FF0000"><small>variables
+      rc,xc, yc, zc,tc,ok, those between c1 and c99 and any other TI-89 reserved
+      variable (they are listed in the manual)</small></font></td>
+    <td WIDTH="368" VALIGN="TOP"><p ALIGN="center" style="margin-left: 0; margin-right: 0"><small><font
+    color="#0080FF">they are reserved variables in TI-89</font></small></td>
+  </tr>
+</table>
+<b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF" size="3">About node labeling</font></p>
+</b>
+
+<table border="1" width="100%" height="48">
+  <tr>
+    <td width="100%" bgcolor="#FFEAEA" height="42"><p
+    style="margin-left: 100; margin-right: 100"><font color="#FF0000"><small><strong><em>Warning!
+    </em></strong>There must <u>always</u> exist at least one 0 node in the circuit
+    description. Be sure to label one node as 0, because otherwise SCS will stop the
+    calculations and tell you to do so.</small></font></td>
+  </tr>
+</table>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Reference node (ground) must always be labeled 0. The rest of the nodes
+receive each one a label. Node label may be a number or a name. The following are examples
+of valid node labels:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">0,
+1, 2, 3, 4</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">0,
+node1, xnode, mynode</font></small></p>
+</font><b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF" size="3">About element labeling</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Each element should receive a label, which first letter corresponds to its
+type. The rest of label, after the first letter, may be a number or a name. The following
+are examples of valid element labels:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>r1,
+l2, c</small><small>q</small><small>, e4, j5, s6, o7, t2, yp, zw, hd</small> </font></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">rwhite,
+lgreen, cbig, ealtern, jpretty, sxyz, opamp1, transfo, yparam, zport, hport</font></small></p>
+</font><b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></b><strong><font
+color="#0080FF" size="3">About passive element values</font></strong></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">The values of all elements may be numerical or symbolical. For example, <b>resistor</b>
+values may be:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">1000,
+rvalue, res, 2*q-3, 2*g+3*<strong><em>i</em></strong></font></small></p>
+</font>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">If you want to
+describe an <b>impedance</b>, use a resistor and give it a complex value. The following is
+an example on how to describe an impedance:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">[r1,1,0,4+3*<strong><em>i</em></strong>,0]</font></small></p>
+</font>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><font color="#0080FF"
+FACE="Courier New"><small>[r1,1,0,rz_,0]</small></font></p>
+<b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Inductors</b> and <b>capacitors</b> can have also numeric or symbolic
+values. You do <b>not</b> have to define inductors and capacitors values as L*s or
+1/(C*s), or as 3*i or 1/(3*i) since the programs in SCS performs this task for you. </font></small></p>
+<b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></b><strong><font
+color="#0080FF" size="3">About active element values</font></strong></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><strong><em><small><font
+color="#0080FF">Independent:</font></small></em></strong></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Values of independent voltages or current sources in <font
+FACE="Courier New">dc()</font><font face="Times New Roman"> should be real, such as:</font></font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">120,
+10*k-3</font></small></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small><font face="Times New Roman">In </font><font FACE="Courier New">fd()</font>
+and <font FACE="Courier New">tr()</font> these values may be real numerical, symbolical or
+time dependent algebraic </small><small>expressions</small><small>&nbsp; such as:</small></font></p>
+<font FACE="Courier New">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">120,
+35*t+2, 120*sin(60*t)*e^(-2*t)</font></small></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Values of independent voltages or current sources in <font
+FACE="Courier New">ac()</font> must be <strong><em>phasors</em></strong> (whether
+numerical or symbolical), such as:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"></font><small><font
+color="#0080FF" FACE="Courier New">120, 100+20*<strong><em>i</em></strong>,
+realPart+imagPart*<strong><em>i</em></strong></font></small></p>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><b><small>Dependent</b>: Simulation of dependent sources has never been so easy.
+Values of dependent voltages or current sources may also have symbolical or algebraic
+</small><small>expressions</small><small> as values. Of course, they include in their value the name of the variable in
+which they depend. For example: A voltage or current source that depends on the voltage of
+node 3 will have a value like this one:</small></font></p>
+<font FACE="Courier New">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">150*v3</font></small></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">And a voltage or current source that depends on the current in resistor r2
+will have a value like this one:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">150*ir2</font></small></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">In the examples section you&#146;ll see a clear example on how to describe
+a circuit (and simulate it) when it contains dependent sources. It is really easy!</font></small></p>
+
+<table border="1" width="100%" height="65">
+  <tr>
+    <td width="100%" bgcolor="#FFE8E8" height="59"><p ALIGN="JUSTIFY"
+    style="margin-left: 100; margin-right: 100"><small><em><font color="#FF0000"><strong>Warning!</strong>
+    Be sure that the variables used to define dependencies are not previously defined. For
+    example, if you want to define a dependent source with 150*v3, be sure that v3 is not
+    defined in current folder. Otherwise, the simulation will fail and corrupt the answers.</font></em></small></td>
+  </tr>
+</table>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Several circuit description examples will be given in the examples
+section.</font></small></p>
+
+<table border="1" width="100%" height="47">
+  <tr>
+    <td width="100%" bgcolor="#FFEAFF" height="41">
+      <p ALIGN="center" style="margin-left: 100; margin-right: 100"><em><font color="#800080"><b><small>Important
+      </small><small>Notice on Sources</small><small>!</small></b></font></em></p>
+      <p ALIGN="JUSTIFY"
+    style="margin-left: 100; margin-right: 100"><em><font color="#800080"><small>1)
+      </small><small>In
+      AC</small><small> analysis, sources are assumed to be complex, and should be valued with<b>
+      phasors</b>.</small></font></em>
+
+<p style="margin-left: 100; margin-right: 100"><font size="2" color="#800080">2)
+In FD and TR analysis, if the source is:</font></p>
+
+      <p style="margin-left: 100; margin-right: 100"><font size="2" color="#800080">a)
+a <b> time-dependant </b> source, you should define it as a function of time,
+example 9*exp(-2*t)*sin(3*t) or </font><i><font size="2" color="#800080">A*exp(-B*t)*sin(C*t)</font></i></p>
+
+<p style="margin-left: 100; margin-right: 100"><font size="2" color="#800080">b)
+a <b> constant-valued</b>  source (battery), you should define it as whether a number
+example, 10, or a symbolic variable followed by
+*u(t), example e*u(t),</font></p>
+
+<p style="margin-left: 100; margin-right: 100"><font size="2" color="#800080">c)
+a <b> dependant source</b>, you should write its value naturally, just as you would in DC or
+AC, example 2.5*ir2</font></p>
+
+    </td>
+  </tr>
+</table>
+
+<hr width="400" color="#0080FF">
+
+<p style="margin-left: 100; margin-right: 100"></i><strong><font color="#0080FF">Simulate
+the circuit</font></strong></p>
+
+<i>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">If you have
+stored your circuit description in a variable, let's say one called <font
+FACE="Courier New">cir</font>, run the program that fits the analysis you need.</font></small>
+
+<ul>
+  <li><p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>To perform a
+    <b>direct current</b> analysis, type: <font FACE="Courier New">sq/dc(cir)</small></font></font></p>
+  </li>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">To perform a
+    <b>frequency domain</b> analysis, type: </font><font color="#0080FF" FACE="Courier New">sq/fd(cir)</small></font><font
+    FACE="Courier New"></p>
+  </li>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">To perform a
+    <b>transient </b>analysis, type: </font><font color="#0080FF" FACE="Courier New">sq/tr(cir)</small></font></p>
+  </li>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">To perform
+    an <b>alternating current</b> analysis, type: </font><font color="#0080FF"
+    FACE="Courier New">sq/</font><font color="#0080FF"><font FACE="Courier New">ac(cir,w) </font>(w
+    is radial frequency value in rad/s)</font></small></p>
+  </li>
+</ul>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">You can also join the description and simulation step in one, as follows:</font></small></p>
+
+<ul>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">To perform a
+    <b>direct current</b> analysis, type:</font><font color="#0080FF" FACE="Courier New">
+    sq/dc(&quot;description&quot;)</small></font><font FACE="Courier New"></p>
+  </li>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">To perform a
+    <b>frequency domain</b> analysis, type: </font><font color="#0080FF" FACE="Courier New">sq/fd(&quot;description&quot;)</small></font><font
+    FACE="Courier New"></p>
+  </li>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">To perform a
+    <b>transient </b>analysis, type:<font FACE="Courier New"> </font></font><font
+    color="#0080FF" FACE="Courier New">sq/tr(&quot;description&quot;)</small></font></i></p>
+    <i></li>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">To perform
+    an <b>alternating current</b> analysis, type:<font FACE="Courier New"> </font></font><font
+    color="#0080FF" FACE="Courier New">sq/ac(&quot;description&quot;,w)</small></font></p>
+  </li>
+</ul>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>As you can see, to execute a program in Symbulator,</small><small> you can place either the <u>name
+of the variable</u> in which you stored the circuit description, or you can
+place the circuit <u>description</u> itself. The same for radial frequency: you can
+type the value of radial frequency or the name of the variable in which the value of
+radial frequency is stored.</small></font></p>
+
+<table border="1" width="99%" height="123">
+  <tr>
+    <td width="100%" bgcolor="#E1FFE1" height="117"><p ALIGN="JUSTIFY"
+    style="margin-left: 100; margin-right: 100"><font color="#008000"><small><strong>Suggestion!</strong>
+    If you are only interested in a few answers from the transient analysis of a rather big
+    circuit, then you
+    can use a trick to save up to 75% of time. Interested? <a href="examplef01.html">Click
+    here!</a></small></font></td>
+  </tr>
+</table>
+</i>
+
+<hr width="400" color="#0080FF">
+
+<p style="margin-left: 100; margin-right: 100"><strong><font color="#0080FF">Retrieve the
+answers</font></strong></p>
+
+<p style="margin-left: 100; margin-right: 100"><i><small><font color="#0080FF">Retrieve
+the answers you want. At the end of the program (if the circuit description was correct)
+you'll find stored in variables the value of voltage in each node, the current through
+each device and the power in each device.&nbsp; It is easy! You can use VAR-LINK to see
+this answers or just type the name of the variable in the entry line.</font></small></i></p>
+
+<table border="1" width="100%" height="596">
+  <tr>
+    <td width="50%" bgcolor="#E6F2FF" align="center" height="15"><font color="#0080FF"><small><strong>Analysis</strong></small></font></td>
+    <td width="50%" bgcolor="#E6F2FF" align="center" height="15"><font color="#0080FF"><small><strong>Answers
+    stored in variables</strong></small></font></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center" height="195"><font color="#0080FF"><small>Direct current <em>dc()</em></small></font></td>
+    <td width="50%" align="left" height="195"><font color="#0080FF"><small>The <strong>voltage</strong> of
+    each node is stored in a variable called <strong><font FACE="Courier New">v#</font></strong>,
+    where # is the label of the node.</small></font><p><font color="#0080FF"><small>The <strong>current</strong>
+    through each element is stored in a variable called <strong><font FACE="Courier New">i#</font></strong>,
+    where # is the label of the element.</small></font></p>
+      <p><font color="#0080FF"><small>The <strong>voltage drop</strong></small><small>
+      through each element is stored in a variable called </small><strong><font FACE="Courier New"><small>v#</font></strong>,
+    where # is the label of the element.</small></font></p>
+    <p><font color="#0080FF"><small>The <strong>power</strong> consumed by each element is
+    stored in a variable called <strong><font FACE="Courier New">p#</font></strong>, where #
+    is the label of the element.</small></font></p>
+    <p><font color="#0080FF"><small>If the circuit does not include ideal
+    transformers,</small><small> a matrix of 4 columns</small><small> can
+    be used instead of a matrix of 5</small><small> columns, because the fifth
+    column would be filled with useless 0's</small><small>.</small></font></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center" height="195"><font color="#0080FF"><small>Alternating current <em>ac()</em></small></font></td>
+    <td width="50%" align="left" height="195"><font color="#0080FF"><small>The <strong>voltage</strong> of
+    each node is stored in a variable called <strong><font FACE="Courier New">v#</font></strong>,
+    where # is the label of the node.</small></font><p><font color="#0080FF"><small>The <strong>current</strong>
+    through each element is stored in a variable called <strong><font FACE="Courier New">i#</font></strong>,
+    where # is the label of the element.</small></font></p>
+      <p><font color="#0080FF"><small>The <strong>voltage drop</strong></small><small>
+    through each element is stored in a variable called </small><strong><font FACE="Courier New"><small>v#</small></font></strong><small>,
+    where # is the label of the element.</small></font></p>
+    <p><font color="#0080FF"><small>The <strong>complex power</strong> in each element is
+    stored in a variable called <strong><font FACE="Courier New">s#</font></strong>, where #
+    is the label of the element.</small></font></p>
+    <p><font color="#0080FF"><small>If the circuit does not include ideal
+    transformers,</small><small> a matrix of 4 columns can
+    be used instead of a matrix of 5</small><small> columns, because the fifth
+    column would be filled with useless 0's</small><small>.</small></font></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center" height="80"><font color="#0080FF"><small>Frequency domain <em>fd()</em></small></font></td>
+    <td width="50%" align="left" height="80"><font color="#0080FF"><small>The <strong>voltage</strong> of
+    each node is stored in a variable called <strong><font FACE="Courier New">v#</font></strong>,
+    where # is the label of the node.</small></font><p><font color="#0080FF"><small>The <strong>current</strong>
+    through each element is stored in a variable called <strong><font FACE="Courier New">i#</font></strong>,
+    where # is the label of the element.</small></font><p><font color="#0080FF"><small>Here
+      you must always use</small><small> matrix of 5</small><small> columns</small><small>
+      to describe the circuit</small><small>.</small></font></td>
+  </tr>
+  <tr>
+    <td width="50%" align="center" height="81"><font color="#0080FF"><small>Transitory analysis <em>tr()</em></small></font></td>
+    <td width="50%" align="left" height="81"><font color="#0080FF"><small>The <strong>voltage</strong> of
+    each node is stored in a variable called <strong><font FACE="Courier New">v#</font></strong>,
+    where # is the label of the node.</small></font><p><font color="#0080FF"><small>The <strong>current</strong>
+    through each element is stored in a variable called <strong><font FACE="Courier New">i#</font></strong>,
+    where # is the label of the element.</small></font><p><font color="#0080FF"><small>Here
+      you must always use</small><small> matrix of 5</small><small> columns to
+      describe the circuit</small><small>.</small></font></td>
+  </tr>
+</table>
+
+    <p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>The <strong>current</strong>
+through any element is always <u>defined</u> from +node to -node. So is voltage
+    drop.</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>If the<strong>
+power </strong>is positive, it is consumed. If the power is negative, it is
+delivered (this happens in <i>most</i> sources)</small><small>.</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100" align="right"><font size="2"><a
+href="http://paxm.org/symbulator"><img src="../microscs.gif"
+alt="Symbolic Circuit Simulator by Roberto Perez-Franco" border="0" hspace="2" vspace="2"
+width="30" ></a><a href="http://paxm.org"><img src="../doc/dove.jpg" border="0" 
+ border="0"></a></font></p>
+</body>
+</html>

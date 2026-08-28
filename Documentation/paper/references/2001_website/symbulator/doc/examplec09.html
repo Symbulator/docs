@@ -1,0 +1,105 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"></i><font color="#004080"><em>C09</em>
+DC analysis:<b> Find ABCD <em>(or transmission) </em>parameters of net with two dependent
+sources</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. Find the four <em>ABCD</em> parameters for shown biport.</font></small></p>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><img src="ex28cir.jpg"
+width="300" height="137"></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"> <small> In <i>Symbulator</i></small><small>, ABCD
+parameters are called <strong><em>a</em></strong> parameters.</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">1) Label nodes and elements. Define a variable as a matrix containing circuit description. I used this
+description:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0000A0"><small>&quot;r1,1,3,5; </small><small>jd,3,0,0.1*v2; </small><small>ed,2,3,0.3*v1;
+</small><small>r2,2,0,4&quot;-&gt; cir</small></font><font
+FACE="Courier New"></p>
+</font></font>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"
+face="Times New Roman"><small>2) Run the ports tools, specifying the terminal nodes, which
+are 1 and 2.</small></font><font FACE="Courier New"> 
+
+<ol START="2">
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>sq\port(cir,1,2)</small></font></p>
+  </font>
+</ol>
+
+<p style="margin-left: 100; margin-right: 100"></font><small><font color="#0080FF"
+face="Times New Roman">Now the program displays a dialog box, in which you have to specify
+the desired parameters (which you set to </font><font face="Times New Roman"
+color="#0000A0">a</font><font color="#0080FF" face="Times New Roman">), give a name to the
+parameters (</font><font face="Times New Roman" color="#0000A0">p</font><font
+color="#0080FF" face="Times New Roman"> is a good name) and specify the analysis you want
+to perform (in this case </font><font face="Times New Roman" color="#0000A0">DC</font><font
+color="#0080FF" face="Times New Roman">). When done, press Enter. The process is complex,
+so you have to wait some time. After a while, the calculator displays...</font></small><font
+FACE="Courier New"></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Done</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"></font><font color="#0080FF"
+face="Times New Roman"><small>3) Since your parameters are h and their name is p, the
+answers are stored in the following variables: ap11, ap12, ap21 and ap22. They are also
+shown in screen. Suppose you want to retrieve them after they've been displayed in screen.
+You can ask for them.</small></font><font FACE="Courier New"></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>ap11</small></font></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+face="Courier New" color="#0000A0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font FACE="Courier New"><font color="#0000A0">2.1154</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>ap12</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+face="Courier New" color="#0000A0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font FACE="Courier New"><font color="#0000A0">3.8462</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>ap21</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+face="Courier New" color="#0000A0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font FACE="Courier New"><font color="#0000A0">0.35001</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>ap22</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+face="Courier New" color="#0000A0">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font color="#0000A0">1</font></small></p>
+<i>
+
+<p style="margin-left: 100; margin-right: 100"></font><font color="#0080FF"
+face="Times New Roman"><small>Answer:</i> The parameters obtained are the right ones.</small></font><font
+FACE="Courier New"></p>
+</font>
+</body>
+</html>

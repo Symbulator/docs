@@ -1,0 +1,81 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><font color="#004080">A09</i>
+AC analysis: <b>Ideal Transformer problem</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. Given the following circuit, find the rms currents through all
+resistors.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><img
+SRC="image32.jpg" width="446" height="114"></font></small></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Label nodes and elements.&nbsp; Define variable <font FACE="Courier New">cir</font> containing
+circuit description. I used this description:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>&quot;ex,1,0,100.*sqrt(2),0;
+</small><small>r25,1,2,25,0; </small><small>r2,3,4,2,0; </small><small>r3,5,0,3,0;
+</small><small>t1,2,3,3,1; </small><small>t2,4,5,4,-3&quot; <font FACE="Wingdings">à</font>cir</small></font></p>
+</font>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Simulate
+this circuit using alternating current analysis. Remember that transformers only are understood
+by ac(). Since no frequency have been specified, we just place a letter as frequency. I
+placed w. </font></small>
+
+<ol>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+  color="#0000A0">s</font></small><font color="#0000A0"><small>q</small></font></font><small><font color="#0000A0" FACE="Courier New">\</font><font
+  FACE="Courier New"><font color="#0000A0">ac(cir,w)</font></small></p>
+  </font>
+</ol>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Now ask for
+the currents. Remember that you've been asked to provide rms currens, defined as
+rmscurrent=current/(sqrt(2)). Ask them by typing:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>ir25/sqrt(2)</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+1.0989</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0000A0">ir2</font></font><font color="#0000A0" FACE="Courier New">/sqrt(2)</font></small><font
+FACE="Courier New"></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+color="#0000A0" FACE="Courier New">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font FACE="Courier New"><font color="#0000A0">3.29671</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0000A0">ir3</font></font><font color="#0000A0" FACE="Courier New">/sqrt(2)</font></small><font
+FACE="Courier New"></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+FACE="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+-4.39559</small></font></p>
+<i>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Answer:</i>
+The answers obtained are the right ones.</font></small></p>
+</body>
+</html>

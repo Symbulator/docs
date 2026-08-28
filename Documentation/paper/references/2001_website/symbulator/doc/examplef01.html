@@ -1,0 +1,134 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><font color="#004080">F01</font></i>
+<font color="#004080">
+TR analysis: <b>Transitory problem - </b></font><b><font color="#808000">(Impala)</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF"><em>Question.</em> Given the following circuit, find the complete
+expressions for v1(t) and v2(t) voltages, for t&gt;0.</font></small></p>
+
+<blockquote>
+  <p align="center">
+
+<i>
+<img src="ex30a.gif"
+width="606" height="111" align="left" border="0">
+  </blockquote>
+  <p align="left"><br><br><br><br><br><br><font
+color="#0080FF"><small>&nbsp;&nbsp;&nbsp;</small></font>
+</i>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+<i>
+<font
+color="#0080FF"><small>Solution:</small></font>
+</i><font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><font
+color="#0080FF"><small>This is the kind of problems you'd love to solve by hand (as long as you
+have in that hand a TI-89 with Symbulator's</small><small> </font><font color="#808000">(Impala)</font></small><font
+color="#0080FF"><small>, hehehe! ;o)</small> </font><font FACE="Courier New"></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>As you can see, this problem has two intervals. The first one, a direct
+current interval, in which we must calculate the initial conditions for the next interval.
+The second one, a transitory analysis interval, which - due to the complexity of the
+current source - will </small><small>activate the </small></font><small><font color="#808000">(Impala)</font></small><font
+color="#0080FF"><small>. ;o)</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">First the easy interval.</font></small></p>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><img src="ex30b.gif"
+width="265" height="91"></p>
+
+<ul>
+  <li><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+    face="Courier New"><small>sq\dc(&quot;e18,3,0,18; </small><small>r8,3,1,8; </small><small>r12,1,0,12;
+    </small><small>r18,1,2,18; </small><small>r6,2,0,6&quot;)</small></font></p>
+  </li>
+</ul>
+
+<ul>
+  <li><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+    face="Courier New"><small>v1</small></font></p>
+  </li>
+  <li><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+    face="Courier New"><small>v2</small></font></p>
+  </li>
+</ul>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">With these steps you get the initial conditions: </font></small><font color="#0000A0" face="Courier New"><small> v1(0)=9</small></font><font
+color="#0080FF"><small> and </small></font><small><font color="#0000A0" face="Courier New">v2(0)=9/4</font></small><font color="#0080FF"><small>.</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>Now, the transitory interval. If you try to solve this circuit in a
+TI-89 as transitory, the calculator won't be able to solve it fast
+enough for you to finish your test on time. Therefore, instead
+of using TR analysis, we will work with FD analysis, and later the FD_to_TR tool</small><small>. Look:</small></font></p>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><img src="ex30c.gif"
+width="622" height="115"></p>
+
+<ul>
+  <li><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+    face="Courier New"><small>sq\fd(&quot;cx,1,0,1/6,9; </small><small>r12,1,0,12,0;
+    </small><small>r18,1,2,18,0; </small><small>r6,2,0,6,0; </small><small>cy,2,0,1/3,9/4;
+    </small><small>js,0,2,10*exp(-t)*sin(2*t+Pi/6),0&quot;)</small></font></p>
+  </li>
+</ul>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"> When you press </font><font color="#000080">Enter</font><font color="#0080FF">,
+the calculator let's you know it is using </font></small><small><font color="#808000">(Impala)</font><font color="#0080FF">,
+and tells you when the </font><font color="#808000">(Impala)</font><font color="#0080FF">
+runs, flies and lands</font></small><font color="#0080FF"><small>.</small></font><font color="#0080FF"><small>
+After the frequency domain FD analysis is done, take the specific answers you
+need to time domain TR, using the FD_to_TR tool, which you can find pressing F5
+in the custom menu, or typing it. Since the expressions are huge, it takes a
+while to the tool, which uses the excellent program DiffEq, to transform them.</small></font></p>
+
+<ul>
+  <li><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+    face="Courier New"><small>sq\fd_to_tr</small><small>(v1)</small></font></p>
+  </li>
+  <li><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+    face="Courier New"><small>sq\fd_to_tr</small><small>(v2)</small></font></p>
+  </li>
+</ul>
+
+<p style="margin-left: 100; margin-right: 100"><em><small><font color="#0080FF">Answers:</font></small></em></p>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">For v1(t) I
+found this answer:</font></small></p>
+
+<p  align="justify" style="margin-left: 100; margin-right: 100"><font color="#0000A0" face="Courier New"><small>(5*sqrt(3)/17-20/17)</small><small>*exp(-t)*cos(2*t)</small><small>
++</small><small>(-20*sqrt(3)/17-5/17)</small><small>*exp(-t)*sin(2*t) +</small><small>(80*sqrt(3)/17+193/34)</small><small>*exp(-t/2)</small><small>
++</small><small>(9/2-5*sqrt(3))</small><small>*exp(-t)</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">For v2(t) I
+found this answer:</font></small></p>
+
+<p style="margin-left: 100; margin-right: 100" align="justify" ><font color="#0000A0" face="Courier New"><small>(-245*sqrt(3/34-20/17)</small><small>*exp(-t)*cos(2*t)
++</small><small>(245/34-20*sqrt(3)/17)</small><small>*exp(-t)*sin(2*t) +</small><small>(80*sqrt(3)/17+193/34)</small><small>*exp(-t/2)
++</small><small>(5*sqrt(3)/2-9/4)</small><small>*exp(-t)</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">If
+you are interested in obtaining a numerically aproximated answer, use </font></small><font color="#0000A0" face="Courier New"><small>expand(approx(</small></font><small><font color="#0080FF">
+in the answer.</font></small></p>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><strong>P.S.</strong><em>
+Try to find this answers using SPICE, hehehe! </em>;o)</font></small></p>
+</body>
+</html>

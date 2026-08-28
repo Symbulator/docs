@@ -1,0 +1,72 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"></i><font color="#004080"><em>B06</em>
+DC analysis: <b>Find input resistance of a net with operational amplifier</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. Given the following net, find the entry resistance.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img src="ex15cir.jpg"
+width="200" height="180"></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Clear
+the </small><small>symbolic variable.</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></i><font color="#0000A0" face="Courier New"><small>DelVar
+rx</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>Label nodes and elements. Define a variable containing circuit description. I used this
+description:</small></font></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0000A0"><small>&quot;rx,1,0,rx; </small><small>r1,1,2,20000.; </small><small>r2,2,3,20000.;
+</small><small>o1,3,1,2&quot; <font FACE="Wingdings"><small>à</small></font>cir</small></font></p>
+</font>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Run the Thevenin/Norton tool:</font></small><font
+FACE="Courier New"> 
+
+<ol START="2">
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>sq/thevenin</small><small>(cir,3,0)</small></font></p>
+  </font>
+</ol>
+
+<p style="margin-left: 100; margin-right: 100"></font><small><font color="#0080FF"
+face="Times New Roman">When asked, select </font><font color="#0000A0"
+face="Times New Roman">DC</font><font color="#0080FF" face="Times New Roman"> (direct
+current) analysis.</font></small><font FACE="Courier New"></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"
+face="Times New Roman"><small>Now, find the value you need. </small></font></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>zth</small></font></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+color="#0000A0" face="Courier New">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font FACE="Courier New"><font color="#0000A0">-rx</font></small></p>
+<i>
+
+<p style="margin-left: 100; margin-right: 100"></font><font color="#0080FF"
+face="Times New Roman"><small>Answer:</i> The answer obtained is the right one.</small></font><font
+FACE="Courier New"></p>
+</font>
+</body>
+</html>

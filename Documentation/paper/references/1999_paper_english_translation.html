@@ -1,0 +1,623 @@
+<html>
+
+<head>
+<title>Symbulator: the calculator-based symbolic circuit simulator by Roberto Perez-Franco</title>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 3.0">
+</head>
+
+<body>
+<b>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100">Symbulator</b>:<br>
+the calculator-based symbolic circuit simulator</p>
+<b>
+
+<p ALIGN="RIGHT" style="margin-left: 100; margin-right: 100">Roberto Perez-Franco</b><i><br>
+November 1999</p>
+
+<blockquote>
+  <blockquote>
+    <b><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Summary</p>
+  </blockquote>
+</blockquote>
+</b></i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><em>Symbulator</em> is a
+powerful calculator-based symbolic linear circuit simulator, designed to help circuit
+courses' students with the mathematical tasks of the analysis, by allowing the numerical
+and symbolic solution in direct current, alternating current, transitory analysis and
+frequency domain, accepting most linear elements and with a reusable circuit description.
+It has been succesfully programmed in the TI-89 BASIC language and is offered as freeware
+on the Internet.</p>
+
+<blockquote>
+  <blockquote>
+    <b><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><i>The need for a
+    calculator-based symbolic circuit simulator</p>
+  </blockquote>
+</blockquote>
+</i></b>
+
+<p style="margin-left: 100; margin-right: 100">For engineering students, mathematics is
+their work tool, not a degree objective. In engineering circuit analysis, a mathematical
+procedure is a method to find the solution to a given circuit, and is not an
+end-unto-itself. When a student meets a new circuit type, he faces two challenges. The
+first and most important is to understand the concept behind the circuit, the logic behind
+its analysis, and its applications in engineering. The second is to master the
+mathematical procedures that will allow him to study the answer of this type of circuits.
+The student must focus on the first, leaving the second to a simulation software.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">When circuits are solved by
+hand, innumerable details such as an unseen negative sign, or a misplaced decimal point,
+can make the difference between a right and a wrong answer. Professional engineers can use
+in their work place a numerical circuit simulator in a PC, such as SPICE. Most students do
+not have this choice in their classroom, because to academic and economic limitations.
+Very often, student's errors are due to a bad mathematical manipulation of the formulas or
+the values, caused by tired eyes or mental pressure of the major.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">On January 1999, I
+committed myself to create a linear circuit simulator to assist students in their
+classroom with the mathematical procedures of the analysis, whether numerical or symbolic,
+in direct current, alternating current, transitory analysis or frequency domain, allowing
+almost every existent linear element.</p>
+
+<blockquote>
+  <blockquote>
+    <i><b><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Previous works on the
+    topic</p>
+  </blockquote>
+</blockquote>
+</b></i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">A preliminary step in my
+project was to improve the best calculator-based circuit simulators available at that
+moment. I worked on two of them.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The first one was the
+numerical simulator <i><b>CSim 2.61</b></i> for HP48GX calculator, created by the Finnish
+engineer Per Stenius in 1991. After several weeks of consulting and a many weeks of
+programming, I presented the numerical simulator <i><b>CSim 3.01</b></i>. This version was
+easier to use than its predecessor. I programmed at the same time two variations on the
+theme: one for novice students, called <i><b>Assistant II</b></i>, and another focused on
+impedance circuits, called <i><b>ZAC 1.4</b></i>. The algorithm, although, was not
+suitable for symbolical applications in the HP48GX, so I soon abandoned this course of
+action.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The second was the
+numerical simulator <i><b>NFAP</b></i> for HP48GX, created by Don Robinson in 1994. I
+wrote two variations on the theme: the <i><b>Symbolic Voltage Finder</b></i> and the <i><b>Symbolic
+Current Finder</b></i>. I was not satisfied: this symbolic simulators seemed to work fine
+with alternating current, but they had too many limitations and did not fulfill the
+purpose of being a complete simulator to accompany the students through their majors.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">At this point, I knew it
+was necessary to attack the problem in a different way, with a brand-new simulator.</p>
+
+<blockquote>
+  <blockquote>
+    <i><b><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Symbulator is born</p>
+  </blockquote>
+</blockquote>
+</b></i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">I named my project <i>Symbolic
+Circuit Simulator</i>, and nicknamed it <i>Symbulator</i>. I visualized it as such a
+powerful tool that it did not fit in any category of existing calculator-based simulators.</p>
+
+<blockquote>
+  <blockquote>
+    <i><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Analysis method
+    selection</p>
+  </blockquote>
+</blockquote>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">For the circuit analysis
+method I would use to develop the new algorithm, I considered two options: the nodal
+analysis method (both modified and <i>gyrator </i>transform) and the method of equations
+generation.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The nodal analysis method
+is powerful. Its advantages are more evident for numerical simulations. Its disadvantages
+are a rather complex answer-retrieving procedure in the final vector and the messy
+manipulation of the matrices in symbolic simulations.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The equation generation
+method is a new and innovative one. I met it by my friend Joe Riel, an engineer from
+California, author of Syrup, a MapleV-based symbolical circuit simulator. It generates and
+solves the equations that describe the voltages and currents of the circuit. Its main
+advantage is the ease to describe dependent sources and a faster handle of symbolic
+simulations. Its main disadvantage is that it takes a complex algorithm.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Finally, I decided to use
+this last method because its advantages would lead me to a much user-friendly simulator,
+with the simplest notation for dependent sources, transformers, and biports.</p>
+
+<blockquote>
+  <blockquote>
+    <i><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Calculator selection</p>
+  </blockquote>
+</blockquote>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">For the platform calculator
+to develop and run the program, I considered as options the Hewlett-Packard and Texas
+Instruments models available.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The algebraic systems of
+Hewlett-Packard 48GX and 49G models lacked at that time the symbolic capabilities required
+by my software for equations solution and expressions manipulation. The <i>solve()</i>
+command of the 49G model was particularly weak and messy.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The Texas Instrument 89 and
+92+ models had an algebraic system that allowed the symbolic manipulation and automatic
+substitution of previously defined expressions. This last feature would become a decisive
+one in the coming algorithm. Those models had the most powerful <i>solve() </i>command in
+the block. [This <i>solve()</i> command is used to solve both linear and non-linear
+simultaneous equations with real values. Complex equations are solved with <i>csolve().</i>]</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Finally, I selected the
+TI-89 to be the platform for the simulator because it had all the features required for
+such a program, with the lowest price of TI's high-performance models. </p>
+
+<blockquote>
+  <blockquote>
+    <i><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Programming</p>
+  </blockquote>
+</blockquote>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Once I selected the method
+and the calculator, I started working in the <i>Symbulator</i>, during the 1999 spring
+break. First, I programmed a small and simple application for direct current analysis that
+allowed only the very basic linear elements: resistance and independent sources. When it
+was done, I carefully modified the source code to program the alternating current,
+frequency domain and transitory analysis applications. At the same time, I increased the
+number of recognized linear elements, including inductances, capacitances, ideal
+operational amplifiers, ideal transformers, mutual inductances and six different biports
+(z/y/h/g/a/b). I am still perfecting the source code.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The growing number of <i>Symbulator</i>
+users and the satisfaction comments I've received from them make me feel that the software
+has been a real success.</p>
+
+<blockquote>
+  <blockquote>
+    <i><b><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Symbulator features</p>
+    </b><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Circuit description</p>
+  </blockquote>
+</blockquote>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Circuit entry for <i>Symbulator</i>
+is described using a particular notation inside a matrix with five columns. Notation rules
+are similar to those of <i>SPICE</i>, but much easier when it comes to biports,
+transformers and dependent sources definition. These last elements are described in the
+way they are presented in textbooks, with no need for any special notation for nodes of
+control values. This makes <i>Symbulator</i> much easier than <i>SPICE</i> as far as
+dependent sources are involved.</p>
+
+<blockquote>
+  <blockquote>
+    <i><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Circuit simulation</p>
+  </blockquote>
+</blockquote>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">To simulate a circuit, just
+type in the entry line of the calculator the type of analysis you wish, followed by the
+circuit description or the name of the variable in which this description is stored. There
+are four analysis options available: direct current DC, alternating current AC, transitory
+analysis TR and frequency domain FD. In the case of alternating current, the radial
+frequency is required; it can be left in terms of a symbolic variable or expression.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">It is interesting to
+analyze how the <i>Symbulator</i> works internally<i>. </i>Here is the idea: The program
+reads the circuit description, writes down the equations that describe its behavior,
+solves them and stores all the answers in variables with their respective names. Answers
+to every analysis include numerical or symbolic expressions for the voltages in every node
+and current through every element in the circuit. In case of direct and alternating
+current analysis, the program also provides the real and complex powers, respectively,
+consumed in every element. In case of frequency domain and transitory analysis, the
+program calls to the Laplace transforms routines of DiffEq program, by the Danish
+programmer Lars Frederiksen, who is my personal friend and, in my opinion, the best TI
+calculator programmer ever. Answers for voltages and currents are left as symbolic
+functions of frequency and time, respectivelly.</p>
+
+<blockquote>
+  <blockquote>
+    <i><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Symbulator tools</p>
+  </blockquote>
+</blockquote>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">In addition to the four
+simulation routines, <i>Symbulator</i> has tools to ease even more of the tasks of
+students. I've written tools to find the Thévenin equivalent of a circuit (whether active
+or passive), the z/y/h/g/a/b parameters of a biport circuit, the gains of a linear
+amplifier, and also to plot the Bode diagrams of gain and phase. The two first tools work
+with direct current, alternating current and frequency domain, allowing to find the
+transfer functions of a circuit in terms of <i>s</i>. These tools accept symbolic
+elements, giving therefore symbolic answers. For power courses, I wrote tools to find the
+losses, the regulation and the efficiency of a real iron-core transformer given its
+short-circuit and open-circuit test values, and its nominal load. This tools rely in the
+simulation applications of Symbulator to speed up procedures that are tedious by hand, and
+they are very easy to use.</p>
+
+<blockquote>
+  <blockquote>
+    <i><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Symbulator limitations</p>
+  </blockquote>
+</blockquote>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Symbulator</i> has
+basically two limitations: non-linear circuits and huge circuits. There are
+alternatingatives to heal these limitations. For the first, non-linear elements can be
+modeled using their linear equivalents. For the second, parts of the circuit can be
+reduced in terms of their Thévenin or de biport equivalents, using the respective tools
+if desired.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The following is a
+comparative chart of Symbulator and SPICE to highlight their differences.</p>
+<div align="center"><center>
+
+<table border="1" bgcolor="#FFFFFF" bordercolor="#000000" bordercolorlight="#000000"
+bordercolordark="#000000" width="60%">
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small><em>Features</em></small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small><em>Symbulator</em></small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small><em>SPICE</em></small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Numeric elements</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Symbolic elements</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>No</small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Simple dependent sources definition</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>No</small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Linear elements</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Non-linear elements</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>No</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Built-in biports</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>No</small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Built-in ideal transformer</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>No</small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Numeric answers</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Symbolic answers</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>No</small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Answers as functions of time and/or frequency</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>No</small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Small circuits</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Huge circuits</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>No</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+  </tr>
+  <tr>
+    <td width="250%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Ploting capabilities</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+    <td width="50%" align="center"><p style="margin-left: 0; margin-right: 0"><font
+    color="#000000" face="Arial"><small>Yes</small></font></td>
+  </tr>
+</table>
+</center></div>
+
+<blockquote>
+  <blockquote>
+    <i><b><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Examples of problems
+    solved with Symbulator</p>
+  </blockquote>
+</blockquote>
+</b></i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Here is a selection of four
+linear circuit problems which were solved using <i>Symbulator</i>, typing just one line of
+commands. The examples here are for direct current, alternating current, frequency domain
+and for transitory analysis.</p>
+<b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Example 1: <i>Direct
+current</i>.</b> Given the circuit of Image #1, find the voltage in node 3.</p>
+<b>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img SRC="im1.gif"
+border="0" width="255" height="145"></p>
+</b><font SIZE="2">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100">Image #1. Circuit of Example
+1.</p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">To solve this problem using
+<i>Symbulator</i>, write in the entry line of the calculator the following line of
+commands.</p>
+
+<blockquote>
+  <blockquote>
+    <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">scs\dc([e1,1,0,vin,0;r1,1,2,r1,0;r2,2,3,r2,0;o1,0,2,3,0]):v3</p>
+    </font><p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img SRC="im2.gif"
+    width="164" height="104"></p>
+    <font SIZE="2"><p ALIGN="CENTER" style="margin-left: 100; margin-right: 100">Image #2.
+    TI-89 screen for Example 1.</p>
+  </blockquote>
+</blockquote>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The first part of this line
+(before the &quot;:&quot;) is the command to make a direct current analysis to the circuit
+described between the parenthesis. Notice the simple circuit description (zeroes at the
+end of each row are just fill-in). The second part (after the &quot;:&quot;) is the
+request for voltage in node 3. Actually, after the simulation, we can ask for any voltage,
+current or power of the circuit: <i>Symbulator</i> stores them all in the memory of the
+calculator under mnemonic names. In the case of a circuit like this one, which contains Op-Amps,
+the algorithm includes the application of a <i>limit()</i> command to every answer before
+they are stored. This simulation took 34 seconds, which is more than what one without Op-Amps
+takes. The requested answer is showed in the screenshot: <i>(-r2 vin)/r1</i>. Let's see
+another example.</p>
+<b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Example 2. <i>Alternating
+current</i>.</b> A circuit consists of a resistance and a capacitance in series. When a
+voltage of 240 V r.m.s. @ 200 Hz is applied, the obtained current is 1.2 + 1.6 <i><b>i</b></i>
+A. Which are their values?</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">To solve this problem using
+<i>Symbulator</i>, enter the following line of commands in your calculator.</p>
+
+<blockquote>
+  <blockquote>
+    <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">scs\ac([e1,1,0,240.*sqrt(2),0;r1,1,2,r,0;cx,2,0,c,0],2*Pi*200.):solve(real(ir1)=1.2
+    and imag(ir1)=1.6,{r,c})</p>
+    </font><p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img SRC="im3.gif"
+    width="164" height="104"></p>
+    <font SIZE="2"><p ALIGN="CENTER" style="margin-left: 100; margin-right: 100">Image #3.
+    TI-89 screen for Example #2.</p>
+  </blockquote>
+</blockquote>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The first part of the line
+is the command to perform an alternating current analysis to the circuit described inside
+the parenthesis. Please notice that symbolic values were given to the resistance and the
+capacitance. The second part is to request the values of the symbolic elements that will
+produce the expected complex current. My calculator took 24.5 seconds to solve the problem
+and return the right answers: 102 ohms and 5.86 microfarads (you must scroll to the right
+to see the rest of the answer in the calculator's screen).</p>
+<b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Example 3: <i>Transitory
+analysis</i>.</b> Given the circuit of Image #4, find a symbolic expression for the
+voltage <i>Vc(t)</i> if <i>Vs=9 cos(t) </i>and <i>Vc(0)=2V.</p>
+</i>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img SRC="im4.gif"
+width="262" height="163"></p>
+<font SIZE="2">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100">Image #4. Circuit of Example
+#3.</p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">To solve this problem using
+<i>Symbulator</i>, write in the entry area of the calculator the following line of
+commands:</p>
+
+<blockquote>
+  <blockquote>
+    <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">scs\tr([es,1,0,9*cos(t),0;r3,1,c,3,0;r6,c,0,6,0;cx,c,0,1/10,2]):vc</p>
+    </font><p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img SRC="im5.gif"
+    width="164" height="104"></p>
+    <font SIZE="2"><p ALIGN="CENTER" style="margin-left: 100; margin-right: 100">Image #5.
+    TI-89 screen for Example #3.</p>
+  </blockquote>
+</blockquote>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The first part of this line
+is the command to perform a transitory analysis to the circuit described inside the
+parenthesis. Please notice two things: 1) the node <i>c</i> is named with a letter,
+instead of a name, and 2) the capacitor's initial condition was entered in the fifth space
+of capacitor's row in the circuit matrix. This fifth space is intended to receive the
+initial conditions of capacitors and inductors in transitory analysis, and in other elements
+it is zero. The second part of the line is to request the voltage of node c, which is the
+answer of the problem. My TI-89 took 53 seconds to solve this problem (to see the complete
+answer we need to scroll to the right). With equal nodes and elements, the transitory
+analysis requires more time. Symbulator first solves the circuit in frequency domain, and
+then asks <i>DiffEq</i> to apply the inverse Laplace transform to each answer, to take
+back to time domain. Remember that we receive as answers every voltage and current in the
+circuit. There are some tricks to speed up the simulation if only a couple of answers are
+needed. In any event, the <i>Symbulator</i> is much faster and reliable than hand.</p>
+<b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Example 4: <i>Frequency
+domain</i>.</b> Given the circuit of Image #6, plot the gain Bode diagram of v4/v5 for
+frequencies between 10<sup>4</sup> y 10<sup>13</sup> rad/seg.</p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img SRC="im6.gif"
+width="769" height="194"></p>
+<font SIZE="2">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100">Image #6. Circuit of Example
+4.</p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">To solve this problem using
+<i>Symbulator</i>, write in the entry area the following command line:</p>
+
+<blockquote>
+  <blockquote>
+    <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">scs\fd([e1,5,0,vg,0;r1,5,1,150.,0;r2,1,0,1000.,0;</p>
+    <p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">cc1,1,0,1E-10,0;cc2,1,2,3E-12,0;jd1,2,0,0.05*v1,0;</p>
+    <p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">r3,2,0,2000.,0;r4,2,3,100.,0;r5,3,0,1000.,0;</p>
+    <p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">cc3,3,0,1E-10,0;cc4,3,4,3E-12,0;jd2,4,0,0.05*v3,0;</p>
+    <p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">r6,4,0,2000.,0]):scs\plot()</p>
+    </font><p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img SRC="im7.gif"
+    width="164" height="104">&nbsp;<img SRC="im8.gif" width="164" height="104"></p>
+    <font SIZE="2"><p ALIGN="CENTER" style="margin-left: 100; margin-right: 100">Images #7 and
+    #8. TI-89 screens for Example 4.</p>
+  </blockquote>
+</blockquote>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The first part of this line
+is the command to perform an analysis in frequency domain to the circuit inside the
+parenthesis. This circuit is considerably big: it was the final project asked by my
+professor of Electronics II course during 1999. The second part is to activate the Bode
+plotter of <i>Symbulator</i>. The circuit simulation in my TI-89 took 3 minutes. Plot the
+graph took my TI-89 52 seconds. Any electrical engineering student knows that this problem
+would take by hand around half an hour, or more.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">I hope these examples are
+enough as a brief sample of <i>Symbulator</i>'s capacities. It is clear that the first
+three examples cannot be solved directly with SPICE. At the <i>Symbulator</i> site <i><b>http://scs.ticalc.org</b></i>
+you can find around fifty solved examples, each one with a special feature.</p>
+
+<blockquote>
+  <blockquote>
+    <i><b><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Results up to the
+    date</p>
+  </blockquote>
+</blockquote>
+</b></i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Up to this date, the
+results obtained by <i>Symbulator</i> are flattering. </p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">As a student, I have used
+it in six different courses in my major and I am pleased at the ease of circuit
+description, the accuracy of the results and the speed of the simulation. With <i>Symbulator</i>,
+I have solved in a couple of minutes some transitory analysis problems that by hand used
+to take me a quarter of hour or more.</p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">I've received dozens of
+positive comments from satisfied users around the world, which use <em>Symbulator</em> as
+an important tool in their studies. Users download the software in the Internet free of
+charge, and then share it with their classmates. Professionals and students from
+Australia, Austria, Belgium, Brazil, Spain, United States of America (California, Kansas,
+Kentucky, Missouri, New York, Ohio, Pennsylvania, Texas), Finland, France, Great Britain
+(including Oxford University), Israel, Italy, Norway, Czech Republic, Switzerland, among
+others, have reported to use and enjoy the software. A student from Texas reported that,
+in his classroom, twelve classmates used the simulator in a circuit theory course. I'd
+like to quote here Chris Riegel, an electrical engineering major and president of the IEEE
+chapter in the University of Kentucky: <i>&quot;For EE211 and EE221, Symbulator actually
+works better than SPICE because you get the results symbolically. Once you use Symbulator
+you'll see what everybody has been talking about. If you're not using Symbulator, you're
+working too hard.&quot;</p>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">The success obtained by <i>Symbulator</i>
+should be measured in the improvements in knowledge and performance of the hundreds of
+students that already use it around the globe, to focus on the concepts of the circuits
+they study, instead of the math involved by their analysis. </p>
+
+<blockquote>
+  <blockquote>
+    <i><b><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">Final words</p>
+  </blockquote>
+</blockquote>
+</b></i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">One year after the early
+beta's first appeared in electrical engineering classrooms, <i>Symbulator</i> has evolved
+from a simple project to become students' dream simulator. Powerful, portable and free of
+charge, this state-of-the-art software has minted a new verb: <i>to Symbulate</i>. I would
+like to end quoting Jay Myers, an electrical engineering major at the University of Texas
+at Arlington, and experienced user of <i>Symbulator</i>:</p>
+
+<blockquote>
+  <blockquote>
+    <i><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100">&quot;This program is
+    the premiere circuit solver for calculators. Yes, there are others, but none are better.
+    This program is similar to SPICE or PSpice in the way it is used, and it is even easier
+    when it comes to dependant sources and biport simulations. Once a circuit is solved, it
+    has all the information the user would want: node voltages, element currents, element
+    power usage, voltage drops across elements via node voltage differences. It solves
+    symbolically, unlike almost any other circuit simulator (even PC based). This program is,
+    hands down, the best program for circuit analysis that I have seen. Big circuits can be
+    slow to solve, and can run the calculator out of memory. Work-arounds are out there,
+    including tools for breaking the circuit into groups of Thévenin or biport equivalents. I
+    could not possibly praise this program well enough. It's hard to believe that Mr.
+    Perez-Franco is letting the world use his fantastic program free of charge. Excellent
+    job!&quot;</p>
+  </blockquote>
+</blockquote>
+</i>
+</body>
+</html>

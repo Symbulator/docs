@@ -1,0 +1,94 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"></i><font color="#004080"><em>C07</em>
+DC analysis: <b>Find gains of circuit containing one biport, given Z parameters.</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. Find Gv, Gi, Gp and Zin of a circuit composed of a biport with z
+parameters z11=4, z12=1.5, z21=10 and z22=3, if it has an input source Vs in its entry
+with a serie resistance of 5 Ohms, while the load is 2 Ohm. There is&nbsp; picture of this
+circuit.</font></small></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>1) Label nodes and elements. Define a variable containing circuit description. I used this
+description:</small></font></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0000A0"><small>&quot;es,3,0,1; </small><small>rs,3,1,5; </small><small>rl,2,0,2;
+</small><small>zp,1,2,0&quot;-&gt; cir</small></font><font
+FACE="Courier New"></p>
+</font></font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">We use a source of 1 Volt, because it does not matter the value of the
+source. We could have used a symbolic source with value, say, Vs. Now store the values of
+parameters. Since we named the biport as zp, the variables we must store are zp11, zp12,
+zp21 and zp22. </font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0000A0">4 -&gt; zp11 : 1.5 -&gt; zp12 : 10 -&gt; zp21 : 3 -&gt; zp22</font></small></p>
+</font>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"
+face="Times New Roman"><small>2) Run the DC analysis</small><small> tool.</small></font><font FACE="Courier New"> 
+
+<ol START="2">
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>sq\dc(cir)</small></font></p>
+  </font>
+</ol>
+
+<p style="margin-left: 100; margin-right: 100"></font><small><font color="#0080FF"
+face="Times New Roman">After a while, the calculator displays...</font></small><font
+FACE="Courier New"></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+Done</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"></font><font color="#0080FF"
+face="Times New Roman"><small>3) The values of voltages and currents are stored, just as
+any other simulation. You can get the gains by hand, or you can use the <em>gain()</em>
+tool:</small></font><font FACE="Courier New"></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font></font><font
+FACE="Courier New" color="#0000A0"><small>sq\gain()</small></font><font
+FACE="Courier New"></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+color="#0080FF" face="Times New Roman">The tool will ask you to input the values or
+expressions for in voltage (input </font><font face="Times New Roman" color="#0000A0">v1</font><font
+color="#0080FF" face="Times New Roman">),&nbsp; in current (input </font><font
+face="Times New Roman" color="#0000A0">i1zp</font><font color="#0080FF"
+face="Times New Roman">),&nbsp; out voltage (input </font><font face="Times New Roman"
+color="#0000A0">v2</font><font color="#0080FF" face="Times New Roman">) and&nbsp; out
+current (input </font><font face="Times New Roman" color="#0000A0">i2zp</font><font
+color="#0080FF" face="Times New Roman">). Then, the program calculates and displays the
+gains. These gains are also stored in variables that you can retrieve later. The program
+displays Gv as 4, Gi as -2, Gp as 8. It also displays Zin as 1 Ohm.</font></small><font
+FACE="Courier New"></p>
+<i>
+
+<p style="margin-left: 100; margin-right: 100"></font><font color="#0080FF"
+face="Times New Roman"><small>Answer:</i> The gains obtained are the right ones.</small></font><font
+FACE="Courier New"></p>
+</font>
+</body>
+</html>

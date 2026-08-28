@@ -1,0 +1,53 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"></i><font color="#004080"><em>B07</em>
+AC analysis: <b>Find the Thévenin equivalent of circuit with ideal transformer</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. Find the Thévenin equivalent of the following circuit.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img src="ex16cir.jpg"
+width="300" height="128"></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>You're assumed to be an advanced Symbulator</small><small> user. Let's solve this problem in one
+step. Label nodes and elements (node b is 0 for it taken as ground). Type the following (you must understand what this means,
+since you have the experience of all the preceding examples).</small></font></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><font
+FACE="Courier New"><small>sq/thevenin</small><small>(&quot;</small></font><small>rx,a,0,20.,0; </small><small>r6,2,3,60.,0; </small><small>t1,a,2,1,4;
+</small><small>ed,3,0,20.*irx,0&quot;,a,0):<font FACE="Courier New">zth</font></small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"></font><small><font color="#0080FF"
+face="Times New Roman">When asked, select </font><font color="#0000A0"
+face="Times New Roman">AC</font><font color="#0080FF" face="Times New Roman"> (direct
+current) analysis, and input any frequency, 1 for example (it doesn't matters here, since
+there are no inductors or capacitors).</font></small><font FACE="Courier New"></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+color="#0000A0" face="Courier New">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+</font><font FACE="Courier New"><font color="#0000A0">4</font></small></p>
+<i>
+
+<p style="margin-left: 100; margin-right: 100"></font><font color="#0080FF"
+face="Times New Roman"><small>Answer:</i> The answer obtained is the right one.</small></font><font
+FACE="Courier New"></p>
+</font>
+</body>
+</html>

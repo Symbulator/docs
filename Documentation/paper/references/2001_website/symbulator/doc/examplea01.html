@@ -1,0 +1,75 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<font size="4">
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"></font><font color="#004080"
+size="3"><i>A01</i> DC analysis: <strong>Circuit with symbolic source</strong></font><font
+size="4"></p>
+</font><i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><strong><small><font
+color="#0080FF">Question.</font></small></strong></i></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Given the following circuit, find voltage vx in current source.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><img
+SRC="image3.jpg" width="340" height="121"></font></small></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><strong><small><font
+color="#0080FF">Solution.</font></small></strong></p>
+</i>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>This is a
+great first example to explore the posibilities of Symbulator</small><small>, since <u>it can't be solved with
+SPICE</u> for it includes a source with unknown value (unless you use <em>trial and error</em>
+method until you find an approximate answer). With Symbulator</small><small>, you solve it easily and fast.</small></font>
+
+<p>&nbsp;</p>
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Clean
+ix variable.</small></font></p>
+  <font FACE="Courier New"><p style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>DelVar ix</small></font></font></p>
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Label nodes
+    and elements. Define a variable containing circuit description. I used this description:</font></small></p>
+  <font FACE="Courier New"><p style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>&quot;e60,1,0,60; </small><small>r8,1,2,8; </small><small>r10,2,0,10;
+  </small><small>r4,2,x,4; </small><small>r2,x,0,2; </small><small>jx,0,x,ix&quot;<font FACE="Wingdings">à</font>cir</small></font></p>
+  </font>
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Simulate
+    this circuit using direct current analysis.</font></small></p>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>sq\dc(cir)</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0" face="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Done</small></font></p>
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Solve for x
+    in expression of current through voltage source.</small></font></p>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>solve(ir8=5,ix)</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0" face="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  ix=1</small></font></p>
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Evaluate
+    voltage in current source with previous answer.</small></font></p>
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" face="Courier New"><small>&nbsp;&nbsp;&nbsp;
+vx|ans(1)</small></font></p>
+<p style="margin-left: 100; margin-right: 100"><font color="#0000A0" face="Courier New"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+8</small></font></p>
+
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>Answer:</small></i> <small> 8 volts. This is the right answer for voltage vx. Notice that
+using Symbulator</small><small> this problem have been solved in only four steps (and may be solved in two),
+while by hand it takes a lot of steps, and by SPICE it takes several iterations.</small></font></p>
+</body>
+</html>

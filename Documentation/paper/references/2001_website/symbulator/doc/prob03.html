@@ -1,0 +1,66 @@
+<html>
+
+<head>
+<title>Solved Problems</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body>
+
+<p align="center"><font color="#004080" size="3"><strong>Problem #3</strong></font></p>
+
+<p><font color="#0080FF"><small>Assuming that the OpAmp in the following circuit is ideal,
+find <em>vo(t). (Hayt-Kemmerly)</em></small></font></p>
+
+<p align="center"><img src="pr02cir.jpg" width="300" height="160"></p>
+
+<p align="center">&nbsp;</p>
+
+<p><font color="#0080FF"><small>I used the following circuit description:</small></font><font
+FACE="Courier New"></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><font color="#0000A0"><small>&quot;j5,0,1,5E-007,0</small><small>;
+</small><small>r2,0,1,2000000.,0</small><small>; </small><small>cx,1,2,5E-007,0</small><small>;
+</small><small>cy,2,3,1E-007,0</small><small>; </small><small>r1,3,0,100,0</small><small>;
+</small><small>o1,0,2,3,0&quot; -&gt;cir</small></font></p>
+</font>
+
+<p><font color="#0080FF"><small>Simulate the circuit. I used frequency domain analysis, to
+save time. Transient analysis may take too long.</small></font> 
+
+<ul>
+  <li><font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><font
+    color="#0000A0"><small>sq\fd(cir</font></font><font FACE="Courier New" color="#0000A0">)</font></small></p>
+    <ul>
+      <li><p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><font FACE="Courier New"
+        color="#0000A0"><small>Done</small></font></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><font color="#0080FF"><small>Take
+v3 from frequency domain to time domain.</small></font></p>
+
+<ul>
+  <li><p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><font FACE="Courier New"
+    color="#0000A0"><small>Define v3=dif\ilaplace(v3,s)</small></font></p>
+    <ul>
+      <li><p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><font FACE="Courier New"
+        color="#0000A0"><small>Done</small></font></p>
+      </li>
+    </ul>
+  </li>
+  <li><p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><font FACE="Courier New"
+    color="#0000A0"><small>v3</small></font></p>
+    <ul>
+      <li><p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><font FACE="Courier New"
+        color="#0000A0"><small>5*exp(-t)-5</small></font></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+<p ALIGN="right" style="margin-left: 0; margin-right: 0"><font size="2"><a href="http://paxm.org/symbulator"><img src="microscs.gif" alt="Symbolic Circuit Simulator by Roberto Perez-Franco" border="0" hspace="2" vspace="2" width="30" ></a><a href="http://paxm.org"><img src="../doc/dove.jpg" border="0"  border="0"></a></font></p>
+</body>
+</html>

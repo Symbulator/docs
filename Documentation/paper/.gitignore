@@ -1,0 +1,5 @@
+# LaTeX build residue; the .tex and the finished .pdf are tracked.
+*.aux
+*.log
+*.out
+*.toc

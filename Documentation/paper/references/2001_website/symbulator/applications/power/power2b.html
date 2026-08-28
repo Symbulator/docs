@@ -1,0 +1,132 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 3.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<font size="4">
+
+<p ALIGN="CENTER"></font><font face="BankGothic Lt BT" size="2" color="#0080FF">Power
+Examples</font><font size="4"></p>
+
+<p ALIGN="CENTER"></font><font color="#004080">P-2b. easytran() tool:<b> Transformer
+fraction of load for highest efficiency</b></font><font size="4"></p>
+</font><i>
+
+<p ALIGN="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Question.</i>
+A transformer with 500KVA, 2300/208V, 60 Hz, had the following results in tests:</font></small></p>
+
+<table border="1" width="100%">
+  <tr>
+    <td width="20%" align="center"><small><em><font color="#0080FF">Test</font></em></small></td>
+    <td width="20%" align="center"><small><em><font color="#0080FF">Voltage in V</font></em></small></td>
+    <td width="20%" align="center"><small><em><font color="#0080FF">Current in A</font></em></small></td>
+    <td width="20%" align="center"><small><em><font color="#0080FF">Real power in W</font></em></small></td>
+    <td width="20%" align="center"><small><em><font color="#0080FF">Side measured</font></em></small></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">Open circuit</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">208</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">85</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">1800</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">Low voltage</font></small></td>
+  </tr>
+  <tr>
+    <td width="20%" align="center"><small><font color="#0080FF">Short circuit</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">95</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">217.4</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">8200</font></small></td>
+    <td width="20%" align="center"><small><font color="#0080FF">High voltage</font></small></td>
+  </tr>
+</table>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Find
+the highest efficiency of the transformer, at power loads of 1.0 and 0.8 lagging, along
+with the load fractions to get these efficiencies.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><em>Solution.</em>
+The easytran() power tool is also designed for this kind of problems. The first step is to
+run the tool and provide all the information that it requests.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><font color="#0000A0"
+face="Courier New"><small>scs/easytran()</small></font></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">The
+first data asked is the alfa relation between high and low voltage. You can enter it
+either as a number or as a cocient. We entered </font><font color="#0000A0">2300/208.</font><font
+color="#0080FF">. Placing a dot after the number prevents the calculator of using exact
+manipulation, since in this case floating point is the apropiate. Then the program prompts
+for the information about <strong>open circuit test</strong>: select </font><font
+color="#0000A0"><em>low tension</em></font><font color="#0080FF"> and enter </font><font
+color="#0000A0">208.</font><font color="#0080FF">, </font><font color="#0000A0">85.</font><font
+color="#0080FF"> and </font><font color="#0000A0">1800.</font><font color="#0080FF"> in
+their respective spaces, and press Enter. Then the program prompts for the information
+about <strong>short circuit test</strong>: select </font><font color="#0000A0"><em>high
+tension</em></font><font color="#0080FF"> and enter </font><font color="#0000A0">95.</font><font
+color="#0080FF">, </font><font color="#0000A0">217.4</font><font color="#0080FF"> and</font><font
+color="#0000A0"> 8200.</font><font color="#0080FF"> in their respective spaces, and press
+Enter. After this, the program provides the different impedances used to describe the
+equivalent circuit of the transformer. This impedances are shown in the IO area and also
+stored in variables. Press Enter until the next dialog box appears.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Then,
+the program focuses on the load. A drop-down dialog box appears, asking you to choose the
+type of data you know about the load. In our case, we know the monophasic power, voltage,
+fp and percent of load. Therefore, we choose the second option: </font><font
+color="#0000A0">S1 + VLN + fp</font><font color="#0080FF">. After this, the program
+prompts a dialog box, where you must enter the values of these known variables. Supose we
+wish calculate the answers for FP=1.0. For this load, input </font><font color="#0000A0">5E5</font><font
+color="#0080FF">, </font><font color="#0000A0">208.</font><font color="#0080FF">, </font><font
+color="#0000A0">1.0</font><font color="#0080FF">,</font><font color="#0000A0"> lagging</font><font
+color="#0080FF"> (or leading, its the same for fp=1.0) and </font><font color="#0000A0">100</font><font
+color="#0080FF">. It is important to use 100% of load. At this point, the program displays
+in the IO area and also stores in variables the phasorial values of S, V, I and Z that
+match the requested fp and percent. Press Enter until the next dialog box appears.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Now,
+the program is getting ready to simulate. It requests the value of the source: input</font><font
+color="#0000A0"> 2300.</font><font color="#0080FF"> and press Enter. After this, the
+program simulates the equivalent circuit of the transformer, with the specified source as
+input and the calculated load. This takes about 12 seconds, until it starts showing
+answers.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">The
+program shows a lot of answers we don't need in this problem.&nbsp; The last answer is the
+one we want, which is the percent of actual load (actual meaning at 100% load and current
+FP) you need to use to get the greatest efficiency at the given power factor: </font><font
+color="#0000A0">47.8</font><font color="#0080FF">%. Just as it appears in the text book.
+Press enter and the program goes back to the Home display. All answers are stored in
+variables. Also, the data you introduced is stored, so that the next time you run the
+program, it will appear already written in the spaces. This saves a lot of time, specially
+in problems like this one, in which you have to calculate several times <em>almost</em>
+the same thing, but with few things changing. Now, run the program again and leave all
+values just as they are, changing just one: the load percent. Input the load percent you
+received as answer the last time, this is</font><font color="#0000A0"> 47.8</font><font
+color="#0080FF">. Now, take note of the efficiency that the program will show as answer in
+the IO area. This is the highest efficiency of the transformer at FP=1.0. (BTW, the
+highest effienciy at FP=1.0 is also the highest efficiency overall). The answer is </font><font
+color="#0000A0">98.2</font><font color="#0080FF">%, which is right. (Ignore the comment
+the program makes at the end, which indicates a new load percent - near to 100% - of
+actual load for highest efficiency, since you already have the highest efficiency.)</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Repeat
+the same procedure, using in the first round all values the same but the value of FP=</font><font
+color="#0000A0">0.8 lagging</font><font color="#0080FF"> and </font><font color="#0000A0">100</font><font
+color="#0080FF">% of load. You'll get </font><font color="#0000A0">48.0</font><font
+color="#0080FF">% as the fraction of load to use to get the highest effieciency at that
+FP. Do the thing again, changing the percent to 48.0 and you'll get the highest
+effienciency at that FP: </font><font color="#0000A0">98.1</font><font color="#0080FF">%
+of efficiency.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">These
+are the right answers! Isn't that easy?</font></small></p>
+
+<p align="right"><font size="2"><a href="http://paxm.org/symbulator"><img
+src="../../microscs.gif" alt="Symbolic Circuit Simulator by Roberto Perez-Franco"
+border="0" hspace="2" vspace="2" width="30" ></a><a href="http://paxm.org"><img
+src="../doc/dove.jpg" border="0"  border="0"></a></font></p>
+</body>
+</html>

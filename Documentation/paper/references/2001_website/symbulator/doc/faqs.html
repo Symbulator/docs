@@ -1,0 +1,135 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>FAQ's - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+
+<p align="center"><font face="BankGothic Lt BT" size="2" color="#0080FF">on-line
+documentation</font><br>
+<font color="#0080FF" face="BankGothic Lt BT" size="5">FAQ's</font></p>
+
+<hr width="70%" color="#0080FF">
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><strong><font
+color="#0080FF"><em>Now that I use Symbulator, will I need SPICE again?</em></font></strong></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Of
+course you will! Remember that SPICE and Symbulator don't overlap or replace each other.
+Symbulator is for linear symbolic circuits; SPICE is for huge numeric non-linear circuits.</font></small></p>
+
+<hr width="70%" color="#0080FF">
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><strong><font
+color="#0080FF"><em>Do you have an anotated version of the program's code?</em></font></strong></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>No,
+sorry. I know <em>Symbulator</em>'s code is extremelly cryptic. I made it that way at
+hand, for it to be</small><small> <strong>smaller</strong> and<strong> faster</strong>.
+Anyway,</small><small> the code is <strong> copyrighted</strong>.</small></font></p>
+
+<hr width="70%" color="#0080FF">
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><strong><font
+color="#0080FF"><em>Does Symbulator runs in a TI-92Plus?</em></font></strong></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Although</small><small>
+I don't owe a</small><small> TI-92+, some friends have told me that it does run
+fine on the 92+.</small></font></p>
+
+<hr width="70%" color="#0080FF">
+
+<p align="left" style="margin-left: 100; margin-right: 100"><strong><font color="#0080FF"><em><small>What
+is the real name of your software</small><small>?</small></em></font></strong></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Once
+it used to be named</small><small> <strong>Symbolic Circuit Simulator</strong>,
+and <strong>SCS </strong>were its initials. Later, I named it</small><strong><small>
+Symbulator</small></strong><small>. </font><font color="#000080">(Expert)</font><font color="#0080FF">
+is the name of an operation mode.&nbsp; </font></small><font color="#808000"><small>(Impala)
+</small></font><font color="#0080FF"><small>is </small><small>the name of an
+inner method. </font><font color="#800080">Q</font><font color="#0080FF"> is the
+name of the last version</font></small><font color="#0080FF"><small>.</small></font></p>
+
+<hr width="70%" color="#0080FF">
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><strong><font
+color="#0080FF"><em>I am having a little trouble understanding the way current is defined
+through a voltage source. Can you explain this point?</em></font></strong></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Currents
+in elements are defined according to a convention used in all major circuit simulators. It
+is the standard convention in the world of circuit simulation. The rule says something
+like this:<br>
+<br>
+1) Current in an element flows from the first node you define to the second node you
+define.<br>
+<br>
+2) In voltage sources, the first node you define is positive node.<br>
+<br>
+3) In current sources, the first node you define is the starting node.<br>
+<br>
+That's why the current is defined that way, which seems to &quot;opposite&quot; to the
+natural flow of current inside a voltage source. Remember that the current in a given
+voltage source may flow in any direction, according to the circuit.</font></small></p>
+
+<hr width="70%" color="#0080FF">
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><strong><em>I</em></strong></font></small><font color="#0080FF"><strong><em><small>s
+it</small><small> possible to analyze a circuit that uses mutual inductances that are defined in the complex
+plane</small></em></strong></font><font color="#0080FF"><small><strong><em>?</em></strong><br>
+<br>
+In </small><em><small>Symbulator</small></em><small>, mutual inductances </small><small>should
+be</small><small> defined in Henrys. Although, if you find a circuit with the
+mutual inductances defined as complex values, </small><small>there is a trick you can
+use:<br>
+<br>
+1) If there is a given frequency for the problem, then obtain, from the
+reactance</small><small> of the mutual inductance in Ohms, its equivalent value
+in Henrys</small><small> using the formula L in Henrys =X in Ohms / w, where w is radial
+frequency, or L = X / 2*Pi*f, where f is frequency in Hz.</small><small><br>
+<br>
+2) If there is no given frequency for the problem, you assign an arbitrary frequency of 1 rad/seg and automatically you can use the Ohms values as if they were Henrys.</small></font></p>
+
+<hr width="70%" color="#0080FF">
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><strong><em>Would
+it be possible for Symbulator to solve circuits that includes diodes?</em></strong><br>
+<br>
+<em>Symbulator</em> cannot solve circuits that includes diodes. Although, you can solve
+circuits that includes diodes using Symbulator as a modeling tool.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Since
+<em>Symbulator</em> is a linear circuit simulator, it does not accept or simulates any
+non-linear element (semiconductors). For non-linear elements I strongly recommend the use
+of a numerical simulator, such as SPICE, PSpice or Electronic Workbench. The reason for
+this limitation has to be searched in the same nature of <em>Symbulator</em>. <em>Symbulator</em>
+is a symbolic simulator. Semiconductors behavior depends on the value of voltages and
+currents in their terminals. How can we know the value of a symbolic current? It is easy
+to see that to have a symbolic value is to have an unknown, and a diode or a transistor
+require us to know the numerical value of this unknown (beside the grafic of its
+features), this is to say the numerical value on which its behavior depends.</font></small></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Now,
+since non-linear elements can be modeled, what you can do in some cases to solve circuits
+that includes diodes is to modelate</small><small> this non-linear elements using linear equivalents. How?
+Well, diodes can be modeled as short circuits and open circuits, depending on their state.
+Zener diodes can be modeled as a voltage source (examples are there in the site).
+Transistors can be modeled using hybrid parameters.</small></font></p>
+
+<p align="left" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><em>Symbulator</em>
+won't simulate a circuit using non-linear elements, but will allow you (as it has allowed
+me during my electronics 1 and 2 courses) to model this non-linear elements with their
+linear elements, and get the right (symbolic) answer.</font></small></p>
+
+<hr width="70%" color="#0080FF">
+
+<p align="right"><font size="2"><a href="http://paxm.org/symbulator"><img src="../microscs.gif"
+alt="Symbolic Circuit Simulator by Roberto Perez-Franco" border="0" hspace="2" vspace="2"
+width="30" ></a><a href="http://paxm.org"><img src="../doc/dove.jpg" border="0" 
+ border="0"></a></font></p>
+</body>
+</html>

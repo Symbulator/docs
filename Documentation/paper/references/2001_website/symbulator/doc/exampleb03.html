@@ -1,0 +1,96 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+<i>
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"></i><font color="#004080"><em>B03</em>
+AC analysis:<b> Resonance frequency and its input impedance</font></p>
+</b>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. Given the following circuit, find the value of resonance
+frequency in rad/s and the value in ohms of the impedance of the circuit at resonance.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><img src="ex12.jpg"
+width="361" height="163"></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>There are different ways to solve this problem using </small><small>Symbulator</small><small>. I'll present
+here the easiest way, using one of the latest tools of </small><small>Symbulator</small><small>:<em> 
+thevenin</small><small>()</em>. This tool
+will provide us with the Zth, which is the input impedance of the circuit.</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Please, set Mode Display Digits in Float 9 or 10.</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">A little theory. Resonance in a circuit is when the imaginary part of its
+entry admitance equals zero. Input admitance can be found as the inverse of input
+impedance.</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">1) Label nodes and elements. Define a variable&nbsp; containing circuit description. I used this
+description:</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0000A0"><small>&quot;r1,0,1,1E4</small></font></font><font color="#0000A0" FACE="Courier New"><small>;
+</small><small>l1,0,1,4.4E-3; </small><small>cx,1,2,1E-8; </small><small>e2,2,0,1E5*ir1&quot;
+<font FACE="Wingdings">à</font>cir</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">2) Run the
+Thevenin/Norton tool:</font></small> 
+
+<ol START="2">
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>sq\thevenin</small><small>(cir,1,0)</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  FACE="Courier New" color="#0000A0"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  Done</small></font></p>
+</ol>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">When asked,
+select </font><font color="#0000A0">AC</font><font color="#0080FF"> (alternating current)
+analysis, and input </font><font color="#0000A0">wo</font><font color="#0080FF"> as
+frequency. This symbolic frequency will help us find the resonance frequency in the next
+step.</font></small></p>
+
+<p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>3) Now, find
+the frequency that produces resonance, this is to say, the frequency that makes the
+imaginary part of admitance (or the impedance) </small><small>equal zero:</small></font></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>solve(imag(1/</small><small>zth)=0,wo)|wo&gt;0</small></font></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font FACE="Courier New"
+color="#0000A0"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+wo=45454.5454</small><small> &nbsp;</small></font></p>
+
+<p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Now, find the
+value of entry impedance at given frequency.</font></small></p>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"></font><small><font
+FACE="Courier New" color="#0000A0">zth|</font><font FACE="Courier New"><font
+color="#0000A0">ans(1)</font></small></p>
+</font>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font FACE="Courier New"
+color="#0000A0"><small>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+9999.93032</small></font></p>
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><i><small><font color="#0080FF">Answer:</font></i>
+<font color="#0080FF">
+The answers obtained are the right ones.</font></small></p>
+</body>
+</html>

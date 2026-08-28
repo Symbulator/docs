@@ -1,0 +1,68 @@
+<html>
+
+<head>
+<meta HTTP-EQUIV="Content-Type" CONTENT="text/html; charset=windows-1252">
+<meta NAME="GENERATOR" CONTENT="Microsoft FrontPage 4.0">
+<title>Examples - Symbolic Circuit Simulator</title>
+</head>
+
+<body LINK="#0080FF">
+
+<p ALIGN="center" style="margin-left: 100; margin-right: 100"><font color="#004080"><i>A03</i>
+TR analysis<b>: RL circuit with given initial values</b></font></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Question. </i>Given the following circuit, find a symbolic expression for
+current through inductor.</font></small></p>
+
+<p ALIGN="CENTER" style="margin-left: 100; margin-right: 100"><small><font color="#0080FF"><img
+SRC="image9.jpg" width="222" height="145"></font></small></p>
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><small><font
+color="#0080FF">Solution:</font></small></p>
+</i>
+
+<ol>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Label nodes
+    and elements.&nbsp;&nbsp; Define variable <font
+    FACE="Courier New">cir</font> containing circuit description. I used this
+    description:</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>&quot;e3,1,0,3,0; </small><small>l2,1,2,2,5; </small><small>r4,2,0,4,0&quot;
+  <font FACE="Wingdings">à</font>
+  cir</small></font></p>
+  </font><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0080FF"><small>The fifth term in inductor l2 description is 5 amperes, the initial
+  current through inductor. Except for inductors and capacitors with initial conditions, and
+  operational amplifiers, the fifth term in element description row is always zero.</small></font></p>
+  <li><p style="margin-left: 100; margin-right: 100"><small><font color="#0080FF">Simulate
+    this circuit using transient analysis.</font></small></p>
+  </li>
+  <font FACE="Courier New"><p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+  color="#0000A0"><small>sq\tr(cir)</small></font></p>
+  </font>
+  <li><p style="margin-left: 100; margin-right: 100"><font color="#0080FF"><small>Ask for
+    current you wish.</small></font></p>
+  </li>
+</ol>
+<font FACE="Courier New">
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font color="#0000A0"><small>il2</small></font></p>
+</font>
+
+<i>
+
+<p ALIGN="JUSTIFY" style="margin-left: 100; margin-right: 100"><font
+color="#0080FF"><small>Answer:</small></font></i> <font
+color="#0080FF"> <small> The answer Symbulator</small><small> gives is the right one, and is the first shown
+in the screen. Up to date, there is no other circuit simulator for any calculator that
+finds this answer. Symbulator</small><small> presents it in fraction form. Circuits text book gives the answer
+using floating point numbers with two decimal digits. You can get the answer this way too,
+if you set &quot;Display Digits&quot; to &quot;FLOAT 3&quot; and press [green diamond] +
+[ENTER] instead of [ENTER] alone. This answer presentation is the second shown in the
+screen.</small></font></p>
+</body>
+</html>

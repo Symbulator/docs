@@ -1,0 +1,80 @@
+<html>
+
+<head>
+<title>Solved Problems</title>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<meta name="GENERATOR" content="Microsoft FrontPage 4.0">
+</head>
+
+<body>
+
+<p align="center"><font color="#004080" size="3"><strong>Problem #4</strong></font></p>
+<font FACE="Courier New">
+
+<p></font><font color="#0080FF" face="Times New Roman"><small>Consider the following
+circuit with Vs = 100&lt;0° volts, f = 50 Hz , and find the phasorial voltage <em>Vx </em>if
+the X element is a) a 30 ohms resistor, b) a 0.5 henrys inductor, and c) a 50 microFarads
+capacitor.<em> (Hayt-Kemmerly)</em></small></font></p>
+
+<p align="center"><font face="Times New Roman"><img src="pr03cir.jpg" width="300"
+height="124"></font></p>
+
+<p><font color="#0080FF" face="Times New Roman"><small>I used the following circuit
+descriptions:</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><font FACE="Courier New"
+color="#0000A0"><small>&quot;es,1,0,100.; </small><small>r1,1,2,10; </small><small>r2,2,3,20;
+</small><small>r3,3,x,30; </small><small>r6,3,0,60; </small><small>jd,0,2,0.05*vx;
+</small><small>rx,x,0,30&quot; -&gt;cir1</small></font></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><small><font FACE="Courier New"
+color="#0000A0">&quot;es,1,0,100.; r1,1,2,10; r2,2,3,20; r3,3,x,30; r6,3,0,60;
+jd,0,2,0</font></small><font face="Courier New" color="#0000A0"><small>.05*vx; lx,x,0,0.5&quot; -&gt;ci</small></font><small><font FACE="Courier New"
+color="#0000A0">r2</font></small></p>
+
+<p ALIGN="JUSTIFY" style="margin-left: 0; margin-right: 0"><font FACE="Courier New"
+color="#0000A0"><small>&quot;es,1,0,100.; r1,1,2,10; r2,2,3,20; r3,3,x,30; r6,3,0,60;
+jd,0,2,0.05*vx; </small></font><font
+FACE="Courier New"><small><font color="#0000A0">cx,x,0,5E-005</font></small></font><font FACE="Courier New"
+color="#0000A0"><small>&quot; -&gt;cir3</small></font></p>
+
+<p><font color="#0080FF"><small>Simulate the first circuit, asking for the phasorial
+voltage in the same step.</small></font> 
+
+<ul>
+  <li><p style="margin-left: 0; margin-right: 0"><font FACE="Courier New" color="#0000A0"><small>sq\ac(cir1,2</small><small>*Pi*50</small><small>):sq\absang(vx)</small></font><ul>
+      <li><p style="margin-left: 0; margin-right: 0"><small><font FACE="Courier New"
+        color="#0000A0">&quot;28.57 &lt; 0.°&quot;</font></small></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p style="margin-left: 0; margin-right: 0"><font color="#0080FF"><small>Erase all
+variables in current folder. Simulate the second circuit, asking for the phasorial voltage
+in the same step.</small></font> 
+
+<ul>
+  <li><p style="margin-left: 0; margin-right: 0"><font FACE="Courier New" color="#0000A0"><small>sq\ac(cir2,2</small><small>*Pi*50</small><small>):sq\absang(vx)</small></font><ul>
+      <li><p style="margin-left: 0; margin-right: 0"><small><font FACE="Courier New"
+        color="#0000A0">&quot;90.24 &lt; 25.52°&quot;</font></small></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p style="margin-left: 0; margin-right: 0"><font color="#0080FF"><small>Erase all
+variables in current folder. Simulate the third circuit, asking for the phasorial voltage
+in the same step.</small></font> 
+
+<ul>
+  <li><p style="margin-left: 0; margin-right: 0"><font FACE="Courier New" color="#0000A0"><small>sq\ac(cir3,2</small><small>*Pi*50</small><small>):sq\absang(vx)</small></font><ul>
+      <li><p style="margin-left: 0; margin-right: 0" align="left"><font FACE="Courier New"
+        color="#0000A0"><small>&quot;64.708 &lt; -49.678°&quot;</small></font></p>
+      </li>
+    </ul>
+  </li>
+</ul>
+<p align="right"><font size="2"><a href="http://paxm.org/symbulator"><img src="../frontpage/microscs.gif" alt="Symbolic Circuit Simulator by Roberto Perez-Franco" border="0" hspace="2" vspace="2" width="30" ></a><a href="http://paxm.org"><img src="../doc/dove.jpg" border="0"  border="0"></a></font></p>
+</body>
+</html>
