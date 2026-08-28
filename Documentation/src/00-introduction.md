@@ -2,12 +2,15 @@
 id: introduction
 kind: front
 title: Introduction
-updated: 2026-08-26
+updated: 2026-08-28
 summary: >
   Learn about Symbulator and how it can help you focus on learning how circuits
   work, instead of struggling with math. Get the latest version of Symbulator
   and get ready to roll.
 ---
+
+*The purpose of this tutorial is to teach you the art of symbolic
+circuit simulation.*
 
 ## What is Symbulator {#what-is-symbulator}
 
