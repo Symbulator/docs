@@ -237,10 +237,12 @@
                 Internal Logic of Symbulator</a></h3>
             </div>
             <div>
-              <p class="way-text">A monograph on the solver: its history since
-                1999, its equations and staged unknowns in annotated
-                pseudo-code, and worked exemplars of circuits that are painful
-                by hand and effortless once described.</p>
+              <p class="way-text">A monograph on the solver: its history from
+                the 1999 TI-89 original to today, its complete logic in
+                annotated pseudo-code — enough to build a simulator of your
+                own — and worked exemplars, including one exam problem solved
+                by the 2001 calculator and the 2026 port with the same answer,
+                digit for digit.</p>
               <p class="way-url">learn.symbulator.com/monograph.pdf</p>
             </div>
           </li>
@@ -289,8 +291,10 @@
         <div>
           <dt>Expert mode</dt>
           <dd>Hand it the extra equations a problem gives you — a known current, a
-            resistance the source sees — and it will solve for the component values
-            you don't have.</dd>
+            power to be delivered — and it solves for the component values you
+            don't have. When the mathematics allows several solutions it returns
+            them all, and a condition like <code>vs&nbsp;&gt;&nbsp;0</code> picks
+            the one you meant.</dd>
         </div>
       </dl>
 
@@ -300,7 +304,9 @@
           transistors. It also will not help with problems that turn on applying a
           formula selectively rather than solving the circuit through.</p>
         <p>And it is not a replacement for your brain. You have to understand
-          circuit theory to use it.</p>
+          circuit theory to use it. That has been the design's stance since the
+          2001 thesis: learn the manual techniques first, and let Symbulator
+          verify what your own hand found.</p>
       </div>
     </div>
   </section>
@@ -311,6 +317,9 @@
       <div class="sec-head">
         <p class="eyebrow">On a calculator</p>
         <h2>Symbulator still runs on the calculators it grew up on.</h2>
+        <p class="sub">Symbulator was born on the TI-89 in 1999 and took first
+          place at the IEEE Region 9 student paper contest in 2000; versions 7
+          and 8 keep those calculators current.</p>
       </div>
 
       <ul class="legacy">
