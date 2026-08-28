@@ -1697,12 +1697,22 @@ call. Naming the nodes \code{a}--\code{n} and the elements after
 their labels:
 
 \begin{quote}
-\code{es,e,0,vs} \quad \code{js,0,d,is} \\
-\code{r1,e,m,10} \quad \code{r2,a,e,20} \quad \code{r3,m,0,30} \quad
+\begin{tabbing}
+\code{jd1,a,b,0.2*v\_r7}xxx\=\kill
+\code{es,e,0,vs}          \> \emph{the voltage source, symbolic} \\
+\code{js,0,d,is}          \> \emph{the current source, symbolic} \\
+\code{r1,e,m,10}          \> \emph{the seven resistors\ldots} \\
+\code{r2,a,e,20} \\
+\code{r3,m,0,30} \\
 \code{r4,b,m,40} \\
-\code{r5,n,m,50} \quad \code{r6,c,d,60} \quad \code{r7,n,d,70} \\
-\code{jd1,a,b,0.2*v\_r7} \quad \code{ed2,c,b,0.1*i\_r5} \\
-\code{jd3,n,c,2*i\_r1} \quad \code{ed4,0,n,0.7*v\_r6}
+\code{r5,n,m,50}          \> \emph{\ldots whose current the CCVS reads} \\
+\code{r6,c,d,60}          \> \emph{\ldots whose drop the VCVS reads} \\
+\code{r7,n,d,70}          \> \emph{\ldots whose drop the VCCS reads} \\
+\code{jd1,a,b,0.2*v\_r7}  \> \emph{the VCCS (delivers the 80 W)} \\
+\code{ed2,c,b,0.1*i\_r5}  \> \emph{the CCVS (dissipates the 0 W)} \\
+\code{jd3,n,c,2*i\_r1}    \> \emph{the CCCS} \\
+\code{ed4,0,n,0.7*v\_r6}  \> \emph{the VCVS}
+\end{tabbing}
 \end{quote}
 
 \noindent with expert equations \code{p\_jd1 = -80} (the solver's $p$
@@ -1773,9 +1783,16 @@ analysis---capacitors open automatically at steady state
 conditions:
 
 \begin{quote}
-\code{e,s,0,18} \quad \code{r8,s,a,8} \quad
-\code{c1,a,0,1/6} \quad \code{r12,a,0,12} \\
-\code{r18,a,b,18} \quad \code{r6,b,0,6} \quad \code{c2,b,0,1/3}
+\begin{tabbing}
+\code{c2,b,0,1/3}xxxxxx\=\kill
+\code{e,s,0,18}         \> \emph{the DC source, still connected} \\
+\code{r8,s,a,8}         \> \emph{\ldots behind its 8~$\Omega$} \\
+\code{c1,a,0,1/6}       \> \emph{first capacitor (open at steady state)} \\
+\code{r12,a,0,12}       \> \emph{the resistive ladder\ldots} \\
+\code{r18,a,b,18} \\
+\code{r6,b,0,6} \\
+\code{c2,b,0,1/3}       \> \emph{second capacitor (open at steady state)}
+\end{tabbing}
 \end{quote}
 
 \noindent returns $v_a = 9$~V and $v_b = \tfrac94$~V. The $t>0$
@@ -1785,10 +1802,16 @@ fields---the fifth field that has existed since the five-column
 matrices of 1999:
 
 \begin{quote}
-\code{c1,a,0,1/6,9} \quad \code{r12,a,0,12} \quad
+\begin{tabbing}
+\code{js,0,b,10*e\^{}(-t)*sin(2*t+30*pi/180)}xxx\=\kill
+\code{c1,a,0,1/6,9}     \> \emph{first capacitor, $v(0) = 9$~V} \\
+\code{r12,a,0,12}       \> \emph{the ladder, source branch dropped\ldots} \\
 \code{r18,a,b,18} \\
-\code{r6,b,0,6} \quad \code{c2,b,0,1/3,9/4} \\
-\code{js,0,b,10*e\^{}(-t)*sin(2*t+30*pi/180)}
+\code{r6,b,0,6} \\
+\code{c2,b,0,1/3,9/4}   \> \emph{second capacitor, $v(0) = \tfrac94$~V} \\
+\code{js,0,b,10*e\^{}(-t)*sin(2*t+30*pi/180)} \\
+                        \> \emph{the waveform source, now connected}
+\end{tabbing}
 \end{quote}
 
 \noindent A TR analysis (\S\ref{sec:tr}) recognizes the source value
@@ -1851,14 +1874,21 @@ sources are typed the way the book prints them, angle notation and
 all:
 
 \begin{quote}
-\code{ea1,na1,0,100} \quad
-\code{eb1,nb1,0,(100$\angle{-120}^{\circ}$)} \quad
-\code{ec1,nc1,0,(100$\angle 120^{\circ}$)} \\
-\code{raa,na1,na2,1} \quad \code{rbb,nb1,nb2,1} \quad
+\begin{tabbing}
+\code{eb1,nb1,0,(100$\angle{-120}^{\circ}$)}xxx\=\kill
+\code{ea1,na1,0,100}    \> \emph{the wye source, phase $a$\ldots} \\
+\code{eb1,nb1,0,(100$\angle{-120}^{\circ}$)}
+                        \> \emph{\ldots phase $b$\ldots} \\
+\code{ec1,nc1,0,(100$\angle 120^{\circ}$)}
+                        \> \emph{\ldots phase $c$} \\
+\code{raa,na1,na2,1}    \> \emph{the three line impedances\ldots} \\
+\code{rbb,nb1,nb2,1} \\
 \code{rcc,nc1,nc2,1} \\
-\code{rac,na2,nc2,100+24*pi*j} \quad
-\code{rcb,nc2,nb2,100+24*pi*j} \quad
+\code{rac,na2,nc2,100+24*pi*j}
+                        \> \emph{the delta load\ldots} \\
+\code{rcb,nc2,nb2,100+24*pi*j} \\
 \code{rba,nb2,na2,100+24*pi*j}
+\end{tabbing}
 \end{quote}
 
 \noindent One AC call returns every line current and node phasor; in
@@ -1882,7 +1912,12 @@ secondary of an ideal $1\!:\!n$ transformer, viewed from the primary
 terminals. Everything in the description is a name:
 
 \begin{quote}
-\code{t,2,3,1,n} \quad \code{r2,3,4,z2} \quad \code{e2,4,0,vs2}
+\begin{tabbing}
+\code{t,2,3,1,n}xxxxxx\=\kill
+\code{t,2,3,1,n}        \> \emph{the ideal $1\!:\!n$ transformer} \\
+\code{r2,3,4,z2}        \> \emph{the secondary impedance, symbolic} \\
+\code{e2,4,0,vs2}       \> \emph{the secondary source, symbolic}
+\end{tabbing}
 \end{quote}
 
 \noindent Asking for the Th\'evenin equivalent seen at the primary
@@ -1907,8 +1942,14 @@ no sources anywhere. The primary carries 1~A at $t=0$; the secondary
 is at rest. What happens?
 
 \begin{quote}
-\code{l1,1,0,2,1} \quad \code{r1,1,0,3} \\
-\code{l2,2,0,2} \quad\ \code{r2,2,0,3} \quad \code{m,l1,l2,1}
+\begin{tabbing}
+\code{l1,1,0,2,1}xxxxx\=\kill
+\code{l1,1,0,2,1}       \> \emph{primary coil, $i(0) = 1$~A} \\
+\code{r1,1,0,3}         \> \emph{\ldots closed on its resistor} \\
+\code{l2,2,0,2}         \> \emph{secondary coil, at rest} \\
+\code{r2,2,0,3}         \> \emph{\ldots closed on its resistor} \\
+\code{m,l1,l2,1}        \> \emph{the coupling, $M = 1$~H}
+\end{tabbing}
 \end{quote}
 
 \noindent The initial condition rides in the inductor's optional
@@ -1938,11 +1979,18 @@ a two-op-amp summing cascade in which every conductance is a symbol,
 $g_1, g_2, g_3, g_4, g$, and the source is $v_s$:
 
 \begin{quote}
-\code{e,1,0,vs} \quad \code{r12,1,2,1/g1} \quad
-\code{r14,1,4,1/g2} \\
-\code{r23,2,3,1/g} \quad \code{r34,3,4,1/g} \quad
-\code{r2o,2,o,1/g4} \quad \code{r4o,4,o,1/g3} \\
-\code{o1,0,2,3} \quad \code{o2,0,4,o}
+\begin{tabbing}
+\code{r12,1,2,1/g1}xxxx\=\kill
+\code{e,1,0,vs}         \> \emph{the source, symbolic} \\
+\code{r12,1,2,1/g1}     \> \emph{conductance $g_1$, into stage one} \\
+\code{r14,1,4,1/g2}     \> \emph{conductance $g_2$, into stage two} \\
+\code{r23,2,3,1/g}      \> \emph{stage one's feedback, $g$} \\
+\code{r34,3,4,1/g}      \> \emph{interstage coupling, $g$} \\
+\code{r2o,2,o,1/g4}     \> \emph{feedback from the output, $g_4$} \\
+\code{r4o,4,o,1/g3}     \> \emph{feedback from the output, $g_3$} \\
+\code{o1,0,2,3}         \> \emph{first nullor} \\
+\code{o2,0,4,o}         \> \emph{second nullor}
+\end{tabbing}
 \end{quote}
 
 \noindent Two nullors, seven symbolic elements, one DC call:
