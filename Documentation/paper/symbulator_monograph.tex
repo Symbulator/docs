@@ -405,9 +405,9 @@ language of \S\ref{sec:input}.
 line names one element, its terminals, and its value---the value being
 a number, a symbol, or an expression; a dependent source is simply a
 source whose value names another answer. Reading ends with validation:
-the description must name a reference node, no element may short its
-own two terminals, and every node must have a conduction path to the
-reference.
+the description must name a reference node, no element may have both
+its terminals on the same node, and every node must have a conduction
+path to the reference.
 
 \emph{Writing down the equations} is called \emph{stamping}: one pass
 over the element list in which each element contributes its own
@@ -677,8 +677,11 @@ case-insensitive and fold to lower case; duplicate names are refused.
 Each element must have exactly the field count its type demands (one
 more is allowed on \code{l}/\code{c}, for the initial condition). The
 whole-circuit checks then enforce three properties that the solver
-depends on: a reference node exists; no two-terminal element shorts
-its own terminals together; and every node has a conduction path to
+depends on: a reference node exists; no element has both its
+terminals on the same node---a rule that binds even the short
+circuit, whose job is to join two \emph{distinct} nodes: a true
+self-loop would leave its own current indeterminate, entering and
+leaving the same KCL sum; and every node has a conduction path to
 the reference. The last check matters more than it may appear: a
 floating sub-circuit has no defined voltages, and without the check
 the solver would quietly return its voltages parametrized in one
@@ -704,7 +707,7 @@ another ($v_2 = v_3$) rather than flag the mistake.
   \Comment{a reference exists}
 \ForAll{$e \in \mathcal{E}$ with two terminals}
   \State \textbf{check} $n_1 \ne n_2$
-    \Comment{no element shorts itself}
+    \Comment{no self-loop: both terminals on one node}
 \EndFor
 \State union-find over terminals: each element joins its nodes
   \Comment{op-amps join all three; grounded two-ports join theirs to \code{0}}
