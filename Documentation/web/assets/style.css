@@ -120,11 +120,12 @@ a:focus-visible, .vkey:focus-visible, .btn:focus-visible {
 /* ------------------------------------------------------------------ top -- */
 
 /* The lockup -- navy band, logo, wordmark, second line, sky keyline, theme
-   toggle -- lives in design/banner.css, one file shared with symbulator.com
+   toggle -- lives in the shared banner.css (canonical in the app tree,
+   Symbulator/repos/local/banner.css), one file shared with symbulator.com
    and the app. build.py copies it to assets/banner.css and index.php links it
    ahead of this file. Only this site's own controls are styled below: the two
    ribbon buttons and the version picker. Do not restate banner rules here --
-   that duplication is exactly what design/banner.css exists to end. */
+   that duplication is exactly what the shared banner.css exists to end. */
 
 
 
@@ -146,7 +147,7 @@ a:focus-visible, .vkey:focus-visible, .btn:focus-visible {
                                   outline-offset: 3px; }
 .versions[open] summary { background: rgba(255, 255, 255, 0.2); }
 
-/* 0.875rem matches .subbar nav a in design/banner.css exactly: the picker
+/* 0.875rem matches .subbar nav a in the shared banner.css exactly: the picker
    sits in the same row as the links and should read at the same size. It
    keeps its border and background because it is a menu, not a link -- that
    affordance is the one thing in this ribbon that should look different. */
@@ -181,7 +182,7 @@ a:focus-visible, .vkey:focus-visible, .btn:focus-visible {
 
 @media (prefers-reduced-motion: reduce) { .chev { transition: none; } }
 
-/* The ribbon's links are styled in design/banner.css, shared with
+/* The ribbon's links are styled in the shared banner.css, shared with
    symbulator.com and the app -- see the note there. The .ribbon-btn chips
    that used to live here were removed on 23 Aug 2026: they were the most
    visible thing making this site look unrelated to the other two. Nothing
@@ -198,7 +199,7 @@ a:focus-visible, .vkey:focus-visible, .btn:focus-visible {
   grid-template-columns: var(--sidebar) minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 4rem);
   /* Same track as the banner, so the sidebar's left edge lines up with the
-     logo above it. Both come from design/banner.css. */
+     logo above it. Both come from the shared banner.css. */
   width: min(var(--banner-w), 100%);
   margin: 0 auto;
   padding: 2.5rem var(--banner-pad) 4rem;
@@ -297,7 +298,7 @@ body.home .sidebar { display: none; }
 
 /* ---------------------------------------------------------- search (#87) --
    The one piece of furniture only this site has, so it is styled here and
-   not in design/banner.css, which the landing page and the app share.
+   not in the shared banner.css, which the landing page and the app share.
 
    It sits at the top of the sidebar rather than in the banner for that
    reason, and it searches the version being read and nothing else: the

@@ -149,7 +149,7 @@ function asset(string $name): string {
            properties and reads as one website only if its contents look
            alike; the two solid buttons that used to be here were the most
            visible thing making this page look unrelated to symbulator.com.
-           The styling comes from design/banner.css. -->
+           The styling comes from the shared banner.css. -->
       <nav>
         <a href="/symbulator-v<?= e($v) ?>.pdf">Download as PDF</a>
         <a href="https://symbulator.pythonanywhere.com">Online App</a>

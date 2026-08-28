@@ -138,7 +138,7 @@ def topbar(book, toc, v, page, ids):
         '<path d="M20.4 14.7A8.5 8.5 0 1 1 9.3 3.6a7 7 0 1 0 11.1 11.1Z"/></svg>'
         '</button>'
     )
-    # Same markup as web/index.php: the shared lockup from design/banner.css
+    # Same markup as web/index.php: the shared lockup from the shared banner.css
     # in .topbar, then a second .subbar band carrying this site's own
     # controls -- a row of plain links, the version picker and the Dark Mode
     # toggle. Keep the two files in step; the banner is meant to exist once,

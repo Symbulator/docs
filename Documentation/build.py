@@ -36,6 +36,14 @@ SRC = os.path.join(ROOT, "src")
 BUILD = os.path.join(ROOT, "build")
 ASSETS = os.path.join(ROOT, "assets")
 
+# The shared banner lockup's one source, in the app repository -- a
+# sibling tree of this one (see the top-level CLAUDE.md for the
+# layout). It lives there rather than here because the app's build
+# inlines a copy it cannot fetch, and moving the source into that repo
+# pins the lockup and the check to the same commit (#75).
+SHARED_BANNER = os.path.normpath(os.path.join(
+    ROOT, "..", "..", "Symbulator", "repos", "local", "banner.css"))
+
 
 # Every URL this build writes into the site is root-absolute.
 #
@@ -1027,10 +1035,19 @@ def build_web(book: Book, versions: list[int]):
             shutil.copytree(s, d, dirs_exist_ok=True)
         else:
             shutil.copy2(s, d)
-    # The banner is shared with symbulator.com and the app; design/banner.css
-    # is its one source, copied in rather than duplicated inside style.css.
-    shutil.copy2(os.path.join(ROOT, "design", "banner.css"),
-                 os.path.join(outroot, "assets", "banner.css"))
+    # The banner is shared with symbulator.com and the app. Its one
+    # source is banner.css in the app's repository (Symbulator/repos/
+    # local -- moved there Aug 2026 so the app build, which inlines a
+    # copy it cannot fetch, guards against a file in its own commit);
+    # this build copies the same file in rather than duplicating it
+    # inside style.css.
+    if not os.path.isfile(SHARED_BANNER):
+        raise SystemExit(
+            f"build.py: {SHARED_BANNER} is missing. The shared banner "
+            "lockup lives in the app repository (Symbulator/repos/local, "
+            "a sibling tree of Sym Docum -- see the top-level CLAUDE.md); "
+            "without it this site cannot build its header.")
+    shutil.copy2(SHARED_BANNER, os.path.join(outroot, "assets", "banner.css"))
     if os.path.isdir(ASSETS):
         shutil.copytree(ASSETS, os.path.join(outroot, "assets"),
                         dirs_exist_ok=True)
@@ -1331,19 +1348,25 @@ def check_nested_version_spans() -> list[str]:
 
 
 def check_shared_banner() -> list[str]:
-    """The banner is one file, design/banner.css, imported by this site and
-    copied verbatim into landing/. The landing page has no build step, so its
-    copy can silently fall behind -- which is exactly how the lockup drifted
-    before it was centralised. Compare them and complain loudly."""
-    canon = os.path.join(ROOT, "design", "banner.css")
+    """The banner is one file -- banner.css in the app repository
+    (Symbulator/repos/local) -- imported by this site and copied
+    verbatim into landing/. The landing page has no build step, so its
+    copy can silently fall behind -- which is exactly how the lockup
+    drifted before it was centralised. Compare them and complain
+    loudly."""
     copy = os.path.join(ROOT, "landing", "assets", "banner.css")
+    if not os.path.isfile(SHARED_BANNER):
+        return [f"banner: the canonical banner.css is missing at "
+                f"{SHARED_BANNER} -- the app repository "
+                "(Symbulator/repos/local) must sit beside Sym Docum; "
+                "see the top-level CLAUDE.md"]
     if not os.path.isfile(copy):
         return ["banner: landing/assets/banner.css is missing -- copy "
-                "design/banner.css there so symbulator.com matches"]
-    if open(canon, encoding="utf-8").read() != open(copy, encoding="utf-8").read():
-        return ["banner: landing/assets/banner.css has drifted from "
-                "design/banner.css -- run "
-                "cp design/banner.css landing/assets/banner.css"]
+                "the canonical banner.css there so symbulator.com matches"]
+    if open(SHARED_BANNER, encoding="utf-8").read() != \
+            open(copy, encoding="utf-8").read():
+        return ["banner: landing/assets/banner.css has drifted from the "
+                f"canonical {SHARED_BANNER} -- copy it across"]
     return []
 
 
