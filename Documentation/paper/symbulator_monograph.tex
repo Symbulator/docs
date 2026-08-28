@@ -310,12 +310,15 @@ wrong''~\cite[Recs.]{thesis2000}. Two of Symbulator's own users,
 Doug Burkett and Tim Hutcheson, undertook an English translation of
 the thesis under the title \emph{The Symbulator
 Book}~\cite[Acks.]{thesis2000}; the effort stopped after the
-preface and the first four chapters, and what survives---working
-notes between the translators still visible in the
-margins---is preserved in the references archive beside the Spanish
-original. Its preface recasts the thesis's opening promise in the
-second person: ``The purpose of this book is to teach you the art
-of symbolic circuit simulation.''
+preface and the first four chapters, and what survived---working
+notes between the translators still visible in the margins---waited
+a quarter of a century in the author's papers. In 2026, in the
+course of preparing this monograph, the translation was completed
+in the translators' own voice and register, and the finished
+book~\cite{book2026} is published alongside this monograph. Its
+preface keeps the thesis's opening promise, recast in the second
+person: ``The purpose of this book is to teach you the art of
+symbolic circuit simulation.''
 
 \section{The long pause, and version 6 (2013)}
 
@@ -1605,7 +1608,10 @@ effortless once described. This chapter collects a few such exemplars,
 each solved by a single call---and two of them come with a rare kind
 of evidence: the thesis solved the same circuits on a TI-89 in 2001
 and printed the answers~\cite{thesis2000}, so the reader can watch
-the 2001 calculator and the 2026 port agree to the last digit.
+the 2001 calculator and the 2026 port agree to the last digit. The
+schematic of every exemplar, drawn from its own description by
+version~9's schematic engine, is collected in
+Appendix~\ref{app:schematics}.
 
 \section{The two-stage amplifier of 1999}
 \label{sec:amplifier}
@@ -1621,14 +1627,27 @@ kilohms---whose gain Bode diagram was requested over $10^{4}$ to
 $10^{13}$~rad/s. In Symbulator notation:
 
 \begin{quote}
-\code{e1,5,0,vg} \\
-\code{r1,5,1,150} \quad \code{r2,1,0,1'k} \quad
-\code{cc1,1,0,100'p} \quad \code{cc2,1,2,3'p} \\
-\code{jd1,2,0,0.05*v\_1} \quad \code{r3,2,0,2'k} \\
-\code{r4,2,3,100} \quad \code{r5,3,0,1'k} \quad
-\code{cc3,3,0,100'p} \quad \code{cc4,3,4,3'p} \\
-\code{jd2,4,0,0.05*v\_3} \quad \code{r6,4,0,2'k}
+\begin{tabbing}
+\code{jd1,2,0,0.05*v\_1}xxx\=\kill
+\code{e1,5,0,vg}          \> \emph{the source, behind\ldots} \\
+\code{r1,5,1,150}         \> \emph{\ldots its source resistance} \\
+\code{r2,1,0,1'k}         \> \emph{first stage: input loading,} \\
+\code{cc1,1,0,100'p}      \> \emph{\ldots shunt capacitance,} \\
+\code{cc2,1,2,3'p}        \> \emph{\ldots coupling capacitance} \\
+\code{jd1,2,0,0.05*v\_1}  \> \emph{first stage's VCCS} \\
+\code{r3,2,0,2'k}         \> \emph{first stage's load} \\
+\code{r4,2,3,100}         \> \emph{interstage resistance} \\
+\code{r5,3,0,1'k}         \> \emph{second stage: input loading,} \\
+\code{cc3,3,0,100'p}      \> \emph{\ldots shunt capacitance,} \\
+\code{cc4,3,4,3'p}        \> \emph{\ldots coupling capacitance} \\
+\code{jd2,4,0,0.05*v\_3}  \> \emph{second stage's VCCS} \\
+\code{r6,4,0,2'k}         \> \emph{second stage's load}
+\end{tabbing}
 \end{quote}
+
+\noindent (The circuit, as drawn by version~9's own schematic
+engine, is Figure~\ref{fig:ex-amplifier} in
+Appendix~\ref{app:schematics}.)
 
 An FD analysis returns every node voltage as a rational function of
 $s$; the transfer function is one division, $v_4/v_5$, and the Bode
@@ -2135,6 +2154,80 @@ three grades of 100/100, and the tribunal's citation.}
 \end{figure}
 
 % ======================================================================
+\chapter{The exemplar circuits, drawn}
+\label{app:schematics}
+% ======================================================================
+
+The schematics below are not illustrations prepared for this
+monograph: each one was \emph{drawn by Symbulator~9's schematic
+engine} from the same circuit description that
+Chapter~\ref{ch:exemplars} solves, exactly as the app draws a
+circuit beside its answers. The conventions are the drawer's own:
+wires never cross an element body, genuine crossings are drawn as
+semicircular hops, junction dots sit on node corners, values read as
+the user typed them, and a dependent source carries its controlling
+expression as its value.
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{figures/ex_amplifier.pdf}
+\caption{The two-stage amplifier of 1999 (\S\ref{sec:amplifier});
+thesis Problem~87.}
+\label{fig:ex-amplifier}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=\textwidth]{figures/ex_showcase2013.pdf}
+\caption{The 2013 showcase (\S\ref{sec:showcase2013}): one dependent
+source of each species, and both independent sources symbolic.}
+\label{fig:ex-showcase}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=0.62\textwidth]{figures/ex_boulet_before.pdf}\\[2em]
+\includegraphics[width=0.62\textwidth]{figures/ex_boulet_after.pdf}
+\caption{Prof.\ Boulet's switching transient
+(\S\ref{sec:boulet}); thesis Problem~88. Above, the $t<0$ circuit
+whose DC solution supplies the initial conditions; below, the $t>0$
+circuit carrying them in the capacitors' fifth fields, with the
+waveform source connected.}
+\label{fig:ex-boulet}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=0.9\textwidth]{figures/ex_threephase.pdf}
+\caption{The balanced wye--delta system with line impedances
+(\S\ref{sec:threephase}), its sources typed in angle notation.}
+\label{fig:ex-threephase}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=0.55\textwidth]{figures/ex_transformer.pdf}
+\caption{The ideal transformer viewed from its primary
+(\S\ref{sec:transformer}), every value a symbol.}
+\label{fig:ex-transformer}
+
+\vspace{3em}
+
+\includegraphics[width=0.5\textwidth]{figures/ex_coupledcoils.pdf}
+\caption{The coupled coils with an initial current
+(\S\ref{sec:coupledcoils}).}
+\label{fig:ex-coupledcoils}
+\end{figure}
+
+\begin{figure}[p]
+\centering
+\includegraphics[width=0.85\textwidth]{figures/ex_twoopamps.pdf}
+\caption{The all-symbolic two-op-amp cascade
+(\S\ref{sec:twoopamps}).}
+\label{fig:ex-twoopamps}
+\end{figure}
+
+% ======================================================================
 % Back matter
 % ======================================================================
 
@@ -2167,12 +2260,20 @@ lineales para calculadoras}, Trabajo de Graduaci\'on (Licenciatura en
 Ingenier\'ia Electromec\'anica), Universidad Tecnol\'ogica de
 Panam\'a, written 2000--2001, defended 9~July 2001 (graded 100/100;
 jury record in Appendix~\ref{app:documents}). Twelve chapters and
-four appendices; 89 worked problems with provenance. English
-translation by D.~Burkett and T.~Hutcheson as \emph{The Symbulator
-Book}, left unfinished at the preface, notice, and chapters~1--4.
-Both the Spanish original and the surviving translation are
+four appendices; 89 worked problems with provenance. Both the
+Spanish original and the surviving 2001 translation fragments are
 preserved in this monograph's \code{references/} archive
-(\code{2000\_thesis/}, \code{2000\_thesis/english\_translation/}).
+(\code{2000\_thesis/}, \code{2000\_thesis/english\_translation/});
+for the completed English edition, see~\cite{book2026}.
+
+\bibitem{book2026}
+R.~P\'erez-Franco, \emph{The Symbulator Book: A Linear Circuit
+Simulator for Calculators}, the completed English edition of the
+2001 thesis~\cite{thesis2000}. Preface, notice, and chapters~1--4
+translated by D.~Burkett and T.~Hutcheson (ca.~2001); chapters
+5--12, back matter, and appendices translated by Claude (2026) in
+the same voice. Published alongside this monograph. [Online].
+Available: \url{https://learn.symbulator.com/book.pdf}
 
 \bibitem{website2001}
 R.~Perez-Franco, \emph{Symbulator: Symbolic Circuit Simulator ---

@@ -1060,6 +1060,16 @@ def build_web(book: Book, versions: list[int]):
             "Documentation/paper/ (twice, for the TOC), or the site would "
             "ship a dead link.")
     shutil.copy2(monograph, os.path.join(outroot, "monograph.pdf"))
+    # The Symbulator Book (paper/the_symbulator_book.pdf) -- the
+    # completed English edition of the 2001 thesis -- ships beside the
+    # monograph, and the landing page links both.
+    symbook = os.path.join(ROOT, "paper", "the_symbulator_book.pdf")
+    if not os.path.isfile(symbook):
+        raise SystemExit(
+            f"build.py: {symbook} is missing. Build it with xelatex in "
+            "Documentation/paper/ (twice, for the TOC), or the site would "
+            "ship a dead link.")
+    shutil.copy2(symbook, os.path.join(outroot, "book.pdf"))
     if os.path.isdir(ASSETS):
         shutil.copytree(ASSETS, os.path.join(outroot, "assets"),
                         dirs_exist_ok=True)

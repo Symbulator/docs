@@ -1,0 +1,466 @@
+% Chapter 5 -- translated by Claude (2026), continuing the voice and
+% register of the Burkett-Hutcheson chapters.
+
+\chapter{Th\'evenin and Norton equivalents}
+
+\section{Introduction to the thevenin tool}
+
+The Th\'evenin--Helmholtz and Norton--Mayer theorems are an
+important part of circuit theory courses. Symbulator has a special
+tool to find the Th\'evenin and Norton equivalents of a network.
+This tool is called \code{thevenin}, and it is executed like this:
+
+\begin{entry}
+thevenin(network,node 1,node 2)
+\end{entry}
+
+As you can see, it takes three input arguments: the description of
+the network in text format, and the names of the two nodes between
+which you want to find the equivalent.
+
+As output, it gives us three variables stored in the current folder.
+These variables are the Th\'evenin impedance \code{zth}, the
+Th\'evenin voltage \code{vth} and the Norton current \code{ino}.
+With these three values, you can then construct the Th\'evenin
+equivalent by placing an impedance of value \code{zth} in series
+with a voltage source of value \code{vth}, and the Norton equivalent
+by placing an impedance of value \code{zth} in parallel with a
+current source of value \code{ino}.
+
+In some cases, as we will see later, the tool also gives us the
+maximum power the network can deliver.
+
+\section{Theory}
+
+After entering the command to execute the tool in the entry line,
+with its input arguments, a screen is shown in which you must choose
+two settings:
+
+\emph{What type of network do you want to analyze?} The options are
+Auto-Detect and Passive. Use Passive if the network has no
+independent sources, and Auto-Detect when it has them or when you
+are not sure.
+
+It is important to choose the network type well. If we choose
+Auto-Detect, the tool will run two simulations, regardless of the
+network type, and we will obtain the correct equivalents. Choosing
+Passive for those networks which really are passive has the
+advantage that the tool saves us time, because it obtains the
+correct equivalents with a single simulation. However, if by mistake
+we choose Passive and the network is not passive, we will obtain
+wrong answers. \emph{Never choose Passive if the network is not
+passive, or if you have doubts.} Remember that a passive network is
+one that has no independent sources.
+
+\emph{What type of analysis do you want?} The options are direct
+current (DC) analysis, alternating current (AC) analysis and
+frequency domain (FD) analysis.
+
+After choosing the desired settings, press \key{ENTER}. At this
+point, Symbulator will run one or two simulations, whose status
+messages you will see on the screen. Then an answer screen appears.
+In this answer screen, the program shows us, one by one, the values
+found: the Th\'evenin impedance \code{zth}, the Th\'evenin voltage
+\code{vth} and the Norton current \code{ino}. To see the next value,
+press \key{ENTER}. At the end, when all the values have been shown,
+`Done' appears. Stored in the current folder are all these values,
+in variables with the same names.
+
+In the case that Passive is used, the tool will not show the values
+of \code{vth} and \code{ino} on the screen, because they will always
+be zero.
+
+In the case that Auto-Detect is used, the tool will also deliver, as
+an answer for direct current analyses, the maximum real power that
+the network can deliver, on the answer screen and in a variable
+called \code{pmax}; and as an answer for alternating current
+analyses, the maximum complex power that the network can deliver, on
+the answer screen and in a variable called \code{smax}.
+
+\section{Practice}
+
+Let us see some problems.
+
+\problem{017}
+
+\emph{Problem: Determine the Th\'evenin and Norton equivalents for
+the part of the circuit that is to the left of $R_L$.}
+
+Solution:
+
+We name the nodes and elements of the part of the circuit that is to
+the left of $R_L$. The element $R_L$ plays no role in our
+simulation. We name the nodes from left to right: 1, 2 and 3. The
+bottom node is the reference. Therefore, the nodes between which we
+want to find the equivalents are node 3 and node 0. We give the
+description of the part of the circuit to the left of $R_L$, and
+execute the \code{thevenin} tool:
+
+\begin{entry}
+sq\thevenin("e1,1,0,12;r1,1,2,3;r2,2,0,6;r3,2,3,7",3,0)
+\end{entry}
+
+We start the simulation with \key{ENTER}. Since the network we want
+to analyze has an independent source, we choose Auto-Detect as the
+circuit type. We choose DC as the analysis type. We press
+\key{ENTER}. We see on the screen the status messages indicating
+that two simulations are run. On the answer screen appear the values
+of the Th\'evenin and Norton equivalents. For \code{zth} we obtain
+9. For \code{vth} we obtain 8. For \code{ino} we obtain 8/9. With
+these values, you can construct the Th\'evenin and Norton
+equivalents of the network in question. As for the maximum power the
+network can deliver, for \code{pmax} we obtain 16/9. Finally, `Done'
+appears.
+
+\problem{018}
+
+\emph{Problem: Determine the Th\'evenin and Norton equivalents of
+the network in front of the 1~k$\Omega$ resistor.}
+
+Solution:
+
+We name the nodes and elements of the network that is to the left of
+the 1~k$\Omega$ resistor. This resistor plays no role in our
+simulation. We name the nodes from left to right: 1, 2 and 3. The
+bottom node is the reference, so the nodes between which we want the
+equivalents are node 3 and node 0. We give the description of the
+part of the circuit that interests us, and execute the tool:
+
+\begin{entry}
+sq\thevenin("e1,1,0,4;r1,1,2,2E3;j1,0,2,2E-3;r2,2,3,3E3",3,0)
+\end{entry}
+
+We start the simulation with \key{ENTER}. The network has
+independent sources, so we choose Auto-Detect as the circuit type,
+and DC as the analysis type. We press \key{ENTER}. The status
+messages show that two simulations are run. On the screen we receive
+the values of the equivalents. For \code{zth} we obtain 5000.\ ohms,
+for \code{vth} we obtain 8.\ volts, for \code{ino} we obtain .0016
+amperes, and for \code{pmax} we obtain .0032 watts. Finally, `Done'
+appears.
+
+\problem{019}
+
+\emph{Problem: Determine the Th\'evenin and Norton equivalents of
+the network shown in the figure.}
+
+Solution:
+
+We name the nodes and elements of the network. We name the nodes
+from left to right: 1, 2 and \code{x}. The bottom node is the
+reference. Therefore, the nodes between which we want to find the
+equivalents are node \code{x} and node 0. We give the description of
+the network and execute the tool:
+
+\begin{entry}
+sq\thevenin("e1,1,0,4;r1,1,2,2E3;j1,0,2,vx/4E3;r2,2,x,3E3",x,0)
+\end{entry}
+
+We start the simulation with \key{ENTER}. The network has an
+independent source, so we choose Auto-Detect, and DC as the
+analysis. We press \key{ENTER}. The status messages show that two
+simulations are run. Then the values of the equivalents appear. For
+\code{zth} we obtain 10000.\ ohms, for \code{vth} we obtain 8.\
+volts, for \code{ino} we obtain .0008 amperes, and for \code{pmax}
+we obtain .0016 watts. Finally, `Done' appears.
+
+\problem{020}
+
+\emph{Problem: Find: 1) $R_{eq}$ if $R = 80~\Omega$; 2) $R$ if
+$R_{eq} = 80~\Omega$; and 3) $R$ if $R = R_{eq}$.}
+
+Solution:
+
+To solve this problem, we will use the \code{thevenin} tool and some
+commands. We name the nodes and elements of the network. We name the
+nodes from left to right: 1, 2, 3 and 4. The bottom node is the
+reference. Therefore, the nodes between which we will look for the
+equivalent resistance are node 1 and node 0. We give the description
+of the network and execute the tool:
+
+\begin{entry}
+sq\thevenin("r1,1,2,10;r2,2,0,100;r,2,3,r;r3,3,0,30;
+            r4,3,4,40;r5,4,0,20",1,0)
+\end{entry}
+
+We start the simulation with \key{ENTER}. The network we want to
+analyze has no independent sources, so we choose Passive as the
+circuit type, and DC as the analysis type. We press \key{ENTER}. The
+status messages show that one simulation is run. For \code{zth}, we
+obtain a function of \code{r}, as expected. Finally, `Done' appears.
+We have been asked to find: 1) $R_{eq}$ if $R = 80~\Omega$, 2) $R$
+if $R_{eq} = 80~\Omega$, and 3) $R$ if $R = R_{eq}$. To find these
+answers, we will use the \code{solve} command and the `with'
+operator of the calculator.
+
+Remember that \code{zth} is stored in memory. To obtain the first
+answer, we write in the entry line the following:
+
+\begin{entry}
+zth|r=80
+\end{entry}
+
+Here we are asking: how much is \code{zth} if \code{r} is 80? We ask
+it this way, and not with \code{solve}, because \code{zth} is a
+function of \code{r}, and not the other way around. We press
+\key{ENTER}. We obtain 60.
+
+To obtain the second answer, we take advantage of the fact that
+\code{zth} is a function of \code{r}, and write in the entry line
+the following:
+
+\begin{entry}
+solve(zth=80,r)
+\end{entry}
+
+Here we are asking: how much is \code{r} if \code{zth} is 80? We
+press \key{ENTER}. We obtain \code{r}~$= 640/3$.
+
+To obtain the third answer, we write in the entry line the
+following:
+
+\begin{entry}
+solve(zth=r,r)
+\end{entry}
+
+Here we are asking: how much is \code{r} if \code{zth} equals
+\code{r}? We press \key{ENTER}. We obtain two answers. One of them
+is positive and the other negative. This means that the equation has
+more than one solution. Obviously, negative resistances do not
+exist, so we will limit the range we want as answers with a
+conditional operator. We will also take the opportunity to request
+the answer in approximate form:
+
+\begin{entry}
+solve(zth=r,r)|r>0
+\end{entry}
+
+Here we are asking: how much is \code{r} if \code{zth} equals
+\code{r} and \code{r} is greater than 0? We press \key{$\diamond$}
+and \key{ENTER}. We obtain \code{r}~$= 51.7890835$.
+
+These are the correct answers.
+
+Let us take a pause and meet a new tool.
+
+\section{The par tool}
+
+The \code{par} tool is a function, and its first version was written
+by my Belgian friend Erwin Baert, for one of the early versions of
+Symbulator, as a simple and fast tool to find the equivalent of two
+resistances connected in parallel. Although I later introduced some
+improvements in the algorithm, the function remains very simple in
+its nature and use.
+
+To find the equivalent of two resistances, say one of 3~$\Omega$ and
+another of 5~$\Omega$, that are connected in parallel, you write
+\code{sq\char`\\par(3,5)}.
+
+This tool can be used either alone or included within a circuit
+description.
+
+\subsection{Verifying the formula for parallel resistances}
+
+To show the use of this tool, let us verify the formula for reducing
+resistances in parallel. The equivalent of two resistances, say
+$R_1$ and $R_2$, connected in parallel, is found with the formula
+$R_{eq} = R_1 R_2/(R_1 + R_2)$. Let us verify this formula with the
+\code{par} tool:
+
+\begin{entry}
+sq\par(r1,r2)
+\end{entry}
+
+We obtain \code{r1*r2/(r1+r2)}. This is correct.
+
+\subsection{Application}
+
+It is easy to find simple applications for the \code{par} tool in
+practice. What interests me here is to show an example of a somewhat
+more complex application. We will solve Problem 020 again, this time
+using the \code{par} tool instead of the \code{thevenin} tool.
+
+\problemx{020}{again}
+
+\emph{Problem: Find: 1) $R_{eq}$ if $R = 80~\Omega$; 2) $R$ if
+$R_{eq} = 80~\Omega$; and 3) $R$ if $R = R_{eq}$.}
+
+Solution:
+
+Let us define the equivalent resistance \code{req} as the
+combination of these resistances:
+
+\begin{entry}
+Define req=10+sq\par(100,r+sq\par(30,40+20))
+\end{entry}
+
+We press \key{ENTER}. We obtain a function of \code{r}, as expected.
+
+\begin{entry}
+req|r=80
+\end{entry}
+
+We press \key{ENTER}. We obtain 60.
+
+\begin{entry}
+solve(req=80,r)
+\end{entry}
+
+We press \key{ENTER}. We obtain \code{r}~$= 640/3$.
+
+\begin{entry}
+solve(req=r,r)|r>0
+\end{entry}
+
+We press \key{$\diamond$} and \key{ENTER}. We obtain
+\code{r}~$= 51.7890835$.
+
+These are the correct answers. We have seen in this problem that the
+\code{par} tool can be very useful to reduce some resistive networks
+to their equivalent. However, there are some resistive networks that
+resist being reduced with series-parallel simplifications, and that
+necessarily require the \code{thevenin} tool. This is the case of
+networks that require delta--wye, or $\Delta$--Y, transformations.
+Let us see an example.
+
+\problem{021}
+
+\emph{Problem: Find the equivalent resistance of the network shown.}
+
+Solution:
+
+Done manually, this problem requires $\Delta$--Y transformations. We
+will use the \code{thevenin} tool. We name the three upper nodes,
+from left to right: 1, 2 and 3. We name the two intermediate nodes,
+from left to right: 4 and 5. The bottom node is the reference.
+Therefore, the nodes between which we will look for the equivalent
+resistance are node 1 and node 0. We name the elements, give the
+description of the network and execute the tool:
+
+\begin{entry}
+sq\thevenin("r1,1,2,5;r2,2,3,6;r3,4,2,75;r4,2,5,4;r5,5,3,2;
+            r6,4,5,9;r7,3,0,3;r8,4,0,100;r9,5,0,12",1,0)
+\end{entry}
+
+We start the simulation with \key{ENTER}. The network we want to
+analyze has no independent sources, so we choose Passive as the
+circuit type, and DC as the analysis type. We press \key{ENTER}. The
+status messages show that one simulation is run. As the value of the
+equivalent resistance, \code{zth}, we obtain 6365/643. Finally,
+`Done' appears. We can obtain an approximate value by asking in the
+entry line for \code{zth} with \key{$\diamond$} and \key{ENTER},
+which gives 9.89891135.
+
+Note that, since this is a passive circuit, we chose the Passive
+option. This implies that no \code{pmax} variable is created, since
+a passive circuit cannot deliver power, having no independent
+sources.
+
+We have said that circuits with no independent sources are
+considered passive. The presence of dependent sources does not
+change this fact. Let us see next four problems in which the
+circuits contain only dependent sources and are therefore passive.
+
+\problem{022}
+
+\emph{Problem: Find the Th\'evenin equivalent of the network shown
+in the figure.}
+
+Solution:
+
+Note that the dependent source is controlled by a current $i$ that
+does not pass through any element. We have two options. The first is
+to place a short circuit where $i$ is, and then define $i$ as the
+current through that short circuit. The second is to understand $i$
+as the sum of the currents of the two resistors, which would have to
+be defined in the appropriate directions so that their currents
+flow into $i$. We will use this second alternative, because it does
+not require a new element.
+
+We name the two upper nodes, from left to right: 1 and 2. The bottom
+node is the reference. Therefore, the nodes between which we will
+look for the equivalent resistance are node 2 and node 0. We name
+the elements, give the description of the network and execute the
+\code{thevenin} tool:
+
+\begin{entry}
+sq\thevenin("e1,1,0,1.5*(ir1+ir2);r1,1,2,3;r2,0,2,2",2,0)
+\end{entry}
+
+Note that both resistors ``flow into'' node 2. We start the
+simulation with \key{ENTER}. The network we want to analyze has no
+independent sources, so we choose Passive as the circuit type, and
+DC as the analysis type. We press \key{ENTER}. The status messages
+show that one simulation is run. For \code{zth} we obtain .6 ohms.
+Finally, `Done' appears.
+
+\problem{023}
+
+\emph{Problem: Find the Norton equivalent of the network shown in
+the figure.}
+
+Solution:
+
+We name the two upper nodes, from left to right: 1 and 2. The bottom
+node is the reference. We will look for the equivalent resistance
+between node 1 and node 0. We name the elements, give the
+description of the network and execute the \code{thevenin} tool:
+
+\begin{entry}
+sq\thevenin("r1,1,0,100;r2,1,2,50;r3,2,0,200;j1,2,0,0.1*v1",1,0)
+\end{entry}
+
+We start the simulation with \key{ENTER}. We choose Passive as the
+circuit type and DC as the analysis type. We press \key{ENTER}. The
+status messages show that one simulation is run. For \code{zth} we
+obtain 10.6382979 ohms.
+
+\problem{024}
+
+\emph{Problem: Find the input impedance, $Z_{in}$, of the network
+shown in the figure.}
+
+Solution:
+
+The nodes of the upper loop were named clockwise, starting at the
+left: 1, 2, 3 and 4. The bottom node is the reference. We name the 8
+ohm resistor \code{rx}, and define it with the appropriate polarity,
+between 3 and 2, in order to use its voltage drop \code{vrx} as the
+control for the dependent source. We give the description of the
+network and execute the \code{thevenin} tool, between 1 and 0:
+
+\begin{entry}
+sq\thevenin("r1,1,2,20;rx,3,2,8;r2,1,4,10;r3,4,3,12;
+            r4,3,0,5;e1,4,0,.6*vrx",1,0)
+\end{entry}
+
+We start the simulation with \key{ENTER}. We choose Passive as the
+circuit type and DC as the analysis type. We press \key{ENTER}. The
+status messages show that one simulation is run. For \code{zth} we
+obtain 6.70508119 ohms.
+
+\problem{025}
+
+\emph{Problem: Find the Th\'evenin equivalent of the network shown
+in the figure.}
+
+Solution:
+
+We will ignore the names $a$ and $b$ shown in the drawing. We name
+the three upper nodes, from left to right: 1, 2 and 3. The bottom
+node is the reference. We will look for the equivalent resistance
+between node 3 and node 0. We name the elements, give the
+description of the network and execute the \code{thevenin} tool:
+
+\begin{entry}
+sq\thevenin("j1,0,1,.01*v3;r1,1,0,200;r2,1,2,50;
+            e1,3,2,.2*v3;r3,3,0,100",3,0)
+\end{entry}
+
+We start the simulation with \key{ENTER}. We choose Passive as the
+circuit type and DC as the analysis type. We press \key{ENTER}. The
+status messages show that one simulation is run. For \code{zth} we
+obtain 192.307692 ohms.
+
+I believe that with the problems shown, you will at this point have
+a complete command of the \code{thevenin} tool.

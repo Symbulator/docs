@@ -1,0 +1,305 @@
+% Chapter 8 -- translated by Claude (2026), continuing the voice and
+% register of the Burkett-Hutcheson chapters.
+
+\chapter{Symbolic simulation of alternating current circuits}
+
+\section{General concepts}
+
+Symbolic simulation in alternating current uses the same techniques
+as symbolic simulation in direct current, with only two exceptions.
+
+\section{The cSolve command}
+
+To solve complex equations, the calculator has the \code{cSolve}
+command, which works identically to the \code{solve} command. The
+\code{cSolve} command is a powerful ally in obtaining numerical
+answers from a symbolic simulation, when the equations involved are
+complex. In other cases, when the equations used are real, the
+\code{solve} command can be used.
+
+\section{Complex unknowns}
+
+To find the numerical value of a complex unknown, we must find two
+numerical values: a real value and an imaginary value. Therefore, a
+complex unknown is really two unknowns: one real and one imaginary.
+
+Likewise, when we have a complex value as a known given value, we
+really have two known values: a real value and an imaginary value.
+In our first problem of this chapter, we will see how to find the
+numerical value of two symbolic unknowns, using only one known
+complex value.
+
+\problem{057}
+
+\emph{Problem: This problem has no figure. A circuit consists of a
+resistance in series with a capacitance. Find their values, if when
+applying a voltage of 240~V RMS at 200~Hz, the current taken from
+the source is $1.2 + 1.6i$. Note that this current is not in RMS.}
+
+Solution: First, we simulate the circuit according to the rigorous
+treatment:
+
+\begin{entry}
+sq\ac("e,1,0,240.*√2;r,1,2,r;c,2,0,c",2*π*200.)
+\end{entry}
+
+Since there is only one element of each type, we have taken the
+opportunity to name them \code{e}, \code{r} and \code{c}, which is a
+licit and very elegant notation. If there were more than one element
+of each type, they would have to be named more completely. We press
+\key{ENTER}. After the status messages, `Done' appears. Next, we
+order the calculator to find the values of \code{r} and \code{c}
+that satisfy both the real part and the imaginary part of the
+current that the problem gave us as a known value:
+
+\begin{entry}
+solve(real(ir)=1.2 and imag(ir)=1.6,{r,c})
+\end{entry}
+
+This command line is very interesting. Let us see what it means. We
+have just run a simulation, using \code{r} and \code{c} as symbolic
+values. Therefore, all the answers, including the current through
+the elements, are expressed as functions of \code{r} and \code{c}.
+These answers have a real part and an imaginary part. The current
+that the circuit gave us as a known value also has a real part and
+an imaginary part. What the command line is ordering the calculator
+is: ``Use the \code{solve} command to find which values of \code{r}
+and \code{c} satisfy the following two conditions: that the real
+part of the current equal 1.2 amperes, and the imaginary part of the
+current equal 1.6 amperes.'' We use the \code{solve} command and not
+the \code{cSolve} command, because the two equations involved are
+given in terms of real numbers. Why? The real part of a complex
+number is a real number. The imaginary part of a complex number,
+once it has been extracted with the \code{imag} command, is also a
+real number. Therefore, the two equations given are composed of real
+numbers, and the \code{solve} command can be used to solve them.
+
+We press \key{ENTER}. The calculator gives us two pairs of answers.
+One of these pairs has a negative value of \code{r}. The other pair
+has a positive value of \code{r}. Obviously, the correct pair of
+answers is the one with the positive value of \code{r}. These
+values, rounded to three figures, are: \code{r}~$= 102.$ and
+\code{c}~$= 5.86$E$-6$. The value of \code{r} is given in $\Omega$,
+and that of \code{c} in F. If we want to obtain only the correct
+answers, we indicate that $r > 0$, with this line:
+
+\begin{entry}
+solve(real(ir)=1.2 and imag(ir)=1.6,{r,c})|r>0
+\end{entry}
+
+\problem{058}
+
+\emph{Problem: If $\omega = 500$~rad/s and $I_L = 2.5∠40°$, find
+$v_s(t)$.}
+
+Solution: We will use a symbolic simulation and then the
+\code{solves} tool:
+
+\begin{entry}
+sq\ac("es,1,0,vs;r1,1,2,10;e2,2,3,(25∠-30°);r2,3,0,25;
+      l1,3,0,.02",500):sq\solves()
+\end{entry}
+
+We press \key{ENTER}. After the status messages, `Done' appears.
+Next, the tool executes. We enter \code{il1=(2.5∠40°)} as the
+equation and \code{vs} as the unknown. We obtain the value of
+\code{vs} on the screen, but it is in rectangular form and this way
+it is not useful to us. We press \key{ENTER} to return to the home
+screen. To see the value in polar form, we use
+\code{sq\char`\\absang(vs)} in the entry line. We obtain
+35.5∠58.9°. Therefore, the value of $v_s(t)$ is
+$35.5\cos(500t + 58.9°)$~V.
+
+\problem{059}
+
+\emph{Problem: This problem has no figure. A phasor current of
+$1∠0°$~A flows through the series combination of 1~$\Omega$, 1~H
+and 1~F. At what frequency is the amplitude of the voltage across
+the network twice the amplitude of the voltage across the
+resistor?}
+
+Solution: First, we simulate the circuit:
+
+\begin{entry}
+sq\ac("j,0,1,1;r,1,2,1;l,2,3,1;c,3,0,1",ω)
+\end{entry}
+
+Since there is only one element of each type, we have taken the
+opportunity to name them with a single letter. We press \key{ENTER}.
+After the status messages, `Done' appears. In this problem, it is
+possible to find more than one answer, so the most adequate thing is
+to use the \code{solve} command instead of the \code{solves} tool,
+because the command will give us the multiple answers it finds,
+while the tool will only give us one answer. So, we use the command:
+
+\begin{entry}
+solve(abs(v1)=2*abs(vr),ω)|ω>0
+\end{entry}
+
+Note that we suppressed the possibility of obtaining negative
+frequencies, with the conditional at the end of the command line. We
+will obtain two answers, and both are valid. If we press
+\key{ENTER}, we obtain the answers in exact form:
+$\omega = (\sqrt7 - \sqrt3)/2$ or $\omega = (\sqrt7 + \sqrt3)/2$. If
+we press \key{$\diamond$} \key{ENTER}, we obtain the answers in
+approximate form: $\omega = .457$ or $\omega = 2.19$.
+
+\problem{060}
+
+\emph{Problem: This problem has no figure. A 20~mH inductor and a
+30~$\Omega$ resistor are in parallel. Find the frequency at which:
+a) $\mathrm{abs}(Z_{in}) = 25~\Omega$, b)
+$\mathrm{ang}(Z_{in}) = 25°$, c) $\mathrm{real}(Z_{in}) =
+25~\Omega$, d) $\mathrm{imag}(Z_{in}) = 10~\Omega$.}
+
+Solution: We use the \code{thevenin} tool:
+
+\begin{entry}
+sq\thevenin("r,1,0,30;l,1,0,.02",1,0)
+\end{entry}
+
+We press \key{ENTER}. Next, the tool executes. We select Passive and
+AC, and press \key{ENTER}. We enter a symbolic frequency \code{w}
+and press \key{ENTER}. After the status messages, \code{zth} appears
+as a function of \code{w}. We press \key{ENTER} to return to the
+home screen. To answer the questions, we use:
+
+\begin{entry}
+solve(abs(zth)=25,w)|w>0
+\end{entry}
+
+We obtain \code{w}~$= 2261$.
+
+\begin{entry}
+solve(angle(zth)=25°,w)|w>0
+\end{entry}
+
+We obtain \code{w}~$= 3217$.
+
+\begin{entry}
+solve(real(zth)=25,w)|w>0
+\end{entry}
+
+We obtain \code{w}~$= 3354$.
+
+\begin{entry}
+solve(imag(zth)=10,w)|w>0
+\end{entry}
+
+We obtain \code{w}~$= 3927.$ or \code{w}~$= 572.9$.
+
+\problem{061}
+
+\emph{Problem: In the network shown, find the frequency at which a)
+$R_{in} = 550~\Omega$, b) $X_{in} = 50~\Omega$, c)
+$G_{in} = 1.8$~mS, d) $B_{in} = -150~\mu$S. Remember that
+$Z = R + iX$ and $Y = G + iB$.}
+
+Solution: We use the \code{thevenin} tool:
+
+\begin{entry}
+sq\thevenin("r1,1,2,500;r2,2,0,100;l1,2,0,1E-3",1,0)
+\end{entry}
+
+We press \key{ENTER}. Next, the tool executes. We select Passive and
+AC, and press \key{ENTER}. We enter a symbolic frequency \code{w}
+and press \key{ENTER}. After the status messages, \code{zth} appears
+as a function of \code{w}. We press \key{ENTER} to return to the
+home screen. To answer the questions, we use:
+
+\begin{entry}
+solve(real(zth)=550,w)|w>0
+\end{entry}
+
+We obtain \code{w}~$= 100000$.
+
+\begin{entry}
+solve(imag(zth)=50,w)|w>0
+\end{entry}
+
+We obtain \code{w}~$= 100000$.
+
+\begin{entry}
+solve(real(1/zth)=.0018,w)|w>0
+\end{entry}
+
+We obtain \code{w}~$= 102062$.
+
+\begin{entry}
+solve(imag(1/zth)=-1.5E-4,w)|w>0
+\end{entry}
+
+We obtain \code{w}~$= 132953.$ or \code{w}~$= 52232$.
+
+\problem{062}
+
+\emph{Problem: Find $Y_{in}$ as a function of $\omega$ for the
+network shown. Also find the resonant frequency $\omega_0$ and the
+value of $Z_{in}$ at that resonant frequency.}
+
+Solution: Theory teaches us that the resonant frequency is that
+frequency at which the imaginary part of the input admittance equals
+zero. As we know, the input admittance is the inverse of the input
+impedance. We use the \code{thevenin} tool:
+
+\begin{entry}
+sq\thevenin("l,1,0,4.4E-3;r,0,1,1E4;c,1,2,1E-8;
+            e,2,0,1E5*ir",1,0)
+\end{entry}
+
+We press \key{ENTER}. Next, the tool executes. We select Passive and
+AC, and press \key{ENTER}. We enter a symbolic frequency \code{w}
+and press \key{ENTER}. After the status messages, \code{zth} appears
+as a function of \code{w}. We press \key{ENTER} to return to the
+home screen. To answer the questions, we use:
+
+\begin{entry}
+solve(imag(1/zth)=0,w)|w>0
+\end{entry}
+
+With the command above these lines, we are asking the calculator:
+``Using the \code{solve} command, tell me how much \code{w} is worth
+when the imaginary part of the inverse of \code{zth} is zero,
+considering \code{w} as positive.'' We press \key{ENTER}. We obtain
+\code{w}~$= 45454.5$ as the resonant frequency.
+
+\begin{entry}
+zth|ans(1)
+\end{entry}
+
+With the command above these lines, we are asking the calculator:
+``Tell me how much \code{zth} is worth when the immediately previous
+answer holds.'' Placing \code{zth|ans(1)} is equivalent to placing
+\code{zth|w=45454.5}. The \code{ans(\#)} command recalls the \#th
+previous answer from the history area. We press \key{ENTER}. We
+obtain 9999.9. This answer can be rounded to 10~k$\Omega$.
+
+\problem{063}
+
+\emph{Problem: For the network shown, find the resonant frequency
+$\omega_0$ and the value of $Z_{in}$ at that frequency.}
+
+Solution: We already know the technique:
+
+\begin{entry}
+sq\thevenin("r1,1,2,5;c,1,2,.01;r2,2,3,2;r3,3,0,5;l,3,0,.01",1,0)
+\end{entry}
+
+We press \key{ENTER}. Next, the tool executes. We select Passive and
+AC, and press \key{ENTER}. We enter a symbolic frequency \code{w}
+and press \key{ENTER}. After the status messages, \code{zth} appears
+as a function of \code{w}. We press \key{ENTER} to return to the
+home screen. To answer the questions, we use:
+
+\begin{entry}
+solve(imag(1/zth)=0,w)|w>0
+\end{entry}
+
+We press \key{ENTER}. We obtain \code{w}~$= 100.$ as the resonant
+frequency.
+
+\begin{entry}
+zth|ans(1)
+\end{entry}
+
+We press \key{ENTER}. We obtain 2.38.

@@ -424,7 +424,9 @@ function asset(string $name): string {
      Documentation by Roberto Perez-Franco. MIT licence.</p>
   <p><a href="/symbulator-v<?= e($v) ?>.pdf">This documentation as a PDF</a>
      · <a href="/monograph.pdf"><em>The Internal Logic of
-     Symbulator</em> — a monograph on how the solver works</a></p>
+     Symbulator</em> — a monograph on how the solver works</a>
+     · <a href="/book.pdf"><em>The Symbulator Book</em> — the English
+     edition of the 2001 thesis</a></p>
 </footer>
 
 <script>

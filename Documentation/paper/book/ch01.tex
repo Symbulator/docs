@@ -1,0 +1,284 @@
+% Chapter 1 -- translation by Doug Burkett & Tim Hutcheson (ca. 2001),
+% lightly copy-edited for this edition.
+
+\chapter{General Symbulator Concepts}
+
+\section{What is Symbulator?}
+
+Symbulator is a linear circuit simulator which finds symbolic and
+numeric results. Symbulator can perform direct current (DC) and
+alternating current (AC) analyses. Symbulator can also find
+frequency domain response and transient response. It supports a wide
+variety of linear circuit elements. It occupies less than 60KB of
+calculator memory and is programmed in BASIC. Symbulator runs on
+particular Texas Instruments graphing calculators.
+
+\section{Requirements}
+
+Symbulator runs on the Texas Instruments TI-89 or equivalent
+calculators which have AMS version 2.0x or superior installed. AMS
+is an acronym for Advanced Mathematics System; this is what Texas
+Instruments calls the calculator operating system. You must also
+have the program DiffEq (version 2.06 or superior) installed. Both
+Symbulator and DiffEq must be archived. In the rest of this book, I
+refer to a calculator that meets these requirements as \emph{your
+calculator}.
+
+\subsection{Installation information resources}
+
+If your calculator does not meet these requirements, you must update
+it before you can use Symbulator. As this book focuses on using
+Symbulator, and not other aspects of calculator operation, I will
+not provide upgrade details. The following resources will help you
+upgrade your calculator.
+
+To upgrade your calculator to AMS 2.05, refer to this Texas
+Instruments Internet site: \code{http://education.ti.com}.
+
+The Symbulator and DiffEq programs can be downloaded free from the
+official Symbulator site shown in section 1.3 below. In order to
+install these programs on your calculator, you will need both the
+GraphLink software and a GraphLink cable to connect your calculator
+to a personal computer. The GraphLink software is free and can also
+be downloaded from \code{http://education.ti.com}.
+
+\subsection{Archive information resources}
+
+Symbulator and DiffEq execute much more quickly when they are
+correctly archived in your calculator's flash memory. Both
+Symbulator and DiffEq are distributed with programs which
+automatically perform the archive operation. Instructions to use the
+archiving programs are provided in the documentation for Symbulator
+and DiffEq, which is included in the downloaded files.
+
+\section{Symbulator Internet site}
+
+Symbulator has an official web site at
+\code{http://paxm.org/symbulator}. This site is in English. In
+addition to complete documentation and many step-by-step example
+problems, the most recent versions of Symbulator and DiffEq can be
+downloaded free.
+
+\section{Brief history of Symbulator}
+
+I am Roberto P\'erez-Franco, the author of Symbulator. I am a
+student of Electromechanical Engineering in the Technological
+University of Panama, located in Azuero. I started programming
+Symbulator, then called SCS, on March 30, 1999. The first released
+version was 0.92, which was posted on the Symbulator web site on
+April 2, 1999. Version 1 added mutual inductances. Version 2 was
+released August 19, 1999, at Azuero and added support for two-port
+circuits. Version 3 incorporated a new Expert system. Version 4 was
+released on the Symbulator web site on January 9, 2001, and added
+the Impala enhancement. The most recent version, called
+Symbulator~Q, was released on the Symbulator web site on March 30,
+2001. Symbulator~Q includes significant improvements which required
+modifying about 40\% of the code.
+
+Symbulator has always been offered for free on the Internet.
+Feedback from users has allowed me to polish the code, eliminate
+errors and add novel features.
+
+Now, two years after its public appearance, Symbulator is used by
+thousands of electrical engineering students and professionals
+around the world, and has received several honors, including 1st
+place in Student Projects of the IEEE (Institute of Electrical and
+Electronics Engineers), for the year 2000 in Latin America
+(Region~9).
+
+\subsection{Language}
+
+Spanish is my native language. I have several books published in
+Spanish, and I am considered a promising young Panamanian author. In
+addition to Spanish, I also speak English and Esperanto. I have also
+studied French and wish to continue developing my literary skills.
+
+When the Symbulator project began in 1999, TI-89/92+ calculators
+were practically nonexistent in Panama. Users play a vital role
+during the development of a program, both in finding bugs and
+inspiring the author with comments, encouragement and thanks. I have
+received no monetary compensation for this program; it has always
+been free.
+
+Since most users of the TI-89 and TI-92+ speak English as a first or
+second language, it was appropriate to use that language for the
+program interface and documentation. This made it easy for users on
+five continents to send comments and suggestions to me. As the
+capabilities of Symbulator extended in many directions in the last
+two years, the rapid release of new versions left me little time to
+keep the documentation up to date. For this reason the documentation
+and the program interface continued to be written in English.
+
+I offer my apologies to victims of this situation. It has always
+been my desire to develop a useful tool for all the engineering
+students of the world. In fact, my interest in Esperanto has its
+root in the lack of a true neutral, common international language
+for all people.
+
+Note that I have responded in Spanish to all users who used that
+language in correspondence with me. Also, this book---which is the
+most complete documentation of Symbulator---was originally written
+in Spanish. You are reading the English translation, and I plan to
+translate this book to Esperanto and other languages as soon as
+possible.
+
+\section{Concept of the algorithm}
+
+In order to analyze an electrical circuit, Symbulator uses methods
+that emulate the manual techniques of circuit analysis which are
+learned by students. In fact, Symbulator operates like an excellent
+student who has paid attention and learned his lessons well. As the
+program uses the same methods as a student, it is also a very
+powerful tool for learning circuit analysis.
+
+Symbulator knows the Ohm--Cavendish law and the Kirchhoff current
+law. With these two laws, the program analyzes circuits using only
+nodal analysis. Although Kirchhoff's voltage law is not used, it is
+always satisfied as a consequence of the other two laws. Mesh
+analysis is not used. Thanks to the powerful built-in capabilities
+of the calculator, nodal analysis is sufficient, even for the most
+complex circuits.
+
+Symbulator also knows the Th\'evenin--Helmholtz and Norton--Mayer
+theorems. Symbulator can also graph Bode plots. To perform the
+necessary Laplace transforms and inverses, Symbulator uses the
+DiffEq program. There is no faster program for Laplace transforms
+and inverses for any computer or calculator. DiffEq is the fruit of
+the brilliant mind of Lars Frederiksen, whom the author is proud to
+count among his friends.
+
+Symbulator generates the equations of each node and each voltage
+source, as well as the equations for each special element. At the
+same time, Symbulator identifies the primary circuit unknowns.
+Finally, it finds the symbolic or numeric value of all the primary
+unknowns which solve the equations, and then finds the values of the
+secondary and tertiary unknowns from the primary unknowns. Thus, it
+offers all the circuit information a student could wish.
+
+\section{Doors}
+
+The heart of Symbulator consists of several programs called
+\code{step} programs, which actually perform the simulation. The
+user never directly uses these \code{step} programs, but instead
+uses other programs that act as \emph{doors}, which in turn use the
+\code{step} programs. There are four access doors, one for each
+basic type of analysis: 1) \code{dc} is used for direct-current
+analysis, 2) \code{ac} is used for alternating-current analysis, 3)
+\code{fd} is used for frequency domain analysis, and 4) \code{tr} is
+used for transient analysis.
+
+\section{Tools}
+
+Symbulator includes eight more tools that can help with performing
+simulations or understanding the simulation results: 1) \code{par}
+reduces parallel resistances to a single resistance, 2)
+\code{absang} shows complex answers in polar form, 3) \code{plot}
+graphs a function of time, 4) \code{bode} draws Bode plots, 5)
+\code{thevenin} finds the Th\'evenin equivalent of a circuit, 6)
+\code{port} finds the equivalent parameters for a two-port circuit,
+7) \code{gain} finds the gain of an amplifier, and 8)
+\code{fd\_to\_tr} converts a frequency domain response to the time
+domain. Throughout this book you will see how these tools are used,
+as well as the tools' syntax.
+
+For quick reference, Symbulator includes a concise Help function. To
+display the Help screens, enter \code{sq\char`\\help()} in the entry
+line. The Help is in English.
+
+\section{Commands}
+
+Sometimes to solve a problem with Symbulator, you must use the
+built-in calculator commands, such as those which solve equations.
+You may also need to use auxiliary programs such as the Laplace
+functions of DiffEq.
+
+\section{Circuit descriptions}
+
+\subsection{Philosophy}
+
+The philosophy of the Symbulator circuit description is the
+principle that you need only provide the minimum necessary
+information to completely describe each circuit element.
+
+\subsection{Text description}
+
+Since Symbulator is designed to be used quickly in engineering
+classes, circuits are described as text strings. A graphical
+interface is not used, because that would tax the calculator's
+processor, which is a Motorola 68000 running at 12~MHz. Also, this
+method would make entering the circuits slow.
+
+A circuit is described as a text string. Each \emph{row} of the
+string describes one circuit element. Each row almost always has
+five columns. The first element of each row is the element name. The
+element name must begin with a letter that identifies the type of
+circuit element the row describes. The next row elements are the
+node names, which specify where the circuit element is connected.
+The node names may be numbers or letters. The next row element is
+the value of the circuit element in its corresponding unit of
+measurement. The element value may be a number, a symbolic variable
+name, or even an algebraic expression. For elements which store
+energy (inductors and capacitors), their initial conditions are
+placed in the last row location.
+
+The elements in each row are separated by commas. The rows are
+separated by semicolons. This example shows a circuit with three
+circuit elements, and five terms for each element:
+
+\begin{entry}
+a1,b1,c1,d1,e1;a2,b2,c2,d2,e2;a3,b3,c3,d3,e3
+\end{entry}
+
+Internally, Symbulator converts this string to a matrix, to work
+more quickly with the circuit description.
+
+\subsection{Nodes}
+
+\subsubsection{Order of the nodes}
+
+The order in which the node names are specified in the circuit
+description is not arbitrary: the order of the node names indicates
+the direction of current flow and voltage drop in the circuit
+element. This is particularly important for voltage and current
+sources, for elements which control dependent sources, for elements
+which store energy and have initial conditions, and for mutual
+inductances.
+
+\subsubsection{Names of the nodes}
+
+Before you can run the simulation, you must identify each circuit
+node and element with a unique name.
+
+In the case of node names, the name can be a number, letter or a
+combination of both. Each node has only one name, which means you
+must use that same name every time the node is used in the circuit
+description.
+
+If you are not accustomed to using circuit simulators, you may
+forget the node name once the simulation results are shown. It may
+help, as you learn to use Symbulator, to write the node names and
+component names on the circuit schematic.
+
+\subsubsection{Reference node}
+
+Each circuit always has exactly one reference node. The voltage at
+the reference node is always 0 volts. This node is known as ground,
+or earth, and must always be given the node name 0 (zero).
+
+\subsection{Reserved variables}
+
+The calculator operating system reserves some variable names for its
+own use. These variables are called reserved or system variables.
+The TI-89/TI-92+ User's Manual lists these reserved variable names.
+You cannot use reserved variable names as component or node names.
+In particular, be sure that you do not use these names: \code{nc},
+\code{ok}, \code{rc}, \code{sx}, \code{tc}, \code{yc}, \code{zc},
+and \code{c1} to \code{c99}.
+
+Symbulator also uses many internal variables to perform the
+simulation. There may be many of these variables, and they are
+generated according to the names of the circuit elements, so it is
+impossible to specify these names. However, they all begin with
+Greek letters, so it is easy to avoid accidentally using these
+names: do not use component names or node names that start with
+Greek letters.

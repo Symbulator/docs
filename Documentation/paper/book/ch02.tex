@@ -1,0 +1,1415 @@
+% Chapter 2 -- translation by Doug Burkett & Tim Hutcheson (ca. 2001),
+% lightly copy-edited; a few printed values corrected against the
+% Spanish original (pr2, pr3, is4 in Problems 008 and 004).
+
+\chapter{Numerical simulation of direct current (DC) circuits}
+
+\section{Before starting a simulation}
+
+Since Symbulator gives you the simulation results in variables
+stored in the current folder, it is good practice to delete
+unnecessary variables in that folder before simulating. This
+prevents confusing both you and Symbulator with answers of a
+previous simulation. Although it is not necessary to do so, this
+practice will ensure better simulation results.
+
+\subsection{Current folder}
+
+The current folder is the folder to which the calculator is
+currently set. Usually, the current folder is the main folder of the
+calculator, called MAIN. You can use any folder you wish, but I
+recommend that you use MAIN unless you have a specific reason to use
+a different folder.
+
+The current folder is shown on the lower left screen of the
+calculator in small text.
+
+\subsection{Unnecessary variables}
+
+Unnecessary variables are the variables in the current folder which
+are not needed to run the simulation. One example of unnecessary
+variables are the results of a previous simulation.
+
+\subsection{Procedure}
+
+If you are familiar with the use of your calculator, you already
+know how to delete variables. A complete explanation can be found in
+the User's Guide. In any case, use these steps to delete the
+variables:
+
+Identify the current folder. The current folder name is shown in the
+lower left corner of the calculator screen. Obviously, the
+calculator must be on. If you do not see the folder name, press
+\key{HOME}, which displays the Home screen.
+
+The home screen has several sections. The upper section is called
+the Toolbar. The central section is called the History area. Entries
+and results are shown here. The line below the history area is
+called the entry line, because this is where you enter calculator
+commands. The last section, below the entry line, is called the
+Status line. The Status line shows the state of several calculator
+modes, including the current folder. MAIN is shown if the main
+folder is current.
+
+Start Var-Link. The Var-Link screen shows the folders and variables
+which you have on your calculator. The Var-Link screen is used to
+manipulate variables, which includes deleting them. To display the
+Var-Link screen on the TI-89, press \key{2nd} \key{$-$}; note that
+VAR-LINK is shown above the \key{$-$} key.
+
+Open the current folder. The Var-Link screen first shows the folders
+on your calculator. At the upper right of the calculator keyboard
+are four blue arrow keys, called the cursor keys. Press the blue
+\key{UP} and \key{DOWN} cursor keys to highlight the current folder
+name. If an arrow is shown to the right of the folder name, that
+folder contains variables. If no arrow is shown, there are no
+variables in the folder. If there are no variables, you need do
+nothing more in Var-Link: press \key{HOME} to return to the home
+screen. Otherwise, open the folder by pressing the blue \key{RIGHT}
+key.
+
+Delete the unnecessary variables. To delete the unnecessary
+variables, first mark them all by using the blue \key{UP} and
+\key{DOWN} keys to highlight the variable names, then press \key{F4}
+to mark them. A small check-mark appears to the left of the variable
+name. When all the unnecessary variables are marked, press the
+\key{BACKSPACE} key to delete them. The \key{BACKSPACE} key is above
+the \key{T} key on the TI-89, and is marked with a left-pointing
+arrow. A dialog box is shown which asks if you want to delete the
+variables. Press \key{ENTER} to delete them.
+
+To delete all variables from the MAIN folder, select the folder,
+then press \key{BACKSPACE}. All the variables in MAIN will be
+deleted, but the folder will remain. The MAIN folder cannot be
+deleted because it is the `main' calculator folder. An error message
+is displayed, indicating that the folder cannot be deleted, but the
+variables are deleted, nonetheless. This method is recommended,
+because it is fast and effective. However, if you use this method,
+you must avoid storing variables in MAIN which you want to keep.
+
+\section{First step for all simulations}
+
+The Symbulator offers four different circuit simulation analyses.
+Each analysis uses a different `door' and operates with a different
+logic. Nevertheless, all of them have something in common: they
+require that the student knows how to correctly describe the
+elements and nodes of the circuit. Thus, the first step for all
+simulations is:
+
+\begin{quote}
+\emph{Name all the nodes and elements of the circuit.}
+\end{quote}
+
+In Chapter 1 we explained the way to name the nodes. The way to name
+the elements will be explained in different chapters, as they are
+used. All these names are unique, and once they are assigned, you
+must be consistent in using them.
+
+\section{Door for direct current: dc}
+
+As mentioned, the door is the name of a program which calls other
+programs to actually perform the simulation. In order to run a
+direct current (DC) circuit simulation, use the door
+\code{sq\char`\\dc}. The letters \code{dc} are the name of the door.
+The letters \code{sq} tell the calculator in which folder the
+program \code{dc} is located. Thus, entering \code{sq\char`\\dc}
+tells the calculator ``execute the program \code{dc} in folder
+\code{sq}''.
+
+\section{Input data: the circuit}
+
+When using the \code{dc} door or any of the other four doors, you
+must provide the program the circuit you want to simulate, as input
+data. The circuit description must be placed just after the name of
+the door, between the parentheses, like this:
+\code{sq\char`\\dc(circuit)}.
+
+There are two ways to do this. The first way is to put the text
+which describes the circuit between the parentheses, for example:
+
+\begin{entry}
+sq\dc("description of the circuit")
+\end{entry}
+
+The second way is to place a variable name, in which the text has
+been stored, between the parentheses, for example:
+
+\begin{entry}
+"description of the circuit" -> variable
+sq\dc(variable)
+\end{entry}
+
+Both methods work well. The second method has the advantage that the
+circuit is saved in memory as a variable, so you may use it again
+later, or change it to run a slightly different simulation.
+
+\section{Answers}
+
+\subsection{Philosophy}
+
+The philosophy of the Symbulator is to give you all the simulation
+results. These results are not displayed automatically, but are
+stored in variables with intuitive names. The idea behind this is
+that you need only display the results of interest.
+
+In the case of DC circuit simulation, the results are the voltages,
+the currents and the powers. Let us see:
+
+\subsection{Node voltages}
+
+The Symbulator calculates node voltages with respect to the
+reference node, in volts (V). These voltages are stored in variables
+whose name is \code{v} plus the name of the node. For example, if
+the node is named \code{q}, the name of the variable in which the
+voltage is stored is \code{vq}.
+
+\subsection{Element voltage drops}
+
+The Symbulator calculates the voltage drops across all the circuit
+elements, defined as the voltage drop from the first node in the
+description with respect to the second node, in volts (V). These
+voltage drops are stored in variables whose name is \code{v} plus
+the name of the element. For example, if the element is called
+\code{r5}, the name of the variable in which the voltage drop is
+stored is \code{vr5}.
+
+\subsection{Currents}
+
+The Symbulator calculates the currents through all the elements,
+defined as the current from the first node in the description to the
+second node, in amperes (A). The currents are stored in variables
+whose name is \code{i} plus the name of the element. For example, if
+the element is called \code{r5}, the name of the variable in which
+the current through the element is stored is \code{ir5}.
+
+\subsection{Powers}
+
+The Symbulator calculates the real power dissipated by all the
+elements, in watts (W). The powers are stored in variables whose
+name is \code{p} plus the name of the element. For example, if the
+element is called \code{r5}, the name of the variable in which the
+real power consumed by the element is stored is \code{pr5}. Note
+that the power is defined as if it were dissipated. In the case of
+an element that generates power instead of consuming it---as is the
+case of most of the sources---the power in the answer will be
+negative.
+
+\section{Short circuit}
+
+Ideally, a short circuit is a perfect conductor which transmits any
+current without voltage drop or power consumption.
+
+\subsection{Notation}
+
+From the point of view of the simulation, the short circuit is the
+most simple element. Nevertheless, it is the least-used element. We
+begin with the short circuit, because it is the easiest to describe.
+
+\emph{What class of element is it?} It is a short circuit. To the
+Symbulator, we indicate the class of element by means of the first
+letter of the name that we give the element. The letter that
+identifies the short circuits is \code{s}. That is to say, if the
+first letter of the name of the element is \code{s}, then Symbulator
+knows that the element is a short circuit.
+
+\emph{How is the element named?} Since a circuit can have several
+elements of the same class, we must give a unique name to each
+element, so that Symbulator can distinguish the different elements.
+Therefore, if a circuit has two short circuits, we must give each
+one a different name. However, both names must begin with \code{s},
+because both represent short circuits. For example, we can name one
+of them \code{s1} and another \code{s2}. Another alternative would
+be to name one \code{sa} and another \code{sb}. Any name is valid
+which begins with \code{s} and that is made up of numbers and/or
+letters. Once the user has defined the name of an element, the
+Symbulator will use that name for all answers related to that
+element.
+
+\emph{Where is the element connected?} A short circuit has two ends,
+each one of them connected to a different node. You must specify
+both nodes to which the short circuit is connected. In the
+Symbulator, the order in which the nodes are listed always indicates
+the direction of current flow through the element. In the case of a
+short circuit, the current is defined as flowing through the element
+from the first node to the second node of the description.
+
+I have mentioned that each circuit element is described as a row of
+terms in the circuit description. Each row includes the minimum
+information needed to specify the element and its connections. So, a
+short circuit is defined as:
+
+\begin{entry}
+sname, first node, second node
+\end{entry}
+
+This row condenses, in simple form, the minimum information
+necessary to describe the short circuit. Note that there are only
+three elements in the row: a name that begins with \code{s}, the
+first node and the second node. There is a fourth specification in
+the row, which is not evident at first sight: the order in which the
+nodes appear specifies the direction in which the user wishes to
+define current flow through the element. Implicit in the description
+is the order: ``define the short circuit current through element
+\code{sname} as flowing from the first node to the second node.''
+
+\subsection{Symmetry of the description}
+
+Once Symbulator starts, the circuit description in text form is
+converted into a matrix. Like any other computer, your calculator
+does not allow asymmetric matrices: all the rows must have the same
+number of elements (dimension). If one row has $n$ terms, then all
+rows must have $n$ terms, otherwise an error occurs.
+
+I have mentioned that three terms are required to describe a short
+circuit. Other circuit elements such as sources require four terms.
+Still others, such as energy storage elements, require five terms.
+
+As all the rows must have the same number of terms, you need to
+identify which row has the most terms. The shorter rows must be
+filled with zeros so that they are the same length as the longest
+row.
+
+For example, in a circuit description with a longest row of four
+terms, you need to add a zero to the row which describes a short
+circuit, so that it has four terms, also:
+
+\begin{entry}
+sname, first node, second node, 0
+\end{entry}
+
+As another example, with a circuit description whose longest row has
+five terms, you must add two zeros to the short circuit description
+row:
+
+\begin{entry}
+sname, first node, second node, 0, 0
+\end{entry}
+
+In the case of other circuit elements, it will sometimes be
+necessary to add zeros at the end of the rows to maintain the
+symmetry of the internal matrix.
+
+\subsection{Related answers}
+
+I have said that each node voltage is stored in a variable at the
+end of the simulation. In addition, each circuit element will
+generate results related to that element, and they will be stored in
+variables with intuitive names.
+
+In the case of a short circuit, a single related result is given:
+the current through the short circuit. Since the voltage drop is
+zero, no power is dissipated, so there are no other related results.
+
+\section{Resistors}
+
+Ideally, a resistor is an imperfect conductor which resists to
+greater or lesser degree the flow of current. The resistor causes a
+voltage drop and therefore dissipates power.
+
+\subsection{Notation}
+
+The information necessary to completely describe a resistor is as
+follows:
+
+\emph{What is the element type?} It is a resistor, so it is
+identified with the letter \code{r}.
+
+\emph{How is the resistor named?} In order to distinguish a given
+resistor from any other, each resistor is given a unique name. The
+name must begin with \code{r}.
+
+\emph{Where is the resistor connected?} A resistor has two
+terminals, each connected to a different node. You must tell
+Symbulator the name of the nodes to which the terminals are
+connected, in the order in which you want the current flow and
+voltage drop defined. The current is defined as flowing through the
+resistor from the first node to the second node. The voltage drop is
+defined as the voltage of the first node with respect to the second
+node.
+
+\emph{What is the resistor value?} The value must be given to the
+Symbulator in ohms. For a DC analysis, the value may be a real
+number or a variable.
+
+So, resistors are defined as:
+
+\begin{entry}
+rname, node 1, node 2, value in ohms
+\end{entry}
+
+Note that the row which describes the resistor has four terms. If
+another row of the description matrix has five terms, then you must
+add a zero to the end of the resistor description, for example:
+
+\begin{entry}
+rname, node 1, node 2, value, 0
+\end{entry}
+
+The resistor value must be entered in ohms; for example, if the
+resistance is 1~k$\Omega$, you must enter the value as 1000 ohms, or
+the results will be wrong.
+
+For simulations other than DC analysis, the resistance value can be
+a phasor, or a function of frequency or time.
+
+\subsection{Conductance}
+
+A conductance and a resistance are the same element analyzed from
+two different perspectives. The resistance is analyzed from the
+point of view of how much it resists current flow, and is measured
+in ohms. Conductance is analyzed from the point of view of how much
+it allows current flow, and is measured in siemens or mhos.
+
+If we have a value of resistance and we want to convert it to
+conductance, we find the reciprocal of the resistance. To find the
+reciprocal, raise the value to the $-1$ power or find one divided by
+the value. For example, a resistance of 5 ohms is equivalent to a
+conductance of $5^{-1}$ or $1/5 = 0.2$ siemens.
+
+For the purposes of simulation, conductances must be specified as
+resistances. The value must be entered in ohms, not siemens. You can
+perform the conversion directly in the resistor description:
+
+\begin{entry}
+rname, node 1, node 2, 1/(value in siemens)
+\end{entry}
+
+or:
+
+\begin{entry}
+rname, node 1, node 2, (value in siemens)^-1
+\end{entry}
+
+\subsection{Related results}
+
+In the case of a resistor, three related results are given: the
+current through the resistance, the voltage drop and the real power
+dissipated by the resistance. The current is stored in variable
+\code{iname}, where \code{name} is the resistor name. The voltage
+drop is stored in a variable called \code{vname}. The dissipated
+power is stored in a variable called \code{pname}.
+
+\section{Current source}
+
+An ideal current source is an element which forces a defined current
+flow through itself, and generates or consumes power.
+
+\subsection{Notation}
+
+The information necessary to define a current source is:
+
+\emph{What is the element type?} It is a current source. Current
+sources are defined with the letter \code{j}.
+
+\emph{What is the name of the source?} To distinguish a particular
+current source from other sources in the circuit, it must be given a
+unique name. The name begins with \code{j}.
+
+\emph{Where is the source connected?} The current source has two
+terminals, each of which is connected to a different circuit node.
+You must tell Symbulator the nodes to which the current source is
+connected. The order in which you list the nodes specifies the
+defined direction of current flow: the current flows from the first
+node to the second node. In the circuit schematic, the current flow
+direction is shown by the arrow in the source symbol. The order of
+the nodes also implicitly defines the sign of the voltage drop
+across the source: the voltage drop is the voltage of the first node
+with respect to the second node.
+
+\emph{What is the value of the current source?} The value of the
+current source is specified in amperes (A). In a DC analysis, the
+value of an independent current source is a real number or a
+variable. The value of a dependent current source is specified as an
+expression. The expression may be a number and a variable name. The
+variable is one of the future simulation results. The examples will
+show this case more clearly.
+
+So, a current source is defined as:
+
+\begin{entry}
+jname, node 1, node 2, value in amperes
+\end{entry}
+
+As mentioned, the direction of the current flow is defined as node 1
+to node 2. For example, if the value of the current source is 10,
+then 10~A flow through the source from node 1 to node 2.
+
+Note that the row that defines a current source has four terms. You
+need to add a zero to the end of the definition if at least one
+other row has five terms. For example:
+
+\begin{entry}
+jname, node 1, node 2, value, 0
+\end{entry}
+
+Make sure that you enter the value in A. For example, if the current
+source is specified as 10~mA, you must enter a value of 0.01~A. If
+you enter the value in mA, the results will be wrong.
+
+For simulations other than DC analysis, the current source value may
+be a phasor, or a function of time or frequency.
+
+The fact that dependent sources are defined with the same notation
+as independent sources is one of the great advantages of Symbulator
+compared to other simulators, which require different names and
+special techniques using control nodes or branches to define
+dependent sources.
+
+\subsection{Related results}
+
+In the case of a current source, three related results are given:
+the current through the source, the voltage drop across the source
+and the real power consumed by the source. The current is stored in
+a variable called \code{iname}, where \code{name} is the current
+source name. The voltage drop is stored in a variable called
+\code{vname}. The consumed real power is stored in a variable called
+\code{pname}.
+
+It may seem pointless that the value of a current source is given as
+a result. It could be said that the value must be known before the
+simulation, so giving it as a result does not contribute any new
+information. This is true with numerical simulators. However, it is
+different in the case of Symbulator, which offers 100\% symbolic
+capabilities, because the value of the current source may be unknown
+at the start of the simulation: the value may be a variable. For
+that reason, the current would not be known, which makes it a very
+important result for the user. That is the reason why Symbulator
+stores the values of all results in variables.
+
+Depending on the circuit configuration, a current source may consume
+power. However, most often current sources generate power. I
+mentioned above that power results are positive for dissipated
+power. If an element, including a current source, generates power,
+then the actual generated power is the negative of the value stored
+in the result variable. It is important to keep this in mind when
+you interpret the answers.
+
+For example, if the answer in the variable \code{pname} has a value
+of $-10$, this means that the source dissipated $-10$ watts. This is
+the same as saying that the source generated 10 watts. As another
+example, if \code{pname} has a value of 15, this means that the
+source dissipated 15 watts, which is the same as saying that the
+source generated $-15$ watts.
+
+\problem{001}
+
+Now I will solve the first problem. Since this is the first, the
+procedure will be explained in detail. In following problems, less
+explanation will be necessary, and it will be omitted gradually.
+
+\emph{Problem: Given the following circuit, obtain the voltages of
+all the nodes.}
+
+Solution:
+
+The first step, as always, consists of naming all the circuit nodes
+and elements. This circuit has three nodes and five elements. This
+is always the first step of all simulations, regardless of the type
+of analysis.
+
+One of the three nodes must be specified as the reference node. The
+usual practice for selecting the reference node is to choose that
+node which has the most sources connected to it. Actually, any node
+can be the reference node. For this problem we choose the bottom
+node as the reference, and we give it the name 0. We name the other
+two nodes 1 (the left node) and 2 (the right node).
+
+We name the elements as follows. The 2 ohm resistance is \code{r1},
+the 5 ohm resistance is \code{r2}, the 1 ohm resistance is
+\code{r3}, the 3.1~A current source is \code{j1} and the $-1.4$~A
+current source is \code{j2}. The nodes of each current source must
+be entered in the description in an order such that they indicate
+the direction of current flow shown in the drawing. The nodes of the
+resistors can be entered in any order.
+
+The first step is done.
+
+The second step is to write the circuit description text and to
+start the simulation. This step could be divided in two steps: first
+write the description and store it in a variable, then run the
+simulation with that variable. However, I prefer to perform these
+two steps as one.
+
+The simulation is started by typing, in the calculator entry line,
+the command \code{sq\char`\\dc} followed by the circuit description
+between parentheses. The calculator interprets this entry as:
+``Execute the program \code{dc} in folder \code{sq}, using the
+circuit description I am giving you between parentheses''.
+
+First we ensure that the calculator is ready for a new entry by
+pressing the \key{CLEAR} key. Next we type this in the entry line:
+
+\begin{entry}
+sq\dc("j1,0,1,3.1; r1,1,0,2; r2,1,2,5; r3,2,0,1; j2,2,0,-1.4")
+\end{entry}
+
+Enter the numbers by pressing the number keys. Enter the
+\code{\char`\\} by pressing \key{2nd} \key{2}. Enter the letters by
+pressing the \key{ALPHA} key followed by the required letter key.
+The letter is shown in purple above the key.
+
+Note that the `$-$' sign in the value of the \code{j2} current
+source is the negation symbol, which is entered by pressing
+\key{($-$)}, not \key{$-$}.
+
+It is also important that you understand what the negative current
+source value means. In the circuit description, we have specified
+the flow of current from node 2 to node 0. Since the value is
+negative, this means that a current of 1.4~A flows from node 0 to
+node 2.
+
+Since no element in this description has five terms, we need not add
+zeros to any of the description rows.
+
+When the description is entered, press the \key{ENTER} key to start
+the simulation. As the simulation runs, various status messages are
+displayed to indicate the simulation progress. After a few seconds,
+the word `Done' is shown in the history display to indicate that the
+simulation is complete. The actual time to complete the simulation
+depends on the particular calculator model and free memory, but it
+took about 13 seconds on my calculator.
+
+The simulation results are stored in variables in the current
+folder. You can use Var-Link to display the results. If you have
+followed the procedure to delete unnecessary variables, you will see
+this in the Var-Link display:
+
+\begin{itemize}
+\item The currents through all the elements, in amperes: \code{ij1},
+  \code{ij2}, \code{ir1}, \code{ir2}, \code{ir3}. These currents are
+  defined as flowing from the first node to the second node of each
+  element description.
+\item The voltage drops for all elements, in volts: \code{vj1},
+  \code{vj2}, \code{vr1}, \code{vr2}, \code{vr3}. The voltage drops
+  are defined as the first described node voltage with respect to
+  the second node.
+\item The real powers consumed by all the elements, in watts:
+  \code{pj1}, \code{pj2}, \code{pr1}, \code{pr2}, \code{pr3}.
+\item The node voltages with respect to the reference node, in
+  volts: \code{v0}, \code{v1} and \code{v2}.
+\end{itemize}
+
+If the user had not erased the unnecessary variables, they will also
+be there when the user views the folder using Var-Link.
+
+Return to the entry line by pressing the \key{HOME} key, then press
+\key{CLEAR} to clear the entry line.
+
+The problem asked for all the node voltages. To display these
+voltages, we enter each node voltage variable name in the entry line
+and press \key{ENTER}, and the voltage is shown in the history
+display.
+
+If we enter \code{v0} in the entry line and press \key{ENTER}, 0 is
+shown in the history display. This is the expected result, since the
+reference node voltage must always be zero.
+
+If we enter \code{v1} in the entry line and press \key{ENTER}, 5. is
+shown, indicating that node 1 is at 5 volts.
+
+If we enter \code{v2} in the entry line and press \key{ENTER}, 2. is
+shown, indicating that node 2 is at 2 volts.
+
+We have finished the problem, since we have found the values of the
+requested unknowns.
+
+\problem{002}
+
+\emph{Problem: Given the following circuit, find the voltages of all
+the nodes.}
+
+Solution:
+
+The only new concept in this circuit compared to the previous
+problem is that the resistors are specified as conductances instead
+of resistances. As already explained above, we can enter the
+conductances directly in the circuit description.
+
+As always, the first step consists of naming all the nodes and
+elements of the circuit. In this circuit there are four nodes, and
+we need to choose one of them as the reference node. We chose the
+bottom node, because it has the most sources connected to it. The
+circuit has eight elements: three independent current sources and
+five conductances. We will simulate the conductances as resistors.
+The node and element names will be shown in the next step.
+
+Note that the actual node and element names are a matter of personal
+preference.
+
+The second step is to enter the simulation command and circuit
+description in the calculator entry line, where the circuit
+description is entered, as always, between the parentheses of the
+simulation command:
+
+\begin{entry}
+sq\dc("j1,0,1,-8; j2,2,1,-3; j3,3,0,-25; r1,1,2,1/3;
+      r2,1,3,1/4; r3,2,3,1/2; r4,2,0,1; r5,3,0,1/5")
+\end{entry}
+
+Remember that the negative signs in front of the current source
+values are entered with the negation key \key{($-$)}, not the
+subtraction key \key{$-$}.
+
+After entering the circuit description, press \key{ENTER} to run the
+simulation. The calculator screen shows the status messages as the
+simulation runs, then the word `Done' is shown in the history
+display when the simulation is finished. This simulation takes about
+20 seconds.
+
+The simulation results are stored in the current folder with the
+appropriate names. We do not need to display the reference node
+voltage, because it is zero.
+
+Enter \code{v1} in the entry line and press \key{ENTER}, and the
+voltage of node 1 is shown: 1.
+
+Enter \code{v2} in the entry line and press \key{ENTER}, and the
+node 2 voltage is shown: 2.
+
+Enter \code{v3} in the entry line and press \key{ENTER}, and the
+node 3 voltage is shown: 3.
+
+These are the correct answers. Before trying more problems, we will
+learn some new concepts.
+
+\section{Modes of operation}
+
+The TI-89, in my opinion, is the best calculator that has ever been
+made. One excellent aspect of the calculator is the intelligent way
+in which it handles exact and approximate numbers.
+
+If we press the \key{MODE} key, the calculator settings are
+displayed. The settings are divided in three groups, which can be
+seen by pressing \key{F1}, \key{F2} and \key{F3}. Press \key{F2} to
+see the second group. Near the bottom of the screen you will see the
+Exact/Approx setting, which is Auto. This setting controls the way
+in which the calculator handles exact and approximate numbers. Press
+\key{HOME} to return to the home screen, and press \key{CLEAR} to
+clear the entry line. Now we will see how this mode setting affects
+Symbulator operation.
+
+The Symbulator handles the Exact/Approx setting automatically,
+setting it to Auto. When your calculator is set to Auto, the number
+2 is interpreted as an exact value, while 2.\ (with a decimal point)
+is interpreted as an approximate value. The calculator considers as
+approximate any number with a decimal point. Let us see this in two
+examples.
+
+In the entry line, type \code{2/3} and press \key{ENTER}. The result
+is shown in the history area as \code{2/3}, which is the exact
+result. The calculator has interpreted the numbers as exact, and
+does not approximate the result.
+
+Now, type \code{2./3} and press \key{ENTER}. The result shown in the
+history display is \code{.666666667}. This answer, which would raise
+the hair of any reader of the Apocalypse, means that the calculator
+has interpreted the fraction as composed of an approximate number
+and an exact number. Therefore, at least one of the numbers is
+approximate, and the calculator automatically returns an approximate
+decimal result.
+
+The observant reader will note that the voltages in Problem 001
+included a decimal point, while the voltages in Problem 002 did not
+have the decimal point. Why? The explanation is simple. In the first
+problem, the element values included approximate numbers with
+decimal points (for example, 3.1 or $-1.4$), and therefore the
+answers were approximate. In the second problem, all the values were
+exact numbers, so the results were also exact.
+
+This teaches us something: when the circuit values are entered as
+exact numbers, the results will also be exact. And whenever the
+values are entered as approximate numbers, the answers will be
+approximate.
+
+One way to turn an exact number, for example 31/10, into an
+approximate value, is to use the \code{approx()} function. So, if we
+enter \code{approx(31/10)}, the calculator returns the approximate
+result, which is 3.1.
+
+We can also turn an approximate number into an exact number with the
+\code{exact()} calculator function. For example, \code{exact(3.1)}
+returns 31/10.
+
+\section{Dependent sources}
+
+In simple terms, the value of a dependent source depends on another
+variable in the circuit. The value of a current-dependent current
+source is a function of a control current, elsewhere in the circuit.
+On the other hand, the value of a voltage-dependent voltage source
+is a function of a control voltage, elsewhere in the circuit.
+
+I have said that one of the great advantages of Symbulator is that
+it allows natural simulation of dependent sources, without
+additional structures or nomenclature. This results from the method
+that Symbulator uses to generate equations, as opposed to
+conventional simulators which use methods such as modified nodal
+analysis or the gyrator transform. Simulators based on these methods
+require special nomenclature to distinguish independent sources from
+dependent sources.
+
+Two precautions are necessary when simulating circuits with
+dependent sources. The first is to ensure that the control variable
+is expressed in terms of simulation results. The second precaution
+is to ensure that the current folder has no unnecessary variables,
+particularly those whose names are identical to the names of results
+of the current simulation that will be used to control the dependent
+source.
+
+\subsection{Voltage-dependent voltage sources}
+
+The control voltage of a voltage-dependent voltage source can be a
+node voltage, which is the voltage of the node measured with respect
+to the reference node. For example, the control voltage might be
+specified as \code{v1}, where \code{v1} is the voltage of node 1.
+The reference voltage is always zero volts.
+
+The control voltage may also be specified as the voltage drop across
+an element. These voltage drops are included in the Symbulator
+results, so a control voltage might be specified as \code{vr1},
+which is the voltage drop across \code{r1}.
+
+The control voltage may also be specified as the voltage between any
+two nodes. In this case the control voltage is expressed as a
+differential voltage, for example, \code{(v1-v2)}.
+
+Let us see a problem as an example.
+
+\problem{003}
+
+\emph{Problem: For the circuit with two nodes shown in the figure,
+find the value of the currents $i_A$, $i_B$ and $i_C$.}
+
+Solution:
+
+As usual, the first step is to name the circuit nodes and elements.
+The circuit has two nodes. We will use the lower node as the
+reference. This circuit has a voltage-dependent current source. The
+control voltage is the voltage drop across the 5.6~A current source,
+and is labeled $v_x$. The current through this source flows from the
+lower node to the upper node. This means that when we describe it,
+its voltage drop will be defined from the lower node with respect to
+the upper node, a polarity which agrees with the drop $v_x$ shown in
+the drawing. If we name this source \code{jx}, then the control
+voltage is \code{vjx}.
+
+The second step is to enter the simulation command and circuit
+description in the calculator entry line.
+
+The circuit specifies the direction of current flow in the sources.
+But how shall we define current flow through the resistors? This is
+not specified, so we must decide.
+
+The problem asks us to find $i_A$, $i_B$ and $i_C$, which flow from
+the top to the bottom of the figure. If we define the resistor
+currents in the same direction, the simulation results will agree
+with the figure. This means we will not have to change the signs of
+the results to answer the problem questions. However, this decision
+is optional, and either direction may be used. This decision just
+makes it easier to interpret the simulation results.
+
+In order to make the answers even easier to understand, we will name
+the elements in the branches of $i_A$, $i_B$ and $i_C$ as \code{rA},
+\code{jB} and \code{rCC}, respectively. This is optional; you may
+use any names you choose. However, choosing appropriate element
+names makes the results easier to interpret. Note that we cannot use
+the variable name \code{rC}, because that is a reserved system name,
+as pointed out in section 1.9.4.
+
+This is the command and circuit description:
+
+\begin{entry}
+sq\dc("jx,0,1,5.6; ra,1,0,18; jb,1,0,.1*vjx; rcc,1,0,9; j2,1,0,2")
+\end{entry}
+
+The value of the dependent source could also have been described as
+\code{-.1*v1}. Press the \key{ENTER} key to start the simulation.
+
+After pressing \key{ENTER}, the simulation status messages are
+shown, and soon `Done' is shown in the history display, indicating
+that the simulation is complete. This simulation took 12 seconds on
+my calculator. The simulation results for the element voltages,
+currents and powers are stored in the current folder.
+
+Enter \code{ira} in the entry line and press \key{ENTER}, then 3.\
+is shown in the history display, which is the current through
+resistor \code{rA} in amperes, which corresponds to the current
+$i_A$ in our problem.
+
+Enter \code{ijb} in the entry line and press \key{ENTER}, then
+$-5.4$ is shown in the history display, which is the current through
+current source \code{jB} in amperes, corresponding to the current
+$i_B$ in our problem.
+
+Enter \code{ircc} in the entry line and press \key{ENTER}, then 6.\
+is shown in the history display, which is the current through
+resistor \code{rCC} in amperes, which corresponds to the current
+$i_C$ in our problem.
+
+This example illustrates why it is important that Symbulator can
+find the currents through current sources: in this problem, the
+current of source \code{jB} was unknown and required as an answer.
+Let us see another example.
+
+\problem{004}
+
+\emph{Problem: For the circuit with two nodes shown in the figure,
+find the currents $i_1$, $i_2$, $i_3$ and $i_4$.}
+
+Solution:
+
+As always, the first step is to name the circuit nodes. This circuit
+has two nodes, or at least that is what the problem statement says.
+Let us carefully examine the circuit. Clearly, we see that there are
+six junctions which may be nodes. We also notice that the four outer
+connections have no resistive elements or current sources: they are
+short circuits. They have identical voltage at both ends. This means
+that the six junctions are two groups of three, where each group has
+the same voltage. When the problem says ``the circuit of two
+nodes'', it refers to this fact. In terms of circuit voltages, these
+six junctions are only two nodes. However, the problem also asks us
+to find the current through the short circuits. Current can enter a
+node and also leave it, but it cannot flow \emph{along} the node.
+So, for the purposes of simulation, we must consider those
+connections as short circuits, not nodes. This requirement is
+identical for any simulator, including SPICE and Symbulator. So,
+this circuit has six nodes and four short circuits, as well as other
+elements.
+
+We will also use this example to show how to define a
+voltage-dependent current source whose control voltage is the
+voltage between two nodes. Which of these six nodes will be the
+reference node? Any one of them is a possibility, but we prefer to
+choose as a reference node the one which is between the dependent
+source and the 2.5 ohm resistor. Why? Because if we use that node as
+the reference, then the control voltage of the dependent source is
+simplified, for it can be defined as a single node voltage. Suppose
+that we name the nodes left to right as follows: 1 is the first
+node, 0 is the second, 2 is the third, 3 is the fourth, 4 is the
+fifth and 5 is the sixth node. With these node names, the control
+voltage of the dependent source is \code{(v1-v0)}, and since
+\code{v0} $= 0$, the control voltage is \code{v1}.
+
+The second step is to enter the simulation command and circuit
+description in the entry line.
+
+How shall we choose the best directions for the current flow? The
+drawing shows the direction for the current sources. For the
+resistors, any direction will work. For the short circuits, remember
+what we learned in the previous problem: it is best to make the
+current flow direction agree with the directions of the problem
+questions and answers. So, we define the current flow directions
+according to the directions of the unknown currents.
+
+In order to answer the questions more easily, we will name the short
+circuits \code{s1}, \code{s2}, \code{s3} and \code{s4}, in the same
+order as the currents $i_1$, $i_2$, $i_3$ and $i_4$.
+
+This, then, is the simulation command and the circuit description:
+
+\begin{entry}
+sq\dc("r1,1,0,25; j1,0,2,.2*v1; r2,2,3,10; j2,4,3,2.5;
+      r3,4,5,100; s1,1,2,0; s2,2,4,0; s3,0,3,0; s4,3,5,0")
+\end{entry}
+
+Two things are worth noticing about the circuit description. First,
+we needed to place zeros at the end of each short circuit element
+description, so that all the rows have the same length. Second, note
+that the control voltage for the source is called \code{v1}, just as
+in the drawing. This is because we intentionally assigned the
+reference node at the appropriate place, and we named the other
+terminal 1. Alternatively, had we named the two nodes \code{m} and
+\code{n}, the control voltage would have been \code{(vm-vn)}.
+Another alternative, just as easy, would have been to define the
+control voltage as \code{vr1}, that is, the voltage drop across
+\code{r1}, because \code{r1} is connected to nodes 1 and 0, in the
+right sequence.
+
+Start the simulation by pressing \key{ENTER} after you have entered
+the circuit description. After the status messages are shown, the
+history display shows `Done'. My calculator ran this simulation in
+32 seconds. The time has increased over that of previous examples,
+because there are more nodes. Since Symbulator uses nodal analysis,
+the number of equations and unknowns increases with the number of
+nodes. The simulation results are stored in the current folder.
+
+Let us display the currents, with the same procedure we have already
+seen many times. The current \code{is1} is $-2$.\ amperes,
+\code{is2} is 3.\ amperes, \code{is3} is $-8$.\ amperes, and
+\code{is4} is $-.5$ amperes.
+
+Now let us look at another type of dependent source.
+
+\subsection{Current-dependent current sources}
+
+For current-dependent current sources, the control current is often
+the current through an element. For example, if the element is
+\code{r1}, then the current is expressed as \code{ir1}.
+
+In some circuits, the control current is the current through a
+branch with no elements. In this case, we need to define that branch
+as a short circuit so we can get the current, just as in the
+previous example. If the short circuit is called \code{s1}, then the
+current will be \code{is1}.
+
+The following problem shows an example of current-dependent current
+sources.
+
+\problem{005}
+
+\emph{Problem: Given the following circuit, determine the value of
+the voltage $v$ and the power dissipation of the independent current
+source.}
+
+Solution:
+
+The first step is to name the circuit nodes and elements. We use the
+bottom node as the reference node, so that voltage $v$ is equal to
+the upper node voltage. If we had used the upper node as the
+reference, then voltage $v$ would be the negative of the lower node
+voltage. We name the 2~k$\Omega$ resistor \code{rx}, and define its
+current as flowing upwards, so that the direction of the current in
+\code{rx} matches that of the control current $i_x$. This makes it
+easier to interpret the simulation results. The current flow
+direction through the other 6~k$\Omega$ resistor is not important.
+
+The second step is to enter the simulation command and circuit
+description in the entry line:
+
+\begin{entry}
+sq\dc("r1,1,0,6E3; j1,0,1,2*irx; j2,0,1,24E-3; rx,0,1,2E3")
+\end{entry}
+
+Note that the control current is labeled $i_X$ in the drawing, but
+it is called \code{irx} in the circuit description. Why did we use a
+different name? The reason is very simple: Symbulator cannot know
+what we mean by $i_X$, because it cannot see the circuit schematic!
+All control voltages or currents must be in terms of the circuit
+elements. Since \code{rx} is a circuit element, Symbulator knows
+that \code{irx} is the current through that resistor.
+
+In the value \code{6E3}, `E' indicates the power of 10, so
+\code{6E3} means $6 \times 10^{3}$. This nomenclature is used in
+most programmable calculators, including Texas Instruments, HP and
+Casio.
+
+Note that even though the circuit resistances are given in
+k$\Omega$, the circuit description values must be in ohms. Currents
+in the circuit are specified in mA, but we must specify the values
+in A for the circuit description. Symbulator does not understand
+unit prefixes such as k or m.
+
+You must keep in mind that we must describe the circuit in terms
+that Symbulator understands. This avoids absurd situations such as
+defining the control current as $i_X$ or specifying values in mA,
+which would result in the wrong answers.
+
+Start the simulation by pressing \key{ENTER}. `Done' is shown in the
+history display after the simulation status messages are shown. My
+calculator took 10 seconds to simulate this circuit. The simulation
+results are stored in the current folder. This example clearly
+demonstrates the agility and potential of Symbulator as a tool for
+learning and checking answers. It would take several minutes to
+solve this circuit by hand and find all of the voltages, currents
+and power dissipations, and there is a chance that we may make a
+mistake. With Symbulator, obtaining all these results takes only ten
+seconds, and we can be confident that the results are correct.
+
+The answers are shown with the same process used in the previous
+examples. Voltage $v$ in the schematic is equivalent to \code{v1},
+which is 14.4~V. The power dissipation of the independent source is
+called \code{pj2}, which is $-.3456$~W. Since the problem asked for
+the power dissipated by the source, \code{pj2} is the answer. If the
+problem had asked for the power generated by the source, we would
+change the sign of the answer, and the generated power would be
+.3456~W (positive). Let us do another example, to reinforce the
+concepts learned so far.
+
+\problem{006}
+
+\emph{Problem: Determine $i_X$ in the following circuit.}
+
+Solution:
+
+As always, the first step is to name all the circuit nodes and
+elements. Like Problem 004, this circuit seems to have two nodes,
+when in fact we need more nodes and some short circuits to simulate
+it. For this problem, the location of control current $i_1$ forces
+us to view the upper part of the circuit as two nodes connected by a
+short circuit, which we will call \code{s1}. On the other hand, the
+location of the unknown current $i_X$ forces us to view the lower
+part of the circuit as two more nodes, and to use another short
+circuit which we will call \code{sxx}. We cannot use the name
+\code{sx}, because that is a reserved system variable name.
+
+With this circuit, it is irrelevant which node we decide to call the
+reference node. The current flow direction in the resistors can also
+be assigned in either direction. The current flow in the current
+sources must, as always, be assigned in the direction shown in the
+drawing. The current flow directions in the short circuits are
+chosen so that they agree with the control current and the unknown
+current.
+
+The second step is to enter the simulation command and circuit
+description in the entry line:
+
+\begin{entry}
+sq\dc("r1,1,0,5E3; j1,1,0,4E-3; s1,1,2,0; sxx,3,0,0;
+      j2,2,3,3*is1; r2,2,3,20E3")
+\end{entry}
+
+It should not be a surprise at this point that the control current
+is called $i_1$ in the drawing, but is called \code{is1} in the
+description.
+
+Start the simulation by pressing \key{ENTER}. `Done' is shown in the
+history display when the simulation is finished. My calculator took
+17.5 seconds to simulate this circuit. The results are stored in the
+current folder.
+
+The answer to the problem, the unknown current $i_X$, is obtained by
+recalling \code{isxx}, which is .000571429 amperes.
+
+\section{Voltage source}
+
+Ideally, a voltage source is a circuit element which forces a
+defined voltage difference between its two terminals, and generates
+or dissipates power.
+
+\subsection{Notation}
+
+The minimum information needed to define a voltage source is:
+
+\emph{What kind of element is it?} It is a voltage source. The
+letter that identifies voltage sources is \code{e}.
+
+\emph{How is the source named?} To distinguish one voltage source
+from another, we must give each one a different name, and those
+names all start with \code{e}.
+
+\emph{Where is the source connected?} A voltage source has two ends,
+each connected to a different node. It is necessary to specify both
+nodes to which the source is connected, and the order in which we
+specify the nodes also specifies the polarity of the source: the
+first node with respect to the second. In the circuit drawing, the
+polarity of the source is specified by the `plus' and `minus' signs
+next to the source.
+
+When entering a voltage source in the circuit description, the order
+in which the nodes are listed defines the source polarity. However,
+the polarity also indirectly specifies the direction of current flow
+through the source, from the first node to the second node. The
+voltage drop across the voltage source is measured from the first
+node with respect to the second node.
+
+This point may cause some confusion if you are not familiar with
+circuit simulation. You may think that, if the first node of the
+voltage source is positive with respect to the second node, then the
+current must flow from the second node to the first. Indeed, it is
+like that, in most cases.
+
+The important point to understand is that the polarity used to
+define a variable does not necessarily establish which node is at
+the higher voltage. As an example, consider the following: ``The
+voltage of node A is $-5$~V with respect to node B''. In this
+example, the polarity is defined at node A with respect to node B,
+but node B is at a higher voltage than node A.
+
+Similarly, defining the direction of current flow through an element
+does not set the actual direction of current flow. Consider this
+phrase: ``the current flowing from node A to node B is $-3$~A''. In
+this case, the current is defined as flowing from A to B, but the
+real direction of conventional current flow is from B to A.
+
+Summarizing: in all the elements we have so far used, the current
+flow direction used to define the simulation results is from the
+first node to the second node, and the polarity of the voltage drop
+across an element is defined as the voltage of the first node with
+respect to the second node. In addition, the voltage source value is
+given as the voltage of the first node with respect to the second.
+
+\emph{What is the value of the source?} The value must be specified
+in volts. For a direct current simulation, the value of an
+independent voltage source can be a real number or a variable. If
+the source is dependent, its value must be an algebraic expression.
+This expression will be composed of a number and a variable. This
+variable will be one of the simulation answers.
+
+So, in a circuit description, a voltage source is defined as:
+
+\begin{entry}
+ename, node 1, node 2, value in volts
+\end{entry}
+
+As we have seen, the value of the voltage source is defined as the
+voltage at node 1 with respect to node 2. For example, if the value
+is 10~V, then the simulator assumes that the voltage difference from
+node 1 with respect to node 2 is 10 volts.
+
+Note that the voltage source description has four terms. If other
+circuit element descriptions have five terms, then we must add a
+zero to the source description, for example:
+
+\begin{entry}
+ename, node 1, node 2, value, 0
+\end{entry}
+
+Take care that all values are entered in volts, and not some other
+unit such as millivolts (mV), otherwise the results will be wrong.
+
+For analyses other than direct current, the value may be a phasor, a
+function of frequency or a function of time.
+
+\subsection{Related answers}
+
+There are three simulation results for a voltage source: the current
+through the source, the voltage drop across the source, and the real
+power consumed by the source. The current is saved in a variable
+called \code{iname}, where \code{name} is the name of the source.
+The voltage drop is stored in a variable called \code{vname}. The
+real consumed power is stored in a variable called \code{pname}.
+
+The current, as previously explained in detail, is defined as
+flowing from the first node to the second node in the description.
+
+The voltage drop is defined as the voltage of the first node with
+respect to the second node in the description.
+
+The power is returned as the consumed power. If the source generates
+power, the returned result is negative. You must remember this when
+you interpret the simulation results.
+
+\problem{007}
+
+\emph{Problem: In the following circuit, determine the power
+consumed by each of the elements.}
+
+Solution:
+
+The first step is to name all the nodes and elements. We will use
+the bottom node as the reference node. Remember that voltage source
+names must begin with \code{e} and the order of the nodes must
+correspond to the polarity shown in the drawing. The order of the
+nodes of the resistors is irrelevant.
+
+The second step is to enter the simulation command and circuit
+description in the entry line:
+
+\begin{entry}
+sq\dc("e1,1,0,120; r1,1,2,30; e2,2,3,30; r2,3,0,15")
+\end{entry}
+
+Start the simulation by pressing \key{ENTER}. After the status
+messages are shown, `Done' is shown in the history display. My
+calculator took 13 seconds to simulate this circuit. The answers are
+stored in the current folder.
+
+The power consumed by source \code{e1} is in the variable
+\code{pe1}, and is $-240$ watts. This means that the source
+generated 240~W, since the value is negative. However, since the
+problem asked for the power consumption of each element, the answer
+is $-240$~W. The power consumed by source \code{e2} is in variable
+\code{pe2}, and is 60~W. Since the value is positive, the source
+consumes power; it does not generate it. The power dissipated by
+\code{r1} is in variable \code{pr1}, and is 120~W. The power
+dissipated by \code{r2}, from variable \code{pr2}, is 60~W. With
+this example, we can verify that Symbulator complies with the energy
+conservation law. If we enter \code{pe1+pr1+pe2+pr2}, to find the
+net power dissipation, the result is 0~W, as expected.
+
+\subsection{Dependent sources}
+
+All the concepts that we learned for the simulation of dependent
+current sources apply to dependent voltage sources as well. Let us
+see some examples for demonstration. We will start with a simple
+problem with a single voltage-dependent voltage source.
+
+\problem{008}
+
+\emph{Problem: In the following circuit, determine the power
+absorbed by each element.}
+
+Solution:
+
+The first step is to name all the nodes and elements. The order of
+the nodes in the voltage sources is determined by the polarity shown
+in the drawing. With the experience we now have, it is obvious that
+if we use the bottom node as the reference node, and call the upper
+left node \code{x}, then we can call the control voltage \code{vx}.
+The other nodes are named 1, 2 and 3, moving clockwise around the
+drawing.
+
+The second step is to enter the simulation command and circuit
+description in the entry line:
+
+\begin{entry}
+sq\dc("r1,x,0,30; e1,1,x,12; r2,1,2,8; r3,2,3,7; e2,3,0,4*vx")
+\end{entry}
+
+Start the simulation by pressing \key{ENTER}. After the status
+messages are shown, the word `Done' is shown in the history display.
+My calculator took 18 seconds to simulate this circuit. The results
+are stored in the current folder.
+
+If we enter \code{pr1} in the entry line and press \key{ENTER}, the
+power dissipated by resistor \code{r1} is shown as 96/125~W. As
+explained, the simulation results are exact, because all of the
+circuit values are exact. Usually, textbook answers are not given as
+exact values like 96/125~W, but as approximate values like 0.768~W.
+The exact value is as correct as the approximate value;
+nevertheless, in an examination the professor may prefer the
+approximate value. Note that the terms `exact' and `approximate' are
+used in the same sense as defined by the operation of programmable
+calculators.
+
+It is simple to obtain the approximate answer instead of the exact
+answer: just press \key{$\diamond$} before pressing \key{ENTER}.
+
+With \code{pr1} in the entry line, if we press \key{$\diamond$}
+\key{ENTER}, then the approximate result of .768~W is shown. This
+same procedure is used for the other variables.
+
+Enter \code{pe1}, then press \key{$\diamond$} \key{ENTER} and the
+result of 1.92~W is shown.
+
+Enter \code{pr2}, then press \key{$\diamond$} \key{ENTER} and the
+result of .2048~W is shown.
+
+Enter \code{pr3}, then press \key{$\diamond$} \key{ENTER} and the
+result of .1792~W is shown.
+
+Enter \code{pe2}, then press \key{$\diamond$} \key{ENTER} and the
+result of $-3.072$~W is shown.
+
+Next, we will do an example with two voltage-dependent voltage
+sources, with more complicated control voltages.
+
+\problem{009}
+
+\emph{Problem: Find the power absorbed by each element of this
+circuit.}
+
+Solution:
+
+The first step is to name all the circuit nodes and elements. The
+order of the nodes in the circuit descriptions for the three voltage
+sources is determined by the polarities shown in the drawing.
+Resistor polarities are irrelevant. There is no clear choice for the
+reference node, so we choose the bottom left node as the reference,
+and name the other nodes in clockwise order as \code{a}, \code{b},
+\code{c}, \code{d} and \code{e}.
+
+The second step is to enter the simulation command and the circuit
+description:
+
+\begin{entry}
+sq\dc("e1,a,0,40; r1,a,b,5; r2,b,c,25; r3,c,d,20;
+      e2,e,d,2*vr3+vr2; e3,e,0,4*vr1-vr2")
+\end{entry}
+
+Start the simulation by pressing \key{ENTER}. After the status
+messages are shown, `Done' is shown in the history display. My
+calculator took 26 seconds to simulate this circuit. The answers are
+stored in the current folder.
+
+For \code{pe1}, we obtain 80 watts.
+
+For \code{pr1}, we obtain 20 watts.
+
+For \code{pr2}, we obtain 100 watts.
+
+For \code{pr3}, we obtain 80 watts.
+
+For \code{pe2}, we obtain $-260$ watts.
+
+For \code{pe3}, we obtain $-20$ watts.
+
+These are the correct answers. Now let us see an example of a
+dependent voltage source controlled by a circuit current.
+
+\problem{010}
+
+\emph{Problem: Find the current $i_X$ in this circuit.}
+
+Solution:
+
+The first step is to name the circuit nodes and elements. The order
+of the nodes in the three sources is determined by the drawing. The
+current flow direction through the 2 ohm resistor (which will be
+named \code{rx}) must agree with that of $i_X$; the current flow
+direction through the other resistor is irrelevant. We choose the
+bottom node as the reference node, and name the other nodes 1, 2 and
+3, moving clockwise around the circuit.
+
+The second step is to enter the simulation command and the circuit
+description:
+
+\begin{entry}
+sq\dc("e1,1,0,10; rx,1,2,2; j1,0,2,3; r1,2,3,1; e2,3,0,2*irx")
+\end{entry}
+
+Start the simulation by pressing \key{ENTER}. After the status
+messages are shown, `Done' appears in the history display. My
+calculator took 16 seconds to simulate this circuit. The answers are
+stored in the current folder.
+
+Enter \code{irx}, then press \key{$\diamond$} \key{ENTER} to obtain
+the current of 1.4~A through \code{rx}, which is correct. We will
+finish this chapter with a problem that combines everything we have
+learned so far.
+
+\problem{011}
+
+\emph{Problem: Find the currents, voltage drops and power
+dissipation for each element in this circuit. Show that the sum of
+the powers is zero.}
+
+Solution:
+
+The first step is to name all the circuit nodes and elements. By
+this point, you should be able to do this without additional
+explanation. The second step is to enter the simulation command and
+the circuit description:
+
+\begin{entry}
+sq\dc("e1,1,0,60; r1,1,0,20; e2,1,2,5*ir1; j1,2,0,ve1/4; r2,2,0,5")
+\end{entry}
+
+Start the simulation by pressing \key{ENTER}. `Done' is shown in the
+history display after the status messages are shown. My calculator
+took 15 seconds to simulate this circuit. The answers are stored in
+the current folder. The results are: \code{ve1} and \code{vr1} are
+both 60 volts, \code{ve2} is 15 volts, \code{vj1} and \code{vr2} are
+both 45 volts, \code{ie1} is $-27$ amperes, \code{ir1} is 3 amperes,
+\code{ie2} is 24 amperes, \code{ij1} is 15 amperes, \code{ir2} is 9
+amperes, \code{pe1} is $-1620$ watts, \code{pr1} is 180 watts,
+\code{pe2} is 360 watts, \code{pj1} is 675 watts, \code{pr2} is 405
+watts. Note that only one source is generating power. How long would
+it take a student to find, without errors, these 15 answers? It took
+the Symbulator, on average, 1 second for each one.
+
+\section{Correcting a wrong description}
+
+Suppose that we make an error in entering the circuit description,
+but we do not notice it until the simulation is complete. We need to
+correct the error and run the simulation again. First, we must erase
+the result variables in the current folder. Next, we must put the
+simulation command and the circuit description in the entry line,
+again. It is a tedious task to completely re-enter the circuit
+description a second time. The skilled user will take advantage of
+the fact that the circuit description is already written. There are
+two ways to do this:
+
+1) If the previous description is still in the entry line, it will
+be shown as white characters on a dark background. Move the cursor
+to the error with the blue cursor keys and correct it. Note that the
+\key{BACKSPACE} key is used to erase a character to the left of the
+cursor.
+
+2) If, for some reason, the circuit description is not in the entry
+line, move the cursor upwards until the circuit description in the
+history area is highlighted. Press \key{ENTER} to make a copy in the
+entry line. The error in this copy is corrected as described above.
+
+Once the error is corrected, run the simulation again by pressing
+\key{ENTER}. With this explanation, we have finished the chapter on
+numerical direct current simulation.

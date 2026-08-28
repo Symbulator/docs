@@ -1,0 +1,260 @@
+% !TEX program = xelatex
+%
+% The Symbulator Book -- the English edition of the 2001 thesis
+% "Symbulator: un simulador de circuitos lineales para calculadoras"
+% by Roberto Perez-Franco.
+%
+% Translation begun by Doug Burkett and Tim Hutcheson (preface,
+% notice, chapters 1-4, ca. 2001), completed by Claude (Fable 5) in
+% 2026 in the same voice and register. See the Note on this Edition.
+%
+% Build:  xelatex the_symbulator_book.tex   (run twice for the TOC)
+
+\documentclass[11pt,oneside]{report}
+
+\usepackage[a4paper,margin=2.8cm]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{array}
+\usepackage{microtype}
+\usepackage[hidelinks]{hyperref}
+
+% Chapter typography, matching the companion monograph.
+\usepackage{titlesec}
+\titleformat{\chapter}[display]
+  {\normalfont\huge\bfseries}{\chaptertitlename\ \thechapter}{16pt}{\Huge}
+\titlespacing*{\chapter}{0pt}{0pt}{28pt}
+
+% ----------------------------------------------------------------------
+% Conventions of this edition
+% ----------------------------------------------------------------------
+
+% The calculator's own display used glyphs the TeX typewriter font
+% lacks; map them to math glyphs so entry lines can carry them
+% verbatim, as the screen showed them.
+\usepackage{newunicodechar}
+\newunicodechar{∠}{\ensuremath{\angle}}
+\newunicodechar{°}{\ensuremath{^\circ}}
+\newunicodechar{π}{\ensuremath{\pi}}
+\newunicodechar{√}{\ensuremath{\surd}}
+\newunicodechar{Ω}{\ensuremath{\Omega}}
+\newunicodechar{µ}{\ensuremath{\mu}}
+\newunicodechar{Δ}{\ensuremath{\Delta}}
+\newunicodechar{ω}{\ensuremath{\omega}}
+\newunicodechar{σ}{\ensuremath{\sigma}}
+\newunicodechar{→}{\ensuremath{\rightarrow}}
+\newunicodechar{∞}{\ensuremath{\infty}}
+
+% Calculator keys, in the bracketed style the original translators
+% established: \key{ENTER} renders as a small boxed sans-serif label.
+\newcommand{\key}[1]{%
+  \setlength{\fboxsep}{1.6pt}%
+  \fbox{\footnotesize\textsf{#1}}}
+
+% Inline program text and variable names.
+\newcommand{\code}[1]{\texttt{#1}}
+
+% Entry-line commands and circuit descriptions: a slightly indented
+% verbatim block.
+\usepackage{fancyvrb}
+\DefineVerbatimEnvironment{entry}{Verbatim}
+  {xleftmargin=2em,fontsize=\small}
+
+% Worked problems: an unnumbered, spaced heading.
+\newcommand{\problem}[1]{%
+  \par\vspace{1.1em}%
+  {\normalfont\large\bfseries Problem N\textsuperscript{\underline{o}} #1\par}%
+  \vspace{0.35em}}
+\newcommand{\problemx}[2]{%
+  \par\vspace{1.1em}%
+  {\normalfont\large\bfseries Problem N\textsuperscript{\underline{o}} #1 #2\par}%
+  \vspace{0.35em}}
+
+\begin{document}
+
+% ======================================================================
+% Title page
+% ======================================================================
+
+\begin{titlepage}
+\centering
+\vspace*{2.6cm}
+{\Huge\bfseries The Symbulator Book\par}
+\vspace{0.6cm}
+{\Large A Linear Circuit Simulator for Calculators\par}
+\vspace{0.4cm}
+{\normalsize The English edition of the 2001 graduation thesis\\
+\emph{Symbulator: un simulador de circuitos lineales para
+calculadoras}\\
+Universidad Tecnol\'ogica de Panam\'a\par}
+\vspace{2.2cm}
+{\large Roberto P\'erez-Franco\par}
+\vspace{1.6cm}
+{\itshape translated by\par}
+\vspace{0.25cm}
+{\large Doug Burkett \& Tim Hutcheson\par}
+{\normalsize (preface, notice, and chapters 1--4, ca.~2001)\par}
+\vspace{0.35cm}
+{\large Claude (Fable 5)\par}
+{\normalsize (chapters 5--12, back matter, and appendices, 2026)\par}
+\vfill
+{\large 2001 \textperiodcentered\ 2026\par}
+\end{titlepage}
+
+% ======================================================================
+% Notice (translated by Burkett & Hutcheson)
+% ======================================================================
+
+\chapter*{Notice}
+\thispagestyle{empty}
+
+I am the founder of the PAX movement, as well as the author of
+Symbulator. It is my wish that Symbulator only be used for peaceful
+purposes, and not for warlike purposes. Please respect this wish.
+Join Pax Movement. Visit \code{http://paxm.org}
+
+\vfill
+
+\section*{The jury's verdict}
+
+This work was defended before an examining tribunal of the
+Technological University of Panama on 9~July 2001. Professors
+Medardo Logreira, Eliane Boulet de Cabrera, and Marcela Paredes de
+V\'asquez each graded it 100/100, with the following general
+observations: \emph{``It is an excellent work that provides an
+innovative contribution to the field of numerical and symbolic
+simulation of electric circuits, and that has received recognition
+at the world level. This work is a source of pride for the Faculty
+of Electrical Engineering and for the Technological University of
+Panama. The members of the jury recommend that this work be promoted
+within the University community.''}
+
+\section*{Acknowledgments}
+
+To professors Medardo Logreira, Eliane Boulet de Cabrera and Marcela
+Paredes of the Technological University of Panama, for their
+unconditional support in the development of this project.
+
+I wish to thank all those who love me: God, for giving me
+everything; my wife M\'onica, for keeping me alive; my mother Eka,
+for giving me life; my father Tito, for giving me two wide, strong
+wings and an enormous sky in which to try them; and my sister Ekita,
+for giving me poetry.
+
+I thank my father for the grammatical review and Jos\'e Vega for the
+technical review of this text, Miguel Latorraca for preparing the
+images of the circuits presented, and my wife for her help preparing
+the index and the list of figures. I am equally indebted to Doug
+Burkett and Tim Hutcheson for the good will, the effort and the very
+many hours of their valuable time that they have dedicated to the
+careful translation of this thesis into English, under the title
+\emph{The Symbulator Book}. My eternal gratitude to all the friends
+and users who encouraged me with their suggestions and comments to
+develop, improve and test Symbulator during these years: Tim
+Hutcheson (USA); Lars Frederiksen (Denmark); Joe Riel (USA); Arne
+Harstad (Norway); Erwin Baert (Belgium); Charles Ware (USA); Doug
+Burkett (USA); Reinhard Willinski (Germany); Kamil Malinski
+(Austria); Jake Adams (USA); Daniele Martini (Italy); Rozgonyi
+Szabolcs (Hungary); Michael Rans (United Kingdom); Alex Astashyn
+(Russia); Al Charpentier (USA); Nevin McChesney (USA); Ivan Oro~Yu
+(Panama); and Pepe Iborra (Spain).
+
+% ======================================================================
+% Preface (translated by Burkett & Hutcheson)
+% ======================================================================
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+
+The purpose of this book is to teach you the art of symbolic circuit
+simulation. In particular, I will demonstrate the knowledge,
+techniques and strategies that you need to take maximum advantage of
+the Symbulator. Symbulator is a powerful tool for learning circuit
+theory.
+
+I assume that the reader is already familiar with the basic concepts
+of circuit theory, such as the laws of Ohm, Cavendish, and
+Kirchhoff. You should also understand the Th\'evenin--Helmholtz and
+Norton--Mayer theorems and Bode plots. Without Symbulator, you
+should be able to perform direct-current and alternating-current
+analyses, frequency and transient responses and Laplace transforms.
+
+I also assume that you have a TI-89 or equivalent calculator and the
+manual for that calculator. You need not be an expert in using the
+calculator, as detailed examples are provided.
+
+This book should be used with your calculator at hand. I assume that
+your calculator meets the Symbulator requirements: you must have AMS
+2.0x or superior installed, as well as DiffEq version 2.06 or
+superior.
+
+You will get the best results if you start with the first chapter,
+read carefully and try all of the examples.
+
+If you have any questions or comments, you can email me at
+\code{symbulator@perez-franco.com}
+
+% ======================================================================
+% A note on this edition
+% ======================================================================
+
+\chapter*{A Note on this Edition}
+\addcontentsline{toc}{chapter}{A Note on this Edition}
+
+The book in your hands is the completed English edition of Roberto
+P\'erez-Franco's graduation thesis of 2000--2001, the most complete
+documentation ever written of the classic Symbulator---the
+twelve-chapter reference its author defended, and its jury graded
+100/100, at the Technological University of Panama in July 2001.
+
+The translation was begun soon afterwards by two of Symbulator's own
+users, Doug Burkett and Tim Hutcheson, who carried the preface, the
+notice, and chapters~1 through~4 into English before the effort
+paused---for a quarter of a century. Their work is preserved here
+essentially as they left it, lightly copy-edited where their working
+drafts still carried both halves of an unresolved revision. The
+remaining chapters, the conclusions and recommendations, and the
+appendices were translated in 2026 by Claude, an AI assistant, in
+the voice and register the original translators established: the
+reader addressed directly, the author speaking as \emph{I}, the
+\emph{doors}, the \emph{(Expert)} and \emph{(Impala)} Modes, and
+calculator keys shown in brackets, so that \key{2nd} \key{ENTER} on
+the page means those keys under your fingers.
+
+Three editorial notes. First, the figures of the original---TI-89
+screen captures and circuit drawings---are not reproduced in this
+edition; every problem's circuit is fully defined by the circuit
+description given in its solution, and the original figures survive
+in the archived thesis. Second, where the translators adapted rather
+than transliterated (their chapter~1 folds the original's historical
+appendix into section~1.4, and speaks of ``this book'' where the
+thesis said ``this thesis''), this edition follows their plan
+throughout; Appendix~A of the original is therefore represented by
+section~1.4 rather than repeated. Third, the calculator this book
+teaches is the TI-89 of 2001 running Symbulator~Q (version~5); the
+program's modern descendant, Symbulator~9, runs the same circuit
+descriptions on Python and SymPy, and its companion volume,
+\emph{The Internal Logic of Symbulator}, documents how everything
+described here works inside.
+
+\tableofcontents
+
+% ======================================================================
+% Chapters
+% ======================================================================
+
+\input{book/ch01}
+\input{book/ch02}
+\input{book/ch03}
+\input{book/ch04}
+\input{book/ch05}
+\input{book/ch06}
+\input{book/ch07}
+\input{book/ch08}
+\input{book/ch09}
+\input{book/ch10}
+\input{book/ch11}
+\input{book/ch12}
+\input{book/backmatter}
+
+\end{document}

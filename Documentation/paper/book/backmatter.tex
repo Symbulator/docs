@@ -1,0 +1,212 @@
+% Back matter -- translated by Claude (2026), continuing the voice and
+% register of the Burkett-Hutcheson chapters.
+
+\chapter*{Conclusions}
+\addcontentsline{toc}{chapter}{Conclusions}
+
+Symbulator is a useful tool for the analysis of linear circuits. It
+allows the use of numerical and symbolic values. It can simulate in
+direct current, alternating current, the frequency domain and
+transient analysis. It gives as answers all the values that interest
+the user: voltages at the nodes, and currents, voltage drops and
+powers in the elements. It makes it easy to find the Th\'evenin,
+Norton and two-port equivalents of a network.
+
+Because of its capabilities, Symbulator can be of great help in the
+teaching, learning and practice of Electrical Engineering, in the
+area of linear circuit analysis, especially in those circuit
+problems that require symbolic answers.
+
+It is to be hoped that the technology developed in Symbulator, and
+matured during these two years of polishing, will serve as the basis
+for developing more and better products in the future, including
+programs for new platforms such as personal computers and portable
+computers.
+
+\chapter*{Recommendations}
+\addcontentsline{toc}{chapter}{Recommendations}
+
+I do not write these recommendations as the author, but based on my
+own experience as a user, and on the testimonials I have received in
+writing from the hundreds of students and professionals who have
+used Symbulator as a learning and verification tool, during its two
+years of development.
+
+I recommend that professors use Symbulator as a teaching instrument
+in their circuit theory courses. I believe this simulator has a
+place in the classroom, due to its characteristics and portability.
+Professors can use it to verify the answer keys of their
+examinations before grading them, and as part of their classes.
+
+I consider that the student should learn, in the first place, the
+manual techniques of circuit solving, and that in evaluations the
+professors should require them to present all calculations and steps
+manually. At the same time, I recommend that the student be allowed
+to use instruments like Symbulator, as a verification tool in
+classes, homework and examinations. I think that having a way to
+verify their answers will favor the learning and the self-confidence
+of the student. Especially because circuit theory textbooks do not
+include answers to all the problems they present, and because some
+of the answers they do present are wrong.
+
+\chapter*{References}
+\addcontentsline{toc}{chapter}{References}
+
+\begin{itemize}
+\item \emph{Engineering Circuit Analysis} (An\'alisis de circuitos
+  en ingenier\'ia), Hayt \& Kemmerly, fifth edition (third edition
+  in Spanish), McGraw-Hill, 1993.
+\item \emph{User's Manual --- TI-89 Calculator}, Texas Instruments,
+  Banta Book Group, 1998.
+\item \emph{User's Manual --- TI-92 Plus Calculator}, Texas
+  Instruments, Banta Book Group, 1999.
+\end{itemize}
+
+\appendix
+
+\chapter{A brief history of Symbulator}
+
+The original thesis carried, as its first appendix, a brief history
+of Symbulator and a note on the language of the program and its
+documentation. When the translators began their work, they moved
+that material forward into the body of the book, where you have
+already read it: it is section 1.4, \emph{Brief history of
+Symbulator}, and its subsection on language. It is not repeated
+here; this appendix remains in the plan of the book as a signpost,
+so that the numbering of the remaining appendices matches the
+original.
+
+\chapter{Symbulator and symbolic simulation}
+
+The knowledge that man has of electricity has been developing for
+centuries, from Volta's frogs to quantum transistors. The tools of
+electrical engineering analysis have developed as well. Symbolic
+simulation, being a very recent invention, is among the newest of
+these tools.
+
+In 1998 I came upon the first symbolic circuit simulator I had seen
+in my life (and in fact the only one I know of apart from
+Symbulator). Its name is Syrup, and it is designed to run in the
+environment of the mathematical program Maple~V for personal
+computers. Although I never came to master this simulator, thanks to
+it I understood that symbolic simulation is a very powerful tool for
+learning and design. At that time I was a student in the Circuit
+Theory~II course at the Azuero Regional Center of the Technological
+University, and I felt it would be very useful to have a symbolic
+simulator available in the classroom. I struck up a good friendship
+with Joe Riel, the author of Syrup, and he explained to me the
+underlying concept of this program, an extremely simple concept in
+truth. Unlike numerical simulators, including some I myself had
+programmed up to that date, Syrup did not use matrices and modified
+nodal analysis. On the contrary, it generated nodal equations,
+solved them and presented them symbolically. With this idea in mind,
+on March 30, 1999, I undertook the programming of a similar
+simulator on my TI-89 calculator, which I initially called SCS (for
+Symbolic Circuit Simulator) and later Symbulator. Syrup was an
+initial inspiration, but not a model to follow, because my idea of
+the perfect simulator for the classroom differed in some respects
+from Syrup. Since, during the two years it took me to perfect it, I
+had no contact with any other symbolic simulator, I was forced to
+invent and develop by my own means the techniques of symbolic
+simulation that I present today, and which have rendered excellent
+results to the thousands of users that Symbulator has in the whole
+world. I have made this clarification because I consider that the
+work presented in this book should be taken for what it truly is: a
+pioneering contribution to a virgin field of electrical engineering.
+Perhaps that is why it earned first place in the IEEE Student Paper
+Contest 2000 for Latin America (Region~9).
+
+\chapter{When is it preferable not to use Symbulator?}
+
+An important skill that a Symbulator user must develop is that of
+recognizing when the simulation represents a saving of time and when
+it does not. This skill manifests itself as a kind of scent, of
+intuition, that tells you whether, due to the nature of a problem,
+it will be more complicated to solve it with a symbolic simulation
+than with manual techniques. It is acquired after much practice.
+Only your own experience will provide you with this special
+intuition.
+
+Below, I present an example that illustrates a case in which it is
+advisable to decline the use of the simulator. It is a circuit that,
+at first sight, seems to be a perfect candidate for symbolic
+simulation in Symbulator. However, it turns out to be much simpler
+to use a single line with the calculator's \code{solve} command to
+solve it.
+
+\problem{089}
+
+\emph{Problem: In the circuit shown, it is known that
+$\mathrm{abs}(I_1) = 7$~A and $\mathrm{abs}(I_2) = 5$~A. Find $I_1$
+and $I_2$.}
+
+Solution: We will simply use the \code{cSolve} command:
+
+\begin{entry}
+cSolve(abs(i1)=7 and abs(i2)=5 and i1+i2=10,
+       {i1=1+1i,i2=1-1i})
+\end{entry}
+
+Note two aspects of this line:
+
+We have written three equations to find two unknowns. This might
+seem to be an error, since one should have as many equations as
+unknowns. However, when we remember that each complex unknown is
+really two unknowns, we understand that we wish to solve for four
+unknowns and not two. The third equation can be considered, from
+this perspective, as two equations instead of one, since in it the
+following two equations are implicitly expressed:
+\code{real(i1)+real(i2)=10 and imag(i1)+imag(i2)=0}. So, in the
+command line shown above we have virtually four equations with four
+unknowns.
+
+We have added an equal sign and a value following the name of each
+variable, when listing the unknowns. Instead of saying
+\code{\{i1,i2\}}, we have said \code{\{i1=1+1i,i2=1-1i\}}. These
+values are known as initial guesses, and their function is to give
+the calculator a starting point for the numerical resolution of the
+equations. The closer the starting point is to the real value, the
+faster the answer will be found. Observe that we have given a
+positive imaginary value to $I_1$, and a negative imaginary value to
+$I_2$. The reason is simple: we know beforehand that, since the
+branch of $I_2$ has a capacitor, its imaginary part will be
+negative, while the imaginary part of $I_1$ will be positive, since
+there is an inductance in that branch.
+
+We press \key{ENTER}. The answers appear. Depending on the modes of
+the calculator, the answers will be shown in rectangular or polar
+form. Since we wish to see them in polar form, regardless of the
+modes, we use the \code{absang} tool, like this:
+
+\begin{entry}
+sq\absang(i1)|ans(1)
+\end{entry}
+
+\code{ans(1)} refers to the answers obtained by the previous
+command. The number in parentheses indicates which previous answer
+we are referring to. We press \key{ENTER}. We obtain 7.∠27.66°.
+
+\begin{entry}
+sq\absang(i2)|ans(2)
+\end{entry}
+
+We press \key{ENTER}. We obtain 5.∠$-$40.54°.
+
+Note how we have obtained these answers easily, using \code{cSolve}.
+Using Symbulator, the effort would have been much greater. That is
+why, in this case and in many other similar cases, it is preferable
+to decline the use of the simulator, and take another, simpler road.
+
+\chapter{Origin of the problems used}
+
+The problems in this book were, in their majority, taken from the
+following book: \emph{An\'alisis de circuitos en ingenier\'ia}, Hayt
+\& Kemmerly, fifth edition (third edition in Spanish), McGraw-Hill,
+1993. The exceptions have been noted. The original thesis closes
+with a table giving, for each of the 89 problems, the page of that
+book from which it was taken; the table is preserved in the archived
+Spanish original, and its exceptions are worth recording here:
+Problem~057 was contributed by Nevin McChesney (USA); Problem~066 by
+Jake Adams (USA); Problem~087 was set by a professor of the
+Technological University of Panama, as was Problem~088 (see
+Chapter~12).

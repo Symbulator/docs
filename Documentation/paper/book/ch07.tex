@@ -1,0 +1,774 @@
+% Chapter 7 -- translated by Claude (2026), continuing the voice and
+% register of the Burkett-Hutcheson chapters.
+
+\chapter{Two-ports}
+
+\section{Introduction}
+
+A two-port is a network that has two pairs of terminals. In
+Symbulator, two-ports can be simulated as circuit elements, assuming
+that:
+
+\begin{itemize}
+\item the network is composed only of linear elements,
+\item the network contains no independent sources (it may contain
+  dependent sources),
+\item the two upper nodes of the terminals are connected to distinct
+  nodes of the circuit,
+\item the two lower nodes of the terminals are considered connected
+  to the reference node, 0.
+\end{itemize}
+
+Symbulator accepts two-ports with parameters of 6 different types:
+
+\begin{itemize}
+\item admittance parameters
+\item impedance parameters
+\item hybrid parameters
+\item gain (inverse hybrid) parameters
+\item transmission parameters
+\item inverse transmission parameters
+\end{itemize}
+
+There are three procedures related to two-ports that can be done in
+Symbulator:
+
+\begin{enumerate}
+\item Simulate circuits that contain two-ports. For this, two-ports
+  are used as circuit elements.
+\item Find the gains in a two-port. For this, the \code{gain} tool
+  is used after a circuit simulation.
+\item Find the equivalent two-port of a network. For this, the
+  \code{port} tool is used with the description of a network.
+\end{enumerate}
+
+In this chapter we will learn everything related to two-ports in
+Symbulator.
+
+\section{Notation}
+
+In the case of two-ports, the minimum information necessary to
+describe them completely is the following:
+
+\emph{Identification.} The letters that identify the different
+two-ports are:
+
+\begin{itemize}
+\item impedance parameters, the letter \code{z}
+\item admittance parameters, the letter \code{y}
+\item hybrid parameters, the letter \code{h}
+\item gain parameters, the letter \code{g}
+\item transmission parameters, the letter \code{a}
+\item inverse transmission parameters, the letter \code{b}
+\end{itemize}
+
+\emph{Name.} Any name is valid that begins with the letter
+identifying the two-port you want to describe, and that is not a
+reserved variable, like those listed in the User's Manual and in
+section 1.9.4 of this book. Example: \code{zc} and \code{yc} are
+reserved variables that cannot be used as names.
+
+\emph{Nodes.} A two-port has four connection points, two upper and
+two lower. For a simulation in Symbulator, the two lower ones are
+always assumed connected to the reference node. The upper ones must
+be connected to nodes distinct from each other. It is only necessary
+to give the simulator the names of these two upper nodes to which
+the two-port is connected.
+
+So, two-ports are defined as shown below:
+
+\begin{entry}
+lettername, node 1, node 2
+\end{entry}
+
+As necessary, one or two zeros are added at the end.
+
+\emph{Value of the parameters.} Two-ports are unique elements,
+because they require something no other element requires in
+Symbulator: variables stored previous to the simulation. Each
+two-port that is simulated as part of a circuit requires that the
+values of its 4 parameters be stored in 4 variables, one for each
+parameter, in the following form:
+
+\begin{itemize}
+\item parameter 11, in the variable \code{lettername11}
+\item parameter 12, in the variable \code{lettername12}
+\item parameter 21, in the variable \code{lettername21}
+\item parameter 22, in the variable \code{lettername22}
+\end{itemize}
+
+Take care to enter these values in whole units, and not in their
+multiples. This means they must not be entered in milli (m), micro
+(µ), kilo (k), mega (M), etc.
+
+\section{Related answers}
+
+In the case of a two-port, two related answers are given. They are
+two currents: the current entering the two-port through the first
+node, and the current entering through the second node. Remember
+that these two nodes are the upper ones, since the lower one on both
+sides is the reference node. These currents are stored in variables
+called \code{inameNODE}, that is, \code{i} followed by the name of
+the two-port and the name of the node. So, for a two-port called
+\code{yp}, connected to nodes 1 and 2, the related answers will be
+\code{iyp1} and \code{iyp2}. Remember that both currents are
+considered as entering the two-port through the upper nodes.
+
+Let us see our first two-port problem.
+
+\problem{039}
+
+\emph{Problem: In the following circuit, the parameters of the
+two-port shown are $z_{11} = 20/3$, $z_{12} = 1/3$,
+$z_{21} = 2500/3$, $z_{22} = 200/3$. Find: a) the voltage at the
+load node and the currents entering the two-port at both ends, b)
+the input impedance and the current, voltage and power gains of the
+two-port, c) the output impedance of the network, seen by the load,
+and d) the equivalents of this two-port in the other five types of
+parameters.}
+
+Solution:
+
+This problem, specially designed to inaugurate our experience with
+two-ports, will be solved in four parts.
+
+Question a) will be answered by simulating the circuit using a
+direct current analysis. We will call the two-port \code{zp}. First,
+we define the variables that describe the parameters of the
+two-port:
+
+\begin{entry}
+20/3→zp11:1/3→zp12:2500/3→zp21:200/3→zp22
+\end{entry}
+
+After entering this line and pressing \key{ENTER}, we will see in
+the history area the value of the last of these parameters as the
+answer to our command. What interests us is that the values were
+stored in the variables. Note that we used the separator \code{:}
+and the \key{STO} key. Once the two-port parameter variables are
+stored, we proceed to order the simulation. Below, the description
+we use:
+
+\begin{entry}
+sq\dc("e1,1,0,1;r1,1,2,2;r2,3,0,20;zp,2,3,0")
+\end{entry}
+
+Note that, since the description of the two-port only requires three
+terms, we fill with a zero to keep the symmetry. We press
+\key{ENTER}. After the status messages, `Done' appears. The problem
+has asked us for the voltage at the load node and the currents
+entering the two-port at both ends. We obtain these values like
+this: the voltage at the load node we obtain with \code{v3}, and it
+is worth 2500/71 volts; the current entering the two-port on the
+left we obtain with \code{izp2}, and it is worth 13/71 amperes; and
+the current entering the two-port on the right we obtain with
+\code{izp3}, and it is worth $-125/71$ amperes. The negative sign of
+this last current tells us that the current is really leaving the
+two-port on the right, not entering.
+
+We have learned that a two-port can be easily simulated in
+Symbulator as one more circuit element. To answer question b), we
+will use a new tool.
+
+\section{The gain tool}
+
+This tool helps us find the current, voltage and power gains, and
+the input impedance of a network. This network may or may not
+contain two-ports. Let us learn to use this tool at the same time we
+answer the second question. The \code{gain} tool is executed like
+this:
+
+\begin{entry}
+sq\gain()
+\end{entry}
+
+It takes no input arguments between the parentheses. However, when
+executing it, a form opens in which we must enter four input values:
+
+\emph{The voltage at the input terminal node.} In the case of our
+problem, this voltage is \code{v2}, because this is the voltage at
+the input node of the two-port, the one toward the source.
+
+\emph{The current entering through the input terminal.} In the case
+of our problem, this current is \code{izp2}, because this is the
+current entering the two-port on the input side, that is, the side
+toward the source.
+
+\emph{The voltage at the output terminal node.} In the case of our
+problem, this voltage is \code{v3}, because this is the voltage at
+the output node of the two-port, the one toward the load.
+
+\emph{The current entering through the output terminal.} In the case
+of our problem, this current is \code{izp3}, because this is the
+current entering the two-port on the output side, that is, the side
+toward the load. Note that saying output current does not mean a
+current that is leaving. The current must be defined as entering the
+two-port, but on the output side.
+
+We press \key{ENTER}, twice if necessary. Next a screen appears,
+which works in a way similar to that of the \code{thevenin} tool, in
+which we must press \key{ENTER} as many times as there are values we
+seek.
+
+We see on the screen that the voltage gain, called $A_v$ or $G_v$
+depending on the textbook, is worth 500/9; the current gain, called
+$A_i$ or $G_i$, is worth $-125/13$; the power gain, called $A_p$ or
+$G_p$, is worth 62500/117; and the input impedance, called $Z_i$ or
+$R_i$, is worth 45/13. Besides showing these values on screen, the
+tool also stores them in variables with the names \code{av},
+\code{ai}, \code{ap}, and \code{zi}, respectively. All these values,
+being stored in memory, can be requested later, even in the form of
+approximate values if desired.
+
+We have learned the use of the \code{gain} tool. Let us now answer
+the next question.
+
+\section{Output impedance}
+
+Question c) requires some theoretical knowledge. Theory teaches us
+that the output impedance of the network, seen by the load, is the
+equivalent impedance of the network, from the terminals where the
+load is connected, when the load has been removed and the
+independent sources have been killed. To kill an independent voltage
+source is to turn it into a short circuit. To kill an independent
+current source is to turn it into an open circuit. We already
+defined the parameters of this two-port when we answered the first
+question, and they are in memory. Therefore, there is no need to
+define them again. Below, the description we use:
+
+\begin{entry}
+sq\thevenin("e1,1,0,0;r1,1,2,2;zp,2,3,0",3,0)
+\end{entry}
+
+Note that the load has been removed from the description, and that
+the source has been killed, that is, its value has been made null.
+This is the same as having turned it into a short circuit. We press
+\key{ENTER}, choose Passive and DC, and press \key{ENTER}. On the
+answer screen, it appears that \code{zth} is 450/13 ohms, which is
+the correct output impedance.
+
+We have learned how to find the output impedance of a network. We
+have also seen that the \code{thevenin} tool works with two-ports
+too. Let us now answer the last question, using a new tool.
+
+\section{The port tool}
+
+This tool gives us the parameters of the equivalent two-port of any
+network with two terminals. Let us learn to use this tool, at the
+same time we answer the fourth question. The \code{port} tool is
+executed like this:
+
+\begin{entry}
+sq\port(description of the network,node1,node2)
+\end{entry}
+
+Three input arguments are given between the parentheses:
+
+\emph{The description of the two-terminal network} whose two-port
+equivalent you want to find. This network must be a circuit composed
+only of passive elements, and it cannot contain independent sources.
+This network may be composed, say, of resistances only. It may also
+be composed of one or more two-ports. Or of a mixture of resistive
+elements and two-ports. Since this network can contain other
+two-ports, the \code{port} tool is a powerful ally for finding the
+equivalent of a given two-port in other, distinct parameters, and
+for reducing a set of several two-ports (in series, in parallel or
+in combination) to a single equivalent two-port.
+
+\emph{The upper node of the input terminal of the network.}
+
+\emph{The upper node of the output terminal of the network.}
+
+It is assumed that the lower node of the two terminals is the
+reference node.
+
+Once we have written the line shown, we press \key{ENTER}. When it
+executes, a form opens in which we must make some selections. The
+three selections are:
+
+\emph{The type of parameter we want to find.} The options are
+\code{z}, \code{y}, \code{h}, \code{g}, \code{a} and \code{b}, whose
+meanings we already listed in section 7.2.
+
+\emph{The name we wish to give the two-port,} without including the
+letter that identifies the type of two-port. For example, if we want
+the two-port to be called \code{zp1}, the name we must enter here is
+only \code{p1}, since the \code{z} we have already chosen above. We
+can use any name, except those that, when combined with the two-port
+letter we have chosen, turn out to be the name of a reserved
+variable. For example, if we choose a two-port of type \code{z} or
+\code{y}, we cannot use a name like \code{c}, because the complete
+name of the two-port would be \code{zc} or \code{yc}, which are both
+reserved variables, as we pointed out in section 1.9.4. There is a
+large number of reserved variables that begin with \code{z} and with
+\code{y}. A complete list can be found in the User's Manual. As a
+general recommendation, use a letter or a number as the name, and
+let that letter not be the letter \code{c}.
+
+\emph{The type of analysis we want.} We can choose between direct
+current analysis DC, alternating current AC and frequency domain
+FD.
+
+Next, a simulation of the network is executed. Then an answer screen
+appears that works in a way similar to the previous ones. We must
+press \key{ENTER} four times to see the four parameters sought,
+presented on the screen.
+
+These parameters will also be stored in the memory of the
+calculator, in variables with the names that correspond to the name
+of the two-port, according to the naming convention we explained in
+section 7.2.
+
+With this knowledge, let us now see how we can answer question d)
+using the \code{port} tool. The question asks us to find the
+equivalents of the two-port in all the other types of parameters.
+Below, the solution to this question.
+
+Let us first find the equivalent in admittance parameters of the
+given two-port. Enter the following command line in the entry line:
+
+\begin{entry}
+sq\port("zp,1,2,0",1,2)
+\end{entry}
+
+This line orders the use of the \code{port} tool to find the
+equivalent of the network described, which is the two-port
+\code{zp}, whose impedance parameters are already known and are
+called \code{zp11}, \code{zp12}, \code{zp21} and \code{zp22}. These
+parameters are already stored in memory, from when we answered the
+first question. If you have any doubt about whether these parameters
+are stored in memory or not, you can use the Var-Link screen to
+verify. If these parameters were deleted, it is necessary to enter
+them again, as shown in the earlier question. The fact is that the
+parameters of a two-port must be stored before executing any
+simulation involving that two-port.
+
+The two-port is connected between nodes 1 and 2, and this is
+indicated in the command line. Although it may seem unnecessary in
+this case, the two end nodes of the network to be reduced must be
+specified, because this network will not always be composed of a
+single element, as we will see later.
+
+So, we press \key{ENTER}. We specify \code{y} as the type of
+two-port desired, \code{p} as the name and DC as the analysis. The
+answers are shown on the screen: the four admittance parameters.
+This is the correct equivalent. Remember that these parameters, in
+addition to appearing on screen, are also stored in variables with
+the corresponding names. Let us now find another equivalent of the
+two-port in another type of parameters.
+
+To find the equivalent in hybrid parameters of the given two-port,
+the procedure is identical. Just for didactic purposes, we will now
+use as the starting two-port the recently found two-port \code{yp}
+whose parameters are already stored in memory, instead of the
+two-port \code{zp} we used in the previous line. Enter the following
+command line:
+
+\begin{entry}
+sq\port("yp,1,2,0",1,2)
+\end{entry}
+
+We press \key{ENTER}. We specify \code{h} as the type of two-port
+desired, \code{p} as the name and DC as the analysis. The answers
+are shown.
+
+To find the equivalent in gain parameters of the given two-port, the
+procedure is the same. We will use as the starting two-port the
+two-port \code{hp}, whose parameters are in memory. Enter the
+following command line:
+
+\begin{entry}
+sq\port("hp,1,2,0",1,2)
+\end{entry}
+
+We press \key{ENTER}. We specify \code{g} as the type of two-port
+desired, \code{p} as the name and DC as the analysis. The answers
+are shown.
+
+Let us find the equivalent in transmission parameters of the
+two-port, using as the starting two-port the two-port \code{gp}.
+Enter the following command line:
+
+\begin{entry}
+sq\port("gp,1,2,0",1,2)
+\end{entry}
+
+We press \key{ENTER}. We specify \code{a} as the type of two-port
+desired, \code{p} as the name and DC as the analysis. The answers
+are shown.
+
+Let us find the equivalent in inverse transmission parameters of the
+two-port, using as the starting two-port the two-port \code{ap}.
+Here we find a variant in the procedure. When we solved question b),
+a moment ago, the \code{gain} tool generated a variable called
+\code{ap}, which contained the power gain. This variable is still in
+memory. If we forget this, and try to execute the tool using
+\code{ap} as the name of the two-port, we will receive an error from
+Symbulator telling us that the name we have assigned to element \#1
+of our circuit description is not appropriate, and that we should
+please correct this description. The name is inappropriate because
+it is the name of a variable in use.
+
+Therefore, we must delete the variable before executing the tool. We
+can put both commands in a single line, using the separator. For
+example, enter the following command line:
+
+\begin{entry}
+DelVar ap:sq\port("ap,1,2,0",1,2)
+\end{entry}
+
+Since the variable \code{ap} has been deleted, now we can use this
+variable as the name of the two-port. We press \key{ENTER}. We
+specify \code{b} as the type of two-port desired, \code{p} as the
+name and DC as the analysis. The answers are shown.
+
+So, we have found the five equivalents of the two-port that was
+given to us.
+
+\section{Verification}
+
+But how could we verify that these two-ports are the correct
+equivalents of our original two-port? Simple. Let us find the
+equivalent in impedance parameters, that is, in the original type,
+using as the starting two-port the two-port \code{bp}, which was the
+last equivalent found. Any error generated along the way will impact
+our final answer. So, if we now obtain the correct equivalent, it
+will mean that all the intermediate equivalents were correct. Enter
+the following command line:
+
+\begin{entry}
+sq\port("bp,1,2,0",1,2)
+\end{entry}
+
+We press \key{ENTER}. We specify \code{z} as the type of two-port
+desired, \code{p} as the name and DC as the analysis. The answers
+are shown, and we can see that these impedance parameters coincide
+perfectly with those the problem gave us as initial data. This means
+that all the equivalents we have found are correct. Let us see more
+solved problems, as practice to master the use of two-ports in
+Symbulator.
+
+\problem{040}
+
+\emph{Problem: The parameters of the two-port shown are
+$z_{11} = 20$, $z_{12} = 3$, $z_{21} = 100$, $z_{22} = 5$. Find: a)
+the input impedance and the current, voltage and power gains of the
+two-port, b) the output impedance of the network, seen by the
+load.}
+
+Solution: Below, the description we use for the first question:
+
+\begin{entry}
+20.→zp11:3.→zp12:100.→zp21:5.→zp22:
+sq\dc("j1,0,1,is;r1,1,0,50.;zp,1,2,0;r2,2,0,100."):sq\gain()
+\end{entry}
+
+In this line are the definition of the parameters, the command to
+run the simulation and the command to run the \code{gain} tool. We
+press \key{ENTER}. After the status messages, the tool's form
+appears, in which we enter \code{v1}, \code{izp1}, \code{v2},
+\code{izp2}. We press \key{ENTER}. We receive on the screen, and in
+memory, the answers: \code{ai}~$= -.952$, \code{av}~$= 5.56$,
+\code{ap}~$= 5.29$, \code{zi}~$= 17.1$.
+
+Below, the description for the second question:
+
+\begin{entry}
+sq\thevenin("r1,1,0,50.;zp,1,2,0",2,0)
+\end{entry}
+
+Note that the current source was removed. This way of killing it is
+equivalent to having entered it with a null value, and has the
+advantage of saving the simulator trouble. We press \key{ENTER}. We
+select Passive and DC, and press \key{ENTER}. We obtain:
+\code{zth}~$= .714$. These are the correct answers.
+
+\problem{041}
+
+\emph{Problem: Find the equivalent of the following network, in
+admittance parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("r1,1,2,10.;r2,1,0,5.;r3,2,0,20.",1,2)
+\end{entry}
+
+We press \key{ENTER}. We select \code{y}, some name and DC, and
+press \key{ENTER}. We obtain the following admittance parameters:
+.3, $-.1$, $-.1$, .15.
+
+\problem{042}
+
+\emph{Problem: Find the equivalent of the following network, in
+admittance parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("r1,1,2,10.;r2,2,3,5;r3,1,3,20;r4,2,0,40",1,3)
+\end{entry}
+
+We press \key{ENTER}. We select \code{y}, some name and DC, and
+press \key{ENTER}. We obtain the following admittance parameters:
+.1192, $-.1115$, $-.1115$, .1269.
+
+\problem{043}
+
+\emph{Problem: Find the equivalent of the following network, in
+admittance parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("s1,x,1,0;j1,1,0,.2*v2;r1,1,0,10.;j2,1,0,.5*is1;
+        r2,2,1,5.",x,2)
+\end{entry}
+
+Note that we introduced a short circuit with the purpose of using
+its current as the control current for source \code{j2}. We press
+\key{ENTER}. We select \code{y}, some name and DC, and press
+\key{ENTER}. We obtain the following admittance parameters: .6, 0.,
+$-.2$, .2.
+
+\problem{044}
+
+\emph{Problem: The following circuit is the linear equivalent of a
+transistor in the common-emitter configuration with resistive
+feedback between the collector and the base. Find the equivalent, in
+admittance parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("r1,1,0,5E2;r2,1,2,2E3;j1,2,0,.0395*v1;r3,2,0,1E4",1,2)
+\end{entry}
+
+We press \key{ENTER}. We select \code{y}, some name and DC, and
+press \key{ENTER}. We obtain the following admittance parameters:
+.0025, $-5$.E$-4$, .039, 6.E$-4$.
+
+\problem{045}
+
+\emph{Problem: Find the equivalent of the following network, in
+impedance parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("r1,1,3,20.;r2,3,2,50.;r3,3,0,25.",1,2)
+\end{entry}
+
+We press \key{ENTER}. We select \code{z}, some name and DC, and
+press \key{ENTER}. We obtain the following impedance parameters:
+45., 25., 25., 75.
+
+\problem{046}
+
+\emph{Problem: Find the equivalent of the following network, in
+impedance parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("r1,1,0,40.;r2,1,3,20.;r3,3,0,25.;r4,3,2,50.",1,2)
+\end{entry}
+
+We press \key{ENTER}. We select \code{z}, some name and DC, and
+press \key{ENTER}. We obtain the following impedance parameters:
+21.2, 11.8, 11.8, 67.6.
+
+\problem{047}
+
+\emph{Problem: Find the equivalent of the following network, in
+impedance parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("r1,1,3,20.;r2,3,2,50.;r3,3,4,25.;e1,4,0,.5*v2",1,2)
+\end{entry}
+
+We press \key{ENTER}. We select \code{z}, some name and DC, and
+press \key{ENTER}. We obtain the following impedance parameters:
+70., 100., 50., 150.
+
+\problem{048}
+
+\emph{Problem: This problem has no figure. Find the input impedance
+and the current, voltage and power gains of a two-port, with
+impedance parameters $z_{11} = 4$, $z_{12} = 1.5$, $z_{21} = 10$ and
+$z_{22} = 3$, if it has an input source $V_s$ at its input in series
+with a 5~$\Omega$ resistance, while the load is 2~$\Omega$.}
+
+Solution: Below, the command we use:
+
+\begin{entry}
+4→zp11:1.5→zp12:10→zp21:3→zp22:
+sq\dc("e1,1,0,vs;r1,1,2,5;r2,3,0,2;zp,2,3,0"):sq\gain()
+\end{entry}
+
+In this line are the definition of the parameters, the command to
+run the simulation and the command to run the \code{gain} tool. We
+press \key{ENTER}. After the status messages, the tool's form
+appears, in which we enter \code{v2}, \code{izp2}, \code{v3},
+\code{izp3}. We press \key{ENTER}. We receive on the screen and in
+memory the answers: \code{ai}~$= -2$., \code{av}~$= 4$.,
+\code{ap}~$= 8$., \code{zi}~$= 1$.
+
+\problem{049}
+
+\emph{Problem: Find the equivalent of the following network, in
+hybrid parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("r1,1,3,1.;r2,3,2,6.;r3,3,0,4.",1,2)
+\end{entry}
+
+We press \key{ENTER}. We select \code{h}, some name and DC, and
+press \key{ENTER}. We obtain the following hybrid parameters: 3.4,
+.4, $-.4$, .1.
+
+\problem{050}
+
+\emph{Problem: The following circuit is the equivalent of a
+high-frequency transistor. Find the equivalent, in impedance
+parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("r1,1,0,1E5;ca,1,0,5E-12;cb,1,2,1E-12;
+        j1,2,0,.01*v1;r2,2,0,1E4",1,2)
+\end{entry}
+
+We press \key{ENTER}. We select \code{z}, some name and AC, and
+press \key{ENTER}. As the frequency, we enter \code{1E8}, and press
+\key{ENTER}. We obtain the following impedance parameters:
+$89.7 - 98.4i$, $94.1 - 4.34i$, $528. + 9401.i$, $564. - 35.5i$.
+Since these values are stored in memory, we can use the
+\code{absang} tool to see them in polar form: 133.1∠$-$47.6°,
+94.2∠$-$2.64°, 9416.∠86.8°, 565.∠$-$3.60°.
+
+\problem{051}
+
+\emph{Problem: Find the equivalent of the following network, in
+impedance parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("r1,1,3,8.;e1,3,0,.1*v2;j1,2,0,.05*v1;r2,2,0,12.",1,2)
+\end{entry}
+
+We press \key{ENTER}. We select \code{z}, some name and DC, and
+press \key{ENTER}. We obtain the following impedance parameters:
+7.55, 1.13, $-4.53$, 11.3.
+
+\problem{052}
+
+\emph{Problem: The following circuit is the equivalent of a
+high-frequency transistor. Find the equivalent, in hybrid
+parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("r1,1,0,2E3;ca,1,0,5E-12;cb,1,2,2.5E-12;
+        j2,2,0,.005*v1",1,2)
+\end{entry}
+
+We press \key{ENTER}. We select \code{h}, some name and AC, and
+press \key{ENTER}. As the frequency, we enter \code{1E8}, and press
+\key{ENTER}. We obtain the following hybrid parameters:
+$615. - 923.i$, $.231 + .154i$, $2.85 - 4.77i$,
+$.00119 + 9.62$E$-4i$. Since these values are stored in memory, we
+can use the \code{absang} tool to see them in polar form:
+1109∠$-$56.3°, .277∠33.7°, 5.55∠$-$59.2°, .00153∠38.9°.
+
+\problem{053}
+
+\emph{Problem: Find a) the equivalent of the following network, in
+hybrid parameters, and b) the output impedance of the network, seen
+from the perspective of the load, if the input contains $V_s$ in
+series with $R_s = 200~\Omega$.}
+
+Solution:
+
+Below, the description we use for the first part:
+
+\begin{entry}
+sq\port("r1,1,0,1E3;j1,0,1,1E-5*v2;e1,0,3,100*v1;
+        r2,3,2,1E4",1,2)
+\end{entry}
+
+We press \key{ENTER}. We select \code{h}, some name and DC, and
+press \key{ENTER}. We obtain the following hybrid parameters:
+1000., .01, 10., 2.E$-4$.
+
+Below, the description we use for the second part:
+
+\begin{entry}
+sq\thevenin("rs,0,1,200;r1,1,0,1E3;j1,0,1,1E-5*v2;
+            e1,0,3,100*v1;r2,3,2,1E4",2,0)
+\end{entry}
+
+Note that we have added only the resistance \code{rs}. The source
+$V_s$ was not added because, to find the output impedance, the
+voltage source must be dead, and a dead voltage source is simply a
+short circuit. It is not necessary to place this short circuit in
+series with the resistance, because placing only the resistance has
+the same effect. We press \key{ENTER}. We select Passive and DC, and
+press \key{ENTER}. We see that \code{zth} is 8571.
+
+\problem{054}
+
+\emph{Problem: Find the equivalent of the following network, in
+transmission parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("r1,1,3,2.;r2,3,2,4.;r3,3,0,10.",1,2)
+\end{entry}
+
+We press \key{ENTER}. We select \code{a}, some name and DC, and
+press \key{ENTER}. We obtain the following transmission parameters:
+1.2, 6.8, .1, 1.4.
+
+\problem{055}
+
+\emph{Problem: Find the equivalent of the following network, in
+transmission parameters.}
+
+Solution: Note that the network, in this case, is composed of two
+groups of resistances in a T arrangement. Below, the description we
+use:
+
+\begin{entry}
+sq\port("r1,1,2,2.;r2,2,0,10.;r3,2,3,4.;r4,3,4,4.;
+        r5,4,0,20.;r6,4,5,8.",1,5)
+\end{entry}
+
+We press \key{ENTER}. We select \code{a}, some name and DC, and
+press \key{ENTER}. We obtain the following transmission parameters:
+1.78, 25.84, .19, 3.32. This is an example of how, with the
+\code{port} tool, a network that would usually have taken two
+two-ports can be reduced to a single two-port.
+
+\problem{056}
+
+\emph{Problem: Find the equivalent of the following network, in
+transmission parameters.}
+
+Solution: Below, the description we use:
+
+\begin{entry}
+sq\port("r1,1,3,5.;j1,3,0,.1*v2;e1,2,3,.3*v1;r2,2,0,4.",1,2)
+\end{entry}
+
+We press \key{ENTER}. We select \code{a}, some name and DC, and
+press \key{ENTER}. We obtain the following transmission parameters:
+2.12, 3.85, .35, 1.
