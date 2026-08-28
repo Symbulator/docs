@@ -1,0 +1,136 @@
+Chapter
+3
+Direct current symbolic simulation
+3.1 Definition of numerical simulation
+In the previous chapter we did several simulations, in which all of the circuit element values were numerical. In addition, the simulation results we were also numerical. This type of simulation is known as numerical simulation, and it is possible with any conventional numeric simulator, such as Electronic Workbench, Pspice PSpice and others. In these simulators it is possible to describe circuits with dependent sources and find results for all nodes and elements, but it is easier in Symbulator.
+One reason that this task is easier in Symbulator, as compared to the other simulators, is that Symbulator is a symbolic simulator, not a numeric simulator. For example, dependent sources are treated symbolically during the simulation, even though they may have numerical values in the end. Another reason that that Symbulator is easier to use is that it was designed and developed by a student, with the clear intent to provide other students with a symbolic simulator which provides symbolic results.
+
+3.2 Definition of symbolic simulation
+A symbolic simulation is one in which at least one of the circuit element values is not a number, be it real or complex, but instead a symbolic value. This symbolic value may be an unknown variable, an algebraic expression, a function of time or frequency, or some other type of non-numerical expression.
+We learned that the type of element entry will determine the type of the results. The nature of the circuit element values is reflected in the simulation answers. Exact values will produce exact answers. Numerical values will produce numerical answers. So, symbolic values will result in symbolic answers. We can ensure obtain a symbolic simulation result by using at least one symbolic circuit element value.
+The tools of electrical engineering analysis have been developed over the centuries, from the frogs of Volta to quantum transistors. Symbolic simulation, being a very recent invention, is among the newest of these tools.
+In 1998, I encountered my first symbolic simulator, and, in fact, the only one I know aside from Symbulator. It is called Syrup, and is designed to run within the Maple V program on personal computers. Although I never mastered this simulator, I realized from using it that symbolic simulation is a very powerful tool for learning circuit design. At that time, I was taking the course Theory of Circuits II at the Regional Center of thePanama Technological University of at Azuero. I felt that it would be very useful to have a symbolic simulator available in the courses. I established a good friendship with Joe Riel, the author of Syrup, and he explained the program's underlying concept to me, which is in truth a very simple concept. Unlike numerical simulators, even some that I had programmed, Syrup does not use matrices and modified nodal analysis. Instead, it generates the node equations, solves them, and displays the solution symbolically. With this idea in mind, on March 30, 1999, I undertook the programming of a similar simulator on my TI-89 calculator, which I initially called SCS (for Symbolic Circuit Simulator), and later called Symbulator. Syrup was the initial inspiration, but it was not a model for me to follow, because my idea of the perfect simulator for courses differed from Syrup in some respects. During the two years that I perfected Symbulator, I did not have access to any other symbolic simulator, which forced me to invent and develop my own symbolic simulation techniques, which I know present in this work and which have rendered excellent results to thousands of Symbulator users, worldwide. I present this explanation because I consider the work presented in this thesis book to be truly a pioneering contribution to a virgin field of electrical engineering. It is perhaps for that reason that it deserved first place in the 2000 IEEE Student Paper Award Contest for Latin America (Region 9) in the year 2000.
+
+3.3 Symbolic simulation to obtain symbolic answers
+A simulation is considered symbolic if the circuit description contains as least one element with a symbolic value. There are two basic types of symbolic simulation: the first results in a symbolic answer, and the second results in a numerical answer. The first type of simulation, whose objective is a symbolic answer, is very useful in design problems, and for getting expressions which symbolically describe some circuit characteristic in terms of element values, such as consumed power. It could also be used for academic purposes, to demonstrate the laws of circuit analysis. Ohm's law, for example, can be demonstrated by a Symbulator simulation. We shall try some problems in order to learn to simulate symbolically.
+Problem N° 012
+Problem: Demonstrate Ohm's law and the power dissipation forumulaformula, with the following circuit and symbolic simulation.
+ 
+Figure 15. Circuit for Problem N° 012.
+Solution:
+This is simplest possible circuit. The first step is to name the circuit nodes and elements.The second step is to run the simulation with the circuit description
+sq\dc("r,1,0,r;j,0,1,i")
+Note the way in which the elements have been named: since there is only one element of each type, we have used only one letter, which is the first letter of the name of the element. We start the simulation by pressing [ENTER], then the status messages are displayed, then "doneDone" is shown in the display. My calculator ran this simulation in 6 seconds. Since this is the simplest possible circuit, this is the shortest Symbulator simulation time. The results are saved in the current folder.
+We can demonstrate Ohm's law by displaying the value of vr, which is, as expected, i*r volts. To demonstrate the power formula, we display the value of pr, which is (i^2)*r, which is correct.
+We could also have verified Ohm's law by using a voltage source instead of a current source, with this circuit description:
+sq\dc("r,1,0,r;e,1,0,v")
+My calculator took 7 seconds to simulate this circuit. Note that a voltage source takes more time than a current source. Although the difference in this case is minor, only 1 second, the difference can be considerable in more complicated circuits.
+We demonstrate Ohms' law by displaying goir, which is v/r volts, which is another way to express the this law. We demonstrate the power formula by displaying pr, which is (v^2)/r watts and equivalent to the power expressed in terms of the current.
+This exercise teaches us that symbolic simulation is an easy way to demonstrate and learn the basic laws of circuit analysis.
+
+3.4 Symbolic simulation to obtain numerical answers
+In some symbolic simulations, our objective is a numerical answer. In this case, we use the Solve command on the simulation results. In this case, we use the solve command, the solves tool and the (Expert) Mode.
+Usually, to obtain a numerical answer, we need to know the numerical value of an answer, such as a voltage, current or power, for each symbolic value in the input circuit. we need a symbolic expression for a circuit element parameter, such as voltage, current or power.
+3.5 The solve Command 
+Let us see a simple example of the second type of symbolic simulation, which obtains a numerical answer, using the solve command.
+Problem N° 013
+Problem. Determine the numerical values of vx and ix in the following circuit.
+ 
+Figure 16. Circuit for Problem N° 013.
+Solution:
+When we compare this circuit with previous examples, we see two obvious differences. First, some element values are numeric and some are symbolic. Second, we are given one of the branch currents: 12A through the 5 ohm resistor. 
+We first name the nodes and elements. We define the current directions through the 5 and 6 ohm resistors as shown in the drawing. For the symbolic values, we use the same names as shown in the drawing. We must make sure that these variables do not already exist in the current folder, that is, variables names ra and vx must not exist, or the calculator will replace the symbolic name with its stored value, and the simulation will be incorrect. We use the DelVar command of the calculator to delete the variables, like this:
+DelVar ra,vx
+With this command, we tell the calculator: "delete Delete the variables ra and vx in the current folder". There is no effect if the variables do not actually exist. We could have deleted the variables in the VarLink window, but this the method shown is faster.
+Once the variables are deleted, we enter the circuit description and run the simulation.
+sq\dc("e1,1,0,18;ra,1,0,ra;r1,1,0,6;r2,2,1,5;ex,2,0,vx")
+We start the simulation by pressing [ENTER], then the status messages are shown, then "doneDone" is shown in the display. My calcultor took 16 seconds to simulate this circuit. The answers are stored in the current folder.
+We find ix by displaying the value of ir1, which is 3A. So far, there is nothing new about this problem.
+The difference appears when we find vx. First, it seems that we could find vx by displaying the value of v2, but v2 is simple vx volts. Obviously, this answer does not tell us anything new, because we require a numerical answer. Then, we remember that the circuit drawing specifies that the current through the 5 ohm resistor is 12A. What is this current, according to the Symbulator results? The recalled value of ir2 is (vx-18)/5 amperes. This symbolic expression, the result of the symbolic simulation, will help us find the value of vs. How? Let us see.
+We know that the current is 12A, and we have its expression as a function of vx. We can combine these expressions in an equation. When we solve the equation for the unknown vx, we will find the numerical value of the voltage source. We could solve this equation manually, but we will take advantage of the of the calculator technology, and use the calcultor's solve command. A detailed explanation of this command can be found in the users manual for the calculator. This is a very powerful command, which is used extensively by Symbulator in its internal calculations. Now, we will use solve manually, by entering this in the entry line:
+solve(ir2=12,vx)
+With this command, we tell the calculator: "Provided that ir2= is 12 for unknown vx, solve the equation for unknown vx and tell me the answer". In other words, what is the value of vx if ir2 = 12? We press [ENTER], and almost instantly we obtain the result: vx = 78 V. That easy! The unknown we solved is the answer we wanted.
+
+Having finished this problem, consider these three observations.
+The solve command told us that vx = 78, but it does not store the value 78 in the variable vx. The solve command solves equations for unknowns, and shows the results in the display, but it does not store these results in the unknown variables. To verify this, recall the value of vx, and vx is shown. This means that no value is stored in variable vx.
+In this problem, the symbolic unknown in the circuit was also one of the result the problem required. In other problems, this may not be the case. We will see an example of this situation next.
+The value of ra is indefinite. There is no mathematical way we can obtain a numerical value for ra. The reason is simple: to obtain a numerical value for a symbolic element, we must have the numerical value of an expression which involves the symbolic value, such as current, voltage or power. For example, we could find the value of vx because we knew the numeric value of the current through vx. But we cannot find the value of ra, because we need the value of an expression related to it: we do not know the numeric value of any current, voltage or power as a function of ra. 
+I recommend that you review this problem until you feel you are sure youfully understand the concepts it illustrates. Only then should you continue.
+
+3.6 solves Tool
+The solves tool is part of the Symbulator. It is programmeed using technology developed for the Symbulator, and it has two purposes: 1) to solve equations using the built-in solve command, and 2) to store all the results in the appropriate variables. This tool is executed with no input arguments between the parentheses:
+sq\solves()
+When we press [ENTER], a dialog box is shown with two fields and two options. The first field is for entering the equation or equations we want to solve. The second field is for entering the unknowns for which we want to solve. The two following options are for choosing if the solutions are real or complex, and if we want to use conditional equations, that is, known values. Press [ESC]N to return to the home screen.
+Next we will solve a problem, similar to the previous one, which shows the basic use of the solves tool.
+Problem N° 014
+Problem. Determine the numerical values of vx and ix in the following circuit.
+
+ 
+Figure 17. Circuit for Problem N° 014.
+Solution:
+Note that in this circuit, the symbolic unknown is rx, while the required answers are ix and vx. These will likely be functions of the unknown. For that reason, the strategy we must follow is to simulate the circuit, solve for the unknown value of the element, then obtain numerical values for the unknown answerss.
+First we name the nodes and elements. We define the currents through the 1 and 2 ohm resistors as shown in the drawing. For the value of the symbolic element, we use the same variable name as in the drawing. To ensure that a variable of the same name does not already exist, we use:
+DelVar rx
+For the reference node, we use the lower left corner. The circuit description and simulation command is:
+sq\dc("j1,0,1,6;r1,1,2,1;r2,1,3,5;j2,3,2,10;r3,3,0,2;rx,2,4,rx;r4,4,0,3")
+We start the simulation with [ENTER]. "doneDone" is displayed after the status messages are shown. My calculator took 30 seconds to run this simulation. By this time, you have noticed that the simulation time is proportional to the number of circuit nodes. The reason for this is that Symbulator "thinks nodally", and will create an equation for each circuit node except the reference. So, this circuit with four different nodes takes approximately four times as long as a circuit with one node. Obviously, there are other factors that affect the simualtion time, such as the type of analysis, the presence of voltage sources, and special elements, and symbolic values.
+Returning the to problem, the simulation results are stored in the current folder. We find ix by asking for the value of ir1. We do not get a numerical value, but instead a function of rx. As we expected, the numerical answers we need are now functions of the unknown. In order to find numerical values for ix and vx, we must first find the numerical value of rx. In order to find this value, we use the fact that we know that the current through the 2 ohm resistor r3 is 4 A.
+The solve command is not appropriate for this task. While we have seen that solve is extremely fast and effective in solving equations, and could no doubt solve this simple equation in a thousandth of a second, solve would only display the value of rx in the history screen, and not store the numerical value. For that reason, solves is a more appropriate tool, instead of solve.
+First To illustrate this point, first we will the do the procedure with the solve command. The Ffirst step is to, solve the equation:
+solve(ir3=4,rx)
+We obtain the answer rx = 40. Since we will evaluate othe expressions which are functions of this unknown, we must manually store this answer in the unknown variable, using the calculator Define command, like this:
+Define rx = 40
+Or, we could use the STO command, which is equivalent to Define:
+40 [STO] rx 
+Once the value of rx is stored, we can ask the calculator to find the numerical values for ix and vx. For ir1 we obtain -8A, for vrx we obtain 80V.
+We get the answers with this method, but it takes four steps: 1) simulate the circuit, 2) solve for the unknown, 3) store the unknown, and 4) evaluate the functions of the unknown.
+With the solves tool, we find the answers in three steps: 1) simulate the circuit, 2) solve and store the unknown in a single step, and 3) evaluate the functions of the unknown to find the answers. To demonstrate this, we first delete the variable rx:
+DelVar rx
+The simulation results are still stored in memory. Therefore, we will not simulate the circuit again. Execute the solves tool:
+sq\solves()
+
+The dialog box is shown. In the first field, labelled "Equations", will enter the equation:
+ir3=4
+In the second field labelled " Unknowns ", we will enter the unknown:
+rx
+Since the remaining options are real solutions and no conditionals, we leave them unchanged. We press [ENTER] twice if necessary. A text message is shown to indicate that the tool is solving the equations and then storing the answers. Next, the answer is shown: rx = 40. That is all. We press [ENTER] to return to the home screen. The value 40 is stored in the variable rx. To If you want to verify this, recall the value of rx, and 40 is displayed.
+The third step is to simply evaluate the required problem answers, which are the numerical values of ix and vx. For ir1 we obtain -8A, and for vrx we obtain 80V.
+There is an even faster way to find these results using the (Expert) method. Since this method requires much more knowledge and skill, we will dedicate the following chapter to that method. Next we will see another problem, similar to the last, to strengthen the concepts we have learned.
+
+Problem N° 015
+Problem. Determine the numerical values of vx and ix in the following circuit.
+ 
+Figure 18. Circuit for Problem N° 015.
+Solution:
+Note that the unknown symbolic current ix in this circuit is also one of the required answers. The other required answer is vx, which is a function of ix. We will simulate the circuit, solve for the unknowns, and then get the answers as numerical values.
+We name the nodes and elements, then define the direction of the current through the 8 ohm resistor as shown in the drawing. We also delete variable ix:
+DelVar ix
+Using the bottom node as the reference node, we enter the circuit description and run the simulation:
+sq\dc("e1,1,0,60;r1,1,2,8;r2,2,0,10;r3,2,3,4;r4,3,0,2;jx,0,3,ix")
+We start the simulation by pressing [ENTER]. After the status messages are shown, the display shows "dDone". My calculator took 19 seconds to run the simulation. All the symbolic results are in the current folder. Since we know that the answers are symbolic, we must solve for the unknown ix. Since one of the answers is a function of ix, the best method is to use the solves() tool:
+sq\solves()
+The input form is shown. If we have not deleted the variables in the current folder after the last time we used solves(), some previous results are shown in the input form. In the "Equations" field we enter the new equation, which replaces any previous equation:
+ir1=5
+In the second field, "Unknowns", we enter the unknown:
+ix
+We leave the remaining options unchanged, since they are as we want them. We press [ENTER], twice, if necessary. The answer ix = 1 is shown. We press [ENTER] to return to the home screen, then we evaluate the remaining variableunknown, and: for v3 we get 8 volts. Let us see yet another example of symbolic simulation with numerical results.
+Problem N° 016
+Problem. Find the value of k such that voltage vy is zero.
+ 
+Figure 19. Circuit for Problem N° 016.
+Solution:
+We label the nodes and elements. We label the center nodes x and y, for obvious reasons. Delete variable k:
+DelVar k
+Using the bottom node as the reference, we enter the circuit description and run the simulation:
+sq\dc("e1,1,0,6;r1,1,x,1;r2,x,0,4;r3,x,y,2;j1,0,y,2;r4,y,2,3;e2,2,0,k*vx")
+We start the simulation by pressing [ENTER]. After the status messages are shown, "doneDone" is shown. My calculator took 36 seconds to run the simulation. All results are in the current folder. Since the only unknown is also the required answer, we can use the built-in solve() function command.
+solve(vy=0,k)
+We obtain the answer k = -13/4, which is correct. But how we can be sure of this, for example, in the middle of a semester examinationfinal test?
+3.7 Verifying a symbolic simulation with a numerical answer
+There is an easy way to verify that the numerical answers to a symbolic simulation are correct. All we need to do is get the circuit description from the history area, instead of writing it again, and replace all the symbolic values with the correct numeric values. To get the description from the history area, use the same method described to correct errors, shown at the end of the previous chapter.
+After executing the simulation with numeric values, we evalute the previously known results, such as the voltages and currents. If we get the same results, then we know that the symbolic simulation results are correct.
+As an example, we can verify the value for k in the previous problem with this numerical simulation:
+sq\dc("e1,1,0,6;r1,1,x,1;r2,x,0,4;r3,x,y,2;j1,0,y,2;r4,y,2,3;e2,2,0,-13/4*vx")
+Note Notice that the only the value of source e2 has changed, which now has a numeric value instead of the symbolic value k. Recall that we were asked to find k such that vy is zero. Therefore, if the value found for k, -13/4, is correct, then the voltage at node y should be zero. Ask for vy and you’ll find it’s 0 V. Which it is, and tThe answer has been verified.
+To be able to verify answers is of special importance for a student during an important examinationtest. Many users recognize that Symbulator is an excellent tool to verify answers during examinations. This is probably one of its more significant strengths.
+Now we will learn to simulate like experts with Symbulator.

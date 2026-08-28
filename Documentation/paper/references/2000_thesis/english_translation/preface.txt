@@ -1,0 +1,13 @@
+Preface
+
+The purpose of this book is to teach you the art of symbolic circuit simulation. In particular, I will demonstrate the knowledge, techniques and strategies that you need to take maximum advantage of the Symbulator. Symbulator is a powerful tool for learning circuit theory.
+
+I assume that the reader is already familiar with the basic concepts of circuit theory, such as the laws of Ohm, Cavendish, and Kirchoff. You should also understand the Thevenin-Helmholtz and Norton-Mayer theories and Bode plots. Without Symbulator, you should be able to peform direct-current and alternating-current analyses, frequency and transient responses and Laplace transforms.
+
+I also assume that you have a TI-89 or equivalent calculator and the manual for that calculator. You need not be an expert in using the calculator, as detailed examples are provided.
+
+This book should be used with your calculator at hand. I assume that your calculator meets the Symbulator requirements: you must have AMS 2.0x or superior installed, as well as DiffEq version 2.06 or superior.
+
+You will get the best results if you start with the first chapter, read carefully and try all of the examples.
+
+If you have any questions or comments, you can email me at symbulator@perez-franco.com

@@ -1059,7 +1059,7 @@ def build_web(book: Book, versions: list[int]):
             f"build.py: {monograph} is missing. Build it with xelatex in "
             "Documentation/paper/ (twice, for the TOC), or the site would "
             "ship a dead link.")
-    shutil.copy2(monograph, os.path.join(outroot, "symbulator-monograph.pdf"))
+    shutil.copy2(monograph, os.path.join(outroot, "monograph.pdf"))
     if os.path.isdir(ASSETS):
         shutil.copytree(ASSETS, os.path.join(outroot, "assets"),
                         dirs_exist_ok=True)

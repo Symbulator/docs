@@ -1,7 +1,7 @@
 % !TEX program = xelatex
 %
 % The Internal Logic of Symbulator -- a monograph
-% Roberto Perez-Franco and Claude (Fable 5)
+% Roberto Perez-Franco, via Claude (Fable 5)
 %
 % Build:  xelatex symbulator_monograph.tex   (run twice for TOC/refs)
 %
@@ -64,7 +64,7 @@ by Staged Solution of Unknowns\par}
 \vspace{2.5cm}
 {\large Roberto Perez-Franco\par}
 \vspace{0.2cm}
-{\large Claude (Fable 5)\par}
+{\large \emph{via} Claude (Fable 5)\par}
 \vspace{3cm}
 {\itshape The purpose of circuit analysis is insight,\\
 not mathematics.\par}
@@ -300,10 +300,16 @@ first and be required to show them; the simulator's place is as a
 learning and \emph{verification} tool---``especially because circuit
 theory textbooks do not include answers to all the problems they
 pose, and because some of the answers they do print are
-wrong''~\cite[Recs.]{thesis2000}. The thesis was later translated
-to English by two of Symbulator's own users, Doug Burkett and Tim
-Hutcheson, under the title \emph{The Symbulator
-Book}~\cite[Acks.]{thesis2000}.
+wrong''~\cite[Recs.]{thesis2000}. Two of Symbulator's own users,
+Doug Burkett and Tim Hutcheson, undertook an English translation of
+the thesis under the title \emph{The Symbulator
+Book}~\cite[Acks.]{thesis2000}; the effort stopped after the
+preface and the first four chapters, and what survives---working
+notes between the translators still visible in the
+margins---is preserved in the references archive beside the Spanish
+original. Its preface recasts the thesis's opening promise in the
+second person: ``The purpose of this book is to teach you the art
+of symbolic circuit simulation.''
 
 \section{The long pause, and version 6 (2013)}
 
@@ -1922,7 +1928,7 @@ the expression---set $g_1 = g_2$ and the output nulls; let
 $g_3 \to g_4$ and the gain diverges; trim any one conductance and the
 sensitivity is a one-line partial derivative. A numeric simulation of
 the same circuit would have produced one number per run and none of
-this shape. Symbolic answers on op-amp networks are, in the authors'
+this shape. Symbolic answers on op-amp networks are, in the author's
 experience, the single most persuasive demonstration of what
 Symbulator is \emph{for}.
 
@@ -2126,7 +2132,7 @@ three grades of 100/100, and the tribunal's citation.}
 \section*{Acknowledgments}
 \addcontentsline{toc}{chapter}{Acknowledgments}
 
-Symbulator 9 is built on Python and SymPy, and the authors thank their
+Symbulator 9 is built on Python and SymPy, and the author thanks their
 creators and maintainers. Versions 7 and 8's Laplace transforms are
 due to Lars Frederiksen, adapted for the TI-Nspire by Philippe Fortin.
 Over the decades, many users improved Symbulator through suggestions
@@ -2153,8 +2159,10 @@ Panam\'a, written 2000--2001, defended 9~July 2001 (graded 100/100;
 jury record in Appendix~\ref{app:documents}). Twelve chapters and
 four appendices; 89 worked problems with provenance. English
 translation by D.~Burkett and T.~Hutcheson as \emph{The Symbulator
-Book}. Preserved in this monograph's \code{references/} archive
-(\code{2000\_thesis/}).
+Book}, left unfinished at the preface, notice, and chapters~1--4.
+Both the Spanish original and the surviving translation are
+preserved in this monograph's \code{references/} archive
+(\code{2000\_thesis/}, \code{2000\_thesis/english\_translation/}).
 
 \bibitem{website2001}
 R.~Perez-Franco, \emph{Symbulator: Symbolic Circuit Simulator ---
