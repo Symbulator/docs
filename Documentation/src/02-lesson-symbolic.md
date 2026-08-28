@@ -2,7 +2,7 @@
 id: lesson-symbolic
 kind: lesson
 title: Symbolic circuits and expert mode
-updated: 2023-07-08
+updated: 2026-08-28
 summary: >
   Learn how to solve different types of *symbolic* circuits in Symbulator. Use
   the solve command on Symbulator answers. And explore **ex**, the powerful
@@ -644,5 +644,68 @@ that:}}{{v9|The **power consumed** line of each resistor's block gives:}}
 Since all are smaller than 2W, it is possible to use 2W resistors in the
 design.
 
+:::
+
+::: only 9
+::: problem The Showing-off Problem (Expert)
+
+In 2014, I invented a problem to showcase how easy it is to describe
+dependent sources in Symbulator.
+
+Question: Find positive values for Vs and Is that will result in 80W
+delivered by the VCCS and 0W dissipated in the CCVS.
+
+::: figure assets/practice/the-showing-off-problem-expert-4.png
+
+:::
+
+Use this circuit description and equations:
+
+```field 9 Circuit Description
+es,e,0,vs
+js,0,d,is
+r1,e,m,10
+r2,a,e,20
+r3,m,0,30
+r4,b,m,40
+r5,n,m,50
+r6,c,d,60
+r7,n,d,70
+jd1,a,b,0.2*v_r7
+ed2,c,b,0.1*i_r5
+jd3,n,c,2*i_r1
+ed4,0,n,0.7*v_r6
+```
+
+Symbulator reports the power *consumed* by each element, so delivering
+80W is consuming −80W. In **Expert Mode**:
+
+```field 9 Add equations
+pjd1 = -80 and ped2 = 0
+```
+
+```field 9 Add unknowns
+vs, is
+```
+
+The problem asks for *positive* values, and that is what the
+conditions are for — the two power equations are quadratic, so four
+solutions fit the circuit, and these pick the one that was meant:
+
+```field 9 Add conditions
+is > 0 and vs > 0
+```
+
+Run it in DC, with **Rounding** at 4 significant digits. Everything
+comes back numerical: v{{sub:s}} = {{o:17.61}} V and
+i{{sub:s}} = {{o:0.3973}} A.
+
+And the answers show *how* the zero-dissipation constraint is met:
+i{{sub:R5}} comes back exactly {{o:0}}. The CCVS's voltage is
+0.1&#8239;i{{sub:R5}}, so the constraint drove its own controlling
+current to zero — the source dissipates nothing because the circuit
+arranged for it to *be* nothing.
+
+:::
 :::
 :::

@@ -151,8 +151,13 @@ function pdf_note(string $name): string {
              site; the version is already in the wordmark beside it and
              in the menu. -->
         <p class="brand-sub">the best portable symbolic simulator of linear circuits</p>
+        <!-- The property mark (#135): one word, two spellings, exactly
+             one shown -- the top form on wide screens, this slot form
+             on phones. Styled by the shared banner.css. -->
+        <p class="property-mark property-mark-slot">Documentation</p>
       </a>
     </div>
+    <span class="property-mark property-mark-top">Documentation</span>
   </div>
 </header>
 

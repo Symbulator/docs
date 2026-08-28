@@ -162,7 +162,12 @@ def topbar(book, toc, v, page, ids):
             # to the lockup there has to be made here as well or the
             # preview quietly shows the superseded one.
             '<p class="brand-sub">the best portable symbolic simulator of linear circuits</p>'
-            '</a></div></div></header>'
+            # The property mark (#135): one word, two spellings,
+            # exactly one shown -- see banner.css.
+            '<p class="property-mark property-mark-slot">Documentation</p>'
+            '</a></div>'
+            '<span class="property-mark property-mark-top">Documentation</span>'
+            '</div></header>'
             f'<div class="subbar"><div class="subbar-inner">{ribbon}'
             f'<details class="versions" id="version-picker">'
             f'<summary aria-label="Choose a version">'
