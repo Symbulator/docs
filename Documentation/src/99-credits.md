@@ -17,6 +17,10 @@ Panamá) in [Azuero](https://ls.utp.ac.pa/). An early version won first
 place at the IEEE Student Paper Contest for Latin America in 2000, and version
 5 (also known as Symbulator Q) served as my graduation thesis in January 2001.
 
+::: figure assets/photo/roberto_2000_ti89.jpg
+Roberto in 2000, with a TI-89
+:::
+
 The first five versions were written between April 1999 and January 2001. The
 sixth came a dozen years later, in 2013, while I was a researcher at MIT. The 
 seventh and eighth a decade later, in 2023, and the ninth in 2026.  
