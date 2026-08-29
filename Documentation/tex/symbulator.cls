@@ -165,9 +165,12 @@
 \renewcommand{\chaptername}{Lesson}
 
 % Lessons carry numbered sections; front and back matter do not.
-\newcommand{\lesson}[2]{\setcounter{secnumdepth}{1}\chapter{#2}}
+% Both open with \color{ink}: the second line of defence against the
+% colour leak described at the problem box below -- a chapter must never
+% inherit whatever colour the previous page's last box left behind.
+\newcommand{\lesson}[2]{\color{ink}\setcounter{secnumdepth}{1}\chapter{#2}}
 \newcommand{\frontchapter}[1]{%
-  \setcounter{secnumdepth}{0}%
+  \color{ink}\setcounter{secnumdepth}{0}%
   \chapter*{#1}\addcontentsline{toc}{chapter}{#1}%
   \markboth{#1}{#1}}
 % standfirst: the "what to expect" paragraph that opens a chapter
@@ -216,14 +219,14 @@
      frame empty, colback=lcd, left=3mm,right=3mm,top=1.6mm,bottom=1.6mm,
      borderline west={2.2pt}{0pt}{accent}, sharp corners]
    \ttfamily\small\raggedright\setlength{\parskip}{0pt}}
-  {\end{tcolorbox}\vspace{1mm}}
+  {\end{tcolorbox}\color{ink}\vspace{1mm}}
 
 \newenvironment{symout}
   {\par\vspace{1mm}\begin{tcolorbox}[breakable,enhanced,boxrule=0pt,
      frame empty, colback=panel, left=3mm,right=3mm,top=1.6mm,bottom=1.6mm,
      borderline west={2.2pt}{0pt}{slate}, sharp corners]
    \ttfamily\small\raggedright\setlength{\parskip}{0pt}}
-  {\end{tcolorbox}\vspace{1mm}}
+  {\end{tcolorbox}\color{ink}\vspace{1mm}}
 
 % ------------------------------------------------------------- callouts ---
 % Every callout carries an icon and a word, so the four kinds remain
@@ -267,20 +270,38 @@
     \ifstrempty{#5}{}{{\sffamily\bfseries\fontsize{10.6}{13}\selectfont
                        #5\par}\vspace{0.6mm}}}}
 
+% Each wrapper re-asserts ink after its box: the colour-leak guard (see
+% the problem box below). The installed tcolorbox has no `after app`
+% key, so the guard lives in the wrappers instead of the box options.
 \newenvironment{callouttip}[1]
-  {\begin{@callout}{green}{greenbg}{\@icotip}{Tip}{#1}}{\end{@callout}}
+  {\begin{@callout}{green}{greenbg}{\@icotip}{Tip}{#1}}
+  {\end{@callout}\color{ink}}
 \newenvironment{calloutnote}[1]
-  {\begin{@callout}{slate}{panel}{\@iconote}{Note}{#1}}{\end{@callout}}
+  {\begin{@callout}{slate}{panel}{\@iconote}{Note}{#1}}
+  {\end{@callout}\color{ink}}
 \newenvironment{calloutwarning}[1]
-  {\begin{@callout}{amber}{amberbg}{\@icowarning}{Warning}{#1}}{\end{@callout}}
+  {\begin{@callout}{amber}{amberbg}{\@icowarning}{Warning}{#1}}
+  {\end{@callout}\color{ink}}
 \newenvironment{calloutdanger}[1]
-  {\begin{@callout}{danger}{dangerbg}{\@icodanger}{Caution}{#1}}{\end{@callout}}
+  {\begin{@callout}{danger}{dangerbg}{\@icodanger}{Caution}{#1}}
+  {\end{@callout}\color{ink}}
 
 % ------------------------------------------------------ problems/figures --
-\newtcolorbox{problem}[1]{breakable,enhanced,boxrule=0.8pt,colframe=rule,
+% after app={\color{ink}} on every box in this class: a breakable box
+% whose end coincides with a page break can leak its fill colour (white,
+% here) into the ambient colour of every page that follows -- Lessons 9
+% and 10 opened with invisible titles and the credits went blank from
+% p255 on, in the 29 Aug 2026 A4 build, and only spans with an explicit
+% \color survived. The re-assertion after each box (and at each chapter
+% start, below) makes the leak unable to outlive the box that caused it.
+\newtcolorbox{problem@frame}[1]{breakable,enhanced,boxrule=0.8pt,
+  colframe=rule,
   colback=white, left=4mm,right=4mm,top=3mm,bottom=3mm, sharp corners,
   before upper={{\sffamily\bfseries\fontsize{11.5}{14}\selectfont #1\par}
                 \vspace{1mm}}}
+\newenvironment{problem}[1]
+  {\csname problem@frame\endcsname{#1}}
+  {\csname endproblem@frame\endcsname\color{ink}}
 
 \newenvironment{solution}
   {\par\vspace{1.5mm}{\sffamily\bfseries\footnotesize\color{accent}%

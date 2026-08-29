@@ -1271,6 +1271,16 @@ def compile_pdf(texdir: str, stem: str, pdfdir: str) -> bool:
         print(f"xelatex produced no {stem}.pdf (see "
               f"{os.path.join(texdir, stem + '.log')})", file=sys.stderr)
         return False
+    # A clean exit is not a visible book: the 29 Aug 2026 A4 build shipped
+    # pages whose text was painted white (a tcolorbox colour leak) with a
+    # clean log. Render-and-compare catches invisible text whatever its
+    # cause; see tools/check_white_text.py.
+    from check_white_text import check_white_text
+    bad = check_white_text(built)
+    if bad:
+        print(f"{stem}.pdf has INVISIBLE TEXT on page(s) {bad} -- "
+              f"see tools/check_white_text.py", file=sys.stderr)
+        return False
     shutil.copy2(built, os.path.join(pdfdir, stem + ".pdf"))
     print(f"pdf:  {os.path.join(pdfdir, stem + '.pdf')}")
     return True
