@@ -1910,10 +1910,18 @@ rl,o,0,rl
 The answer you want is `vo`, in **Results**.
 :::
 
-The answer, shown left, is correct. The textbook's answer is shown right.
+The answer, shown first below, is correct. The textbook's answer follows it.
 
+::: only 7,8
 ::: figure assets/practice/tr5s-example-4-1-symbolic-40.jpg
 
+:::
+:::
+
+::: only 9
+$$
+-\dfrac{r\,rl\,vs}{rc\,rp + rc\,rs + rl\,rp + rl\,rs}
+$$
 :::
 
 ::: figure assets/practice/tr5s-example-4-1-symbolic-41.jpg
@@ -1955,11 +1963,19 @@ rl,2,0,rl
 The answer you want is `v2`, in **Results**.
 :::
 
-{{v7,8|The simulation took 25 seconds. }}The answer I got is shown left (the
-textbook's right.)
+{{v7,8|The simulation took 25 seconds. }}The answer I got is shown first
+below (the textbook's follows it.)
 
+::: only 7,8
 ::: figure assets/practice/bo2s-example-1-11-symbolic-43.jpg
 
+:::
+:::
+
+::: only 9
+$$
+-\dfrac{gm\,rd\,rg\,rl\,v1}{r1\,rd + r1\,rl + rd\,rg + rg\,rl}
+$$
 :::
 
 ::: figure assets/practice/bo2s-example-1-11-symbolic-44.jpg
@@ -2039,10 +2055,18 @@ The answer you want is `vo`, in **Results**.
 :::
 
 This is the answer we get. It is correct. Compare it with the textbook's
-answer.
+answer below it.
 
+::: only 7,8
 ::: figure assets/practice/tr5s-exercise-4-3-symbolic-48.png
 
+:::
+:::
+
+::: only 9
+$$
+\dfrac{vs\,(g2\,\mu + gx)}{g2\,\mu + g2 + gl + gx}
+$$
 :::
 
 ::: figure assets/practice/tr5s-exercise-4-3-symbolic-49.jpg
@@ -2081,10 +2105,19 @@ j,c,e,β*irb
 The answer you want is `irb`, in **Results**.
 :::
 
-Compare my answer, left, to the book's answer, right.
+Compare my answer, first below, to the book's answer beneath it.{{v9| Note
+`re1`: as in the previous problem, version 9's panel renamed the element.}}
 
+::: only 7,8
 ::: figure assets/practice/tr5s-example-4-5-symbolic-51.jpg
 
+:::
+:::
+
+::: only 9
+$$
+\dfrac{vcc + v\gamma}{re1\,\beta + re1 + rb}
+$$
 :::
 
 ::: figure assets/practice/tr5s-example-4-5-symbolic-52.jpg

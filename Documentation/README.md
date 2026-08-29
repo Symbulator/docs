@@ -109,7 +109,8 @@ Never edit anything in `build/` — the next build overwrites it.
 ## Figures
 
 **All real, since 27 Aug 2026 — verified by opening the built PDFs, not by
-build success.** Every one of the 314 `::: figure` references in `src/`
+build success.** Every one of the 318 `::: figure` references in `src/`
+(316 distinct files; the count was 314 when first measured on 27 Aug 2026)
 cites a raster (`.jpg`/`.jpeg`/`.png`), every one of those files is genuine
 artwork, and both builds consume the raster directly: the HTML emitter
 writes the path verbatim, and the LaTeX emitter passes a raster path
@@ -123,6 +124,21 @@ arrived; what it left behind were ~250 orphaned placeholder `.svg`/`.pdf`
 siblings in `assets/` that nothing referenced (removed 27 Aug 2026 —
 `tools/make_placeholders.py` can redraw a placeholder any time a reference
 appears without its file, and never overwrites real artwork).
+
+**Every figure renders at its own measured size, since 29 Aug 2026
+(#153).** `tools/figure_sizes.json`, written by
+`tools/measure_figures.py`, records each scan's pixel size and the
+estimated height of the label text inside it; `build.py` sizes the figure
+so that text prints at body-text height (2.7 mm), capped at the line, and
+gives the web the same width as a percentage of the column. The scans'
+own pixel sizes mean nothing — most were resampled to a uniform 1100 px
+in 2023 — which is why the old fixed 72%-of-the-line rule printed labels
+anywhere from half to triple the body size. Two things to know: **a new
+figure needs a re-run of `tools/measure_figures.py`** (until then it
+falls back to 72% of the line), and a figure the detector misjudges gets
+its width in millimetres in the manifest's `overrides` block, which
+re-runs preserve. The write-up, including how the detector works and its
+two failure modes, is #153 in `NEXT_DOCS.md`.
 
 ## Outstanding
 

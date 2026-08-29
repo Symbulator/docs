@@ -63,8 +63,13 @@ the slack and wraps, which is the shape every table in this book has: a short
 key against a line of prose.
 
 **Leave the header cells empty and there is no header** -- `| | |` over the
-rule. Chapter 13's gain answers do this, being a label against a value with
-nothing to call either column.
+rule. (Chapter 13's gain answers used this until 29 Aug 2026, when answers
+in tables were converted to the prose form the rest of the book uses (#157);
+the feature remains for a genuine label-against-value table.)
+
+Answers are never given in tables: an answer reads as prose, its values in
+`{{o:...}}` spans -- see #157 in NEXT_DOCS.md. A table is for reference
+material, like the problem-credits table or "type this to find that".
 
 A cell that needs a literal pipe writes `\|`. That matters here more than in
 most books: the calculator's "with" operator is a pipe and gets discussed.

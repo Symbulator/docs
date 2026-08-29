@@ -81,12 +81,8 @@ approx({is1,is2,is3,is4})
 ```
 
 ::: only 9
-| Short | Current through |
-|---|---|
-| `s1` | {{o:-2}} A |
-| `s2` | {{o:3}} A |
-| `s3` | {{o:-8}} A |
-| `s4` | {{o:-0.5}} A |
+`s1` reads {{o:-2}} A, `s2` {{o:3}} A, `s3` {{o:-8}} A and `s4`
+{{o:-0.5}} A.
 :::
 
 These are correct. These answers can only be found using short circuits.

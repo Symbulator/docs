@@ -512,19 +512,26 @@ o,0,a,o
 rl,o,0,1
 ```
 
-When we evaluate `vo/v1`, both approaches get the same answer, shown left
-below:
+When we evaluate `vo/v1`, both approaches get the same answer:
 
+::: only 7,8
 ::: figure assets/practice/tr5s-example-4-14-inverting-11.png
 
 :::
+:::
+
+::: only 9
+$$
+-\dfrac{r2\,r4}{r1\,r2 + r1\,r3 + r2\,r3}
+$$
+:::
+
+which is correct, as can be seen by comparing it to the book's answer,
+below:
 
 ::: figure assets/practice/tr5s-example-4-14-inverting-12.jpg
 
 :::
-
-which is correct, as can be seen by comparing it to the book's answer, shown
-right.
 
 :::
 
@@ -664,7 +671,9 @@ The answer you want is `vo`, in **Results**.
 We get the right answer (below), an expression equivalent to the book's
 answer.
 
-((r1+rf)/r1)vi
+$$
+\left(\dfrac{r1 + rf}{r1}\right) vi
+$$
 
 :::
 
@@ -703,7 +712,9 @@ vo/vs
 
 We get
 
-(r2 (r3+r4))/((r1+r2) r4)
+$$
+\dfrac{r2\,(r3 + r4)}{(r1 + r2)\,r4}
+$$
 
 which is correct, as can be seen by comparing it to the book's answer, shown
 below:
@@ -737,7 +748,9 @@ v2/vs
 
 We get
 
-r2/(r1+r2)
+$$
+\dfrac{r2}{r1 + r2}
+$$
 
 which is correct for this part. Then, simulate the right half.
 
@@ -764,7 +777,9 @@ vo/v2
 
 We get
 
-(r3+r4)/r4
+$$
+\dfrac{r3 + r4}{r4}
+$$
 
 which is correct for this part. The product of these two partial answers
 produces the same expression shown above after the big simulation, and is the
@@ -1174,7 +1189,9 @@ The answer you want is `vo`, in **Results**.
 :::
 
 
-(r1 r4 v2-r2 (r3 v1+r4 (v1-v2)))/(r1*(r3+r4))
+$$
+\dfrac{r1\,r4\,v2 - r2\,\bigl(r3\,v1 + r4\,(v1 - v2)\bigr)}{r1\,(r3 + r4)}
+$$
 
 This expression is equivalent to the book's answer, shown below:
 
@@ -1751,12 +1768,17 @@ below:
 
 Our answer, expanded via `expand(vo)`, is shown below:
 
-(-r2 r4 v1)/(r1 r3)-(r4 v1)/r3+(r4 v2)/r3+v2
+$$
+-\dfrac{r2\,r4\,v1}{r1\,r3} - \dfrac{r4\,v1}{r3} + \dfrac{r4\,v2}{r3} + v2
+$$
 
 Playing with it by hand we get a form that, in my opinion, is *prettier* ;-)
 than the book's:
 
-v2(r4/r3+1)-v1(r4/r3)(r2/r1+1)
+$$
+v2\left(\dfrac{r4}{r3} + 1\right) -
+v1\left(\dfrac{r4}{r3}\right)\left(\dfrac{r2}{r1} + 1\right)
+$$
 
 :::
 
@@ -1788,7 +1810,9 @@ r3,d,e,r3
 To find vo, we ask for `vb-ve`. We get an expression that can easily be
 rearranged to look like this:
 
--((r1+r2+r3)/r2)(v1-v2)
+$$
+-\left(\dfrac{r1 + r2 + r3}{r2}\right)(v1 - v2)
+$$
 
 This is exactly the answer from the book:
 

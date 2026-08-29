@@ -75,7 +75,9 @@ l,o,0,1,0
 ::: only 9
 Run it in TR. The answer is on the `o` node's line:
 
-$v_o(t) = \dfrac{3\sqrt{2}}{2}\,e^{-4t}\sin(\sqrt{2}\,t)$
+$$
+v_o(t) = \dfrac{3\sqrt{2}}{2}\,e^{-4t}\sin(\sqrt{2}\,t)
+$$
 :::
 
 Now let us do it properly, in the s-domain, which is what you would want if any
@@ -121,7 +123,9 @@ Choose *FD — complex frequency domain*.
 
 Both give the same answer, in the s-domain:
 
-$v_o(s) = \dfrac{3}{s^2 + 8s + 18}$
+$$
+v_o(s) = \dfrac{3}{s^2 + 8s + 18}
+$$
 
 Note the source: `1/s`, not `1`. The unit step is `1/s` in the s-domain, and
 writing `1` there would have described an impulse instead.

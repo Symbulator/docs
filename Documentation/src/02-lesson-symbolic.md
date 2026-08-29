@@ -122,8 +122,9 @@ read the **current through** line}}. To find the voltage drop on r2, we
 
 Both are expressions rather than numbers:
 
-$i_{r1} = \dfrac{v}{r1 + r2}$ and
-$v_{r2} = \dfrac{r2\,v}{r1 + r2}$
+$$
+i_{r1} = \dfrac{v}{r1 + r2} \quad\text{and}\quad v_{r2} = \dfrac{r2\,v}{r1 + r2}
+$$
 
 which is the voltage divider you would have written by hand.
 
@@ -132,8 +133,9 @@ To find the power consumed in r2, we {{v7,8|ask for `pr2`}}{{v9|read the
 source, we {{v7,8|ask for the negative of `pev`}}{{v9|take the opposite of the
 source's **power consumed** line — type `-pev` into **Evaluate**}}.
 
-$p_{r2} = \dfrac{r2\,v^2}{(r1 + r2)^2}$ and
-$-p_{ev} = \dfrac{v^2}{r1 + r2}$
+$$
+p_{r2} = \dfrac{r2\,v^2}{(r1 + r2)^2} \quad\text{and}\quad -p_{ev} = \dfrac{v^2}{r1 + r2}
+$$
 
 It is this ability to simulate symbolically, as if it were nothing, that puts
 Symbulator in a league of its own. Getting symbolic answers from a symbolic circuit takes

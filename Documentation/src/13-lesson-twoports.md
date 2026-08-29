@@ -336,7 +336,9 @@ h,2,3
 parameters cannot be pinned here — the equivalent tools take no Expert Mode
 equations — so the answers come back as formulas:
 
-$v_{th} = \dfrac{-60\,h_{21}}{h_{11}h_{22} - h_{12}h_{21} + 40\,h_{22}}$
+$$
+v_{th} = \dfrac{-60\,h_{21}}{h_{11}h_{22} - h_{12}h_{21} + 40\,h_{22}}
+$$
 
 Which is more useful than it looks: put `vth` in **Evaluate** with the four
 parameters in its **Conditions** box, and the number falls out.
@@ -555,12 +557,8 @@ Av 55.6, Ai -9.62, Ap 534, Zin 3.46 Ω
 ```
 
 ::: only 9
-| | |
-|---|---|
-| Av — voltage gain | {{o:55.56}} |
-| Ai — current gain | {{o:-9.615}} |
-| Ap — power gain | {{o:534.2}} |
-| Zi — input impedance | {{o:3.462}} Ω |
+The voltage gain Av is {{o:55.56}}, the current gain Ai {{o:-9.615}}, the
+power gain Ap {{o:534.2}}, and the input impedance Zi {{o:3.462}} Ω.
 :::
 
 These are correct.
@@ -644,12 +642,8 @@ Gv 4, Gi -2, Gp 8, Zin 1 Ω
 ```
 
 ::: only 9
-| | |
-|---|---|
-| Av — voltage gain | {{o:4}} |
-| Ai — current gain | {{o:-2}} |
-| Ap — power gain | {{o:8}} |
-| Zi — input impedance | {{o:1}} Ω |
+The voltage gain Av is {{o:4}}, the current gain Ai {{o:-2}}, the power
+gain Ap {{o:8}}, and the input impedance Zi {{o:1}} Ω.
 :::
 
 These are correct.

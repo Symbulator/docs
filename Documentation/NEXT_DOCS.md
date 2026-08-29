@@ -8,6 +8,117 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #151 — The tutorial PDFs are A4 — built 29 Aug 2026, not yet deployed
+
+Roberto's call: the three tutorial PDFs move from the 170 mm × 240 mm trade
+size to A4, joining the monograph and the Book. One edit, the `\geometry`
+line in `tex/symbulator.cls`; the margin scheme is unchanged, so the text
+block grew with the page to a 156 mm measure — within 2 mm of what the two
+paper/ PDFs have had all along. Verified in the XeLaTeX logs
+(597.5 × 845.0 pt = 210 × 297 mm), not by eye.
+
+The A4 rebuild is also what exposed #153: the old fixed figure rule sized
+every image at 72% of the line, so the wider line silently enlarged every
+figure by a third, and Roberto's page-by-page review of the result produced
+the visual pass below.
+
+## #152 — Problem headers are never orphaned — built 29 Aug 2026
+
+A problem box that started near the foot of a page left its header (and
+often the one-line statement) stranded there, with the statement figure —
+unbreakable — opening the next page. Pages 24, 26 and 130 of the first A4
+build all showed it.
+
+`build.py` now emits `\Needspace*{...}` before every `\begin{problem}`,
+sized per problem: title + estimated statement lines + the height of the
+first figure (known from #153's manifest), capped at 170 mm. If the page
+has less room than the problem's opening needs, the whole box starts on the
+next page. `tex/symbulator.cls` gained `\RequirePackage{needspace}`.
+Print-only by nature; the web has no page breaks.
+
+## #153 — Figures sized by the text inside them — built 29 Aug 2026
+
+The rule until now was `width=0.72\linewidth` for every figure. But the
+scans came from a dozen textbooks and were resampled to arbitrary pixel
+sizes (most practice crops to a uniform 1100 px in 2023), so a fixed
+fraction printed some labels at half the body size and others at triple —
+Roberto's examples: B11 7.10 and RM3 9-12 too small, B11 8.10 and the
+RM3 7-16 ladder too large, expression crops enormous. His rule: **a figure
+is right when its label text matches the body text height.**
+
+`tools/measure_figures.py` estimates the label text height of every scan
+(threshold, merge characters into words by horizontal dilation, filter
+word-shaped components, median height — with guards for the beige Bo2
+scans, whose Otsu threshold must be capped, and for dashed boxes/mesh
+arrows, whose 8–11 px dash swarm otherwise outvotes the characters) and
+writes `tools/figure_sizes.json`. `build.py` renders each figure at
+`px_width × 2.7 mm / text_px`, capped at the line (`\symfig` in the cls
+caps at `\linewidth`, since problem boxes are ~9 mm narrower), and gives
+the web the same width as a percentage of the column, so both outputs
+agree. The manifest's `overrides` block (width in mm, preserved across
+re-runs) covers the two strips the detector cannot read; a figure absent
+from the manifest falls back to the old 72% and means a re-measure is due.
+Calibrated against every page Roberto judged; verified page by page after
+the rebuild. Median computed width 86 mm; 10 of 316 figures cap at full
+line.
+
+## #154 — Standalone expressions are display math — built 29 Aug 2026
+
+Expressions that stood alone in a paragraph were set inline — fractions
+squashed to the line height, ragged left, "lost in the text" (Roberto, on
+the old page 35). Twelve paragraphs across lessons 2, 5, 12 and 13 are now
+`$$` display blocks — centered, padded, full-size fractions — including
+the four bare-ASCII answer lines in lesson 5 (`r2/(r1+r2)` and kin), now
+typeset with the same values. Inline math that is part of a sentence stays
+inline. Renders as `\[...\]` in the PDFs and MathJax display on the web;
+no renderer change was needed, the `$$` block syntax existed all along.
+
+## #155 — v9 shows no captures of Symbulator's own output — built 29 Aug 2026
+
+Five figures in the v9 pages were pictures of Symbulator's answer: four
+TI-89 pixel-font captures (TR5 4.1, Bo2 1.11, TR5 Ex 4.3, TR5 4.5 — the
+lesson 3 symbolic finale) and one screenshot of the v9 app's own MathJax
+(TR5 4-14). Each is now a `::: only 7,8` figure plus a `::: only 9` `$$`
+block carrying **what the running v9 solver actually returns** — every one
+of the five was solved with the local 0.5.19 package first and the raw
+result typeset, not transcribed from the old image. All five came back
+equivalent to the captures and to the textbook answers beside them (the
+Ex 4.3 capture's apparent `g1` is really `gl`). The stale "shown left /
+shown right" prose — describing the 2023 site's side-by-side layout that
+stacked vertically here — was reworded in each spot. The AC and Bode
+lessons already had this shape (`only 7` captures, LaTeX for the rest) and
+needed nothing. Textbook-scan expressions stay as images under #153's
+sizing.
+
+## #156 — β, γ and μ no longer print as tofu — built 29 Aug 2026
+
+IBM Plex has no Greek, so every code block naming a transistor gain printed
+□ where β, γ, μ or µ should be — pages 75–77 of the first A4 build, and
+the XeLaTeX logs' "Missing character" lines as the definitive list (which
+also surfaced the superscript minus in the two-ports lesson). Fixed where
+δ, ω and π were already fixed: four new entries in `build.py`'s GLYPHS map,
+plus `⁻` → `\textsuperscript{-}`. The rebuilt logs report **zero** missing
+characters across all three books. Web unaffected (its fonts have Greek).
+
+## #157 — Answers read as prose, never as tables — built 29 Aug 2026
+
+Three `only 9` answer tables — HK5's Drill 1-13 shorts (which also
+rendered broken, values wrapping under their labels) and chapter 13's two
+gain tables — are now the prose form the rest of the book uses, values in
+`{{o:...}}` spans, byte-identical. The two legitimate reference tables
+(problem credits, lesson 4's "type this to find that") stay tables, and
+SPEC.md now states the rule. `check_against_originals.py` still reports
+exactly the known 11-block residue, nothing added.
+
+Also fixed in the same pass, found by the review itself: **Lesson 4's
+chapter title ran off the page edge** — "Shorts, equivalent resistance and
+Thévenin/Norton" was 162 pt overfull at its fixed 26 pt size (and had been
+on the old page size too, unnoticed). Chapter titles now wrap
+(`\raggedright` in the titleformat). The rebuilt books: v7 229, v8 218,
+v9 259 pages, `build.py --check` clean, all verified but **not deployed**.
+
+---
+
 ## #119 — The full v9 read-through, 27 Aug 2026 — closed; everything live
 
 Roberto asked for a complete read of the version 9 documentation for

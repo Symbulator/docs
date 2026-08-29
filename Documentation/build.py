@@ -36,6 +36,47 @@ SRC = os.path.join(ROOT, "src")
 BUILD = os.path.join(ROOT, "build")
 ASSETS = os.path.join(ROOT, "assets")
 
+# ---- figure sizes (#153) --------------------------------------------------
+# tools/figure_sizes.json, written by tools/measure_figures.py, records the
+# pixel size of every figure scan and the estimated height in pixels of the
+# label text inside it. A figure is rendered at the width that puts that
+# label text at target_mm -- the size of the body text -- capped at the
+# line; the same proportion goes to the web as a percentage of the column.
+# The scans' own pixel sizes are meaningless (most were resampled to a
+# uniform 1100 px in 2023), which is why the old fixed 72%-of-the-line rule
+# printed some labels at half the body size and others at triple.
+FIGSIZES_PATH = os.path.join(ROOT, "tools", "figure_sizes.json")
+try:
+    with open(FIGSIZES_PATH, encoding="utf-8") as _fh:
+        _FIGSIZES = json.load(_fh)
+except FileNotFoundError:
+    _FIGSIZES = {"target_mm": 2.7, "line_mm": 156.0,
+                 "overrides": {}, "measured": {}}
+
+FIG_LINE_MM = float(_FIGSIZES.get("line_mm", 156.0))
+
+
+def figure_size_mm(ref: str):
+    """(width_mm, height_mm) to render a figure at, or (None, None).
+
+    None means the manifest knows nothing about the file -- the renderers
+    fall back to the old 72%-of-the-line rule, and a fresh run of
+    tools/measure_figures.py is due.
+    """
+    rel = ref[len("assets/"):] if ref.startswith("assets/") else ref
+    m = _FIGSIZES["measured"].get(rel)
+    ov = _FIGSIZES["overrides"].get(rel)
+    if ov is not None:
+        w_mm = min(float(ov), FIG_LINE_MM)
+        if m and m.get("w"):
+            return (w_mm, w_mm * m["h"] / m["w"])
+        return (w_mm, None)
+    if not m or not m.get("text_px"):
+        return (None, None)
+    w_mm = min(m["w"] * float(_FIGSIZES["target_mm"]) / m["text_px"],
+               FIG_LINE_MM)
+    return (w_mm, w_mm * m["h"] / m["w"])
+
 # The shared banner lockup's one source, in the app repository -- a
 # sibling tree of this one (see the top-level CLAUDE.md for the
 # layout). It lives there rather than here because the app's build
@@ -668,7 +709,13 @@ class HtmlRenderer:
                     f'{title}{self.blocks(b.children)}</aside>')
         if k == "figure":
             cap = self.blocks(b.children)
-            return (f'<figure><img src="{html.escape(site_path(b.arg))}" alt="">'
+            # #153: same proportion of the column as the PDF gives of its
+            # line, so a figure reads at the same relative size in both.
+            w_mm, _h = figure_size_mm(b.arg)
+            style = (f' style="width:{100 * w_mm / FIG_LINE_MM:.1f}%"'
+                     if w_mm else "")
+            return (f'<figure><img src="{html.escape(site_path(b.arg))}"'
+                    f' alt=""{style}>'
                     f'<figcaption>{cap}</figcaption></figure>')
         if k == "problem":
             return (f'<section class="problem"><p class="problem-title">'
@@ -726,6 +773,15 @@ GLYPHS = {"\U0001d422": r"\textbf{i}", "∠": r"\ensuremath{\angle}",
           "Δ": r"\ensuremath{\Delta}", "≤": r"\ensuremath{\le}",
           "→": r"\ensuremath{\rightarrow}", "ᴇ": r"\textsc{e}",
           "º": r"\textordmasculine{}", "°": r"\textdegree{}",
+          # IBM Plex (mono and serif alike) has no Greek: β, γ and both
+          # mus -- U+03BC and the micro sign U+00B5 -- rendered as tofu
+          # boxes in every code block that names a transistor gain (#156,
+          # 29 Aug 2026). The XeLaTeX log's "Missing character" lines are
+          # the authority on this list; check them after adding glyphs.
+          "β": r"\ensuremath{\beta}", "γ": r"\ensuremath{\gamma}",
+          "μ": r"\ensuremath{\mu}", "µ": r"\ensuremath{\mu}",
+          # Plex Serif has superscript four but not superscript minus.
+          "⁻": r"\textsuperscript{-}",
           }
 
 # curly punctuation: converted in prose, left alone inside code, where the
@@ -820,6 +876,32 @@ class TexRenderer:
         return "\n\n".join(x for x in (self.block(b)
                                        for b in walk(blocks, self.v)) if x)
 
+    def _problem_need(self, b: Node) -> float:
+        """Millimetres the opening of a problem box needs on the page.
+
+        Title, then the statement paragraphs, then the first figure --
+        the unbreakable block that actually causes the stranding. A
+        problem that opens with something else settles for a flat
+        minimum. Estimates are rough (a paragraph line is guessed from
+        its character count); the cap keeps a tall figure from demanding
+        more than most of a page.
+        """
+        need = 14.0                          # title + box padding
+        for child in list(walk(b.children, self.v))[:4]:
+            if child.kind == "para":
+                need += 6.0 * max(1, round(len(child.text) / 90))
+            elif child.kind == "figure":
+                w_mm, h_mm = figure_size_mm(child.arg)
+                if h_mm:
+                    inner = min(w_mm, 147.0)     # the box eats ~9mm of line
+                    need += h_mm * inner / w_mm + 6.0
+                else:
+                    need += 60.0
+                break
+            else:
+                break
+        return min(need, 170.0)
+
     def block(self, b: Node) -> str:
         k = b.kind
         if k == "para":
@@ -893,11 +975,22 @@ class TexRenderer:
             src = (b.arg if b.arg.lower().endswith((".png", ".jpg", ".jpeg"))
                    else os.path.splitext(b.arg)[0])
             cap = self.blocks(b.children)
+            # #153: measured width, capped at \linewidth by \symfig; the
+            # fallback is the old 72% rule for a file the manifest has
+            # not met yet.
+            w_mm, _h = figure_size_mm(b.arg)
+            img = (f"\\symfig{{{w_mm:.1f}}}{{{src}}}" if w_mm
+                   else f"\\includegraphics[width=\\figwidth]{{{src}}}")
             return ("\\begin{symfigure}\n"
-                    f"\\includegraphics[width=\\figwidth]{{{src}}}\n"
+                    f"{img}\n"
                     f"\\caption{{{cap}}}\n\\end{{symfigure}}")
         if k == "problem":
-            return (f"\\begin{{problem}}{{{self.inline(b.arg)}}}\n"
+            # #152: a problem's header must not be stranded at the foot of
+            # a page while its statement figure starts the next. Demand
+            # room for the title, the statement and the first figure; if
+            # the page has less, the whole box starts on the next one.
+            return (f"\\Needspace*{{{self._problem_need(b):.0f}mm}}\n"
+                    f"\\begin{{problem}}{{{self.inline(b.arg)}}}\n"
                     f"{self.blocks(b.children)}\n\\end{{problem}}")
         if k == "answer":
             return (f"\\begin{{solution}}\n{self.blocks(b.children)}\n"

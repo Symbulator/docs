@@ -18,12 +18,17 @@
 \RequirePackage{booktabs}
 \RequirePackage{imakeidx}
 \RequirePackage{etoolbox}
+\RequirePackage{needspace}
 \RequirePackage[hidelinks]{hyperref}
 
 \tcbuselibrary{skins,breakable}
 
 % ---------------------------------------------------------------- page ----
-\geometry{papersize={170mm,240mm},
+% A4 since 29 Aug 2026 (Roberto), replacing the 170mm x 240mm trade size.
+% The margin scheme is unchanged, so the text block grows with the page;
+% the resulting 156mm measure sits within a couple of mm of the monograph
+% and the Book, which have been A4 with 2.8cm margins all along.
+\geometry{papersize={210mm,297mm},
           inner=24mm, outer=30mm, top=22mm, bottom=24mm,
           marginparwidth=0mm, footskip=12mm}
 
@@ -80,6 +85,16 @@
 \setlength{\parindent}{0pt}
 \setlength{\emergencystretch}{2em}
 \newlength{\figwidth}\setlength{\figwidth}{0.72\linewidth}
+% #153: build.py sizes each figure from the measured height of the label
+% text inside the scan (tools/figure_sizes.json), so labels print at body
+% text size everywhere. The width arrives in millimetres; the cap keeps a
+% wide crop inside whatever line it lands on -- problem boxes are ~9mm
+% narrower than the page's. \figwidth above survives only as the fallback
+% for a figure the manifest has not measured yet.
+\newcommand{\symfig}[2]{%
+  \setlength{\@tempdima}{#1mm}%
+  \ifdim\@tempdima>\linewidth\setlength{\@tempdima}{\linewidth}\fi
+  \includegraphics[width=\@tempdima]{#2}}
 
 % ------------------------------------------------------------- metadata ---
 \newcommand{\@booktitle}{}\newcommand{\booktitle}[1]{\renewcommand{\@booktitle}{#1}}
@@ -111,7 +126,10 @@
   {\sffamily}
   {\color{accent}\bfseries\fontsize{11}{13}\selectfont\MakeUppercase{\chaptertitlename\ \thechapter}}
   {2mm}
-  {\bfseries\fontsize{26}{30}\selectfont}
+  % \raggedright so a long title wraps instead of running off the page --
+  % Lesson 4's "Shorts, equivalent resistance and Thévenin/Norton" was
+  % 162pt overfull and clipped at the page edge until 29 Aug 2026.
+  {\bfseries\fontsize{26}{30}\selectfont\raggedright}
   [\vspace{1mm}{\color{rule}\titlerule[0.8pt]}]
 \titlespacing*{\chapter}{0pt}{0pt}{7mm}
 
