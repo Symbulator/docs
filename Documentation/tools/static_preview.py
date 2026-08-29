@@ -156,7 +156,10 @@ def topbar(book, toc, v, page, ids):
             '<img src="assets/logo.png" alt="Symbulator logo" class="header-logo">'
             '</a>'
             f'<a class="header-title" href="{link(v)}">'
-            f'<p class="brand-name">Symbulator <span class="vnum">{e(toc["label"])}</span></p>'
+            # The β is temporary: version 9 is in beta (Roberto,
+            # 28 Aug 2026); only the 9 carries it, matching index.php.
+            f'<p class="brand-name">Symbulator <span class="vnum">{e(toc["label"])}'
+            f'{"β" if str(toc["label"]) == "9" else ""}</span></p>'
             # Static, matching web/index.php, the landing page and the
             # app. This generator does not read index.php, so a change
             # to the lockup there has to be made here as well or the

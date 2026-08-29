@@ -144,7 +144,10 @@ function pdf_note(string $name): string {
         <img src="/assets/logo.png" alt="Symbulator logo" class="header-logo">
       </a>
       <a class="header-title" href="<?= url($v) ?>">
-        <p class="brand-name">Symbulator <span class="vnum"><?= e($toc['label']) ?></span></p>
+        <?php /* The β is temporary (Roberto, 28 Aug 2026): version 9 is
+                 in beta, and the numeral says so until it is not. Only
+                 the 9 carries it — the 7 and 8 pages stay plain. */ ?>
+        <p class="brand-name">Symbulator <span class="vnum"><?= e($toc['label']) ?><?= (string) $toc['label'] === '9' ? 'β' : '' ?></span></p>
         <!-- Static, and identical to the line on symbulator.com and in
              the app. It used to read "For <platform>", which made the
              lockup say something different on every version of the
