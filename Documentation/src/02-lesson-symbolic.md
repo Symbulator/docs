@@ -2,7 +2,7 @@
 id: lesson-symbolic
 kind: lesson
 title: Symbolic circuits and expert mode
-updated: 2026-08-28
+updated: 2026-08-29
 summary: >
   Learn how to solve different types of *symbolic* circuits in Symbulator. Use
   the solve command on Symbulator answers. And explore **ex**, the powerful
@@ -24,6 +24,15 @@ value, we call it a **symbolic circuit**.{{i:symbolic circuit}} A symbolic
 problem is one that involves a symbolic circuit. It gives me great joy when I
 encounter a symbolic problem, because the ability to simulate symbolic circuits
 is what sets Symbulator apart from other programs.
+
+::: note Variables are case-sensitive; names are not
+Element and node names ignore case — `R1` and `r1` are the same resistor,
+and so is any reference built from a name: `2*VR1`, `2*vr1` and `2*v_r1`
+all mean r1's voltage drop. A variable that names nothing in the circuit
+is different: `e,a,b,c` and `e,a,b,C` are two *different* symbolic
+sources, and telling Symbulator that `c = 5` says nothing about `C`.
+Pick one spelling for each unknown and keep it.
+:::
 
 I find it useful to distinguish between two types of symbolic problems:
 

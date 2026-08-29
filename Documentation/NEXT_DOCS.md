@@ -8,6 +8,62 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #164 — Lesson 13 revised for the two-port parameter term — 29 Aug 2026
+
+Roberto, 29 Aug 2026, on discovering that the v9 port had left two-port
+parameters reachable only through expert mode: revise the two-port
+documentation in Lesson 13 once #163 (the parameter term,
+`z,1,2,[100,10,20,50]`) landed in solver 0.5.21 — "in addition to, and
+independent from, the SPICE stuff".
+
+What changed in `src/13-lesson-twoports.md` (v9 panels only, except
+where noted):
+
+- **"Giving it its four parameters"** teaches three possibilities in
+  Roberto's order of preference: the description's fourth term
+  (primary — the parameters travel with the circuit and reach *every*
+  analysis, the equivalent tools included), the **Define** field
+  (the closest cousin of v7/v8's store-the-values-first), and leaving
+  them symbolic. A note box documents the naming rule (`z` owns
+  `z11`…`z22`, `z1` owns `z111`…`z122` — no warning in the app, per
+  Roberto: well-documented behaviour, not a surprise) and that plain
+  variables are case-sensitive while name-derived references fold.
+- **Example 19.2** carries `z,1,2,[40,20j,30j,50]` in the description
+  instead of four expert equations.
+- **Example 19.6** runs the Thévenin *directly* — the old v9 text
+  taught a workaround ("the equivalent tools take no Expert Mode
+  equations", solve symbolically, substitute in Evaluate) that #163
+  made unnecessary; the formula view is kept as what you get when the
+  term is left off. Verified: vth = −29.69 V, req = 51.46 Ω straight
+  from `th()` with the term.
+- **Both gain examples** carry their parameters in the description.
+- The **element description** section states the two guards (no port
+  node on ground, no shared port node — v7/8-era measures, confirmed
+  live in 0.5.21 and stopping the solve with clear messages).
+- One **shared-text correction**, originals-verified: the port
+  currents are named by the two-port and the *node* (`i_z5`, `i_z9`
+  for ports on nodes 5 and 9), not the "port number" the conversion
+  had said — Roberto's 2023 pages say "current entering the
+  transformer at nodes 1 and 2", so this restores the original.
+- **Lesson 2** gains the case-sensitivity note where symbolic values
+  are introduced (Roberto's ask the same day): names fold
+  (`2*VR1` ≡ `2*v_r1`), free variables don't (`c` ≠ `C`) — every
+  claim measured before writing. Both chapters' `updated:` moved to
+  2026-08-29.
+
+The companion `examples/Lesson_13.cir` (app tree) moved to the new
+notation the same day, which exposed a real bug: the app's AC
+imaginary-unit normalisation sympified the parameter term whole,
+evaluating its internal `pr(...)` encoding as the parallel-combination
+function and collapsing `[40,20j,30j,50]` into one number. Fixed in
+`symbulator_ui.normalise_imaginary` (entry-by-entry normalisation);
+caught by `tools/verify_lesson.py Lesson_13`, whose run now ends
+0 problems — with 19.6 *newly* machine-checkable (its vth/req come
+back as named answers now that the parameters ride the description;
+the two gain entries stay mini-tool-only by design, their numbers
+verified directly against `gain()`). Shipped at cache v86 on both
+offline sites; the server needs Roberto's next pull.
+
 ## #151 — The tutorial PDFs are A4 — built 29 Aug 2026, not yet deployed
 
 Roberto's call: the three tutorial PDFs move from the 170 mm × 240 mm trade

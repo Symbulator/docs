@@ -2,7 +2,7 @@
 id: lesson-twoports
 kind: lesson
 title: Two-ports
-updated: 2023-07-08
+updated: 2026-08-29
 summary: >
   Find the *two-port equivalent* of a network using the **port** script. Learn
   how to include *two-ports* in your circuit using the **z**, **y**, **h**,
@@ -88,13 +88,16 @@ Correct.
 
 A two-port can be an element in a bigger circuit. Its description is three
 fields: a name whose first letter says which kind it is, then the **top left**
-node and the **top right** node. Both bottom nodes are ground, always.
+node and the **top right** node. Both bottom nodes are ground, always —
+which is why neither top node may be `0`, and the two may not be the same
+node; Symbulator stops with a message if they are.
 
 ```field 9 Circuit Description
 z,1,2
 ```
 
-That is a z-type two-port between nodes 1 and 2.
+That is a z-type two-port between nodes 1 and 2.{{v9| An optional fourth
+term carries its four parameters — see below.}}
 
 ### Giving it its four parameters
 
@@ -119,31 +122,53 @@ shorthand in the values you type.
 variables in the answers.
 :::
 ::: only 9
-Two possibilities.
+Three possibilities.
 
-**Leave them undefined**, in which case they stay symbolic and appear in the
-answers as `z11`, `z12`, `z21` and `z22`. That is often what you want —
-the answer as a formula in the parameters.
+**Give them in the description**, as an optional fourth term — a list of
+four, in the order 11, 12, 21, 22:
 
-**Pin them in Expert Mode**, one equation each, under **Add equations**:
+```field 9 Circuit Description
+z,1,2,[40,20j,30j,50]
+```
 
-```field 9 Add equations
+This is the way to prefer: the parameters travel with the circuit, so they
+survive being pasted into a link, saved to a file, or handed to any other
+tool — and they work in *every* analysis, the equivalent tools included.
+The entries can be numbers, SI-prefixed values, or expressions, symbols
+among them.
+
+**Store them in Define**, calculator-style, and keep the description bare:
+
+```field 9 Define
 z11 = 40
 z12 = 20j
 z21 = 30j
 z22 = 50
 ```
 
-::: warning Expert Mode is only there for a plain solve
-The **Add equations** box disappears as soon as you choose *Find equivalent*,
-whichever kind — those tools do not take it. To use a two-port with
-numbers inside one of them, solve it symbolically and substitute afterwards;
-Example 19.6 below does exactly that.
+Define any subset and the rest stay symbolic. This is the closest cousin of
+how versions 7 and 8 stored the values in variables before simulating.
+
+**Leave them undefined**, in which case they stay symbolic and appear in the
+answers as `z11`, `z12`, `z21` and `z22`. That is often what you want —
+the answer as a formula in the parameters. (Pinning them afterwards in
+Expert Mode's **Add equations** still works too, in a plain solve, and an
+equation or condition there overrides the description's own values.)
+
+::: note How the variables are named
+The four variables are always the element's name plus `11`, `12`, `21`,
+`22`: a two-port called `z` owns `z11`…`z22`, and one called `z1` owns
+`z111`…`z122` — the name simply gains the digits. And note that while
+element and node names ignore case (`2*VR1` is `2*v_r1`), a variable that
+names nothing in the circuit is case-sensitive: `za` and `ZA` are two
+different symbols.
 :::
 :::
 
 **What answers do you get?** The current entering each port, named with the
-two-port and the port number — for a two-port {{v7|`zp`, that is `izp1` and `izp2`}}{{!v7|`z`, that is `iz1` and `iz2`}}.
+two-port and the **node** it sits on — for a two-port {{v7|`zp` on nodes 1
+and 2, that is `izp1` and `izp2`}}{{!v7|`z` on nodes 1 and 2, that is `iz1`
+and `iz2`}}.
 
 ::: problem AS7's Example 19.2
 Find I{{sub:1}} and I{{sub:2}} in the circuit.
@@ -161,12 +186,12 @@ AS7's Example 19.2
 ```
 ```field 9 Circuit Description
 e,1,0,100
-z,1,2
+z,1,2,[40,20j,30j,50]
 r,2,0,10
 ```
 
 ::: only 9
-With the four parameters pinned in **Add equations** as above, and AC.
+The four parameters ride in the description's fourth term. In AC.
 :::
 
 ```sym 7
@@ -328,33 +353,23 @@ AS7's Example 19.6
 ```field 9 Circuit Description
 e,1,0,60
 r,1,2,40
-h,2,3
+h,2,3,[1000,-2,10,2e-4]
 ```
 
 ::: only 9
-*Find equivalent*, *Thévenin / Norton*, nodes **3** and **0**, DC. The
-parameters cannot be pinned here — the equivalent tools take no Expert Mode
-equations — so the answers come back as formulas:
+*Find equivalent*, *Thévenin / Norton*, nodes **3** and **0**, DC. Because
+the parameters ride in the description, they reach the equivalent tools
+like any other value, and the answers come straight back as numbers.
+
+Leave the fourth term off — `h,2,3` alone — and the same run answers with
+formulas instead:
 
 $$
 v_{th} = \dfrac{-60\,h_{21}}{h_{11}h_{22} - h_{12}h_{21} + 40\,h_{22}}
 $$
 
-Which is more useful than it looks: put `vth` in **Evaluate** with the four
-parameters in its **Conditions** box, and the number falls out.
-
-```field 9 Evaluate
-vth
-```
-
-```field 9 Conditions
-h11 = 1000
-h12 = -2
-h21 = 10
-h22 = 2e-4
-```
-
-Then ask for `req` under the same conditions.
+which is useful in its own right: put `vth` in **Evaluate** with the four
+parameters in its **Conditions** box, and the same number falls out.
 :::
 
 ```out 7,8
@@ -511,19 +526,10 @@ A symbolic `vs` would do just as well.
 es,3,0,1
 rs,3,1,2
 rl,2,0,20
-y,1,2
+y,1,2,[0.4,-0.002,-5,0.04]
 ```
 
 ::: only 9
-Pin the four parameters in **Add equations**:
-
-```field 9 Add equations
-y11 = 0.4
-y12 = -0.002
-y21 = -5
-y22 = 0.04
-```
-
 Solve in DC, then open **Mini-Tools**, choose *gain*, and give it the four:
 :::
 
@@ -586,7 +592,7 @@ The same shape as before, with z parameters instead of y.
 es,3,0,1
 rs,3,1,5
 rl,2,0,2
-z,1,2
+z,1,2,[4,1.5,10,3]
 ```
 
 ::: only 7,8
@@ -595,15 +601,6 @@ can store the parameters in variables beforehand or type them when asked.
 :::
 
 ::: only 9
-Pin the four parameters in **Add equations**:
-
-```field 9 Add equations
-z11 = 4
-z12 = 1.5
-z21 = 10
-z22 = 3
-```
-
 Solve in DC, then open **Mini-Tools**, choose *gain*, and give it the four:
 :::
 
