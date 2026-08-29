@@ -44,7 +44,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Serif:ital,wght@0,400;1,400&amp;display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/banner.css?v=a1af8aab">
+<link rel="stylesheet" href="/assets/banner.css?v=15076a3e">
 <link rel="stylesheet" href="/assets/landing.css?v=13244f7c">
 
 <script>
@@ -170,8 +170,68 @@
     </div>
   </section>
 
+  <!-- ============ what it does ============ -->
+  <section class="band" id="what">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">What it does</p>
+        <h2>Four analyses, every element you meet in Circuits I and II.</h2>
+      </div>
+
+      <dl class="cap-list">
+        <div>
+          <dt>Analyses</dt>
+          <dd><b>DC</b> and <b>AC</b> as phasor analysis, <b>transient</b> in the time
+            domain, and the <b>complex frequency domain</b>. Numerical circuits and,
+            more to the point, symbolic ones.</dd>
+        </div>
+        <div>
+          <dt>Answers</dt>
+          <dd>Voltages at every node; current, voltage drop and power in every
+            element. Real and complex power in AC, and the impedance each source
+            sees looking back into the circuit.</dd>
+        </div>
+        <div>
+          <dt>Equivalents</dt>
+          <dd><b>Thévenin</b> and <b>Norton</b> equivalents between any two nodes, and
+            two-port parameters in six varieties.</dd>
+        </div>
+        <div>
+          <dt>Elements</dt>
+          <dd>Resistors, inductors, capacitors, mutual inductance, independent and
+            dependent sources of both kinds, ideal operational amplifiers and ideal
+            transformers.</dd>
+        </div>
+        <div>
+          <dt>Plots</dt>
+          <dd>Time-domain plots, and Bode gain and phase against frequency on a
+            logarithmic axis.</dd>
+        </div>
+        <div>
+          <dt>Expert mode</dt>
+          <dd>Hand it the extra equations a problem gives you — a known current, a
+            power to be delivered — and it solves for the component values you
+            don't have. When the mathematics allows several solutions it returns
+            them all, and a condition like <code>vs&nbsp;&gt;&nbsp;0</code> picks
+            the one you meant.</dd>
+        </div>
+      </dl>
+
+      <div class="limits">
+        <h3>What it will not do</h3>
+        <p>Symbulator simulates linear circuits, so there are no diodes and no
+          transistors. It also will not help with problems that turn on applying a
+          formula selectively rather than solving the circuit through.</p>
+        <p>And it is not a replacement for your brain. You have to understand
+          circuit theory to use it. That has been the design's stance since the
+          2001 thesis: learn the manual techniques first, and let Symbulator
+          verify what your own hand found.</p>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ the ways in ============ -->
-  <section class="band" id="start">
+  <section id="start">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Start here</p>
@@ -237,106 +297,41 @@
               <p class="way-url">learn.symbulator.com</p>
             </div>
           </li>
-          <li class="way way-wide">
-            <div>
-              <p class="way-kicker">For the curious: how it works inside</p>
-              <h3><a href="https://learn.symbulator.com/monograph.pdf">The
-                Internal Logic of Symbulator (2026)</a></h3>
-            </div>
-            <div>
-              <p class="way-text">A monograph on the solver: its history from
-                the 1999 TI-89 original to today, its complete logic in
-                annotated pseudo-code — enough to build a simulator of your
-                own — and worked exemplars, including one exam problem solved
-                by the 2001 calculator and the 2026 port with the same answer,
-                digit for digit.</p>
-              <p class="way-meta"><b>PDF</b>, 0.8&nbsp;MB, 44 pages</p>
-              <p class="way-url">learn.symbulator.com/monograph.pdf</p>
-            </div>
-          </li>
-          <li class="way way-wide">
-            <div>
-              <p class="way-kicker">For the historians: where it began</p>
-              <h3><a href="https://learn.symbulator.com/book.pdf">The
-                Symbulator Book (2001)</a></h3>
-            </div>
-            <div>
-              <p class="way-text">The English edition of the 2001 thesis that
-                documented the classic calculator Symbulator — twelve
-                chapters and 89 worked problems, defended for a perfect
-                grade, begun in English by two of its users in 2001 and
-                completed in 2026.</p>
-              <p class="way-meta"><b>PDF</b>, 0.5&nbsp;MB, 117 pages</p>
-              <p class="way-url">learn.symbulator.com/book.pdf</p>
-            </div>
-          </li>
         </ul>
       </div>
     </div>
   </section>
 
-  <!-- ============ what it does ============ -->
-  <section id="what">
+  <!-- ============ for developers ============ -->
+  <section class="band" id="build">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">What it does</p>
-        <h2>Four analyses, every element you meet in Circuits I and II.</h2>
+        <p class="eyebrow">For developers</p>
+        <h2>The engine underneath, if you want to build on it.</h2>
+        <p class="sub">Not needed to use Symbulator — this is for people who want to
+          call it from their own code, or fork it.</p>
       </div>
 
-      <dl class="cap-list">
-        <div>
-          <dt>Analyses</dt>
-          <dd><b>DC</b> and <b>AC</b> as phasor analysis, <b>transient</b> in the time
-            domain, and the <b>complex frequency domain</b>. Numerical circuits and,
-            more to the point, symbolic ones.</dd>
-        </div>
-        <div>
-          <dt>Answers</dt>
-          <dd>Voltages at every node; current, voltage drop and power in every
-            element. Real and complex power in AC, and the impedance each source
-            sees looking back into the circuit.</dd>
-        </div>
-        <div>
-          <dt>Equivalents</dt>
-          <dd><b>Thévenin</b> and <b>Norton</b> equivalents between any two nodes, and
-            two-port parameters in six varieties.</dd>
-        </div>
-        <div>
-          <dt>Elements</dt>
-          <dd>Resistors, inductors, capacitors, mutual inductance, independent and
-            dependent sources of both kinds, ideal operational amplifiers and ideal
-            transformers.</dd>
-        </div>
-        <div>
-          <dt>Plots</dt>
-          <dd>Time-domain plots, and Bode gain and phase against frequency on a
-            logarithmic axis.</dd>
-        </div>
-        <div>
-          <dt>Expert mode</dt>
-          <dd>Hand it the extra equations a problem gives you — a known current, a
-            power to be delivered — and it solves for the component values you
-            don't have. When the mathematics allows several solutions it returns
-            them all, and a condition like <code>vs&nbsp;&gt;&nbsp;0</code> picks
-            the one you meant.</dd>
-        </div>
-      </dl>
-
-      <div class="limits">
-        <h3>What it will not do</h3>
-        <p>Symbulator simulates linear circuits, so there are no diodes and no
-          transistors. It also will not help with problems that turn on applying a
-          formula selectively rather than solving the circuit through.</p>
-        <p>And it is not a replacement for your brain. You have to understand
-          circuit theory to use it. That has been the design's stance since the
-          2001 thesis: learn the manual techniques first, and let Symbulator
-          verify what your own hand found.</p>
-      </div>
+      <ul class="dev">
+        <li>
+          <h3><a href="https://pypi.org/project/symbulator/">The Python package</a></h3>
+          <p><code>pip install symbulator</code> — the core of Symbulator: the
+            description parser, the stamping engine and the solver. It is what powers
+            the app, exposed as a library you can import and call directly.</p>
+        </li>
+        <li>
+          <h3><a href="https://github.com/Symbulator">The source, on GitHub</a></h3>
+          <p>Both halves are there — the solver that does the algebra, and the
+            interface that wraps it. Symbulator is now open source under the MIT
+            licence, so ports and derivatives are welcome under the same licence,
+            with attribution.</p>
+        </li>
+      </ul>
     </div>
   </section>
 
   <!-- ============ older calculators ============ -->
-  <section class="band" id="calculators">
+  <section id="calculators">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">On a calculator</p>
@@ -377,29 +372,47 @@
       </ul>
     </div>
   </section>
-  <!-- ============ for developers ============ -->
-  <section id="build">
+  <!-- ============ the logic and its history ============ -->
+  <section class="band" id="logic">
     <div class="wrap">
       <div class="sec-head">
-        <p class="eyebrow">For developers</p>
-        <h2>The engine underneath, if you want to build on it.</h2>
-        <p class="sub">Not needed to use Symbulator — this is for people who want to
-          call it from their own code, or fork it.</p>
+        <p class="eyebrow">The logic and its history</p>
+        <h2>Two books: how it works inside, and where it began.</h2>
       </div>
 
-      <ul class="dev">
-        <li>
-          <h3><a href="https://pypi.org/project/symbulator/">The Python package</a></h3>
-          <p><code>pip install symbulator</code> — the core of Symbulator: the
-            description parser, the stamping engine and the solver. It is what powers
-            the app, exposed as a library you can import and call directly.</p>
+      <ul class="ways">
+        <li class="way way-wide">
+          <div>
+            <p class="way-kicker">For the curious: how it works inside</p>
+            <h3><a href="https://learn.symbulator.com/monograph.pdf">The
+              Internal Logic of Symbulator (2026)</a></h3>
+          </div>
+          <div>
+            <p class="way-text">A monograph on the solver: its history from
+              the 1999 TI-89 original to today, its complete logic in
+              annotated pseudo-code — enough to build a simulator of your
+              own — and worked exemplars, including one exam problem solved
+              by the 2001 calculator and the 2026 port with the same answer,
+              digit for digit.</p>
+            <p class="way-meta"><b>PDF</b>, 0.8&nbsp;MB, 44 pages</p>
+            <p class="way-url">learn.symbulator.com/monograph.pdf</p>
+          </div>
         </li>
-        <li>
-          <h3><a href="https://github.com/Symbulator">The source, on GitHub</a></h3>
-          <p>Both halves are there — the solver that does the algebra, and the
-            interface that wraps it. Symbulator is now open source under the MIT
-            licence, so ports and derivatives are welcome under the same licence,
-            with attribution.</p>
+        <li class="way way-wide">
+          <div>
+            <p class="way-kicker">For the historians: where it began</p>
+            <h3><a href="https://learn.symbulator.com/book.pdf">The
+              Symbulator Book (2001)</a></h3>
+          </div>
+          <div>
+            <p class="way-text">The English edition of the 2001 thesis that
+              documented the classic calculator Symbulator — twelve
+              chapters and 89 worked problems, defended for a perfect
+              grade, begun in English by two of its users in 2001 and
+              completed in 2026.</p>
+            <p class="way-meta"><b>PDF</b>, 0.5&nbsp;MB, 117 pages</p>
+            <p class="way-url">learn.symbulator.com/book.pdf</p>
+          </div>
         </li>
       </ul>
     </div>
@@ -412,7 +425,7 @@
     <img src="/assets/mark.png" alt="">
     <div class="foot-text">
       <p class="foot-name">Symbulator, by Roberto Perez-Franco</p>
-      <p>Born free and shared freely, for the greater good.</p>
+      <p>Born free and shared openly for the greater good.</p>
     </div>
   </div>
 </footer>

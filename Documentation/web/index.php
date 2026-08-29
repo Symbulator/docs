@@ -175,8 +175,11 @@ function pdf_note(string $name): string {
         <a href="/symbulator-v<?= e($v) ?>.pdf">Download as PDF</a>
         <a href="https://symbulator.pythonanywhere.com">Online App</a>
         <!-- Version-independent on purpose: the monograph documents the
-             solver logic every version shares. -->
-        <a href="/monograph.pdf">How it works</a>
+             solver logic every version shares. Points at the landing
+             page's "The logic and its history" section (#142), where the
+             monograph is offered with its context, rather than at the
+             PDF directly. -->
+        <a href="https://symbulator.com/#logic">How it works</a>
       </nav>
 
   
