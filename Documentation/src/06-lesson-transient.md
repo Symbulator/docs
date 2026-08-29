@@ -2,7 +2,7 @@
 id: lesson-transient
 kind: lesson
 title: Transient analysis
-updated: 2023-07-08
+updated: 2026-08-29
 summary: >
   Learn to run a *transient* time-domain analysis with **tr**. Learn to
   describe *capacitors* with **c** and *inductors* with **l**. Save time with
@@ -1279,7 +1279,7 @@ s\tr("e,1,0,1:o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic,vo}
 s\tr("e,1,0,1:o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic,vo}
 ```
 ```field 9 Circuit Description
-e,1,0,1
+e,1,0,u(t)
 o,1,2,o
 c,2,o,1/8,0
 r2,2,o,2
@@ -1317,7 +1317,7 @@ s\tr("e,1,0,1:r1,1,2,1:r2,2,o,2:c,2,o,1/8,0:o,0,2,o"):{vc,ic,vo}
 s\tr("e,1,0,1:r1,1,2,1:r2,2,o,2:c,2,o,1/8,0:o,0,2,o"):{vc,ic,vo}
 ```
 ```field 9 Circuit Description
-e,1,0,1
+e,1,0,u(t)
 r1,1,2,1
 r2,2,o,2
 c,2,o,1/8,0
@@ -1557,7 +1557,7 @@ s\tr("e,1,0,-4:r3,1,2,3:r5,2,3,5:c,3,0,1,2:j,0,2,2ir3"):vc
 s\tr("e,1,0,–4:r3,1,2,3:r5,2,3,5:c,3,0,1,2:j,0,2,2ir3"):vc
 ```
 ```field 9 Circuit Description
-e,1,0,-4
+e,1,0,-4*u(t)
 r3,1,2,3
 r5,2,3,5
 c,3,0,1,2
@@ -1647,7 +1647,7 @@ s\tr("e,1,0,3:o,1,2,o:c,2,o,1/4,-2:r2,2,o,2:r1,2,0,1"):vc
 s\tr("e,1,0,3:o,1,2,o:c,2,o,1/4,–2:r2,2,o,2:r1,2,0,1"):vc
 ```
 ```field 9 Circuit Description
-e,1,0,3
+e,1,0,3*u(t)
 o,1,2,o
 c,2,o,1/4,-2
 r2,2,o,2
@@ -2583,7 +2583,7 @@ s\only("vc,il"):s\tr("e,1,0,2/5:r,1,2,12:l,2,3,2,0:c,3,0,1/50,0")
 s\only("vc,il"):s\tr("e,1,0,2/5:r,1,2,12:l,2,3,2,0:c,3,0,1/50,0")
 ```
 ```field 9 Circuit Description
-e,1,0,2/5
+e,1,0,2/5*u(t)
 r,1,2,12
 l,2,3,2,0
 c,3,0,1/50,0
@@ -2638,7 +2638,7 @@ s\only("vc,il"):s\tr("e,1,0,3:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):{vc,il}
 s\only("vc,il"):s\tr("e,1,0,3:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):{vc,il}
 ```
 ```field 9 Circuit Description
-e,1,0,3
+e,1,0,3*u(t)
 r,1,2,5
 l,2,3,1/2,0
 c,3,0,1/8,0
@@ -2713,7 +2713,7 @@ s\only("vl"):s\tr("e,1,0,12.:r,1,2,3:l,2,3,1,4:c,3,0,1'µ,0")
 s\only("vl"):s\tr("e,1,0,12.:r,1,2,3:l,2,3,1,4:c,3,0,1'µ,0")
 ```
 ```field 9 Circuit Description
-e,1,0,12.
+e,1,0,12*u(t)
 r,1,2,3
 l,2,3,1,4
 c,3,0,1'µ,0
@@ -2742,7 +2742,7 @@ s\only("il,vc"):s\tr("j,0,1,1:r,1,0,1:l,1,0,2,0:c,1,0,1/2,0"):{il,vc}
 s\only("il,vc"):s\tr("j,0,1,1:r,1,0,1:l,1,0,2,0:c,1,0,1/2,0"):{il,vc}
 ```
 ```field 9 Circuit Description
-j,0,1,1
+j,0,1,u(t)
 r,1,0,1
 l,1,0,2,0
 c,1,0,1/2,0
@@ -2771,7 +2771,7 @@ s\only("vo"):s\tr("e,3,0,1:r1,3,1,1:r2,1,2,1:
 ca,2,0,1/5,0:cb,1,o,1,0:o,2,o,o"):vo
 ```
 ```field 9 Circuit Description
-e,3,0,1
+e,3,0,u(t)
 r1,3,1,1
 r2,1,2,1
 ca,2,0,1/5,0
@@ -2799,7 +2799,7 @@ s\only("vo"):s\tr("e,3,0,3:r1,3,1,1:r2,1,2,1:
 ca,2,0,25/16,0:cb,1,o,1,0:o,2,o,o"):vo
 ```
 ```field 9 Circuit Description
-e,3,0,3
+e,3,0,3*u(t)
 r1,3,1,1
 r2,1,2,1
 ca,2,0,25/16,0
