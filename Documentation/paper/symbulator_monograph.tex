@@ -100,11 +100,13 @@ annotated pseudo-code intended to be complete enough that a reader
 could implement a simulator of their own from it, how a DC analysis
 proceeds: parsing and validation; the \emph{stamping} of each element
 into a system of equations; and the staged solution of unknowns by
-\emph{degree}---first-degree unknowns (node voltages, and the currents
-of current sources) obtained directly, second-degree unknowns (the
-remaining branch currents) obtained with or after them, and
-third-degree quantities (voltage drops, powers, and the resistance or
-impedance seen by each source) derived once the system is solved. A
+\emph{level}---first-level unknowns (the node voltages, and the
+currents no element law determines locally, a voltage source's among
+them) solved simultaneously, second-level answers (the remaining
+currents) expressed in terms of them, and third-level quantities
+(the voltage drop across each element, the powers, and the
+resistance or impedance seen by each source) derived once the system
+is solved. A
 chapter of variations covers how AC, FD, and TR analyses differ from
 the DC template, the historical \emph{Impala} mode, and the expert
 mode, including multiple solutions. A further chapter presents the
@@ -428,17 +430,21 @@ balance. One equation per element law, one per non-reference node.
 solver---the TI-89's \code{solve()} then, SymPy's now. But not every
 answer needs to be \emph{in} the system, and this is the architectural
 idea Symbulator has carried since 1999: answers have
-\emph{degrees}. First-degree unknowns are the node voltages, and the
-currents of current sources---the latter known outright, since a
-current source's current \emph{is} its value. Second-degree unknowns
-are the remaining branch currents: some (a voltage source's current)
-must be solved simultaneously with the voltages, since nothing local
-determines them; others (a resistor's, a capacitor's) follow from the
-solved voltages by the element's own law, by direct substitution.
-Third-degree quantities are derived after the solve, by plain algebra
-on the first two degrees: the voltage drop across each element, the
-power each element absorbs, and, for each source, the resistance the
-source sees looking into the rest of the circuit.
+\emph{levels}. First-level unknowns are the ones the solver must find
+simultaneously: the node voltages, and the currents nothing local
+determines---a voltage source fixes a voltage and supplies whatever
+current the circuit demands, so its current can only come out of the
+joint solve. Second-level answers are expressions in the first-level
+variables, written down rather than solved for: a resistor's or a
+capacitor's current follows from the solved voltages by the element's
+own law, by direct substitution; a current source's current is the
+plainest expression of all---known outright, since it \emph{is} the
+source's value, entering its two nodes' KCL sums as a plain term
+rather than through any equation. Third-level quantities are derived
+after the solve, by plain algebra on everything before them: the
+voltage drop across each element, the power it absorbs, and, for
+each source, the resistance the source sees looking into the rest of
+the circuit.
 
 \emph{Storing the answers} gives every quantity a systematic name ---
 $v_n$ for node voltages, $i_e$ for currents, $v_e$, $p_e$, $r_e$ for
@@ -446,9 +452,8 @@ the derived quantities of element $e$ --- and it is by these names
 that dependent sources, expert-mode equations, and the user's own
 follow-up questions refer to them.
 
-The original documentation describes the same machinery
-operationally, in terms of \emph{levels}, and the thesis devotes its
-theory chapter to the doctrine~\cite[\S4.2]{thesis2000}. The
+The vocabulary and the doctrine are the thesis's own: its theory
+chapter is devoted to the levels~\cite[\S4.2]{thesis2000}. The
 \emph{first-level equations} are ``the indispensable equations
 Symbulator uses to solve a circuit,'' and come in exactly two kinds:
 one \emph{node equation} per node---the KCL sum, with resistive
@@ -481,15 +486,20 @@ an ideal transformer's primary current is first level, its secondary
 a kept expression; both currents of a two-port are first level; an
 op-amp's output current is first level.
 
-Degrees classify answers by what they are; levels, by how they are
-obtained. They coincide except at the seam: a voltage source's
-current is a second-degree answer that the calculator had to place in
-the first-level \emph{solve}, while a current source's current is
-first-degree precisely because it never needs solving at all. Keeping
-the simultaneous set small was what made symbolic solving feasible on
-a late-1990s calculator; version~9, with SymPy underneath, solves the
-joined system in one call and keeps the staged view as what it always
-really was---the right way to \emph{understand} the solver.
+Keeping the simultaneous set small was the point: it is what made
+symbolic solving feasible on a late-1990s calculator. Version~9, with
+SymPy underneath, solves the joined system in one call and keeps the
+staged view as what it always really was---the right way to
+\emph{understand} the solver. Where this monograph classifies an
+answer, it classifies by what the version~9 code does, and twice
+that departs from the census above. Resistor currents, second-level
+expressions on the calculator, are stamped straight into the
+simultaneous solve (\S\ref{sec:portchanges}). And the voltage
+drops, which the thesis keeps as second-level standing
+expressions~\cite[\S4.2.4]{thesis2000}, are computed by the port
+after the solve, in the round the code itself labels third
+level---beside the powers, and beside the resistance each source
+sees, an answer the census never reached at all.
 
 \section{The input language}
 \label{sec:input}
@@ -572,7 +582,7 @@ job, not an error. Second, \emph{power is reported as consumed}: a
 source that delivers 80~W reports $p = -80$~W. Both conventions are
 load-bearing in what follows---the KCL bookkeeping of
 Algorithm~\ref{alg:stampdc} adds each current at its first node and
-subtracts it at its second, and the third-degree round of
+subtracts it at its second, and the third-level round of
 Algorithm~\ref{alg:solvedc} computes $p = (v_{n_1}-v_{n_2})\,i$ with
 no sign adjustment, precisely because the two conventions agree.
 
@@ -766,7 +776,7 @@ that an expert user could take over the machinery mid-flight
 Algorithm~\ref{alg:stampdc} is the heart of the solver. Two
 bookkeeping conventions do quiet but important work. First, asking for
 a node's voltage ($v(n)$ in the pseudo-code) is what \emph{creates}
-the node: it registers $v_n$ as a first-degree unknown and opens the
+the node: it registers $v_n$ as a first-level unknown and opens the
 node's KCL sum, so even a node touched only through a voltage relation
 (an op-amp input, say) still ends the pass with a KCL row. Second,
 ground never gets a symbol: $v(\code{0})$ is the constant~$0$, so the
@@ -788,7 +798,7 @@ reference is built into every equation rather than solved for.
     \Else
       \State \kw{emit} $v_{n_1} - v_{n_2} = R\,i_e$;\quad
         add $i_e$ to $\mathcal{U}$
-        \Comment{Ohm's law; $i_e$ is 2nd degree}
+        \Comment{Ohm's law; $i_e$ is second level}
       \State adds $i_e$ at $n_1$, $-i_e$ at $n_2$
     \EndIf
   \CaseLine{\code{l} (inductor):}
@@ -810,7 +820,7 @@ reference is built into every equation rather than solved for.
     \EndIf
   \CaseLine{\code{j} (current source, value $J$):}
     \State $\mathcal{K}[i_e] \gets J$
-      \Comment{1st degree: the current \emph{is} the value}
+      \Comment{second level: the current \emph{is} the value}
     \State adds $J$ at $n_1$, $-J$ at $n_2$
       \Comment{no equation, no unknown; the voltage across is free}
   \CaseLine{\code{o} (op-amp, terminals $n_+, n_-, n_\mathrm{out}$):}
@@ -848,7 +858,7 @@ reference is built into every equation rather than solved for.
 \end{algorithm}
 
 A word on each rule, in the order stamped. The \emph{resistor} is the
-paradigm: one law, one new second-degree unknown, two KCL
+paradigm: one law, one new second-level current, two KCL
 contributions. The \emph{inductor} at DC steady state sustains no
 voltage---it is a short---but its current is a real answer and stays
 in the system. The \emph{capacitor} at DC steady state carries no
@@ -857,8 +867,8 @@ $0$ in $\mathcal{K}$ and nothing enters the system at all. The
 \emph{voltage source} fixes a voltage and leaves its current free; the
 \emph{current source} fixes a current and leaves its voltage free, and
 because the fixed thing \emph{is} the answer, nothing about it is ever
-solved: this is the sense in which current-source currents are first
-degree. The \emph{op-amp} is modeled as a nullor: the two inputs are
+solved: the current source is, with the resistor, one of the thesis's
+two non-special elements, contributing no equation and no unknown. The \emph{op-amp} is modeled as a nullor: the two inputs are
 forced equal and draw no current---their absence from the KCL sums
 \emph{is} the infinite input impedance---while the output contributes
 a free current with no return path in the model, standing for the
@@ -888,8 +898,8 @@ contain no frequency term to vanish.
 
 A dependent source may name a quantity that is \emph{known} rather
 than solved for: another source's current, a capacitor's current, or
-an element's voltage drop (which is never an unknown---it is derived,
-in the third degree, as $v_{n_1}-v_{n_2}$). Left alone, such a name
+an element's voltage drop (which is never an unknown---it is derived
+after the solve, as $v_{n_1}-v_{n_2}$). Left alone, such a name
 would enter the system as a fresh free variable that no equation
 constrains, and the solver would happily answer every quantity
 \emph{in terms of it}---a failure disguised as a solution. The final
@@ -900,7 +910,7 @@ capacitor's current is exactly that). Node-voltage names win where a
 node and an element share a name. After this closure, a reference like
 \code{0.5*i\_cx} has become a real constraint on node voltages.
 
-\subsection{Solving by degrees}
+\subsection{Solving by levels}
 
 \begin{algorithm}[htbp]
 \caption{\kw{Solve-DC}: the staged solution}
@@ -912,8 +922,8 @@ node and an element share a name. After this closure, a reference like
   $\{\,\mathrm{name} \mapsto \mathrm{expression}\,\}$
 \State \kw{Expert-Augment}$(\Sigma, \mathcal{U}, \mathcal{K})$
   \Comment{Alg.~\ref{alg:expert}, if extras given}
-\Statex \emph{--- 1\textsuperscript{st}/2\textsuperscript{nd} degree:
-  the simultaneous system ---}
+\Statex \emph{--- the simultaneous system: first level (and, in
+  version~9, most of the second) ---}
 \State $\mathcal{S} \gets \mathrm{solve}(\Sigma, \mathcal{U})$
   \Comment{all solutions; a plain circuit has exactly one}
 \If{$\mathcal{S} = \emptyset$}
@@ -923,15 +933,15 @@ node and an element share a name. After this closure, a reference like
 \State $\mathcal{S} \gets$ \kw{Rank}$(\mathcal{S})$
   \Comment{\S\ref{sec:multiple}; a single solution is untouched}
 \ForAll{solution $\sigma \in \mathcal{S}$}
-  \Statex \quad\emph{--- remaining 1\textsuperscript{st}/2\textsuperscript{nd}
-    degree: direct substitution ---}
+  \Statex \quad\emph{--- the rest of the second level: direct
+    substitution ---}
   \ForAll{$(\mathrm{name} \mapsto \mathrm{expr}) \in \mathcal{K}$}
     \State $\sigma[\mathrm{name}] \gets \mathrm{expr}$ with $\sigma$
       substituted in
       \Comment{knowns were stamped in terms of $v_n$ symbols}
   \EndFor
-  \Statex \quad\emph{--- 3\textsuperscript{rd} degree: derived
-    quantities ---}
+  \Statex \quad\emph{--- third level: drops, powers, seen
+    resistances ---}
   \ForAll{$e \in \mathcal{E}$ of kind \code{e j r c l}}
     \State $\Delta v \gets \sigma[v_{n_1}] - \sigma[v_{n_2}]$;\quad
       $i \gets \sigma[i_e]$
@@ -960,7 +970,7 @@ unknowns that truly required it (the first \emph{level}), everything
 locally computable being deferred to the substitution loop; in
 version~9 the split survives only for the two always-local cases
 (current-source and capacitor currents), and line~2 is a single call
-to \code{sympy.solve}. Either way the third-degree round is the same
+to \code{sympy.solve}. Either way the third-level round is the same
 plain algebra: drops, powers, and---for sources only, where the
 question ``what does this source see?'' is meaningful---the seen
 resistance. The answers are stored under the systematic names of
@@ -1003,7 +1013,7 @@ handheld's reach.
 
 AC analysis works in phasors at a single angular frequency $\omega$ (a
 number or a symbol). Three stamping rules change, and the third
-degree grows richer:
+level grows richer:
 
 \begin{itemize}
 \item The \emph{inductor} becomes an impedance:
@@ -1022,7 +1032,7 @@ degree grows richer:
   matches how textbooks give coupled pairs ``in $j\Omega$.''
 \end{itemize}
 
-In the third degree, complex power replaces DC power:
+At the third level, complex power replaces DC power:
 $S_e = V_e \overline{I_e}$ under RMS phasors, or
 $V_e \overline{I_e}/2$ under amplitude phasors, with the real part
 reported as the average power (named \code{p} in the first convention
@@ -1062,7 +1072,7 @@ is taken as zero when absent---all three conventions stated in the
 thesis exactly as they stand today~\cite[\S10.3]{thesis2000}. Source
 values are expected already written in $s$ (a step of amplitude $k$
 is $k/s$), with the brace shorthand \code{\{expr\}} transforming a
-time-domain value on entry. No third degree is computed in FD: an
+time-domain value on entry. No third level is computed in FD: an
 $s$-domain power has no established meaning in the curriculum
 Symbulator serves, and the original made the same
 choice~\cite[\S10.4]{thesis2000}.
@@ -1302,7 +1312,7 @@ call.
   \EndIf
 \EndFor
 \ForAll{new symbol $x$ appearing in $Q$ but not in $\mathcal{U}$}
-  \If{$x$ names a third-degree quantity of some element}
+  \If{$x$ names a third-level quantity of some element}
     \State \kw{emit} its defining equation; add $x$ to $\mathcal{U}$
     \Comment{see below}
   \Else
@@ -1329,14 +1339,14 @@ real constraint---or into a symbol-free residue, which is either a
 harmless tautology (dropped) or a flat contradiction (reported
 plainly).
 
-Second, an equation naming a \emph{third-degree} quantity
+Second, an equation naming a \emph{third-level} quantity
 ($\code{r\_e} = 12000$: ``the source must see 12\,k$\Omega$'') is the
 mirror problem: those names are computed after the solve and are
 invisible to it. The remedy is to stamp the quantity's defining
 equation into the system on demand---for the seen resistance, in the
 polynomial form $r_e \cdot (-i_e) = v_{n_1} - v_{n_2}$ so that a zero
 current cannot inject a division by zero---after which the constraint
-does real work. The definitions used here and the third-degree round
+does real work. The definitions used here and the third-level round
 of Algorithm~\ref{alg:solvedc} are the same formulas by construction,
 and the test suite holds them to that.
 
@@ -1550,7 +1560,7 @@ menu covers the same ground with the host platform's graphics.
 \label{sec:portchanges}
 
 Version 9 is a faithful port: its stamping rules, naming conventions,
-degree architecture, and tool behaviours were transcribed from the
+level architecture, and tool behaviours were transcribed from the
 TI-Basic sources and validated against the printed answers of the
 version 7/8 documentation---322 worked examples, each run and
 compared. The genuine differences are few enough to enumerate, and
@@ -1735,10 +1745,12 @@ works everywhere a name can appear.} and the positivity written
 directly as \emph{conditions}: \code{is > 0}, \code{vs > 0}.
 
 Every piece of Chapter~\ref{ch:logic} participates. The dependent
-values name answers of all three degrees ($i_{R1}$, $i_{R5}$ are
-second degree; $v_{R6}$, $v_{R7}$ third), so the known-reference
-closure (\S\ref{sec:closure}) rewrites them into node-voltage
-constraints. The expert equations name third-degree powers, so their
+values name answers on both sides of the solve: $i_{R1}$ and
+$i_{R5}$ are currents the system already carries as unknowns, while
+$v_{R6}$ and $v_{R7}$ are voltage drops---third-level names that the
+known-reference closure (\S\ref{sec:closure}) rewrites into
+node-voltage constraints. The expert equations name third-level
+powers, so their
 defining equations are stamped in on demand
 (\S\ref{sec:expert})---and being powers, they are quadratic, so the
 system has \emph{four} solutions: two sign-symmetric pairs. The
@@ -2103,8 +2115,8 @@ students to internalize.
 
 \emph{The input is the concept.} The description language is a
 one-to-one transcription of a schematic: an element, its terminals,
-its value. Dependent sources are ordinary values that name an answer;
-degrees mirror how a hand solution actually proceeds (voltages, then
+its value. Dependent sources are ordinary values that name an answer; the
+levels mirror how a hand solution actually proceeds (voltages, then
 currents, then powers). The equations generated are the ones a student
 would write. Nothing in the interface is an artifact to learn and
 later unlearn.
@@ -2142,7 +2154,7 @@ judgment.
 
 There is also a lesson in the project's longevity. The same internal
 logic has now run on 1990s calculator hardware and on a modern
-computer algebra system, with the staged degree architecture surviving
+computer algebra system, with the level architecture surviving
 as a \emph{conceptual} account even where it is no longer an
 operational necessity. Designs that mirror the structure of the
 subject matter---here, of circuit analysis as actually taught---age

@@ -8,6 +8,104 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #195 — the monograph and the solver agree about levels — **done, deployed**
+
+Roberto, 30 Aug 2026: *"I want the solver's code to match the monograph.
+The monograph and the solver should match in the sense that someone using
+the monograph will not find that the package code contradicts it, or
+viceversa."*
+
+Two halves: the monograph, rewritten by Fable 5 who wrote it; and the
+solver's comments, brought into line here.
+
+### How it started: degrees were never a second taxonomy
+
+Roberto: the monograph distinguishes *degrees* from *levels* of variables,
+but that distinction is a translation artefact — he said "degrees" when
+explaining it, his friends' translation of the thesis said "levels", and
+Fable took the coincidence for deliberate precision and built an apparatus
+on it, including a paragraph reconciling the two.
+
+It was worse than redundant. The invented degree taxonomy **contradicted
+the thesis the monograph cites**, on three counts:
+
+| | thesis §4.2.3–6 | old monograph |
+|---|---|---|
+| voltage-source current | first level | second degree |
+| current-source current | second level | first degree |
+| voltage drop | second level | third degree |
+
+Fable's own account of how: the degree scheme classified *by kind of
+quantity* — voltages, then currents, then derived — under which every
+branch current is second by construction. When that collided with the
+thesis's explicit first-level listing, it read the collision as two
+deliberate taxonomies rather than as its own error.
+
+### Roberto's ruling: classify from the code
+
+He asked Fable to justify the second-degree classification, openly allowing
+that he might be the one who was wrong — *"Maybe Fable is right and I was
+wrong."* He was not. `_stamp_e` appends the voltage source's current to
+`self.unknowns`; `_stamp_j` puts the current source's into `self.known`
+with *"no new unknown or equation needed at all"*, adding the value into
+both nodes' KCL sums as a plain term — which is exactly the mechanism
+Roberto described from memory. Thesis and code agree; the monograph was
+alone.
+
+He then ruled that the monograph should classify **by what the version 9
+code does**, not by the thesis. That matters for one item: the port
+computes voltage drops in `analysis._derived`, the same round as the
+powers, where the thesis keeps them as second-level standing expressions.
+
+One correction went the other way. Roberto thought voltage drops post-dated
+the thesis; §4.2.4 has them, as second-level variables, with a census —
+*"7 caídas de voltaje en las 3 resistencias y las 4 fuentes"*. His memory
+was right about the half that mattered, though: §4.2.5 says drops are
+among the expressions deliberately **never evaluated**, so in 2000 a drop
+existed as a classified expression but never as a stored answer. Version 9
+evaluates it. **The quantity changed status between the calculator and the
+port**, which is why the two authorities disagree, and the monograph now
+says so.
+
+### The monograph, as it stands
+
+Classifies by the code, and states both departures from the census in
+§4.3 with citations rather than smoothing them: resistor currents (second
+level on the calculator, stamped into the simultaneous solve here) and
+voltage drops (second-level standing expressions in the thesis, computed
+after the solve here, beside the powers and the seen resistance "an answer
+the census never reached at all"). The thesis-census paragraph is left
+intact as the thesis's own account. Roberto's KCL-term point is now in the
+exposition. 26 + 11 edits, two clean `xelatex` passes, **44 pages before
+and after**.
+
+Deployed to `learn.symbulator.com/monograph.pdf` and verified live by hash.
+
+### The solver's comments
+
+Six sites mention levels; eleven other hits for "degree" are angles — Bode
+phase, schematic labels, the `100<30 degrees` input syntax — and were left
+alone. Of the six:
+
+- **`engine.py`'s `_expand_solution` comment was wrong twice.** It called
+  `circuit.known` *"Third-level"* (those are substituted, second level) and
+  offered *"an op-amp's output current"* as an example — but `_stamp_o`
+  appends `i_out` to `self.unknowns`. Measured: `known` is populated in
+  exactly two places, `_stamp_c` and `_stamp_j`, and nowhere else.
+- **The module design note** was right about the calculator and silent
+  about where the port lands; it now names the resistor-current departure
+  and points at the monograph's §4.3.
+- **`analysis._derived`** now says "third level" is this port's rule —
+  whatever the round derives — and records that the thesis counts only the
+  powers and keeps the drop at second level.
+
+Comments only: no behaviour change, **311 solver tests pass**, and no
+release is implied. The repo sits one commit ahead of PyPI 0.5.22 with
+identical behaviour, so version X, which runs the published package, is
+unaffected.
+
+---
+
 ## #194 — version 9's TR steps are its own — **done, deployed**
 
 Roberto, 30 Aug 2026, asked whether any references to **`ex`** — the
