@@ -8,7 +8,23 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #193 — landing page: spell out DC and AC, bold two-port — **accepted, not done**
+**#192 and #193 deployed together, 30 Aug 2026** — the first `landing`
+deploy since the #140–#157 day, and it behaved: one file, 20,848 bytes,
+13 already identical, and the whole diff was the four intended lines (7
+insertions against 6 deletions, the extra one being the re-wrap of the
+Analyses entry). `build.py --check` was run first, since a landing-only
+session otherwise never runs the guard that compares the landing copy of
+`banner.css` against the canonical in the app tree — clean.
+
+Verified on `https://symbulator.com/`: no *fourteen* anywhere in the page,
+*Thirteen lessons* in the kicker, *thirteen lessons* in the
+`og:description`, *Direct current* and *alternating current* still bold in
+Analyses, and `<b>two-port</b>` in Equivalents. Line 295's "three-phase
+and two-ports" left alone as agreed.
+
+---
+
+## #193 — landing page: spell out DC and AC, bold two-port — **done, deployed**
 
 Roberto, 30 Aug 2026, two wording fixes in the definition list on the
 landing page. **Ships with #192**, which is the other landing change
@@ -53,7 +69,7 @@ it is.
 
 ---
 
-## #192 — the landing page says fourteen lessons — **accepted, not done**
+## #192 — the landing page says fourteen lessons — **done, deployed**
 
 Roberto, 30 Aug 2026: on the landing page, *fourteen lessons* should be
 **thirteen**.
