@@ -2940,14 +2940,21 @@ the problem up - is a living legend among circuit students at UTP.
 
 The **expert** tool can be very useful in transient analysis. Using it,
 however, requires some knowledge. Here’s two things you need to know in order
-to use `ex` like a boss:
+to use {{v7,8|`ex`}}{{v9|expert mode}} like a boss:
 
 First, when Symbulator solves a problem using TR, it follows these general
 steps:
 
+::: only 7,8
 - Generate a set of equations and unknowns for the system, in the frequency domain. Any time-dependent source is replaced with a dummy variable.
 - Solve these frequency domain equations.
 - Replace any dummy variable with the original source value, and convert the answers to the time domain.
+:::
+::: only 9
+- Move every independent source into the frequency domain, and generate a set of equations and unknowns for the system there.
+- Solve these frequency domain equations.
+- Convert the answers back to the time domain.
+:::
 
 Second, when Symbulator solves a problem using the expert tool, it freezes
 this process halfway between steps 1 and 2, so that you can tinker with the

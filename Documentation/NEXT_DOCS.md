@@ -8,6 +8,65 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #194 — version 9's TR steps are its own — **done, deployed**
+
+Roberto, 30 Aug 2026, asked whether any references to **`ex`** — the
+calculator's expert-mode call — survived in the version 9 documentation.
+He had seen some a while back; a clean-up pass by Fable 5 since then had
+caught most of them.
+
+Measured on the **built v9 pages**, not the source: the source legitimately
+contains `ex` inside `{{v7,8|...}}` spans, because versions 7 and 8 really
+do call `s\ex`. Exactly **one** survived in v9, in "Advanced use of Expert
+in TR" — *"two things you need to know in order to use `ex` like a boss"*.
+Now `{{v7,8|`ex`}}{{v9|expert mode}}`. Version 7's eleven are untouched and
+correct.
+
+### The larger fault underneath it
+
+The three steps immediately below that sentence were **ungated**, and they
+describe **Impala** — the version 4 trick of stamping a placeholder for a
+time-varying source, solving, then substituting the real value back:
+
+> Generate a set of equations and unknowns for the system, in the frequency
+> domain. *Any time-dependent source is replaced with a dummy variable.*
+> … *Replace any dummy variable with the original source value*, and
+> convert the answers to the time domain.
+
+True of versions 7 and 8. **Not true of version 9**, which has no Impala
+and needs none: `laplace.tr()` calls `_sources_to_s(desc)` and moves every
+independent source into the s-domain *before* stamping, so no placeholder
+exists at any point (established the same day, while fixing #176's TR
+stamp — see `NEXT.md`). Ungated, the block taught a version 9 reader the
+calculator's algorithm as their own.
+
+The old steps are now `::: only 7,8`, where they are right, and version 9
+has its own:
+
+- Move every independent source into the frequency domain, and generate a
+  set of equations and unknowns for the system there.
+- Solve these frequency domain equations.
+- Convert the answers back to the time domain.
+
+Deliberately three steps with the same shape, because the sentence after
+them — "the expert tool freezes this process halfway between steps 1 and
+2" — has to stay true in both versions, and it does.
+
+### Deployed
+
+`learn.symbulator.com`, 30 Aug 2026, **with v9's PDF rebuilt at Roberto's
+explicit ask** — an exception to the standing `--web`-only instruction at
+the head of `README.md`, not a lifting of it. v7 and v8 need no PDF: their
+text did not change, only its gating. Three files, 27 MB.
+
+Verified live: v9 says *Move every independent source* and has no *dummy
+variable* and no *use ex like a boss*; v7 still has all three; the v9 PDF
+on the server matches the local build by hash. Guards clean — 241 pages,
+zero LaTeX errors, `check_white_text` clean, 73 blocks verified against the
+originals with the same 11 not found, control chars and palette clean.
+
+---
+
 **#192 and #193 deployed together, 30 Aug 2026** — the first `landing`
 deploy since the #140–#157 day, and it behaved: one file, 20,848 bytes,
 13 already identical, and the whole diff was the four intended lines (7
