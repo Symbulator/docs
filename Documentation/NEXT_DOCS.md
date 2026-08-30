@@ -8,7 +8,22 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #188 — the note callout is blue — **done, not deployed**
+**Deployed 30 Aug 2026** to `learn.symbulator.com`, with all three PDFs
+rebuilt — v9 **241 pages**, v7 205, v8 195 — and Roberto's own revision of
+the Acknowledgements in the same upload. Guards: 73 blocks verified against
+the originals and the same 11 not found, control chars clean, palette clean
+at 25 tokens, `check_white_text` clean on all three, zero LaTeX errors.
+Verified live: the blue note rule served, *approx (full precision)* in
+Lesson 5, and the credits' new **AI collaborator** section and *Use AI
+responsibly* callout.
+
+**This was the last full build for now** — see the standing instruction at
+the head of `README.md`: builds are `--web` only until Roberto says
+otherwise.
+
+---
+
+## #188 — the note callout is blue — **done, deployed**
 
 Roberto, 30 Aug 2026: the **note** kind reads too grey.
 
@@ -36,7 +51,7 @@ clean, zero LaTeX errors.
 
 ---
 
-## #190 — the *approx* option names its precision — **done, not deployed**
+## #190 — the *approx* option names its precision — **done, deployed**
 
 Roberto asked what an accurate description of the **approx** rounding
 option would be, guessing "approx without rounding" or "approx with 12

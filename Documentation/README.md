@@ -1,3 +1,26 @@
+> ## ⚠ Standing instruction: build the web only
+>
+> **Roberto, 30 Aug 2026: until further notice, exclude the PDFs from
+> builds unless told otherwise.**
+>
+>     python build.py --web        # <- the default from now on
+>     python build.py              # web AND all three PDFs; ask first
+>
+> The three PDFs are the slow half of a build — minutes of XeLaTeX — and
+> they rarely change in a way anyone reads. `--web` produces the whole
+> site, and `py deploy_symbulator.py learn` then uploads only what
+> changed, so the PDFs already on the server stay as they are.
+>
+> Two things follow from that. `build/` may be deleted at any time (it is
+> untracked and 383 MB), and after that the PDFs are simply **absent**
+> until a full build is asked for — the learn deploy will not upload
+> them, and will not remove the ones already live. And the guards that
+> read PDFs — `tools/check_white_text.py` — have nothing to check on a
+> `--web` build; run them when the PDFs are next built, not before.
+>
+> Lift this when Roberto says so, not on a hunch that a change "looks
+> like it needs" a PDF.
+
 # Symbulator documentation
 
 One source tree; three PDFs and one website come out of it.
