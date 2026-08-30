@@ -8,6 +8,51 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #193 — landing page: spell out DC and AC, bold two-port — **accepted, not done**
+
+Roberto, 30 Aug 2026, two wording fixes in the definition list on the
+landing page. **Ships with #192**, which is the other landing change
+waiting: one `landing` deploy covers all three.
+
+**1. Spell the analyses out, keeping the bold on the terms.** Line 184, in
+the *Analyses* entry:
+
+    <dd><b>DC</b> and <b>AC</b> as phasor analysis, <b>transient</b> in the time
+
+becomes
+
+    <dd><b>Direct current</b> and <b>alternating current</b> as phasor analysis,
+        <b>transient</b> in the time
+
+Capital **D** on *Direct*, because it opens the sentence; lower-case **a**
+on *alternating*, as Roberto wrote it. `<b>transient</b>` and
+`<b>complex frequency domain</b>` further down that entry are untouched.
+The line will want re-wrapping afterwards — the replacement is a good deal
+longer than what it replaces, and the file is hand-wrapped.
+
+**2. Bold the two-port.** Line 197, in the *Equivalents* entry:
+
+    two-port parameters in six varieties.
+
+becomes
+
+    <b>two-port</b> parameters in six varieties.
+
+Note this is the *Equivalents* entry, **not** line 295, which says
+"three-phase and two-ports" in the lessons kicker. That is a different
+sentence about what the lessons cover, it is not bold, and Roberto did not
+ask for it — leave it.
+
+### Deploying
+
+Same as #192: the landing page has no build step, `landing/` *is* the
+site, and `py deploy_symbulator.py landing` uploads it. Do #192 and this
+one together and the whole diff should be four lines in
+`landing/index.html` — two for the lesson count, two for these. Check that
+it is.
+
+---
+
 ## #192 — the landing page says fourteen lessons — **accepted, not done**
 
 Roberto, 30 Aug 2026: on the landing page, *fourteen lessons* should be
