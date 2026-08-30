@@ -508,7 +508,7 @@ j8,2,0,8
 ::: only 9
 The answers you want are `ir2`, `ir6` and `ir8`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 We get these answers: **{1.25,4.75,3.25}**. So I{{sub:R2}} is 1.25A,
@@ -582,7 +582,7 @@ j03,0,3,2
 ::: only 9
 The answers you want are `v1`, `v2` and `v3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer, **{-2.,1.,.5}**, indicates v{{sub:1}}=-2V, v{{sub:2}}=1V,
@@ -723,7 +723,7 @@ Ask **Evaluate** for:
 -ie
 ```
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer, **{-.5,-1.5,1.5,11.5}**, is correct: v{{sub:1}}=-.5,
@@ -759,7 +759,7 @@ j2,2,0,4
 ::: only 9
 The answers you want are `v1` and `v2`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer, **{10.67,-1.33}**, tells us that V{{sub:1}} is 10.67V and
@@ -823,7 +823,7 @@ e2,0,3,12
 ::: only 9
 The answers you want are `ir2` and `ir3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 Answer: **{3.33,-.667}**. This is correct.
@@ -858,7 +858,7 @@ r3,2,0,10
 ::: only 9
 The answers you want are `v1`, `v2`, `ir1`, `ir2` and `ir3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 Answer: **{37.82,32.73,3.27,1.27,3.27}**. You should know how to read these
@@ -984,7 +984,7 @@ e2,b,2,8
 ::: only 9
 The answers you want are `ir2` and `ir3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer, **{.00154,.00111}** is correct: I{{sub:R2}} = 1.54 mA and
@@ -1343,7 +1343,7 @@ ed,3,0,4*vx
 ::: only 9
 The answers you want are `pr1`, `pei`, `pr2`, `pr3` and `ped`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer, **{.768,1.92,.2048,.1792,-3.072}**, is correct.
@@ -1378,7 +1378,7 @@ ed,c,0,4*iro
 ::: only 9
 The answer you want is `iro`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer, **1.5** A, is correct.
@@ -1453,7 +1453,7 @@ r4b,2,0,4
 ::: only 9
 The answers you want are `v1`, `v2` and `v3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer, **{4.8,2.4,-2.4}**, is correct.
@@ -1490,7 +1490,7 @@ r1,4,0,1
 ::: only 9
 The answers you want are `v1`, `v2`, `v3` and `v4`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer, **{26.67,6.67,173.33,-46.67}**, is correct.
@@ -1640,7 +1640,7 @@ jr,0,x,2
 ::: only 9
 The answers you want are `ira`, `ijb` and `ir9`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer, **{3.,-5.4,6.}**, is correct.
@@ -1728,7 +1728,7 @@ j,4,0,vr10/15
 ::: only 9
 The answers you want are `vr10`, `ir2` and `vj`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer, **{7.5,.5,.5}** is correct: i=.5, v=7.5 and v{{sub:d}}=.5.
@@ -1806,7 +1806,7 @@ j,0,o,100'm*vr2
 ::: only 9
 The answers you want are `vo` and `re`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer, **{.904\*vs,10952.}**, is correct: *v*{{sub:O}}*=.904 v*{{sub:S}}

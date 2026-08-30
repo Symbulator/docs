@@ -1636,7 +1636,7 @@ r6,5,0,10'k
 ```
 
 ::: only 9
-Ask **Evaluate** for `expand(vo)` with **Rounding** set to *approximate* in
+Ask **Evaluate** for `expand(vo)` with **Rounding** set to *approx* in
 **Settings** — that is what the calculator's `expand(approx(vo))` is doing. It is arranged differently from
 the book's, which is a matter of presentation rather than of arithmetic.
 :::

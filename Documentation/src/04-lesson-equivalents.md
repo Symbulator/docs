@@ -2211,7 +2211,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 
 The answers you want are `req` and `pmax`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 Choose DC.{{v7,8| You can answer N when asked about the load equations.}} The answer,
@@ -2251,7 +2251,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 
 The answers you want are `req` and `pmax`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 Choose DC.{{v7,8| You can answer N.}} The logic of this problem is identical to
@@ -2345,7 +2345,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 
 The answers you want are `req` and `pmax`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 Choose DC.{{v7,8| You can answer N.}} The answer is **{15., 273.07}**. Let's now

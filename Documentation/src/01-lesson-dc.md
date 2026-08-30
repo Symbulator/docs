@@ -273,7 +273,7 @@ results: an answer of v{{sub:in}}·r{{sub:2}}/(r{{sub:1}}
 + r{{sub:2}}) cannot and should not be rounded.
 
 For numerical work like the example in this lesson, decimals read better. Open the
-**Settings** card and set **Rounding** to *approximate to n significant digits*
+**Settings** card and set **Rounding** to *approx to n digits*
 with **n** = 3, then tick **Use SI prefixes in answers**. The current above
 then reads 6 mA instead of 3/500 A.
 
@@ -1157,7 +1157,7 @@ r2,2,0,2
 ::: only 9
 The answer you want is `ir10`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 We find that `ir10` = {{o:1.22}} A.
@@ -1244,7 +1244,7 @@ Ask **Evaluate** for:
 va-vb
 ```
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer, {{o:{.6,.2,.4,-2.}}}, indicates I{{sub:1}}=.6, I{{sub:2}}=.2,
@@ -1295,7 +1295,7 @@ Ask **Evaluate** for:
 va-vb
 ```
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
 The answer we get indicates that the equivalent resistance, given by
