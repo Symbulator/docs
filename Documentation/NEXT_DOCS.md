@@ -8,6 +8,58 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #188 — the note callout is blue — **done, not deployed**
+
+Roberto, 30 Aug 2026: the **note** kind reads too grey.
+
+It was grey because it had no rule of its own. `tip`, `warning` and
+`danger` each override the base `.callout`; `note` fell through to the
+neutral default — `--ink-3` on `--paper-2` — and so was the only one of
+the four without a hue.
+
+Both outputs now use the palette's **`accent`** (#2f5fa8), the same token
+the links and the section numbers use, so screen and print are the same
+blue and dark mode picks up #5b96e0 on its own.
+
+The web side needed one thing untangled first. `.callout` set
+`--accent: var(--ink-3)` **on the element**, shadowing the page's blue
+inside every callout — so a `note` rule could not have asked for
+`var(--accent)` at all; that is a cycle. The callout-local variable is
+renamed `--callout-accent`, which removes the shadow. Checked before
+doing it: **no callout anywhere in the book contains a link**, so nothing
+was relying on the shadow to tint one.
+
+Verified: light `#2f5fa8` on `#e9eff8`, dark `#5b96e0` on `#24344a`, both
+sitting correctly beside tip green and warning amber; the PDF's note box
+blue to match, `check_palette` clean at 25 tokens, `check_white_text`
+clean, zero LaTeX errors.
+
+---
+
+## #190 — the *approx* option names its precision — **done, not deployed**
+
+Roberto asked what an accurate description of the **approx** rounding
+option would be, guessing "approx without rounding" or "approx with 12
+digits". Measured, it is neither:
+
+| exact | approx | approx to 4 |
+|---|---|---|
+| `15/2` | 7.5 | 7.500 |
+| `3/500` | 0.006 | 0.006000 |
+| `1/3` | 0.3333333333333333 | 0.3333 |
+
+`approx` converts to a decimal and shows **the shortest form that is still
+exactly the same number** at double precision — so `15/2` needs two digits
+and `1/3` needs sixteen. There is no fixed count; the ceiling is the
+machine's, about 15 to 17 significant digits. The real contrast with
+*approx to n digits* is who decides the width: the number, or the setting.
+
+Roberto's choice of label: **approx (full precision)**. Changed in the
+menu, and in the one tutorial line that names the option (Lesson 5), the
+way #179 established.
+
+---
+
 ## #177 — Antony García in the credits — **done, deployed**
 
 Roberto, 30 Aug 2026, alongside Antony's two app suggestions (#175, #176):

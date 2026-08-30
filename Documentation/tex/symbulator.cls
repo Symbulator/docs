@@ -276,8 +276,11 @@
 \newenvironment{callouttip}[1]
   {\begin{@callout}{green}{greenbg}{\@icotip}{Tip}{#1}}
   {\end{@callout}\color{ink}}
+% #188: accent, not slate -- note read grey beside the other three, which
+% each have a hue of their own. Same token the screen side uses, so the
+% two outputs are the same blue.
 \newenvironment{calloutnote}[1]
-  {\begin{@callout}{slate}{panel}{\@iconote}{Note}{#1}}
+  {\begin{@callout}{accent}{accentbg}{\@iconote}{Note}{#1}}
   {\end{@callout}\color{ink}}
 \newenvironment{calloutwarning}[1]
   {\begin{@callout}{amber}{amberbg}{\@icowarning}{Warning}{#1}}

@@ -578,14 +578,17 @@ code {
   border-left: 3px solid var(--ink-3);
   background: var(--paper-2);
   border-radius: 0 6px 6px 0;
-  --accent: var(--ink-3);
+  /* Named for the callout, not `--accent`: setting `--accent` here shadowed
+     the page's blue inside every callout, which is why `note` could not
+     simply ask for it (#188). */
+  --callout-accent: var(--ink-3);
 }
 .callout p:last-child { margin-bottom: 0.4rem; }
 
 .callout-kind {
   display: flex; align-items: center; gap: 0.4rem;
   margin: 0 0 0.35rem !important;
-  color: var(--accent);
+  color: var(--callout-accent);
   font-family: var(--sans); font-weight: 600; font-size: 0.66rem;
   letter-spacing: 0.13em; text-transform: uppercase;
 }
@@ -597,13 +600,19 @@ code {
   color: var(--ink);
 }
 
-.callout.tip     { --accent: var(--green);  border-left-color: var(--green);
+/* `note` is the plainest of the four and used to have no rule at all, so it
+   fell through to the neutral default above and read grey. It is the same
+   blue as the links and the section numbers now (#188, Roberto). */
+.callout.note    { --callout-accent: var(--accent);
+                   border-left-color: var(--accent);
+                   background: var(--accent-bg); }
+.callout.tip     { --callout-accent: var(--green);  border-left-color: var(--green);
                    background: var(--green-bg); }
-.callout.warning { --accent: var(--amber);  border-left-color: var(--amber);
+.callout.warning { --callout-accent: var(--amber);  border-left-color: var(--amber);
                    background: var(--amber-bg); }
-.callout.danger  { --accent: var(--danger); border-left-color: var(--danger);
+.callout.danger  { --callout-accent: var(--danger); border-left-color: var(--danger);
                    background: var(--danger-bg); }
-.callout.absent  { --accent: var(--amber);  border-left-color: var(--amber);
+.callout.absent  { --callout-accent: var(--amber);  border-left-color: var(--amber);
                    background: var(--amber-bg); }
 
 /* In print the tints wash out, so lean on the rule and the label instead. */
