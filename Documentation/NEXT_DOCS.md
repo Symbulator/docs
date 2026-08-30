@@ -22,6 +22,10 @@ The rest of that chapter is still deliberately untouched by #173's cutting
 pass — it is Roberto's own life, his thanks to his father, and other
 people's words.
 
+Built and deployed to `learn.symbulator.com` the same day, all three PDFs
+rebuilt with it; verified live on
+`https://learn.symbulator.com/9/credits`.
+
 ---
 
 ## #171 — a problem no longer reserves a page it cannot fill — **done, deployed**
