@@ -287,21 +287,36 @@
   {\end{@callout}\color{ink}}
 
 % ------------------------------------------------------ problems/figures --
-% after app={\color{ink}} on every box in this class: a breakable box
-% whose end coincides with a page break can leak its fill colour (white,
-% here) into the ambient colour of every page that follows -- Lessons 9
-% and 10 opened with invisible titles and the credits went blank from
-% p255 on, in the 29 Aug 2026 A4 build, and only spans with an explicit
-% \color survived. The re-assertion after each box (and at each chapter
-% start, below) makes the leak unable to outlive the box that caused it.
-\newtcolorbox{problem@frame}[1]{breakable,enhanced,boxrule=0.8pt,
-  colframe=rule,
-  colback=white, left=4mm,right=4mm,top=3mm,bottom=3mm, sharp corners,
-  before upper={{\sffamily\bfseries\fontsize{11.5}{14}\selectfont #1\par}
-                \vspace{1mm}}}
+% #172: a worked problem is a rule and a title, not a frame. It was a
+% breakable tcolorbox until 30 Aug 2026, and the frame was what stranded
+% the circuits: LaTeX refuses \begin{figure} inside any box ("Not in
+% outer par mode"), so every one of the 280 circuits inside a problem had
+% to sit exactly where it was written. A circuit that did not fit in what
+% was left of the page took the rest of the page with it -- measured at
+% sixteen pages of holes in the middle of v9's 259. Frameless, the same
+% circuits are floats, and the text closes up behind them.
+%
+% What keeps a circuit with its problem is the placement build.py asks for:
+% [!ht], never [b] or [p]. A circuit may stay where it was written or rise
+% to the top of the page it lands on; it can never sink to the foot of a
+% page or take a page of its own, either of which would put it after the
+% words that introduce it. Measured over all 284 circuits in v9, none is
+% printed before its own title and only two land more than a page after it.
+% \FloatBarrier at the head of each problem was tried and dropped: it
+% changed neither of those numbers, and it flushed the page it fired on,
+% putting back the mid-page holes this whole change exists to remove.
+%
+% The old frame's \color{ink} guard is gone with the frame. It was there
+% because a breakable box whose end met a page break leaked its white
+% fill into the ambient colour of every page after it (Lessons 9 and 10
+% opened with invisible titles in the 29 Aug 2026 A4 build). The callouts
+% above are still boxes and still carry the guard, and
+% tools/check_white_text.py still renders every page to prove it held.
 \newenvironment{problem}[1]
-  {\csname problem@frame\endcsname{#1}}
-  {\csname endproblem@frame\endcsname\color{ink}}
+  {\par\addvspace{4mm}{\color{rule}\hrule height 0.8pt}%
+   \vspace{1.5mm}%
+   {\sffamily\bfseries\fontsize{11.5}{14}\selectfont #1\par}\vspace{0.5mm}}
+  {\par\addvspace{3mm}}
 
 \newenvironment{solution}
   {\par\vspace{1.5mm}{\sffamily\bfseries\footnotesize\color{accent}%

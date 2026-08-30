@@ -8,6 +8,137 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #171 — a problem no longer reserves a page it cannot fill — 30 Aug 2026
+
+Roberto, 30 Aug 2026: the PDFs have too much blank space in them.
+
+Measured before touching anything, by rendering all 259 pages of v9 and
+finding every run of white 12 mm or taller inside the text block, ignoring
+the sixteen pages that legitimately end a chapter: **27 pages' worth of dead
+space**, 11 at the feet of pages and 16 as holes in the middle, with 40% of
+pages carrying more than 25 mm of it.
+
+The cause of the first half was #152's own guard. `_problem_need()` demanded
+room for a problem's title, its statement **and its first figure**, capped at
+170 mm, and `\Needspace*` moved the whole box to the next page when the
+current one had less. A problem whose circuit would not fit therefore threw
+away everything it had been standing on.
+
+Two changes, both in `build.py`:
+
+- the demand is the rule, the title and the opening lines only, capped at
+  `PROBLEM_NEED_MAX = 34.0` mm. The figure term is gone: circuits float now
+  (#172), so there is nothing to reserve for.
+- `\needspace`, not `\Needspace*`. The starred form fills out the page it
+  breaks from, which does not remove blank space, it moves it from the foot
+  into the middle of the page. That is what the 16 pages of mid-page holes
+  were, and measuring only the feet had hidden them.
+
+Alone this took v9 from 259 pages to 253. With #172 it reaches 241.
+
+---
+
+## #172 — the circuits choose their own page — 30 Aug 2026
+
+Roberto, 30 Aug 2026, asked for figures placed "so as to make the best use of
+the space", with the text moving above or below them. That is LaTeX's float
+mechanism, and the frame around problems was what forbade it: **LaTeX refuses
+`\begin{figure}` inside any box** ("Not in outer par mode"), and 280 of v9's
+282 circuits sat inside the `problem` tcolorbox. A circuit that did not fit in
+what was left of a page took the rest of the page with it, and nothing could
+move up past it.
+
+So the frame goes. `problem` in `tex/symbulator.cls` is now a rule and a bold
+title, the way the practice sections already read, and `build.py` emits each
+circuit as a real float. The frame was not itself the problem — frameless with
+the circuits still nailed in place measures **worse** than before (263 pages) —
+it was only in the way.
+
+**Placement is `[!ht]`, never `[b]` or `[p]`.** A circuit may stay where it was
+written or rise to the top of the page it lands on; it may not sink to the foot
+of a page or take a page of its own, either of which would put it after the
+words that introduce it. Verified by instrumenting the build so every problem
+and every circuit carried a unique printed marker, then reading the built PDF:
+of **284 circuits, none is printed before its own title** and only two land
+more than a page after it.
+
+`\FloatBarrier` at the head of each problem (the `placeins` package) was tried
+and dropped. It changed neither of those numbers, and it flushed the page it
+fired on — putting back exactly the mid-page holes #171 exists to remove, two
+of them over 120 mm.
+
+A figure inside a **callout** still cannot float, because a callout is still a
+tcolorbox. `TexRenderer.boxdepth` counts how deep we are and falls back to the
+old in-place `symfigure` there. One figure in the book is in that position.
+
+**The text had to stop saying where the circuits are.** 70 phrases pointed at a
+figure by its position — "the circuit below", "my solution below the
+schematic", "comparing it to the book's answer, shown below". Every one is
+reworded. References to a ```sym or ```out block, or to a callout, are left
+alone: those still sit exactly where they are written, so "below" is still
+true. Which was which was decided by walking forward from each "below" to the
+first block it could be pointing at, not by eye.
+
+Result, measured the same way as the baseline in #171:
+
+| | pages | dead space | pages over 25 mm |
+|---|---|---|---|
+| before | 259 | 27.2 pages' worth | 40% |
+| #171 alone | 253 | 20.5 | 30% |
+| frameless, circuits fixed | 263 | 24.3 | 33% |
+| **#171 + #172** | **241** | **6.1** | **4%** |
+
+v7 and v8 shrank with it — they share `src/` and the class.
+
+---
+
+## #173 — fewer words for the same thing — 30 Aug 2026
+
+Roberto, 30 Aug 2026: "Sometimes I use too many words to say things." His two
+examples, both from his own revision of Lesson 1: "For each resistor included
+in the description of the circuit" → "For each resistor", and "that is to say"
+→ "defined as".
+
+A cutting pass, not a rewrite. No sentence says anything it did not say
+before, the first person stays, and so do the jokes — the Joker, the Swiss
+knife, "born to be bad". **167 edits, 2,035 words** across every chapter that
+has them: 96 over lessons 2 to 9, then 24 in the Introduction and 47 in
+Lesson 1 when Roberto asked for those two as well. Lessons 10 to 13 were
+written recently and are already tight, and **`99-credits.md` was left alone
+on purpose** — it is Roberto's own life, his thanks to his father, and other
+people's words.
+
+The one repeated cut worth naming: the two sentences about `approx` and
+**Rounding** appear **twenty** times across Lessons 1, 3 and 4. They now say
+the same thing in a clause less.
+
+Also fixed here: `src/02-lesson-symbolic.md` carried a literal `&#8239;`, the
+narrow no-break space as an HTML entity. The web swallowed it; the PDF printed
+the seven characters. It is a plain space now.
+
+**`00-introduction.md` and `01-lesson-dc.md` were done in a second round**,
+after Roberto asked for them, on top of his own uncommitted revision rather
+than instead of it — his revision is committed here as he left it. His draft
+carries trailing spaces on some lines, so the matcher tolerates them; a source
+that has moved on still fails loudly rather than being half-edited.
+
+Four things in that draft were repaired while passing through, and they are
+not cuts, so they are listed here: "the first thing we all to solve it" →
+"the first thing we do to solve it"; "will starts a new input file" →
+"starts"; a comma splice at "the right default for a machine doing algebra,
+it is exactly what you want"; and a missing full stop after "you cannot write
+back to it". Also `Python Anywhere` → `PythonAnywhere`, `labeled` →
+`labelled` to match the rest of the book, "in your device" → "on your
+device", and "what input cards carry" → "what input files carry", which
+looked like a slip for *files*. Say if any of those was deliberate.
+
+**Guards, all clean after the pass**: `check_against_originals.py` reports the
+same 73 blocks verified and the same 11 not found as before it, so no printed
+answer moved; `check_control_chars.py` clean; `check_white_text.py` clean on
+all three PDFs; `build.py --check` clean; zero LaTeX errors in all three logs.
+
+---
+
 ## #164 — Lesson 13 revised for the two-port parameter term — 29 Aug 2026
 
 Roberto, 29 Aug 2026, on discovering that the v9 port had left two-port

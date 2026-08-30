@@ -9,18 +9,18 @@ summary: >
   *expert mode*, for the ambitious user.
 ---
 
-Here you will learn about the different types of symbolic circuits and how to
-solve them in Symbulator, using the solve command when needed, and — for the
-more adventurous users — leveraging the powerful *expert mode*.
+Here you will learn about the types of symbolic circuits and how to solve
+them in Symbulator, using the solve command when needed, and — for the more
+adventurous — the powerful *expert mode*.
 
 ## About symbolic problems {#about-symbolic}
 
 The problem we saw in {{ref:lesson-dc}} was a numerical problem because it
-involved a numerical circuit: from the start, we knew the numerical values for
-all the elements in it. None of them were unknown.
+involved a numerical circuit: from the start, we knew the values of all its
+elements. None were unknown.
 
-When a circuit has one or more elements for which we do not have a numerical
-value, we call it a **symbolic circuit**.{{i:symbolic circuit}} A symbolic
+A circuit with one or more elements whose value we do not know is a
+**symbolic circuit**.{{i:symbolic circuit}} A symbolic
 problem is one that involves a symbolic circuit. It gives me great joy when I
 encounter a symbolic problem, because the ability to simulate symbolic circuits
 is what sets Symbulator apart from other programs.
@@ -36,21 +36,20 @@ Pick one spelling for each unknown and keep it.
 
 I find it useful to distinguish between two types of symbolic problems:
 
-- **Purely symbolic problems** are problems that use symbolic circuits where the
-  desired answers are also symbolic. The answers are given as expressions of
-  unknown variables. Solving them in Symbulator is as straightforward as
-  solving numerical problems.
-- **Numerical-from-symbolic problems** start with a symbolic circuit, but ask us
-  to find numerical answers. This is possible when the problem gives us
-  additional information about the circuit.
+- **Purely symbolic problems** use symbolic circuits whose answers are also
+  symbolic, given as expressions of unknown variables. Solving them in
+  Symbulator is as straightforward as solving numerical problems.
+- **Numerical-from-symbolic problems** start with a symbolic circuit but ask
+  for numerical answers. That is possible when the problem gives us more
+  information about the circuit.
 
 Numerical-from-symbolic problems can be solved in two ways. If they are simple
-— just one or two unknown values, and only one or two numerical answers wanted
-— it is time-efficient to simulate the circuit symbolically and then solve for
-the numerical answers with the {{v7,8|**solve** command of the
+— one or two unknown values, one or two numerical answers wanted — it is
+quicker to simulate the circuit symbolically and then solve for the numerical
+answers with the {{v7,8|**solve** command of the
 calculator}}{{v9|**Solve** card, which sits under the results and
-does exactly that job}}. If they are not simple, it is easier and more
-time-efficient to use **expert mode**{{v9|, which version 9 offers in its
+does exactly that job}}. If they are not simple, it is easier to use
+**expert mode**{{v9|, which version 9 offers in its
 **Expert Mode** box}}.
 
 Let's see an example of each.
@@ -74,22 +73,18 @@ AS5's Figure 2.29
 :::
 
 ::: answer
-As you can see, all the values in this circuit are variables: no element values
-are known. This is an example of a symbolic circuit. Imagine you are asked to
+All the values in this circuit are variables: no element value is known. This is an example of a symbolic circuit. Imagine you are asked to
 find symbolic expressions for the current i, the voltage drop in R2, and the
 power consumed by R1 and R2. Since we are being asked to find symbolic answers
 from a symbolic circuit, this is a purely symbolic problem.
 
-This is how I would describe this circuit. First, I name the nodes. The node
-called a in the schematic, I will still call node a. The node called b will
-serve as my ground node, so I call it node 0. And the node between the two
-resistors, I will call node c.
+This is how I would describe this circuit. First, the nodes. The node called a
+in the schematic stays node a. The node called b is my ground, so it becomes
+node 0. The node between the two resistors I call c.
 
-Then, we name the elements. I will name the source ev, and will call the
-resistors r1 and r2. For the values of the elements, I will use variables. The
-value of the source will be v, and the values of the resistors will be r1 and
-r2. It is not a problem that the symbolic value is the same as the name of the
-element.
+Then the elements. I name the source ev and the resistors r1 and r2, and give
+them variables for values: v for the source, r1 and r2 for the resistors. It is
+no problem that a symbolic value carries the same name as its element.
 
 ```sym 7
 "ev,a,0,v:r1,a,c,r1:r2,c,0,r2"→cir
@@ -147,17 +142,16 @@ p_{r2} = \dfrac{r2\,v^2}{(r1 + r2)^2} \quad\text{and}\quad -p_{ev} = \dfrac{v^2}
 $$
 
 It is this ability to simulate symbolically, as if it were nothing, that puts
-Symbulator in a league of its own. Getting symbolic answers from a symbolic circuit takes
-no extra effort.
+Symbulator in a league of its own. Symbolic answers from a symbolic circuit
+take no extra effort.
 :::
 :::
 
 ## Numerical from symbolic, with solve {#with-solve}
 
-Getting numerical answers from a symbolic circuit, on the other hand, requires
-an additional step. This additional step can be the use of the solve command,
-as we will see in this next example. Or it can be the use of the expert mode,
-as we will see in the example after that.
+Getting numerical answers from a symbolic circuit, on the other hand, takes an
+extra step: the solve command, as in this next example, or expert mode, as in
+the one after.
 
 ::: problem B11's Example 5.6, with solve
 ::: figure assets/circuit/b11e0506.jpg
@@ -165,25 +159,22 @@ B11's Example 5.6
 :::
 
 ::: answer
-This is a very nice numerical-from-symbolic problem. We should be able to solve
-it into numerical results because, even though the problem hides two values
-from us (the value of the source E and of the resistor R1), it gives us in
-exchange two answers (the equivalent resistance RT and the current I3) that we
-can use to solve for the unknowns.
+This is a very nice numerical-from-symbolic problem. We can solve it into
+numbers because, although it hides two values from us (the source E and the
+resistor R1), it gives us in exchange two answers (the equivalent resistance RT
+and the current I3) to solve for them with.
 
 Since this circuit is structurally identical to B11's Example 5.7 solved in
-{{ref:lesson-dc}}, we will use the same names for the nodes. The circuit
-description is identical except for the element's values. As values for the
-elements in the circuit, Symbulator will accept numbers, variables or even
-algebraic expressions. For this example, I will use e for the value of source
-e, and r1 for the value of the r1 resistor.
+{{ref:lesson-dc}}, we will use the same names for the nodes. The description is
+identical except for the values. Symbulator accepts numbers, variables or even
+algebraic expressions as values. Here I use e for source e, and r1 for
+resistor r1.
 
 ::: only 7,8
 ::: warning Clean your {{t:container}}
-Make sure that the variables you are going to use as symbolic values are empty,
-meaning that they do not exist in {{t:container_the}}. You can do this either by
-emptying the whole {{t:container}} or by deleting these specific variables from
-the memory, thus: `DelVar e,r1`
+Make sure the variables you will use as symbolic values are empty — that they
+do not exist in {{t:container_the}}. Empty the whole {{t:container}}, or delete
+just those variables: `DelVar e,r1`
 :::
 :::
 
@@ -206,10 +197,9 @@ r3,3,0,6'k
 Run it in DC, as before.
 :::
 
-A moment later, Symbulator is done, and we are ready to answer the questions.
-Using the symbolic answers provided by Symbulator and the known answers given
-by the problem, we will write two equations, and then solve them for the two
-unknowns that interest us.
+A moment later Symbulator is done. From its symbolic answers and the answers
+the problem gives us, we write two equations and solve them for the two
+unknowns.
 
 The problem says that I3 is 6 mA. In Symbulator, I3 is {{v7,8|`ir3`}}{{v9|the
 **current through** line of the `r3` block, `ir3`}}, the current
@@ -254,9 +244,8 @@ Then press **Solve equations**.
 
 ::: only 7,8
 ::: note The apostrophe shorthand does not work here
-Notice that you cannot use `'k` here as a shorthand for kilo, or any other SI
-prefix, because that shorthand only works within the values in the description
-of the circuit.
+You cannot use `'k` here as a shorthand for kilo, or any other SI prefix: it
+works only in the values in the circuit description.
 :::
 :::
 ::: only 9
@@ -276,10 +265,9 @@ simulators allow this flexibility.
 ::: only 7,8
 Symbulator's true strength is seen in numerical-from-symbolic problems like the
 one we solved above, when we use its expert mode of simulation.{{i:expert mode}}
-Expert mode cracks these problems open even faster, and can give you fully
-numerical values to all the answers of problems that have an equal number of
-unknown values and of answers provided by the problem. Learning to use the
-expert mode pays off handsomely in terms of additional power and speed.
+Expert mode cracks these problems open even faster, and gives fully numerical
+answers whenever the problem provides as many answers as it hides values.
+Learning it pays off handsomely in power and speed.
 
 Let's solve the same circuit again, this time using the expert mode's program
 **ex**.
@@ -297,10 +285,9 @@ before. Like this:
 "e,1,0,e:r1,1,2,rx:r2,2,3,4'k:r3,3,0,6'k"→cir
 ```
 
-We use rx instead of r1 for our symbolic value because the expert mode will try
-to save into that variable the value it finds, and r1 (as well as other r#
-variables) cannot be used to store anything: trying to store a value into r1
-results in an error.
+We use rx instead of r1 because expert mode saves the value it finds into that
+variable, and r1 — like the other r# variables — cannot store anything: trying
+to results in an error.
 
 To run an expert mode simulation, type this:
 
@@ -312,9 +299,8 @@ s\ex(cir)
 ```
 
 When prompted, select DC and press Enter. Now you will see a prompt asking you
-to add equations, variables and conditions. You may recall from your algebra
-class that you need an equal number of equations and unknowns in order to solve
-a set of equations into numerical values. The statement of the problem gives us
+to add equations, variables and conditions. You may recall from algebra that solving a set
+of equations into numbers needs as many equations as unknowns. The statement of the problem gives us
 the information we need to write the two additional equations.
 
 In "Add equations" type:
@@ -335,17 +321,14 @@ e,rx
 e,rx
 ```
 
-Now we have six variables and six equations. Press Enter and wait just a few
-seconds. A few other dialogs will appear. In this and all the other expert
-examples in this volume, just press OK in these prompts without changing
-anything in them. When Symbulator says "Done", go ahead and retrieve the
+Now we have six variables and six equations. Press Enter and wait a few
+seconds. A few other dialogs appear; in this and every other expert example in
+this volume, just press OK without changing anything. When Symbulator says "Done", go ahead and retrieve the
 answers: `rx` gives 2000 and `e` gives 72. Both are right.
 
-The speed advantage of the expert mode is not necessarily evident in this
-simple problem. It does give you an idea of what the expert mode is all about:
-you get to halt the simulation in mid-air and give Symbulator extra
-information. Had this circuit been larger, the benefit in computation time
-would be clear.
+The speed advantage is not obvious in so simple a problem, but the idea is:
+you halt the simulation in mid-air and give Symbulator extra information. Had
+the circuit been larger, the saving would be clear.
 :::
 :::
 :::
@@ -353,9 +336,9 @@ would be clear.
 ::: only 9
 Symbulator's true strength is seen in numerical-from-symbolic problems like the
 one we solved above, when we use its expert mode of simulation.{{i:expert mode}}
-Expert mode cracks these problems open in a single call, and can give you fully
-numerical values to all the answers of problems that have an equal number of
-unknown values and of answers provided by the problem.
+Expert mode cracks these problems open in a single call, and gives fully
+numerical answers whenever the problem provides as many answers as it hides
+values.
 
 The three things the calculator stopped to ask you for — extra equations, extra
 unknowns and extra conditions — are three boxes in Symbulator 9, and they are
@@ -713,7 +696,7 @@ i{{sub:s}} = {{o:0.3973}} A.
 
 And the answers show *how* the zero-dissipation constraint is met:
 i{{sub:R5}} comes back exactly {{o:0}}. The CCVS's voltage is
-0.1&#8239;i{{sub:R5}}, so the constraint drove its own controlling
+0.1 i{{sub:R5}}, so the constraint drove its own controlling
 current to zero — the source dissipates nothing because the circuit
 arranged for it to *be* nothing.
 

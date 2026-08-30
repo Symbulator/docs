@@ -55,6 +55,19 @@ except FileNotFoundError:
 
 FIG_LINE_MM = float(_FIGSIZES.get("line_mm", 156.0))
 
+#: #171: the most a problem may demand before it starts -- the title and
+#: three lines or so. Above that it stops protecting a title and starts
+#: throwing away the foot of the page.
+PROBLEM_NEED_MAX = 34.0
+
+#: #172: where a circuit may go. "h" first so it stays where it was
+#: written whenever it fits; "t" for the top of the page it lands on.
+#: Never "b" or "p" -- a circuit that sank to the foot of the page, or
+#: to a page of its own, would be reached before the words that set it
+#: up. "!" tells LaTeX to ignore its own fullness quotas, which are
+#: tuned for journal figures, not for a circuit per worked problem.
+FIGURE_FLOAT = "!ht"
+
 
 def figure_size_mm(ref: str):
     """(width_mm, height_mm) to render a figure at, or (None, None).
@@ -831,6 +844,8 @@ class TexRenderer:
         self.terms = book.meta.get("terms", {})
         self.labels = book.labels(version)
         self.chapter_no = None
+        #: how many tcolorboxes deep we are. A float cannot leave one.
+        self.boxdepth = 0
 
     def inline(self, text: str) -> str:
         return "".join(self.inode(n) for n in parse_inline(text))
@@ -877,30 +892,25 @@ class TexRenderer:
                                        for b in walk(blocks, self.v)) if x)
 
     def _problem_need(self, b: Node) -> float:
-        """Millimetres the opening of a problem box needs on the page.
+        """Millimetres a problem needs before it is worth starting.
 
-        Title, then the statement paragraphs, then the first figure --
-        the unbreakable block that actually causes the stranding. A
-        problem that opens with something else settles for a flat
-        minimum. Estimates are rough (a paragraph line is guessed from
-        its character count); the cap keeps a tall figure from demanding
-        more than most of a page.
+        Enough for the rule, the title and the opening lines of the
+        statement -- no more. #152 used to add the first figure's height
+        too, and cap the demand at 170mm; that is what emptied the foot
+        of one page in six, because a problem whose circuit would not fit
+        moved wholesale and left everything it had been standing on
+        behind. The circuits float now (#172), so they no longer need to
+        be reserved for, and the demand is back to what it is for: a
+        title must not be the last thing on a page. Estimates are rough
+        -- a paragraph line is guessed from its character count.
         """
-        need = 14.0                          # title + box padding
+        need = 11.0                          # the rule, the title, the air
         for child in list(walk(b.children, self.v))[:4]:
             if child.kind == "para":
                 need += 6.0 * max(1, round(len(child.text) / 90))
-            elif child.kind == "figure":
-                w_mm, h_mm = figure_size_mm(child.arg)
-                if h_mm:
-                    inner = min(w_mm, 147.0)     # the box eats ~9mm of line
-                    need += h_mm * inner / w_mm + 6.0
-                else:
-                    need += 60.0
-                break
             else:
                 break
-        return min(need, 170.0)
+        return min(need, PROBLEM_NEED_MAX)
 
     def block(self, b: Node) -> str:
         k = b.kind
@@ -969,8 +979,11 @@ class TexRenderer:
             return f"\\begin{{{env}}}\n{lines}\n\\end{{{env}}}"
         if k in ("tip", "note", "warning", "danger"):
             title = self.inline(b.arg) if b.arg else ""
+            self.boxdepth += 1               # no floats in here (#172)
+            body = self.blocks(b.children)
+            self.boxdepth -= 1
             return (f"\\begin{{callout{k}}}{{{title}}}\n"
-                    f"{self.blocks(b.children)}\n\\end{{callout{k}}}")
+                    f"{body}\n\\end{{callout{k}}}")
         if k == "figure":
             src = (b.arg if b.arg.lower().endswith((".png", ".jpg", ".jpeg"))
                    else os.path.splitext(b.arg)[0])
@@ -981,15 +994,21 @@ class TexRenderer:
             w_mm, _h = figure_size_mm(b.arg)
             img = (f"\\symfig{{{w_mm:.1f}}}{{{src}}}" if w_mm
                    else f"\\includegraphics[width=\\figwidth]{{{src}}}")
-            return ("\\begin{symfigure}\n"
+            if self.boxdepth:
+                # Inside a callout, which is a tcolorbox: LaTeX will not
+                # let a float out of a box, so this one stays put.
+                return ("\\begin{symfigure}\n"
+                        f"{img}\n"
+                        f"\\caption{{{cap}}}\n\\end{{symfigure}}")
+            return (f"\\begin{{figure}}[{FIGURE_FLOAT}]\\centering\n"
                     f"{img}\n"
-                    f"\\caption{{{cap}}}\n\\end{{symfigure}}")
+                    f"\\caption{{{cap}}}\n\\end{{figure}}")
         if k == "problem":
-            # #152: a problem's header must not be stranded at the foot of
-            # a page while its statement figure starts the next. Demand
-            # room for the title, the statement and the first figure; if
-            # the page has less, the whole box starts on the next one.
-            return (f"\\Needspace*{{{self._problem_need(b):.0f}mm}}\n"
+            # #171: a problem's title must not be the last thing on a
+            # page. The plain \\needspace, not the starred
+            # \\Needspace*: the starred one fills out the page it breaks
+            # from, which only moves the blank from the foot to the middle.
+            return (f"\\needspace{{{self._problem_need(b):.0f}mm}}\n"
                     f"\\begin{{problem}}{{{self.inline(b.arg)}}}\n"
                     f"{self.blocks(b.children)}\n\\end{{problem}}")
         if k == "answer":

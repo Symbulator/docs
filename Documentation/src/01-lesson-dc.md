@@ -2,18 +2,16 @@
 id: lesson-dc
 kind: lesson
 title: Direct current analysis
-updated: 2026-08-26
+updated: 2026-08-29
 summary: >
   Learn to describe a circuit in Symbulator, and how to run a *direct current*
   analysis using **dc**. Learn how to describe a *voltage source* using **e**,
   and a *resistor* (or a conductance) using **r**.
 ---
 
-I firmly believe one learns best by *doing*. Because of this, I have written this
-documentation of Symbulator as a tutorial, where you can learn how to use
-Symbulator by working through a series of progressively more diverse and more
-complex examples. In a moment, I'll teach you how to swim. But for now, let's jump right into the
-water!
+I firmly believe one learns best by *doing*, so I have written this
+documentation as a tutorial, where you learn Symbulator by working through a
+series of progressively more diverse and complex examples. In a moment, I'll teach you how to swim. But for now, let me throw you in the deep end!
 
 ## Run a direct current analysis {#run-dc}
 
@@ -23,9 +21,8 @@ type this:}}{{v8|I want you to create a new document in your calculator, or to
 delete all variables you don't need from your current one (ideally, the current
 document should be empty), and type this:}}{{v9|Open Symbulator 9. If you already
 have it installed as a local app, then just open that app. If you do *not* have it locally, 
-open the **[online app](https://symbulator.pythonanywhere.com/)** in a browser connected to the Internet. 
-Once it is open, in the box labelled **Circuit Description**, type this — one element per
-line:}}
+open the **[online app](https://symbulator.pythonanywhere.com/)** in a browser connected to the Internet. Let's click on **Clear all inputs**, found at the top right of the app page, to make sure there is nothing anywhere in the input fields.
+Then, in the box labelled **Circuit Description**, type the following circuit description, one element per line:}}
 
 ```sym 7
 s\dc("e1,1,0,36:r1,1,2,1'k:r2,2,3,3'k:r3,3,0,2'k")
@@ -44,37 +41,36 @@ r3,3,0,2'k
 Now I want you to press ENTER.
 :::
 ::: only 9
-Just below the box are two menus. Set **Type of analysis** to *Solve
-circuit* and **Analysis** to *DC — direct current*. Then click the
-**Run Symbulator** button.
+Scroll down to the section called **Analysis & Settings**. If it is collapsed, open it with the little blue triangle to its left; under it are two drop-down menus. Set **Type of analysis** to *Solve
+circuit* and **Analysis** to *DC — direct current*. Then click
+**Run Symbulator**.
 :::
 
 ::: only 7
 If you typed everything correctly and your calculator is properly set up with
-Symbulator, you should have seen BUSY appear in the bottom right corner of your
-screen, and your calculator seemingly go into a trance and spew out a series of
-cryptic messages on the screen. Then, after a few seconds, it should have
-returned back to normal, displaying a short message of Done.
+Symbulator, you should have seen BUSY appear in the bottom right corner, and
+your calculator seemingly go into a trance and spew out a series of cryptic
+messages. Then, after a few seconds, it should have returned to normal,
+displaying a short Done.
 :::
 ::: only 8
 If you typed everything correctly and your calculator is properly set up with
-Symbulator, you should have seen several lines of text appear on the screen,
-with a series of cryptic messages. Then, after a few seconds, it should have
-displayed a short message of Done.
+Symbulator, you should have seen several lines of text appear, with a series
+of cryptic messages. Then, after a few seconds, it should have displayed a
+short Done.
 :::
 ::: only 9
-If you typed everything correctly, the word *Solving…* appears beside the
-button for a moment. When it changes to "Solved!", the results are ready. Scroll down past the 
-Outputs heading and you will find a **Results** section that was not
-active before. It presents the results for every node and every element of 
-the circuit you just solved.
+If you typed everything correctly, the word *Solving…* appears on the
+button for a moment. When it changes to *Solved!*, the results are ready. Scroll down to the
+Outputs part of the page, where the **Results** section is now active, holding
+the results for every node and every element of the circuit you just solved.
 :::
 
-Congratulations! You have just run your first simulation in Symbulator.
+Congratulations! You have just run your first simulation in Symbulator 9.
 
 ### How does it work
 
-Let's now go over what exactly it is that you typed, one piece at a time.
+Let's now go over what we just did, one piece at a time.
 
 ::: only 7
 To analyse a direct current circuit in Symbulator, we use a program called
@@ -91,12 +87,11 @@ knows exactly what we want. And because it is a program, it carries the
 parenthesis **()** after its name.
 :::
 ::: only 9
-The selections that you made in the **Analysis and Settings** menu tell Symbulator
-*what kind of question* you are asking (i.e. what **Type of analysis**) and
-*which analysis* answers it. Choosing *Solve circuit* and *DC — direct current*
-tells Symbulator that you want to solve a direct current circuit. Everything else 
-on *Analysis and Settings* is optional. You will meet the other menus and
-cards in later lessons, and until then they can be left exactly as they are.
+The selections you made in **Analysis & Settings** tell Symbulator *what kind
+of question* you are asking (solve a circuit) and *which analysis* to perform
+(direct current). Everything else there is optional: you will meet the other
+menus and cards in later lessons, and until then they can be left exactly as
+they are.
 :::
 
 ::: only 7,8
@@ -122,9 +117,9 @@ s\dc(cir)
 ```
 
 ::: only 9
-The most important input you need to give Symbulator is the description of the 
-circuit you want to analyse. That input goes inside the **Circuit Description** area, 
-and takes the form of a series of lines of text, each one describing an element.{{i:circuit description}}
+The most important input is the description of the circuit you want to
+analyse. It goes in the **Circuit Description** area, as a series of lines of
+text, each describing one element.{{i:circuit description}}
 :::
 
 ```field 9 Circuit Description
@@ -135,11 +130,9 @@ r3,3,0,2'k
 ```
 
 ::: only 9
-A new line is the ordinary way to separate one element from the next, and it is
-what you will see throughout this tutorial: it keeps a long circuit readable,
-and it makes a mistake easy to find, because each line stands alone. Symbulator
-also accepts a colon as a separator, which is how the calculator versions have
-always done it. This is the same circuit in one line: 
+Using one line per element keeps a long circuit readable,
+and it makes mistakes easier to find. Symbulator
+also accepts a colon as a separator. This is the same circuit in one line: 
 :::
 
 ```field 9 Circuit Description
@@ -147,38 +140,33 @@ e,1,0,36:r1,1,2,1'k:r2,2,3,3'k:r3,3,0,2'k
 ```
 
 ::: only 7,8
-In terms of the simulation, the results of doing it this way are exactly the
-same as doing it in a single step. I like to use **cir** as the name of the
-variable where I store my circuits, and that's what you will see in this
-tutorial. But you are free to use any other valid variable name. Throughout
-this text, you will see both ways being used.
+The results are exactly the same as doing it in a single step. I like to use
+**cir** as the name of the variable where I store my circuits, and that is what
+you will see in this tutorial, though any valid variable name will do. You will
+see both ways used throughout.
 :::
 
 ::: only 9
-You do not have to retype a circuit you have used before. You can save it, 
-along with all the other current settings and inputs, into something called
-an **entry**, so you can use them in the future. You can save this entry, along 
-with other entries like it, in something called an **input file**. When you create 
-an input file or an entry you will be asked to give names to both. Input files 
-must have the .cir extension.
+To reuse this circuit later, save it as an **entry** in an **input file**. You
+will be asked to name both. Input files must have the `.cir` extension.
 :::
 
 ### Look at the elements
 
-Now let's examine the contents of the circuit description. {{v7,8|Study it, and
-you will see that there are three colons in it. In Symbulator, colons are used
-to separate elements in a circuit description. Thus, putting the colons aside,
-we can see that in this description there are four elements being
-described:}}{{v9|Study it, and you will see it has four lines. Each line describes
+Now let's examine the contents of the circuit description. {{v7,8|Study it and you will see three colons.
+In Symbulator, colons separate elements in a circuit description, so putting
+them aside, this description has four elements:}}{{v9|Study it, and you will see it has four lines. Each line describes
 one element.}}
 
-- The first one is {{v7,8|`e1,1,0,36`}}{{v9|`e,1,0,36`}}
+::: only 7,8
+- The first one is `e1,1,0,36`
 - the second one is `r1,1,2,1'k`
 - the third one is `r2,2,3,3'k`
 - the fourth one is `r3,3,0,2'k`
+:::
 
-At the moment, they may look cryptic and indecipherable. But by the time you
-are done with this lesson, you will be able to understand them with ease.
+At the moment they may look cryptic. But by the end of this lesson you will
+read them with ease.
 
 ## How to describe a resistor {#describe-resistor}
 
@@ -186,74 +174,57 @@ Notice that the second, third and fourth elements in the list all start with
 the letter **r**. These are resistors.{{i:resistor}}
 
 ::: note Describing resistors
-In Symbulator, an ideal resistor is described with four pieces of information,
-separated by commas, as follows: a unique name to identify the resistor (which
-must start with the letter **r**), the names of the first and second node of
-the resistor, and the value of the resistor in ohms (Ω).
+An ideal resistor is described with four pieces of information, separated by
+commas: a unique name (which must start with the letter **r**), the names of
+its first and second node, and its value in ohms (Ω).
 
-For example, an ideal resistor called **r1**, connected between two nodes
-called **a** and **b** with a resistance of **300** Ω, would be described in
-Symbulator as follows: `r1,a,b,300`
+For example, an ideal resistor called **r1**, between nodes **a** and **b**,
+of **300** Ω, is described `r1,a,b,300`
 :::
 
 ### How to name resistors
 
-Every resistor in your circuit must have a name. As long as it starts with the
-letter **r**, and as long as it is unique, this name can be whatever you want.
+Every resistor must have a name. As long as it starts with the letter **r**
+and is unique, it can be whatever you want. *Unique* means no other element or
+node has the same name.
 
 ::: only 7
-With one exception: the variable `rc` is reserved in the TI-89 calculator. You
-cannot use rc as a name for a resistor or anything else.
+With one exception: `rc` is reserved in the TI-89 calculator, and cannot name
+a resistor or anything else.
 
 ::: warning Can't touch rc
 The variable `rc` is reserved by the calculator, and cannot be used as a name.
 :::
 :::
 ::: only 8
-There are two exceptions I know of so far: the names `r` and `rr` should not be
-used as names for resistors, because some of the variables they generate as
-answers have the same name as reserved variables.
+Two exceptions I know of so far: `r` and `rr` should not name resistors,
+because some of the answer variables they generate collide with reserved
+ones.
 
 ::: warning Can't touch r or rr
 The names `r` and `rr` cannot be used, because their answers conflict with
 reserved variables in the calculator.
 :::
 :::
-::: only 9
-::: tip No reserved names
-Version 9 reserves nothing. Any name starting with **r** will do, `rc`
-included, and the same goes for every other kind of element.
-
-Two names are refused, and neither is a resistor: a short circuit called `s`,
-whose current would be spelled `is`, and a source called `eturn`, whose
-resistance would be spelled `return`. Both of those spellings already mean
-something in Python, so the answer would be read as that rather than as your
-circuit. Symbulator says so and suggests `s1` or `eturn1`.
-:::
-:::
 
 ### How to name nodes
 
-Naming the nodes in a circuit is the first thing we all do before we analyse it. 
-In a circuit description for Symbulator, every node in
-your circuit must have a name. Node names must be unique: no other node or
-circuit element should have the same name. As long as these names are unique,
-they can be whatever you want, with 
+Naming the nodes is the first thing we do to solve a circuit. Every node must
+have a name, and node names must be unique: no other node or element may have
+the same one. Otherwise they can be whatever you want, with 
 {{v7,8|two constraints. The first one is that:}}{{v9|one constraint:}}
  at least one node should be called **0** (zero). This will be considered the
 *ground node* of your circuit{{i:ground node}} and will have, by definition, a
 voltage of 0 volts.
 
 ::: warning You need a ground node
-Every circuit in Symbulator must have a node called 0 to serve as reference or
-ground node.
+Every circuit must have a node called 0 to serve as reference or ground.
 :::
 
 ::: only 7
-The second restriction is that you cannot use variables that are reserved in
-the calculator as names. Besides rc, discussed above, there are others, such as
-c1, c2, c3 … c99. Others, more exotic, are listed in the User's Manual of the
-calculator.
+The second restriction is that you cannot use the calculator's reserved
+variables as names. Besides rc, there are c1, c2, c3 … c99, and more exotic
+ones listed in the calculator's User's Manual.
 :::
 ::: only 8
 The second restriction is that you cannot use variables that are reserved in
@@ -263,51 +234,45 @@ calculator.
 
 ### Values can use SI prefixes
 
-The values of circuit elements are often given using prefixes of the
-International System (SI), such as kilo, milli, micro, etc. Because of this,
-Symbulator includes a shorthand that helps it understand SI prefixes. Whenever
-an SI prefix is used in the value of an element in a circuit description,
-preceded by an apostrophe, Symbulator will multiply it by the corresponding
-factor, using exact values.{{i:SI prefixes}}
+The values of circuit elements are often given with prefixes of the
+International System (SI) — kilo, milli, micro. So Symbulator has a shorthand
+for them: an SI prefix in an element's value, preceded by an apostrophe,
+multiplies it by the corresponding factor, exactly.{{i:SI prefixes}}
 
 ::: tip Prefixes welcome!
-You can use SI prefixes, preceded by an apostrophe, in the values of your
-elements, and Symbulator will understand this as shorthand to multiply that
-value by the corresponding factor.
+You can use SI prefixes, preceded by an apostrophe, in the values of
+elements.
 :::
 
-So, for example, the value of a 3 kΩ resistor can be described to Symbulator as
-`3'k`, and it will understand that this means $3 \times 10^{3}$. The value of
-an 8 kΩ resistor can be entered in many ways: `8000`, `8'k`, `8000.` and `8E3`
-are all equivalent, except that the first two will be treated as exact values,
-while the other two will be treated as approximate values.
+For example, an 8 kΩ resistor can be entered in many ways: `8000`, `8'k`,
+`8000.` and `8E3` are all equivalent, except that the first two are treated as
+exact and the other two as approximate.
 
 ## What answers do you get {#dc-answers}
 
 After the simulation in DC is complete, Symbulator {{v7,8|stores a series of
 answers in the calculator's memory, labelled with easy to remember names for
 your convenience}}{{v9|fills in the **Results** section for you, under
-**[ O U T P U T S ]**. Nothing is hidden away: every answer it worked out is
+**OUTPUTS**. Nothing is hidden away: every answer it worked out is
 on the page, and reading them is a matter of scrolling and looking}}.
 
 ::: only 9
-The **Results** section comes in two parts. **Node voltages** first, one line
+The **Results** are arranged in groups. **Node voltages** first, one line
 per node, and then **Results by element**, which gives each element a small
 block of its own headed by its name and its kind — `r1` *resistor*, `e`
 *voltage source*.
 
 Every answer is written the way you would write it by hand, as a named quantity
-and its value: v{{sub:1}} = 36 V, i{{sub:r1}} = 6 mA. You never type
-those names — they are labels, there so you know what you are looking at.
+and its value: v{{sub:1}} = 36 V, i{{sub:r1}} = 6 mA.
 
-::: tip How answers are shown, and how to change it
+### How answers are shown
 Out of the box, Symbulator answers *exactly*. It works symbolically, so it
 would rather tell you a current is 3/500 A than round it off. That is the right
-default for a machine doing algebra, and in the symbolic lessons later on it is
-exactly what you want: an answer of v{{sub:in}}·r{{sub:2}}/(r{{sub:1}}
-+ r{{sub:2}}) cannot be rounded, and should not be.
+default for a machine doing algebra, and exactly what you want for symbolic
+results: an answer of v{{sub:in}}·r{{sub:2}}/(r{{sub:1}}
++ r{{sub:2}}) cannot and should not be rounded.
 
-For numerical work like this lesson, decimals read better. Open the
+For numerical work like the example in this lesson, decimals read better. Open the
 **Settings** card and set **Rounding** to *approximate to n significant digits*
 with **n** = 3, then tick **Use SI prefixes in answers**. The current above
 then reads 6 mA instead of 3/500 A.
@@ -321,23 +286,19 @@ Throughout this tutorial the numerical examples assume approximate answers to
 three or four figures with prefixes on, and the symbolic ones assume *exact*.
 Where a change is needed, the text says so.
 :::
-:::
 
 ### Answer for each node
 
-For each node used in the description of the circuit, its voltage with
-reference to the ground is {{v7,8|stored in a variable called v plus the name of
+For each node, its voltage with reference to ground is {{v7,8|stored in a variable called v plus the name of
 the node. For example, for a node called 1, its voltage is stored in a variable
 called v1}}{{v9|shown under **Node voltages**, labelled *v* with the node's name
-below it. Node 1 appears as `v1`}}.
+below it. The voltage in node 1 appears as `v1`}}.
 
 ### Answers for each resistor
 
-For each resistor included in the description of the circuit, the following
-answers are calculated:
+For each resistor, the following answers are calculated:
 
-- The voltage drop in the resistor, that is to say, the voltage in the first
-  node declared minus the voltage in the second node declared, in volts. For a
+- The voltage drop in the resistor, defined as the voltage in the first node minus the voltage in the second node, in volts. For a
   resistor called r5, this is {{v7,8|stored in `vr5`}}{{v9|the line marked
   **voltage drop**, labelled `vr5`}}.
 - The current through the resistor, flowing from the first node towards the
@@ -347,8 +308,8 @@ answers are calculated:
   is {{v7,8|stored in `pr12`}}{{v9|the line marked **power consumed**, labelled
   `pr12`}}.
 
-By now, you should be able to understand the description of the second, third
-and fourth elements in our example.
+By now you should understand the description of the second, third and fourth
+elements in our example.
 
 ## How to describe a voltage source {#describe-voltage-source}
 
@@ -357,14 +318,12 @@ The first element in our example, on the other hand, started with the letter
 
 ::: note Describing voltage sources
 In Symbulator, a voltage source is described with four pieces of information,
-separated by commas, as follows: a unique name to identify the source (which
-must start with the letter **e**), the name of the positive node of the source,
-the name of the negative node of the source, and the value of the source in
-volts (V).
+separated by commas: a unique name (which must start with the letter **e**),
+the names of its positive and negative node, and its value in volts (V).
 
-For example, an ideal voltage source called **e1**, connected with its positive
-terminal in node **3** and with its negative terminal in the ground node **0**,
-with a value of 12 volts, would be described as follows: `e1,3,0,12`
+For example, an ideal voltage source called **e1**, with its positive terminal
+in node **3**, its negative terminal in the ground node **0**, and a value of
+12 volts, is described `e1,3,0,12`
 :::
 
 ### How to name voltage sources
@@ -374,18 +333,15 @@ the letter **e**, and it can be whatever you want.
 
 ### Values can use SI prefixes
 
-The values of a voltage source in the circuit description can also use SI
-prefixes. They can be used in the values of all elements in the circuit
-description.
+A voltage source's value can use SI prefixes too — they work in the values of
+every element.
 
 ### Answers for a voltage source
 
-For each voltage source included in the description of the circuit, the
-following answers are calculated:
+For each voltage source, the following answers are calculated:
 
-- The voltage drop in the source, that is, the voltage in the first node
-  declared minus the voltage in the second node declared, in volts. For a
-  source called e5, {{v7,8|`ve5`}}{{v9|the **voltage drop** line,
+- The voltage drop in the source, defined as the voltage in the first node
+  minus the voltage in the second, in volts. For a source called e5, {{v7,8|`ve5`}}{{v9|the **voltage drop** line,
   `ve5`}}.
 - The current through the source, flowing from the first node towards the
   second, in amperes. For a source called ex, {{v7,8|`iex`}}{{v9|the
@@ -413,9 +369,9 @@ Let's go back now to the simulation we ran earlier. That simulation corresponds
 to the circuit given in Example 5.7 in Boylestad's *Introductory Circuit
 Analysis* (11ed). Moving forward, I will refer to that textbook as **B11**.
 
-For your benefit, the problem statement and the circuit schematic have been
-scanned and are reproduced below, exactly as they appear in the textbook. This
-will be the case in every other problem shown in this tutorial. Since this is
+The problem statement and the circuit schematic are reproduced exactly as they
+appear in the textbook, as they will be for every other problem in this
+tutorial. Since this is
 for educational purposes, it is my understanding that it falls squarely within
 the "fair use" doctrine of copyright law. In any event, no copyright
 infringement is meant.
@@ -426,31 +382,28 @@ B11's Example 5.7
 :::
 
 ::: answer
-As you can see, all the values in this circuit are numbers: no element values
-are unknown. This is an example of a **numerical circuit**. A circuit is
-numerical if we know the numerical value of every element in it.
+All the values in this circuit are numbers: no element value is unknown. This
+is a **numerical circuit** — one where we know the numerical value of every
+element in it.
 
-I will now walk you step by step through the solution of this numerical
-problem. The process you will see here applies to most numerical simulations in
-Symbulator. First, you describe the circuit. Then, you run the simulation.
-Finally, you get the answers.
+I will now walk you step by step through the solution. The process applies to
+most numerical simulations in Symbulator: first you describe the circuit, then
+you run the simulation, then you get the answers.
 
-**Step 1: describe the circuit.** The first step in solving a circuit is to
-describe it. Circuit description starts with **naming the nodes**. As we
-mentioned earlier, you can call the nodes anything you want, be it a number or
-a letter, as long as the name is unique. But you must always have one node
-called 0 (zero); this is your ground node and has a voltage of 0 V. In this
-particular circuit, the ground node is indicated with the ground symbol, but
-that is not always the case. When it is not marked, you pick a node to serve as
-zero.
+**Step 1: describe the circuit.** Description starts with **naming the
+nodes**. As we said, you can call them anything you want, number or letter, as
+long as the name is unique — but one node must always be called 0 (zero), the
+ground node, with a voltage of 0 V. In this circuit the ground node is marked
+with the ground symbol. That is not always so; when it is not marked, you pick
+a node to serve as zero.
 
 I labelled the nodes in this circuit, starting in the ground and moving
 clockwise, as 0, 1, 2 and 3. It helps me to pencil the names in the schematic
 itself.
 
 ::: tip Write 'em down!
-I strongly recommend that you write down the names of your nodes and your
-elements onto the circuit schematic itself, so you don't forget who's who.
+Write the names of your nodes and elements onto the circuit schematic itself,
+so you don't forget who's who.
 :::
 
 ::: figure assets/circuit/b11e0507b.jpg
@@ -461,17 +414,14 @@ After naming the nodes, I am ready to describe the elements of the circuit in
 Symbulator notation.
 
 Let's start with the source: when I only have one voltage source, like here, I
-enjoy {{v7,8|naming it with a single letter: e}}{{v9|giving it a short name: e}}. Having chosen a name for it,
-I can now describe the voltage source as follows:
-{{v7,8|`e,1,0,36`}}{{v9|`e,1,0,36`}}, given that its name is
-{{v7,8|e}}{{v9|e}}, its positive node is called 1, its negative node is called
-0, and its value is 36 volts between these nodes in that order.
+enjoy {{v7,8|naming it with a single letter: e}}{{v9|giving it a short name: e}}. So the voltage source is
+{{v7,8|`e,1,0,36`}}{{v9|`e,1,0,36`}}: its name is
+{{v7,8|e}}{{v9|e}}, its positive node is 1, its negative node is 0, and its
+value is 36 volts between them in that order.
 
-Now I describe the resistors. I named the first resistor r1, and I described it
-as follows: `r1,1,2,1'k`, because its name is r1, its first node is called 1,
-its second node is called 2, and its value is 1 kΩ. The second resistor we
-describe similarly: `r2,2,3,3'k` and likewise for the third resistor:
-`r3,3,0,2'k`.
+Now the resistors. I named the first r1 and described it `r1,1,2,1'k`: its
+name is r1, its first node 1, its second node 2, and its value 1 kΩ. The
+second is `r2,2,3,3'k`, and the third `r3,3,0,2'k`.
 
 ::: note An important point about SI prefixes
 In the case of kilo, we can write it as either `'k` or `'K`. But that's not the
@@ -481,10 +431,9 @@ spelling of all SI prefixes.}}
 :::
 
 ::: only 7,8
-We pass the description of a circuit to Symbulator as a string. This means we
-open with a quotation mark, then enter the descriptions of each element as
-above, separated with colons, and then close with a quotation mark. We can
-store this string in a variable, like this:
+We pass the description to Symbulator as a string: open with a quotation mark,
+enter each element's description separated by colons, and close with a
+quotation mark. We can store the string in a variable:
 :::
 ::: only 9
 Those four descriptions, gathered together, are the whole circuit. Put them in
@@ -524,16 +473,14 @@ Then press **Run Symbulator**.
 :::
 
 ::: only 7
-Symbulator will let you know when it has completed a successful simulation by
-saying Done. It took my calculator 16 seconds to solve this circuit. In that
-time, Symbulator found a total of 16 answers, and stored each one in a
-memorably named variable in the current folder.
+Symbulator says Done when a simulation completes. It took my calculator 16
+seconds to solve this circuit, in which time it found 16 answers and stored
+each in a memorably named variable in the current folder.
 :::
 ::: only 8
-Symbulator will let you know when it has completed a successful simulation by
-saying Done. It took my calculator under 2 seconds to solve this circuit. In
-that time, Symbulator found a total of 16 answers, and stored each one in a
-memorably named variable in the current document.
+Symbulator says Done when a simulation completes. It took my calculator under
+2 seconds to solve this circuit, in which time it found 16 answers and stored
+each in a memorably named variable in the current document.
 :::
 ::: only 9
 The page fills in below almost immediately — this circuit takes well under a
@@ -558,8 +505,7 @@ For a DC analysis, these answers are as follows:
   circuit **as seen by that source**.
 
 ::: note The sign is in the details
-So that you interpret the signs of your answers correctly, remember to pay
-attention to the details. For example:
+To read the signs of your answers correctly, mind the details:
 
 - The current in the elements is defined as going through the element from the
   first node to the second node.
@@ -592,7 +538,7 @@ element**, and read the line marked **resistance seen**:
 r{{sub:e}} = 6 kΩ
 :::
 
-That is to say, 6 kΩ. Correct.
+That is 6 kΩ. Correct.
 
 *Answer to question (b).* Current Is is defined in the schematic as the current
 flowing through the source, in the direction that goes from node 0 to node 1.
@@ -614,8 +560,8 @@ The **current through** line in the same block reads ie = −6 mA. The answer
 we want is its opposite, 6 mA.
 :::
 
-That is to say, 6 mA. Another way to find the answer, given that this is a
-series circuit where all elements have the same current through them, is to
+That is 6 mA. Another way, since this is a series circuit where every element
+carries the same current, is to
 {{v7,8|evaluate the current through any of the resistors}}{{v9|read the
 **current through** line of any resistor — all three say 6 mA}}.
 
@@ -687,10 +633,9 @@ problem in Symbulator.
 
 ### Numerical problems in DC using e and r
 
-The following are practice problems taken from several textbooks. They were
-chosen because they apply only the concepts that you have learned so far in
-Lesson 1. This will allow you to practice these concepts and reinforce them
-before moving to Lesson 2.
+These practice problems are taken from several textbooks, chosen because they
+apply only the concepts you have learned so far. They let you practise and
+reinforce them before Lesson 2.
 
 The problem below comes from Figure 1-26 (a) in Hyatt and Kemmerly's
 *Engineering Circuit Analysis* (5ed). Moving forward, we will refer to that
@@ -698,9 +643,9 @@ textbook as **HK5**.
 
 ::: problem HK5's Figure 1-26
 
-We are asked to determine the current, voltage drop and power consumed in
-each resistor, as well as the power *delivered* by each voltage source. We
-are also asked to check that the powers in the circuit add up to zero.
+We are asked for the current, voltage drop and power consumed in each
+resistor, the power *delivered* by each voltage source, and a check that the
+powers in the circuit add up to zero.
 
 ::: figure assets/practice/hk5s-figure-1-26-1.jpg
 
@@ -708,9 +653,9 @@ are also asked to check that the powers in the circuit add up to zero.
 
 Here is my solution.
 
-I named the nodes thus: the bottom node is named **0**, the top nodes, from
-left to right, are named **1**, **2** and **3**. My description of the
-circuit is given below{{v7,8|, as the argument of the DC simulation command}}.
+I named the nodes thus: the bottom node **0**, and the top nodes, from left to
+right, **1**, **2** and **3**. My description of the
+circuit{{v7,8|, as the argument of the DC simulation command}}:
 
 ```sym 7
 s\dc("e1,1,0,120:r1,1,2,30:e2,2,3,30:r2,3,0,15")
@@ -756,16 +701,15 @@ We could also have asked for all the answers with one array:
 
 ::: problem B11's Example 5.20
 
-The practice problems will get progressively more complicated as we move on.
-This will allow you to build up your *'symbulating'* skills with confidence.
+The practice problems get progressively more complicated, so you build up your
+*'symbulating'* skills with confidence.
 
 ::: figure assets/practice/b11s-example-5-20-2.jpg
 
 :::
 
-I named the nodes clockwise starting from the ground: **0**, **1**, **2**,
-**3** and **4**. Below is my circuit description, given as an argument of the
-command to do the DC simulation:
+I named the nodes clockwise from the ground: **0**, **1**, **2**, **3** and
+**4**. My circuit description, as an argument of the DC simulation command:
 
 ```sym 7
 s\dc("e1,1,0,50:r1,1,2,4:e2,2,3,12.5:r2,3,4,7:r3,4,0,4")
@@ -817,7 +761,7 @@ r3,1,0,1.2'k
 
 ::: problem B11's Example 7.2
 
-Determine I{{sub:4}}, I{{sub:S}} and V{{sub:2}}. My solution below. I named
+Determine I{{sub:4}}, I{{sub:S}} and V{{sub:2}}. My solution: I named
 the top node **1**, and the other **2**:
 
 ::: figure assets/practice/b11s-example-7-2-4.jpg
@@ -849,7 +793,7 @@ Answers: `v2` is {{o:2.51}} V, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `i
 
 :::
 
-For your benefit, I have labeled the node names I used. My solution:
+I have labelled the node names I used. My solution:
 
 ```sym 7
 s\dc("e1,0,1,6:e2,0,2,18:r1,1,a,5:r2,a,2,3:r3,1,b,6:r4,b,2,2")
@@ -879,7 +823,7 @@ Determine I{{sub:6}} and V{{sub:6}}.
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("e,1,0,240:r1,1,2,5:r2,2,0,6:r3,2,3,4:r4,3,0,6:r5,3,4,1:r6,4,0,2")
@@ -909,7 +853,7 @@ Calculate the indicated currents and voltages.
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("r2,2,3,8'k:r1,3,4,4'k:r3,1,2,12'k:r4,1,4,24'k:
@@ -946,7 +890,7 @@ I{{sub:C}}, and the voltage drop areas A, B and C.
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("e,1,0,16.8:r1,1,2,9:r2,1,2,6:r3,2,3,4:r4,3,0,6:r5,3,0,3:r6,2,0,3")
@@ -977,7 +921,7 @@ Current I{{sub:1}} is found via `ir1` = {{o:1.2}} A, I{{sub:2}} via `ir2` =
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("e,1,0,28:r1,1,0,1.6'k:r2,1,0,20'k:r3,1,0,56'k")
@@ -1008,7 +952,7 @@ Determine V{{sub:b}} and V{{sub:c}}.
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("e,a,0,120:r1,a,b,10:r2,b,c,20:r3,c,0,30:
@@ -1040,7 +984,7 @@ Determine the current through each resistor.
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("e1,1,0,15:r1,1,a,4:e3,3,0,20:r3,3,a,10:e2,0,2,40:r2,a,2,5")
@@ -1100,7 +1044,7 @@ our answers.}}
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("e,1,0,24:r1,1,2,6:r2,1,2,6:r3,1,2,2:r4,2,0,8:r5,2,0,12")
@@ -1129,7 +1073,7 @@ V{{sub:5}}={{o:19.2}} V.
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("e1,a,0,20:e2,a,b,5:e3,c,0,8:r1,a,c,10:r2,b,c,4:r3,b,0,5")
@@ -1159,7 +1103,7 @@ Find the voltage drop in the 3Ω resistor.
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("e8,1,0,8:r2,1,2,2:r4,2,0,4:r6,2,3,6:r3,3,0,3:r10,3,4,10:e1,0,4,1")
@@ -1185,13 +1129,13 @@ correct.
 
 ::: problem B11's Example 8.18
 
-Find the current through the 10Ω resistor in the network shown below.
+Find the current through the 10Ω resistor in the network shown.
 
 ::: figure assets/practice/b11s-example-8-18-15.jpg
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("e15,1,0,15:r10,1,2,10:r8,1,3,8:r5,3,2,5:r3,3,0,3:r2,2,0,2"):
@@ -1213,7 +1157,7 @@ r2,2,0,2
 ::: only 9
 The answer you want is `ir10`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 We find that `ir10` = {{o:1.22}} A.
@@ -1300,7 +1244,7 @@ Ask **Evaluate** for:
 va-vb
 ```
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer, {{o:{.6,.2,.4,-2.}}}, indicates I{{sub:1}}=.6, I{{sub:2}}=.2,
@@ -1316,7 +1260,7 @@ Find the total circuit resistance, and the indicated currents and voltages.
 
 :::
 
-My solution below:
+My solution:
 
 This is how I named the nodes: the top, **1**; the bottom, **2**, and **a**
 and **b** as in the figure. In my solution below, notice I introduced two
@@ -1351,7 +1295,7 @@ Ask **Evaluate** for:
 va-vb
 ```
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer we get indicates that the equivalent resistance, given by

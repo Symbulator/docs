@@ -11,15 +11,14 @@ summary: >
 
 In this lesson you will learn how to use the **ac** {{v7,8|program}}{{v9|analysis}}
 to solve AC circuits in Symbulator. You will also learn how to describe the
-elements you already know so they are suitable inputs for AC analysis, and how
-to use tools you already know, such as **er** and **th**, in their AC mode.
+elements you already know so they suit AC analysis, and how to use **er** and
+**th** in their AC mode.
 
 ## AC analysis in Symbulator {#ac-analysis}
 
-The main thing you need to know is that, when working in AC mode, Symbulator
-understands phasors, namely complex numbers.{{i:phasor}} You can analyse
-alternating current circuits by means of phasors: Symbulator uses them in the
-input, in the analysis and in the output.
+The main thing to know is that in AC mode Symbulator understands phasors —
+complex numbers.{{i:phasor}} It uses them in the input, in the analysis and in
+the output.
 
 ::: danger Symbulator does not understand sinusoids
 You should not feed Symbulator any sinusoids, or expect any sinusoid answers
@@ -29,17 +28,16 @@ from it. Any conversion to and from sinusoids has to be done by you.
 ::: only 7,8
 ### The ac program
 
-Symbulator has a program dedicated to analysing AC circuits, called **s\ac**.
-As opposed to s\dc and s\tr, which take only the circuit description, s\ac
-takes two inputs: the circuit description, in a string, and the frequency of
-the circuit in radians per second.
+Symbulator has a program for analysing AC circuits, called **s\ac**. Unlike
+s\dc and s\tr, which take only the circuit description, s\ac takes two inputs:
+the description, in a string, and the frequency of the circuit in radians per
+second.
 
 ### The AC mode
 
-Besides the s\ac program itself, you can use other Symbulator tools and
-programs, such as s\er, s\th and s\ex, in their AC mode. You do this by
-selecting AC from the options when asked what type of analysis you want to
-conduct. In this lesson, we will see examples of all of these.
+Besides s\ac itself, you can use s\er, s\th and s\ex in their AC mode: select
+AC when asked what type of analysis you want. This lesson has examples of all
+of them.
 :::
 ::: only 9
 ### The AC analysis
@@ -58,10 +56,9 @@ frequency where the circuit needs one.
 
 ### Describing elements for AC
 
-When describing a circuit for AC analysis, you have to describe the value of
-elements in the correct way for this type of analysis. Valueless elements, like
-the short circuit and the op amp, are described the same way. Here's how to
-describe elements with values:
+When describing a circuit for AC analysis, element values have to be written
+the way this analysis expects. Valueless elements, like the short circuit and
+the op amp, are unchanged. Here's how to describe the ones with values:
 
 - Current sources **j** and voltage sources **e** accept complex values. You can
   declare their value in rectangular form, e.g. `10-3𝐢`, or in angular form,
@@ -830,10 +827,9 @@ When asked, specify AC. Then we are asked for the frequency. The problem gives
 2000 Hz; Symbulator asks for radians per second, so I enter `2π2E3`. I could
 also have entered 12566.37.
 
-Please notice two things. First, I did not use an SI prefix: the shorthand only
-works in the circuit description string. Second, I used 2E3 instead of 2000
-because I wanted an approximate value rather than an exact one — when I tried
-with exact values only, cSolve was taking too long.
+Notice two things. First, I did not use an SI prefix: the shorthand only works
+in the circuit description string. Second, I used 2E3 rather than 2000 because
+I wanted an approximate value — with exact values, cSolve took too long.
 
 ::: warning If exact fails in AC, try approximate
 It is a known bug of the TI CAS that `cSolve` often struggles with some exact
@@ -882,11 +878,10 @@ capacitance is a real number.
 The answer is c = 0.000001235, or 1.235 µF. This is not the answer the book
 gives.
 
-Initially I used cSolve here, which also works, but my friend Qifan Wang — who
-verified my answers to this problem — pointed out, correctly, that it is not
-necessary: focusing on the imaginary part removes all references to the complex
-operator, so for practical purposes we are solving an equation with real terms
-only.
+I first used cSolve here, which also works, but my friend Qifan Wang — who
+verified my answers — pointed out, correctly, that it is not necessary:
+focusing on the imaginary part removes every reference to the complex operator,
+so we are solving an equation in real terms only.
 
 Let's now repeat the process, using what I suspect is the frequency they meant:
 2000 rad/s. I also want to show you something cool. Now that we know the answer
@@ -973,10 +968,9 @@ used in Circuits I and II courses, and it particularly shines when solving
 symbolic problems. However, as you move to larger and more complex problems, it
 will struggle.
 
-In a sense, this is not a problem. First, because it makes no sense to solve
-large circuits symbolically: the resulting expressions are beyond our
-understanding. Second, because there are already many established tools to
-solve such large circuits numerically.
+In a sense this is not a problem. First, solving large circuits symbolically
+makes no sense: the expressions are beyond our understanding. Second, there are
+already many established tools for solving them numerically.
 :::
 ::: only 9
 Symbulator 9 is not bound by the memory of a handheld, so it goes considerably

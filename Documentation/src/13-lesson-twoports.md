@@ -58,8 +58,8 @@ Enter gives you a two-port called `zp`.
 ::: only 8
 When asked, specify DC as the analysis and `z` as the parameter type.
 
-Then it wants a name. You are offered the chance to add between one and six
-more characters to it, and you can leave that empty — the Nspire does not
+Then it wants a name. You may add between one and six more characters, or
+leave it empty — the Nspire does not
 reserve `z11`, `z12`, `z21` and `z22`, so the two-port can simply be called
 `z`.
 :::
@@ -504,7 +504,7 @@ It wants four values — the voltage and current at the input, then the voltage
 and current at the output — and answers with all four figures at once.
 
 ::: problem Gain Example 1
-For the circuit below, find G{{sub:v}}, G{{sub:i}}, G{{sub:p}} and
+For the circuit, find G{{sub:v}}, G{{sub:i}}, G{{sub:p}} and
 Z{{sub:in}}. The two-port has y parameters y{{sub:11}} = 0.4,
 y{{sub:12}} = −0.002, y{{sub:21}} = −5 and y{{sub:22}} = 0.04.
 

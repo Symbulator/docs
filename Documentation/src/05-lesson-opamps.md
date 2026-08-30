@@ -25,10 +25,9 @@ letter **o**; then, the names of the two input nodes, separated by a comma (the
 polarity doesn't matter, you can give these input nodes in any order); and
 finally, the name of the output node.
 
-For example, an ideal op amp called o1, whose input nodes are 2 and 3, and
-whose output node is node 5, would be described as `o1,2,3,5`. And an ideal op
-amp called o, whose input nodes are p and n and whose output node is also
-called o, would be `o,p,n,o`
+For example, an ideal op amp called o1, with input nodes 2 and 3 and output
+node 5, is described `o1,2,3,5`. And one called o, with input nodes p and n and
+output node o, is `o,p,n,o`
 :::
 
 ### What answers do you get
@@ -46,12 +45,11 @@ answers:
 
 ### Livin' on the edge
 
-Since I was born to be bad, I like to play with how I name nodes in order to
-get the answers as close to the book as possible. So, do not be surprised if I
-call one op amp "o" and then also name its output node "o". That way I can ask
-for `vo` and `io`, and get the output voltage and current. But realise this: in
-asking for `vo`, we are asking for the voltage in node o. And in asking for
-`io`, the o stands for the element o.
+Since I was born to be bad, I like to play with node names to get the answers
+as close to the book as possible. So do not be surprised if I call one op amp
+"o" and name its output node "o" as well. That way I can ask for `vo` and `io`
+and get the output voltage and current. But realise this: `vo` asks for the
+voltage in node o, while in `io` the o stands for the element o.
 
 ::: only 7,8
 You, too, can be bad to the bone, and live dangerously with your node naming,
@@ -59,12 +57,11 @@ as long as you anticipate what variables Symbulator will create to store the
 answers. I tell you this because there are limits to what you can get away
 with.
 
-For example, when deciding the name of nodes, remember that for a node you name
-#, Symbulator will create a variable called v# to store the voltage of that
-node. Because of this, you should never name a node the same as any element for
-which Symbulator will also calculate a voltage drop: r, e, j, c, l, for
-example. If in doubt, play it safe: give nodes unique names, different from any
-other node and from any element.
+For example, when naming nodes, remember that for a node called #, Symbulator
+creates a variable v# for its voltage. So never give a node the same name as an
+element that has a voltage drop of its own: r, e, j, c, l. If in doubt, play it
+safe and give every node a name of its own, different from any other node and
+from any element.
 
 In this example, we got away with it because op amps are not that type of
 element. Symbulator does not save a voltage drop for op amps in a variable
@@ -98,7 +95,7 @@ Bo2's Drill Exercise 3.2
 :::
 
 ::: answer
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("e,1,0,.1:r12,1,2,1'k:r2o,2,o,10'k:r30,3,0,1'k:r3o,3,o,20'k:o,3,2,o")
@@ -216,7 +213,7 @@ through a short is precisely a source with nothing in the way of it: R{{sub:EQ}}
 = 0Ω.
 
 So V{{sub:TH}} is correct, as can be seen by comparing it to the book's
-answer, shown below — and the Thévenin resistance is not merely asserted
+answer — and the Thévenin resistance is not merely asserted
 here, it is the answer Symbulator gives.
 :::
 
@@ -416,7 +413,7 @@ current through the feedback resistor (i.e. the 15’kΩ resistor).
 
 :::
 
-My answer below. Notice we used the m for milli in the value of the voltage
+My answer: Notice we used the m for milli in the value of the voltage
 source.
 
 ```sym 7
@@ -468,7 +465,7 @@ The answer, **-6**, is correct.
 
 ::: problem TR5's Example 4-14 (Inverting)
 
-Find the input-output relationship of the circuit below.
+Find the input-output relationship of the circuit.
 
 ::: figure assets/practice/tr5s-example-4-14-inverting-10.jpg
 
@@ -526,8 +523,7 @@ $$
 $$
 :::
 
-which is correct, as can be seen by comparing it to the book's answer,
-below:
+which is correct, as can be seen by comparing it to the book's answer.
 
 ::: figure assets/practice/tr5s-example-4-14-inverting-12.jpg
 
@@ -716,8 +712,7 @@ $$
 \dfrac{r2\,(r3 + r4)}{(r1 + r2)\,r4}
 $$
 
-which is correct, as can be seen by comparing it to the book's answer, shown
-below:
+which is correct, as can be seen by comparing it to the book's answer.
 
 ::: figure assets/practice/tr5s-example-4-13-non-inverting-amplifier-19.jpg
 
@@ -872,11 +867,11 @@ The answer you want is `prl`, in **Results** — the power consumed by the
 load resistor `rl`.
 :::
 
-The answer, **.00225**, is correct. The explanation to the apparent paradox
-that the load in (a) is drawing more power than the source in (b) seems able
-to provide evaporates once we remember that the ideal op amp shown in the
-schematic is only part of the truth: the real op amp has its own source of
-power, which provides the difference.
+The answer, **.00225**, is correct. The apparent paradox — the load in (a)
+drawing more power than the source in (b) seems able to provide — evaporates
+once we remember that the ideal op amp in the schematic is only part of the
+truth: the real one has its own source of power, which makes up the
+difference.
 
 :::
 
@@ -967,8 +962,7 @@ The answer you want is `vo`, in **Results**.
 
 -(r2/r1)(va+vb)
 
-which is correct, as can be seen by comparing it to the book's answer, shown
-below:
+which is correct, as can be seen by comparing it to the book's answer.
 
 ::: figure assets/practice/bo2s-example-3-2-adder-or-summing-26.jpg
 
@@ -1010,8 +1004,7 @@ Ask **Evaluate** for `expand(vo)`, exactly as on the calculator.
 
 -rf v1/r1 - rf v2/r2 - rf v3/r3
 
-which is correct, as can be seen by comparing it to the book's answer, shown
-below:
+which is correct, as can be seen by comparing it to the book's answer.
 
 ::: figure assets/practice/as2s-figure-5-21-adder-or-summing-28.jpg
 
@@ -1193,7 +1186,7 @@ $$
 \dfrac{r1\,r4\,v2 - r2\,\bigl(r3\,v1 + r4\,(v1 - v2)\bigr)}{r1\,(r3 + r4)}
 $$
 
-This expression is equivalent to the book's answer, shown below:
+This expression is equivalent to the book's answer.
 
 ::: figure assets/practice/as2s-figure-5-24-difference-or-differential-35.jpg
 
@@ -1235,11 +1228,10 @@ The answer we get, **v2-v1**, is correct.
 Design an op amp circuit with inputs v{{sub:1}} and v{{sub:2}} such that
 v{{sub:o}} = -5v{{sub:1}} + 3v{{sub:2}}.
 
-My solution follows. The problem statement is a fancy way to say: for the
-same circuit of the previous problem, find what values of resistors you need
-to use if you want to get an output v{{sub:o}} = -5v{{sub:1}} + 3v{{sub:2}}.
-Although this is not strictly a Symbulator problem, I present it here because
-it illustrates how Symbulator fits in such design problems.
+My solution follows. The problem statement is a fancy way of saying: for the
+circuit of the previous problem, find the resistor values that give an output
+v{{sub:o}} = -5v{{sub:1}} + 3v{{sub:2}}. Not strictly a Symbulator problem, but
+it shows how Symbulator fits into design problems.
 
 First we take that part of v{{sub:o}} that is a factor of v{{sub:1}}, and
 make it equal to -5. Thus:
@@ -1290,10 +1282,9 @@ equal 3.
 :::
 
 We get **r2\*r4/(r1\*(r3+r4))+r4/(r3+r4)=3** Now, since you have two
-equations, you can solve for two unknowns. Out of the four resistors whose
-values you can decide upon, two can be whatever you want. The book recommends
-you use R{{sub:1}} = 10’k and R{{sub:3}}=20’k. Now let's find the values for
-the other two resistors, R{{sub:2}} and R{{sub:4}}.
+equations, you can solve for two unknowns. Of the four resistors you get to
+choose, two can be whatever you want. The book recommends R{{sub:1}} = 10’k and
+R{{sub:3}}=20’k. Now let's find R{{sub:2}} and R{{sub:4}}.
 
 ```sym 7
 solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=20000
@@ -1351,11 +1342,10 @@ values are correct.
 
 Design a difference amplifier with gain 4.
 
-My solution follows. The problem statement, again, is just a fancy way to
-say: for the same circuit of the previous problem, find what values of
-resistors you need to use if you want to get an output v{{sub:o}} = **4**
-(v{{sub:2}}-v{{sub:1}}), or in other terms, -4v{{sub:1}} + 4v{{sub:2}}. Same
-as before.
+My solution follows. Again the statement is a fancy way of saying: for the
+circuit of the previous problem, find the resistor values that give an output
+v{{sub:o}} = **4** (v{{sub:2}}-v{{sub:1}}), that is, -4v{{sub:1}} +
+4v{{sub:2}}. Same as before.
 
 ```sym 7
 Define v1=1:Define v2=0:vo=-4
@@ -1476,8 +1466,7 @@ o2,0,4,o
 
 {{o:((g1-g2) vs)/(g3-g4)}}
 
-which is correct, as can be seen by comparing it to the book's answer, shown
-below:
+which is correct, as can be seen by comparing it to the book's answer.
 
 ::: figure assets/practice/bo2s-example-3-3-cascade-38.jpg
 
@@ -1582,8 +1571,7 @@ same as 1mA.
 
 ::: problem AS2's Practice Problem 5.10 (Cascade)
 
-If v{{sub:1}} = 2V and v{{sub:2}} = 1.5V, find v{{sub:o}} in the circuit
-below.
+If v{{sub:1}} = 2V and v{{sub:2}} = 1.5V, find v{{sub:o}} in the circuit.
 
 ::: figure assets/practice/as2s-practice-problem-5-10-cascade-43.jpg
 
@@ -1696,7 +1684,7 @@ The answer, **8 v1 – 4 v2**, is correct.
 
 ::: problem AS2's Example 5.10 (Cascade)
 
-If v{{sub:1}} = 1V and v{{sub:2}} = 2V, find v{{sub:o}} in the circuit below.
+If v{{sub:1}} = 1V and v{{sub:2}} = 2V, find v{{sub:o}} in the circuit.
 
 ::: figure assets/practice/as2s-example-5-10-cascade-46.jpg
 
@@ -1759,8 +1747,7 @@ o2,4,6,o
 The answer you want is `vo`, in **Results**.
 :::
 
-We get the right answer. Let's compare it with the book's answer, which is
-below:
+We get the right answer. Let's compare it with the book's answer.
 
 ::: figure assets/practice/tr5s-example-4-17-cascade-48.jpg
 
@@ -1820,10 +1807,9 @@ This is exactly the answer from the book:
 
 :::
 
-If you are ever in doubt about whether two expressions are the same,
-{{v7,8|enter them both, separately, into the calculator, and then ask the
-calculator to compare them using the equality sign. If the answer is
-'**true**', then they are the same.}}{{v9|subtract one from the other in
+If you are ever in doubt whether two expressions are the same,
+{{v7,8|enter them both separately into the calculator and compare them with
+the equality sign. If the answer is '**true**', they are the same.}}{{v9|subtract one from the other in
 **Evaluate**. If the answer is `0`, they are the same — an equality sign
 would only be read as a comparison to solve, not as a question about
 sameness.}}

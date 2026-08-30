@@ -18,18 +18,15 @@ load.
 ## About solving three-phase circuits {#about-threephase}
 
 Three-phase circuits can be tricky to solve in Symbulator, for several
-reasons.{{i:three-phase circuits}} For example, it is not always clear which
-node should be used as ground node. There are three times as many nodes as
-there would be for an equivalent single-phase circuit. And, in the case of
-sources in a delta array, there are some mathematical issues, where we have
-more unknowns than equations.
+reasons.{{i:three-phase circuits}} It is not always clear which node to use as
+ground. There are three times as many nodes as in an equivalent single-phase
+circuit. And sources in a delta array bring mathematical trouble: more unknowns
+than equations.
 
-Symbulator does a great job of solving the simple three-phase circuits you may
-encounter in a basic Circuits I / II textbook. Here we will see some examples,
-and one or two tricks, to solve them. Having said that, Symbulator would not be
-my tool of choice for solving anything larger than such basic circuits. As
-circuits grow larger, the number of nodes quickly grows beyond what the
-{{t:machine}} can solve.
+Symbulator does a great job on the simple three-phase circuits of a basic
+Circuits I / II textbook, and here we will see examples and one or two tricks.
+It would not be my tool of choice for anything larger: as circuits grow, the
+number of nodes quickly passes what the {{t:machine}} can solve.
 
 ## Wye-Wye {#wye-wye}
 
@@ -120,11 +117,10 @@ The complex power at the load is `sra0+srb0+src0`, which gives
 1390.8 + 1112.6𝐢 VA. The load is consuming an average power of 1391 W and a
 reactive power of 1113 VAR.
 
-Before we move on, I want you to try simulating this circuit using a different
-node as the centre of the Y array of the load — call it d0, to remind you it is
-the centre for the demand side. If you evaluate the voltage in that node, you
-will see it is 0 V, because the system is balanced. That's why we were able to
-use 0 for both. When we solve an unbalanced system, we cannot.
+Before we move on, try simulating this circuit with a different node as the
+centre of the load's Y array — call it d0, for the demand side. The voltage in
+that node evaluates to 0 V, because the system is balanced. That is why we
+could use 0 for both. In an unbalanced system we cannot.
 :::
 :::
 
@@ -791,11 +787,9 @@ reads {{o:9.106}}∠{{o:168.48}}° and `aa(irbc)` reads
 {{o:5.500}}∠{{o:172.47}}°, matching the printed answers.
 :::
 
-The remaining answer, the generator current, is trickier. They are asking for
-the current in the source we did not use in the simulation. And even if they
-had asked for the current in one of the sources we did have, we would not be
-able to trust it, since we only used two sources and in reality the circuit
-uses three.
+The remaining answer, the generator current, is trickier. They ask for the
+current in the source we did not simulate — and even for one of the two we did
+have, we could not trust it, since the real circuit uses three.
 
 Now, I tried something, and I think I got lucky, because I got the answer the
 book gives. This is what I tried:
@@ -812,12 +806,11 @@ s\aa(–(ie0a+ieb0)/3)
 readily as a name and answers with the magnitude and the angle.
 :::
 
-What I thought was: the current that I have coming out of the two sources in
-my simulation would, in reality, be coming out of three sources. So if I add
-those two currents together and divide them by three, I may get an
-approximation of the current that would be coming out of one source. I am
-confident that this should be the case in a balanced circuit. But this is not
-a balanced circuit. Still, it was the best I had to go by. So I tried it.
+What I thought was: the current coming out of the two sources in my simulation
+would, in reality, come out of three. So adding those two currents and dividing
+by three may approximate the current out of one source. I am confident that
+holds in a balanced circuit. This one is not balanced, but it was the best I
+had. So I tried it.
 
 ```out 7,8
 "5.959ᴇ0∠-177.18°"

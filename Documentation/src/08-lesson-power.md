@@ -105,19 +105,18 @@ conjugating and the halving for you.
 
 ## RMS and PF {#rms-and-pf}
 
-In the previous lesson we mentioned that after an AC simulation, besides real
-power consumed, you also get the complex power consumed. The way you should
-interpret these values depends on the setting of a flag called the RMS
-flag.{{i:RMS}}
+In the previous lesson we mentioned that after an AC simulation you also get
+the complex power consumed. How to read these values depends on a flag called
+the RMS flag.{{i:RMS}}
 
 ::: only 7,8
 ### The {{v7|s\rms}}{{v8|userms}} flag
 
-You will learn in your circuits course that phasor analysis can be conducted
-using RMS values. There are certain advantages to this, and you will have to
-solve AC circuits both in normal values (also called magnitude values) and in
-RMS values. Working in RMS values basically means that all the currents and
-voltages in the analysis are considered to be RMS. That's it.
+You will learn in your circuits course that phasor analysis can be done in RMS
+values. There are advantages to it, and you will have to solve AC circuits both
+in normal values (also called magnitude values) and in RMS. Working in RMS
+simply means every current and voltage in the analysis is taken to be RMS.
+That's it.
 
 The flag that tells the program which you want is stored in a variable called
 {{v7|**s\rms**}}{{v8|**userms**}}, and it can be true or false. By default, it is
@@ -135,11 +134,11 @@ name.
 ::: only 9
 ### The RMS setting
 
-You will learn in your circuits course that phasor analysis can be conducted
-using RMS values. There are certain advantages to this, and you will have to
-solve AC circuits both in normal values (also called magnitude values) and in
-RMS values. Working in RMS values basically means that all the currents and
-voltages in the analysis are considered to be RMS. That's it.
+You will learn in your circuits course that phasor analysis can be done in RMS
+values. There are advantages to it, and you will have to solve AC circuits both
+in normal values (also called magnitude values) and in RMS. Working in RMS
+simply means every current and voltage in the analysis is taken to be RMS.
+That's it.
 
 Where the calculator versions used a flag variable that persisted between runs,
 Symbulator 9 puts it in **Settings**, under **AC power convention**: tick
@@ -229,11 +228,11 @@ s\pf("e")
 pf: 0.97342 leading
 ```
 
-In a nutshell: if you give pf a complex number or expression, you get a number
-or expression for the power factor, but no indication of leading or lagging. If
-you give it the name of an element in a string, right after an s\ac simulation,
-you get the value and a verbal description of lagging or leading. This second
-form only works if the expression can be evaluated numerically.
+In a nutshell: given a complex number or expression, pf returns the power
+factor but says nothing about leading or lagging. Given the name of an element
+in a string, right after an s\ac simulation, it returns the value and says
+which. That second form works only if the expression can be evaluated
+numerically.
 :::
 ::: only 9
 Symbulator 9 has the same tool, in the **Mini-Tools** card. Choose *pf —

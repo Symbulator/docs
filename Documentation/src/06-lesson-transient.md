@@ -9,13 +9,11 @@ summary: >
   the **only** tool. Plot expressions in time with the **plot** tool.
 ---
 
-Symbulator can simulate two types of energy-storing elements: capacitors and
-inductors. It can conduct three types of analysis where these elements are
-relevant: transient time-domain (TR) analysis, alternating current (AC)
-analysis, and complex frequency-domain (FD) analysis. In this lesson we will
-teach you how to conduct the transient analysis of a circuit, and how to
-describe capacitors and inductors for it. AC and FD analysis are discussed in
-subsequent lessons.
+Symbulator can simulate two energy-storing elements, capacitors and inductors,
+in three kinds of analysis: transient time-domain (TR), alternating current
+(AC), and complex frequency-domain (FD). This lesson teaches the transient
+analysis of a circuit, and how to describe capacitors and inductors for it. AC
+and FD come in later lessons.
 
 ## How to describe a capacitor {#describe-capacitor}
 
@@ -80,8 +78,8 @@ basically becomes a short circuit.
 
 ## Running a transient analysis {#run-transient}
 
-You will learn the subtleties of running transient simulations through a series
-of examples. For now, suffice it to say that to run one we use
+You will learn the subtleties of transient simulations through a series of
+examples. For now, to run one we use
 {{v7,8|an access program called **s\tr**, which takes one argument: the circuit
 description in string form}}{{v9|the **tr** function, which takes the circuit
 description and, optionally, the list of quantities you want back}}.
@@ -108,10 +106,9 @@ Bo2's Example 4.15
 For t ≤ 0 s, since the current source is inactive, there is nothing going on.
 Without doing a simulation, we know the voltage v is 0 volts.
 
-For 0 s < t ≤ 2 s, the source is active. By inspection of the graph, we learn
-that for this interval the value of the source is t: the current in amperes is
-the same as the time in seconds. We describe the circuit and run the transient
-analysis:
+For 0 s < t ≤ 2 s, the source is active. From the graph, its value in this
+interval is t: the current in amperes equals the time in seconds. We describe
+the circuit and run the transient analysis:
 
 ```sym 7
 s\tr("j,0,1,t:c,1,0,2,0")
@@ -124,10 +121,9 @@ j,0,1,t
 c,1,0,2,0
 ```
 
-The description of the source has four terms: name (starting with j), first
-node, second node, and value. In this case the value is t. The description of
-the capacitor has five terms: name, first node, second node, value in farads,
-and its initial condition in volts. Here the initial condition is 0 volts.
+The source has four terms: name (starting with j), first node, second node,
+and value — here t. The capacitor has five: name, first node, second node,
+value in farads, and initial condition in volts — here 0 volts.
 
 Once the simulation is complete, ask for the value of the voltage, `vc`. We get
 this value, which is correct:
@@ -167,19 +163,19 @@ For the purpose of a transient analysis, Symbulator accepts many types of
 source values. The only thing you must do is describe these values properly.
 
 **Step values: symbolic.** A source with an unknown step value starting at t=0
-is described using a variable and the step function u(t). For example, a
-voltage source e1, connected between nodes 1 and 0, with a value of V volts
-starting at t=0, would be `e1,1,0,V*u(t)`.
+is described with a variable and the step function u(t). For example, a
+voltage source e1 between nodes 1 and 0, of V volts starting at t=0, is
+`e1,1,0,V*u(t)`.
 
-**Step values: numerical.** A step source with a known numerical value can also
-be described as above, `e1,1,0,12*u(t)`. However, to save some typing, when
-your value is numerical you can skip the u(t), and Symbulator will assume it is
-a numerical step value: `e1,1,0,12`. The results are the same.
+**Step values: numerical.** A step source with a known numerical value can be
+described the same way, `e1,1,0,12*u(t)`. To save typing, you can skip the u(t)
+when the value is numerical, and Symbulator assumes a step: `e1,1,0,12`. The
+results are the same.
 
-**Impulse values.** A source with an impulse value at t=0 is described using
+**Impulse values.** A source with an impulse value at t=0 is described with
 its value, symbolic or numerical, and the delta function δ(t). For example, a
-current source j1, connected between nodes 0 and 1, with an impulse value of i
-amperes at t=0, would be `j1,0,1,i*δ(t)`.
+current source j1 between nodes 0 and 1, with an impulse of i amperes at t=0,
+is `j1,0,1,i*δ(t)`.
 
 **Values as functions of time.** A source whose value is a function of time,
 such as a ramp, a sinusoid or an exponential, is described by writing the value
@@ -192,9 +188,9 @@ seen before, for example `j,0,1,3*vr1`.
 
 ### A word on intervals
 
-For transient analyses, every time a switch opens or closes marks the end of
-one time interval and the beginning of another. A simulation can only be done
-for one time interval. When we run a TR simulation and get answers in terms of
+In a transient analysis, every switch opening or closing ends one time
+interval and begins another, and a simulation covers one interval only. When we
+run a TR simulation and get answers in terms of
 t, this variable must be understood as the time elapsed since the start of
 *that* interval in particular.
 
@@ -208,10 +204,10 @@ the solved problems.
 
 ### The only tool
 
-Unless you indicate otherwise, a Symbulator simulation will give you a whole
-set of answers: voltages in all nodes, and voltage drops, currents and power
-consumed in all elements. When the circuit has complicated symbolic
-expressions, storing all these answers takes time.
+Unless you say otherwise, a Symbulator simulation gives you the whole set of
+answers: voltages in all nodes, and voltage drops, currents and power consumed
+in all elements. When the expressions are complicated, storing them all takes
+time.
 
 ::: only 7,8
 In case you don't want all the answers, but only a chosen few, you may save
@@ -231,8 +227,8 @@ s\only("ir1")
 s\only("ir1,va,vr2")
 ```
 
-The s\only tool is valuable in TR analysis, because you can save time by not
-having Symbulator find the inverse Laplace of answers that are not needed.
+The s\only tool is valuable in TR analysis: you save time by not having
+Symbulator find the inverse Laplace of answers you do not need.
 :::
 ::: only 9
 In case you don't want all the answers, but only a chosen few, tick **Do you
@@ -318,10 +314,9 @@ version 9 equivalent — the results are already on screen.
 
 :::
 
-**Solution.** Here we have two intervals. For the first interval, when **t <
-0s**, we assume that things have been steady for a long time now and any
-transient effect has long passed. So for this first interval of t < 0s, we do
-a DC simulation to find the initial conditions for the second interval.
+**Solution.** Here we have two intervals. In the first, **t < 0s**, we assume
+things have been steady for a long time and any transient has passed, so we run
+a DC simulation to find the initial conditions for the second.
 
 ```sym 7
 s\dc("e,1,0,V:r1,1,2,r1:c,2,0,c:r,2,0,r")
@@ -558,7 +553,7 @@ $$
 
 ::: problem Bo2's Figure 5.10a
 
-Look at the simple resistor-inductor (RL) circuit shown below, where at time
+Look at the simple resistor-inductor (RL) circuit shown, where at time
 t=0 the inductor current is i{{sub:L}}(0). Determine v{{sub:L}}(t),
 i{{sub:L}}(t) and v{{sub:R}}(t) for t≥0.
 
@@ -917,7 +912,7 @@ $$
 
 ::: problem Bo2's Example 5.6
 
-In the circuit shown below, there are two switches: one that opens at time
+In the circuit shown, there are two switches: one that opens at time
 t=0 and one that closes at time t=1 second. Determine v{{sub:C}}(t) and
 i{{sub:C}}(t) for all t.
 
@@ -974,8 +969,8 @@ $$
 \{ 8 e^{-t} , -2 e^{-t} \}
 $$
 
-The voltage in the capacitor at the end of this second interval will serve as
-initial condition for the third interval. We can use its exact value, i.e.
+The capacitor's voltage at the end of this second interval is the initial
+condition for the third. We can use its exact value,
 {{v7|`8*e^-1`}}{{v8|`8*e^–1`}}, but the textbook prefers using its approximate value, i.e. `2.943`.
 
 The third interval corresponds to t > 1 second. We simulate in TR. To make
@@ -1066,8 +1061,8 @@ $$
 \{ 3 e^{-2t} , -36 e^{-2t} \}
 $$
 
-The current in the inductor at the end of this second interval will serve as
-initial condition for the third interval. Find its approximate value thus:
+The inductor's current at the end of this second interval is the initial
+condition for the third. Find its approximate value thus:
 
 ```sym 7
 iL|t=2.
@@ -1186,7 +1181,7 @@ $$
 
 ::: problem Bo2's Drill Exercise 5.7
 
-For the circuit below, with a step source of 12 volts, find i{{sub:L}},
+For the circuit, with a step source of 12 volts, find i{{sub:L}},
 v{{sub:L}}, i{{sub:L}} and v.
 
 ::: figure assets/practice/bo2s-drill-exercise-5-7-20.jpg
@@ -1392,10 +1387,9 @@ box. That is what the calculator's `|` does: evaluate this expression under
 this condition. The answer comes back {{o:V - V*exp(-to/(c*r))}}.
 :::
 
-The circuit description for the second interval uses the expression above as
-the initial condition of the capacitor. In this second interval, the source
-has a value of 0 volts, which is another way to say that it becomes a short,
-so there is no need to include it in the circuit description.
+The circuit description for the second interval uses that expression as the
+capacitor's initial condition. The source is now 0 volts — another way of
+saying it becomes a short — so it need not appear in the description.
 
 $$
 (v-v e^{(-to/(c r))})e^{((-t+to)/(c r))}
@@ -1478,10 +1472,9 @@ box. The answer comes back {{o:V/r - V*exp(-r*to/l)/r}}, which is the same
 expression gathered differently.
 :::
 
-The circuit description for the second interval uses the expression above as
-the initial condition of the inductor. In this second interval, the source
-becomes a short, so there is no need to include it in the circuit
-description.
+The circuit description for the second interval uses that expression as the
+inductor's initial condition. The source becomes a short, so it need not
+appear in the description.
 
 $$
 (v/r)(1-e^{((-to r)/l)})e^{((-r t)/l)}
@@ -2047,9 +2040,9 @@ needs. The graph of the capacitor's voltage drop between 0 and 1.5 seconds
 appears beneath.
 :::
 
-Compare it to the graph given by the textbook, shown below. Repeat this
+Compare it to the graph given by the textbook. Repeat this
 procedure giving `il` as the function. Compare the resulting graph to that
-given by the textbook, shown below.
+given by the textbook.
 
 ::: figure assets/practice/practice-problems-for-lesson-6-31.jpg
 Practice Problems for Lesson 6
@@ -2057,7 +2050,7 @@ Practice Problems for Lesson 6
 
 ::: problem Bo2's Drill Exercise 6.1
 
-For the circuit shown below, find v(t) and i(t) for t≥0.
+For the circuit shown, find v(t) and i(t) for t≥0.
 
 ::: figure assets/practice/bo2s-drill-exercise-6-1-32.jpg
 
@@ -2138,7 +2131,7 @@ answers.}}
 
 ::: problem Bo2's Example 6.2
 
-Find i(t) and v(t) for the circuit shown below.
+Find i(t) and v(t) for the circuit shown.
 
 ::: figure assets/practice/bo2s-example-6-2-33.jpg
 
@@ -2207,10 +2200,10 @@ The answer you want is `il`, in **Results**.
 
 1
 
-The second interval, for t≥0, is analyzed using TR. I could have described
-the circuit again from scratch. But out of laziness I preferred to copy/paste
-the descriptions from the DC simulations. To avoid renaming the nodes, I
-simulated the right switch as a short circuit between nodes 2 and 3.
+The second interval, for t≥0, is analyzed using TR. I could have described the
+circuit again from scratch, but out of laziness I copied the descriptions from
+the DC simulations. To avoid renaming nodes, I simulated the right switch as a
+short between nodes 2 and 3.
 
 ::: only 9
 `vc` comes back {{o:-(sin(4*t) + 7*cos(4*t))*exp(-3*t)/50}} and `il`
@@ -2258,7 +2251,7 @@ answers.
 
 ::: problem Bo2's Example 6.3
 
-Find i(t) and v(t) for the circuit shown below.
+Find i(t) and v(t) for the circuit shown.
 
 ::: figure assets/practice/bo2s-example-6-3-34.jpg
 
@@ -2311,15 +2304,12 @@ $$
 
 ### Is the textbook wrong?
 
-Anybody that has even written a textbook, or read one for that matter, can
-attest to the fact that errors in the problems or the answers come with the
-territory. (As a matter of fact, I am sure this book I am writing right now
-has many errors.) We are all only human. Errors in an engineering textbook,
-however, can be *very* frustrating to an engineering student. When one is
-learning from a textbook, and the textbook has errors in the problems or
-answers, confusion and hair-pulling will likely ensue. If you think you have
-found an error in your circuit analysis textbook, Symbulator can help you
-bring some sanity to the situation to confirm whether your guess is right.
+Anybody who has written a textbook, or read one for that matter, can attest
+that errors in the problems or the answers come with the territory. (I am sure
+this book has many.) We are all only human. But errors in an engineering
+textbook can be *very* frustrating to a student: confusion and hair-pulling
+ensue. If you think you have found one in your circuit analysis textbook,
+Symbulator can help you confirm whether your guess is right.
 
 Below is an example of using Symbulator to confirm an error in a textbook.
 
@@ -2329,12 +2319,10 @@ Below is an example of using Symbulator to confirm an error in a textbook.
 
 :::
 
-My copy of Bo2 is second-hand. I noticed this problem had scribbles on it.
-The previous owner, evidently, struggled with this problem and concluded that
-the value of the inductor had to be ½ H, not 1 H as the schematic says.
-Symbulator can be used to show that he is right, and the book is wrong. Here
-is how we do it. First, we can solve the circuit as shown, with a 1 H
-inductor.
+My copy of Bo2 is second-hand, and this problem had scribbles on it. The
+previous owner evidently struggled with it and concluded that the inductor had
+to be ½ H, not the 1 H the schematic says. Symbulator can show he is right and
+the book wrong. First, solve the circuit as printed, with a 1 H inductor.
 
 ```sym 7
 s\dc("e,2,0,2:r,1,2,1:l,1,0,1:c,1,0,1/8"):{il,vc}
@@ -2382,11 +2370,10 @@ l,1,0,1/2,2
 c,1,0,1/8,0
 ```
 
-Now the answer we get matches the answer provided by the book. An expert user
-of Symbulator can use the `fd` gate and the `t2s` tool, which we have not
-discussed yet here, to find the value of the inductor given the book's
-answer. Below is how I found the ½ H value myself, reverse-engineering the
-answer:
+Now the answer matches the book's. An expert user can reach for the `fd` gate
+and the `t2s` tool, which we have not discussed yet, to find the inductor's
+value from the book's answer. This is how I found the ½ H myself, working
+backwards:
 
 ::: only 9
 ```field 9 Evaluate
@@ -2460,7 +2447,7 @@ be discussed separately in a subsequent part of Symbulator's documentation.
 
 ::: problem Bo2's Drill Exercise 6.5
 
-In the circuit below, suppose that v{{sub:S}}(t)= 12 – 12 u(t) V. Find
+In the circuit, suppose that v{{sub:S}}(t)= 12 – 12 u(t) V. Find
 i{{sub:2}}(t) for t≥0.
 
 ::: figure assets/practice/bo2s-drill-exercise-6-5-36.jpg
@@ -2508,7 +2495,7 @@ $$
 
 ::: problem Bo2's Drill Exercise 6.6 (Op Amp)
 
-In the circuit below, suppose that v{{sub:S}}(t)= 2 – 2 u(t) V. Find
+In the circuit, suppose that v{{sub:S}}(t)= 2 – 2 u(t) V. Find
 v{{sub:o}}(t) for t≥0.
 
 ::: figure assets/practice/bo2s-drill-exercise-6-6-op-amp-37.jpg
@@ -2569,7 +2556,7 @@ o,0,2,o
 
 ::: problem Bo2's Example 6.5 (Plot)
 
-In the circuit below, use v{{sub:S}}=2/5V, R=12Ω, L=2H and C=1/50F. Find v(t)
+In the circuit, use v{{sub:S}}=2/5V, R=12Ω, L=2H and C=1/50F. Find v(t)
 and i(t), and plot them for time 0<t<1.5 seconds.
 
 ::: figure assets/practice/bo2s-example-6-5-plot-38.jpg
@@ -2616,9 +2603,8 @@ second.
 
 These are the right answers. To plot them, run the `plot` tool, thus:
 s\plot(). Once the plot window opens, enter `vc` as function, `0` as minimal
-time and `1.5` as maximal time. Compare to the graph from the book, shown
-below. Repeat the plot for `il`, and compare to the graph from the book
-below.
+time and `1.5` as maximal time. Compare to the graph from the book. Repeat the plot
+for `il`, and compare that one to the book's graph too.
 
 ::: figure assets/practice/bo2s-example-6-5-plot-39.jpg
 
@@ -2676,7 +2662,7 @@ $$
 
 ::: problem Bo2's Example 6.6 (Plot)
 
-For the circuit below, plot the voltage drop in the inductor for 0 < t < 5ms.
+For the circuit, plot the voltage drop in the inductor for 0 < t < 5ms.
 
 ::: figure assets/practice/bo2s-example-6-6-plot-40.jpg
 
@@ -2728,7 +2714,7 @@ volts!
 
 ::: problem Bo2's Drill Exercise 6.9
 
-For the circuit below, R=1Ω, L=2H, C=1/2F and i{{sub:S}}(t)=u(t). Find i(t)
+For the circuit, R=1Ω, L=2H, C=1/2F and i{{sub:S}}(t)=u(t). Find i(t)
 and v(t).
 
 ::: figure assets/practice/bo2s-drill-exercise-6-9-41.jpg
@@ -2756,7 +2742,7 @@ $$
 
 ::: problem Bo2's Figure 6.23 (Op Amp)
 
-For the circuit below, find v{{sub:o}}(t) if v{{sub:S}}(t) = u(t).
+For the circuit, find v{{sub:o}}(t) if v{{sub:S}}(t) = u(t).
 
 ::: figure assets/practice/bo2s-figure-6-23-op-amp-42.jpg
 
@@ -2787,7 +2773,7 @@ $$
 
 ::: problem Bo2's Drill Exercise 6.10 (Op Amp)
 
-In the circuit above, change capacitor's value from 1/5 F to 25/16 F. Find
+In the previous circuit, change the capacitor's value from 1/5 F to 25/16 F. Find
 v{{sub:o}}(t) if v{{sub:S}}(t) = 3 u(t).
 
 ```sym 7
@@ -2813,7 +2799,7 @@ o,2,o,o
 
 ::: problem Bo2's Drill Exercise 6.11 (p307)
 
-For the circuit below, suppose that R{{sub:1}} = R{{sub:2}} = 1Ω, L = 1H, C =
+For the circuit, suppose that R{{sub:1}} = R{{sub:2}} = 1Ω, L = 1H, C =
 1F and v{{sub:S}}(t)= 2e{{sup:-2t}} u(t). Find i(t) if all initial conditions
 are zero.
 
@@ -2841,7 +2827,7 @@ l,1,0,1,0
 
 ::: problem A more complex problem
 
-The circuit below comes from the circuits analysis class of Professor Eliane
+The circuit comes from the circuits analysis class of Professor Eliane
 Boulet de Cabrera, from Universidad Tecnologica de Panama. Find v1 and v.
 
 ::: figure assets/practice/a-more-complex-problem-44.png

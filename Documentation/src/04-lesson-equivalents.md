@@ -9,25 +9,22 @@ summary: >
   Norton equivalents* using the **th** script.
 ---
 
-In this lesson, you will learn how to describe a *short circuit* using the
-**s** element. And you will learn how to find *equivalent resistances* using
-the **er** script, and *Thévenin and Norton equivalents* using the **th**
-script.
+In this lesson you will learn how to describe a *short circuit* with the
+**s** element, how to find *equivalent resistances* with the **er** script,
+and *Thévenin and Norton equivalents* with the **th** script.
 
 ## How to describe a short circuit {#describe-short}
 
-Shorts are used mostly when we need to find out a current in a part of the
-circuit where there is no element already. Otherwise, we would just define it
-as a single node.
+Shorts are used mostly to find a current in a part of the circuit with no
+element in it already. Otherwise we would just make it a single node.
 
 ::: note Describing short circuits
-In Symbulator, an ideal short circuit is described using three bits of
-information, separated by commas: first, the name of the short, which must
-start with the letter **s**; then, the name of the first node; and finally, the
-name of the second node.
+In Symbulator, an ideal short circuit is described with three bits of
+information, separated by commas: the name of the short, which must start with
+the letter **s**, then the names of its first and second node.
 
-For example, an ideal short circuit called **s1**, connected between two nodes
-called **3** and **5**, would be described as follows: `s1,3,5`{{i:short circuit}}
+For example, an ideal short circuit called **s1**, between nodes **3** and
+**5**, is described: `s1,3,5`{{i:short circuit}}
 :::
 
 ### What answers do you get
@@ -45,7 +42,7 @@ HK5's Drill Problem 1-13
 :::
 
 ::: answer
-My solution below. I define the shorts in the same direction as the arrows in
+My solution: I define the shorts in the same direction as the arrows in
 the schematic.
 
 ```sym 7
@@ -85,15 +82,14 @@ approx({is1,is2,is3,is4})
 {{o:-0.5}} A.
 :::
 
-These are correct. These answers can only be found using short circuits.
+These are correct, and they can only be found using short circuits.
 :::
 :::
 
 ## The equivalent resistance script: er {#er-script}
 
-As we saw before, Symbulator has the ability to provide the equivalent
-resistance of a circuit as seen from any source. This allows us to solve
-problems like the following.
+As we saw, Symbulator gives the equivalent resistance of a circuit as seen
+from any source. That lets us solve problems like this one.
 
 ::: problem AS2's Practice Problem 2.15
 Find the equivalent resistance as seen by the 100 V source, and the value of
@@ -121,10 +117,9 @@ r50,3,0,50
 ```
 
 ::: only 7,8
-By evaluating `re` we get the equivalent resistance as seen by the source e. It
-is 40 Ω. By evaluating `ir13` we get 2.5 A for current i. The answers were
-easily found, because there was a source connected between the two desired
-nodes.
+Evaluating `re` gives the equivalent resistance as seen by the source e:
+40 Ω. Evaluating `ir13` gives 2.5 A for current i. The answers came easily,
+because a source sat between the two nodes we wanted.
 :::
 ::: only 9
 Solve it in DC. There is no special tool to reach for here: because a source
@@ -142,20 +137,18 @@ desired nodes. The rest of this lesson is about what to do when there is not.
 
 ### What if there is no independent source?
 
-But how can we find the equivalent resistance of a **passive circuit**, that is
-to say, a circuit that has no *independent* source in it? One way is to connect
-a 1 A current source between the two nodes where we want to find the equivalent
-resistance, and then read the voltage drop across the source. This is the
-manual way.
+But how do we find the equivalent resistance of a **passive circuit**, one
+with no *independent* source in it? One way is to connect a 1 A current source
+between the two nodes and read the voltage drop across it. That is the manual
+way.
 
 An easier way is to let Symbulator do that for us.{{i:er script}}
 
 ::: only 7,8
-Just run the **er** script, and it will do the same thing automatically. The er
-script finds the equivalent resistance of a passive circuit, and stores it — in
-the case of a DC analysis — in **req**. It takes three arguments: the circuit
-description in the form of a string, and the two nodes between which we need to
-find the equivalent resistance.
+Just run the **er** script and it does the same thing automatically. It finds
+the equivalent resistance of a passive circuit and stores it — for a DC
+analysis — in **req**. It takes three arguments: the circuit description as a
+string, and the two nodes to measure between.
 :::
 ::: only 9
 Version 9 puts this on the **Type of analysis** menu. Choose *Find equivalent*
@@ -168,7 +161,7 @@ does the 1 A trick internally and reports the answer.
 :::
 
 ::: problem B11's Example 8.29
-Calculate the equivalent resistance of the circuit shown below.
+Calculate the equivalent resistance of the circuit shown.
 
 ::: figure assets/circuit/b11e0829.jpg
 B11's Example 8.29
@@ -226,13 +219,12 @@ The value is 2.89 Ω. This is correct.
 
 ### What counts as passive
 
-The example above was made of resistors only. The er script can be applied to a
-second type of passive circuit: one that includes resistors and dependent
-sources, but no independent sources. A circuit with no independent sources can
-only be reduced to an equivalent resistance, not to a Thévenin or Norton
-equivalent, so the proper script to use is er. It is used in exactly the same
-manner as for purely resistive circuits, making sure the dependent sources are
-described properly.
+That example was made of resistors only. The er script also handles a second
+kind of passive circuit: one with resistors and dependent sources, but no
+independent sources. Such a circuit can only be reduced to an equivalent
+resistance, not to a Thévenin or Norton equivalent, so er is the script to use
+— in exactly the same way, provided the dependent sources are described
+properly.
 
 ## The Thévenin / Norton script: th {#th-script}
 
@@ -240,19 +232,17 @@ Just as a *passive circuit* can be reduced to an equivalent resistance, an
 **active circuit** — one with independent sources — can be reduced to a
 Thévenin or Norton equivalent.
 
-One way to do this with Symbulator is to run a first simulation to find the
-voltage between the two nodes where we want the equivalent (this is the
-Thévenin voltage, VTH), and then a second simulation with a short circuit
-connected between those nodes to find the current running through it (this is
-the Norton current, INO). We then get REQ by dividing VTH/INO. This is the
-manual way.
+One way is to run a first simulation for the voltage between the two nodes
+where we want the equivalent (the Thévenin voltage, VTH), then a second with a
+short between those nodes for the current through it (the Norton current,
+INO). REQ is then VTH/INO. That is the manual way.
 
-An easier way is to run the **th** script,{{i:th script}} which does exactly
-that, automatically. It takes three arguments: the circuit description, the
-first node and the second node.
+An easier way is the **th** script,{{i:th script}} which does exactly that
+automatically. It takes three arguments: the circuit description, the first
+node and the second node.
 
 ::: problem RM3's Practice Problem 9-4
-Find the Thévenin and Norton equivalents of the circuit below.
+Find the Thévenin and Norton equivalents of the circuit.
 
 ::: figure assets/circuit/rm3pp0904.jpg
 RM3's Practice Problem 9-4
@@ -292,16 +282,14 @@ s\th("e,1,0,3.3:r1,1,2,66:r2,2,0,24",2,0)
 s\th("e,1,0,3.3:r1,1,2,66:r2,2,0,24",2,0)
 ```
 
-When prompted to select a type of analysis, choose DC. Symbulator will let you
-know what it's doing: first it runs one simulation and gives you the Thévenin
-voltage, then a second one for the Norton current and the equivalent
-resistance. In this case, VTH = 0.88 V, INO = 0.05 A and REQ = 17.6 Ω.
+When prompted to select a type of analysis, choose DC. Symbulator tells you
+what it is doing: one simulation for the Thévenin voltage, then a second for
+the Norton current and the equivalent resistance. In this case, VTH = 0.88 V, INO = 0.05 A and REQ = 17.6 Ω.
 :::
 
-{{v7,8|At this point, when you press ENTER, Symbulator will ask whether you
-are planning to run a problem with a load connected to this equivalent
-circuit. For now, say No. After the script is done, the following variables
-are stored:}}{{v9|The answers appear in **Results** under these names:}}
+{{v7,8|When you press ENTER, Symbulator asks whether you are running a
+problem with a load connected to this equivalent circuit. For now, say No. The
+script then stores these variables:}}{{v9|The answers appear in **Results** under these names:}}
 
 - **vth** has the Thévenin voltage
 - **ino** has the Norton current
@@ -326,9 +314,9 @@ generous — the most this circuit could deliver into a matched load.
 
 ### Problems with a load
 
-One type of problem that books and professors like to present when teaching the
-Thévenin / Norton equivalents is what I like to call RL problems. A typical RL
-problem goes like this: "First, reduce the circuit, as seen by resistor RL, to
+One type of problem books and professors like when teaching the Thévenin /
+Norton equivalents is what I call an RL problem. A typical one goes like
+this: "First, reduce the circuit, as seen by resistor RL, to
 its Thévenin or Norton equivalent. Then, find the value of the voltage drop,
 current and/or power consumed in the load resistor RL if its value is
 (whatever) ohms."
@@ -433,9 +421,8 @@ The three answers come back one at a time: {{o:1.5}} A, {{o:.5}} A and
 
 ### Power transfer problems
 
-Another type of problem often associated with the Thévenin / Norton equivalents
-concerns the power transfer to a load, particularly the maximum power transfer
-possible. Maximum power is transferred when the load RL equals the REQ of the
+Another problem often associated with the Thévenin / Norton equivalents is
+power transfer to a load, particularly the maximum possible. Maximum power is transferred when the load RL equals the REQ of the
 equivalent. Symbulator's th script gives you the maximum power that can be
 delivered in {{v7,8|**pmax**}}{{v9|`pmax`}}, and the power transferred to the
 load as a function of its value in {{v7,8|**prl**}}{{v9|the expression
@@ -579,7 +566,7 @@ version 9 equivalent — the results are already on screen.
 
 ::: problem B11's Example 8.29
 
-Calculate the equivalent resistance of the circuit shown below.
+Calculate the equivalent resistance of the circuit shown.
 
 You saw this circuit solved step by step in the walkthrough above; here it is
 again, in the compact form the rest of these problems use.
@@ -623,7 +610,7 @@ This is correct. Below are many practice examples of this type.
 
 ::: problem B11's Example 8.30
 
-Find the equivalent resistance of the circuit below.
+Find the equivalent resistance of the circuit.
 
 ::: figure assets/practice/b11s-example-8-30-2.jpg
 
@@ -665,7 +652,7 @@ no sources — grounding b gives the same {{o:3.273}} Ω.
 
 ::: problem AS2's Example 2.9
 
-Find the equivalent resistance of the circuit below.
+Find the equivalent resistance of the circuit.
 
 ::: figure assets/practice/as2s-example-2-9-3.jpg
 
@@ -689,7 +676,7 @@ Evaluating approximately gives us the equivalent resistance: **14.4** Ω.
 
 ::: problem AS2's Practice Problem 2.9
 
-Find the equivalent resistance of the circuit below.
+Find the equivalent resistance of the circuit.
 
 ::: figure assets/practice/as2s-practice-problem-2-9-4.jpg
 
@@ -713,7 +700,7 @@ Evaluating approximately gives us the equivalent resistance: **6** Ω.
 
 ::: problem AS2's Example 2.11
 
-Find the equivalent *conductance* of the circuit below.
+Find the equivalent *conductance* of the circuit.
 
 ::: figure assets/practice/as2s-example-2-11-5.jpg
 
@@ -737,7 +724,7 @@ Evaluating approximately gives us the equivalent conductance: **10** S.
 
 ::: problem AS2's Practice Problem 2.11
 
-Find the equivalent *conductance* of the circuit below.
+Find the equivalent *conductance* of the circuit.
 
 ::: figure assets/practice/as2s-practice-problem-2-11-6.jpg
 
@@ -763,7 +750,7 @@ Evaluating approximately gives us the equivalent conductance: **4** S.
 
 ::: problem Bo2's Drill Problem 3.14
 
-Find the equivalent resistance of the circuit below.
+Find the equivalent resistance of the circuit.
 
 ::: figure assets/practice/bo2s-drill-problem-3-14-7.jpg
 
@@ -794,7 +781,7 @@ is **2** Ω.
 
 ::: problem AS2's Example 4.10
 
-Find the equivalent resistance of the circuit below.
+Find the equivalent resistance of the circuit.
 
 ::: figure assets/practice/as2s-example-4-10-8.jpg
 
@@ -827,7 +814,7 @@ the result of the dependent sources.
 
 ::: problem AS2's Practice Problem 4.10
 
-Find the equivalent resistance of the circuit below.
+Find the equivalent resistance of the circuit.
 
 ::: figure assets/practice/as2s-practice-problem-4-10-9.jpg
 
@@ -859,7 +846,7 @@ equivalent resistance is **-7.5** Ω.
 
 ::: problem HK5's Figure 2-29
 
-Find the equivalent resistance of the circuit below.
+Find the equivalent resistance of the circuit.
 
 ::: figure assets/practice/hk5s-figure-2-29-10.jpg
 
@@ -894,7 +881,7 @@ The dependent value follows it — `is1`.
 
 ::: problem HK5's Drill Problem 2-9d
 
-Find the equivalent resistance of the circuit below.
+Find the equivalent resistance of the circuit.
 
 ::: figure assets/practice/hk5-drill-problem-2-9d-11.jpg
 
@@ -926,7 +913,7 @@ Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 
 ::: problem Bo2's Example 3.12
 
-Find the equivalent resistance of the circuit below.
+Find the equivalent resistance of the circuit.
 
 ::: figure assets/practice/bo2s-example-3-12-12.jpg
 
@@ -957,7 +944,7 @@ Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 
 ::: problem B11's Example 9.7
 
-Find the Thévenin equivalent of the circuit below, as seen from the
+Find the Thévenin equivalent of the circuit, as seen from the
 R{{sub:3}} resistor.
 
 ::: figure assets/practice/b11s-example-9-7-13.jpg
@@ -987,7 +974,7 @@ R{{sub:EQ}} = **6** Ω.
 
 ::: problem B11's Example 9.11
 
-Find the Norton equivalent of the circuit below, as seen from the R{{sub:L}}
+Find the Norton equivalent of the circuit, as seen from the R{{sub:L}}
 resistor.
 
 ::: figure assets/practice/b11s-example-9-11-14.jpg
@@ -1017,7 +1004,7 @@ R{{sub:EQ}} = **2** Ω.
 
 ::: problem AS2's Practice Problem 4.12
 
-Find the Norton equivalent of the circuit below.
+Find the Norton equivalent of the circuit.
 
 ::: figure assets/practice/as2s-practice-problem-4-12-15.jpg
 
@@ -1077,7 +1064,7 @@ R{{sub:EQ}} = **9** Ω.
 
 ::: problem HK5's Drill Problem 2-8b
 
-Find the Thévenin equivalent of the circuit below.
+Find the Thévenin equivalent of the circuit.
 
 ::: figure assets/practice/hk5s-drill-problem-2-8b-17.jpg
 
@@ -1106,7 +1093,7 @@ R{{sub:EQ}} = **25** Ω.
 
 ::: problem HK5's Figure 2-27
 
-Find the Thévenin equivalent of the circuit below.
+Find the Thévenin equivalent of the circuit.
 
 ::: figure assets/practice/hk5s-figure-2-27-18.jpg
 
@@ -1136,7 +1123,7 @@ Via `vth` we find V{{sub:TH}} = **8** V. Via `req` we find R{{sub:EQ}} =
 
 ::: problem B11's Example 9.8
 
-Find the Thévenin equivalent of the circuit below, as seen from the
+Find the Thévenin equivalent of the circuit, as seen from the
 R{{sub:4}} resistor.
 
 I ignore the textbook's decision to call the nodes **a** and **b**, since b
@@ -1170,7 +1157,7 @@ R{{sub:EQ}}= **2.4** Ω.
 
 ::: problem B11's Example 8.6
 
-Find the Norton equivalent of the circuit below.
+Find the Norton equivalent of the circuit.
 
 ::: figure assets/practice/b11s-example-8-6-20.jpg
 
@@ -1200,7 +1187,7 @@ R{{sub:EQ}} = **2** Ω.
 
 ::: problem Bo2's Drill Exercise 3.12
 
-Find the Norton equivalent of the circuit below.
+Find the Norton equivalent of the circuit.
 
 ::: figure assets/practice/bo2s-drill-exercise-3-12-21.jpg
 
@@ -1230,7 +1217,7 @@ R{{sub:EQ}} = **1** Ω.
 
 ::: problem Bo2's Drill Exercise 3.9
 
-Find the Thévenin equivalent of the circuit below.
+Find the Thévenin equivalent of the circuit.
 
 ::: figure assets/practice/bo2s-drill-exercise-3-9-22.jpg
 
@@ -1260,7 +1247,7 @@ R{{sub:EQ}} = **2.4** Ω.
 
 ::: problem AS2's Example 4.12
 
-Find Norton equivalent of the circuit below.
+Find Norton equivalent of the circuit.
 
 ::: figure assets/practice/as2s-example-4-12-23.jpg
 
@@ -1290,7 +1277,7 @@ R{{sub:EQ}} = **5** Ω.
 
 ::: problem B11's Example 9.10 (Hidden source)
 
-Find the Thévenin equivalent of the circuit below.
+Find the Thévenin equivalent of the circuit.
 
 ::: figure assets/practice/b11s-example-9-10-hidden-source-24.jpg
 
@@ -1326,7 +1313,7 @@ R{{sub:EQ}} = **2** kΩ.
 
 ::: problem B11's Example 9.9
 
-Find the Thévenin equivalent of the circuit below, as seen from the
+Find the Thévenin equivalent of the circuit, as seen from the
 R{{sub:L}} resistor.
 
 ::: figure assets/practice/b11s-example-9-9-25.jpg
@@ -1358,7 +1345,7 @@ R{{sub:EQ}} = **5** Ω.
 
 ::: problem AS2's Example 4.11
 
-Find the Norton equivalent of the circuit below.
+Find the Norton equivalent of the circuit.
 
 ::: figure assets/practice/as2s-example-4-11-26.jpg
 
@@ -1390,7 +1377,7 @@ R{{sub:EQ}} = **4** Ω.
 
 ::: problem HK5's Drill Problem 2-8a
 
-Find the Thévenin equivalent of the circuit below.
+Find the Thévenin equivalent of the circuit.
 
 ::: figure assets/practice/hk5s-drill-problem-2-8a-27.jpg
 
@@ -1421,7 +1408,7 @@ R{{sub:EQ}} = **30** Ω.
 
 ::: problem B11's Example 8.7
 
-Find Norton equivalent of the circuit below.
+Find Norton equivalent of the circuit.
 
 ::: figure assets/practice/b11s-example-8-7-28.jpg
 
@@ -1451,7 +1438,7 @@ R{{sub:EQ}} = **4** Ω.
 
 ::: problem AS2's Practice Problem 4.9
 
-Find the Thévenin equivalent of the circuit below.
+Find the Thévenin equivalent of the circuit.
 
 ::: figure assets/practice/as2s-practice-problem-4-9-29.jpg
 
@@ -1482,7 +1469,7 @@ R{{sub:EQ}} = **0.44** Ω.
 
 ::: problem AS2's Example 4.9
 
-Find the Thévenin equivalent of the circuit below.
+Find the Thévenin equivalent of the circuit.
 
 ::: figure assets/practice/as2s-example-4-9-30.jpg
 
@@ -1514,7 +1501,7 @@ R{{sub:EQ}} = **6** Ω.
 
 ::: problem Bo2's Drill Exercise 3.8
 
-Find the Thévenin equivalent of the circuit below.
+Find the Thévenin equivalent of the circuit.
 
 ::: figure assets/practice/bo2s-drill-exercise-3-8-31.jpg
 
@@ -1582,7 +1569,7 @@ two we solve below.
 
 ::: problem Bo2's Example 3.11 (Tricky)
 
-Find the Norton equivalent of the circuit below.
+Find the Norton equivalent of the circuit.
 
 ::: figure assets/practice/bo2s-example-3-11-tricky-33.jpg
 
@@ -1661,8 +1648,7 @@ Your idea of fun, right?
 
 ::: problem Bo2's Drill Exercise 3.13 (Tricky)
 
-Below is another tricky problem. Find the Norton equivalent of the circuit
-below.
+Another tricky one. Find the Norton equivalent of the circuit.
 
 ::: figure assets/practice/bo2s-drill-exercise-3-13-tricky-34.jpg
 
@@ -1786,7 +1772,7 @@ version 9 writes that difference straight into the value — `va-vb`, exactly as
 {{ref:lesson-sources}} describes. There is nothing to define beforehand.
 :::
 
-Now I run the th script, with the circuit description shown below:
+Now I run the th script, with this circuit description:
 
 ```sym 7
 s\th("ei,a,0,vs:ed,1,0,μ*(vx):ro,b,1,ro",b,0):
@@ -1829,7 +1815,7 @@ a-b. Then find the current through RL = 6, 16 and 36Ω.
 
 :::
 
-My solution below.
+My solution:
 
 ```sym 7
 s\th("e,1,0,32.:r4,1,2,4:r12,2,0,12:j,0,2,2:r1,2,3,1",3,0):
@@ -1870,8 +1856,7 @@ The answer, **{30.,4.,3.,1.5,.75}**, is correct.
 ::: problem Bo2's Example 3.10
 
 Find the Norton equivalent of the circuit left of the a-b terminals, and then
-find the voltage drop and the current through the ¼ Ω resistor. My one-line
-solution below.
+find the voltage drop and the current through the ¼ Ω resistor. My one-line solution:
 
 ::: figure assets/practice/bo2s-example-3-10-39.jpg
 
@@ -1917,7 +1902,7 @@ The book gives the answers as fractions. We get it right:
 
 Find the Norton equivalent of the circuit external to R{{sub:L}}. Then
 determine the load current I{{sub:L}} when R{{sub:L}} = 0 Ω, 2'k Ω and 5'k Ω.
-My one-line solution below.
+My one-line solution:
 
 ::: figure assets/practice/rm3s-example-9-7-40.jpg
 
@@ -1967,7 +1952,7 @@ determine the voltage drop across this 1Ω resistor.
 
 :::
 
-My solution below.
+My solution:
 
 ```sym 7
 s\th("e,1,0,24:r12,1,2,12:r20,2,0,4:r23,2,3,4:r34,3,4,2:
@@ -2056,8 +2041,7 @@ The answer, **{28.8,96.,.1}**, is correct.
 ::: problem Bo2's Example 3.7
 
 Find the Thévenin equivalent for the circuit left of a-b. Then find the
-voltage across the 3 Ω resistor, and also if it was 6 Ω. My answer is
-presented below.
+voltage across the 3 Ω resistor, and also if it was 6 Ω. My answer:
 
 ::: figure assets/practice/bo2s-example-3-7-43.jpg
 
@@ -2104,7 +2088,7 @@ The answer we find, **{30,2,18,22.5}**, is correct.
 Find the Thévenin equivalent for the circuit left of a-b. Then find the
 voltage *v*.
 
-My answer below.
+My answer:
 
 ::: figure assets/practice/bo2s-drill-exercise-3-7-44.jpg
 
@@ -2150,7 +2134,7 @@ The answer, **{6,3,3.75}**, is correct.
 
 :::
 
-My solution below.
+My solution:
 
 ```sym 7
 s\th("e1,1,0,35.:r1,1,2,15'k:r2,2,3,60'k:e2,3,0,70:r3,2,4,30'k",4,0):
@@ -2203,7 +2187,7 @@ transferred.
 :::
 
 R{{sub:L}} for maximum transfer is `req`. The maximum power is in `pmax`.
-My solution below:
+My solution:
 
 ```sym 7
 s\th("e,1,0,12:r6,1,2,6:r12,2,0,12:r3,2,3,3:j,0,3,2:r2,3,4,2",4,0):
@@ -2227,7 +2211,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 
 The answers you want are `req` and `pmax`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 Choose DC.{{v7,8| You can answer N when asked about the load equations.}} The answer,
@@ -2267,7 +2251,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 
 The answers you want are `req` and `pmax`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 Choose DC.{{v7,8| You can answer N.}} The logic of this problem is identical to
@@ -2361,7 +2345,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 
 The answers you want are `req` and `pmax`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 Choose DC.{{v7,8| You can answer N.}} The answer is **{15., 273.07}**. Let's now

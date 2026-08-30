@@ -9,26 +9,23 @@ summary: >
   describe *conductances* and *dependent sources*.
 ---
 
-In this lesson you will learn how to describe a *current source* using the
-**j** element, and a trick to simplify *parallel resistors* using the **pr**
-tool or its shorthand. You will also learn how to describe *conductance* and
-*dependent sources* in Symbulator using elements you already know.
+In this lesson you will learn how to describe a *current source* with the
+**j** element, and a trick to simplify *parallel resistors* with the **pr**
+tool or its shorthand. You will also learn to describe *conductance* and
+*dependent sources* using elements you already know.
 
 ## How to describe a current source {#describe-current-source}
 
 ::: note Describing current sources
 In Symbulator, an ideal current source is described with four pieces of
-information, separated by commas: a unique name to identify the current source
-(which must start with the letter **j**), the names of the first and second
-node of the source, and the value of the source in amperes (A). The value
-should be given in terms of the current flowing through the source from the
-first node towards the second node. This means that the value of the source is
-how much current leaves the source out of the second node, and also how much
-current enters the source's first node.
+information, separated by commas: a unique name (which must start with the
+letter **j**), the names of its first and second node, and its value in
+amperes (A). The value is the current flowing through the source from the
+first node towards the second: how much current leaves by the second node, and
+equally how much enters by the first.
 
-For example, an ideal current source called **j1**, connected between two nodes
-called **0** and **3**, with a current of **5** A running through it from the
-first node to the second node, would be described as follows:
+For example, an ideal current source called **j1**, between nodes **0** and
+**3**, carrying **5** A from the first node to the second, is described:
 `j1,0,3,5`{{i:current source}}
 :::
 
@@ -38,16 +35,15 @@ division by a thousand.
 
 ### Answers for a current source
 
-For each current source included in the circuit description, you get the same
-answers you would get for a voltage source, using the same polarity
-conventions: the voltage drop in it, the current through it, the power consumed
-by it (for the delivered power, ask for the negative), and the equivalent
-resistance of the rest of the circuit as seen by that source.
+For each current source you get the same answers as for a voltage source, with
+the same polarity conventions: the voltage drop in it, the current through it,
+the power consumed by it (for the delivered power, ask for the negative), and
+the equivalent resistance of the rest of the circuit as seen by that source.
 
 Let's see an example.
 
 ::: problem B11's Example 8.1
-Given the circuit below, determine the current and voltage drop in R1.
+Given the circuit, determine the current and voltage drop in R1.
 
 ::: figure assets/circuit/b11e0801.jpg
 B11's Example 8.1
@@ -86,26 +82,24 @@ current and a 200 V voltage drop.
 
 ## What about conductances? {#conductances}
 
-Conductances are really resistors by another name.{{i:conductance}} So, we
-describe them as resistors, using the element **r**, and we enter as the value
-the inverse of the conductance: one divided by the value of the conductance
-gives you the value of the resistor in Ω.
+Conductances are really resistors by another name.{{i:conductance}} So we
+describe them as resistors, using the element **r**, and give as the value the
+inverse of the conductance: one divided by the conductance is the resistor
+in Ω.
 
-The following example is taken from the textbook *Elementary Linear Circuit
-Analysis* (2ed) by Leonard S. Bobrow. From this point forward, I will refer to
-this book as **Bo2**.
+The next example is from *Elementary Linear Circuit Analysis* (2ed) by
+Leonard S. Bobrow, which from here on I call **Bo2**.
 
 ::: problem Bo2's Example 2.2
-Given the circuit below, determine the voltages in the nodes.
+Given the circuit, determine the voltages in the nodes.
 
 ::: figure assets/circuit/bo2e0202.jpg
 Bo2's Example 2.2
 :::
 
 ::: answer
-As I explained before, in Symbulator all conductances are simulated as
-resistors. So, the 4 siemens conductance becomes a 1/4 resistor, and so on.
-Below is my description:
+As I explained, all conductances are simulated as resistors: the 4 siemens
+conductance becomes a 1/4 resistor, and so on. My description:
 
 ```sym 7
 s\dc("j10,1,0,2:r12,1,2,1:r20,2,0,1/4:r30,3,0,1/3:r13,1,3,1/2:j32,3,2,3")
@@ -142,17 +136,16 @@ That indicates v1 = –1.3 V, v2 = .34 V, v3 = –1.12 V. This is correct.
 ## How to reduce parallel resistors {#parallel-resistors}
 
 ::: only 7,8
-Symbulator has a way to help you reduce resistors connected in parallel to
-their equivalent. It is a function called **pr**,{{i:pr tool}} and you can use
-it either on its own or as part of circuit descriptions. Furthermore, to save
-you some typing, you can invoke it on the fly using a shorthand.
+Symbulator can reduce resistors connected in parallel to their
+equivalent. The function is called **pr**,{{i:pr tool}} and you can use it on
+its own or inside a circuit description. There is a shorthand too, to save you
+typing.
 
 ### Using s\pr({r,r,r…})
 
-When you do not need to know the current through, or the power consumed by,
-each individual resistor, you can reduce any number of resistors in parallel to
-a single equivalent value. You do this by invoking the **s\pr** function, and
-giving it a list of resistance values separated by commas.
+When you do not need the current through, or the power consumed by, each
+resistor, you can reduce any number of parallel resistors to one equivalent
+value: invoke **s\pr** with a comma-separated list of resistance values.
 
 For example, to reduce three resistors in parallel with values of 10 Ω, 20 Ω
 and 30 Ω:
@@ -178,18 +171,16 @@ s\pr({r1,r2,r3,r4})
 
 You get the answer as a symbolic expression.
 
-You can use the s\pr tool as part of a circuit description or on its own, on
-the entry line, outside of Symbulator. This is useful because sometimes you may
-not even need to run a simulation to find the answer to a problem which is
-basically a resistor reduction problem.
+You can use the s\pr tool inside a circuit description or on its own, on the
+entry line. That is useful because a problem which is really just a resistor
+reduction may need no simulation at all.
 
 ### Reducing series and parallel combos
 
-A similar reduction of resistors in series is possible through simple addition,
-whenever we do not need to know specific answers for each resistor, such as the
-voltage drop or power consumed in each, or the voltage in the node between
-them. The current through series resistors is the same, so even through an
-equivalent you can get the current.
+Resistors in series reduce by simple addition, whenever we do not need each
+resistor's own answers — the voltage drop or power in each, or the voltage in
+the node between them. The current through series resistors is the same, so an
+equivalent still gives you the current.
 
 ::: problem AS7's Example 2.10
 Find the equivalent resistance.
@@ -236,12 +227,10 @@ We evaluate and get 19 Ω. This is correct.
 
 ### The [r,r,r…] shorthand for descriptions
 
-It may not be too practical to have to type `s\pr({})` while you describe the
-circuit. So, to make it easier to call for the reduction of parallel resistors
-on the fly, I have added a shorthand. Symbulator will recognise any values
-inside square brackets, such as `[10,20,30]` or `[r1,r2,r3,r4]`, as input to be
-passed to the s\pr function. This shorthand only works within the circuit
-description that is passed to Symbulator, and will not work outside of it.
+Typing `s\pr({})` while describing a circuit is not very practical, so there
+is a shorthand: Symbulator reads any values inside square brackets, such as
+`[10,20,30]` or `[r1,r2,r3,r4]`, as input to s\pr. It works only inside the
+circuit description passed to Symbulator.
 
 ### When to reduce resistors
 
@@ -332,11 +321,9 @@ The answer is {{o:19}} Ω. This is correct.
 
 ### The [r,r,r…] shorthand for descriptions
 
-It may not be too practical to have to call `pr()` separately while you
-describe the circuit. So, to make it easier to call for the reduction of
-parallel resistors on the fly, there is a shorthand: Symbulator will recognise
-any values inside square brackets, such as `[10,20,30]` or `[r1,r2,r3,r4]`, as
-input to be passed to `pr`. The **Evaluate** card runs what you type through
+Calling `pr()` separately while describing a circuit is not very practical, so
+there is a shorthand: Symbulator reads any values inside square brackets, such
+as `[10,20,30]` or `[r1,r2,r3,r4]`, as input to `pr`. The **Evaluate** card runs what you type through
 the same shorthand, so the brackets work there too; this book writes `pr(...)`
 outside descriptions anyway, where square brackets are easy to misread as a
 list.
@@ -399,19 +386,17 @@ prison, taking a bare-knuckle beating from an ever-more-frustrated Batman.
 Master of the situation and laughing hysterically, the Joker says: *"You have
 nothing! Nothing to threaten me with!"*
 
-Even though the movie had not been made yet, I remember feeling something along
-the same lines — although maybe less hysterical — back in 1999, when I realised
-that one of the consequences of having used a 100% symbolic implementation for
-Symbulator was that I could make any element's value dependent on any answer of
-the circuit. I could simulate voltage or current sources that were dependent on
-any voltage, current or combination thereof, with the same ease that I could
-simulate a 12 V source.
+Even though the movie had not been made yet, I remember feeling something
+similar — if less hysterical — back in 1999, when I realised that a 100%
+symbolic implementation let me make any element's value depend on any answer of
+the circuit. I could simulate voltage or current sources dependent on any
+voltage, current or combination of them as easily as a 12 V source.
 
 Here is what you need to know for simulating dependent
 sources{{i:dependent source}} in Symbulator: nothing. There is nothing special
-to it, nothing at all. Just write the value as a function of the circuit's
-answers, using the variables that by now you should know well, and run the
-simulation like it's nobody's business. For example:
+to it at all. Just write the value as a function of the circuit's answers,
+using the variables you know by now, and run the simulation like it's nobody's
+business. For example:
 
 ::: only 7,8
 - if the source depends on the current through a resistor called r1, you define
@@ -438,10 +423,9 @@ With Symbulator, instead of fearing them, you will laugh in the face of
 dependent sources, thinking: *"You have nothing!"* Booyah!
 
 ::: tip Dependent sources are just sources
-For Symbulator, dependent sources are just sources and require no special
-notation. When you declare their value, just state the expression that
-describes it, using variables Symbulator knows and paying attention to their
-polarity, and you are off to the races.
+For Symbulator, dependent sources are just sources and need no special
+notation. State the expression that describes the value, using variables
+Symbulator knows and minding their polarity, and you are off to the races.
 :::
 
 ## Instructive solved examples {#practice-sources}
@@ -469,10 +453,9 @@ Determine the values of V{{sub:S}}, I{{sub:1}} and I{{sub:2}}.
 
 :::
 
-{{v7,8|In the line below, we concatenate two commands using a colon. The first
-asks Symbulator to run a DC simulation of the circuit described in the string.
-The second asks the calculator for the values of three variables that – given
-the circuit description – answer the questions.}}
+{{v7,8|In the line below we join two commands with a colon. The first runs a DC
+simulation of the circuit described in the string; the second asks the
+calculator for three variables that answer the questions.}}
 
 ```sym 7
 s\dc("j,0,1,7:e,1,0,12:r1,1,0,4"):
@@ -493,15 +476,14 @@ The answers you want are `v1`, `ie` and `ir1`, in **Results**.
 :::
 
 {{v7,8|The calculator returns **{12,4,3}**, meaning}}{{v9|The answers show}} V{{sub:S}} is 12V, I{{sub:1}} is
-4A and I{{sub:2}} is 3A. These are the correct answers. {{v7,8|We will continue
-to use the single line instruction as we move on.}}
+4A and I{{sub:2}} is 3A. These are the correct answers. {{v7,8|We will keep using the single-line instruction.}}
 
 :::
 
 ::: problem B11's Example 8.15
 
-Determine the current through each resistor. My solution below, direction in
-blue:
+Determine the current through each resistor. My solution, with the
+direction marked in blue:
 
 ::: figure assets/practice/b11s-example-8-15-2.jpg
 
@@ -526,7 +508,7 @@ j8,2,0,8
 ::: only 9
 The answers you want are `ir2`, `ir6` and `ir8`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 We get these answers: **{1.25,4.75,3.25}**. So I{{sub:R2}} is 1.25A,
@@ -542,7 +524,7 @@ I{{sub:R6}} is 4.75A, and I{{sub:R8}} is 3.25A.
 
 Determine the voltage in each node and the current through each resistor.
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("j1,0,1,4:r1,1,0,2:r3,1,2,12:r2,0,2,6:j2,2,0,2"):
@@ -571,7 +553,7 @@ V{{sub:2}}=-6V, I{{sub:R1}}=3A, and I{{sub:R2}}=I{{sub:R3}}=1A.
 
 ::: problem Bo2's Drill Exercise 2.2 (Conductances)
 
-Given the circuit below, determine the voltages in the nodes.
+Given the circuit, determine the voltages in the nodes.
 
 ::: figure assets/practice/bo2s-drill-exercise-2-2-conductances-4.jpg
 
@@ -600,7 +582,7 @@ j03,0,3,2
 ::: only 9
 The answers you want are `v1`, `v2` and `v3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer, **{-2.,1.,.5}**, indicates v{{sub:1}}=-2V, v{{sub:2}}=1V,
@@ -616,7 +598,7 @@ Determine *i*{{sub:x}} and *v*{{sub:x}} in the following circuit.
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\ex("j6,0,1,6:r5,1,2,5:r2,2,0,2:r1,1,3,1:
@@ -649,7 +631,7 @@ answer, **{-8,80}**, means that I{{sub:X}} is -8A and that V{{sub:X}} is 80V.
 
 ::: problem HK5's Example 2.2 (Conductances)
 
-Determine the voltages in the nodes. My solution below:
+Determine the voltages in the nodes. My solution:
 
 ::: figure assets/practice/hk5s-example-2-2-conductances-6.jpg
 
@@ -683,8 +665,7 @@ v{{sub:3}}=3V.
 
 ::: problem B11's Example 8.5
 
-Determine the current I{{sub:2}} in the circuit shown below. My solution is
-below the circuit.
+Determine the current I{{sub:2}} in the circuit shown. My solution:
 
 ::: figure assets/practice/b11s-example-8-5-7.jpg
 
@@ -742,7 +723,7 @@ Ask **Evaluate** for:
 -ie
 ```
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer, **{-.5,-1.5,1.5,11.5}**, is correct: v{{sub:1}}=-.5,
@@ -752,7 +733,7 @@ v{{sub:2}}=-1.5, v{{sub:3}}=1.5, i=11.5
 
 ::: problem B11's Example 8.22
 
-Determine V{{sub:1}} and V{{sub:2}}. My solution below:
+Determine V{{sub:1}} and V{{sub:2}}. My solution:
 
 ::: figure assets/practice/b11s-example-8-22-9.jpg
 
@@ -778,7 +759,7 @@ j2,2,0,4
 ::: only 9
 The answers you want are `v1` and `v2`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer, **{10.67,-1.33}**, tells us that V{{sub:1}} is 10.67V and
@@ -788,13 +769,13 @@ V{{sub:2}} is -1.33V.
 
 ::: problem B11's Example 8.19
 
-Determine V{{sub:1}}, I{{sub:1}} and I{{sub:2}}, in the circuit below:
+Determine V{{sub:1}}, I{{sub:1}} and I{{sub:2}}, in the circuit:
 
 ::: figure assets/practice/b11s-example-8-19-10.jpg
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("e,2,0,24:r1,1,2,6:r2,1,0,12:j,0,1,1"):approx({v1,ir1,ir2})
@@ -842,7 +823,7 @@ e2,0,3,12
 ::: only 9
 The answers you want are `ir2` and `ir3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 Answer: **{3.33,-.667}**. This is correct.
@@ -852,7 +833,7 @@ Answer: **{3.33,-.667}**. This is correct.
 ::: problem B11's Example 8.20
 
 Determine V{{sub:1}}, V{{sub:2}}, I{{sub:1}}, I{{sub:2}} and I{{sub:3}}. My
-solution is found below the circuit schematic:
+solution:
 
 ::: figure assets/practice/b11s-example-8-20-12.jpg
 
@@ -877,7 +858,7 @@ r3,2,0,10
 ::: only 9
 The answers you want are `v1`, `v2`, `ir1`, `ir2` and `ir3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 Answer: **{37.82,32.73,3.27,1.27,3.27}**. You should know how to read these
@@ -976,7 +957,7 @@ from **a** to **b**.
 ::: problem RM3's Example 8-13
 
 Solve for the currents through R{{sub:2}} and R{{sub:3}} in the circuit
-shown. My solution is below:
+shown. My solution:
 
 ::: figure assets/practice/rm3s-example-8-13-14.jpg
 
@@ -1003,7 +984,7 @@ e2,b,2,8
 ::: only 9
 The answers you want are `ir2` and `ir3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer, **{.00154,.00111}** is correct: I{{sub:R2}} = 1.54 mA and
@@ -1182,7 +1163,7 @@ I{{sub:2}}=-3/26 and v=-15/26.
 
 ::: problem AS2's Practice Problem 2.7
 
-Find v{{sub:o}} and i{{sub:o}} in the circuit. My solution below:
+Find v{{sub:o}} and i{{sub:o}} in the circuit. My solution:
 
 ::: figure assets/practice/as2s-practice-problem-2-7-20.jpg
 
@@ -1248,7 +1229,7 @@ together.
 
 ::: problem AS2's Practice Problem 2.6
 
-Find v{{sub:x}} and v{{sub:o}} in the circuit. My solution below:
+Find v{{sub:x}} and v{{sub:o}} in the circuit. My solution:
 
 ::: figure assets/practice/as2s-practice-problem-p2-6-22.jpg
 
@@ -1281,7 +1262,7 @@ The answer, **{10,-5}**, is correct: v{{sub:x}} =10 and v{{sub:o}} =-5.
 
 :::
 
-Determine v{{sub:1}}, v{{sub:2}} and i. My solution below.{{v7,8| The simulation took 14 seconds.}}
+Determine v{{sub:1}}, v{{sub:2}} and i. My solution:{{v7,8| The simulation took 14 seconds.}}
 
 ```sym 7
 s\dc("ei,1,0,2:r1,1,2,1/3:ed,3,2,4*ir1:r2,3,0,1/5"):{ir1,vr1,vr2}
@@ -1337,7 +1318,7 @@ The answer, **{48,-8}**, is correct: v{{sub:o}} =48 and *i* = -8.
 
 ::: problem HK5's Drill Problem 1.11
 
-Find the power absorbed by each element in the circuit. My solution below:
+Find the power absorbed by each element in the circuit. My solution:
 
 ::: figure assets/practice/hk5s-drill-problem-1-11-25.jpg
 
@@ -1362,7 +1343,7 @@ ed,3,0,4*vx
 ::: only 9
 The answers you want are `pr1`, `pei`, `pr2`, `pr3` and `ped`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer, **{.768,1.92,.2048,.1792,-3.072}**, is correct.
@@ -1371,7 +1352,7 @@ The answer, **{.768,1.92,.2048,.1792,-3.072}**, is correct.
 
 ::: problem AS2's Example 3.6
 
-Determine the value of I{{sub:o}} in the circuit. My solution below:
+Determine the value of I{{sub:o}} in the circuit. My solution:
 
 ::: figure assets/practice/as2s-example-3-6-26.jpg
 
@@ -1397,7 +1378,7 @@ ed,c,0,4*iro
 ::: only 9
 The answer you want is `iro`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer, **1.5** A, is correct.
@@ -1415,7 +1396,7 @@ Determine i, v and i{{sub:d}}.
 We are given an unnecessary piece of information: the 4V drop in the 2Ω
 resistor.
 
-My solution is shown below the schematic.
+My solution:
 
 ```sym 7
 s\dc("ei,1,0,10:r1,1,2,1:r2,2,3,2:r3,2,0,3:
@@ -1450,7 +1431,7 @@ Determine the voltages at the nodes.
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("ji,0,1,3:jd,3,0,2ir2:r2,1,2,2:r4a,1,3,4:r8,2,3,8:r4b,2,0,4"):
@@ -1472,7 +1453,7 @@ r4b,2,0,4
 ::: only 9
 The answers you want are `v1`, `v2` and `v3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer, **{4.8,2.4,-2.4}**, is correct.
@@ -1481,7 +1462,7 @@ The answer, **{4.8,2.4,-2.4}**, is correct.
 
 ::: problem AS2's Example 3.4
 
-Find the node voltages in the circuit. My solution below:
+Find the node voltages in the circuit. My solution:
 
 ::: figure assets/practice/as2s-example-3-4-29.jpg
 
@@ -1509,7 +1490,7 @@ r1,4,0,1
 ::: only 9
 The answers you want are `v1`, `v2`, `v3` and `v4`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer, **{26.67,6.67,173.33,-46.67}**, is correct.
@@ -1529,7 +1510,7 @@ dividing 1 over the siemens value.
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("j,0,1,6:ei,3,1,6:ed,2,3,3v1:r5,1,0,1/5:r2,1,2,1/2:
@@ -1560,7 +1541,7 @@ The answer, **{-1,2,5}**, is correct.
 
 ::: problem Bo2's Example 2.7
 
-Determine the voltages in all nodes. My solution below the schematic:
+Determine the voltages in all nodes. My solution:
 
 ::: figure assets/practice/bo2s-example-2-7-31.jpg
 
@@ -1601,7 +1582,7 @@ Determine the voltages in all nodes.
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("e1,0,1,1:e2,3,4,.5:ed,3,2,3vr4:j,0,4,2:r4,1,2,1/4:
@@ -1638,7 +1619,7 @@ Find i{{sub:A}}, i{{sub:B}} and i{{sub:C}}.
 
 :::
 
-My solution below:
+My solution:
 
 ```sym 7
 s\dc("jl,x,0,5.6:ra,0,x,18:jb,0,x,.1vx:r9,0,x,9:jr,0,x,2"):
@@ -1659,7 +1640,7 @@ jr,0,x,2
 ::: only 9
 The answers you want are `ira`, `ijb` and `ir9`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer, **{3.,-5.4,6.}**, is correct.
@@ -1747,7 +1728,7 @@ j,4,0,vr10/15
 ::: only 9
 The answers you want are `vr10`, `ir2` and `vj`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer, **{7.5,.5,.5}** is correct: i=.5, v=7.5 and v{{sub:d}}=.5.
@@ -1825,7 +1806,7 @@ j,0,o,100'm*vr2
 ::: only 9
 The answers you want are `vo` and `re`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal. Version 9 does that through **Rounding** instead — *approximate to n significant digits* with **n** = 3 is a good setting for this one.
+The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approximate to n significant digits*, with **n** = 3 here.
 :::
 
 The answer, **{.904\*vs,10952.}**, is correct: *v*{{sub:O}}*=.904 v*{{sub:S}}
@@ -1938,7 +1919,7 @@ Determine v{{sub:2}}.
 
 :::
 
-My solution below. In my solution I named the value of the source v{{sub:1}},
+My solution: In my solution I named the value of the source v{{sub:1}},
 to keep it similar to the book. This required avoiding naming any node as
 **1**: if there was a node 1, Symbulator would store in **v1** the voltage of
 the node, creating trouble. There is no problem with using r1 as a value,
@@ -1987,7 +1968,7 @@ $$
 ::: problem TR5's Example 4-7 (Symbolic)
 
 Find R{{sub:IN}}, i.e. the resistance as seen by the current source. My
-solution below.
+solution:
 
 ::: figure assets/practice/tr5-example-4-7-symbolic-45.jpg
 
@@ -2012,7 +1993,7 @@ The answer you want is `rji`, in **Results**.
 
 The answer we get — {{v7,8|`re*(β+1)`}}{{v9|`re1*(β+1)`, version 9's panel
 having renamed the element}} — is correct, as can be seen by comparing it to
-the textbook's answer, shown below.
+the textbook's answer.
 
 ::: figure assets/practice/tr5-example-4-7-symbolic-46.jpg
 
