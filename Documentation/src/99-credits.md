@@ -98,7 +98,7 @@ José Vega (Panama), Tim Hutcheson (USA), Lars Frederiksen (Denmark), Joe Riel
 (Austria), Jake Adams (USA), Daniele Martini (Italy), Rozgonyi Szabolcs
 (Hungary), Michael Rans (UK), Alex Astashyn (Russia), Al Charpentier (USA),
 Nevin McChesney (USA), Ivan Oro Yu (Panama), Pepe Iborra (Spain), Dave Conklin
-(USA), Carlos Perez Ortega (Chile) and Qifan Wang.
+(USA), Carlos Perez Ortega (Chile), Qifan Wang and Antony García (Panama).
 
 My thanks to all of them.
 

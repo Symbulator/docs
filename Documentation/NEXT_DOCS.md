@@ -8,6 +8,22 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #177 — Antony García in the credits — **done, deployed**
+
+Roberto, 30 Aug 2026, alongside Antony's two app suggestions (#175, #176):
+add him to the list of people who have made Symbulator better.
+
+`src/99-credits.md`, appended to the end of the list, which is not
+alphabetical: "… Carlos Perez Ortega (Chile), Qifan Wang and Antony
+García (Panama)." A plain space in the name, not a non-breaking one, to
+match every other entry in the list.
+
+The rest of that chapter is still deliberately untouched by #173's cutting
+pass — it is Roberto's own life, his thanks to his father, and other
+people's words.
+
+---
+
 ## #171 — a problem no longer reserves a page it cannot fill — **done, deployed**
 
 Roberto, 30 Aug 2026: the PDFs have too much blank space in them.
