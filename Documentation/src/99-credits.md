@@ -56,6 +56,23 @@ name with a hyphen, as a dot-com address, like so: rxxxxxx@pxxxx-fxxxxx.cxx
 
 ## Acknowledgements {#acknowledgements}
 
+### Human collaborators
+
+Over the past decades, many people have made Symbulator better
+through their suggestions and corrections, on both the software and the
+documentation. Many were complete strangers at first and became dear friends
+through our exchanges.
+
+Among them are: José Vega (Panama), Tim Hutcheson (USA), Lars Frederiksen (Denmark), Joe Riel
+(USA), Arne Harstad (Norway), Erwin Baert (Belgium), Charles 'Chuck' Ware
+(USA), Doug Burkett (USA), Reinhard Willinski (Germany), Kamil Malinski
+(Austria), Jake Adams (USA), Daniele Martini (Italy), Rozgonyi Szabolcs
+(Hungary), Michael Rans (UK), Alex Astashyn (Russia), Al Charpentier (USA),
+Nevin McChesney (USA), Ivan Oro Yu (Panama), Pepe Iborra (Spain), Dave Conklin
+(USA), Carlos Perez Ortega (Chile), Qifan Wang (China) and Antony García (Panama).
+
+My thanks to all of them.
+
 ### Technology
 
 ::: only 7
@@ -75,32 +92,19 @@ I am thankful to the creators of such wonderful open-source software, and to the
 maintainers who keep their development going. I am proud to honour the open-source
 community by making Symbulator free and open-source software, from 2026.
 
-I also want to acknowledge that porting Symbulator to Python/SymPy, and creating
-its websites, would not have been possible without the coding prowess of Anthropic's
+### AI collaborator
+
+I also want to acknowledge that porting Symbulator to Python/SymPy, creating
+its interface and websites and updating its documentation, would not have been possible without the coding prowess of Anthropic's
 artificial intelligence assistant. Claude allowed me to do in two weeks something that 
 I was unable to find the time to do in two decades: to port Symbulator to Python.
 
-AI is not without risks, and needs careful policies and oversight on fronts like ethics, 
-biases, its impact on labour, and its voracious use of water and energy. I believe there
-is a right way to deploy this technology, and — after working on Symbulator 9 with Claude — I am now convinced that AI will revolutionise the way we work.
+::: warning Use AI responsibly 
+AI is not without risks, and needs careful policies and regulatory oversight on fronts like ethics, 
+systemic biases, its impact on labour, and its voracious use of water and energy. I believe there
+is a right way to deploy this technology, and — after working on Symbulator 9 with Claude — I am now convinced that AI will revolutionise the way we work. We just need to do it the right way.
 :::
-
-### Human collaborators
-
-Over the past decades, many people have made Symbulator better
-through their suggestions and corrections, on both the software and the
-documentation. Many were complete strangers at first and became dear friends
-through our exchanges. Among them are:
-
-José Vega (Panama), Tim Hutcheson (USA), Lars Frederiksen (Denmark), Joe Riel
-(USA), Arne Harstad (Norway), Erwin Baert (Belgium), Charles 'Chuck' Ware
-(USA), Doug Burkett (USA), Reinhard Willinski (Germany), Kamil Malinski
-(Austria), Jake Adams (USA), Daniele Martini (Italy), Rozgonyi Szabolcs
-(Hungary), Michael Rans (UK), Alex Astashyn (Russia), Al Charpentier (USA),
-Nevin McChesney (USA), Ivan Oro Yu (Panama), Pepe Iborra (Spain), Dave Conklin
-(USA), Carlos Perez Ortega (Chile), Qifan Wang and Antony García (Panama).
-
-My thanks to all of them.
+:::
 
 ## Problem credits {#problem-credits}
 
@@ -180,7 +184,7 @@ of that precious collection.
 ## Licence {#licence}
 
 Symbulator has always been free of cost, and always will be. From June 2013 it
-was offered under a Creative Commons BY-NC-SA licence; it is now open source
+was offered under a Creative Commons BY-NC-SA licence. Since 2016 it is open source
 under the MIT licence, which supersedes it. If you want to port it to another
 platform, you are free to do so, provided the copyright notice and the
-attribution travel with it.
+attribution of authorship travel with it.
