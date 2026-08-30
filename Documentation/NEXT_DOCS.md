@@ -8,6 +8,41 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #192 — the landing page says fourteen lessons — **accepted, not done**
+
+Roberto, 30 Aug 2026: on the landing page, *fourteen lessons* should be
+**thirteen**.
+
+Confirmed against the source before recording it. `book.yaml` lists **15
+chapters**, and of those exactly **13 carry `kind: lesson`** — the other
+two being the Introduction (`kind: front`) and the Credits (`kind: back`).
+So thirteen is right, and the fourteen looks like a chapter count that
+dropped only one of the two non-lessons.
+
+**Two places to change, not one**, and the second is the one that gets
+missed because it is invisible on the page:
+
+    landing/index.html:290   <p class="way-kicker">Fourteen lessons, with worked problems</p>
+    landing/index.html:13    <meta property="og:description" content="... or read fourteen lessons of worked problems.">
+
+The meta description is what appears when the site is shared on social
+media or in a search result, so leaving it behind would keep the wrong
+number in circulation where nobody looks for it. Mind the capital **F** in
+the first and the lower-case **f** in the second.
+
+### Deploying it
+
+The landing page **has no build step** — `landing/` *is* the site, and
+`py deploy_symbulator.py landing` uploads it. That target has not been
+touched in a while: this would be the first `landing` deploy since the
+#140–#157 day, so expect the diff to be exactly these two lines and check
+that it is.
+
+Nothing else counts lessons: `grep -ri "fourteen\|thirteen"` over
+`landing/` and `src/` finds only these two.
+
+---
+
 **Deployed 30 Aug 2026** to `learn.symbulator.com`, with all three PDFs
 rebuilt — v9 **241 pages**, v7 205, v8 195 — and Roberto's own revision of
 the Acknowledgements in the same upload. Guards: 73 blocks verified against
