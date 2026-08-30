@@ -8,7 +8,7 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #171 — a problem no longer reserves a page it cannot fill — 30 Aug 2026
+## #171 — a problem no longer reserves a page it cannot fill — **done, deployed**
 
 Roberto, 30 Aug 2026: the PDFs have too much blank space in them.
 
@@ -38,7 +38,7 @@ Alone this took v9 from 259 pages to 253. With #172 it reaches 241.
 
 ---
 
-## #172 — the circuits choose their own page — 30 Aug 2026
+## #172 — the circuits choose their own page — **done, deployed**
 
 Roberto, 30 Aug 2026, asked for figures placed "so as to make the best use of
 the space", with the text moving above or below them. That is LaTeX's float
@@ -92,7 +92,7 @@ v7 and v8 shrank with it — they share `src/` and the class.
 
 ---
 
-## #173 — fewer words for the same thing — 30 Aug 2026
+## #173 — fewer words for the same thing — **done, deployed**
 
 Roberto, 30 Aug 2026: "Sometimes I use too many words to say things." His two
 examples, both from his own revision of Lesson 1: "For each resistor included
@@ -136,6 +136,11 @@ looked like a slip for *files*. Say if any of those was deliberate.
 same 73 blocks verified and the same 11 not found as before it, so no printed
 answer moved; `check_control_chars.py` clean; `check_white_text.py` clean on
 all three PDFs; `build.py --check` clean; zero LaTeX errors in all three logs.
+
+**Deployed 30 Aug 2026** to `learn.symbulator.com`: 39 files, and the three
+PDFs verified live by hash against the local build — v9 240 pages, v7 205,
+v8 195. The pages carry the reworded prose (`circuit below` returns nothing
+on the built site).
 
 ---
 
