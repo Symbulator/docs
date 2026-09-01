@@ -8,6 +8,79 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #216 — Appendix B, redrawn — **done and live on learn, 1 Sep 2026**
+
+Appendix B of *The Internal Logic of Symbulator* is not artwork: it is
+seven circuits rendered by the v9 schematic engine itself, through
+`paper/render_exemplars.py`. That drawer changed on 1 Sep 2026 (#213 —
+the reference marks and the typeset values) and again the same day
+(resistors 20% smaller, dependent sources 10% larger), so the appendix
+was showing a hand the app no longer uses. Regenerated, and the
+monograph rebuilt: **45 pages**, was 44.
+
+**The script no longer keeps its own copy of the circuits.** It reads
+them from the app's example book, `repos/server/examples/The_Monograph.cir`,
+by entry name — the same seven entries the reader meets in the app,
+drawn by the same drawer. The duplicate copy is exactly what drifted
+when Roberto restated the showcase's controls (#215) and this file
+stayed as it was; a rename on either side now fails the script loudly
+instead.
+
+### Two bugs it found, both only visible in the rendered page
+
+**Every resistance in the appendix has been printing as `10 |`.**
+Helvetica is a Type 1 face in WinAnsi: no omega, no pi, no angle sign,
+and reportlab draws what it cannot encode as a bar or as nothing. The
+SVGs had all four characters correct the whole time — it was the PDF
+conversion that lost them, and only a rendered page shows it. This has
+been true since the figures were first generated on 28 Aug 2026. Fixed
+by embedding DejaVu Sans (upright and oblique), through
+`svglib.register_font` rather than reportlab's own `registerFont`:
+svglib keeps a separate map from an SVG `font-family` to a face, and a
+family it does not know falls back to Helvetica silently — which is
+what the first attempt at the fix did, omegas still missing and nothing
+said. Adobe's Symbol font, tried before that, drew blanks: svglib will
+not honour a per-tspan `font-family` switch.
+
+**The labels are now laid out here, not by svglib.** With DejaVu
+embedded, `J` and its subscript `D1` came out on top of each other
+while `R` and its `5` were fine: the advance svglib used was not the
+advance it drew with. Rather than chase which metric it was reading,
+every run is measured against the same reportlab face the page is drawn
+in and handed over already positioned, `text-anchor="start"`. Two
+details that cost a round each: a label's own anchor has to be honoured
+by measuring the whole label first, and the renderer strips a run's
+outer whitespace (Unicode-aware, so a no-break space does not survive
+either) — so a run is drawn without its outer spaces, at its own x plus
+the width of the leading ones. The mutual-inductance caption read
+`M=  1H(couples  L1and  L2)` until it was.
+
+### §5.2 follows the example, on Roberto's ruling
+
+#215 renamed the showcase's unknowns to `es` and `js`, which left §5.2's
+prose saying `vs` and `is` two pages before Figure B.2 showed sources
+valued `es` and `js` — a document contradicting its own appendix.
+Roberto ruled that the prose should follow the example (1 Sep 2026), and
+it does: the symbols are now $E_s$ and $J_s$, the verbatim listing is
+the shipped description character for character (`es,e,0,es`,
+`jd1,a,b,0.2vr7`, `ped2 = 0`, `conditions: es > 0, js > 0`), and the
+`is` footnote survives as what it always was — the story of solver
+0.5.19 shielding Python keywords — reworded to say the names *were*
+`vs` and `is` when the chapter was drafted, and that which name the
+example ships under is a matter of taste rather than of what the reader
+may write. The closed forms are untouched.
+
+The listing was the easy thing to miss: §5.2 quotes the circuit twice,
+once in prose and once in a `tabbing` block, and only the prose was
+caught on the first pass. It showed up by reading the rendered page.
+
+Deployed: `py deploy_symbulator.py learn` uploaded one file
+(`monograph.pdf`, 1,019,308 bytes; 661 already identical) and verified
+it by fetching — the live PDF hash-matches the local build. **45 pages**,
+was 44.
+
+---
+
 ## #195 — the monograph and the solver agree about levels — **done, deployed**
 
 Roberto, 30 Aug 2026: *"I want the solver's code to match the monograph.
