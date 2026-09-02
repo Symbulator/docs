@@ -8,7 +8,7 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #220 — Units of measure across lessons 1–13 — **done, built, not deployed, 2 Sep 2026**
+## #220 — Units of measure across lessons 1–13 — **done and live on learn, 2 Sep 2026**
 
 Roberto's findings list, worked prose-only: no circuit description, no
 `'k`/`'m`/`'µ` inside an Evaluate or Solve block, no variable names.
@@ -65,11 +65,20 @@ default makes this a real inconsistency rather than a considered one.
 Verified by `build.py --check` (clean), `tools/check_against_originals.py`
 (unchanged at its baseline, 73 verified / 11 not found — it reads `out`
 blocks, so prose edits do not move it) and by grepping the built pages
-for each changed string. Nothing deployed.
+for each changed string.
+
+**Live on learn, 2 Sep 2026**, pages and PDFs both, and verified on the
+*served* pages rather than on the build: 12 V, 100 mS, 10.95 kΩ, the kΩ
+conversions in lessons 4 and 5, `I₃: 20 mA`, `var` twice, nine `rad/s`
+with the two dialog labels still `rad/sec` on v7 only, `0.4 S` and
+`4 Ω`. No `'k` or `’k` left anywhere in prose. The host was pruned the
+same day of 278 orphans left from the placeholder era; remote count is
+now 662, matching local exactly, with all 316 asset references
+resolving.
 
 ---
 
-## #221 — `\*` is an escape now, and always should have been — **done, built, not deployed, 2 Sep 2026**
+## #221 — `\*` is an escape now, and always should have been — **done and live on learn, 2 Sep 2026**
 
 `build.py`'s inline parser had no escape mechanism at all, while the
 sources have been writing `\*` for a literal multiplication sign since
@@ -128,6 +137,24 @@ This is the docs-tree instance of *measure the artefact, not the model
 that produced it*: the parser was self-evidently fine from the code, and
 only the rendered page showed that eleven paragraphs were being mangled.
 Nobody had looked.
+
+### The PDFs, and an ohm that is not the ohm you typed
+
+Roberto lifted the `--web` standing instruction for one run so the
+typeset half would stop disagreeing with the web half — `tex_escape`
+maps `\` to `\textbackslash{}`, so every `\*` had been *printing* a
+backslash in all three books. Rebuilt and deployed 2 Sep 2026: **0
+occurrences of `\*` in the v9 PDF text**, `{.904*vs,10952.}` and
+`r2*r4/(r1*(r3+r4))+r4/(r3+r4)=3` and `3*v2-5*v1` all correct. v9 is
+**241 pages**, one more than before, from the added units and two
+rewrapped sentences; v7 and v8 are unchanged at 205 and 195. All three
+hash-verified against the local build.
+
+**A built PDF encodes Ω as U+2126 (ohm sign), not the U+03A9 that is in
+the source.** Two of the verification probes came back as misses on that
+alone, and a book that was entirely correct looked broken for as long as
+it took to print the codepoints. Normalise, or search for both, before
+concluding anything about a PDF from a grep.
 
 ---
 
