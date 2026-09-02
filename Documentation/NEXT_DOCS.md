@@ -171,6 +171,24 @@ pane at all but the mobile layout doing its job: clicking an app link on
 a narrow screen switches to the app tab, which hides the docs pane, so
 the docs document legitimately had no layout to measure.
 
+### The walkthroughs have no link, and must not get one
+
+Links attach to `::: problem` blocks. A chapter that teaches by having
+the reader *type* a circuit — a `field 9` block, like Lesson 1 §1.1
+*Run a direct current analysis* — gets none, and that is correct rather
+than an oversight. Roberto, 2 Sep 2026, asked whether §1.1 had been left
+out deliberately and then settled it: **"It's a manual example. It's
+meant to be manual."** The section exists to make the reader type the
+circuit; a button that loaded it for them would remove the exercise.
+
+The circuit itself is not unreachable — §1.1's is `Lesson_01.cir` entry
+1, linked from §1.5 where `::: problem B11's Example 5.7` presents it
+formally. So the gap is only at first contact, and it is the point.
+
+Written down because it looks exactly like a bug from the outside: a
+future pass counting links against `field 9` blocks will find these
+missing and be tempted to fix them. Do not.
+
 ### Still open
 
 Nothing blocking. Two things a reader may raise once it is live:
