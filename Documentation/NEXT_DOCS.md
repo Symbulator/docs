@@ -8,6 +8,52 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #226 — "Split View" in the ribbon — **done and live on learn, 2 Sep 2026**
+
+Roberto, 2 Sep 2026: replace *How it works* in the ribbon under the
+banner with **Split View**, taking the reader to the split view of the
+page they are already on.
+
+The link carries `?page=<chapter>` rather than a lesson and an entry,
+because the reader has not picked a problem — they have asked to see
+this chapter beside the app. `/split/` grew a third way in for it: the
+left pane opens on that chapter, and the right pane opens on the
+chapter's **first book**, so Lesson 6 opens the app on Lesson 6's
+entries rather than on whatever it had last. A chapter with no book of
+its own — the introduction, the credits — leaves the app at its default.
+On the home page there is no chapter to carry, so the link says
+`?page=introduction`.
+
+**Versions 7 and 8 keep the old link.** There is no split view for them:
+the app *is* version 9, so a "Split View" link on a version 7 page would
+quietly move that reader onto version 9's documentation — the exact
+opposite of "the same page where they are". This is the one deliberate
+departure from "replace it", and it is worth a second look if the
+ribbon is ever revisited.
+
+Two things the implementation turned up:
+
+* **`lessons.json` now writes both directions of the map.** Inverting
+  one of them in the page would not do, because JavaScript does not keep
+  an object's key order for keys that look like array indices:
+  `{"1":…,"10":…,"4a":…}` comes back as `1, 10, 4a`, so "the chapter's
+  first book" would silently have been the wrong one for Lesson 1
+  against Lesson 10. Both directions are generated from `CHAPTER_BOOKS`.
+* **The bar shows the chapter's own title**, carried in the `ready`
+  message. Only the pane knows it: deriving *Transient analysis* from
+  `lesson-transient` is guesswork, and wrong in every language the book
+  is ever set in. Clicking an entry then switches the bar to
+  `Lesson 6b · entry 3` and the URL to `?lesson=6b&entry=3`, so a split
+  view opened on a chapter stays shareable at whatever the reader
+  reaches inside it.
+
+Verified live on `learn.symbulator.com`: the v9 ribbon links
+`/split/?page=lesson-transient`, the v9 home page links
+`/split/?page=introduction`, and the v7 ribbon still reads
+*How it works*.
+
+---
+
 ## #224 — The split view, and an app link on every worked problem — **done and live on learn, 2 Sep 2026**
 
 Roberto's brief, 2 Sep 2026: a page that shows the documentation and the
