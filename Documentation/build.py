@@ -1143,7 +1143,7 @@ SEARCH_SPLIT = re.compile(r'<h2 id="([^"]+)"[^>]*>(.*?)</h2>', re.S)
 
 def plain(html_text: str) -> str:
     """The words of a rendered page, with the markup taken out."""
-    text = re.sub(r"(?is)<(script|style).*?</>", " ", html_text)
+    text = re.sub(r"(?is)<(script|style)\b.*?</\1>", " ", html_text)
     # #224's app links are furniture, not words. Left in, "Open in app"
     # would be part of the searchable text of 265 problems, so a search
     # for "app" would return most of the book.

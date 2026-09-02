@@ -10,6 +10,15 @@ It was found twice on 25 Aug 2026 -- once fresh in chapter 7, once already
 published in chapter 9's delta-delta section and chapter 7's LaTeX. Nothing
 in this documentation has any business containing a control character, so
 the rule is simply that there are none.
+
+#230 (3 Sep 2026) widened it from the prose to **the code that builds the
+prose**, because that is where the next one was hiding. build.py's plain()
+carried a regex reading <(script|style)BS...</SOH> -- literal bytes 8 and 1
+where a word boundary and a backreference had been written -- so its
+script/style stripping could never match anything and never had. It was
+harmless only because no chapter contains a script tag. The checker that
+would have caught it was looking at src/ alone: it had the same blind spot
+as the bug, which is the reason to scan the tools too.
 """
 import glob
 import io
@@ -27,9 +36,23 @@ LIKELY = {7: r"\a  (as in s\ac or s\aa)", 8: r"\b", 12: r"\f  (as in \frac)",
 
 def check_control_chars() -> list[str]:
     problems = []
-    for path in sorted(glob.glob(os.path.join(ROOT, "src", "*.md"))):
+    # The prose, and the code that renders it. A build script is exactly
+    # as vulnerable to a heredoc eating an escape as a chapter is, and
+    # rather more quietly: a mangled regex still compiles and simply
+    # stops matching (#230).
+    targets = (sorted(glob.glob(os.path.join(ROOT, "src", "*.md")))
+               + [os.path.join(ROOT, "build.py")]
+               + sorted(glob.glob(os.path.join(ROOT, "tools", "*.py"))))
+    for path in targets:
+        if not os.path.isfile(path):
+            continue
         text = io.open(path, encoding="utf-8", newline="").read()
-        name = os.path.basename(path)
+        # CRLF is a line ending, not a control character in the content:
+        # these files are edited on Windows and many are stored with it.
+        # Collapsing the pair first keeps a *lone* CR a finding, which is
+        # what chr(13) meant when only the prose was scanned.
+        text = text.replace("\r\n", "\n")
+        name = os.path.relpath(path, ROOT).replace(os.sep, "/")
         for i, ch in enumerate(text):
             if ord(ch) < 32 and ch not in ALLOWED:
                 line = text[:i].count("\n") + 1
