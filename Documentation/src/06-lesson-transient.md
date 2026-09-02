@@ -438,7 +438,7 @@ $$
 **Solution.** Again, we have two intervals: the first for DC, the second for
 TR.
 
-For the interval when **t < 0s**, the voltage source is 12A. Simulate in DC.
+For the interval when **t < 0s**, the voltage source is 12 V. Simulate in DC.
 
 ```sym 7
 s\dc("e,1,0,12:r3,1,2,3:r6,2,0,6:r4,2,3,4:c,3,0,1/12"):{vc,ic,v2}

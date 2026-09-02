@@ -45,6 +45,23 @@ Markdown for the ordinary things:
 | `$x^2$`, `$$...$$` | maths (LaTeX in the PDF, KaTeX on the web) |
 | `> quoted` | quotation (see below) |
 | `\| a \| b \|` | table (see below) |
+| `\*`, `\\` | a literal `*` or `\` (see below) |
+
+### Escapes -- and the two characters that are *not* escapes
+
+`\*` is a literal asterisk and `\\` a literal backslash. Nothing else is an
+escape sequence. That matters more than it sounds: a backslash is ordinary
+content in this book, because the calculator's own namespace is spelled
+`s\dc`, `s\tr`, `s\rms`, and a general `\.` escape would silently eat every
+one of them.
+
+Use `\*` for the multiplication sign inside an answer quoted back from the
+software -- `**{.904\*vs,10952.}**`. Without it the interior `*` breaks the
+`**...**` match and the remaining stars re-pair themselves across the rest
+of the paragraph: the sentence renders with its italics shifted one span to
+the right and a stray `*` left over at the end. Eleven lines in four lessons
+were doing exactly that until 2 Sep 2026, because the escape was written in
+the sources from the start but never implemented in `build.py`.
 
 ### Tables
 

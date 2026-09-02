@@ -8,6 +8,147 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #220 — Units of measure across lessons 1–13 — **done, built, not deployed, 2 Sep 2026**
+
+Roberto's findings list, worked prose-only: no circuit description, no
+`'k`/`'m`/`'µ` inside an Evaluate or Solve block, no variable names.
+Nine `src/*.md` files, 48 lines.
+
+**Three that were wrong.** Lesson 6, Bo2's p224 5.2 called a voltage
+source "12A"; it is 12 V. Lesson 3, TR5's Example 4.4 called the
+transconductance *g* "100mA" — a current, for a quantity measured in
+siemens; it is 100 mS. The same problem's answer read `RIN=10.95'kΩ`.
+
+**The apostrophe leaking out of the input language.** `'k` is how a
+value is *typed*; it is not a unit and does not belong in a sentence.
+Lesson 4 (RM3's 9-7, B11's 9.15), Lesson 5 (AS2's 5.3 and 5.7 with both
+practice problems) and Lesson 3 all had it, in both the straight and the
+curly apostrophe — `10'kΩ` and `10’kΩ` are the same mistake and a search
+for one will not find the other.
+
+**Consistency.** Lesson 1's B11 6.13 gave I₃ as "0.02 A" beside siblings
+in mA. Lesson 9 spelled the reactive-power unit "VAR" twice; SI and IEEE
+spell it `var`. Lesson 11 mixed rad/sec and rad/s across seventeen
+places.
+
+### Three findings the list did not survive contact with
+
+**`ap_` is average power, not apparent power — the report was inverted.**
+The list asked for Lesson 7's AS7 Example 9.9 to be rewritten so that
+`pe`/`pr1` held average power and `ape`/`apr1` apparent power. The
+chapter was right and the change would have broken it.
+`analysis.py:211` reads `out[f"p_{e.name}" if use_rms else
+f"ap_{e.name}"] = sp.re(s)`: **both names hold the same quantity**, the
+real part of V·conj(I), and which one is used depends only on the RMS
+setting — `ap` for peak-amplitude phasors, `p` for RMS. The app agrees
+(`_ELEMENT_KEYS` in `symbulator_ui.py` labels `ap_{n}` "average power",
+in W) and so does Lesson 8's own text. "None is given for the capacitor"
+is right too: `p_`/`ap_` are emitted only for kinds `e`, `j`, `r`, `o`.
+Lesson 7 was left alone. What is actually wrong is the solver README —
+**#223**.
+
+**Two "rad/sec" were kept on purpose.** In `s\bode()` the calculator
+offers a literal choice reading `in Hz` / `in rad/sec`
+(`symbulator_calculator/decoded/v7_programs_partial.txt:436`). Renaming
+those two would send a v7/v8 reader hunting for a menu entry that does
+not exist, so they are italicised as the UI labels they are. Every
+*measurement* in the lesson is rad/s.
+
+**v9 ships with SI prefixes off**, so mA and kΩ in a sentence that
+narrates the screen describe a screen the reader does not have.
+`<input type="checkbox" id="siUnits">` in `templates/index.html` carries
+no `checked`. Lesson 1's bullet is a summary and reads in mA; Lesson 2's
+B11 6.19 quotes the **current through** line directly and was left at
+`−0.02 A` for that reason. Anything that later turns the setting on by
+default makes this a real inconsistency rather than a considered one.
+
+Verified by `build.py --check` (clean), `tools/check_against_originals.py`
+(unchanged at its baseline, 73 verified / 11 not found — it reads `out`
+blocks, so prose edits do not move it) and by grepping the built pages
+for each changed string. Nothing deployed.
+
+---
+
+## #221 — `\*` is an escape now, and always should have been — **done, built, not deployed, 2 Sep 2026**
+
+`build.py`'s inline parser had no escape mechanism at all, while the
+sources have been writing `\*` for a literal multiplication sign since
+the conversion. Eleven lines across four lessons were affected and the
+damage was not local to them.
+
+`INLINE_RE`'s strong rule was `\*\*[^*]+\*\*`. In
+`**{.904\*vs,10952.}**` the interior `*` makes that fail, so the scan
+falls through to the em rule, which matches `*{.904\*` — and every
+star for the rest of the paragraph is then paired one position out of
+step. The sentence in TR5's Example 4.4 rendered as *"is correct: v*<sub>O</sub>*
+=.904 v"* with the italics shifted a span to the right and a bare `*`
+left sitting before the full stop. In the PDFs it was worse: `tex_escape`
+maps `\` to `\textbackslash{}`, so the backslash printed.
+
+The fix is an `esc` alternative, `\\[*\\]`, plus `(?:\\[*\\]|[^*])+` in
+place of `[^*]+` inside strong and em, so an escaped star no longer
+terminates a span.
+
+**The escape set is deliberately two characters, not a general `\.`.**
+A backslash is ordinary content in this book: the calculator's namespace
+is spelled `s\dc`, `s\tr`, `s\rms`, `s\pf`, `s\bode`, and a general
+escape would silently swallow every one.
+
+### The atom order is the whole trick, and the first version got it wrong
+
+The obvious spelling of that atom is `(?:[^*\\]|\\[*\\])` — escape or
+non-special character — and it is **wrong**, because `[^*\\]` bans a
+*lone* backslash from emphasis altogether. `**s\bode**` stopped being
+bold, along with every other `**s\...**` in the book. Nine built pages
+moved that had nothing to do with `\*`.
+
+`(?:\\[*\\]|[^*])` is correct and the order is load-bearing: the escape
+alternative goes first so `\*` is swallowed as a unit and its star
+cannot close the span, and `[^*]` then still admits a bare backslash as
+ordinary content.
+
+**Nothing in the source told me this. The diff did.** The change was
+verified by building the site twice — once with `build.py` stashed, once
+with it restored — and diffing the two trees. The first run touched
+lessons that contain no `\*` at all, which is what exposed the
+regression; the second touches exactly the four lessons that do
+(equivalents, opamps, sources, transient) plus the three search
+indexes, and every hunk in them is one of the eleven lines. A parser is
+another artefact whose model you cannot read the truth off.
+
+Documented in `SPEC.md` under *Escapes — and the two characters that are
+not escapes*.
+
+**It exposed one content bug the moment it went in.** TR5's Example 4.8
+in Lesson 4 read `**{vs\*µ/(µ+1**),**ro/(µ+1)}**` — a stray `**` in the
+middle of the braced pair, which the broken parser had been hiding.
+Corrected to one bold span.
+
+This is the docs-tree instance of *measure the artefact, not the model
+that produced it*: the parser was self-evidently fine from the code, and
+only the rendered page showed that eleven paragraphs were being mangled.
+Nobody had looked.
+
+---
+
+## #222 — Units on the bare answer lines — **accepted, not done**
+
+Many solved-example answer lines carry no unit at all. #220 did the six
+Roberto named — Lesson 1's B11 7.11 (V and A), Lesson 3's Bo2 1.9, AS2's
+Practice Problem 2.7 and Bo2's 1.10 (V and A), and Lesson 13's Gain
+Examples 1 and 2, whose y and z parameters had no S or Ω (the app's own
+`_PORT_UNITS` is `{"z": "ohm", "y": "S"}`; the gains stay bare because
+they are dimensionless).
+
+The rest is a single uninterrupted pass over all fourteen chapters, and
+it wants to be one: every unit has to be *verified* against what the
+quantity is, not inferred from the name, and a half-done sweep reads
+worse than none. Watch for the same trap #220 hit — a value that is
+genuinely dimensionless, and a name whose prefix does not say what it
+measures.
+
+---
+
 ## #216 — Appendix B, redrawn — **done and live on learn, 1 Sep 2026**
 
 Appendix B of *The Internal Logic of Symbulator* is not artwork: it is

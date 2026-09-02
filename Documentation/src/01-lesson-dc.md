@@ -755,7 +755,7 @@ r3,1,0,1.2'k
 
 - {{v7,8|Evaluating `re` gets}}{{v9|`re` is}} the total resistance: {{o:9.49}} Ω
 - {{v7,8|Evaluating }}{{v7|`-ie`}}{{v8|`–ie`}}{{v9|Flipping the sign of `ie`}} gets us the source current: {{o:2.53}} A
-- {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} I{{sub:1}}: {{o:2.4}} A, {{v7,8|`ir2` gets}}{{v9|`ir2` is}} I{{sub:2}}: {{o:109}} mA, and {{v7,8|`ir3` gets}}{{v9|`ir3` is}} I{{sub:3}}: {{o:0.02}} A.
+- {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} I{{sub:1}}: {{o:2.4}} A, {{v7,8|`ir2` gets}}{{v9|`ir2` is}} I{{sub:2}}: {{o:109}} mA, and {{v7,8|`ir3` gets}}{{v9|`ir3` is}} I{{sub:3}}: {{o:20}} mA.
 
 :::
 
@@ -1090,8 +1090,8 @@ r2,b,c,4
 r3,b,0,5
 ```
 
-Answers: `va`={{o:20}}, `vb`={{o:15}}, `vc`={{o:8}}, `va-vc`= {{o:12}},
-`vb-vc`={{o:7}}, `ir2`={{o:1.75}}, I{{sub:S}} via {{v7|`-ie3`}}{{v8|`–ie3`}}{{v9|the opposite of `ie3`}}={{o:-2.95}}
+Answers: `va`={{o:20}} V, `vb`={{o:15}} V, `vc`={{o:8}} V, `va-vc`= {{o:12}} V,
+`vb-vc`={{o:7}} V, `ir2`={{o:1.75}} A, I{{sub:S}} via {{v7|`-ie3`}}{{v8|`–ie3`}}{{v9|the opposite of `ie3`}}={{o:-2.95}} A
 
 :::
 

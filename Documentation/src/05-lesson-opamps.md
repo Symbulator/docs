@@ -327,7 +327,7 @@ correct:
 ::: problem AS2's Example 5.3 (Inverting)
 
 If v{{sub:i}} is 0.5V, calculate the output voltage v{{sub:o}} and the
-current in the 10’kΩ resistor.
+current in the 10 kΩ resistor.
 
 ::: figure assets/practice/as2s-example-5-3-inverting-6.jpg
 
@@ -407,7 +407,7 @@ answer is v{{sub:O}}=**-15**V for v{{sub:S}} = 6V.
 ::: problem AS2's Practice Problem 5.3 (Inverting)
 
 Find the output voltage of the op amp (i.e. v{{sub:o}}) and calculate the
-current through the feedback resistor (i.e. the 15’kΩ resistor).
+current through the feedback resistor (i.e. the 15 kΩ resistor).
 
 ::: figure assets/practice/as2s-practice-problem-5-3-inverting-8.jpg
 
@@ -1283,8 +1283,8 @@ equal 3.
 
 We get **r2\*r4/(r1\*(r3+r4))+r4/(r3+r4)=3** Now, since you have two
 equations, you can solve for two unknowns. Of the four resistors you get to
-choose, two can be whatever you want. The book recommends R{{sub:1}} = 10’k and
-R{{sub:3}}=20’k. Now let's find R{{sub:2}} and R{{sub:4}}.
+choose, two can be whatever you want. The book recommends R{{sub:1}} = 10 kΩ
+and R{{sub:3}} = 20 kΩ. Now let's find R{{sub:2}} and R{{sub:4}}.
 
 ```sym 7
 solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=20000
@@ -1368,7 +1368,7 @@ read `vo` each time. The two factors are the same as before, so the two
 design equations are the same shape with 4 in place of 5 and 3.
 :::
 
-This time the book asks that you use R{{sub:1}} = 10’k and R{{sub:3}} = 10’k.
+This time the book asks that you use R{{sub:1}} = 10 kΩ and R{{sub:3}} = 10 kΩ.
 So we do that.
 
 ```sym 7

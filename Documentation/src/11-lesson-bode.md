@@ -111,8 +111,8 @@ Description is ignored for this plot type, so it works on an empty page.
   powers, implied multiplication, `1'k` — and it must be numeric apart from
   `s`. A leftover symbol is refused by name.
 - The frequency boxes are in **hertz**. The calculator examples in this
-  lesson give their ranges in rad/sec; divide by 2π for the same sweep in Hz
-  (0.1 to 300 rad/sec is about 0.016 to 48 Hz).
+  lesson give their ranges in rad/s; divide by 2π for the same sweep in Hz
+  (0.1 to 300 rad/s is about 0.016 to 48 Hz).
 :::
 
 ::: practice
@@ -131,7 +131,7 @@ The expression, typed outside the tool
 
 When I'm happy with it I copy it to the clipboard, run `s\bode()`, and paste
 it into the field. Gain Plot as the type, 0.1 as the minimum frequency and 100
-as the maximum, rad/sec as the unit. Press Enter.
+as the maximum, *in rad/sec* as the unit. Press Enter.
 
 I wanted to see more of the plot to the right, so I pressed HOME and ran the
 tool again — the previous values are still there, so only the maximum needs
@@ -144,7 +144,7 @@ Finding the maximum
 :::
 
 There is a maximum gain of 24.4 at x = 0.65052 — and since x is the logarithm
-of the frequency, that is 10^0.65052 = 4.47 rad/sec.
+of the frequency, that is 10^0.65052 = 4.47 rad/s.
 
 Press F5 again and choose the zero option, with bounds around where the line
 crosses the axis:
@@ -153,7 +153,7 @@ crosses the axis:
 Finding the zero
 :::
 
-That is x = 2.3005, so 10^2.3005 = 199.8 rad/sec.
+That is x = 2.3005, so 10^2.3005 = 199.8 rad/s.
 
 Now the phase plot. Run the tool again and ask for a Phase plot:
 
@@ -173,9 +173,9 @@ Version 9 takes the expression directly, like the calculator: set **Plot
 type** to *Bode plot of a transfer function H(s) (FD)* and type the problem's
 function into the box, writing `s` wherever the textbook writes jω — no
 imaginary operator involved. The frequency boxes are in hertz, so the
-calculator's sweep of 0.1 to 300 rad/sec is about 0.016 to 48 Hz. Reading
-the answers off the curve: the maximum the calculator found at 4.47 rad/sec
-sits near 0.71 Hz, and the zero crossing it found at 199.8 rad/sec near
+calculator's sweep of 0.1 to 300 rad/s is about 0.016 to 48 Hz. Reading
+the answers off the curve: the maximum the calculator found at 4.47 rad/s
+sits near 0.71 Hz, and the zero crossing it found at 199.8 rad/s near
 31.8 Hz.
 :::
 :::
@@ -199,7 +199,7 @@ The phase plot
 :::
 ::: only 9
 The transfer-function plot type again: write the function in terms of `s`
-and sweep. The calculator's 0.1 to 100 rad/sec is about 0.016 to 16 Hz.
+and sweep. The calculator's 0.1 to 100 rad/s is about 0.016 to 16 Hz.
 :::
 :::
 
@@ -253,8 +253,8 @@ To be sure of typing it clearly, write the expression outside the tool first:
 The expression
 :::
 
-Gain Plot, 0.1 as the minimum frequency and 100 as the maximum, rad/sec as the
-unit. Press Enter and we get this:
+Gain Plot, 0.1 as the minimum frequency and 100 as the maximum, *in rad/sec*
+as the unit. Press Enter and we get this:
 
 ::: figure assets/screen/as7e1405s2.jpeg
 The gain plot
@@ -352,7 +352,7 @@ With the cursor in the blank next to ω=, press **F2 Solve**:
 The resonant frequency
 :::
 
-So ω{{sub:0}} is 50000 rad/sec. For ω{{sub:1}}, the lower bandwidth
+So ω{{sub:0}} is 50000 rad/s. For ω{{sub:1}}, the lower bandwidth
 frequency, change the equation and the bounds:
 
 ::: figure assets/screen/as7e1407s3.jpeg
@@ -363,7 +363,7 @@ Set up for the lower bandwidth frequency
 ω1
 :::
 
-ω{{sub:1}} is 49010 rad/sec. For the upper one, change the bounds again:
+ω{{sub:1}} is 49010 rad/s. For the upper one, change the bounds again:
 
 ::: figure assets/screen/as7e1407s5.jpeg
 Set up for the upper bandwidth frequency
@@ -373,7 +373,7 @@ Set up for the upper bandwidth frequency
 ω2
 :::
 
-ω{{sub:2}} is 51010 rad/sec.
+ω{{sub:2}} is 51010 rad/s.
 :::
 ::: only 9
 Put `w` in the ω box and solve in AC. Then, in the **Solve** card:
@@ -436,20 +436,20 @@ part.
 imag(ie)=0 converges at once
 :::
 
-ω{{sub:0}} is 25000 rad/sec. For ω{{sub:1}}, go back to the previous
+ω{{sub:0}} is 25000 rad/s. For ω{{sub:1}}, go back to the previous
 example's equation and change the bounds:
 
 ::: figure assets/screen/as7e1408s2.jpeg
 ω1
 :::
 
-ω{{sub:1}} is 24992.2 rad/sec. And for ω{{sub:2}}:
+ω{{sub:1}} is 24992.2 rad/s. And for ω{{sub:2}}:
 
 ::: figure assets/screen/as7e1408s3.jpeg
 ω2
 :::
 
-ω{{sub:2}} is 25007.8 rad/sec.
+ω{{sub:2}} is 25007.8 rad/s.
 :::
 ::: only 9
 ```field 9 Equation(s) to solve in terms of the results
@@ -500,7 +500,7 @@ im(v1) = 0
 with `w>0` and **real solutions only**.
 :::
 
-ω{{sub:0}} is {{o:2}} rad/sec. Correct.
+ω{{sub:0}} is {{o:2}} rad/s. Correct.
 :::
 :::
 

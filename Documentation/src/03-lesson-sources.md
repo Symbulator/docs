@@ -1156,8 +1156,8 @@ r2,1,0,5
 The answers you want are `ir1`, `v1` and `ir2`, in **Results**.
 :::
 
-The answer, **{-5/26,-15/26,-3/26}**, is correct: I{{sub:1}}=-5/26,
-I{{sub:2}}=-3/26 and v=-15/26.
+The answer, **{-5/26,-15/26,-3/26}**, is correct: I{{sub:1}}=-5/26 A,
+I{{sub:2}}=-3/26 A and v=-15/26 V.
 
 :::
 
@@ -1186,7 +1186,7 @@ r8,o,0,8
 The answers you want are `vo` and `iro`, in **Results**.
 :::
 
-The answer, **{8,4}**, is correct: v{{sub:o}} = 8 and i{{sub:o}} = 4.
+The answer, **{8,4}**, is correct: v{{sub:o}} = 8 V and i{{sub:o}} = 4 A.
 
 :::
 
@@ -1281,8 +1281,8 @@ r2,3,0,1/5
 The answers you want are `ir1`, `vr1` and `vr2`, in **Results**.
 :::
 
-The answers, **{-15/26,-5/26,-3/26}**, is correct: v{{sub:1}}=-5/26,
-v{{sub:2}}=-3/26 and i=-15/26.
+The answers, **{-15/26,-5/26,-3/26}**, is correct: v{{sub:1}}=-5/26 V,
+v{{sub:2}}=-3/26 V and i=-15/26 A.
 
 :::
 
@@ -1777,8 +1777,8 @@ The answer, **{1000\*is,2\*is}**, is correct: *v*{{sub:O}}*=1000*
 ::: problem TR5's Example 4.4
 
 Find v{{sub:O}} and the equivalent resistance R{{sub:IN}}, in terms of
-v{{sub:S}}, when R{{sub:1}} is 50, R{{sub:2}} is 1'k, R{{sub:3}} is 100,
-R{{sub:4}} is 5'k and g is 100mA (i.e. 100'm).
+v{{sub:S}}, when R{{sub:1}} is 50 Ω, R{{sub:2}} is 1 kΩ,
+R{{sub:3}} is 100 Ω, R{{sub:4}} is 5 kΩ and g is 100 mS (i.e. 100'm).
 
 ::: figure assets/practice/tr5s-example-4-4-37.jpg
 
@@ -1810,7 +1810,7 @@ The calculator versions wrap this in `approx` to get a decimal; version 9 does i
 :::
 
 The answer, **{.904\*vs,10952.}**, is correct: *v*{{sub:O}}*=.904 v*{{sub:S}}
-and *R*{{sub:IN}}*=10.95'kΩ*.
+and *R*{{sub:IN}}* = 10.95 kΩ*.
 
 :::
 

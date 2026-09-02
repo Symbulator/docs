@@ -111,11 +111,11 @@ impedance's *current through* reads straight off:
 The complex power at the source is `sea0+seb0+sec0`, which gives
 −2086.2 − 834.5𝐢 VA. The real part is the average power absorbed by the source;
 since it is negative, the source is delivering an average power of 2086 W. The
-imaginary part is the reactive power: 834 VAR.
+imaginary part is the reactive power: 834 var.
 
 The complex power at the load is `sra0+srb0+src0`, which gives
 1390.8 + 1112.6𝐢 VA. The load is consuming an average power of 1391 W and a
-reactive power of 1113 VAR.
+reactive power of 1113 var.
 
 Before we move on, try simulating this circuit with a different node as the
 centre of the load's Y array — call it d0, for the demand side. The voltage in

@@ -1794,7 +1794,7 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 The answers you want are `vth` and `req`, in **Results**.
 :::
 
-The answers we get, **{vs\*µ/(µ+1**),**ro/(µ+1)}**, are correct, as can be
+The answers we get, **{vs\*µ/(µ+1),ro/(µ+1)}**, are correct, as can be
 seen by comparing them to those in the book:
 
 ::: figure assets/practice/tr5s-example-4-8-symbolic-37.jpg
@@ -1901,7 +1901,7 @@ The book gives the answers as fractions. We get it right:
 ::: problem RM3's Example 9-7
 
 Find the Norton equivalent of the circuit external to R{{sub:L}}. Then
-determine the load current I{{sub:L}} when R{{sub:L}} = 0 Ω, 2'k Ω and 5'k Ω.
+determine the load current I{{sub:L}} when R{{sub:L}} = 0 Ω, 2 kΩ and 5 kΩ.
 My one-line solution:
 
 ::: figure assets/practice/rm3s-example-9-7-40.jpg
@@ -2300,17 +2300,17 @@ vth^2*8200./(req+8200.)^2
 Choose DC.{{v7,8| Answer Y about the load formulas.}} The answer we obtain,
 **{40000, 1, .93, .57}**, is correct. Let's deconstruct it.
 
-Part (a) is answered by the first two values: a 40'k Ω resistor as load would
+Part (a) is answered by the first two values: a 40 kΩ resistor as load would
 receive 1W power. Since this is the maximum – this is the most that any load
 could receive ever.
 
 Part (b) is answered by the third value. {{v7,8|Making use of the variable
 **prL**, which contains the power delivered by the circuit equivalent to the
-load, as a function of the load value **L**, we}}{{v9|We}} find that a load of 68'kΩ receives
+load, as a function of the load value **L**, we}}{{v9|We}} find that a load of 68 kΩ receives
 .93W, which is less than the maximum.
 
-Part (c) is answered in similar manner by the fourth value. A load of 8.2'kΩ
-receives .57W, which is less than the maximum. Any resistance other than 40'k
+Part (c) is answered in similar manner by the fourth value. A load of 8.2 kΩ
+receives .57W, which is less than the maximum. Any resistance other than 40 kΩ
 gets less power.
 
 :::

@@ -505,8 +505,8 @@ and current at the output — and answers with all four figures at once.
 
 ::: problem Gain Example 1
 For the circuit, find G{{sub:v}}, G{{sub:i}}, G{{sub:p}} and
-Z{{sub:in}}. The two-port has y parameters y{{sub:11}} = 0.4,
-y{{sub:12}} = −0.002, y{{sub:21}} = −5 and y{{sub:22}} = 0.04.
+Z{{sub:in}}. The two-port has y parameters y{{sub:11}} = 0.4 S,
+y{{sub:12}} = −0.002 S, y{{sub:21}} = −5 S and y{{sub:22}} = 0.04 S.
 
 ::: figure assets/circuit/gain-example-1.png
 Gain Example 1
@@ -573,9 +573,9 @@ These are correct.
 
 ::: problem Gain Example 2
 Find G{{sub:v}}, G{{sub:i}}, G{{sub:p}} and Z{{sub:in}} for a two-port with
-z parameters z{{sub:11}} = 4, z{{sub:12}} = 1.5, z{{sub:21}} = 10 and
-z{{sub:22}} = 3, driven by a source V{{sub:s}} with 5 Ω in series and loaded
-with 2 Ω.
+z parameters z{{sub:11}} = 4 Ω, z{{sub:12}} = 1.5 Ω, z{{sub:21}} = 10 Ω
+and z{{sub:22}} = 3 Ω, driven by a source V{{sub:s}} with 5 Ω in series
+and loaded with 2 Ω.
 
 There is no picture of this one — the description below is the whole circuit.
 

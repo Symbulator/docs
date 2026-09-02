@@ -396,13 +396,32 @@ def collect_directive(rest: list[str], path: str, depth: int):
 # Inline parser
 # --------------------------------------------------------------------------
 
+# `\*` is a literal asterisk -- the multiplication sign in an answer the
+# software gave back, as in **{.904\*vs,10952.}**. Until 2 Sep 2026 there
+# was no escape at all: the interior `*` broke the `**...**` match, the
+# stars then re-paired themselves across the rest of the paragraph, and
+# the sentence rendered with scrambled italics and a stray `*` left over.
+# Eleven lines across four lessons were doing this and nobody had looked.
+#
+# The escape set is deliberately just `*` and `\` -- NOT a general `\.`.
+# A backslash is ordinary content here: the calculator's own namespace is
+# written `s\dc`, `s\tr`, `s\rms`, and a general escape would eat those.
+#
+# Hence the atom `(?:\\[*\\]|[^*])`, in that order and not the other way
+# round. The escape alternative goes first so `\*` is swallowed whole and
+# its star cannot close the span; `[^*]` then still admits a *lone*
+# backslash, which is what keeps **s\bode** bold. Writing the atom as
+# `(?:[^*\\]|\\[*\\])` looks equivalent and is not -- it bans ordinary
+# backslashes from emphasis entirely, and silently un-bolded every
+# `**s\...**` in the book. Only a diff of the built pages showed it.
 INLINE_RE = re.compile(
-    r"(?P<brace>\{\{(?:[^{}]|\{[^{}]*\})*\}\})"
+    r"(?P<esc>\\[*\\])"
+    r"|(?P<brace>\{\{(?:[^{}]|\{[^{}]*\})*\}\})"
     r"|(?P<code>`[^`]+`)"
     r"|(?P<math>\$[^$]+\$)"
     r"|(?P<link>\[[^\]]+\]\([^)]+\))"
-    r"|(?P<strong>\*\*[^*]+\*\*)"
-    r"|(?P<em>\*[^*]+\*)"
+    r"|(?P<strong>\*\*(?:\\[*\\]|[^*])+\*\*)"
+    r"|(?P<em>\*(?:\\[*\\]|[^*])+\*)"
 )
 
 
@@ -413,7 +432,9 @@ def parse_inline(text: str) -> list[Node]:
             out.append(Node("text", text=text[pos:m.start()]))
         kind = m.lastgroup
         s = m.group()
-        if kind == "brace":
+        if kind == "esc":
+            out.append(Node("text", text=s[1]))
+        elif kind == "brace":
             out.append(parse_brace(s[2:-2]))
         elif kind == "code":
             out.append(Node("icode", text=s[1:-1]))
