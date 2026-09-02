@@ -8,6 +8,39 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #230 — A regex that could never match, and the checker that could never see it — **done 3 Sep 2026, nothing to deploy**
+
+`build.py`'s `plain()` — the function that reduces a rendered page to its
+words for the search index — carried two literal control bytes where a
+word boundary and a backreference had been written. The pattern still
+compiled and simply never matched, so its script/style stripping had not
+fired once since the line was written. Harmless only because no chapter
+contains a script tag; a guard that cannot go off is not a guard.
+
+**The checker for this exact failure had the same blind spot as the
+bug.** `tools/check_control_chars.py` exists because a shell heredoc once
+ate backslash escapes in two chapters — its own docstring says so — and
+it was scanning `src/*.md` alone. It now scans `build.py` and
+`tools/*.py` as well, collapsing CRLF first so a Windows line ending is
+not a finding while a lone carriage return still is.
+
+Proved in both directions rather than assumed: the repaired pattern
+strips `<script>` and `<style>` bodies and leaves `<scriptural>` alone,
+the word boundary doing its job; re-damaging `build.py` on purpose makes
+the widened checker report both bytes on line 1146 and name the intended
+escape, and restoring it goes green again. **All three `search.json`
+files are byte-identical after the rebuild** — the repair changes nothing
+that ships, which is why there is nothing to deploy and the `learn` dry
+run reports 0 files.
+
+And the bug reproduced itself during the fix: the first attempt at the
+CRLF line wrote a real carriage return into the checker, the escape eaten
+passing through a nested shell string. Which is the best argument
+available for scanning the tools as well as the prose.
+
+---
+
+
 ## #226 — "Split View" in the ribbon — **done and live on learn, 2 Sep 2026**
 
 Roberto, 2 Sep 2026: replace *How it works* in the ribbon under the
