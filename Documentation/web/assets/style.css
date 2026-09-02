@@ -634,6 +634,40 @@ code {
   margin: 0 0 0.7rem !important;
   font-family: var(--sans); font-weight: 600; font-size: 1rem;
 }
+/* #224: the links that open a worked problem in the app. Sized and
+   coloured as a caption rather than as body text -- a problem carries up
+   to four of these, and at body weight they would read as part of the
+   question. Directly under the title, which is where the reader decides
+   whether to run this one. */
+.problem-links {
+  margin: -0.3rem 0 0.9rem !important;
+  display: flex; flex-wrap: wrap; gap: 0.35rem 1rem;
+  font-family: var(--sans); font-size: 0.78rem; line-height: 1.5;
+}
+.applink-row { display: inline-flex; align-items: baseline; gap: 0.55rem; }
+.applink-tag {
+  font-size: 0.68rem; font-weight: 600; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--ink-3);
+}
+.problem-links a { color: var(--accent); text-decoration: none; }
+.problem-links a:hover, .problem-links a:focus-visible { text-decoration: underline; }
+.problem-links .splitlink { color: var(--ink-3); }
+
+/* Embedded as the left pane of /split/. The banner and the sidebar are
+   navigation for a page that is being read on its own; in a pane they
+   are chrome around chrome, and the column they cost is the reason
+   someone opened the split view. "Open in split view" goes too -- it
+   points at where the reader already is. */
+html.embedded .topbar,
+html.embedded .subbar,
+html.embedded .sidebar,
+html.embedded .splitlink { display: none; }
+html.embedded .shell { grid-template-columns: minmax(0, 1fr); }
+html.embedded #main { padding-top: 1.2rem; }
+/* The pane scrolls to a problem on request, and a heading flush with
+   the top edge reads as cut off. */
+html.embedded .problem { scroll-margin-top: 0.8rem; }
+
 .answer { margin-top: 1.1rem; padding-top: 0.9rem; border-top: 1px dashed var(--rule); }
 .answer-title {
   margin: 0 0 0.6rem !important;

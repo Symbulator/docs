@@ -286,4 +286,48 @@ An entry is not just a circuit: it is everything you give Symbulator to run the 
 and you are back where you left off, with the same rounding, asking for the same analysis.
 
 The **About input file (.cir) format** section inside the **Input File** card explains what input files carry, in detail.
+
+## Reading and running side by side {#split-view}
+
+Working through this tutorial means going back and forth between two things:
+the page you are reading and the app you are running. You can keep them in two
+windows, and many people do. But there is a tidier way.
+
+The **[split view](/split/)** puts them side by side in one window: this
+documentation on the left, the live app on the right. Drag the divider to give
+whichever side you need more room; on a phone or a narrow window the two
+become a pair of tabs instead. Everything in either half is the real thing —
+the same documentation and the same app, simply shown together.
+
+What makes it worth using is that the two halves are connected. On the website,
+every worked problem in every lesson carries its own pair of links, sitting just
+under the problem's title:
+
+- **Open in app ↗** loads that exact circuit — the description, the analysis, the settings, all of it — ready to run. Read it on the page, then run it yourself without typing a character.
+
+- **Open in split view** does the same thing, but opens the side-by-side window first, on the very problem you were reading.
+
+Inside the split view, **Open in app ↗** loads the circuit into the right-hand
+pane instead of opening a new tab, so you never leave the page you are reading.
+The second link disappears there, having nowhere left to take you.
+
+::: warning Loading a problem starts the app fresh
+Each **Open in app ↗** reloads the app with the circuit you asked for. That is
+the point of it — you are saying *show me this one* — but it does mean anything
+you had typed on that side is replaced. If you have been experimenting and want
+to keep the result, save it to an entry and download the file **before** you
+click the next problem. {{ref:input-files}} explains how.
+:::
+
+A problem that needs more than one simulation carries a link for each, marked
+with what that run is: **DC** for the pass that finds an initial condition,
+**TR** for the transient that follows it. A handful of problems have no link at
+all, because they are worked with pencil and paper rather than by the software.
+If you are reading this in the PDF, the links are on the web edition at
+`learn.symbulator.com`; everything else on this page applies either way.
+
+The split view keeps its address up to date as you move, so the window is always
+shareable exactly where you are: send someone
+`learn.symbulator.com/split/?lesson=6a&entry=3` and they open on the same
+problem, with the same circuit loaded beside it.
 :::

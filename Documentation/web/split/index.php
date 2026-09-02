@@ -1,0 +1,382 @@
+<?php
+// #224: the split view. Documentation on the left, the live app on the
+// right, and every worked problem in the tutorial loadable into the
+// right pane in one click.
+//
+// This page is a shell and nothing else. It holds no documentation and
+// no app -- both panes are iframes onto the real sites, which stay the
+// only sources of truth. Nothing here needs redeploying when either of
+// them changes.
+//
+// It is PHP rather than plain HTML for one reason: the stylesheet stamp.
+// learn.symbulator.com serves assets with a week-long max-age, so a
+// returning visitor keeps a stale stylesheet unless the URL changes when
+// the file does; index.php solves that with filemtime() at request time
+// and this page borrows the same trick rather than inventing a second
+// one. See the note above asset() in ../index.php.
+//
+// It lives at /split/ as a real directory, so .htaccess needs no rule
+// for it -- the rewrite there only claims ^[789].
+
+function asset(string $name): string {
+    $path = __DIR__ . '/../assets/' . $name;
+    $v = is_file($path) ? substr(md5_file($path), 0, 8) : '0';
+    return '/assets/' . $name . '?v=' . $v;
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Symbulator 9 — split view</title>
+<meta name="description" content="The Symbulator 9 tutorial beside the live app, with every worked problem loadable in one click.">
+<script>
+// Before first paint, as on every other page of this site, and reading
+// the same key so the split view opens in the theme the reader chose.
+(function () {
+  var saved = null;
+  try { saved = localStorage.getItem('symbulator-docs-theme'); } catch (e) {}
+  if (saved === 'dark') { document.documentElement.setAttribute('data-theme', 'dark'); }
+})();
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="icon" href="/favicon.ico" sizes="any">
+<link rel="icon" href="/assets/favicon-32.png" type="image/png" sizes="32x32">
+<meta name="theme-color" content="#203864">
+<!-- style.css is loaded for its design tokens: the split view paints
+     itself from the same --navy, --ink and --rule as the rest of the
+     site rather than restating any hex of its own. -->
+<link rel="stylesheet" href="<?= asset('style.css') ?>">
+<style>
+  html, body { height: 100%; }
+  body {
+    margin: 0; display: flex; flex-direction: column;
+    background: var(--paper-2); color: var(--ink);
+    font-family: var(--sans); overflow: hidden;
+  }
+
+  /* --- the bar -------------------------------------------------------
+     Deliberately not the shared two-band lockup. That banner is a tall
+     navy block designed to open a page; here every pixel it took would
+     come out of the two panes, which are the entire point of the view.
+     One slim band, the same navy, and the wordmark links home. */
+  .splitbar {
+    flex: none; display: flex; align-items: center; gap: 0.9rem;
+    background: var(--navy); color: #fff;
+    padding: 0.4rem 0.85rem; font-size: 0.86rem;
+  }
+  .splitbar a { color: #fff; }
+  .splitbar .mark {
+    font-weight: 700; letter-spacing: 0.01em; text-decoration: none;
+    white-space: nowrap; flex: none;
+  }
+  .splitbar .mark .py { color: var(--sky); }
+  .splitbar .where {
+    color: var(--sky); font-size: 0.78rem; letter-spacing: 0.09em;
+    text-transform: uppercase; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis; min-width: 0;
+  }
+  .splitbar .spacer { flex: 1 1 auto; }
+  .splitbar .tabs { flex: none; }
+  /* Below the tab breakpoint the bar is wordmark + tabs; the position
+     line gives up its space rather than pushing either onto a second
+     line, which is what a wrapped lockup was doing at 375px. */
+  @media (max-width: 480px) {
+    .splitbar { gap: 0.5rem; padding: 0.4rem 0.55rem; }
+    .splitbar .where { display: none; }
+  }
+  .splitbar .plain {
+    font-size: 0.8rem; opacity: 0.92; white-space: nowrap;
+  }
+  @media (max-width: 700px) { .splitbar .plain { display: none; } }
+
+  /* --- the tabs, on a narrow screen ----------------------------------- */
+  .tabs { display: none; gap: 0.3rem; }
+  .tabs button {
+    font: inherit; font-size: 0.8rem; cursor: pointer;
+    background: transparent; color: #fff;
+    border: 1px solid rgba(255,255,255,0.45); border-radius: 3px;
+    padding: 0.16rem 0.6rem;
+  }
+  .tabs button[aria-pressed="true"] {
+    background: #fff; color: var(--navy); border-color: #fff; font-weight: 600;
+  }
+
+  /* --- the panes ------------------------------------------------------ */
+  .panes { flex: 1 1 auto; display: flex; min-height: 0; }
+  .pane { min-width: 0; position: relative; background: var(--paper); }
+  .pane.docs { flex: 0 0 auto; }
+  .pane.app  { flex: 1 1 auto; }
+  .pane iframe { width: 100%; height: 100%; border: 0; display: block; }
+
+  .divider {
+    flex: 0 0 6px; cursor: col-resize; background: var(--rule);
+    position: relative; touch-action: none;
+  }
+  .divider::after {
+    content: ""; position: absolute; inset-block: 0;
+    inset-inline-start: 2px; width: 2px; background: var(--ink-3);
+    opacity: 0.35;
+  }
+  .divider:hover::after, .divider:focus-visible::after { opacity: 0.8; }
+  .divider:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+  /* While a drag is in flight the panes must not swallow the pointer --
+     an iframe eats mousemove, and the divider would stick to the cursor
+     the moment it crossed one. */
+  body.dragging iframe { pointer-events: none; }
+  body.dragging { cursor: col-resize; }
+
+  /* --- narrow: one pane at a time ------------------------------------- */
+  @media (max-width: 820px) {
+    .tabs { display: flex; }
+    .divider { display: none; }
+    .pane { flex: 1 1 auto !important; }
+    body[data-show="docs"] .pane.app  { display: none; }
+    body[data-show="app"]  .pane.docs { display: none; }
+  }
+
+  .nojs { padding: 1rem; font-size: 0.9rem; }
+</style>
+</head>
+<body data-show="docs">
+
+<div class="splitbar">
+  <a class="mark" href="/9/">Sym<span class="py">bulator</span> 9</a>
+  <span class="where" id="where">Tutorial</span>
+  <span class="spacer"></span>
+  <span class="plain" id="hint">Links in the left pane load the circuit on the right.</span>
+  <span class="tabs">
+    <button type="button" id="tabDocs" aria-pressed="true">Docs</button>
+    <button type="button" id="tabApp"  aria-pressed="false">App</button>
+  </span>
+</div>
+
+<div class="panes" id="panes">
+  <div class="pane docs" id="paneDocs" style="flex-basis:50%">
+    <iframe id="docsFrame" title="Symbulator 9 documentation"
+            src="/9/lesson-dc"></iframe>
+  </div>
+  <div class="divider" id="divider" role="separator" aria-orientation="vertical"
+       tabindex="0" aria-label="Resize the two panes"></div>
+  <div class="pane app" id="paneApp">
+    <iframe id="appFrame" title="The Symbulator 9 app"
+            src="https://symbulator.pythonanywhere.com/"
+            allow="clipboard-write"></iframe>
+  </div>
+</div>
+
+<script>
+// -------------------------------------------------------------------------
+// #224: the split view's shell.
+//
+// The postMessage protocol, in full. Two messages, one each way:
+//
+//   docs pane -> shell   { from: 'symbulator-docs', type: 'open',
+//                          lesson: '6a', entry: 3, anchor: 'e-6a-3' }
+//     Sent when a reader clicks "Open in app" inside the embedded docs.
+//     The shell points the right pane at that entry instead of letting
+//     the click navigate the left pane away to the app.
+//
+//   shell -> docs pane   { from: 'symbulator-split', type: 'scrollto',
+//                          anchor: 'e-6a-3' }
+//     Sent once the docs pane reports itself ready, and again whenever
+//     the shell needs the left pane moved to a problem it is already
+//     showing -- a hash change alone would not scroll a document the
+//     browser considers already loaded.
+//
+//   docs pane -> shell   { from: 'symbulator-docs', type: 'ready',
+//                          chapter: 'lesson-transient' }
+//     Sent on load, so the shell knows the pane can be spoken to and
+//     which chapter it settled on.
+//
+// The docs pane is same-origin with this shell -- both are served by
+// learn.symbulator.com -- so messages to it are addressed to
+// location.origin rather than '*', and messages from it are accepted
+// only when they arrive from that frame's own window. The app pane is a
+// different origin and is never messaged at all: it is driven by its
+// src, which is the whole reason a click reloads it.
+// -------------------------------------------------------------------------
+(function () {
+  'use strict';
+
+  var APP = 'https://symbulator.pythonanywhere.com/';
+  var docsFrame = document.getElementById('docsFrame');
+  var appFrame  = document.getElementById('appFrame');
+  var whereEl   = document.getElementById('where');
+
+  // lesson word -> chapter slug. Written by build.py from the same
+  // CHAPTER_BOOKS the links themselves are generated from, so the two
+  // cannot drift: tools/app_links.py is the one place that knows Lesson
+  // 6 is four books.
+  var LESSONS = {};
+  var pending = null;   // an entry asked for before lessons.json arrived
+
+  function qs() {
+    try { return new URLSearchParams(location.search); }
+    catch (e) { return new URLSearchParams(''); }
+  }
+
+  function normalise(lesson) {
+    // The app accepts 4b, 04b, 7 and 07 alike; this page keeps the
+    // short spelling so its own URLs stay tidy and predictable.
+    var m = String(lesson || '').trim().toLowerCase().match(/^0?(\d{1,2})([a-d]?)$/);
+    return m ? m[1] + m[2] : '';
+  }
+
+  function docsUrlFor(lesson, anchor) {
+    var chapter = LESSONS[lesson];
+    if (!chapter) { return null; }
+    return '/9/' + chapter + (anchor ? '#' + anchor : '');
+  }
+
+  // Point the right pane at an entry. This reloads the app, which is
+  // deliberate and is what the reader asked for by clicking "show me
+  // this one" -- but it does mean anything typed there is replaced. The
+  // introduction says so, and so does the bar above.
+  function loadApp(lesson, entry) {
+    appFrame.src = APP + '?lesson=' + encodeURIComponent(lesson) +
+                   '&entry=' + encodeURIComponent(entry);
+  }
+
+  function scrollDocsTo(anchor) {
+    try {
+      docsFrame.contentWindow.postMessage(
+        { from: 'symbulator-split', type: 'scrollto', anchor: anchor },
+        location.origin);
+    } catch (e) { /* the pane is not ready; its 'ready' message will do it */ }
+  }
+
+  // The one place that moves the view. `reloadDocs` is false when the
+  // click came from inside the docs pane, which is already on the right
+  // page and only needs scrolling.
+  function show(lesson, entry, reloadDocs) {
+    lesson = normalise(lesson);
+    entry = parseInt(entry, 10) || 1;
+    if (!lesson) { return; }
+    var anchor = 'e-' + lesson + '-' + entry;
+    loadApp(lesson, entry);
+    if (!Object.keys(LESSONS).length) { pending = [lesson, entry, reloadDocs]; }
+    else if (reloadDocs) {
+      var url = docsUrlFor(lesson, anchor);
+      if (url) { docsFrame.src = url; }
+    } else {
+      scrollDocsTo(anchor);
+    }
+    whereEl.textContent = 'Lesson ' + lesson + ' · entry ' + entry;
+    // Shareable at whatever the reader is looking at, without adding a
+    // history entry per click -- the back button should leave the split
+    // view, not walk back through the problems visited inside it.
+    try {
+      history.replaceState(null, '',
+        location.pathname + '?lesson=' + lesson + '&entry=' + entry);
+    } catch (e) {}
+  }
+
+  // ---- the lesson map ---------------------------------------------------
+  fetch('/split/lessons.json', { cache: 'no-cache' })
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      LESSONS = data || {};
+      if (pending) { show(pending[0], pending[1], true); pending = null; }
+    })
+    .catch(function () {
+      // No map: the app pane still works from the query string, and the
+      // docs pane stays on whatever it opened with. Degraded, not broken.
+    });
+
+  // ---- messages from the docs pane --------------------------------------
+  window.addEventListener('message', function (ev) {
+    if (ev.origin !== location.origin) { return; }
+    if (!docsFrame.contentWindow || ev.source !== docsFrame.contentWindow) { return; }
+    var msg = ev.data;
+    if (!msg || msg.from !== 'symbulator-docs') { return; }
+    if (msg.type === 'open') {
+      show(msg.lesson, msg.entry, false);
+    } else if (msg.type === 'ready') {
+      var q = qs();
+      var lesson = normalise(q.get('lesson') || q.get('input'));
+      var entry = parseInt(q.get('entry') || '1', 10) || 1;
+      if (lesson) { scrollDocsTo('e-' + lesson + '-' + entry); }
+    }
+  });
+
+  // ---- opening state ----------------------------------------------------
+  (function start() {
+    var q = qs();
+    var lesson = normalise(q.get('lesson') || q.get('input'));
+    if (!lesson) { return; }          // the defaults in the markup stand
+    show(lesson, q.get('entry') || 1, true);
+  })();
+
+  // ---- the divider ------------------------------------------------------
+  var panes = document.getElementById('panes');
+  var paneDocs = document.getElementById('paneDocs');
+  var divider = document.getElementById('divider');
+  var KEY = 'symbulator-split-ratio';
+
+  function setRatio(pct) {
+    pct = Math.min(80, Math.max(20, pct));
+    paneDocs.style.flexBasis = pct + '%';
+    try { localStorage.setItem(KEY, String(Math.round(pct))); } catch (e) {}
+  }
+  try {
+    var saved = parseFloat(localStorage.getItem(KEY));
+    if (saved) { paneDocs.style.flexBasis = saved + '%'; }
+  } catch (e) {}
+
+  divider.addEventListener('pointerdown', function (ev) {
+    ev.preventDefault();
+    divider.setPointerCapture(ev.pointerId);
+    document.body.classList.add('dragging');
+  });
+  divider.addEventListener('pointermove', function (ev) {
+    if (!document.body.classList.contains('dragging')) { return; }
+    var box = panes.getBoundingClientRect();
+    if (!box.width) { return; }
+    setRatio(((ev.clientX - box.left) / box.width) * 100);
+  });
+  function endDrag(ev) {
+    if (!document.body.classList.contains('dragging')) { return; }
+    document.body.classList.remove('dragging');
+    try { divider.releasePointerCapture(ev.pointerId); } catch (e) {}
+  }
+  divider.addEventListener('pointerup', endDrag);
+  divider.addEventListener('pointercancel', endDrag);
+  // Keyboard, because a separator that only answers to a mouse is not a
+  // control everyone has.
+  divider.addEventListener('keydown', function (ev) {
+    var step = ev.key === 'ArrowLeft' ? -4 : ev.key === 'ArrowRight' ? 4 : 0;
+    if (!step) { return; }
+    ev.preventDefault();
+    var box = panes.getBoundingClientRect();
+    var now = paneDocs.getBoundingClientRect().width;
+    if (box.width) { setRatio(((now + step * box.width / 100) / box.width) * 100); }
+  });
+
+  // ---- the tabs, on a narrow screen -------------------------------------
+  var tabDocs = document.getElementById('tabDocs');
+  var tabApp = document.getElementById('tabApp');
+  function showPane(which) {
+    document.body.setAttribute('data-show', which);
+    tabDocs.setAttribute('aria-pressed', String(which === 'docs'));
+    tabApp.setAttribute('aria-pressed', String(which === 'app'));
+  }
+  tabDocs.addEventListener('click', function () { showPane('docs'); });
+  tabApp.addEventListener('click', function () { showPane('app'); });
+  // A click in the left pane on a narrow screen has just loaded
+  // something into a pane the reader cannot see. Bring it forward.
+  window.addEventListener('message', function (ev) {
+    if (ev.origin !== location.origin) { return; }
+    var msg = ev.data;
+    if (msg && msg.from === 'symbulator-docs' && msg.type === 'open'
+        && window.matchMedia('(max-width: 820px)').matches) {
+      showPane('app');
+    }
+  });
+}());
+</script>
+</body>
+</html>

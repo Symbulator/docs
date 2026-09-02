@@ -128,7 +128,7 @@ function pdf_note(string $name): string {
 <link rel="stylesheet" href="<?= asset('style.css') ?>">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 </head>
-<body class="v<?= e($v) ?><?= $isHome ? ' home' : '' ?>">
+<body class="v<?= e($v) ?><?= $isHome ? ' home' : '' ?>" data-chapter="<?= e($page) ?>">
 
 <a class="skip" href="#main">Skip to content</a>
 
@@ -493,6 +493,168 @@ function pdf_note(string $name): string {
     try { localStorage.setItem('symbulator-docs-theme', nextDark ? 'dark' : 'light'); } catch (e) {}
     sync();
   });
+})();
+
+// -------------------------------------------------------------------------
+// #224: behaving differently when this page is the left pane of /split/.
+//
+// Embedding is detected with window.self !== window.top rather than an
+// ?embed=1 flag. The flag would have to survive every internal link the
+// reader follows inside the pane -- the sidebar, the chapter nav, a
+// cross-reference -- and the first one that dropped it would silently
+// turn the pane back into a standalone page. This test cannot be lost,
+// and it needs no plumbing through index.php or the rewrite rules.
+//
+// Standalone, none of this runs and the links are ordinary links: "Open
+// in app" opens a new tab, "Open in split view" replaces the window.
+//
+// The protocol is documented in full at the head of split/index.php.
+(function () {
+  var embedded = false;
+  try { embedded = window.self !== window.top; } catch (e) { embedded = true; }
+  if (!embedded) { return; }
+  document.documentElement.classList.add('embedded');
+
+  // The browser restores an iframe's old scroll position when the shell
+  // around it is reloaded, and that restoration wins races against the
+  // anchor: a reload of the split view put the pane 38,000px past the
+  // problem it was asked for, on a chapter it had already visited. The
+  // shell always says where this pane should be, so remembering where it
+  // last was can only ever contradict it.
+  try { history.scrollRestoration = 'manual'; } catch (e) {}
+
+  // "Open in split view" is the way into the view the reader is already
+  // in, so inside it the link is furniture. Hidden by CSS on .embedded;
+  // also made unreachable by the keyboard, which display:none does but
+  // is worth not relying on if that rule ever softens.
+  Array.prototype.forEach.call(
+    document.querySelectorAll('a.splitlink'),
+    function (a) { a.tabIndex = -1; a.setAttribute('aria-hidden', 'true'); });
+
+  Array.prototype.forEach.call(
+    document.querySelectorAll('a.applink'),
+    function (a) {
+      // Inside the shell the app is already open beside this pane, so
+      // the link loads it there instead of opening a tab.
+      a.removeAttribute('target');
+      a.removeAttribute('rel');
+      a.title = 'Load this circuit into the app pane';
+    });
+
+  document.addEventListener('click', function (ev) {
+    var a = ev.target.closest ? ev.target.closest('a.applink') : null;
+    if (!a) { return; }
+    // A modified click still means "somewhere else, please".
+    if (ev.metaKey || ev.ctrlKey || ev.shiftKey || ev.altKey || ev.button !== 0) {
+      return;
+    }
+    var lesson = a.getAttribute('data-lesson');
+    var entry = a.getAttribute('data-entry');
+    if (!lesson || !entry) { return; }
+    ev.preventDefault();
+    parent.postMessage({ from: 'symbulator-docs', type: 'open',
+                         lesson: lesson, entry: parseInt(entry, 10),
+                         anchor: a.id }, '*');
+  });
+
+  // A chapter is mostly circuit scans, and a scan is an <img> with a
+  // width and no height -- so the page is still growing under itself for
+  // as long as they are arriving. Scrolling once, on a message that
+  // reaches us while the parser is still running, lands wherever the
+  // problem happened to be at that instant; the first run of this landed
+  // five thousand pixels short of Bo2's Example 5.1. So the anchor is
+  // remembered and re-applied: on load, and once more after the last
+  // image settles.
+  var wanted = null;
+  var releasers = [];
+
+  // Every scroll here is explicitly 'instant', and that is the whole
+  // trick. style.css sets `scroll-behavior: smooth` on the root, so a
+  // scrollIntoView() with no behavior of its own animates -- and each
+  // retry below restarted the animation before the previous one
+  // arrived, leaving the pane parked a few hundred pixels down a five
+  // thousand pixel journey, for ever. It looked exactly like a message
+  // that never got delivered. 'instant' overrides the CSS property;
+  // 'auto' defers to it, which is what made this so quiet.
+  function goTo(anchor) {
+    var el = document.getElementById(anchor);
+    var target = el ? (el.closest('.problem') || el) : null;
+    if (!target) { return; }
+    var top = target.getBoundingClientRect().top + window.scrollY - 12;
+    window.scrollTo({ top: top, behavior: 'instant' });
+  }
+
+  // A chapter is mostly circuit scans, and a scan is an <img> with a
+  // width and no height, so the page goes on growing under itself for as
+  // long as they are arriving: a single scroll lands wherever the
+  // problem happened to be at that instant, and Lesson 6 is 48 images
+  // and sixty thousand pixels of them.
+  //
+  // Fixed timers were tried first and are not enough -- a run that had
+  // stopped correcting at 1.2s sat 39,000px past the problem, because
+  // the images finished after that. So the correction is driven by the
+  // images themselves: whichever one lands last has the last word. The
+  // listeners retire on their own once every image is in.
+  // Three separate things move a chapter after the scroll has been asked
+  // for, and each of them was found the hard way: the circuit scans
+  // arriving (an <img> with a width and no height reserves nothing, and
+  // Lesson 6 is 48 of them over sixty thousand pixels); the webfonts
+  // swapping in, which re-flows everything and left one problem's title
+  // clipped 37px above the top edge; and KaTeX typesetting the maths.
+  //
+  // Rather than name them and guess at timings -- fixed timers were
+  // tried, and a run that stopped correcting at 1.2s sat 39,000px past
+  // its problem -- watch the one thing they all do, which is change the
+  // height of the document, and re-apply until it stops.
+  function settle(anchor) {
+    wanted = anchor;
+    goTo(anchor);
+
+    function reapply() { if (wanted === anchor) { goTo(anchor); } }
+
+    var stop = function () {};
+    if (window.ResizeObserver) {
+      var ro = new ResizeObserver(reapply);
+      ro.observe(document.documentElement);
+      stop = function () { ro.disconnect(); };
+    }
+    window.addEventListener('load', reapply, { once: true });
+    if (document.fonts && document.fonts.ready) {
+      document.fonts.ready.then(reapply);
+    }
+    [200, 700, 1800].forEach(function (ms) { setTimeout(reapply, ms); });
+    // Let go eventually, so a page that never stops settling cannot hold
+    // the reader's scroll hostage.
+    setTimeout(stop, 6000);
+    releasers.push(stop);
+  }
+
+  window.addEventListener('message', function (ev) {
+    var msg = ev.data;
+    if (!msg || msg.from !== 'symbulator-split') { return; }
+    if (msg.type !== 'scrollto' || !msg.anchor) { return; }
+    // The shell asks for this after a click that did not reload the
+    // pane, and once on load: a hash the document already carries will
+    // not scroll it a second time on its own.
+    settle(msg.anchor);
+  });
+
+  // A reader who moves has overruled us; stop chasing the anchor, or the
+  // next image to arrive would yank the page back out from under them.
+  function release() {
+    wanted = null;
+    while (releasers.length) { releasers.pop()(); }
+  }
+  window.addEventListener('wheel', release, { passive: true });
+  window.addEventListener('touchmove', release, { passive: true });
+  window.addEventListener('keydown', release);
+  window.addEventListener('mousedown', release);
+
+  // Told once the pane is up, so the shell can scroll it to the entry
+  // the split view was opened at without polling for readiness.
+  parent.postMessage({ from: 'symbulator-docs', type: 'ready',
+                       chapter: document.body.getAttribute('data-chapter') || '' },
+                     '*');
 })();
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>

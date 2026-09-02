@@ -30,6 +30,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "too
 from check_palette import check_palette  # noqa: E402  (needs sys.path set first)
 from stamp_assets import check_asset_stamps  # noqa: E402
 from check_control_chars import check_control_chars  # noqa: E402
+import app_links  # noqa: E402  (#224: the app link on every worked problem)
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 SRC = os.path.join(ROOT, "src")
@@ -621,6 +622,13 @@ class HtmlRenderer:
         self.chapter_id = ""
         self.section_no = 0
         self.chapter_no = None
+        # #224. Version 9 is the only one with an app to open a problem
+        # in, so the books are read only when they can be used -- a v7
+        # build does not reach into the app tree at all.
+        self.books = app_links.load_books() if version == 9 else {}
+        self.entries: list = []      # the entries of each problem, in order
+        self.problem_no = 0          # which problem the renderer is on
+        self.problem_ids: set = set()
 
     # -- inline ----------------------------------------------------------
     def inline(self, text: str) -> str:
@@ -752,8 +760,10 @@ class HtmlRenderer:
                     f' alt=""{style}>'
                     f'<figcaption>{cap}</figcaption></figure>')
         if k == "problem":
-            return (f'<section class="problem"><p class="problem-title">'
-                    f'{self.inline(b.arg)}</p>{self.blocks(b.children)}</section>')
+            pid, links = self.problem_furniture(b)
+            return (f'<section class="problem"{pid}><p class="problem-title">'
+                    f'{self.inline(b.arg)}</p>{links}'
+                    f'{self.blocks(b.children)}</section>')
         if k == "answer":
             return (f'<div class="answer"><p class="answer-title">Solution</p>'
                     f'{self.blocks(b.children)}</div>')
@@ -766,8 +776,62 @@ class HtmlRenderer:
             return f'<div class="mathblock">\\[{html.escape(b.text)}\\]</div>'
         return ""
 
+    def problem_furniture(self, b: Node) -> tuple[str, str]:
+        """#224: a worked problem's anchor, and its links into the app.
+
+        Two anchors, doing different jobs. The section gets one built
+        from its title, so every problem can be linked to -- including
+        the fifteen the app has no entry for. Each *entry* gets one of
+        its own, `e-6a-3`, on the link that opens it: the split view is
+        handed ?lesson=6a&entry=3 and has to scroll the left pane to the
+        matching place, and deriving `#e-6a-3` from the query costs it no
+        lookup table. An entry anchor has to sit on the link rather than
+        on the section, because a problem is often several entries -- a
+        DC pass for the initial condition, then the TR -- and only one of
+        them could own the section.
+
+        The links go after the title paragraph, never inside it:
+        SEARCH_PROBLEM reads that paragraph to label a search hit, and
+        putting them in would rename every hit in the book.
+        """
+        n, self.problem_no = self.problem_no, self.problem_no + 1
+        # From the source title, not the rendered one: inline() turns the
+        # apostrophe in "Bo2's" into &#x27;, and slugifying that gives
+        # prob-bo2x27s-example-51. slugify already drops version spans.
+        base = slugify(b.arg)
+        pid = f"prob-{base}"
+        i = 2
+        while pid in self.problem_ids:
+            pid, i = f"prob-{base}-{i}", i + 1
+        self.problem_ids.add(pid)
+        entries = self.entries[n] if n < len(self.entries) else []
+        if not entries:
+            return f' id="{pid}"', ""
+        rows = []
+        for e in entries:
+            label = app_links.entry_label(e, b.arg) if len(entries) > 1 else ""
+            tag = (f'<span class="applink-tag">{html.escape(label)}</span>'
+                   if label else "")
+            rows.append(
+                f'<span class="applink-row">{tag}'
+                f'<a class="applink" id="{e.anchor}" href="{html.escape(e.app_href)}"'
+                f' target="_blank" rel="noopener"'
+                f' data-lesson="{e.lesson}" data-entry="{e.index}">'
+                f'Open in app ↗</a>'
+                f'<a class="splitlink" href="{html.escape(e.split_href)}">'
+                f'Open in split view</a></span>')
+        return f' id="{pid}"', f'<p class="problem-links">{"".join(rows)}</p>'
+
     def chapter(self, ch: Chapter, number, present: bool) -> str:
         self.chapter_id, self.chapter_no, self.section_no = ch.id, number, 0
+        # #224. Resolved for the whole chapter up front, because an entry
+        # is claimed by one problem and which problem that is depends on
+        # the ones around it. Both walks are walk(blocks, v), so the order
+        # here is the order the renderer will meet them in.
+        self.problem_no, self.problem_ids, self.entries = 0, set(), []
+        if self.v == 9 and present and ch.id in app_links.CHAPTER_BOOKS:
+            self.entries = app_links.resolve_chapter(
+                ch.id, app_links.chapter_problems(ch, self.v), self.books)
         # An eyebrow is the small line above a chapter title -- "Lesson 3".
         # A chapter with no number has nothing useful to put there, and
         # falling back to the title printed it twice: "Introduction /
@@ -1080,6 +1144,10 @@ SEARCH_SPLIT = re.compile(r'<h2 id="([^"]+)"[^>]*>(.*?)</h2>', re.S)
 def plain(html_text: str) -> str:
     """The words of a rendered page, with the markup taken out."""
     text = re.sub(r"(?is)<(script|style).*?</>", " ", html_text)
+    # #224's app links are furniture, not words. Left in, "Open in app"
+    # would be part of the searchable text of 265 problems, so a search
+    # for "app" would return most of the book.
+    text = re.sub(r'(?is)<p class="problem-links">.*?</p>', " ", text)
     text = re.sub(r"<[^>]+>", " ", text)
     return re.sub(r"\s+", " ", html.unescape(text)).strip()
 
@@ -1162,12 +1230,23 @@ def build_web(book: Book, versions: list[int]):
                                encoding="utf-8"), ensure_ascii=False,
                   separators=(",", ":"))
     # copy the PHP front end and static assets next to the content
-    for name in ("index.php", ".htaccess", "favicon.ico", "assets"):
+    # `split` is #224's shell: a real directory, so it needs no .htaccess
+    # rule -- the rewrite there only claims ^[789], and DirectoryIndex
+    # serves /split/ on its own.
+    for name in ("index.php", ".htaccess", "favicon.ico", "assets", "split"):
         s, d = os.path.join(ROOT, "web", name), os.path.join(outroot, name)
         if os.path.isdir(s):
             shutil.copytree(s, d, dirs_exist_ok=True)
         else:
             shutil.copy2(s, d)
+    # #224. The split view has to turn ?lesson=6a into a chapter to open
+    # its left pane on. Written from CHAPTER_BOOKS rather than restated in
+    # the shell, so that the map the links are generated from and the map
+    # the shell reads them back with are the same one.
+    json.dump({key: cid for cid, keys in app_links.CHAPTER_BOOKS.items()
+               for key in keys},
+              open(os.path.join(outroot, "split", "lessons.json"), "w",
+                   encoding="utf-8"), indent=1, sort_keys=True)
     # The banner is shared with symbulator.com and the app. Its one
     # source is banner.css in the app's repository (Symbulator/repos/
     # local -- moved there Aug 2026 so the app build, which inlines a

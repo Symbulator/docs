@@ -8,6 +8,131 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #224 — The split view, and an app link on every worked problem — **built 2 Sep 2026, awaiting a `learn` deploy**
+
+Roberto's brief, 2 Sep 2026: a page that shows the documentation and the
+live app side by side, and a link on every worked problem that loads that
+problem's circuit into the app. Entirely a docs-tree item — **the app
+tree is untouched**, no cache bump, no solver release, no PDF rebuild.
+
+### What is where
+
+| | |
+|---|---|
+| `tools/app_links.py` | the join: which app entries a worked problem is. Run it on its own for the coverage report |
+| `build.py` | `HtmlRenderer.problem_furniture()` emits the anchors and the links; `chapter()` resolves a chapter up front; `plain()` keeps the link text out of the search index; `build_web()` copies `split/` and writes `split/lessons.json` |
+| `web/split/index.php` | the shell. Two iframes, a draggable divider, the postMessage protocol documented at its head |
+| `web/index.php` | the embedded-mode script at the foot: link interception, and the scroll that has to survive a chapter still settling |
+| `web/assets/style.css` | `.problem-links` and the `html.embedded` rules |
+| `src/00-introduction.md` | § *Reading and running side by side* |
+| `deploy_targets.ini` | verifies `/split/` renders and `lessons.json` is there |
+
+### The join, and why it takes six stages
+
+The chapters and the `.cir` books were written separately and never
+numbered against each other: Lesson 6 is 51 worked problems in the book
+against 80 entries in its four books, because a transient problem is
+usually a DC pass for the initial condition and then the TR. So the
+match is made on content, and **neither available key works alone**.
+The figure (`image:` on the entry, `::: figure` in the chapter) matches
+248 of 280 and *over*-collects — the two entries of `AS2's Example 5.7`
+carry the figure of `AS2's Figure 5.24`, being four elements deep inside
+that drawing. The title matches a different 262 and misses wherever the
+chapter and the book word the distinction differently.
+
+Six stages, most specific first, each entry claimed once. Two of them
+are there for one case each and both were found by the coverage report
+rather than by reading:
+
+* **stage 0**, before the exact-title match: a title the chapter uses
+  *twice* is two problems. Lesson 4 walks through `B11's Example 8.29`
+  in Part 1 and sets it again in Part 2, and each part has its own book.
+  Without this the first occurrence took both entries and the second got
+  none.
+* **stage 3b**, after the specific title stages: several problems still
+  sharing a base, none of which named its entry recognisably — Lesson
+  2's *with solve* against *using ex*. It runs after stage 2 so that a
+  problem which *did* name its entry has already taken it, which is what
+  keeps Lesson 5's `(Subtractor)` from being handed its sibling's
+  drawing.
+
+**308 of the 310 lesson entries are linked.** The residue is real and
+was checked one by one, not assumed: 15 problems have no entry (the
+Bode sketches of AS7 14.3–14.5, worked with pencil and paper; the AS7
+2.10 pair this file already records as having no v9 content; AS7's
+9.37; AS2's 2.9 and 2.11 pairs; `AS2's Practice Problem 5.7`; the
+Showing-off Problem) and 2 entries have no worked problem (`B11's
+Example 7.4`, which the chapter only mentions in passing, and Lesson
+11's `A low-pass RC`, which is Claude's own demonstration).
+
+### Two anchors, doing different jobs
+
+`prob-<slug>` on the section, so every problem can be linked to,
+including the fifteen with no entry. `e-<lesson>-<entry>` on each
+*link* — `e-6a-3` — so the shell can derive the anchor straight from
+`?lesson=6a&entry=3` with no lookup table. The entry anchor cannot live
+on the section because a problem is often several entries and only one
+could own it.
+
+### Three bugs the harness found that reading would not have
+
+There is no PHP on this machine, so the panes were served by a harness
+that strips the PHP and lifts the embedded script out of `index.php`
+verbatim. All three of these were invisible in the source and obvious
+within a minute of driving the real thing:
+
+1. **`scroll-behavior: smooth`.** style.css sets it on the root, so a
+   `scrollIntoView()` with no behavior of its own *animates*, and each
+   correction restarted the animation before the last one arrived. The
+   pane parked a few hundred pixels into a five-thousand-pixel journey
+   and stayed there — indistinguishable from a message never delivered.
+   Every scroll in the embedded script now says `behavior: 'instant'`,
+   which overrides the CSS property; `'auto'` defers to it, which is
+   what made this so quiet.
+2. **The page is still growing when the scroll is asked for.** A circuit
+   scan is an `<img>` with a width and no height, so it reserves
+   nothing; the fonts load with `display=swap` and re-flow everything;
+   KaTeX then typesets the maths. Fixed timers were tried and are not
+   enough — a run that stopped correcting at 1.2s sat 39,000px past its
+   problem, and a later one left a title clipped 37px above the top
+   edge. The correction is now driven by a `ResizeObserver` on the root:
+   whatever changes the height last has the last word, and it lets go
+   after six seconds or as soon as the reader moves.
+3. **Scroll restoration.** Reloading the shell made the browser restore
+   the *iframe's* previous position, which beat the anchor. The embedded
+   page sets `history.scrollRestoration = 'manual'`: the shell always
+   says where the pane should be, so remembering where it last was can
+   only contradict it.
+
+Measured after each fix rather than assumed, and swept across seven
+entries in two books rather than the one that proved it: every problem
+lands at exactly 12px from the top of the pane.
+
+**And twice the measurements were zero because the browser pane was
+hidden** — `innerWidth: 0`, every rect 0 — which is the trap already
+written up in the top-level `CLAUDE.md`. The second time it was not the
+pane at all but the mobile layout doing its job: clicking an app link on
+a narrow screen switches to the app tab, which hides the docs pane, so
+the docs document legitimately had no layout to measure.
+
+### Still open
+
+Nothing blocking. Two things a reader may raise once it is live:
+
+* Clicking a link **reloads the app pane**, discarding anything typed
+  there. Roberto's decision, 2 Sep 2026 — "what the user is doing is
+  saying: show me the app and load this entry" — and the introduction
+  and the shell's own bar both warn about it. Keeping the app alive
+  across clicks would need the app to accept a `postMessage`, which is
+  an app-tree change with a cache bump and a five-site deploy behind it.
+* The new introduction section is prose in `src/`, so a **full** PDF
+  build would print it. It is worded to be true in print (it says the
+  links are on the website, and points a PDF reader at
+  `learn.symbulator.com`), but there is no web-only gate in the markup
+  and adding one would be a change to SPEC.md's directives.
+
+---
+
 ## #220 — Units of measure across lessons 1–13 — **done and live on learn, 2 Sep 2026**
 
 Roberto's findings list, worked prose-only: no circuit description, no
