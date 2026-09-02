@@ -1240,13 +1240,26 @@ def build_web(book: Book, versions: list[int]):
         else:
             shutil.copy2(s, d)
     # #224. The split view has to turn ?lesson=6a into a chapter to open
-    # its left pane on. Written from CHAPTER_BOOKS rather than restated in
-    # the shell, so that the map the links are generated from and the map
-    # the shell reads them back with are the same one.
-    json.dump({key: cid for cid, keys in app_links.CHAPTER_BOOKS.items()
-               for key in keys},
+    # its left pane on, and #226 needs the other direction: the ribbon's
+    # "Split View" link carries ?page=lesson-transient, and the app pane
+    # opens on that chapter's first book. Written from CHAPTER_BOOKS
+    # rather than restated in the shell, so that the map the links are
+    # generated from and the map the shell reads them back with are the
+    # same one.
+    #
+    # Both directions are written out rather than one being inverted in
+    # the page, because JavaScript does not keep an object's key order
+    # for keys that look like array indices: {"1":…,"10":…,"4a":…} comes
+    # back as 1, 10, 4a, so "the chapter's first book" would silently be
+    # the wrong one for Lesson 1 against Lesson 10.
+    json.dump({"lessons": {key: cid
+                           for cid, keys in app_links.CHAPTER_BOOKS.items()
+                           for key in keys},
+               "chapters": {cid: keys[0]
+                            for cid, keys in app_links.CHAPTER_BOOKS.items()
+                            if keys}},
               open(os.path.join(outroot, "split", "lessons.json"), "w",
-                   encoding="utf-8"), indent=1, sort_keys=True)
+                   encoding="utf-8"), indent=1)
     # The banner is shared with symbulator.com and the app. Its one
     # source is banner.css in the app's repository (Symbulator/repos/
     # local -- moved there Aug 2026 so the app build, which inlines a

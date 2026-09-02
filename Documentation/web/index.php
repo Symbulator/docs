@@ -174,12 +174,27 @@ function pdf_note(string $name): string {
       <nav>
         <a href="/symbulator-v<?= e($v) ?>.pdf">Download as PDF</a>
         <a href="https://symbulator.pythonanywhere.com">Online App</a>
+<?php if ($v === '9'): ?>
+        <!-- #226: the split view, opened on the page being read -- the
+             reader has not picked a problem, they have asked to see this
+             chapter beside the app, so the link carries ?page= rather
+             than a lesson and an entry. On the home page there is no
+             chapter to carry, so it opens on the introduction.
+
+             Version 9 only, and it replaces "How it works" rather than
+             joining it. There is no split view for 7 and 8: the app is
+             version 9, so the link would quietly move a version 7 reader
+             onto version 9's documentation -- the opposite of "the same
+             page where they are". Those two keep the old link. -->
+        <a href="/split/?page=<?= rawurlencode($page ?: 'introduction') ?>">Split View</a>
+<?php else: ?>
         <!-- Version-independent on purpose: the monograph documents the
              solver logic every version shares. Points at the landing
              page's "The logic and its history" section (#142), where the
              monograph is offered with its context, rather than at the
              PDF directly. -->
         <a href="https://symbulator.com/#logic">How it works</a>
+<?php endif; ?>
       </nav>
 
   
@@ -659,11 +674,16 @@ function pdf_note(string $name): string {
   window.addEventListener('keydown', release);
   window.addEventListener('mousedown', release);
 
-  // Told once the pane is up, so the shell can scroll it to the entry
-  // the split view was opened at without polling for readiness.
+  // Told once the pane is up, so the shell can scroll it to the entry the
+  // split view was opened at without polling for readiness. The chapter's
+  // own title rides along: the shell shows it in the bar when it was
+  // opened on a page rather than an entry (#226), and only this side
+  // knows it -- deriving "Transient analysis" from "lesson-transient" is
+  // guesswork, and wrong in every language the book is ever set in.
+  var head = document.querySelector('.chapter-head h1');
   parent.postMessage({ from: 'symbulator-docs', type: 'ready',
-                       chapter: document.body.getAttribute('data-chapter') || '' },
-                     '*');
+                       chapter: document.body.getAttribute('data-chapter') || '',
+                       title: head ? head.textContent.trim() : '' }, '*');
 })();
 </script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>

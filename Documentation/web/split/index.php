@@ -211,8 +211,10 @@ function asset(string $name): string {
   // CHAPTER_BOOKS the links themselves are generated from, so the two
   // cannot drift: tools/app_links.py is the one place that knows Lesson
   // 6 is four books.
-  var LESSONS = {};
-  var pending = null;   // an entry asked for before lessons.json arrived
+  var LESSONS = {};     // "6a" -> "lesson-transient"
+  var CHAPTERS = {};    // "lesson-transient" -> "6a", its first book
+  var pending = null;   // what was asked for before lessons.json arrived
+  var onPage = '';      // the chapter, when opened on one rather than an entry
 
   function qs() {
     try { return new URLSearchParams(location.search); }
@@ -256,10 +258,14 @@ function asset(string $name): string {
     lesson = normalise(lesson);
     entry = parseInt(entry, 10) || 1;
     if (!lesson) { return; }
+    // No longer showing a whole chapter: a later 'ready' must not put the
+    // chapter's title back over the entry this is about to name.
+    onPage = '';
     var anchor = 'e-' + lesson + '-' + entry;
     loadApp(lesson, entry);
-    if (!Object.keys(LESSONS).length) { pending = [lesson, entry, reloadDocs]; }
-    else if (reloadDocs) {
+    if (!Object.keys(LESSONS).length) {
+      pending = function () { show(lesson, entry, reloadDocs); };
+    } else if (reloadDocs) {
       var url = docsUrlFor(lesson, anchor);
       if (url) { docsFrame.src = url; }
     } else {
@@ -279,8 +285,9 @@ function asset(string $name): string {
   fetch('/split/lessons.json', { cache: 'no-cache' })
     .then(function (r) { return r.json(); })
     .then(function (data) {
-      LESSONS = data || {};
-      if (pending) { show(pending[0], pending[1], true); pending = null; }
+      LESSONS = (data && data.lessons) || {};
+      CHAPTERS = (data && data.chapters) || {};
+      if (pending) { pending(); pending = null; }
     })
     .catch(function () {
       // No map: the app pane still works from the query string, and the
@@ -296,6 +303,9 @@ function asset(string $name): string {
     if (msg.type === 'open') {
       show(msg.lesson, msg.entry, false);
     } else if (msg.type === 'ready') {
+      // Opened on a page (#226): the bar says which chapter, in the words
+      // the chapter itself uses.
+      if (onPage && msg.title) { whereEl.textContent = msg.title; }
       var q = qs();
       var lesson = normalise(q.get('lesson') || q.get('input'));
       var entry = parseInt(q.get('entry') || '1', 10) || 1;
@@ -303,12 +313,39 @@ function asset(string $name): string {
     }
   });
 
+  // #226: the ribbon's "Split View" link carries the chapter the reader
+  // is on rather than an entry -- they have not picked a problem, they
+  // have asked to see this page beside the app. The left pane opens on
+  // that chapter; the right pane opens on the chapter's first book, so
+  // Lesson 6 opens the app on Lesson 6's entries rather than on whatever
+  // it had last. A chapter with no book of its own (the introduction,
+  // the credits) leaves the app at its own default.
+  function showPage(page) {
+    if (!/^[a-z0-9-]+$/.test(page)) { return; }
+    if (!Object.keys(CHAPTERS).length) {
+      pending = function () { showPage(page); };
+      return;
+    }
+    onPage = page;
+    docsFrame.src = '/9/' + page;
+    var lesson = CHAPTERS[page];
+    if (lesson) { loadApp(lesson, 1); }
+    // A placeholder until the pane reports its real title, which is the
+    // only place the chapter's name exists.
+    whereEl.textContent = page.replace(/-/g, ' ');
+    try {
+      history.replaceState(null, '', location.pathname + '?page=' + page);
+    } catch (e) {}
+  }
+
   // ---- opening state ----------------------------------------------------
   (function start() {
     var q = qs();
     var lesson = normalise(q.get('lesson') || q.get('input'));
-    if (!lesson) { return; }          // the defaults in the markup stand
-    show(lesson, q.get('entry') || 1, true);
+    if (lesson) { show(lesson, q.get('entry') || 1, true); return; }
+    var page = (q.get('page') || '').trim().toLowerCase();
+    if (page) { showPage(page); return; }
+    // Neither: the defaults in the markup stand.
   })();
 
   // ---- the divider ------------------------------------------------------
