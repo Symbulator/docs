@@ -232,6 +232,21 @@ What survives is `tools/`-worthy but was not kept: the population is
 small enough that the real work was reading all 73 lines, and the
 scanner only ever narrowed the field.
 
+### Verifying it in the PDF: two glyphs that are not the glyphs you typed
+
+The rebuilt PDFs (205 / 195 / 241 pages, unchanged — #222's additions
+were too small to move pagination) confirm every unit, but only once the
+probes were right, and they were not right first time.
+
+* **Ω extracts as U+2126** (OHM SIGN), not the U+03A9 in the source.
+* **∠ extracts as U+0338** (COMBINING LONG SOLIDUS OVERLAY), not U+2220.
+
+Both make a perfectly correct book grep as broken: `42.76∠-155.1° A` is
+in the PDF and searching for it by the source's characters finds
+nothing. Normalise, or search for a fragment either side of the glyph,
+and print codepoints before concluding anything. Between #221 and #222
+this cost five false misses.
+
 ---
 
 ## #216 — Appendix B, redrawn — **done and live on learn, 1 Sep 2026**
