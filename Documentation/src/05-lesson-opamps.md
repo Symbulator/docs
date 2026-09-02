@@ -1387,7 +1387,7 @@ r4*(r1 + r2)/(r1*(r3 + r4)) = 4
 ```
 
 with `r2, r4` as the unknowns. It answers `r2` = {{o:4*r1}} and
-`r4` = {{o:4*r3}} — at 10 kΩ each, {{o:40000}} and {{o:40000}}.
+`r4` = {{o:4*r3}} — at 10 kΩ each, {{o:40000}} Ω and {{o:40000}} Ω.
 :::
 
 We get **r2=40000 and r4=40000**, the correct values for the remaining

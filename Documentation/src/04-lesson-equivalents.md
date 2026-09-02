@@ -497,7 +497,7 @@ j,2,0,560'm
 ::: only 9
 **Results** gives `ino` = {{o:-0.36}} A and `req` = {{o:84}} Ω.
 
-The sign differs from the calculator's, which prints {{o:0.36}}: version 9
+The sign differs from the calculator's, which prints {{o:0.36}} A: version 9
 reports the Norton current in the direction it actually flows, from the
 first node to the second. Nothing else changes — carry the sign through and
 the load current below comes out the same.

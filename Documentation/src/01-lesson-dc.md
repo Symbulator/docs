@@ -1247,8 +1247,8 @@ va-vb
 The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
 :::
 
-The answer, {{o:{.6,.2,.4,-2.}}}, indicates I{{sub:1}}=.6, I{{sub:2}}=.2,
-I{{sub:3}}=.4 and V{{sub:ab}}=-2. This is correct.
+The answer, {{o:{.6,.2,.4,-2.}}}, indicates I{{sub:1}}=.6 A, I{{sub:2}}=.2 A,
+I{{sub:3}}=.4 A and V{{sub:ab}}=-2 V. This is correct.
 
 :::
 

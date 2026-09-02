@@ -236,7 +236,7 @@ and give it the answer's name:{{i:aa tool}}
 ir1
 ```
 
-It reads {{o:1.789}}∠{{o:26.57}}°.
+It reads {{o:1.789}}∠{{o:26.57}}° A.
 
 That is the one-value way of doing it. If you would rather see *every* answer
 in polar form, there is a setting for it — see *Rectangular or polar*, above.
@@ -284,7 +284,7 @@ The source is given in polar form, and version 9 reads it as written —
 magnitude, the angle sign, then the angle in degrees.
 
 Then AC, with **10** for ω. **Mini-Tools** with *aa* reads
-`ir1` as {{o:4.472}}∠{{o:3.43}}° and `vl` as {{o:8.944}}∠{{o:93.43}}°.
+`ir1` as {{o:4.472}}∠{{o:3.43}}° A and `vl` as {{o:8.944}}∠{{o:93.43}}° V.
 Both are correct.
 :::
 
@@ -396,11 +396,12 @@ s\aa(ir1)
 ```
 
 ::: only 7,8
-We get {{o:4.789}}∠{{o:-16.7}}°.
+We get {{o:4.789}}∠{{o:-16.7}}° A.
 :::
 
 ::: only 9
-Read it with **Mini-Tools** set to *aa*: `aa(ir)` gives {{o:4.789}}∠{{o:-16.70}}°.
+Read it with **Mini-Tools** set to *aa*: `aa(ir)` gives
+{{o:4.789}}∠{{o:-16.70}}° A.
 :::
 
 That is 4.789 A at an angle of −16.7°, which is correct.
@@ -495,7 +496,7 @@ We get {{o:414.5}}∠{{o:-71.6}}° mA.
 ::: only 9
 There is no stored `zeq` to divide by, so put the whole thing in
 **Mini-Tools** with *aa*: `aa(12/(4+20j+pr(16,-14j+25j)))` gives
-{{o:0.4145}}∠{{o:-71.60}}°.
+{{o:0.4145}}∠{{o:-71.60}}° A.
 :::
 
 That is 414.5 mA at an angle of −71.6°, which is correct.
@@ -511,7 +512,7 @@ r1,1,0,4+20j+[16,-14j+25j]
 
 No frequency is needed to solve this, but AC asks for one anyway — put in
 anything you like, because every value is already an impedance and none of them
-depends on it. Then `aa(ir1)` gives the same {{o:0.4145}}∠{{o:-71.60}}°.
+depends on it. Then `aa(ir1)` gives the same {{o:0.4145}}∠{{o:-71.60}}° A.
 :::
 :::
 :::
@@ -613,11 +614,11 @@ s\aa(icx)
 s\aa(icx)
 ```
 ::: only 7,8
-We get {{o:7.59}}∠{{o:108.4}}°.
+We get {{o:7.59}}∠{{o:108.4}}° A.
 :::
 
 ::: only 9
-`aa(icx)` gives {{o:7.589}}∠{{o:108.4}}°.
+`aa(icx)` gives {{o:7.589}}∠{{o:108.4}}° A.
 :::
 
 That is 7.59 A at an angle of 108.4°, which is correct.
@@ -663,12 +664,12 @@ AC, with **ω — angular frequency** set to **2**.
 {s\aa(v1),s\aa(v2)}
 ```
 ::: only 7,8
-We get {{o:11.33}}∠{{o:60.02}}° and {{o:33.02}}∠{{o:57.13}}°.
+We get {{o:11.33}}∠{{o:60.02}}° V and {{o:33.02}}∠{{o:57.13}}° V.
 :::
 
 ::: only 9
-`aa(v1)` gives {{o:11.33}}∠{{o:60.02}}° and `aa(v2)` gives
-{{o:33.02}}∠{{o:57.13}}°.
+`aa(v1)` gives {{o:11.33}}∠{{o:60.02}}° V and `aa(v2)` gives
+{{o:33.02}}∠{{o:57.13}}° V.
 :::
 
 Both are correct.
@@ -722,8 +723,8 @@ We get {{o:1.55}}∠{{o:-95.18}}° V and {{o:3.26}}∠{{o:-3.74}}° mA.
 :::
 
 ::: only 9
-`aa(vro)` gives {{o:1.550}}∠{{o:-95.18}}° and `aa(ico)` gives
-{{o:0.003264}}∠{{o:-3.743}}°.
+`aa(vro)` gives {{o:1.550}}∠{{o:-95.18}}° V and `aa(ico)` gives
+{{o:0.003264}}∠{{o:-3.743}}° A.
 :::
 
 That is 1.55 V at −95.18° and 3.26 mA at −3.74°, both correct.
@@ -776,8 +777,8 @@ We get {{o:2.708}}∠{{o:-56.73}}° V and {{o:6.914}}∠{{o:-80.70}}° V.
 :::
 
 ::: only 9
-`aa(v1)` gives {{o:2.708}}∠{{o:-56.73}}° and `aa(v2)` gives
-{{o:6.914}}∠{{o:-80.70}}°.
+`aa(v1)` gives {{o:2.708}}∠{{o:-56.73}}° V and `aa(v2)` gives
+{{o:6.914}}∠{{o:-80.70}}° V.
 :::
 
 That is 2.708 V at −56.73° and 6.914 V at −80.70°, both correct.

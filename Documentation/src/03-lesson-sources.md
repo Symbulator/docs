@@ -276,7 +276,7 @@ parallel with values of 10 Ω, 20 Ω and 30 Ω:
 pr(10, 20, 30)
 ```
 
-You get {{o:60/11}} with **Rounding** on *exact*, or {{o:5.45}}
+You get {{o:60/11}} Ω with **Rounding** on *exact*, or {{o:5.45}} Ω
 approximately. It nests as deeply as you like — the two problems below lean
 on that — and it works on symbols as readily as on numbers: `pr(r1, r2)`
 evaluates to $r1 r2/(r1 + r2)$, useful when the resistors in your circuit

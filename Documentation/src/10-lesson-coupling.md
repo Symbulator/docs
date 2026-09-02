@@ -107,8 +107,8 @@ AC, and leave **RMS phasors** unticked. Then read the two currents with
 ```
 
 ::: only 9
-`aa(ir2)` reads {{o:13.02}}∠{{o:-49.4}}° and `aa(ir4)` reads
-{{o:2.910}}∠{{o:14.04}}°.
+`aa(ir2)` reads {{o:13.02}}∠{{o:-49.4}}° A and `aa(ir4)` reads
+{{o:2.910}}∠{{o:14.04}}° A.
 :::
 
 Both are correct.
@@ -145,7 +145,7 @@ r4,o,0,10
 ```
 
 ::: only 9
-`aa(vo)` reads {{o:20.00}}∠{{o:-134.43}}°.
+`aa(vo)` reads {{o:20.00}}∠{{o:-134.43}}° V.
 :::
 
 Correct.
@@ -182,8 +182,8 @@ r4,3,0,5
 ```
 
 ::: only 9
-`aa(ir1)` reads {{o:20.30}}∠{{o:3.5}}° and `aa(ir4)` reads
-{{o:8.693}}∠{{o:19.03}}°.
+`aa(ir1)` reads {{o:20.30}}∠{{o:3.5}}° A and `aa(ir4)` reads
+{{o:8.693}}∠{{o:19.03}}° A.
 :::
 
 Correct.
@@ -298,9 +298,9 @@ power, and that is the convention it wants.
 
 ::: only 9
 Three readings from **Mini-Tools** with *aa*: `ir1` is
-{{o:11.09}}∠{{o:33.69}}°, `vro` is {{o:110.9}}∠{{o:-146.31}}°, and
+{{o:11.09}}∠{{o:33.69}}° A, `vro` is {{o:110.9}}∠{{o:-146.31}}° V, and
 `-se` — the complex power *supplied*, so the opposite of the power consumed
-by the source — is {{o:1331}}∠{{o:-33.69}}°.
+by the source — is {{o:1331}}∠{{o:-33.69}}° VA.
 
 Three conversions in a row is the point at which the setting is less work
 than the tool: tick **Show AC answers as polar phasors** in **Settings** and

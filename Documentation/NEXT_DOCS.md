@@ -158,21 +158,79 @@ concluding anything about a PDF from a grep.
 
 ---
 
-## #222 — Units on the bare answer lines — **accepted, not done**
+## #222 — Units on the bare answer lines — **done and live on learn, 2 Sep 2026**
 
-Many solved-example answer lines carry no unit at all. #220 did the six
+Many solved-example answer lines carried no unit at all. #220 did the six
 Roberto named — Lesson 1's B11 7.11 (V and A), Lesson 3's Bo2 1.9, AS2's
 Practice Problem 2.7 and Bo2's 1.10 (V and A), and Lesson 13's Gain
 Examples 1 and 2, whose y and z parameters had no S or Ω (the app's own
 `_PORT_UNITS` is `{"z": "ohm", "y": "S"}`; the gains stay bare because
-they are dimensionless).
+they are dimensionless). This is the rest of it: **41 edits across ten
+chapters**, every unit decided from what the quantity *is* — the element
+kind behind the name, or the analysis — and never from the shape of the
+number.
 
-The rest is a single uninterrupted pass over all fourteen chapters, and
-it wants to be one: every unit has to be *verified* against what the
-quantity is, not inferred from the name, and a half-done sweep reads
-worse than none. Watch for the same trap #220 hit — a value that is
-genuinely dimensionless, and a name whose prefix does not say what it
-measures.
+The bulk is Lesson 9 and Lesson 7, where nearly every `aa()` reading was
+a bare polar pair: `aa(iraa)` reads 2.35∠−36.2°, with nothing saying
+amperes. A list gets one unit at its end (`… and 42.76∠−155.1° A`,
+matching the `… and −18280𝐢 VA` already in the book); a sentence pairing
+two different quantities gets one each (`aa(vro) … ° V and aa(ico) … °
+A`). Lesson 7 corroborates that pair itself in the next sentence — "That
+is 1.55 V at −95.18° and 3.26 mA" — which is the kind of check worth
+looking for before stamping a unit on anything.
+
+### What was deliberately left bare, and why
+
+This is the more useful half of the item. Six kinds of answer take no
+unit, and stamping one on them would have been the error:
+
+* **Power factors** — Lesson 8's four (`0.97342 leading`, `0.93595
+  lagging`, `0.99805 leading`, and the `1` at unity). Dimensionless by
+  definition; *leading* and *lagging* are the qualifiers, not units.
+* **h and a two-port parameters** — Lesson 13's 19.6 and AS7's 19.8.
+  `h11` is Ω, `h12` and `h21` are dimensionless, `h22` is S; for the
+  transmission parameters A and D are dimensionless, B is Ω, C is S.
+  Mixed by construction, which is exactly why the app's `_PORT_UNITS`
+  units z and y and nothing else. The y quadruples beside them *did*
+  get their S.
+* **Gains** — Av, Ai, Ap, Gv, Gi, Gp. Ratios.
+* **Symbolic answers** — `vth = vs*(r1 + r2)/r1`, `r2 = 5*r1`,
+  `((g1-g2) vs)/(g3-g4)`. They carry their units in their symbols;
+  stamping V on a formula in terms of `vs` tells the reader nothing.
+* **Infinity** — the ideal op-amp's `ino` and `pmax`. Not measurements.
+  (`req` = 0 sits in that same list and is genuinely ohms; it was left
+  alone so the list does not carry one lone unit among four entries
+  that cannot. Marginal either way.)
+* **`c` = 25 in Lesson 7's Example 9.14.** The circuit line is
+  `c,1,0,c'µ`, so the unknown being solved is the *coefficient of the
+  multiplier*, not the capacitance. "25 µF" is true of the capacitor and
+  false of `c`, and writing it would be a different claim from the one
+  the app makes. This is the trap #220 named — a name whose prefix does
+  not say what it measures — and it is the single most interesting line
+  in the sweep.
+
+### The scanner was wrong twice before it was right
+
+Worth recording, because the same mistake is available to anyone who
+repeats this.
+
+The first pass flagged **238** bare markers by asking whether a unit
+followed each `{{o:}}` immediately. That is the wrong question: in
+`{{o:6.809}}∠{{o:-21.8}}° A` the magnitude is covered by the unit after
+the angle, and in `{{o:-1054}} − {{o:842.9}}𝐢 VA` the real part is
+covered by the one after the imaginary part. Rewritten to scan forward
+to the end of the answer phrase, it said **152**.
+
+Then it said 128, then 102, and the difference was a bug: the scan
+treated the `:` **inside a following `{{o:...}}` marker** as a colon
+ending the sentence, so any answer followed by another answer looked
+unitless. Markers have to be substituted out *before* the sentence scan,
+not after. Order matters, and the 26 phantom hits all looked perfectly
+plausible in a list.
+
+What survives is `tools/`-worthy but was not kept: the population is
+small enough that the real work was reading all 73 lines, and the
+scanner only ever narrowed the field.
 
 ---
 

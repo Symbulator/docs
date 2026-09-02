@@ -2435,7 +2435,7 @@ That is what the **Solve** card is for — a system that is not a circuit:
 -16/(s+4)^2 = -16*l/(l*s^2+8*l*s+8)
 ```
 
-with `l` as the unknown. It answers `l` = {{o:1/2}}.
+with `l` as the unknown. It answers `l` = {{o:1/2}} H.
 :::
 
 l=1/2

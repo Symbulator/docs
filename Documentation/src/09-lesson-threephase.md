@@ -189,16 +189,16 @@ For the answers the textbook wants, ask for these:
 ::: only 9
 In **Mini-Tools** with *aa*:
 
-- `aa(vag-vbg)` = {{o:207.8}}∠{{o:60.00}}°
-- `aa(vbg-vcg)` = {{o:207.8}}∠{{o:-60.00}}°
-- `aa(vcg-vag)` = {{o:207.8}}∠{{o:180.0}}°
+- `aa(vag-vbg)` = {{o:207.8}}∠{{o:60.00}}° V
+- `aa(vbg-vcg)` = {{o:207.8}}∠{{o:-60.00}}° V
+- `aa(vcg-vag)` = {{o:207.8}}∠{{o:180.0}}° V
 :::
 
 ::: tip Which line voltage did you want?
 If you ask me, that is not really the voltage between the lines, because the
 transmission line starts *after* the generator. At the start of the
-transmission line the answer is {{o:204.6}}∠{{o:60.03}}°, and at the end of it
-{{o:198.7}}∠{{o:59.71}}° — ask for
+transmission line the answer is {{o:204.6}}∠{{o:60.03}}° V, and at the end of it
+{{o:198.7}}∠{{o:59.71}}° V — ask for
 {{v7,8|`s\aa(vas-vbs)`}}{{v9|`aa(vas-vbs)`}} and
 {{v7,8|`s\aa(vad-vbd)`}}{{v9|`aa(vad-vbd)`}} respectively. All three are
 different, and which one you want depends on where you are standing.
@@ -322,7 +322,7 @@ AC, with **RMS phasors** ticked.
 
 ::: only 9
 The three line currents read {{o:56.78}}∠{{o:0}}°, {{o:25.46}}∠{{o:135.0}}° and
-{{o:42.76}}∠{{o:-155.1}}°. The complex powers in the load are
+{{o:42.76}}∠{{o:-155.1}}° A. The complex powers in the load are
 {{o:16120}}𝐢, {{o:6480}} and {{o:-18280}}𝐢 VA, and in the three sources
 {{o:-6814}}, {{o:790.6}} − {{o:2951}}𝐢 and {{o:-456.5}} + {{o:5111}}𝐢 VA.
 :::
@@ -404,8 +404,8 @@ AC, with **RMS phasors** left unticked this time.
 
 ::: only 9
 The three line currents read {{o:6.667}}∠{{o:0}}°, {{o:8.944}}∠{{o:93.43}}° and
-{{o:10.00}}∠{{o:-66.87}}°, and the neutral current
-{{o:10.06}}∠{{o:178.5}}°.
+{{o:10.00}}∠{{o:-66.87}}° A, and the neutral current
+{{o:10.06}}∠{{o:178.5}}° A.
 :::
 
 All four are correct. The neutral carries a current precisely because the load
@@ -464,7 +464,7 @@ The phase currents are the currents in the three load impedances:
 
 ::: only 9
 `aa(irab)`, `aa(irbc)` and `aa(irca)` read {{o:19.36}}∠{{o:13.43}}°,
-{{o:19.36}}∠{{o:-106.57}}° and {{o:19.36}}∠{{o:133.43}}°.
+{{o:19.36}}∠{{o:-106.57}}° and {{o:19.36}}∠{{o:133.43}}° A.
 :::
 
 The line currents are the currents the sources deliver, which is the opposite
@@ -482,7 +482,7 @@ of the current through each source element:
 
 ::: only 9
 `aa(-iea0)`, `aa(-ieb0)` and `aa(-iec0)` read {{o:33.54}}∠{{o:-16.57}}°,
-{{o:33.54}}∠{{o:-136.57}}° and {{o:33.54}}∠{{o:103.43}}°.
+{{o:33.54}}∠{{o:-136.57}}° and {{o:33.54}}∠{{o:103.43}}° A.
 :::
 
 Both sets are correct, and they show the relationship you would expect of a
@@ -525,8 +525,8 @@ The line current is the current in one of the line resistors, and the phase
 voltage is the difference between two load nodes:
 
 ::: only 9
-`aa(iraa)` reads {{o:2.35}}∠{{o:-36.2}}° and `aa(vna2-vnb2)` reads
-{{o:169.94}}∠{{o:30.81}}°. Both are correct.
+`aa(iraa)` reads {{o:2.35}}∠{{o:-36.2}}° A and `aa(vna2-vnb2)` reads
+{{o:169.94}}∠{{o:30.81}}° V. Both are correct.
 :::
 
 ```sym 7
@@ -540,7 +540,7 @@ voltage is the difference between two load nodes:
 ```
 
 ::: only 9
-For the phase current, `aa(irac)` reads {{o:1.357}}∠{{o:-66.2}}°.
+For the phase current, `aa(irac)` reads {{o:1.357}}∠{{o:-66.2}}° A.
 :::
 :::
 :::
@@ -619,7 +619,7 @@ The line currents are the currents through the shorts:
 
 ::: only 9
 `aa(isat)`, `aa(isbt)` and `aa(isct)` read {{o:22.86}}∠{{o:6.87}}°,
-{{o:22.86}}∠{{o:-113.13}}° and {{o:22.86}}∠{{o:126.87}}°.
+{{o:22.86}}∠{{o:-113.13}}° and {{o:22.86}}∠{{o:126.87}}° A.
 :::
 
 Correct.
@@ -674,7 +674,7 @@ rca,cd,ad,8+6j
 
 ::: only 9
 `aa(isla)`, `aa(islb)` and `aa(islc)` read {{o:39.71}}∠{{o:-41.07}}°,
-{{o:64.12}}∠{{o:-139.77}}° and {{o:70.13}}∠{{o:74.27}}°.
+{{o:64.12}}∠{{o:-139.77}}° and {{o:70.13}}∠{{o:74.27}}° A.
 :::
 
 Correct — and unlike the balanced case, all three differ in magnitude as well
@@ -725,7 +725,7 @@ rca,cd,ad,10
 
 ::: only 9
 The three line currents read {{o:64.00}}∠{{o:80.1}}°,
-{{o:38.11}}∠{{o:-60}}° and {{o:42.50}}∠{{o:-135}}°.
+{{o:38.11}}∠{{o:-60}}° and {{o:42.50}}∠{{o:-135}}° A.
 
 For the power, add the three loads' consumption in **Evaluate**:
 
@@ -783,8 +783,8 @@ rca,cd,ad,-40j
 
 ::: only 9
 *Find equivalent* is not needed here — a plain AC solve gives both. `aa(irlb)`
-reads {{o:9.106}}∠{{o:168.48}}° and `aa(irbc)` reads
-{{o:5.500}}∠{{o:172.47}}°, matching the printed answers.
+reads {{o:9.106}}∠{{o:168.48}}° A and `aa(irbc)` reads
+{{o:5.500}}∠{{o:172.47}}° A, matching the printed answers.
 :::
 
 The remaining answer, the generator current, is trickier. They ask for the
@@ -817,7 +817,7 @@ had. So I tried it.
 ```
 
 ::: only 9
-{{o:5.959}}∠{{o:-177.18}}°
+{{o:5.959}}∠{{o:-177.18}}° A
 :::
 
 And it worked. That is the answer in the book.
@@ -881,7 +881,7 @@ Node 0 here is the centre of the load's wye, not a node of the source at all.
 
 ::: only 9
 `aa(ira)`, `aa(irb)` and `aa(irc)` read {{o:2.570}}∠{{o:-62.01}}°,
-{{o:2.570}}∠{{o:177.99}}° and {{o:2.570}}∠{{o:57.99}}°.
+{{o:2.570}}∠{{o:177.99}}° and {{o:2.570}}∠{{o:57.99}}° A.
 :::
 
 Correct — balanced, so three equal magnitudes 120° apart.

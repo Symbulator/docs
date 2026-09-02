@@ -695,7 +695,7 @@ comes back numerical: v{{sub:s}} = {{o:17.61}} V and
 i{{sub:s}} = {{o:0.3973}} A.
 
 And the answers show *how* the zero-dissipation constraint is met:
-i{{sub:R5}} comes back exactly {{o:0}}. The CCVS's voltage is
+i{{sub:R5}} comes back exactly {{o:0}} A. The CCVS's voltage is
 0.1 i{{sub:R5}}, so the constraint drove its own controlling
 current to zero — the source dissipates nothing because the circuit
 arranged for it to *be* nothing.
