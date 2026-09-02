@@ -8,7 +8,7 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #224 — The split view, and an app link on every worked problem — **built 2 Sep 2026, awaiting a `learn` deploy**
+## #224 — The split view, and an app link on every worked problem — **done and live on learn, 2 Sep 2026**
 
 Roberto's brief, 2 Sep 2026: a page that shows the documentation and the
 live app side by side, and a link on every worked problem that loads that
@@ -107,6 +107,16 @@ within a minute of driving the real thing:
 Measured after each fix rather than assumed, and swept across seven
 entries in two books rather than the one that proved it: every problem
 lands at exactly 12px from the top of the pane.
+
+**A fourth appeared only once it was live**, and is the sharpest of the
+four. The `ResizeObserver` gave up after a fixed six seconds, which was
+comfortably enough locally — and on the deployed site left Bo2's Example
+5.1 sitting 505px down the pane, because Lesson 6's 49 scans come off a
+disk in well under six seconds and over a network they do not. It now
+stops when the height has been *still* for 1.5s, with a 20s backstop.
+Re-measured live across all four books of Lesson 6: every one at 12px.
+A local harness proves the mechanism; only the real host proves the
+timing.
 
 **And twice the measurements were zero because the browser pane was
 hidden** — `innerWidth: 0`, every rect 0 — which is the trap already
