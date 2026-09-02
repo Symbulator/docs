@@ -614,18 +614,27 @@ function pdf_note(string $name): string {
 
     var stop = function () {};
     if (window.ResizeObserver) {
-      var ro = new ResizeObserver(reapply);
+      var idle;
+      var ro = new ResizeObserver(function () {
+        reapply();
+        // Stop when the page has stopped moving, not when a clock says
+        // so. A fixed six-second cap passed every local test and then
+        // left the problem 505px down the pane on the real site, where
+        // the scans arrive over the network rather than from disk.
+        clearTimeout(idle);
+        idle = setTimeout(function () { ro.disconnect(); }, 1500);
+      });
       ro.observe(document.documentElement);
-      stop = function () { ro.disconnect(); };
+      stop = function () { clearTimeout(idle); ro.disconnect(); };
     }
     window.addEventListener('load', reapply, { once: true });
     if (document.fonts && document.fonts.ready) {
       document.fonts.ready.then(reapply);
     }
     [200, 700, 1800].forEach(function (ms) { setTimeout(reapply, ms); });
-    // Let go eventually, so a page that never stops settling cannot hold
-    // the reader's scroll hostage.
-    setTimeout(stop, 6000);
+    // A backstop, so a page that never stops settling cannot hold the
+    // reader's scroll hostage for ever.
+    setTimeout(stop, 20000);
     releasers.push(stop);
   }
 
