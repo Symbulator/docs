@@ -39,7 +39,7 @@ def _escape(t):
     return (t.replace("&", "&amp;").replace("<", "&lt;")
              .replace(">", "&gt;"))
 
-OUT = r"C:\Users\perez\Claude Code\Sym Docum\Documentation\paper\figures"
+OUT = r"C:\Users\perez\Claude Code\Documentation\paper\figures"
 BOOK = os.path.join(SERVER, "examples", "The_Monograph.cir")
 
 # Figure name -> the entry in The_Monograph.cir it is drawn from. The

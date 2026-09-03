@@ -97,7 +97,7 @@ def figure_size_mm(ref: str):
 # inlines a copy it cannot fetch, and moving the source into that repo
 # pins the lockup and the check to the same commit (#75).
 SHARED_BANNER = os.path.normpath(os.path.join(
-    ROOT, "..", "..", "Symbulator", "repos", "local", "banner.css"))
+    ROOT, "..", "Symbulator", "repos", "local", "banner.css"))
 
 
 # Every URL this build writes into the site is root-absolute.

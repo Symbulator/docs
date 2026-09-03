@@ -48,7 +48,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #: `repos/local/examples` is generated from it by build_local.py, so this
 #: reads the one people edit.
 EXAMPLES = os.path.normpath(os.path.join(
-    ROOT, "..", "..", "Symbulator", "repos", "server", "examples"))
+    ROOT, "..", "Symbulator", "repos", "server", "examples"))
 
 #: Hardwired to version 9 (Roberto, 2 Sep 2026: "X is for experiments,
 #: not for users. Use the default app link, v9, always, hardwired.").
