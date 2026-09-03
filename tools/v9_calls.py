@@ -113,10 +113,8 @@ def _selector_lines(sel: str) -> list[str]:
         out.append("```")
     if approx:
         out.append("")
-        out.append("The calculator versions wrap this in `approx` to get a "
-                   "decimal. Version 9 does that through **Rounding** "
-                   "instead — *approximate to n significant digits* with "
-                   "**n** = 3 is a good setting for this one.")
+        out.append("Here we use **Rounding** — *approx to n digits*, "
+                   "with **n** = 3.")
     return out
 
 

@@ -73,7 +73,7 @@ l,o,0,1,0
 ```
 
 ::: only 9
-Run it in TR. The answer is on the `o` node's line:
+Run it in TR. The answer is `vo`:
 
 $$
 v_o(t) = \dfrac{3\sqrt{2}}{2}\,e^{-4t}\sin(\sqrt{2}\,t)
@@ -205,9 +205,8 @@ Either way, the same answer.
 ::: only 9
 ### The curly-bracket shorthand
 
-Version 9 has the same shortcut: wrap the value in curly brackets — `{u(t)}` —
-and FD reads it as `t2s(u(t))`. As on the calculator, it works only inside a
-circuit description, so the answer still needs `s2t(...)` when you ask for it
+Wrap the value in curly brackets — `{u(t)}` — and FD reads it as `t2s(u(t))`.
+It works only inside a circuit description, so the answer still needs `s2t(...)` when you ask for it
 in **Evaluate**.
 :::
 

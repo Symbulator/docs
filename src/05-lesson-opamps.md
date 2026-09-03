@@ -139,15 +139,6 @@ Which are correct. The voltage in node o is –2.1 V, and the op amp is absorbin
 
 ::: practice
 
-::: only 9
-::: note Some of this narration still describes the calculator
-Every problem below carries a **Circuit Description** panel you can type
-straight into Symbulator 9, and the circuits and answers are identical
-across the versions. What has not all been rewritten is the narration
-between them: where it says to evaluate a name or press a key, do the
-version 9 equivalent — the results are already on screen.
-:::
-:::
 
 
 ### Solved Op Amp problems
@@ -253,8 +244,13 @@ o,2,1,o
 The answers you want are `vo` and `io`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{9.,.00065}**, is correct: v{{sub:o}} is 9V and i{{sub:o}} is
 0.65mA
+:::
+::: only 9
+The answer is v{{sub:o}} = 9V and i{{sub:o}} = 0.65mA. This is correct.
+:::
 
 :::
 
@@ -350,7 +346,12 @@ o,0,1,o
 The answers you want are `vo` and `ir1`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{-1.25, 5e-5}**, is correct.
+:::
+::: only 9
+The answer is `vo` = -1.25 V and `ir1` = 5e-5 A. This is correct.
+:::
 
 :::
 
@@ -383,9 +384,8 @@ o,0,2,o
 ```
 
 ::: only 9
-The calculator's `|` says "given"; version 9 says the same thing in the
-**Evaluate** card's own **Conditions** box. Put the answer you want in the
-first and the value you are giving it in the second:
+Use the **Evaluate** card's **Conditions** box to say "given": put the answer
+you want in the first and the value you are giving it in the second:
 
 ```field 9 Evaluate
 vo
@@ -398,9 +398,16 @@ vs = 2
 Then run it again with `vs = -4` and once more with `vs = 6`.
 :::
 
+::: only 7,8
 The answer, **{-6.6,13.2,-19.8}**, is correct within the linear realm, but
 since the output is constrained to no more than 15V or less than -15V, the
 answer is v{{sub:O}}=**-15**V for v{{sub:S}} = 6V.
+:::
+::: only 9
+The answers, `vo` = -6.6 V, 13.2 V and -19.8 V, are correct within the linear
+realm, but since the output is constrained to no more than 15V or less than
+-15V, the answer is v{{sub:O}}=**-15**V for v{{sub:S}} = 6V.
+:::
 
 :::
 
@@ -429,7 +436,12 @@ rf,1,o,15'k
 o,0,1,o
 ```
 
+::: only 7,8
 The answer, **{-.12, 8e-6}**, is correct.
+:::
+::: only 9
+The answer is `vo` = -.12 V and `irf` = 8e-6 A. This is correct.
+:::
 
 :::
 
@@ -846,8 +858,14 @@ vth^2*1000/(req+1000)^2
 ```
 :::
 
+::: only 7,8
 The answers we get, **{2.8125e-4,2.5e-4}**, are correct. Now we simulate the
 (a) circuit.
+:::
+::: only 9
+The answers we get, `pmax` = 2.8125e-4 W and 2.5e-4 W in the 1 kΩ load, are
+correct. Now we simulate the (a) circuit.
+:::
 
 ```sym 7
 s\dc("e,1,0,1.5:rs,1,2,2'k:o,2,o,o:rl,o,0,1'k"):prL
@@ -998,7 +1016,7 @@ o,0,a,o
 ```
 
 ::: only 9
-Ask **Evaluate** for `expand(vo)`, exactly as on the calculator.
+Ask **Evaluate** for `expand(vo)`.
 :::
 
 
@@ -1042,8 +1060,14 @@ o,0,a,o
 The answers you want are `vo` and `io`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{-8.,-.0048}**, is correct. Notice a current of 4.8mA is going
 into the op amp.
+:::
+::: only 9
+The answer is `vo` = -8 V and `io` = -.0048 A. This is correct. Notice a
+current of 4.8mA is going into the op amp.
+:::
 
 :::
 
@@ -1079,8 +1103,14 @@ o,0,8,o
 The answers you want are `vo` and `io`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{-3.8,-.001425}**, is correct. Again, the current is going into
 the op amp.
+:::
+::: only 9
+The answer is `vo` = -3.8 V and `io` = -.001425 A. This is correct. Again, the
+current is going into the op amp.
+:::
 
 :::
 
@@ -1210,8 +1240,8 @@ expand(vo)|r2=r1 and r3=r4
 ```
 
 ::: only 9
-The calculator's `|` is Evaluate's **Conditions** box. Ask **Evaluate** for
-`expand(vo)` and give it both equalities:
+Ask **Evaluate** for `expand(vo)` and give it both equalities in the
+**Conditions** box:
 
 ```field 9 Conditions
 r2 = r1
@@ -1564,8 +1594,13 @@ r6,3,o,6'k
 The answers you want are `vo` and `iro`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{10,1/1000}**, is correct. To say a 1/1000 A current is the
 same as 1mA.
+:::
+::: only 9
+The answer is `vo` = 10 V and `iro` = 1/1000 A, that is 1mA. This is correct.
+:::
 
 :::
 
@@ -1637,8 +1672,7 @@ r6,5,0,10'k
 
 ::: only 9
 Ask **Evaluate** for `expand(vo)` with **Rounding** set to *approx (full precision)* in
-**Settings** — that is what the calculator's `expand(approx(vo))` is doing. It is arranged differently from
-the book's, which is a matter of presentation rather than of arithmetic.
+**Settings**. The answer is arranged differently from the book's, which is a matter of presentation rather than of arithmetic.
 :::
 
 The answer, **-2.4 v1 − 6**, is correct.
@@ -1675,7 +1709,7 @@ o2,0,7,o
 ```
 
 ::: only 9
-Ask **Evaluate** for `expand(vo)`, as on the calculator.
+Ask **Evaluate** for `expand(vo)`.
 :::
 
 The answer, **8 v1 – 4 v2**, is correct.

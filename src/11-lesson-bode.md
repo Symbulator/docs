@@ -98,8 +98,8 @@ is why it works from the circuit rather than from a result.
 
 ### When you have H(s) itself
 
-The textbook often hands you the transfer function and no circuit — which is
-exactly what the calculator's tool took. Version 9 takes it too: set **Plot
+The textbook often hands you the transfer function and no circuit. Symbulator
+takes it directly: set **Plot
 type** to *Bode plot of a transfer function H(s) (FD)*, and the variable box
 becomes **Transfer function H(s)**. Type the function there; the Circuit
 Description is ignored for this plot type, so it works on an empty page.
@@ -110,7 +110,7 @@ Description is ignored for this plot type, so it works on an empty page.
 - The expression takes the same shorthand a circuit value does — `^` for
   powers, implied multiplication, `1'k` — and it must be numeric apart from
   `s`. A leftover symbol is refused by name.
-- The frequency boxes are in **hertz**. The calculator examples in this
+- The frequency boxes are in **hertz**. The examples in this
   lesson give their ranges in rad/s; divide by 2π for the same sweep in Hz
   (0.1 to 300 rad/s is about 0.016 to 48 Hz).
 :::
@@ -169,14 +169,13 @@ Phase zero at the gain peak
 :::
 :::
 ::: only 9
-Version 9 takes the expression directly, like the calculator: set **Plot
+Symbulator takes the expression directly: set **Plot
 type** to *Bode plot of a transfer function H(s) (FD)* and type the problem's
 function into the box, writing `s` wherever the textbook writes jω — no
 imaginary operator involved. The frequency boxes are in hertz, so the
-calculator's sweep of 0.1 to 300 rad/s is about 0.016 to 48 Hz. Reading
-the answers off the curve: the maximum the calculator found at 4.47 rad/s
-sits near 0.71 Hz, and the zero crossing it found at 199.8 rad/s near
-31.8 Hz.
+sweep of 0.1 to 300 rad/s is about 0.016 to 48 Hz. Reading the answers off
+the curve: the maximum at 4.47 rad/s sits near 0.71 Hz, and the zero
+crossing at 199.8 rad/s near 31.8 Hz.
 :::
 :::
 
@@ -199,7 +198,7 @@ The phase plot
 :::
 ::: only 9
 The transfer-function plot type again: write the function in terms of `s`
-and sweep. The calculator's 0.1 to 100 rad/s is about 0.016 to 16 Hz.
+and sweep. The sweep of 0.1 to 100 rad/s is about 0.016 to 16 Hz.
 :::
 :::
 
@@ -237,8 +236,7 @@ Both plots together
 :::
 :::
 ::: only 9
-The calculator had to be asked for gain and phase together; version 9 always
-draws both, magnitude above and phase below, so there is nothing extra to
+Symbulator always draws both, magnitude above and phase below, so there is nothing extra to
 ask for.
 :::
 :::

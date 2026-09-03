@@ -116,6 +116,7 @@ what a person writing a quotation types anyway.
 |---|---|
 | `{{v7\|text}}`, `{{v7,8\|text}}` | show only in those versions |
 | `{{!v8\|text}}` | show in every version except those |
+| `{{web\|text}}`, `{{pdf\|text}}` | show on the website only, or in the PDFs only |
 | `{{t:container}}` | version term from `book.yaml` (`folder` / `document` / `session`) |
 | `{{i:resistor}}` | index entry (invisible) |
 | `{{ref:lesson-dc}}` | cross-reference, renders as "Lesson 3" or "section 3.2" |
@@ -167,6 +168,7 @@ Make MAIN your current folder before you simulate.
 | `practice` | heading | merged practice problems |
 | `only` | `7,8` | contents shown only in those versions |
 | `not` | `8` | contents hidden in those versions |
+| `web` `pdf` | — | contents shown on the website only, or in the PDFs only |
 
 Directives nest. Close every one with `:::`.
 

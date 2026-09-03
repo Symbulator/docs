@@ -26,7 +26,7 @@ than equations.
 Symbulator does a great job on the simple three-phase circuits of a basic
 Circuits I / II textbook, and here we will see examples and one or two tricks.
 It would not be my tool of choice for anything larger: as circuits grow, the
-number of nodes quickly passes what the {{t:machine}} can solve.
+number of nodes quickly passes what {{v7,8|the calculator}}{{v9|your device}} can solve.
 
 ## Wye-Wye {#wye-wye}
 
@@ -338,13 +338,6 @@ it was in the balanced case — `vn` is
 The third phase is named with a doubled letter because on the calculator the
 short names collide with reserved ones. Version 9 has no such restriction and
 names the third phase like the other two.
-:::
-:::
-::: only 9
-::: tip Why `ec` and `rc` here, and `ecc` and `rcc` on the calculator
-The doubled letters exist only to dodge the calculator's reserved names.
-Version 9 has no reserved names to dodge, so the third phase is named like the
-other two.
 :::
 :::
 :::

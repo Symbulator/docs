@@ -41,7 +41,7 @@ terms:
   machine:
     7: calculator
     8: calculator
-    9: computer
+    9: device
 
 chapters:
   - 00-introduction.md

@@ -141,8 +141,7 @@ vc|t=2
 vc|t=2
 ```
 ::: only 9
-The calculator's `|` says "given"; version 9 says the same thing in the
-**Evaluate** card's **Conditions** box:
+Say "given" in the **Evaluate** card's **Conditions** box:
 
 ```field 9 Evaluate
 vc
@@ -291,15 +290,6 @@ check that the variable is spelled the way **Results** spells it.
 
 ::: practice
 
-::: only 9
-::: note Some of this narration still describes the calculator
-Every problem below carries a **Circuit Description** panel you can type
-straight into Symbulator 9, and the circuits and answers are identical
-across the versions. What has not all been rewritten is the narration
-between them: where it says to evaluate a name or press a key, do the
-version 9 equivalent — the results are already on screen.
-:::
-:::
 
 
 ### Transient analysis of RC circuit
@@ -384,9 +374,13 @@ c,1,0,1/12
 
 ::: only 9
 The answers you want are `vc` and `ic`, in **Results**.
+
+`vc` = 6 V and `ic` = 0 A.
 :::
 
+```out 7,8
 { 6 , 0 }
+```
 
 So the voltage in the capacitor is 6V. We store this value in a variable
 called **vc**{{sub:0}}, to use it as initial condition of the capacitor for
@@ -456,9 +450,13 @@ c,3,0,1/12
 
 ::: only 9
 The answers you want are `vc`, `ic` and `v2`, in **Results**.
+
+`vc` = 8 V, `ic` = 0 A and `v2` = 8 V.
 :::
 
+```out 7,8
 { 8 , 0 , 8 }
+```
 
 For the interval when **0s ≤ t**, the voltage source is 0V. Simulate in TR,
 giving the capacitor as initial condition its voltage from the previous
@@ -519,9 +517,13 @@ c,2,0,1/10
 
 ::: only 9
 The answers you want are `vc`, `ic` and `v1`, in **Results**.
+
+`vc` = 6 V, `ic` = 0 A and `v1` = 12 V.
 :::
 
+```out 7,8
 { 6 , 0 , 12 }
+```
 
 For **0s ≤ t**, the source is no longer relevant and can be excluded from the
 circuit. Simulate in TR, giving the capacitor its proper initial condition.
@@ -667,9 +669,13 @@ r12,2,0,12
 
 ::: only 9
 The answers you want are `il`, `vl` and `ir4`, in **Results**.
+
+`il` = 2 A, `vl` = 0 V and `ir4` = 2 A.
 :::
 
+```out 7,8
 { 2 , 0 , 2 }
+```
 
 For **t ≥ 0s**, simulate in TR, giving the inductor its initial condition of
 2A.
@@ -764,9 +770,13 @@ ed,3,0,3*vr8
 
 ::: only 9
 The answers you want are `il` and `vl`, in **Results**.
+
+`il` = 2 A and `vl` = 0 V.
 :::
 
+```out 7,8
 { 2 , 0 }
+```
 
 For **t ≥ 0s**, simulate in TR, giving the inductor its initial condition.
 
@@ -821,9 +831,13 @@ o,0,1,o
 
 ::: only 9
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
+
+`vc` = 10 V, `ic` = 0 A and `vo` = -10 V.
 :::
 
+```out 7,8
 { 10 , 0 , -10 }
+```
 
 For **t ≥ 0s**, simulate in TR, giving the capacitor its initial condition.
 
@@ -879,9 +893,13 @@ r2,1,0,2
 
 ::: only 9
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
+
+`vc` = 10 V, `ic` = 0 A and `vo` = 14 V.
 :::
 
+```out 7,8
 { 10 , 0 , 14 }
+```
 
 For **t ≥ 0s**, simulate in TR, giving the capacitor its initial condition.
 
@@ -940,9 +958,13 @@ r4,1,0,4
 
 ::: only 9
 The answers you want are `vc` and `ic`, in **Results**.
+
+`vc` = 8 V and `ic` = 0 A.
 :::
 
+```out 7,8
 { 8 , 0 }
+```
 
 The voltage in the capacitor at the end of this interval will serve as the
 initial condition of the capacitor for the next interval. The second interval
@@ -1032,9 +1054,13 @@ l,2,0,6
 
 ::: only 9
 The answers you want are `il` and `vl`, in **Results**.
+
+`il` = 3 A and `vl` = 0 V.
 :::
 
+```out 7,8
 { 3 , 0 }
+```
 
 The 3A current in the inductor is its initial condition for the second
 interval, which goes from 0 to 2 seconds, i.e. 0 < t ≤ 2 seconds. We simulate
@@ -1383,8 +1409,7 @@ vc|t=to
 
 ::: only 9
 Put `vc` in the **Evaluate** card and write `t = to` in its **Conditions**
-box. That is what the calculator's `|` does: evaluate this expression under
-this condition. The answer comes back {{o:V - V*exp(-to/(c*r))}}.
+box, to evaluate this expression under this condition. The answer comes back {{o:V - V*exp(-to/(c*r))}}.
 :::
 
 The circuit description for the second interval uses that expression as the
@@ -1790,7 +1815,7 @@ $$
 For the circuit of Bo2's Example 5.7, find v{{sub:C}}(t) and i{{sub:C}}(t)
 due to a ramp input voltage of v{{sub:S}}(t)= r(t).
 
-Nothing new here. The command below should be clear to you by now.
+Nothing new here. The {{v7,8|command}}{{v9|description}} below should be clear to you by now.
 
 ```sym 7
 s\tr("e,1,0,t:o,1,2,o:c,2,o,1/8,0:r2,2,o,2:r1,2,0,1"):{vc,ic}
@@ -1981,9 +2006,13 @@ r3,2,0,2
 
 ::: only 9
 The answers you want are `vc` and `il`, in **Results**.
+
+`vc` = 2 V and `il` = 1 A.
 :::
 
+```out 7,8
 {2,1}
+```
 
 These are the initial conditions for the second interval. The second is for
 t≥0. We can analyze the second interval using TR. We only care about `vc` and
@@ -2075,9 +2104,13 @@ c,2,0,1/3
 
 ::: only 9
 The answers you want are `vc` and `il`, in **Results**.
+
+`vc` = 2 V and `il` = 0 A.
 :::
 
+```out 7,8
 {2,0}
+```
 
 These conditions are used in the TR analysis of the second interval,
 for t≥0.
@@ -2277,9 +2310,13 @@ j,0,3,1
 
 ::: only 9
 The answers you want are `vc` and `il`, in **Results**.
+
+`vc` = 2 V and `il` = 1 A.
 :::
 
+```out 7,8
 {2,1}
+```
 
 Using these as initial conditions, now we use TR for t≥0:
 
@@ -2339,9 +2376,13 @@ c,1,0,1/8
 
 ::: only 9
 The answers you want are `il` and `vc`, in **Results**.
+
+`il` = 2 A and `vc` = 0 V.
 :::
 
+```out 7,8
 {2,0}
+```
 
 ```sym 7
 s\only("il,vc"):s\tr("r,1,0,1:l,1,0,1,2:c,1,0,1/8,0"):{il,vc}
@@ -2470,9 +2511,13 @@ l2,2,0,4
 
 ::: only 9
 The answers you want are `il1` and `il2`, in **Results**.
+
+`il1` = 2 A and `il2` = 0 A.
 :::
 
+```out 7,8
 {2,0}
+```
 
 ```sym 7
 s\only("il2"):s\tr("r6,0,1,6:l1,1,0,6,2:r3,1,2,3:l2,2,0,4,0"):il2
@@ -2525,9 +2570,13 @@ o,0,2,o
 
 ::: only 9
 The answers you want are `vca` and `vcb`, in **Results**.
+
+`vca` = 0 V and `vcb` = 4 V.
 :::
 
+```out 7,8
 {0,4}
+```
 
 Then simulate the second interval in TR, to find the voltage in node *o*.
 
@@ -2686,9 +2735,13 @@ s1,3,0
 
 ::: only 9
 The answers you want are `il` and `vc`, in **Results**.
+
+`il` = 4 A and `vc` = 0 V.
 :::
 
+```out 7,8
 {4,0}
+```
 
 Then, find the `vl` for t≥0 by running a TR simulation.
 
@@ -2857,9 +2910,13 @@ cb,2,0,1/3
 
 ::: only 9
 The answers you want are `vca` and `vcb`, in **Results**.
+
+`vca` = 9 V and `vcb` = 9/4 V.
 :::
 
+```out 7,8
 {9,9/4}
+```
 
 These serve as initial conditions for the second interval, which is run in
 TR. Since we only want v1 and v2, it pays off to let Symbulator know this:
@@ -3011,12 +3068,6 @@ equations, conditions, expressions — is read in the **time domain**, the
 same domain as the answers on screen. You do not convert, and you do not
 have to remember which side of the transform you are standing on.
 
-::: note The calculator does not offer this at all
-Expert mode on the calculator asks *Analysis? 1:DC 2:AC 3:FD* — TR is not
-among the choices, which is how it avoided the question. Version 9 keeps
-expert mode for TR and answers the question instead: everything is in time.
-:::
-
 If you would rather convert by hand, **t2s** is still there and an equation
 already written in s is left alone rather than transformed twice:
 
@@ -3058,9 +3109,7 @@ Expert prompt. In the equations field, paste the new equation, adding the
 word` and `first:
 :::
 ::: only 9
-Choose TR, then open **Expert Mode**. **Add equations** takes one per line,
-so there is no ` and ` to prefix — the word exists on the calculator only
-because the equation is being appended to a list:
+Choose TR, then open **Expert Mode**. **Add equations** takes one per line:
 
 ```field 9 Add equations
 1-e^(-t/2) = vc
@@ -3116,8 +3165,7 @@ This is correct, so we proceed to ask for the answers we want:
 :::
 ::: only 9
 This is correct, and the answers we want are on screen with it: `ic` is
-{{o:exp(-t/2)/2}}, and the resistor's **voltage drop** line gives
-{{o:exp(-t/2)}}.
+{{o:exp(-t/2)/2}}, and the voltage drop `vr` is {{o:exp(-t/2)}}.
 :::
 
 ```sym 7

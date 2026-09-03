@@ -67,8 +67,7 @@ reserve `z11`, `z12`, `z21` and `z22`, so the two-port can simply be called
 *Find equivalent*, then *Two-port parameters*, with **Parameters** set to
 *z — impedance* and **1** and **3** in the two node boxes. In DC.
 
-There is no name to invent: version 9 does not store its answers in calculator
-variables, so the four come back as `z11`, `z12`, `z21` and `z22`.
+There is no name to invent: the four come back as `z11`, `z12`, `z21` and `z22`.
 :::
 
 ```out 7,8
@@ -137,7 +136,7 @@ tool — and they work in *every* analysis, the equivalent tools included.
 The entries can be numbers, SI-prefixed values, or expressions, symbols
 among them.
 
-**Store them in Define**, calculator-style, and keep the description bare:
+**Store them in Define**, and keep the description bare:
 
 ```field 9 Define
 z11 = 40

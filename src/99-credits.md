@@ -184,7 +184,7 @@ of that precious collection.
 ## Licence {#licence}
 
 Symbulator has always been free of cost, and always will be. From June 2013 it
-was offered under a Creative Commons BY-NC-SA licence. Since 2016 it is open source
+was offered under a Creative Commons BY-NC-SA licence. Since 2026 it is open source
 under the MIT licence, which supersedes it. If you want to port it to another
 platform, you are free to do so, provided the copyright notice and the
 attribution of authorship travel with it.

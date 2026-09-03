@@ -239,6 +239,24 @@ International System (SI) — kilo, milli, micro. So Symbulator has a shorthand
 for them: an SI prefix in an element's value, preceded by an apostrophe,
 multiplies it by the corresponding factor, exactly.{{i:SI prefixes}}
 
+::: only 9
+The prefixes Symbulator accepts:
+
+| Prefix | Shorthand | Factor |
+|---|---|---|
+| peta | `'P` | 10{{sup:15}} |
+| tera | `'T` | 10{{sup:12}} |
+| giga | `'G` | 10{{sup:9}} |
+| mega | `'M` | 10{{sup:6}} |
+| kilo | `'k` or `'K` | 10{{sup:3}} |
+| milli | `'m` | 10{{sup:-3}} |
+| micro | `'u` or `'µ` | 10{{sup:-6}} |
+| nano | `'n` | 10{{sup:-9}} |
+| pico | `'p` | 10{{sup:-12}} |
+| femto | `'f` | 10{{sup:-15}} |
+| atto | `'a` | 10{{sup:-18}} |
+:::
+
 ::: tip Prefixes welcome!
 You can use SI prefixes, preceded by an apostrophe, in the values of
 elements.
@@ -257,10 +275,9 @@ your convenience}}{{v9|fills in the **Results** section for you, under
 on the page, and reading them is a matter of scrolling and looking}}.
 
 ::: only 9
-The **Results** are arranged in groups. **Node voltages** first, one line
-per node, and then **Results by element**, which gives each element a small
-block of its own headed by its name and its kind — `r1` *resistor*, `e`
-*voltage source*.
+The **Results** are arranged in groups: **Node voltages** first, one per
+node, and then **Results by element**, one group per element, headed by its
+name and its kind — `r1` *resistor*, `e` *voltage source*.
 
 Every answer is written the way you would write it by hand, as a named quantity
 and its value: v{{sub:1}} = 36 V, i{{sub:r1}} = 6 mA.
@@ -299,14 +316,12 @@ below it. The voltage in node 1 appears as `v1`}}.
 For each resistor, the following answers are calculated:
 
 - The voltage drop in the resistor, defined as the voltage in the first node minus the voltage in the second node, in volts. For a
-  resistor called r5, this is {{v7,8|stored in `vr5`}}{{v9|the line marked
-  **voltage drop**, labelled `vr5`}}.
+  resistor called r5, this is {{v7,8|stored in}}{{v9|given in}} `vr5`.
 - The current through the resistor, flowing from the first node towards the
-  second, in amperes. For a resistor called rx, this is {{v7,8|stored in
-  `irx`}}{{v9|the line marked **current through**, labelled `irx`}}.
+  second, in amperes. For a resistor called rx, this is {{v7,8|stored in}}{{v9|given in}}
+  `irx`.
 - The power consumed by the resistor, in watts. For a resistor called r12, this
-  is {{v7,8|stored in `pr12`}}{{v9|the line marked **power consumed**, labelled
-  `pr12`}}.
+  is {{v7,8|stored in}}{{v9|given in}} `pr12`.
 
 By now you should understand the description of the second, third and fourth
 elements in our example.
@@ -341,26 +356,24 @@ every element.
 For each voltage source, the following answers are calculated:
 
 - The voltage drop in the source, defined as the voltage in the first node
-  minus the voltage in the second, in volts. For a source called e5, {{v7,8|`ve5`}}{{v9|the **voltage drop** line,
-  `ve5`}}.
+  minus the voltage in the second, in volts. For a source called e5, `ve5`.
 - The current through the source, flowing from the first node towards the
-  second, in amperes. For a source called ex, {{v7,8|`iex`}}{{v9|the
-  **current through** line, `iex`}}.
+  second, in amperes. For a source called ex, `iex`.
 - The power consumed — attention: not delivered, but consumed — by the source,
-  in watts. For a source called e12, {{v7,8|`pe12`}}{{v9|the **power consumed**
-  line, `pe12`}}. If we want the power delivered, we ask for the
+  in watts. For a source called e12, `pe12`. If we want the power delivered, we ask for the
   negative of this value.
 - The equivalent resistance of the rest of the circuit, as seen by the source.
-  For a source called e2, {{v7,8|`re2`}}{{v9|the **resistance seen** line, `re2`}}.
+  For a source called e2, `re2`.
 
 ::: note This last one belongs to sources only
 That equivalent resistance is a property of the *view from a source*, not a
-per-element quantity, so it exists only for sources. There is no
-`rr1` for a resistor — a resistor's resistance
-is the value you gave it. {{v9|Look at any resistor's block in **Results by
-element** and you will see three lines, not four: current, voltage and power,
-and no resistance seen.}} The same applies to the impedance answers in AC
-analysis, which you will meet in {{ref:lesson-ac}}.
+per-element quantity, so it exists only for sources.
+
+::: only 7,8
+There is no `rr1` for a resistor — a resistor's resistance is the value you
+gave it. The same applies to the impedance answers in AC analysis, which you
+will meet in {{ref:lesson-ac}}.
+:::
 :::
 
 ## A numerical DC simulation, step by step {#step-by-step}
@@ -386,7 +399,7 @@ All the values in this circuit are numbers: no element value is unknown. This
 is a **numerical circuit** — one where we know the numerical value of every
 element in it.
 
-I will now walk you step by step through the solution. The process applies to
+I will now walk you step by step through the solution. This process applies to
 most numerical simulations in Symbulator: first you describe the circuit, then
 you run the simulation, then you get the answers.
 
@@ -417,7 +430,7 @@ Let's start with the source: when I only have one voltage source, like here, I
 enjoy {{v7,8|naming it with a single letter: e}}{{v9|giving it a short name: e}}. So the voltage source is
 {{v7,8|`e,1,0,36`}}{{v9|`e,1,0,36`}}: its name is
 {{v7,8|e}}{{v9|e}}, its positive node is 1, its negative node is 0, and its
-value is 36 volts between them in that order.
+value is 36 volts between them.
 
 Now the resistors. I named the first r1 and described it `r1,1,2,1'k`: its
 name is r1, its first node 1, its second node 2, and its value 1 kΩ. The
@@ -436,7 +449,7 @@ enter each element's description separated by colons, and close with a
 quotation mark. We can store the string in a variable:
 :::
 ::: only 9
-Those four descriptions, gathered together, are the whole circuit. Put them in
+Those four element descriptions, gathered together, are the whole circuit. Put them in
 the **Circuit description** box, one to a line:
 :::
 
@@ -483,8 +496,8 @@ Symbulator says Done when a simulation completes. It took my calculator under
 each in a memorably named variable in the current document.
 :::
 ::: only 9
-The page fills in below almost immediately — this circuit takes well under a
-second — and a line at the foot of the **Results** section tells you what just
+The page fills in below almost immediately — this circuit takes under a
+second on a computer, and maybe a bit more on a mobile — and a line at the foot of the **Results** section tells you what just
 happened: *DC analysis · 16 result(s)*, and how long it took. Sixteen answers,
 found and displayed in one go.
 :::
@@ -532,18 +545,18 @@ re
 ```
 
 ::: only 9
-Nothing to compute. Find the block headed `e` *voltage source* in **Results by
-element**, and read the line marked **resistance seen**:
-
-r{{sub:e}} = 6 kΩ
+Nothing to compute: in **Results by element**, the resistance seen by the
+source reads `re` = 6 kΩ. Correct.
 :::
 
+::: only 7,8
 That is 6 kΩ. Correct.
+:::
 
 *Answer to question (b).* Current Is is defined in the schematic as the current
 flowing through the source, in the direction that goes from node 0 to node 1.
 One way to find this value is evaluating the negative of the current through
-the source, which as you know flows in the opposite direction:
+the source, which {{v7,8|as you know flows}}{{v9|we defined as flowing}} in the opposite direction:
 
 ```sym 7
 –ie
@@ -556,14 +569,14 @@ the source, which as you know flows in the opposite direction:
 ```
 
 ::: only 9
-The **current through** line in the same block reads ie = −6 mA. The answer
-we want is its opposite, 6 mA.
+The current through the source reads `ie` = −6 mA. The answer we want is its
+opposite, 6 mA.
 :::
 
-That is 6 mA. Another way, since this is a series circuit where every element
+{{v7,8|That is 6 mA. }}Another way, since this is a series circuit where every element
 carries the same current, is to
 {{v7,8|evaluate the current through any of the resistors}}{{v9|read the
-**current through** line of any resistor — all three say 6 mA}}.
+current through any resistor}}.
 
 *Answer to question (c).* The voltage drop in resistor R1 — since its polarity
 is defined in the schematic in the same way it is defined in our circuit
@@ -575,25 +588,31 @@ For R2, `vr2` gives 18 V. And for R3, `vr3` gives 12 V. These are all the right
 answers.
 :::
 ::: only 9
-It is already on screen. In the block for `r1`, the **voltage drop** line reads
-v{{sub:r1}} = 6 V. Look at the blocks for `r2` and `r3` and you will find
-v{{sub:r2}} = 18 V and v{{sub:r3}} = 12 V. These are all the right
-answers.
+The voltage drop `vr1` reads 6 V, `vr2` reads 18 V and `vr3` reads 12 V. All
+correct.
 :::
 
+::: only 7,8
 *Answer to question (d).* Since the problem asks for the power supplied by the
-source, and we know that {{v7,8|`pe` has}}{{v9|the **power consumed** line of
-the source's block, `pe`, holds}} the power consumed by it, we need
-{{v7,8|to evaluate the negative of it, and we get `.216`}}{{v9|its opposite,
-which is 216 mW}}, that is 216 mW delivered.
+source, and we know that `pe` has the power consumed by it, we need to evaluate
+the negative of it, and we get `.216`, that is 216 mW delivered.
+:::
+::: only 9
+*Answer to question (d).* We know that the power consumed is given in `pe`. We
+get the power supplied by the source by switching the sign: 216 mW delivered.
+:::
 
-*Answer to question (e).* The power consumed by the resistors is
-{{v7,8|found evaluating `pr1`, `pr2` and `pr3`. We get `.036`, `.108` and
-`.072`}}{{v9|on the **power consumed** line of each resistor's block:
-`pr1` = 36 mW, `pr2` = 108 mW and `pr3` =
-72 mW}}, that is 36 mW, 108 mW and 72 mW consumed, respectively.
+::: only 7,8
+*Answer to question (e).* The power consumed by the resistors is found
+evaluating `pr1`, `pr2` and `pr3`. We get `.036`, `.108` and `.072`, that is
+36 mW, 108 mW and 72 mW consumed, respectively.
+:::
+::: only 9
+*Answer to question (e).* The power consumed by the resistors is given in
+`pr1`, `pr2` and `pr3`: 36 mW, 108 mW and 72 mW, respectively.
+:::
 
-*Answer to question (f).* Let's ask the {{t:machine}} whether the sum of the
+*Answer to question (f).* Let's ask {{v7,8|the calculator}}{{v9|Evaluate}} whether the sum of the
 consumed power in the resistors equals the power supplied by the source:
 
 ```sym 7
@@ -607,8 +626,7 @@ true
 ```
 
 ::: only 9
-The tidiest way to check a balance like this is to add everything up and expect
-nothing. If the resistors consume exactly what the source delivers, then all
+If the resistors consume exactly what the source delivers, then all
 four powers together must come to zero. In **Evaluate**:
 
 ```field 9 Evaluate
@@ -673,9 +691,9 @@ r2,3,0,15
 {{v7,8|When the simulation is done, you can ask the calculator for the answers
 you need:}}{{v9|Run it, and the answers are all on the page already:}}
 
-- {{v7,8|Evaluating `ir1` or `ir2` gets}}{{v9|The **current through** line of
-  either resistor gives}} the current in the resistors: {{o:2}} A
-- {{v7,8|Evaluating `vr1` gets}}{{v9|The **voltage drop** line of `r1` gives}}
+- {{v7,8|Evaluating `ir1` or `ir2` gets the current in the resistors}}{{v9|The
+  current through either resistor is}}: {{o:2}} A
+- {{v7,8|Evaluating `vr1` gets}}{{v9|`vr1` gives}}
   the voltage drop in the 30Ω resistor: {{o:60}} V
 - {{v7,8|Evaluating `vr2` gets}}{{v9|`vr2` is}} the voltage drop in the 15Ω resistor: {{o:30}} V
 - {{v7,8|Evaluating `pr1` gets}}{{v9|`pr1` is}} the power consumed in the 30Ω resistor: {{o:120}} W
@@ -709,7 +727,7 @@ The practice problems get progressively more complicated, so you build up your
 :::
 
 I named the nodes clockwise from the ground: **0**, **1**, **2**, **3** and
-**4**. My circuit description, as an argument of the DC simulation command:
+**4**. My circuit description{{v7,8|, as an argument of the DC simulation command}}:
 
 ```sym 7
 s\dc("e1,1,0,50:r1,1,2,4:e2,2,3,12.5:r2,3,4,7:r3,4,0,4")
@@ -884,7 +902,7 @@ Answers: `ir5` is {{o:3}} mA, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie
 ::: problem B11's Example 7.4
 
 Determine the currents I{{sub:1}}, I{{sub:2}}, I{{sub:A}}, I{{sub:B}} and
-I{{sub:C}}, and the voltage drop areas A, B and C.
+I{{sub:C}}, and the voltage drop in areas A, B and C.
 
 ::: figure assets/practice/b11s-example-7-4-8.jpg
 
@@ -1019,7 +1037,8 @@ I{{sub:R2}} =7.18A and I{{sub:R3}} =2.41A. These are the correct answers. We
 could get this answer in a single-line command:
 :::
 ::: only 9
-Reading the **current through** line of each of the three resistors:
+Reading the current through each of the three resistors, `ir1`, `ir2` and
+`ir3`:
 I{{sub:R1}} =4.77A, I{{sub:R2}} =7.18A and I{{sub:R3}} =2.41A. These are the
 correct answers.
 :::
@@ -1121,8 +1140,7 @@ r10,3,4,10
 e1,0,4,1
 ```
 
-{{v7,8|Now, evaluating **vr3** via `approx(vr3)` finds}}{{v9|The **voltage
-drop** line of the `r3` block shows}} that V{{sub:3Ω}} is {{o:1.1}} V. This is
+{{v7,8|Now, evaluating **vr3** via `approx(vr3)` finds}}{{v9|The voltage drop `vr3` shows}} that V{{sub:3Ω}} is {{o:1.1}} V. This is
 correct.
 
 :::
@@ -1157,7 +1175,7 @@ r2,2,0,2
 ::: only 9
 The answer you want is `ir10`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 We find that `ir10` = {{o:1.22}} A.
@@ -1193,7 +1211,7 @@ r6,2,5,6
 r7,5,0,9
 ```
 
-{{v7,8|Evaluating `approx(vr4)`, we find}}{{v9|The `r4` block gives}} the
+{{v7,8|Evaluating `approx(vr4)`, we find}}{{v9|`vr4` gives}} the
 voltage drop in R{{sub:4}} (the 2Ω resistor): it is {{o:10.67}} V
 
 :::
@@ -1244,11 +1262,17 @@ Ask **Evaluate** for:
 va-vb
 ```
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 The answer, {{o:{.6,.2,.4,-2.}}}, indicates I{{sub:1}}=.6 A, I{{sub:2}}=.2 A,
 I{{sub:3}}=.4 A and V{{sub:ab}}=-2 V. This is correct.
+:::
+::: only 9
+The answer is I{{sub:1}}=.6 A, I{{sub:2}}=.2 A, I{{sub:3}}=.4 A and
+V{{sub:ab}}=-2 V. This is correct.
+:::
 
 :::
 
@@ -1295,7 +1319,7 @@ Ask **Evaluate** for:
 va-vb
 ```
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 The answer we get indicates that the equivalent resistance, given by

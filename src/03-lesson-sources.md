@@ -73,9 +73,7 @@ n significant digits* with **n** = 3 and ticking **Use SI prefixes**, as in
 :::
 
 {{v7,8|We ask for the values of two variables, `ir1` and `vr1`. We get `.01`
-and `200.`, meaning}}{{v9|The `r1` block gives both answers at once:
-`ir1` = 10 mA on the **current through** line, and
-`vr1` = 200 V on the **voltage drop** line — that is}} a 10 mA
+and `200.`, meaning}}{{v9|We read `ir1` = 10 mA and `vr1` = 200 V, meaning}} a 10 mA
 current and a 200 V voltage drop.
 :::
 :::
@@ -374,7 +372,7 @@ problem does not ask about.
 Where doing the reciprocal arithmetic by hand would divide by zero,
 Symbulator's `pr` checks for it: if any of the values you give it is exactly
 zero, the combination is zero, because a short circuit across a parallel
-network wins. The calculator tool did the same.
+network wins.
 :::
 :::
 
@@ -432,15 +430,6 @@ Symbulator knows and minding their polarity, and you are off to the races.
 
 ::: practice
 
-::: only 9
-::: note Some of this narration still describes the calculator
-Every problem below carries a **Circuit Description** panel you can type
-straight into Symbulator 9, and the circuits and answers are identical
-across the versions. What has not all been rewritten is the narration
-between them: where it says to evaluate a name or press a key, do the
-version 9 equivalent — the results are already on screen.
-:::
-:::
 
 
 ### Circuits with E, J and R
@@ -508,11 +497,17 @@ j8,2,0,8
 ::: only 9
 The answers you want are `ir2`, `ir6` and `ir8`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 We get these answers: **{1.25,4.75,3.25}**. So I{{sub:R2}} is 1.25A,
 I{{sub:R6}} is 4.75A, and I{{sub:R8}} is 3.25A.
+:::
+::: only 9
+The answer is I{{sub:R2}} = 1.25A, I{{sub:R6}} = 4.75A and I{{sub:R8}} =
+3.25A.
+:::
 
 :::
 
@@ -546,8 +541,14 @@ j2,2,0,2
 The answers you want are `v1`, `v2`, `ir1`, `ir2` and `ir3`, in **Results**.
 :::
 
+::: only 7,8
 We get the following answers: **{6,-6,3,1,1}**. So V{{sub:1}}=6V,
 V{{sub:2}}=-6V, I{{sub:R1}}=3A, and I{{sub:R2}}=I{{sub:R3}}=1A.
+:::
+::: only 9
+The answer is V{{sub:1}}=6V, V{{sub:2}}=-6V, I{{sub:R1}}=3A and
+I{{sub:R2}}=I{{sub:R3}}=1A.
+:::
 
 :::
 
@@ -582,11 +583,17 @@ j03,0,3,2
 ::: only 9
 The answers you want are `v1`, `v2` and `v3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 The answer, **{-2.,1.,.5}**, indicates v{{sub:1}}=-2V, v{{sub:2}}=1V,
 v{{sub:3}}=0.5V. This is correct.
+:::
+::: only 9
+The answer is v{{sub:1}}=-2V, v{{sub:2}}=1V and v{{sub:3}}=0.5V. This is
+correct.
+:::
 
 :::
 
@@ -624,8 +631,14 @@ Set **Analysis** to *DC — direct current*. This one needs **Enable Expert Mode
 The answers you want are `ir1` and `vrx`, in **Results**.
 :::
 
+::: only 7,8
 Select DC. Add equation `ir2=4`. Add unknown `rx`. Run the simulation. The
 answer, **{-8,80}**, means that I{{sub:X}} is -8A and that V{{sub:X}} is 80V.
+:::
+::: only 9
+Select DC. Add equation `ir2=4`. Add unknown `rx`. Run the simulation. The
+answer is I{{sub:X}} = -8A and V{{sub:X}} = 80V.
+:::
 
 :::
 
@@ -658,8 +671,13 @@ r30,3,0,1/5
 The answers you want are `v1`, `v2` and `v3`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{1,2,3}**, is correct: v{{sub:1}}=1V, v{{sub:2}}=2V,
 v{{sub:3}}=3V.
+:::
+::: only 9
+The answer is v{{sub:1}}=1V, v{{sub:2}}=2V and v{{sub:3}}=3V. This is correct.
+:::
 
 :::
 
@@ -723,11 +741,17 @@ Ask **Evaluate** for:
 -ie
 ```
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 The answer, **{-.5,-1.5,1.5,11.5}**, is correct: v{{sub:1}}=-.5,
 v{{sub:2}}=-1.5, v{{sub:3}}=1.5, i=11.5
+:::
+::: only 9
+The answer is v{{sub:1}}=-.5, v{{sub:2}}=-1.5, v{{sub:3}}=1.5 and i=11.5. This
+is correct.
+:::
 
 :::
 
@@ -759,11 +783,16 @@ j2,2,0,4
 ::: only 9
 The answers you want are `v1` and `v2`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 The answer, **{10.67,-1.33}**, tells us that V{{sub:1}} is 10.67V and
 V{{sub:2}} is -1.33V.
+:::
+::: only 9
+The answer is V{{sub:1}} = 10.67V and V{{sub:2}} = -1.33V.
+:::
 
 :::
 
@@ -790,8 +819,13 @@ r2,1,0,12
 j,0,1,1
 ```
 
+::: only 7,8
 The answer, **{20.,-.667,1.67}**, tells us that V{{sub:1}} is 20V, I{{sub:1}}
 is -.667A and I{{sub:2}} is 1.67 A.
+:::
+::: only 9
+The answer is V{{sub:1}} = 20V, I{{sub:1}} = -.667A and I{{sub:2}} = 1.67 A.
+:::
 
 :::
 
@@ -823,10 +857,15 @@ e2,0,3,12
 ::: only 9
 The answers you want are `ir2` and `ir3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 Answer: **{3.33,-.667}**. This is correct.
+:::
+::: only 9
+The answer is `ir2` = 3.33 A and `ir3` = -.667 A. This is correct.
+:::
 
 :::
 
@@ -858,12 +897,18 @@ r3,2,0,10
 ::: only 9
 The answers you want are `v1`, `v2`, `ir1`, `ir2` and `ir3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 Answer: **{37.82,32.73,3.27,1.27,3.27}**. You should know how to read these
 by now, but here it is just in case: V{{sub:1}} = 37.82V, V{{sub:2}} =
 32.73V, I{{sub:1}} = 3.27A, I{{sub:2}} = 1.27A, I{{sub:3}} = 3.27A.
+:::
+::: only 9
+The answer is V{{sub:1}} = 37.82V, V{{sub:2}} = 32.73V, I{{sub:1}} = 3.27A,
+I{{sub:2}} = 1.27A and I{{sub:3}} = 3.27A.
+:::
 
 :::
 
@@ -984,11 +1029,17 @@ e2,b,2,8
 ::: only 9
 The answers you want are `ir2` and `ir3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 The answer, **{.00154,.00111}** is correct: I{{sub:R2}} = 1.54 mA and
 I{{sub:R3}} = 1.11 mA.
+:::
+::: only 9
+The answer is I{{sub:R2}} = 1.54 mA and I{{sub:R3}} = 1.11 mA. This is
+correct.
+:::
 
 :::
 
@@ -1022,8 +1073,13 @@ e,2,0,20
 The answers you want are `v1` and `ir1`, in **Results**.
 :::
 
+::: only 7,8
 We get the answer: **{24,2}**, which is correct. V{{sub:S}} is **24**V and
 I{{sub:1}} is **2**A.
+:::
+::: only 9
+The answer is V{{sub:S}} = 24V and I{{sub:1}} = 2A. This is correct.
+:::
 
 :::
 
@@ -1058,9 +1114,15 @@ Set **Analysis** to *DC — direct current*. This one needs **Enable Expert Mode
 The answers you want are `ix` and `v3`, in **Results**.
 :::
 
+::: only 7,8
 Select DC. Add equation `ir8=5`. Add unknown `ix`. Run the simulation, and
 you will get: **{1,8}**. This is correct: I{{sub:X}} is 1A and that
 V{{sub:X}} is 8V.
+:::
+::: only 9
+Select DC. Add equation `ir8=5`. Add unknown `ix`. Run the simulation. The
+answer is I{{sub:X}} = 1A and V{{sub:X}} = 8V. This is correct.
+:::
 
 :::
 
@@ -1124,8 +1186,14 @@ Choose DC. Open **Expert Mode**, put `ir2 = 2'm` in **Add equations** and
 `is1` in **Add unknowns**, then **Run Symbulator**.
 :::
 
+::: only 7,8
 The answer, **{.009,.001,.006}**, is correct, since the currents are as
 follows: I{{sub:S}} is 9mA, I{{sub:1}} is 1mA and I{{sub:3}} is 6mA.
+:::
+::: only 9
+The answer is I{{sub:S}} = 9mA, I{{sub:1}} = 1mA and I{{sub:3}} = 6mA. This is
+correct.
+:::
 
 :::
 
@@ -1156,8 +1224,14 @@ r2,1,0,5
 The answers you want are `ir1`, `v1` and `ir2`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{-5/26,-15/26,-3/26}**, is correct: I{{sub:1}}=-5/26 A,
 I{{sub:2}}=-3/26 A and v=-15/26 V.
+:::
+::: only 9
+The answer is I{{sub:1}}=-5/26 A, I{{sub:2}}=-3/26 A and v=-15/26 V. This is
+correct.
+:::
 
 :::
 
@@ -1186,7 +1260,12 @@ r8,o,0,8
 The answers you want are `vo` and `iro`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{8,4}**, is correct: v{{sub:o}} = 8 V and i{{sub:o}} = 4 A.
+:::
+::: only 9
+The answer is v{{sub:o}} = 8 V and i{{sub:o}} = 4 A. This is correct.
+:::
 
 :::
 
@@ -1221,9 +1300,15 @@ pr1+pra
 ```
 :::
 
+::: only 7,8
 The answer, **{960,1920,2880}**, is right: the independent source delivers
 960W, the dependent source delivers 1920W, and the resistors consume 2880W
 together.
+:::
+::: only 9
+The independent source delivers 960W, the dependent source delivers 1920W, and
+the resistors consume 2880W together. This is correct.
+:::
 
 :::
 
@@ -1252,7 +1337,12 @@ ro,1,2,5
 The answers you want are `vx` and `vro`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{10,-5}**, is correct: v{{sub:x}} =10 and v{{sub:o}} =-5.
+:::
+::: only 9
+The answer is v{{sub:x}} =10 and v{{sub:o}} =-5. This is correct.
+:::
 
 :::
 
@@ -1281,8 +1371,14 @@ r2,3,0,1/5
 The answers you want are `ir1`, `vr1` and `vr2`, in **Results**.
 :::
 
+::: only 7,8
 The answers, **{-15/26,-5/26,-3/26}**, is correct: v{{sub:1}}=-5/26 V,
 v{{sub:2}}=-3/26 V and i=-15/26 A.
+:::
+::: only 9
+The answer is v{{sub:1}}=-5/26 V, v{{sub:2}}=-3/26 V and i=-15/26 A. This is
+correct.
+:::
 
 :::
 
@@ -1312,7 +1408,12 @@ ro,o,0,6
 The answers you want are `vo` and `iri`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{48,-8}**, is correct: v{{sub:o}} =48 and *i* = -8.
+:::
+::: only 9
+The answer is v{{sub:o}} =48 and *i* = -8. This is correct.
+:::
 
 :::
 
@@ -1343,10 +1444,16 @@ ed,3,0,4*vx
 ::: only 9
 The answers you want are `pr1`, `pei`, `pr2`, `pr3` and `ped`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 The answer, **{.768,1.92,.2048,.1792,-3.072}**, is correct.
+:::
+::: only 9
+The answer is `pr1` = .768 W, `pei` = 1.92 W, `pr2` = .2048 W, `pr3` = .1792 W
+and `ped` = -3.072 W. This is correct.
+:::
 
 :::
 
@@ -1378,7 +1485,7 @@ ed,c,0,4*iro
 ::: only 9
 The answer you want is `iro`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 The answer, **1.5** A, is correct.
@@ -1419,7 +1526,12 @@ ed,2,3,ir1/2
 The answers you want are `ir1`, `vr3` and `ied`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{4,6,1}**, is correct: i=4, v=6 and i{{sub:d}}=1.
+:::
+::: only 9
+The answer is i=4, v=6 and i{{sub:d}}=1. This is correct.
+:::
 
 :::
 
@@ -1453,10 +1565,15 @@ r4b,2,0,4
 ::: only 9
 The answers you want are `v1`, `v2` and `v3`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 The answer, **{4.8,2.4,-2.4}**, is correct.
+:::
+::: only 9
+The answer is `v1` = 4.8 V, `v2` = 2.4 V and `v3` = -2.4 V. This is correct.
+:::
 
 :::
 
@@ -1490,10 +1607,16 @@ r1,4,0,1
 ::: only 9
 The answers you want are `v1`, `v2`, `v3` and `v4`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 The answer, **{26.67,6.67,173.33,-46.67}**, is correct.
+:::
+::: only 9
+The answer is `v1` = 26.67 V, `v2` = 6.67 V, `v3` = 173.33 V and `v4` = -46.67
+V. This is correct.
+:::
 
 :::
 
@@ -1535,7 +1658,12 @@ r4,3,0,1
 The answers you want are `v1`, `v2` and `v3`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{-1,2,5}**, is correct.
+:::
+::: only 9
+The answer is `v1` = -1 V, `v2` = 2 V and `v3` = 5 V. This is correct.
+:::
 
 :::
 
@@ -1570,7 +1698,13 @@ ed,4,0,2*vr4
 The answers you want are `v1`, `v2`, `v3` and `v4`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{1.5,-.5,-2.5,-4.}**, is correct.
+:::
+::: only 9
+The answer is `v1` = 1.5 V, `v2` = -.5 V, `v3` = -2.5 V and `v4` = -4 V. This
+is correct.
+:::
 
 :::
 
@@ -1607,7 +1741,13 @@ r2,2,4,1/2
 The answers you want are `v1`, `v2`, `v3` and `v4`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{-1,-2.,1.,.5}**, is correct.
+:::
+::: only 9
+The answer is `v1` = -1 V, `v2` = -2 V, `v3` = 1 V and `v4` = .5 V. This is
+correct.
+:::
 
 :::
 
@@ -1640,10 +1780,15 @@ jr,0,x,2
 ::: only 9
 The answers you want are `ira`, `ijb` and `ir9`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 The answer, **{3.,-5.4,6.}**, is correct.
+:::
+::: only 9
+The answer is `ira` = 3 A, `ijb` = -5.4 A and `ir9` = 6 A. This is correct.
+:::
 
 :::
 
@@ -1691,9 +1836,16 @@ Ask **Evaluate** for:
 ```
 :::
 
+::: only 7,8
 Select DC, Add` vr4=4` to the equations and `vs` to the unknowns. Run the
 simulation. The answer, **{2,-9,-3,3}**, is correct: i=2, v=-9, i{{sub:s}}=-3
 and v{{sub:s}}=3.
+:::
+::: only 9
+Select DC, add `vr4=4` to the equations and `vs` to the unknowns. Run the
+simulation. The answer is i=2, v=-9, i{{sub:s}}=-3 and v{{sub:s}}=3. This is
+correct.
+:::
 
 :::
 
@@ -1728,10 +1880,15 @@ j,4,0,vr10/15
 ::: only 9
 The answers you want are `vr10`, `ir2` and `vj`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 The answer, **{7.5,.5,.5}** is correct: i=.5, v=7.5 and v{{sub:d}}=.5.
+:::
+::: only 9
+The answer is i=.5, v=7.5 and v{{sub:d}}=.5. This is correct.
+:::
 
 :::
 
@@ -1767,10 +1924,15 @@ ro,o,0,500
 The answers you want are `vo` and `iro`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **{1000\*is,2\*is}**, is correct: *v*{{sub:O}}*=1000*
 *i*{{sub:S}} and *i*{{sub:O}}*=2 i*{{sub:S}}.
-{{v9|Version 9's panel names the source's value `is1`, so its answers read
-`1000*is1` and `2*is1`.}}
+:::
+::: only 9
+The answer is *v*{{sub:O}}*=1000* *i*{{sub:S}} and *i*{{sub:O}}*=2
+i*{{sub:S}}. This is correct. The panel names the source's value `is1`, so the
+answers read `1000*is1` and `2*is1`.
+:::
 
 :::
 
@@ -1806,11 +1968,17 @@ j,0,o,100'm*vr2
 ::: only 9
 The answers you want are `vo` and `re`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
+::: only 7,8
 The answer, **{.904\*vs,10952.}**, is correct: *v*{{sub:O}}*=.904 v*{{sub:S}}
 and *R*{{sub:IN}}* = 10.95 kΩ*.
+:::
+::: only 9
+The answer is *v*{{sub:O}}*=.904 v*{{sub:S}} and *R*{{sub:IN}}* = 10.95 kΩ*.
+This is correct.
+:::
 
 :::
 
@@ -2107,10 +2275,10 @@ $$
 
 :::
 
-The last four problems show Symbulator at its DC best. I don't know of any
+The last four problems show Symbulator at its DC best.{{v7,8| I don't know of any
 calculator-based program that was able to provide this kind of purely
 symbolic answer to a circuit simulator back in 1999 when I made Symbulator.
 As a matter of fact, even today – a quarter of a century later - I know of no
-other calculator-based simulator that can do this.
+other calculator-based simulator that can do this.}}
 
 :::

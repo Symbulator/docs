@@ -165,7 +165,12 @@ class SourceError(Exception):
 # --------------------------------------------------------------------------
 
 DIRECTIVES = {"tip", "note", "warning", "danger", "figure", "problem",
-              "answer", "practice", "only", "not"}
+              "answer", "practice", "only", "not", "web", "pdf"}
+
+#: The two output media. `::: web` / `::: pdf` blocks and `{{web|...}}` /
+#: `{{pdf|...}}` spans show in one of them only; a pass that is not
+#: rendering (labels, --check) sees both.
+MEDIA = ("web", "pdf")
 
 BS = chr(92)      # a LaTeX escape, spelled out so no editor eats it
 NL = chr(10)      # a real newline in the emitted .tex
@@ -498,6 +503,9 @@ def parse_brace(inner: str) -> Node:
         return Node("sub", text=inner[4:].strip())
     if inner.startswith("sup:"):
         return Node("sup", text=inner[4:].strip())
+    m = re.match(r"^(web|pdf)\|(.*)$", inner, re.S)
+    if m:                               # {{web|...}} / {{pdf|...}}
+        return Node("mspan", arg=m.group(1), children=parse_inline(m.group(2)))
     m = re.match(r"^(!?)v([\d,]+)\|(.*)$", inner, re.S)
     if m:
         neg, vers, body = m.groups()
@@ -559,12 +567,21 @@ def keep(node: Node, v: int) -> bool:
     return True
 
 
-def walk(blocks: list[Node], v: int):
-    """Yield blocks visible in version v, flattening only/not wrappers."""
+def walk(blocks: list[Node], v: int, medium: str | None = None):
+    """Yield blocks visible in version v, flattening only/not wrappers.
+
+    `medium` is "web" or "pdf" while rendering; a `::: web` or `::: pdf`
+    block is flattened when it matches and dropped when it does not. With
+    no medium (labels, --check) both are kept, so an anchor defined in
+    either is known everywhere."""
     for b in blocks:
+        if b.kind in MEDIA:
+            if medium is None or medium == b.kind:
+                yield from walk(b.children, v, medium)
+            continue
         if b.kind in ("only", "not"):
             if keep(b, v):
-                yield from walk(b.children, v)
+                yield from walk(b.children, v, medium)
             continue
         if not keep(b, v):
             continue
@@ -629,6 +646,7 @@ class HtmlRenderer:
         self.entries: list = []      # the entries of each problem, in order
         self.problem_no = 0          # which problem the renderer is on
         self.problem_ids: set = set()
+        self.medium = "web"
 
     # -- inline ----------------------------------------------------------
     def inline(self, text: str) -> str:
@@ -671,11 +689,14 @@ class HtmlRenderer:
             hit = self.v in n.meta["versions"]
             show = (not hit) if n.arg == "!" else hit
             return "".join(self.inode(c) for c in n.children) if show else ""
+        if n.kind == "mspan":
+            return ("".join(self.inode(c) for c in n.children)
+                    if n.arg == self.medium else "")
         return ""
 
     # -- blocks ----------------------------------------------------------
     def blocks(self, blocks: list[Node]) -> str:
-        return "\n".join(self.block(b) for b in walk(blocks, self.v))
+        return "\n".join(self.block(b) for b in walk(blocks, self.v, self.medium))
 
     def block(self, b: Node) -> str:
         k = b.kind
@@ -716,7 +737,7 @@ class HtmlRenderer:
             # which is what someone writing a quotation types anyway, without
             # having to be told a rule.
             parts = []
-            for child in walk(b.children, self.v):
+            for child in walk(b.children, self.v, self.medium):
                 if child.kind == "para" and child.text.lstrip()[:1] in QUOTE_DASHES:
                     parts.append(f'<p class="quote-by">'
                                  f'{self.inline(child.text)}</p>')
@@ -931,6 +952,7 @@ class TexRenderer:
         self.chapter_no = None
         #: how many tcolorboxes deep we are. A float cannot leave one.
         self.boxdepth = 0
+        self.medium = "pdf"
 
     def inline(self, text: str) -> str:
         return "".join(self.inode(n) for n in parse_inline(text))
@@ -970,11 +992,14 @@ class TexRenderer:
             hit = self.v in n.meta["versions"]
             show = (not hit) if n.arg == "!" else hit
             return "".join(self.inode(c) for c in n.children) if show else ""
+        if n.kind == "mspan":
+            return ("".join(self.inode(c) for c in n.children)
+                    if n.arg == self.medium else "")
         return ""
 
     def blocks(self, blocks: list[Node]) -> str:
         return "\n\n".join(x for x in (self.block(b)
-                                       for b in walk(blocks, self.v)) if x)
+                                       for b in walk(blocks, self.v, self.medium)) if x)
 
     def _problem_need(self, b: Node) -> float:
         """Millimetres a problem needs before it is worth starting.
@@ -990,7 +1015,7 @@ class TexRenderer:
         -- a paragraph line is guessed from its character count.
         """
         need = 11.0                          # the rule, the title, the air
-        for child in list(walk(b.children, self.v))[:4]:
+        for child in list(walk(b.children, self.v, self.medium))[:4]:
             if child.kind == "para":
                 need += 6.0 * max(1, round(len(child.text) / 90))
             else:
@@ -1031,7 +1056,7 @@ class TexRenderer:
                     + BS + "bottomrule" + NL + BS + "end{tabularx}")
         if k == "quote":
             parts = []
-            for child in walk(b.children, self.v):
+            for child in walk(b.children, self.v, self.medium):
                 if (child.kind == "para"
                         and child.text.lstrip()[:1] in QUOTE_DASHES):
                     parts.append(BS + "quoteby{"
@@ -1202,7 +1227,7 @@ def build_web(book: Book, versions: list[int]):
             sections = []
             if present:
                 n = 0
-                for b in walk(ch.blocks, v):
+                for b in walk(ch.blocks, v, "web"):
                     if b.kind == "heading" and b.meta["level"] == 2:
                         n += 1
                         sections.append({"anchor": b.meta["anchor"],
@@ -1585,7 +1610,7 @@ def check_nested_version_spans() -> list[str]:
     `::: only 7,8` and `::: only 9` blocks instead when either half needs
     inline markup of its own."""
     import glob as _glob
-    opener = re.compile(r"\{\{v(?:7|8|9|7,8|7,9|8,9)\|")
+    opener = re.compile(r"\{\{(?:v(?:7|8|9|7,8|7,9|8,9)|web|pdf)\|")
     out = []
     for path in sorted(_glob.glob(os.path.join(SRC, "*.md"))):
         # Whole file, not line by line: a version span routinely wraps across

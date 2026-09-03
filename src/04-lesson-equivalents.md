@@ -31,8 +31,7 @@ For example, an ideal short circuit called **s1**, between nodes **3** and
 
 No power is consumed, and no voltage is dropped, in a short circuit. For each
 short in a circuit, Symbulator stores only the current through it, flowing from
-the first node towards the second. For a short called sx, that is
-{{v7,8|`isx`}}{{v9|the **current through** line of the `sx` block in **Results**}}.
+the first node towards the second. For a short called sx, that is `isx`.
 
 ::: problem HK5's Drill Problem 1-13
 Find i1, i2, i3 and i4.
@@ -64,8 +63,8 @@ s4,3,5
 ```
 
 {{v7,8|We ask for the values of the variables:}}{{v9|Choose *Solve circuit* and
-*DC*, then run it. Each short has its own block in **Results**, and the
-number you want is on its **current through** line:}}
+*DC*, then run it. The current through each short is given in `is1`, `is2`,
+`is3` and `is4`:}}
 
 ```sym 7
 approx({is1,is2,is3,is4})
@@ -78,15 +77,15 @@ approx({is1,is2,is3,is4})
 ```
 
 ::: only 9
-`s1` reads {{o:-2}} A, `s2` {{o:3}} A, `s3` {{o:-8}} A and `s4`
-{{o:-0.5}} A.
+`is1` = {{o:-2}} A, `is2` = {{o:3}} A, `is3` = {{o:-8}} A and
+`is4` = {{o:-0.5}} A.
 :::
 
 These are correct, and they can only be found using short circuits.
 :::
 :::
 
-## The equivalent resistance script: er {#er-script}
+## {{v7,8|The equivalent resistance script: er}}{{v9|Finding the equivalent resistance}} {#er-script}
 
 As we saw, Symbulator gives the equivalent resistance of a circuit as seen
 from any source. That lets us solve problems like this one.
@@ -124,10 +123,10 @@ because a source sat between the two nodes we wanted.
 ::: only 9
 Solve it in DC. There is no special tool to reach for here: because a source
 sits between the two nodes we care about, the equivalent resistance is one of
-the answers Symbulator works out anyway. In the block for `e`, the
-**resistance seen** line reads re = 40 Ω.
+the answers Symbulator works out anyway: the resistance seen by the source,
+`re`, is 40 Ω.
 
-The current i is the current through r13, and its block gives ir13 = 2.5 A.
+The current i is the current through r13: `ir13` = 2.5 A.
 
 Both answers came free, because there was a source connected between the two
 desired nodes. The rest of this lesson is about what to do when there is not.
@@ -207,8 +206,7 @@ Set **Type of analysis** to *Find equivalent*, **Type of equivalent** to
 **Analysis** on *DC — direct current* and press **Run Symbulator**.
 
 **Results** looks different from a normal solve: instead of the node and
-element listing there is a single block headed **Equivalent impedance**, with
-one line in it.
+element listing there is a single answer, headed **Equivalent impedance**:
 
 Req = 2.89 Ω
 :::
@@ -219,14 +217,14 @@ The value is 2.89 Ω. This is correct.
 
 ### What counts as passive
 
-That example was made of resistors only. The er script also handles a second
+That example was made of resistors only. {{v7,8|The er script}}{{v9|*Resistance / impedance*}} also handles a second
 kind of passive circuit: one with resistors and dependent sources, but no
 independent sources. Such a circuit can only be reduced to an equivalent
-resistance, not to a Thévenin or Norton equivalent, so er is the script to use
-— in exactly the same way, provided the dependent sources are described
+resistance, not to a Thévenin or Norton equivalent, so {{v7,8|er is the script to use
+— in exactly the same way}}{{v9|it is found in exactly the same way}}, provided the dependent sources are described
 properly.
 
-## The Thévenin / Norton script: th {#th-script}
+## {{v7,8|The Thévenin / Norton script: th}}{{v9|Finding a Thévenin / Norton equivalent}} {#th-script}
 
 Just as a *passive circuit* can be reduced to an equivalent resistance, an
 **active circuit** — one with independent sources — can be reduced to a
@@ -237,9 +235,16 @@ where we want the equivalent (the Thévenin voltage, VTH), then a second with a
 short between those nodes for the current through it (the Norton current,
 INO). REQ is then VTH/INO. That is the manual way.
 
+::: only 7,8
 An easier way is the **th** script,{{i:th script}} which does exactly that
 automatically. It takes three arguments: the circuit description, the first
 node and the second node.
+:::
+::: only 9
+An easier way is to let Symbulator do exactly that automatically:{{i:th script}}
+set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
+*Thévenin / Norton*, and give it the two nodes.
+:::
 
 ::: problem RM3's Practice Problem 9-4
 Find the Thévenin and Norton equivalents of the circuit.
@@ -249,7 +254,7 @@ RM3's Practice Problem 9-4
 :::
 
 ::: answer
-This is my circuit description, and this is how we run the th script:
+This is my circuit description{{v7,8|, and this is how we run the th script}}:
 
 ```sym 7
 "e,1,0,3.3:r1,1,2,66:r2,2,0,24"→cir
@@ -298,7 +303,7 @@ script then stores these variables:}}{{v9|The answers appear in **Results** unde
   hypothetical load
 :::
 ::: only 9
-**Results** replaces the usual node-and-element listing with a single block
+**Results** replaces the usual node-and-element listing with a single group
 headed **Thévenin / Norton equivalent**. There are no prompts and no second
 step; all four answers arrive together:
 
@@ -333,8 +338,8 @@ very typical case, as functions of the **load** variable:
 - **prl** has the power consumed in the load
 :::
 ::: only 9
-Symbulator 9 does not ask, and it does not carry the load quantities on the
-results either. **Results** shows four answers and no more: `vth`, `ino`,
+Symbulator does not carry the load quantities on the results. **Results**
+shows four answers and no more: `vth`, `ino`,
 `req` and `pmax`.
 
 That is no great loss, because each load quantity is one line in
@@ -347,9 +352,8 @@ the load resistance:
 | the voltage drop in the load | `vth*R/(req+R)` |
 | the power consumed in the load | `vth^2*R/(req+R)^2` |
 
-Put the load's actual value where R is. The rest of this section reads
-exactly as it does on the calculator, with those three in place of the
-calculator's `irL`, `vrL` and `prL`.
+Put the load's actual value where R is. Where the problems below mention
+`irL`, `vrL` and `prL`, use those three.
 :::
 
 ::: problem B11's Example 9.6
@@ -423,7 +427,7 @@ The three answers come back one at a time: {{o:1.5}} A, {{o:.5}} A and
 
 Another problem often associated with the Thévenin / Norton equivalents is
 power transfer to a load, particularly the maximum possible. Maximum power is transferred when the load RL equals the REQ of the
-equivalent. Symbulator's th script gives you the maximum power that can be
+equivalent. {{v7,8|Symbulator's th script gives}}{{v9|Symbulator gives}} you the maximum power that can be
 delivered in {{v7,8|**pmax**}}{{v9|`pmax`}}, and the power transferred to the
 load as a function of its value in {{v7,8|**prl**}}{{v9|the expression
 `vth^2*R/(req+R)^2` derived above}}.
@@ -497,10 +501,9 @@ j,2,0,560'm
 ::: only 9
 **Results** gives `ino` = {{o:-0.36}} A and `req` = {{o:84}} Ω.
 
-The sign differs from the calculator's, which prints {{o:0.36}} A: version 9
-reports the Norton current in the direction it actually flows, from the
-first node to the second. Nothing else changes — carry the sign through and
-the load current below comes out the same.
+The Norton current is reported in the direction it actually flows, from the
+first node to the second. Carry the sign through and the load current below
+comes out the same.
 :::
 
 Correct. Now to the second part of the question. In order to find the current
@@ -536,8 +539,7 @@ j,0,n,180'm
 ```
 
 ::: only 9
-Run it in DC. The `rl` block's **current through** line reads
-{{o:-0.06}} A.
+Run it in DC. The current through `rl`, `irl`, reads {{o:-0.06}} A.
 :::
 
 Correct: there is a current of 60 mA flowing through RL from 0 to n.
@@ -551,15 +553,6 @@ it confusing to use, just don't use it.
 
 ::: practice
 
-::: only 9
-::: note Some of this narration still describes the calculator
-Every problem below carries a **Circuit Description** panel you can type
-straight into Symbulator 9, and the circuits and answers are identical
-across the versions. What has not all been rewritten is the narration
-between them: where it says to evaluate a name or press a key, do the
-version 9 equivalent — the results are already on screen.
-:::
-:::
 
 
 ### Practice problems for resistive circuits
@@ -642,8 +635,8 @@ is **3.27** Ω.
 :::
 
 ::: only 9
-The calculator description names its four nodes a, b, c and d. Version 9
-needs one of them to be the reference node, so d is called 0 here instead.
+The problem names the four nodes a, b, c and d. Symbulator needs one of them
+to be the reference node, so d is called 0 here.
 Which node you ground makes no difference to the answer in a network with
 no sources — grounding b gives the same {{o:3.273}} Ω.
 :::
@@ -1772,7 +1765,7 @@ version 9 writes that difference straight into the value — `va-vb`, exactly as
 {{ref:lesson-sources}} describes. There is nothing to define beforehand.
 :::
 
-Now I run the th script, with this circuit description:
+Now I {{v7,8|run the th script, with}}{{v9|find the Thévenin equivalent of}} this circuit description:
 
 ```sym 7
 s\th("ei,a,0,vs:ed,1,0,μ*(vx):ro,b,1,ro",b,0):
@@ -1794,15 +1787,23 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 The answers you want are `vth` and `req`, in **Results**.
 :::
 
+::: only 7,8
 The answers we get, **{vs\*µ/(µ+1),ro/(µ+1)}**, are correct, as can be
 seen by comparing them to those in the book:
+:::
+::: only 9
+The answers we get, `vth` = `vs*µ/(µ+1)` and `req` = `ro/(µ+1)`, are correct,
+as can be seen by comparing them to those in the book:
+:::
 
 ::: figure assets/practice/tr5s-example-4-8-symbolic-37.jpg
 
 :::
 
+::: only 7,8
 I am not sure there is any other circuit simulator for calculators that can
 do this.
+:::
 
 :::
 
@@ -1849,7 +1850,13 @@ vth/(req+36)
 
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
+::: only 7,8
 The answer, **{30.,4.,3.,1.5,.75}**, is correct.
+:::
+::: only 9
+The answer is `vth` = 30 V and `req` = 4 Ω, and the load current is 3 A for 6
+Ω, 1.5 A for 16 Ω and .75 A for 36 Ω. This is correct.
+:::
 
 :::
 
@@ -1893,8 +1900,14 @@ vth/(req+1/4)
 
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
+::: only 7,8
 The book gives the answers as fractions. We get it right:
-**{21/8, 4/9, 21/50, 42/25}**. 
+**{21/8, 4/9, 21/50, 42/25}**.
+:::
+::: only 9
+The book gives the answers as fractions. We get it right: `ino` = 21/8 A and
+`req` = 4/9 Ω, and the load's voltage and current are 21/50 V and 42/25 A.
+:::
 
 :::
 
@@ -1939,7 +1952,13 @@ vth/(req+5000)
 
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
+::: only 7,8
 The answer, **{.0075, 1500., .0075, .00321, .00173}**, is correct.
+:::
+::: only 9
+The answer is `ino` = .0075 A and `req` = 1500 Ω, and the load current is
+.0075 A for 0 Ω, .00321 A for 2 kΩ and .00173 A for 5 kΩ. This is correct.
+:::
 
 :::
 
@@ -1986,7 +2005,13 @@ vth*1/(req+1)
 
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
+::: only 7,8
 The answer, **{-9/7,7/2,-1}**, is correct.
+:::
+::: only 9
+The answer is `ino` = -9/7 A and `req` = 7/2 Ω, and the voltage in the 1 Ω
+load is -1 V. This is correct.
+:::
 
 :::
 
@@ -2034,7 +2059,13 @@ vth/(req+192)
 
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
+::: only 7,8
 The answer, **{28.8,96.,.1}**, is correct.
+:::
+::: only 9
+The answer is `vth` = 28.8 V and `req` = 96 Ω, and the current in the 192 Ω
+load is .1 A. This is correct.
+:::
 
 :::
 
@@ -2079,7 +2110,13 @@ vth*6/(req+6.)
 
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
+::: only 7,8
 The answer we find, **{30,2,18,22.5}**, is correct.
+:::
+::: only 9
+The answer is `vth` = 30 V and `req` = 2 Ω, and the voltage in the load is 18
+V for 3 Ω and 22.5 V for 6 Ω. This is correct.
+:::
 
 :::
 
@@ -2124,7 +2161,13 @@ vth*5/(req+5)
 
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
+::: only 7,8
 The answer, **{6,3,3.75}**, is correct.
+:::
+::: only 9
+The answer is `vth` = 6 V and `req` = 3 Ω, and the voltage in the 5 Ω load is
+3.75 V. This is correct.
+:::
 
 :::
 
@@ -2171,7 +2214,14 @@ One line at a time, as before.
 
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
+::: only 7,8
 The answer, **{.001,42000,.001,.000808,.000457,.000296}**, is correct.
+:::
+::: only 9
+The answer is `ino` = .001 A and `req` = 42000 Ω, and the load current is .001
+A for 0 Ω, .000808 A for 10 kΩ, .000457 A for 50 kΩ and .000296 A for 100 kΩ.
+This is correct.
+:::
 
 :::
 
@@ -2211,13 +2261,20 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 
 The answers you want are `req` and `pmax`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
-Choose DC.{{v7,8| You can answer N when asked about the load equations.}} The answer,
+::: only 7,8
+Choose DC. You can answer N when asked about the load equations. The answer,
 **{9.,13.44}**, is correct: the maximum transfer of power occurs when the
 load is 9Ω. At this point, the power transferred is 13.44W. Now let's solve
 another one.
+:::
+::: only 9
+Choose DC. The maximum transfer of power occurs when the load is `req` = 9Ω,
+and the power transferred is then `pmax` = 13.44W. Now let's solve another
+one.
+:::
 
 :::
 
@@ -2251,11 +2308,17 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 
 The answers you want are `req` and `pmax`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
-Choose DC.{{v7,8| You can answer N.}} The logic of this problem is identical to
+::: only 7,8
+Choose DC. You can answer N. The logic of this problem is identical to
 the previous one. The answer is **{4.22,2.901}**.
+:::
+::: only 9
+Choose DC. The logic of this problem is identical to the previous one. The
+answer is `req` = 4.22 Ω and `pmax` = 2.901 W.
+:::
 
 :::
 
@@ -2297,8 +2360,14 @@ vth^2*8200./(req+8200.)^2
 ```
 :::
 
-Choose DC.{{v7,8| Answer Y about the load formulas.}} The answer we obtain,
+::: only 7,8
+Choose DC. Answer Y about the load formulas. The answer we obtain,
 **{40000, 1, .93, .57}**, is correct. Let's deconstruct it.
+:::
+::: only 9
+Choose DC. The answers we obtain, `req` = 40000 Ω, `pmax` = 1 W, .93 W and .57
+W, are correct. Let's deconstruct it.
+:::
 
 Part (a) is answered by the first two values: a 40 kΩ resistor as load would
 receive 1W power. Since this is the maximum – this is the most that any load
@@ -2345,11 +2414,17 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 
 The answers you want are `req` and `pmax`, in **Results**.
 
-The calculator versions wrap this in `approx` to get a decimal; version 9 does it through **Rounding** — *approx to n digits*, with **n** = 3 here.
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
-Choose DC.{{v7,8| You can answer N.}} The answer is **{15., 273.07}**. Let's now
+::: only 7,8
+Choose DC. You can answer N. The answer is **{15., 273.07}**. Let's now
 see one that is a little different.
+:::
+::: only 9
+Choose DC. The answer is `req` = 15 Ω and `pmax` = 273.07 W. Let's now see one
+that is a little different.
+:::
 
 :::
 

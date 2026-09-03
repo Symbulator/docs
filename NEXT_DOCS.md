@@ -8,6 +8,139 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #253 — an entry saves the Plotting Tools' inputs — **done and live, 3 Sep 2026**
+
+Roberto's note from the session working on the input-file tool: the
+inputs of the **Plotting Tools** card are saved in an entry like everything
+else. The introduction's *What an entry remembers* said "the plot"; it now
+names the card. One sentence, version 9 only (the whole section is).
+
+---
+
+## #252 — `::: web` / `::: pdf` blocks and `{{web|…}}` / `{{pdf|…}}` spans — **done and live, 3 Sep 2026**
+
+Roberto asked for a "PDF only" and a "web only" tag, so a passage can
+address one medium — a link that means nothing on paper, a page reference
+that means nothing on screen. Two block directives and two inline spans,
+the same shape as `only`/`not` and `{{v9|…}}`, in `build.py`:
+
+- `walk()` takes a `medium` ("web" or "pdf") and flattens a matching
+  block, drops the other. Each renderer passes its own medium; the search
+  index is built as "web". **The label pass and `--check` pass no medium
+  and see both**, so a heading anchored inside a `::: web` block is still
+  a known label in the PDF — it resolves to the chapter rather than
+  failing the build.
+- `{{web|…}}` / `{{pdf|…}}` parse to an `mspan` node; each renderer emits
+  it only when the medium is its own. The nested-span guard
+  (`check_nested_version_spans`) covers them too: like a version span, one
+  closes at the first `}}`, so no brace command inside.
+
+Proved on a real build, not by reading: a throwaway paragraph in the
+introduction with all four forms — the web build carried the two `web`
+texts and neither `pdf` one, `--tex-only` the reverse, `--check` clean —
+then the file was restored. Documented in `SPEC.md`'s two tables.
+
+First use, at Roberto's ask the same day: the introduction's *If you are
+reading this in the PDF, the links are on the web edition…* is a
+`{{pdf|…}}` span now, reading *In the PDF, …* — the only passage in the
+book that addressed one medium's reader (Lesson 6's *easier read on screen
+than in print* is about the app's screen, not the PDF, and stays).
+
+---
+
+## #251 — the version 9 wording pass: no calculator, no "line", terse answers — **done and live, 3 Sep 2026**
+
+Roberto's rulings of 3 Sep 2026, given twice: first to the wrong session,
+which applied them, saved the diff as
+`C:\Users\perez\Claude Symbulator\Notes\docs_legacy_wording_2026-09-03.patch`
+and reverted; then here, with a second batch. The patch applied clean to
+HEAD and was taken whole (rulings 1–9 below); ruling 10 and the second
+batch were done on top. **Version 9 text only** — the 7/8 wording is frozen
+as Roberto wrote it, so every shared sentence that changed went into a
+`{{v7,8|…}}{{v9|…}}` pair or, where a `{{sub:}}` or `{{o:}}` sits inside,
+into `::: only 7,8` / `::: only 9` blocks.
+
+**The rulings.**
+
+1. "It is already on screen." goes (Lesson 1, answer c).
+2. **No "line", no "block" for a Results entry.** The reader is thinking
+   about circuits, and a line is a conductor. Name the quantity or the
+   variable instead: *the current through the source reads `ie` = −6 mA*,
+   *`vr1` gives the voltage drop in the 30Ω resistor: 60 V*, *the current
+   through any resistor*. "Value" is the fallback word, rarely needed.
+3. Never "the computer" — Symbulator runs on phones. `book.yaml`'s
+   `machine` term is *device* for 9; "ask the computer" became "ask
+   Evaluate". Lesson 1 now says a solve takes *under a second on a
+   computer, and maybe a bit more on a mobile* (Roberto measured 1.15 s).
+4. The "add everything up and expect nothing" sentence goes.
+5. "voltage drop areas" → "voltage drop in areas".
+6. No command-line framing: "as an argument of the DC simulation command",
+   "the command below", "the er script", "the th script", "three arguments"
+   are 7/8-only now.
+7. **No reference to the calculator anywhere in version 9 text**: the 20
+   rounding notes read *Here we use **Rounding** — approx to n digits, with
+   n = 3* (also in `tools/v9_calls.py`); the four "still describes the
+   calculator" notes and the four comparison callouts are gone. Roberto's
+   two "calculator-based simulator" remarks are 7/8-only rather than
+   reworded, since dropping the qualifier would broaden the claim.
+8. "the solve command" → "**Solve**" (the card); 9. "ex" → "expert mode",
+   the section heading included (`{{v7,8|using ex}}{{v9|in expert mode}}`,
+   the anchor unchanged).
+10. **No curly-bracket answers.** `{.6,.2,.4,-2.}` is a calculator list;
+    version 9 says *The answer is I1=.6 A, I2=.2 A, I3=.4 A and Vab=-2 V.
+    This is correct.* 54 paragraphs split across lessons 1, 3, 4 and 5.
+    Where the 7/8 text never named the values, the names come from the
+    `The answers you want are …` line above (they were generated from the
+    same calculator list, so the order matches) and the load quantities from
+    the Evaluate box; units only where the prefix makes them certain
+    (v → V, i → A, p → W, r → Ω), values verbatim as printed.
+11. **No restated values.** *That is 6 kΩ. Correct.* right after `re` =
+    6 kΩ is gone for 9 (kept for 7/8, where it follows the `6000` output);
+    likewise *That is 6 mA*, and the five Lesson 7 *That is 4.789 A at an
+    angle of −16.7°* sentences that repeated the `aa()` phasor just above
+    them — those blocks now end *Correct.* The four after an unversioned
+    `out` block (*That is 3.22 − j11.07 Ω*) stay: they convert 𝐢-notation
+    and add the unit.
+12. Answers say as little as will state the result. Lesson 1's answer (c)
+    is *The voltage drop `vr1` reads 6 V, `vr2` reads 18 V and `vr3` reads
+    12 V. All correct.*
+13. The sources-only note ends at its statement; the tangent about
+    resistors having no `rr1` (and the AC pointer) is 7/8-only.
+14. Small ones: *This process applies to most* and *between them.* (no *in
+    that order*) — these two in all three versions, at Roberto's word;
+    *Those four element descriptions*; *which we defined as
+    flowing in the opposite direction*; credits say open source since
+    **2026**, not 2016.
+15. **The SI prefix table** (Lesson 1, after "Symbulator has a shorthand
+    for them"): word, shorthand, factor — the eleven prefixes
+    `repos/solver/symbulator/si_prefix.py` accepts, peta to atto, `'k`/`'K`
+    and `'u`/`'µ` both spelled. Version 9 only, since that file is the
+    source; factors as powers of ten via `{{sup:}}`, which works in a cell.
+
+**Lesson 6's calculator outputs.** Seventeen lines like `{ 6 , 0 }` sat as
+bare paragraphs, visible in all three versions. They are `out 7,8` blocks
+now, byte-identical inside, and version 9 reads the same values by name
+(*`vc` = 6 V and `ic` = 0 A*). That is why `check_against_originals.py`
+moved from 11 not-found to **23**: it never examined a bare paragraph, and
+six of the seventeen — `{8,0,8}`, `{6,0,12}`, `{2,0,2}`, `{10,0,-10}`,
+`{10,0,14}`, `{9,9/4}` — are not in the 2023 pages in any spacing. The
+values were not touched; they were simply never checked before.
+
+**The PDFs are behind, on purpose.** Deployed with `--web` — Roberto
+started a full build and then held it ("Don't build the PDFs yet"). This
+changes typeset text on every lesson, so **the live PDFs still say
+"line" and carry the calculator notes** until the next full `py build.py`
+and `learn` deploy. `SPEC.md`'s span example still reads "the **current
+through** line" — it documents markup, not the book.
+
+**Tooling.** `tools/v9_lines.py REGEX [--para] [files]` prints the lines
+version 9 actually renders — fences with a version list, `::: only`/`not`
+blocks and single-line spans all honoured. It found everything above; the
+plain grep had been reporting 7/8-only text as leftovers. Run it with
+`PYTHONUTF8=1` on Windows or the first Ω kills it.
+
+---
+
 ## #231, #233, #234 — the docs side of the fine-tuning batch — **done and live, 3 Sep 2026**
 
 Three of the nine items from Roberto's round of 3 Sep 2026; the other

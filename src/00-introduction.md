@@ -45,7 +45,7 @@ version 7, and a newer Python/SymPy port called version 9.
 ::: only 9
 Symbulator 9, released in 2026, is a port of the classic code to Python, powered by the SymPy computer algebra library.
 It runs anywhere Python runs: your mobile phone, tablet, laptop, a Jupyter notebook, or a browser on any computer.
-Since it is not bound by the memory of a calculator, version 9 solves circuits faster than versions 7 and 8.
+Version 9 solves circuits faster than versions 7 and 8.
 :::
 
 ## Why use Symbulator? {#why-use-it}
@@ -279,8 +279,8 @@ An entry keeps everything you typed, not just the circuit description: the
 analysis and whatever it needs — the frequency, the two node names for an
 equivalent, which kind of two-port — the Expert Mode equations, unknowns and
 conditions, everything in **Settings**, whatever is in **Evaluate** and its
-**Conditions**, the **Solve** card, the plot, and a note of your own shown when
-the entry is loaded.
+**Conditions**, the **Solve** card, the inputs of the **Plotting Tools** card,
+and a note of your own shown when the entry is loaded.
 
 An entry is not just a circuit: it is everything you give Symbulator to run the analysis. Load one a year later
 and you are back where you left off, with the same rounding, asking for the same analysis.
@@ -323,8 +323,8 @@ A problem that needs more than one simulation carries a link for each, marked
 with what that run is: **DC** for the pass that finds an initial condition,
 **TR** for the transient that follows it. A handful of problems have no link at
 all, because they are worked with pencil and paper rather than by the software.
-If you are reading this in the PDF, the links are on the web edition at
-`learn.symbulator.com`; everything else on this page applies either way.
+{{pdf|In the PDF, the links are on the web edition at `learn.symbulator.com`;
+everything else on this page applies either way.}}
 
 The split view keeps its address up to date as you move, so the window is always
 shareable exactly where you are: send someone

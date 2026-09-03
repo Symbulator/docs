@@ -140,12 +140,10 @@ in normal values (also called magnitude values) and in RMS. Working in RMS
 simply means every current and voltage in the analysis is taken to be RMS.
 That's it.
 
-Where the calculator versions used a flag variable that persisted between runs,
-Symbulator 9 puts it in **Settings**, under **AC power convention**: tick
+The switch is in **Settings**, under **AC power convention**: tick
 **RMS phasors**. Off means peak amplitude, the convention with the divide-by-two,
-and the setting affects AC power only. Being a setting rather than a stored
-variable, it is always in view — it cannot be left set from a problem you
-finished an hour ago.
+and the setting affects AC power only. It is always in view, so it cannot be
+left set from a problem you finished an hour ago.
 :::
 
 ::: problem AS7's Example 11.10
@@ -249,17 +247,15 @@ ve
 
 It answers {{o:0.97342}} leading.
 
-It returns the value and the verbal description together, in one string, just
-as the calculator prints them.
+It returns the value and the verbal description together, in one string.
 
 ::: warning Mind the sign for a source
 The minus sign in front of `ie` is not a typo, and leaving it out will
 quietly give you the wrong word. Symbulator reports the power, voltage and
 current *consumed by* each element, source or not, so the current stored in
-`ie` runs into the source rather than out of it. The calculator's pf tool
-knew, from the element name you handed it, that `e` was a source, and flipped
-the sign for you. The pf tool here is given two bare phasors and cannot
-know where they came from, so it cannot. Call it with `-ie` — the
+`ie` runs into the source rather than out of it. The pf tool is given two bare
+phasors and cannot know that one of them belongs to a source, so it cannot
+flip the sign for you. Call it with `-ie` — the
 current the source *delivers* — and you get **0.97342 leading**; call it with
 `ie` and you get 0.97342 lagging, which is the same magnitude and the
 wrong answer.
@@ -411,8 +407,7 @@ rl2,3,0,.1+1j
 ```
 
 ::: only 9
-AC with **RMS phasors** ticked. The `rl` block's **power consumed** line reads
-{{o:573.2}} W.
+AC with **RMS phasors** ticked. The power consumed `prl` reads {{o:573.2}} W.
 :::
 
 ```out 7,8

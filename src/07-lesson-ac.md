@@ -210,7 +210,7 @@ what it found:
   in {{v7,8|`ze`}}{{v9|`ze`}}
 
 To get the answers we need for this problem in particular, we ask for `ir1` and
-`vc`. It is likely that the {{t:machine}} will give you the answers in
+`vc`. It is likely that {{v7,8|the calculator}}{{v9|Symbulator}} will give you the answers in
 rectangular form, with a real part and an imaginary part.
 
 ::: only 7,8
@@ -253,7 +253,7 @@ Asking for the capacitor voltage the same way gives 4.472∠-63.43°, that is,
 $v(t) = 4.472 \cos(4t - 63.43°)$ V, which is correct.
 
 Future solved problems will not include this level of detail in the solution,
-only the circuit description and the commands we give.
+only the circuit description and the {{v7,8|commands we give}}{{v9|settings we choose}}.
 :::
 :::
 
@@ -401,10 +401,12 @@ We get {{o:4.789}}∠{{o:-16.7}}° A.
 
 ::: only 9
 Read it with **Mini-Tools** set to *aa*: `aa(ir)` gives
-{{o:4.789}}∠{{o:-16.70}}° A.
+{{o:4.789}}∠{{o:-16.70}}° A. Correct.
 :::
 
+::: only 7,8
 That is 4.789 A at an angle of −16.7°, which is correct.
+:::
 
 ::: tip Why the resistor is r on one calculator and r1 on the other
 The version 7 description above names its resistor `r`; the version 8 one
@@ -496,10 +498,12 @@ We get {{o:414.5}}∠{{o:-71.6}}° mA.
 ::: only 9
 There is no stored `zeq` to divide by, so put the whole thing in
 **Mini-Tools** with *aa*: `aa(12/(4+20j+pr(16,-14j+25j)))` gives
-{{o:0.4145}}∠{{o:-71.60}}° A.
+{{o:0.4145}}∠{{o:-71.60}}° A. Correct.
 :::
 
+::: only 7,8
 That is 414.5 mA at an angle of −71.6°, which is correct.
+:::
 
 ::: tip The same answer from a simulation
 You can also let Symbulator do the reduction, using the square-bracket
@@ -618,10 +622,12 @@ We get {{o:7.59}}∠{{o:108.4}}° A.
 :::
 
 ::: only 9
-`aa(icx)` gives {{o:7.589}}∠{{o:108.4}}° A.
+`aa(icx)` gives {{o:7.589}}∠{{o:108.4}}° A. Correct.
 :::
 
+::: only 7,8
 That is 7.59 A at an angle of 108.4°, which is correct.
+:::
 :::
 :::
 
@@ -724,10 +730,12 @@ We get {{o:1.55}}∠{{o:-95.18}}° V and {{o:3.26}}∠{{o:-3.74}}° mA.
 
 ::: only 9
 `aa(vro)` gives {{o:1.550}}∠{{o:-95.18}}° V and `aa(ico)` gives
-{{o:0.003264}}∠{{o:-3.743}}° A.
+{{o:0.003264}}∠{{o:-3.743}}° A. Both correct.
 :::
 
+::: only 7,8
 That is 1.55 V at −95.18° and 3.26 mA at −3.74°, both correct.
+:::
 :::
 :::
 
@@ -778,10 +786,12 @@ We get {{o:2.708}}∠{{o:-56.73}}° V and {{o:6.914}}∠{{o:-80.70}}° V.
 
 ::: only 9
 `aa(v1)` gives {{o:2.708}}∠{{o:-56.73}}° V and `aa(v2)` gives
-{{o:6.914}}∠{{o:-80.70}}° V.
+{{o:6.914}}∠{{o:-80.70}}° V. Both correct.
 :::
 
+::: only 7,8
 That is 2.708 V at −56.73° and 6.914 V at −80.70°, both correct.
+:::
 :::
 :::
 
@@ -841,14 +851,6 @@ symbolic values. More often than not, this bypasses the bug and you get a
 solution surprisingly fast.
 :::
 :::
-::: only 9
-::: tip No cSolve, no ceiling
-The exact-versus-approximate problem that plagues the calculator versions comes
-from a bug in the TI CAS's `cSolve`. Symbulator 9 solves through SymPy instead,
-so exact inputs are safe, and you can leave the frequency as `2*pi*2e3` rather
-than pre-computing it.
-:::
-:::
 
 Once the simulation finishes, solve for the value of c that makes the imaginary
 part of the equivalent impedance zero:
@@ -906,8 +908,7 @@ im(zeq) = 0
 
 with `c` as the unknown and **real solutions only** ticked — the same
 equation as before, now against the new `zeq` — which answers
-`c` = {{o:25}}. The calculator spells that function `imag`; version 9 uses
-`im`.
+`c` = {{o:25}}.
 :::
 
 ```sym 7
@@ -1017,9 +1018,7 @@ r2,3,o,r2
 ```
 
 {{v7,8|Notice `ca` and `cb`: `c1` and `c2` are reserved variables on the
-calculator.}}{{v9|The capacitors are called `ca` and `cb` because the
-calculator versions had to avoid the reserved `c1` and `c2`; version 9 has no
-such restriction, but the names are kept so the description matches.}}
+calculator.}}
 
 Then ask for the ratio:
 

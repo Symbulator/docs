@@ -5,12 +5,12 @@ title: Symbolic circuits and expert mode
 updated: 2026-08-29
 summary: >
   Learn how to solve different types of *symbolic* circuits in Symbulator. Use
-  the solve command on Symbulator answers. And explore **ex**, the powerful
-  *expert mode*, for the ambitious user.
+  {{v7,8|the solve command on}}{{v9|**Solve** in}} Symbulator. And explore
+  {{v7,8|**ex**, }}the powerful *expert mode*, for the ambitious user.
 ---
 
 Here you will learn about the types of symbolic circuits and how to solve
-them in Symbulator, using the solve command when needed, and — for the more
+them in Symbulator, using {{v7,8|the solve command}}{{v9|**Solve**}} when needed, and — for the more
 adventurous — the powerful *expert mode*.
 
 ## About symbolic problems {#about-symbolic}
@@ -58,7 +58,7 @@ Let's see an example of each.
 
 Since Symbulator is natively a symbolic simulator, there is nothing special
 about solving a purely symbolic problem. The only limitation comes from the
-computing capacity of the {{t:machine}}: {{v7,8|while small circuits can be
+computing capacity of {{v7,8|the calculator}}{{v9|your device}}: {{v7,8|while small circuits can be
 solved relatively fast, larger circuits may be too slow to solve and may cause
 a memory error}}{{v9|while small circuits are solved almost instantly, large
 symbolic circuits can produce expressions too large to be useful}}.
@@ -120,9 +120,8 @@ Leave **Type of analysis** on *Solve circuit*, set **Analysis** to
 {{v7|This simulation took 15 seconds in my calculator.}}{{v8|This simulation
 took a couple of seconds in my calculator.}}{{v9|The answer comes back almost at
 once — symbolic circuits this small cost nothing.}} To find the current i, we
-{{v7,8|ask for `ir1` or `ir2`}}{{v9|look at the block for `r1` or for `r2` and
-read the **current through** line}}. To find the voltage drop on r2, we
-{{v7,8|ask for `vr2`}}{{v9|read the **voltage drop** line in the `r2` block}}.
+{{v7,8|ask for `ir1` or `ir2`}}{{v9|read `ir1` or `ir2`}}. To find the voltage drop on r2, we
+{{v7,8|ask for `vr2`}}{{v9|read `vr2`}}.
 
 Both are expressions rather than numbers:
 
@@ -132,10 +131,8 @@ $$
 
 which is the voltage divider you would have written by hand.
 
-To find the power consumed in r2, we {{v7,8|ask for `pr2`}}{{v9|read the
-**power consumed** line of the `r2` block}}. To find the power delivered by the
-source, we {{v7,8|ask for the negative of `pev`}}{{v9|take the opposite of the
-source's **power consumed** line — type `-pev` into **Evaluate**}}.
+To find the power consumed in r2, we {{v7,8|ask for `pr2`}}{{v9|read `pr2`}}. To find the power delivered by the
+source, we {{v7,8|ask for the negative of `pev`}}{{v9|switch the sign of `pev` — type `-pev` into **Evaluate**}}.
 
 $$
 p_{r2} = \dfrac{r2\,v^2}{(r1 + r2)^2} \quad\text{and}\quad -p_{ev} = \dfrac{v^2}{r1 + r2}
@@ -150,7 +147,7 @@ take no extra effort.
 ## Numerical from symbolic, with solve {#with-solve}
 
 Getting numerical answers from a symbolic circuit, on the other hand, takes an
-extra step: the solve command, as in this next example, or expert mode, as in
+extra step: {{v7,8|the solve command}}{{v9|**Solve**}}, as in this next example, or expert mode, as in
 the one after.
 
 ::: problem B11's Example 5.6, with solve
@@ -201,16 +198,13 @@ A moment later Symbulator is done. From its symbolic answers and the answers
 the problem gives us, we write two equations and solve them for the two
 unknowns.
 
-The problem says that I3 is 6 mA. In Symbulator, I3 is {{v7,8|`ir3`}}{{v9|the
-**current through** line of the `r3` block, `ir3`}}, the current
-through resistor r3. {{v7,8|If you evaluate it, you will see it produces an
+The problem says that I3 is 6 mA. In Symbulator, I3 is `ir3`, the current through resistor r3. {{v7,8|If you evaluate it, you will see it produces an
 algebraic expression in terms of the two unknowns, e and r1.}}{{v9|Look at it
 and you will see an expression rather than a number — $e/(r1 + 10000)$ — in
 terms of the two unknowns, e and r1.}} This is what we call a symbolic answer.
 The problem also says that RT is 12 kΩ; the equivalent resistance as seen by
 the source e is {{v7,8|given by `re`, which when evaluated gives another
-algebraic expression in terms of r1}}{{v9|the **resistance seen** line,
-`re`, which is $r1 + 10000$}}. We can then write two new equations
+algebraic expression in terms of r1}}{{v9|`re`, which is $r1 + 10000$}}. We can then write two new equations
 and solve them for e and r1{{v7,8|:}}{{v9|.}}
 
 ```sym 7
@@ -249,8 +243,7 @@ works only in the values in the circuit description.
 :::
 :::
 ::: only 9
-The calculator's restriction does not carry over: the shorthand works in
-these boxes too, so `re = 12'k` reads as 12000.
+The shorthand works in these boxes too, so `re = 12'k` reads as 12000.
 :::
 
 An instant later we get the answers: {{v7,8|e = 72 V and r1 = 2000 Ω}}{{v9|the
@@ -260,7 +253,7 @@ simulators allow this flexibility.
 :::
 :::
 
-## Numerical from symbolic, using ex {#expert-mode}
+## Numerical from symbolic, {{v7,8|using ex}}{{v9|in expert mode}} {#expert-mode}
 
 ::: only 7,8
 Symbulator's true strength is seen in numerical-from-symbolic problems like the
@@ -340,9 +333,8 @@ Expert mode cracks these problems open in a single call, and gives fully
 numerical answers whenever the problem provides as many answers as it hides
 values.
 
-The three things the calculator stopped to ask you for — extra equations, extra
-unknowns and extra conditions — are three boxes in Symbulator 9, and they are
-hidden until you ask for them. Open the **Expert Mode** box and tick **Enable
+Expert mode takes three things — extra equations, extra unknowns and extra
+conditions — in three boxes, hidden until you ask for them. Open the **Expert Mode** box and tick **Enable
 Expert Mode**; three new fields appear:
 
 - **Add equations** — one per line, written in the names the results use.
@@ -355,13 +347,12 @@ DC, AC, FD and TR.
 ::: problem B11's Example 5.6, using ex
 ::: answer
 We use the very same circuit description as before, `r1` as the symbolic
-value included — version 9 has no objection to it; the calculator needed a
-different name here, and the note below says why.
+value included.
 
 The statement of the problem gives us the information we need to write the two
 additional equations: the source sees 12 kΩ, and the current through R3 is
 6 mA. Both are written in the same names the answers come back under, and the
-calculator's SI shorthand works here too:
+SI shorthand works here too:
 
 ```field 9 Circuit Description
 e,1,0,e
@@ -410,15 +401,6 @@ returns one of them. If the answer surprises you, check whether the other root
 is the one the problem meant.
 :::
 :::
-:::
-
-::: note Coming from a calculator version?
-Two of the calculator's precautions are gone. There is no need to avoid `r1`
-as a symbolic value — Symbulator 9 keeps its answers to itself, so there is
-nothing to collide with — and there are no follow-up dialogs to click through.
-The rest maps across directly: the three boxes carry the calculator's own
-prompts as their names — **Add equations**, **Add unknowns** and
-**Add conditions**.
 :::
 :::
 
@@ -478,7 +460,7 @@ vx
 :::
 
 We get that v{{sub:x}} is {{o:78}} V, which is correct.
-{{v7,8|Evaluating `ir6` we find}}{{v9|The `r6` block already shows}} that
+{{v7,8|Evaluating `ir6` we find}}{{v9|The current `ir6` already shows}} that
 i{{sub:x}} is {{o:3}} A. The fact that we can find numerical answers in this
 problem can be quite puzzling until one realizes that ignoring the value of
 R{{sub:A}} doesn't matter: due to the circuit's structure, it is not needed
@@ -560,8 +542,7 @@ We get that E is {{o:16}} V. These are correct.
 :::
 ::: only 9
 Run it. Everything comes back numerical: *e* = 16 appears among the results, so
-E is {{o:16}} V, and the source's **current through** line gives
-i{{sub:e}} = −0.02 A, so I{{sub:S}} is {{o:0.02}} A. These are correct.
+E is {{o:16}} V, and the current through the source, `ie`, is −0.02 A, so I{{sub:S}} is {{o:0.02}} A. These are correct.
 The solver also fills in the two resistors it had to find on the way,
 *r2* = 1600 Ω and *r3* = 8000 Ω.
 :::
@@ -631,7 +612,7 @@ answers:}}{{v9|Run it, and read the answers straight off the results:}}
 correct.
 
 {{v7,8|Then we ask for the powers consumed in the resistors, and find
-that:}}{{v9|The **power consumed** line of each resistor's block gives:}}
+that:}}{{v9|The power consumed in each resistor is given in `pr1`, `pr2` and `pr3`:}}
 
 `pr1` is {{o:1.2}} W, `pr2` is {{o:0.4}} W, and `pr3` is {{o:0.6}} W
 
