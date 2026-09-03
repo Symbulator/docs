@@ -79,9 +79,29 @@ The 7/8 text is byte-for-byte what it was, which is what
 since two answers became blocks it can see), the same 23 not found.
 
 **Numbers.** 11 chapters touched, 411 lines in and 544 out; `--check`
-clean; deployed to `learn` from a `--web` build, 37 files, verified —
-**the PDFs are still the 2 Sep build** and need a full `py build.py`
-before their next deploy.
+clean; deployed to `learn` from a `--web` build, 37 files, verified.
+
+**The PDFs followed on 4 Sep 2026**, at Roberto's ask: full `py build.py`,
+then a `learn` deploy of the three, each fetched and hash-checked against
+the local build. **v9 is 236 pages** (241 before the pass), v7 **206** and
+v8 **196** — those two gained a page each not from new words but from
+paragraph splits, several shared sentences having become `::: only 7,8`
+blocks. Verified in the built text, not assumed: *This process applies to*
+present, *the calculator versions wrap* and *the er script* gone,
+*Plotting Tools* present.
+
+**A trap worth knowing: a stopped XeLaTeX run poisons the next build.**
+The first attempt failed with `Runaway argument? … File ended while
+scanning use of \@newl@bel` and *NO PDF PRODUCED for v9*, because
+`build/tex/symbulator-v9.aux` was a 16,384-byte fragment — a buffer flush
+cut mid-line when the previous night's build was stopped part-way.
+XeLaTeX reads its own `.aux` back on the second pass and chokes. `build.py`
+does not clear the intermediates, so the fix is to delete
+`build/tex/symbulator-v9.{aux,toc,out,log}` by hand and build again.
+**And `build.py` exited 0 anyway**, printing the failure to stdout while
+returning success — so a caller trusting the exit code would have deployed
+two fresh PDFs and one stale one. Read the output, or check the file
+timestamps, rather than the status.
 
 ---
 
