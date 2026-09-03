@@ -195,7 +195,7 @@ and the difference is load-bearing rather than pedantic: SymPy evaluates
 DiracDelta of a strictly *positive* argument to 0, so under `positive` every
 impulse quietly disappeared, and `symbulator.laplace` says so at length.
 The same note, followed up in the app, turned out to be the whole of #95 in
-`Symbulator/repos/local/NEXT.md` — and to point the wrong way round: the
+`Application/v9/repos/local/NEXT.md` — and to point the wrong way round: the
 boxes on the page parse `t` correctly and always did, and it is the answers
 that lose the assumption on the way back.
 

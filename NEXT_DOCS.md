@@ -1,7 +1,7 @@
 # Open items on the documentation
 
 Numbered on the running sequence shared with
-`Symbulator/repos/local/NEXT.md`, which stood at #77 when this file started.
+`Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 Nothing here is numbered twice and the sequence never restarts.
 
 Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
@@ -11,7 +11,7 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 ## #231, #233, #234 — the docs side of the fine-tuning batch — **done and live, 3 Sep 2026**
 
 Three of the nine items from Roberto's round of 3 Sep 2026; the other
-six are app-side and written up in `Symbulator/repos/local/NEXT.md`.
+six are app-side and written up in `Application/v9/repos/local/NEXT.md`.
 
 ### #231 — the split view's wordmark is one colour
 
@@ -1375,7 +1375,7 @@ fixing, in rough order of how badly it reads:
   "Here is how we find it:" and then show a `sym 7`/`sym 8` fence using the
   calculator's `|` operator, so a version 9 reader is shown the promise and
   nothing else. **Written, and live since 27 Aug 2026.** #95 and #96 in
-  `Symbulator/repos/local/NEXT.md` were built on 26 Aug 2026: `t = to` now
+  `Application/v9/repos/local/NEXT.md` were built on 26 Aug 2026: `t = to` now
   works in the Solve card, and **Evaluate** has a *Conditions* box that says
   `vc|t=to` directly. Neither is live yet, so writing it up now would
   document a version of the app no reader has. Write it when it ships.
@@ -1529,7 +1529,7 @@ Both are the app, not the documentation, and both were found from this side:
 * **#95**, there is no version 9 way to say `vc|t=to`. What blocks the second
   bullet of #89.
 
-They live in `Symbulator/repos/local/NEXT.md` now, with the measurements.
+They live in `Application/v9/repos/local/NEXT.md` now, with the measurements.
 **#96** is there too: Roberto's request, on 26 Aug 2026, for a *Conditions*
 field on the **Evaluate** card. All three were built the same day and none is
 deployed.
@@ -1550,7 +1550,7 @@ chapter prints. These are what that turned up. Nothing below has been
 changed in the documentation.
 
 The app-side findings from the same pass -- #105, #107, #110, #112 and
-#114 -- are in `Symbulator/repos/local/NEXT.md`.
+#114 -- are in `Application/v9/repos/local/NEXT.md`.
 
 ---
 
