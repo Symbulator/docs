@@ -69,11 +69,18 @@ function asset(string $name): string {
     padding: 0.4rem 0.85rem; font-size: 0.86rem;
   }
   .splitbar a { color: #fff; }
+  /* #231: the wordmark is one colour -- the sky -- and the numeral is
+     the contrasting element. It used to be the other way round by
+     accident: a span carried over from another lockup coloured
+     "bulator" and left "Sym" white, splitting the word down the middle.
+     The colour has to be stated here rather than left to `.splitbar a`
+     above, which paints every link in the bar white. */
   .splitbar .mark {
     font-weight: 700; letter-spacing: 0.01em; text-decoration: none;
     white-space: nowrap; flex: none;
+    color: var(--sky, #8ec7f5);
   }
-  .splitbar .mark .py { color: var(--sky); }
+  .splitbar .mark .vnum { color: #fff; }
   .splitbar .where {
     color: var(--sky); font-size: 0.78rem; letter-spacing: 0.09em;
     text-transform: uppercase; white-space: nowrap;
@@ -144,8 +151,8 @@ function asset(string $name): string {
 <body data-show="docs">
 
 <div class="splitbar">
-  <a class="mark" href="/9/">Sym<span class="py">bulator</span> 9</a>
-  <span class="where" id="where">Tutorial</span>
+  <a class="mark" href="/9/">Symbulator <span class="vnum">9</span></a>
+  <span class="where" id="where">Documentation</span>
   <span class="spacer"></span>
   <span class="plain" id="hint">Links in the left pane load the circuit on the right.</span>
   <span class="tabs">
