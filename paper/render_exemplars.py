@@ -19,8 +19,8 @@ import os
 import re
 import sys
 
-SOLVER = r"C:\Users\perez\Claude Code\Symbulator\repos\solver"
-SERVER = r"C:\Users\perez\Claude Code\Symbulator\repos\server"
+SOLVER = r"C:\Users\perez\Claude Code\Application\v9\repos\solver"
+SERVER = r"C:\Users\perez\Claude Code\Application\v9\repos\server"
 for path in (SOLVER, SERVER):
     if not os.path.isdir(path):
         raise SystemExit(

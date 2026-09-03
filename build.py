@@ -97,7 +97,7 @@ def figure_size_mm(ref: str):
 # inlines a copy it cannot fetch, and moving the source into that repo
 # pins the lockup and the check to the same commit (#75).
 SHARED_BANNER = os.path.normpath(os.path.join(
-    ROOT, "..", "Symbulator", "repos", "local", "banner.css"))
+    ROOT, "..", "Application", "v9", "repos", "local", "banner.css"))
 
 
 # Every URL this build writes into the site is root-absolute.
@@ -1261,7 +1261,7 @@ def build_web(book: Book, versions: list[int]):
               open(os.path.join(outroot, "split", "lessons.json"), "w",
                    encoding="utf-8"), indent=1)
     # The banner is shared with symbulator.com and the app. Its one
-    # source is banner.css in the app's repository (Symbulator/repos/
+    # source is banner.css in the app's repository (Application/v9/repos/
     # local -- moved there Aug 2026 so the app build, which inlines a
     # copy it cannot fetch, guards against a file in its own commit);
     # this build copies the same file in rather than duplicating it
@@ -1269,9 +1269,10 @@ def build_web(book: Book, versions: list[int]):
     if not os.path.isfile(SHARED_BANNER):
         raise SystemExit(
             f"build.py: {SHARED_BANNER} is missing. The shared banner "
-            "lockup lives in the app repository (Symbulator/repos/local, "
-            "a sibling tree of Documentation -- see the top-level CLAUDE.md); "
-            "without it this site cannot build its header.")
+            "lockup lives in the app repository (Application/v9/repos/local, "
+            "a sibling tree's grandchild of Documentation -- see the "
+            "top-level CLAUDE.md); without it this site cannot build its "
+            "header.")
     shutil.copy2(SHARED_BANNER, os.path.join(outroot, "assets", "banner.css"))
     # The monograph (paper/symbulator_monograph.pdf, tracked in this
     # repository) ships beside the three tutorial PDFs, under the same
@@ -1606,7 +1607,7 @@ def check_nested_version_spans() -> list[str]:
 
 def check_shared_banner() -> list[str]:
     """The banner is one file -- banner.css in the app repository
-    (Symbulator/repos/local) -- imported by this site and copied
+    (Application/v9/repos/local) -- imported by this site and copied
     verbatim into landing/. The landing page has no build step, so its
     copy can silently fall behind -- which is exactly how the lockup
     drifted before it was centralised. Compare them and complain
@@ -1615,7 +1616,8 @@ def check_shared_banner() -> list[str]:
     if not os.path.isfile(SHARED_BANNER):
         return [f"banner: the canonical banner.css is missing at "
                 f"{SHARED_BANNER} -- the app repository "
-                "(Symbulator/repos/local) must sit beside Documentation; "
+                "(Application/v9/repos/local) must sit beside "
+                "Documentation's own sibling folder, Application; "
                 "see the top-level CLAUDE.md"]
     if not os.path.isfile(copy):
         return ["banner: landing/assets/banner.css is missing -- copy "

@@ -48,7 +48,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 #: `repos/local/examples` is generated from it by build_local.py, so this
 #: reads the one people edit.
 EXAMPLES = os.path.normpath(os.path.join(
-    ROOT, "..", "Symbulator", "repos", "server", "examples"))
+    ROOT, "..", "Application", "v9", "repos", "server", "examples"))
 
 #: Hardwired to version 9 (Roberto, 2 Sep 2026: "X is for experiments,
 #: not for users. Use the default app link, v9, always, hardwired.").
@@ -136,11 +136,11 @@ def load_books(examples_dir: str = EXAMPLES) -> dict[str, list[Entry]]:
         raise SystemExit(
             f"app_links: {examples_dir} is missing. The tutorial's worked "
             "problems link to the app's built-in entries (#224), which are "
-            "read from the app repository (Symbulator/repos/server/examples, "
-            "a sibling tree of Documentation -- see the top-level CLAUDE.md). "
-            "Without it this site would build with no app links at all, "
-            "which is a silent loss rather than a visible one, so the build "
-            "stops here instead.")
+            "read from the app repository (Application/v9/repos/server/"
+            "examples, a sibling tree's grandchild of Documentation -- see "
+            "the top-level CLAUDE.md). Without it this site would build "
+            "with no app links at all, which is a silent loss rather than "
+            "a visible one, so the build stops here instead.")
     books: dict[str, list[Entry]] = {}
     for name in sorted(os.listdir(examples_dir)):
         m = re.fullmatch(r"Lesson_0?(\d{1,2})([a-d]?)\.cir", name)

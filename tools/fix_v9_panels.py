@@ -34,7 +34,7 @@ import os
 import re
 import sys
 
-sys.path.insert(0, r"C:\Users\perez\Claude Code\Symbulator\repos\server")
+sys.path.insert(0, r"C:\Users\perez\Claude Code\Application\v9\repos\server")
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 import symbulator_ui as ui                                    # noqa: E402
