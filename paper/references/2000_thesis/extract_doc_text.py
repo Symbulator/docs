@@ -13,7 +13,7 @@ import sys
 
 import olefile
 
-REF = r"C:\Users\perez\Claude Code\Documentation\paper\references\2000_thesis"
+REF = r"C:\Users\perez\Claude Symbulator\Documentation\paper\references\2000_thesis"
 
 
 def fib_text(data):

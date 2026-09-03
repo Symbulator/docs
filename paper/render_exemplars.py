@@ -19,8 +19,8 @@ import os
 import re
 import sys
 
-SOLVER = r"C:\Users\perez\Claude Code\Application\v9\repos\solver"
-SERVER = r"C:\Users\perez\Claude Code\Application\v9\repos\server"
+SOLVER = r"C:\Users\perez\Claude Symbulator\Application\v9\repos\solver"
+SERVER = r"C:\Users\perez\Claude Symbulator\Application\v9\repos\server"
 for path in (SOLVER, SERVER):
     if not os.path.isdir(path):
         raise SystemExit(
@@ -39,7 +39,7 @@ def _escape(t):
     return (t.replace("&", "&amp;").replace("<", "&lt;")
              .replace(">", "&gt;"))
 
-OUT = r"C:\Users\perez\Claude Code\Documentation\paper\figures"
+OUT = r"C:\Users\perez\Claude Symbulator\Documentation\paper\figures"
 BOOK = os.path.join(SERVER, "examples", "The_Monograph.cir")
 
 # Figure name -> the entry in The_Monograph.cir it is drawn from. The

@@ -40,7 +40,7 @@ See `SPEC.md` for the markup.
 
 ## Deploying
 
-    cd "C:\Users\perez\Claude Code"
+    cd "C:\Users\perez\Claude Symbulator"
     py Deploy\deploy_symbulator.py learn
 
 Since 27 Aug 2026 this is how the site moves. It uploads only what changed

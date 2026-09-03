@@ -19,7 +19,7 @@ import re
 import sys
 import time
 
-sys.path.insert(0, r"C:\Users\perez\Claude Code\Application\v9\repos\server")
+sys.path.insert(0, r"C:\Users\perez\Claude Symbulator\Application\v9\repos\server")
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 
 import app as flask_app                                      # noqa: E402
