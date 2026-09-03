@@ -8,6 +8,59 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #231, #233, #234 — the docs side of the fine-tuning batch — **done and live, 3 Sep 2026**
+
+Three of the nine items from Roberto's round of 3 Sep 2026; the other
+six are app-side and written up in `Symbulator/repos/local/NEXT.md`.
+
+### #231 — the split view's wordmark is one colour
+
+`web/split/index.php`. It read **Sym**bulator in two tones — "Sym" white,
+"bulator" sky — because a span carried over from another lockup coloured
+half the word. The whole word is sky now and the **numeral is white**,
+so the contrast falls between the name and the version rather than down
+the middle of the name (Roberto's A1: the 9 stays white).
+
+The colour has to be stated on `.mark` rather than left to inherit:
+`.splitbar a` paints every link in the bar white.
+
+While in there, the bar's own default position label said *Tutorial*.
+It says *Documentation* now, for #232's consistency.
+
+### #233 — the landing hero says it is a beta
+
+The gold **New!** chip stays; the line beside it reads *Symbulator 9, in
+beta version, for Python and SymPy*. Roberto's A4 — keep the chip, add
+the state in words — which happily avoids a problem the alternative had:
+`landing.css:20` says in as many words that gold means *"new", and only
+that*, deliberately not amber. Had the chip itself become "Beta", that
+comment would have turned false and `chip-new` would have become a
+misnomer. Nothing renamed, no CSS touched.
+
+Commas rather than a bare insertion: *"Symbulator 9 in beta version for
+Python and SymPy"* runs on without a breath.
+
+### #234 — the split view offered on the landing page
+
+A second entry under *Learn it*, below *Read the documentation* — second
+on purpose (A8): reading the documentation is the plain way in, and this
+is the one that needs a sentence of explanation.
+
+    THE DOCUMENTATION AND THE APP, SIDE BY SIDE
+    Read and run at the same time →
+    Every lesson on the left, the live app on the right. Each worked
+    problem carries a link that loads that exact circuit into the app —
+    read the explanation, then run it without typing a character.
+    learn.symbulator.com/split/
+
+Title names the benefit rather than the feature (A7): "split view" means
+nothing to someone who has not seen one, and the kicker underneath says
+what it is. **No CSS was needed** — every `.way` on the page is already
+`way-wide` and `.ways` is a single-column grid, so the two simply stack.
+
+---
+
+
 ## #230 — A regex that could never match, and the checker that could never see it — **done 3 Sep 2026, nothing to deploy**
 
 `build.py`'s `plain()` — the function that reduces a rendered page to its
