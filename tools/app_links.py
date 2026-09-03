@@ -137,7 +137,7 @@ def load_books(examples_dir: str = EXAMPLES) -> dict[str, list[Entry]]:
             f"app_links: {examples_dir} is missing. The tutorial's worked "
             "problems link to the app's built-in entries (#224), which are "
             "read from the app repository (Symbulator/repos/server/examples, "
-            "a sibling tree of Sym Docum -- see the top-level CLAUDE.md). "
+            "a sibling tree of Documentation -- see the top-level CLAUDE.md). "
             "Without it this site would build with no app links at all, "
             "which is a silent loss rather than a visible one, so the build "
             "stops here instead.")

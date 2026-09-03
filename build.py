@@ -1270,7 +1270,7 @@ def build_web(book: Book, versions: list[int]):
         raise SystemExit(
             f"build.py: {SHARED_BANNER} is missing. The shared banner "
             "lockup lives in the app repository (Symbulator/repos/local, "
-            "a sibling tree of Sym Docum -- see the top-level CLAUDE.md); "
+            "a sibling tree of Documentation -- see the top-level CLAUDE.md); "
             "without it this site cannot build its header.")
     shutil.copy2(SHARED_BANNER, os.path.join(outroot, "assets", "banner.css"))
     # The monograph (paper/symbulator_monograph.pdf, tracked in this
@@ -1615,7 +1615,7 @@ def check_shared_banner() -> list[str]:
     if not os.path.isfile(SHARED_BANNER):
         return [f"banner: the canonical banner.css is missing at "
                 f"{SHARED_BANNER} -- the app repository "
-                "(Symbulator/repos/local) must sit beside Sym Docum; "
+                "(Symbulator/repos/local) must sit beside Documentation; "
                 "see the top-level CLAUDE.md"]
     if not os.path.isfile(copy):
         return ["banner: landing/assets/banner.css is missing -- copy "
