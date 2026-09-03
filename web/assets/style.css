@@ -121,7 +121,7 @@ a:focus-visible, .vkey:focus-visible, .btn:focus-visible {
 
 /* The lockup -- navy band, logo, wordmark, second line, sky keyline, theme
    toggle -- lives in the shared banner.css (canonical in the app tree,
-   Symbulator/repos/local/banner.css), one file shared with symbulator.com
+   Application/v9/repos/local/banner.css), one file shared with symbulator.com
    and the app. build.py copies it to assets/banner.css and index.php links it
    ahead of this file. Only this site's own controls are styled below: the two
    ribbon buttons and the version picker. Do not restate banner rules here --

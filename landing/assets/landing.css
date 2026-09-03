@@ -86,7 +86,7 @@ a:focus-visible, button:focus-visible {
 /* The banner lives in assets/banner.css -- both bands, the navy lockup and
    the lighter controls ribbon under it -- shared verbatim with
    learn.symbulator.com and the app. banner.css in the app tree
-   (Symbulator/repos/local) is the canonical copy; the Documentation
+   (Application/v9/repos/local) is the canonical copy; the Documentation
    build.py --check fails if this one drifts.
    The ribbon's links are styled there too, as of 23 Aug 2026 -- this page,
    learn and the app all draw the same row of links from the same rules, so
