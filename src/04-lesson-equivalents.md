@@ -5,13 +5,13 @@ title: Shorts, equivalent resistance and Thévenin/Norton
 updated: 2023-07-08
 summary: >
   Learn how to describe a *short circuit* using the **s** element. Learn how to
-  find *equivalent resistances* using the **er** script, and *Thevenin and
-  Norton equivalents* using the **th** script.
+  find *equivalent resistances*{{v7,8| using the **er** script}}, and *Thevenin and
+  Norton equivalents*{{v7,8| using the **th** script}}.
 ---
 
 In this lesson you will learn how to describe a *short circuit* with the
-**s** element, how to find *equivalent resistances* with the **er** script,
-and *Thévenin and Norton equivalents* with the **th** script.
+**s** element, how to find *equivalent resistances*{{v7,8| with the **er** script}},
+and *Thévenin and Norton equivalents*{{v7,8| with the **th** script}}.
 
 ## How to describe a short circuit {#describe-short}
 
@@ -30,7 +30,7 @@ For example, an ideal short circuit called **s1**, between nodes **3** and
 ### What answers do you get
 
 No power is consumed, and no voltage is dropped, in a short circuit. For each
-short in a circuit, Symbulator stores only the current through it, flowing from
+short in a circuit, Symbulator {{v7,8|stores}}{{v9|gives}} only the current through it, flowing from
 the first node towards the second. For a short called sx, that is `isx`.
 
 ::: problem HK5's Drill Problem 1-13
@@ -121,10 +121,9 @@ Evaluating `re` gives the equivalent resistance as seen by the source e:
 because a source sat between the two nodes we wanted.
 :::
 ::: only 9
-Solve it in DC. There is no special tool to reach for here: because a source
-sits between the two nodes we care about, the equivalent resistance is one of
-the answers Symbulator works out anyway: the resistance seen by the source,
-`re`, is 40 Ω.
+Solve it in DC. Because a source sits between the two nodes we care about,
+the equivalent resistance is one of the answers already: the resistance seen
+by the source, `re`, is 40 Ω.
 
 The current i is the current through r13: `ir13` = 2.5 A.
 
@@ -150,13 +149,10 @@ analysis — in **req**. It takes three arguments: the circuit description as a
 string, and the two nodes to measure between.
 :::
 ::: only 9
-Version 9 puts this on the **Type of analysis** menu. Choose *Find equivalent*
-instead of *Solve circuit*, and a second menu appears — **Type of equivalent**
-— whose first entry is *Resistance / impedance*. Two node boxes appear with
-it, for the pair of terminals you are measuring between.
-
-That is the whole of it: no source to invent, no voltage to divide. Symbulator
-does the 1 A trick internally and reports the answer.
+Set **Type of analysis** to *Find equivalent*, and a second menu appears,
+**Type of equivalent**, whose first entry is *Resistance / impedance*. Two
+node boxes appear with it, for the terminals you are measuring between.
+Symbulator does the 1 A trick internally and reports the answer.
 :::
 
 ::: problem B11's Example 8.29
@@ -168,7 +164,7 @@ B11's Example 8.29
 
 ::: answer
 Let me solve this problem step by step. After I label the nodes, I describe the
-circuit and store it in a variable.
+circuit{{v7,8| and store it in a variable}}.
 
 ```sym 7
 "r4,0,a,4:r2,0,b,2:r6,a,b,6:rb,a,c,3:ra,b,c,3"→cir
@@ -211,7 +207,7 @@ element listing there is a single answer, headed **Equivalent impedance**:
 Req = 2.89 Ω
 :::
 
-The value is 2.89 Ω. This is correct.
+{{v7,8|The value is 2.89 Ω. }}This is correct.
 :::
 :::
 
@@ -294,7 +290,8 @@ the Norton current and the equivalent resistance. In this case, VTH = 0.88 V, IN
 
 {{v7,8|When you press ENTER, Symbulator asks whether you are running a
 problem with a load connected to this equivalent circuit. For now, say No. The
-script then stores these variables:}}{{v9|The answers appear in **Results** under these names:}}
+script then stores these variables:}}{{v9|**Results** replaces the node-and-element listing with a single group
+headed **Thévenin / Norton equivalent**, holding four answers:}}
 
 - **vth** has the Thévenin voltage
 - **ino** has the Norton current
@@ -303,17 +300,9 @@ script then stores these variables:}}{{v9|The answers appear in **Results** unde
   hypothetical load
 :::
 ::: only 9
-**Results** replaces the usual node-and-element listing with a single group
-headed **Thévenin / Norton equivalent**. There are no prompts and no second
-step; all four answers arrive together:
-
-- **Thevenin voltage**, vth = 880 mV
-- **Norton current**, ino = 50 mA
-- **Equivalent resistance**, Req = 17.6 Ω
-- **Maximum deliverable power**, pmax = 11 mW
-
-The first three are what you came for. The fourth is Symbulator being
-generous — the most this circuit could deliver into a matched load.
+Here they read vth = 880 mV, ino = 50 mA, Req = 17.6 Ω and pmax = 11 mW. The
+first three are what you came for; the fourth is the most this circuit could
+deliver into a matched load.
 :::
 :::
 
@@ -338,13 +327,9 @@ very typical case, as functions of the **load** variable:
 - **prl** has the power consumed in the load
 :::
 ::: only 9
-Symbulator does not carry the load quantities on the results. **Results**
-shows four answers and no more: `vth`, `ino`,
-`req` and `pmax`.
-
-That is no great loss, because each load quantity is one line in
-**Evaluate**, built from the two answers you already have. Writing R for
-the load resistance:
+**Results** shows four answers: `vth`, `ino`, `req` and `pmax`. Each load
+quantity is one expression in **Evaluate**, built from two of them. Writing R
+for the load resistance:
 
 | To find | Type into Evaluate |
 |---|---|
@@ -390,9 +375,8 @@ in the second. Choose *DC* and run it.
 {6, 2}
 ```
 
-Correct. Now we find the values of the current in the load for the different
-values. We can do this in a single push, or separately. Here I find them in one
-go:
+Correct. Now we find the current in the load for each value.{{v7,8| We can do
+this in a single push, or separately. Here I find them in one go:}}
 
 ```sym 7
 {irL|Load=2.,irL|Load=10.,irL|Load=100.}
@@ -401,8 +385,7 @@ go:
 {irL|Load=2.,irL|Load=10.,irL|Load=100.}
 ```
 ::: only 9
-There is no single push here — you ask **Evaluate** three times, once per
-load, and the answers come back one at a time:
+Ask **Evaluate** three times, once per load:
 
 ```field 9 Evaluate
 vth/(req+2)
@@ -415,8 +398,7 @@ Then `vth/(req+10)`, then `vth/(req+100)`.
 ```
 
 ::: only 9
-The three answers come back one at a time: {{o:1.5}} A, {{o:.5}} A and
-{{o:.059}} A.
+The answers are {{o:1.5}} A, {{o:.5}} A and {{o:.059}} A.
 :::
 
 {{v7,8|Where `|` is the "given" operator.}} The answers are correct.
@@ -449,10 +431,9 @@ equivalent connected, between nodes **n** and **0**, to a load called **rl**
 with a symbolic value of **load**, in ohms.
 :::
 ::: only 9
-Symbulator 9 writes no such string for you, and does not need to: the
-equivalent is three lines, and you already have both numbers on screen.
-Type them into a fresh **Circuit Description**, putting `ino` and `req`
-where they belong:
+The Norton equivalent connected to a load is three lines. Type them into a
+fresh **Circuit Description**, with the numbers **Results** gave you in place
+of `ino` and `req`:
 
 ```field 9 Circuit Description
 jn,0,n,ino
@@ -460,11 +441,8 @@ re1,n,0,req
 rl,n,0,load
 ```
 
-Replace `ino` and `req` with the numbers **Results** just gave you. The
-load is called `rl` and its value is the symbol `load`, so the answers
-come back in terms of it.
-
-You can use it as a starting point for a new simulation.
+The load `rl` has the symbolic value `load`, so the answers come back in
+terms of it.
 :::
 
 ::: problem RM3's Example 9-8
@@ -511,9 +489,10 @@ through RL, we cannot use the load expressions, because now the load is not the
 only thing connected to the terminals of the equivalent: there is also a
 current source. We have to run a new simulation.
 
-The fastest way is to start from the equivalent circuit description:
+{{v7,8|The fastest way is to start from the equivalent circuit description:}}{{v9|Start
+from the three-line equivalent above.}}
 
-```out
+```out 7,8
 "jN,0,n,iNo:rE,n,0,rEq:rL,n,0,L"
 ```
 
@@ -568,8 +547,8 @@ again, in the compact form the rest of these problems use.
 
 :::
 
-After I label the nodes, I describe the circuit. In this case, I store it in
-a variable.
+After I label the nodes, I describe the circuit.{{v7,8| In this case, I store it in
+a variable.}}
 
 ```sym 7
 "r4,0,a,4:r2,0,b,2:r6,a,b,6:rb,a,c,3:ra,b,c,3"→cir
@@ -651,7 +630,7 @@ Find the equivalent resistance of the circuit.
 
 :::
 
-We don't need to run a simulation for this. We can reduce it using s\pr.
+We don't need to run a simulation for this. We can reduce it using {{v7,8|s\pr}}{{v9|`pr`}}.
 
 ```sym 7
 4+s\pr({1+5,2+s\pr({6,3})})+8
@@ -675,7 +654,7 @@ Find the equivalent resistance of the circuit.
 
 :::
 
-We don't need to run a simulation for this. We can reduce it using s\pr.
+We don't need to run a simulation for this. We can reduce it using {{v7,8|s\pr}}{{v9|`pr`}}.
 
 ```sym 7
 2+s\pr({6,3+s\pr({4,4+5+3})})+1
@@ -699,7 +678,7 @@ Find the equivalent *conductance* of the circuit.
 
 :::
 
-We don't need to run a simulation for this. We can reduce it using s\pr.
+We don't need to run a simulation for this. We can reduce it using {{v7,8|s\pr}}{{v9|`pr`}}.
 
 ```sym 7
 1/(s\pr({1/6,1/5+s\pr({1/8,1/12})}))
@@ -723,7 +702,7 @@ Find the equivalent *conductance* of the circuit.
 
 :::
 
-We don't need to run a simulation for this. We can reduce it using s\pr.
+We don't need to run a simulation for this. We can reduce it using {{v7,8|s\pr}}{{v9|`pr`}}.
 
 ```sym 7
 1/(s\pr({1/8,1/4})+s\pr({1/2,1/12+1/6}))
@@ -864,10 +843,9 @@ Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 :::
 ::: only 9
 *Find equivalent*, *Resistance / impedance*, nodes **1** and **0**, in DC:
-`req` is {{o:0.6000}} Ω. Only the short is renamed, `s` to `s1`: a short
-named bare `s` would have its current spelled `is`, which already means
-something in Python, so version 9 refuses that one name and suggests `s1`.
-The dependent value follows it — `is1`.
+`req` is {{o:0.6000}} Ω. The short is named `s1` rather than `s`, because a
+bare `s` would make its current `is`, a reserved word in Python; the dependent
+value follows it as `is1`.
 :::
 
 :::
@@ -1628,10 +1606,9 @@ Via `Define x=3: {ino,req} `we find that I{{sub:NO}} = **1** A, and
 R{{sub:EQ}} is undefined.
 :::
 ::: only 9
-The equivalent is already on screen, written in terms of x, so there is
-nothing to run again. Put `ino` in the **Evaluate** card with `x = 3` in its
-**Conditions** box: I{{sub:NO}} = **1** A. Ask for `req` the same way and the
-answer is infinite, the denominator being zero at that value.
+The equivalent is in terms of x, so nothing needs running again. Put `ino`
+in **Evaluate** with `x = 3` in its **Conditions** box: I{{sub:NO}} = **1** A.
+Ask for `req` the same way: infinite, the denominator being zero.
 :::
 
 This means the equivalent resistance is, for practical purposes, infinite.
@@ -1734,9 +1711,16 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 The answers you want are `vth` and `req`, in **Results**.
 :::
 
+::: only 7,8
 We get `{vs*µ/(µ+1),ro}`, which is correct, as can be seen in the textbook's
 answers for v{{sub:T}} and R{{sub:T}}, shown right of the circuit schematic
 above.
+:::
+::: only 9
+We get `vth` = `vs*µ/(µ+1)` and `req` = `ro`, which is correct, as can be
+seen in the textbook's answers for v{{sub:T}} and R{{sub:T}}, shown right of
+the circuit schematic above.
+:::
 
 :::
 
@@ -1760,9 +1744,9 @@ Define vx=va-vb
 ```
 
 ::: only 9
-The dependent source's value is the difference between two node voltages, so
-version 9 writes that difference straight into the value — `va-vb`, exactly as
-{{ref:lesson-sources}} describes. There is nothing to define beforehand.
+The dependent source's value is the difference between two node voltages,
+written straight into the value as `va-vb`, as {{ref:lesson-sources}}
+describes.
 :::
 
 Now I {{v7,8|run the th script, with}}{{v9|find the Thévenin equivalent of}} this circuit description:
@@ -1863,7 +1847,7 @@ The answer is `vth` = 30 V and `req` = 4 Ω, and the load current is 3 A for 6
 ::: problem Bo2's Example 3.10
 
 Find the Norton equivalent of the circuit left of the a-b terminals, and then
-find the voltage drop and the current through the ¼ Ω resistor. My one-line solution:
+find the voltage drop and the current through the ¼ Ω resistor. My {{v7,8|one-line }}solution:
 
 ::: figure assets/practice/bo2s-example-3-10-39.jpg
 
@@ -1915,7 +1899,7 @@ The book gives the answers as fractions. We get it right: `ino` = 21/8 A and
 
 Find the Norton equivalent of the circuit external to R{{sub:L}}. Then
 determine the load current I{{sub:L}} when R{{sub:L}} = 0 Ω, 2 kΩ and 5 kΩ.
-My one-line solution:
+My {{v7,8|one-line }}solution:
 
 ::: figure assets/practice/rm3s-example-9-7-40.jpg
 
@@ -2332,7 +2316,7 @@ answer is `req` = 4.22 Ω and `pmax` = 2.901 W.
 
 :::
 
-My one-line solution to all three questions is presented below.
+My {{v7,8|one-line }}solution to all three questions is presented below.
 
 ```sym 7
 s\th("j,0,1,10'm:rs,1,0,40'k",1,0):

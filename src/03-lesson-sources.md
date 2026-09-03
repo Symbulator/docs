@@ -50,8 +50,8 @@ B11's Example 8.1
 :::
 
 ::: answer
-We ask Symbulator to run a DC simulation of the circuit described between
-quotations:
+{{v7,8|We ask Symbulator to run a DC simulation of the circuit described between
+quotations:}}{{v9|The circuit:}}
 
 ```sym 7
 s\dc("j,0,1,10'm:r1,1,0,20'k")
@@ -65,16 +65,15 @@ r1,1,0,20'k
 ```
 
 ::: only 9
-Two lines, two elements. Under **Type of analysis** leave *Solve circuit*, set
-**Analysis** to *DC — direct current*, and click **Run Symbulator**. This is a
-numerical circuit, so it is worth putting **Rounding** back to *approximate to
-n significant digits* with **n** = 3 and ticking **Use SI prefixes**, as in
-{{ref:lesson-dc}}.
+Two lines, two elements. Leave **Type of analysis** on *Solve circuit*, set
+**Analysis** to *DC — direct current*, and click **Run Symbulator**. The
+circuit is numerical, so set **Rounding** to *approx to n digits* with
+**n** = 3 and tick **Use SI prefixes**, as in {{ref:lesson-dc}}.
 :::
 
 {{v7,8|We ask for the values of two variables, `ir1` and `vr1`. We get `.01`
-and `200.`, meaning}}{{v9|We read `ir1` = 10 mA and `vr1` = 200 V, meaning}} a 10 mA
-current and a 200 V voltage drop.
+and `200.`, meaning a 10 mA current and a 200 V voltage drop.}}{{v9|We read
+`ir1` = 10 mA and `vr1` = 200 V.}}
 :::
 :::
 
@@ -114,8 +113,7 @@ r13,1,3,1/2
 j32,3,2,3
 ```
 
-{{v7,8|We ask for these answers:}}{{v9|Run it in DC. The answers are the first
-thing on the page, under **Node voltages**:}}
+{{v7,8|We ask for these answers:}}{{v9|Run it in DC. The answers are under **Node voltages**:}}
 
 ```sym 7
 approx({v1,v2,v3})
@@ -261,8 +259,8 @@ circuit descriptions whenever we feel it is appropriate.
 :::
 
 ::: only 9
-Symbulator 9 has the same tool, spelled `pr`, and you can use it in two
-places.{{i:parallel resistors}}
+Symbulator has a tool for reducing resistors in parallel, `pr`, and you can
+use it in two places.{{i:parallel resistors}}
 
 Inside a circuit description, write it where a value goes — that is what the
 `re,3,0,[6,3]` shorthand below does, and `pr(6,3)` means the same thing.
@@ -275,10 +273,8 @@ pr(10, 20, 30)
 ```
 
 You get {{o:60/11}} Ω with **Rounding** on *exact*, or {{o:5.45}} Ω
-approximately. It nests as deeply as you like — the two problems below lean
-on that — and it works on symbols as readily as on numbers: `pr(r1, r2)`
-evaluates to $r1 r2/(r1 + r2)$, useful when the resistors in your circuit
-are still unknowns.
+approximately. It nests as deeply as you like, as the two problems below
+show, and it works on symbols: `pr(r1, r2)` gives $r1 r2/(r1 + r2)$.
 
 ::: problem AS7's Example 2.10
 Find the equivalent resistance.
@@ -288,8 +284,8 @@ AS7's Example 2.10
 :::
 
 ::: answer
-No simulation is needed — the whole reduction is one nested expression in
-the **Evaluate** card, working from the far end of the ladder outward:
+No simulation needed: the whole reduction is one nested expression in
+**Evaluate**, from the far end of the ladder outward:
 
 ```field 9 Evaluate
 10 + pr(3, 6, 1 + pr(12, 4, 1 + 5))
@@ -319,12 +315,10 @@ The answer is {{o:19}} Ω. This is correct.
 
 ### The [r,r,r…] shorthand for descriptions
 
-Calling `pr()` separately while describing a circuit is not very practical, so
-there is a shorthand: Symbulator reads any values inside square brackets, such
-as `[10,20,30]` or `[r1,r2,r3,r4]`, as input to `pr`. The **Evaluate** card runs what you type through
-the same shorthand, so the brackets work there too; this book writes `pr(...)`
-outside descriptions anyway, where square brackets are easy to misread as a
-list.
+Inside a circuit description there is a shorthand: values in square
+brackets, such as `[10,20,30]` or `[r1,r2,r3,r4]`, are read as input to `pr`.
+The brackets work in **Evaluate** too, but this book writes `pr(...)` there,
+where brackets are easy to misread as a list.
 
 ### When to reduce resistors
 
@@ -976,8 +970,7 @@ Notice that both the voltage drop (given by va-vb) and the current (given by
 by voltage drop:
 
 ::: only 9
-Both routes go in the **Solve** card, which solves against the answers the
-circuit just produced:
+Either equation goes in the **Solve** card:
 
 ```field 9 Equation(s) to solve in terms of the results
 va-vb = 12
@@ -1930,8 +1923,8 @@ The answer, **{1000\*is,2\*is}**, is correct: *v*{{sub:O}}*=1000*
 :::
 ::: only 9
 The answer is *v*{{sub:O}}*=1000* *i*{{sub:S}} and *i*{{sub:O}}*=2
-i*{{sub:S}}. This is correct. The panel names the source's value `is1`, so the
-answers read `1000*is1` and `2*is1`.
+i*{{sub:S}}. This is correct. The panel names the source's value `is1`, so the answers read `1000*is1` and
+`2*is1`.
 :::
 
 :::
@@ -2024,8 +2017,8 @@ pro/(-pjs)
 
 The answers we get are correct: i{{sub:O}}=**-12is**, v{{sub:O}}=**-6000is**,
 p{{sub:O}}=**72000is**{{sup:2}}, and p{{sub:O}}/p{{sub:S}}=**4320**.
-{{v9|Version 9's panel names the source's value `is1`, so its answers carry
-`is1` where these carry is.}}
+{{v9|The panel names the source's value `is1`, so the answers carry `is1`
+where these carry is.}}
 
 :::
 
@@ -2087,11 +2080,18 @@ Determine v{{sub:2}}.
 
 :::
 
+::: only 7,8
 My solution: In my solution I named the value of the source v{{sub:1}},
 to keep it similar to the book. This required avoiding naming any node as
 **1**: if there was a node 1, Symbulator would store in **v1** the voltage of
 the node, creating trouble. There is no problem with using r1 as a value,
 since nothing will be stored in that r1 value.
+:::
+::: only 9
+My solution. I named the source's value v{{sub:1}}, as in the book, so no
+node may be called **1**: its voltage would be `v1` too. Using r1 as a value
+is fine.
+:::
 
 ```sym 7
 s\dc("e,a,0,v1:r1,a,3,r1:rg,3,0,rg:j,2,0,gm*vrg:rd,2,0,rd:rl,2,0,rl"):v2
@@ -2159,8 +2159,7 @@ rl,b,0,rl
 The answer you want is `rji`, in **Results**.
 :::
 
-The answer we get — {{v7,8|`re*(β+1)`}}{{v9|`re1*(β+1)`, version 9's panel
-having renamed the element}} — is correct, as can be seen by comparing it to
+The answer we get — {{v7,8|`re*(β+1)`}}{{v9|`re1*(β+1)`}} — is correct, as can be seen by comparing it to
 the textbook's answer.
 
 ::: figure assets/practice/tr5-example-4-7-symbolic-46.jpg
@@ -2254,8 +2253,7 @@ j,c,e,β*irb
 The answer you want is `irb`, in **Results**.
 :::
 
-Compare my answer, first below, to the book's answer beneath it.{{v9| Note
-`re1`: as in the previous problem, version 9's panel renamed the element.}}
+Compare my answer, first below, to the book's answer beneath it.
 
 ::: only 7,8
 ::: figure assets/practice/tr5s-example-4-5-symbolic-51.jpg

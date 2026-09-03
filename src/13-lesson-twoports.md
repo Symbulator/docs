@@ -4,7 +4,7 @@ kind: lesson
 title: Two-ports
 updated: 2026-08-29
 summary: >
-  Find the *two-port equivalent* of a network using the **port** script. Learn
+  Find the *two-port equivalent* of a network{{v7,8| using the **port** script}}. Learn
   how to include *two-ports* in your circuit using the **z**, **y**, **h**,
   **g**, **a** and **b** elements. Calculate gains with the **gain** tool.
 ---
@@ -130,11 +130,9 @@ four, in the order 11, 12, 21, 22:
 z,1,2,[40,20j,30j,50]
 ```
 
-This is the way to prefer: the parameters travel with the circuit, so they
-survive being pasted into a link, saved to a file, or handed to any other
-tool — and they work in *every* analysis, the equivalent tools included.
-The entries can be numbers, SI-prefixed values, or expressions, symbols
-among them.
+Prefer this way: the parameters travel with the circuit, into links, files
+and every analysis, the equivalent tools included. The entries can be
+numbers, SI-prefixed values or expressions.
 
 **Store them in Define**, and keep the description bare:
 
@@ -145,8 +143,7 @@ z21 = 30j
 z22 = 50
 ```
 
-Define any subset and the rest stay symbolic. This is the closest cousin of
-how versions 7 and 8 stored the values in variables before simulating.
+Define any subset and the rest stay symbolic.
 
 **Leave them undefined**, in which case they stay symbolic and appear in the
 answers as `z11`, `z12`, `z21` and `z22`. That is often what you want —
@@ -155,12 +152,10 @@ Expert Mode's **Add equations** still works too, in a plain solve, and an
 equation or condition there overrides the description's own values.)
 
 ::: note How the variables are named
-The four variables are always the element's name plus `11`, `12`, `21`,
-`22`: a two-port called `z` owns `z11`…`z22`, and one called `z1` owns
-`z111`…`z122` — the name simply gains the digits. And note that while
-element and node names ignore case (`2*VR1` is `2*v_r1`), a variable that
-names nothing in the circuit is case-sensitive: `za` and `ZA` are two
-different symbols.
+The four variables are the element's name plus `11`, `12`, `21`, `22`: a
+two-port called `z1` owns `z111`…`z122`. Element and node names ignore case,
+but a variable that names nothing in the circuit is case-sensitive: `za` and
+`ZA` are two different symbols.
 :::
 :::
 
@@ -356,9 +351,8 @@ h,2,3,[1000,-2,10,2e-4]
 ```
 
 ::: only 9
-*Find equivalent*, *Thévenin / Norton*, nodes **3** and **0**, DC. Because
-the parameters ride in the description, they reach the equivalent tools
-like any other value, and the answers come straight back as numbers.
+*Find equivalent*, *Thévenin / Norton*, nodes **3** and **0**, DC. The
+parameters ride in the description, so the answers come back as numbers.
 
 Leave the fourth term off — `h,2,3` alone — and the same run answers with
 formulas instead:

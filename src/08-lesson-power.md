@@ -5,13 +5,13 @@ title: Power in AC circuits
 updated: 2023-07-08
 summary: >
   Learn to solve *average power* and *complex power* problems in AC. Learn how
-  you can use RMS values in Symbulator with the **rms** flag. Solve power
+  you can use RMS values in Symbulator with {{v7,8|the **rms** flag}}{{v9|the **RMS phasors** setting}}. Solve power
   factor problems using the **pf** tool.
 ---
 
 In this lesson you will learn how to run more advanced *alternating current*
 simulations. You will learn how to solve *average power* problems, when and how
-to use the **rms** flag, and how to solve *complex power* problems.
+to use {{v7,8|the **rms** flag}}{{v9|the **RMS phasors** setting}}, and how to solve *complex power* problems.
 
 ## Average power {#average-power}
 
@@ -24,9 +24,9 @@ AS7's Example 11.5
 :::
 
 ::: answer
-Symbulator's **th** tool helps us find all the answers we need. Notice this
-circuit description does not include the load, because it is not needed as
-input to th.
+{{v7,8|Symbulator's **th** tool}}{{v9|*Thévenin / Norton*}} helps us find all the answers we need. Notice this
+circuit description does not include the load, because it is not needed{{v7,8| as
+input to th}}.
 
 ```sym 7
 "e,1,0,10:r1,1,2,4:r2,2,0,8-6𝐢:r3,2,3,5𝐢"→cir
@@ -60,9 +60,6 @@ maximum power is its conjugate, 2.933 − j4.467.
 
 The average maximum power delivered by the circuit is in
 {{v7,8|`apmax`}}{{v9|`pmax`}}, which evaluates to 2.3674 W.
-{{v9|There is no separate `apmax` in Symbulator 9: `pmax` looks at the domain
-you asked for, and in the AC domain it is already the *average* maximum power,
-computed from the real part of the equivalent impedance.}}
 
 ::: only 7,8
 Now, here's the cool part: when you answer Yes to the load question, Symbulator
@@ -90,15 +87,9 @@ It is the same answer.
 :::
 
 ::: only 9
-Now, here's the cool part. Symbulator 9 carries no load expressions on the
-result — the tool reports `vth`, `ino`, `zeq` and `pmax`, and nothing else —
-but you do not have to build anything: the maximum average power is one of the
-four answers it already gives you, in `pmax`.
-
-**Results** shows `pmax` = {{o:2.367}} W, alongside `vth`, `ino` and `zeq`.
-That is the power delivered when the load is the conjugate of the equivalent
-impedance, which is the whole point of the exercise — Symbulator has done the
-conjugating and the halving for you.
+In AC, `pmax` is the *average* maximum power, computed from the real part of
+the equivalent impedance: **Results** shows `pmax` = {{o:2.367}} W, the power
+delivered when the load is the conjugate of `zeq`.
 :::
 :::
 :::
@@ -106,8 +97,8 @@ conjugating and the halving for you.
 ## RMS and PF {#rms-and-pf}
 
 In the previous lesson we mentioned that after an AC simulation you also get
-the complex power consumed. How to read these values depends on a flag called
-the RMS flag.{{i:RMS}}
+the complex power consumed. How to read these values depends on {{v7,8|a flag called
+the RMS flag}}{{v9|the **RMS phasors** setting}}.{{i:RMS}}
 
 ::: only 7,8
 ### The {{v7|s\rms}}{{v8|userms}} flag
@@ -233,9 +224,8 @@ which. That second form works only if the expression can be evaluated
 numerically.
 :::
 ::: only 9
-Symbulator 9 has the same tool, in the **Mini-Tools** card. Choose *pf —
-power factor*; it asks for the voltage and the current separately rather
-than for a single complex power or an element name:{{i:power factor}}
+The tool is in the **Mini-Tools** card. Choose *pf — power factor*; it asks
+for the voltage and the current:{{i:power factor}}
 
 ```field 9 Voltage
 ve
@@ -250,15 +240,12 @@ It answers {{o:0.97342}} leading.
 It returns the value and the verbal description together, in one string.
 
 ::: warning Mind the sign for a source
-The minus sign in front of `ie` is not a typo, and leaving it out will
-quietly give you the wrong word. Symbulator reports the power, voltage and
-current *consumed by* each element, source or not, so the current stored in
-`ie` runs into the source rather than out of it. The pf tool is given two bare
-phasors and cannot know that one of them belongs to a source, so it cannot
-flip the sign for you. Call it with `-ie` — the
-current the source *delivers* — and you get **0.97342 leading**; call it with
-`ie` and you get 0.97342 lagging, which is the same magnitude and the
-wrong answer.
+The minus sign in front of `ie` is not a typo, and leaving it out gives you
+the wrong word. Symbulator reports the current *consumed by* each element,
+source or not, so `ie` runs into the source. The pf tool is given two bare
+phasors and cannot know that one belongs to a source. Call it with `-ie`, the
+current the source *delivers*, and you get **0.97342 leading**; with `ie` you
+get 0.97342 lagging, the same magnitude and the wrong answer.
 
 The rule of thumb: negate the current for a source, leave it alone for a load.
 :::
@@ -315,7 +302,7 @@ The complex power absorbed in the source, line and load are in
 ```
 
 ::: only 9
-We look in the results and see:
+**Results** shows:
 
 - `-se` = {{o:2163.8}} − {{o:911.1}}𝐢 VA
 - `sr1` = {{o:455.5}} + {{o:227.8}}𝐢 VA

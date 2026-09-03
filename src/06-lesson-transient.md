@@ -4,9 +4,10 @@ kind: lesson
 title: Transient analysis
 updated: 2026-08-29
 summary: >
-  Learn to run a *transient* time-domain analysis with **tr**. Learn to
-  describe *capacitors* with **c** and *inductors* with **l**. Save time with
-  the **only** tool. Plot expressions in time with the **plot** tool.
+  Learn to run a *transient* time-domain analysis{{v7,8| with **tr**}}. Learn to
+  describe *capacitors* with **c** and *inductors* with **l**. {{v7,8|Save time with
+  the **only** tool. Plot expressions in time with the **plot** tool.}}{{v9|Limit
+  the results, and plot answers in time.}}
 ---
 
 Symbulator can simulate two energy-storing elements, capacitors and inductors,
@@ -79,10 +80,10 @@ basically becomes a short circuit.
 ## Running a transient analysis {#run-transient}
 
 You will learn the subtleties of transient simulations through a series of
-examples. For now, to run one we use
-{{v7,8|an access program called **s\tr**, which takes one argument: the circuit
-description in string form}}{{v9|the **tr** function, which takes the circuit
-description and, optionally, the list of quantities you want back}}.
+examples. For now, to run one
+{{v7,8|we use an access program called **s\tr**, which takes one argument: the circuit
+description in string form}}{{v9|set **Analysis** to *TR — transient / time
+domain*}}.
 
 ::: only 7
 For transient simulations, Symbulator uses a software for Laplace transforms
@@ -92,11 +93,6 @@ called DiffEq, by Lars Frederiksen. Make sure you have it properly installed!
 For transient simulations, Symbulator uses the Laplace Functions by Lars
 Frederiksen. Make sure you have them properly installed!
 :::
-::: only 9
-For transient simulations, Symbulator 9 uses SymPy's own Laplace machinery.
-There is nothing extra to install.
-:::
-
 ::: problem Bo2's Example 4.15
 ::: figure assets/circuit/bo2e0415.jpg
 Bo2's Example 4.15
@@ -201,7 +197,7 @@ the solved problems.
 
 ## Two useful tools {#tr-tools}
 
-### The only tool
+### {{v7,8|The only tool}}{{v9|Limiting the results}}
 
 Unless you say otherwise, a Symbulator simulation gives you the whole set of
 answers: voltages in all nodes, and voltage drops, currents and power consumed
@@ -230,21 +226,19 @@ The s\only tool is valuable in TR analysis: you save time by not having
 Symbulator find the inverse Laplace of answers you do not need.
 :::
 ::: only 9
-In case you don't want all the answers, but only a chosen few, tick **Do you
-want to limit the results to save time?** — it appears under the analysis
-menus once you choose TR. A box opens asking **What results are you after?**
-List them there, separated by commas:
+To get only a chosen few, tick **Do you want to limit the results to save
+time?**, under the analysis menus once TR is chosen, and list them in the box
+that opens, separated by commas:
 
 ```field 9 What results are you after? List the variables here
 v2
 ```
 
-This matters most in TR analysis, where each answer costs an inverse Laplace
-transform. Asking for one instead of a dozen is the single easiest speed-up
-available to you.
+Each TR answer costs an inverse Laplace transform, so asking for one instead
+of a dozen is the easiest speed-up there is.
 :::
 
-### The plot tool
+### {{v7,8|The plot tool}}{{v9|Plotting an answer}}
 
 ::: only 7,8
 Very often we are asked to plot functions of time. The calculator has extensive
@@ -259,9 +253,9 @@ s\plot()
 ```
 :::
 ::: only 9
-Symbulator 9 draws the plot for you, in the **Plot** card below the results.
-Solve the circuit first — the plot is of an answer, so there has to be one —
-then open **Plot** and fill in four things:
+Symbulator draws plots in the **Plotting Tools** card below the results.
+Solve the circuit first, since the plot is of an answer, then open the card
+and fill in four things:
 
 - **Plot type**: *Plot a function of time (TR)*
 - **Variable to plot**: the answer you want, such as `v2`
@@ -272,17 +266,14 @@ then open **Plot** and fill in four things:
 
 Press **Run** and the curve appears under the card.
 
-The second field is worth a moment. It takes an answer's name, not an
-expression, and it must be one this circuit actually has — `v2` and `ir1`
-rather than `vc` or a formula of your own. If you are unsure of the spelling,
-**Results** lists every name above.
+The variable must be an answer's name, not an expression, and one this
+circuit has, as **Results** spells it: `v2` or `ir1`.
 
 ::: warning A curve the inverse Laplace could not find
-Some circuits have an answer the inverse Laplace transform cannot close into
-an expression. Symbulator samples the s-domain answer numerically for the
-plot instead, so the picture still appears even when **Results** shows
-nothing for that variable. If a plot is blank where you expected a curve,
-check that the variable is spelled the way **Results** spells it.
+When the inverse Laplace transform cannot produce an expression, Symbulator
+samples the s-domain answer numerically, so the plot still appears even when
+**Results** shows nothing for that variable. A blank plot usually means a
+misspelled variable.
 :::
 :::
 
@@ -1009,7 +1000,7 @@ c,1,0,1/4,2.943
 re,1,0,[4,6]
 ```
 
-Ask for `{vc,ic}`. The expressions we get are equivalent to:
+{{v7,8|Ask for `{vc,ic}`. }}The expressions we get are equivalent to:
 
 $$
 \{ 2.943 e^{(-5(t-1))/3} , -1.226 e^{(-5(t-1))/3} \}
@@ -1596,7 +1587,7 @@ This is the expression for the voltage drop in the capacitor after t=0.
 
 :::
 
-### The only tool
+### {{v7,8|The only tool}}{{v9|Limiting the results}}
 
 ::: problem Bo2's Drill Exercise 5.11
 
@@ -1614,7 +1605,7 @@ s\only("vc")
 ```
 
 ::: only 9
-This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** — it sits under the analysis menus once TR is chosen — and list `vc` in the field it reveals.
+Optional in Symbulator 9, which solves quickly enough: if you want to, tick **Do you want to limit the results to save time?** under the analysis menus and list `vc` in the field it reveals.
 :::
 
 Then we run the simulation for the first interval, just as we did before, but
@@ -1652,7 +1643,7 @@ s\only("vc")
 ```
 
 ::: only 9
-This is optional: Symbulator 9 solves quickly enough that limiting the results rarely saves you anything worth having. If you want to anyway, tick **Do you want to limit the results to save time?** — it sits under the analysis menus once TR is chosen — and list `vc` in the field it reveals.
+Optional in Symbulator 9, which solves quickly enough: if you want to, tick **Do you want to limit the results to save time?** under the analysis menus and list `vc` in the field it reveals.
 :::
 
 Then we run the simulation for the second interval, just as we did before,
@@ -2039,11 +2030,11 @@ here.}}
 
 :::
 
-### The plot tool
+### {{v7,8|The plot tool}}{{v9|Plotting an answer}}
 
 Imagine, for example, that in Bo2's Example 6.1 we are asked to plot i(t) and
-v(t) for times between 0 s and 1.5 s. The first step is to run the `plot`
-tool:
+v(t) for times between 0 s and 1.5 s.{{v7,8| The first step is to run the `plot`
+tool:}}
 
 ```sym 7
 s\plot()
@@ -2062,11 +2053,9 @@ and wait a little. The graph of the voltage drop in the capacitor between
 time 0 and 1.5 seconds should appear in the screen.
 :::
 ::: only 9
-Open the **Plot** card, leave **Plot type** on *Plot a function of time (TR)*, and
-give it `vc` as the variable, `0` as the minimum and `1.5` as the maximum.
-The answers from the solve above are already in scope, so the name is all it
-needs. The graph of the capacitor's voltage drop between 0 and 1.5 seconds
-appears beneath.
+Open the **Plotting Tools** card, leave **Plot type** on *Plot a function of
+time (TR)*, and give it `vc` as the variable, `0` as the start and `1.5` as
+the end. The graph appears beneath.
 :::
 
 Compare it to the graph given by the textbook. Repeat this
@@ -2176,9 +2165,8 @@ I decided to simulate this using only fractions, not decimals.
 So I convert the 3.5V value to its exact fractional equivalent, thus:
 :::
 ::: only 9
-So write the value as the fraction it is: `7/2` rather than `3.5`. Version
-9 needs no conversion step — a fraction stays exact, and it is the decimal
-point that would make the arithmetic approximate.
+Write the value as the fraction it is, `7/2` rather than `3.5`: a fraction
+stays exact, a decimal point makes the arithmetic approximate.
 :::
 
 ```sym 7
@@ -2411,7 +2399,7 @@ l,1,0,1/2,2
 c,1,0,1/8,0
 ```
 
-Now the answer matches the book's. An expert user can reach for the `fd` gate
+Now the answer matches the book's. An expert user can reach for {{v7,8|the `fd` gate}}{{v9|FD analysis}}
 and the `t2s` tool, which we have not discussed yet, to find the inductor's
 value from the book's answer. This is how I found the ½ H myself, working
 backwards:
@@ -2481,7 +2469,7 @@ with `l` as the unknown. It answers `l` = {{o:1/2}} H.
 
 l=1/2
 
-The `fd` gate and `t2s` tool are used for frequency domain analysis, and will
+{{v7,8|The `fd` gate and `t2s` tool are}}{{v9|FD analysis and the `t2s` tool are}} used for frequency domain analysis, and will
 be discussed separately in a subsequent part of Symbulator's documentation.
 
 :::
@@ -2646,14 +2634,15 @@ $$
 $$
 
 ::: only 9
-We look in the results and see that `vc` is the first of those and `il` the
-second.
+`vc` is the first of those and `il` the second.
 :::
 
-These are the right answers. To plot them, run the `plot` tool, thus:
+These are the right answers. {{v7,8|To plot them, run the `plot` tool, thus:
 s\plot(). Once the plot window opens, enter `vc` as function, `0` as minimal
-time and `1.5` as maximal time. Compare to the graph from the book. Repeat the plot
-for `il`, and compare that one to the book's graph too.
+time and `1.5` as maximal time.}}{{v9|To plot them, open **Plotting Tools**,
+enter `vc` as the variable, `0` as the start and `1.5` as the end.}} Compare
+to the graph from the book. Repeat the plot for `il`, and compare that one to
+the book's graph too.
 
 ::: figure assets/practice/bo2s-example-6-5-plot-39.jpg
 
@@ -2758,8 +2747,9 @@ l,2,3,1,4
 c,3,0,1'µ,0
 ```
 
-Finally, run `s\plot()` and enter `vl` as function, `0` as minimal time and
-`0.005` as maximal time. In the resulting plot you will see something
+Finally, {{v7,8|run `s\plot()` and enter `vl` as function, `0` as minimal time and
+`0.005` as maximal time}}{{v9|plot `vl` in **Plotting Tools** from `0` to
+`0.005` s}}. In the resulting plot you will see something
 outstanding: around t = 1.57 ms, the voltage drop across the inductor is 3991
 volts!
 
@@ -2969,9 +2959,8 @@ $$
 $$
 
 ::: only 9
-Version 9 answers this one in about a second. `v1` and `v2` are in
-**Results**; they are long enough that they are easier read on screen than
-in print.
+Symbulator 9 answers this one in about a second; `v1` and `v2` are in
+**Results**.
 :::
 
 ```sym 7
@@ -3022,16 +3011,12 @@ In the problems below, you will see that, when we tinker with the equations,
 we have to do so in the frequency domain.
 :::
 ::: only 9
-That is where version 9 differs, and it is the more comfortable of the two.
-The equations are still solved in the frequency domain — that has not
-changed, and it is why initial conditions and impulses behave as they do —
-but what you *type* is read in the **time domain**, and converted for you on
-the way in. Write the answer you know the way you would write it on paper.
-
-The rule covers everything you add: equations, conditions and the
-expressions inside them. A relation between plain parameters, such as
-`x = 3`, is left alone — it fixes a symbol in the circuit rather than
-describing a signal, and there is nothing to transform.
+In version 9, what you *type* is read in the **time domain** and converted
+on the way in, though the equations are still solved in the frequency
+domain. Write the answer you know the way you would on paper. That covers
+everything you add: equations, conditions and the expressions in them. A
+relation between plain parameters, such as `x = 3`, is left alone, having
+nothing to transform.
 :::
 
 ::: problem Bo2's Drill Exercise 4.5 (Expert)
@@ -3062,11 +3047,8 @@ DiffEq’s Laplace Transform to do so: `s\t2s`.
 :::
 
 ::: only 9
-The non-expert user is right here: the new equation is simply
-`1-e^(-t/2) = vc`. Everything you type into expert mode in version 9 —
-equations, conditions, expressions — is read in the **time domain**, the
-same domain as the answers on screen. You do not convert, and you do not
-have to remember which side of the transform you are standing on.
+The new equation is simply `1-e^(-t/2) = vc`: expert mode reads it in the
+time domain, like the answers on screen.
 
 If you would rather convert by hand, **t2s** is still there and an equation
 already written in s is left alone rather than transformed twice:
@@ -3085,8 +3067,8 @@ s\t2s(1-e^(-t/2))=vc
 s\t2s(1-e^(–t/2))=vc
 ```
 
-We have our new equation. Copy this equation into the clipboard, since we
-will want to paste it in the Expert window. Now let’s run the Expert
+{{v7,8|We have our new equation. Copy this equation into the clipboard, since we
+will want to paste it in the Expert window. }}Now let’s run the Expert
 simulation of the circuit. Let’s define the value of the source as `a*u(t)`,
 since we know it’s a step source; the variable `a` will serve as the unknown
 value, for which we will solve in the Expert mode.
@@ -3127,7 +3109,7 @@ and 1/s-2/(2*s+1)=vc
 In the unknown field, add the variable a, preceded by a comma:
 :::
 ::: only 9
-**Add unknowns** likewise takes the name on its own, with no leading comma:
+**Add unknowns** takes the name:
 
 ```field 9 Add unknowns
 a

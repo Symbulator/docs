@@ -12,8 +12,8 @@ summary: >
 Symbulator is a program to solve linear electric circuits symbolically and
 numerically {{v7,8|in a calculator}}{{v9|on your device}}. It takes numerical and symbolic
 values, and returns numerical and symbolic results. The odd-sounding name is a portmanteau of *"symbolic simulator"*.
-Symbulator is widely regarded as the best symbolic simulator of linear
-electric circuits ever made for a {{v7,8|calculator.}}{{v9|handheld device.}}
+{{v7,8|Symbulator is widely regarded as the best symbolic simulator of linear
+electric circuits ever made for a calculator.}}
 
 ### What analyses can it do?
 
@@ -151,9 +151,9 @@ You can use Symbulator 9 in two ways:
 - as an online app running on a remote server, or
 - as an offline app running locally on your device.
 
-The easiest way to start is the online app, currently hosted at PythonAnywhere. Click **[here](https://symbulator.pythonanywhere.com/)** to go to it.
+The easiest way to start is the **[online app](https://symbulator.pythonanywhere.com/)**.
 
-To install Symbulator 9 as a local app that runs on your device even offline, follow the instructions at the bottom of the online app, under "**Run Symbulator 9 locally**".
+To run it offline on your own device, follow the instructions at the bottom of the online app, under **Run Symbulator 9 locally**.
 
 :::
 
@@ -221,113 +221,99 @@ simulation left behind before trying again.
 
 ## Input files and entries {#input-files}
 
-Everything you put into Symbulator — the circuit, the analysis, the settings,
-and whatever is in the **Evaluate** and **Solve** cards — can be kept and used
-again. There are two words for it.
+Everything you type into Symbulator — circuit, analysis, settings, the
+**Evaluate** and **Solve** cards — can be saved and reused. Two words matter
+here.
 
-- An **entry** is one set of inputs meant to be solved together: a circuit, the analysis to run on it, and the settings to run it with, along with a name.
+- An **entry** is one named set of inputs: a circuit, the analysis to run on it, and the settings.
 
-- An **input file** holds as many entries as you like, along with a name, such as *Circuits for Lesson 1 of the Tutorial*, and that is what you will see it called.
+- An **input file** is a named collection of entries, such as *Circuits for Lesson 1 of the Tutorial*.
 
-Input files are plain text and require the extension **`.cir`**. Using them is optional; the buttons to load, download and create them are in the **Input File** card at the top of the app.
+Input files are plain text with the extension **`.cir`**. They are optional. The buttons to load, download and create them are in the **Input File** card at the top of the app.
 
 ### Loading input files
 
-Symbulator arrives with input files of its own: one for each lesson in this
-tutorial, holding an entry for every simulation that lesson runs. It is not
-always one entry per problem — a few problems take more than one simulation,
-and each gets its own entry — so a lesson file may hold more entries than the
-lesson has problems. Between them, they let you follow the whole tutorial
-without typing a circuit at all.
+Symbulator comes with an input file for each lesson of this tutorial, holding
+an entry for every simulation in it. A problem that takes more than one
+simulation has an entry for each, so a lesson file may hold more entries than
+the lesson has problems. With them you can follow the whole tutorial without
+typing a circuit.
 
-**Built-in examples** lists the input files available for the lessons; click a
-title to load it. That link is always there. These files are **read-only**:
-load one and change it as much as you like, but you cannot write back to it.
+**Built-in examples** lists them; click a title to load it. These files are
+**read-only**: change a loaded one as much as you like, but you cannot write
+back to it.
 
-To open an input file of your own, click **Upload** and choose the `.cir` file. The dropdown beneath then reads *Entries in* followed by the file's name.
-Choosing an entry fills in every box on the page at once — circuit,
-analysis, settings and all. Then solve it exactly as you would something you
-had just typed.
+To open your own input file, click **Upload** and choose the `.cir` file. The dropdown beneath then reads *Entries in* and the file's name.
+Choosing an entry fills in every box on the page. Solve it as if you had just
+typed it.
 
-Trying to save an entry while a read-only file is loaded, or clicking **Create new**, starts a new input file of your own, blank by default.
+Saving an entry while a read-only file is loaded, or clicking **Create new**, starts a blank input file of your own.
 
 ### Saving your work
 
-Two links sit under the circuit box, and each appears only when it applies:
+Two links under the circuit box appear when they apply:
 
 - **Save inputs to new entry** adds what is on screen as a new entry and asks
-  you to name it. This is the one you want the first time.
-- **Update inputs in this entry** writes your changes back into the entry you
-  loaded. It appears once you have actually changed something.
+  for a name.
+- **Update inputs in this entry** writes your changes back into the loaded
+  entry. It appears once you have changed something.
 
 Beside the dropdown, **Rename** and **Delete** act on the entry itself.
 Neither is offered for the built-in examples, since they are read-only.
 
 ::: warning Nothing reaches your disk until you press Download
-Saving an entry writes it into the file open **in your browser**. The only
-thing that produces a `.cir` on your computer is **Download**.
+Saving an entry writes it into the file open **in your browser**. Only
+**Download** produces a `.cir` on your device.
 
-Symbulator does what it can in the meantime: your work is mirrored into the
-browser's own storage, so closing the tab does not lose it, and you are warned
-before anything replaces a file holding entries you have not downloaded. None
-of that is a file, though. Download when you are done.
+Your work is mirrored into the browser's storage, so closing the tab does not
+lose it, and you are warned before anything replaces a file with entries you
+have not downloaded. Still, download when you are done.
 :::
 
 ### What an entry remembers
 
-An entry keeps everything you typed, not just the circuit description: the
-analysis and whatever it needs — the frequency, the two node names for an
-equivalent, which kind of two-port — the Expert Mode equations, unknowns and
-conditions, everything in **Settings**, whatever is in **Evaluate** and its
-**Conditions**, the **Solve** card, the inputs of the **Plotting Tools** card,
-and a note of your own shown when the entry is loaded.
-
-An entry is not just a circuit: it is everything you give Symbulator to run the analysis. Load one a year later
-and you are back where you left off, with the same rounding, asking for the same analysis.
+An entry keeps everything you typed, not just the circuit: the analysis and
+what it needs (the frequency, the nodes of an equivalent, the kind of
+two-port), the Expert Mode equations, unknowns and conditions, everything in
+**Settings**, **Evaluate** and its **Conditions**, the **Solve** card, the
+**Plotting Tools** inputs, and a note of your own shown when the entry is
+loaded. Load one a year later and you are back where you left off.
 
 The **About input file (.cir) format** section inside the **Input File** card explains what input files carry, in detail.
 
 ## Reading and running side by side {#split-view}
 
-Working through this tutorial means going back and forth between two things:
-the page you are reading and the app you are running. You can keep them in two
-windows, and many people do. But there is a tidier way.
+This tutorial has you moving between the page you are reading and the app you
+are running. Two windows work. There is a tidier way.
 
-The **[split view](/split/)** puts them side by side in one window: this
-documentation on the left, the live app on the right. Drag the divider to give
-whichever side you need more room; on a phone or a narrow window the two
-become a pair of tabs instead. Everything in either half is the real thing —
-the same documentation and the same app, simply shown together.
+The **[split view](/split/)** puts both in one window: the documentation on
+the left, the live app on the right. Drag the divider to resize them; on a
+phone or a narrow window they become two tabs. Both halves are the real thing,
+simply shown together.
 
-What makes it worth using is that the two halves are connected. On the website,
-every worked problem in every lesson carries its own pair of links, sitting just
-under the problem's title:
+The two halves are connected. On the website, every worked problem carries two
+links under its title:
 
-- **Open in app ↗** loads that exact circuit — the description, the analysis, the settings, all of it — ready to run. Read it on the page, then run it yourself without typing a character.
+- **Open in app ↗** loads that circuit, with its analysis and settings, ready to run.
 
-- **Open in split view** does the same thing, but opens the side-by-side window first, on the very problem you were reading.
+- **Open in split view** does the same, but in the split view, on the problem you were reading.
 
 Inside the split view, **Open in app ↗** loads the circuit into the right-hand
-pane instead of opening a new tab, so you never leave the page you are reading.
-The second link disappears there, having nowhere left to take you.
+pane instead of a new tab, and the second link is not shown.
 
 ::: warning Loading a problem starts the app fresh
-Each **Open in app ↗** reloads the app with the circuit you asked for. That is
-the point of it — you are saying *show me this one* — but it does mean anything
-you had typed on that side is replaced. If you have been experimenting and want
-to keep the result, save it to an entry and download the file **before** you
-click the next problem. {{ref:input-files}} explains how.
+**Open in app ↗** reloads the app with the circuit you asked for, replacing
+anything you had typed there. To keep your own work, save it to an entry and
+download the file **before** you click the next problem. {{ref:input-files}}
+explains how.
 :::
 
-A problem that needs more than one simulation carries a link for each, marked
-with what that run is: **DC** for the pass that finds an initial condition,
-**TR** for the transient that follows it. A handful of problems have no link at
-all, because they are worked with pencil and paper rather than by the software.
+A problem with more than one simulation carries a link for each, marked **DC**
+or **TR**. A few problems have no link, because they are worked by hand.
 {{pdf|In the PDF, the links are on the web edition at `learn.symbulator.com`;
 everything else on this page applies either way.}}
 
-The split view keeps its address up to date as you move, so the window is always
-shareable exactly where you are: send someone
-`learn.symbulator.com/split/?lesson=6a&entry=3` and they open on the same
-problem, with the same circuit loaded beside it.
+The split view keeps its address current as you move, so it can be shared
+where you are: send someone `learn.symbulator.com/split/?lesson=6a&entry=3`
+and they open on the same problem, with the same circuit loaded.
 :::

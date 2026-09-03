@@ -8,6 +8,83 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #254 — the legibility pass over the version 9 text — **done and live, 3 Sep 2026**
+
+Roberto's brief, late on 3 Sep 2026: read the version 9 documentation
+end to end, mark anything old, out of place, verbose or convoluted, and
+rewrite for clarity and economy; commit, build and upload without waiting,
+so he can read it on the web in the morning; and keep a safety copy in
+case he wants it all reverted.
+
+**The safety copy is two things.** The git tag
+`before-legibility-pass-2026-09-03` on commit `a08a1c8` (the sources with
+#251–#253 applied and nothing from this pass), and
+`C:\Users\perez\Claude Symbulator\Notes\docs_src_before_legibility_pass_2026-09-03.zip`
+(`src/` and `book.yaml` at the same point). To revert everything from this
+pass and nothing else:
+
+    git -C "C:\Users\perez\Claude Symbulator\Documentation" checkout before-legibility-pass-2026-09-03 -- src book.yaml
+
+then `py build.py --web` and the `learn` deploy. A single chapter can be
+taken back the same way by naming its file.
+
+**What changed.** Every chapter's version 9 rendering was read with
+`tools/v9_lines.py` and the port-era prose rewritten in place — the same
+rules as #251, applied to legibility rather than to a word list. The
+kinds of change, with the reader's first page as the example:
+
+- **Padding out.** *Nothing is hidden away: every answer it worked out is
+  on the page, and reading them is a matter of scrolling and looking* →
+  *with every answer it worked out*. *That is the right default for a
+  machine doing algebra, and exactly what you want for…* → *That is what
+  you want for symbolic results*. The split-view and input-file sections
+  of the introduction lost about a third of their words and none of their
+  facts.
+- **Comparisons with the calculator that only a 7/8 reader could follow.**
+  *Symbulator 9 has the same tool* (same as what? the 7/8 text above is
+  hidden), *Symbulator 9 writes no such string for you*, *There is no
+  stored `zeq` to divide by*, *the collision is impossible*, *Version 9 is
+  not bound by the memory of a handheld*, *That is the difference a desktop
+  makes*, the *Why the resistor is r on one calculator and r1 on the other*
+  tip — all reworded to stand alone, or made 7/8-only.
+- **Calculator vocabulary that had survived #251** in shared sentences:
+  *the er script*, *the th script*, *the port script*, *the only tool*,
+  *the plot tool*, *the rms flag*, *the fd gate*, *s\pr*, *s\plot()*, *My
+  one-line solution*, *store it in a variable*, *ans(1)*, *described
+  between quotations*, *with no leading comma*, *copy this equation into
+  the clipboard*, *Ask for `{vc,ic}`*, *We get `{vs*µ/(µ+1),ro}`* — each
+  now a `{{v7,8|…}}` span or an `::: only` block, the 7/8 words untouched.
+  Lesson 6's two subheadings read *Limiting the results* and *Plotting an
+  answer* in version 9 via spans in the heading, which work.
+- **The card's real name.** *the **Plot** card* is the **Plotting Tools**
+  card (#174), in Lessons 6 and 11. *approximate to n significant digits*
+  is *approx to n digits*, the label the app actually shows, in Lessons 2
+  and 3.
+- **Restated values**, the #251 rule again: Lesson 4's `Req = 2.89 Ω …
+  The value is 2.89 Ω`, Lesson 5's *We get r2=50000 and r4=20000* right
+  after `50 kΩ and 20 kΩ`, Lesson 7's phasor repeated in prose, Lesson 8's
+  `pmax` stated three times — 7/8-only or folded.
+- **Two bugs in passing.** Lesson 6 described the TR analysis as *the
+  `tr` function, which takes the circuit description and, optionally, the
+  list of quantities you want back* — the Python API, not the app; it now
+  says to set **Analysis** to *TR*. Lesson 2 pointed at a *Solve
+  equations* card that does not exist (the card is **Solve**; the button
+  is *Solve equations*).
+
+**What was left alone, on purpose.** Roberto's own voice — the Joker, the
+Swiss knife, *Booyah!*, *Your idea of fun, right?*, the fair-use
+paragraph — and every shared sentence that reads fine in both versions.
+The 7/8 text is byte-for-byte what it was, which is what
+`check_against_originals.py` confirms: 75 verified (two more than before,
+since two answers became blocks it can see), the same 23 not found.
+
+**Numbers.** 11 chapters touched, 411 lines in and 544 out; `--check`
+clean; deployed to `learn` from a `--web` build, 37 files, verified —
+**the PDFs are still the 2 Sep build** and need a full `py build.py`
+before their next deploy.
+
+---
+
 ## #253 — an entry saves the Plotting Tools' inputs — **done and live, 3 Sep 2026**
 
 Roberto's note from the session working on the input-file tool: the

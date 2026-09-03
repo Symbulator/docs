@@ -11,8 +11,8 @@ summary: >
 
 In this lesson you will learn how to use the **ac** {{v7,8|program}}{{v9|analysis}}
 to solve AC circuits in Symbulator. You will also learn how to describe the
-elements you already know so they suit AC analysis, and how to use **er** and
-**th** in their AC mode.
+elements you already know so they suit AC analysis, and how to {{v7,8|use **er** and
+**th** in their AC mode}}{{v9|find equivalents in AC}}.
 
 ## AC analysis in Symbulator {#ac-analysis}
 
@@ -42,10 +42,9 @@ of them.
 ::: only 9
 ### The AC analysis
 
-Version 9 keeps AC on the same menu as the other analyses: set **Analysis**
-to *AC — alternating current*. Unlike DC and TR it needs one more input — the
-frequency of the circuit in radians per second, typed into the
-**ω — angular frequency** box that appears beside the menu.
+Set **Analysis** to *AC — alternating current*. Unlike DC and TR, it needs
+one more input: the frequency in radians per second, typed into the
+**ω — angular frequency** box beside the menu.
 
 ### AC mode in the other tools
 
@@ -109,41 +108,32 @@ answer at a time. You will see it used throughout this lesson.
 ::: only 9
 Symbulator answers in rectangular form unless you ask otherwise. In
 **Settings**, under *Display*, tick **Show AC answers as polar phasors** and
-every answer is shown as an amplitude and an angle instead. The circuit is
-re-solved as soon as you tick it, so you can switch back and forth on a
-solved circuit and watch the same answers change form.
+every answer is shown as an amplitude and an angle. The circuit is re-solved
+as soon as you tick it.
 
-Three things it deliberately leaves alone, and they are worth knowing so the
-setting does not look broken:
+Three things it leaves alone:
 
-- **Average power stays a plain number.** It is a real quantity, not a
-  phasor, so an angle would be meaningless — 1234 W is 1234 W. Complex
-  power *is* converted, because its polar form is the apparent power and
-  the power-factor angle, which is usually what you want. See
-  {{ref:lesson-power}}.
-- **Symbolic answers are left as they are**, exactly as SI prefixes leave
-  them. There is no angle to take of $v_{in} r_b/(r_a + r_b)$.
-- **It applies to AC only.** In DC every answer is real, and in the other
-  two analyses the answers are functions of *s* or *t*, so there is nothing
-  to take the angle of. The checkbox greys out there and tells you why.
+- **Average power stays a plain number.** It is real, so an angle would be
+  meaningless. Complex power *is* converted: its polar form is the apparent
+  power and the power-factor angle. See {{ref:lesson-power}}.
+- **Symbolic answers are left as they are.** There is no angle to take of
+  $v_{in} r_b/(r_a + r_b)$.
+- **It applies to AC only.** DC answers are real, and TR and FD answers are
+  functions of *t* or *s*. The checkbox greys out there.
 
-An answer that happens to be real still gets its angle, of 0° or 180°.
-That is deliberate: it is what the **aa** tool does, and it means a purely
-resistive circuit does not look as though the setting failed.
+An answer that happens to be real still gets its angle, 0° or 180°, as the
+**aa** tool does.
 
 ::: tip It combines with SI prefixes
-Ticking both gives you the amplitude with a prefix and the angle in plain
-degrees — `632.5 m∠108.4°`. The angle is never prefixed, which would be
-nonsense.
+With SI prefixes on too, the amplitude carries the prefix and the angle
+stays in degrees: `632.5 m∠108.4°`.
 
-One consequence to expect: a polar answer is always a decimal, even under
-*exact*. An angle in degrees is a measurement rather than a closed form, so
-there is nothing exact to preserve. This is the same trade SI prefixes make.
+A polar answer is always a decimal, even under *exact*: an angle in degrees
+has no closed form to preserve.
 :::
 
-The **aa** tool has not gone anywhere, and it is still the better choice when
-you want one value converted — or when you want the amplitude and angle of
-something that is not an answer by itself, such as a difference between two
+The **aa** tool is still the better choice for converting one value, or an
+expression that is not an answer by itself, such as a difference between two
 node voltages. {{ref:lesson-threephase}} uses it that way throughout.
 :::
 
@@ -238,8 +228,8 @@ ir1
 
 It reads {{o:1.789}}∠{{o:26.57}}° A.
 
-That is the one-value way of doing it. If you would rather see *every* answer
-in polar form, there is a setting for it — see *Rectangular or polar*, above.
+To see *every* answer in polar form, use the setting described in
+*Rectangular or polar*, above.
 :::
 
 This is correct. You manually convert it to a sinusoid, by putting it back in
@@ -280,16 +270,18 @@ l,2,0,.2
 ```
 
 ::: only 9
-The source is given in polar form, and version 9 reads it as written —
-magnitude, the angle sign, then the angle in degrees.
+The source is given in polar form and typed as written: magnitude, the angle
+sign, then degrees.
 
 Then AC, with **10** for ω. **Mini-Tools** with *aa* reads
 `ir1` as {{o:4.472}}∠{{o:3.43}}° A and `vl` as {{o:8.944}}∠{{o:93.43}}° V.
 Both are correct.
 :::
 
+::: only 7,8
 We ask for the current in the resistor and get 4.472∠3.43°, and for the voltage
 in the inductor and get 8.944∠93.43°. Both are correct.
+:::
 :::
 :::
 
@@ -302,7 +294,7 @@ AS7's Example 9.10
 :::
 
 ::: answer
-Since this is a passive circuit, to reduce it we will use the **er** tool.
+Since this is a passive circuit, to reduce it we {{v7,8|will use the **er** tool}}{{v9|find its equivalent impedance}}.
 
 ```sym 7
 "ca,1,2,2'm:r1,2,3,3:cb,3,0,10'm:l1,2,4,.2:r2,4,0,8"→cir
@@ -408,11 +400,12 @@ Read it with **Mini-Tools** set to *aa*: `aa(ir)` gives
 That is 4.789 A at an angle of −16.7°, which is correct.
 :::
 
+::: only 7,8
 ::: tip Why the resistor is r on one calculator and r1 on the other
 The version 7 description above names its resistor `r`; the version 8 one
 cannot, because the Nspire reserves `r` (and `rr`), as {{ref:lesson-dc}}
-notes — `r1` is the usual fix there. Version 9 reserves neither, and its
-panel keeps the plain `r`.
+notes — `r1` is the usual fix there.
+:::
 :::
 :::
 :::
@@ -432,7 +425,7 @@ AS7's Problem 9.37
 
 ::: answer
 Since the values are in ohms, these are all impedances. This is a passive
-circuit, so we could use the er tool. However, the structure of this circuit is
+circuit, so we could {{v7,8|use the er tool}}{{v9|find its equivalent}}. However, the structure of this circuit is
 so simple that we can reduce it by hand. The problem asks for the equivalent
 admittance, so our answer will be the inverse of the equivalent impedance:
 
@@ -462,13 +455,9 @@ AS7's Problem 9.39
 :::
 
 ::: answer
-Notice that the question gives you a frequency and that it is entirely
-superfluous: every value is already in ohms, so there is nothing for a
-frequency to convert. You will not need it.
-
-Notice also that nothing here asks for a full simulation. The equivalent
-impedance falls out of one expression, using the shorthand for parallel
-combination:
+The frequency the question gives is superfluous: every value is already in
+ohms. Nothing here needs a full simulation either; the equivalent impedance
+is one expression, using the parallel shorthand:
 
 ```sym 7
 4+𝐢20+s\pr({16,-𝐢14+𝐢25})→zeq
@@ -496,8 +485,7 @@ We get {{o:414.5}}∠{{o:-71.6}}° mA.
 :::
 
 ::: only 9
-There is no stored `zeq` to divide by, so put the whole thing in
-**Mini-Tools** with *aa*: `aa(12/(4+20j+pr(16,-14j+25j)))` gives
+Put the whole thing in **Mini-Tools** with *aa*: `aa(12/(4+20j+pr(16,-14j+25j)))` gives
 {{o:0.4145}}∠{{o:-71.60}}° A. Correct.
 :::
 
@@ -514,9 +502,8 @@ e,1,0,12
 r1,1,0,4+20j+[16,-14j+25j]
 ```
 
-No frequency is needed to solve this, but AC asks for one anyway — put in
-anything you like, because every value is already an impedance and none of them
-depends on it. Then `aa(ir1)` gives the same {{o:0.4145}}∠{{o:-71.60}}° A.
+AC asks for a frequency anyway; put in anything, since every value is
+already an impedance. Then `aa(ir1)` gives the same {{o:0.4145}}∠{{o:-71.60}}° A.
 :::
 :::
 :::
@@ -529,9 +516,9 @@ AS7's Problem 9.73
 :::
 
 ::: answer
-Eight impedances and no source, so this is a job for the equivalent-impedance
-tool rather than a solve. The names below carry the two nodes each element
-bridges, which is only a convenience — any unique names would do.
+Eight impedances and no source: a job for *Find equivalent* rather than a
+solve. The names carry the two nodes each element bridges, a convenience
+only.
 
 ```sym 7
 "r10,1,0,𝐢6:r20,2,0,𝐢8:r30,3,0,𝐢8:r40,4,0,𝐢12:r12,1,2,2:r23,2,3,-𝐢6:r34,3,4,4:r14,1,4,-𝐢4"→cir
@@ -571,11 +558,9 @@ A dependent source is described exactly like an independent one — the value is
 just an expression naming another element's answer instead of a
 number.{{i:dependent source}}
 
-The spelling of that name is the one thing that changed between the versions.
-Version 7 runs the quantity and the element together, as in `2icx`; version 9
-uses the same names it reports its answers under, so the current through `cx`
-is `icx` and the voltage across `rx` is
-`vrx`.
+{{v7,8|Version 7 runs the quantity and the element together, as in `2icx`.}}{{v9|The
+name is the one the answers use: the current through `cx` is `icx`, the
+voltage across `rx` is `vrx`.}}
 
 ::: practice
 
@@ -975,11 +960,9 @@ makes no sense: the expressions are beyond our understanding. Second, there are
 already many established tools for solving them numerically.
 :::
 ::: only 9
-Symbulator 9 is not bound by the memory of a handheld, so it goes considerably
-further than versions 7 and 8 before it slows down. It is still a symbolic
-solver, though, and symbolic effort grows quickly with the number of nodes. A
-circuit that would fill a page with algebra is one you should be solving
-numerically anyway.
+Symbulator is a symbolic solver, and symbolic effort grows quickly with the
+number of nodes. A circuit that would fill a page with algebra is one you
+should be solving numerically anyway.
 :::
 
 What matters is that you know the limits, so that they don't take you by
@@ -1058,9 +1041,8 @@ this on my TI-89 Titanium in six minutes, and on my friend Qifan's Voyage 200
 it fails altogether unless the source is reduced to a nominal 1 V.
 :::
 ::: only 9
-The same circuit takes version 9 about ten seconds, with every value still
-symbolic. That is the difference a desktop makes — the algebra is the same
-size, there is simply more room to do it in.
+This circuit takes Symbulator 9 about ten seconds, with every value
+symbolic.
 :::
 :::
 :::

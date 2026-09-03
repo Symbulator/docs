@@ -64,10 +64,9 @@ replaced by `x` at that point, so every graph option — minimum, maximum, zero,
 trace — works normally. Just remember that `x` means your variable.
 :::
 ::: only 9
-Symbulator 9 draws it for you, in the **Plot** card below the results. Solve
-the circuit first — the plot is of an answer, so there has to be one — then
-set **Plot type** to *Bode plot of a variable (FD)*. The two
-time boxes relabel themselves as frequencies.
+Symbulator draws it in the **Plotting Tools** card below the results. Solve
+the circuit first, then set **Plot type** to *Bode plot of a variable (FD)*;
+the two time boxes become frequencies.
 
 ```field 9 Circuit Description
 e,1,0,1
@@ -85,15 +84,11 @@ frequency, falling 20 dB per decade after the corner, with the phase heading
 for −90°.
 
 ::: warning The variable, not an expression
-The box takes an answer's *name* — `v2`, `ir1` — not a formula of your own,
-and it has to be one this circuit actually has. **Results** lists every name
-above it. The one place a formula does belong is the transfer-function plot
-type, next.
+The box takes an answer's *name*, as **Results** spells it, not a formula. A
+formula belongs in the transfer-function plot type, next.
 
-It is also tempting to solve in AC and then plot against frequency. There is
-nothing to sweep: an AC result is a phasor computed at one fixed ω, a single
-point. The Plot card re-solves the circuit at every frequency instead, which
-is why it works from the circuit rather than from a result.
+Solving in AC and plotting against frequency would not work: an AC result is
+one phasor at one ω. The plot re-solves the circuit at every frequency.
 :::
 
 ### When you have H(s) itself
@@ -265,10 +260,8 @@ The phase plot
 :::
 :::
 ::: only 9
-The same transfer-function type. There is no typing the expression "outside
-the tool first" to check it — the box shows it in full as you type, and if a
-symbol other than `s` slips in, the error names it rather than plotting the
-wrong thing.
+The same transfer-function type. If a symbol other than `s` slips in, the
+error names it.
 :::
 :::
 
@@ -456,10 +449,10 @@ im(ie) = 0
 
 with `w>0` and **real solutions only**, giving ω{{sub:0}} = {{o:25000}} rad/s.
 
-Version 9 solves this symbolically rather than by searching, so the sharpness
-of the peak costs it nothing — but the alternative equation is worth knowing
-anyway, because it says something true about the circuit: at resonance the
-source sees a purely real load, so its current is in phase with its voltage.
+Symbulator 9 solves this symbolically rather than by searching, so the sharp
+peak costs it nothing. The alternative equation is still worth knowing: at
+resonance the source sees a purely real load, so its current is in phase with
+its voltage.
 :::
 :::
 :::

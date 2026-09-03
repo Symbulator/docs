@@ -32,7 +32,7 @@ output node o, is `o,p,n,o`
 
 ### What answers do you get
 
-For each ideal op amp in a circuit, Symbulator will store the following
+For each ideal op amp in a circuit, Symbulator {{v7,8|will store}}{{v9|gives}} the following
 answers:
 
 - The current through the output node, flowing from the output node outwards.
@@ -75,10 +75,9 @@ as trivial by the calculator, and this leaves Symbulator one equation short.
 :::
 :::
 ::: only 9
-In Symbulator 9 the collision is impossible: **Results** lists node voltages
-and element quantities in separate sections, each labelled by its own node or
-element, so a node called o and an op amp called o never contend for the same
-name.
+In Symbulator 9 the two cannot collide: **Results** lists node voltages and
+element quantities separately, so a node called o and an op amp called o never
+share a name.
 
 ::: danger Never describe a source as e,#,0,v_#
 If you describe a source as `e1,1,0,v1`, you are declaring the voltage of node
@@ -112,8 +111,7 @@ r3o,3,o,20'k
 o,3,2,o
 ```
 
-{{v7,8|We ask for the values of the variables `vo` and `po`:}}{{v9|We look in
-the results and see `vo` and `po`:}}
+{{v7,8|We ask for the values of the variables `vo` and `po`:}}{{v9|Read `vo` and `po` in **Results**:}}
 
 ```sym 7
 {vo,po}
@@ -182,30 +180,22 @@ below.
 :::
 
 ::: only 9
-This is the one that catches people out, and Symbulator says so plainly:
+This one catches people out, and Symbulator says so:
 
 - `vth` = {{o:vs*(r1 + r2)/r1}}
 - `ino` = {{o:∞}}
 - `req` = {{o:0}}
 - `pmax` = {{o:∞}}
 
-with a note beneath the answers explaining that the short-circuit current is
-unbounded, so the equivalent is a voltage source with no impedance in series
-with it.
+with a note under the answers: the short-circuit current is unbounded, so
+the equivalent is a voltage source with nothing in series.
 
-None of that is a failure to solve, and none of it is guesswork. An ideal op
-amp holds its output voltage whatever current is drawn from it, so asking
-what flows through a short across that output has no answer as an equation —
-the two rounds Symbulator runs to build a Thévenin equivalent leave the
-second one unsolvable. What it does instead is put a resistance across the
-terminals rather than a short, and let that resistance fall to zero, which is
-what a short is. The current grows without bound, and an unbounded current
-through a short is precisely a source with nothing in the way of it: R{{sub:EQ}}
-= 0Ω.
-
-So V{{sub:TH}} is correct, as can be seen by comparing it to the book's
-answer — and the Thévenin resistance is not merely asserted
-here, it is the answer Symbulator gives.
+That is not a failure to solve. An ideal op amp holds its output voltage
+whatever current is drawn, so a short across its output carries an unbounded
+current, which is exactly a source with no resistance in series:
+R{{sub:EQ}} = 0 Ω. Symbulator finds it by putting a resistance across the
+terminals and letting it fall to zero. V{{sub:TH}} matches the book's
+answer.
 :::
 
 ::: figure assets/practice/bo2s-drill-exercise-3-11-thevenin-2.jpg
@@ -384,8 +374,7 @@ o,0,2,o
 ```
 
 ::: only 9
-Use the **Evaluate** card's **Conditions** box to say "given": put the answer
-you want in the first and the value you are giving it in the second:
+Put `vo` in **Evaluate** and the given value in its **Conditions** box:
 
 ```field 9 Evaluate
 vo
@@ -1284,9 +1273,9 @@ $$
 which is equivalent to the book's expression, and it is that which has to
 equal −5.
 
-Version 9 will not always arrange an expression the way the book
-does. If you want it another way, the **Evaluate** card takes
-`simplify()`, `collect()`, `expand()`, `factor()` and `apart()`.
+Symbulator will not always arrange an expression the way the book does. To
+rearrange it, **Evaluate** takes `simplify()`, `collect()`, `expand()`,
+`factor()` and `apart()`.
 :::
 
 We get **-r2/r1=-5**. Now make that part of v{{sub:o}} that is a factor of
@@ -1324,8 +1313,8 @@ solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=20000
 ```
 
 ::: only 9
-There is no `ans(1)`, so write the two equations out. This is what the
-**Solve** card is for — it solves a system that is not a circuit:
+Write the two equations out in the **Solve** card, which solves a system
+that is not a circuit:
 
 ```field 9 Equation(s) to solve in terms of the results
 -r2/r1 = -5
@@ -1337,9 +1326,11 @@ with `r2, r4` as the unknowns. The answer is `r2` = {{o:5*r1}} and
 book's `r1` = 10 kΩ and `r3` = 20 kΩ into it and you get 50 kΩ and 20 kΩ.
 :::
 
-{{v7,8|The expression above assumes that ans(1) and ans(2) are pointing to
-the two equations we found before. }}We get **r2=50000 and r4=20000**. This is
+::: only 7,8
+The expression above assumes that ans(1) and ans(2) are pointing to
+the two equations we found before. We get **r2=50000 and r4=20000**. This is
 correct.
+:::
 
 Now, if this problem was part of a test, I'd like to verify that the answer
 is correct. To confirm this, simulate the circuit using the four values given
@@ -1420,8 +1411,10 @@ with `r2, r4` as the unknowns. It answers `r2` = {{o:4*r1}} and
 `r4` = {{o:4*r3}} — at 10 kΩ each, {{o:40000}} Ω and {{o:40000}} Ω.
 :::
 
+::: only 7,8
 We get **r2=40000 and r4=40000**, the correct values for the remaining
 resistors.
+:::
 
 :::
 
@@ -1843,10 +1836,8 @@ This is exactly the answer from the book:
 
 If you are ever in doubt whether two expressions are the same,
 {{v7,8|enter them both separately into the calculator and compare them with
-the equality sign. If the answer is '**true**', they are the same.}}{{v9|subtract one from the other in
-**Evaluate**. If the answer is `0`, they are the same — an equality sign
-would only be read as a comparison to solve, not as a question about
-sameness.}}
+the equality sign. If the answer is '**true**', they are the same.}}{{v9|subtract one from the other in **Evaluate**: if the answer is `0`, they
+are the same.}}
 
 :::
 

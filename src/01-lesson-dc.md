@@ -19,10 +19,10 @@ series of progressively more diverse and complex examples. In a moment, I'll tea
 variables you don't need (ideally, the current folder should be empty), and
 type this:}}{{v8|I want you to create a new document in your calculator, or to
 delete all variables you don't need from your current one (ideally, the current
-document should be empty), and type this:}}{{v9|Open Symbulator 9. If you already
-have it installed as a local app, then just open that app. If you do *not* have it locally, 
-open the **[online app](https://symbulator.pythonanywhere.com/)** in a browser connected to the Internet. Let's click on **Clear all inputs**, found at the top right of the app page, to make sure there is nothing anywhere in the input fields.
-Then, in the box labelled **Circuit Description**, type the following circuit description, one element per line:}}
+document should be empty), and type this:}}{{v9|Open Symbulator 9 — the local app if you have it installed, otherwise the
+**[online app](https://symbulator.pythonanywhere.com/)** in a browser. Click
+**Clear all inputs**, at the top right, so every input field is empty. Then
+type this into the **Circuit Description** box, one element per line:}}
 
 ```sym 7
 s\dc("e1,1,0,36:r1,1,2,1'k:r2,2,3,3'k:r3,3,0,2'k")
@@ -41,9 +41,9 @@ r3,3,0,2'k
 Now I want you to press ENTER.
 :::
 ::: only 9
-Scroll down to the section called **Analysis & Settings**. If it is collapsed, open it with the little blue triangle to its left; under it are two drop-down menus. Set **Type of analysis** to *Solve
-circuit* and **Analysis** to *DC — direct current*. Then click
-**Run Symbulator**.
+Scroll down to **Analysis & Settings** (if it is collapsed, open it with the
+blue triangle to its left). Set **Type of analysis** to *Solve circuit* and
+**Analysis** to *DC — direct current*. Then click **Run Symbulator**.
 :::
 
 ::: only 7
@@ -60,10 +60,9 @@ of cryptic messages. Then, after a few seconds, it should have displayed a
 short Done.
 :::
 ::: only 9
-If you typed everything correctly, the word *Solving…* appears on the
-button for a moment. When it changes to *Solved!*, the results are ready. Scroll down to the
-Outputs part of the page, where the **Results** section is now active, holding
-the results for every node and every element of the circuit you just solved.
+The button reads *Solving…* for a moment, then *Solved!*. Scroll down to
+**Results**, under Outputs: there is an answer for every node and every
+element of the circuit.
 :::
 
 Congratulations! You have just run your first simulation in Symbulator 9.
@@ -87,11 +86,9 @@ knows exactly what we want. And because it is a program, it carries the
 parenthesis **()** after its name.
 :::
 ::: only 9
-The selections you made in **Analysis & Settings** tell Symbulator *what kind
-of question* you are asking (solve a circuit) and *which analysis* to perform
-(direct current). Everything else there is optional: you will meet the other
-menus and cards in later lessons, and until then they can be left exactly as
-they are.
+The two menus in **Analysis & Settings** tell Symbulator what to do (solve
+the circuit) and which analysis to run (direct current). Everything else there
+is optional; later lessons introduce it, and until then leave it as it is.
 :::
 
 ::: only 7,8
@@ -270,9 +267,8 @@ exact and the other two as approximate.
 
 After the simulation in DC is complete, Symbulator {{v7,8|stores a series of
 answers in the calculator's memory, labelled with easy to remember names for
-your convenience}}{{v9|fills in the **Results** section for you, under
-**OUTPUTS**. Nothing is hidden away: every answer it worked out is
-on the page, and reading them is a matter of scrolling and looking}}.
+your convenience}}{{v9|fills in the **Results** section under **OUTPUTS** with every answer it
+worked out}}.
 
 ::: only 9
 The **Results** are arranged in groups: **Node voltages** first, one per
@@ -283,33 +279,31 @@ Every answer is written the way you would write it by hand, as a named quantity
 and its value: v{{sub:1}} = 36 V, i{{sub:r1}} = 6 mA.
 
 ### How answers are shown
-Out of the box, Symbulator answers *exactly*. It works symbolically, so it
-would rather tell you a current is 3/500 A than round it off. That is the right
-default for a machine doing algebra, and exactly what you want for symbolic
-results: an answer of v{{sub:in}}·r{{sub:2}}/(r{{sub:1}}
-+ r{{sub:2}}) cannot and should not be rounded.
+By default, Symbulator answers *exactly*: it works symbolically, so a current
+comes back as 3/500 A rather than a decimal. That is what you want for
+symbolic results: v{{sub:in}}·r{{sub:2}}/(r{{sub:1}} + r{{sub:2}}) cannot be
+rounded.
 
 For numerical work like the example in this lesson, decimals read better. Open the
 **Settings** card and set **Rounding** to *approx to n digits*
 with **n** = 3, then tick **Use SI prefixes in answers**. The current above
 then reads 6 mA instead of 3/500 A.
 
-One thing to expect: ticking the prefix box moves **Rounding** off *exact* by
-itself, because a prefixed value is a decimal. Symbulator says so on screen
-rather than doing it silently, and the reverse happens too — choose *exact*
-again and the prefixes switch off.
+Ticking the prefix box moves **Rounding** off *exact* by itself, since a
+prefixed value is a decimal, and choosing *exact* again switches the prefixes
+off. Symbulator says so on screen when it does.
 
-Throughout this tutorial the numerical examples assume approximate answers to
-three or four figures with prefixes on, and the symbolic ones assume *exact*.
-Where a change is needed, the text says so.
+In this tutorial, numerical examples assume approximate answers to three or
+four figures with prefixes on, and symbolic ones assume *exact*. The text says
+so when a change is needed.
 :::
 
 ### Answer for each node
 
 For each node, its voltage with reference to ground is {{v7,8|stored in a variable called v plus the name of
 the node. For example, for a node called 1, its voltage is stored in a variable
-called v1}}{{v9|shown under **Node voltages**, labelled *v* with the node's name
-below it. The voltage in node 1 appears as `v1`}}.
+called v1}}{{v9|shown under **Node voltages** as `v` plus the node's name: node 1's
+voltage is `v1`}}.
 
 ### Answers for each resistor
 
@@ -467,9 +461,7 @@ r3,3,0,2'k
 ```
 
 **Step 2: run the simulation.** {{v7,8|We can now ask Symbulator to simulate
-this circuit in direct current:}}{{v9|The two menus under the box say what kind
-of simulation to run. We want a plain solve of the circuit as described, in
-direct current, so:}}
+this circuit in direct current:}}{{v9|Under the box, choose the simulation:}}
 
 ```sym 7
 s\dc(cir)
@@ -496,17 +488,15 @@ Symbulator says Done when a simulation completes. It took my calculator under
 each in a memorably named variable in the current document.
 :::
 ::: only 9
-The page fills in below almost immediately — this circuit takes under a
-second on a computer, and maybe a bit more on a mobile — and a line at the foot of the **Results** section tells you what just
-happened: *DC analysis · 16 result(s)*, and how long it took. Sixteen answers,
-found and displayed in one go.
+The page fills in below — this circuit takes under a second on a computer,
+and maybe a bit more on a mobile — and a line at the foot of **Results** says
+what happened: *DC analysis · 16 result(s)*, and how long it took.
 :::
 
 For a DC analysis, these answers are as follows:
 
 - The **voltage of each node**, so the voltages of nodes 1, 2 and 3 are in
-  {{v7,8|v1, v2 and v3}}{{v9|the three lines under **Node voltages**:
-  `v1`, `v2` and `v3`}}.
+  {{v7,8|v1, v2 and v3}}{{v9|`v1`, `v2` and `v3`, under **Node voltages**}}.
 - The **current through each element**. The direction of the current is defined
   as going from the first node in the element's description to the second.
 - The **voltage drop in each element**, defined as the difference in voltage
@@ -626,17 +616,15 @@ true
 ```
 
 ::: only 9
-If the resistors consume exactly what the source delivers, then all
-four powers together must come to zero. In **Evaluate**:
+If the resistors consume exactly what the source delivers, the four powers
+add up to zero. In **Evaluate**:
 
 ```field 9 Evaluate
 pr1 + pr2 + pr3 + pe
 ```
 
-The answer is **0** — not a small number, but zero. If you want to be sure it
-is genuinely zero and not three digits' worth of rounding, set **Rounding**
-back to *exact* for a moment: Symbulator returns to fractions and still
-says 0.
+The answer is **0**. To be sure it is not rounding, set **Rounding** to
+*exact* for a moment: still 0.
 :::
 
 This is the right answer, and concludes the solution to this, your first ever

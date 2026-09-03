@@ -47,10 +47,8 @@ Numerical-from-symbolic problems can be solved in two ways. If they are simple
 — one or two unknown values, one or two numerical answers wanted — it is
 quicker to simulate the circuit symbolically and then solve for the numerical
 answers with the {{v7,8|**solve** command of the
-calculator}}{{v9|**Solve** card, which sits under the results and
-does exactly that job}}. If they are not simple, it is easier to use
-**expert mode**{{v9|, which version 9 offers in its
-**Expert Mode** box}}.
+calculator}}{{v9|**Solve** card, under the results}}. If they are not simple, it is easier to use
+**expert mode**{{v9|, in the **Expert Mode** box}}.
 
 Let's see an example of each.
 
@@ -97,12 +95,10 @@ s\dc(cir)
 
 ::: only 9
 ::: tip Turn rounding back to exact for this lesson
-{{ref:lesson-dc}} had you set **Rounding** to *approximate to n significant
-digits*, which is right for numbers and pointless here: there is nothing to
-round. Open **Settings** and put **Rounding** back to *exact*. The **Use SI
-prefixes** tick will clear itself when you do, which is what we want — a
-prefix has nothing to attach itself to in an answer like
-$v/(r1 + r2)$.
+{{ref:lesson-dc}} had you set **Rounding** to *approx to n digits*. There is
+nothing to round here, so open **Settings** and put it back to *exact*. The
+**Use SI prefixes** tick clears itself: a prefix has no place in an answer
+like $v/(r1 + r2)$.
 :::
 
 Type the three elements into the box, one to a line:
@@ -118,8 +114,7 @@ Leave **Type of analysis** on *Solve circuit*, set **Analysis** to
 :::
 
 {{v7|This simulation took 15 seconds in my calculator.}}{{v8|This simulation
-took a couple of seconds in my calculator.}}{{v9|The answer comes back almost at
-once — symbolic circuits this small cost nothing.}} To find the current i, we
+took a couple of seconds in my calculator.}}{{v9|The answer comes back at once.}} To find the current i, we
 {{v7,8|ask for `ir1` or `ir2`}}{{v9|read `ir1` or `ir2`}}. To find the voltage drop on r2, we
 {{v7,8|ask for `vr2`}}{{v9|read `vr2`}}.
 
@@ -215,8 +210,8 @@ solve(re=12000 and ir3=.006,{e,r1})
 ```
 
 ::: only 9
-That is what the **Solve** card is for. You will find it under the
-results, beside **Evaluate**. Open it and fill in two boxes.
+That is what the **Solve** card, under the results beside **Evaluate**, is
+for. It has two boxes.
 
 In the first, headed **Equation(s) to solve in terms of the results**, write
 one equation per line, using the same names the results use:
@@ -246,9 +241,8 @@ works only in the values in the circuit description.
 The shorthand works in these boxes too, so `re = 12'k` reads as 12000.
 :::
 
-An instant later we get the answers: {{v7,8|e = 72 V and r1 = 2000 Ω}}{{v9|the
-card lists *e* = 72.0 and *r1* = 2000.0, that is a source of 72 V and a
-resistor of 2000 Ω}}. These are the right answers. Not many other circuit
+An instant later we get the answers: {{v7,8|e = 72 V and r1 = 2000 Ω}}{{v9|the card lists *e* = 72.0 and *r1* = 2000.0: a 72 V source and a
+2000 Ω resistor}}. These are the right answers. Not many other circuit
 simulators allow this flexibility.
 :::
 :::
@@ -333,9 +327,8 @@ Expert mode cracks these problems open in a single call, and gives fully
 numerical answers whenever the problem provides as many answers as it hides
 values.
 
-Expert mode takes three things — extra equations, extra unknowns and extra
-conditions — in three boxes, hidden until you ask for them. Open the **Expert Mode** box and tick **Enable
-Expert Mode**; three new fields appear:
+Expert mode takes extra equations, unknowns and conditions in three boxes.
+Open the **Expert Mode** box and tick **Enable Expert Mode** to see them:
 
 - **Add equations** — one per line, written in the names the results use.
 - **Add unknowns** — comma-separated.
@@ -346,13 +339,11 @@ DC, AC, FD and TR.
 
 ::: problem B11's Example 5.6, using ex
 ::: answer
-We use the very same circuit description as before, `r1` as the symbolic
-value included.
+We use the same circuit description as before, `r1` included.
 
-The statement of the problem gives us the information we need to write the two
-additional equations: the source sees 12 kΩ, and the current through R3 is
-6 mA. Both are written in the same names the answers come back under, and the
-SI shorthand works here too:
+The problem gives us the two extra equations: the source sees 12 kΩ, and the
+current through R3 is 6 mA. They use the names the answers come back under,
+and the SI shorthand works here too:
 
 ```field 9 Circuit Description
 e,1,0,e
@@ -370,15 +361,11 @@ ir3 = 6'm
 e, r1
 ```
 
-Run it in DC as usual. This time nothing comes back symbolic: Symbulator has
-enough to pin every value down, so the whole circuit arrives in numbers. The
-node voltages read v{{sub:1}} = 72 V, v{{sub:2}} = 60 V and
-v{{sub:3}} = 36 V, and at the foot of **Results by element** you will find
-the two unknowns you asked for, listed like any other answer:
-*e* = 72 and *r1* = 2000.
-
-Both are right, and they arrived alongside everything else rather than in a
-separate step — the whole circuit is solved, not just the two unknowns.
+Run it in DC. This time everything comes back numerical: the node voltages
+read v{{sub:1}} = 72 V, v{{sub:2}} = 60 V and v{{sub:3}} = 36 V, and at the
+foot of **Results by element** are the two unknowns, listed like any other
+answer: *e* = 72 and *r1* = 2000. Both are right, and the whole circuit was
+solved with them in one step.
 
 The speed advantage of the expert mode is not necessarily evident in this
 simple problem. It does give you an idea of what the expert mode is all about:
@@ -387,18 +374,16 @@ after. Had this circuit been larger, the benefit in computation time would be
 clear.
 
 ::: note What you can write an equation about
-Anything the simulation reports: node voltages `v1`, `v2`, …, element
-currents `ir3`, branch voltages `vr1`, powers `pr2`, and the resistance or
-impedance a source sees, `re` and `ze`. The one exception is the AC power
-family — `s_`, `p_` and `ap_` in an AC analysis — which is defined through
-complex conjugation and cannot be solved as part of the system; Symbulator
-will tell you so rather than quietly ignoring the equation, and you can
-restate the constraint in voltages and currents instead.
+Anything the simulation reports: node voltages such as `v1`, currents `ir3`,
+voltage drops `vr1`, powers `pr2`, and the resistance or impedance a source
+sees, `re` or `ze`. The one exception is AC power (`s`, `p` and `ap` in an AC
+analysis), which involves a complex conjugate and cannot be solved for;
+Symbulator says so, and you can restate the constraint in voltages and
+currents.
 
-One thing to watch: a quantity that depends on an unknown quadratically, such
-as a power, can be satisfied by two different component values. Symbulator
-returns one of them. If the answer surprises you, check whether the other root
-is the one the problem meant.
+A quantity that is quadratic in an unknown, such as a power, can be satisfied
+by two values. Symbulator returns one; if it surprises you, check whether the
+problem meant the other.
 :::
 :::
 :::
@@ -448,7 +433,7 @@ solve(ir5=12,vx)
 ```
 
 ::: only 9
-Solve it in DC, then use the **Solve equations** card:
+Solve it in DC, then use the **Solve** card:
 
 ```field 9 Equation(s) to solve in terms of the results
 ir5 = 12
@@ -541,10 +526,9 @@ e
 We get that E is {{o:16}} V. These are correct.
 :::
 ::: only 9
-Run it. Everything comes back numerical: *e* = 16 appears among the results, so
-E is {{o:16}} V, and the current through the source, `ie`, is −0.02 A, so I{{sub:S}} is {{o:0.02}} A. These are correct.
-The solver also fills in the two resistors it had to find on the way,
-*r2* = 1600 Ω and *r3* = 8000 Ω.
+Run it. Everything comes back numerical: *e* = 16, so E is {{o:16}} V, and
+`ie` = −0.02 A, so I{{sub:S}} is {{o:0.02}} A. Both correct. The two
+resistors come back too: *r2* = 1600 Ω and *r3* = 8000 Ω.
 :::
 
 :::
@@ -663,9 +647,9 @@ pjd1 = -80 and ped2 = 0
 vs, is
 ```
 
-The problem asks for *positive* values, and that is what the
-conditions are for — the two power equations are quadratic, so four
-solutions fit the circuit, and these pick the one that was meant:
+The problem asks for *positive* values, which is what the conditions are
+for: the two power equations are quadratic, so four solutions fit, and the
+conditions pick the one meant:
 
 ```field 9 Add conditions
 is > 0 and vs > 0
@@ -675,11 +659,9 @@ Run it in DC, with **Rounding** at 4 significant digits. Everything
 comes back numerical: v{{sub:s}} = {{o:17.61}} V and
 i{{sub:s}} = {{o:0.3973}} A.
 
-And the answers show *how* the zero-dissipation constraint is met:
-i{{sub:R5}} comes back exactly {{o:0}} A. The CCVS's voltage is
-0.1 i{{sub:R5}}, so the constraint drove its own controlling
-current to zero — the source dissipates nothing because the circuit
-arranged for it to *be* nothing.
+The answers also show *how* the CCVS dissipates nothing: i{{sub:R5}} comes
+back exactly {{o:0}} A, and its voltage is 0.1 i{{sub:R5}}, so the source
+itself is zero.
 
 :::
 :::
