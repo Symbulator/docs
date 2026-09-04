@@ -329,7 +329,7 @@ e,rx
 Now we have six variables and six equations. Press Enter and wait a few
 seconds. A few other dialogs appear; in this and every other expert example in
 this volume, just press OK without changing anything. When Symbulator says "Done", go ahead and retrieve the
-answers: `rx` gives 2000 and `e` gives 72. Both are right.
+answers: `rx` gives {{o:2000}} and `e` gives {{o:72}}. Both are right.
 
 The speed advantage is not obvious in so simple a problem, but the idea is:
 you halt the simulation in mid-air and give Symbulator extra information. Had

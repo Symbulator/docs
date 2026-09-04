@@ -6,7 +6,7 @@ updated: 2026-08-29
 summary: >
   Learn to describe a circuit in Symbulator, and how to run a *direct current*
   analysis using **dc**. Learn how to describe a *voltage source* using **e**,
-  and a *resistor* (or a conductance) using **r**.
+  and a *resistor* using **r**.
 ---
 
 I firmly believe one learns best by *doing*, so I have written this
@@ -61,7 +61,7 @@ short Done.
 :::
 ::: only 9
 The button reads *Solving…* for a moment, then *Solved!*. Scroll down to
-**Results**, under Outputs: there is an answer for every node and every
+**Results**, under **OUTPUTS**: there is an answer for every node and every
 element of the circuit.
 :::
 
@@ -86,8 +86,8 @@ knows exactly what we want. And because it is a program, it carries the
 parenthesis **()** after its name.
 :::
 ::: only 9
-The two menus in **Analysis & Settings** tell Symbulator what to do (solve
-the circuit) and which analysis to run (direct current). Everything else there
+The two menus in **Analysis & Settings** tell Symbulator what to do (in this case, solve
+the circuit) and which analysis to run (in this case, in direct current). Everything else there
 is optional; later lessons introduce it, and until then leave it as it is.
 :::
 
@@ -128,8 +128,8 @@ r3,3,0,2'k
 
 ::: only 9
 Using one line per element keeps a long circuit readable,
-and it makes mistakes easier to find. Symbulator
-also accepts a colon as a separator. This is the same circuit in one line: 
+and it makes mistakes easier to find. But it is not the only option: Symbulator
+also accepts a colon as a separator. For example, this is the same circuit, described in one line: 
 :::
 
 ```field 9 Circuit Description
@@ -271,7 +271,7 @@ your convenience}}{{v9|fills in the **Results** section under **OUTPUTS** with e
 worked out}}.
 
 ::: only 9
-The **Results** are arranged in groups: **Node voltages** first, one per
+The results are arranged in groups: **Node voltages** first, one per
 node, and then **Results by element**, one group per element, headed by its
 name and its kind — `r1` *resistor*, `e` *voltage source*.
 
@@ -281,15 +281,7 @@ and its value: v{{sub:1}} = 36 V, i{{sub:r1}} = 6 mA.
 ### How answers are shown
 By default, Symbulator answers *exactly*: it works symbolically, so a current
 comes back as 3/500 A rather than a decimal. That is what you want for
-symbolic results:
-
-$$
-\dfrac{v_{in}\,r2}{r1 + r2}
-$$
-
-cannot be rounded.
-
-For numerical work like the example in this lesson, decimals read better. Open the
+symbolic results. For numerical work like the example in this lesson, decimals read better. Open the
 **Settings** card and set **Rounding** to *approx to n digits*
 with **n** = 3, then tick **Use SI prefixes in answers**. The current above
 then reads 6 mA instead of 3/500 A.
@@ -305,14 +297,14 @@ so when a change is needed.
 
 ### Answer for each node
 
-For each node, its voltage with reference to ground is {{v7,8|stored in a variable called v plus the name of
+Symbulator calculates for each node a voltage with reference to ground, which is {{v7,8|stored in a variable called v plus the name of
 the node. For example, for a node called 1, its voltage is stored in a variable
 called v1}}{{v9|shown under **Node voltages** as `v` plus the node's name: node 1's
 voltage is `v1`}}.
 
 ### Answers for each resistor
 
-For each resistor, the following answers are calculated:
+Symbulator calculates for each resistor the following answers:
 
 - The voltage drop in the resistor, defined as the voltage in the first node minus the voltage in the second node, in volts. For a
   resistor called r5, this is {{v7,8|stored in}}{{v9|given in}} `vr5`.
@@ -364,9 +356,8 @@ For each voltage source, the following answers are calculated:
 - The equivalent resistance of the rest of the circuit, as seen by the source.
   For a source called e2, `re2`.
 
-::: note This last one belongs to sources only
-That equivalent resistance is a property of the *view from a source*, not a
-per-element quantity, so it exists only for sources.
+::: note For sources only
+The equivalent resistance is a property of the *view from a source*, not for every element. It exists only for sources.
 
 ::: only 7,8
 There is no `rr1` for a resistor — a resistor's resistance is the value you
@@ -395,14 +386,14 @@ B11's Example 5.7
 
 ::: answer
 All the values in this circuit are numbers: no element value is unknown. This
-is a **numerical circuit** — one where we know the numerical value of every
+is a *numerical circuit* — one where we know the numerical value of every
 element in it.
 
 I will now walk you step by step through the solution. This process applies to
-most numerical simulations in Symbulator: first you describe the circuit, then
-you run the simulation, then you get the answers.
+most numerical simulations in Symbulator: (1) describe the circuit, (2)
+run the simulation, and (3) get the answers.
 
-**Step 1: describe the circuit.** Description starts with **naming the
+**Step 1: Describe the circuit.** Description starts with **naming the
 nodes**. As we said, you can call them anything you want, number or letter, as
 long as the name is unique — but one node must always be called 0 (zero), the
 ground node, with a voltage of 0 V. In this circuit the ground node is marked
@@ -465,7 +456,7 @@ r2,2,3,3'k
 r3,3,0,2'k
 ```
 
-**Step 2: run the simulation.** {{v7,8|We can now ask Symbulator to simulate
+**Step 2: Run the simulation.** {{v7,8|We can now ask Symbulator to simulate
 this circuit in direct current:}}{{v9|Under the box, choose the simulation:}}
 
 ```sym 7
@@ -523,7 +514,7 @@ To read the signs of your answers correctly, mind the details:
   evaluate the negative of that power.
 :::
 
-**Step 3: get the answers.** We can now answer the six questions in the
+**Step 3: Get the answers.** We can now answer the six questions in the
 problem.
 
 *Answer to question (a).* The equivalent resistance as seen by the source
@@ -541,7 +532,7 @@ re
 
 ::: only 9
 Nothing to compute: in **Results by element**, the resistance seen by the
-source reads `re` = 6 kΩ. Correct.
+source reads `re` = {{o:6}} kΩ. Correct.
 :::
 
 ::: only 7,8
@@ -579,11 +570,11 @@ description — is as follows.
 
 ::: only 7,8
 It is found by evaluating `vr1`: the {{t:machine}} returns `6`, that is 6 V.
-For {{var:R_2}}, `vr2` gives 18 V. And for {{var:R_3}}, `vr3` gives 12 V. These are all the right
+For {{var:R_2}}, `vr2` gives {{o:18}} V. And for {{var:R_3}}, `vr3` gives {{o:12}} V. These are all the right
 answers.
 :::
 ::: only 9
-The voltage drop `vr1` reads 6 V, `vr2` reads 18 V and `vr3` reads 12 V. All
+The voltage drop `vr1` reads {{o:6}} V, `vr2` reads {{o:18}} V and `vr3` reads {{o:12}} V. All
 correct.
 :::
 
@@ -628,8 +619,7 @@ add up to zero. In **Evaluate**:
 pr1 + pr2 + pr3 + pe
 ```
 
-The answer is **0**. To be sure it is not rounding, set **Rounding** to
-*exact* for a moment: still 0.
+The answer is {{o:0}}.
 :::
 
 This is the right answer, and concludes the solution to this, your first ever
@@ -685,14 +675,14 @@ r2,3,0,15
 you need:}}{{v9|Run it, and the answers are all on the page already:}}
 
 - {{v7,8|Evaluating `ir1` or `ir2` gets the current in the resistors}}{{v9|The
-  current through either resistor is}}: {{o:2}} A
+  current through either resistor, `ir1` or, `ir2` is}}: {{o:2}} A
 - {{v7,8|Evaluating `vr1` gets}}{{v9|`vr1` gives}}
   the voltage drop in the 30Ω resistor: {{o:60}} V
 - {{v7,8|Evaluating `vr2` gets}}{{v9|`vr2` is}} the voltage drop in the 15Ω resistor: {{o:30}} V
 - {{v7,8|Evaluating `pr1` gets}}{{v9|`pr1` is}} the power consumed in the 30Ω resistor: {{o:120}} W
 - {{v7,8|Evaluating `pr2` gets}}{{v9|`pr2` is}} the power consumed in the 15Ω resistor: {{o:60}} W
 - {{v7,8|Evaluating }}{{v7|`-pe1`}}{{v8|`–pe1`}}{{v9|Flipping the sign of `pe1`}} gets the power delivered by the 120V source: {{o:240}} W
-- {{v7,8|Evaluating }}{{v7|`-pe2`}}{{v8|`–pe2`}}{{v9|Flipping the sign of `pe2`}} gets the power delivered by the 30V source: {{o:-60}} W. This means this source is actually consuming 60W.
+- {{v7,8|Evaluating }}{{v7|`-pe2`}}{{v8|`–pe2`}}{{v9|Flipping the sign of `pe2`}} gets the power delivered by the 30V source: {{o:-60}} W. The source consumes 60W, so it delivers *negative* 60W.
 - {{v7,8|Evaluating `pr1+pr2+pe1+pe2` gets}}{{v9|`pr1+pr2+pe1+pe2` is}} the sum of powers: {{o:0}} W. As expected.
 
 Wasn't that easy?
@@ -772,7 +762,9 @@ r3,1,0,1.2'k
 
 ::: problem B11's Example 7.2
 
-Determine {{var:I_4}}, {{var:I_S}} and {{var:V_2}}. My solution: I named
+Determine {{var:I_4}}, {{var:I_S}} and {{var:V_2}}.
+
+My solution: I named
 the top node **1**, and the other **2**:
 
 ::: figure assets/practice/b11s-example-7-2-4.jpg
@@ -1025,14 +1017,14 @@ approx({ir1,ir2,ir3})
 ```
 
 ::: only 7,8
-The calculator returns {{o:{4.77,7.18,2.41}}} meaning {{var:I_R1}} =4.77A,
-{{var:I_R2}} =7.18A and {{var:I_R3}} =2.41A. These are the correct answers. We
+The calculator returns {{o:{4.77,7.18,2.41}}} meaning {{var:I_R1}} ={{o:4.77}}A,
+{{var:I_R2}} ={{o:7.18}}A and {{var:I_R3}} ={{o:2.41}}A. These are the correct answers. We
 could get this answer in a single-line command:
 :::
 ::: only 9
 Reading the current through each of the three resistors, `ir1`, `ir2` and
 `ir3`:
-{{var:I_R1}} =4.77A, {{var:I_R2}} =7.18A and {{var:I_R3}} =2.41A. These are the
+{{var:I_R1}} ={{o:4.77}}A, {{var:I_R2}} ={{o:7.18}}A and {{var:I_R3}} ={{o:2.41}}A. These are the
 correct answers.
 :::
 
@@ -1259,12 +1251,12 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, {{o:{.6,.2,.4,-2.}}}, indicates {{var:I_1}}=.6 A, {{var:I_2}}=.2 A,
-{{var:I_3}}=.4 A and {{var:V_ab}}=-2 V. This is correct.
+The answer, {{o:{.6,.2,.4,-2.}}}, indicates {{var:I_1}}={{o:.6}} A, {{var:I_2}}={{o:.2}} A,
+{{var:I_3}}={{o:.4}} A and {{var:V_ab}}={{o:-2}} V. This is correct.
 :::
 ::: only 9
-The answer is {{var:I_1}}=.6 A, {{var:I_2}}=.2 A, {{var:I_3}}=.4 A and
-{{var:V_ab}}=-2 V. This is correct.
+The answer is {{var:I_1}}={{o:.6}} A, {{var:I_2}}={{o:.2}} A, {{var:I_3}}={{o:.4}} A and
+{{var:V_ab}}={{o:-2}} V. This is correct.
 :::
 
 :::
@@ -1302,19 +1294,7 @@ e1,1,0,-2
 e2,2,0,-10
 ```
 
-::: only 9
-The answers you want are `irt`, `ir1` and `ir2`, in **Results**.
-
-Ask **Evaluate** for:
-
-```field 9 Evaluate
-(v1-v2)/irt
-va-vb
-```
-
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
-:::
-
+::: only 7,8
 The answer we get indicates that the equivalent resistance, given by
 
 $$
@@ -1322,8 +1302,38 @@ $$
 $$
 
 is {{o:7.2}} kΩ, and that
-{{var:I_T}}={{o:1.11}} mA, {{var:I_1}}=.{{o:133}} mA,
-{{var:I_2}}=.{{o:444}} mA and {{var:V_ab}}={{o:-0.8}} V. This is correct.
+{{var:I_T}}={{o:1.11}} mA, {{var:I_1}}={{o:.133}} mA,
+{{var:I_2}}={{o:.444}} mA and {{var:V_ab}}={{o:-0.8}} V. This is correct.
+:::
+
+::: only 9
+
+Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+
+Three answers are given directly in **Results**. The values of `irt`, `ir1` and `ir2` tell us that {{var:I_T}}={{o:1.11}} mA, {{var:I_1}}={{o:.133}} mA, and {{var:I_2}}={{o:.444}} mA.
+
+The other two answers can be found using **Evaluate**. The equivalent resistance, given by the expression:
+
+$$
+\dfrac{v_1 - v_2}{I_T}
+$$
+
+is found by evaluating:
+
+```field 9 Evaluate
+(v1-v2)/irt
+```
+
+which gives a value of {{o:7.2}} kΩ.
+
+And the value of {{var:V_ab}} is found by evaluating:
+
+```field 9 Evaluate
+va-vb
+```
+
+which gives the value of {{o:-0.8}} V. This is correct.
+:::
 
 :::
 

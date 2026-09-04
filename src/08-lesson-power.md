@@ -244,7 +244,7 @@ The minus sign in front of `ie` is not a typo, and leaving it out gives you
 the wrong word. Symbulator reports the current *consumed by* each element,
 source or not, so `ie` runs into the source. The pf tool is given two bare
 phasors and cannot know that one belongs to a source. Call it with `-ie`, the
-current the source *delivers*, and you get **0.97342 leading**; with `ie` you
+current the source *delivers*, and you get {{o:0.97342}} leading; with `ie` you
 get 0.97342 lagging, the same magnitude and the wrong answer.
 
 The rule of thumb: negate the current for a source, leave it alone for a load.

@@ -171,7 +171,7 @@ The **th** script tells us it found the Thévenin voltage, but could not find
 the Norton current. This is not a surprise, since an ideal op amp has zero
 output resistance and a fixed voltage, an infinite current when
 short-circuited. So the Thévenin equivalent is given by {{var:V_TH}} and no
-resistance (or {{var:R_EQ}} = 0Ω). Evaluating `vth` results in
+resistance (or {{var:R_EQ}} = {{o:0}}Ω). Evaluating `vth` results in
 
 ((r1+r2) vs)/r1
 
@@ -193,7 +193,7 @@ the equivalent is a voltage source with nothing in series.
 That is not a failure to solve. An ideal op amp holds its output voltage
 whatever current is drawn, so a short across its output carries an unbounded
 current, which is exactly a source with no resistance in series:
-{{var:R_EQ}} = 0 Ω. Symbulator finds it by putting a resistance across the
+{{var:R_EQ}} = {{o:0}} Ω. Symbulator finds it by putting a resistance across the
 terminals and letting it fall to zero. {{var:V_TH}} matches the book's
 answer.
 :::
@@ -235,11 +235,11 @@ The answers you want are `vo` and `io`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{9.,.00065}**, is correct: {{var:v_o}} is 9V and {{var:i_o}} is
-0.65mA
+The answer, {{o:{9.,.00065}}}, is correct: {{var:v_o}} is {{o:9}}V and {{var:i_o}} is
+{{o:0.65}}mA
 :::
 ::: only 9
-The answer is {{var:v_o}} = 9V and {{var:i_o}} = 0.65mA. This is correct.
+The answer is {{var:v_o}} = {{o:9}}V and {{var:i_o}} = {{o:0.65}}mA. This is correct.
 :::
 
 :::
@@ -337,10 +337,10 @@ The answers you want are `vo` and `ir1`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{-1.25, 5e-5}**, is correct.
+The answer, {{o:{-1.25, 5e-5}}}, is correct.
 :::
 ::: only 9
-The answer is `vo` = -1.25 V and `ir1` = 5e-5 A. This is correct.
+The answer is `vo` = {{o:-1.25}} V and `ir1` = {{o:5e-5}} A. This is correct.
 :::
 
 :::
@@ -388,14 +388,14 @@ Then run it again with `vs = -4` and once more with `vs = 6`.
 :::
 
 ::: only 7,8
-The answer, **{-6.6,13.2,-19.8}**, is correct within the linear realm, but
+The answer, {{o:{-6.6,13.2,-19.8}}}, is correct within the linear realm, but
 since the output is constrained to no more than 15V or less than -15V, the
-answer is {{var:v_O}}=**-15**V for {{var:v_S}} = 6V.
+answer is {{var:v_O}}={{o:-15}}V for {{var:v_S}} = {{o:6}}V.
 :::
 ::: only 9
-The answers, `vo` = -6.6 V, 13.2 V and -19.8 V, are correct within the linear
+The answers, `vo` = {{o:-6.6}} V, {{o:13.2}} V and {{o:-19.8}} V, are correct within the linear
 realm, but since the output is constrained to no more than 15V or less than
--15V, the answer is {{var:v_O}}=**-15**V for {{var:v_S}} = 6V.
+-15V, the answer is {{var:v_O}}={{o:-15}}V for {{var:v_S}} = {{o:6}}V.
 :::
 
 :::
@@ -429,7 +429,7 @@ o,0,1,o
 The answer, **{-.12, 8e-6}**, is correct.
 :::
 ::: only 9
-The answer is `vo` = -.12 V and `irf` = 8e-6 A. This is correct.
+The answer is `vo` = {{o:-.12}} V and `irf` = {{o:8e-6}} A. This is correct.
 :::
 
 :::
@@ -460,7 +460,7 @@ o,a,b,o
 The answer you want is `vo`, in **Results**.
 :::
 
-The answer, **-6**, is correct.
+The answer, {{o:-6}}, is correct.
 
 :::
 
@@ -636,7 +636,7 @@ vo/v1
 ```
 :::
 
-We get **1+r2/r1**, which is correct.
+We get {{o:1+r2/r1}}, which is correct.
 
 :::
 
@@ -848,11 +848,11 @@ vth^2*1000/(req+1000)^2
 :::
 
 ::: only 7,8
-The answers we get, **{2.8125e-4,2.5e-4}**, are correct. Now we simulate the
+The answers we get, {{o:{2.8125e-4,2.5e-4}}}, are correct. Now we simulate the
 (a) circuit.
 :::
 ::: only 9
-The answers we get, `pmax` = 2.8125e-4 W and 2.5e-4 W in the 1 kΩ load, are
+The answers we get, `pmax` = {{o:2.8125e-4}} W and {{o:2.5e-4}} W in the 1 kΩ load, are
 correct. Now we simulate the (a) circuit.
 :::
 
@@ -908,7 +908,7 @@ o,b,a,o
 The answer you want is `vo`, in **Results**.
 :::
 
-The answer, **-1**, is correct.
+The answer, {{o:-1}}, is correct.
 
 :::
 
@@ -935,7 +935,7 @@ r5,3,o,5'k
 o,2,3,o
 ```
 
-The answer for `vo`, **7**, is correct.
+The answer for `vo`, {{o:7}}, is correct.
 
 :::
 
@@ -1050,11 +1050,11 @@ The answers you want are `vo` and `io`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{-8.,-.0048}**, is correct. Notice a current of 4.8mA is going
+The answer, {{o:{-8.,-.0048}}}, is correct. Notice a current of 4.8mA is going
 into the op amp.
 :::
 ::: only 9
-The answer is `vo` = -8 V and `io` = -.0048 A. This is correct. Notice a
+The answer is `vo` = {{o:-8}} V and `io` = {{o:-.0048}} A. This is correct. Notice a
 current of 4.8mA is going into the op amp.
 :::
 
@@ -1093,11 +1093,11 @@ The answers you want are `vo` and `io`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{-3.8,-.001425}**, is correct. Again, the current is going into
+The answer, {{o:{-3.8,-.001425}}}, is correct. Again, the current is going into
 the op amp.
 :::
 ::: only 9
-The answer is `vo` = -3.8 V and `io` = -.001425 A. This is correct. Again, the
+The answer is `vo` = {{o:-3.8}} V and `io` = {{o:-.001425}} A. This is correct. Again, the
 current is going into the op amp.
 :::
 
@@ -1164,7 +1164,7 @@ r4,6,0,15'k
 o,6,5,o
 ```
 
-{{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}} **3 v2 − 4 v1**, which is the
+{{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}} {{o:3 v2 − 4 v1}}, which is the
 correct answer.
 
 :::
@@ -1323,7 +1323,7 @@ r4*(r1 + r2)/(r1*(r3 + r4)) = 3
 
 with `r2, r4` as the unknowns. The answer is `r2` = {{o:5*r1}} and
 `r4` = {{o:r3}}: a design rule rather than a pair of numbers. Put the
-book's `r1` = 10 kΩ and `r3` = 20 kΩ into it and you get 50 kΩ and 20 kΩ.
+book's `r1` = 10 kΩ and `r3` = 20 kΩ into it and you get {{o:50}} kΩ and {{o:20}} kΩ.
 :::
 
 ::: only 7,8
@@ -1365,7 +1365,7 @@ Design a difference amplifier with gain 4.
 
 My solution follows. Again the statement is a fancy way of saying: for the
 circuit of the previous problem, find the resistor values that give an output
-{{var:v_o}} = **4** ({{var:v_2}}-{{var:v_1}}), that is, -4{{var:v_1}} +
+{{var:v_o}} = {{o:4}} ({{var:v_2}}-{{var:v_1}}), that is, -4{{var:v_1}} +
 4{{var:v_2}}. Same as before.
 
 ```sym 7
@@ -1452,7 +1452,7 @@ The answer you want is `ir5`, in **Results**.
 :::
 
 In the schematic, the current {{var:i_o}} corresponds to `ir5`. The answer,
-**2e-6**, is correct.
+{{o:2e-6}}, is correct.
 
 :::
 
@@ -1556,8 +1556,14 @@ r2,a,2,12'k
 r3,2,0,3'k
 ```
 
-{{v7,8|Evaluating `approx({vo,iro})` we get the answer, **{.35,2.5e-5}**.}}{{v9|`vo` is **.35** and `iro` is **2.5e-5**.}} This is
+::: only 7,8
+Evaluating `approx({vo,iro})` we get the answer, {{o:{.35,2.5e-5}}}. This is
 correct.
+:::
+::: only 9
+`vo` is {{o:.35}} and `iro` is {{o:2.5e-5}}. This is
+correct.
+:::
 
 :::
 
@@ -1588,11 +1594,11 @@ The answers you want are `vo` and `iro`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{10,1/1000}**, is correct. To say a 1/1000 A current is the
+The answer, {{o:{10,1/1000}}}, is correct. To say a 1/1000 A current is the
 same as 1mA.
 :::
 ::: only 9
-The answer is `vo` = 10 V and `iro` = 1/1000 A, that is 1mA. This is correct.
+The answer is `vo` = {{o:10}} V and `iro` = {{o:1/1000}} A, that is 1mA. This is correct.
 :::
 
 :::
@@ -1630,7 +1636,7 @@ o3,0,6,o
 The answer you want is `vo`, in **Results**.
 :::
 
-The answer, **9**, is correct.
+The answer, {{o:9}}, is correct.
 
 :::
 
@@ -1668,7 +1674,7 @@ Ask **Evaluate** for `expand(vo)` with **Rounding** set to *approx (full precisi
 **Settings**. The answer is arranged differently from the book's, which is a matter of presentation rather than of arithmetic.
 :::
 
-The answer, **-2.4 v1 − 6**, is correct.
+The answer, {{o:-2.4 v1 − 6}}, is correct.
 
 :::
 
@@ -1705,7 +1711,7 @@ o2,0,7,o
 Ask **Evaluate** for `expand(vo)`.
 :::
 
-The answer, **8 v1 – 4 v2**, is correct.
+The answer, {{o:8 v1 – 4 v2}}, is correct.
 
 :::
 
@@ -1738,7 +1744,7 @@ ob,0,4,b
 oc,0,c,o
 ```
 
-The answer, **8.667**, is correct.
+The answer, {{o:8.667}}, is correct.
 
 :::
 

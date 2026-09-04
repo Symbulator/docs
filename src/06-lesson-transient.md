@@ -366,7 +366,7 @@ c,1,0,1/12
 ::: only 9
 The answers you want are `vc` and `ic`, in **Results**.
 
-`vc` = 6 V and `ic` = 0 A.
+`vc` = {{o:6}} V and `ic` = {{o:0}} A.
 :::
 
 ```out 7,8
@@ -442,7 +442,7 @@ c,3,0,1/12
 ::: only 9
 The answers you want are `vc`, `ic` and `v2`, in **Results**.
 
-`vc` = 8 V, `ic` = 0 A and `v2` = 8 V.
+`vc` = {{o:8}} V, `ic` = {{o:0}} A and `v2` = {{o:8}} V.
 :::
 
 ```out 7,8
@@ -509,7 +509,7 @@ c,2,0,1/10
 ::: only 9
 The answers you want are `vc`, `ic` and `v1`, in **Results**.
 
-`vc` = 6 V, `ic` = 0 A and `v1` = 12 V.
+`vc` = {{o:6}} V, `ic` = {{o:0}} A and `v1` = {{o:12}} V.
 :::
 
 ```out 7,8
@@ -661,7 +661,7 @@ r12,2,0,12
 ::: only 9
 The answers you want are `il`, `vl` and `ir4`, in **Results**.
 
-`il` = 2 A, `vl` = 0 V and `ir4` = 2 A.
+`il` = {{o:2}} A, `vl` = {{o:0}} V and `ir4` = {{o:2}} A.
 :::
 
 ```out 7,8
@@ -762,7 +762,7 @@ ed,3,0,3*vr8
 ::: only 9
 The answers you want are `il` and `vl`, in **Results**.
 
-`il` = 2 A and `vl` = 0 V.
+`il` = {{o:2}} A and `vl` = {{o:0}} V.
 :::
 
 ```out 7,8
@@ -823,7 +823,7 @@ o,0,1,o
 ::: only 9
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
 
-`vc` = 10 V, `ic` = 0 A and `vo` = -10 V.
+`vc` = {{o:10}} V, `ic` = {{o:0}} A and `vo` = {{o:-10}} V.
 :::
 
 ```out 7,8
@@ -885,7 +885,7 @@ r2,1,0,2
 ::: only 9
 The answers you want are `vc`, `ic` and `vo`, in **Results**.
 
-`vc` = 10 V, `ic` = 0 A and `vo` = 14 V.
+`vc` = {{o:10}} V, `ic` = {{o:0}} A and `vo` = {{o:14}} V.
 :::
 
 ```out 7,8
@@ -950,7 +950,7 @@ r4,1,0,4
 ::: only 9
 The answers you want are `vc` and `ic`, in **Results**.
 
-`vc` = 8 V and `ic` = 0 A.
+`vc` = {{o:8}} V and `ic` = {{o:0}} A.
 :::
 
 ```out 7,8
@@ -1046,7 +1046,7 @@ l,2,0,6
 ::: only 9
 The answers you want are `il` and `vl`, in **Results**.
 
-`il` = 3 A and `vl` = 0 V.
+`il` = {{o:3}} A and `vl` = {{o:0}} V.
 :::
 
 ```out 7,8
@@ -1998,7 +1998,7 @@ r3,2,0,2
 ::: only 9
 The answers you want are `vc` and `il`, in **Results**.
 
-`vc` = 2 V and `il` = 1 A.
+`vc` = {{o:2}} V and `il` = {{o:1}} A.
 :::
 
 ```out 7,8
@@ -2094,7 +2094,7 @@ c,2,0,1/3
 ::: only 9
 The answers you want are `vc` and `il`, in **Results**.
 
-`vc` = 2 V and `il` = 0 A.
+`vc` = {{o:2}} V and `il` = {{o:0}} A.
 :::
 
 ```out 7,8
@@ -2299,7 +2299,7 @@ j,0,3,1
 ::: only 9
 The answers you want are `vc` and `il`, in **Results**.
 
-`vc` = 2 V and `il` = 1 A.
+`vc` = {{o:2}} V and `il` = {{o:1}} A.
 :::
 
 ```out 7,8
@@ -2365,7 +2365,7 @@ c,1,0,1/8
 ::: only 9
 The answers you want are `il` and `vc`, in **Results**.
 
-`il` = 2 A and `vc` = 0 V.
+`il` = {{o:2}} A and `vc` = {{o:0}} V.
 :::
 
 ```out 7,8
@@ -2500,7 +2500,7 @@ l2,2,0,4
 ::: only 9
 The answers you want are `il1` and `il2`, in **Results**.
 
-`il1` = 2 A and `il2` = 0 A.
+`il1` = {{o:2}} A and `il2` = {{o:0}} A.
 :::
 
 ```out 7,8
@@ -2559,7 +2559,7 @@ o,0,2,o
 ::: only 9
 The answers you want are `vca` and `vcb`, in **Results**.
 
-`vca` = 0 V and `vcb` = 4 V.
+`vca` = {{o:0}} V and `vcb` = {{o:4}} V.
 :::
 
 ```out 7,8
@@ -2725,7 +2725,7 @@ s1,3,0
 ::: only 9
 The answers you want are `il` and `vc`, in **Results**.
 
-`il` = 4 A and `vc` = 0 V.
+`il` = {{o:4}} A and `vc` = {{o:0}} V.
 :::
 
 ```out 7,8
@@ -2901,7 +2901,7 @@ cb,2,0,1/3
 ::: only 9
 The answers you want are `vca` and `vcb`, in **Results**.
 
-`vca` = 9 V and `vcb` = 9/4 V.
+`vca` = {{o:9}} V and `vcb` = {{o:9/4}} V.
 :::
 
 ```out 7,8

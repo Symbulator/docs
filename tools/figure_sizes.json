@@ -1900,7 +1900,26 @@
   }
  },
  "overrides": {
+  "circuit/b11e0507.jpg": 135.0,
+  "circuit/b11e0507b.jpg": 125.1,
   "practice/a-more-complex-problem-44.png": 156.0,
+  "practice/b11s-example-5-20-2.jpg": 116.0,
+  "practice/b11s-example-6-13-3.jpg": 112.5,
+  "practice/b11s-example-6-15-9.jpg": 132.6,
+  "practice/b11s-example-7-11-13.jpg": 156.0,
+  "practice/b11s-example-7-2-4.jpg": 116.0,
+  "practice/b11s-example-7-4-8.jpg": 156.0,
+  "practice/b11s-example-7-6-12.jpg": 128.0,
+  "practice/b11s-example-7-7-5.jpg": 132.6,
+  "practice/b11s-example-8-10-11.jpg": 128.0,
+  "practice/b11s-example-8-18-15.jpg": 132.6,
+  "practice/b11s-example-8-24-14.jpg": 137.5,
+  "practice/b11s-example-8-26-16.jpg": 132.6,
+  "practice/b11s-figure-7-32-6.jpg": 123.8,
+  "practice/b11s-figure-7-40-10.jpg": 156.0,
+  "practice/hk5s-figure-1-26-1.jpg": 62.0,
+  "practice/rm3s-example-7-5-hidden-source-17.jpg": 156.0,
+  "practice/rm3s-figure-7-16-hidden-source-18.jpg": 72.1,
   "screen/ansas7p1077.png": 107.0
  },
  "target_mm": 2.7

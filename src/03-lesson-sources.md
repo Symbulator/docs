@@ -71,9 +71,14 @@ circuit is numerical, so set **Rounding** to *approx to n digits* with
 **n** = 3 and tick **Use SI prefixes**, as in {{ref:lesson-dc}}.
 :::
 
-{{v7,8|We ask for the values of two variables, `ir1` and `vr1`. We get `.01`
-and `200.`, meaning a 10 mA current and a 200 V voltage drop.}}{{v9|We read
-`ir1` = 10 mA and `vr1` = 200 V.}}
+::: only 7,8
+We ask for the values of two variables, `ir1` and `vr1`. We get {{o:.01}}
+and {{o:200.}}, meaning a 10 mA current and a 200 V voltage drop.
+:::
+::: only 9
+We read
+`ir1` = {{o:10}} mA and `vr1` = {{o:200}} V.
+:::
 :::
 :::
 
@@ -341,7 +346,7 @@ r6,2,0,3
 ```
 
 Run it in DC, then ask **Evaluate** for `-ie`, the current the source
-delivers. The answer is **3 A**.
+delivers. The answer is {{o:3}} A.
 
 An example where using pr makes no sense is B11's Example 8.3, because you need
 to know the value of the current through {{var:R_1}}.
@@ -462,8 +467,14 @@ r1,1,0,4
 The answers you want are `v1`, `ie` and `ir1`, in **Results**.
 :::
 
-{{v7,8|The calculator returns **{12,4,3}**, meaning}}{{v9|The answers show}} {{var:V_S}} is 12V, {{var:I_1}} is
-4A and {{var:I_2}} is 3A. These are the correct answers. {{v7,8|We will keep using the single-line instruction.}}
+::: only 7,8
+The calculator returns {{o:{12,4,3}}}, meaning {{var:V_S}} is {{o:12}}V, {{var:I_1}} is
+{{o:4}}A and {{var:I_2}} is {{o:3}}A. These are the correct answers. We will keep using the single-line instruction.
+:::
+::: only 9
+The answers show {{var:V_S}} is {{o:12}}V, {{var:I_1}} is
+{{o:4}}A and {{var:I_2}} is {{o:3}}A. These are the correct answers.
+:::
 
 :::
 
@@ -499,12 +510,12 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-We get these answers: **{1.25,4.75,3.25}**. So {{var:I_R2}} is 1.25A,
-{{var:I_R6}} is 4.75A, and {{var:I_R8}} is 3.25A.
+We get these answers: {{o:{1.25,4.75,3.25}}}. So {{var:I_R2}} is {{o:1.25}}A,
+{{var:I_R6}} is {{o:4.75}}A, and {{var:I_R8}} is {{o:3.25}}A.
 :::
 ::: only 9
-The answer is {{var:I_R2}} = 1.25A, {{var:I_R6}} = 4.75A and {{var:I_R8}} =
-3.25A.
+The answer is {{var:I_R2}} = {{o:1.25}}A, {{var:I_R6}} = {{o:4.75}}A and {{var:I_R8}} =
+{{o:3.25}}A.
 :::
 
 :::
@@ -540,12 +551,12 @@ The answers you want are `v1`, `v2`, `ir1`, `ir2` and `ir3`, in **Results**.
 :::
 
 ::: only 7,8
-We get the following answers: **{6,-6,3,1,1}**. So {{var:V_1}}=6V,
-{{var:V_2}}=-6V, {{var:I_R1}}=3A, and {{var:I_R2}}={{var:I_R3}}=1A.
+We get the following answers: {{o:{6,-6,3,1,1}}}. So {{var:V_1}}={{o:6}}V,
+{{var:V_2}}={{o:-6}}V, {{var:I_R1}}={{o:3}}A, and {{var:I_R2}}={{var:I_R3}}={{o:1}}A.
 :::
 ::: only 9
-The answer is {{var:V_1}}=6V, {{var:V_2}}=-6V, {{var:I_R1}}=3A and
-{{var:I_R2}}={{var:I_R3}}=1A.
+The answer is {{var:V_1}}={{o:6}}V, {{var:V_2}}={{o:-6}}V, {{var:I_R1}}={{o:3}}A and
+{{var:I_R2}}={{var:I_R3}}={{o:1}}A.
 :::
 
 :::
@@ -585,11 +596,11 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{-2.,1.,.5}**, indicates {{var:v_1}}=-2V, {{var:v_2}}=1V,
-{{var:v_3}}=0.5V. This is correct.
+The answer, {{o:{-2.,1.,.5}}}, indicates {{var:v_1}}={{o:-2}}V, {{var:v_2}}={{o:1}}V,
+{{var:v_3}}={{o:0.5}}V. This is correct.
 :::
 ::: only 9
-The answer is {{var:v_1}}=-2V, {{var:v_2}}=1V and {{var:v_3}}=0.5V. This is
+The answer is {{var:v_1}}={{o:-2}}V, {{var:v_2}}={{o:1}}V and {{var:v_3}}={{o:0.5}}V. This is
 correct.
 :::
 
@@ -631,11 +642,11 @@ The answers you want are `ir1` and `vrx`, in **Results**.
 
 ::: only 7,8
 Select DC. Add equation `ir2=4`. Add unknown `rx`. Run the simulation. The
-answer, **{-8,80}**, means that {{var:I_X}} is -8A and that {{var:V_X}} is 80V.
+answer, {{o:{-8,80}}}, means that {{var:I_X}} is {{o:-8}}A and that {{var:V_X}} is {{o:80}}V.
 :::
 ::: only 9
 Select DC. Add equation `ir2=4`. Add unknown `rx`. Run the simulation. The
-answer is {{var:I_X}} = -8A and {{var:V_X}} = 80V.
+answer is {{var:I_X}} = {{o:-8}}A and {{var:V_X}} = {{o:80}}V.
 :::
 
 :::
@@ -670,11 +681,11 @@ The answers you want are `v1`, `v2` and `v3`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{1,2,3}**, is correct: {{var:v_1}}=1V, {{var:v_2}}=2V,
-{{var:v_3}}=3V.
+The answer, {{o:{1,2,3}}}, is correct: {{var:v_1}}={{o:1}}V, {{var:v_2}}={{o:2}}V,
+{{var:v_3}}={{o:3}}V.
 :::
 ::: only 9
-The answer is {{var:v_1}}=1V, {{var:v_2}}=2V and {{var:v_3}}=3V. This is correct.
+The answer is {{var:v_1}}={{o:1}}V, {{var:v_2}}={{o:2}}V and {{var:v_3}}={{o:3}}V. This is correct.
 :::
 
 :::
@@ -700,7 +711,7 @@ e2,1,2,5
 r2,0,2,2
 ```
 
-This gives us a value for {{var:I_2}} of **3.4** A. This is correct.
+This gives us a value for {{var:I_2}} of {{o:3.4}} A. This is correct.
 
 :::
 
@@ -743,11 +754,11 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{-.5,-1.5,1.5,11.5}**, is correct: {{var:v_1}}=-.5,
-{{var:v_2}}=-1.5, {{var:v_3}}=1.5, i=11.5
+The answer, **{-.5,-1.5,1.5,11.5}**, is correct: {{var:v_1}}={{o:-.5}},
+{{var:v_2}}={{o:-1.5}}, {{var:v_3}}={{o:1.5}}, {{var:i}}={{o:11.5}}
 :::
 ::: only 9
-The answer is {{var:v_1}}=-.5, {{var:v_2}}=-1.5, {{var:v_3}}=1.5 and {{var:i}}=11.5. This
+The answer is {{var:v_1}}={{o:-.5}}, {{var:v_2}}={{o:-1.5}}, {{var:v_3}}={{o:1.5}} and {{var:i}}={{o:11.5}}. This
 is correct.
 :::
 
@@ -785,11 +796,11 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{10.67,-1.33}**, tells us that {{var:V_1}} is 10.67V and
-{{var:V_2}} is -1.33V.
+The answer, {{o:{10.67,-1.33}}}, tells us that {{var:V_1}} is {{o:10.67}}V and
+{{var:V_2}} is {{o:-1.33}}V.
 :::
 ::: only 9
-The answer is {{var:V_1}} = 10.67V and {{var:V_2}} = -1.33V.
+The answer is {{var:V_1}} = {{o:10.67}}V and {{var:V_2}} = {{o:-1.33}}V.
 :::
 
 :::
@@ -818,11 +829,11 @@ j,0,1,1
 ```
 
 ::: only 7,8
-The answer, **{20.,-.667,1.67}**, tells us that {{var:V_1}} is 20V, {{var:I_1}}
-is -.667A and {{var:I_2}} is 1.67 A.
+The answer, {{o:{20.,-.667,1.67}}}, tells us that {{var:V_1}} is {{o:20}}V, {{var:I_1}}
+is {{o:-.667}}A and {{var:I_2}} is {{o:1.67}} A.
 :::
 ::: only 9
-The answer is {{var:V_1}} = 20V, {{var:I_1}} = -.667A and {{var:I_2}} = 1.67 A.
+The answer is {{var:V_1}} = {{o:20}}V, {{var:I_1}} = {{o:-.667}}A and {{var:I_2}} = {{o:1.67}} A.
 :::
 
 :::
@@ -859,10 +870,10 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-Answer: **{3.33,-.667}**. This is correct.
+Answer: {{o:{3.33,-.667}}}. This is correct.
 :::
 ::: only 9
-The answer is `ir2` = 3.33 A and `ir3` = -.667 A. This is correct.
+The answer is `ir2` = {{o:3.33}} A and `ir3` = {{o:-.667}} A. This is correct.
 :::
 
 :::
@@ -899,13 +910,13 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-Answer: **{37.82,32.73,3.27,1.27,3.27}**. You should know how to read these
-by now, but here it is just in case: {{var:V_1}} = 37.82V, {{var:V_2}} =
-32.73V, {{var:I_1}} = 3.27A, {{var:I_2}} = 1.27A, {{var:I_3}} = 3.27A.
+Answer: {{o:{37.82,32.73,3.27,1.27,3.27}}}. You should know how to read these
+by now, but here it is just in case: {{var:V_1}} = {{o:37.82}}V, {{var:V_2}} =
+{{o:32.73}}V, {{var:I_1}} = {{o:3.27}}A, {{var:I_2}} = {{o:1.27}}A, {{var:I_3}} = {{o:3.27}}A.
 :::
 ::: only 9
-The answer is {{var:V_1}} = 37.82V, {{var:V_2}} = 32.73V, {{var:I_1}} = 3.27A,
-{{var:I_2}} = 1.27A and {{var:I_3}} = 3.27A.
+The answer is {{var:V_1}} = {{o:37.82}}V, {{var:V_2}} = {{o:32.73}}V, {{var:I_1}} = {{o:3.27}}A,
+{{var:I_2}} = {{o:1.27}}A and {{var:I_3}} = {{o:3.27}}A.
 :::
 
 :::
@@ -1030,11 +1041,11 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{.00154,.00111}** is correct: {{var:I_R2}} = 1.54 mA and
-{{var:I_R3}} = 1.11 mA.
+The answer, **{.00154,.00111}** is correct: {{var:I_R2}} = {{o:1.54}} mA and
+{{var:I_R3}} = {{o:1.11}} mA.
 :::
 ::: only 9
-The answer is {{var:I_R2}} = 1.54 mA and {{var:I_R3}} = 1.11 mA. This is
+The answer is {{var:I_R2}} = {{o:1.54}} mA and {{var:I_R3}} = {{o:1.11}} mA. This is
 correct.
 :::
 
@@ -1071,11 +1082,11 @@ The answers you want are `v1` and `ir1`, in **Results**.
 :::
 
 ::: only 7,8
-We get the answer: **{24,2}**, which is correct. {{var:V_S}} is **24**V and
-{{var:I_1}} is **2**A.
+We get the answer: {{o:{24,2}}}, which is correct. {{var:V_S}} is {{o:24}}V and
+{{var:I_1}} is {{o:2}}A.
 :::
 ::: only 9
-The answer is {{var:V_S}} = 24V and {{var:I_1}} = 2A. This is correct.
+The answer is {{var:V_S}} = {{o:24}}V and {{var:I_1}} = {{o:2}}A. This is correct.
 :::
 
 :::
@@ -1113,12 +1124,12 @@ The answers you want are `ix` and `v3`, in **Results**.
 
 ::: only 7,8
 Select DC. Add equation `ir8=5`. Add unknown `ix`. Run the simulation, and
-you will get: **{1,8}**. This is correct: {{var:I_X}} is 1A and that
-{{var:V_X}} is 8V.
+you will get: {{o:{1,8}}}. This is correct: {{var:I_X}} is {{o:1}}A and that
+{{var:V_X}} is {{o:8}}V.
 :::
 ::: only 9
 Select DC. Add equation `ir8=5`. Add unknown `ix`. Run the simulation. The
-answer is {{var:I_X}} = 1A and {{var:V_X}} = 8V. This is correct.
+answer is {{var:I_X}} = {{o:1}}A and {{var:V_X}} = {{o:8}}V. This is correct.
 :::
 
 :::
@@ -1147,7 +1158,7 @@ r2,1,0,10'k
 r3,1,0,22'k
 ```
 
-We get {{var:I_1}} = **10.48** mA, which is correct.
+We get {{var:I_1}} = {{o:10.48}} mA, which is correct.
 
 :::
 
@@ -1185,10 +1196,10 @@ Choose DC. Open **Expert Mode**, put `ir2 = 2'm` in **Add equations** and
 
 ::: only 7,8
 The answer, **{.009,.001,.006}**, is correct, since the currents are as
-follows: {{var:I_S}} is 9mA, {{var:I_1}} is 1mA and {{var:I_3}} is 6mA.
+follows: {{var:I_S}} is {{o:9}}mA, {{var:I_1}} is {{o:1}}mA and {{var:I_3}} is {{o:6}}mA.
 :::
 ::: only 9
-The answer is {{var:I_S}} = 9mA, {{var:I_1}} = 1mA and {{var:I_3}} = 6mA. This is
+The answer is {{var:I_S}} = {{o:9}}mA, {{var:I_1}} = {{o:1}}mA and {{var:I_3}} = {{o:6}}mA. This is
 correct.
 :::
 
@@ -1222,11 +1233,11 @@ The answers you want are `ir1`, `v1` and `ir2`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{-5/26,-15/26,-3/26}**, is correct: {{var:I_1}}=-5/26 A,
-{{var:I_2}}=-3/26 A and v=-15/26 V.
+The answer, {{o:{-5/26,-15/26,-3/26}}}, is correct: {{var:I_1}}={{o:-5/26}} A,
+{{var:I_2}}={{o:-3/26}} A and {{var:v}}={{o:-15/26}} V.
 :::
 ::: only 9
-The answer is {{var:I_1}}=-5/26 A, {{var:I_2}}=-3/26 A and {{var:v}}=-15/26 V. This is
+The answer is {{var:I_1}}={{o:-5/26}} A, {{var:I_2}}={{o:-3/26}} A and {{var:v}}={{o:-15/26}} V. This is
 correct.
 :::
 
@@ -1258,10 +1269,10 @@ The answers you want are `vo` and `iro`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{8,4}**, is correct: {{var:v_o}} = 8 V and {{var:i_o}} = 4 A.
+The answer, {{o:{8,4}}}, is correct: {{var:v_o}} = {{o:8}} V and {{var:i_o}} = {{o:4}} A.
 :::
 ::: only 9
-The answer is {{var:v_o}} = 8 V and {{var:i_o}} = 4 A. This is correct.
+The answer is {{var:v_o}} = {{o:8}} V and {{var:i_o}} = {{o:4}} A. This is correct.
 :::
 
 :::
@@ -1298,7 +1309,7 @@ pr1+pra
 :::
 
 ::: only 7,8
-The answer, **{960,1920,2880}**, is right: the independent source delivers
+The answer, {{o:{960,1920,2880}}}, is right: the independent source delivers
 960W, the dependent source delivers 1920W, and the resistors consume 2880W
 together.
 :::
@@ -1335,10 +1346,10 @@ The answers you want are `vx` and `vro`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{10,-5}**, is correct: {{var:v_x}} =10 and {{var:v_o}} =-5.
+The answer, {{o:{10,-5}}}, is correct: {{var:v_x}} ={{o:10}} and {{var:v_o}} ={{o:-5}}.
 :::
 ::: only 9
-The answer is {{var:v_x}} =10 and {{var:v_o}} =-5. This is correct.
+The answer is {{var:v_x}} ={{o:10}} and {{var:v_o}} ={{o:-5}}. This is correct.
 :::
 
 :::
@@ -1369,11 +1380,11 @@ The answers you want are `ir1`, `vr1` and `vr2`, in **Results**.
 :::
 
 ::: only 7,8
-The answers, **{-15/26,-5/26,-3/26}**, is correct: {{var:v_1}}=-5/26 V,
-{{var:v_2}}=-3/26 V and i=-15/26 A.
+The answers, {{o:{-15/26,-5/26,-3/26}}}, is correct: {{var:v_1}}={{o:-5/26}} V,
+{{var:v_2}}={{o:-3/26}} V and {{var:i}}={{o:-15/26}} A.
 :::
 ::: only 9
-The answer is {{var:v_1}}=-5/26 V, {{var:v_2}}=-3/26 V and {{var:i}}=-15/26 A. This is
+The answer is {{var:v_1}}={{o:-5/26}} V, {{var:v_2}}={{o:-3/26}} V and {{var:i}}={{o:-15/26}} A. This is
 correct.
 :::
 
@@ -1406,10 +1417,10 @@ The answers you want are `vo` and `iri`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{48,-8}**, is correct: {{var:v_o}} =48 and {{var:i}} = -8.
+The answer, {{o:{48,-8}}}, is correct: {{var:v_o}} ={{o:48}} and {{var:i}} = {{o:-8}}.
 :::
 ::: only 9
-The answer is {{var:v_o}} =48 and {{var:i}} = -8. This is correct.
+The answer is {{var:v_o}} ={{o:48}} and {{var:i}} = {{o:-8}}. This is correct.
 :::
 
 :::
@@ -1448,8 +1459,8 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 The answer, **{.768,1.92,.2048,.1792,-3.072}**, is correct.
 :::
 ::: only 9
-The answer is `pr1` = .768 W, `pei` = 1.92 W, `pr2` = .2048 W, `pr3` = .1792 W
-and `ped` = -3.072 W. This is correct.
+The answer is `pr1` = {{o:.768}} W, `pei` = {{o:1.92}} W, `pr2` = {{o:.2048}} W, `pr3` = {{o:.1792}} W
+and `ped` = {{o:-3.072}} W. This is correct.
 :::
 
 :::
@@ -1485,7 +1496,7 @@ The answer you want is `iro`, in **Results**.
 Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
-The answer, **1.5** A, is correct.
+The answer, {{o:1.5}} A, is correct.
 
 :::
 
@@ -1524,10 +1535,10 @@ The answers you want are `ir1`, `vr3` and `ied`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{4,6,1}**, is correct: {{var:i}}=4, {{var:v}}=6 and {{var:i_d}}=1.
+The answer, {{o:{4,6,1}}}, is correct: {{var:i}}={{o:4}}, {{var:v}}={{o:6}} and {{var:i_d}}={{o:1}}.
 :::
 ::: only 9
-The answer is {{var:i}}=4, {{var:v}}=6 and {{var:i_d}}=1. This is correct.
+The answer is {{var:i}}={{o:4}}, {{var:v}}={{o:6}} and {{var:i_d}}={{o:1}}. This is correct.
 :::
 
 :::
@@ -1566,10 +1577,10 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{4.8,2.4,-2.4}**, is correct.
+The answer, {{o:{4.8,2.4,-2.4}}}, is correct.
 :::
 ::: only 9
-The answer is `v1` = 4.8 V, `v2` = 2.4 V and `v3` = -2.4 V. This is correct.
+The answer is `v1` = {{o:4.8}} V, `v2` = {{o:2.4}} V and `v3` = {{o:-2.4}} V. This is correct.
 :::
 
 :::
@@ -1608,10 +1619,10 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{26.67,6.67,173.33,-46.67}**, is correct.
+The answer, {{o:{26.67,6.67,173.33,-46.67}}}, is correct.
 :::
 ::: only 9
-The answer is `v1` = 26.67 V, `v2` = 6.67 V, `v3` = 173.33 V and `v4` = -46.67
+The answer is `v1` = {{o:26.67}} V, `v2` = {{o:6.67}} V, `v3` = {{o:173.33}} V and `v4` = {{o:-46.67}}
 V. This is correct.
 :::
 
@@ -1656,10 +1667,10 @@ The answers you want are `v1`, `v2` and `v3`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{-1,2,5}**, is correct.
+The answer, {{o:{-1,2,5}}}, is correct.
 :::
 ::: only 9
-The answer is `v1` = -1 V, `v2` = 2 V and `v3` = 5 V. This is correct.
+The answer is `v1` = {{o:-1}} V, `v2` = {{o:2}} V and `v3` = {{o:5}} V. This is correct.
 :::
 
 :::
@@ -1696,10 +1707,10 @@ The answers you want are `v1`, `v2`, `v3` and `v4`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{1.5,-.5,-2.5,-4.}**, is correct.
+The answer, {{o:{1.5,-.5,-2.5,-4.}}}, is correct.
 :::
 ::: only 9
-The answer is `v1` = 1.5 V, `v2` = -.5 V, `v3` = -2.5 V and `v4` = -4 V. This
+The answer is `v1` = {{o:1.5}} V, `v2` = {{o:-.5}} V, `v3` = {{o:-2.5}} V and `v4` = {{o:-4}} V. This
 is correct.
 :::
 
@@ -1739,10 +1750,10 @@ The answers you want are `v1`, `v2`, `v3` and `v4`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{-1,-2.,1.,.5}**, is correct.
+The answer, {{o:{-1,-2.,1.,.5}}}, is correct.
 :::
 ::: only 9
-The answer is `v1` = -1 V, `v2` = -2 V, `v3` = 1 V and `v4` = .5 V. This is
+The answer is `v1` = {{o:-1}} V, `v2` = {{o:-2}} V, `v3` = {{o:1}} V and `v4` = {{o:.5}} V. This is
 correct.
 :::
 
@@ -1781,10 +1792,10 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{3.,-5.4,6.}**, is correct.
+The answer, {{o:{3.,-5.4,6.}}}, is correct.
 :::
 ::: only 9
-The answer is `ira` = 3 A, `ijb` = -5.4 A and `ir9` = 6 A. This is correct.
+The answer is `ira` = {{o:3}} A, `ijb` = {{o:-5.4}} A and `ir9` = {{o:6}} A. This is correct.
 :::
 
 :::
@@ -1835,12 +1846,12 @@ Ask **Evaluate** for:
 
 ::: only 7,8
 Select DC, Add` vr4=4` to the equations and `vs` to the unknowns. Run the
-simulation. The answer, **{2,-9,-3,3}**, is correct: {{var:i}}=2, {{var:v}}=-9, {{var:i_s}}=-3
-and {{var:v_s}}=3.
+simulation. The answer, {{o:{2,-9,-3,3}}}, is correct: {{var:i}}={{o:2}}, {{var:v}}={{o:-9}}, {{var:i_s}}={{o:-3}}
+and {{var:v_s}}={{o:3}}.
 :::
 ::: only 9
 Select DC, add `vr4=4` to the equations and `vs` to the unknowns. Run the
-simulation. The answer is {{var:i}}=2, {{var:v}}=-9, {{var:i_s}}=-3 and {{var:v_s}}=3. This is
+simulation. The answer is {{var:i}}={{o:2}}, {{var:v}}={{o:-9}}, {{var:i_s}}={{o:-3}} and {{var:v_s}}={{o:3}}. This is
 correct.
 :::
 
@@ -1881,10 +1892,10 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{7.5,.5,.5}** is correct: {{var:i}}=.5, {{var:v}}=7.5 and {{var:v_d}}=.5.
+The answer, {{o:{7.5,.5,.5}}} is correct: {{var:i}}={{o:.5}}, {{var:v}}={{o:7.5}} and {{var:v_d}}={{o:.5}}.
 :::
 ::: only 9
-The answer is {{var:i}}=.5, {{var:v}}=7.5 and {{var:v_d}}=.5. This is correct.
+The answer is {{var:i}}={{o:.5}}, {{var:v}}={{o:7.5}} and {{var:v_d}}={{o:.5}}. This is correct.
 :::
 
 :::
@@ -2019,8 +2030,8 @@ pro/(-pjs)
 ```
 :::
 
-The answers we get are correct: {{var:i_O}}=**-12is**, {{var:v_O}}=**-6000is**,
-{{var:p_O}}=**72000is**{{sup:2}}, and {{var:p_O}}/{{var:p_S}}=**4320**.
+The answers we get are correct: {{var:i_O}}={{o:-12is}}, {{var:v_O}}={{o:-6000is}},
+{{var:p_O}}={{o:72000is}}{{sup:2}}, and {{var:p_O}}/{{var:p_S}}={{o:4320}}.
 {{v9|The panel names the source's value `is1`, so the answers carry `is1`
 where these carry is.}}
 

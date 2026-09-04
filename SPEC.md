@@ -40,7 +40,7 @@ Markdown for the ordinary things:
 | `## Title {#label}` | section (numbered `N.M`), optional explicit anchor |
 | `### Title` | subsection (not numbered) |
 | `- item` / `1. item` | lists |
-| `**bold**`, `*italic*`, `` `code` `` | inline |
+| `**bold**`, `*italic*`, `` `code` `` | inline — one level of nesting each way: `*"**symb**olic"*`, `**Tick *real solutions only*.**` |
 | `[text](url)` | link |
 | `$x^2$`, `$$...$$` | maths (LaTeX in the PDF, KaTeX on the web) |
 | `> quoted` | quotation (see below) |

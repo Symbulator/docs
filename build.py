@@ -426,14 +426,30 @@ def collect_directive(rest: list[str], path: str, depth: int):
 # `(?:[^*\\]|\\[*\\])` looks equivalent and is not -- it bans ordinary
 # backslashes from emphasis entirely, and silently un-bolded every
 # `**s\...**` in the book. Only a diff of the built pages showed it.
+#
+# One level of nesting each way (#263, 5 Sep 2026): an italic span may
+# hold `**...**` runs -- *"**symb**olic sim**ulator**"* in the
+# Introduction -- and a bold span may hold `*...*` runs -- `**Tick *real
+# solutions only*.**` in Lesson 11. Each body admits a whole group of the
+# other kind as one atom, so the inner stars cannot close the outer span;
+# the body is then parsed again and the group becomes a node inside.
+# The inner group is the plain form, so the nesting stops at one level.
+# Strong is still tried first at any position, so a plain `**bold**`
+# never reads as an italic that happens to start with a star. A side
+# effect: `***x***`, which used to print a stray star and then bold, now
+# reads as bold inside italic; no source writes it. Before this rule the
+# Introduction's line rendered as five italic runs with no bold, and the
+# Lesson 11 bullet as two stray stars and two fragments of italic -- the
+# span closed at the first inner star and the stars re-paired down the
+# rest of the paragraph.
 INLINE_RE = re.compile(
     r"(?P<esc>\\[*\\])"
     r"|(?P<brace>\{\{(?:[^{}]|\{[^{}]*\})*\}\})"
     r"|(?P<code>`[^`]+`)"
     r"|(?P<math>\$[^$]+\$)"
     r"|(?P<link>\[[^\]]+\]\([^)]+\))"
-    r"|(?P<strong>\*\*(?:\\[*\\]|[^*])+\*\*)"
-    r"|(?P<em>\*(?:\\[*\\]|[^*])+\*)"
+    r"|(?P<strong>\*\*(?:\\[*\\]|\*(?:\\[*\\]|[^*])+\*|[^*])+\*\*)"
+    r"|(?P<em>\*(?:\\[*\\]|\*\*(?:\\[*\\]|[^*])+\*\*|[^*])+\*)"
 )
 
 

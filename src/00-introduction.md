@@ -2,7 +2,7 @@
 id: introduction
 kind: front
 title: Introduction
-updated: 2026-08-29
+updated: 2026-09-05
 summary: >
   Learn about Symbulator and how it can help you focus on learning how circuits work, instead of struggling with math. Get the latest version of Symbulator and get ready to roll.
 ---
@@ -11,9 +11,9 @@ summary: >
 
 Symbulator is a program to solve linear electric circuits symbolically and
 numerically {{v7,8|in a calculator}}{{v9|on your device}}. It takes numerical and symbolic
-values, and returns numerical and symbolic results. The odd-sounding name is a portmanteau of *"symbolic simulator"*.
-{{v7,8|Symbulator is widely regarded as the best symbolic simulator of linear
-electric circuits ever made for a calculator.}}
+values, and returns numerical and symbolic results. The odd-sounding name is a portmanteau of *"**symb**olic sim**ulator**"*.
+Symbulator is widely regarded as the best symbolic simulator of linear
+electric circuits ever {{v7,8|made for a calculator}}{{v9|capable of running on a handheld device}}.
 
 ### What analyses can it do?
 
@@ -70,9 +70,7 @@ circuit analysis rather than on the mathematics of solving it.
 ### Symbulator is free!
 
 Symbulator has always been free of cost, and always will be.
-*(You are welcome!)*
-
-Since 2026, Symbulator is also open source under the MIT licence. You are free to use it,
+*(You are welcome!)* Since 2026, Symbulator is also open source under the MIT licence. You are free to use it,
 change it and port it to other platforms; all the licence asks is that the
 copyright notice and the attribution to the original author travel with it.
 

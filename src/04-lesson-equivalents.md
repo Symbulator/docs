@@ -117,7 +117,7 @@ r50,3,0,50
 
 ::: only 7,8
 Evaluating `re` gives the equivalent resistance as seen by the source e:
-40 Ω. Evaluating `ir13` gives 2.5 A for current i. The answers came easily,
+40 Ω. Evaluating `ir13` gives {{o:2.5}} A for current i. The answers came easily,
 because a source sat between the two nodes we wanted.
 :::
 ::: only 9
@@ -125,7 +125,7 @@ Solve it in DC. Because a source sits between the two nodes we care about,
 the equivalent resistance is one of the answers already: the resistance seen
 by the source, `re`, is 40 Ω.
 
-The current i is the current through r13: `ir13` = 2.5 A.
+The current i is the current through r13: `ir13` = {{o:2.5}} A.
 
 Both answers came free, because there was a source connected between the two
 desired nodes. The rest of this lesson is about what to do when there is not.
@@ -285,7 +285,7 @@ s\th("e,1,0,3.3:r1,1,2,66:r2,2,0,24",2,0)
 
 When prompted to select a type of analysis, choose DC. Symbulator tells you
 what it is doing: one simulation for the Thévenin voltage, then a second for
-the Norton current and the equivalent resistance. In this case, {{var:V_TH}} = 0.88 V, {{var:I_NO}} = 0.05 A and {{var:R_EQ}} = 17.6 Ω.
+the Norton current and the equivalent resistance. In this case, {{var:V_TH}} = {{o:0.88}} V, {{var:I_NO}} = {{o:0.05}} A and {{var:R_EQ}} = {{o:17.6}} Ω.
 :::
 
 {{v7,8|When you press ENTER, Symbulator asks whether you are running a
@@ -568,7 +568,7 @@ ra,b,c,3
 ::: only 7,8
 Run the **er** script, giving it as arguments the circuit and the nodes:
 `s\er(cir,0,c)` When prompted, choose DC as analysis type. Once it is done,
-evaluate `approx(req)` The value is **2.89** Ω.
+evaluate `approx(req)` The value is {{o:2.89}} Ω.
 :::
 ::: only 9
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
@@ -606,7 +606,7 @@ rbd,b,0,9
 
 ::: only 7,8
 Choose DC. When *Done*, use `approx(req)` to find the equivalent resistance
-is **3.27** Ω.
+is {{o:3.27}} Ω.
 :::
 ::: only 9
 *Find equivalent*, *Resistance / impedance*, nodes **a** and **c**, in DC: `req` is
@@ -642,7 +642,7 @@ We don't need to run a simulation for this. We can reduce it using {{v7,8|s\pr}}
 4+pr(1+5,2+pr(6,3))+8
 ```
 
-Evaluating approximately gives us the equivalent resistance: **14.4** Ω.
+Evaluating approximately gives us the equivalent resistance: {{o:14.4}} Ω.
 
 :::
 
@@ -666,7 +666,7 @@ We don't need to run a simulation for this. We can reduce it using {{v7,8|s\pr}}
 2+pr(6,3+pr(4,4+5+3))+1
 ```
 
-Evaluating approximately gives us the equivalent resistance: **6** Ω.
+Evaluating approximately gives us the equivalent resistance: {{o:6}} Ω.
 
 :::
 
@@ -690,7 +690,7 @@ We don't need to run a simulation for this. We can reduce it using {{v7,8|s\pr}}
 1/(pr(1/6,1/5+pr(1/8,1/12)))
 ```
 
-Evaluating approximately gives us the equivalent conductance: **10** S.
+Evaluating approximately gives us the equivalent conductance: {{o:10}} S.
 
 :::
 
@@ -714,7 +714,7 @@ We don't need to run a simulation for this. We can reduce it using {{v7,8|s\pr}}
 1/(pr(1/8,1/4)+pr(1/2,1/12+1/6))
 ```
 
-Evaluating approximately gives us the equivalent conductance: **4** S.
+Evaluating approximately gives us the equivalent conductance: {{o:4}} S.
 
 :::
 
@@ -742,7 +742,7 @@ ji,a,0,iri/2
 
 ::: only 7,8
 Choose DC. Wait for *Done*. Evaluate `req` to find the equivalent resistance
-is **2** Ω.
+is {{o:2}} Ω.
 :::
 ::: only 9
 *Find equivalent*, *Resistance / impedance*, nodes **a** and **0**, in DC: `req` is
@@ -773,7 +773,7 @@ j,a,0,2*irx
 
 ::: only 7,8
 Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
-**-4** Ω. It may be surprising to have a negative resistance. This is the
+{{o:-4}} Ω. It may be surprising to have a negative resistance. This is the
 result of the dependent sources.
 :::
 ::: only 9
@@ -807,7 +807,7 @@ rx,x,0,5
 
 ::: only 7,8
 Choose DC. Wait for *Done*. Evaluating `req` approximately, we find the
-equivalent resistance is **-7.5** Ω.
+equivalent resistance is {{o:-7.5}} Ω.
 :::
 ::: only 9
 *Find equivalent*, *Resistance / impedance*, nodes **a** and **0**, in DC:
@@ -839,7 +839,7 @@ s1,2,1
 
 ::: only 7,8
 Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
-**0.6** Ω.
+{{o:0.6}} Ω.
 :::
 ::: only 9
 *Find equivalent*, *Resistance / impedance*, nodes **1** and **0**, in DC:
@@ -873,7 +873,7 @@ e,1,0,20*ir1
 
 ::: only 7,8
 Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
-**20** Ω.
+{{o:20}} Ω.
 :::
 ::: only 9
 *Find equivalent*, *Resistance / impedance*, nodes **3** and **0**, in DC: `req` is
@@ -904,7 +904,7 @@ e,a,1,6*ir1
 
 ::: only 7,8
 Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
-**3** Ω.
+{{o:3}} Ω.
 :::
 ::: only 9
 *Find equivalent*, *Resistance / impedance*, nodes **a** and **0**, in DC: `req` is
@@ -938,8 +938,8 @@ r2,1,a,2
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `vth` we find {{var:V_TH}} = **48** V. Via `req` we find
-{{var:R_EQ}} = **6** Ω.
+Choose DC. Via `vth` we find {{var:V_TH}} = {{o:48}} V. Via `req` we find
+{{var:R_EQ}} = {{o:6}} Ω.
 
 :::
 
@@ -968,8 +968,8 @@ r2,2,0,6
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `ino` we find {{var:I_NO}} = **3** A. Via `req` we find
-{{var:R_EQ}} = **2** Ω.
+Choose DC. Via `ino` we find {{var:I_NO}} = {{o:3}} A. Via `req` we find
+{{var:R_EQ}} = {{o:2}} Ω.
 
 :::
 
@@ -998,8 +998,8 @@ e,1,x,2*vx
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **x** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `ino` we find {{var:I_NO}} = **10** A. Via `req` we find
-{{var:R_EQ}} = **1** Ω.
+Choose DC. Via `ino` we find {{var:I_NO}} = {{o:10}} A. Via `req` we find
+{{var:R_EQ}} = {{o:1}} Ω.
 
 :::
 
@@ -1028,8 +1028,8 @@ j,1,2,10
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `ino` we find {{var:I_NO}} = **5.56** A. Via `req` we find
-{{var:R_EQ}} = **9** Ω.
+Choose DC. Via `ino` we find {{var:I_NO}} = {{o:5.56}} A. Via `req` we find
+{{var:R_EQ}} = {{o:9}} Ω.
 
 :::
 
@@ -1057,8 +1057,8 @@ e,1,2,100
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `vth` we find {{var:V_TH}} = **125** V. Via `req` we find
-{{var:R_EQ}} = **25** Ω.
+Choose DC. Via `vth` we find {{var:V_TH}} = {{o:125}} V. Via `req` we find
+{{var:R_EQ}} = {{o:25}} Ω.
 
 :::
 
@@ -1087,8 +1087,8 @@ j,0,2,vx/4000
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **x** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Via `vth` we find {{var:V_TH}} = **8** V. Via `req` we find {{var:R_EQ}} =
-**10** kΩ.
+Via `vth` we find {{var:V_TH}} = {{o:8}} V. Via `req` we find {{var:R_EQ}} =
+{{o:10}} kΩ.
 
 :::
 
@@ -1121,8 +1121,8 @@ e,0,1,8
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `vth` we get {{var:V_TH}}= **-4.8** V. Via `req` we get
-{{var:R_EQ}}= **2.4** Ω.
+Choose DC. Via `vth` we get {{var:V_TH}}= {{o:-4.8}} V. Via `req` we get
+{{var:R_EQ}}= {{o:2.4}} Ω.
 
 :::
 
@@ -1151,8 +1151,8 @@ r2,1,0,6
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `ino` we find {{var:I_NO}} = **-4** A. Via `req` we find
-{{var:R_EQ}} = **2** Ω.
+Choose DC. Via `ino` we find {{var:I_NO}} = {{o:-4}} A. Via `req` we find
+{{var:R_EQ}} = {{o:2}} Ω.
 
 :::
 
@@ -1181,8 +1181,8 @@ r3,2,0,3
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `ino` we find {{var:I_NO}} = **8** A. Via `req` we find
-{{var:R_EQ}} = **1** Ω.
+Choose DC. Via `ino` we find {{var:I_NO}} = {{o:8}} A. Via `req` we find
+{{var:R_EQ}} = {{o:1}} Ω.
 
 :::
 
@@ -1211,8 +1211,8 @@ r6,a,b,6
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `vth` we find {{var:V_TH}} = **24** V. Via `req` we find
-{{var:R_EQ}} = **2.4** Ω.
+Choose DC. Via `vth` we find {{var:V_TH}} = {{o:24}} V. Via `req` we find
+{{var:R_EQ}} = {{o:2.4}} Ω.
 
 :::
 
@@ -1241,8 +1241,8 @@ j,0,a,2*irx
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `ino` we find {{var:I_NO}} = **7** A. Via `req` we find
-{{var:R_EQ}} = **5** Ω.
+Choose DC. Via `ino` we find {{var:I_NO}} = {{o:7}} A. Via `req` we find
+{{var:R_EQ}} = {{o:5}} Ω.
 
 :::
 
@@ -1277,8 +1277,8 @@ r4,2,1,1.4'k
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `vth` we find {{var:V_TH}} = -**3** V. Via `req` we find
-{{var:R_EQ}} = **2** kΩ.
+Choose DC. Via `vth` we find {{var:V_TH}} = {{o:-3}} V. Via `req` we find
+{{var:R_EQ}} = {{o:2}} kΩ.
 
 :::
 
@@ -1309,8 +1309,8 @@ r4,0,a,4
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **b** in the first and **a** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `vth` we find {{var:V_TH}} = **6** V. Via `req` we find
-{{var:R_EQ}} = **5** Ω.
+Choose DC. Via `vth` we find {{var:V_TH}} = {{o:6}} V. Via `req` we find
+{{var:R_EQ}} = {{o:5}} Ω.
 
 :::
 
@@ -1341,8 +1341,8 @@ r4,3,1,5
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **1** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `ino` we find {{var:I_NO}} = **1** A. Via `req` we find
-{{var:R_EQ}} = **4** Ω.
+Choose DC. Via `ino` we find {{var:I_NO}} = {{o:1}} A. Via `req` we find
+{{var:R_EQ}} = {{o:4}} Ω.
 
 :::
 
@@ -1372,8 +1372,8 @@ e5,3,4,50
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **4** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `vth` we find {{var:V_TH}} = **130** V. Via `req` we find
-{{var:R_EQ}} = **30** Ω.
+Choose DC. Via `vth` we find {{var:V_TH}} = {{o:130}} V. Via `req` we find
+{{var:R_EQ}} = {{o:30}} Ω.
 
 :::
 
@@ -1402,8 +1402,8 @@ j4,0,1,4
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `ino` we find {{var:I_NO}} = **8** A. Via `req` we find
-{{var:R_EQ}} = **4** Ω.
+Choose DC. Via `ino` we find {{var:I_NO}} = {{o:8}} A. Via `req` we find
+{{var:R_EQ}} = {{o:4}} Ω.
 
 :::
 
@@ -1433,8 +1433,8 @@ r4,3,0,4
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `vth` we find {{var:V_TH}} = **5.33** V. Via `req` we find
-{{var:R_EQ}} = **0.44** Ω.
+Choose DC. Via `vth` we find {{var:V_TH}} = {{o:5.33}} V. Via `req` we find
+{{var:R_EQ}} = {{o:0.44}} Ω.
 
 :::
 
@@ -1465,8 +1465,8 @@ e,1,0,2*vrx
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `vth` we find {{var:V_TH}} = **20** V. Via `req` we find
-{{var:R_EQ}} = **6** Ω.
+Choose DC. Via `vth` we find {{var:V_TH}} = {{o:20}} V. Via `req` we find
+{{var:R_EQ}} = {{o:6}} Ω.
 
 :::
 
@@ -1497,8 +1497,8 @@ r2,2,3,2
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `vth` we find {{var:V_TH}} = **2** V. Via `req` we find
-{{var:R_EQ}} = **4** Ω.
+Choose DC. Via `vth` we find {{var:V_TH}} = {{o:2}} V. Via `req` we find
+{{var:R_EQ}} = {{o:4}} Ω.
 
 :::
 
@@ -1527,8 +1527,8 @@ r2,a,0,6
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
-Choose DC. Via `ino` we find {{var:I_NO}} = **-6.25** A. Via `req` we find
-{{var:R_EQ}} = **2.4** Ω.
+Choose DC. Via `ino` we find {{var:I_NO}} = {{o:-6.25}} A. Via `req` we find
+{{var:R_EQ}} = {{o:2.4}} Ω.
 
 :::
 
@@ -1606,12 +1606,12 @@ $$
 will divide by zero at $x = 3$ — the very value we replaced.
 
 ::: only 7,8
-Via `Define x=3: {ino,req} `we find that {{var:I_NO}} = **1** A, and
+Via `Define x=3: {ino,req} `we find that {{var:I_NO}} = {{o:1}} A, and
 {{var:R_EQ}} is undefined.
 :::
 ::: only 9
 The equivalent is in terms of x, so nothing needs running again. Put `ino`
-in **Evaluate** with `x = 3` in its **Conditions** box: {{var:I_NO}} = **1** A.
+in **Evaluate** with `x = 3` in its **Conditions** box: {{var:I_NO}} = {{o:1}} A.
 Ask for `req` the same way: infinite, the denominator being zero.
 :::
 
@@ -1654,12 +1654,12 @@ Exploring the answers, we see that the denominator of the expression for
 `req`, (x-1), results in a division by zero at x = 1.
 
 ::: only 7,8
-Via `1→x:{ino,req} `we find that {{var:I_NO}} = -3A, and {{var:R_EQ}} is
+Via `1→x:{ino,req} `we find that {{var:I_NO}} = {{o:-3}}A, and {{var:R_EQ}} is
 undefined or, for practical purposes, infinite.
 :::
 ::: only 9
 Put `ino` in the **Evaluate** card with `x = 1` in its **Conditions** box:
-{{var:I_NO}} = **-3** A. Ask for `req` the same way and the answer is
+{{var:I_NO}} = {{o:-3}} A. Ask for `req` the same way and the answer is
 infinite, so {{var:R_EQ}} is undefined at that value.
 :::
 
@@ -1839,11 +1839,11 @@ vth/(req+36)
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 ::: only 7,8
-The answer, **{30.,4.,3.,1.5,.75}**, is correct.
+The answer, {{o:{30.,4.,3.,1.5,.75}}}, is correct.
 :::
 ::: only 9
-The answer is `vth` = 30 V and `req` = 4 Ω, and the load current is 3 A for 6
-Ω, 1.5 A for 16 Ω and .75 A for 36 Ω. This is correct.
+The answer is `vth` = {{o:30}} V and `req` = {{o:4}} Ω, and the load current is {{o:3}} A for 6
+Ω, {{o:1.5}} A for 16 Ω and {{o:.75}} A for 36 Ω. This is correct.
 :::
 
 :::
@@ -1890,11 +1890,11 @@ Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 ::: only 7,8
 The book gives the answers as fractions. We get it right:
-**{21/8, 4/9, 21/50, 42/25}**.
+{{o:{21/8, 4/9, 21/50, 42/25}}}.
 :::
 ::: only 9
-The book gives the answers as fractions. We get it right: `ino` = 21/8 A and
-`req` = 4/9 Ω, and the load's voltage and current are 21/50 V and 42/25 A.
+The book gives the answers as fractions. We get it right: `ino` = {{o:21/8}} A and
+`req` = {{o:4/9}} Ω, and the load's voltage and current are {{o:21/50}} V and {{o:42/25}} A.
 :::
 
 :::
@@ -1944,8 +1944,8 @@ Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 The answer, **{.0075, 1500., .0075, .00321, .00173}**, is correct.
 :::
 ::: only 9
-The answer is `ino` = .0075 A and `req` = 1500 Ω, and the load current is
-.0075 A for 0 Ω, .00321 A for 2 kΩ and .00173 A for 5 kΩ. This is correct.
+The answer is `ino` = {{o:.0075}} A and `req` = {{o:1500}} Ω, and the load current is
+{{o:.0075}} A for 0 Ω, {{o:.00321}} A for 2 kΩ and {{o:.00173}} A for 5 kΩ. This is correct.
 :::
 
 :::
@@ -1994,11 +1994,11 @@ vth*1/(req+1)
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 ::: only 7,8
-The answer, **{-9/7,7/2,-1}**, is correct.
+The answer, {{o:{-9/7,7/2,-1}}}, is correct.
 :::
 ::: only 9
-The answer is `ino` = -9/7 A and `req` = 7/2 Ω, and the voltage in the 1 Ω
-load is -1 V. This is correct.
+The answer is `ino` = {{o:-9/7}} A and `req` = {{o:7/2}} Ω, and the voltage in the 1 Ω
+load is {{o:-1}} V. This is correct.
 :::
 
 :::
@@ -2048,11 +2048,11 @@ vth/(req+192)
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 ::: only 7,8
-The answer, **{28.8,96.,.1}**, is correct.
+The answer, {{o:{28.8,96.,.1}}}, is correct.
 :::
 ::: only 9
-The answer is `vth` = 28.8 V and `req` = 96 Ω, and the current in the 192 Ω
-load is .1 A. This is correct.
+The answer is `vth` = {{o:28.8}} V and `req` = {{o:96}} Ω, and the current in the 192 Ω
+load is {{o:.1}} A. This is correct.
 :::
 
 :::
@@ -2099,11 +2099,11 @@ vth*6/(req+6.)
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 ::: only 7,8
-The answer we find, **{30,2,18,22.5}**, is correct.
+The answer we find, {{o:{30,2,18,22.5}}}, is correct.
 :::
 ::: only 9
-The answer is `vth` = 30 V and `req` = 2 Ω, and the voltage in the load is 18
-V for 3 Ω and 22.5 V for 6 Ω. This is correct.
+The answer is `vth` = {{o:30}} V and `req` = {{o:2}} Ω, and the voltage in the load is {{o:18}}
+V for 3 Ω and {{o:22.5}} V for 6 Ω. This is correct.
 :::
 
 :::
@@ -2150,11 +2150,11 @@ vth*5/(req+5)
 Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 
 ::: only 7,8
-The answer, **{6,3,3.75}**, is correct.
+The answer, {{o:{6,3,3.75}}}, is correct.
 :::
 ::: only 9
-The answer is `vth` = 6 V and `req` = 3 Ω, and the voltage in the 5 Ω load is
-3.75 V. This is correct.
+The answer is `vth` = {{o:6}} V and `req` = {{o:3}} Ω, and the voltage in the 5 Ω load is
+{{o:3.75}} V. This is correct.
 :::
 
 :::
@@ -2206,8 +2206,8 @@ Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
 The answer, **{.001,42000,.001,.000808,.000457,.000296}**, is correct.
 :::
 ::: only 9
-The answer is `ino` = .001 A and `req` = 42000 Ω, and the load current is .001
-A for 0 Ω, .000808 A for 10 kΩ, .000457 A for 50 kΩ and .000296 A for 100 kΩ.
+The answer is `ino` = {{o:.001}} A and `req` = {{o:42000}} Ω, and the load current is {{o:.001}}
+A for 0 Ω, {{o:.000808}} A for 10 kΩ, {{o:.000457}} A for 50 kΩ and {{o:.000296}} A for 100 kΩ.
 This is correct.
 :::
 
@@ -2254,13 +2254,13 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 
 ::: only 7,8
 Choose DC. You can answer N when asked about the load equations. The answer,
-**{9.,13.44}**, is correct: the maximum transfer of power occurs when the
+{{o:{9.,13.44}}}, is correct: the maximum transfer of power occurs when the
 load is 9Ω. At this point, the power transferred is 13.44W. Now let's solve
 another one.
 :::
 ::: only 9
-Choose DC. The maximum transfer of power occurs when the load is `req` = 9Ω,
-and the power transferred is then `pmax` = 13.44W. Now let's solve another
+Choose DC. The maximum transfer of power occurs when the load is `req` = {{o:9}}Ω,
+and the power transferred is then `pmax` = {{o:13.44}}W. Now let's solve another
 one.
 :::
 
@@ -2301,11 +2301,11 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 
 ::: only 7,8
 Choose DC. You can answer N. The logic of this problem is identical to
-the previous one. The answer is **{4.22,2.901}**.
+the previous one. The answer is {{o:{4.22,2.901}}}.
 :::
 ::: only 9
 Choose DC. The logic of this problem is identical to the previous one. The
-answer is `req` = 4.22 Ω and `pmax` = 2.901 W.
+answer is `req` = {{o:4.22}} Ω and `pmax` = {{o:2.901}} W.
 :::
 
 :::
@@ -2350,10 +2350,10 @@ vth^2*8200./(req+8200.)^2
 
 ::: only 7,8
 Choose DC. Answer Y about the load formulas. The answer we obtain,
-**{40000, 1, .93, .57}**, is correct. Let's deconstruct it.
+{{o:{40000, 1, .93, .57}}}, is correct. Let's deconstruct it.
 :::
 ::: only 9
-Choose DC. The answers we obtain, `req` = 40000 Ω, `pmax` = 1 W, .93 W and .57
+Choose DC. The answers we obtain, `req` = {{o:40000}} Ω, `pmax` = {{o:1}} W, {{o:.93}} W and {{o:.57}}
 W, are correct. Let's deconstruct it.
 :::
 
@@ -2406,11 +2406,11 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-Choose DC. You can answer N. The answer is **{15., 273.07}**. Let's now
+Choose DC. You can answer N. The answer is {{o:{15., 273.07}}}. Let's now
 see one that is a little different.
 :::
 ::: only 9
-Choose DC. The answer is `req` = 15 Ω and `pmax` = 273.07 W. Let's now see one
+Choose DC. The answer is `req` = {{o:15}} Ω and `pmax` = {{o:273.07}} W. Let's now see one
 that is a little different.
 :::
 
