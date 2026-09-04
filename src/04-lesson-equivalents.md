@@ -1598,8 +1598,12 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 :::
 
 Now it solves. The expression for `ino` is fine, but the one for `req`,
-$(9x-35)/(4(x-3))$, will divide by zero at $x = 3$ — the very value we
-replaced.
+
+$$
+\dfrac{9x - 35}{4(x - 3)}
+$$
+
+will divide by zero at $x = 3$ — the very value we replaced.
 
 ::: only 7,8
 Via `Define x=3: {ino,req} `we find that I{{sub:NO}} = **1** A, and

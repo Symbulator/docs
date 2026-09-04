@@ -8,6 +8,90 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #260 — compound expressions set on a line of their own — **done and live, 4 Sep 2026**
+
+Roberto, 4 Sep 2026, on Lesson 1's *That is what you want for symbolic
+results: v_in·r2/(r1 + r2) cannot be rounded*: put the expression on a
+line of its own, typeset. Then: find the others like it, with several
+terms, and do the same; then build, commit and deploy everything.
+
+**The sweep** was two greps over `src/`, read in context: every inline
+`$…$` holding an operator, and every prose fraction (a slash beside a
+parenthesis) outside code fences, maths blocks, inline code and `{{o:…}}`
+answers. The rule applied: an expression with a compound numerator or
+denominator, or a function of *t* or *s*, moves into a `$$` block set with
+`\dfrac`, the way Lesson 2 already sets its voltage divider; a monomial
+ratio (`v_{s2}/n`), a sum of two terms (`r1 + 10000`), a problem statement's
+*Find v_o/v_S* and an answer the software printed (`{{o:…}}`, the bold
+7/8 answers, the bare 7/8 output lines) stay as they are — the answers
+because they are the software's own text, checked against the originals.
+
+**Nine displays, seven chapters:**
+
+| chapter | expression | version |
+|---|---|---|
+| Lesson 1, *How answers are shown* | v_in r2 / (r1 + r2) | 9 |
+| Lesson 1, RM3's Figure 7-16 | (v1 − v2) / I_T | shared |
+| Lesson 2, the rounding tip | v / (r1 + r2) | 9 |
+| Lesson 2, B11's Example 5.6 | e / (r1 + 10000) | 9 |
+| Lesson 3, `pr()` on symbols | r1 r2 / (r1 + r2) | 9 |
+| Lesson 4, Bo2's Example 3.11 | (9x − 35) / (4(x − 3)) | shared |
+| Lesson 7, AS7's Example 9.9 | v(t) = 4.472 cos(4t − 63.43°) V | shared |
+| Lesson 13, Example 19.7 | the four g parameters, 2 × 2 `aligned` | 9 |
+| Lesson 13, Practice Problem 19.7 | the four g parameters, 2 × 2 `aligned` | 9 |
+
+**The 7 and 8 books.** Three of the nine sit in paragraphs the three
+versions share. Their words are untouched — the sentence is the same,
+broken around the display — and the change is layout only, the same
+treatment the sibling `i(t)` display in Lesson 7 already had in all three
+versions. Verified by building before and after and diffing the v7 and v8
+trees: exactly `lesson-dc`, `lesson-equivalents` and `lesson-ac` differ,
+each by its one moved expression, and `search.json`. The Lesson 2
+paragraph is the exception that proves it: its expression sat inside a
+`{{v9|…}}` span, and a display cannot live in a span, so the paragraph is
+now a `::: only 7,8` / `::: only 9` pair — the 7,8 side is the brace text
+resolved word for word, and the built `lesson-symbolic` pages for 7 and 8
+are byte-identical to before.
+
+**Left inline, on purpose:** Lesson 7's *There is no angle to take of
+v_in r_b/(r_a + r_b)* is a bullet in a list, and the markup's list items
+hold inline text only (`build.py` joins continuation lines into the
+item), so a `$$` block cannot go there. The three `only 9` bullets would
+have to become paragraphs to display it. Also left: the `g` names on the
+Practice Problem 19.7 display are inferred from the order the four come
+back in, which is the order Example 19.7 names them.
+
+Built in full (PDFs included, because the typeset text changed) and
+deployed the same night: v7 **206**, v8 **196**, v9 **236** pages,
+unchanged. Page 12, 32 and 227 of the v9 PDF were rendered and read.
+
+---
+
+## #259 — an address on a line of its own: the `address` directive — **done and live, 4 Sep 2026**
+
+Roberto, 4 Sep 2026: the Introduction's *send someone
+learn.symbulator.com/split/?lesson=6a&entry=3 and they open on the same
+problem* should put the link on a line of its own, centred, with a
+background of its own — *send someone:* / the address / *and they open
+on the same problem, with the same circuit loaded.*
+
+**A new block directive**, `::: address <url>` with an empty body, closed
+with `:::` like every directive. The URL is written as it should be read,
+without a scheme; the link target adds `https://` unless one is there.
+On the web it is `<p class="address">` with the link inside — centred,
+mono, on the input panel's tint (`--lcd`), without the accent rule a
+typed fence carries, since nothing here is typed. `overflow-wrap:
+anywhere` so a long query string breaks inside the panel on a phone. In
+the PDF it is `\symaddress{target}{text}` in `symbulator.cls`: a
+`tcolorbox` on the same tint, `halign=center`, mono, the text in the
+accent colour under `\href`. The argument is escaped verbatim on both
+sides — not run through `inline()`, since a URL wants no curly quotes —
+and the TeX side escapes `%` and `#` in the target the way the inline
+link does. `SPEC.md` has the row and a paragraph.
+
+First and only use so far: the Introduction's split-view paragraph.
+---
+
 ## #258 — the docs wordmark's β at 80%, like the other two — **done and live, 4 Sep 2026**
 
 Roberto, 4 Sep 2026, after #257 went live: *did the beta next to the 9

@@ -169,8 +169,15 @@ Make MAIN your current folder before you simulate.
 | `only` | `7,8` | contents shown only in those versions |
 | `not` | `8` | contents hidden in those versions |
 | `web` `pdf` | — | contents shown on the website only, or in the PDFs only |
+| `address` | the URL, as it should be read | — (empty; still closed with `:::`) |
 
 Directives nest. Close every one with `:::`.
+
+`address` sets a URL on a line of its own, centred, on the input panel's
+tint, for an address the reader is meant to share or type -- the split
+view's link in the Introduction is the first. Write it as it should be read,
+without `https://`; the link target adds it. The text is set verbatim, so
+`&` and `?` need no escaping there.
 
 ### Code
 

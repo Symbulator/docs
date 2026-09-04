@@ -240,7 +240,12 @@ i(t) = 1.789 \cos(4t + 26.57°)\ \mathrm{A}
 $$
 
 Asking for the capacitor voltage the same way gives 4.472∠-63.43°, that is,
-$v(t) = 4.472 \cos(4t - 63.43°)$ V, which is correct.
+
+$$
+v(t) = 4.472 \cos(4t - 63.43°)\ \mathrm{V}
+$$
+
+which is correct.
 
 Future solved problems will not include this level of detail in the solution,
 only the circuit description and the {{v7,8|commands we give}}{{v9|settings we choose}}.

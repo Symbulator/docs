@@ -407,8 +407,14 @@ the question asks for functions of s.
 ```
 
 ::: only 9
-`g11` = $1/(s+1)$, `g12` = $-1/(s+1)$, `g21` = $1/(s+1)$ and `g22` =
-$(s^2+s+1)/(s(s+1))$.
+The four come back as
+
+$$
+\begin{aligned}
+g_{11} &= \dfrac{1}{s + 1}, & g_{12} &= -\dfrac{1}{s + 1}, \\[0.6em]
+g_{21} &= \dfrac{1}{s + 1}, & g_{22} &= \dfrac{s^2 + s + 1}{s(s + 1)}.
+\end{aligned}
+$$
 :::
 :::
 :::
@@ -440,8 +446,13 @@ r2,3,0,1
 
 ::: only 9
 *g*, nodes **1** and **3**, FD. The four come back as
-$(s+2)/(s^2+3s+1)$, $-1/(s^2+3s+1)$, $1/(s^2+3s+1)$ and
-$s(s+2)/(s^2+3s+1)$.
+
+$$
+\begin{aligned}
+g_{11} &= \dfrac{s + 2}{s^2 + 3s + 1}, & g_{12} &= -\dfrac{1}{s^2 + 3s + 1}, \\[0.6em]
+g_{21} &= \dfrac{1}{s^2 + 3s + 1}, & g_{22} &= \dfrac{s(s + 2)}{s^2 + 3s + 1}.
+\end{aligned}
+$$
 :::
 
 Correct.

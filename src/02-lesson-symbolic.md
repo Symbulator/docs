@@ -98,7 +98,11 @@ s\dc(cir)
 {{ref:lesson-dc}} had you set **Rounding** to *approx to n digits*. There is
 nothing to round here, so open **Settings** and put it back to *exact*. The
 **Use SI prefixes** tick clears itself: a prefix has no place in an answer
-like $v/(r1 + r2)$.
+like
+
+$$
+\dfrac{v}{r1 + r2}
+$$
 :::
 
 Type the three elements into the box, one to a line:
@@ -193,14 +197,28 @@ A moment later Symbulator is done. From its symbolic answers and the answers
 the problem gives us, we write two equations and solve them for the two
 unknowns.
 
-The problem says that I3 is 6 mA. In Symbulator, I3 is `ir3`, the current through resistor r3. {{v7,8|If you evaluate it, you will see it produces an
-algebraic expression in terms of the two unknowns, e and r1.}}{{v9|Look at it
-and you will see an expression rather than a number — $e/(r1 + 10000)$ — in
-terms of the two unknowns, e and r1.}} This is what we call a symbolic answer.
+::: only 7,8
+The problem says that I3 is 6 mA. In Symbulator, I3 is `ir3`, the current through resistor r3. If you evaluate it, you will see it produces an
+algebraic expression in terms of the two unknowns, e and r1. This is what we call a symbolic answer.
 The problem also says that RT is 12 kΩ; the equivalent resistance as seen by
-the source e is {{v7,8|given by `re`, which when evaluated gives another
-algebraic expression in terms of r1}}{{v9|`re`, which is $r1 + 10000$}}. We can then write two new equations
-and solve them for e and r1{{v7,8|:}}{{v9|.}}
+the source e is given by `re`, which when evaluated gives another
+algebraic expression in terms of r1. We can then write two new equations
+and solve them for e and r1:
+:::
+::: only 9
+The problem says that I3 is 6 mA. In Symbulator, I3 is `ir3`, the current through resistor r3. Look at it
+and you will see an expression rather than a number, in terms of the two
+unknowns, e and r1:
+
+$$
+\dfrac{e}{r1 + 10000}
+$$
+
+This is what we call a symbolic answer.
+The problem also says that RT is 12 kΩ; the equivalent resistance as seen by
+the source e is `re`, which is $r1 + 10000$. We can then write two new equations
+and solve them for e and r1.
+:::
 
 ```sym 7
 solve(re=12000 and ir3=.006,{e,r1})

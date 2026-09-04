@@ -221,6 +221,15 @@
    \ttfamily\small\raggedright\setlength{\parskip}{0pt}}
   {\end{tcolorbox}\color{ink}\vspace{1mm}}
 
+% An address to share (#259): a URL on a line of its own, centred, on the
+% input panel's tint -- the print side of the ::: address directive.
+% #1 is the link target, #2 the text as printed (already escaped).
+\newcommand{\symaddress}[2]{\par\vspace{1mm}%
+  \begin{tcolorbox}[enhanced,boxrule=0pt,frame empty,colback=lcd,
+     left=3mm,right=3mm,top=1.6mm,bottom=1.6mm,sharp corners,halign=center]
+  \ttfamily\small\href{#1}{\textcolor{accent}{#2}}%
+  \end{tcolorbox}\color{ink}\vspace{1mm}}
+
 \newenvironment{symout}
   {\par\vspace{1mm}\begin{tcolorbox}[breakable,enhanced,boxrule=0pt,
      frame empty, colback=panel, left=3mm,right=3mm,top=1.6mm,bottom=1.6mm,

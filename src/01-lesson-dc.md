@@ -281,8 +281,13 @@ and its value: v{{sub:1}} = 36 V, i{{sub:r1}} = 6 mA.
 ### How answers are shown
 By default, Symbulator answers *exactly*: it works symbolically, so a current
 comes back as 3/500 A rather than a decimal. That is what you want for
-symbolic results: v{{sub:in}}·r{{sub:2}}/(r{{sub:1}} + r{{sub:2}}) cannot be
-rounded.
+symbolic results:
+
+$$
+\dfrac{v_{in}\,r2}{r1 + r2}
+$$
+
+cannot be rounded.
 
 For numerical work like the example in this lesson, decimals read better. Open the
 **Settings** card and set **Rounding** to *approx to n digits*
@@ -1311,7 +1316,12 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 The answer we get indicates that the equivalent resistance, given by
-(v{{sub:1}}-v{{sub:2}})/I{{sub:T}}, is {{o:7.2}} kΩ, and that
+
+$$
+\dfrac{v_1 - v_2}{I_T}
+$$
+
+is {{o:7.2}} kΩ, and that
 I{{sub:T}}={{o:1.11}} mA, I{{sub:1}}=.{{o:133}} mA,
 I{{sub:2}}=.{{o:444}} mA and V{{sub:ab}}={{o:-0.8}} V. This is correct.
 

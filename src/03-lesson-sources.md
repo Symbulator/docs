@@ -274,7 +274,11 @@ pr(10, 20, 30)
 
 You get {{o:60/11}} Ω with **Rounding** on *exact*, or {{o:5.45}} Ω
 approximately. It nests as deeply as you like, as the two problems below
-show, and it works on symbols: `pr(r1, r2)` gives $r1 r2/(r1 + r2)$.
+show, and it works on symbols: `pr(r1, r2)` gives
+
+$$
+\dfrac{r1\,r2}{r1 + r2}
+$$
 
 ::: problem AS7's Example 2.10
 Find the equivalent resistance.

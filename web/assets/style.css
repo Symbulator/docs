@@ -557,6 +557,21 @@ code {
    "type" would be a lie and "returns" says Symbulator produced it. */
 .code.plain { border-left-color: var(--rule); background: var(--paper-2);
               border-color: var(--rule); }
+/* An address to share (#259, Roberto, 4 Sep 2026): a URL on a line of its
+   own, centred, on the input panel's tint -- the ::: address directive.
+   The same panel as a typed fence, without the accent rule down its left,
+   because nothing here is typed: it is handed over. overflow-wrap so a
+   long query string breaks inside the panel on a phone rather than
+   pushing the column wide. */
+.address {
+  margin: 0 0 1.1rem; padding: 0.7rem 0.9rem;
+  background: var(--lcd); border: 1px solid var(--lcd-edge);
+  border-radius: 6px; text-align: center;
+  font-family: var(--mono); font-size: 0.86rem; line-height: 1.55;
+  overflow-wrap: anywhere;
+}
+.address a { color: var(--accent); text-decoration: none; }
+.address a:hover { text-decoration: underline; }
 .code-label {
   position: absolute; top: 0; right: 0.5rem;
   transform: translateY(-52%);

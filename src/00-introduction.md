@@ -314,6 +314,10 @@ or **TR**. A few problems have no link, because they are worked by hand.
 everything else on this page applies either way.}}
 
 The split view keeps its address current as you move, so it can be shared
-where you are: send someone `learn.symbulator.com/split/?lesson=6a&entry=3`
+where you are: send someone:
+
+::: address learn.symbulator.com/split/?lesson=6a&entry=3
+:::
+
 and they open on the same problem, with the same circuit loaded.
 :::

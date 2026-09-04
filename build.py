@@ -171,7 +171,7 @@ class SourceError(Exception):
 # --------------------------------------------------------------------------
 
 DIRECTIVES = {"tip", "note", "warning", "danger", "figure", "problem",
-              "answer", "practice", "only", "not", "web", "pdf"}
+              "answer", "practice", "only", "not", "web", "pdf", "address"}
 
 #: The two output media. `::: web` / `::: pdf` blocks and `{{web|...}}` /
 #: `{{pdf|...}}` spans show in one of them only; a pass that is not
@@ -771,6 +771,16 @@ class HtmlRenderer:
             label = "type" if cls == "sym" else "returns"
             return (f'<div class="code {cls}"><span class="code-label">{label}'
                     f'</span><pre><code>{body}</code></pre></div>')
+        if k == "address":
+            # #259: an address to share, on a line of its own, centred, on
+            # the input panel's tint. The argument is the URL as it should
+            # be read (no scheme); the link target adds https:// unless a
+            # scheme is already there. Escaped verbatim, not run through
+            # inline(): a URL wants no curly quotes and no emphasis.
+            text = b.arg.strip()
+            href = text if re.match(r"^[a-z][a-z0-9+.-]*://", text) else "https://" + text
+            return (f'<p class="address"><a href="{html.escape(href)}">'
+                    f'{html.escape(text)}</a></p>')
         if k in ("tip", "note", "warning", "danger"):
             title = (f'<p class="callout-title">{self.inline(b.arg)}</p>'
                      if b.arg else "")
@@ -1097,6 +1107,14 @@ class TexRenderer:
             lines = (BS * 2 + NL).join(
                 _listing_line(l) for l in b.text.split(chr(10)))
             return f"\\begin{{{env}}}\n{lines}\n\\end{{{env}}}"
+        if k == "address":
+            # #259, the PDF side: \symaddress in symbulator.cls. The
+            # target escapes what hyperref reads specially, the way the
+            # inline link does; the printed text goes through tex_escape.
+            text = b.arg.strip()
+            href = text if re.match(r"^[a-z][a-z0-9+.-]*://", text) else "https://" + text
+            href = href.replace("%", r"\%").replace("#", r"\#")
+            return f"\\symaddress{{{href}}}{{{tex_escape(text, prose=False)}}}"
         if k in ("tip", "note", "warning", "danger"):
             title = self.inline(b.arg) if b.arg else ""
             self.boxdepth += 1               # no floats in here (#172)
