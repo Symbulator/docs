@@ -8,6 +8,46 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #258 — the docs wordmark's β at 80%, like the other two — **done and live, 4 Sep 2026**
+
+Roberto, 4 Sep 2026, after #257 went live: *did the beta next to the 9
+spring back to its old height?* It had not sprung back; **it had never
+been shortened on this site.** Measured live before touching anything:
+
+| site | markup | numeral | β |
+|---|---|---|---|
+| symbulator.com | `.tm` with the β in a `.beta` span | 20.6 px | 16.5 px |
+| the app | the same | 20.6 px | 16.5 px |
+| learn | `9β` as bare text in a `.vnum` span | 20.6 px | **20.6 px** |
+
+**A miss in #229, not a regression.** The 80% rule in the shared
+`banner.css` is `.brand-name .tm .beta`, and its comment names the two
+consumers that draw a β: the app and the landing page. This page draws
+one too, but wrote it as bare text with no span for the rule to catch —
+the numeral was styled, because `banner.css` matches both `.vnum` and
+`.tm`, and the β inherited the numeral's full size. So learn had shown
+the tall β since #137, and the claim that #229 applied *everywhere it
+appears* was wrong about this site. Nobody noticed because the three
+lockups are never on one screen.
+
+**The fix is one line of markup** in `web/index.php`: the numeral's span
+is `.tm`, the markup the other two use, and the β is wrapped in
+`<span class="beta">`. No change to the shared `banner.css`, so nothing
+had to propagate; the split view's own bar keeps its `.vnum`, which is
+its own rule and carries no β. `tools/static_preview.py` still emits a
+plain `.vnum` label — it draws no β at all, so it is not wrong, only
+different.
+
+Deployed the same day: one file moved (`index.php`), and the live page
+measured at 16.5 px for the β against 20.6 px for the numeral on the
+version 9 page, with the 7 page still reading a plain `Symbulator 7`.
+
+**For #137:** the docs page is now a third place that carries the
+`.beta` span. When the mark comes off, it comes off here as well as the
+five spots that item lists.
+
+---
+
 ## #257 — on a phone the ribbon keeps Split View and drops the PDF link — **done and live, 4 Sep 2026**
 
 Roberto, 4 Sep 2026: in mobile view hide *Download as PDF* when the

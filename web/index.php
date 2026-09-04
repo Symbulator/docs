@@ -146,8 +146,16 @@ function pdf_note(string $name): string {
       <a class="header-title" href="<?= url($v) ?>">
         <?php /* The β is temporary (Roberto, 28 Aug 2026): version 9 is
                  in beta, and the numeral says so until it is not. Only
-                 the 9 carries it — the 7 and 8 pages stay plain. */ ?>
-        <p class="brand-name">Symbulator <span class="vnum"><?= e($toc['label']) ?><?= (string) $toc['label'] === '9' ? 'β' : '' ?></span></p>
+                 the 9 carries it — the 7 and 8 pages stay plain.
+
+                 The span is .tm with the β in its own .beta span, the
+                 markup the landing page and the app use, because that is
+                 what the shared banner.css's 80% rule matches (#229).
+                 Until #258 (4 Sep 2026) this page wrote "9β" as bare
+                 text in a .vnum span -- the numeral was styled (banner.css
+                 matches both names) but the β was not, so it stood at
+                 full height here alone. #137 removes the mark. */ ?>
+        <p class="brand-name">Symbulator <span class="tm"><?= e($toc['label']) ?><?= (string) $toc['label'] === '9' ? '<span class="beta">β</span>' : '' ?></span></p>
         <!-- Static, and identical to the line on symbulator.com and in
              the app. It used to read "For <platform>", which made the
              lockup say something different on every version of the
