@@ -42,9 +42,9 @@ Deployed the same day: one file moved (`index.php`), and the live page
 measured at 16.5 px for the β against 20.6 px for the numeral on the
 version 9 page, with the 7 page still reading a plain `Symbulator 7`.
 
-**For #137:** the docs page is now a third place that carries the
-`.beta` span. When the mark comes off, it comes off here as well as the
-five spots that item lists.
+**For #137:** nothing new to clear. `web/index.php` is already one of
+the five spots that item lists; the β is in the same place, only wrapped
+now, so removing it is the same edit as before.
 
 ---
 
