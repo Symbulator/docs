@@ -46,7 +46,7 @@ farads and henries are described identically in both, and so is everything
 else — shorts, op-amps, transformers, all of it.
 
 ::: problem AS7's Example 16.1
-Find v{{sub:o}}(t) in the circuit, assuming zero initial conditions.
+Find {{var:v_o}}(t) in the circuit, assuming zero initial conditions.
 
 ::: figure assets/circuit/as7e1601.png
 AS7's Example 16.1
@@ -215,7 +215,7 @@ in **Evaluate**.
 ::: practice
 
 ::: problem AS7's Practice Problem 16.1
-Determine v{{sub:o}}(t) in the circuit.
+Determine {{var:v_o}}(t) in the circuit.
 
 ::: figure assets/circuit/as7pp1601.png
 AS7's Practice Problem 16.1
@@ -256,7 +256,7 @@ Because both answers are functions of s, so is their ratio — which is exactly
 what a transfer function is meant to be.
 
 ::: problem NR11's Example 13.7
-Find the transfer function H(s) = V{{sub:o}}/V{{sub:s}}.
+Find the transfer function H(s) = {{var:V_o}}/{{var:V_s}}.
 
 ::: figure assets/circuit/nr11e1307.png
 NR11's Example 13.7

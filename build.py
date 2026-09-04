@@ -505,6 +505,8 @@ def parse_brace(inner: str) -> Node:
         return Node("ref", text=inner[4:].strip())
     if inner.startswith("o:"):          # an answer the software gave back
         return Node("answer_span", text=inner[2:].strip())
+    if inner.startswith("var:"):        # a problem's own variable (#261)
+        return Node("var", text=inner[4:].strip())
     if inner.startswith("sub:"):
         return Node("sub", text=inner[4:].strip())
     if inner.startswith("sup:"):
@@ -687,6 +689,14 @@ class HtmlRenderer:
             if ltx:
                 return f'<span class="ans ans-math">\\({ltx}\\)</span>'
             return f'<span class="ans">{html.escape(n.text)}</span>'
+        if n.kind == "var":
+            # #261: a variable the problem itself names -- I_s, v_o, R_L --
+            # as distinct from the name Symbulator files the answer under
+            # (`ir3`, in code). Bold italic, Roberto's choice of 5 Sep 2026;
+            # `_` starts a subscript, so {{var:I_s}} is I with s below.
+            base, _, sb = n.text.partition("_")
+            sb = f'<sub>{html.escape(sb)}</sub>' if sb else ""
+            return f'<strong><em>{html.escape(base)}{sb}</em></strong>'
         if n.kind == "sub":
             return f'<sub>{html.escape(n.text)}</sub>'
         if n.kind == "sup":
@@ -1004,6 +1014,10 @@ class TexRenderer:
             if ltx:
                 return r"\ansmath{" + ltx + "}"
             return r"\ans{" + tex_escape(n.text) + "}"
+        if n.kind == "var":                  # #261, see the HTML side
+            base, _, sb = n.text.partition("_")
+            sb = r"\textsubscript{" + tex_escape(sb) + "}" if sb else ""
+            return r"\textbf{\textit{" + tex_escape(base) + sb + "}}"
         if n.kind == "sub":
             return r"\textsubscript{" + tex_escape(n.text) + "}"
         if n.kind == "sup":

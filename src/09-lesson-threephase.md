@@ -345,8 +345,8 @@ names the third phase like the other two.
 
 ::: problem AS7's Example 12.9
 The unbalanced Y-load has balanced voltages of 100 V in the *acb* sequence.
-Calculate the line currents and the neutral current. Take Z{{sub:A}} = 15 Ω,
-Z{{sub:B}} = 10 + j5 Ω and Z{{sub:C}} = 6 − j8 Ω.
+Calculate the line currents and the neutral current. Take {{var:Z_A}} = 15 Ω,
+{{var:Z_B}} = 10 + j5 Ω and {{var:Z_C}} = 6 − j8 Ω.
 
 ::: figure assets/circuit/as7f1223.png
 AS7's Example 12.9
@@ -484,8 +484,8 @@ delta load: the line current is √3 times the phase current, and lags it by 30�
 :::
 
 ::: problem AS7's Example 12.11
-For the balanced Y-Δ circuit, find the line current I{{sub:aA}}, the phase
-voltage V{{sub:AB}}, and the phase current I{{sub:AC}}. The source frequency
+For the balanced Y-Δ circuit, find the line current {{var:I_aA}}, the phase
+voltage {{var:V_AB}}, and the phase current {{var:I_AC}}. The source frequency
 is 60 Hz.
 
 ::: figure assets/circuit/as7e1211.png
@@ -570,7 +570,7 @@ right; the inside of the generator is not.
 
 ::: problem AS7's Example 12.4
 A balanced Δ-connected load of 20 − j15 Ω is fed by a Δ-connected,
-positive-sequence generator with V{{sub:ab}} = 330∠0° V. Find the phase
+positive-sequence generator with {{var:V_ab}} = 330∠0° V. Find the phase
 currents of the load and the line currents.
 
 ::: figure assets/circuit/as7e1204.png
@@ -628,7 +628,7 @@ answers stop being three copies of one another.
 
 ::: problem AS7's Practice Problem 12.9
 The unbalanced Δ-load is supplied by balanced line-to-line voltages of 440 V
-in positive sequence. Find the line currents, taking V{{sub:ab}} as the
+in positive sequence. Find the line currents, taking {{var:V_ab}} as the
 reference.
 
 ::: figure assets/circuit/as7pp1209.png
@@ -734,8 +734,8 @@ Correct.
 :::
 
 ::: problem AS7's Example 12.12
-For the unbalanced Δ-Δ circuit, find the generator current I{{sub:ab}}, the
-line current I{{sub:bB}} and the phase current I{{sub:BC}}.
+For the unbalanced Δ-Δ circuit, find the generator current {{var:I_ab}}, the
+line current {{var:I_bB}} and the phase current {{var:I_BC}}.
 
 ::: figure assets/circuit/as7e1212.png
 AS7's Example 12.12

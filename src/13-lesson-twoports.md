@@ -165,7 +165,7 @@ and 2, that is `izp1` and `izp2`}}{{!v7|`z` on nodes 1 and 2, that is `iz1`
 and `iz2`}}.
 
 ::: problem AS7's Example 19.2
-Find I{{sub:1}} and I{{sub:2}} in the circuit.
+Find {{var:I_1}} and {{var:I_2}} in the circuit.
 
 ::: figure assets/circuit/as7e1902.png
 AS7's Example 19.2
@@ -508,9 +508,9 @@ It wants four values — the voltage and current at the input, then the voltage
 and current at the output — and answers with all four figures at once.
 
 ::: problem Gain Example 1
-For the circuit, find G{{sub:v}}, G{{sub:i}}, G{{sub:p}} and
-Z{{sub:in}}. The two-port has y parameters y{{sub:11}} = 0.4 S,
-y{{sub:12}} = −0.002 S, y{{sub:21}} = −5 S and y{{sub:22}} = 0.04 S.
+For the circuit, find {{var:G_v}}, {{var:G_i}}, {{var:G_p}} and
+{{var:Z_in}}. The two-port has y parameters {{var:y_11}} = 0.4 S,
+{{var:y_12}} = −0.002 S, {{var:y_21}} = −5 S and {{var:y_22}} = 0.04 S.
 
 ::: figure assets/circuit/gain-example-1.png
 Gain Example 1
@@ -568,7 +568,7 @@ Av 55.6, Ai -9.62, Ap 534, Zin 3.46 Ω
 
 ::: only 9
 The voltage gain Av is {{o:55.56}}, the current gain Ai {{o:-9.615}}, the
-power gain Ap {{o:534.2}}, and the input impedance Zi {{o:3.462}} Ω.
+power gain {{var:Ap}} {{o:534.2}}, and the input impedance {{var:Zi}} {{o:3.462}} Ω.
 :::
 
 These are correct.
@@ -576,9 +576,9 @@ These are correct.
 :::
 
 ::: problem Gain Example 2
-Find G{{sub:v}}, G{{sub:i}}, G{{sub:p}} and Z{{sub:in}} for a two-port with
-z parameters z{{sub:11}} = 4 Ω, z{{sub:12}} = 1.5 Ω, z{{sub:21}} = 10 Ω
-and z{{sub:22}} = 3 Ω, driven by a source V{{sub:s}} with 5 Ω in series
+Find {{var:G_v}}, {{var:G_i}}, {{var:G_p}} and {{var:Z_in}} for a two-port with
+z parameters {{var:z_11}} = 4 Ω, {{var:z_12}} = 1.5 Ω, {{var:z_21}} = 10 Ω
+and {{var:z_22}} = 3 Ω, driven by a source {{var:V_s}} with 5 Ω in series
 and loaded with 2 Ω.
 
 There is no picture of this one — the description below is the whole circuit.
@@ -644,7 +644,7 @@ Gv 4, Gi -2, Gp 8, Zin 1 Ω
 
 ::: only 9
 The voltage gain Av is {{o:4}}, the current gain Ai {{o:-2}}, the power
-gain Ap {{o:8}}, and the input impedance Zi {{o:1}} Ω.
+gain {{var:Ap}} {{o:8}}, and the input impedance {{var:Zi}} {{o:1}} Ω.
 :::
 
 These are correct.

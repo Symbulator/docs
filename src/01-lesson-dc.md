@@ -548,7 +548,7 @@ source reads `re` = 6 kΩ. Correct.
 That is 6 kΩ. Correct.
 :::
 
-*Answer to question (b).* Current Is is defined in the schematic as the current
+*Answer to question (b).* Current {{var:Is}} is defined in the schematic as the current
 flowing through the source, in the direction that goes from node 0 to node 1.
 One way to find this value is evaluating the negative of the current through
 the source, which {{v7,8|as you know flows}}{{v9|we defined as flowing}} in the opposite direction:
@@ -573,13 +573,13 @@ carries the same current, is to
 {{v7,8|evaluate the current through any of the resistors}}{{v9|read the
 current through any resistor}}.
 
-*Answer to question (c).* The voltage drop in resistor R1 — since its polarity
+*Answer to question (c).* The voltage drop in resistor {{var:R1}} — since its polarity
 is defined in the schematic in the same way it is defined in our circuit
 description — is as follows.
 
 ::: only 7,8
 It is found by evaluating `vr1`: the {{t:machine}} returns `6`, that is 6 V.
-For R2, `vr2` gives 18 V. And for R3, `vr3` gives 12 V. These are all the right
+For {{var:R2}}, `vr2` gives 18 V. And for {{var:R3}}, `vr3` gives 12 V. These are all the right
 answers.
 :::
 ::: only 9
@@ -766,13 +766,13 @@ r3,1,0,1.2'k
 
 - {{v7,8|Evaluating `re` gets}}{{v9|`re` is}} the total resistance: {{o:9.49}} Ω
 - {{v7,8|Evaluating }}{{v7|`-ie`}}{{v8|`–ie`}}{{v9|Flipping the sign of `ie`}} gets us the source current: {{o:2.53}} A
-- {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} I{{sub:1}}: {{o:2.4}} A, {{v7,8|`ir2` gets}}{{v9|`ir2` is}} I{{sub:2}}: {{o:109}} mA, and {{v7,8|`ir3` gets}}{{v9|`ir3` is}} I{{sub:3}}: {{o:20}} mA.
+- {{v7,8|Evaluating `ir1` gets}}{{v9|`ir1` is}} {{var:I_1}}: {{o:2.4}} A, {{v7,8|`ir2` gets}}{{v9|`ir2` is}} {{var:I_2}}: {{o:109}} mA, and {{v7,8|`ir3` gets}}{{v9|`ir3` is}} {{var:I_3}}: {{o:20}} mA.
 
 :::
 
 ::: problem B11's Example 7.2
 
-Determine I{{sub:4}}, I{{sub:S}} and V{{sub:2}}. My solution: I named
+Determine {{var:I_4}}, {{var:I_S}} and {{var:V_2}}. My solution: I named
 the top node **1**, and the other **2**:
 
 ::: figure assets/practice/b11s-example-7-2-4.jpg
@@ -793,7 +793,7 @@ r3,2,0,2'k
 r4,1,0,8.2'k
 ```
 
-Answers: `v2` is {{o:2.51}} V, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} (i.e. I{{sub:S}}) is {{o:2.86}} mA and
+Answers: `v2` is {{o:2.51}} V, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} (i.e. {{var:I_S}}) is {{o:2.86}} mA and
 `ir4` is {{o:1.46}} mA.
 
 :::
@@ -821,14 +821,14 @@ r3,1,b,6
 r4,b,2,2
 ```
 
-Answers: `vr1` is {{o:7.5}} V, `vr3` is {{o:9}} V. For V{{sub:ba}}, `vb-va`
-is {{o:-1.5}} V. For I{{sub:S}}, {{v7|`-ie2`}}{{v8|`–ie2`}}{{v9|the opposite of `ie2`}} is {{o:3}} A.
+Answers: `vr1` is {{o:7.5}} V, `vr3` is {{o:9}} V. For {{var:V_ba}}, `vb-va`
+is {{o:-1.5}} V. For {{var:I_S}}, {{v7|`-ie2`}}{{v8|`–ie2`}}{{v9|the opposite of `ie2`}} is {{o:3}} A.
 
 :::
 
 ::: problem B11's Figure 7.32
 
-Determine I{{sub:6}} and V{{sub:6}}.
+Determine {{var:I_6}} and {{var:V_6}}.
 
 ::: figure assets/practice/b11s-figure-7-32-6.jpg
 
@@ -887,15 +887,15 @@ r8,5,6,3'k
 r9,0,6,6'k
 ```
 
-Answers: `ir5` is {{o:3}} mA, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} (i.e. I{{sub:S}}) is {{o:7.36}} mA, and
+Answers: `ir5` is {{o:3}} mA, {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} (i.e. {{var:I_S}}) is {{o:7.36}} mA, and
 `vr7` is {{o:19.6}} V.
 
 :::
 
 ::: problem B11's Example 7.4
 
-Determine the currents I{{sub:1}}, I{{sub:2}}, I{{sub:A}}, I{{sub:B}} and
-I{{sub:C}}, and the voltage drop in areas A, B and C.
+Determine the currents {{var:I_1}}, {{var:I_2}}, {{var:I_A}}, {{var:I_B}} and
+{{var:I_C}}, and the voltage drop in areas A, B and C.
 
 ::: figure assets/practice/b11s-example-7-4-8.jpg
 
@@ -919,9 +919,9 @@ r5,3,0,3
 r6,2,0,3
 ```
 
-Current I{{sub:1}} is found via `ir1` = {{o:1.2}} A, I{{sub:2}} via `ir2` =
-{{o:1.8}} A, I{{sub:A}}, via {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} = {{o:3}} A, I{{sub:B}} via `ir3` =
-{{o:1}} A and I{{sub:C}} via `ir6` = {{o:2}} A. The voltage drop in area A is
+Current {{var:I_1}} is found via `ir1` = {{o:1.2}} A, {{var:I_2}} via `ir2` =
+{{o:1.8}} A, {{var:I_A}}, via {{v7|`-ie`}}{{v8|`–ie`}}{{v9|the opposite of `ie`}} = {{o:3}} A, {{var:I_B}} via `ir3` =
+{{o:1}} A and {{var:I_C}} via `ir6` = {{o:2}} A. The voltage drop in area A is
 `vr1` = {{o:10.8}} V; in both B and C it is `v2` = {{o:6}} V.
 
 :::
@@ -957,7 +957,7 @@ These are the correct answers.
 
 ::: problem B11's Figure 7.40
 
-Determine V{{sub:b}} and V{{sub:c}}.
+Determine {{var:V_b}} and {{var:V_c}}.
 
 ::: figure assets/practice/b11s-figure-7-40-10.jpg
 
@@ -1025,14 +1025,14 @@ approx({ir1,ir2,ir3})
 ```
 
 ::: only 7,8
-The calculator returns {{o:{4.77,7.18,2.41}}} meaning I{{sub:R1}} =4.77A,
-I{{sub:R2}} =7.18A and I{{sub:R3}} =2.41A. These are the correct answers. We
+The calculator returns {{o:{4.77,7.18,2.41}}} meaning {{var:I_R1}} =4.77A,
+{{var:I_R2}} =7.18A and {{var:I_R3}} =2.41A. These are the correct answers. We
 could get this answer in a single-line command:
 :::
 ::: only 9
 Reading the current through each of the three resistors, `ir1`, `ir2` and
 `ir3`:
-I{{sub:R1}} =4.77A, I{{sub:R2}} =7.18A and I{{sub:R3}} =2.41A. These are the
+{{var:I_R1}} =4.77A, {{var:I_R2}} =7.18A and {{var:I_R3}} =2.41A. These are the
 correct answers.
 :::
 
@@ -1073,9 +1073,9 @@ r4,2,0,8
 r5,2,0,12
 ```
 
-Answer: {{v7|`-ie`}}{{v8|`–ie`}}{{v9|The opposite of `ie`}} is I{{sub:S}}={{o:4}} A, `ir2` is I{{sub:2}} = {{o:.8}} A, `ir4`
-is I{{sub:4}}={{o:2.4}} A, `vr1` is V{{sub:1}}={{o:4.8}} V, `vr5` is
-V{{sub:5}}={{o:19.2}} V.
+Answer: {{v7|`-ie`}}{{v8|`–ie`}}{{v9|The opposite of `ie`}} is {{var:I_S}}={{o:4}} A, `ir2` is {{var:I_2}} = {{o:.8}} A, `ir4`
+is {{var:I_4}}={{o:2.4}} A, `vr1` is {{var:V_1}}={{o:4.8}} V, `vr5` is
+{{var:V_5}}={{o:19.2}} V.
 
 :::
 
@@ -1103,7 +1103,7 @@ r3,b,0,5
 ```
 
 Answers: `va`={{o:20}} V, `vb`={{o:15}} V, `vc`={{o:8}} V, `va-vc`= {{o:12}} V,
-`vb-vc`={{o:7}} V, `ir2`={{o:1.75}} A, I{{sub:S}} via {{v7|`-ie3`}}{{v8|`–ie3`}}{{v9|the opposite of `ie3`}}={{o:-2.95}} A
+`vb-vc`={{o:7}} V, `ir2`={{o:1.75}} A, {{var:I_S}} via {{v7|`-ie3`}}{{v8|`–ie3`}}{{v9|the opposite of `ie3`}}={{o:-2.95}} A
 
 :::
 
@@ -1133,7 +1133,7 @@ r10,3,4,10
 e1,0,4,1
 ```
 
-{{v7,8|Now, evaluating **vr3** via `approx(vr3)` finds}}{{v9|The voltage drop `vr3` shows}} that V{{sub:3Ω}} is {{o:1.1}} V. This is
+{{v7,8|Now, evaluating **vr3** via `approx(vr3)` finds}}{{v9|The voltage drop `vr3` shows}} that {{var:V_3Ω}} is {{o:1.1}} V. This is
 correct.
 
 :::
@@ -1205,7 +1205,7 @@ r7,5,0,9
 ```
 
 {{v7,8|Evaluating `approx(vr4)`, we find}}{{v9|`vr4` gives}} the
-voltage drop in R{{sub:4}} (the 2Ω resistor): it is {{o:10.67}} V
+voltage drop in {{var:R_4}} (the 2Ω resistor): it is {{o:10.67}} V
 
 :::
 
@@ -1259,12 +1259,12 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, {{o:{.6,.2,.4,-2.}}}, indicates I{{sub:1}}=.6 A, I{{sub:2}}=.2 A,
-I{{sub:3}}=.4 A and V{{sub:ab}}=-2 V. This is correct.
+The answer, {{o:{.6,.2,.4,-2.}}}, indicates {{var:I_1}}=.6 A, {{var:I_2}}=.2 A,
+{{var:I_3}}=.4 A and {{var:V_ab}}=-2 V. This is correct.
 :::
 ::: only 9
-The answer is I{{sub:1}}=.6 A, I{{sub:2}}=.2 A, I{{sub:3}}=.4 A and
-V{{sub:ab}}=-2 V. This is correct.
+The answer is {{var:I_1}}=.6 A, {{var:I_2}}=.2 A, {{var:I_3}}=.4 A and
+{{var:V_ab}}=-2 V. This is correct.
 :::
 
 :::
@@ -1322,8 +1322,8 @@ $$
 $$
 
 is {{o:7.2}} kΩ, and that
-I{{sub:T}}={{o:1.11}} mA, I{{sub:1}}=.{{o:133}} mA,
-I{{sub:2}}=.{{o:444}} mA and V{{sub:ab}}={{o:-0.8}} V. This is correct.
+{{var:I_T}}={{o:1.11}} mA, {{var:I_1}}=.{{o:133}} mA,
+{{var:I_2}}=.{{o:444}} mA and {{var:V_ab}}={{o:-0.8}} V. This is correct.
 
 :::
 

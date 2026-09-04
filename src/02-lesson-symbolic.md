@@ -72,8 +72,8 @@ AS5's Figure 2.29
 
 ::: answer
 All the values in this circuit are variables: no element value is known. This is an example of a symbolic circuit. Imagine you are asked to
-find symbolic expressions for the current i, the voltage drop in R2, and the
-power consumed by R1 and R2. Since we are being asked to find symbolic answers
+find symbolic expressions for the current i, the voltage drop in {{var:R2}}, and the
+power consumed by {{var:R1}} and {{var:R2}}. Since we are being asked to find symbolic answers
 from a symbolic circuit, this is a purely symbolic problem.
 
 This is how I would describe this circuit. First, the nodes. The node called a
@@ -157,8 +157,8 @@ B11's Example 5.6
 ::: answer
 This is a very nice numerical-from-symbolic problem. We can solve it into
 numbers because, although it hides two values from us (the source E and the
-resistor R1), it gives us in exchange two answers (the equivalent resistance RT
-and the current I3) to solve for them with.
+resistor {{var:R1}}), it gives us in exchange two answers (the equivalent resistance {{var:RT}}
+and the current {{var:I3}}) to solve for them with.
 
 Since this circuit is structurally identical to B11's Example 5.7 solved in
 {{ref:lesson-dc}}, we will use the same names for the nodes. The description is
@@ -198,15 +198,15 @@ the problem gives us, we write two equations and solve them for the two
 unknowns.
 
 ::: only 7,8
-The problem says that I3 is 6 mA. In Symbulator, I3 is `ir3`, the current through resistor r3. If you evaluate it, you will see it produces an
+The problem says that {{var:I3}} is 6 mA. In Symbulator, {{var:I3}} is `ir3`, the current through resistor r3. If you evaluate it, you will see it produces an
 algebraic expression in terms of the two unknowns, e and r1. This is what we call a symbolic answer.
-The problem also says that RT is 12 kΩ; the equivalent resistance as seen by
+The problem also says that {{var:RT}} is 12 kΩ; the equivalent resistance as seen by
 the source e is given by `re`, which when evaluated gives another
 algebraic expression in terms of r1. We can then write two new equations
 and solve them for e and r1:
 :::
 ::: only 9
-The problem says that I3 is 6 mA. In Symbulator, I3 is `ir3`, the current through resistor r3. Look at it
+The problem says that {{var:I3}} is 6 mA. In Symbulator, {{var:I3}} is `ir3`, the current through resistor r3. Look at it
 and you will see an expression rather than a number, in terms of the two
 unknowns, e and r1:
 
@@ -215,7 +215,7 @@ $$
 $$
 
 This is what we call a symbolic answer.
-The problem also says that RT is 12 kΩ; the equivalent resistance as seen by
+The problem also says that {{var:RT}} is 12 kΩ; the equivalent resistance as seen by
 the source e is `re`, which is $r1 + 10000$. We can then write two new equations
 and solve them for e and r1.
 :::
@@ -280,7 +280,7 @@ Let's solve the same circuit again, this time using the expert mode's program
 ::: problem B11's Example 5.6, using ex
 ::: answer
 We will use the same circuit description as before, with a single change: we
-will use rx for the value of resistor R1, instead of the r1 value we used
+will use rx for the value of resistor {{var:R1}}, instead of the r1 value we used
 before. Like this:
 
 ```sym 7
@@ -360,7 +360,7 @@ DC, AC, FD and TR.
 We use the same circuit description as before, `r1` included.
 
 The problem gives us the two extra equations: the source sees 12 kΩ, and the
-current through R3 is 6 mA. They use the names the answers come back under,
+current through {{var:R3}} is 6 mA. They use the names the answers come back under,
 and the SI shorthand works here too:
 
 ```field 9 Circuit Description
@@ -441,7 +441,7 @@ evx,2,0,vx
 ```
 
 Explore the answers. Since **ir5** (which we
-know is 12 A) is in terms of v{{sub:x}}, we can find v{{sub:x}}:
+know is 12 A) is in terms of {{var:v_x}}, we can find {{var:v_x}}:
 
 ```sym 7
 solve(ir5=12,vx)
@@ -462,11 +462,11 @@ vx
 ```
 :::
 
-We get that v{{sub:x}} is {{o:78}} V, which is correct.
+We get that {{var:v_x}} is {{o:78}} V, which is correct.
 {{v7,8|Evaluating `ir6` we find}}{{v9|The current `ir6` already shows}} that
-i{{sub:x}} is {{o:3}} A. The fact that we can find numerical answers in this
+{{var:i_x}} is {{o:3}} A. The fact that we can find numerical answers in this
 problem can be quite puzzling until one realizes that ignoring the value of
-R{{sub:A}} doesn't matter: due to the circuit's structure, it is not needed
+{{var:R_A}} doesn't matter: due to the circuit's structure, it is not needed
 to answer the two questions we have been asked.
 
 :::
@@ -522,7 +522,7 @@ e, r2, r3
 ```
 
 ::: only 7,8
-Press Enter and Enter. When Symbulator is *Done*, find I{{sub:S}} and E by
+Press Enter and Enter. When Symbulator is *Done*, find {{var:I_S}} and {{var:E}} by
 asking:
 
 ```sym 7
@@ -532,7 +532,7 @@ approx(-ie1)
 approx(-ie1)
 ```
 
-We get that I{{sub:S}} is {{o:0.02}} A.
+We get that {{var:I_S}} is {{o:0.02}} A.
 
 ```sym 7
 e
@@ -544,8 +544,8 @@ e
 We get that E is {{o:16}} V. These are correct.
 :::
 ::: only 9
-Run it. Everything comes back numerical: *e* = 16, so E is {{o:16}} V, and
-`ie` = −0.02 A, so I{{sub:S}} is {{o:0.02}} A. Both correct. The two
+Run it. Everything comes back numerical: *e* = 16, so {{var:E}} is {{o:16}} V, and
+`ie` = −0.02 A, so {{var:I_S}} is {{o:0.02}} A. Both correct. The two
 resistors come back too: *r2* = 1600 Ω and *r3* = 8000 Ω.
 :::
 
@@ -553,7 +553,7 @@ resistors come back too: *r2* = 1600 Ω and *r3* = 8000 Ω.
 
 ::: problem B11's Example 7.12 (Expert)
 
-Determine R{{sub:1}}, R{{sub:2}} and R{{sub:3}} for the voltage divider
+Determine {{var:R_1}}, {{var:R_2}} and {{var:R_3}} for the voltage divider
 supply. Can 2W resistors be used?
 
 ::: figure assets/practice/b11s-example-7-12-expert-3.jpg
@@ -629,7 +629,7 @@ design.
 In 2014, I invented a problem to showcase how easy it is to describe
 dependent sources in Symbulator.
 
-Question: Find positive values for Vs and Is that will result in 80W
+Question: Find positive values for {{var:Vs}} and {{var:Is}} that will result in 80W
 delivered by the VCCS and 0W dissipated in the CCVS.
 
 ::: figure assets/practice/the-showing-off-problem-expert-4.png
@@ -674,8 +674,8 @@ is > 0 and vs > 0
 ```
 
 Run it in DC, with **Rounding** at 4 significant digits. Everything
-comes back numerical: v{{sub:s}} = {{o:17.61}} V and
-i{{sub:s}} = {{o:0.3973}} A.
+comes back numerical: {{var:v_s}} = {{o:17.61}} V and
+{{var:i_s}} = {{o:0.3973}} A.
 
 The answers also show *how* the CCVS dissipates nothing: i{{sub:R5}} comes
 back exactly {{o:0}} A, and its voltage is 0.1 i{{sub:R5}}, so the source

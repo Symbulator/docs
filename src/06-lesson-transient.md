@@ -547,8 +547,8 @@ $$
 ::: problem Bo2's Figure 5.10a
 
 Look at the simple resistor-inductor (RL) circuit shown, where at time
-t=0 the inductor current is i{{sub:L}}(0). Determine v{{sub:L}}(t),
-i{{sub:L}}(t) and v{{sub:R}}(t) for t≥0.
+t=0 the inductor current is {{var:i_L}}(0). Determine {{var:v_L}}(t),
+{{var:i_L}}(t) and {{var:v_R}}(t) for t≥0.
 
 ::: figure assets/practice/bo2s-figure-5-10a-7.jpg
 
@@ -585,7 +585,7 @@ $$
 
 ::: problem Bo2's Example 5.3
 
-Determine i{{sub:L}}(t) for all t.
+Determine {{var:i_L}}(t) for all t.
 
 ::: figure assets/practice/bo2s-example-5-3-8.jpg
 
@@ -637,7 +637,7 @@ $$
 
 ::: problem Bo2's Drill Exercise 5.3
 
-Find i{{sub:L}}(t), v{{sub:L}}(t) and i(t) for all t.
+Find {{var:i_L}}(t), {{var:v_L}}(t) and i(t) for all t.
 
 ::: figure assets/practice/bo2s-drill-exercise-5-3-9.jpg
 
@@ -702,7 +702,7 @@ tool, described above, can save.}}
 
 ::: problem Bo2's p230 (Dependent source)
 
-Find i{{sub:L}}(t) for t≥0, given that i{{sub:L}}(0) = 5A.
+Find {{var:i_L}}(t) for t≥0, given that {{var:i_L}}(0) = 5A.
 
 ::: figure assets/practice/bo2s-p230-dependent-source-10.jpg
 
@@ -736,7 +736,7 @@ $$
 
 ::: problem Bo2's Drill Exercise 5.4 (Dependent source)
 
-Find i{{sub:L}}(t) and v{{sub:L}}(t) for all t.
+Find {{var:i_L}}(t) and {{var:v_L}}(t) for all t.
 
 ::: figure assets/practice/bo2s-drill-exercise-5-4-dependent-source-11.jpg
 
@@ -797,7 +797,7 @@ $$
 
 ::: problem Bo2's Example 5.5 (Op Amp)
 
-Determine v{{sub:C}}(t), i{{sub:C}}(t) and v{{sub:o}}(t) for all t.
+Determine {{var:v_C}}(t), {{var:i_C}}(t) and {{var:v_o}}(t) for all t.
 
 ::: figure assets/practice/bo2s-example-5-5-op-amp-12.jpg
 
@@ -859,7 +859,7 @@ $$
 
 ::: problem Bo2's Drill Exercise 5.5 (Op Amp)
 
-Determine v{{sub:C}}(t), i{{sub:C}}(t) and v{{sub:o}}(t) for all t.
+Determine {{var:v_C}}(t), {{var:i_C}}(t) and {{var:v_o}}(t) for all t.
 
 ::: figure assets/practice/bo2s-drill-exercise-5-5-op-amp-13.jpg
 
@@ -922,8 +922,8 @@ $$
 ::: problem Bo2's Example 5.6
 
 In the circuit shown, there are two switches: one that opens at time
-t=0 and one that closes at time t=1 second. Determine v{{sub:C}}(t) and
-i{{sub:C}}(t) for all t.
+t=0 and one that closes at time t=1 second. Determine {{var:v_C}}(t) and
+{{var:i_C}}(t) for all t.
 
 ::: figure assets/practice/bo2s-example-5-6-14.jpg
 
@@ -1021,7 +1021,7 @@ These are the right answers, as can be seen by checking the book's answers.
 ::: problem Bo2's Drill Exercise 5.6
 
 Let’s see another example where a TR simulation is done for an interval that
-starts at a time other than t=0. Determine i{{sub:L}}(t) and v{{sub:L}}(t)
+starts at a time other than t=0. Determine {{var:i_L}}(t) and {{var:v_L}}(t)
 for all t.
 
 ::: figure assets/practice/bo2s-drill-exercise-5-6-17.jpg
@@ -1122,7 +1122,7 @@ These are the kind of expressions your book or professor are looking for.
 
 In the following circuit, assume that all the initial conditions are zero.
 The source is a step function **u(t)** with value **V** volts. Find
-i{{sub:R}}, v{{sub:R}}, i{{sub:C}} and v{{sub:C}}.
+{{var:i_R}}, {{var:v_R}}, {{var:i_C}} and {{var:v_C}}.
 
 ::: figure assets/practice/bo2s-figure-5-19-18.jpg
 
@@ -1150,7 +1150,7 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vc`, `vr` and `ic`, in **Results**.
 :::
 
-There is no need to ask for i{{sub:R}}, since i{{sub:R}}=i{{sub:C}}. We get
+There is no need to ask for {{var:i_R}}, since {{var:i_R}}={{var:i_C}}. We get
 the following expressions:
 
 $$
@@ -1163,7 +1163,7 @@ $$
 
 In the following circuit, assume that all the initial conditions are zero.
 The source is a step function **u(t)** with value **V** volts. Find
-i{{sub:R}}, v{{sub:R}}, i{{sub:L}} and v{{sub:L}}.
+{{var:i_R}}, {{var:v_R}}, {{var:i_L}} and {{var:v_L}}.
 
 ::: figure assets/practice/bo2s-figure-5-24-19.jpg
 
@@ -1187,8 +1187,8 @@ Set **Analysis** to *TR — transient / time domain*.
 The answers you want are `vl`, `vr` and `il`, in **Results**.
 :::
 
-There is no need to ask for i{{sub:R}}, since in a series circuit it will be
-identical to i{{sub:L}}.
+There is no need to ask for {{var:i_R}}, since in a series circuit it will be
+identical to {{var:i_L}}.
 
 $$
 \{ v e^{(-r t)/l} , v (1-e^{(-r t)/l}) , (v/r)(1-e^{(-r t)/l}) \}
@@ -1198,8 +1198,8 @@ $$
 
 ::: problem Bo2's Drill Exercise 5.7
 
-For the circuit, with a step source of 12 volts, find i{{sub:L}},
-v{{sub:L}}, i{{sub:L}} and v.
+For the circuit, with a step source of 12 volts, find {{var:i_L}},
+{{var:v_L}}, {{var:i_L}} and v.
 
 ::: figure assets/practice/bo2s-drill-exercise-5-7-20.jpg
 
@@ -1237,7 +1237,7 @@ $$
 
 In the following circuit, assume that all the initial conditions are zero.
 The source is a step function **u(t)** with value **I** amperes. Find
-i{{sub:C}}, i{{sub:R}}, and v.
+{{var:i_C}}, {{var:i_R}}, and v.
 
 ::: figure assets/practice/bo2s-figure-5-26-21.jpg
 
@@ -1273,8 +1273,8 @@ $$
 
 ::: problem Bo2's Example 5.7 (Op Amp)
 
-Suppose that *v*{{sub:s}}*(t)=u(t)*. Find v{{sub:C}}, i{{sub:C}}, and
-v{{sub:o}}.
+Suppose that {{var:v_s}}*(t)=u(t)*. Find {{var:v_C}}, {{var:i_C}}, and
+{{var:v_o}}.
 
 ::: figure assets/practice/bo2s-example-5-7-op-amp-22.jpg
 
@@ -1312,8 +1312,8 @@ $$
 
 ::: problem Bo2's Drill Exercise 5.8 (Op Amp)
 
-Suppose that *v*{{sub:s}}*(t)=u(t)*. Find v{{sub:C}}, i{{sub:C}}, and
-v{{sub:o}}.
+Suppose that {{var:v_s}}*(t)=u(t)*. Find {{var:v_C}}, {{var:i_C}}, and
+{{var:v_o}}.
 
 ::: figure assets/practice/bo2s-drill-exercise-5-8-op-amp-23.jpg
 
@@ -1387,8 +1387,8 @@ $$
 v-v e^{(-t/(c r))}
 $$
 
-The second interval starts at t{{sub:0}}. In it, the initial condition of the
-capacitor is given by the value of the expression above when t=t{{sub:0}}.
+The second interval starts at {{var:t_0}}. In it, the initial condition of the
+capacitor is given by the value of the expression above when t={{var:t_0}}.
 Here is how we find it:
 
 ```sym 7
@@ -1435,8 +1435,8 @@ interval.
 
 ::: problem Bo2's Drill Exercise 5.9
 
-Find the current through the inductor if the source is v{{sub:s}}(t) = V u(t)
-– V u(t-t{{sub:o}}).
+Find the current through the inductor if the source is {{var:v_s}}(t) = V u(t)
+– V u(t-{{var:t_o}}).
 
 ::: figure assets/practice/bo2s-drill-exercise-5-9-25.jpg
 
@@ -1471,8 +1471,8 @@ $$
 (v/r)(1-e^{((-r t)/l)})
 $$
 
-The second interval starts at t{{sub:0}}. In it, the initial condition of the
-inductor is given by the value of the expression above when t=t{{sub:0}}.
+The second interval starts at {{var:t_0}}. In it, the initial condition of the
+inductor is given by the value of the expression above when t={{var:t_0}}.
 Here is how we find it:
 
 ```sym 7
@@ -1592,7 +1592,7 @@ This is the expression for the voltage drop in the capacitor after t=0.
 ::: problem Bo2's Drill Exercise 5.11
 
 For the circuit of Bo2's Example 5.7, change the value of the capacitor to ¼
-F. Find v{{sub:C}}(t) for the case that the source is v{{sub:S}}(t)=1 V for
+F. Find {{var:v_C}}(t) for the case that the source is {{var:v_S}}(t)=1 V for
 t<0 and 3V for t≥0.
 
 We let Symbulator know that we are only interested in one variable: vc.
@@ -1736,8 +1736,8 @@ ic
 
 ::: problem Bo2's Drill Exercise 5.13 (Impulse)
 
-For the circuit of Bo2's Example 5.7, find v{{sub:C}}(t), i{{sub:C}}(t) and
-v{{sub:o}}(t) due to an impulse voltage source of v{{sub:S}}(t)= δ(t) (that
+For the circuit of Bo2's Example 5.7, find {{var:v_C}}(t), {{var:i_C}}(t) and
+{{var:v_o}}(t) due to an impulse voltage source of {{var:v_S}}(t)= δ(t) (that
 is to say, a 1V impulse in t=0.)
 
 Nothing new here. Again we use the δ(t) nomenclature for the source.
@@ -1803,8 +1803,8 @@ $$
 
 ::: problem Bo2's Drill Exercise 5.14 (Ramp)
 
-For the circuit of Bo2's Example 5.7, find v{{sub:C}}(t) and i{{sub:C}}(t)
-due to a ramp input voltage of v{{sub:S}}(t)= r(t).
+For the circuit of Bo2's Example 5.7, find {{var:v_C}}(t) and {{var:i_C}}(t)
+due to a ramp input voltage of {{var:v_S}}(t)= r(t).
 
 Nothing new here. The {{v7,8|command}}{{v9|description}} below should be clear to you by now.
 
@@ -1836,8 +1836,8 @@ $$
 
 ::: problem Bo2's Example 5.12 (Exponential)
 
-Assume initial conditions zero. Find i{{sub:L}}(t) and v{{sub:L}}(t), given
-that i{{sub:S}}(t) = 2 *e* {{sup:-4t}} A.
+Assume initial conditions zero. Find {{var:i_L}}(t) and {{var:v_L}}(t), given
+that {{var:i_S}}(t) = 2 *e* {{sup:-4t}} A.
 
 ::: figure assets/practice/bo2s-example-5-12-exponential-28.jpg
 
@@ -1871,7 +1871,7 @@ $$
 
 ::: problem Bo2's p265 (Exponential)
 
-Repeat Bo2's Example 5.12 if the current source is now i{{sub:S}}(t) = 2 *e*
+Repeat Bo2's Example 5.12 if the current source is now {{var:i_S}}(t) = 2 *e*
 {{sup:-3t}} A.
 
 All we do is change one digit in the circuit description: replace `4` with
@@ -1904,7 +1904,7 @@ $$
 ::: problem Bo2's Example 5.13 (Exponential)
 
 Find the voltage drop in the capacitor and the current in the 3 Ω resistor,
-if the source value is v{{sub:S}}(t)=18*e*{{sup:-t/2}}.
+if the source value is {{var:v_S}}(t)=18*e*{{sup:-t/2}}.
 
 ::: figure assets/practice/bo2s-example-5-13-exponential-29.jpg
 
@@ -1938,8 +1938,8 @@ $$
 
 ::: problem Bo2's Drill Exercise 5.16 (Exponential)
 
-For the circuit of Bo2's Example 5.7, find v{{sub:C}}(t) and i{{sub:C}}(t)
-for the case when the source's value is v{{sub:S}}(t)= 2 *e* {{sup:-4t}}. As
+For the circuit of Bo2's Example 5.7, find {{var:v_C}}(t) and {{var:i_C}}(t)
+for the case when the source's value is {{var:v_S}}(t)= 2 *e* {{sup:-4t}}. As
 before, assume initial conditions are zero.
 
 ```sym 7
@@ -2045,7 +2045,7 @@ s\plot()
 
 ::: only 7,8
 A window opens, asking you to enter three things: first, a function of time;
-second, a minimal time; and third, a maximal time. Let's plot v{{sub:C}}(t)
+second, a minimal time; and third, a maximal time. Let's plot {{var:v_C}}(t)
 first. Unless you have deleted the value of the variable **vc**, you should
 have the answer to the simulation above stored in it. So enter `vc` as the
 function, `0` as the minimal time and `1.5` as the maximal time. Press Enter,
@@ -2476,8 +2476,8 @@ be discussed separately in a subsequent part of Symbulator's documentation.
 
 ::: problem Bo2's Drill Exercise 6.5
 
-In the circuit, suppose that v{{sub:S}}(t)= 12 – 12 u(t) V. Find
-i{{sub:2}}(t) for t≥0.
+In the circuit, suppose that {{var:v_S}}(t)= 12 – 12 u(t) V. Find
+{{var:i_2}}(t) for t≥0.
 
 ::: figure assets/practice/bo2s-drill-exercise-6-5-36.jpg
 
@@ -2528,8 +2528,8 @@ $$
 
 ::: problem Bo2's Drill Exercise 6.6 (Op Amp)
 
-In the circuit, suppose that v{{sub:S}}(t)= 2 – 2 u(t) V. Find
-v{{sub:o}}(t) for t≥0.
+In the circuit, suppose that {{var:v_S}}(t)= 2 – 2 u(t) V. Find
+{{var:v_o}}(t) for t≥0.
 
 ::: figure assets/practice/bo2s-drill-exercise-6-6-op-amp-37.jpg
 
@@ -2593,7 +2593,7 @@ o,0,2,o
 
 ::: problem Bo2's Example 6.5 (Plot)
 
-In the circuit, use v{{sub:S}}=2/5V, R=12Ω, L=2H and C=1/50F. Find v(t)
+In the circuit, use {{var:v_S}}=2/5V, R=12Ω, L=2H and C=1/50F. Find v(t)
 and i(t), and plot them for time 0<t<1.5 seconds.
 
 ::: figure assets/practice/bo2s-example-6-5-plot-38.jpg
@@ -2652,7 +2652,7 @@ the book's graph too.
 
 ::: problem Bo2's Drill Exercise 6.7
 
-For the circuit in Bo2's Example 6.5, use v{{sub:S}}=3V, R=5Ω, L=1/2H and
+For the circuit in Bo2's Example 6.5, use {{var:v_S}}=3V, R=5Ω, L=1/2H and
 C=1/8F. Find v(t) and i(t).
 
 ```sym 7
@@ -2677,7 +2677,7 @@ $$
 ::: problem Bo2's Drill Exercise 6.8 (Ramp)
 
 For the circuit in Bo2's Drill Exercise 6.7, find the voltage drop in the
-capacitor v(t) if the source has a value v{{sub:S}}(t) = 3 r(t).
+capacitor v(t) if the source has a value {{var:v_S}}(t) = 3 r(t).
 
 ```sym 7
 s\only("vc"):s\tr("e,1,0,3t:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):vc
@@ -2757,7 +2757,7 @@ volts!
 
 ::: problem Bo2's Drill Exercise 6.9
 
-For the circuit, R=1Ω, L=2H, C=1/2F and i{{sub:S}}(t)=u(t). Find i(t)
+For the circuit, R=1Ω, L=2H, C=1/2F and {{var:i_S}}(t)=u(t). Find i(t)
 and v(t).
 
 ::: figure assets/practice/bo2s-drill-exercise-6-9-41.jpg
@@ -2785,7 +2785,7 @@ $$
 
 ::: problem Bo2's Figure 6.23 (Op Amp)
 
-For the circuit, find v{{sub:o}}(t) if v{{sub:S}}(t) = u(t).
+For the circuit, find {{var:v_o}}(t) if {{var:v_S}}(t) = u(t).
 
 ::: figure assets/practice/bo2s-figure-6-23-op-amp-42.jpg
 
@@ -2817,7 +2817,7 @@ $$
 ::: problem Bo2's Drill Exercise 6.10 (Op Amp)
 
 In the previous circuit, change the capacitor's value from 1/5 F to 25/16 F. Find
-v{{sub:o}}(t) if v{{sub:S}}(t) = 3 u(t).
+{{var:v_o}}(t) if {{var:v_S}}(t) = 3 u(t).
 
 ```sym 7
 s\only("vo"):s\tr("e,3,0,3:r1,3,1,1:r2,1,2,1:
@@ -2842,8 +2842,8 @@ o,2,o,o
 
 ::: problem Bo2's Drill Exercise 6.11 (p307)
 
-For the circuit, suppose that R{{sub:1}} = R{{sub:2}} = 1Ω, L = 1H, C =
-1F and v{{sub:S}}(t)= 2e{{sup:-2t}} u(t). Find i(t) if all initial conditions
+For the circuit, suppose that {{var:R_1}} = {{var:R_2}} = 1Ω, L = 1H, C =
+1F and {{var:v_S}}(t)= 2e{{sup:-2t}} u(t). Find i(t) if all initial conditions
 are zero.
 
 ::: figure assets/practice/bo2s-drill-exercise-6-11-p307-43.jpg
@@ -3022,7 +3022,7 @@ nothing to transform.
 ::: problem Bo2's Drill Exercise 4.5 (Expert)
 
 For this circuit, we know that the capacitor’s initial condition is zero,
-that v{{sub:s}} is an unknown step source (i.e. of the form A *u(t)*, where A
+that {{var:v_s}} is an unknown step source (i.e. of the form A *u(t)*, where A
 is a constant value in volts) and that the voltage drop in the capacitor for
 t>0 is found to be 1-e^(-t/2). Find the voltage drop in the resistor, the
 current through the capacitor and the value of the source.

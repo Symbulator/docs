@@ -370,7 +370,7 @@ It reads {{o:0.93595}} **lagging**.
 :::
 
 ::: problem AS7's Problem 11.97
-A power transmission system is modelled as shown. If V{{sub:s}} = 240 V rms,
+A power transmission system is modelled as shown. If {{var:V_s}} = 240 V rms,
 find the average power absorbed by the load.
 
 ::: figure assets/circuit/as7p1197.png

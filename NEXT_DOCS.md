@@ -8,6 +8,64 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #261 — a problem's own variables set bold italic: `{{var:…}}` — **done and live, 5 Sep 2026**
+
+Roberto, 5 Sep 2026: find every variable the *problem* names — in its
+text or its diagram, as distinct from the name Symbulator files the answer
+under — and set it bold italic. *Current Is is defined in the schematic
+as…*: that `Is` is the problem's.
+
+**The markup** is a brace command rather than raw `***…***`, so the
+intent is greppable and the style lives in one place: `{{var:I_s}}` is
+*I* with *s* below, bold italic, on the web
+(`<strong><em>I<sub>s</sub></em></strong>`) and in the PDF
+(`\textbf{\textit{I\textsubscript{s}}}`). `_` starts the subscript; a
+name without one (`{{var:E}}`) is set plain. Documented in `SPEC.md`
+beside `{{sub:}}`. It carries no nested brace, so it is safe inside
+nothing and beside everything; the nested-span check stays green.
+
+**The sweep.** Two greps over `src/` — every `X{{sub:Y}}` token, and
+every bare capital-led token shaped like a variable — gave 457 candidate
+lines, read in context with their directive stack. On 374 of them, 589
+tokens became `{{var:…}}`: every subscripted book variable in a problem
+statement or its answer discussion, plus the bare ones written without a
+subscript — `I3` and `RT` in Lesson 2, `R1`/`R2`/`R3` where the text
+names a diagram's resistor, `E` in B11's Example 6.19, `VTH`/`INO`/`REQ`
+and `RL` in Lesson 4, `Ap` and `Zi` in Lesson 13, and the bare `Is`, `Vs`
+and `Vo` that a stop-list for the verb *is* had swallowed on the first pass —
+Roberto's own example, *Current Is is defined in the schematic*, among
+them, caught by reading the PDF before deploying. **Spellings were kept
+as written**: `RL` stays *RL*, not *R*\textsubscript{L}; normalising
+them is a separate decision.
+
+**Left alone, each for a reason:**
+
+- Symbulator's own names in code (`ir3`, `vth`, `req`) and every
+  `{{o:…}}` answer — the software's text, checked against the originals.
+- Four lines where the notation is the tutorial's, not a problem's:
+  Lesson 1's *v₁ = 36 V, i_r1 = 6 mA* explaining how answers are shown;
+  Lesson 2's node voltages read off the results; the Showing-off
+  Problem's *i_R5*, a derived quantity nobody asked for.
+- Theory text outside problems: Lesson 4's manual-method paragraph
+  (*VTH*, *INO*, *REQ*) and its "RL problem" paragraphs; Lesson 8's RMS
+  discussion.
+- Inline maths and #260's displays — bold italic is not a convention
+  inside mathematics.
+- Single-letter element values in Lesson 6's statements (*R=12Ω, L=2H,
+  C=1/50F*), which no pattern can tell from prose.
+
+The problem statements are shared by the three versions, so the 7 and 8
+books show the marks too — words unchanged, the same layout-only
+treatment as #260. The build's diff against the previous one touches
+exactly the chapters with problems, in all three versions, plus the
+search indexes.
+
+Also in this train: the Introduction's split-view line now reads *where
+you are. Send someone:* (a full stop, not a colon, before the address —
+Roberto, 5 Sep 2026).
+
+---
+
 ## #260 — compound expressions set on a line of their own — **done and live, 4 Sep 2026**
 
 Roberto, 4 Sep 2026, on Lesson 1's *That is what you want for symbolic

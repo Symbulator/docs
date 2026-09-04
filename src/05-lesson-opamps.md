@@ -170,8 +170,8 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Th�
 The **th** script tells us it found the Thévenin voltage, but could not find
 the Norton current. This is not a surprise, since an ideal op amp has zero
 output resistance and a fixed voltage, an infinite current when
-short-circuited. So the Thévenin equivalent is given by V{{sub:TH}} and no
-resistance (or R{{sub:EQ}} = 0Ω). Evaluating `vth` results in
+short-circuited. So the Thévenin equivalent is given by {{var:V_TH}} and no
+resistance (or {{var:R_EQ}} = 0Ω). Evaluating `vth` results in
 
 ((r1+r2) vs)/r1
 
@@ -193,8 +193,8 @@ the equivalent is a voltage source with nothing in series.
 That is not a failure to solve. An ideal op amp holds its output voltage
 whatever current is drawn, so a short across its output carries an unbounded
 current, which is exactly a source with no resistance in series:
-R{{sub:EQ}} = 0 Ω. Symbulator finds it by putting a resistance across the
-terminals and letting it fall to zero. V{{sub:TH}} matches the book's
+{{var:R_EQ}} = 0 Ω. Symbulator finds it by putting a resistance across the
+terminals and letting it fall to zero. {{var:V_TH}} matches the book's
 answer.
 :::
 
@@ -210,7 +210,7 @@ The Thevenin resistance, as explained above, is 0Ω.
 
 ::: problem AS2's Example 5.2
 
-Find v{{sub:o}} and i{{sub:o}}.
+Find {{var:v_o}} and {{var:i_o}}.
 
 ::: figure assets/practice/as2s-example-5-2-3.jpg
 
@@ -235,18 +235,18 @@ The answers you want are `vo` and `io`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{9.,.00065}**, is correct: v{{sub:o}} is 9V and i{{sub:o}} is
+The answer, **{9.,.00065}**, is correct: {{var:v_o}} is 9V and {{var:i_o}} is
 0.65mA
 :::
 ::: only 9
-The answer is v{{sub:o}} = 9V and i{{sub:o}} = 0.65mA. This is correct.
+The answer is {{var:v_o}} = 9V and {{var:i_o}} = 0.65mA. This is correct.
 :::
 
 :::
 
 ::: problem Bo2's Figure 3.3 (Inverting)
 
-Find the gain of the overall circuit, v{{sub:o}}/v{{sub:S}}.
+Find the gain of the overall circuit, {{var:v_o}}/{{var:v_S}}.
 
 ::: figure assets/practice/bo2s-figure-3-3-inverting-4.jpg
 
@@ -280,7 +280,7 @@ above.
 
 ::: problem AS2's Figure 5.10 (Inverting)
 
-Find v{{sub:o}}.
+Find {{var:v_o}}.
 
 ::: figure assets/practice/as2s-figure-5-10-inverting-5.jpg
 
@@ -312,7 +312,7 @@ correct:
 
 ::: problem AS2's Example 5.3 (Inverting)
 
-If v{{sub:i}} is 0.5V, calculate the output voltage v{{sub:o}} and the
+If {{var:v_i}} is 0.5V, calculate the output voltage {{var:v_o}} and the
 current in the 10 kΩ resistor.
 
 ::: figure assets/practice/as2s-example-5-3-inverting-6.jpg
@@ -347,7 +347,7 @@ The answer is `vo` = -1.25 V and `ir1` = 5e-5 A. This is correct.
 
 ::: problem TR5's Exercise 4-11 (Inverting)
 
-Find v{{sub:O}} when v{{sub:S}} is 2V, -4V and 6V. Notice the output of the
+Find {{var:v_O}} when {{var:v_S}} is 2V, -4V and 6V. Notice the output of the
 op amp is limited to ±15V.
 
 ::: figure assets/practice/tr5s-exercise-4-11-inverting-7.jpg
@@ -390,19 +390,19 @@ Then run it again with `vs = -4` and once more with `vs = 6`.
 ::: only 7,8
 The answer, **{-6.6,13.2,-19.8}**, is correct within the linear realm, but
 since the output is constrained to no more than 15V or less than -15V, the
-answer is v{{sub:O}}=**-15**V for v{{sub:S}} = 6V.
+answer is {{var:v_O}}=**-15**V for {{var:v_S}} = 6V.
 :::
 ::: only 9
 The answers, `vo` = -6.6 V, 13.2 V and -19.8 V, are correct within the linear
 realm, but since the output is constrained to no more than 15V or less than
--15V, the answer is v{{sub:O}}=**-15**V for v{{sub:S}} = 6V.
+-15V, the answer is {{var:v_O}}=**-15**V for {{var:v_S}} = 6V.
 :::
 
 :::
 
 ::: problem AS2's Practice Problem 5.3 (Inverting)
 
-Find the output voltage of the op amp (i.e. v{{sub:o}}) and calculate the
+Find the output voltage of the op amp (i.e. {{var:v_o}}) and calculate the
 current through the feedback resistor (i.e. the 15 kΩ resistor).
 
 ::: figure assets/practice/as2s-practice-problem-5-3-inverting-8.jpg
@@ -436,7 +436,7 @@ The answer is `vo` = -.12 V and `irf` = 8e-6 A. This is correct.
 
 ::: problem AS2's Example 5.4 (Inverting)
 
-Determine v{{sub:o}}.
+Determine {{var:v_o}}.
 
 ::: figure assets/practice/as2s-example-5-4-inverting-9.jpg
 
@@ -535,7 +535,7 @@ which is correct, as can be seen by comparing it to the book's answer.
 ::: problem AS2's Practice Problem 5.4a (Transresistance)
 
 This is a current-to-voltage converter, also called a *transresistance
-amplifier*. Find v{{sub:o}}/i{{sub:S}}.
+amplifier*. Find {{var:v_o}}/{{var:i_S}}.
 
 ::: figure assets/practice/as2s-practice-problem-5-4a-transresistance-13.jpg
 
@@ -568,7 +568,7 @@ The answer, **-r**, is correct.
 ::: problem AS2's Practice Problem 5.4b (Transresistance)
 
 This is another *transresistance amplifier*. Again, find
-v{{sub:o}}/i{{sub:S}}.
+{{var:v_o}}/{{var:i_S}}.
 
 ::: figure assets/practice/as2s-practice-problem-5-4b-transresistance-14.jpg
 
@@ -609,7 +609,7 @@ differently.
 
 ::: problem Bo2's Example 3.1 (Non-Inverting Amplifier)
 
-Find v{{sub:o}}/v{{sub:1}}.
+Find {{var:v_o}}/{{var:v_1}}.
 
 ::: figure assets/practice/bo2s-example-3-1-non-inverting-amplifier-16.jpg
 
@@ -642,7 +642,7 @@ We get **1+r2/r1**, which is correct.
 
 ::: problem AS2's Figure 5.16 (Non-Inverting Amplifier)
 
-Find v{{sub:o}}.
+Find {{var:v_o}}.
 
 ::: figure assets/practice/as2s-figure-5-16-non-inverting-amplifier-17.jpg
 
@@ -676,7 +676,7 @@ $$
 
 ::: problem TR5's Example 4-13 (Non-Inverting Amplifier)
 
-Find Vo/Vs.
+Find {{var:Vo}}/{{var:Vs}}.
 
 ::: figure assets/practice/tr5s-example-4-13-non-inverting-amplifier-18.jpg
 
@@ -785,7 +785,7 @@ right answer.
 
 ::: problem AS2's Figure 5.17 (Voltage Follower)
 
-Find v{{sub:o}}.
+Find {{var:v_o}}.
 
 ::: figure assets/practice/as2s-figure-5-17-voltage-follower-20.jpg
 
@@ -884,7 +884,7 @@ difference.
 
 ::: problem AS2's Example 5.5 (Inverting)
 
-Find v{{sub:o}}.
+Find {{var:v_o}}.
 
 ::: figure assets/practice/as2s-example-5-5-inverting-23.jpg
 
@@ -914,7 +914,7 @@ The answer, **-1**, is correct.
 
 ::: problem AS2's Practice Problem 5.5 (Non-Inverting)
 
-Calculate v{{sub:o}}.
+Calculate {{var:v_o}}.
 
 ::: figure assets/practice/as2s-practice-problem-5-5-non-inverting-24.jpg
 
@@ -941,7 +941,7 @@ The answer for `vo`, **7**, is correct.
 
 ::: problem Bo2's Example 3.2 (Adder or Summing)
 
-Find v{{sub:o}}.
+Find {{var:v_o}}.
 
 ::: figure assets/practice/bo2s-example-3-2-adder-or-summing-25.jpg
 
@@ -979,7 +979,7 @@ which is correct, as can be seen by comparing it to the book's answer.
 
 ::: problem AS2's Figure 5.21 (Adder or Summing)
 
-Find v{{sub:o}}.
+Find {{var:v_o}}.
 
 ::: figure assets/practice/as2s-figure-5-21-adder-or-summing-27.jpg
 
@@ -1021,7 +1021,7 @@ which is correct, as can be seen by comparing it to the book's answer.
 
 ::: problem AS2's Example 5.6 (Adder or Summing)
 
-Find v{{sub:o}} and i{{sub:o}}.
+Find {{var:v_o}} and {{var:i_o}}.
 
 ::: figure assets/practice/as2s-example-5-6-adder-or-summing-29.jpg
 
@@ -1062,7 +1062,7 @@ current of 4.8mA is going into the op amp.
 
 ::: problem AS2's Practice Problem 5.6 (Adder or Summing)
 
-Find v{{sub:o}} and i{{sub:o}}.
+Find {{var:v_o}} and {{var:i_o}}.
 
 ::: figure assets/practice/as2s-practice-problem-5-6-adder-or-summing-30.jpg
 
@@ -1140,7 +1140,7 @@ above.
 
 ::: problem TR5's Exercise 4-13 (Difference or Differential)
 
-Find v{{sub:o}}.
+Find {{var:v_o}}.
 
 ::: figure assets/practice/tr5s-exercise-4-13-difference-or-differential-33.jpg
 
@@ -1171,7 +1171,7 @@ correct answer.
 
 ::: problem AS2's Figure 5.24 (Difference or Differential)
 
-Find v{{sub:o}}. (And keep it in the memory, for you will use it in the next
+Find {{var:v_o}}. (And keep it in the memory, for you will use it in the next
 three problems.)
 
 ::: figure assets/practice/as2s-figure-5-24-difference-or-differential-34.jpg
@@ -1215,8 +1215,8 @@ This expression is equivalent to the book's answer.
 
 ::: problem AS2's Figure 5.24 (Subtractor)
 
-For the same circuit of the previous problem, find v{{sub:o}} when
-R{{sub:1}}=R{{sub:2}} and R{{sub:3}}=R{{sub:4}}.
+For the same circuit of the previous problem, find {{var:v_o}} when
+{{var:R_1}}={{var:R_2}} and {{var:R_3}}={{var:R_4}}.
 
 Since we already have the expression for vo stored in the memory, we only do
 this:
@@ -1244,15 +1244,15 @@ The answer we get, **v2-v1**, is correct.
 
 ::: problem AS2's Example 5.7 (Difference or Differential)
 
-Design an op amp circuit with inputs v{{sub:1}} and v{{sub:2}} such that
-v{{sub:o}} = -5v{{sub:1}} + 3v{{sub:2}}.
+Design an op amp circuit with inputs {{var:v_1}} and {{var:v_2}} such that
+{{var:v_o}} = -5{{var:v_1}} + 3{{var:v_2}}.
 
 My solution follows. The problem statement is a fancy way of saying: for the
 circuit of the previous problem, find the resistor values that give an output
-v{{sub:o}} = -5v{{sub:1}} + 3v{{sub:2}}. Not strictly a Symbulator problem, but
+{{var:v_o}} = -5{{var:v_1}} + 3{{var:v_2}}. Not strictly a Symbulator problem, but
 it shows how Symbulator fits into design problems.
 
-First we take that part of v{{sub:o}} that is a factor of v{{sub:1}}, and
+First we take that part of {{var:v_o}} that is a factor of {{var:v_1}}, and
 make it equal to -5. Thus:
 
 ```sym 7
@@ -1278,8 +1278,8 @@ rearrange it, **Evaluate** takes `simplify()`, `collect()`, `expand()`,
 `factor()` and `apart()`.
 :::
 
-We get **-r2/r1=-5**. Now make that part of v{{sub:o}} that is a factor of
-v{{sub:2}} equal to 3. Thus:
+We get **-r2/r1=-5**. Now make that part of {{var:v_o}} that is a factor of
+{{var:v_2}} equal to 3. Thus:
 
 ```sym 7
 Define v1=0:Define v2=1:expand(vo)=3
@@ -1302,8 +1302,8 @@ equal 3.
 
 We get **r2\*r4/(r1\*(r3+r4))+r4/(r3+r4)=3** Now, since you have two
 equations, you can solve for two unknowns. Of the four resistors you get to
-choose, two can be whatever you want. The book recommends R{{sub:1}} = 10 kΩ
-and R{{sub:3}} = 20 kΩ. Now let's find R{{sub:2}} and R{{sub:4}}.
+choose, two can be whatever you want. The book recommends {{var:R_1}} = 10 kΩ
+and {{var:R_3}} = 20 kΩ. Now let's find {{var:R_2}} and {{var:R_4}}.
 
 ```sym 7
 solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=20000
@@ -1365,8 +1365,8 @@ Design a difference amplifier with gain 4.
 
 My solution follows. Again the statement is a fancy way of saying: for the
 circuit of the previous problem, find the resistor values that give an output
-v{{sub:o}} = **4** (v{{sub:2}}-v{{sub:1}}), that is, -4v{{sub:1}} +
-4v{{sub:2}}. Same as before.
+{{var:v_o}} = **4** ({{var:v_2}}-{{var:v_1}}), that is, -4{{var:v_1}} +
+4{{var:v_2}}. Same as before.
 
 ```sym 7
 Define v1=1:Define v2=0:vo=-4
@@ -1389,7 +1389,7 @@ read `vo` each time. The two factors are the same as before, so the two
 design equations are the same shape with 4 in place of 5 and 3.
 :::
 
-This time the book asks that you use R{{sub:1}} = 10 kΩ and R{{sub:3}} = 10 kΩ.
+This time the book asks that you use {{var:R_1}} = 10 kΩ and {{var:R_3}} = 10 kΩ.
 So we do that.
 
 ```sym 7
@@ -1420,7 +1420,7 @@ resistors.
 
 ::: problem AS2's Practice Problem 5.8 (Instrumentation)
 
-Find i{{sub:o}}.
+Find {{var:i_o}}.
 
 ::: figure assets/practice/as2s-practice-problem-5-8-instrumentation-36.jpg
 
@@ -1451,15 +1451,15 @@ r5,o,0,10'k
 The answer you want is `ir5`, in **Results**.
 :::
 
-In the schematic, the current i{{sub:o}} corresponds to `ir5`. The answer,
+In the schematic, the current {{var:i_o}} corresponds to `ir5`. The answer,
 **2e-6**, is correct.
 
 :::
 
 ::: problem Bo2's Example 3.3 (Cascade)
 
-Find v{{sub:o}} in terms of the conductances and the applied voltage
-v{{sub:S}}.
+Find {{var:v_o}} in terms of the conductances and the applied voltage
+{{var:v_S}}.
 
 ::: figure assets/practice/bo2s-example-3-3-cascade-37.jpg
 
@@ -1532,7 +1532,7 @@ o2,3,4,o
 
 ::: problem AS2's Example 5.9 (Cascade)
 
-Find v{{sub:o}} and i{{sub:o}}.
+Find {{var:v_o}} and {{var:i_o}}.
 
 ::: figure assets/practice/as2s-example-5-9-cascade-41.jpg
 
@@ -1563,7 +1563,7 @@ correct.
 
 ::: problem AS2's Practice Problem 5.9 (Cascade)
 
-Determine v{{sub:o}} and i{{sub:o}}.
+Determine {{var:v_o}} and {{var:i_o}}.
 
 ::: figure assets/practice/as2s-practice-problem-5-9-cascade-42.jpg
 
@@ -1599,7 +1599,7 @@ The answer is `vo` = 10 V and `iro` = 1/1000 A, that is 1mA. This is correct.
 
 ::: problem AS2's Practice Problem 5.10 (Cascade)
 
-If v{{sub:1}} = 2V and v{{sub:2}} = 1.5V, find v{{sub:o}} in the circuit.
+If {{var:v_1}} = 2V and {{var:v_2}} = 1.5V, find {{var:v_o}} in the circuit.
 
 ::: figure assets/practice/as2s-practice-problem-5-10-cascade-43.jpg
 
@@ -1636,7 +1636,7 @@ The answer, **9**, is correct.
 
 ::: problem TR5's Example 4-16 (Cascade)
 
-Derive an expression for v{{sub:o}} in terms of the two inputs.
+Derive an expression for {{var:v_o}} in terms of the two inputs.
 
 ::: figure assets/practice/tr5s-example-4-16-cascade-44.jpg
 
@@ -1674,8 +1674,8 @@ The answer, **-2.4 v1 − 6**, is correct.
 
 ::: problem TR5's Exercise 4-14 (Cascade)
 
-Derive an expression for v{{sub:o}} in terms of the inputs v{{sub:1}} and
-v{{sub:2}}.
+Derive an expression for {{var:v_o}} in terms of the inputs {{var:v_1}} and
+{{var:v_2}}.
 
 ::: figure assets/practice/tr5s-exercise-4-14-cascade-45.jpg
 
@@ -1711,7 +1711,7 @@ The answer, **8 v1 – 4 v2**, is correct.
 
 ::: problem AS2's Example 5.10 (Cascade)
 
-If v{{sub:1}} = 1V and v{{sub:2}} = 2V, find v{{sub:o}} in the circuit.
+If {{var:v_1}} = 1V and {{var:v_2}} = 2V, find {{var:v_o}} in the circuit.
 
 ::: figure assets/practice/as2s-example-5-10-cascade-46.jpg
 
@@ -1744,8 +1744,8 @@ The answer, **8.667**, is correct.
 
 ::: problem TR5's Example 4-17 (Cascade)
 
-Derive an expression for v{{sub:o}} in terms of the inputs v{{sub:1}} and
-v{{sub:2}}.
+Derive an expression for {{var:v_o}} in terms of the inputs {{var:v_1}} and
+{{var:v_2}}.
 
 ::: figure assets/practice/tr5s-example-4-17-cascade-47.jpg
 
@@ -1798,8 +1798,8 @@ $$
 
 ::: problem TR5's Example 4-18 (Multiple)
 
-Derive an expression for v{{sub:o}} in terms of the inputs v{{sub:1}} and
-v{{sub:2}}.
+Derive an expression for {{var:v_o}} in terms of the inputs {{var:v_1}} and
+{{var:v_2}}.
 
 ::: figure assets/practice/tr5s-example-4-18-multiple-49.jpg
 

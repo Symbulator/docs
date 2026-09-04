@@ -121,6 +121,7 @@ what a person writing a quotation types anyway.
 | `{{i:resistor}}` | index entry (invisible) |
 | `{{ref:lesson-dc}}` | cross-reference, renders as "Lesson 3" or "section 3.2" |
 | `{{sub:R1}}` | subscript — `I{{sub:R1}}` renders as I with a subscript R1 |
+| `{{var:I_s}}` | a variable the problem itself names — set bold italic; `_` starts a subscript, so this is *I* with s below. Not for Symbulator's own names (`ir3`), which stay in code |
 | `{{o:1.2}}` | a value the software returned |
 
 ::: warning A version span cannot contain another brace command

@@ -43,7 +43,7 @@ the equivalent resistance of the rest of the circuit as seen by that source.
 Let's see an example.
 
 ::: problem B11's Example 8.1
-Given the circuit, determine the current and voltage drop in R1.
+Given the circuit, determine the current and voltage drop in {{var:R1}}.
 
 ::: figure assets/circuit/b11e0801.jpg
 B11's Example 8.1
@@ -231,8 +231,8 @@ circuit description passed to Symbulator.
 ### When to reduce resistors
 
 A simulation where it makes sense to use pr is B11's Example 7.4, which you saw
-in the practice problems of {{ref:lesson-dc}}. It makes sense to reduce R4 and
-R5 to an equivalent resistor, since we do not need to know their individual
+in the practice problems of {{ref:lesson-dc}}. It makes sense to reduce {{var:R4}} and
+{{var:R5}} to an equivalent resistor, since we do not need to know their individual
 currents or power use:
 
 ```sym 7
@@ -242,11 +242,11 @@ s\dc("e,1,0,16.8:r1,1,2,9:r2,1,2,6:r3,2,3,4:re,3,0,[6,3]:r6,2,0,3")
 s\dc("e,1,0,16.8:r1,1,2,9:r2,1,2,6:r3,2,3,4:re,3,0,[6,3]:r6,2,0,3")
 ```
 An example where using pr makes no sense is B11's Example 8.3, because you need
-to know the value of the current through R1.
+to know the value of the current through {{var:R1}}.
 
 Finally, a simulation where you can reduce part of the resistors is B11's
-Example 6.22. We must leave R1 alone, because we need the current through it,
-but we can reduce R2 and R3:
+Example 6.22. We must leave {{var:R1}} alone, because we need the current through it,
+but we can reduce {{var:R2}} and {{var:R3}}:
 
 ```sym 7
 s\dc("jt,0,1,12'm:r1,1,0,1'k:re,1,0,[10'k,22'k]")
@@ -327,8 +327,8 @@ where brackets are easy to misread as a list.
 ### When to reduce resistors
 
 A simulation where it makes sense to use pr is B11's Example 7.4, which you saw
-in the practice problems of {{ref:lesson-dc}}. It makes sense to reduce R4 and
-R5 to an equivalent resistor, since we do not need to know their individual
+in the practice problems of {{ref:lesson-dc}}. It makes sense to reduce {{var:R4}} and
+{{var:R5}} to an equivalent resistor, since we do not need to know their individual
 currents or power use:
 
 ```field 9 Circuit Description
@@ -344,11 +344,11 @@ Run it in DC, then ask **Evaluate** for `-ie`, the current the source
 delivers. The answer is **3 A**.
 
 An example where using pr makes no sense is B11's Example 8.3, because you need
-to know the value of the current through R1.
+to know the value of the current through {{var:R1}}.
 
 Finally, a simulation where you can reduce part of the resistors is B11's
-Example 6.22. We must leave R1 alone, because we need the current through it,
-but we can reduce R2 and R3:
+Example 6.22. We must leave {{var:R1}} alone, because we need the current through it,
+but we can reduce {{var:R2}} and {{var:R3}}:
 
 ```field 9 Circuit Description
 jt,0,1,12'm
@@ -434,7 +434,7 @@ Symbulator knows and minding their polarity, and you are off to the races.
 
 ::: problem B11's Example 8.2
 
-Determine the values of V{{sub:S}}, I{{sub:1}} and I{{sub:2}}.
+Determine the values of {{var:V_S}}, {{var:I_1}} and {{var:I_2}}.
 
 ::: figure assets/practice/b11s-example-8-2-1.jpg
 
@@ -462,8 +462,8 @@ r1,1,0,4
 The answers you want are `v1`, `ie` and `ir1`, in **Results**.
 :::
 
-{{v7,8|The calculator returns **{12,4,3}**, meaning}}{{v9|The answers show}} V{{sub:S}} is 12V, I{{sub:1}} is
-4A and I{{sub:2}} is 3A. These are the correct answers. {{v7,8|We will keep using the single-line instruction.}}
+{{v7,8|The calculator returns **{12,4,3}**, meaning}}{{v9|The answers show}} {{var:V_S}} is 12V, {{var:I_1}} is
+4A and {{var:I_2}} is 3A. These are the correct answers. {{v7,8|We will keep using the single-line instruction.}}
 
 :::
 
@@ -499,11 +499,11 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-We get these answers: **{1.25,4.75,3.25}**. So I{{sub:R2}} is 1.25A,
-I{{sub:R6}} is 4.75A, and I{{sub:R8}} is 3.25A.
+We get these answers: **{1.25,4.75,3.25}**. So {{var:I_R2}} is 1.25A,
+{{var:I_R6}} is 4.75A, and {{var:I_R8}} is 3.25A.
 :::
 ::: only 9
-The answer is I{{sub:R2}} = 1.25A, I{{sub:R6}} = 4.75A and I{{sub:R8}} =
+The answer is {{var:I_R2}} = 1.25A, {{var:I_R6}} = 4.75A and {{var:I_R8}} =
 3.25A.
 :::
 
@@ -540,12 +540,12 @@ The answers you want are `v1`, `v2`, `ir1`, `ir2` and `ir3`, in **Results**.
 :::
 
 ::: only 7,8
-We get the following answers: **{6,-6,3,1,1}**. So V{{sub:1}}=6V,
-V{{sub:2}}=-6V, I{{sub:R1}}=3A, and I{{sub:R2}}=I{{sub:R3}}=1A.
+We get the following answers: **{6,-6,3,1,1}**. So {{var:V_1}}=6V,
+{{var:V_2}}=-6V, {{var:I_R1}}=3A, and {{var:I_R2}}={{var:I_R3}}=1A.
 :::
 ::: only 9
-The answer is V{{sub:1}}=6V, V{{sub:2}}=-6V, I{{sub:R1}}=3A and
-I{{sub:R2}}=I{{sub:R3}}=1A.
+The answer is {{var:V_1}}=6V, {{var:V_2}}=-6V, {{var:I_R1}}=3A and
+{{var:I_R2}}={{var:I_R3}}=1A.
 :::
 
 :::
@@ -585,11 +585,11 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{-2.,1.,.5}**, indicates v{{sub:1}}=-2V, v{{sub:2}}=1V,
-v{{sub:3}}=0.5V. This is correct.
+The answer, **{-2.,1.,.5}**, indicates {{var:v_1}}=-2V, {{var:v_2}}=1V,
+{{var:v_3}}=0.5V. This is correct.
 :::
 ::: only 9
-The answer is v{{sub:1}}=-2V, v{{sub:2}}=1V and v{{sub:3}}=0.5V. This is
+The answer is {{var:v_1}}=-2V, {{var:v_2}}=1V and {{var:v_3}}=0.5V. This is
 correct.
 :::
 
@@ -631,11 +631,11 @@ The answers you want are `ir1` and `vrx`, in **Results**.
 
 ::: only 7,8
 Select DC. Add equation `ir2=4`. Add unknown `rx`. Run the simulation. The
-answer, **{-8,80}**, means that I{{sub:X}} is -8A and that V{{sub:X}} is 80V.
+answer, **{-8,80}**, means that {{var:I_X}} is -8A and that {{var:V_X}} is 80V.
 :::
 ::: only 9
 Select DC. Add equation `ir2=4`. Add unknown `rx`. Run the simulation. The
-answer is I{{sub:X}} = -8A and V{{sub:X}} = 80V.
+answer is {{var:I_X}} = -8A and {{var:V_X}} = 80V.
 :::
 
 :::
@@ -670,18 +670,18 @@ The answers you want are `v1`, `v2` and `v3`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{1,2,3}**, is correct: v{{sub:1}}=1V, v{{sub:2}}=2V,
-v{{sub:3}}=3V.
+The answer, **{1,2,3}**, is correct: {{var:v_1}}=1V, {{var:v_2}}=2V,
+{{var:v_3}}=3V.
 :::
 ::: only 9
-The answer is v{{sub:1}}=1V, v{{sub:2}}=2V and v{{sub:3}}=3V. This is correct.
+The answer is {{var:v_1}}=1V, {{var:v_2}}=2V and {{var:v_3}}=3V. This is correct.
 :::
 
 :::
 
 ::: problem B11's Example 8.5
 
-Determine the current I{{sub:2}} in the circuit shown. My solution:
+Determine the current {{var:I_2}} in the circuit shown. My solution:
 
 ::: figure assets/practice/b11s-example-8-5-7.jpg
 
@@ -700,7 +700,7 @@ e2,1,2,5
 r2,0,2,2
 ```
 
-This gives us a value for I{{sub:2}} of **3.4** A. This is correct.
+This gives us a value for {{var:I_2}} of **3.4** A. This is correct.
 
 :::
 
@@ -743,11 +743,11 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{-.5,-1.5,1.5,11.5}**, is correct: v{{sub:1}}=-.5,
-v{{sub:2}}=-1.5, v{{sub:3}}=1.5, i=11.5
+The answer, **{-.5,-1.5,1.5,11.5}**, is correct: {{var:v_1}}=-.5,
+{{var:v_2}}=-1.5, {{var:v_3}}=1.5, i=11.5
 :::
 ::: only 9
-The answer is v{{sub:1}}=-.5, v{{sub:2}}=-1.5, v{{sub:3}}=1.5 and i=11.5. This
+The answer is {{var:v_1}}=-.5, {{var:v_2}}=-1.5, {{var:v_3}}=1.5 and i=11.5. This
 is correct.
 :::
 
@@ -755,7 +755,7 @@ is correct.
 
 ::: problem B11's Example 8.22
 
-Determine V{{sub:1}} and V{{sub:2}}. My solution:
+Determine {{var:V_1}} and {{var:V_2}}. My solution:
 
 ::: figure assets/practice/b11s-example-8-22-9.jpg
 
@@ -785,18 +785,18 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{10.67,-1.33}**, tells us that V{{sub:1}} is 10.67V and
-V{{sub:2}} is -1.33V.
+The answer, **{10.67,-1.33}**, tells us that {{var:V_1}} is 10.67V and
+{{var:V_2}} is -1.33V.
 :::
 ::: only 9
-The answer is V{{sub:1}} = 10.67V and V{{sub:2}} = -1.33V.
+The answer is {{var:V_1}} = 10.67V and {{var:V_2}} = -1.33V.
 :::
 
 :::
 
 ::: problem B11's Example 8.19
 
-Determine V{{sub:1}}, I{{sub:1}} and I{{sub:2}}, in the circuit:
+Determine {{var:V_1}}, {{var:I_1}} and {{var:I_2}}, in the circuit:
 
 ::: figure assets/practice/b11s-example-8-19-10.jpg
 
@@ -818,11 +818,11 @@ j,0,1,1
 ```
 
 ::: only 7,8
-The answer, **{20.,-.667,1.67}**, tells us that V{{sub:1}} is 20V, I{{sub:1}}
-is -.667A and I{{sub:2}} is 1.67 A.
+The answer, **{20.,-.667,1.67}**, tells us that {{var:V_1}} is 20V, {{var:I_1}}
+is -.667A and {{var:I_2}} is 1.67 A.
 :::
 ::: only 9
-The answer is V{{sub:1}} = 20V, I{{sub:1}} = -.667A and I{{sub:2}} = 1.67 A.
+The answer is {{var:V_1}} = 20V, {{var:I_1}} = -.667A and {{var:I_2}} = 1.67 A.
 :::
 
 :::
@@ -833,7 +833,7 @@ The answer is V{{sub:1}} = 20V, I{{sub:1}} = -.667A and I{{sub:2}} = 1.67 A.
 
 :::
 
-Determine I{{sub:2}} and I{{sub:3}}.
+Determine {{var:I_2}} and {{var:I_3}}.
 
 ```sym 7
 s\dc("e1,1,0,20:r1,1,2,6:r2,2,a,4:j,a,0,4:r3,a,3,2:e2,0,3,12"):
@@ -869,7 +869,7 @@ The answer is `ir2` = 3.33 A and `ir3` = -.667 A. This is correct.
 
 ::: problem B11's Example 8.20
 
-Determine V{{sub:1}}, V{{sub:2}}, I{{sub:1}}, I{{sub:2}} and I{{sub:3}}. My
+Determine {{var:V_1}}, {{var:V_2}}, {{var:I_1}}, {{var:I_2}} and {{var:I_3}}. My
 solution:
 
 ::: figure assets/practice/b11s-example-8-20-12.jpg
@@ -900,19 +900,19 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 
 ::: only 7,8
 Answer: **{37.82,32.73,3.27,1.27,3.27}**. You should know how to read these
-by now, but here it is just in case: V{{sub:1}} = 37.82V, V{{sub:2}} =
-32.73V, I{{sub:1}} = 3.27A, I{{sub:2}} = 1.27A, I{{sub:3}} = 3.27A.
+by now, but here it is just in case: {{var:V_1}} = 37.82V, {{var:V_2}} =
+32.73V, {{var:I_1}} = 3.27A, {{var:I_2}} = 1.27A, {{var:I_3}} = 3.27A.
 :::
 ::: only 9
-The answer is V{{sub:1}} = 37.82V, V{{sub:2}} = 32.73V, I{{sub:1}} = 3.27A,
-I{{sub:2}} = 1.27A and I{{sub:3}} = 3.27A.
+The answer is {{var:V_1}} = 37.82V, {{var:V_2}} = 32.73V, {{var:I_1}} = 3.27A,
+{{var:I_2}} = 1.27A and {{var:I_3}} = 3.27A.
 :::
 
 :::
 
 ::: problem RM3's Example 9-12 (*solve*)
 
-If R{{sub:3}} is to be replaced with R{{sub:4}} and I{{sub:4}}, determine the
+If {{var:R_3}} is to be replaced with {{var:R_4}} and {{var:I_4}}, determine the
 value and direction of the source.
 
 ::: figure assets/practice/rm3s-example-9-12-solve-13.jpg
@@ -952,8 +952,8 @@ va-vb
 
 We find that the voltage drop is 12V and the current is 0.2A. These are the
 currents and voltages that we have to keep once we do the replacement.
-Simulate the circuit now replacing R{{sub:3}} with a resistor R{{sub:4}} of
-240Ω and a source **j** with value I{{sub:4}}. Run this:
+Simulate the circuit now replacing {{var:R_3}} with a resistor {{var:R_4}} of
+240Ω and a source **j** with value {{var:I_4}}. Run this:
 
 ```sym 7
 s\dc("e,0,b,20:r1,0,a,16:r2,a,b,40:r4,a,b,240:j,a,b,i4")
@@ -998,7 +998,7 @@ from **a** to **b**.
 
 ::: problem RM3's Example 8-13
 
-Solve for the currents through R{{sub:2}} and R{{sub:3}} in the circuit
+Solve for the currents through {{var:R_2}} and {{var:R_3}} in the circuit
 shown. My solution:
 
 ::: figure assets/practice/rm3s-example-8-13-14.jpg
@@ -1030,11 +1030,11 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{.00154,.00111}** is correct: I{{sub:R2}} = 1.54 mA and
-I{{sub:R3}} = 1.11 mA.
+The answer, **{.00154,.00111}** is correct: {{var:I_R2}} = 1.54 mA and
+{{var:I_R3}} = 1.11 mA.
 :::
 ::: only 9
-The answer is I{{sub:R2}} = 1.54 mA and I{{sub:R3}} = 1.11 mA. This is
+The answer is {{var:I_R2}} = 1.54 mA and {{var:I_R3}} = 1.11 mA. This is
 correct.
 :::
 
@@ -1042,7 +1042,7 @@ correct.
 
 ::: problem B11's Example 6.3 (Hidden source)
 
-Determine V{{sub:S}} and I{{sub:1}}.
+Determine {{var:V_S}} and {{var:I_1}}.
 
 ::: figure assets/practice/b11s-example-6-3-hidden-source-15.jpg
 
@@ -1071,11 +1071,11 @@ The answers you want are `v1` and `ir1`, in **Results**.
 :::
 
 ::: only 7,8
-We get the answer: **{24,2}**, which is correct. V{{sub:S}} is **24**V and
-I{{sub:1}} is **2**A.
+We get the answer: **{24,2}**, which is correct. {{var:V_S}} is **24**V and
+{{var:I_1}} is **2**A.
 :::
 ::: only 9
-The answer is V{{sub:S}} = 24V and I{{sub:1}} = 2A. This is correct.
+The answer is {{var:V_S}} = 24V and {{var:I_1}} = 2A. This is correct.
 :::
 
 :::
@@ -1113,19 +1113,19 @@ The answers you want are `ix` and `v3`, in **Results**.
 
 ::: only 7,8
 Select DC. Add equation `ir8=5`. Add unknown `ix`. Run the simulation, and
-you will get: **{1,8}**. This is correct: I{{sub:X}} is 1A and that
-V{{sub:X}} is 8V.
+you will get: **{1,8}**. This is correct: {{var:I_X}} is 1A and that
+{{var:V_X}} is 8V.
 :::
 ::: only 9
 Select DC. Add equation `ir8=5`. Add unknown `ix`. Run the simulation. The
-answer is I{{sub:X}} = 1A and V{{sub:X}} = 8V. This is correct.
+answer is {{var:I_X}} = 1A and {{var:V_X}} = 8V. This is correct.
 :::
 
 :::
 
 ::: problem B11's Example 6.22 (Hidden source)
 
-Determine I{{sub:1}}.
+Determine {{var:I_1}}.
 
 ::: figure assets/practice/b11s-example-6-22-hidden-source-17.jpg
 
@@ -1147,13 +1147,13 @@ r2,1,0,10'k
 r3,1,0,22'k
 ```
 
-We get I1 = **10.48** mA, which is correct.
+We get {{var:I1}} = **10.48** mA, which is correct.
 
 :::
 
 ::: problem B11's Example 6.21 (Hidden source, Expert)
 
-Determine I{{sub:S}}, I{{sub:1}} and I{{sub:3}}.
+Determine {{var:I_S}}, {{var:I_1}} and {{var:I_3}}.
 
 ::: figure assets/practice/b11s-example-6-21-hidden-source-expert-18.jpg
 
@@ -1185,10 +1185,10 @@ Choose DC. Open **Expert Mode**, put `ir2 = 2'm` in **Add equations** and
 
 ::: only 7,8
 The answer, **{.009,.001,.006}**, is correct, since the currents are as
-follows: I{{sub:S}} is 9mA, I{{sub:1}} is 1mA and I{{sub:3}} is 6mA.
+follows: {{var:I_S}} is 9mA, {{var:I_1}} is 1mA and {{var:I_3}} is 6mA.
 :::
 ::: only 9
-The answer is I{{sub:S}} = 9mA, I{{sub:1}} = 1mA and I{{sub:3}} = 6mA. This is
+The answer is {{var:I_S}} = 9mA, {{var:I_1}} = 1mA and {{var:I_3}} = 6mA. This is
 correct.
 :::
 
@@ -1196,7 +1196,7 @@ correct.
 
 ::: problem Bo2's Example 1.9
 
-Determine I{{sub:1}}, I{{sub:2}} and v.
+Determine {{var:I_1}}, {{var:I_2}} and v.
 
 ::: figure assets/practice/bo2s-example-1-9-19.jpg
 
@@ -1222,11 +1222,11 @@ The answers you want are `ir1`, `v1` and `ir2`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{-5/26,-15/26,-3/26}**, is correct: I{{sub:1}}=-5/26 A,
-I{{sub:2}}=-3/26 A and v=-15/26 V.
+The answer, **{-5/26,-15/26,-3/26}**, is correct: {{var:I_1}}=-5/26 A,
+{{var:I_2}}=-3/26 A and v=-15/26 V.
 :::
 ::: only 9
-The answer is I{{sub:1}}=-5/26 A, I{{sub:2}}=-3/26 A and v=-15/26 V. This is
+The answer is {{var:I_1}}=-5/26 A, {{var:I_2}}=-3/26 A and v=-15/26 V. This is
 correct.
 :::
 
@@ -1234,7 +1234,7 @@ correct.
 
 ::: problem AS2's Practice Problem 2.7
 
-Find v{{sub:o}} and i{{sub:o}} in the circuit. My solution:
+Find {{var:v_o}} and {{var:i_o}} in the circuit. My solution:
 
 ::: figure assets/practice/as2s-practice-problem-2-7-20.jpg
 
@@ -1258,10 +1258,10 @@ The answers you want are `vo` and `iro`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{8,4}**, is correct: v{{sub:o}} = 8 V and i{{sub:o}} = 4 A.
+The answer, **{8,4}**, is correct: {{var:v_o}} = 8 V and {{var:i_o}} = 4 A.
 :::
 ::: only 9
-The answer is v{{sub:o}} = 8 V and i{{sub:o}} = 4 A. This is correct.
+The answer is {{var:v_o}} = 8 V and {{var:i_o}} = 4 A. This is correct.
 :::
 
 :::
@@ -1311,7 +1311,7 @@ the resistors consume 2880W together. This is correct.
 
 ::: problem AS2's Practice Problem 2.6
 
-Find v{{sub:x}} and v{{sub:o}} in the circuit. My solution:
+Find {{var:v_x}} and {{var:v_o}} in the circuit. My solution:
 
 ::: figure assets/practice/as2s-practice-problem-p2-6-22.jpg
 
@@ -1335,10 +1335,10 @@ The answers you want are `vx` and `vro`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{10,-5}**, is correct: v{{sub:x}} =10 and v{{sub:o}} =-5.
+The answer, **{10,-5}**, is correct: {{var:v_x}} =10 and {{var:v_o}} =-5.
 :::
 ::: only 9
-The answer is v{{sub:x}} =10 and v{{sub:o}} =-5. This is correct.
+The answer is {{var:v_x}} =10 and {{var:v_o}} =-5. This is correct.
 :::
 
 :::
@@ -1349,7 +1349,7 @@ The answer is v{{sub:x}} =10 and v{{sub:o}} =-5. This is correct.
 
 :::
 
-Determine v{{sub:1}}, v{{sub:2}} and i. My solution:{{v7,8| The simulation took 14 seconds.}}
+Determine {{var:v_1}}, {{var:v_2}} and i. My solution:{{v7,8| The simulation took 14 seconds.}}
 
 ```sym 7
 s\dc("ei,1,0,2:r1,1,2,1/3:ed,3,2,4*ir1:r2,3,0,1/5"):{ir1,vr1,vr2}
@@ -1369,11 +1369,11 @@ The answers you want are `ir1`, `vr1` and `vr2`, in **Results**.
 :::
 
 ::: only 7,8
-The answers, **{-15/26,-5/26,-3/26}**, is correct: v{{sub:1}}=-5/26 V,
-v{{sub:2}}=-3/26 V and i=-15/26 A.
+The answers, **{-15/26,-5/26,-3/26}**, is correct: {{var:v_1}}=-5/26 V,
+{{var:v_2}}=-3/26 V and i=-15/26 A.
 :::
 ::: only 9
-The answer is v{{sub:1}}=-5/26 V, v{{sub:2}}=-3/26 V and i=-15/26 A. This is
+The answer is {{var:v_1}}=-5/26 V, {{var:v_2}}=-3/26 V and i=-15/26 A. This is
 correct.
 :::
 
@@ -1385,7 +1385,7 @@ correct.
 
 :::
 
-Determine v{{sub:o}} and *i* in the circuit. My solution is shown below:
+Determine {{var:v_o}} and *i* in the circuit. My solution is shown below:
 
 ```sym 7
 s\dc("e12,1,o,12:ri,1,2,4:ed,2,3,2vo:e4,0,3,4:ro,o,0,6"):{vo,iri}
@@ -1406,10 +1406,10 @@ The answers you want are `vo` and `iri`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{48,-8}**, is correct: v{{sub:o}} =48 and *i* = -8.
+The answer, **{48,-8}**, is correct: {{var:v_o}} =48 and *i* = -8.
 :::
 ::: only 9
-The answer is v{{sub:o}} =48 and *i* = -8. This is correct.
+The answer is {{var:v_o}} =48 and *i* = -8. This is correct.
 :::
 
 :::
@@ -1456,7 +1456,7 @@ and `ped` = -3.072 W. This is correct.
 
 ::: problem AS2's Example 3.6
 
-Determine the value of I{{sub:o}} in the circuit. My solution:
+Determine the value of {{var:I_o}} in the circuit. My solution:
 
 ::: figure assets/practice/as2s-example-3-6-26.jpg
 
@@ -1491,7 +1491,7 @@ The answer, **1.5** A, is correct.
 
 ::: problem Bo2's Drill Exercise 1.12
 
-Determine i, v and i{{sub:d}}.
+Determine i, v and {{var:i_d}}.
 
 ::: figure assets/practice/bo2s-drill-exercise-1-12-27.jpg
 
@@ -1524,10 +1524,10 @@ The answers you want are `ir1`, `vr3` and `ied`, in **Results**.
 :::
 
 ::: only 7,8
-The answer, **{4,6,1}**, is correct: i=4, v=6 and i{{sub:d}}=1.
+The answer, **{4,6,1}**, is correct: i=4, v=6 and {{var:i_d}}=1.
 :::
 ::: only 9
-The answer is i=4, v=6 and i{{sub:d}}=1. This is correct.
+The answer is i=4, v=6 and {{var:i_d}}=1. This is correct.
 :::
 
 :::
@@ -1750,7 +1750,7 @@ correct.
 
 ::: problem HK5's Drill Problem 1-12
 
-Find i{{sub:A}}, i{{sub:B}} and i{{sub:C}}.
+Find {{var:i_A}}, {{var:i_B}} and {{var:i_C}}.
 
 ::: figure assets/practice/hk5s-drill-problem-1-12-33.jpg
 
@@ -1793,7 +1793,7 @@ The answer is `ira` = 3 A, `ijb` = -5.4 A and `ir9` = 6 A. This is correct.
 
 ::: problem Bo2's Drill Exercise 1.10
 
-Determine i, v, i{{sub:s}} and v{{sub:s}}.
+Determine i, v, {{var:i_s}} and {{var:v_s}}.
 
 ::: figure assets/practice/bo2s-drill-exercise-1-10-34.jpg
 
@@ -1802,7 +1802,7 @@ Determine i, v, i{{sub:s}} and v{{sub:s}}.
 With one unknown value and one known solution, this problem is a job for
 Expert.
 
-Determine i, v, i{{sub:s}} and v{{sub:s}}.
+Determine i, v, {{var:i_s}} and {{var:v_s}}.
 
 ```sym 7
 s\ex("es,2,0,vs:jd,0,3,2ir1:r7,0,1,7:r1,3,1,1:r3,3,2,3:r4,1,2,4"):
@@ -1835,12 +1835,12 @@ Ask **Evaluate** for:
 
 ::: only 7,8
 Select DC, Add` vr4=4` to the equations and `vs` to the unknowns. Run the
-simulation. The answer, **{2,-9,-3,3}**, is correct: i=2, v=-9, i{{sub:s}}=-3
-and v{{sub:s}}=3.
+simulation. The answer, **{2,-9,-3,3}**, is correct: i=2, v=-9, {{var:i_s}}=-3
+and {{var:v_s}}=3.
 :::
 ::: only 9
 Select DC, add `vr4=4` to the equations and `vs` to the unknowns. Run the
-simulation. The answer is i=2, v=-9, i{{sub:s}}=-3 and v{{sub:s}}=3. This is
+simulation. The answer is i=2, v=-9, {{var:i_s}}=-3 and {{var:v_s}}=3. This is
 correct.
 :::
 
@@ -1848,7 +1848,7 @@ correct.
 
 ::: problem Bo2's Drill Exercise 1.11
 
-Determine i, v and v{{sub:d}}. (Since all element values are known, the tip
+Determine i, v and {{var:v_d}}. (Since all element values are known, the tip
 we are given by the book – namely, that the voltage drop in the 6Ω resistor
 is 1.5V – is totally superfluous.)
 
@@ -1881,10 +1881,10 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
-The answer, **{7.5,.5,.5}** is correct: i=.5, v=7.5 and v{{sub:d}}=.5.
+The answer, **{7.5,.5,.5}** is correct: i=.5, v=7.5 and {{var:v_d}}=.5.
 :::
 ::: only 9
-The answer is i=.5, v=7.5 and v{{sub:d}}=.5. This is correct.
+The answer is i=.5, v=7.5 and {{var:v_d}}=.5. This is correct.
 :::
 
 :::
@@ -1893,7 +1893,7 @@ The answer is i=.5, v=7.5 and v{{sub:d}}=.5. This is correct.
 
 ::: problem TR5's Exercise 4.2
 
-Find v{{sub:O}} and i{{sub:O}} in terms of i{{sub:S}}.
+Find {{var:v_O}} and {{var:i_O}} in terms of {{var:i_S}}.
 
 ::: figure assets/practice/tr5s-exercise-4-2-36.jpg
 
@@ -1935,9 +1935,9 @@ i*{{sub:S}}. This is correct. The panel names the source's value `is1`, so the a
 
 ::: problem TR5's Example 4.4
 
-Find v{{sub:O}} and the equivalent resistance R{{sub:IN}}, in terms of
-v{{sub:S}}, when R{{sub:1}} is 50 Ω, R{{sub:2}} is 1 kΩ,
-R{{sub:3}} is 100 Ω, R{{sub:4}} is 5 kΩ and g is 100 mS (i.e. 100'm).
+Find {{var:v_O}} and the equivalent resistance {{var:R_IN}}, in terms of
+{{var:v_S}}, when {{var:R_1}} is 50 Ω, {{var:R_2}} is 1 kΩ,
+{{var:R_3}} is 100 Ω, {{var:R_4}} is 5 kΩ and g is 100 mS (i.e. 100'm).
 
 ::: figure assets/practice/tr5s-example-4-4-37.jpg
 
@@ -2019,8 +2019,8 @@ pro/(-pjs)
 ```
 :::
 
-The answers we get are correct: i{{sub:O}}=**-12is**, v{{sub:O}}=**-6000is**,
-p{{sub:O}}=**72000is**{{sup:2}}, and p{{sub:O}}/p{{sub:S}}=**4320**.
+The answers we get are correct: {{var:i_O}}=**-12is**, {{var:v_O}}=**-6000is**,
+{{var:p_O}}=**72000is**{{sup:2}}, and {{var:p_O}}/{{var:p_S}}=**4320**.
 {{v9|The panel names the source's value `is1`, so the answers carry `is1`
 where these carry is.}}
 
@@ -2078,21 +2078,21 @@ $$
 
 ::: problem Bo2's Example 1.11 (Symbolic)
 
-Determine v{{sub:2}}.
+Determine {{var:v_2}}.
 
 ::: figure assets/practice/bo2s-example-1-11-symbolic-42.jpg
 
 :::
 
 ::: only 7,8
-My solution: In my solution I named the value of the source v{{sub:1}},
+My solution: In my solution I named the value of the source {{var:v_1}},
 to keep it similar to the book. This required avoiding naming any node as
 **1**: if there was a node 1, Symbulator would store in **v1** the voltage of
 the node, creating trouble. There is no problem with using r1 as a value,
 since nothing will be stored in that r1 value.
 :::
 ::: only 9
-My solution. I named the source's value v{{sub:1}}, as in the book, so no
+My solution. I named the source's value {{var:v_1}}, as in the book, so no
 node may be called **1**: its voltage would be `v1` too. Using r1 as a value
 is fine.
 :::
@@ -2139,7 +2139,7 @@ $$
 
 ::: problem TR5's Example 4-7 (Symbolic)
 
-Find R{{sub:IN}}, i.e. the resistance as seen by the current source. My
+Find {{var:R_IN}}, i.e. the resistance as seen by the current source. My
 solution:
 
 ::: figure assets/practice/tr5-example-4-7-symbolic-45.jpg
@@ -2174,7 +2174,7 @@ the textbook's answer.
 
 ::: problem TR5's Exercise 4.3 (Symbolic)
 
-Find v{{sub:O}}, in terms of the value in the circuit. For resistors, use
+Find {{var:v_O}}, in terms of the value in the circuit. For resistors, use
 their conductance value.
 
 ::: figure assets/practice/tr5s-exercise-4-3-symbolic-47.jpg
@@ -2229,7 +2229,7 @@ $$
 
 ::: problem TR5's Example 4.5 (Symbolic)
 
-Find i{{sub:B}}.
+Find {{var:i_B}}.
 
 ::: figure assets/practice/tr5s-example-4-5-symbolic-50.jpg
 

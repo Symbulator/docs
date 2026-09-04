@@ -346,7 +346,7 @@ before you do that.
 
 ::: problem AS7's Problem 9.35
 Find the steady-state current i in the circuit when
-v{{sub:s}}(t) = 50 cos 200t V.
+{{var:v_s}}(t) = 50 cos 200t V.
 
 ::: figure assets/circuit/as7p0935.png
 AS7's Problem 9.35
@@ -570,7 +570,7 @@ voltage across `rx` is `vrx`.}}
 ::: practice
 
 ::: problem AS7's Example 10.1
-Find i{{sub:x}} in the circuit.
+Find {{var:i_x}} in the circuit.
 
 ::: figure assets/circuit/as7e1001.png
 AS7's Example 10.1
@@ -622,7 +622,7 @@ That is 7.59 A at an angle of 108.4°, which is correct.
 :::
 
 ::: problem AS7's Practice Problem 10.1
-Find v{{sub:1}} and v{{sub:2}} in the circuit.
+Find {{var:v_1}} and {{var:v_2}} in the circuit.
 
 ::: figure assets/circuit/as7pp1001.png
 AS7's Practice Problem 10.1
@@ -673,7 +673,7 @@ Both are correct.
 :::
 
 ::: problem AS7's Example 10.13
-Obtain v{{sub:o}} and i{{sub:o}} in the circuit.
+Obtain {{var:v_o}} and {{var:i_o}} in the circuit.
 
 ::: figure assets/circuit/as7e1013.png
 AS7's Example 10.13
@@ -730,7 +730,7 @@ That is 1.55 V at −95.18° and 3.26 mA at −3.74°, both correct.
 :::
 
 ::: problem AS7's Example 10.14
-Find V{{sub:1}} and V{{sub:2}} in the circuit.
+Find {{var:V_1}} and {{var:V_2}} in the circuit.
 
 ::: figure assets/circuit/as7e1014.png
 AS7's Example 10.14
@@ -921,7 +921,7 @@ frequency unit.
 ## Solved symbolic examples {#ac-symbolic}
 
 ::: problem AS7's Problem 10.69
-Find Vo/Vs.
+Find {{var:Vo}}/{{var:Vs}}.
 
 ::: figure assets/circuit/as7p1069.png
 AS7's Problem 10.69
@@ -979,7 +979,7 @@ symbolic answers, but when you need to chop a tree down, they are the way to
 go.
 
 ::: problem AS7's Problem 10.77
-Compute the closed-loop gain V{{sub:o}}/V{{sub:s}} for the op-amp circuit.
+Compute the closed-loop gain {{var:V_o}}/{{var:V_s}} for the op-amp circuit.
 
 ::: figure assets/circuit/as7pr1077.png
 AS7's Problem 10.77

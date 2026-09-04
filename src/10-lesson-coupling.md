@@ -64,7 +64,7 @@ shows up in the currents of the elements it couples.
 ::: practice
 
 ::: problem AS7's Example 13.1
-Calculate the phasor currents I{{sub:1}} and I{{sub:2}} in the circuit.
+Calculate the phasor currents {{var:I_1}} and {{var:I_2}} in the circuit.
 
 ::: figure assets/circuit/as7e1301.png
 AS7's Example 13.1
@@ -116,7 +116,7 @@ Both are correct.
 :::
 
 ::: problem AS7's Practice Problem 13.1
-Determine the voltage V{{sub:o}} in the circuit.
+Determine the voltage {{var:V_o}} in the circuit.
 
 ::: figure assets/circuit/as7pp1301.png
 AS7's Practice Problem 13.1
@@ -222,7 +222,7 @@ transformer and the node — for a transformer `t` on node 2, that is
 ::: practice
 
 ::: problem AS7's Figure 13.33
-Obtain V{{sub:Th}} and Z{{sub:Eq}} for the part of the circuit to the right of
+Obtain {{var:V_Th}} and {{var:Z_Eq}} for the part of the circuit to the right of
 nodes a and b.
 
 ::: figure assets/circuit/as7f1333.png
@@ -263,8 +263,8 @@ impedance by its square, which is exactly what an ideal transformer does.
 :::
 
 ::: problem AS7's Example 13.8
-For the ideal transformer circuit, find the source current I{{sub:1}}, the
-output voltage V{{sub:o}}, and the complex power supplied by the source.
+For the ideal transformer circuit, find the source current {{var:I_1}}, the
+output voltage {{var:V_o}}, and the complex power supplied by the source.
 
 ::: figure assets/circuit/as7e1308.png
 AS7's Example 13.8
