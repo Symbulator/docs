@@ -192,6 +192,39 @@ a:focus-visible, .vkey:focus-visible, .btn:focus-visible {
    Still local, because only this site has them: .versions and its dropdown,
    below. */
 
+/* Which link gives way on a phone (#257, Roberto, 4 Sep 2026). The shared
+   banner.css caps the ribbon's nav at one line and clips whatever wraps,
+   so the LAST link in flex order is the one that goes -- and here that was
+   Split View, the link a phone reader is most likely to want, while
+   Download as PDF, the least useful thing on a phone, stayed. The ribbon
+   held all three down to about 400px of viewport and then dropped Split
+   View at 375px.
+
+   Reversing the DOM would fix the priority but also the tab order and
+   what a screen reader announces first. Instead the nav lays out in
+   row-reverse -- so flex order runs right to left across the screen --
+   and each link is given an explicit order that reverses the DOM again:
+   the first child sits at the far right of the nav's flex order and the
+   last child at the far left. Visually the row still reads Download as
+   PDF, Online App, Split View (or How it works, on 7 and 8), left to
+   right; in flex order the PDF link is last, so it is the one that wraps
+   and is clipped. Nothing about *when* a link hides changed -- that is
+   still the shared one-line clip, measured against real widths, not a
+   media query -- only *which* link.
+
+   justify-content is flex-end because in row-reverse main-end is the
+   left edge: without it the links would pack against the version picker.
+   The orders are explicit rather than a step so a fourth link, arriving
+   with order 0, is a visible mistake (it lands at the right, rather than
+   silently taking the PDF link's place as the first to hide). Measured
+   live with the rule injected, 4 Sep 2026: at 320 and 375px the PDF link
+   is hidden and the other two show; at 430px and above all three show
+   in the usual order. */
+.subbar nav { flex-direction: row-reverse; justify-content: flex-end; }
+.subbar nav > :nth-child(1) { order: 3; }
+.subbar nav > :nth-child(2) { order: 2; }
+.subbar nav > :nth-child(3) { order: 1; }
+
 /* ---------------------------------------------------------------- shell -- */
 
 .shell {

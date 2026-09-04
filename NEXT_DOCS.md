@@ -8,6 +8,56 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #257 — on a phone the ribbon keeps Split View and drops the PDF link — **done and live, 4 Sep 2026**
+
+Roberto, 4 Sep 2026: in mobile view hide *Download as PDF* when the
+ribbon needs the space, and keep *Split View* always visible.
+
+**What was happening.** The shared `banner.css` caps the ribbon's nav at
+one line and clips whatever wraps (Roberto's rule of 28 Aug 2026: a link
+that would wrap hides instead). Flexbox wraps the *last* link in flex
+order first, and the last link was Split View — so a 375 px phone showed
+*Download as PDF · Online App* and lost the one link a phone reader is
+most likely to want. Measured live: all three fit down to about 400 px;
+at 375 px Split View was on a second, clipped line.
+
+**The fix is four lines in `web/assets/style.css`, and no markup
+change.** The nav lays out in `row-reverse`, and each of its three links
+gets an explicit `order` that reverses the DOM again (first child order
+3, last child order 1). Visually the row still reads *Download as PDF ·
+Online App · Split View* left to right, and tab order and screen-reader
+order are untouched because the DOM is; but in flex order the PDF link
+is now last, so it is the one that wraps into the clip. `justify-content:
+flex-end` keeps the links packed left, since in row-reverse main-end is
+the left edge. Version 7 and 8 pages, whose third link is *How it
+works*, get the same treatment for free.
+
+Nothing about *when* a link hides changed — it is still the shared
+one-line clip, decided by real widths rather than a media query — only
+*which* link. The rule is learn-only, in this site's own stylesheet; the
+landing page and the app keep their own priorities and the shared
+`banner.css` is untouched.
+
+**Measured, not eyeballed** — the rule was injected into the live page
+and the links' boxes read against the nav's clip:
+
+| viewport | before | after |
+|---|---|---|
+| 320 px | PDF · App (Split View clipped) | App · Split View (PDF clipped) |
+| 375 px | PDF · App (Split View clipped) | App · Split View (PDF clipped) |
+| 430 px and up | all three | all three, usual order |
+
+A fourth link ever added to the nav arrives with `order: 0` and lands at
+the right-hand end, visibly, rather than silently becoming the first to
+hide; the comment in `style.css` says so.
+
+Deployed the same day: one file moved (`assets/style.css`), hash-verified
+against the host, and the live page measured at 375 px serving the new
+stylesheet hash with the PDF link clipped and *Online App · Split View*
+showing in order.
+
+---
+
 ## #256 — figures keep their size on a phone — **done and live, 4 Sep 2026**
 
 Roberto, reading the tutorial on his phone in portrait, found the figures
