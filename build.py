@@ -55,6 +55,12 @@ except FileNotFoundError:
                  "overrides": {}, "measured": {}}
 
 FIG_LINE_MM = float(_FIGSIZES.get("line_mm", 156.0))
+#: The desktop reading column in CSS pixels: --measure is 34rem in
+#: web/assets/style.css at the 16px root. A figure's measured width in mm
+#: becomes a pixel width at this column's scale (#256), so the labels
+#: inside it are the same height on every screen -- a phone included --
+#: instead of shrinking with the column as a percentage did.
+MEASURE_PX = 544.0
 
 #: #171: the most a problem may demand before it starts -- the title and
 #: three lines or so. Above that it stops protecting a title and starts
@@ -772,10 +778,14 @@ class HtmlRenderer:
                     f'{title}{self.blocks(b.children)}</aside>')
         if k == "figure":
             cap = self.blocks(b.children)
-            # #153: same proportion of the column as the PDF gives of its
-            # line, so a figure reads at the same relative size in both.
+            # #153 measured the width in mm that puts a figure's labels at
+            # body-text size; #256 turns it into pixels at the desktop
+            # column's scale rather than a share of whatever column the
+            # reader has. On a desktop that is the same width as before;
+            # on a phone the figure keeps its size and the column, not the
+            # figure, gives way -- capped at 100% so nothing overflows.
             w_mm, _h = figure_size_mm(b.arg)
-            style = (f' style="width:{100 * w_mm / FIG_LINE_MM:.1f}%"'
+            style = (f' style="width:min(100%,{w_mm * MEASURE_PX / FIG_LINE_MM:.0f}px)"'
                      if w_mm else "")
             return (f'<figure><img src="{html.escape(site_path(b.arg))}"'
                     f' alt=""{style}>'

@@ -690,6 +690,13 @@ figure img { max-width: 100%; height: auto; display: block; margin: 0 auto; }
 html[data-theme="dark"] figure img {
   background: #fff; border-radius: 8px; padding: 0.75rem;
 }
+/* #256: on a phone a problem card's 1.3rem side padding is a fifth of the
+   column, so a figure that wants the width may take it -- out to the card's
+   inner edge, not past its border. The image is still capped at 100% of
+   the figure box by the rule above. */
+@media (max-width: 40rem) {
+  .problem figure { margin-left: -1.3rem; margin-right: -1.3rem; }
+}
 figcaption {
   margin-top: 0.55rem; text-align: center;
   font-family: var(--sans); font-size: 0.78rem; color: var(--ink-3);

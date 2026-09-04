@@ -8,6 +8,59 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #256 — figures keep their size on a phone — **done and live, 4 Sep 2026**
+
+Roberto, reading the tutorial on his phone in portrait, found the figures
+too small to read. Measured rather than eyeballed, the finding was
+systematic: **every one of the 314 measured figures showed its labels at
+5.0 px on a 375 px phone**, against a body text whose cap height is 12 px,
+while the same figures show them at 8.7–9.4 px on a desktop.
+
+**The cause was #153's web rule.** The manifest gives each figure the
+width in mm that puts its labels at body-text height in print, and the
+web rendered that as *the same percentage of the column*. A percentage
+keeps the figure-to-page ratio constant, so when the column shrinks from
+544 px (`--measure: 34rem`) to 291 px inside a phone's problem card, the
+figure shrinks with it while the text does not. HK5's Figure 1-26, 30% of
+the line, was 88 px wide on the phone — an 887 px scan at a tenth of its
+size.
+
+**The fix is two small things, web only; the PDF rule is untouched.**
+
+1. `build.py` emits `width:min(100%, Npx)` instead of `width:P%`, with
+   N = the manifest's mm width at the desktop column's scale
+   (`MEASURE_PX = 544`). On a desktop that is the width the figure had
+   (a little more inside a card, whose padding the percentage used to
+   absorb: median labels 8.7 → 9.4 px). On a phone the figure keeps that
+   width and the column gives way, capped at 100% so nothing overflows.
+2. `style.css`, under the 40 rem breakpoint: `.problem figure` drops the
+   card's 1.3 rem side padding, so a figure that wants the width runs to
+   the card's inner edge — 333 px rather than 291. Not past the border:
+   problems are bordered, shadowed cards, and an image over the border
+   looked wrong in the mockup.
+
+**Outcome on a 375 px phone**, from the manifest's own label heights:
+
+| labels on screen | today | rule 1 | rules 1 + 2 |
+|---|---|---|---|
+| median | 5.0 px | 9.1 px | 9.4 px |
+| under 6 px | 314 | 37 | 8 |
+| 8 px or better | 0 | 204 | 247 |
+
+117 figures want more than 333 px and stay capped; pinch-to-zoom covers
+them, and a tighter crop of the widest scans (strips such as
+`tr5s-figure-4-32-voltage-follower-21.jpg`, 1100 × 259 with 14 px labels)
+would finish the job. No pan-and-scroll containers: panning a circuit is
+worse than zooming it.
+
+Verified live after the deploy by driving the page at the mobile preset:
+the inline widths are on the page and the figures measure at the new
+sizes. The decision was made on a mockup with two real figures at real
+phone size, today against the two rules, sent to Roberto as an artifact
+(*Figures on a Phone*); his answer was *Punch it*.
+
+---
+
 ## #254 — the legibility pass over the version 9 text — **done and live, 3 Sep 2026**
 
 Roberto's brief, late on 3 Sep 2026: read the version 9 documentation

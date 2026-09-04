@@ -153,7 +153,9 @@ appears without its file, and never overwrites real artwork).
 `tools/measure_figures.py`, records each scan's pixel size and the
 estimated height of the label text inside it; `build.py` sizes the figure
 so that text prints at body-text height (2.7 mm), capped at the line, and
-gives the web the same width as a percentage of the column. The scans'
+gives the web that same width in pixels at the desktop column's scale,
+capped at 100% — pixels, not a percentage, so a phone's narrow column
+does not shrink the figure with it (#256). The scans'
 own pixel sizes mean nothing — most were resampled to a uniform 1100 px
 in 2023 — which is why the old fixed 72%-of-the-line rule printed labels
 anywhere from half to triple the body size. Two things to know: **a new
