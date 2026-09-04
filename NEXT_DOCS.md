@@ -8,6 +8,128 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #266 — every answer number in the red answer face — **done and live, 5 Sep 2026**
+
+Roberto, 5 Sep 2026: *make sure that all the numbers given as part of
+answers are shown in that nice red font — {{o:…}} — consistently.* His
+example, B11's Example 8.10: *I_R1 = 4.77 A, I_R2 = 7.18 A and I_R3 =
+2.41 A* had none.
+
+**The sweep** was a survey of every prose line (outside code fences,
+maths and existing `{{o:}}` spans) for four shapes, 353 candidate lines
+read in context with their directive stack, then 419 values wrapped
+across eight chapters (`{{o:}}` count 354 → 772):
+
+- after a marked variable — `{{var:I_R1}} ={{o:4.77}}A`;
+- bold answers — the `V_TH = **48** V` lines through Lesson 4, single
+  ones like `**3.4** A`, and the symbolic ones, `**1+r2/r1**`,
+  `**3 v2 − 4 v1**` (a symbolic value still typesets as mathematics
+  through `answer_math`; one sympy cannot parse falls back to plain
+  red, as before);
+- the 7/8 calculator sets, `**{12,4,3}**` → `{{o:{12,4,3}}}`, the form
+  one line already used;
+- after a Symbulator name — ``` `vth` = {{o:30}} V ```, and the trailing
+  values of the same sentence, *{{o:3}} A for 6 Ω, {{o:1.5}} A for 16 Ω*.
+
+Three paragraphs had their answers inside a `{{v7,8|…}}` / `{{v9|…}}`
+span, which cannot hold a brace command (the nested-span rule), so they
+became `::: only` pairs: Lesson 3's first answer, B11's Example 8.2 and
+AS2's Example 5.9.
+
+**Left plain, on purpose:** values the problem gives rather than
+returns (*R_1 is 50 Ω*, *Z_A = 15 Ω*, *v_1 = 2V*), node names and
+settings in bold (*put **2** in the first box*, *ω set to **4***),
+element values in the describing notes, and a restatement of an answer
+in another unit (*1/1000 A, that is 1mA*). Spacing kept as written.
+`tools/check_against_originals.py` reads ```out``` fences, not `{{o:}}`
+spans, so it is unaffected.
+
+**And a lesson, recorded in memory as well.** The sweep wrote to
+`src/01-lesson-dc.md` while Roberto had the file open in his editor. His
+buffer predated the sweep; the conflict cost the lesson's last problem
+its shared 7/8 answer, which he had folded into his revised version 9
+block. Reconciled from the two versions he pasted: the 7/8 answer back
+as its own `::: only 7,8` block, word for word as committed, and his
+version 9 revision word for word in `::: only 9`; the one thing changed
+in both is `.{{o:133}}` → `{{o:.133}}`, the decimal point inside the
+span. **From now on, a source he says is open is not edited until he
+releases it, whatever the feedback in between says.**
+
+---
+
+## #265 — Lesson 1's figures a quarter larger — **done and live, 5 Sep 2026**
+
+Roberto, 5 Sep 2026, in three steps: B11's Example 5.7 *a bit larger*,
+then HK5's Figure 1-26, then *the figures in general in lesson 1*. Each
+is a width override in `tools/figure_sizes.json`, the block the manifest
+reserves for hand-set widths and a re-measure preserves.
+
+| | was | now |
+|---|---|---|
+| B11's Example 5.7 (`circuit/b11e0507.jpg`) | 112.6 mm / 393 px | 135 mm / 471 px |
+| HK5's Figure 1-26 | 47 mm / 164 px | 62 mm / 216 px |
+| the other 17 figures of Lesson 1 | the label rule's width | × 1.25, capped at the 156 mm line |
+
+Four of the 17 hit the line (B11's Examples 7.4 and 7.11, Figure 7.40,
+RM3's Example 7-5); B11's Example 7.10 was already there and got no
+entry. The two smallest were small for the same reason — big labels in
+the scan, so #153's rule shrank the whole picture — and RM3's Figure
+7-16 (58 → 72 mm) could still take more. The practice figures are shared
+with the 7 and 8 books, which grow the same way; each PDF gained one
+page: v7 **207**, v8 **197**, v9 **237**.
+
+---
+
+## #264 — bold inside italic, and italic inside bold — **done and live, 5 Sep 2026**
+
+Roberto's Introduction edit of 5 Sep 2026 wrote the name's origin as
+*"**symb**olic sim**ulator**"* — bold inside italic — and the inline
+parser could not nest them: it rendered five italic runs and no bold,
+because the em closed at the first star of `**symb**` and the stars
+re-paired down the sentence. Asked which way to go, Roberto chose
+extending the parser.
+
+**One level of nesting each way.** The em body now admits a whole
+`**…**` group as one atom, and the strong body a whole `*…*` group, so
+the inner stars cannot close the outer span; the body is parsed again
+and the group becomes a node inside. The inner group is the plain form,
+so nesting stops at one level. Strong is still tried first at any
+position, so `**bold**` never reads as an italic starting with a star.
+
+**Proved by comparing the old and new rules over every paragraph** —
+3,069 of them, fenced code and maths stripped, the unit the real build
+tokenises (a whole-file comparison lied: a stray star inside a code span
+started an italic across paragraphs, which the real build never sees).
+Exactly two paragraphs change: the Introduction's line, and Lesson 11's
+*`**Tick *real solutions only*.**`*, italic inside bold, which had been
+rendering as two stray stars and two fragments of italic for as long as
+it existed and now reads as bold with the italic inside. That second
+case is why the rule went symmetric. Side effect: `***x***`, which used
+to print a stray star, now reads as bold inside italic; no source
+writes it. `SPEC.md` records the nesting.
+
+---
+
+## #263 — the two PDF links at the foot of every page removed — **done and live, 5 Sep 2026**
+
+Roberto, 5 Sep 2026: remove the two links at the bottom of the
+documentation pages — confirmed as the footer's *Download the
+documentation for Symbulator 9 (PDF, 26.9MB) · The internal logic of
+Symbulator (PDF, 1.0MB)*, not the Previous / Next pager. Gone from
+`web/index.php` with the `pdf_note()` helper only they used; the ribbon
+still offers the PDF and the landing page carries the monograph. The
+deploy's verification rule for the lesson page had named the removed
+text (*Download the documentation for* and *MB)*), so those two markers
+came out of `Deploy/deploy_targets.ini` in the same change — the next
+deploy would otherwise have failed on its own success.
+
+Also in this train, Roberto's own edits to the Introduction and Lesson
+1 (wording, the portmanteau line, *where you are. Send someone:*, and
+the last problem's version 9 answer), and his removal of #260's display
+in Lesson 1's *How answers are shown*, which now reads as one sentence.
+
+---
+
 ## #262 — the bare variables respelled with subscripts, and the single letters marked — **done and live, 5 Sep 2026**
 
 Roberto, 5 Sep 2026, on the two decisions #261 left open: respell the
