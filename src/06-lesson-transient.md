@@ -2032,8 +2032,8 @@ here.}}
 
 ### {{v7,8|The plot tool}}{{v9|Plotting an answer}}
 
-Imagine, for example, that in Bo2's Example 6.1 we are asked to plot i(t) and
-v(t) for times between 0 s and 1.5 s.{{v7,8| The first step is to run the `plot`
+Imagine, for example, that in Bo2's Example 6.1 we are asked to plot {{var:i}}(t) and
+{{var:v}}(t) for times between 0 s and 1.5 s.{{v7,8| The first step is to run the `plot`
 tool:}}
 
 ```sym 7
@@ -2594,7 +2594,7 @@ o,0,2,o
 ::: problem Bo2's Example 6.5 (Plot)
 
 In the circuit, use {{var:v_S}}=2/5V, {{var:R}}=12Ω, {{var:L}}=2H and {{var:C}}=1/50F. Find {{var:v}}(t)
-and i(t), and plot them for time 0<t<1.5 seconds.
+and {{var:i}}(t), and plot them for time 0<t<1.5 seconds.
 
 ::: figure assets/practice/bo2s-example-6-5-plot-38.jpg
 
@@ -2758,7 +2758,7 @@ volts!
 ::: problem Bo2's Drill Exercise 6.9
 
 For the circuit, {{var:R}}=1Ω, {{var:L}}=2H, {{var:C}}=1/2F and {{var:i_S}}(t)=u(t). Find {{var:i}}(t)
-and v(t).
+and {{var:v}}(t).
 
 ::: figure assets/practice/bo2s-drill-exercise-6-9-41.jpg
 

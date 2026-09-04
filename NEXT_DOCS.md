@@ -44,6 +44,12 @@ checked by rendering the line. The second *V* was caught on a second
 look: it sits at the end of the source line, before a wrap, where a
 pattern that wanted *u(* after it could not see it.
 
+Four more *i(t)* / *v(t)* were caught after the first deploy, by reading
+the PDF: three sat on the wrapped second line of a statement the pattern
+had only run over the first line of, and one pair is the tutorial's own
+reference to Example 6.1's variables. A sweep over every prose line for a
+bare *i(t)* or *v(t)* now finds none.
+
 Built in full and deployed the same day; the PDFs unchanged at 206 / 196
 / 236 pages.
 
