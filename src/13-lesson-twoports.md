@@ -568,7 +568,7 @@ Av 55.6, Ai -9.62, Ap 534, Zin 3.46 Ω
 
 ::: only 9
 The voltage gain Av is {{o:55.56}}, the current gain Ai {{o:-9.615}}, the
-power gain {{var:Ap}} {{o:534.2}}, and the input impedance {{var:Zi}} {{o:3.462}} Ω.
+power gain {{var:A_p}} {{o:534.2}}, and the input impedance {{var:Z_i}} {{o:3.462}} Ω.
 :::
 
 These are correct.
@@ -644,7 +644,7 @@ Gv 4, Gi -2, Gp 8, Zin 1 Ω
 
 ::: only 9
 The voltage gain Av is {{o:4}}, the current gain Ai {{o:-2}}, the power
-gain {{var:Ap}} {{o:8}}, and the input impedance {{var:Zi}} {{o:1}} Ω.
+gain {{var:A_p}} {{o:8}}, and the input impedance {{var:Z_i}} {{o:1}} Ω.
 :::
 
 These are correct.

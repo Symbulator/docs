@@ -676,7 +676,7 @@ $$
 
 ::: problem TR5's Example 4-13 (Non-Inverting Amplifier)
 
-Find {{var:Vo}}/{{var:Vs}}.
+Find {{var:V_o}}/{{var:V_s}}.
 
 ::: figure assets/practice/tr5s-example-4-13-non-inverting-amplifier-18.jpg
 

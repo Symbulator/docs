@@ -72,8 +72,8 @@ AS5's Figure 2.29
 
 ::: answer
 All the values in this circuit are variables: no element value is known. This is an example of a symbolic circuit. Imagine you are asked to
-find symbolic expressions for the current i, the voltage drop in {{var:R2}}, and the
-power consumed by {{var:R1}} and {{var:R2}}. Since we are being asked to find symbolic answers
+find symbolic expressions for the current {{var:i}}, the voltage drop in {{var:R_2}}, and the
+power consumed by {{var:R_1}} and {{var:R_2}}. Since we are being asked to find symbolic answers
 from a symbolic circuit, this is a purely symbolic problem.
 
 This is how I would describe this circuit. First, the nodes. The node called a
@@ -157,8 +157,8 @@ B11's Example 5.6
 ::: answer
 This is a very nice numerical-from-symbolic problem. We can solve it into
 numbers because, although it hides two values from us (the source E and the
-resistor {{var:R1}}), it gives us in exchange two answers (the equivalent resistance {{var:RT}}
-and the current {{var:I3}}) to solve for them with.
+resistor {{var:R_1}}), it gives us in exchange two answers (the equivalent resistance {{var:R_T}}
+and the current {{var:I_3}}) to solve for them with.
 
 Since this circuit is structurally identical to B11's Example 5.7 solved in
 {{ref:lesson-dc}}, we will use the same names for the nodes. The description is
@@ -198,15 +198,15 @@ the problem gives us, we write two equations and solve them for the two
 unknowns.
 
 ::: only 7,8
-The problem says that {{var:I3}} is 6 mA. In Symbulator, {{var:I3}} is `ir3`, the current through resistor r3. If you evaluate it, you will see it produces an
+The problem says that {{var:I_3}} is 6 mA. In Symbulator, {{var:I_3}} is `ir3`, the current through resistor r3. If you evaluate it, you will see it produces an
 algebraic expression in terms of the two unknowns, e and r1. This is what we call a symbolic answer.
-The problem also says that {{var:RT}} is 12 kΩ; the equivalent resistance as seen by
+The problem also says that {{var:R_T}} is 12 kΩ; the equivalent resistance as seen by
 the source e is given by `re`, which when evaluated gives another
 algebraic expression in terms of r1. We can then write two new equations
 and solve them for e and r1:
 :::
 ::: only 9
-The problem says that {{var:I3}} is 6 mA. In Symbulator, {{var:I3}} is `ir3`, the current through resistor r3. Look at it
+The problem says that {{var:I_3}} is 6 mA. In Symbulator, {{var:I_3}} is `ir3`, the current through resistor r3. Look at it
 and you will see an expression rather than a number, in terms of the two
 unknowns, e and r1:
 
@@ -215,7 +215,7 @@ $$
 $$
 
 This is what we call a symbolic answer.
-The problem also says that {{var:RT}} is 12 kΩ; the equivalent resistance as seen by
+The problem also says that {{var:R_T}} is 12 kΩ; the equivalent resistance as seen by
 the source e is `re`, which is $r1 + 10000$. We can then write two new equations
 and solve them for e and r1.
 :::
@@ -280,7 +280,7 @@ Let's solve the same circuit again, this time using the expert mode's program
 ::: problem B11's Example 5.6, using ex
 ::: answer
 We will use the same circuit description as before, with a single change: we
-will use rx for the value of resistor {{var:R1}}, instead of the r1 value we used
+will use rx for the value of resistor {{var:R_1}}, instead of the r1 value we used
 before. Like this:
 
 ```sym 7
@@ -360,7 +360,7 @@ DC, AC, FD and TR.
 We use the same circuit description as before, `r1` included.
 
 The problem gives us the two extra equations: the source sees 12 kΩ, and the
-current through {{var:R3}} is 6 mA. They use the names the answers come back under,
+current through {{var:R_3}} is 6 mA. They use the names the answers come back under,
 and the SI shorthand works here too:
 
 ```field 9 Circuit Description
@@ -629,7 +629,7 @@ design.
 In 2014, I invented a problem to showcase how easy it is to describe
 dependent sources in Symbulator.
 
-Question: Find positive values for {{var:Vs}} and {{var:Is}} that will result in 80W
+Question: Find positive values for {{var:V_s}} and {{var:I_s}} that will result in 80W
 delivered by the VCCS and 0W dissipated in the CCVS.
 
 ::: figure assets/practice/the-showing-off-problem-expert-4.png

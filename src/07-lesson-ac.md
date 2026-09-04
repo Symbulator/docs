@@ -142,7 +142,7 @@ node voltages. {{ref:lesson-threephase}} uses it that way throughout.
 ### With values in F and H
 
 ::: problem AS7's Example 9.9
-Find v(t) and i(t).
+Find {{var:v}}(t) and {{var:i}}(t).
 
 ::: figure assets/circuit/as7e0909.png
 AS7's Example 9.9
@@ -253,7 +253,7 @@ only the circuit description and the {{v7,8|commands we give}}{{v9|settings we c
 :::
 
 ::: problem AS7's Practice Problem 9.9
-Determine v(t) and i(t).
+Determine {{var:v}}(t) and {{var:i}}(t).
 
 ::: figure assets/circuit/as7pp0909.png
 AS7's Practice Problem 9.9
@@ -345,7 +345,7 @@ before you do that.
 :::
 
 ::: problem AS7's Problem 9.35
-Find the steady-state current i in the circuit when
+Find the steady-state current {{var:i}} in the circuit when
 {{var:v_s}}(t) = 50 cos 200t V.
 
 ::: figure assets/circuit/as7p0935.png
@@ -921,7 +921,7 @@ frequency unit.
 ## Solved symbolic examples {#ac-symbolic}
 
 ::: problem AS7's Problem 10.69
-Find {{var:Vo}}/{{var:Vs}}.
+Find {{var:V_o}}/{{var:V_s}}.
 
 ::: figure assets/circuit/as7p1069.png
 AS7's Problem 10.69

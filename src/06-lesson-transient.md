@@ -637,7 +637,7 @@ $$
 
 ::: problem Bo2's Drill Exercise 5.3
 
-Find {{var:i_L}}(t), {{var:v_L}}(t) and i(t) for all t.
+Find {{var:i_L}}(t), {{var:v_L}}(t) and {{var:i}}(t) for all t.
 
 ::: figure assets/practice/bo2s-drill-exercise-5-3-9.jpg
 
@@ -1350,8 +1350,8 @@ $$
 
 ::: problem Bo2's p249 F5.28
 
-For the circuit left, the source is *v*{{sub:s}}*(t)* *= V u(t) - V
-u(t-t*{{sub:0}}*)*. This is shown in the plot to the right. Given this, find
+For the circuit left, the source is {{var:v_s}}*(t)* *= {{var:V}} u(t) - {{var:V}}
+u(t-{{var:t_0}})*. This is shown in the plot to the right. Given this, find
 the voltage drop in the capacitor for all *t*.
 
 ::: figure assets/practice/bo2s-p249-f5-28-24.jpg
@@ -1435,8 +1435,8 @@ interval.
 
 ::: problem Bo2's Drill Exercise 5.9
 
-Find the current through the inductor if the source is {{var:v_s}}(t) = V u(t)
-– V u(t-{{var:t_o}}).
+Find the current through the inductor if the source is {{var:v_s}}(t) = {{var:V}} u(t)
+– {{var:V}} u(t-{{var:t_o}}).
 
 ::: figure assets/practice/bo2s-drill-exercise-5-9-25.jpg
 
@@ -1970,8 +1970,8 @@ $$
 
 ::: problem Bo2's Example 6.1
 
-Find the current in the inductor i(t) and the voltage drop in the capacitor
-v(t).
+Find the current in the inductor {{var:i}}(t) and the voltage drop in the capacitor
+{{var:v}}(t).
 
 ::: figure assets/practice/bo2s-example-6-1-30.jpg
 
@@ -2068,7 +2068,7 @@ Practice Problems for Lesson 6
 
 ::: problem Bo2's Drill Exercise 6.1
 
-For the circuit shown, find v(t) and i(t) for t≥0.
+For the circuit shown, find {{var:v}}(t) and {{var:i}}(t) for t≥0.
 
 ::: figure assets/practice/bo2s-drill-exercise-6-1-32.jpg
 
@@ -2153,7 +2153,7 @@ answers.}}
 
 ::: problem Bo2's Example 6.2
 
-Find i(t) and v(t) for the circuit shown.
+Find {{var:i}}(t) and {{var:v}}(t) for the circuit shown.
 
 ::: figure assets/practice/bo2s-example-6-2-33.jpg
 
@@ -2272,7 +2272,7 @@ answers.
 
 ::: problem Bo2's Example 6.3
 
-Find i(t) and v(t) for the circuit shown.
+Find {{var:i}}(t) and {{var:v}}(t) for the circuit shown.
 
 ::: figure assets/practice/bo2s-example-6-3-34.jpg
 
@@ -2593,7 +2593,7 @@ o,0,2,o
 
 ::: problem Bo2's Example 6.5 (Plot)
 
-In the circuit, use {{var:v_S}}=2/5V, R=12Ω, L=2H and C=1/50F. Find v(t)
+In the circuit, use {{var:v_S}}=2/5V, {{var:R}}=12Ω, {{var:L}}=2H and {{var:C}}=1/50F. Find {{var:v}}(t)
 and i(t), and plot them for time 0<t<1.5 seconds.
 
 ::: figure assets/practice/bo2s-example-6-5-plot-38.jpg
@@ -2652,8 +2652,8 @@ the book's graph too.
 
 ::: problem Bo2's Drill Exercise 6.7
 
-For the circuit in Bo2's Example 6.5, use {{var:v_S}}=3V, R=5Ω, L=1/2H and
-C=1/8F. Find v(t) and i(t).
+For the circuit in Bo2's Example 6.5, use {{var:v_S}}=3V, {{var:R}}=5Ω, {{var:L}}=1/2H and
+{{var:C}}=1/8F. Find {{var:v}}(t) and {{var:i}}(t).
 
 ```sym 7
 s\only("vc,il"):s\tr("e,1,0,3:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):{vc,il}
@@ -2677,7 +2677,7 @@ $$
 ::: problem Bo2's Drill Exercise 6.8 (Ramp)
 
 For the circuit in Bo2's Drill Exercise 6.7, find the voltage drop in the
-capacitor v(t) if the source has a value {{var:v_S}}(t) = 3 r(t).
+capacitor {{var:v}}(t) if the source has a value {{var:v_S}}(t) = 3 r(t).
 
 ```sym 7
 s\only("vc"):s\tr("e,1,0,3t:r,1,2,5:l,2,3,1/2,0:c,3,0,1/8,0"):vc
@@ -2757,7 +2757,7 @@ volts!
 
 ::: problem Bo2's Drill Exercise 6.9
 
-For the circuit, R=1Ω, L=2H, C=1/2F and {{var:i_S}}(t)=u(t). Find i(t)
+For the circuit, {{var:R}}=1Ω, {{var:L}}=2H, {{var:C}}=1/2F and {{var:i_S}}(t)=u(t). Find {{var:i}}(t)
 and v(t).
 
 ::: figure assets/practice/bo2s-drill-exercise-6-9-41.jpg
@@ -2842,8 +2842,8 @@ o,2,o,o
 
 ::: problem Bo2's Drill Exercise 6.11 (p307)
 
-For the circuit, suppose that {{var:R_1}} = {{var:R_2}} = 1Ω, L = 1H, C =
-1F and {{var:v_S}}(t)= 2e{{sup:-2t}} u(t). Find i(t) if all initial conditions
+For the circuit, suppose that {{var:R_1}} = {{var:R_2}} = 1Ω, {{var:L}} = 1H, {{var:C}} =
+1F and {{var:v_S}}(t)= 2e{{sup:-2t}} u(t). Find {{var:i}}(t) if all initial conditions
 are zero.
 
 ::: figure assets/practice/bo2s-drill-exercise-6-11-p307-43.jpg
@@ -2871,7 +2871,7 @@ l,1,0,1,0
 ::: problem A more complex problem
 
 The circuit comes from the circuits analysis class of Professor Eliane
-Boulet de Cabrera, from Universidad Tecnologica de Panama. Find v1 and v.
+Boulet de Cabrera, from Universidad Tecnologica de Panama. Find {{var:v_1}} and {{var:v}}.
 
 ::: figure assets/practice/a-more-complex-problem-44.png
 
@@ -3022,7 +3022,7 @@ nothing to transform.
 ::: problem Bo2's Drill Exercise 4.5 (Expert)
 
 For this circuit, we know that the capacitor’s initial condition is zero,
-that {{var:v_s}} is an unknown step source (i.e. of the form A *u(t)*, where A
+that {{var:v_s}} is an unknown step source (i.e. of the form {{var:A}} *u(t)*, where {{var:A}}
 is a constant value in volts) and that the voltage drop in the capacitor for
 t>0 is found to be 1-e^(-t/2). Find the voltage drop in the resistor, the
 current through the capacitor and the value of the source.

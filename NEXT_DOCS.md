@@ -8,6 +8,47 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #262 — the bare variables respelled with subscripts, and the single letters marked — **done and live, 5 Sep 2026**
+
+Roberto, 5 Sep 2026, on the two decisions #261 left open: respell the
+bare forms with subscripts, and set the single-letter element values bold
+italic too.
+
+**Respelled: 51 tokens.** `RL` → *R*\textsubscript{L}, `R1`…`R5`,
+`I1`, `I3`, `RT`, `VTH`, `REQ`, `INO`, `Is`, `Vs`, `Vo`, `Ap`, `Zi` —
+each `{{var:XY}}` became `{{var:X_Y}}`, so the mark and the subscript
+now match the diagrams. `E` stays bare, having nothing to subscript. Two
+bare statements took subscripts on the way: Lesson 4's *Find i1, i2, i3
+and i4* and Lesson 6's *Find v1 and v*.
+
+**Single-letter element values: 16 tokens.** *R*, *L* and *C* in the four
+Lesson 6 statements that give them (*R=12Ω, L=2H and C=1/50F* and its
+kin), the amplitude *V* in *V u(t) − V u(t − t₀)* in two problems, the
+step amplitude *A* in the unknown-source drill, and the conductance *g*
+in TR5's Example 4.4.
+
+**And the single-letter *i* and *v* a problem asks for: 50 tokens.** One
+step past the brief, taken because a half-marked list looked wrong:
+*Determine i, v and i_d* with only the last one marked. So *i* and *v*
+are marked where they sit beside marked variables — the *Determine i, v…*
+statements and their *i=4, v=6* answer lines in Lesson 3, *Find v(t) and
+i(t)* in Lessons 6 and 7, *the current i* in Lesson 2's symbolic problem
+and Lesson 7's steady-state current. Roberto can send them back plain.
+
+One line #261 had missed came right as well: Lesson 6's *For the circuit
+left, the source is v_s(t) = V u(t) − V u(t − t₀)* wrapped its variable
+in italics (`*v*{{sub:s}}*(t)*`), which put a `*` where #261's pattern
+wanted a letter. It now reads `{{var:v_s}}*(t)* *= {{var:V}} u(t) −
+{{var:V}} u(t−{{var:t_0}})*` — three marks inside an italic expression,
+checked by rendering the line. The second *V* was caught on a second
+look: it sits at the end of the source line, before a wrap, where a
+pattern that wanted *u(* after it could not see it.
+
+Built in full and deployed the same day; the PDFs unchanged at 206 / 196
+/ 236 pages.
+
+---
+
 ## #261 — a problem's own variables set bold italic: `{{var:…}}` — **done and live, 5 Sep 2026**
 
 Roberto, 5 Sep 2026: find every variable the *problem* names — in its

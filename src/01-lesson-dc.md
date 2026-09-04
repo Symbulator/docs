@@ -548,7 +548,7 @@ source reads `re` = 6 kΩ. Correct.
 That is 6 kΩ. Correct.
 :::
 
-*Answer to question (b).* Current {{var:Is}} is defined in the schematic as the current
+*Answer to question (b).* Current {{var:I_s}} is defined in the schematic as the current
 flowing through the source, in the direction that goes from node 0 to node 1.
 One way to find this value is evaluating the negative of the current through
 the source, which {{v7,8|as you know flows}}{{v9|we defined as flowing}} in the opposite direction:
@@ -573,13 +573,13 @@ carries the same current, is to
 {{v7,8|evaluate the current through any of the resistors}}{{v9|read the
 current through any resistor}}.
 
-*Answer to question (c).* The voltage drop in resistor {{var:R1}} — since its polarity
+*Answer to question (c).* The voltage drop in resistor {{var:R_1}} — since its polarity
 is defined in the schematic in the same way it is defined in our circuit
 description — is as follows.
 
 ::: only 7,8
 It is found by evaluating `vr1`: the {{t:machine}} returns `6`, that is 6 V.
-For {{var:R2}}, `vr2` gives 18 V. And for {{var:R3}}, `vr3` gives 12 V. These are all the right
+For {{var:R_2}}, `vr2` gives 18 V. And for {{var:R_3}}, `vr3` gives 12 V. These are all the right
 answers.
 :::
 ::: only 9

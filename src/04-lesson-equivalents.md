@@ -34,7 +34,7 @@ short in a circuit, Symbulator {{v7,8|stores}}{{v9|gives}} only the current thro
 the first node towards the second. For a short called sx, that is `isx`.
 
 ::: problem HK5's Drill Problem 1-13
-Find i1, i2, i3 and i4.
+Find {{var:i_1}}, {{var:i_2}}, {{var:i_3}} and {{var:i_4}}.
 
 ::: figure assets/circuit/hk5d0113.jpg
 HK5's Drill Problem 1-13
@@ -285,7 +285,7 @@ s\th("e,1,0,3.3:r1,1,2,66:r2,2,0,24",2,0)
 
 When prompted to select a type of analysis, choose DC. Symbulator tells you
 what it is doing: one simulation for the Thévenin voltage, then a second for
-the Norton current and the equivalent resistance. In this case, {{var:VTH}} = 0.88 V, {{var:INO}} = 0.05 A and {{var:REQ}} = 17.6 Ω.
+the Norton current and the equivalent resistance. In this case, {{var:V_TH}} = 0.88 V, {{var:I_NO}} = 0.05 A and {{var:R_EQ}} = 17.6 Ω.
 :::
 
 {{v7,8|When you press ENTER, Symbulator asks whether you are running a
@@ -343,7 +343,7 @@ Put the load's actual value where R is. Where the problems below mention
 
 ::: problem B11's Example 9.6
 Find the Thévenin equivalent circuit for the network in the shaded area. Then
-find the current through {{var:RL}} for {{var:RL}} values of 2 Ω, 10 Ω and 100 Ω.
+find the current through {{var:R_L}} for {{var:R_L}} values of 2 Ω, 10 Ω and 100 Ω.
 
 ::: figure assets/circuit/b11e0906.jpg
 B11's Example 9.6
@@ -447,7 +447,7 @@ terms of it.
 
 ::: problem RM3's Example 9-8
 Find the Norton equivalent of the circuit left of a-b; then find the current
-through {{var:RL}}.
+through {{var:R_L}}.
 
 ::: figure assets/circuit/rm3e0908.jpg
 RM3's Example 9-8
@@ -485,7 +485,7 @@ comes out the same.
 :::
 
 Correct. Now to the second part of the question. In order to find the current
-through {{var:RL}}, we cannot use the load expressions, because now the load is not the
+through {{var:R_L}}, we cannot use the load expressions, because now the load is not the
 only thing connected to the terminals of the equivalent: there is also a
 current source. We have to run a new simulation.
 
@@ -521,7 +521,7 @@ j,0,n,180'm
 Run it in DC. The current through `rl`, `irl`, reads {{o:-0.06}} A.
 :::
 
-Correct: there is a current of 60 mA flowing through {{var:RL}} from 0 to n.
+Correct: there is a current of 60 mA flowing through {{var:R_L}} from 0 to n.
 
 Using the equivalent circuit description is meant to save you time. If you find
 it confusing to use, just don't use it.
@@ -1798,7 +1798,7 @@ do this.
 ::: problem AS2's Example 4.8
 
 Find the Thévenin equivalent of the circuit shown to the left of terminals
-a-b. Then find the current through {{var:RL}} = 6, 16 and 36Ω.
+a-b. Then find the current through {{var:R_L}} = 6, 16 and 36Ω.
 
 ::: figure assets/practice/as2s-example-4-8-38.jpg
 
