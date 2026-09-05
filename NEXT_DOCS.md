@@ -8,6 +8,39 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #281 — the Expert Mode fields with the plural in parentheses, the book's half — **Lessons 3, 6, 13 web live 6 Sep 2026; Lesson 2 queued; PDFs held**
+
+Roberto, 6 Sep 2026: like the Solve card's *Equation(s) to solve* and
+*Unknown(s) to solve for*, the Expert Mode fields should be **Add
+equation(s)**, **Add unknown(s)**, **Add condition(s)**, and Lesson 2's
+three bullets should say one or many — *separated by `and` or one per
+line* for equations and conditions, *separated by commas or one per
+line* for unknowns.
+
+**The book leads; the app's half is #279**, claimed by the app tree the
+same afternoon. Those names are the app's own labels (`i18n/en.json`),
+and a field box is meant to spell its field as the interface does;
+Roberto said not to wait for the app. So the twelve mentions in Lessons
+3, 6 and 13 — prose and field boxes — carry the new spelling now, and
+Lesson 2's twelve, with the rewritten bullets, are queued for the file's
+release (he has it open), together with two wording changes from the
+same round: *But it does give you an idea of what*, and the quadratic
+note, *Symbulator returns multiple solutions when they exist* (it used
+to say Symbulator returned one).
+
+The commit that shipped the first half, `3d4e7a6`, is titled `#278` —
+the number the app tree had taken an hour earlier for its colour themes,
+which this file already recorded. The item is #281; the commit message
+cannot be changed once pushed. Same lesson as 3 Sep: claim a number in
+both trees before using it.
+
+---
+
+## #280 — claimed by the app tree (6 Sep 2026)
+
+Display-style maths in the app's results, so fractions are set at full
+size; write-up in `Application/v9/repos/local/NEXT.md`. Nothing for the docs.
+
 ## #279 — claimed by the app tree (6 Sep 2026)
 
 Expert Mode's three labels with the parenthetical *(s)*, English only; the
