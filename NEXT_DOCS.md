@@ -8,7 +8,7 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #281 — the Expert Mode fields with the plural in parentheses, the book's half — **web live 6 Sep 2026, PDFs held**
+## #281 — the Expert Mode fields with the plural in parentheses, the book's half — **done and live, 6 Sep 2026**
 
 Roberto, 6 Sep 2026: like the Solve card's *Equation(s) to solve* and
 *Unknown(s) to solve for*, the Expert Mode fields should be **Add
@@ -37,7 +37,7 @@ both trees before using it.
 
 ---
 
-## #284 — numeric card answers as result panels, one per answer — **web live 6 Sep 2026, PDFs held**
+## #284 — numeric card answers as result panels, one per answer — **done and live, 6 Sep 2026**
 
 Roberto, 6 Sep 2026, on Lesson 2's *The power consumed in each resistor
 is given in `pr1`, `pr2` and `pr3`: `pr1` is 1.2 W, `pr2` is 0.4 W, and
@@ -77,7 +77,7 @@ of #282 and #283.
 
 ---
 
-## #288 — `is` instead of `is1` as a source's symbolic value, and three small fixes — **web live 6 Sep 2026, PDFs held**
+## #288 — `is` instead of `is1` as a source's symbolic value, and three small fixes — **done and live, 6 Sep 2026**
 
 Roberto, 6 Sep 2026, on B11's Example 6.21: *can we replace the value
 is1 with is? Can you run the simulation to verify?* Versions 7 and 8 had
@@ -115,7 +115,7 @@ and 72 mW*, keeps its names because its values are not keyed.
 
 ---
 
-## #287 — the figure label target a quarter larger, for every figure — **web live 6 Sep 2026, PDFs held**
+## #287 — the figure label target a quarter larger, for every figure — **done and live, 6 Sep 2026**
 
 Roberto, 6 Sep 2026, on HK5's Drill Problem 1-13 in the browser: the
 labels in the figure sit at about two-thirds of the prose's height, and
@@ -146,6 +146,39 @@ together and the shortfall Roberto saw was the rule's. If labels still
 read short after this build, the same number moves again.
 
 ---
+
+## #290 — Lesson 4's equivalent-tool wording, and the PDFs caught up — **done and live, 6 Sep 2026**
+
+Roberto, 6 Sep 2026, three small things in Lesson 4, then *run
+everything*:
+
+- the card's heading in B11's Example 8.29 said *Equivalent impedance*;
+  it is a DC problem, and the app's label is now lower case, so it reads
+  ***equivalent resistance***. The rest of the book already followed the
+  rule he stated — *Thévenin voltage* and *Norton current* keep their
+  capitals, *equivalent resistance*, *equivalent impedance* and *maximum
+  deliverable power* are lower case, impedance only for an AC `zeq` — and
+  the built pages carry no capitalised tool label; the one place still
+  saying *Equivalent impedance* for DC is the app's own `js.tool.er`
+  heading, for the other session;
+- the manual-method paragraph (*the Thévenin voltage, VTH … REQ is then
+  VTH/INO*) had been left bare as theory text; its three quantities now
+  carry the subscripted mark the answers use, `{{var:V_TH}}` and kin;
+- the three bare *RL* in *Problems with a load* (*an R_L problem*, *as seen
+  by resistor R_L*, *the load resistor R_L*) marked the same way.
+
+**The PDFs were rebuilt and deployed with this train**, the first full
+build since #277, so #281, #284, #287 and #288 reached print at once —
+the labelled field boxes, the result panels for numeric answers, the
+larger figures and the `is` rename. The figures cost pages: v7 **234**
+(221), v8 **221** (211), v9 **271** (253). Hash-verified live.
+
+---
+
+## #289 — claimed by the app tree (6 Sep 2026)
+
+The th/er tool's answer labels in lower case; write-up in
+`Application/v9/repos/local/NEXT.md`. Nothing for the docs.
 
 ## #286 — claimed by the app tree (6 Sep 2026)
 

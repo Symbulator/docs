@@ -201,7 +201,7 @@ Set **Type of analysis** to *Find equivalent*, **Type of equivalent** to
 **Analysis** on *DC — direct current* and press **Run Symbulator**.
 
 **Results** looks different from a normal solve: instead of the node and
-element listing there is a single answer, headed **Equivalent impedance**:
+element listing there is a single answer, headed **equivalent resistance**:
 
 **Req** = {{o:2.89}} Ω
 :::
@@ -226,9 +226,9 @@ Just as a *passive circuit* can be reduced to an equivalent resistance, an
 Thévenin or Norton equivalent.
 
 One way is to run a first simulation for the voltage between the two nodes
-where we want the equivalent (the Thévenin voltage, VTH), then a second with a
+where we want the equivalent (the Thévenin voltage, {{var:V_TH}}), then a second with a
 short between those nodes for the current through it (the Norton current,
-INO). REQ is then VTH/INO. That is the manual way.
+{{var:I_NO}}). {{var:R_EQ}} is then {{var:V_TH}}/{{var:I_NO}}. That is the manual way.
 
 ::: only 7,8
 An easier way is the **th** script,{{i:th script}} which does exactly that
@@ -308,10 +308,10 @@ deliver into a matched load.
 ### Problems with a load
 
 One type of problem books and professors like when teaching the Thévenin /
-Norton equivalents is what I call an RL problem. A typical one goes like
-this: "First, reduce the circuit, as seen by resistor RL, to
+Norton equivalents is what I call an {{var:R_L}} problem. A typical one goes like
+this: "First, reduce the circuit, as seen by resistor {{var:R_L}}, to
 its Thévenin or Norton equivalent. Then, find the value of the voltage drop,
-current and/or power consumed in the load resistor RL if its value is
+current and/or power consumed in the load resistor {{var:R_L}} if its value is
 (whatever) ohms."
 
 ::: only 7,8
