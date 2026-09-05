@@ -63,8 +63,7 @@ s4,3,5
 ```
 
 {{v7,8|We ask for the values of the variables:}}{{v9|Choose *Solve circuit* and
-*DC*, then run it. The current through each short is given in `is1`, `is2`,
-`is3` and `is4`:}}
+*DC*, then run it. The current through each short is given in:}}
 
 ```sym 7
 approx({is1,is2,is3,is4})

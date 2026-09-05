@@ -51,7 +51,7 @@ try:
     with open(FIGSIZES_PATH, encoding="utf-8") as _fh:
         _FIGSIZES = json.load(_fh)
 except FileNotFoundError:
-    _FIGSIZES = {"target_mm": 2.7, "line_mm": 156.0,
+    _FIGSIZES = {"target_mm": 3.4, "line_mm": 156.0,
                  "overrides": {}, "measured": {}}
 
 FIG_LINE_MM = float(_FIGSIZES.get("line_mm", 156.0))

@@ -77,6 +77,81 @@ of #282 and #283.
 
 ---
 
+## #288 — `is` instead of `is1` as a source's symbolic value, and three small fixes — **web live 6 Sep 2026, PDFs held**
+
+Roberto, 6 Sep 2026, on B11's Example 6.21: *can we replace the value
+is1 with is? Can you run the simulation to verify?* Versions 7 and 8 had
+always said `is`; version 9 had been given `is1` — with a note in two
+problems explaining the odd name — on the belief that `is`, a Python
+keyword, would not survive the app.
+
+**It does, and it was measured rather than assumed.** The solver alone
+takes `is` and returns 9 mA, 1 mA and 6 mA, the same as with `is1`.
+Through the app's own path — `solve_ui` in `symbulator_ui.py`, the code
+the online app runs — with `ir2 = 2'm` as the equation and `is` as the
+unknown, the run succeeds and reports *is = 9 m* with no warning. The
+app's keyword guard bans an *element* named `s`, whose answer would be
+`is`; a value symbol called `is` is a plain symbol. The three other
+Lesson 3 problems that used `is1` were run the same way and return the
+answers the chapter prints (*1000·is*, *2·is*; *−12·is*, *−6000·is*;
+*re1·(β+1)* with the `β*is` source).
+
+**Changed:** the four version 9 circuit descriptions (B11's Example 6.21,
+TR5's Figure 4-4, Bo2's Example 1.11, TR5's Example 4.5) and the Expert
+Mode instruction, and the two notes excusing `is1` are gone. No `is1` is
+left in the book. **The app's four entries in `Lesson_03_*.cir` still say
+`is1`**; a prompt for the app session was handed to Roberto, since the
+book and the app should agree.
+
+**In the same train, three small things:** HK5's Figures 1-24b and 1-24c
+name their variables as the diagrams do, lower-case *i_x* and *v_x* (the
+1-24b figure was read to confirm it matches); B11's Example 6.22 reads
+*Looking at the value of `ir1`, we get I₁ = 10.48 mA* (a panel form was
+tried at Roberto's suggestion and withdrawn at his word); and HK5's Drill
+Problem 1-11's lead-in drops the four names its values line repeats,
+*The current through each short is given in:* — the only other lead-in
+of that shape, Lesson 1's *given in `pr1`, `pr2` and `pr3`: 36 mW, 108 mW
+and 72 mW*, keeps its names because its values are not keyed.
+
+---
+
+## #287 — the figure label target a quarter larger, for every figure — **web live 6 Sep 2026, PDFs held**
+
+Roberto, 6 Sep 2026, on HK5's Drill Problem 1-13 in the browser: the
+labels in the figure sit at about two-thirds of the prose's height, and
+*images like this one* are still short. After Lesson 1's sweep (#265),
+HK5's Figure 1-26 and TR5's Example 4-7's answer image, each an override
+on a figure that #153's rule had sized, the pattern was the rule itself:
+`TARGET_MM = 2.7`, the label height it aims for in print, was too low
+for the way the measuring tool reads a label's height.
+
+**Raised to 3.4 mm**, the same quarter Lesson 1 got, in the three places
+that hold it: `tools/measure_figures.py` (so a re-measure keeps it), the
+manifest `tools/figure_sizes.json` (what the build reads), and
+`build.py`'s fallback. Every figure the rule sizes — 294 of 316 — grows
+by a quarter, capped at the 156 mm line, which 43 now reach; the 22
+hand-set overrides keep their widths, and since Lesson 1's were already a
+quarter up, the book is uniform again. HK5's Drill Problem 1-13 goes from
+117 to 147 mm (408 to 513 px on the web); AS2's Practice Problem 2.15,
+which Roberto asked about next, from 78 to 98 mm (272 to 342 px).
+
+**One override on the way:** the textbook's answer in TR5's Example 4-7
+is a one-line formula image, 412 × 61 px, and the tool had taken almost
+the whole image height as label text, shrinking it to 21 mm wide. It is
+set to 42 mm (146 px), about the height of a line.
+
+**Why the browser showed it:** the web sizes a figure in pixels against
+the desktop column (#256), so browser zoom scales figure and prose
+together and the shortfall Roberto saw was the rule's. If labels still
+read short after this build, the same number moves again.
+
+---
+
+## #286 — claimed by the app tree (6 Sep 2026)
+
+Lesson 3's four `is1` entries renamed `is` in the example book; write-up
+in `Application/v9/repos/local/NEXT.md`.
+
 ## #285 — claimed by the app tree (6 Sep 2026)
 
 The app's footer reworded, no copyright sign; write-up in

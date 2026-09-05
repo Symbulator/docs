@@ -648,11 +648,11 @@ The answers you want are `ir1` and `vrx`, in **Results**.
 
 ::: only 7,8
 Select DC. Add equation `ir2=4`. Add unknown `rx`. Run the simulation. The
-answer, {{o:{-8,80}}}, means that {{var:I_X}} is {{o:-8}}A and that {{var:V_X}} is {{o:80}}V.
+answer, {{o:{-8,80}}}, means that {{var:i_x}} is {{o:-8}}A and that {{var:v_x}} is {{o:80}}V.
 :::
 ::: only 9
 Select DC. Add equation `ir2=4`. Add unknown `rx`. Run the simulation. The
-answer is {{var:I_X}} = {{o:-8}}A and {{var:V_X}} = {{o:80}}V.
+answer is {{var:i_x}} = {{o:-8}}A and {{var:v_x}} = {{o:80}}V.
 :::
 
 :::
@@ -1134,12 +1134,12 @@ The answers you want are `ix` and `v3`, in **Results**.
 
 ::: only 7,8
 Select DC. Add equation `ir8=5`. Add unknown `ix`. Run the simulation, and
-you will get: {{o:{1,8}}}. This is correct: {{var:I_X}} is {{o:1}}A and that
-{{var:V_X}} is {{o:8}}V.
+you will get: {{o:{1,8}}}. This is correct: {{var:i_x}} is {{o:1}}A and that
+{{var:v_x}} is {{o:8}}V.
 :::
 ::: only 9
 Select DC. Add equation `ir8=5`. Add unknown `ix`. Run the simulation. The
-answer is {{var:I_X}} = {{o:1}}A and {{var:V_X}} = {{o:8}}V. This is correct.
+answer is {{var:i_x}} = {{o:1}}A and {{var:v_x}} = {{o:8}}V. This is correct.
 :::
 
 :::
@@ -1168,7 +1168,7 @@ r2,1,0,10'k
 r3,1,0,22'k
 ```
 
-We get {{var:I_1}} = {{o:10.48}} mA, which is correct.
+Looking at the value of `ir1`, we get {{var:I_1}} = {{o:10.48}} mA, which is correct.
 
 :::
 
@@ -1189,7 +1189,7 @@ s\ex("js,0,1,is:r1,1,0,6:r2,1,0,3:r3,1,0,1"):approx({is,ir1,ir3})
 s\ex("js,0,1,is:r1,1,0,6:r2,1,0,3:r3,1,0,1"):approx({is,ir1,ir3})
 ```
 ```field 9 Circuit Description
-js,0,1,is1
+js,0,1,is
 r1,1,0,6
 r2,1,0,3
 r3,1,0,1
@@ -1201,7 +1201,7 @@ simulation.
 :::
 ::: only 9
 Choose DC. Open **Expert Mode**, put `ir2 = 2'm` in **Add equation(s)** and
-`is1` in **Add unknown(s)**, then **Run Symbulator**.
+`is` in **Add unknown(s)**, then **Run Symbulator**.
 :::
 
 ::: only 7,8
@@ -2014,7 +2014,7 @@ s\dc("ji,0,x,is:r1,x,0,1'k:r2,x,o,2'k:jd,0,o,vx/500:ro,o,0,500"):
 {vo,iro}
 ```
 ```field 9 Circuit Description
-ji,0,x,is1
+ji,0,x,is
 r1,x,0,1'k
 r2,x,o,2'k
 jd,0,o,vx/500
@@ -2031,8 +2031,7 @@ The answer, **{1000\*is,2\*is}**, is correct: *v*{{sub:O}}*=1000*
 :::
 ::: only 9
 The answer is *v*{{sub:O}}*=1000* *i*{{sub:S}} and *i*{{sub:O}}*=2
-i*{{sub:S}}. This is correct. The panel names the source's value `is1`, so the answers read `1000*is1` and
-`2*is1`.
+i*{{sub:S}}. This is correct.
 :::
 
 :::
@@ -2105,7 +2104,7 @@ s\dc("js,0,1,is:r50,1,0,50:rx,1,0,25:jd,o,0,48irx:
 r3,o,0,300:ro,o,0,500"):{iro,vo,pro,pro/(–pjs)}
 ```
 ```field 9 Circuit Description
-js,0,1,is1
+js,0,1,is
 r50,1,0,50
 rx,1,0,25
 jd,o,0,48*irx
@@ -2125,8 +2124,6 @@ pro/(-pjs)
 
 The answers we get are correct: {{var:i_O}}={{o:-12is}}, {{var:v_O}}={{o:-6000is}},
 {{var:p_O}}={{o:72000is}}{{sup:2}}, and {{var:p_O}}/{{var:p_S}}={{o:4320}}.
-{{v9|The panel names the source's value `is1`, so the answers carry `is1`
-where these carry is.}}
 
 :::
 
@@ -2257,9 +2254,9 @@ s\dc("ji,0,a,is:re,a,0,re:jd,b,a,β*is:rl,b,0,rl"):rji
 s\dc("ji,0,a,is:re,a,0,re:jd,b,a,β*is:rl,b,0,rl"):rji
 ```
 ```field 9 Circuit Description
-ji,0,a,is1
+ji,0,a,is
 re1,a,0,re1
-jd,b,a,β*is1
+jd,b,a,β*is
 rl,b,0,rl
 ```
 

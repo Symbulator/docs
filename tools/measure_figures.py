@@ -38,7 +38,9 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 ASSETS = os.path.join(ROOT, "assets")
 OUT = os.path.join(ROOT, "tools", "figure_sizes.json")
 
-TARGET_MM = 2.7      # label text height in print; body text is 11pt Plex
+TARGET_MM = 3.4      # label text height in print (#285, 6 Sep 2026: was 2.7,
+                     # body text at 11pt Plex -- Roberto found every figure
+                     # sized by it a third short, on the web and in print)
 LINE_MM = 156.0      # A4 text block: 210 - 24 - 30
 
 
