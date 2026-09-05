@@ -191,6 +191,20 @@ function asset(string $name): string {
     body[data-show="app"]  .pane.docs { display: none; }
   }
 
+  /* #310: the sun and moon. The docs pane hides its own ribbon when
+     embedded, and its toggle lives there, so the shell carries one that
+     drives both. banner.css's .theme-toggle, sized for this slimmer bar. */
+  .splitbar .theme-toggle {
+    padding: 0; flex: none; width: 1.9rem; height: 1.9rem;
+    display: flex; align-items: center; justify-content: center;
+    background: rgba(255,255,255,.12); color: #fff;
+    border: 1px solid rgba(255,255,255,.35); border-radius: 999px;
+    line-height: 1; cursor: pointer;
+  }
+  .splitbar .theme-toggle svg { width: 1.05em; height: 1.05em; flex: none; }
+  .splitbar .theme-toggle:hover { background: rgba(255,255,255,.22); }
+  .splitbar .theme-toggle:focus-visible { outline: 2px solid var(--sky, #8ec7f5); outline-offset: 2px; }
+
   .nojs { padding: 1rem; font-size: 0.9rem; }
 </style>
 </head>
@@ -212,6 +226,8 @@ function asset(string $name): string {
     <button type="button" id="tabDocs" aria-pressed="true">Docs</button>
     <button type="button" id="tabApp"  aria-pressed="false">App</button>
   </span>
+  <button type="button" id="themeToggle" class="theme-toggle"
+          aria-label="Switch to dark mode" title="Switch to dark mode"></button>
 </div>
 
 <div class="panes" id="panes">
@@ -480,6 +496,39 @@ function asset(string $name): string {
   // A click inside either iframe never reaches this document, so the
   // menu also closes when the focus leaves for a pane.
   window.addEventListener('blur', closeMenu);
+
+  // ---- #310: light and dark, for the shell and the docs pane together ----
+  // Same key, icons and logic as the docs page's own toggle, which the
+  // embedded pane hides with the rest of its ribbon. The pane is
+  // same-origin, so its root attribute is set directly; a pane that
+  // navigates afterwards reads the stored key itself, before first paint.
+  // The app pane is another origin and keeps its own toggle.
+  (function () {
+    var btn = document.getElementById('themeToggle');
+    var ICON_MOON = '<svg viewBox="0 0 24 24" fill="#8ec7f5" aria-hidden="true"><path d="M20.4 14.7A8.5 8.5 0 1 1 9.3 3.6a7 7 0 1 0 11.1 11.1Z"/></svg>';
+    var ICON_SUN = '<svg viewBox="0 0 24 24" fill="none" stroke="#8ec7f5" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>';
+    function isDark() { return document.documentElement.getAttribute('data-theme') === 'dark'; }
+    function apply(root, dark) {
+      if (!root) { return; }
+      if (dark) { root.setAttribute('data-theme', 'dark'); }
+      else { root.removeAttribute('data-theme'); }
+    }
+    function sync() {
+      var dark = isDark();
+      btn.innerHTML = dark ? ICON_SUN : ICON_MOON;
+      var label = dark ? 'Switch to light mode' : 'Switch to dark mode';
+      btn.setAttribute('aria-label', label);
+      btn.title = label;
+    }
+    sync();
+    btn.addEventListener('click', function () {
+      var dark = !isDark();
+      apply(document.documentElement, dark);
+      try { apply(docsFrame.contentDocument && docsFrame.contentDocument.documentElement, dark); } catch (e) {}
+      try { localStorage.setItem('symbulator-docs-theme', dark ? 'dark' : 'light'); } catch (e) {}
+      sync();
+    });
+  })();
 
   // ---- opening state ----------------------------------------------------
   (function start() {

@@ -8,6 +8,26 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #310 — light and dark in the split view — **done and live, 7 Sep 2026**
+
+Roberto, 7 Sep 2026: *"I don't see the light dark mode toggle on the doc
+side of the split view."* The docs page hides its whole ribbon when
+embedded (`html.embedded .topbar, .subbar { display: none }`, #224), and
+its sun-and-moon lives in that ribbon; the shell read the stored theme
+on load but offered no way to change it.
+
+The shell's bar now carries the toggle, at the right-hand end after the
+Docs and App tabs: the docs page's own icons and logic (`ICON_MOON`,
+`ICON_SUN`, the `symbulator-docs-theme` key), sized for the slimmer bar.
+A click sets `data-theme` on the shell and, the pane being same-origin,
+on the docs pane's root directly, so both change together without a
+reload; a pane that navigates afterwards reads the stored key itself
+before first paint, as it always did. The app pane is another origin and
+keeps its own toggle.
+
+Verified live: both roots go dark and back together, the stored key
+follows, the button's label flips between the two modes.
+
 ## #306 — a Contents button for the phone layout — **done and live, 7 Sep 2026**
 
 Roberto, 7 Sep 2026: *"it is important for the user in mobile using
