@@ -342,7 +342,7 @@ to add equations, variables and conditions. You may recall from algebra that sol
 of equations into numbers needs as many equations as unknowns. The statement of the problem gives us
 the information we need to write the two additional equations.
 
-In "Add equations" type:
+In "Add equation(s)" type:
 
 ```sym 7
 re=12'k and ir3=6'm
@@ -351,7 +351,7 @@ re=12'k and ir3=6'm
 re=12'k and ir3=6'm
 ```
 
-In "Add unknowns" type:
+In "Add unknown(s)" type:
 
 ```sym 7
 e,rx
@@ -382,9 +382,9 @@ values.
 **Expert Mode** takes extra equations, unknowns and conditions in three boxes.
 Open the **Expert Mode** box and tick **Enable Expert Mode** to see them:
 
-- **Add equations** — one per line, written in the names the results use.
-- **Add unknowns** — comma-separated.
-- **Add conditions** — for narrowing a solution down, which we will use later.
+- **Add equation(s)** — one or many, separated by `and` or one per line, written in the names the results use.
+- **Add unknown(s)** — one or many, separated by commas or one per line.
+- **Add condition(s)** — one or many, separated by `and` or one per line, for narrowing a solution down, which we will use later.
 
 They apply to whatever analysis you run, so **Expert Mode** works the same way in
 DC, AC, FD and TR.
@@ -404,12 +404,12 @@ r2,2,3,4'k
 r3,3,0,6'k
 ```
 
-```field 9 Add equations
+```field 9 Add equation(s)
 re = 12'k
 ir3 = 6'm
 ```
 
-```field 9 Add unknowns
+```field 9 Add unknown(s)
 e, r1
 ```
 
@@ -420,7 +420,7 @@ answer: **e** = {{o:72}} and **r1** = {{o:2000}}. Both are right, and the whole 
 solved with them in one step.
 
 The speed advantage of **Expert Mode** is not necessarily evident in this
-simple problem. It does give you an idea of what **Expert Mode** is all about:
+simple problem. But it does give you an idea of what **Expert Mode** is all about:
 you get to hand Symbulator extra information before it solves, rather than
 after. Had this circuit been larger, the benefit in computation time would be
 clear.
@@ -434,8 +434,7 @@ Symbulator says so, and you can restate the constraint in voltages and
 currents.
 
 A quantity that is quadratic in an unknown, such as a power, can be satisfied
-by two values. Symbulator returns one; if it surprises you, check whether the
-problem meant the other.
+by two values. Symbulator returns multiple solutions when they exist.
 :::
 :::
 :::
@@ -537,7 +536,7 @@ ir1=8'm and ir2=10'm and ir3=2'm
 ```sym 8
 ir1=8'm and ir2=10'm and ir3=2'm
 ```
-```field 9 Add equations
+```field 9 Add equation(s)
 ir1 = 8'm
 ir2 = 10'm
 ir3 = 2'm
@@ -551,7 +550,7 @@ e,r2,r3
 ```sym 8
 e,r2,r3
 ```
-```field 9 Add unknowns
+```field 9 Add unknown(s)
 e, r2, r3
 ```
 
@@ -621,7 +620,7 @@ irl1=20'm and vrl1=60 and irl2=10'm and vrl2=20 and -ie=50'm
 ```sym 8
 irl1=20'm and vrl1=60 and irl2=10'm and vrl2=20 and –ie=50'm
 ```
-```field 9 Add equations
+```field 9 Add equation(s)
 irl1 = 20'm
 vrl1 = 60
 irl2 = 10'm
@@ -638,7 +637,7 @@ r1,r2,r3,rl1,rl2
 ```sym 8
 r1,r2,r3,rl1,rl2
 ```
-```field 9 Add unknowns
+```field 9 Add unknown(s)
 r1, r2, r3, rl1, rl2
 ```
 
@@ -691,11 +690,11 @@ ed4,0,n,0.7*v_r6
 Symbulator reports the power *consumed* by each element, so delivering
 80W is consuming −80W. In **Expert Mode**:
 
-```field 9 Add equations
+```field 9 Add equation(s)
 pjd1 = -80 and ped2 = 0
 ```
 
-```field 9 Add unknowns
+```field 9 Add unknown(s)
 vs, is
 ```
 
@@ -703,7 +702,7 @@ The problem asks for *positive* values, which is what the conditions are
 for: the two power equations are quadratic, so four solutions fit, and the
 conditions pick the one meant:
 
-```field 9 Add conditions
+```field 9 Add condition(s)
 is > 0 and vs > 0
 ```
 

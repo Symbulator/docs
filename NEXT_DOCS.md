@@ -8,7 +8,7 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #281 — the Expert Mode fields with the plural in parentheses, the book's half — **Lessons 3, 6, 13 web live 6 Sep 2026; Lesson 2 queued; PDFs held**
+## #281 — the Expert Mode fields with the plural in parentheses, the book's half — **web live 6 Sep 2026, PDFs held**
 
 Roberto, 6 Sep 2026: like the Solve card's *Equation(s) to solve* and
 *Unknown(s) to solve for*, the Expert Mode fields should be **Add
@@ -22,11 +22,12 @@ same afternoon. Those names are the app's own labels (`i18n/en.json`),
 and a field box is meant to spell its field as the interface does;
 Roberto said not to wait for the app. So the twelve mentions in Lessons
 3, 6 and 13 — prose and field boxes — carry the new spelling now, and
-Lesson 2's twelve, with the rewritten bullets, are queued for the file's
-release (he has it open), together with two wording changes from the
-same round: *But it does give you an idea of what*, and the quadratic
-note, *Symbulator returns multiple solutions when they exist* (it used
-to say Symbulator returned one).
+Lesson 2's twelve, with the rewritten bullets, followed the same evening
+when he released the file, applied on top of his own edits, together
+with two wording changes from the same round: *But it does give you an
+idea of what*, and the quadratic note, *Symbulator returns multiple
+solutions when they exist* (it used to say Symbulator returned one).
+No old spelling is left anywhere in the version 9 pages.
 
 The commit that shipped the first half, `3d4e7a6`, is titled `#278` —
 the number the app tree had taken an hour earlier for its colour themes,
