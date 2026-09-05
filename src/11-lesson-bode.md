@@ -477,7 +477,7 @@ r2,2,0,2
 ```
 
 This time, look for the frequency at which the imaginary part of the voltage
-at node 1 vanishes.
+at node **1** vanishes.
 
 ```sym 7
 nSolve(imag(v1)=0,ω)|ω>0

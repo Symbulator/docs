@@ -2,7 +2,7 @@
 id: lesson-dc
 kind: lesson
 title: Direct current analysis
-updated: 2026-08-29
+updated: 2026-09-05
 summary: >
   Learn to describe a circuit in Symbulator, and how to run a *direct current*
   analysis using **dc**. Learn how to describe a *voltage source* using **e**,
@@ -215,7 +215,7 @@ the same one. Otherwise they can be whatever you want, with
 voltage of 0 volts.
 
 ::: warning You need a ground node
-Every circuit must have a node called 0 to serve as reference or ground.
+Every circuit must have a node called **0** to serve as reference or ground.
 :::
 
 ::: only 7
@@ -298,8 +298,8 @@ so when a change is needed.
 ### Answer for each node
 
 Symbulator calculates for each node a voltage with reference to ground, which is {{v7,8|stored in a variable called v plus the name of
-the node. For example, for a node called 1, its voltage is stored in a variable
-called v1}}{{v9|shown under **Node voltages** as `v` plus the node's name: node 1's
+the node. For example, for a node called **1**, its voltage is stored in a variable
+called v1}}{{v9|shown under **Node voltages** as `v` plus the node's name: node **1**'s
 voltage is `v1`}}.
 
 ### Answers for each resistor
@@ -307,11 +307,11 @@ voltage is `v1`}}.
 Symbulator calculates for each resistor the following answers:
 
 - The voltage drop in the resistor, defined as the voltage in the first node minus the voltage in the second node, in volts. For a
-  resistor called r5, this is {{v7,8|stored in}}{{v9|given in}} `vr5`.
+  resistor called **r5**, this is {{v7,8|stored in}}{{v9|given in}} `vr5`.
 - The current through the resistor, flowing from the first node towards the
-  second, in amperes. For a resistor called rx, this is {{v7,8|stored in}}{{v9|given in}}
+  second, in amperes. For a resistor called **rx**, this is {{v7,8|stored in}}{{v9|given in}}
   `irx`.
-- The power consumed by the resistor, in watts. For a resistor called r12, this
+- The power consumed by the resistor, in watts. For a resistor called **r12**, this
   is {{v7,8|stored in}}{{v9|given in}} `pr12`.
 
 By now you should understand the description of the second, third and fourth
@@ -347,14 +347,14 @@ every element.
 For each voltage source, the following answers are calculated:
 
 - The voltage drop in the source, defined as the voltage in the first node
-  minus the voltage in the second, in volts. For a source called e5, `ve5`.
+  minus the voltage in the second, in volts. For a source called **e5**, `ve5`.
 - The current through the source, flowing from the first node towards the
-  second, in amperes. For a source called ex, `iex`.
+  second, in amperes. For a source called **ex**, `iex`.
 - The power consumed — attention: not delivered, but consumed — by the source,
-  in watts. For a source called e12, `pe12`. If we want the power delivered, we ask for the
+  in watts. For a source called **e12**, `pe12`. If we want the power delivered, we ask for the
   negative of this value.
 - The equivalent resistance of the rest of the circuit, as seen by the source.
-  For a source called e2, `re2`.
+  For a source called **e2**, `re2`.
 
 ::: note For sources only
 The equivalent resistance is a property of the *view from a source*, not for every element. It exists only for sources.
@@ -395,7 +395,7 @@ run the simulation, and (3) get the answers.
 
 **Step 1: Describe the circuit.** Description starts with **naming the
 nodes**. As we said, you can call them anything you want, number or letter, as
-long as the name is unique — but one node must always be called 0 (zero), the
+long as the name is unique — but one node must always be called **0** (zero), the
 ground node, with a voltage of 0 V. In this circuit the ground node is marked
 with the ground symbol. That is not always so; when it is not marked, you pick
 a node to serve as zero.
@@ -417,13 +417,13 @@ After naming the nodes, I am ready to describe the elements of the circuit in
 Symbulator notation.
 
 Let's start with the source: when I only have one voltage source, like here, I
-enjoy {{v7,8|naming it with a single letter: e}}{{v9|giving it a short name: e}}. So the voltage source is
+enjoy {{v7,8|naming it with a single letter: **e**}}{{v9|giving it a short name: **e**}}. So the voltage source is
 {{v7,8|`e,1,0,36`}}{{v9|`e,1,0,36`}}: its name is
-{{v7,8|e}}{{v9|e}}, its positive node is 1, its negative node is 0, and its
+**e**, its positive node is **1**, its negative node is **0**, and its
 value is 36 volts between them.
 
-Now the resistors. I named the first r1 and described it `r1,1,2,1'k`: its
-name is r1, its first node 1, its second node 2, and its value 1 kΩ. The
+Now the resistors. I named the first **r1** and described it `r1,1,2,1'k`: its
+name is **r1**, its first node **1**, its second node **2**, and its value 1 kΩ. The
 second is `r2,2,3,3'k`, and the third `r3,3,0,2'k`.
 
 ::: note An important point about SI prefixes
@@ -491,7 +491,7 @@ what happened: *DC analysis · 16 result(s)*, and how long it took.
 
 For a DC analysis, these answers are as follows:
 
-- The **voltage of each node**, so the voltages of nodes 1, 2 and 3 are in
+- The **voltage of each node**, so the voltages of nodes **1**, **2** and **3** are in
   {{v7,8|v1, v2 and v3}}{{v9|`v1`, `v2` and `v3`, under **Node voltages**}}.
 - The **current through each element**. The direction of the current is defined
   as going from the first node in the element's description to the second.
@@ -540,7 +540,7 @@ That is 6 kΩ. Correct.
 :::
 
 *Answer to question (b).* Current {{var:I_s}} is defined in the schematic as the current
-flowing through the source, in the direction that goes from node 0 to node 1.
+flowing through the source, in the direction that goes from node **0** to node **1**.
 One way to find this value is evaluating the negative of the current through
 the source, which {{v7,8|as you know flows}}{{v9|we defined as flowing}} in the opposite direction:
 

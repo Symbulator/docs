@@ -95,7 +95,7 @@ node; Symbulator stops with a message if they are.
 z,1,2
 ```
 
-That is a z-type two-port between nodes 1 and 2.{{v9| An optional fourth
+That is a z-type two-port between nodes **1** and **2**.{{v9| An optional fourth
 term carries its four parameters — see below.}}
 
 ### Giving it its four parameters
@@ -148,7 +148,7 @@ Define any subset and the rest stay symbolic.
 **Leave them undefined**, in which case they stay symbolic and appear in the
 answers as `z11`, `z12`, `z21` and `z22`. That is often what you want —
 the answer as a formula in the parameters. (Pinning them afterwards in
-Expert Mode's **Add equations** still works too, in a plain solve, and an
+**Expert Mode**'s **Add equations** still works too, in a plain solve, and an
 equation or condition there overrides the description's own values.)
 
 ::: note How the variables are named
@@ -160,8 +160,8 @@ but a variable that names nothing in the circuit is case-sensitive: `za` and
 :::
 
 **What answers do you get?** The current entering each port, named with the
-two-port and the **node** it sits on — for a two-port {{v7|`zp` on nodes 1
-and 2, that is `izp1` and `izp2`}}{{!v7|`z` on nodes 1 and 2, that is `iz1`
+two-port and the **node** it sits on — for a two-port {{v7|`zp` on nodes **1**
+and **2**, that is `izp1` and `izp2`}}{{!v7|`z` on nodes **1** and **2**, that is `iz1`
 and `iz2`}}.
 
 ::: problem AS7's Example 19.2

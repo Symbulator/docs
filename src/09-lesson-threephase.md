@@ -77,12 +77,12 @@ the frequency is asked for but never used.
 
 Some observations about my description:
 
-- Notice that I have specified the node at the centre of both Y's as node 0.
+- Notice that I have specified the node at the centre of both Y's as node **0**.
   This is something you can do only in the case of balanced Y-Y systems, not
   for other configurations and not for unbalanced systems.
 - Since Symbulator does not differentiate between lower and upper case
-  variables, nodes called a and A would be considered the same node. Instead,
-  we use the names ag and ad, where the g reminds us a node is on the
+  variables, nodes called **a** and **A** would be considered the same node. Instead,
+  we use the names **ag** and **ad**, where the g reminds us a node is on the
   generation side and the d reminds us it is on the demand side.
 
 Once the simulation is completed, {{v7,8|we ask for the currents on the
@@ -268,7 +268,7 @@ All correct.
 
 ### Unbalanced wye-wye system
 
-The balanced case let you use node 0 for the centre of *both* wyes, because the
+The balanced case let you use node **0** for the centre of *both* wyes, because the
 voltage at the centre of the load is zero. Unbalanced, it is not — so the load
 needs a centre node of its own.{{i:unbalanced system}}
 
@@ -546,7 +546,7 @@ If you find a simple unbalanced wye-delta problem, let me know.
 
 Until now, choosing a ground node was easy: the centre of the wye of sources.
 A delta has no centre, which is the first problem. It is solved by picking one
-of the delta's own nodes on the generator side and calling it 0.
+of the delta's own nodes on the generator side and calling it **0**.
 
 The second problem is subtler, and it is not Symbulator's alone — SPICE-like
 simulators dislike it too. **A triangle of three voltage sources cannot be
@@ -860,7 +860,7 @@ rb,b,0,40+25j
 rc,c,0,40+25j
 ```
 
-Node 0 here is the centre of the load's wye, not a node of the source at all.
+Node **0** here is the centre of the load's wye, not a node of the source at all.
 
 ```sym 7
 {s\aa(ira),s\aa(irb),s\aa(ircc)}

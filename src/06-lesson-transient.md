@@ -159,7 +159,7 @@ source values. The only thing you must do is describe these values properly.
 
 **Step values: symbolic.** A source with an unknown step value starting at t=0
 is described with a variable and the step function u(t). For example, a
-voltage source e1 between nodes 1 and 0, of V volts starting at t=0, is
+voltage source **e1** between nodes **1** and **0**, of V volts starting at t=0, is
 `e1,1,0,V*u(t)`.
 
 **Step values: numerical.** A step source with a known numerical value can be
@@ -169,7 +169,7 @@ results are the same.
 
 **Impulse values.** A source with an impulse value at t=0 is described with
 its value, symbolic or numerical, and the delta function δ(t). For example, a
-current source j1 between nodes 0 and 1, with an impulse of i amperes at t=0,
+current source **j1** between nodes **0** and **1**, with an impulse of i amperes at t=0,
 is `j1,0,1,i*δ(t)`.
 
 **Values as functions of time.** A source whose value is a function of time,
@@ -1770,8 +1770,8 @@ $$
 
 ::: problem Bo2's Figure 5.39 (Ramp)
 
-Find iL(t) and vL(t) for a circuit that has in parallel a resistor R, an
-inductor L and a current source with a ramp value I r(t). Initial conditions
+Find {{var:i_L}}(t) and {{var:v_L}}(t) for a circuit that has in parallel a resistor {{var:R}}, an
+inductor {{var:L}} and a current source with a ramp value {{var:I}} r(t). Initial conditions
 are zero.
 
 A ramp value I r(t) means a value of I t. We describe this source simply as
@@ -2224,7 +2224,7 @@ The answer you want is `il`, in **Results**.
 The second interval, for t≥0, is analyzed using TR. I could have described the
 circuit again from scratch, but out of laziness I copied the descriptions from
 the DC simulations. To avoid renaming nodes, I simulated the right switch as a
-short between nodes 2 and 3.
+short between nodes **2** and **3**.
 
 ::: only 9
 `vc` comes back {{o:-(sin(4*t) + 7*cos(4*t))*exp(-3*t)/50}} and `il`
@@ -2986,7 +2986,7 @@ the problem up - is a living legend among circuit students at UTP.
 
 The **expert** tool can be very useful in transient analysis. Using it,
 however, requires some knowledge. Here’s two things you need to know in order
-to use {{v7,8|`ex`}}{{v9|expert mode}} like a boss:
+to use {{v7,8|`ex`}}{{v9|**Expert Mode**}} like a boss:
 
 First, when Symbulator solves a problem using TR, it follows these general
 steps:
@@ -3034,7 +3034,7 @@ current through the capacitor and the value of the source.
 This problem is a match made in heaven for the **expert** tool, because we
 have one unknown value in the circuit (i.e. the value of the step source) and
 we have one known answer (i.e. the voltage drop in the capacitor.) So, the
-game plan here is to run this circuit through Symbulator’s expert mode, add
+game plan here is to run this circuit through Symbulator’s {{v7,8|expert mode}}{{v9|**Expert Mode**}}, add
 one new equation and one new unknown, and then solve. First, let’s generate
 the new equation.
 
@@ -3047,7 +3047,7 @@ DiffEq’s Laplace Transform to do so: `s\t2s`.
 :::
 
 ::: only 9
-The new equation is simply `1-e^(-t/2) = vc`: expert mode reads it in the
+The new equation is simply `1-e^(-t/2) = vc`: **Expert Mode** reads it in the
 time domain, like the answers on screen.
 
 If you would rather convert by hand, **t2s** is still there and an equation
@@ -3071,7 +3071,7 @@ s\t2s(1-e^(–t/2))=vc
 will want to paste it in the Expert window. }}Now let’s run the Expert
 simulation of the circuit. Let’s define the value of the source as `a*u(t)`,
 since we know it’s a step source; the variable `a` will serve as the unknown
-value, for which we will solve in the Expert mode.
+value, for which we will solve in {{v7,8|the Expert mode}}{{v9|**Expert Mode**}}.
 
 ```sym 7
 s\ex("e,1,0,a*u(t):r,1,2,2:c,2,0,1,0")

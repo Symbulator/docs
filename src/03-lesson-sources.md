@@ -161,7 +161,7 @@ s\pr({10,20,30})
 You get 60/11 if you evaluate exactly, or 5.45 approximately.
 
 You can also give symbolic values. For example, to reduce four resistors in
-parallel with values r1, r2, r3 and r4:
+parallel with values **r1**, **r2**, **r3** and **r4**:
 
 ```sym 7
 s\pr({r1,r2,r3,r4})
@@ -345,8 +345,8 @@ re1,3,0,[6,3]
 r6,2,0,3
 ```
 
-Run it in DC, then ask **Evaluate** for `-ie`, the current the source
-delivers. The answer is {{o:3}} A.
+Run it in DC. The current the source delivers is the opposite of `ie`:
+{{o:3}} A.
 
 An example where using pr makes no sense is B11's Example 8.3, because you need
 to know the value of the current through {{var:R_1}}.
@@ -400,21 +400,21 @@ using the variables you know by now, and run the simulation like it's nobody's
 business. For example:
 
 ::: only 7,8
-- if the source depends on the current through a resistor called r1, you define
+- if the source depends on the current through a resistor called **r1**, you define
   its value as `ir1`
-- if the source depends on the voltage drop in a resistor called r2, you define
+- if the source depends on the voltage drop in a resistor called **r2**, you define
   its value as `vr2`
-- if the source depends on the current through a short called s3, you define
+- if the source depends on the current through a short called **s3**, you define
   its value as `is3`
 - if the source depends on the difference between the voltage of two nodes a
   and b, you define its value as `va-vb`
 :::
 ::: only 9
-- if the source depends on the current through a resistor called r1, you define
+- if the source depends on the current through a resistor called **r1**, you define
   its value as `ir1`
-- if the source depends on the voltage drop in a resistor called r2, you define
+- if the source depends on the voltage drop in a resistor called **r2**, you define
   its value as `vr2`
-- if the source depends on the current through a short called s3, you define
+- if the source depends on the current through a short called **s3**, you define
   its value as `is3`
 - if the source depends on the difference between the voltage of two nodes a
   and b, you define its value as `va-vb`
@@ -742,13 +742,8 @@ r13,1,3,1/2
 ```
 
 ::: only 9
-The answers you want are `v1`, `v2` and `v3`, in **Results**.
-
-Ask **Evaluate** for:
-
-```field 9 Evaluate
--ie
-```
+The answers you want are `v1`, `v2` and `v3`, in **Results**; {{var:i}} is
+the opposite of `ie`.
 
 Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 :::
@@ -930,7 +925,7 @@ value and direction of the source.
 
 :::
 
-So that we can keep the name of node b, we will use the top left node as
+So that we can keep the name of node **b**, we will use the top left node as
 reference.
 
 First, make sure you understand what this problem is asking you to do. The
@@ -1299,23 +1294,22 @@ ra,0,3,15
 ```
 
 ::: only 9
-Ask **Evaluate** for:
+The power each source delivers is the opposite of `pei` and of `ped`. For the
+resistors together, ask **Evaluate** for:
 
 ```field 9 Evaluate
--pei
--ped
 pr1+pra
 ```
 :::
 
 ::: only 7,8
 The answer, {{o:{960,1920,2880}}}, is right: the independent source delivers
-960W, the dependent source delivers 1920W, and the resistors consume 2880W
+{{o:960}}W, the dependent source delivers {{o:1920}}W, and the resistors consume {{o:2880}}W
 together.
 :::
 ::: only 9
-The independent source delivers 960W, the dependent source delivers 1920W, and
-the resistors consume 2880W together. This is correct.
+The independent source delivers {{o:960}}W, the dependent source delivers {{o:1920}}W, and
+the resistors consume {{o:2880}}W together. This is correct.
 :::
 
 :::
@@ -1835,13 +1829,8 @@ r4,1,2,4
 ::: only 9
 Set **Analysis** to *DC — direct current*. This one needs **Enable Expert Mode** ticked in the **Expert Mode** box; the equations and unknowns go in the fields it reveals.
 
-The answers you want are `ir1`, `vjd` and `vs`, in **Results**.
-
-Ask **Evaluate** for:
-
-```field 9 Evaluate
--ies
-```
+The answers you want are `ir1`, `vjd` and `vs`, in **Results**; {{var:i_s}} is
+the opposite of `ies`.
 :::
 
 ::: only 7,8
@@ -2098,7 +2087,7 @@ Determine {{var:v_2}}.
 ::: only 7,8
 My solution: In my solution I named the value of the source {{var:v_1}},
 to keep it similar to the book. This required avoiding naming any node as
-**1**: if there was a node 1, Symbulator would store in **v1** the voltage of
+**1**: if there was a node **1**, Symbulator would store in **v1** the voltage of
 the node, creating trouble. There is no problem with using r1 as a value,
 since nothing will be stored in that r1 value.
 :::

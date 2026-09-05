@@ -2,26 +2,26 @@
 id: lesson-symbolic
 kind: lesson
 title: Symbolic circuits and expert mode
-updated: 2026-08-29
+updated: 2026-09-06
 summary: >
   Learn how to solve different types of *symbolic* circuits in Symbulator. Use
   {{v7,8|the solve command on}}{{v9|**Solve** in}} Symbulator. And explore
-  {{v7,8|**ex**, }}the powerful *expert mode*, for the ambitious user.
+  {{v7,8|**ex**, }}the powerful {{v7,8|*expert mode*}}{{v9|**Expert Mode**}}, for the ambitious user.
 ---
 
 Here you will learn about the types of symbolic circuits and how to solve
 them in Symbulator, using {{v7,8|the solve command}}{{v9|**Solve**}} when needed, and — for the more
-adventurous — the powerful *expert mode*.
+adventurous — the powerful {{v7,8|*expert mode*}}{{v9|**Expert Mode**}}.
 
 ## About symbolic problems {#about-symbolic}
 
-The problem we saw in {{ref:lesson-dc}} was a numerical problem because it
+The problem we saw in {{ref:lesson-dc}} was a *numerical problem* because it
 involved a numerical circuit: from the start, we knew the values of all its
 elements. None were unknown.
 
 A circuit with one or more elements whose value we do not know is a
-**symbolic circuit**.{{i:symbolic circuit}} A symbolic
-problem is one that involves a symbolic circuit. It gives me great joy when I
+**symbolic circuit**.{{i:symbolic circuit}} A *symbolic
+problem* is one that involves a symbolic circuit. It gives me great joy when I
 encounter a symbolic problem, because the ability to simulate symbolic circuits
 is what sets Symbulator apart from other programs.
 
@@ -29,7 +29,7 @@ is what sets Symbulator apart from other programs.
 Element and node names ignore case — `R1` and `r1` are the same resistor,
 and so is any reference built from a name: `2*VR1`, `2*vr1` and `2*v_r1`
 all mean r1's voltage drop. A variable that names nothing in the circuit
-is different: `e,a,b,c` and `e,a,b,C` are two *different* symbolic
+is different: `e,1,2,c` and `e,1,2,C` are two *different* symbolic
 sources, and telling Symbulator that `c = 5` says nothing about `C`.
 Pick one spelling for each unknown and keep it.
 :::
@@ -48,7 +48,7 @@ Numerical-from-symbolic problems can be solved in two ways. If they are simple
 quicker to simulate the circuit symbolically and then solve for the numerical
 answers with the {{v7,8|**solve** command of the
 calculator}}{{v9|**Solve** card, under the results}}. If they are not simple, it is easier to use
-**expert mode**{{v9|, in the **Expert Mode** box}}.
+{{v7,8|**expert mode**}}{{v9|**Expert Mode**, in the **Expert Mode** box}}.
 
 Let's see an example of each.
 
@@ -76,12 +76,12 @@ find symbolic expressions for the current {{var:i}}, the voltage drop in {{var:R
 power consumed by {{var:R_1}} and {{var:R_2}}. Since we are being asked to find symbolic answers
 from a symbolic circuit, this is a purely symbolic problem.
 
-This is how I would describe this circuit. First, the nodes. The node called a
-in the schematic stays node a. The node called b is my ground, so it becomes
-node 0. The node between the two resistors I call c.
+This is how I would describe this circuit. First, the nodes. The node called **a**
+in the schematic stays node **a**. The node called **b** is my ground, so it becomes
+node **0**. The node between the two resistors I call **c**.
 
-Then the elements. I name the source ev and the resistors r1 and r2, and give
-them variables for values: v for the source, r1 and r2 for the resistors. It is
+Then the elements. I name the source **ev** and the resistors **r1** and **r2**, and give
+them variables for values: **v** for the source, **r1** and **r2** for the resistors. It is
 no problem that a symbolic value carries the same name as its element.
 
 ```sym 7
@@ -131,7 +131,7 @@ $$
 which is the voltage divider you would have written by hand.
 
 To find the power consumed in r2, we {{v7,8|ask for `pr2`}}{{v9|read `pr2`}}. To find the power delivered by the
-source, we {{v7,8|ask for the negative of `pev`}}{{v9|switch the sign of `pev` — type `-pev` into **Evaluate**}}.
+source, we {{v7,8|ask for the negative of `pev`}}{{v9|switch the sign of `pev`}}.
 
 $$
 p_{r2} = \dfrac{r2\,v^2}{(r1 + r2)^2} \quad\text{and}\quad -p_{ev} = \dfrac{v^2}{r1 + r2}
@@ -143,28 +143,28 @@ take no extra effort.
 :::
 :::
 
-## Numerical from symbolic, with solve {#with-solve}
+## Numerical from symbolic, with {{v7,8|solve}}{{v9|**Solve**}} {#with-solve}
 
 Getting numerical answers from a symbolic circuit, on the other hand, takes an
-extra step: {{v7,8|the solve command}}{{v9|**Solve**}}, as in this next example, or expert mode, as in
+extra step: {{v7,8|the solve command}}{{v9|**Solve**}}, as in this next example, or {{v7,8|expert mode}}{{v9|**Expert Mode**}}, as in
 the one after.
 
-::: problem B11's Example 5.6, with solve
+::: problem B11's Example 5.6, with {{v7,8|solve}}{{v9|**Solve**}}
 ::: figure assets/circuit/b11e0506.jpg
 B11's Example 5.6
 :::
 
 ::: answer
 This is a very nice numerical-from-symbolic problem. We can solve it into
-numbers because, although it hides two values from us (the source E and the
+numbers because, although it hides two values from us (the source **E** and the
 resistor {{var:R_1}}), it gives us in exchange two answers (the equivalent resistance {{var:R_T}}
 and the current {{var:I_3}}) to solve for them with.
 
 Since this circuit is structurally identical to B11's Example 5.7 solved in
 {{ref:lesson-dc}}, we will use the same names for the nodes. The description is
 identical except for the values. Symbulator accepts numbers, variables or even
-algebraic expressions as values. Here I use e for source e, and r1 for
-resistor r1.
+algebraic expressions as values. Here I use **e** for source **e**, and **r1** for
+resistor **r1**.
 
 ::: only 7,8
 ::: warning Clean your {{t:container}}
@@ -198,17 +198,17 @@ the problem gives us, we write two equations and solve them for the two
 unknowns.
 
 ::: only 7,8
-The problem says that {{var:I_3}} is 6 mA. In Symbulator, {{var:I_3}} is `ir3`, the current through resistor r3. If you evaluate it, you will see it produces an
-algebraic expression in terms of the two unknowns, e and r1. This is what we call a symbolic answer.
+The problem says that {{var:I_3}} is 6 mA. In Symbulator, {{var:I_3}} is `ir3`, the current through resistor **r3**. If you evaluate it, you will see it produces an
+algebraic expression in terms of the two unknowns, **e** and **r1**. This is what we call a symbolic answer.
 The problem also says that {{var:R_T}} is 12 kΩ; the equivalent resistance as seen by
-the source e is given by `re`, which when evaluated gives another
+the source **e** is given by `re`, which when evaluated gives another
 algebraic expression in terms of r1. We can then write two new equations
 and solve them for e and r1:
 :::
 ::: only 9
-The problem says that {{var:I_3}} is 6 mA. In Symbulator, {{var:I_3}} is `ir3`, the current through resistor r3. Look at it
+The problem says that {{var:I_3}} is 6 mA. In Symbulator, {{var:I_3}} is `ir3`, the current through resistor **r3**. Look at it
 and you will see an expression rather than a number, in terms of the two
-unknowns, e and r1:
+unknowns, **e** and **r1**:
 
 $$
 \dfrac{e}{r1 + 10000}
@@ -216,8 +216,8 @@ $$
 
 This is what we call a symbolic answer.
 The problem also says that {{var:R_T}} is 12 kΩ; the equivalent resistance as seen by
-the source e is `re`, which is $r1 + 10000$. We can then write two new equations
-and solve them for e and r1.
+the source **e** is `re`, which is $r1 + 10000$. We can then write two new equations
+and solve them for **e** and **r1**.
 :::
 
 ```sym 7
@@ -265,7 +265,7 @@ simulators allow this flexibility.
 :::
 :::
 
-## Numerical from symbolic, {{v7,8|using ex}}{{v9|in expert mode}} {#expert-mode}
+## Numerical from symbolic, {{v7,8|using ex}}{{v9|in **Expert Mode**}} {#expert-mode}
 
 ::: only 7,8
 Symbulator's true strength is seen in numerical-from-symbolic problems like the
@@ -340,19 +340,19 @@ the circuit been larger, the saving would be clear.
 
 ::: only 9
 Symbulator's true strength is seen in numerical-from-symbolic problems like the
-one we solved above, when we use its expert mode of simulation.{{i:expert mode}}
-Expert mode cracks these problems open in a single call, and gives fully
+one we solved above, when we use its **Expert Mode** of simulation.{{i:expert mode}}
+**Expert Mode** cracks these problems open in a single call, and gives fully
 numerical answers whenever the problem provides as many answers as it hides
 values.
 
-Expert mode takes extra equations, unknowns and conditions in three boxes.
+**Expert Mode** takes extra equations, unknowns and conditions in three boxes.
 Open the **Expert Mode** box and tick **Enable Expert Mode** to see them:
 
 - **Add equations** — one per line, written in the names the results use.
 - **Add unknowns** — comma-separated.
 - **Add conditions** — for narrowing a solution down, which we will use later.
 
-They apply to whatever analysis you run, so expert mode works the same way in
+They apply to whatever analysis you run, so **Expert Mode** works the same way in
 DC, AC, FD and TR.
 
 ::: problem B11's Example 5.6, using ex
@@ -385,8 +385,8 @@ foot of **Results by element** are the two unknowns, listed like any other
 answer: *e* = 72 and *r1* = 2000. Both are right, and the whole circuit was
 solved with them in one step.
 
-The speed advantage of the expert mode is not necessarily evident in this
-simple problem. It does give you an idea of what the expert mode is all about:
+The speed advantage of **Expert Mode** is not necessarily evident in this
+simple problem. It does give you an idea of what **Expert Mode** is all about:
 you get to hand Symbulator extra information before it solves, rather than
 after. Had this circuit been larger, the benefit in computation time would be
 clear.
@@ -411,7 +411,7 @@ problem meant the other.
 
 ::: practice
 
-### Numeric-from-symbolic, with solve
+### Numeric-from-symbolic, with {{v7,8|solve}}{{v9|**Solve**}}
 
 ::: problem HK5's Figure 1-24a (*solve*)
 
@@ -480,7 +480,7 @@ to answer the two questions we have been asked.
 :::
 
 This problem, having three unknown element values and three known answers, is
-a perfect candidate for the expert mode. Below is my circuit description.
+a perfect candidate for {{v7,8|the expert mode}}{{v9|**Expert Mode**}}. Below is my circuit description.
 
 ```sym 7
 s\ex("e,1,0,e:r1,1,0,2'k:r2,1,0,r2:r3,1,0,r3")
@@ -560,7 +560,7 @@ supply. Can 2W resistors be used?
 
 :::
 
-This problem is also perfect for the expert mode, because: (a) the target is
+This problem is also perfect for {{v7,8|the expert mode}}{{v9|**Expert Mode**}}, because: (a) the target is
 to obtain numerical values, and (b) we have N unknown element values, and in
 turn we are given N numerical answers. Here is how I solved it:
 

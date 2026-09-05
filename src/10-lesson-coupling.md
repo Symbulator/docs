@@ -202,8 +202,8 @@ A **t** element takes five fields: a name starting with `t`, the live node on
 the first side, the live node on the second side, and the turns on each
 side. For example: `t1,1,2,80,800`
 
-That is 80 turns on the side connected to node 1 and 800 on the side connected
-to node 2, wound the same way. Only the ratio matters, so `1,10` would describe
+That is 80 turns on the side connected to node **1** and 800 on the side connected
+to node **2**, wound the same way. Only the ratio matters, so `1,10` would describe
 the same transformer.
 
 **Polarity is a minus sign.** If the dots are on opposite ends, make one of
@@ -214,7 +214,7 @@ is.
 
 **What answers do you get?** The voltages at the two live nodes, as for any
 node in the circuit, and the current entering the transformer, named with the
-transformer and the node — for a transformer `t` on node 2, that is
+transformer and the node — for a transformer `t` on node **2**, that is
 `it2`.
 
 ## Instructive t problems {#practice-transformer}
@@ -223,7 +223,7 @@ transformer and the node — for a transformer `t` on node 2, that is
 
 ::: problem AS7's Figure 13.33
 Obtain {{var:V_Th}} and {{var:Z_Eq}} for the part of the circuit to the right of
-nodes a and b.
+nodes **a** and **b**.
 
 ::: figure assets/circuit/as7f1333.png
 AS7's Figure 13.33

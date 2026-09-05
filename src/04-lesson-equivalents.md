@@ -31,7 +31,7 @@ For example, an ideal short circuit called **s1**, between nodes **3** and
 
 No power is consumed, and no voltage is dropped, in a short circuit. For each
 short in a circuit, Symbulator {{v7,8|stores}}{{v9|gives}} only the current through it, flowing from
-the first node towards the second. For a short called sx, that is `isx`.
+the first node towards the second. For a short called **sx**, that is `isx`.
 
 ::: problem HK5's Drill Problem 1-13
 Find {{var:i_1}}, {{var:i_2}}, {{var:i_3}} and {{var:i_4}}.
@@ -116,7 +116,7 @@ r50,3,0,50
 ```
 
 ::: only 7,8
-Evaluating `re` gives the equivalent resistance as seen by the source e:
+Evaluating `re` gives the equivalent resistance as seen by the source **e**:
 40 Ω. Evaluating `ir13` gives {{o:2.5}} A for current i. The answers came easily,
 because a source sat between the two nodes we wanted.
 :::
@@ -497,7 +497,7 @@ from the three-line equivalent above.}}
 ```
 
 We change the value of the load to 168 Ω, and add the 180 mA source flowing
-from node 0 to node n. Then we run a dc simulation and ask for the current in
+from node **0** to node **n**. Then we run a dc simulation and ask for the current in
 the load:
 
 ```sym 7
@@ -614,7 +614,7 @@ is {{o:3.27}} Ω.
 :::
 
 ::: only 9
-The problem names the four nodes a, b, c and d. Symbulator needs one of them
+The problem names the four nodes **a**, **b**, **c** and **d**. Symbulator needs one of them
 to be the reference node, so d is called 0 here.
 Which node you ground makes no difference to the answer in a network with
 no sources — grounding b gives the same {{o:3.273}} Ω.
@@ -1097,7 +1097,7 @@ Via `vth` we find {{var:V_TH}} = {{o:8}} V. Via `req` we find {{var:R_EQ}} =
 Find the Thévenin equivalent of the circuit, as seen from the
 {{var:R_4}} resistor.
 
-I ignore the textbook's decision to call the nodes **a** and **b**, since b
+I ignore the textbook's decision to call the nodes **a** and **b**, since **b**
 is ground anyway.
 
 ::: figure assets/practice/b11s-example-9-8-19.jpg

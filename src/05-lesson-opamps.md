@@ -25,9 +25,9 @@ letter **o**; then, the names of the two input nodes, separated by a comma (the
 polarity doesn't matter, you can give these input nodes in any order); and
 finally, the name of the output node.
 
-For example, an ideal op amp called o1, with input nodes 2 and 3 and output
-node 5, is described `o1,2,3,5`. And one called o, with input nodes p and n and
-output node o, is `o,p,n,o`
+For example, an ideal op amp called **o1**, with input nodes **2** and **3** and output
+node **5**, is described `o1,2,3,5`. And one called **o**, with input nodes **p** and **n** and
+output node **o**, is `o,p,n,o`
 :::
 
 ### What answers do you get
@@ -36,12 +36,12 @@ For each ideal op amp in a circuit, Symbulator {{v7,8|will store}}{{v9|gives}} t
 answers:
 
 - The current through the output node, flowing from the output node outwards.
-  For an op amp called o, that is `io`.
+  For an op amp called **o**, that is `io`.
 - The power consumed by the visible part of the op amp. For an op amp called
   o2, `po2`; the power delivered is the negative of
   that.
 - And, as with every element's nodes, the voltage of each of its nodes with
-  reference to ground. For node o, `vo`.
+  reference to ground. For node **o**, `vo`.
 
 ### Livin' on the edge
 
@@ -49,7 +49,7 @@ Since I was born to be bad, I like to play with node names to get the answers
 as close to the book as possible. So do not be surprised if I call one op amp
 "o" and name its output node "o" as well. That way I can ask for `vo` and `io`
 and get the output voltage and current. But realise this: `vo` asks for the
-voltage in node o, while in `io` the o stands for the element o.
+voltage in node **o**, while in `io` the o stands for the element **o**.
 
 ::: only 7,8
 You, too, can be bad to the bone, and live dangerously with your node naming,
@@ -65,23 +65,23 @@ from any element.
 
 In this example, we got away with it because op amps are not that type of
 element. Symbulator does not save a voltage drop for op amps in a variable
-called vo, so there is no problem having a node called o in the same circuit.
+called vo, so there is no problem having a node called **o** in the same circuit.
 
 ::: danger Never describe a source as e,#,0,v#
 If you describe a source as `e1,1,0,v1`, Symbulator will define the voltage of
-node 1, namely v1, as having the value you provided for the source, which you
+node **1**, namely v1, as having the value you provided for the source, which you
 declared to be, wait for it… v1! The resulting equation, v1 = v1, is discarded
 as trivial by the calculator, and this leaves Symbulator one equation short.
 :::
 :::
 ::: only 9
 In Symbulator 9 the two cannot collide: **Results** lists node voltages and
-element quantities separately, so a node called o and an op amp called o never
+element quantities separately, so a node called **o** and an op amp called **o** never
 share a name.
 
 ::: danger Never describe a source as e,#,0,v_#
 If you describe a source as `e1,1,0,v1`, you are declaring the voltage of node
-1 to be the voltage of node 1. The resulting equation, v1 = v1, is trivially
+1 to be the voltage of node **1**. The resulting equation, v1 = v1, is trivially
 true and carries no information, which leaves the system one equation short.
 :::
 :::
@@ -128,7 +128,7 @@ o,3,2,o
 - `po` = {{o:-0.00063}} W
 :::
 
-Which are correct. The voltage in node o is –2.1 V, and the op amp is absorbing
+Which are correct. The voltage in node **o** is –2.1 V, and the op amp is absorbing
 –.63 mW, which is to say it is delivering .63 mW of power to the circuit.
 :::
 :::

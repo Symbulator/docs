@@ -272,7 +272,7 @@ have not downloaded. Still, download when you are done.
 
 An entry keeps everything you typed, not just the circuit: the analysis and
 what it needs (the frequency, the nodes of an equivalent, the kind of
-two-port), the Expert Mode equations, unknowns and conditions, everything in
+two-port), the **Expert Mode** equations, unknowns and conditions, everything in
 **Settings**, **Evaluate** and its **Conditions**, the **Solve** card, the
 **Plotting Tools** inputs, and a note of your own shown when the entry is
 loaded. Load one a year later and you are back where you left off.

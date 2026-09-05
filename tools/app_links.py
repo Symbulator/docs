@@ -106,7 +106,19 @@ class Entry:
 def _fold(s: str) -> str:
     """A comparison key. Accents folded (the book says Thevenin in one
     place and Thevenin-with-an-acute in the other), emphasis markers and
-    version spans taken out, everything but letters and digits dropped."""
+    brace commands taken out, everything but letters and digits dropped.
+
+    A version span keeps its version 9 body and loses the rest (#267,
+    6 Sep 2026): a problem title may now read `with {{v7,8|solve}}{{v9|
+    **Solve**}}`, and dropping the whole span left the key as `with`,
+    which is not what the entry is called. The app is version 9, so the
+    version 9 spelling is the one an entry title was written against;
+    the bold markers go with the other punctuation."""
+    def _v9(m):
+        neg, vers, body = m.group(1), m.group(2), m.group(3)
+        hit = "9" in vers.split(",")
+        return body if hit != bool(neg) else ""
+    s = re.sub(r"\{\{(!?)v([\d,]+)\|([^}]*)\}\}", _v9, s)
     s = re.sub(r"\{\{[^}]*\}\}", "", s)
     s = "".join(c for c in unicodedata.normalize("NFKD", s)
                 if not unicodedata.combining(c))

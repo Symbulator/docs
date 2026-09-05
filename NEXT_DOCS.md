@@ -8,6 +8,103 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #269 — *Solve* and *Expert Mode*, capitalised and bold in version 9 — **done and live, 6 Sep 2026**
+
+Roberto, 6 Sep 2026: in version 9 *solve* is not a command but a tool in
+a card, so it is **Solve**; likewise *expert mode* is **Expert Mode**. Text
+and headings alike, the problem title *B11's Example 5.6, with solve*
+included.
+
+**Where.** Lesson 2 throughout (the summary, the intro, both headings,
+the problem title, and every version 9 sentence that named the mode),
+the Introduction's *the **Expert Mode** equations*, four sentences in
+Lesson 6 and one in Lesson 13. Shared sentences take a version span —
+`{{v7,8|expert mode}}{{v9|**Expert Mode**}}` — and the 7 and 8 text keeps
+its lower case, since there the feature was `ex`, a program. Headings
+take the same span, as the book's headings already do. Every other
+capitalised *Solve* in the book is the verb (*Solve it in DC*) and stays.
+
+**The problem title needed a change to the linker first.** A problem's
+title is the key `tools/app_links.py` joins to the app's entry titles,
+and `_fold` used to drop a version span outright — so *with
+{{v7,8|solve}}{{v9|**Solve**}}* would have keyed as *with* and unlinked
+the problem. `_fold` now keeps a span's version 9 body (the app is
+version 9, so that is the spelling the entry titles were written
+against) and loses the rest. Proved: the retitled form folds to exactly
+today's key, and the coverage run is unchanged at 308 of 310 with the
+same 17 loose ends.
+
+**Open:** the chapter title, *Symbolic circuits and expert mode*, in the
+sidebar and the PDF contents. Left as it is until Roberto says.
+
+---
+
+## #268 — no Evaluate for a sign flip — **done and live, 6 Sep 2026**
+
+Roberto, 6 Sep 2026, on Lesson 2's *we switch the sign of `pev` — type
+`-pev` into Evaluate*: *humans are capable of changing the sign in their
+minds* — a ruling he had already given earlier sessions. Evaluate is for
+an expression worth computing, not for a minus sign. Recorded in memory
+so it outlives the session.
+
+**Fixed in three chapters.** Lesson 2's line now ends at *switch the sign
+of `pev`*. Lesson 3 had four: *ask Evaluate for `-ie`* became *the
+current the source delivers is the opposite of `ie`*, and three Evaluate
+boxes holding nothing but a negation are gone — Bo2's Example 2.5 and the
+`-ies` drill now say in words that *i* and *i_s* are the opposites of
+`ie` and `ies`, and HK5's Example 1-3 keeps its box for `pr1+pra`, a sum
+worth computing, while saying the delivered powers are the opposites of
+`pei` and `ped` (its three power values took the red answer face too,
+which #266 had missed: they follow no name or equals sign). Lesson 8's
+*`-pe` in Evaluate* and *`-se` in Evaluate* became *the opposite of*.
+A scan for any Evaluate box whose only content is a negated name finds
+none.
+
+---
+
+## #267 — node names, element names, symbolic values and unknowns set bold — **done and live, 6 Sep 2026**
+
+Roberto, 6 Sep 2026, in four steps over Lesson 2's AS5 Figure 2.29 and
+B11's Example 5.6: bold the node names (*the node called **a** … becomes
+node **0** … I call **c***), then the element names and the values given
+to them (*the source **ev** … **v** for the source*), then a source
+called *E*, then the unknowns (*in terms of the two unknowns, **e** and
+**r1***). The book already set node names bold in most places (*the
+bottom node **0***); this makes it every place.
+
+**Node names: 61** in nine chapters, everywhere a bare name followed
+*node* or *nodes* in prose — Lesson 1's describing rules, Lesson 4's
+*nodes **a**, **b**, **c** and **d***, the op-amp notes, the step and
+impulse sources, Lesson 9's ground discussion (*nodes called **a** and
+**A***, the names ***ag** and **ad***), the transformer's and the
+two-port's nodes. **Element names and values: 30** edits in five
+chapters plus Lesson 2's — the describing rules (*a resistor called
+**r5***), the dependent-source rules and *values **r1**, **r2**, **r3**
+and **r4*** in Lesson 3, *short called **sx***, the op amps ***o1*** and
+***o***, ***e1*** and ***j1*** in Lesson 6. **Unknowns:** the four
+mentions in Lesson 2; no other chapter names one bare. Bo2's Figure 5.3
+in Lesson 6 had its symbolic values *R*, *L*, *I* and its asked *iL(t)*,
+*vL(t)* unmarked from #261/#262, so those took `{{var:}}`.
+
+**Left alone:** names in code spans (Symbulator's own), a variable
+prefix (*a variable called v*), the *letter z* aside in Lesson 7, and
+the book's own labels for terminals (*terminals a-b*).
+
+**Lesson 2 was locked** while Roberto edited it (the rule from #266), so
+its share of #267–#269 sat in a queue — seven items — and was applied
+in one pass when he released the file for this train, from the file as
+he left it. His own Lesson 2 edits of the same day are in this commit.
+
+**Open, from the same conversation:** the marked variable's face.
+Roberto finds Plex Serif Bold Italic *chubby*; a strip of five weights
+was typeset and sent (`scratchpad/varfont/sample.pdf`) — the
+recommendation is SemiBold Italic (600) on both outputs, which also
+means loading the italic 600 cut on the web, where bold italic is
+currently a synthesised slant of the semibold roman. Waiting on his
+letter.
+
+---
+
 ## #266 — every answer number in the red answer face — **done and live, 5 Sep 2026**
 
 Roberto, 5 Sep 2026: *make sure that all the numbers given as part of

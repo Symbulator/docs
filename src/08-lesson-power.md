@@ -344,7 +344,7 @@ r4,3,0,-6j
 ::: only 9
 Written out as four elements rather than one, which is clearer and costs
 nothing here. The average power supplied is the opposite of the power the
-source consumes — `-pe` in **Evaluate** gives {{o:2007.1}} W.
+source consumes, `pe`: {{o:2007.1}} W.
 
 For the power factor, use **Mini-Tools** with *pf*, giving it the source's
 voltage and the current it delivers — which is the opposite of the current
@@ -431,7 +431,7 @@ r3,1,0,60
 ```
 
 **(a)** The complex power delivered is the opposite of the power the source
-consumes: {{v7,8|`-se`}}{{v9|`-se` in **Evaluate**}} gives
+consumes: {{v7,8|`-se`}}{{v9|the opposite of `se`}} gives
 {{o:1835.9}} − {{o:114.7}}j VA.
 
 **(b)** The power factor, from {{v7,8|`s\pf("e")`}}{{v9|*pf* in **Mini-Tools**
