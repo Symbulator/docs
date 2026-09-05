@@ -116,7 +116,7 @@ r50,3,0,50
 
 ::: only 7,8
 Evaluating `re` gives the equivalent resistance as seen by the source **e**:
-40 Ω. Evaluating `ir13` gives {{o:2.5}} A for current i. The answers came easily,
+40 Ω. Evaluating `ir13` gives {{o:2.5}} A for current {{var:i}}. The answers came easily,
 because a source sat between the two nodes we wanted.
 :::
 ::: only 9
@@ -124,7 +124,7 @@ Solve it in DC. Because a source sits between the two nodes we care about,
 the equivalent resistance is one of the answers already: the resistance seen
 by the source, `re`, is 40 Ω.
 
-The current i is the current through r13: `ir13` = {{o:2.5}} A.
+The current {{var:i}} is the current through **r13**: `ir13` = {{o:2.5}} A.
 
 Both answers came free, because there was a source connected between the two
 desired nodes. The rest of this lesson is about what to do when there is not.
@@ -162,8 +162,8 @@ B11's Example 8.29
 :::
 
 ::: answer
-Let me solve this problem step by step. After I label the nodes, I describe the
-circuit{{v7,8| and store it in a variable}}.
+My solution: I label the nodes, then describe the circuit{{v7,8| and store it
+in a variable}}.
 
 ```sym 7
 "r4,0,a,4:r2,0,b,2:r6,a,b,6:rb,a,c,3:ra,b,c,3"→cir
