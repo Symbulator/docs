@@ -8,6 +8,23 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #303 — a placed link scrolls the split view to itself — **done and live, 7 Sep 2026**
+
+Roberto, 7 Sep 2026, on the placed pairs: *"when that link is clicked,
+the documentation scrolls up to where it used to be. You need to add new
+anchors in the new locations for those links, each one linking to its own
+location's anchor."*
+
+The anchors were already there -- `applink_rows` puts `id="e-6a-3"` on
+whichever pair renders it, head or placed -- but the docs pane's `goTo`
+(`web/index.php`) scrolled to `el.closest('.problem')` on purpose, so that
+a head link put the problem's title in view. That was right for #224,
+when every link was at the head, and wrong from #297 on: a placed link's
+anchor was found and then the pane scrolled to the head anyway. Now a
+link whose row follows the problem title scrolls to the problem as
+before, and any other scrolls to its own row. One function, in the docs
+page; the shell and the protocol are unchanged.
+
 ## #302 — element names set as element names, not as answers — **done and live (web), 7 Sep 2026**
 
 Roberto, 7 Sep 2026, on Lesson 4's *The current through `rl`, `irl`, reads

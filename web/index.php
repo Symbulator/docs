@@ -586,8 +586,16 @@ function asset(string $name): string {
   // 'auto' defers to it, which is what made this so quiet.
   function goTo(anchor) {
     var el = document.getElementById(anchor);
-    var target = el ? (el.closest('.problem') || el) : null;
-    if (!target) { return; }
+    if (!el) { return; }
+    // #303 (Roberto, 7 Sep 2026): a link at the problem's head scrolls to
+    // the problem, so the title is in view; a link placed in the solution
+    // (#297, #301) scrolls to its own row, which is where the run it opens
+    // is described. Before this every entry anchor scrolled to the head,
+    // so a placed link landed the pane where the link used to be.
+    var row = el.closest('p.problem-links');
+    var atHead = !!(row && row.previousElementSibling
+                    && row.previousElementSibling.classList.contains('problem-title'));
+    var target = atHead ? (el.closest('.problem') || el) : (row || el);
     var top = target.getBoundingClientRect().top + window.scrollY - 12;
     window.scrollTo({ top: top, behavior: 'instant' });
   }
