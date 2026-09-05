@@ -476,6 +476,34 @@ function asset(string $name): string {
   });
 })();
 
+// #313: the Copy button on a field box. One delegated handler for the
+// page; the clipboard API where it exists, the old textarea trick where
+// it does not (an http origin, an older browser), and "Copied" on the
+// button for a moment either way.
+document.addEventListener('click', function (ev) {
+  var btn = ev.target.closest ? ev.target.closest('.code.field .copy') : null;
+  if (!btn) return;
+  var code = btn.parentElement.querySelector('code');
+  var text = code ? code.textContent : '';
+  function done(ok) {
+    btn.textContent = ok ? 'Copied' : 'Select and copy';
+    btn.classList.add('done');
+    setTimeout(function () { btn.textContent = 'Copy'; btn.classList.remove('done'); }, 1600);
+  }
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(text).then(function () { done(true); },
+                                            function () { fallback(); });
+  } else { fallback(); }
+  function fallback() {
+    var ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    var ok = false;
+    try { ok = document.execCommand('copy'); } catch (e) {}
+    ta.remove(); done(ok);
+  }
+});
+
 // Dark Mode toggle. The early inline script in <head> already applied a
 // saved preference (if any) before first paint, so this only has to wire
 // up the button: flip the attribute, persist it, and update the icon/label.

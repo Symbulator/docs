@@ -8,6 +8,35 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #313 — a Copy button on every typed-input box — **done and live, 7 Sep 2026**
+
+Roberto, 7 Sep 2026: *"Thinking about a easy way to pass the transfer
+functions from the documentation to the app, could we offer a 'copy with
+a click' option on the documentation for these transfer functions?"*
+
+Every `field` box -- the panel that shows what the reader types into a
+named field of the app -- now carries a small **Copy** pill in its label
+row, at the right where the other panels float *type* and *returns*. A
+click puts the box's text on the clipboard and the pill reads *Copied*
+for a moment; where the clipboard API is refused it falls back to the
+old select-and-`execCommand` route, and says *Select and copy* if even
+that fails. One delegated handler in `web/index.php`, one rule block in
+`style.css` on the palette's tokens, hidden in print. The split view's
+docs iframe gained `allow="clipboard-write"` so the button works inside
+it too. Lesson 11's six transfer functions were the ask; the same button
+now sits on every circuit description, Evaluate line and Solve equation
+in the book -- 315 boxes -- so a whole problem can be carried into the
+app field by field. The search index strips the buttons as it strips the
+app links, so *Copy* is not a word the search finds on every page.
+
+Verified live on Lesson 11: sixteen buttons on the page; a real mouse
+click on the first transfer-function box's pill wrote to the clipboard
+(the browser harness reported the write) and the pill said *Copied*.
+Worth knowing: a *programmatic* click fails both routes and shows
+*Select and copy*, because the clipboard needs a user activation that a
+script's `click()` does not carry -- so an automated check of this button
+has to press it with the mouse.
+
 ## #312 — one sun-and-moon in the split view — **done and live, 7 Sep 2026, both halves**
 
 Roberto, 7 Sep 2026: *"We get duplicate dark mode toggle buttons now on

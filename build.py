@@ -848,8 +848,13 @@ class HtmlRenderer:
                 # entered into a labelled box -- so the label is part of the
                 # instruction, and the panel is drawn to resemble that box.
                 name = html.escape(b.meta.get("field") or "")
+                # #313: a Copy button, so what the box shows can go into
+                # the app's field in one click -- a transfer function, a
+                # circuit description. Wired by web/index.php.
                 return (f'<div class="code field">'
                         f'<span class="code-label">{name}</span>'
+                        f'<button type="button" class="copy" '
+                        f'aria-label="Copy to the clipboard">Copy</button>'
                         f'<pre><code>{body}</code></pre></div>')
             # A ```text fence is neither typed nor returned -- it is a
             # listing, such as the contents of a .cir file. Labelling it
@@ -1355,6 +1360,8 @@ def plain(html_text: str) -> str:
     # would be part of the searchable text of 265 problems, so a search
     # for "app" would return most of the book.
     text = re.sub(r'(?is)<p class="problem-links">.*?</p>', " ", text)
+    # #313's Copy buttons are furniture too.
+    text = re.sub(r'(?is)<button class="copy"[^>]*>.*?</button>', " ", text)
     text = re.sub(r"<[^>]+>", " ", text)
     return re.sub(r"\s+", " ", html.unescape(text)).strip()
 

@@ -233,7 +233,7 @@ function asset(string $name): string {
 <div class="panes" id="panes">
   <div class="pane docs" id="paneDocs" style="flex-basis:50%">
     <iframe id="docsFrame" title="Symbulator 9 documentation"
-            src="/9/lesson-dc"></iframe>
+            src="/9/lesson-dc" allow="clipboard-write"></iframe>
   </div>
   <div class="divider" id="divider" role="separator" aria-orientation="vertical"
        tabindex="0" aria-label="Resize the two panes"></div>

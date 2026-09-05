@@ -617,6 +617,22 @@ em.var { font-weight: 600; font-style: italic; }
 /* One element per line is the point, so lines must not be re-wrapped: a
    wrapped element would read as two. */
 .code.field code { white-space: pre; }
+/* #313 (Roberto, 7 Sep 2026): copy what the box shows, in one click, for
+   pasting into the app's field. Sits where the type/returns label sits on
+   the other panels, in the field's own label row. */
+.code.field .copy {
+  position: absolute; top: 0.38rem; right: 0.6rem;
+  font-family: var(--sans); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.04em; line-height: 1.4;
+  padding: 0.05rem 0.6rem; border-radius: 999px;
+  border: 1px solid var(--rule); background: var(--paper-2);
+  color: var(--accent); cursor: pointer;
+}
+.code.field .copy:hover, .code.field .copy:focus-visible {
+  background: var(--accent-bg); border-color: var(--accent);
+}
+.code.field .copy.done { color: var(--ink-2); background: var(--paper); }
+@media print { .code.field .copy { display: none; } }
 
 /* A card answer as the app shows it (#276, Roberto, 6 Sep 2026): the
    label the Results card uses -- current through, resistance seen -- over
