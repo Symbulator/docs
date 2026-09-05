@@ -2066,7 +2066,7 @@ The answer, shown first below, is correct. The textbook's answer follows it.
 
 ::: only 9
 $$
--\dfrac{r\,rl\,vs}{rc\,rp + rc\,rs + rl\,rp + rl\,rs}
+v_{o} = -\dfrac{r\,rl\,vs}{rc\,rp + rc\,rs + rl\,rp + rl\,rs}
 $$
 :::
 
@@ -2127,7 +2127,7 @@ below (the textbook's follows it.)
 
 ::: only 9
 $$
--\dfrac{gm\,rd\,rg\,rl\,v1}{r1\,rd + r1\,rl + rd\,rg + rg\,rl}
+v_{2} = -\dfrac{gm\,rd\,rg\,rl\,v1}{r1\,rd + r1\,rl + rd\,rg + rg\,rl}
 $$
 :::
 
@@ -2217,7 +2217,7 @@ answer below it.
 
 ::: only 9
 $$
-\dfrac{vs\,(g2\,\mu + gx)}{g2\,\mu + g2 + gl + gx}
+v_{o} = \dfrac{vs\,(g2\,\mu + gx)}{g2\,\mu + g2 + gl + gx}
 $$
 :::
 
@@ -2267,7 +2267,7 @@ Compare my answer, first below, to the book's answer beneath it.
 
 ::: only 9
 $$
-\dfrac{vcc + v\gamma}{re1\,\beta + re1 + rb}
+i_{rb} = \dfrac{vcc + v\gamma}{re1\,\beta + re1 + rb}
 $$
 :::
 

@@ -211,12 +211,18 @@ and you will see an expression rather than a number, in terms of the two
 unknowns, **e** and **r1**:
 
 $$
-\dfrac{e}{r1 + 10000}
+i_{r3} = \dfrac{e}{r1 + 10000}
 $$
 
 This is what we call a symbolic answer.
 The problem also says that {{var:R_T}} is 12 kΩ; the equivalent resistance as seen by
-the source **e** is `re`, which is $r1 + 10000$. We can then write two new equations
+the source **e** is `re`, which is:
+
+$$
+r_{e} = r1 + 10000
+$$
+
+We can then write two new equations
 and solve them for **e** and **r1**.
 :::
 

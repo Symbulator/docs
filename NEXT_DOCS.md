@@ -8,6 +8,56 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #273 — a displayed card answer carries its name, one line per answer — **web live 6 Sep 2026, PDFs held**
+
+Roberto, 6 Sep 2026, in two examples from Lesson 2: a version 9 answer
+read from a card and shown as mathematics should stand on its own line
+*with the variable up front, as the user would see it in the card* —
+`ir3 = e/(r1 + 10000)`, `re = r1 + 10000`. Then: the form should match
+the app's, the kind letter tall and the element low; then: *full sweep*.
+
+**The form is the app's own.** `templates/index.html` renders a result
+as `${sym}_{${element}}` in plain maths — `v_{c}`, `i_{r3}`, `v_{2}` —
+with five special names in `TEXNAME`: `v_{th}`, `i_{no}`, `R_{eq}`,
+`Z_{eq}`, `p_{max}`. The book now writes exactly that (a strip of four
+candidate forms was typeset with the class and sent; Roberto chose the
+italic letters of plain maths with the app's subscripts, not
+`\mathrm`). A ratio from Evaluate is a fraction of names,
+`\dfrac{v_{o}}{v_{s}} = …`.
+
+**The sweep.** An extractor listed all 79 `$$` displays outside Lesson 2
+with their version context, set elements and the names their lead-in
+gives — *The answers you want are `vc`, `ic` and `vo`, in Results* names
+them in the set's order, a `field 9 Evaluate` box or a calculator
+request `{vc,il}` where there is no sentence. 25 came back unresolved and
+were mapped by hand from the problem text; four pairs of single displays
+that follow two request boxes were assigned by the circuits themselves —
+each initial condition matches its element, so *v_c* takes the answer
+that starts at the capacitor's voltage and *i_l* the one that starts at
+the inductor's current. The plan was printed in full and read before
+anything was written. **68 displays rewritten**, plus Lesson 2's two on
+release, plus one bare 7/8 answer line that sat between two of them:
+
+- a version 9 display gets its name in place: `v_{o} = …`;
+- a display shared with 7 and 8 becomes a version pair — 7 and 8 keep
+  the calculator's form (`\{ 10e^{-4t} , -2e^{-4t} , -10e^{-4t} \}` is
+  what the calculator printed), 9 gets the named form;
+- a set becomes an `aligned` block, one row per answer, `v_{c} &= …`.
+
+**Left alone:** displays that are not card answers (Lesson 1's Evaluate
+expression *(v1 − v2)/I_T*, Lesson 3's Mini-Tools `pr` result), and
+those already named (Lessons 7, 12, 13). The 7/8 books' own bare answer
+lines outside any display were not in scope.
+
+Proved by typesetting one aligned list and three named fractions against
+the real class (no errors) before the build; the web renders the same
+markup through KaTeX, which Lesson 13's g-parameter tables already use.
+
+**Web only, at Roberto's ask; the PDFs stay held** — four items behind
+the web now (#270–#273).
+
+---
+
 ## #272 — a result's name in bold, its value in red; bold italic kept for the problem's own variables — **web live 6 Sep 2026, PDFs held**
 
 Roberto, 6 Sep 2026, on Lesson 2's *the card lists e = 72.0 and r1 =

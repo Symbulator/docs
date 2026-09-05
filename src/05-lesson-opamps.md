@@ -520,7 +520,7 @@ When we evaluate `vo/v1`, both approaches get the same answer:
 
 ::: only 9
 $$
--\dfrac{r2\,r4}{r1\,r2 + r1\,r3 + r2\,r3}
+\dfrac{v_{o}}{v_{1}} = -\dfrac{r2\,r4}{r1\,r2 + r1\,r3 + r2\,r3}
 $$
 :::
 
@@ -668,9 +668,16 @@ The answer you want is `vo`, in **Results**.
 We get the right answer (below), an expression equivalent to the book's
 answer.
 
+::: only 7,8
 $$
 \left(\dfrac{r1 + rf}{r1}\right) vi
 $$
+:::
+::: only 9
+$$
+v_{o} = \left(\dfrac{r1 + rf}{r1}\right) vi
+$$
+:::
 
 :::
 
@@ -709,9 +716,16 @@ vo/vs
 
 We get
 
+::: only 7,8
 $$
 \dfrac{r2\,(r3 + r4)}{(r1 + r2)\,r4}
 $$
+:::
+::: only 9
+$$
+\dfrac{v_{o}}{v_{s}} = \dfrac{r2\,(r3 + r4)}{(r1 + r2)\,r4}
+$$
+:::
 
 which is correct, as can be seen by comparing it to the book's answer.
 
@@ -744,9 +758,16 @@ v2/vs
 
 We get
 
+::: only 7,8
 $$
 \dfrac{r2}{r1 + r2}
 $$
+:::
+::: only 9
+$$
+\dfrac{v_{2}}{v_{s}} = \dfrac{r2}{r1 + r2}
+$$
+:::
 
 which is correct for this part. Then, simulate the right half.
 
@@ -773,9 +794,16 @@ vo/v2
 
 We get
 
+::: only 7,8
 $$
 \dfrac{r3 + r4}{r4}
 $$
+:::
+::: only 9
+$$
+\dfrac{v_{o}}{v_{2}} = \dfrac{r3 + r4}{r4}
+$$
+:::
 
 which is correct for this part. The product of these two partial answers
 produces the same expression shown above after the big simulation, and is the
@@ -1201,9 +1229,16 @@ The answer you want is `vo`, in **Results**.
 :::
 
 
+::: only 7,8
 $$
 \dfrac{r1\,r4\,v2 - r2\,\bigl(r3\,v1 + r4\,(v1 - v2)\bigr)}{r1\,(r3 + r4)}
 $$
+:::
+::: only 9
+$$
+v_{o} = \dfrac{r1\,r4\,v2 - r2\,\bigl(r3\,v1 + r4\,(v1 - v2)\bigr)}{r1\,(r3 + r4)}
+$$
+:::
 
 This expression is equivalent to the book's answer.
 
@@ -1267,7 +1302,7 @@ Conditions again, this time on the inputs rather than the resistors:
 `v1 = 1` and `v2 = 0`. Then `vo` is
 
 $$
--\frac{r_{2}}{r_{1}}
+v_{o} = -\frac{r_{2}}{r_{1}}
 $$
 
 which is equivalent to the book's expression, and it is that which has to
@@ -1292,8 +1327,7 @@ Define v1=0:Define v2=1:expand(vo)=3
 With `v1 = 0` and `v2 = 1` instead, `vo` is
 
 $$
-\frac{r_{4} \left(r_{1} + r_{2}\right)}
-{r_{1} \left(r_{3} + r_{4}\right)}
+v_{o} = \frac{r_{4} \left(r_{1} + r_{2}\right)} {r_{1} \left(r_{3} + r_{4}\right)}
 $$
 
 which is equivalent to the book's expression, and it is that which has to
@@ -1788,17 +1822,31 @@ We get the right answer. Let's compare it with the book's answer.
 
 Our answer, expanded via `expand(vo)`, is shown below:
 
+::: only 7,8
 $$
 -\dfrac{r2\,r4\,v1}{r1\,r3} - \dfrac{r4\,v1}{r3} + \dfrac{r4\,v2}{r3} + v2
 $$
+:::
+::: only 9
+$$
+v_{o} = -\dfrac{r2\,r4\,v1}{r1\,r3} - \dfrac{r4\,v1}{r3} + \dfrac{r4\,v2}{r3} + v2
+$$
+:::
 
 Playing with it by hand we get a form that, in my opinion, is *prettier* ;-)
 than the book's:
 
+::: only 7,8
 $$
 v2\left(\dfrac{r4}{r3} + 1\right) -
 v1\left(\dfrac{r4}{r3}\right)\left(\dfrac{r2}{r1} + 1\right)
 $$
+:::
+::: only 9
+$$
+v_{o} = v2\left(\dfrac{r4}{r3} + 1\right) - v1\left(\dfrac{r4}{r3}\right)\left(\dfrac{r2}{r1} + 1\right)
+$$
+:::
 
 :::
 
@@ -1830,9 +1878,16 @@ r3,d,e,r3
 To find vo, we ask for `vb-ve`. We get an expression that can easily be
 rearranged to look like this:
 
+::: only 7,8
 $$
 -\left(\dfrac{r1 + r2 + r3}{r2}\right)(v1 - v2)
 $$
+:::
+::: only 9
+$$
+v_{o} = -\left(\dfrac{r1 + r2 + r3}{r2}\right)(v1 - v2)
+$$
+:::
 
 This is exactly the answer from the book:
 

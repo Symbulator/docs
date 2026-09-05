@@ -1599,9 +1599,16 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *ThÃ
 
 Now it solves. The expression for `ino` is fine, but the one for `req`,
 
+::: only 7,8
 $$
 \dfrac{9x - 35}{4(x - 3)}
 $$
+:::
+::: only 9
+$$
+R_{eq} = \dfrac{9x - 35}{4(x - 3)}
+$$
+:::
 
 will divide by zero at $x = 3$ â€” the very value we replaced.
 
