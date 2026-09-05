@@ -340,7 +340,16 @@ The answers you want are `vo` and `ir1`, in **Results**.
 The answer, {{o:{-1.25, 5e-5}}}, is correct.
 :::
 ::: only 9
-The answer is `vo` = {{o:-1.25}} V and `ir1` = {{o:5e-5}} A. This is correct.
+The answers are:
+
+::: result voltage of node o
+v_{o} = -1.25\ \mathrm{V}
+:::
+::: result
+i_{r1} = 5e-5\ \mathrm{A}
+:::
+
+This is correct.
 :::
 
 :::
@@ -429,7 +438,16 @@ o,0,1,o
 The answer, **{-.12, 8e-6}**, is correct.
 :::
 ::: only 9
-The answer is `vo` = {{o:-.12}} V and `irf` = {{o:8e-6}} A. This is correct.
+The answers are:
+
+::: result voltage of node o
+v_{o} = -.12\ \mathrm{V}
+:::
+::: result
+i_{rf} = 8e-6\ \mathrm{A}
+:::
+
+This is correct.
 :::
 
 :::

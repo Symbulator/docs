@@ -371,9 +371,14 @@ c,1,0,1/12
 ```
 
 ::: only 9
-The answers you want are `vc` and `ic`, in **Results**.
+The answers you want are in **Results**:
 
-`vc` = {{o:6}} V and `ic` = {{o:0}} A.
+::: result
+v_{c} = 6\ \mathrm{V}
+:::
+::: result
+i_{c} = 0\ \mathrm{A}
+:::
 :::
 
 ```out 7,8
@@ -457,9 +462,17 @@ c,3,0,1/12
 ```
 
 ::: only 9
-The answers you want are `vc`, `ic` and `v2`, in **Results**.
+The answers you want are in **Results**:
 
-`vc` = {{o:8}} V, `ic` = {{o:0}} A and `v2` = {{o:8}} V.
+::: result
+v_{c} = 8\ \mathrm{V}
+:::
+::: result
+i_{c} = 0\ \mathrm{A}
+:::
+::: result voltage of node 2
+v_{2} = 8\ \mathrm{V}
+:::
 :::
 
 ```out 7,8
@@ -537,9 +550,17 @@ c,2,0,1/10
 ```
 
 ::: only 9
-The answers you want are `vc`, `ic` and `v1`, in **Results**.
+The answers you want are in **Results**:
 
-`vc` = {{o:6}} V, `ic` = {{o:0}} A and `v1` = {{o:12}} V.
+::: result
+v_{c} = 6\ \mathrm{V}
+:::
+::: result
+i_{c} = 0\ \mathrm{A}
+:::
+::: result voltage of node 1
+v_{1} = 12\ \mathrm{V}
+:::
 :::
 
 ```out 7,8
@@ -722,9 +743,17 @@ r12,2,0,12
 ```
 
 ::: only 9
-The answers you want are `il`, `vl` and `ir4`, in **Results**.
+The answers you want are in **Results**:
 
-`il` = {{o:2}} A, `vl` = {{o:0}} V and `ir4` = {{o:2}} A.
+::: result
+i_{l} = 2\ \mathrm{A}
+:::
+::: result
+v_{l} = 0\ \mathrm{V}
+:::
+::: result
+i_{r4} = 2\ \mathrm{A}
+:::
 :::
 
 ```out 7,8
@@ -843,9 +872,14 @@ ed,3,0,3*vr8
 ```
 
 ::: only 9
-The answers you want are `il` and `vl`, in **Results**.
+The answers you want are in **Results**:
 
-`il` = {{o:2}} A and `vl` = {{o:0}} V.
+::: result
+i_{l} = 2\ \mathrm{A}
+:::
+::: result
+v_{l} = 0\ \mathrm{V}
+:::
 :::
 
 ```out 7,8
@@ -914,9 +948,17 @@ o,0,1,o
 ```
 
 ::: only 9
-The answers you want are `vc`, `ic` and `vo`, in **Results**.
+The answers you want are in **Results**:
 
-`vc` = {{o:10}} V, `ic` = {{o:0}} A and `vo` = {{o:-10}} V.
+::: result
+v_{c} = 10\ \mathrm{V}
+:::
+::: result
+i_{c} = 0\ \mathrm{A}
+:::
+::: result voltage of node o
+v_{o} = -10\ \mathrm{V}
+:::
 :::
 
 ```out 7,8
@@ -989,9 +1031,17 @@ r2,1,0,2
 ```
 
 ::: only 9
-The answers you want are `vc`, `ic` and `vo`, in **Results**.
+The answers you want are in **Results**:
 
-`vc` = {{o:10}} V, `ic` = {{o:0}} A and `vo` = {{o:14}} V.
+::: result
+v_{c} = 10\ \mathrm{V}
+:::
+::: result
+i_{c} = 0\ \mathrm{A}
+:::
+::: result voltage of node o
+v_{o} = 14\ \mathrm{V}
+:::
 :::
 
 ```out 7,8
@@ -1067,9 +1117,14 @@ r4,1,0,4
 ```
 
 ::: only 9
-The answers you want are `vc` and `ic`, in **Results**.
+The answers you want are in **Results**:
 
-`vc` = {{o:8}} V and `ic` = {{o:0}} A.
+::: result
+v_{c} = 8\ \mathrm{V}
+:::
+::: result
+i_{c} = 0\ \mathrm{A}
+:::
 :::
 
 ```out 7,8
@@ -1183,9 +1238,14 @@ l,2,0,6
 ```
 
 ::: only 9
-The answers you want are `il` and `vl`, in **Results**.
+The answers you want are in **Results**:
 
-`il` = {{o:3}} A and `vl` = {{o:0}} V.
+::: result
+i_{l} = 3\ \mathrm{A}
+:::
+::: result
+v_{l} = 0\ \mathrm{V}
+:::
 :::
 
 ```out 7,8
@@ -2369,9 +2429,14 @@ r3,2,0,2
 ```
 
 ::: only 9
-The answers you want are `vc` and `il`, in **Results**.
+The answers you want are in **Results**:
 
-`vc` = {{o:2}} V and `il` = {{o:1}} A.
+::: result
+v_{c} = 2\ \mathrm{V}
+:::
+::: result
+i_{l} = 1\ \mathrm{A}
+:::
 :::
 
 ```out 7,8
@@ -2475,9 +2540,14 @@ c,2,0,1/3
 ```
 
 ::: only 9
-The answers you want are `vc` and `il`, in **Results**.
+The answers you want are in **Results**:
 
-`vc` = {{o:2}} V and `il` = {{o:0}} A.
+::: result
+v_{c} = 2\ \mathrm{V}
+:::
+::: result
+i_{l} = 0\ \mathrm{A}
+:::
 :::
 
 ```out 7,8
@@ -2708,9 +2778,14 @@ j,0,3,1
 ```
 
 ::: only 9
-The answers you want are `vc` and `il`, in **Results**.
+The answers you want are in **Results**:
 
-`vc` = {{o:2}} V and `il` = {{o:1}} A.
+::: result
+v_{c} = 2\ \mathrm{V}
+:::
+::: result
+i_{l} = 1\ \mathrm{A}
+:::
 :::
 
 ```out 7,8
@@ -2784,9 +2859,14 @@ c,1,0,1/8
 ```
 
 ::: only 9
-The answers you want are `il` and `vc`, in **Results**.
+The answers you want are in **Results**:
 
-`il` = {{o:2}} A and `vc` = {{o:0}} V.
+::: result
+i_{l} = 2\ \mathrm{A}
+:::
+::: result
+v_{c} = 0\ \mathrm{V}
+:::
 :::
 
 ```out 7,8
@@ -2919,9 +2999,14 @@ l2,2,0,4
 ```
 
 ::: only 9
-The answers you want are `il1` and `il2`, in **Results**.
+The answers you want are in **Results**:
 
-`il1` = {{o:2}} A and `il2` = {{o:0}} A.
+::: result
+i_{l1} = 2\ \mathrm{A}
+:::
+::: result
+i_{l2} = 0\ \mathrm{A}
+:::
 :::
 
 ```out 7,8
@@ -2985,9 +3070,14 @@ o,0,2,o
 ```
 
 ::: only 9
-The answers you want are `vca` and `vcb`, in **Results**.
+The answers you want are in **Results**:
 
-`vca` = {{o:0}} V and `vcb` = {{o:4}} V.
+::: result
+v_{ca} = 0\ \mathrm{V}
+:::
+::: result
+v_{cb} = 4\ \mathrm{V}
+:::
 :::
 
 ```out 7,8
@@ -3189,9 +3279,14 @@ s1,3,0
 ```
 
 ::: only 9
-The answers you want are `il` and `vc`, in **Results**.
+The answers you want are in **Results**:
 
-`il` = {{o:4}} A and `vc` = {{o:0}} V.
+::: result
+i_{l} = 4\ \mathrm{A}
+:::
+::: result
+v_{c} = 0\ \mathrm{V}
+:::
 :::
 
 ```out 7,8
@@ -3382,9 +3477,14 @@ cb,2,0,1/3
 ```
 
 ::: only 9
-The answers you want are `vca` and `vcb`, in **Results**.
+The answers you want are in **Results**:
 
-`vca` = {{o:9}} V and `vcb` = {{o:9/4}} V.
+::: result
+v_{ca} = 9\ \mathrm{V}
+:::
+::: result
+v_{cb} = 9/4\ \mathrm{V}
+:::
 :::
 
 ```out 7,8

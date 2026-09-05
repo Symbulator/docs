@@ -369,7 +369,14 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
 *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0**
 in the second. Choose *DC* and run it.
 
-**Results** gives `vth` = {{o:6}} V and `req` = {{o:2}} Ω.
+**Results** gives:
+
+::: result
+v_{th} = 6\ \mathrm{V}
+:::
+::: result
+R_{eq} = 2\ \Omega
+:::
 :::
 ```out 7,8
 {6, 2}
@@ -477,7 +484,14 @@ j,2,0,560'm
 ```
 
 ::: only 9
-**Results** gives `ino` = {{o:-0.36}} A and `req` = {{o:84}} Ω.
+**Results** gives:
+
+::: result
+i_{no} = -0.36\ \mathrm{A}
+:::
+::: result
+R_{eq} = 84\ \Omega
+:::
 
 The Norton current is reported in the direction it actually flows, from the
 first node to the second. Carry the sign through and the load current below

@@ -76,8 +76,14 @@ We ask for the values of two variables, `ir1` and `vr1`. We get {{o:.01}}
 and {{o:200.}}, meaning a 10 mA current and a 200 V voltage drop.
 :::
 ::: only 9
-We read
-`ir1` = {{o:10}} mA and `vr1` = {{o:200}} V.
+We read:
+
+::: result
+i_{r1} = 10\ \mathrm{mA}
+:::
+::: result
+v_{r1} = 200\ \mathrm{V}
+:::
 :::
 :::
 :::
@@ -868,7 +874,16 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 Answer: {{o:{3.33,-.667}}}. This is correct.
 :::
 ::: only 9
-The answer is `ir2` = {{o:3.33}} A and `ir3` = {{o:-.667}} A. This is correct.
+The answers are:
+
+::: result
+i_{r2} = 3.33\ \mathrm{A}
+:::
+::: result
+i_{r3} = -.667\ \mathrm{A}
+:::
+
+This is correct.
 :::
 
 :::
@@ -1453,8 +1468,25 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 The answer, **{.768,1.92,.2048,.1792,-3.072}**, is correct.
 :::
 ::: only 9
-The answer is `pr1` = {{o:.768}} W, `pei` = {{o:1.92}} W, `pr2` = {{o:.2048}} W, `pr3` = {{o:.1792}} W
-and `ped` = {{o:-3.072}} W. This is correct.
+The answers are:
+
+::: result
+p_{r1} = .768\ \mathrm{W}
+:::
+::: result
+p_{ei} = 1.92\ \mathrm{W}
+:::
+::: result
+p_{r2} = .2048\ \mathrm{W}
+:::
+::: result
+p_{r3} = .1792\ \mathrm{W}
+:::
+::: result
+p_{ed} = -3.072\ \mathrm{W}
+:::
+
+This is correct.
 :::
 
 :::
@@ -1574,7 +1606,19 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 The answer, {{o:{4.8,2.4,-2.4}}}, is correct.
 :::
 ::: only 9
-The answer is `v1` = {{o:4.8}} V, `v2` = {{o:2.4}} V and `v3` = {{o:-2.4}} V. This is correct.
+The answers are:
+
+::: result voltage of node 1
+v_{1} = 4.8\ \mathrm{V}
+:::
+::: result voltage of node 2
+v_{2} = 2.4\ \mathrm{V}
+:::
+::: result voltage of node 3
+v_{3} = -2.4\ \mathrm{V}
+:::
+
+This is correct.
 :::
 
 :::
@@ -1616,8 +1660,22 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 The answer, {{o:{26.67,6.67,173.33,-46.67}}}, is correct.
 :::
 ::: only 9
-The answer is `v1` = {{o:26.67}} V, `v2` = {{o:6.67}} V, `v3` = {{o:173.33}} V and `v4` = {{o:-46.67}}
-V. This is correct.
+The answers are:
+
+::: result voltage of node 1
+v_{1} = 26.67\ \mathrm{V}
+:::
+::: result voltage of node 2
+v_{2} = 6.67\ \mathrm{V}
+:::
+::: result voltage of node 3
+v_{3} = 173.33\ \mathrm{V}
+:::
+::: result voltage of node 4
+v_{4} = -46.67\ \mathrm{V}
+:::
+
+This is correct.
 :::
 
 :::
@@ -1664,7 +1722,19 @@ The answers you want are `v1`, `v2` and `v3`, in **Results**.
 The answer, {{o:{-1,2,5}}}, is correct.
 :::
 ::: only 9
-The answer is `v1` = {{o:-1}} V, `v2` = {{o:2}} V and `v3` = {{o:5}} V. This is correct.
+The answers are:
+
+::: result voltage of node 1
+v_{1} = -1\ \mathrm{V}
+:::
+::: result voltage of node 2
+v_{2} = 2\ \mathrm{V}
+:::
+::: result voltage of node 3
+v_{3} = 5\ \mathrm{V}
+:::
+
+This is correct.
 :::
 
 :::
@@ -1704,8 +1774,22 @@ The answers you want are `v1`, `v2`, `v3` and `v4`, in **Results**.
 The answer, {{o:{1.5,-.5,-2.5,-4.}}}, is correct.
 :::
 ::: only 9
-The answer is `v1` = {{o:1.5}} V, `v2` = {{o:-.5}} V, `v3` = {{o:-2.5}} V and `v4` = {{o:-4}} V. This
-is correct.
+The answers are:
+
+::: result voltage of node 1
+v_{1} = 1.5\ \mathrm{V}
+:::
+::: result voltage of node 2
+v_{2} = -.5\ \mathrm{V}
+:::
+::: result voltage of node 3
+v_{3} = -2.5\ \mathrm{V}
+:::
+::: result voltage of node 4
+v_{4} = -4\ \mathrm{V}
+:::
+
+This is correct.
 :::
 
 :::
@@ -1747,8 +1831,22 @@ The answers you want are `v1`, `v2`, `v3` and `v4`, in **Results**.
 The answer, {{o:{-1,-2.,1.,.5}}}, is correct.
 :::
 ::: only 9
-The answer is `v1` = {{o:-1}} V, `v2` = {{o:-2}} V, `v3` = {{o:1}} V and `v4` = {{o:.5}} V. This is
-correct.
+The answers are:
+
+::: result voltage of node 1
+v_{1} = -1\ \mathrm{V}
+:::
+::: result voltage of node 2
+v_{2} = -2\ \mathrm{V}
+:::
+::: result voltage of node 3
+v_{3} = 1\ \mathrm{V}
+:::
+::: result voltage of node 4
+v_{4} = .5\ \mathrm{V}
+:::
+
+This is correct.
 :::
 
 :::
@@ -1789,7 +1887,19 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 The answer, {{o:{3.,-5.4,6.}}}, is correct.
 :::
 ::: only 9
-The answer is `ira` = {{o:3}} A, `ijb` = {{o:-5.4}} A and `ir9` = {{o:6}} A. This is correct.
+The answers are:
+
+::: result
+i_{ra} = 3\ \mathrm{A}
+:::
+::: result
+i_{jb} = -5.4\ \mathrm{A}
+:::
+::: result
+i_{r9} = 6\ \mathrm{A}
+:::
+
+This is correct.
 :::
 
 :::

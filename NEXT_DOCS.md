@@ -37,6 +37,56 @@ both trees before using it.
 
 ---
 
+## #284 — numeric card answers as result panels, one per answer — **web live 6 Sep 2026, PDFs held**
+
+Roberto, 6 Sep 2026, on Lesson 2's *The power consumed in each resistor
+is given in `pr1`, `pr2` and `pr3`: `pr1` is 1.2 W, `pr2` is 0.4 W, and
+`pr3` is 0.6 W*: use the new labelled single-line form — *given in:*
+then one panel per answer — and do the same wherever that structure
+occurs, dropping the duplicate mention of the names.
+
+**The sweep.** A survey of every version 9 line giving numeric card
+answers keyed by result name (110 lines) read against its lead-in; two
+shapes were converted, 30 passages in Lessons 2 to 6:
+
+- Lesson 6's *The answers you want are `vc`, `ic` and `v2`, in Results.*
+  followed by *`vc` = 8 V, `ic` = 0 A and `v2` = 8 V.* — seventeen of them —
+  now *The answers you want are in **Results**:* and a panel per answer;
+- a whole sentence of the form *The answer is `v1` = 4.8 V, `v2` = 2.4 V
+  and `v3` = −2.4 V. This is correct.* (Lessons 3, 4, 5; *Results gives*,
+  *We read*) — the lead-in loses the values and the *This is correct.*
+  becomes its own paragraph after the panels.
+
+A `::: result` panel now holds a number with its unit
+(`v_{c} = 8\ \mathrm{V}`), the label from the name as before, and the
+converter reads the circuit description to tell a node voltage from an
+element's drop — with the op-amp rule from #276 built in this time (an op
+amp's name is its output node, so `v_o` is *voltage of node o*, never a
+drop in o). Versions 7 and 8 are untouched: every converted passage sits
+in `::: only 9`.
+
+**Left as they were, on purpose:** the phasor lists in Lessons 9 and 10
+(magnitude and angle, not a plain unit), the complex powers in Lesson 8,
+the two-port parameters in Lesson 13 (the label rule would say *impedance
+seen by 11*), Lesson 5's symbolic design rules, and sentences that carry
+on past the values (*…and the load current is 3 A for 6 Ω*).
+
+Also in this train: Roberto's credits chapter, now dated (it had no
+`updated:` line, so the page printed no date), and the app tree's claims
+of #282 and #283.
+
+---
+
+## #283 — claimed by the app tree (6 Sep 2026)
+
+The MIT `LICENSE` file added to `server` and to this repository; write-up
+in `Application/v9/repos/local/NEXT.md`.
+
+## #282 — claimed by the app tree (6 Sep 2026)
+
+Two theme names renamed; write-up in `Application/v9/repos/local/NEXT.md`.
+Nothing for the docs.
+
 ## #280 — claimed by the app tree (6 Sep 2026)
 
 Display-style maths in the app's results, so fractions are set at full

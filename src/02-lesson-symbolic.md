@@ -646,10 +646,25 @@ answers:}}{{v9|Run it, and read the answers straight off the results:}}
 `r1` = {{o:1333.3}} Ω, `r2` = {{o:1000}} Ω, `r3` = {{o:240}} Ω. These are
 correct.
 
-{{v7,8|Then we ask for the powers consumed in the resistors, and find
-that:}}{{v9|The power consumed in each resistor is given in `pr1`, `pr2` and `pr3`:}}
+::: only 7,8
+Then we ask for the powers consumed in the resistors, and find
+that:
 
 `pr1` is {{o:1.2}} W, `pr2` is {{o:0.4}} W, and `pr3` is {{o:0.6}} W
+:::
+::: only 9
+The power consumed in each resistor is given in:
+
+::: result
+p_{r1} = 1.2\ \mathrm{W}
+:::
+::: result
+p_{r2} = 0.4\ \mathrm{W}
+:::
+::: result
+p_{r3} = 0.6\ \mathrm{W}
+:::
+:::
 
 Since all are smaller than 2W, it is possible to use 2W resistors in the
 design.

@@ -2,39 +2,25 @@
 id: credits
 kind: back
 title: Roll the credits
+updated: 2026-09-06
 summary: >
-  If you are interested in the people behind Symbulator, here's who made it and
-  who helped, plus some acknowledgements. And some glowing reviews of
-  Symbulator.
+  If you are interested in the people behind Symbulator, here's who made it and who helped, plus some acknowledgements. And some glowing reviews received over the decades.
 ---
 
-## About the author {#about-the-author}
+## Who made Symbulator {#about-the-author}
 
-Both Symbulator and this documentation were made by me, **Roberto
-Perez-Franco**. I started working on it in April 1999, as an engineering
-student at the Technological University of Panama (Universidad Tecnológica de 
-Panamá) in [Azuero](https://ls.utp.ac.pa/). An early version won first
-place at the IEEE Student Paper Contest for Latin America in 2000, and version
-5 (also known as Symbulator Q) served as my graduation thesis in January 2001.
+Symbulator and its documentation, in all its versions up to this date, have been made by me, [**Roberto Perez-Franco**](http://roberto.perez-franco.com). I started coding it on 30 March 1999, when I was an engineering student at the Technological University of Panama (Universidad Tecnológica de Panamá) in [Azuero](https://ls.utp.ac.pa/). An early version won first place at the IEEE Student Paper Contest for Latin America in 2000, and version 5 (a.k.a. Q) served as my graduation thesis in July 2001. Version 6 came in 2013, while I was a researcher at MIT in the United States. Versions 7 and 8 came a decade later, in 2023, when I was in Melbourne Australia. This version 9 was made in 2026. 
 
 ::: figure assets/photo/roberto_2000_ti89.jpg
 Roberto in 2000, with a TI-89
 :::
 
-The first five versions were written between April 1999 and January 2001. The
-sixth came a dozen years later, in 2013, while I was a researcher at MIT. The 
-seventh and eighth a decade later, in 2023, and the ninth in 2026.  
-
 ### What Symbulator did for me
 
-Thanks in great part to Symbulator, I landed my first job, received a
-Distinguished Alum award from UTP in 2008, and won a Fulbright Scholarship that
-took me to a Master of Engineering and later a PhD in Engineering Systems at
-the Massachusetts Institute of Technology. MIT then hired me, and I lived in
-Boston for almost twelve years. I now live in Melbourne, Australia. You can say 
-that writing Symbulator changed my life. In a way, I think, when I am no more,
-Symbulator will preserve a part of my mind as it solves circuits for new generations,
-the same way a composer lives in the tunes or a writer in the words they conceived.
+I've never made any money from Symbulator: it has always been and will remain free of cost. But I have benefited from Symbulator in other ways. Thanks in large part to Symbulator, I landed my first job, received a
+Distinguished Alum award from UTP in 2008 and an Outstanding Young Person (TYOP) award from the Panamanian chapter of Junior Chamber International (JCI), and won a Fulbright Scholarship that
+took me to a Master of Engineering and later a PhD in Engineering Systems at the Massachusetts Institute of Technology. MIT then hired me, and I lived in Boston for almost twelve years. I now live in Melbourne, Australia. You can say 
+that writing Symbulator changed my life. Beyond my lifetime, Symbulator may preserve a part of my mind as it solves circuits for new generations, the same way a composer lives in the tunes or a writer in the words they conceived.
 
 ### Dedication
 
@@ -183,7 +169,7 @@ of that precious collection.
 
 ## Licence {#licence}
 
-Symbulator has always been free of cost, and always will be. From June 2013 it
+From June 2013, Symbulator
 was offered under a Creative Commons BY-NC-SA licence. Since 2026 it is open source
 under the MIT licence, which supersedes it. If you want to port it to another
 platform, you are free to do so, provided the copyright notice and the
