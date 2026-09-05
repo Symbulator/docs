@@ -2114,8 +2114,8 @@ only one voltage and one resistor. Then find the current in the load resistor
 
 :::
 
-I don't know Millman's Theorem, but in my book this is called the Thévenin
-equivalent.
+I don't know Millman's Theorem, but we can find the Thévenin equivalent
+with Symbulator.
 
 ```sym 7
 s\th("r1,0,1,240.:e1,2,1,96:r2,0,3,200:e2,3,2,40:
