@@ -225,10 +225,15 @@
 % mathematics rather than bold text (build.py's answer_math decides which).
 \newcommand{\ansmath}[1]{{\color{answer}\(\displaystyle #1\)}}
 
+% The label a box carries over its contents (#277, Roberto, 6 Sep 2026:
+% all boxes, inputs and results, labelled online and in print alike) --
+% the web's words, in the sans face, plain.
+\newcommand{\symboxlabel}[1]{{\sffamily\footnotesize\color{slate}#1}\par\vspace{0.6mm}}
 \newenvironment{symtype}
   {\par\vspace{1mm}\begin{tcolorbox}[breakable,enhanced,boxrule=0pt,
      frame empty, colback=lcd, left=3mm,right=3mm,top=1.6mm,bottom=1.6mm,
      borderline west={2.2pt}{0pt}{accent}, sharp corners]
+   \symboxlabel{type}%
    \ttfamily\small\raggedright\setlength{\parskip}{0pt}}
   {\end{tcolorbox}\color{ink}\vspace{1mm}}
 
@@ -251,10 +256,31 @@
    \ifx\relax#1\relax\else{\sffamily\footnotesize\color{slate}#1}\par\vspace{-2mm}\fi}
   {\end{tcolorbox}\color{ink}\vspace{1mm}}
 
+% A field of the Symbulator 9 interface, and what the reader types into it
+% (#277): symtype's box with the field's name over it, in the sans face,
+% plain -- the web's field panel, in print. #1 is the name, escaped.
+\newenvironment{symfield}[1]
+  {\par\vspace{1mm}\begin{tcolorbox}[breakable,enhanced,boxrule=0pt,
+     frame empty, colback=lcd, left=3mm,right=3mm,top=1.6mm,bottom=1.6mm,
+     borderline west={2.2pt}{0pt}{accent}, sharp corners]
+   \symboxlabel{#1}%
+   \ttfamily\small\raggedright\setlength{\parskip}{0pt}}
+  {\end{tcolorbox}\color{ink}\vspace{1mm}}
+
 \newenvironment{symout}
   {\par\vspace{1mm}\begin{tcolorbox}[breakable,enhanced,boxrule=0pt,
      frame empty, colback=panel, left=3mm,right=3mm,top=1.6mm,bottom=1.6mm,
      borderline west={2.2pt}{0pt}{slate}, sharp corners]
+   \symboxlabel{returns}%
+   \ttfamily\small\raggedright\setlength{\parskip}{0pt}}
+  {\end{tcolorbox}\color{ink}\vspace{1mm}}
+% A listing that is neither typed nor returned -- a ```text fence, the
+% contents of a .cir file -- keeps symout's box and no label, as on the
+% web (#277).
+\newenvironment{symlisting}
+  {\par\vspace{1mm}\begin{tcolorbox}[breakable,enhanced,boxrule=0pt,
+     frame empty, colback=panel, left=3mm,right=3mm,top=1.6mm,bottom=1.6mm,
+     borderline west={2.2pt}{0pt}{rule}, sharp corners]
    \ttfamily\small\raggedright\setlength{\parskip}{0pt}}
   {\end{tcolorbox}\color{ink}\vspace{1mm}}
 

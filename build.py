@@ -1178,11 +1178,15 @@ class TexRenderer:
             return (BS + "begin{symquote}" + NL + NL.join(parts)
                     + NL + BS + "end{symquote}")
         if k == "code":
-            # In print there is no interface to imitate, so a field is set as
-            # typed input like any other. The sentence above it names the
-            # field anyway.
-            env = ("symtype" if b.meta["lang"] in ("sym", "field")
-                   else "symout")
+            # A field is typed input with the field's name over it (#277,
+            # Roberto, 6 Sep 2026 -- until then the PDF set it as plain
+            # typed input, the sentence above naming the field): symfield
+            # in the class, symtype's box with a label line.
+            env = ("symtype" if b.meta["lang"] == "sym" else
+                   "symfield" if b.meta["lang"] == "field" else
+                   "symlisting" if b.meta["lang"] == "text" else "symout")
+            head = ("" if env != "symfield"
+                    else "{" + tex_escape(b.meta.get("field") or "") + "}")
             def _listing_line(line):
                 # A blank line still has to be a line. These are joined with
                 # \\, and \\ after nothing at all is "There's no line here
@@ -1198,7 +1202,7 @@ class TexRenderer:
 
             lines = (BS * 2 + NL).join(
                 _listing_line(l) for l in b.text.split(chr(10)))
-            return f"\\begin{{{env}}}\n{lines}\n\\end{{{env}}}"
+            return f"\\begin{{{env}}}{head}\n{lines}\n\\end{{{env}}}"
         if k == "result":                    # #276, the PDF side
             label = tex_escape(result_label(b.text, b.arg))
             return (f"\\begin{{symresult}}{{{label}}}\n\\[{b.text}\\]\n"
