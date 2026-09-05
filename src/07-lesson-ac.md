@@ -868,7 +868,7 @@ carrying an `im(c)` term, because nothing has told Symbulator that a
 capacitance is a real number.
 :::
 
-The answer is c = 0.000001235, or 1.235 µF. This is not the answer the book
+The answer is **c** = {{o:0.000001235}}, or 1.235 µF. This is not the answer the book
 gives.
 
 I first used cSolve here, which also works, but my friend Qifan Wang — who
@@ -912,7 +912,7 @@ s\er(cir,1,0)
 solve(imag(zeq)=0,c)
 ```
 
-The answer is c = 25, that is to say 25 µF. This is the right answer in the
+The answer is **c** = {{o:25}}, that is to say 25 µF. This is the right answer in the
 book. So they asked the wrong question — they asked it using the wrong
 frequency unit.
 :::

@@ -1,7 +1,7 @@
 ---
 id: lesson-symbolic
 kind: lesson
-title: Symbolic circuits and expert mode
+title: Symbolic circuits and {{v7,8|expert mode}}{{v9|Expert Mode}}
 updated: 2026-09-06
 summary: >
   Learn how to solve different types of *symbolic* circuits in Symbulator. Use
@@ -231,19 +231,34 @@ solve(re=12000 and ir3=.006,{e,r1})
 That is what the **Solve** card, under the results beside **Evaluate**, is
 for. It has two boxes.
 
-In the first, headed **Equation(s) to solve in terms of the results**, write
-one equation per line, using the same names the results use:
+In the first box, headed **Equation(s) to solve in terms of the results**, write the equationse, using the same names the results use.
+
+The shorthand works in these boxes too, so `re = 12'k` reads as 12000.
+
+ You can write the equations separated by `and`, like this:
+
+```field 9 Equation(s) to solve in terms of the results
+re = 12'k and ir3 = 6'm
+```
+
+Or one equation per line, like this:
 
 ```field 9 Equation(s) to solve in terms of the results
 re = 12'k
 ir3 = 6'm
 ```
 
-In the second, headed **Unknown(s) to solve for**, name what you want found, separated by
-commas:
+In the second box, headed **Unknown(s) to solve for**, name what you want found. You can write the unknowns separated by commas, like this:
 
 ```field 9 Unknown(s) to solve for
 e, r1
+```
+
+Or one unknown per line, like this:
+
+```field 9 Unknown(s) to solve for
+e
+r1
 ```
 
 Then press **Solve equations**.
@@ -255,13 +270,16 @@ You cannot use `'k` here as a shorthand for kilo, or any other SI prefix: it
 works only in the values in the circuit description.
 :::
 :::
-::: only 9
-The shorthand works in these boxes too, so `re = 12'k` reads as 12000.
-:::
 
-An instant later we get the answers: {{v7,8|e = 72 V and r1 = 2000 Ω}}{{v9|the card lists *e* = 72.0 and *r1* = 2000.0: a 72 V source and a
-2000 Ω resistor}}. These are the right answers. Not many other circuit
+::: only 7,8
+An instant later we get the answers: **e** = {{o:72}} V and **r1** = {{o:2000}} Ω. These are the right answers. Not many other circuit
 simulators allow this flexibility.
+:::
+::: only 9
+An instant later we get the answers: the card lists **e** = {{o:72.0}} and **r1** = {{o:2000.0}}: a 72 V source and a
+2000 Ω resistor. These are the right answers. Not many other circuit
+simulators allow this flexibility.
+:::
 :::
 :::
 
@@ -382,7 +400,7 @@ e, r1
 Run it in DC. This time everything comes back numerical: the node voltages
 read v{{sub:1}} = 72 V, v{{sub:2}} = 60 V and v{{sub:3}} = 36 V, and at the
 foot of **Results by element** are the two unknowns, listed like any other
-answer: *e* = 72 and *r1* = 2000. Both are right, and the whole circuit was
+answer: **e** = {{o:72}} and **r1** = {{o:2000}}. Both are right, and the whole circuit was
 solved with them in one step.
 
 The speed advantage of **Expert Mode** is not necessarily evident in this
@@ -544,9 +562,9 @@ e
 We get that E is {{o:16}} V. These are correct.
 :::
 ::: only 9
-Run it. Everything comes back numerical: *e* = 16, so {{var:E}} is {{o:16}} V, and
+Run it. Everything comes back numerical: **e** = {{o:16}}, so {{var:E}} is {{o:16}} V, and
 `ie` = −0.02 A, so {{var:I_S}} is {{o:0.02}} A. Both correct. The two
-resistors come back too: *r2* = 1600 Ω and *r3* = 8000 Ω.
+resistors come back too: **r2** = {{o:1600}} Ω and **r3** = {{o:8000}} Ω.
 :::
 
 :::

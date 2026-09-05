@@ -532,6 +532,12 @@ code {
    mathematics (KaTeX) rather than bold text -- build.py's answer_math
    decides which form each {{o:...}} gets */
 .ans-math { font-weight: 400; }
+/* A problem's own variable -- {{var:I_s}} (#261): the family's SemiBold
+   Italic, 600, chosen by Roberto from a strip of five weights (#271). Not
+   <strong><em>: that asked for weight 700 italic, a cut the page never
+   loaded, so browsers slanted the semibold roman -- the "chubby" mark he
+   saw. index.php now loads ital,wght 1,600, so this is the real cut. */
+em.var { font-weight: 600; font-style: italic; }
 .ans-math .katex { font-size: 1.06em; }
 
 .xref { color: var(--accent); text-decoration-color: rgba(15, 107, 92, 0.4); }

@@ -130,7 +130,7 @@ approx({v1,v2,v3})
 {–1.3, .34, –1.12}
 ```
 
-That indicates v1 = –1.3 V, v2 = .34 V, v3 = –1.12 V. This is correct.
+That indicates **v1** = {{o:–1.3}} V, **v2** = {{o:.34}} V, **v3** = {{o:–1.12}} V. This is correct.
 :::
 :::
 
@@ -956,7 +956,7 @@ va-vb
 ```
 :::
 
-We find that the voltage drop is 12V and the current is 0.2A. These are the
+We find that the voltage drop is {{o:12}}V and the current is {{o:0.2}}A. These are the
 currents and voltages that we have to keep once we do the replacement.
 Simulate the circuit now replacing {{var:R_3}} with a resistor {{var:R_4}} of
 240Ω and a source **j** with value {{var:I_4}}. Run this:

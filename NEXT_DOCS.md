@@ -8,6 +8,81 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #272 — a result's name in bold, its value in red; bold italic kept for the problem's own variables — **web live 6 Sep 2026, PDFs held**
+
+Roberto, 6 Sep 2026, on Lesson 2's *the card lists e = 72.0 and r1 =
+2000.0*: those *e* and *r1* are answers Symbulator gives back in
+**Results**, so they are bold and not italic — bold italic is reserved
+for the variables the problem gives — and the numbers are red like every
+other answer. Spread through the whole book.
+
+**The rule, in one line:** a Symbulator result named bare in prose (not
+in code) is **bold**; its value is `{{o:…}}`; a problem's own variable
+stays `{{var:…}}`. The survey looked for a bare name followed by `=`,
+*is* or *reads* and a value, 26 candidate lines read in context; sixteen
+edits in five chapters. Lesson 2's quoted passage sat inside a
+`{{v7,8|…}}{{v9|…}}` span and became a `::: only` pair; its *e = 72 and r1
+= 2000*, *e = 16* and *r2 = 1600 Ω and r3 = 8000 Ω* lost their italics
+for bold. Lesson 3's *v1 = –1.3 V, v2 = .34 V, v3 = –1.12 V* and the
+hidden-source *voltage drop is 12V*; Lesson 4's **Req** = 2.89 Ω line
+under the Equivalent impedance heading, *vth = 880 mV, ino = 50 mA…*,
+and the maximum-power *9Ω … 13.44W*; Lesson 5's three 7/8 bold answers
+(`**r2=50000 and r4=20000**` → **r2**={{o:50000}} and **r4**={{o:20000}},
+and `-r2/r1=-5` as one red answer); Lesson 7's two *c = …* answers.
+
+**Left:** *Let omega = 10 rad/s* and *the voltage v is 0 volts*, which
+are given, not returned; and *the book's answer is 25 µF*, which is the
+book's.
+
+**Deployed web only, at Roberto's ask.** `build.py --web`; the three
+PDFs on learn are the ones from the #267–#269 build and now lag the web
+in three ways — this item, #270's chapter title and #271's face — until
+the next full build.
+
+---
+
+## #271 — a marked variable in Plex Serif SemiBold Italic — **web live 6 Sep 2026, PDFs held**
+
+Roberto found the marked variables (#261, *I_3*, *V_ab*) *a bit chubby*
+and asked for a crisper font. The face is IBM Plex Serif everywhere; the
+chubbiness had two causes. In the PDF the mark was the family's real
+Bold Italic, weight 700, heavy at body size. On the web the site loaded
+no italic above 400 at all (roman 400, roman 600, italic 400), so every
+browser was faking bold italic by slanting the semibold roman.
+
+A strip of five weights was typeset (`scratchpad/varfont/sample.pdf`:
+700, 600, 500, 400, and Plex Sans SemiBold Italic) and, when he asked
+whether a more elegant face would fit, a second strip of four serifs
+(Plex Serif, STIX Two Text, Libertinus Serif, EB Garamond — the three
+alternatives are in MiKTeX; STIX Two is also on Google Fonts). He chose
+to stay with Plex at **SemiBold Italic, 600**.
+
+**The change is contained to the mark.** PDF: `symbulator.cls` gains
+`\symvarfont` (IBM Plex Serif SemiBold with its SemiBold Italic; plain
+bold in the Latin Modern fallback) and `\symvar{}`, which `build.py`
+emits for every `{{var:}}` — proved by compiling a one-line document
+against the class. Web: the mark is `<em class="var">` at weight 600 in
+`style.css`, and `index.php` now loads Plex Serif's italic 600 cut
+(`ital,wght@…;1,600`), so the browser draws the real cut.
+
+---
+
+## #270 — a chapter title may differ by version — **web live 6 Sep 2026, PDFs held**
+
+The last of #269's questions: Lesson 2 is titled *Symbolic circuits and
+expert mode* in the sidebar, the home-page cards, the search index and
+the PDF's contents and running foot — one front-matter string for three
+versions. Roberto: capitalise it in version 9, without bold (a title is
+printed raw in all those places, so bold would show as asterisks).
+
+`build.py` gains `title_for(ch, v)`, which resolves version spans in a
+title, applied at every place a title is printed; the title now reads
+`Symbolic circuits and {{v7,8|expert mode}}{{v9|Expert Mode}}`. Unit-tested
+for all three versions; `SPEC.md` records that a title may carry a
+version span and nothing else.
+
+---
+
 ## #269 — *Solve* and *Expert Mode*, capitalised and bold in version 9 — **done and live, 6 Sep 2026**
 
 Roberto, 6 Sep 2026: in version 9 *solve* is not a command but a tool in

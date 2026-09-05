@@ -1278,7 +1278,7 @@ rearrange it, **Evaluate** takes `simplify()`, `collect()`, `expand()`,
 `factor()` and `apart()`.
 :::
 
-We get **-r2/r1=-5**. Now make that part of {{var:v_o}} that is a factor of
+We get {{o:-r2/r1=-5}}. Now make that part of {{var:v_o}} that is a factor of
 {{var:v_2}} equal to 3. Thus:
 
 ```sym 7
@@ -1328,7 +1328,7 @@ book's `r1` = 10 kΩ and `r3` = 20 kΩ into it and you get {{o:50}} kΩ and {{o:
 
 ::: only 7,8
 The expression above assumes that ans(1) and ans(2) are pointing to
-the two equations we found before. We get **r2=50000 and r4=20000**. This is
+the two equations we found before. We get **r2**={{o:50000}} and **r4**={{o:20000}}. This is
 correct.
 :::
 
@@ -1412,7 +1412,7 @@ with `r2, r4` as the unknowns. It answers `r2` = {{o:4*r1}} and
 :::
 
 ::: only 7,8
-We get **r2=40000 and r4=40000**, the correct values for the remaining
+We get **r2**={{o:40000}} and **r4**={{o:40000}}, the correct values for the remaining
 resistors.
 :::
 

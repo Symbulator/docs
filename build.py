@@ -150,6 +150,22 @@ class Node:
     meta: dict = field(default_factory=dict)
 
 
+def title_for(ch, v) -> str:
+    """A chapter's title for version v (#270, 6 Sep 2026). The title is
+    front matter -- one string for all three versions -- but Lesson 2's
+    must say *expert mode* in 7 and 8 and *Expert Mode* in 9, so it may
+    carry the same version spans the body does: `{{v7,8|expert
+    mode}}{{v9|Expert Mode}}`, or `{{!v7|...}}`. Only version spans are
+    resolved; a title is printed raw everywhere (the h1, the sidebar's
+    toc.json, the search index, the PDF's \\lesson and running foot),
+    so no other markup belongs in one -- bold included."""
+    def pick(m):
+        neg, vers = m.group(1), [int(x) for x in m.group(2).split(",")]
+        hit = v in vers
+        return m.group(3) if hit != bool(neg) else ""
+    return re.sub(r"\{\{(!?)v([\d,]+)\|([^}]*)\}\}", pick, ch.title)
+
+
 @dataclass
 class Chapter:
     id: str
@@ -566,7 +582,7 @@ class Book:
         """id -> (display name, chapter id, anchor) for cross-references."""
         lab = {}
         for ch, number, present in self.for_version(v):
-            name = f"Lesson {number}" if number else ch.title
+            name = f"Lesson {number}" if number else title_for(ch, v)
             lab[ch.id] = (name, ch.id, "")
             if not present:
                 continue
@@ -712,7 +728,10 @@ class HtmlRenderer:
             # `_` starts a subscript, so {{var:I_s}} is I with s below.
             base, _, sb = n.text.partition("_")
             sb = f'<sub>{html.escape(sb)}</sub>' if sb else ""
-            return f'<strong><em>{html.escape(base)}{sb}</em></strong>'
+            # <em class="var">, weight 600 in style.css (#271): the site
+            # loads Plex Serif's italic 600 cut for it, so the browser no
+            # longer fakes a bold italic by slanting the semibold roman.
+            return f'<em class="var">{html.escape(base)}{sb}</em>'
         if n.kind == "sub":
             return f'<sub>{html.escape(n.text)}</sub>'
         if n.kind == "sup":
@@ -908,7 +927,7 @@ class HtmlRenderer:
         parts = ['<header class="chapter-head">']
         if eyebrow:
             parts.append(f'<p class="eyebrow">{html.escape(eyebrow)}</p>')
-        parts.append(f'<h1>{html.escape(ch.title)}</h1>')
+        parts.append(f'<h1>{html.escape(title_for(ch, self.v))}</h1>')
         if ch.summary:
             parts.append(f'<p class="lede">{self.inline(ch.summary)}</p>')
         if ch.updated:
@@ -1033,7 +1052,7 @@ class TexRenderer:
         if n.kind == "var":                  # #261, see the HTML side
             base, _, sb = n.text.partition("_")
             sb = r"\textsubscript{" + tex_escape(sb) + "}" if sb else ""
-            return r"\textbf{\textit{" + tex_escape(base) + sb + "}}"
+            return r"\symvar{" + tex_escape(base) + sb + "}"   # #271
         if n.kind == "sub":
             return r"\textsubscript{" + tex_escape(n.text) + "}"
         if n.kind == "sup":
@@ -1194,9 +1213,9 @@ class TexRenderer:
         self.chapter_no = number
         head = []
         if number:
-            head.append(f"\\lesson{{{number}}}{{{tex_escape(ch.title)}}}")
+            head.append(f"\\lesson{{{number}}}{{{tex_escape(title_for(ch, self.v))}}}")
         else:
-            head.append(f"\\frontchapter{{{tex_escape(ch.title)}}}")
+            head.append(f"\\frontchapter{{{tex_escape(title_for(ch, self.v))}}}")
         head.append(f"\\label{{lbl:{ch.id}}}")
         if ch.summary:
             head.append(f"\\chaptersummary{{{self.inline(ch.summary)}}}")
@@ -1281,7 +1300,7 @@ def build_web(book: Book, versions: list[int]):
             open(os.path.join(vdir, ch.id + ".html"), "w",
                  encoding="utf-8").write(body)
             if present:
-                search += search_entries(ch.id, ch.title, body)
+                search += search_entries(ch.id, title_for(ch, v), body)
             sections = []
             if present:
                 n = 0
@@ -1291,7 +1310,7 @@ def build_web(book: Book, versions: list[int]):
                         sections.append({"anchor": b.meta["anchor"],
                                          "title": re.sub(r"\{\{[^}]*\}\}", "", b.text),
                                          "number": f"{number}.{n}" if number else ""})
-            toc.append({"id": ch.id, "title": ch.title,
+            toc.append({"id": ch.id, "title": title_for(ch, v),
                         # Empty, not the title -- see the note above. Every
                         # consumer of toc.json must skip an empty eyebrow.
                         "eyebrow": f"Lesson {number}" if number else "",

@@ -13,6 +13,12 @@ build/             generated — never edit by hand
 
 ## Chapter file
 
+A chapter's `title:` may carry a version span (`Symbolic circuits and
+{{v7,8|expert mode}}{{v9|Expert Mode}}`), resolved per version everywhere the
+title is printed. Nothing else: a title is printed raw in the sidebar, the
+search index and the PDF's running foot, so bold or code in it would show as
+literal asterisks and backticks.
+
 Each file opens with YAML front matter:
 
 ```yaml

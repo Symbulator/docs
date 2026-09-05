@@ -204,7 +204,7 @@ Set **Type of analysis** to *Find equivalent*, **Type of equivalent** to
 **Results** looks different from a normal solve: instead of the node and
 element listing there is a single answer, headed **Equivalent impedance**:
 
-Req = 2.89 Ω
+**Req** = {{o:2.89}} Ω
 :::
 
 {{v7,8|The value is 2.89 Ω. }}This is correct.
@@ -300,7 +300,7 @@ headed **Thévenin / Norton equivalent**, holding four answers:}}
   hypothetical load
 :::
 ::: only 9
-Here they read vth = 880 mV, ino = 50 mA, Req = 17.6 Ω and pmax = 11 mW. The
+Here they read **vth** = {{o:880}} mV, **ino** = {{o:50}} mA, **Req** = {{o:17.6}} Ω and **pmax** = {{o:11}} mW. The
 first three are what you came for; the fourth is the most this circuit could
 deliver into a matched load.
 :::
@@ -2255,7 +2255,7 @@ Here we use **Rounding** — *approx to n digits*, with **n** = 3.
 ::: only 7,8
 Choose DC. You can answer N when asked about the load equations. The answer,
 {{o:{9.,13.44}}}, is correct: the maximum transfer of power occurs when the
-load is 9Ω. At this point, the power transferred is 13.44W. Now let's solve
+load is {{o:9}}Ω. At this point, the power transferred is {{o:13.44}}W. Now let's solve
 another one.
 :::
 ::: only 9

@@ -61,6 +61,13 @@
   \setmainfont{IBM Plex Serif}[Ligatures=TeX]
   \setsansfont{IBM Plex Sans}[Ligatures=TeX]
   \setmonofont{IBM Plex Mono}[Scale=0.86]
+  % The face of a marked variable (#271, Roberto, 6 Sep 2026): the
+  % family's SemiBold Italic, weight 600, not the Bold Italic that
+  % \textbf{\textit{}} gives. He found the 700 cut "chubby" at body
+  % size; a strip of five weights was set and 600 chosen -- a third
+  % lighter in the stroke, the subscripts still open, still a mark.
+  \newfontfamily\symvarfont{IBM Plex Serif SemiBold}[Ligatures=TeX,
+    ItalicFont=IBM Plex Serif SemiBold Italic]
 }{
   % Latin Modern, not TeX Gyre. The fallback used to name TeX Gyre
   % Schola/Heros and DejaVu Sans Mono, none of which can be loaded by
@@ -78,7 +85,11 @@
   \setmainfont{Latin Modern Roman}[Ligatures=TeX]
   \setsansfont{Latin Modern Sans}[Ligatures=TeX]
   \setmonofont{Latin Modern Mono}[Scale=MatchLowercase]
+  \newcommand{\symvarfont}{\bfseries}   % no semibold in the fallback
 }
+% A problem's own variable -- the print side of {{var:I_s}} (#261): the
+% mark's face, italic. build.py emits \symvar{I\textsubscript{s}}.
+\newcommand{\symvar}[1]{{\symvarfont\itshape #1}}
 \color{ink}
 \linespread{1.06}
 \setlength{\parskip}{0.55\baselineskip}
