@@ -64,6 +64,7 @@ function asset(string $name): string {
      come out of the two panes, which are the entire point of the view.
      One slim band, the same navy, and the wordmark links home. */
   .splitbar {
+    position: relative;
     flex: none; display: flex; align-items: center; gap: 0.9rem;
     background: var(--navy); color: #fff;
     padding: 0.4rem 0.85rem; font-size: 0.86rem;
@@ -97,12 +98,13 @@ function asset(string $name): string {
   .splitbar button.where:hover, .splitbar button.where:focus-visible { color: #fff; }
   .splitbar button.where:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
   .menu {
-    position: absolute; top: 100%; left: 0; z-index: 20;
+    position: absolute; top: 100%; left: 0.85rem; z-index: 20;
+    max-width: calc(100vw - 1.7rem);
     margin: 0.35rem 0 0; padding: 0.3rem 0; list-style: none;
     background: var(--paper); color: var(--ink);
     border: 1px solid var(--rule); border-radius: 6px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.18);
-    min-width: 17rem; max-height: 72vh; overflow: auto;
+    min-width: min(17rem, calc(100vw - 1.7rem)); max-height: 72vh; overflow: auto;
     font-size: 0.86rem; letter-spacing: 0; text-transform: none;
   }
   .menu[hidden] { display: none; }
@@ -110,11 +112,22 @@ function asset(string $name): string {
     display: block; width: 100%; text-align: left; font: inherit;
     padding: 0.38rem 0.85rem; background: none; border: 0;
     color: var(--ink); cursor: pointer; white-space: nowrap;
+    overflow: hidden; text-overflow: ellipsis;
   }
+  /* #306 (Roberto, 7 Sep 2026): on a phone the badge is hidden, so a
+     Contents button between the wordmark and the tabs opens the same
+     menu. Drawn like the tabs' buttons, and only where the badge is not. */
+  .splitbar .contents {
+    display: none; font: inherit; font-size: 0.8rem; cursor: pointer;
+    background: transparent; color: #fff;
+    border: 1px solid rgba(255,255,255,0.45); border-radius: 3px;
+    padding: 0.16rem 0.6rem; white-space: nowrap; flex: none;
+  }
+  .splitbar .contents[aria-expanded="true"] { background: #fff; color: var(--navy); }
   .menu button:hover, .menu button:focus-visible { background: var(--paper-2); outline: 0; }
   .menu button[aria-current="true"] { font-weight: 600; color: var(--accent); }
   .menu .num {
-    display: inline-block; min-width: 4.6em; color: var(--ink-3);
+    display: inline-block; min-width: 4.6em; margin-right: 0.6rem; color: var(--ink-3);
     font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;
   }
   .splitbar .spacer { flex: 1 1 auto; }
@@ -125,6 +138,8 @@ function asset(string $name): string {
   @media (max-width: 480px) {
     .splitbar { gap: 0.5rem; padding: 0.4rem 0.55rem; }
     .splitbar .wherewrap { display: none; }
+    .splitbar .contents { display: inline-block; }
+    .menu { left: 0.55rem; }
   }
   .splitbar .plain {
     font-size: 0.8rem; opacity: 0.92; white-space: nowrap;
@@ -183,12 +198,14 @@ function asset(string $name): string {
 
 <div class="splitbar">
   <a class="mark" href="/9/">Symbulator <span class="vnum">9</span></a>
+  <button type="button" class="contents" id="contentsBtn" aria-haspopup="menu"
+          aria-expanded="false" aria-controls="lessonMenu">Contents</button>
   <span class="wherewrap">
     <button type="button" class="where" id="where" aria-haspopup="menu"
             aria-expanded="false" aria-controls="lessonMenu"
             title="Go to a lesson">Documentation</button>
-    <ul class="menu" id="lessonMenu" role="menu" hidden></ul>
   </span>
+  <ul class="menu" id="lessonMenu" role="menu" hidden></ul>
   <span class="spacer"></span>
   <span class="plain" id="hint">Links in the left pane load the circuit on the right.</span>
   <span class="tabs">
@@ -394,6 +411,9 @@ function asset(string $name): string {
   // ribbon's Split View link does for it (showPage): the left pane opens
   // on the chapter, the right pane on the chapter's first book.
   var menu = document.getElementById('lessonMenu');
+  var contentsBtn = document.getElementById('contentsBtn');   // #306
+  var opener = whereEl;      // which trigger opened it, for the focus return
+  var triggers = [whereEl, contentsBtn];
 
   function buildMenu(titles) {
     menu.innerHTML = '';
@@ -426,28 +446,32 @@ function asset(string $name): string {
     }
   }
 
-  function openMenu() {
+  function openMenu(from) {
     if (!menu.children.length) { return; }
+    opener = from || whereEl;
     menu.hidden = false;
-    whereEl.setAttribute('aria-expanded', 'true');
+    triggers.forEach(function (t) { t.setAttribute('aria-expanded', 'true'); });
     var cur = menu.querySelector('button[aria-current="true"]') || menu.querySelector('button');
     if (cur) { cur.focus(); }
   }
   function closeMenu() {
     menu.hidden = true;
-    whereEl.setAttribute('aria-expanded', 'false');
+    triggers.forEach(function (t) { t.setAttribute('aria-expanded', 'false'); });
   }
-  whereEl.addEventListener('click', function () {
-    if (menu.hidden) { openMenu(); } else { closeMenu(); }
+  triggers.forEach(function (t) {
+    t.addEventListener('click', function () {
+      if (menu.hidden) { openMenu(t); } else { closeMenu(); }
+    });
   });
   document.addEventListener('click', function (ev) {
     if (menu.hidden) { return; }
-    if (ev.target === whereEl || whereEl.contains(ev.target) || menu.contains(ev.target)) { return; }
+    var onTrigger = triggers.some(function (t) { return t === ev.target || t.contains(ev.target); });
+    if (onTrigger || menu.contains(ev.target)) { return; }
     closeMenu();
   });
   document.addEventListener('keydown', function (ev) {
     if (menu.hidden) { return; }
-    if (ev.key === 'Escape') { closeMenu(); whereEl.focus(); return; }
+    if (ev.key === 'Escape') { closeMenu(); opener.focus(); return; }
     var items = Array.prototype.slice.call(menu.querySelectorAll('button'));
     var i = items.indexOf(document.activeElement);
     if (ev.key === 'ArrowDown') { ev.preventDefault(); (items[i + 1] || items[0]).focus(); }

@@ -8,6 +8,29 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #306 — a Contents button for the phone layout — **done and live, 7 Sep 2026**
+
+Roberto, 7 Sep 2026: *"it is important for the user in mobile using
+split view to have a way to navigate the lessons. How about we add, in
+the space between the Symbulator 9 text and the Docs button, a Contents
+button that deploys the menu?"* #304's menu hung off the position badge,
+and below 480px the badge is hidden to keep the bar on one line, so a
+phone had no way into it.
+
+A **Contents** button now sits between the wordmark and the tabs, drawn
+like the tabs' buttons and shown only where the badge is not (the same
+480px breakpoint, one way each). Both triggers open the one menu, which
+moved out of the badge's wrapper to be a child of the bar -- hidden
+inside a hidden wrapper it could not have shown -- positioned under the
+bar's left edge and capped at the viewport's width, items ellipsised.
+Escape returns focus to whichever trigger opened it. Nothing else in the
+shell changed.
+
+Verified live at 375px: the badge hidden, Contents shown; a tap opens the
+fifteen items inside the viewport; choosing Lesson 11 loads
+`/9/lesson-bode` on the left and `?lesson=11&entry=1` on the right and
+closes the menu.
+
 ## #304 — a lesson menu in the split view's bar — **done and live, 7 Sep 2026**
 
 Roberto, 7 Sep 2026: *"There's no table of content in split, so how about
