@@ -399,7 +399,10 @@ this in a single push, or separately. Here I find them in one go:}}
 {irL|Load=2.,irL|Load=10.,irL|Load=100.}
 ```
 ::: only 9
-Ask **Evaluate** for `irl`, with the load's value in the **Conditions** box:
+Here we use **Rounding** — *approx to n digits*, with **n** = 2, in
+**Settings**, so the answers read as the book prints them; exact, the
+third would come back as 1/17. Then ask **Evaluate** for `irl`, with the
+load's value in the **Conditions** box:
 
 ```field 9 Evaluate
 irl
@@ -425,7 +428,7 @@ The answers are {{o:1.5}} A, {{o:.5}} A and {{o:.059}} A.
 ### Power transfer problems
 
 Another problem often associated with the Thévenin / Norton equivalents is
-power transfer to a load, particularly the maximum possible. Maximum power is transferred when the load RL equals the REQ of the
+power transfer to a load, particularly the maximum possible. Maximum power is transferred when the load {{var:R_L}} equals the {{var:R_EQ}} of the
 equivalent. {{v7,8|Symbulator's th script gives}}{{v9|Symbulator gives}} you the maximum power that can be
 delivered in {{v7,8|**pmax**}}{{v9|`pmax`}}, and the power transferred to the
 load as a function of its value in {{v7,8|**prl**}}{{v9|`prl`, once the load

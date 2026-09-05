@@ -127,6 +127,9 @@ What changed, version 9 pages only (7 and 8 untouched):
   **Evaluate** for `irl` with `load = 2` in **Conditions**.
 * **B11's Example 9.6** ticks the question, shows `i_{rl} = 6/(load + 2)`
   as a result panel under the four, and evaluates `irl` at 2, 10 and 100.
+  Roberto, later that night: it says to set **Rounding** to *approx to n
+  digits*, **n** = 2, so the third answer reads .059 rather than 1/17; the
+  entry's `rounding:` moved to 2 with it.
 * **Power transfer problems** names `prl` again instead of *the
   expression derived above*.
 * **What if it's more than a load?** describes the button, its warning
