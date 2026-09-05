@@ -101,7 +101,7 @@ nothing to round here, so open **Settings** and put it back to *exact*. The
 like
 
 $$
-\dfrac{v}{r1 + r2}
+\dfrac{v}{r_{1} + r_{2}}
 $$
 :::
 
@@ -125,7 +125,7 @@ took a couple of seconds in my calculator.}}{{v9|The answer comes back at once.}
 Both are expressions rather than numbers:
 
 $$
-i_{r1} = \dfrac{v}{r1 + r2} \quad\text{and}\quad v_{r2} = \dfrac{r2\,v}{r1 + r2}
+i_{r1} = \dfrac{v}{r_{1} + r_{2}} \quad\text{and}\quad v_{r2} = \dfrac{r_{2}\,v}{r_{1} + r_{2}}
 $$
 
 which is the voltage divider you would have written by hand.
@@ -134,7 +134,7 @@ To find the power consumed in r2, we {{v7,8|ask for `pr2`}}{{v9|read `pr2`}}. To
 source, we {{v7,8|ask for the negative of `pev`}}{{v9|switch the sign of `pev`}}.
 
 $$
-p_{r2} = \dfrac{r2\,v^2}{(r1 + r2)^2} \quad\text{and}\quad -p_{ev} = \dfrac{v^2}{r1 + r2}
+p_{r2} = \dfrac{r_{2}\,v^2}{(r_{1} + r_{2})^2} \quad\text{and}\quad -p_{ev} = \dfrac{v^2}{r_{1} + r_{2}}
 $$
 
 It is this ability to simulate symbolically, as if it were nothing, that puts
@@ -211,7 +211,7 @@ and you will see an expression rather than a number, in terms of the two
 unknowns, **e** and **r1**:
 
 $$
-i_{r3} = \dfrac{e}{r1 + 10000}
+i_{r3} = \dfrac{e}{r_{1} + 10000}
 $$
 
 This is what we call a symbolic answer.
@@ -219,7 +219,7 @@ The problem also says that {{var:R_T}} is 12 kΩ; the equivalent resistance as s
 the source **e** is `re`, which is:
 
 $$
-r_{e} = r1 + 10000
+r_{e} = r_{1} + 10000
 $$
 
 We can then write two new equations

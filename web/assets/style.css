@@ -520,7 +520,10 @@ blockquote .quote-by strong {
 .chapter li { margin-bottom: 0.35rem; }
 
 code {
-  font-family: var(--mono); font-size: 0.86em;
+  /* 0.92em, not 0.86 (#275, Roberto, 6 Sep 2026): the mono read small
+     beside the prose, in the field panels most of all. Same step in the
+     panels below and in the PDF class. */
+  font-family: var(--mono); font-size: 0.92em;
   background: var(--paper-2); border: 1px solid var(--rule-2);
   border-radius: 4px; padding: 0.08em 0.32em;
   word-break: break-word;
@@ -573,7 +576,7 @@ em.var { font-weight: 600; font-style: italic; }
   margin: 0 0 1.1rem; padding: 0.7rem 0.9rem;
   background: var(--lcd); border: 1px solid var(--lcd-edge);
   border-radius: 6px; text-align: center;
-  font-family: var(--mono); font-size: 0.86rem; line-height: 1.55;
+  font-family: var(--mono); font-size: 0.95rem; line-height: 1.55;
   overflow-wrap: anywhere;
 }
 .address a { color: var(--accent); text-decoration: none; }
@@ -618,7 +621,7 @@ em.var { font-weight: 600; font-style: italic; }
 
 .code code {
   background: none; border: 0; padding: 0;
-  font-size: 0.86rem; line-height: 1.55; white-space: pre-wrap;
+  font-size: 0.95rem; line-height: 1.55; white-space: pre-wrap;
   word-break: break-word;
 }
 

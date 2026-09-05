@@ -520,7 +520,7 @@ When we evaluate `vo/v1`, both approaches get the same answer:
 
 ::: only 9
 $$
-\dfrac{v_{o}}{v_{1}} = -\dfrac{r2\,r4}{r1\,r2 + r1\,r3 + r2\,r3}
+\dfrac{v_{o}}{v_{1}} = -\dfrac{r_{2}\,r_{4}}{r_{1}\,r_{2} + r_{1}\,r_{3} + r_{2}\,r_{3}}
 $$
 :::
 
@@ -675,7 +675,7 @@ $$
 :::
 ::: only 9
 $$
-v_{o} = \left(\dfrac{r1 + rf}{r1}\right) vi
+v_{o} = \left(\dfrac{r_{1} + rf}{r_{1}}\right) vi
 $$
 :::
 
@@ -723,7 +723,7 @@ $$
 :::
 ::: only 9
 $$
-\dfrac{v_{o}}{v_{s}} = \dfrac{r2\,(r3 + r4)}{(r1 + r2)\,r4}
+\dfrac{v_{o}}{v_{s}} = \dfrac{r_{2}\,(r_{3} + r_{4})}{(r_{1} + r_{2})\,r_{4}}
 $$
 :::
 
@@ -765,7 +765,7 @@ $$
 :::
 ::: only 9
 $$
-\dfrac{v_{2}}{v_{s}} = \dfrac{r2}{r1 + r2}
+\dfrac{v_{2}}{v_{s}} = \dfrac{r_{2}}{r_{1} + r_{2}}
 $$
 :::
 
@@ -801,7 +801,7 @@ $$
 :::
 ::: only 9
 $$
-\dfrac{v_{o}}{v_{2}} = \dfrac{r3 + r4}{r4}
+\dfrac{v_{o}}{v_{2}} = \dfrac{r_{3} + r_{4}}{r_{4}}
 $$
 :::
 
@@ -1236,7 +1236,7 @@ $$
 :::
 ::: only 9
 $$
-v_{o} = \dfrac{r1\,r4\,v2 - r2\,\bigl(r3\,v1 + r4\,(v1 - v2)\bigr)}{r1\,(r3 + r4)}
+v_{o} = \dfrac{r_{1}\,r_{4}\,v_{2} - r_{2}\,\bigl(r_{3}\,v_{1} + r_{4}\,(v_{1} - v_{2})\bigr)}{r_{1}\,(r_{3} + r_{4})}
 $$
 :::
 
@@ -1829,7 +1829,7 @@ $$
 :::
 ::: only 9
 $$
-v_{o} = -\dfrac{r2\,r4\,v1}{r1\,r3} - \dfrac{r4\,v1}{r3} + \dfrac{r4\,v2}{r3} + v2
+v_{o} = -\dfrac{r_{2}\,r_{4}\,v_{1}}{r_{1}\,r_{3}} - \dfrac{r_{4}\,v_{1}}{r_{3}} + \dfrac{r_{4}\,v_{2}}{r_{3}} + v_{2}
 $$
 :::
 
@@ -1844,7 +1844,7 @@ $$
 :::
 ::: only 9
 $$
-v_{o} = v2\left(\dfrac{r4}{r3} + 1\right) - v1\left(\dfrac{r4}{r3}\right)\left(\dfrac{r2}{r1} + 1\right)
+v_{o} = v_{2}\left(\dfrac{r_{4}}{r_{3}} + 1\right) - v_{1}\left(\dfrac{r_{4}}{r_{3}}\right)\left(\dfrac{r_{2}}{r_{1}} + 1\right)
 $$
 :::
 
@@ -1885,7 +1885,7 @@ $$
 :::
 ::: only 9
 $$
-v_{o} = -\left(\dfrac{r1 + r2 + r3}{r2}\right)(v1 - v2)
+v_{o} = -\left(\dfrac{r_{1} + r_{2} + r_{3}}{r_{2}}\right)(v_{1} - v_{2})
 $$
 :::
 

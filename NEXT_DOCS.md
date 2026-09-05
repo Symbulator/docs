@@ -8,6 +8,39 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #275 — the mono type a step larger — **web live 6 Sep 2026, PDF scale set, PDFs held**
+
+Roberto, 6 Sep 2026, on a **Solve** card box: the type in the field
+rectangles reads smaller than the prose; make the heights more similar,
+for all the computer type across the book. IBM Plex Mono was set at
+0.86 of the body size on the web (inline `code` 0.86em, the panels and
+the `::: address` line 0.86rem) and `Scale=0.86` in the class. Now
+0.92em inline, 0.95rem in the panels and the address line, and
+`Scale=0.95` in the class for the next PDF build.
+
+---
+
+## #274 — inside an expression, an identifier's trailing digits are its subscript — **web live 6 Sep 2026, PDFs held**
+
+Roberto, 6 Sep 2026, on `r_{e} = r1 + 10000`: *the variables on the right
+side of the equal sign should also get the same subscript treatment* —
+the `1` of `r1` below the line, everywhere.
+
+**The rule is SymPy's**, which is what the app applies when it draws an
+answer: `latex(Symbol('r1'))` is `r_{1}`, `il0` is `il_{0}`, and a
+letters-only name — `vs`, `gm`, `rl` — stays as it is. So the book now
+does exactly that inside every display and inline expression a version
+9 reader sees: 27 lines across Lessons 2, 3, 5 and 6, from `\dfrac{v}{r1
++ r2}` to `\dfrac{v}{r_{1} + r_{2}}`. A result name in front of an
+expression (`i_{r3}`, from #273) is protected, as are LaTeX commands
+and `\text{}`; displays under `::: only 7,8` are left alone, since
+those show what the calculator printed. A dry run listed every changed
+line before the write — the first pass had missed every fraction's
+numerator, because the protector swallowed a `\dfrac{…}` argument with
+its command name; the print showed it.
+
+---
+
 ## #273 — a displayed card answer carries its name, one line per answer — **web live 6 Sep 2026, PDFs held**
 
 Roberto, 6 Sep 2026, in two examples from Lesson 2: a version 9 answer

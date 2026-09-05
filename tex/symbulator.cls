@@ -60,7 +60,7 @@
 \IfFontExistsTF{IBM Plex Serif}{
   \setmainfont{IBM Plex Serif}[Ligatures=TeX]
   \setsansfont{IBM Plex Sans}[Ligatures=TeX]
-  \setmonofont{IBM Plex Mono}[Scale=0.86]
+  \setmonofont{IBM Plex Mono}[Scale=0.95]   % 0.86 until #275: read small beside the prose
   % The face of a marked variable (#271, Roberto, 6 Sep 2026): the
   % family's SemiBold Italic, weight 600, not the Bold Italic that
   % \textbf{\textit{}} gives. He found the 700 cut "chubby" at body

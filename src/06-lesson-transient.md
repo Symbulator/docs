@@ -340,7 +340,7 @@ $$
 :::
 ::: only 9
 $$
-v_{c} = e^{-t/cr} (r v)/(r+r1)
+v_{c} = e^{-t/cr} (r v)/(r+r_{1})
 $$
 :::
 
@@ -624,9 +624,9 @@ $$
 ::: only 9
 $$
 \begin{aligned}
-v_{l} &= -il0 r e^{(-r t)/l} \\
-i_{l} &= il0 e^{(-r t)/l} \\
-v_{r} &= -il0 r e^{(-r t)/l}
+v_{l} &= -il_{0} r e^{(-r t)/l} \\
+i_{l} &= il_{0} e^{(-r t)/l} \\
+v_{r} &= -il_{0} r e^{(-r t)/l}
 \end{aligned}
 $$
 :::
@@ -686,7 +686,7 @@ $$
 :::
 ::: only 9
 $$
-i_{l} = e^{(-r t)/l}v/r1
+i_{l} = e^{(-r t)/l}v/r_{1}
 $$
 :::
 

@@ -282,7 +282,7 @@ approximately. It nests as deeply as you like, as the two problems below
 show, and it works on symbols: `pr(r1, r2)` gives
 
 $$
-\dfrac{r1\,r2}{r1 + r2}
+\dfrac{r_{1}\,r_{2}}{r_{1} + r_{2}}
 $$
 
 ::: problem AS7's Example 2.10
@@ -2127,7 +2127,7 @@ below (the textbook's follows it.)
 
 ::: only 9
 $$
-v_{2} = -\dfrac{gm\,rd\,rg\,rl\,v1}{r1\,rd + r1\,rl + rd\,rg + rg\,rl}
+v_{2} = -\dfrac{gm\,rd\,rg\,rl\,v_{1}}{r_{1}\,rd + r_{1}\,rl + rd\,rg + rg\,rl}
 $$
 :::
 
@@ -2217,7 +2217,7 @@ answer below it.
 
 ::: only 9
 $$
-v_{o} = \dfrac{vs\,(g2\,\mu + gx)}{g2\,\mu + g2 + gl + gx}
+v_{o} = \dfrac{vs\,(g_{2}\,\mu + gx)}{g_{2}\,\mu + g_{2} + gl + gx}
 $$
 :::
 
@@ -2267,7 +2267,7 @@ Compare my answer, first below, to the book's answer beneath it.
 
 ::: only 9
 $$
-i_{rb} = \dfrac{vcc + v\gamma}{re1\,\beta + re1 + rb}
+i_{rb} = \dfrac{vcc + v\gamma}{re_{1}\,\beta + re_{1} + rb}
 $$
 :::
 
