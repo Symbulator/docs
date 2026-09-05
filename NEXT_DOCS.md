@@ -31,7 +31,10 @@ app links, so *Copy* is not a word the search finds on every page.
 
 Verified live on Lesson 11: sixteen buttons on the page; a real mouse
 click on the first transfer-function box's pill wrote to the clipboard
-(the browser harness reported the write) and the pill said *Copied*.
+(the browser harness reported the write) and the pill said *Copied*. The
+PDFs were rebuilt and deployed straight after (v7 234 / v8 221 / v9 278
+pages, unchanged in count), so they carry the evening's wording; the
+button itself is web-only, as the TeX shows no *Copy*.
 Worth knowing: a *programmatic* click fails both routes and shows
 *Select and copy*, because the clipboard needs a user activation that a
 script's `click()` does not carry -- so an automated check of this button
