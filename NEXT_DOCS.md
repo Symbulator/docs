@@ -8,7 +8,7 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #312 — one sun-and-moon in the split view — **done and live (web), 7 Sep 2026; the app's half awaits Roberto's pull**
+## #312 — one sun-and-moon in the split view — **done and live, 7 Sep 2026, both halves**
 
 Roberto, 7 Sep 2026: *"We get duplicate dark mode toggle buttons now on
 the app side of split. Can you think of a way of solving that
