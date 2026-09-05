@@ -77,6 +77,11 @@ of #282 and #283.
 
 ---
 
+## #285 — claimed by the app tree (6 Sep 2026)
+
+The app's footer reworded, no copyright sign; write-up in
+`Application/v9/repos/local/NEXT.md`. Nothing for the docs.
+
 ## #283 — claimed by the app tree (6 Sep 2026)
 
 The MIT `LICENSE` file added to `server` and to this repository; write-up

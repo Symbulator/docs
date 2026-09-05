@@ -1715,15 +1715,13 @@ r4,3,0,1
 ```
 
 ::: only 9
-The answers you want are `v1`, `v2` and `v3`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
 The answer, {{o:{-1,2,5}}}, is correct.
 :::
 ::: only 9
-The answers are:
-
 ::: result voltage of node 1
 v_{1} = -1\ \mathrm{V}
 :::
@@ -1767,15 +1765,13 @@ ed,4,0,2*vr4
 ```
 
 ::: only 9
-The answers you want are `v1`, `v2`, `v3` and `v4`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
 The answer, {{o:{1.5,-.5,-2.5,-4.}}}, is correct.
 :::
 ::: only 9
-The answers are:
-
 ::: result voltage of node 1
 v_{1} = 1.5\ \mathrm{V}
 :::
@@ -1824,15 +1820,13 @@ r2,2,4,1/2
 ```
 
 ::: only 9
-The answers you want are `v1`, `v2`, `v3` and `v4`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
 The answer, {{o:{-1,-2.,1.,.5}}}, is correct.
 :::
 ::: only 9
-The answers are:
-
 ::: result voltage of node 1
 v_{1} = -1\ \mathrm{V}
 :::

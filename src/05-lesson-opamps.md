@@ -333,15 +333,13 @@ o,0,1,o
 ```
 
 ::: only 9
-The answers you want are `vo` and `ir1`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
 The answer, {{o:{-1.25, 5e-5}}}, is correct.
 :::
 ::: only 9
-The answers are:
-
 ::: result voltage of node o
 v_{o} = -1.25\ \mathrm{V}
 :::
@@ -1092,7 +1090,7 @@ o,0,a,o
 ```
 
 ::: only 9
-The answers you want are `vo` and `io`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -1100,8 +1098,14 @@ The answer, {{o:{-8.,-.0048}}}, is correct. Notice a current of 4.8mA is going
 into the op amp.
 :::
 ::: only 9
-The answer is `vo` = {{o:-8}} V and `io` = {{o:-.0048}} A. This is correct. Notice a
-current of 4.8mA is going into the op amp.
+::: result voltage of node o
+v_{o} = -8\ \mathrm{V}
+:::
+::: result
+i_{o} = -.0048\ \mathrm{A}
+:::
+
+This is correct. Notice a current of 4.8mA is going into the op amp.
 :::
 
 :::
@@ -1135,7 +1139,7 @@ o,0,8,o
 ```
 
 ::: only 9
-The answers you want are `vo` and `io`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -1143,8 +1147,14 @@ The answer, {{o:{-3.8,-.001425}}}, is correct. Again, the current is going into
 the op amp.
 :::
 ::: only 9
-The answer is `vo` = {{o:-3.8}} V and `io` = {{o:-.001425}} A. This is correct. Again, the
-current is going into the op amp.
+::: result voltage of node o
+v_{o} = -3.8\ \mathrm{V}
+:::
+::: result
+i_{o} = -.001425\ \mathrm{A}
+:::
+
+This is correct. Again, the current is going into the op amp.
 :::
 
 :::
