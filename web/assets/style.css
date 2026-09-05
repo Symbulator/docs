@@ -618,6 +618,24 @@ em.var { font-weight: 600; font-style: italic; }
    wrapped element would read as two. */
 .code.field code { white-space: pre; }
 
+/* A card answer as the app shows it (#276, Roberto, 6 Sep 2026): the
+   label the Results card uses -- current through, resistance seen -- over
+   the typeset answer, on the returned-output panel. The label sits inside
+   at the top left, the way a field's name does; the panel's colours are
+   .code.out's, so it follows the page's mode like every other panel. */
+.code.result {
+  background: var(--paper-2); border: 1px solid var(--rule);
+  border-left: 3px solid var(--ink-3); border-radius: 6px;
+  padding: 1.5rem 0.9rem 0.4rem;
+}
+.code.result .code-label {
+  top: 0.5rem; left: 0.85rem; right: auto;
+  transform: none; background: none; padding: 0;
+  text-transform: none; letter-spacing: 0.01em;
+  font-size: 0.72rem; font-weight: 400; color: var(--ink-2);   /* plain, not bold (Roberto, 6 Sep) */
+}
+.code.result .mathblock { margin: 0.2rem 0 0.6rem; }
+
 
 .code code {
   background: none; border: 0; padding: 0;

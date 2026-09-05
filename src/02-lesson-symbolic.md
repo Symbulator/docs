@@ -124,9 +124,19 @@ took a couple of seconds in my calculator.}}{{v9|The answer comes back at once.}
 
 Both are expressions rather than numbers:
 
+::: only 7,8
 $$
 i_{r1} = \dfrac{v}{r_{1} + r_{2}} \quad\text{and}\quad v_{r2} = \dfrac{r_{2}\,v}{r_{1} + r_{2}}
 $$
+:::
+::: only 9
+::: result
+i_{r1} = \dfrac{v}{r_{1} + r_{2}}
+:::
+::: result
+v_{r2} = \dfrac{r_{2}\,v}{r_{1} + r_{2}}
+:::
+:::
 
 which is the voltage divider you would have written by hand.
 
@@ -210,17 +220,17 @@ The problem says that {{var:I_3}} is 6 mA. In Symbulator, {{var:I_3}} is `ir3`, 
 and you will see an expression rather than a number, in terms of the two
 unknowns, **e** and **r1**:
 
-$$
+::: result
 i_{r3} = \dfrac{e}{r_{1} + 10000}
-$$
+:::
 
 This is what we call a symbolic answer.
 The problem also says that {{var:R_T}} is 12 kΩ; the equivalent resistance as seen by
 the source **e** is `re`, which is:
 
-$$
+::: result
 r_{e} = r_{1} + 10000
-$$
+:::
 
 We can then write two new equations
 and solve them for **e** and **r1**.

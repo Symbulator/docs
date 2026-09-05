@@ -2065,9 +2065,9 @@ The answer, shown first below, is correct. The textbook's answer follows it.
 :::
 
 ::: only 9
-$$
+::: result voltage of node o
 v_{o} = -\dfrac{r\,rl\,vs}{rc\,rp + rc\,rs + rl\,rp + rl\,rs}
-$$
+:::
 :::
 
 ::: figure assets/practice/tr5s-example-4-1-symbolic-41.jpg
@@ -2126,9 +2126,9 @@ below (the textbook's follows it.)
 :::
 
 ::: only 9
-$$
+::: result voltage of node 2
 v_{2} = -\dfrac{gm\,rd\,rg\,rl\,v_{1}}{r_{1}\,rd + r_{1}\,rl + rd\,rg + rg\,rl}
-$$
+:::
 :::
 
 ::: figure assets/practice/bo2s-example-1-11-symbolic-44.jpg
@@ -2216,9 +2216,9 @@ answer below it.
 :::
 
 ::: only 9
-$$
+::: result voltage of node o
 v_{o} = \dfrac{vs\,(g_{2}\,\mu + gx)}{g_{2}\,\mu + g_{2} + gl + gx}
-$$
+:::
 :::
 
 ::: figure assets/practice/tr5s-exercise-4-3-symbolic-49.jpg
@@ -2266,9 +2266,9 @@ Compare my answer, first below, to the book's answer beneath it.
 :::
 
 ::: only 9
-$$
+::: result
 i_{rb} = \dfrac{vcc + v\gamma}{re_{1}\,\beta + re_{1} + rb}
-$$
+:::
 :::
 
 ::: figure assets/practice/tr5s-example-4-5-symbolic-52.jpg

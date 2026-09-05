@@ -177,8 +177,20 @@ Make MAIN your current folder before you simulate.
 | `not` | `8` | contents hidden in those versions |
 | `web` `pdf` | — | contents shown on the website only, or in the PDFs only |
 | `address` | the URL, as it should be read | — (empty; still closed with `:::`) |
+| `result` | optional label (else derived from the name) | one answer in LaTeX, `r_{e} = r_{1} + 10000`, kept raw |
 
 Directives nest. Close every one with `:::`.
+
+`result` shows a card answer the way the app does: a small label in the
+card's words — *current through*, *resistance seen* — over the typeset
+answer, on the returned-output panel. The body is one LaTeX line, kept raw
+(no inline markup applies), written with the name in front in the app's
+form: `i_{r3} = \dfrac{e}{r_{1} + 10000}`. The label is derived from the
+name — *current through r3*, *voltage drop in c*, *power consumed by r1*,
+*resistance seen by e* — and names the element, which the app's card shows
+once as a heading but a single panel cannot; give the label as the argument
+to say otherwise (`::: result voltage of node 2`). Version 9 only in practice: 7 and 8 show what
+the calculator printed.
 
 `address` sets a URL on a line of its own, centred, on the input panel's
 tint, for an address the reader is meant to share or type -- the split

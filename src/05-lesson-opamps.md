@@ -674,9 +674,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result voltage of node o
 v_{o} = \left(\dfrac{r_{1} + rf}{r_{1}}\right) vi
-$$
+:::
 :::
 
 :::
@@ -1235,9 +1235,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result voltage of node o
 v_{o} = \dfrac{r_{1}\,r_{4}\,v_{2} - r_{2}\,\bigl(r_{3}\,v_{1} + r_{4}\,(v_{1} - v_{2})\bigr)}{r_{1}\,(r_{3} + r_{4})}
-$$
+:::
 :::
 
 This expression is equivalent to the book's answer.
@@ -1301,9 +1301,9 @@ Define v1=1:Define v2=0:expand(vo)=–5
 Conditions again, this time on the inputs rather than the resistors:
 `v1 = 1` and `v2 = 0`. Then `vo` is
 
-$$
+::: result voltage of node o
 v_{o} = -\frac{r_{2}}{r_{1}}
-$$
+:::
 
 which is equivalent to the book's expression, and it is that which has to
 equal −5.
@@ -1326,9 +1326,9 @@ Define v1=0:Define v2=1:expand(vo)=3
 ::: only 9
 With `v1 = 0` and `v2 = 1` instead, `vo` is
 
-$$
+::: result voltage of node o
 v_{o} = \frac{r_{4} \left(r_{1} + r_{2}\right)} {r_{1} \left(r_{3} + r_{4}\right)}
-$$
+:::
 
 which is equivalent to the book's expression, and it is that which has to
 equal 3.
@@ -1828,9 +1828,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result voltage of node o
 v_{o} = -\dfrac{r_{2}\,r_{4}\,v_{1}}{r_{1}\,r_{3}} - \dfrac{r_{4}\,v_{1}}{r_{3}} + \dfrac{r_{4}\,v_{2}}{r_{3}} + v_{2}
-$$
+:::
 :::
 
 Playing with it by hand we get a form that, in my opinion, is *prettier* ;-)
@@ -1843,9 +1843,9 @@ v1\left(\dfrac{r4}{r3}\right)\left(\dfrac{r2}{r1} + 1\right)
 $$
 :::
 ::: only 9
-$$
+::: result voltage of node o
 v_{o} = v_{2}\left(\dfrac{r_{4}}{r_{3}} + 1\right) - v_{1}\left(\dfrac{r_{4}}{r_{3}}\right)\left(\dfrac{r_{2}}{r_{1}} + 1\right)
-$$
+:::
 :::
 
 :::
@@ -1884,9 +1884,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result voltage of node o
 v_{o} = -\left(\dfrac{r_{1} + r_{2} + r_{3}}{r_{2}}\right)(v_{1} - v_{2})
-$$
+:::
 :::
 
 This is exactly the answer from the book:

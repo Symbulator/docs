@@ -339,9 +339,9 @@ e^{-t/cr} (r v)/(r+r1)
 $$
 :::
 ::: only 9
-$$
+::: result
 v_{c} = e^{-t/cr} (r v)/(r+r_{1})
-$$
+:::
 :::
 
 :::
@@ -421,12 +421,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= 6e^{-4t} \\
-i_{c} &= -2e^{-4t}
-\end{aligned}
-$$
+::: result
+v_{c} = 6e^{-4t}
+:::
+::: result
+i_{c} = -2e^{-4t}
+:::
 :::
 
 :::
@@ -496,13 +496,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= 8e^{-2t} \\
-i_{c} &= (-4/3)e^{-2t} \\
-v_{2} &= (8/3)e^{-2t}
-\end{aligned}
-$$
+::: result
+v_{c} = 8e^{-2t}
+:::
+::: result
+i_{c} = (-4/3)e^{-2t}
+:::
+::: result voltage of node 2
+v_{2} = (8/3)e^{-2t}
+:::
 :::
 
 :::
@@ -572,13 +574,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= 6e^{-5t} \\
-i_{c} &= -3e^{-5t} \\
-v_{1} &= 3e^{-5t}
-\end{aligned}
-$$
+::: result
+v_{c} = 6e^{-5t}
+:::
+::: result
+i_{c} = -3e^{-5t}
+:::
+::: result voltage of node 1
+v_{1} = 3e^{-5t}
+:::
 :::
 
 :::
@@ -622,13 +626,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{l} &= -il_{0} r e^{(-r t)/l} \\
-i_{l} &= il_{0} e^{(-r t)/l} \\
-v_{r} &= -il_{0} r e^{(-r t)/l}
-\end{aligned}
-$$
+::: result
+v_{l} = -il_{0} r e^{(-r t)/l}
+:::
+::: result
+i_{l} = il_{0} e^{(-r t)/l}
+:::
+::: result
+v_{r} = -il_{0} r e^{(-r t)/l}
+:::
 :::
 
 :::
@@ -685,9 +691,9 @@ e^{(-r t)/l}v/r1
 $$
 :::
 ::: only 9
-$$
+::: result
 i_{l} = e^{(-r t)/l}v/r_{1}
-$$
+:::
 :::
 
 :::
@@ -753,13 +759,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-i_{l} &= 2e^{-3t} \\
-v_{l} &= -6 e^{-3t} \\
-i_{r4} &= (3/2)e^{-3t}
-\end{aligned}
-$$
+::: result
+i_{l} = 2e^{-3t}
+:::
+::: result
+v_{l} = -6 e^{-3t}
+:::
+::: result
+i_{r4} = (3/2)e^{-3t}
+:::
 :::
 
 {{v7,8|In my machine the simulation took 30 seconds, 12 seconds of these (40%)
@@ -802,9 +810,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 i_{l} = 5e^{((-R t)/3L)}
-$$
+:::
 :::
 
 :::
@@ -870,12 +878,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-i_{l} &= 2 e^{-2t} \\
-v_{l} &= -64 e^{-2t}
-\end{aligned}
-$$
+::: result
+i_{l} = 2 e^{-2t}
+:::
+::: result
+v_{l} = -64 e^{-2t}
+:::
 :::
 
 :::
@@ -942,13 +950,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= 10 e^{-4t} \\
-i_{c} &= -2 e^{-4t} \\
-v_{o} &= -10 e^{-4t}
-\end{aligned}
-$$
+::: result
+v_{c} = 10 e^{-4t}
+:::
+::: result
+i_{c} = -2 e^{-4t}
+:::
+::: result voltage of node o
+v_{o} = -10 e^{-4t}
+:::
 :::
 
 :::
@@ -1015,13 +1025,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= 10 e^{-4t} \\
-i_{c} &= -2 e^{-4t} \\
-v_{o} &= 10 e^{-4t}
-\end{aligned}
-$$
+::: result
+v_{c} = 10 e^{-4t}
+:::
+::: result
+i_{c} = -2 e^{-4t}
+:::
+::: result voltage of node o
+v_{o} = 10 e^{-4t}
+:::
 :::
 
 :::
@@ -1091,12 +1103,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= 8 e^{-t} \\
-i_{c} &= -2 e^{-t}
-\end{aligned}
-$$
+::: result
+v_{c} = 8 e^{-t}
+:::
+::: result
+i_{c} = -2 e^{-t}
+:::
 :::
 
 The capacitor's voltage at the end of this second interval is the initial
@@ -1125,12 +1137,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= 2.943 e^{(-5(t-1))/3} \\
-i_{c} &= -1.226 e^{(-5(t-1))/3}
-\end{aligned}
-$$
+::: result
+v_{c} = 2.943 e^{(-5(t-1))/3}
+:::
+::: result
+i_{c} = -1.226 e^{(-5(t-1))/3}
+:::
 :::
 
 These are the right answers, as can be seen by checking the book's answers.
@@ -1207,12 +1219,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-i_{l} &= 3 e^{-2t} \\
-v_{l} &= -36 e^{-2t}
-\end{aligned}
-$$
+::: result
+i_{l} = 3 e^{-2t}
+:::
+::: result
+v_{l} = -36 e^{-2t}
+:::
 :::
 
 The inductor's current at the end of this second interval is the initial
@@ -1253,12 +1265,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-i_{l} &= .055 e^{(-(t-2)/2)} \\
-v_{l} &= -.165 e^{(-(t-2)/2)}
-\end{aligned}
-$$
+::: result
+i_{l} = .055 e^{(-(t-2)/2)}
+:::
+::: result
+v_{l} = -.165 e^{(-(t-2)/2)}
+:::
 :::
 
 These are the kind of expressions your book or professor are looking for.
@@ -1306,13 +1318,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= v-v e^{(-t/(c r))} \\
-v_{r} &= v e^{(-t/(c r))} \\
-i_{c} &= (v/r)e^{(-t/(c r))}
-\end{aligned}
-$$
+::: result
+v_{c} = v-v e^{(-t/(c r))}
+:::
+::: result
+v_{r} = v e^{(-t/(c r))}
+:::
+::: result
+i_{c} = (v/r)e^{(-t/(c r))}
+:::
 :::
 
 :::
@@ -1354,13 +1368,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{l} &= v e^{(-r t)/l} \\
-v_{r} &= v (1-e^{(-r t)/l}) \\
-i_{l} &= (v/r)(1-e^{(-r t)/l})
-\end{aligned}
-$$
+::: result
+v_{l} = v e^{(-r t)/l}
+:::
+::: result
+v_{r} = v (1-e^{(-r t)/l})
+:::
+::: result
+i_{l} = (v/r)(1-e^{(-r t)/l})
+:::
 :::
 
 :::
@@ -1402,13 +1418,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-i_{l} &= 2-2e^{-3t} \\
-v_{l} &= 12 e^{-3t} \\
-v_{2} &= 8 e^{-3t}+4
-\end{aligned}
-$$
+::: result
+i_{l} = 2-2e^{-3t}
+:::
+::: result
+v_{l} = 12 e^{-3t}
+:::
+::: result voltage of node 2
+v_{2} = 8 e^{-3t}+4
+:::
 :::
 
 :::
@@ -1451,13 +1469,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{1} &= (i-i e^{-t/(c r)}) \cdot r \\
-i_{r} &= i-i e^{-t/(c r)} \\
-i_{c} &= i e^{-t/(c r)}
-\end{aligned}
-$$
+::: result voltage of node 1
+v_{1} = (i-i e^{-t/(c r)}) \cdot r
+:::
+::: result
+i_{r} = i-i e^{-t/(c r)}
+:::
+::: result
+i_{c} = i e^{-t/(c r)}
+:::
 :::
 
 :::
@@ -1501,13 +1521,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= 2 e^{-4t}-2 \\
-i_{c} &= -e^{-4t} \\
-v_{o} &= 3-2e^{-4t}
-\end{aligned}
-$$
+::: result
+v_{c} = 2 e^{-4t}-2
+:::
+::: result
+i_{c} = -e^{-4t}
+:::
+::: result voltage of node o
+v_{o} = 3-2e^{-4t}
+:::
 :::
 
 :::
@@ -1550,13 +1572,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= 2-2 e^{-4t} \\
-i_{c} &= e^{-4t} \\
-v_{o} &= 2 e^{-4t}-2
-\end{aligned}
-$$
+::: result
+v_{c} = 2-2 e^{-4t}
+:::
+::: result
+i_{c} = e^{-4t}
+:::
+::: result voltage of node o
+v_{o} = 2 e^{-4t}-2
+:::
 :::
 
 :::
@@ -1602,9 +1626,9 @@ v-v e^{(-t/(c r))}
 $$
 :::
 ::: only 9
-$$
+::: result
 v_{c} = v-v e^{(-t/(c r))}
-$$
+:::
 :::
 
 The second interval starts at {{var:t_0}}. In it, the initial condition of the
@@ -1633,9 +1657,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 v_{c} = (v-v e^{(-to/(c r))})e^{((-t+to)/(c r))}
-$$
+:::
 :::
 
 ```sym 7
@@ -1700,9 +1724,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 i_{l} = (v/r)(1-e^{((-r t)/l)})
-$$
+:::
 :::
 
 The second interval starts at {{var:t_0}}. In it, the initial condition of the
@@ -1732,9 +1756,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 i_{l} = (v/r)(1-e^{((-to r)/l)})e^{((-r t)/l)}
-$$
+:::
 :::
 
 ```sym 7
@@ -1763,9 +1787,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 i_{l} = (v/r)(1-e^{((-to r)/l)})e^{((-r (t-to))/l)}
-$$
+:::
 :::
 
 This is the expression for the inductor's current in the second interval.
@@ -1833,9 +1857,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 v_{c} = 6e^{( -t/6)}-4
-$$
+:::
 :::
 
 This is the expression for the voltage drop in the capacitor after t=0.
@@ -1930,9 +1954,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 v_{c} = 4e^{(-2t)}-6
-$$
+:::
 :::
 
 :::
@@ -1970,9 +1994,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 v_{c} = (i/c)e^{(-t/(c r))}
-$$
+:::
 :::
 
 ::: only 7,8
@@ -1981,9 +2005,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 i_{c} = (-i/(c r))e^{(-t/(c r))}
-$$
+:::
 :::
 
 ::: only 9
@@ -2044,13 +2068,15 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= -8 e^{-4t} \\
-i_{c} &= 4 e^{-4t} \\
-v_{o} &= 8 e^{-4t}
-\end{aligned}
-$$
+::: result
+v_{c} = -8 e^{-4t}
+:::
+::: result
+i_{c} = 4 e^{-4t}
+:::
+::: result voltage of node o
+v_{o} = 8 e^{-4t}
+:::
 :::
 
 :::
@@ -2088,12 +2114,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-i_{l} &= ((i l)/r)(e^{((-r t)/l)}-1)+i t \\
-v_{l} &= i l(1-e^{((-r t)/l)})
-\end{aligned}
-$$
+::: result
+i_{l} = ((i l)/r)(e^{((-r t)/l)}-1)+i t
+:::
+::: result
+v_{l} = i l(1-e^{((-r t)/l)})
+:::
 :::
 
 :::
@@ -2131,12 +2157,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= (1/2)(1-e^{-4t})-2t \\
-i_{c} &= (1/4)(e^{-4t}-1)
-\end{aligned}
-$$
+::: result
+v_{c} = (1/2)(1-e^{-4t})-2t
+:::
+::: result
+i_{c} = (1/4)(e^{-4t}-1)
+:::
 :::
 
 :::
@@ -2176,12 +2202,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-i_{l} &= 6 e^{-3t}-6 e^{-4t} \\
-v_{l} &= 48 e^{-4t}-36 e^{-3t}
-\end{aligned}
-$$
+::: result
+i_{l} = 6 e^{-3t}-6 e^{-4t}
+:::
+::: result
+v_{l} = 48 e^{-4t}-36 e^{-3t}
+:::
 :::
 
 :::
@@ -2218,12 +2244,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-i_{l} &= 6 t e^{-3t} \\
-v_{l} &= (12-36 t) e^{-3t}
-\end{aligned}
-$$
+::: result
+i_{l} = 6 t e^{-3t}
+:::
+::: result
+v_{l} = (12-36 t) e^{-3t}
+:::
 :::
 
 :::
@@ -2263,12 +2289,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= 9 e^{(-t/6)}-9 e^{(-t/2)} \\
-i_{r3} &= (3/2) e^{(-t/2)}-(1/2)e^{(-t/6)}
-\end{aligned}
-$$
+::: result
+v_{c} = 9 e^{(-t/6)}-9 e^{(-t/2)}
+:::
+::: result
+i_{r3} = (3/2) e^{(-t/2)}-(1/2)e^{(-t/6)}
+:::
 :::
 
 :::
@@ -2305,12 +2331,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= -16 t e^{-4 t} \\
-i_{c} &= (8 t-2) e^{-4t}
-\end{aligned}
-$$
+::: result
+v_{c} = -16 t e^{-4 t}
+:::
+::: result
+i_{c} = (8 t-2) e^{-4t}
+:::
 :::
 
 :::
@@ -2374,12 +2400,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= 4 e^{-2t}-2 e^{-8t} \\
-i_{l} &= 2 e^{-8t}-e^{-2t}
-\end{aligned}
-$$
+::: result
+v_{c} = 4 e^{-2t}-2 e^{-8t}
+:::
+::: result
+i_{l} = 2 e^{-8t}-e^{-2t}
+:::
 :::
 
 {{v7,8|Notice that the use of the only tool saves approximately 10 seconds
@@ -2499,9 +2525,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 v_{c} = 3e^{-2t}-e^{-6t}
-$$
+:::
 :::
 
 ::: only 7,8
@@ -2510,9 +2536,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 i_{l} = 2e^{-6t}-2e^{-2t}
-$$
+:::
 :::
 
 {{v7,8|Using `only` saves about 13 seconds, or about a third of the
@@ -2634,9 +2660,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 v_{c} = (-7/50)e^{-3t}\cos(4t)-(1/50)e^{-3t}\sin(4t)
-$$
+:::
 :::
 
 ::: only 7,8
@@ -2645,9 +2671,9 @@ e^{-3t}\cos(4t)-e^{-3t}\sin(4t)
 $$
 :::
 ::: only 9
-$$
+::: result
 i_{l} = e^{-3t}\cos(4t)-e^{-3t}\sin(4t)
-$$
+:::
 :::
 
 {{v7,8|The TR simulation took 30 s in my calculator. }}These are the right
@@ -2712,12 +2738,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= (3t+2)e^{-2t} \\
-i_{l} &= (1-3t)e^{-2t}
-\end{aligned}
-$$
+::: result
+v_{c} = (3t+2)e^{-2t}
+:::
+::: result
+i_{l} = (1-3t)e^{-2t}
+:::
 :::
 
 :::
@@ -2921,9 +2947,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 i_{l2} = (12/11)(e^{-3t}-e^{-t/4})
-$$
+:::
 :::
 
 :::
@@ -2976,9 +3002,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result voltage of node o
 v_{o} = (-4t-4)e^{-t}
-$$
+:::
 :::
 
 ```sym 7
@@ -3033,9 +3059,9 @@ vc
 -(2/5)e{{sup:-3t}}cos(4t)-(3/10)e{{sup:-3t}}sin(4t)+2/5
 :::
 ::: only 9
-$$
+::: result
 v_{c} = -\tfrac{2}{5}e^{-3t}\cos(4t) - \tfrac{3}{10}e^{-3t}\sin(4t) + \tfrac{2}{5}
-$$
+:::
 :::
 
 ```sym 7
@@ -3051,9 +3077,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 i_{l} = (1/20)e^{-3t}\sin(4t)
-$$
+:::
 :::
 
 ::: only 9
@@ -3097,12 +3123,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-v_{c} &= -4e^{-2t}+e^{-8t}+3 \\
-i_{l} &= e^{-2t}-e^{-8t}
-\end{aligned}
-$$
+::: result
+v_{c} = -4e^{-2t}+e^{-8t}+3
+:::
+::: result
+i_{l} = e^{-2t}-e^{-8t}
+:::
 :::
 
 :::
@@ -3131,9 +3157,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 v_{c} = 2e^{-2t}-(e^{-8t})/8+3t-15/8
-$$
+:::
 :::
 
 :::
@@ -3223,12 +3249,12 @@ $$
 $$
 :::
 ::: only 9
-$$
-\begin{aligned}
-i_{l} &= (-t-1)e^{-t}+1 \\
-v_{c} &= 2te^{-t}
-\end{aligned}
-$$
+::: result
+i_{l} = (-t-1)e^{-t}+1
+:::
+::: result
+v_{c} = 2te^{-t}
+:::
 :::
 
 :::
@@ -3264,9 +3290,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result voltage of node o
 v_{o} = 1-e^{-t} \cos(2t)-(1/2)e^{-t} \sin(2t)
-$$
+:::
 :::
 
 :::
@@ -3409,13 +3435,13 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result voltage of node 1
 \begin{aligned}
 v_{1} &= (53/17-20/17)e^{-t} \cos(2t) \\
 &+ (-203/17-5/17)e^{-t} \sin(2t) \\
 &+ (803/17+193/34)e^{-t/2}+(9/2-53)e^{-t}
 \end{aligned}
-$$
+:::
 :::
 
 ::: only 7,8
@@ -3428,13 +3454,13 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result voltage of node 2
 \begin{aligned}
 v_{2} &= (-2453/34-20/17)e^{-t} \cos(2t) \\
 &+ (245/34-203/17)e^{-t} \sin(2t) \\
 &+ (803/17+193/34)e^{-t/2}+(53/2-9/4)e^{-t}
 \end{aligned}
-$$
+:::
 :::
 
 ::: only 9

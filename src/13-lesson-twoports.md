@@ -357,9 +357,9 @@ parameters ride in the description, so the answers come back as numbers.
 Leave the fourth term off — `h,2,3` alone — and the same run answers with
 formulas instead:
 
-$$
+::: result
 v_{th} = \dfrac{-60\,h_{21}}{h_{11}h_{22} - h_{12}h_{21} + 40\,h_{22}}
-$$
+:::
 
 which is useful in its own right: put `vth` in **Evaluate** with the four
 parameters in its **Conditions** box, and the same number falls out.

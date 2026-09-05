@@ -1605,9 +1605,9 @@ $$
 $$
 :::
 ::: only 9
-$$
+::: result
 R_{eq} = \dfrac{9x - 35}{4(x - 3)}
-$$
+:::
 :::
 
 will divide by zero at $x = 3$ — the very value we replaced.

@@ -241,6 +241,16 @@
   \ttfamily\small\href{#1}{\textcolor{accent}{#2}}%
   \end{tcolorbox}\color{ink}\vspace{1mm}}
 
+% A card answer as the app shows it (#276): the label over the typeset
+% answer, on the returned-output panel -- symout's grey and slate rule --
+% always the light panel in print. #1 is the label, already escaped.
+\newenvironment{symresult}[1]
+  {\par\vspace{1mm}\begin{tcolorbox}[breakable,enhanced,boxrule=0pt,
+     frame empty, colback=panel, left=3mm,right=3mm,top=1.6mm,bottom=0.2mm,
+     borderline west={2.2pt}{0pt}{slate}, sharp corners]
+   \ifx\relax#1\relax\else{\sffamily\footnotesize\color{slate}#1}\par\vspace{-2mm}\fi}
+  {\end{tcolorbox}\color{ink}\vspace{1mm}}
+
 \newenvironment{symout}
   {\par\vspace{1mm}\begin{tcolorbox}[breakable,enhanced,boxrule=0pt,
      frame empty, colback=panel, left=3mm,right=3mm,top=1.6mm,bottom=1.6mm,

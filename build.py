@@ -187,7 +187,39 @@ class SourceError(Exception):
 # --------------------------------------------------------------------------
 
 DIRECTIVES = {"tip", "note", "warning", "danger", "figure", "problem",
-              "answer", "practice", "only", "not", "web", "pdf", "address"}
+              "answer", "practice", "only", "not", "web", "pdf", "address",
+              "result"}
+
+#: The label a ::: result panel shows over an answer, from the name in
+#: front of it (#276) -- the app's own words, from _ELEMENT_KEYS and
+#: _TOOL_LABELS in repos/server/symbulator_ui.py. The directive's argument
+#: overrides it: `::: result node voltage`.
+#: With the element named (Roberto, 6 Sep 2026 -- a departure from the
+#: app, whose card shows the element once as a heading the reader of a
+#: single panel cannot see): "current through r3", "voltage drop in c",
+#: "power consumed by r1", "resistance seen by e".
+RESULT_LABELS = {"i": "current through {}", "v": "voltage drop in {}",
+                 "p": "power consumed by {}", "r": "resistance seen by {}",
+                 "z": "impedance seen by {}", "s": "complex power in {}"}
+RESULT_SPECIAL = {"v_{th}": "Thévenin voltage", "i_{no}": "Norton current",
+                  "R_{eq}": "equivalent resistance",
+                  "Z_{eq}": "equivalent impedance",
+                  "p_{max}": "maximum deliverable power"}
+
+
+def result_label(text: str, arg: str) -> str:
+    """The label for a result panel: the argument if given, else derived
+    from the name before the `=`; empty when there is no name."""
+    if arg.strip():
+        return arg.strip()
+    m = re.match(r"\s*([A-Za-z]_\{[^}]*\})\s*&?=", text)
+    if not m:
+        return ""
+    name = m.group(1)
+    if name in RESULT_SPECIAL:
+        return RESULT_SPECIAL[name]
+    elem = re.sub(r"[\\{}]", "", name[3:-1])      # the subscript, plain
+    return RESULT_LABELS.get(name[0], "").format(elem).strip()
 
 #: The two output media. `::: web` / `::: pdf` blocks and `{{web|...}}` /
 #: `{{pdf|...}}` spans show in one of them only; a pass that is not
@@ -321,7 +353,10 @@ def parse_blocks(lines: list[str], path: str, depth: int = 0) -> list[Node]:
         if m and m.group(1) in DIRECTIVES:
             name, arg = m.group(1), m.group(2).strip()
             inner, consumed = collect_directive(lines[i + 1:], path, depth + 1)
-            node = Node(name, arg=arg, children=parse_blocks(inner, path, depth + 1))
+            if name == "result":            # #276: the body is LaTeX, kept raw
+                node = Node(name, arg=arg, text="\n".join(l for l in inner if l.strip()))
+            else:
+                node = Node(name, arg=arg, children=parse_blocks(inner, path, depth + 1))
             out.append(node)
             i = i + 1 + consumed
             continue
@@ -816,6 +851,14 @@ class HtmlRenderer:
             label = "type" if cls == "sym" else "returns"
             return (f'<div class="code {cls}"><span class="code-label">{label}'
                     f'</span><pre><code>{body}</code></pre></div>')
+        if k == "result":
+            # #276: a card answer as the app shows it -- the label over the
+            # typeset answer, on the returned-output panel (.code.out's
+            # colours, so it follows the page's mode like every panel).
+            label = html.escape(result_label(b.text, b.arg))
+            lab = f'<span class="code-label">{label}</span>' if label else ""
+            return (f'<div class="code result">{lab}'
+                    f'<div class="mathblock">\\[{html.escape(b.text)}\\]</div></div>')
         if k == "address":
             # #259: an address to share, on a line of its own, centred, on
             # the input panel's tint. The argument is the URL as it should
@@ -1156,6 +1199,10 @@ class TexRenderer:
             lines = (BS * 2 + NL).join(
                 _listing_line(l) for l in b.text.split(chr(10)))
             return f"\\begin{{{env}}}\n{lines}\n\\end{{{env}}}"
+        if k == "result":                    # #276, the PDF side
+            label = tex_escape(result_label(b.text, b.arg))
+            return (f"\\begin{{symresult}}{{{label}}}\n\\[{b.text}\\]\n"
+                    f"\\end{{symresult}}")
         if k == "address":
             # #259, the PDF side: \symaddress in symbulator.cls. The
             # target escapes what hyperref reads specially, the way the

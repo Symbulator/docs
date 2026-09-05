@@ -8,6 +8,51 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #276 — a card answer as the app shows it: the `::: result` panel — **web live 6 Sep 2026, PDFs held**
+
+Roberto, 6 Sep 2026, with a picture of the app's Results card — a small
+label, *resistance seen*, over `r_e = r_1 + 10000` on a panel: *what would
+it take to include the answers in this form, online and PDF?* Not much:
+the field panel, KaTeX/LaTeX and #273's `name = expression` displays were
+the parts; one directive puts them together. Decisions on the way: the
+PDF is the light panel, the web follows the page's mode like every other
+panel; the label is plain, not bold; and — a departure from the app,
+whose card names the element once as a heading that a single panel
+cannot show — the label names the element: *current through r3*,
+*voltage drop in c*, *power consumed by r1*, *resistance seen by e*.
+
+**The directive.** `::: result` with one LaTeX line as its body, kept raw
+(no inline markup), written in the app's form: `i_{r3} = \dfrac{e}{r_{1} +
+10000}`. `build.py` parses it without touching the body, derives the label
+from the name — `RESULT_LABELS` by the kind letter with the element from
+the subscript, `RESULT_SPECIAL` for `v_{th}`, `i_{no}`, `R_{eq}`, `Z_{eq}`,
+`p_{max}` in the app's words — and takes the argument as an override
+(`::: result voltage of node 2`). Web: `<div class="code result">` in the
+returned-output colours (`--paper-2`, the slate rule) with the label
+inside at the top left the way a field's name sits, the display inside.
+PDF: `symresult` in the class, `symout`'s grey panel and rule with the
+label in the sans face. Unit-tested labels; a sample typeset against the
+class; `SPEC.md` has the row.
+
+**The conversion: 67 displays → 112 panels**, one per answer. A set that
+#273 had turned into an aligned list became one panel per row. A `v_{X}`
+whose X is not an element of the nearest circuit description is a node
+voltage and is labelled so — *voltage of node o* in the op-amp problems,
+*node 1* and *node 2* in the transients — which the converter decides by
+reading the description, not by guessing from the letter. Lesson 2's
+shared divider display (*i_{r1} = … and v_{r2} = …*) split by version so
+7 and 8 keep the display. **Left as displays, on purpose:** the four
+Evaluate ratios in Lesson 5 (`v_o / v_s = …`, not a card answer), Lesson
+1's Evaluate expression, Lesson 3's Mini-Tools result, the g-parameter
+tables in Lesson 13 (a table, not a row), the hand-written `i(t) = …`
+sinusoids in Lesson 7, and `v_o(t) = …` in Lesson 12.
+
+**Web only; the PDFs stay held**, now seven items behind the web
+(#270–#276). The class is ready for them: `symresult`, `\symvar`,
+`Scale=0.95`, all proved against the class in samples.
+
+---
+
 ## #275 — the mono type a step larger — **web live 6 Sep 2026, PDF scale set, PDFs held**
 
 Roberto, 6 Sep 2026, on a **Solve** card box: the type in the field
