@@ -8,6 +8,11 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #279 — claimed by the app tree (6 Sep 2026)
+
+Expert Mode's three labels with the parenthetical *(s)*, English only; the
+write-up is in `Application/v9/repos/local/NEXT.md`. Nothing for the docs.
+
 ## #278 — claimed by the app tree (6 Sep 2026)
 
 Thirteen colour themes for the app and the scorpion on a transparent

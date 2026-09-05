@@ -3596,9 +3596,9 @@ Expert prompt. In the equations field, paste the new equation, adding the
 word` and `first:
 :::
 ::: only 9
-Choose TR, then open **Expert Mode**. **Add equations** takes one per line:
+Choose TR, then open **Expert Mode**. **Add equation(s)** takes one per line:
 
-```field 9 Add equations
+```field 9 Add equation(s)
 1-e^(-t/2) = vc
 ```
 :::
@@ -3614,9 +3614,9 @@ and 1/s-2/(2*s+1)=vc
 In the unknown field, add the variable a, preceded by a comma:
 :::
 ::: only 9
-**Add unknowns** takes the name:
+**Add unknown(s)** takes the name:
 
-```field 9 Add unknowns
+```field 9 Add unknown(s)
 a
 ```
 :::
@@ -3707,7 +3707,7 @@ vr=s\t2s(e^(–t))
 ::: only 9
 No transform this time either — write what you know:
 
-```field 9 Add equations
+```field 9 Add equation(s)
 vr = e^(-t)
 ```
 :::
@@ -3732,7 +3732,7 @@ When prompted, select TR. In the equations field, add the new equation you
 found:
 :::
 ::: only 9
-Choose TR, and put `vs` in **Add unknowns** beside the equation above.
+Choose TR, and put `vs` in **Add unknown(s)** beside the equation above.
 :::
 
 ```sym 7
@@ -3845,10 +3845,10 @@ l,2,0,1,0
 Choose TR, and add `,vs` to the unknowns and the following to the equations
 :::
 ::: only 9
-Choose TR, put `vs` in **Add unknowns**, and give **Add equations** the
+Choose TR, put `vs` in **Add unknown(s)**, and give **Add equation(s)** the
 answer you know — in time, as always here:
 
-```field 9 Add equations
+```field 9 Add equation(s)
 1-e^(-2*t) = il
 ```
 :::

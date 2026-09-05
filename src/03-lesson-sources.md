@@ -1185,8 +1185,8 @@ Select DC, and press Enter. Add equation `ir2=2'm.` Add unknown `is`. Run the
 simulation.
 :::
 ::: only 9
-Choose DC. Open **Expert Mode**, put `ir2 = 2'm` in **Add equations** and
-`is1` in **Add unknowns**, then **Run Symbulator**.
+Choose DC. Open **Expert Mode**, put `ir2 = 2'm` in **Add equation(s)** and
+`is1` in **Add unknown(s)**, then **Run Symbulator**.
 :::
 
 ::: only 7,8

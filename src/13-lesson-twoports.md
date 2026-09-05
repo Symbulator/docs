@@ -148,7 +148,7 @@ Define any subset and the rest stay symbolic.
 **Leave them undefined**, in which case they stay symbolic and appear in the
 answers as `z11`, `z12`, `z21` and `z22`. That is often what you want —
 the answer as a formula in the parameters. (Pinning them afterwards in
-**Expert Mode**'s **Add equations** still works too, in a plain solve, and an
+**Expert Mode**'s **Add equation(s)** still works too, in a plain solve, and an
 equation or condition there overrides the description's own values.)
 
 ::: note How the variables are named
