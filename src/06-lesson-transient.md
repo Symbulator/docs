@@ -124,9 +124,14 @@ value in farads, and initial condition in volts — here 0 volts.
 Once the simulation is complete, ask for the value of the voltage, `vc`. We get
 this value, which is correct:
 
-```out
+```out 7,8
 t^2/4
 ```
+::: only 9
+::: result voltage drop in c
+v_{c} = \dfrac{t^{2}}{4}
+:::
+:::
 
 For 2 s < t, the voltage is equal to whatever value it had at time 2 s:
 

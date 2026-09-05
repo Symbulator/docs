@@ -326,18 +326,20 @@ very typical case, as functions of the **load** variable:
 - **prl** has the power consumed in the load
 :::
 ::: only 9
-**Results** shows four answers: `vth`, `ino`, `req` and `pmax`. Each load
-quantity is one expression in **Evaluate**, built from two of them. Writing R
-for the load resistance:
+Since this is such a typical problem, Symbulator makes provision for it.
+When the equivalent asked for is *Thévenin / Norton*, a question appears
+under the two node boxes: **Are you running a problem with a load connected
+to this equivalent circuit?** Tick it, and **Results** adds three answers
+under the four, each an expression in the variable **load**, the value of
+the load resistor:
 
-| To find | Type into Evaluate |
-|---|---|
-| the current in the load | `vth/(req+R)` |
-| the voltage drop in the load | `vth*R/(req+R)` |
-| the power consumed in the load | `vth^2*R/(req+R)^2` |
+- **irl** has the current in the load
+- **vrl** has the voltage drop in the load
+- **prl** has the power consumed in the load
 
-Put the load's actual value where R is. Where the problems below mention
-`irL`, `vrL` and `prL`, use those three.
+To read one of them at a given load, ask **Evaluate** for its name and put
+the load's value in the **Conditions** box, as in `load = 2`. Untick the
+question and the four answers are all you see.
 :::
 
 ::: problem B11's Example 9.6
@@ -366,7 +368,7 @@ r2,2,0,6
 ::: only 9
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
 *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0**
-in the second. Choose *DC* and run it.
+in the second. Tick the question about the load. Choose *DC* and run it.
 
 **Results** gives:
 
@@ -375,6 +377,12 @@ v_{th} = 6\ \mathrm{V}
 :::
 ::: result
 R_{eq} = 2\ \Omega
+:::
+
+and, because the load question is ticked, under `pmax`:
+
+::: result current in load
+i_{rl} = \dfrac{6}{load + 2}
 :::
 :::
 ```out 7,8
@@ -391,13 +399,16 @@ this in a single push, or separately. Here I find them in one go:}}
 {irL|Load=2.,irL|Load=10.,irL|Load=100.}
 ```
 ::: only 9
-Ask **Evaluate** three times, once per load:
+Ask **Evaluate** for `irl`, with the load's value in the **Conditions** box:
 
 ```field 9 Evaluate
-vth/(req+2)
+irl
+```
+```field 9 Conditions
+load = 2
 ```
 
-Then `vth/(req+10)`, then `vth/(req+100)`.
+Then `load = 10`, then `load = 100`.
 :::
 ```out 7,8
 {1.5, .5, .059}
@@ -417,8 +428,8 @@ Another problem often associated with the Thévenin / Norton equivalents is
 power transfer to a load, particularly the maximum possible. Maximum power is transferred when the load RL equals the REQ of the
 equivalent. {{v7,8|Symbulator's th script gives}}{{v9|Symbulator gives}} you the maximum power that can be
 delivered in {{v7,8|**pmax**}}{{v9|`pmax`}}, and the power transferred to the
-load as a function of its value in {{v7,8|**prl**}}{{v9|the expression
-`vth^2*R/(req+R)^2` derived above}}.
+load as a function of its value in {{v7,8|**prl**}}{{v9|`prl`, once the load
+question is ticked}}.
 
 ### What if it's more than a load?
 
@@ -437,18 +448,24 @@ equivalent connected, between nodes **n** and **0**, to a load called **rl**
 with a symbolic value of **load**, in ohms.
 :::
 ::: only 9
-The Norton equivalent connected to a load is three lines. Type them into a
-fresh **Circuit Description**, with the numbers **Results** gave you in place
-of `ino` and `req`:
+To help you in those cases, Symbulator writes that circuit for you. With
+the load question ticked, a button appears under it: **Load circuit
+equivalent?** Press it and it warns you first: the equivalent circuit will
+overwrite the **Circuit Description**, **Define** and **Expert Mode** fields
+and switch the analysis to *Solve circuit*, so a circuit you have not saved
+yet can be saved before it goes. Proceed, and the description becomes
 
 ```field 9 Circuit Description
-jn,0,n,ino
-re1,n,0,req
-rl,n,0,load
+jN,0,n,iNo
+rE,n,0,rEq
+rL,n,0,load
 ```
 
-The load `rl` has the symbolic value `load`, so the answers come back in
-terms of it.
+with **Define** holding the values of `iNo` and `rEq` that **Results**
+found, exact rather than rounded, and a value for `load` if you had given
+it one. It is the Norton equivalent connected, between nodes **n** and
+**0**, to a load called **rL** with the symbolic value **load**, in ohms.
+You can use it as a starting point.
 :::
 
 ::: problem RM3's Example 9-8
@@ -476,7 +493,8 @@ j,2,0,560'm
 ```
 
 ::: only 9
-*Find equivalent*, *Thévenin / Norton*, nodes **2** and **0**, in DC.
+*Find equivalent*, *Thévenin / Norton*, nodes **2** and **0**, in DC, with
+the load question ticked.
 :::
 ```out 7,8
 {.36, 84.}
@@ -502,11 +520,18 @@ through {{var:R_L}}, we cannot use the load expressions, because now the load is
 only thing connected to the terminals of the equivalent: there is also a
 current source. We have to run a new simulation.
 
-{{v7,8|The fastest way is to start from the equivalent circuit description:}}{{v9|Start
-from the three-line equivalent above.}}
+{{v7,8|The fastest way is to start from the equivalent circuit description:}}{{v9|The
+fastest way is the button under the load question, **Load circuit
+equivalent?** Proceed past its warning and the description is replaced by
+the equivalent, with `iNo` and `rEq` already in **Define**:}}
 
 ```out 7,8
 "jN,0,n,iNo:rE,n,0,rEq:rL,n,0,L"
+```
+```field 9 Circuit Description
+jN,0,n,iNo
+rE,n,0,rEq
+rL,n,0,load
 ```
 
 We change the value of the load to 168 Ω, and add the 180 mA source flowing
@@ -520,9 +545,9 @@ s\dc("jN,0,n,iNo:rE,n,0,rEq:rL,n,0,168:j,0,n,180'm"):irL
 s\dc("jN,0,n,iNo:rE,n,0,rEq:rL,n,0,168:j,0,n,180'm"):irL
 ```
 ```field 9 Circuit Description
-jn,0,n,-0.36
-re1,n,0,84
-rl,n,0,168
+jN,0,n,iNo
+rE,n,0,rEq
+rL,n,0,168
 j,0,n,180'm
 ```
 
@@ -531,7 +556,8 @@ j,0,n,180'm
 ```
 
 ::: only 9
-Run it in DC. The current through `rl`, `irl`, reads {{o:-0.06}} A.
+The analysis is already *Solve circuit*; run it in DC. The current through
+`rl`, `irl`, reads {{o:-0.06}} A.
 :::
 
 Correct: there is a current of 60 mA flowing through {{var:R_L}} from 0 to n.
@@ -1736,14 +1762,30 @@ The answers you want are `vth` and `req`, in **Results**.
 :::
 
 ::: only 7,8
-We get `{vs*µ/(µ+1),ro}`, which is correct, as can be seen in the textbook's
-answers for {{var:v_T}} and {{var:R_T}}, shown right of the circuit schematic
-above.
+We get
+
+$$
+vth = \dfrac{vs\,\mu}{\mu + 1}
+$$
+$$
+req = ro
+$$
+
+which is correct, as can be seen in the textbook's answers for {{var:v_T}}
+and {{var:R_T}}, shown right of the circuit schematic above.
 :::
 ::: only 9
-We get `vth` = `vs*µ/(µ+1)` and `req` = `ro`, which is correct, as can be
-seen in the textbook's answers for {{var:v_T}} and {{var:R_T}}, shown right of
-the circuit schematic above.
+**Results** gives
+
+::: result Thevenin voltage
+v_{th} = \dfrac{vs\,\mu}{\mu + 1}
+:::
+::: result equivalent resistance
+R_{eq} = ro
+:::
+
+which is correct, as can be seen in the textbook's answers for {{var:v_T}}
+and {{var:R_T}}, shown right of the circuit schematic above.
 :::
 
 :::
@@ -1796,12 +1838,28 @@ The answers you want are `vth` and `req`, in **Results**.
 :::
 
 ::: only 7,8
-The answers we get, **{vs\*µ/(µ+1),ro/(µ+1)}**, are correct, as can be
-seen by comparing them to those in the book:
+The answers we get,
+
+$$
+vth = \dfrac{vs\,\mu}{\mu + 1}
+$$
+$$
+req = \dfrac{ro}{\mu + 1}
+$$
+
+are correct, as can be seen by comparing them to those in the book:
 :::
 ::: only 9
-The answers we get, `vth` = `vs*µ/(µ+1)` and `req` = `ro/(µ+1)`, are correct,
-as can be seen by comparing them to those in the book:
+The answers we get in **Results**,
+
+::: result Thevenin voltage
+v_{th} = \dfrac{vs\,\mu}{\mu + 1}
+:::
+::: result equivalent resistance
+R_{eq} = \dfrac{ro}{\mu + 1}
+:::
+
+are correct, as can be seen by comparing them to those in the book:
 :::
 
 ::: figure assets/practice/tr5s-example-4-8-symbolic-37.jpg
@@ -1843,26 +1901,29 @@ r1,2,3,1
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `vth` and `req`, in **Results**.
+The answers you want are `vth` and `req`, in **Results**, and under them the load answers.
 
-Ask **Evaluate** for:
+Ask **Evaluate** for `irl`, with the load in the **Conditions** box:
 
 ```field 9 Evaluate
-vth/(req+6)
-vth/(req+16)
-vth/(req+36)
+irl
 ```
+```field 9 Conditions
+load = 6
+```
+
+Then `load = 16`, then `load = 36`.
 :::
 
-Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
+{{v7,8|Choose DC. Answer Y when offered the load formulas.}}
 
 ::: only 7,8
 The answer, {{o:{30.,4.,3.,1.5,.75}}}, is correct.
 :::
 ::: only 9
-The answer is `vth` = {{o:30}} V and `req` = {{o:4}} Ω, and the load current is {{o:3}} A for 6
+The answer is `vth` = {{o:30}} V and `req` = {{o:4}} Ω, and `irl` is {{o:3}} A for 6
 Ω, {{o:1.5}} A for 16 Ω and {{o:.75}} A for 36 Ω. This is correct.
 :::
 
@@ -1894,19 +1955,21 @@ j,2,0,v1/2
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `ino` and `req`, in **Results**.
+The answers you want are `ino` and `req`, in **Results**, and under them the load answers.
 
-Ask **Evaluate** for:
+Ask **Evaluate** for `vrl`, then for `irl`, with the load in the **Conditions** box each time:
 
 ```field 9 Evaluate
-vth*(1/4)/(req+1/4)
-vth/(req+1/4)
+vrl
+```
+```field 9 Conditions
+load = 1/4
 ```
 :::
 
-Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
+{{v7,8|Choose DC. Answer Y when offered the load formulas.}}
 
 ::: only 7,8
 The book gives the answers as fractions. We get it right:
@@ -1914,7 +1977,7 @@ The book gives the answers as fractions. We get it right:
 :::
 ::: only 9
 The book gives the answers as fractions. We get it right: `ino` = {{o:21/8}} A and
-`req` = {{o:4/9}} Ω, and the load's voltage and current are {{o:21/50}} V and {{o:42/25}} A.
+`req` = {{o:4/9}} Ω, and at that load `vrl` = {{o:21/50}} V and `irl` = {{o:42/25}} A.
 :::
 
 :::
@@ -1945,26 +2008,29 @@ r2,2,0,2'k
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `ino` and `req`, in **Results**.
+The answers you want are `ino` and `req`, in **Results**, and under them the load answers.
 
-Ask **Evaluate** for:
+Ask **Evaluate** for `irl`, with the load in the **Conditions** box:
 
 ```field 9 Evaluate
-vth/(req+0)
-vth/(req+2000)
-vth/(req+5000)
+irl
 ```
+```field 9 Conditions
+load = 0
+```
+
+Then `load = 2000`, then `load = 5000`.
 :::
 
-Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
+{{v7,8|Choose DC. Answer Y when offered the load formulas.}}
 
 ::: only 7,8
 The answer, **{.0075, 1500., .0075, .00321, .00173}**, is correct.
 :::
 ::: only 9
-The answer is `ino` = {{o:.0075}} A and `req` = {{o:1500}} Ω, and the load current is
+The answer is `ino` = {{o:.0075}} A and `req` = {{o:1500}} Ω, and `irl` is
 {{o:.0075}} A for 0 Ω, {{o:.00321}} A for 2 kΩ and {{o:.00173}} A for 5 kΩ. This is correct.
 :::
 
@@ -2000,24 +2066,27 @@ r40,4,0,5
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `ino` and `req`, in **Results**.
+The answers you want are `ino` and `req`, in **Results**, and under them the load answers.
 
-Ask **Evaluate** for:
+Ask **Evaluate** for `vrl`, with the load in the **Conditions** box:
 
 ```field 9 Evaluate
-vth*1/(req+1)
+vrl
+```
+```field 9 Conditions
+load = 1
 ```
 :::
 
-Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
+{{v7,8|Choose DC. Answer Y when offered the load formulas.}}
 
 ::: only 7,8
 The answer, {{o:{-9/7,7/2,-1}}}, is correct.
 :::
 ::: only 9
-The answer is `ino` = {{o:-9/7}} A and `req` = {{o:7/2}} Ω, and the voltage in the 1 Ω
+The answer is `ino` = {{o:-9/7}} A and `req` = {{o:7/2}} Ω, and `vrl` in the 1 Ω
 load is {{o:-1}} V. This is correct.
 :::
 
@@ -2054,24 +2123,27 @@ e3,2,4,80
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `vth` and `req`, in **Results**.
+The answers you want are `vth` and `req`, in **Results**, and under them the load answers.
 
-Ask **Evaluate** for:
+Ask **Evaluate** for `irl`, with the load in the **Conditions** box:
 
 ```field 9 Evaluate
-vth/(req+192)
+irl
+```
+```field 9 Conditions
+load = 192
 ```
 :::
 
-Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
+{{v7,8|Choose DC. Answer Y when offered the load formulas.}}
 
 ::: only 7,8
 The answer, {{o:{28.8,96.,.1}}}, is correct.
 :::
 ::: only 9
-The answer is `vth` = {{o:28.8}} V and `req` = {{o:96}} Ω, and the current in the 192 Ω
+The answer is `vth` = {{o:28.8}} V and `req` = {{o:96}} Ω, and `irl` in the 192 Ω
 load is {{o:.1}} A. This is correct.
 :::
 
@@ -2104,25 +2176,29 @@ j30,3,0,15
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `vth` and `req`, in **Results**.
+The answers you want are `vth` and `req`, in **Results**, and under them the load answers.
 
-Ask **Evaluate** for:
+Ask **Evaluate** for `vrl`, with the load in the **Conditions** box:
 
 ```field 9 Evaluate
-vth*3/(req+3)
-vth*6/(req+6.)
+vrl
 ```
+```field 9 Conditions
+load = 3
+```
+
+Then `load = 6.`.
 :::
 
-Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
+{{v7,8|Choose DC. Answer Y when offered the load formulas.}}
 
 ::: only 7,8
 The answer we find, {{o:{30,2,18,22.5}}}, is correct.
 :::
 ::: only 9
-The answer is `vth` = {{o:30}} V and `req` = {{o:2}} Ω, and the voltage in the load is {{o:18}}
+The answer is `vth` = {{o:30}} V and `req` = {{o:2}} Ω, and `vrl` is {{o:18}}
 V for 3 Ω and {{o:22.5}} V for 6 Ω. This is correct.
 :::
 
@@ -2156,24 +2232,27 @@ r2,2,3,2
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `vth` and `req`, in **Results**.
+The answers you want are `vth` and `req`, in **Results**, and under them the load answers.
 
-Ask **Evaluate** for:
+Ask **Evaluate** for `vrl`, with the load in the **Conditions** box:
 
 ```field 9 Evaluate
-vth*5/(req+5)
+vrl
+```
+```field 9 Conditions
+load = 5.
 ```
 :::
 
-Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
+{{v7,8|Choose DC. Answer Y when offered the load formulas.}}
 
 ::: only 7,8
 The answer, {{o:{6,3,3.75}}}, is correct.
 :::
 ::: only 9
-The answer is `vth` = {{o:6}} V and `req` = {{o:3}} Ω, and the voltage in the 5 Ω load is
+The answer is `vth` = {{o:6}} V and `req` = {{o:3}} Ω, and `vrl` in the 5 Ω load is
 {{o:3.75}} V. This is correct.
 :::
 
@@ -2204,29 +2283,29 @@ r3,2,4,30'k
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **4** in the first and **0** in the second — the pair of terminals you are looking into.
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **4** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `ino` and `req`, in **Results**.
+The answers you want are `ino` and `req`, in **Results**, and under them the load answers.
 
-Ask **Evaluate** for:
+Ask **Evaluate** for `irl`, with the load in the **Conditions** box:
 
 ```field 9 Evaluate
-ino*req/(req+0)
-ino*req/(req+1e4)
-ino*req/(req+5e4)
-ino*req/(req+1e5)
+irl
+```
+```field 9 Conditions
+load = 0
 ```
 
-One line at a time, as before.
+Then `load = 1e4`, then `load = 5e4`, then `load = 1e5`.
 :::
 
-Choose DC.{{v7,8| Answer Y when offered the load formulas.}}
+{{v7,8|Choose DC. Answer Y when offered the load formulas.}}
 
 ::: only 7,8
 The answer, **{.001,42000,.001,.000808,.000457,.000296}**, is correct.
 :::
 ::: only 9
-The answer is `ino` = {{o:.001}} A and `req` = {{o:42000}} Ω, and the load current is {{o:.001}}
+The answer is `ino` = {{o:.001}} A and `req` = {{o:42000}} Ω, and `irl` is {{o:.001}}
 A for 0 Ω, {{o:.000808}} A for 10 kΩ, {{o:.000457}} A for 50 kΩ and {{o:.000296}} A for 100 kΩ.
 This is correct.
 :::
@@ -2356,16 +2435,21 @@ rs,1,0,40'k
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `req` and `pmax`, in **Results**.
+The answers you want are `req` and `pmax`, in **Results**, and under them the
+load answers.
 
-Ask **Evaluate** for:
+Ask **Evaluate** for `prl`, with the load in the **Conditions** box:
 
 ```field 9 Evaluate
-vth^2*68000./(req+68000.)^2
-vth^2*8200./(req+8200.)^2
+prl
 ```
+```field 9 Conditions
+load = 68000.
+```
+
+Then `load = 8200.`.
 :::
 
 ::: only 7,8
@@ -2373,8 +2457,8 @@ Choose DC. Answer Y about the load formulas. The answer we obtain,
 {{o:{40000, 1, .93, .57}}}, is correct. Let's deconstruct it.
 :::
 ::: only 9
-Choose DC. The answers we obtain, `req` = {{o:40000}} Ω, `pmax` = {{o:1}} W, {{o:.93}} W and {{o:.57}}
-W, are correct. Let's deconstruct it.
+The answers we obtain, `req` = {{o:40000}} Ω and `pmax` = {{o:1}} W, then `prl` =
+{{o:.93}} W and {{o:.57}} W, are correct. Let's deconstruct it.
 :::
 
 Part (a) is answered by the first two values: a 40 kΩ resistor as load would
@@ -2383,7 +2467,8 @@ could receive ever.
 
 Part (b) is answered by the third value. {{v7,8|Making use of the variable
 **prL**, which contains the power delivered by the circuit equivalent to the
-load, as a function of the load value **L**, we}}{{v9|We}} find that a load of 68 kΩ receives
+load, as a function of the load value **L**, we}}{{v9|Making use of `prl`, the
+power delivered by the equivalent to the load as a function of `load`, we}} find that a load of 68 kΩ receives
 .93W, which is less than the maximum.
 
 Part (c) is answered in similar manner by the fourth value. A load of 8.2 kΩ

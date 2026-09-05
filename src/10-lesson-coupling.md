@@ -254,7 +254,14 @@ e2,4,0,vs2
 ```
 
 ::: only 9
-`vth` is $v_{s2}/n$ and `req` is $z_2/n^2$.
+**Results** gives
+
+::: result Thevenin voltage
+v_{th} = \dfrac{vs_{2}}{n}
+:::
+::: result equivalent resistance
+R_{eq} = \dfrac{z_{2}}{n^{2}}
+:::
 :::
 
 Correct — the transformer refers the source by the turns ratio and the

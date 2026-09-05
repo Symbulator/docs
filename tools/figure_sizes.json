@@ -1902,6 +1902,12 @@
  "overrides": {
   "circuit/b11e0507.jpg": 135.0,
   "circuit/b11e0507b.jpg": 125.1,
+  "plot/as7e1403-bode.png": 120.0,
+  "plot/as7e1404-bode.png": 120.0,
+  "plot/as7e1405-bode.png": 120.0,
+  "plot/as7pp1403-bode.png": 120.0,
+  "plot/as7pp1404-bode.png": 120.0,
+  "plot/as7pp1405-bode.png": 120.0,
   "practice/a-more-complex-problem-44.png": 156.0,
   "practice/b11s-example-5-20-2.jpg": 116.0,
   "practice/b11s-example-6-13-3.jpg": 112.5,

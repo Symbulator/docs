@@ -8,6 +8,187 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #298 — the five `out` fences a version 9 reader saw as calculator text — **done and live (web), 7 Sep 2026**
+
+Roberto, 7 Sep 2026, on Lesson 6's `t^2/4`: *"Make sure to show these
+expressions mathematically."* A sweep of every ```` ```out ```` fence
+visible in version 9 (a script over the `only`/`not` nesting and the
+fence's version list) found five: that one, and four complex answers in
+Lesson 7 written with the calculator's 𝐢 -- `3.22–𝐢11.07`,
+`0.25-0.025𝐢`, `9.135+𝐢27.47`, `0.3794+𝐢1.46`. Each fence is now
+`out 7,8`, and version 9 gets the answer as mathematics: a `::: result`
+panel where it is a card answer (`v_{c} = t^{2}/4`, the two `Z_{eq}`),
+a `$$` display where it came out of **Evaluate**, the imaginary unit
+written `j` after the number as the app writes it, with the unit. No
+other version 9 page shows an `out` fence now.
+
+**The PDFs are held** (Roberto, the same evening: *"Do not do the PDFs
+for now until I tell you."*). The full build that was running was
+stopped, the three `symbulator-v*.pdf` were removed from `build/web`
+before the `learn` deploy so the live PDFs stayed as they were (the
+script never deletes without `--delete`), and `build/pdf/` still holds
+the earlier run's PDFs, which predate #296–#298 anyway. The next PDF
+build picks up #293–#298 together.
+
+## #297 — `::: applink`: a run's app links beside the run — **done and live (web), 7 Sep 2026**
+
+Roberto, 7 Sep 2026, on AS7's Example 16.1: *"Having four sets of links
+at the top of this problem is confusing. Please insert these pairs of
+links at the location of the solution where they are logically
+related."* That problem is four app entries -- TR in one step, FD with
+everything as an impedance, FD with farads and henries, FD and back to
+time -- and #224 stacked all four pairs under the title, two of them
+labelled *in FD* because `entry_label` shortens a qualifier at its comma.
+
+A new directive, `::: applink <entry title>` (empty, closed with `:::`),
+renders one pair where it stands, labelled with the run's full
+qualifier; the problem head leaves that entry out, and a problem whose
+runs are all placed has no head links at all. The argument is the entry's
+title as its input file writes it, brackets and all, folded the way the
+join folds (`app_links._fold`), so the two *in FD* runs name different
+entries. A title that names no entry of the chapter is a `SourceError`,
+so a renamed entry fails the build rather than silently losing its link.
+The head and the inline pair share one renderer (`applink_rows`), so the
+entry anchor `e-12-3` the split view scrolls to is emitted exactly once,
+by whichever of the two draws it -- and the split view now lands on the
+run itself. The search index already strips `class="problem-links"`
+paragraphs, and the inline one uses that class unchanged. The PDFs print
+nothing for it, like the head links.
+
+Example 16.1 places its four pairs after the TR result, after each FD
+description and after the `s2t(vo)` Evaluate box in the next section --
+the fourth run's text lives outside the problem block, which is why the
+directive takes a full title rather than a qualifier of "the current
+problem". `SPEC.md` has the row and the paragraph.
+
+---
+
+## #296 — Lesson 11's transfer functions shown, and the plots as pictures — **done and live (web; PDFs held), 7 Sep 2026**
+
+Roberto, 7 Sep 2026: *"In the Bode lesson, the transfer functions for
+the problems are not shown. Please make sure the functions are shown and
+also include as images the resulting graphs."* The six practice problems
+(AS7's Examples 14.3, 14.4, 14.5 and the three Practice Problems) said
+*Construct the Bode plots for the given transfer function* and never gave
+it; version 7 showed two of them as calculator screenshots.
+
+Each statement now carries its function as a display, in the textbook's
+form -- `H(ω)` in jω for 14.3, 14.4 and their practice problems, `H(s)`
+for 14.5 and its practice problem. 14.3 and 14.5 were read off the
+chapter's own screenshots (`as71403s1.jpeg`, `as7e1405s1.jpeg`); the
+other four are Alexander & Sadiku's, checked against the version 7 plot
+screenshots the chapter already carried (PP 14.3 crosses 0 dB at ω ≈ 1,
+14.4 crosses left of it, PP 14.4 peaks near ω = 5 with the phase running
++90° to −180°, PP 14.5's phase starts at −90°). The version 9 block of
+each problem gains the **Transfer function H(s)** box with the function
+as the reader types it, the two frequencies in hertz, and a figure of the
+plot: `assets/plot/<problem>-bode.png`, six PNGs drawn by
+`bode_tf_ui` -- the same samples the app's Plot card draws -- through
+matplotlib, magnitude above and phase below on a log axis in Hz, 300
+points over the chapter's own sweeps (0.1–300 rad/s for 14.3, 0.1–100 for
+the rest). The peaks agree with the chapter: 24.44 dB at 4.48 rad/s for
+14.3, where the text says 24.4 at 4.47. The six carry a 120 mm override
+in `tools/figure_sizes.json`, since the detector's label-height rule was
+written for scanned circuits. Version 7's pages are untouched, and the
+figures sit inside `::: only 9`.
+
+Not done: app entries for the six. An input-file entry needs at least one
+element line (`parse_book` skips one without), and the transfer-function
+plot has no circuit, so an entry would have to carry a dummy element to
+exist. Left alone rather than mislead; the two loose ends `app_links.py`
+reports for this chapter are these.
+
+The transformer passage in Lesson 10 (AS7's Figure 13.33) also moved to
+result panels the same evening, at Roberto's ask -- `v_{th} = vs_{2}/n`,
+`R_{eq} = z_{2}/n^{2}` -- the same rule as #294.
+
+## #293 — Lesson 4's Thévenin-with-a-load material, rewritten around the app's own load answers — **done and live (web; PDFs held), 7 Sep 2026**
+
+Roberto, 7 Sep 2026: *"The features of the th() tool of Symbulator were
+not properly ported from v8 to v9. And the documentation for v9 for
+thevenin equivalents, as a consequence, are full of material made up by
+the AI. We need to correct that."*
+
+The app's half is **#292** (`Application/v9/repos/local/NEXT.md`): the
+load question under the port nodes, the three load answers **irl**,
+**vrl** and **prl** in the variable `load`, and the *Load circuit
+equivalent?* button. This is the book's half, written from the 2023
+version 8 page (`originals/docs-page8.html`, *Problems with a load* and
+*What if it's more than a load?*) rather than from the invented
+workaround the version 9 text carried -- a table of hand-typed
+expressions, `vth/(req+R)`, `vth*R/(req+R)`, `vth^2*R/(req+R)^2`, and a
+three-line circuit the reader was told to type with rounded numbers.
+
+What changed, version 9 pages only (7 and 8 untouched):
+
+* **Problems with a load** describes the question -- *Are you running a
+  problem with a load connected to this equivalent circuit?* -- the three
+  answers it adds under the four, and how to read one at a value: ask
+  **Evaluate** for `irl` with `load = 2` in **Conditions**.
+* **B11's Example 9.6** ticks the question, shows `i_{rl} = 6/(load + 2)`
+  as a result panel under the four, and evaluates `irl` at 2, 10 and 100.
+* **Power transfer problems** names `prl` again instead of *the
+  expression derived above*.
+* **What if it's more than a load?** describes the button, its warning
+  and what it writes: the three-line equivalent in the description with
+  `iNo` and `rEq` in **Define**, exact.
+* **RM3's Example 9-8** uses the button, then edits the load to 168 Ω
+  and adds the 180 mA source -- the calculator's own sequence.
+* The nine practice problems that said *Answer Y when offered the load
+  formulas* -- Bo2's 3.10, 3.5, 3.7 and Drill 3.7, RM3's 9-7, 9-13 and
+  Practice Problem 9.5, B11's 9.15, and **AS2's 4.8**, which Roberto's
+  list did not name but carried the same workaround -- now say *tick the
+  question about the load* in the setup line and ask **Evaluate** for
+  `irl`, `vrl` or `prl` with the load in **Conditions**. The 7/8 *Answer
+  Y* sentence is unchanged, and became a 7,8 span so version 9 does not
+  print *Choose DC* twice.
+* **Lesson 5's TR5 Figure 4-32** did the same for `prl` at 1000, so no
+  version 9 page types a load expression by hand any more:
+  `tools/v9_lines.py 'vth/\(req|vth\^2'` finds nothing.
+
+The example books moved with the chapters (their `evaluate:` lines now
+read `irl`/`vrl`/`prl` with an `evaluate_conditions: load = …`, and RM3's
+9-8 follow-up entry is the circuit the button writes, with its two
+`defines:`); `verify_lesson.py` was run over Lesson_04a and Lesson_04b,
+see #292.
+
+`build.py --check` clean; `build.py --web` built. **The PDFs are not
+rebuilt** -- this changes what the typeset text says, so the next deploy
+is one of the exceptions to `--web` and wants a full `python build.py`
+first.
+
+---
+
+## #294 — symbolic answers on their own lines, as mathematics — **done and live (web; PDFs held), 7 Sep 2026**
+
+Roberto, 7 Sep 2026, three asks in one:
+
+1. *"format these expressions as single line preceded by their variable:
+   'The answers we get, {vs*µ/(µ+1),ro/(µ+1)}, are correct,'"* -- TR5's
+   Example 4-8 (Symbolic) in Lesson 4, and its twin two problems earlier,
+   `{vs*µ/(µ+1),ro}`. Both versions: 7 and 8 get `$$` displays headed
+   `vth =` and `req =` (the set form #273 had kept for them is what he
+   quoted, so the ruling is his); version 9 gets `::: result` panels
+   labelled *Thevenin voltage* and *equivalent resistance*, in the app's
+   form `v_{th} = …`, `R_{eq} = …`.
+2. *"in the op amp lesson, put these in single lines: vth = (expression),
+   ino = ∞, req = 0, pmax = ∞"* -- Bo2's Drill Exercise 3.11 (Thévenin):
+   four result panels, `\infty` set as the symbol.
+3. *"make all the answers in this chapter that are symbolic values appear
+   in their own single line as mathematical expressions"* -- Lesson 5,
+   version 9. Twenty passages. A card answer (`vo`) becomes a
+   `::: result voltage of node o` panel; an **Evaluate** ratio or a
+   **Solve** answer a `$$` display with the quantity in front
+   (`\dfrac{v_{o}}{is_{1}} = -r`, `r_{2} = 5\,r_{1}`). Where the line
+   was shared by all three versions it is split into `::: only 7,8` /
+   `::: only 9` blocks and the 7/8 half keeps its words. Identifiers
+   follow #274: `vs`, `vi`, `rf`, `ro` stay as the app writes them, a
+   trailing digit is a subscript.
+
+Numeric answers already on their own panels (#284) and the numeric
+inline ones (`vo` = 9 V) are untouched -- the ask was symbolic values.
+`build.py --check` clean. Same PDF note as #293.
+
 ## #281 — the Expert Mode fields with the plural in parentheses, the book's half — **done and live, 6 Sep 2026**
 
 Roberto, 6 Sep 2026: like the Solve card's *Equation(s) to solve* and

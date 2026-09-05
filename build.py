@@ -150,6 +150,16 @@ class Node:
     meta: dict = field(default_factory=dict)
 
 
+def applink_args(blocks: list) -> list:
+    """Every `::: applink` argument under `blocks`, in reading order (#297)."""
+    out = []
+    for b in blocks:
+        if b.kind == "applink":
+            out.append(b.arg)
+        out.extend(applink_args(b.children))
+    return out
+
+
 def title_for(ch, v) -> str:
     """A chapter's title for version v (#270, 6 Sep 2026). The title is
     front matter -- one string for all three versions -- but Lesson 2's
@@ -188,7 +198,7 @@ class SourceError(Exception):
 
 DIRECTIVES = {"tip", "note", "warning", "danger", "figure", "problem",
               "answer", "practice", "only", "not", "web", "pdf", "address",
-              "result"}
+              "result", "applink"}
 
 #: The label a ::: result panel shows over an answer, from the name in
 #: front of it (#276) -- the app's own words, from _ELEMENT_KEYS and
@@ -869,6 +879,27 @@ class HtmlRenderer:
             href = text if re.match(r"^[a-z][a-z0-9+.-]*://", text) else "https://" + text
             return (f'<p class="address"><a href="{html.escape(href)}">'
                     f'{html.escape(text)}</a></p>')
+        if k == "applink":
+            # #297 (Roberto, 7 Sep 2026): a problem solved as several runs
+            # had every run's link pair stacked under its title -- four
+            # rows on AS7's Example 16.1, two of them labelled alike. This
+            # places one pair where the solution reaches that run. The
+            # argument is the entry's full title, brackets and all, so two
+            # runs whose short labels coincide ("in FD" twice) still name
+            # different entries; the head then leaves that entry out. Only
+            # version 9 has entries; the other versions print nothing.
+            if self.v != 9 or not self.entry_by_title:
+                return ""
+            e = self.entry_by_title.get(app_links._fold(b.arg))
+            if e is None:
+                raise SourceError(f"::: applink names no entry of this "
+                                  f"chapter: {b.arg!r}")
+            # The full qualifier as the label, not entry_label's short
+            # form: "in FD" twice was the confusion this directive exists
+            # to remove.
+            base, qual = app_links._split_qual(e.title)
+            return (f'<p class="problem-links">'
+                    f'{self.applink_rows([e], base, labelled=True, label=qual)}</p>')
         if k in ("tip", "note", "warning", "danger"):
             title = (f'<p class="callout-title">{self.inline(b.arg)}</p>'
                      if b.arg else "")
@@ -934,13 +965,27 @@ class HtmlRenderer:
             pid, i = f"prob-{base}-{i}", i + 1
         self.problem_ids.add(pid)
         entries = self.entries[n] if n < len(self.entries) else []
+        # #297: an entry placed by a `::: applink` in the body is not
+        # repeated here. A problem whose runs are all placed has no head.
+        entries = [e for e in entries
+                   if app_links._fold(e.title) not in self.placed]
         if not entries:
             return f' id="{pid}"', ""
+        rows = self.applink_rows(entries, b.arg, labelled=len(entries) > 1)
+        return f' id="{pid}"', f'<p class="problem-links">{rows}</p>'
+
+    def applink_rows(self, entries, title: str, labelled: bool,
+                     label: str = "") -> str:
+        """The link pair(s) for `entries`: the run's label when asked for,
+        then Open in app and Open in split view. Shared by the problem
+        head and by an inline `::: applink` (#297), so the two cannot
+        drift -- the entry anchor `e-6a-3` the split view scrolls to sits
+        on whichever of the two renders it."""
         rows = []
         for e in entries:
-            label = app_links.entry_label(e, b.arg) if len(entries) > 1 else ""
-            tag = (f'<span class="applink-tag">{html.escape(label)}</span>'
-                   if label else "")
+            shown = label or (app_links.entry_label(e, title) if labelled else "")
+            tag = (f'<span class="applink-tag">{html.escape(shown)}</span>'
+                   if shown else "")
             rows.append(
                 f'<span class="applink-row">{tag}'
                 f'<a class="applink" id="{e.anchor}" href="{html.escape(e.app_href)}"'
@@ -949,7 +994,7 @@ class HtmlRenderer:
                 f'Open in app ↗</a>'
                 f'<a class="splitlink" href="{html.escape(e.split_href)}">'
                 f'Open in split view</a></span>')
-        return f' id="{pid}"', f'<p class="problem-links">{"".join(rows)}</p>'
+        return "".join(rows)
 
     def chapter(self, ch: Chapter, number, present: bool) -> str:
         self.chapter_id, self.chapter_no, self.section_no = ch.id, number, 0
@@ -958,9 +1003,16 @@ class HtmlRenderer:
         # the ones around it. Both walks are walk(blocks, v), so the order
         # here is the order the renderer will meet them in.
         self.problem_no, self.problem_ids, self.entries = 0, set(), []
+        self.entry_by_title, self.placed = {}, set()
         if self.v == 9 and present and ch.id in app_links.CHAPTER_BOOKS:
             self.entries = app_links.resolve_chapter(
                 ch.id, app_links.chapter_problems(ch, self.v), self.books)
+            # #297: which entries the body places itself, so the problem
+            # head can leave them out. Read before any block is rendered,
+            # because the head comes first and the directive later.
+            self.entry_by_title = {app_links._fold(e.title): e
+                                   for group in self.entries for e in group}
+            self.placed = {app_links._fold(a) for a in applink_args(ch.blocks)}
         # An eyebrow is the small line above a chapter title -- "Lesson 3".
         # A chapter with no number has nothing useful to put there, and
         # falling back to the title printed it twice: "Introduction /
@@ -1207,6 +1259,8 @@ class TexRenderer:
             label = tex_escape(result_label(b.text, b.arg))
             return (f"\\begin{{symresult}}{{{label}}}\n\\[{b.text}\\]\n"
                     f"\\end{{symresult}}")
+        if k == "applink":
+            return ""                        # #297: web furniture, no print form
         if k == "address":
             # #259, the PDF side: \symaddress in symbulator.cls. The
             # target escapes what hyperref reads specially, the way the

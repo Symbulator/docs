@@ -78,6 +78,9 @@ Run it in TR. The answer is `vo`:
 $$
 v_o(t) = \dfrac{3\sqrt{2}}{2}\,e^{-4t}\sin(\sqrt{2}\,t)
 $$
+
+::: applink AS7's Example 16.1 (in TR, the one-step way)
+:::
 :::
 
 Now let us do it properly, in the s-domain, which is what you would want if any
@@ -100,6 +103,9 @@ r3,2,0,3/s
 r4,o,0,s
 ```
 
+::: applink AS7's Example 16.1 (in FD, everything as an impedance)
+:::
+
 That was to prove it can be done. In practice the schematic gives you farads
 and henries, so give Symbulator farads and henries and let it do the converting:
 
@@ -119,6 +125,9 @@ l,o,0,1,0
 
 ::: only 9
 Choose *FD — complex frequency domain*.
+
+::: applink AS7's Example 16.1 (in FD, farads and henries)
+:::
 :::
 
 Both give the same answer, in the s-domain:
@@ -175,6 +184,9 @@ Run that in FD, then put the answer back into the time domain from
 ```field 9 Evaluate
 s2t(vo)
 ```
+
+::: applink AS7's Example 16.1 (in FD, and back to time)
+:::
 :::
 
 ::: only 7,8

@@ -178,6 +178,7 @@ Make MAIN your current folder before you simulate.
 | `web` `pdf` | — | contents shown on the website only, or in the PDFs only |
 | `address` | the URL, as it should be read | — (empty; still closed with `:::`) |
 | `result` | optional label (else derived from the name) | one answer in LaTeX, `r_{e} = r_{1} + 10000`, kept raw |
+| `applink` | the app entry's full title, `AS7's Example 16.1 (in FD, and back to time)` | — (empty; still closed with `:::`) |
 
 Directives nest. Close every one with `:::`.
 
@@ -191,6 +192,13 @@ name — *current through r3*, *voltage drop in c*, *power consumed by r1*,
 once as a heading but a single panel cannot; give the label as the argument
 to say otherwise (`::: result voltage of node 2`). Version 9 only in practice: 7 and 8 show what
 the calculator printed.
+
+`applink` places one of a problem's app-link pairs -- *Open in app*, *Open
+in split view* -- where the solution reaches that run, instead of under the
+title with the rest (#297). Name the entry as its input file does, brackets
+and all; the problem head then leaves that entry out, and a problem whose
+runs are all placed has no head links. Version 9 only; the PDFs print
+nothing for it. A title that names no entry of the chapter fails the build.
 
 `address` sets a URL on a line of its own, centred, on the input panel's
 tint, for an address the reader is meant to share or type -- the split

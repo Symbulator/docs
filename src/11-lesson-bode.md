@@ -115,6 +115,10 @@ Description is ignored for this plot type, so it works on an empty page.
 ::: problem AS7's Example 14.3
 Construct the Bode plots for the given transfer function.
 
+$$
+H(\omega) = \dfrac{200\,j\omega}{(j\omega + 2)(j\omega + 10)}
+$$
+
 ::: only 7
 We write the expression using the character the calculator understands for the
 imaginary operator — 𝐢, rather than the textbook's j. In my experience it pays
@@ -168,14 +172,29 @@ Symbulator takes the expression directly: set **Plot
 type** to *Bode plot of a transfer function H(s) (FD)* and type the problem's
 function into the box, writing `s` wherever the textbook writes jω — no
 imaginary operator involved. The frequency boxes are in hertz, so the
-sweep of 0.1 to 300 rad/s is about 0.016 to 48 Hz. Reading the answers off
-the curve: the maximum at 4.47 rad/s sits near 0.71 Hz, and the zero
-crossing at 199.8 rad/s near 31.8 Hz.
+sweep of 0.1 to 300 rad/s is about 0.016 to 48 Hz.
+
+```field 9 Transfer function H(s)
+200*s/((s+2)*(s+10))
+```
+
+- **Start frequency (Hz)** and **End frequency (Hz)**: 0.016 and 48
+
+::: figure assets/plot/as7e1403-bode.png
+AS7's Example 14.3: the Bode plot Symbulator draws
+:::
+
+Reading the answers off the curve: the maximum of {{o:24.4}} dB at 4.47 rad/s
+sits near 0.71 Hz, and the zero crossing at 199.8 rad/s near 31.8 Hz.
 :::
 :::
 
 ::: problem AS7's Practice Problem 14.3
 Draw the Bode plots for the given transfer function.
+
+$$
+H(\omega) = \dfrac{5\,(j\omega + 2)}{j\omega\,(j\omega + 10)}
+$$
 
 ::: only 7
 Solved exactly as the one above. I used 0.1 and 100 as the minimum and maximum
@@ -194,11 +213,25 @@ The phase plot
 ::: only 9
 The transfer-function plot type again: write the function in terms of `s`
 and sweep. The sweep of 0.1 to 100 rad/s is about 0.016 to 16 Hz.
+
+```field 9 Transfer function H(s)
+5*(s+2)/(s*(s+10))
+```
+
+- **Start frequency (Hz)** and **End frequency (Hz)**: 0.016 and 16
+
+::: figure assets/plot/as7pp1403-bode.png
+AS7's Practice Problem 14.3: the Bode plot Symbulator draws
+:::
 :::
 :::
 
 ::: problem AS7's Example 14.4
 Construct the Bode plots for the given transfer function.
+
+$$
+H(\omega) = \dfrac{j\omega + 10}{j\omega\,(j\omega + 5)^{2}}
+$$
 
 ::: only 7
 Same as above. This is the gain plot:
@@ -216,11 +249,25 @@ The phase plot
 ::: only 9
 Solved the same way: the *Bode plot of a transfer function H(s) (FD)* type, with
 the function written in terms of `s`.
+
+```field 9 Transfer function H(s)
+(s+10)/(s*(s+5)^2)
+```
+
+- **Start frequency (Hz)** and **End frequency (Hz)**: 0.016 and 16
+
+::: figure assets/plot/as7e1404-bode.png
+AS7's Example 14.4: the Bode plot Symbulator draws
+:::
 :::
 :::
 
 ::: problem AS7's Practice Problem 14.4
 Construct the Bode plots for the given transfer function.
+
+$$
+H(\omega) = \dfrac{50\,j\omega}{(j\omega + 4)(j\omega + 10)^{2}}
+$$
 
 ::: only 7
 Same as above, so this time let us do both plots together — the tool will draw
@@ -233,11 +280,25 @@ Both plots together
 ::: only 9
 Symbulator always draws both, magnitude above and phase below, so there is nothing extra to
 ask for.
+
+```field 9 Transfer function H(s)
+50*s/((s+4)*(s+10)^2)
+```
+
+- **Start frequency (Hz)** and **End frequency (Hz)**: 0.016 and 16
+
+::: figure assets/plot/as7pp1404-bode.png
+AS7's Practice Problem 14.4: the Bode plot Symbulator draws
+:::
 :::
 :::
 
 ::: problem AS7's Example 14.5
 Draw the Bode plots for the given transfer function.
+
+$$
+H(s) = \dfrac{s + 1}{s^{2} + 12s + 100}
+$$
 
 ::: only 7
 To be sure of typing it clearly, write the expression outside the tool first:
@@ -260,13 +321,27 @@ The phase plot
 :::
 :::
 ::: only 9
-The same transfer-function type. If a symbol other than `s` slips in, the
-error names it.
+The same transfer-function type, and this one is already written in `s`. If a
+symbol other than `s` slips in, the error names it.
+
+```field 9 Transfer function H(s)
+(s+1)/(s^2+12*s+100)
+```
+
+- **Start frequency (Hz)** and **End frequency (Hz)**: 0.016 and 16
+
+::: figure assets/plot/as7e1405-bode.png
+AS7's Example 14.5: the Bode plot Symbulator draws
+:::
 :::
 :::
 
 ::: problem AS7's Practice Problem 14.5
 Draw the Bode plots for the given transfer function.
+
+$$
+H(s) = \dfrac{10}{s\,(s^{2} + 80s + 400)}
+$$
 
 ::: only 7
 Solved the same way as the one above, so there is nothing new to show. Let me
@@ -279,6 +354,16 @@ Gain and phase together
 ::: only 9
 Nothing new here either: the transfer-function type, the function written in
 terms of `s`, both curves drawn together.
+
+```field 9 Transfer function H(s)
+10/(s*(s^2+80*s+400))
+```
+
+- **Start frequency (Hz)** and **End frequency (Hz)**: 0.016 and 16
+
+::: figure assets/plot/as7pp1405-bode.png
+AS7's Practice Problem 14.5: the Bode plot Symbulator draws
+:::
 :::
 :::
 

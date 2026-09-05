@@ -182,10 +182,18 @@ below.
 ::: only 9
 This one catches people out, and Symbulator says so:
 
-- `vth` = {{o:vs*(r1 + r2)/r1}}
-- `ino` = {{o:∞}}
-- `req` = {{o:0}}
-- `pmax` = {{o:∞}}
+::: result Thevenin voltage
+v_{th} = \dfrac{vs\,(r_{1} + r_{2})}{r_{1}}
+:::
+::: result Norton current
+i_{no} = \infty
+:::
+::: result equivalent resistance
+R_{eq} = 0
+:::
+::: result maximum deliverable power
+p_{max} = \infty
+:::
 
 with a note under the answers: the short-circuit current is unbounded, so
 the equivalent is a voltage source with nothing in series.
@@ -273,8 +281,19 @@ vo/vs
 ```
 :::
 
+::: only 7,8
 We get **-r2/r1**, which is correct, as can be seen in the book's answer
 above.
+:::
+::: only 9
+We get
+
+$$
+\dfrac{v_{o}}{vs} = -\dfrac{r_{2}}{r_{1}}
+$$
+
+which is correct, as can be seen in the book's answer above.
+:::
 
 :::
 
@@ -306,7 +325,14 @@ The answer you want is `vo`, in **Results**.
 This problem is almost identical to the one above. The answer we get is
 correct:
 
+::: only 7,8
 -(rf/r1)vi
+:::
+::: only 9
+::: result voltage of node o
+v_{o} = -\dfrac{rf}{r_{1}}\,vi
+:::
+:::
 
 :::
 
@@ -577,7 +603,16 @@ vo/is1
 ```
 :::
 
+::: only 7,8
 The answer, **-r**, is correct.
+:::
+::: only 9
+The answer is correct:
+
+$$
+\dfrac{v_{o}}{is_{1}} = -r
+$$
+:::
 
 :::
 
@@ -612,8 +647,13 @@ Asking:
 gets **-r1\*r3/r2-r1-r3**, which is equivalent to the book's answer.
 :::
 ::: only 9
-Ask **Evaluate** for `vo/is1`. It gives **-r1 - r1\*r3/r2 - r3**, which is
-equivalent to the book's answer — the same expression, gathered
+Ask **Evaluate** for `vo/is1`. It gives
+
+$$
+\dfrac{v_{o}}{is_{1}} = -r_{1} - \dfrac{r_{1}\,r_{3}}{r_{2}} - r_{3}
+$$
+
+which is equivalent to the book's answer — the same expression, gathered
 differently.
 :::
 
@@ -652,7 +692,18 @@ vo/v1
 ```
 :::
 
+::: only 7,8
 We get {{o:1+r2/r1}}, which is correct.
+:::
+::: only 9
+We get
+
+$$
+\dfrac{v_{o}}{v_{1}} = 1 + \dfrac{r_{2}}{r_{1}}
+$$
+
+which is correct.
+:::
 
 :::
 
@@ -850,7 +901,16 @@ o,1,o,o
 The answer you want is `vo`, in **Results**.
 :::
 
+::: only 7,8
 The answer, **vi**, is correct.
+:::
+::: only 9
+The answer is correct:
+
+::: result voltage of node o
+v_{o} = vi
+:::
+:::
 
 :::
 
@@ -879,15 +939,17 @@ rs,1,2,2'k
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
+Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answer you want is `pmax`, in **Results**.
-
-The power in a 1 kΩ load is the expression {{ref:lesson-equivalents}}
-derives, with 1000 where R goes:
+The answer you want is `pmax`, in **Results**, and under it `prl`, the power
+in the load as {{ref:lesson-equivalents}} describes. Ask **Evaluate** for it
+with the load in the **Conditions** box:
 
 ```field 9 Evaluate
-vth^2*1000/(req+1000)^2
+prl
+```
+```field 9 Conditions
+load = 1000
 ```
 :::
 
@@ -896,8 +958,8 @@ The answers we get, {{o:{2.8125e-4,2.5e-4}}}, are correct. Now we simulate the
 (a) circuit.
 :::
 ::: only 9
-The answers we get, `pmax` = {{o:2.8125e-4}} W and {{o:2.5e-4}} W in the 1 kΩ load, are
-correct. Now we simulate the (a) circuit.
+The answers we get, `pmax` = {{o:2.8125e-4}} W and `prl` = {{o:2.5e-4}} W in the 1 kΩ
+load, are correct. Now we simulate the (a) circuit.
 :::
 
 ```sym 7
@@ -1007,11 +1069,16 @@ o,0,1,o
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+The answer you want is `vo`, in **Results**:
+
+::: result voltage of node o
+v_{o} = -\dfrac{r_{2}}{r_{1}}\,(va + vb)
+:::
 :::
 
-
+::: only 7,8
 -(r2/r1)(va+vb)
+:::
 
 which is correct, as can be seen by comparing it to the book's answer.
 
@@ -1049,11 +1116,16 @@ o,0,a,o
 ```
 
 ::: only 9
-Ask **Evaluate** for `expand(vo)`.
+Ask **Evaluate** for `expand(vo)`. It gives
+
+$$
+v_{o} = -\dfrac{rf\,v_{1}}{r_{1}} - \dfrac{rf\,v_{2}}{r_{2}} - \dfrac{rf\,v_{3}}{r_{3}}
+$$
 :::
 
-
+::: only 7,8
 -rf v1/r1 - rf v2/r2 - rf v3/r3
+:::
 
 which is correct, as can be seen by comparing it to the book's answer.
 
@@ -1187,10 +1259,19 @@ r4,2,0,r2
 o,2,1,o
 ```
 
-{{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}} the correct answer, equivalent to the book's answer
+::: only 7,8
+Evaluating `vo` we get the correct answer, equivalent to the book's answer
 above.
 
 ((vb-va) r2)/r1
+:::
+::: only 9
+`vo` is the correct answer, equivalent to the book's answer above:
+
+::: result voltage of node o
+v_{o} = \dfrac{(vb - va)\,r_{2}}{r_{1}}
+:::
+:::
 
 :::
 
@@ -1220,8 +1301,16 @@ r4,6,0,15'k
 o,6,5,o
 ```
 
-{{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}} {{o:3 v2 − 4 v1}}, which is the
-correct answer.
+::: only 7,8
+Evaluating `vo` we get {{o:3 v2 − 4 v1}}, which is the correct answer.
+:::
+::: only 9
+`vo` is the correct answer:
+
+::: result voltage of node o
+v_{o} = 3\,v_{2} - 4\,v_{1}
+:::
+:::
 
 :::
 
@@ -1301,7 +1390,16 @@ r3 = r4
 ```
 :::
 
+::: only 7,8
 The answer we get, **v2-v1**, is correct.
+:::
+::: only 9
+The answer we get is correct:
+
+$$
+v_{o} = v_{2} - v_{1}
+$$
+:::
 
 :::
 
@@ -1341,8 +1439,20 @@ rearrange it, **Evaluate** takes `simplify()`, `collect()`, `expand()`,
 `factor()` and `apart()`.
 :::
 
+::: only 7,8
 We get {{o:-r2/r1=-5}}. Now make that part of {{var:v_o}} that is a factor of
 {{var:v_2}} equal to 3. Thus:
+:::
+::: only 9
+We get
+
+$$
+-\dfrac{r_{2}}{r_{1}} = -5
+$$
+
+Now make that part of {{var:v_o}} that is a factor of {{var:v_2}} equal to
+3. Thus:
+:::
 
 ```sym 7
 Define v1=0:Define v2=1:expand(vo)=3
@@ -1362,10 +1472,24 @@ which is equivalent to the book's expression, and it is that which has to
 equal 3.
 :::
 
+::: only 7,8
 We get **r2\*r4/(r1\*(r3+r4))+r4/(r3+r4)=3** Now, since you have two
 equations, you can solve for two unknowns. Of the four resistors you get to
 choose, two can be whatever you want. The book recommends {{var:R_1}} = 10 kΩ
 and {{var:R_3}} = 20 kΩ. Now let's find {{var:R_2}} and {{var:R_4}}.
+:::
+::: only 9
+We get
+
+$$
+\dfrac{r_{4}\,(r_{1} + r_{2})}{r_{1}\,(r_{3} + r_{4})} = 3
+$$
+
+Now, since you have two equations, you can solve for two unknowns. Of the
+four resistors you get to choose, two can be whatever you want. The book
+recommends {{var:R_1}} = 10 kΩ and {{var:R_3}} = 20 kΩ. Now let's find
+{{var:R_2}} and {{var:R_4}}.
+:::
 
 ```sym 7
 solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=20000
@@ -1383,9 +1507,18 @@ that is not a circuit:
 r4*(r1 + r2)/(r1*(r3 + r4)) = 3
 ```
 
-with `r2, r4` as the unknowns. The answer is `r2` = {{o:5*r1}} and
-`r4` = {{o:r3}}: a design rule rather than a pair of numbers. Put the
-book's `r1` = 10 kΩ and `r3` = 20 kΩ into it and you get {{o:50}} kΩ and {{o:20}} kΩ.
+with `r2, r4` as the unknowns. The answer is a design rule rather than a
+pair of numbers:
+
+$$
+r_{2} = 5\,r_{1}
+$$
+$$
+r_{4} = r_{3}
+$$
+
+Put the book's `r1` = 10 kΩ and `r3` = 20 kΩ into it and you get {{o:50}} kΩ
+and {{o:20}} kΩ.
 :::
 
 ::: only 7,8
@@ -1416,8 +1549,19 @@ r4,b,0,20'k
 o,b,a,o
 ```
 
-{{v7,8|Evaluating `vo` gives us}}{{v9|`vo` is}} the desired output, **3\*v2-5\*v1**. The resistor
+::: only 7,8
+Evaluating `vo` gives us the desired output, **3\*v2-5\*v1**. The resistor
 values are correct.
+:::
+::: only 9
+`vo` is the desired output:
+
+::: result voltage of node o
+v_{o} = 3\,v_{2} - 5\,v_{1}
+:::
+
+The resistor values are correct.
+:::
 
 :::
 
@@ -1469,8 +1613,16 @@ In the **Solve** card:
 r4*(r1 + r2)/(r1*(r3 + r4)) = 4
 ```
 
-with `r2, r4` as the unknowns. It answers `r2` = {{o:4*r1}} and
-`r4` = {{o:4*r3}} — at 10 kΩ each, {{o:40000}} Ω and {{o:40000}} Ω.
+with `r2, r4` as the unknowns. It answers
+
+$$
+r_{2} = 4\,r_{1}
+$$
+$$
+r_{4} = 4\,r_{3}
+$$
+
+which at 10 kΩ each is {{o:40000}} Ω and {{o:40000}} Ω.
 :::
 
 ::: only 7,8
@@ -1547,9 +1699,18 @@ o1,0,2,3
 o2,0,4,o
 ```
 
-{{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}}:
+::: only 7,8
+Evaluating `vo` we get:
 
 {{o:((g1-g2) vs)/(g3-g4)}}
+:::
+::: only 9
+`vo` is:
+
+::: result voltage of node o
+v_{o} = \dfrac{(g_{1} - g_{2})\,vs}{g_{3} - g_{4}}
+:::
+:::
 
 which is correct, as can be seen by comparing it to the book's answer.
 
@@ -1588,7 +1749,16 @@ o1,0,2,3
 o2,3,4,o
 ```
 
-{{v7,8|Evaluating `vo` we get}}{{v9|`vo` is}}: -**.75 vs**, which is correct.
+::: only 7,8
+Evaluating `vo` we get: -**.75 vs**, which is correct.
+:::
+::: only 9
+`vo` is correct:
+
+::: result voltage of node o
+v_{o} = -0.75\,vs
+:::
+:::
 
 :::
 
@@ -1736,7 +1906,16 @@ Ask **Evaluate** for `expand(vo)` with **Rounding** set to *approx (full precisi
 **Settings**. The answer is arranged differently from the book's, which is a matter of presentation rather than of arithmetic.
 :::
 
+::: only 7,8
 The answer, {{o:-2.4 v1 − 6}}, is correct.
+:::
+::: only 9
+The answer is correct:
+
+$$
+v_{o} = -2.4\,v_{1} - 6
+$$
+:::
 
 :::
 
@@ -1773,7 +1952,16 @@ o2,0,7,o
 Ask **Evaluate** for `expand(vo)`.
 :::
 
+::: only 7,8
 The answer, {{o:8 v1 – 4 v2}}, is correct.
+:::
+::: only 9
+The answer is correct:
+
+$$
+v_{o} = 8\,v_{1} - 4\,v_{2}
+$$
+:::
 
 :::
 

@@ -329,9 +329,14 @@ farads and an inductor in henries, Symbulator will ask you for the frequency;
 enter 50. Once the program is done, ask for the equivalent impedance, `zeq`.
 :::
 
-```out
+```out 7,8
 3.22–𝐢11.07
 ```
+::: only 9
+::: result equivalent impedance
+Z_{eq} = 3.22 - 11.07\,\text{j}\ \Omega
+:::
+:::
 
 That is 3.22 − j11.07 Ω, which is correct.
 
@@ -443,9 +448,14 @@ admittance, so our answer will be the inverse of the equivalent impedance:
 ```field 9 Evaluate
 1/pr(4,8j,-10j)
 ```
-```out
+```out 7,8
 0.25-0.025𝐢
 ```
+::: only 9
+$$
+0.25 - 0.025\,\text{j}\ \mathrm{S}
+$$
+:::
 
 That is 0.25 − j0.025 S, which is correct.
 :::
@@ -473,9 +483,14 @@ is one expression, using the parallel shorthand:
 ```field 9 Evaluate
 4+20j+pr(16,-14j+25j)
 ```
-```out
+```out 7,8
 9.135+𝐢27.47
 ```
+::: only 9
+$$
+9.135 + 27.47\,\text{j}\ \Omega
+$$
+:::
 
 That is 9.135 + j27.47 Ω. The current is the source voltage divided by it:
 
@@ -549,9 +564,14 @@ Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
 *Resistance / impedance*, with nodes **1** and **0**, in AC. The answer is called `zeq`.
 :::
 
-```out
+```out 7,8
 0.3794+𝐢1.46
 ```
+::: only 9
+::: result equivalent impedance
+Z_{eq} = 0.3794 + 1.46\,\text{j}\ \Omega
+:::
+:::
 
 That is 0.3794 + j1.46 Ω, which is correct.
 :::
