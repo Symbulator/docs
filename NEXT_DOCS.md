@@ -8,7 +8,13 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #277 — every box labelled in print as on the web — **in the class, PDFs held (6 Sep 2026)**
+## #278 — claimed by the app tree (6 Sep 2026)
+
+Twelve colour themes for the app; the write-up and the palettes are in
+`Application/v9/repos/local/NEXT.md`. Listed here so the shared sequence
+skips it. Nothing for the docs.
+
+## #277 — every box labelled in print as on the web — **done and live, 6 Sep 2026**
 
 Roberto, 6 Sep 2026: the labels on the field boxes plain, not bold (done
 on the web in a line of CSS); then *can you add the labels to the print
@@ -32,13 +38,15 @@ no word at all, where the web says TYPE and RETURNS. Now, in the class:
 - the result panel (#276) already had its label.
 
 Unit-rendered from the build (each fence kind emits its environment) and
-typeset against the class in one sample holding all five boxes. Lands in
-the PDFs at the next full build, which Roberto is holding; the web needed
-only the bold removed from the field labels (#276's follow-up).
+typeset against the class in one sample holding all five boxes. The PDFs were rebuilt and deployed the same evening, the first full build
+since #269: every box now carries its label in print, and the eight items
+held since #270 landed at once. The labels and panels cost pages -- v7
+**221** (207), v8 **211** (197), v9 **253** (236). Pages 34 and 69 of v9
+and 15 of v7 were read before the deploy.
 
 ---
 
-## #276 — a card answer as the app shows it: the `::: result` panel — **web live 6 Sep 2026, PDFs held**
+## #276 — a card answer as the app shows it: the `::: result` panel — **done and live, 6 Sep 2026**
 
 Roberto, 6 Sep 2026, with a picture of the app's Results card — a small
 label, *resistance seen*, over `r_e = r_1 + 10000` on a panel: *what would
@@ -83,7 +91,7 @@ sinusoids in Lesson 7, and `v_o(t) = …` in Lesson 12.
 
 ---
 
-## #275 — the mono type a step larger — **web live 6 Sep 2026, PDF scale set, PDFs held**
+## #275 — the mono type a step larger — **done and live, 6 Sep 2026**
 
 Roberto, 6 Sep 2026, on a **Solve** card box: the type in the field
 rectangles reads smaller than the prose; make the heights more similar,
@@ -95,7 +103,7 @@ the `::: address` line 0.86rem) and `Scale=0.86` in the class. Now
 
 ---
 
-## #274 — inside an expression, an identifier's trailing digits are its subscript — **web live 6 Sep 2026, PDFs held**
+## #274 — inside an expression, an identifier's trailing digits are its subscript — **done and live, 6 Sep 2026**
 
 Roberto, 6 Sep 2026, on `r_{e} = r1 + 10000`: *the variables on the right
 side of the equal sign should also get the same subscript treatment* —
@@ -116,7 +124,7 @@ its command name; the print showed it.
 
 ---
 
-## #273 — a displayed card answer carries its name, one line per answer — **web live 6 Sep 2026, PDFs held**
+## #273 — a displayed card answer carries its name, one line per answer — **done and live, 6 Sep 2026**
 
 Roberto, 6 Sep 2026, in two examples from Lesson 2: a version 9 answer
 read from a card and shown as mathematics should stand on its own line
@@ -166,7 +174,7 @@ the web now (#270–#273).
 
 ---
 
-## #272 — a result's name in bold, its value in red; bold italic kept for the problem's own variables — **web live 6 Sep 2026, PDFs held**
+## #272 — a result's name in bold, its value in red; bold italic kept for the problem's own variables — **done and live, 6 Sep 2026**
 
 Roberto, 6 Sep 2026, on Lesson 2's *the card lists e = 72.0 and r1 =
 2000.0*: those *e* and *r1* are answers Symbulator gives back in
@@ -199,7 +207,7 @@ the next full build.
 
 ---
 
-## #271 — a marked variable in Plex Serif SemiBold Italic — **web live 6 Sep 2026, PDFs held**
+## #271 — a marked variable in Plex Serif SemiBold Italic — **done and live, 6 Sep 2026**
 
 Roberto found the marked variables (#261, *I_3*, *V_ab*) *a bit chubby*
 and asked for a crisper font. The face is IBM Plex Serif everywhere; the
@@ -225,7 +233,7 @@ against the class. Web: the mark is `<em class="var">` at weight 600 in
 
 ---
 
-## #270 — a chapter title may differ by version — **web live 6 Sep 2026, PDFs held**
+## #270 — a chapter title may differ by version — **done and live, 6 Sep 2026**
 
 The last of #269's questions: Lesson 2 is titled *Symbolic circuits and
 expert mode* in the sidebar, the home-page cards, the search index and
