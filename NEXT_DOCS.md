@@ -8,6 +8,36 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #277 — every box labelled in print as on the web — **in the class, PDFs held (6 Sep 2026)**
+
+Roberto, 6 Sep 2026: the labels on the field boxes plain, not bold (done
+on the web in a line of CSS); then *can you add the labels to the print
+boxes in the PDFs as well?*; then *all boxes, in results and inputs,
+should be labelled both online and PDF.*
+
+Until now the PDF set a `field` fence as plain typed input — *in print
+there is no interface to imitate*, the build said, *the sentence above
+names the field anyway* — and typed input and returned output carried
+no word at all, where the web says TYPE and RETURNS. Now, in the class:
+
+- **`symfield{name}`** — the typed-input box with the field's name over
+  it, `build.py` passing the name the fence carries (*Circuit
+  Description*, *Unknown(s) to solve for*);
+- **`symtype`** says *type* and **`symout`** says *returns*, the web's
+  own words, through one `\symboxlabel` command — sans, footnotesize,
+  slate, plain;
+- **`symlisting`** for a ```text fence: symout's box and no label, as on
+  the web, where a listing is neither typed nor returned and is
+  unlabelled on purpose;
+- the result panel (#276) already had its label.
+
+Unit-rendered from the build (each fence kind emits its environment) and
+typeset against the class in one sample holding all five boxes. Lands in
+the PDFs at the next full build, which Roberto is holding; the web needed
+only the bold removed from the field labels (#276's follow-up).
+
+---
+
 ## #276 — a card answer as the app shows it: the `::: result` panel — **web live 6 Sep 2026, PDFs held**
 
 Roberto, 6 Sep 2026, with a picture of the app's Results card — a small
