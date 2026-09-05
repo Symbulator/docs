@@ -612,7 +612,7 @@ em.var { font-weight: 600; font-style: italic; }
   top: 0.5rem; left: 0.85rem; right: auto;
   transform: none; background: none; padding: 0;
   text-transform: none; letter-spacing: 0.01em;
-  font-size: 0.72rem; font-weight: 600; color: var(--ink-2);
+  font-size: 0.72rem; font-weight: 400;   /* plain, like the result panel (Roberto, 6 Sep) */ color: var(--ink-2);
 }
 /* One element per line is the point, so lines must not be re-wrapped: a
    wrapped element would read as two. */
