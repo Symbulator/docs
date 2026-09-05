@@ -10,7 +10,8 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ## #278 — claimed by the app tree (6 Sep 2026)
 
-Twelve colour themes for the app; the write-up and the palettes are in
+Thirteen colour themes for the app and the scorpion on a transparent
+ground (the landing's and learn's logo copies change with it); the write-up and the palettes are in
 `Application/v9/repos/local/NEXT.md`. Listed here so the shared sequence
 skips it. Nothing for the docs.
 
