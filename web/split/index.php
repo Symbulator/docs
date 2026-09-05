@@ -81,10 +81,41 @@ function asset(string $name): string {
     color: var(--sky, #8ec7f5);
   }
   .splitbar .mark .vnum { color: #fff; }
-  .splitbar .where {
+  /* #304: the position badge is a button that opens the lesson menu --
+     the shell has no table of contents, and this is where a reader
+     looks to see where they are. Reset to look exactly as the badge
+     did, plus a caret. */
+  .splitbar .wherewrap { position: relative; min-width: 0; display: flex; }
+  .splitbar button.where {
+    font: inherit; background: none; border: 0; padding: 0; margin: 0;
+    cursor: pointer; text-align: left;
     color: var(--sky); font-size: 0.78rem; letter-spacing: 0.09em;
     text-transform: uppercase; white-space: nowrap;
     overflow: hidden; text-overflow: ellipsis; min-width: 0;
+  }
+  .splitbar button.where::after { content: " \25BE"; opacity: 0.8; }
+  .splitbar button.where:hover, .splitbar button.where:focus-visible { color: #fff; }
+  .splitbar button.where:focus-visible { outline: 2px solid var(--sky); outline-offset: 2px; }
+  .menu {
+    position: absolute; top: 100%; left: 0; z-index: 20;
+    margin: 0.35rem 0 0; padding: 0.3rem 0; list-style: none;
+    background: var(--paper); color: var(--ink);
+    border: 1px solid var(--rule); border-radius: 6px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.18);
+    min-width: 17rem; max-height: 72vh; overflow: auto;
+    font-size: 0.86rem; letter-spacing: 0; text-transform: none;
+  }
+  .menu[hidden] { display: none; }
+  .menu button {
+    display: block; width: 100%; text-align: left; font: inherit;
+    padding: 0.38rem 0.85rem; background: none; border: 0;
+    color: var(--ink); cursor: pointer; white-space: nowrap;
+  }
+  .menu button:hover, .menu button:focus-visible { background: var(--paper-2); outline: 0; }
+  .menu button[aria-current="true"] { font-weight: 600; color: var(--accent); }
+  .menu .num {
+    display: inline-block; min-width: 4.6em; color: var(--ink-3);
+    font-size: 0.78rem; letter-spacing: 0.06em; text-transform: uppercase;
   }
   .splitbar .spacer { flex: 1 1 auto; }
   .splitbar .tabs { flex: none; }
@@ -93,7 +124,7 @@ function asset(string $name): string {
      line, which is what a wrapped lockup was doing at 375px. */
   @media (max-width: 480px) {
     .splitbar { gap: 0.5rem; padding: 0.4rem 0.55rem; }
-    .splitbar .where { display: none; }
+    .splitbar .wherewrap { display: none; }
   }
   .splitbar .plain {
     font-size: 0.8rem; opacity: 0.92; white-space: nowrap;
@@ -152,7 +183,12 @@ function asset(string $name): string {
 
 <div class="splitbar">
   <a class="mark" href="/9/">Symbulator <span class="vnum">9</span></a>
-  <span class="where" id="where">Documentation</span>
+  <span class="wherewrap">
+    <button type="button" class="where" id="where" aria-haspopup="menu"
+            aria-expanded="false" aria-controls="lessonMenu"
+            title="Go to a lesson">Documentation</button>
+    <ul class="menu" id="lessonMenu" role="menu" hidden></ul>
+  </span>
   <span class="spacer"></span>
   <span class="plain" id="hint">Links in the left pane load the circuit on the right.</span>
   <span class="tabs">
@@ -222,6 +258,7 @@ function asset(string $name): string {
   var CHAPTERS = {};    // "lesson-transient" -> "6a", its first book
   var pending = null;   // what was asked for before lessons.json arrived
   var onPage = '';      // the chapter, when opened on one rather than an entry
+  var current = '';     // #304: the chapter the docs pane is on, for the menu
 
   function qs() {
     try { return new URLSearchParams(location.search); }
@@ -269,6 +306,8 @@ function asset(string $name): string {
     // chapter's title back over the entry this is about to name.
     onPage = '';
     var anchor = 'e-' + lesson + '-' + entry;
+    current = LESSONS[lesson] || current;
+    markCurrent();
     loadApp(lesson, entry);
     if (!Object.keys(LESSONS).length) {
       pending = function () { show(lesson, entry, reloadDocs); };
@@ -294,6 +333,7 @@ function asset(string $name): string {
     .then(function (data) {
       LESSONS = (data && data.lessons) || {};
       CHAPTERS = (data && data.chapters) || {};
+      buildMenu((data && data.titles) || []);
       if (pending) { pending(); pending = null; }
     })
     .catch(function () {
@@ -334,6 +374,8 @@ function asset(string $name): string {
       return;
     }
     onPage = page;
+    current = page;
+    markCurrent();
     docsFrame.src = '/9/' + page;
     var lesson = CHAPTERS[page];
     if (lesson) { loadApp(lesson, 1); }
@@ -344,6 +386,76 @@ function asset(string $name): string {
       history.replaceState(null, '', location.pathname + '?page=' + page);
     } catch (e) {}
   }
+
+  // ---- #304: the lesson menu --------------------------------------------
+  // Roberto, 7 Sep 2026: "There's no table of content in split, so how
+  // about we make a drop down menu for all the lessons, visible when one
+  // clicks here" -- the position badge. Picking a chapter does what the
+  // ribbon's Split View link does for it (showPage): the left pane opens
+  // on the chapter, the right pane on the chapter's first book.
+  var menu = document.getElementById('lessonMenu');
+
+  function buildMenu(titles) {
+    menu.innerHTML = '';
+    titles.forEach(function (row) {
+      var li = document.createElement('li');
+      li.setAttribute('role', 'none');
+      var b = document.createElement('button');
+      b.type = 'button';
+      b.setAttribute('role', 'menuitem');
+      b.dataset.page = row[0];
+      var num = document.createElement('span');
+      num.className = 'num';
+      num.textContent = row[1] || '';
+      b.appendChild(num);
+      b.appendChild(document.createTextNode(row[2] || row[0]));
+      b.addEventListener('click', function () {
+        closeMenu();
+        showPage(row[0]);
+      });
+      li.appendChild(b);
+      menu.appendChild(li);
+    });
+    markCurrent();
+  }
+
+  function markCurrent() {
+    var items = menu.querySelectorAll('button[data-page]');
+    for (var i = 0; i < items.length; i++) {
+      items[i].setAttribute('aria-current', String(items[i].dataset.page === current));
+    }
+  }
+
+  function openMenu() {
+    if (!menu.children.length) { return; }
+    menu.hidden = false;
+    whereEl.setAttribute('aria-expanded', 'true');
+    var cur = menu.querySelector('button[aria-current="true"]') || menu.querySelector('button');
+    if (cur) { cur.focus(); }
+  }
+  function closeMenu() {
+    menu.hidden = true;
+    whereEl.setAttribute('aria-expanded', 'false');
+  }
+  whereEl.addEventListener('click', function () {
+    if (menu.hidden) { openMenu(); } else { closeMenu(); }
+  });
+  document.addEventListener('click', function (ev) {
+    if (menu.hidden) { return; }
+    if (ev.target === whereEl || whereEl.contains(ev.target) || menu.contains(ev.target)) { return; }
+    closeMenu();
+  });
+  document.addEventListener('keydown', function (ev) {
+    if (menu.hidden) { return; }
+    if (ev.key === 'Escape') { closeMenu(); whereEl.focus(); return; }
+    var items = Array.prototype.slice.call(menu.querySelectorAll('button'));
+    var i = items.indexOf(document.activeElement);
+    if (ev.key === 'ArrowDown') { ev.preventDefault(); (items[i + 1] || items[0]).focus(); }
+    if (ev.key === 'ArrowUp') { ev.preventDefault(); (items[i - 1] || items[items.length - 1]).focus(); }
+  });
+  // A click inside either iframe never reaches this document, so the
+  // menu also closes when the focus leaves for a pane.
+  window.addEventListener('blur', closeMenu);
 
   // ---- opening state ----------------------------------------------------
   (function start() {

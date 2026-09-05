@@ -8,6 +8,30 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #304 — a lesson menu in the split view's bar — **done and live, 7 Sep 2026**
+
+Roberto, 7 Sep 2026: *"There's no table of content in split, so how about
+we make a drop down menu for all the lessons, visible when one clicks
+here"* -- the position badge (*Lesson 4b · entry 31*).
+
+The badge is a button now, with a caret; it opens a menu of every version
+9 chapter in reading order, *Lesson 3* in small capitals beside each
+title, the current chapter marked. Picking one does what the ribbon's
+*Split View* link does for a chapter (`showPage`): the left pane opens on
+the chapter, the right pane on the chapter's first book, the URL becomes
+`?page=…`. Escape, an outside click, or the focus leaving for a pane
+closes it; the arrow keys walk it. The titles ride in `lessons.json`,
+written by `build.py` from `book.for_version(9)` -- they exist nowhere
+else the shell can reach without loading every chapter -- as a third key
+beside `lessons` and `chapters`. Below 480px the badge's wrapper is
+hidden as the badge was, so a phone keeps the two tabs and no menu.
+
+Verified live: fifteen items, *Lesson 4 · Shorts, equivalent resistance
+and Thévenin/Norton* marked current on `?lesson=4a&entry=7`; choosing
+Lesson 6 loads `/9/lesson-transient` on the left, `?lesson=6a&entry=1` on
+the right, the URL `?page=lesson-transient`, the badge *Transient
+analysis*.
+
 ## #303 — a placed link scrolls the split view to itself — **done and live, 7 Sep 2026**
 
 Roberto, 7 Sep 2026, on the placed pairs: *"when that link is clicked,
@@ -94,8 +118,10 @@ for now until I tell you."*). The full build that was running was
 stopped, the three `symbulator-v*.pdf` were removed from `build/web`
 before the `learn` deploy so the live PDFs stayed as they were (the
 script never deletes without `--delete`), and `build/pdf/` still holds
-the earlier run's PDFs, which predate #296–#298 anyway. The next PDF
-build picks up #293–#298 together.
+the earlier run's PDFs, which predate #296–#298 anyway. **Lifted at the
+end of the session** (Roberto: *"build, commit, and upload everything,
+including the PDFs"*): rebuilt and deployed at v7 **234** / v8 **221** /
+v9 **278** pages, carrying #293–#304, the white-text check clean.
 
 ## #297 — `::: applink`: a run's app links beside the run — **done and live (web), 7 Sep 2026**
 

@@ -1459,14 +1459,21 @@ def build_web(book: Book, versions: list[int]):
     # for keys that look like array indices: {"1":…,"10":…,"4a":…} comes
     # back as 1, 10, 4a, so "the chapter's first book" would silently be
     # the wrong one for Lesson 1 against Lesson 10.
+    # #304: the version 9 chapters in reading order, for the shell's
+    # lesson menu -- [id, "Lesson 3" or "", title]. The shell has no
+    # table of contents of its own, and the titles exist nowhere else it
+    # can reach without loading every chapter.
+    titles = [[ch.id, f"Lesson {n}" if n else "", title_for(ch, 9)]
+              for ch, n, present in book.for_version(9) if present]
     json.dump({"lessons": {key: cid
                            for cid, keys in app_links.CHAPTER_BOOKS.items()
                            for key in keys},
                "chapters": {cid: keys[0]
                             for cid, keys in app_links.CHAPTER_BOOKS.items()
-                            if keys}},
+                            if keys},
+               "titles": titles},
               open(os.path.join(outroot, "split", "lessons.json"), "w",
-                   encoding="utf-8"), indent=1)
+                   encoding="utf-8"), indent=1, ensure_ascii=False)
     # The banner is shared with symbulator.com and the app. Its one
     # source is banner.css in the app's repository (Application/v9/repos/
     # local -- moved there Aug 2026 so the app build, which inlines a
