@@ -273,7 +273,7 @@ worked out}}.
 ::: only 9
 The results are arranged in groups: **Node voltages** first, one per
 node, and then **Results by element**, one group per element, headed by its
-name and its kind — `r1` *resistor*, `e` *voltage source*.
+name and its kind — **r1** *resistor*, **e** *voltage source*.
 
 Every answer is written the way you would write it by hand, as a named quantity
 and its value: v{{sub:1}} = 36 V, i{{sub:r1}} = 6 mA.

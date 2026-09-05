@@ -458,6 +458,8 @@ r2,1,0,120+70j
 r3,1,0,60
 c,1,0,x
 ```
+::: applink AS7's Problem 11.75 (c, trying a capacitor)
+:::
 
 ::: only 9
 Put `2*pi*50` in the **ω — angular frequency** box — it takes an expression.
@@ -507,6 +509,8 @@ r2,1,0,120+70j
 r3,1,0,60
 l,1,0,x
 ```
+::: applink AS7's Problem 11.75 (c, an inductor instead)
+:::
 
 ```out 7,8
 1.5987 H

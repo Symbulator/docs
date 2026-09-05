@@ -334,6 +334,8 @@ s\tr("c,2,0,c,r*v/(r+r1):r,2,0,r")
 c,2,0,c,r*v/(r+r1)
 r,2,0,r
 ```
+::: applink Bo2's Example 5.1 (TR)
+:::
 
 When the simulation is *Done*, we ask for `vc` again. We get the expression
 below, which is correct.
@@ -416,6 +418,8 @@ j,0,1,0
 r,1,0,3
 c,1,0,1/12,vc0
 ```
+::: applink Bo2's Drill Exercise 5.1 (TR)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -501,6 +505,8 @@ r6,2,0,6
 r4,2,3,4
 c,3,0,1/12,8
 ```
+::: applink Bo2's p224 5.2 (TR)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -587,6 +593,8 @@ r12,1,2,3
 r20,2,0,3
 c,2,0,1/10,6
 ```
+::: applink Bo2's Drill Exercise 5.2 (TR)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -704,6 +712,8 @@ s\tr("l,2,0,l,v/r1:r2,2,0,r"):il
 l,2,0,l,v/r1
 r2,2,0,r
 ```
+::: applink Bo2's Example 5.3 (TR)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -780,6 +790,8 @@ r4,1,2,4
 l,2,0,1,2
 r12,2,0,12
 ```
+::: applink Bo2's Drill Exercise 5.3 (TR)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -904,6 +916,8 @@ l,2,0,16,2
 r8,2,3,8
 ed,3,0,3*vr8
 ```
+::: applink Bo2's Drill Exercise 5.4 (Dependent source, TR)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -984,6 +998,8 @@ r5,1,o,5
 c,1,o,1/20,10
 o,0,1,o
 ```
+::: applink Bo2's Example 5.5 (Op Amp, TR)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -1067,6 +1083,8 @@ c,o,1,1/20,10
 r5,o,1,5
 r2,1,0,2
 ```
+::: applink Bo2's Drill Exercise 5.5 (Op Amp, TR)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -1150,6 +1168,8 @@ s\tr("c,1,0,1/4,8:r4,1,0,4"):{vc,ic}
 c,1,0,1/4,8
 r4,1,0,4
 ```
+::: applink Bo2's Example 5.6 (TR, 0 < t <= 1 s)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -1188,6 +1208,8 @@ s\tr("c,1,0,1/4,2.943:re,1,0,[4,6]")
 c,1,0,1/4,2.943
 re,1,0,[4,6]
 ```
+::: applink Bo2's Example 5.6 (TR, t > 1 s)
+:::
 
 {{v7,8|Ask for `{vc,ic}`. }}The expressions we get are equivalent to:
 
@@ -1271,6 +1293,8 @@ s\tr("r,1,0,9+3:l,1,0,6,3"):{il,vl}
 r,1,0,9+3
 l,1,0,6,3
 ```
+::: applink Bo2's Drill Exercise 5.6 (TR, 0 < t <= 2 s)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -1317,6 +1341,8 @@ s\tr("r,1,0,[9+3,4]:l,1,0,6,.055"):{il,vl}
 r,1,0,[9+3,4]
 l,1,0,6,.055
 ```
+::: applink Bo2's Drill Exercise 5.6 (TR, t > 2 s)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -1737,6 +1763,8 @@ s\tr("r,0,2,r:c,2,0,c,v-e^(–to/(c*r))*v"):vc
 r,0,2,r
 c,2,0,c,v-e^(-to/(c*r))*v
 ```
+::: applink Bo2's p249 F5.28 (TR, second interval)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -1836,6 +1864,8 @@ s\tr("l,0,2,l,v/r-e^(–to*r/l)*v/r:r,2,0,r"):il
 l,0,2,l,v/r-e^(-to*r/l)*v/r
 r,2,0,r
 ```
+::: applink Bo2's Drill Exercise 5.9 (TR, second interval)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -1909,6 +1939,8 @@ r5,2,3,5
 c,3,0,1,2
 j,0,2,2*ir3
 ```
+::: applink Bo2's Figure 5.36 (TR, second interval)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -2006,6 +2038,8 @@ c,2,o,1/4,-2
 r2,2,o,2
 r1,2,0,1
 ```
+::: applink Bo2's Drill Exercise 5.11 (TR)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
@@ -2463,6 +2497,8 @@ r1,1,0,5
 l,1,2,1/2,1
 c,2,0,1/8,2
 ```
+::: applink Bo2's Example 6.1 (TR, second order)
+:::
 
 ::: only 7,8
 $$
@@ -2579,6 +2615,8 @@ r6,1,0,6
 l,1,2,1/4,0
 c,2,0,1/3,2
 ```
+::: applink Bo2's Drill Exercise 6.1 (TR)
+:::
 
 ```sym 7
 vc
@@ -2686,6 +2724,8 @@ l,3,0,1/50
 r4,3,4,3
 e2,4,0,3
 ```
+::: applink Bo2's Example 6.2 (DC, the right half)
+:::
 
 ::: only 9
 The answer you want is `il`, in **Results**.
@@ -2714,6 +2754,8 @@ c,1,0,2,-7/50
 r,1,0,[1/6,1/6]
 l,1,0,1/50,1
 ```
+::: applink Bo2's Example 6.2 (TR, both halves joined)
+:::
 
 ```sym 7
 vc
@@ -2811,6 +2853,8 @@ l,2,3,1,1
 c,3,0,1,2
 r1,3,0,1
 ```
+::: applink Bo2's Example 6.3 (TR)
+:::
 
 ::: only 7,8
 $$
@@ -2889,6 +2933,8 @@ r,1,0,1
 l,1,0,1,2
 c,1,0,1/8,0
 ```
+::: applink Bo2's Drill Exercise 6.4 (TR, the book's 1 H)
+:::
 
 The answer we get doesn't match the answer provided by the book. Now let's
 repeat the TR simulation using the ½ H value for the inductor:
@@ -2904,6 +2950,8 @@ r,1,0,1
 l,1,0,1/2,2
 c,1,0,1/8,0
 ```
+::: applink Bo2's Drill Exercise 6.4 (TR, 1/2 H instead)
+:::
 
 Now the answer matches the book's. An expert user can reach for {{v7,8|the `fd` gate}}{{v9|FD analysis}}
 and the `t2s` tool, which we have not discussed yet, to find the inductor's
@@ -2947,6 +2995,8 @@ r,1,0,1
 l,1,0,l,2
 c,1,0,1/8,0
 ```
+::: applink Bo2's Drill Exercise 6.4 (FD, solving for the inductor)
+:::
 
 ::: only 9
 Set **Analysis** to *FD — complex frequency domain*.
@@ -3030,6 +3080,8 @@ l1,1,0,6,2
 r3,1,2,3
 l2,2,0,4,0
 ```
+::: applink Bo2's Drill Exercise 6.5 (TR)
+:::
 
 ::: only 7,8
 $$
@@ -3118,6 +3170,8 @@ ca,1,0,1,0
 cb,2,o,1/4,4
 o,0,2,o
 ```
+::: applink Bo2's Drill Exercise 6.6 (Op Amp, TR)
+:::
 
 :::
 
@@ -3312,6 +3366,8 @@ r,1,2,3
 l,2,3,1,4
 c,3,0,1'µ,0
 ```
+::: applink Bo2's Example 6.6 (Plot, TR)
+:::
 
 Finally, {{v7,8|run `s\plot()` and enter `vl` as function, `0` as minimal time and
 `0.005` as maximal time}}{{v9|plot `vl` in **Plotting Tools** from `0` to
@@ -3522,6 +3578,8 @@ r6,2,0,6
 cb,2,0,1/3,9/4
 j,0,2,10e^(-t)*sin(2t+30*pi/180)
 ```
+::: applink A more complex problem (TR)
+:::
 
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.

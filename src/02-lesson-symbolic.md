@@ -26,7 +26,7 @@ encounter a symbolic problem, because the ability to simulate symbolic circuits
 is what sets Symbulator apart from other programs.
 
 ::: note Variables are case-sensitive; names are not
-Element and node names ignore case — `R1` and `r1` are the same resistor,
+Element and node names ignore case — **R1** and **r1** are the same resistor,
 and so is any reference built from a name: `2*VR1`, `2*vr1` and `2*v_r1`
 all mean r1's voltage drop. A variable that names nothing in the circuit
 is different: `e,1,2,c` and `e,1,2,C` are two *different* symbolic
@@ -391,7 +391,7 @@ DC, AC, FD and TR.
 
 ::: problem B11's Example 5.6, using ex
 ::: answer
-We use the same circuit description as before, `r1` included.
+We use the same circuit description as before, **r1** included.
 
 The problem gives us the two extra equations: the source sees 12 kΩ, and the
 current through {{var:R_3}} is 6 mA. They use the names the answers come back under,

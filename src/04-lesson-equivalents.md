@@ -452,8 +452,10 @@ with a symbolic value of **load**, in ohms.
 :::
 ::: only 9
 To help you in those cases, Symbulator writes that circuit for you. With
-the load question ticked, a button appears under it: **Load circuit
-equivalent?** Press it and it warns you first: the equivalent circuit will
+the load question ticked, a button appears at the foot of **Results**,
+under the equivalent's answers: **Load circuit equivalent?** It is live
+once the equivalent has been found, and goes dead again if you change any
+input until you run again. Press it and it warns you first: the equivalent circuit will
 overwrite the **Circuit Description**, **Define** and **Expert Mode** fields
 and switch the analysis to *Solve circuit*, so a circuit you have not saved
 yet can be saved before it goes. Proceed, and the description becomes
@@ -524,7 +526,7 @@ only thing connected to the terminals of the equivalent: there is also a
 current source. We have to run a new simulation.
 
 {{v7,8|The fastest way is to start from the equivalent circuit description:}}{{v9|The
-fastest way is the button under the load question, **Load circuit
+fastest way is the button at the foot of **Results**, **Load circuit
 equivalent?** Proceed past its warning and the description is replaced by
 the equivalent, with `iNo` and `rEq` already in **Define**:}}
 
@@ -554,13 +556,16 @@ rL,n,0,168
 j,0,n,180'm
 ```
 
+::: applink RM3's Example 9-8 (with the load)
+:::
+
 ```out 7,8
 –.06
 ```
 
 ::: only 9
-The analysis is already *Solve circuit*; run it in DC. The current through
-`rl`, `irl`, reads {{o:-0.06}} A.
+The analysis is already *Solve circuit*; run it in DC, with **SI prefixes**
+ticked in **Settings**. The current through **rl**, `irl`, reads {{o:-60}} mA.
 :::
 
 Correct: there is a current of 60 mA flowing through {{var:R_L}} from 0 to n.
@@ -885,7 +890,7 @@ Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 :::
 ::: only 9
 *Find equivalent*, *Resistance / impedance*, nodes **1** and **0**, in DC:
-`req` is {{o:0.6000}} Ω. The short is named `s1` rather than `s`, because a
+`req` is {{o:0.6000}} Ω. The short is named **s1** rather than **s**, because a
 bare `s` would make its current `is`, a reserved word in Python; the dependent
 value follows it as `is1`.
 :::
@@ -1634,6 +1639,8 @@ r1,1,a,1
 e,1,0,1
 j,2,b,x*ir8
 ```
+::: applink Bo2's Example 3.11 (Tricky, with a symbol)
+:::
 
 ::: only 9
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
@@ -1757,6 +1764,8 @@ rf,3,2,rf
 ro,2,t,ro
 ed,2,0,μ*vrf
 ```
+::: applink TR5's Exercise 4-6 (Symbolic, output equivalent)
+:::
 
 ::: only 9
 Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **t** in the first and **0** in the second — the pair of terminals you are looking into.

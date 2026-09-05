@@ -22,14 +22,14 @@ both.{{i:mutual inductance}}
 - Two inductors in **henries**, coupled by a mutual inductance also in
   henries.
 - Two impedances in **jΩ**, coupled by a mutual impedance also in jΩ. Written
-  this way the coils are `r` elements with imaginary values.
+  this way the coils are **r** elements with imaginary values.
 
 Either way the coupling itself is an **m** element with four fields: a name
-starting with `m`, the names of the two coupled elements, and the value of the
+starting with **m**, the names of the two coupled elements, and the value of the
 coupling. For example: `m1,l1,l2,1.5`
 
-That is a mutual inductance of 1.5 H between inductors `l1` and `l2`. In jΩ it
-looks the same, naming two `r` elements instead: `m1,r1,r2,2j`
+That is a mutual inductance of 1.5 H between inductors **l1** and **l2**. In jΩ it
+looks the same, naming two **r** elements instead: `m1,r1,r2,2j`
 
 ::: warning Don't mix the two
 `m1,l1,r1,2` couples an inductor given in henries to one given in jΩ. It will
@@ -55,7 +55,7 @@ notice that the dotted ends are always the first node given.
 
 The value of a mutual inductance can use SI prefixes.
 
-**What answers do you get?** None. An `m` element is a statement about two
+**What answers do you get?** None. An **m** element is a statement about two
 other elements, not a component with its own voltage and current — its effect
 shows up in the currents of the elements it couples.
 
@@ -72,7 +72,7 @@ AS7's Example 13.1
 
 ::: answer
 Three things to notice in the description. The bottom node of both halves is
-ground. The coils are given in jΩ, so they are `r` elements with imaginary
+ground. The coils are given in jΩ, so they are **r** elements with imaginary
 values, and the mutual is imaginary too, to match. And the dotted node of each
 coupled element is named first.
 

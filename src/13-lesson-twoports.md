@@ -153,15 +153,15 @@ equation or condition there overrides the description's own values.)
 
 ::: note How the variables are named
 The four variables are the element's name plus `11`, `12`, `21`, `22`: a
-two-port called `z1` owns `z111`…`z122`. Element and node names ignore case,
+two-port called **z1** owns `z111`…`z122`. Element and node names ignore case,
 but a variable that names nothing in the circuit is case-sensitive: `za` and
 `ZA` are two different symbols.
 :::
 :::
 
 **What answers do you get?** The current entering each port, named with the
-two-port and the **node** it sits on — for a two-port {{v7|`zp` on nodes **1**
-and **2**, that is `izp1` and `izp2`}}{{!v7|`z` on nodes **1** and **2**, that is `iz1`
+two-port and the **node** it sits on — for a two-port {{v7|**zp** on nodes **1**
+and **2**, that is `izp1` and `izp2`}}{{!v7|**z** on nodes **1** and **2**, that is `iz1`
 and `iz2`}}.
 
 ::: problem AS7's Example 19.2

@@ -584,8 +584,8 @@ just an expression naming another element's answer instead of a
 number.{{i:dependent source}}
 
 {{v7,8|Version 7 runs the quantity and the element together, as in `2icx`.}}{{v9|The
-name is the one the answers use: the current through `cx` is `icx`, the
-voltage across `rx` is `vrx`.}}
+name is the one the answers use: the current through **cx** is `icx`, the
+voltage across **rx** is `vrx`.}}
 
 ::: practice
 
@@ -597,8 +597,8 @@ AS7's Example 10.1
 :::
 
 ::: answer
-The current source is controlled by the current through the capacitor `cx`,
-which is what the last field of `j1` says.
+The current source is controlled by the current through the capacitor **cx**,
+which is what the last field of **j1** says.
 
 ```sym 7
 "e1,1,0,20:r1,1,2,10:cx,2,0,.1:l1,2,3,1:j1,0,3,2icx:l2,3,0,.5"→cir
@@ -650,7 +650,7 @@ AS7's Practice Problem 10.1
 
 ::: answer
 This one is controlled by a *voltage* rather than a current — three times the
-voltage across `rx`.
+voltage across **rx**.
 
 ```sym 7
 "j,0,1,10:rx,1,0,2:c,1,2,.2:l,2,0,2:r,2,3,4:e,3,0,3vrx"→cir
@@ -907,6 +907,8 @@ c,1,0,c'µ
 r1,1,2,10
 l,2,0,5'm
 ```
+::: applink AS7's Problem 9.89 (at 2000 rad/s, as it was meant)
+:::
 
 *Find equivalent*, *Resistance / impedance*, nodes **1** and **0**, in AC at ω
 **2000**. That gives `zeq` = {{o:500j/(-c + 25 + 25j)}}, and the condition

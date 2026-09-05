@@ -989,6 +989,8 @@ r2,a,b,40
 r4,a,b,240
 j,a,b,i4
 ```
+::: applink RM3's Example 9-12 (Step 2)
+:::
 
 Notice that both the voltage drop (given by va-vb) and the current (given by
 `ir4+ij`) are algebraic functions in terms of i4. Now you can find i4 solving
@@ -1169,6 +1171,9 @@ r3,1,0,22'k
 ```
 
 Looking at the value of `ir1`, we get {{var:I_1}} = {{o:10.48}} mA, which is correct.
+
+::: applink B11's Example 6.22 (Partial reduction)
+:::
 
 :::
 

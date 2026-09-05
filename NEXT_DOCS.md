@@ -8,6 +8,56 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #302 — element names set as element names, not as answers — **done and live (web), 7 Sep 2026**
+
+Roberto, 7 Sep 2026, on Lesson 4's *The current through `rl`, `irl`, reads
+−0.06 A*: *"rl appears as if it was an answer variable, in the same
+format as irl. However, rl is not such a thing. Instead, rl is the name
+of an element, so show it in regular text but bold, as other element
+names. Do this fix on every other instance of this mistake across the
+documentation."*
+
+A sweep of every version 9 line with a short element-shaped name in code
+(`tools/v9_lines.py`, then read by hand) found nineteen such names in
+eight chapters: **rl** twice (Lessons 4 and 5), **cx**, **rx** and **j1**
+in Lesson 7, **l1**, **l2** and the kind letters **r** and **m** in
+Lesson 10, the node names **ag**, **as**, **ad** in Lesson 9, **s1** and
+**s** in Lesson 4, **r1**/**R1** in Lessons 1 and 2, the book's **r1** and
+**r3** values in Lesson 5's design problem, and the two-ports **z1**,
+**zp** and **z** in Lesson 13. Answer names (`icx`, `vrx`, `irl`, `z111`),
+unknowns the reader types into a field (`rx`, `l`) and circuit lines stay
+in code. Rule: #267's -- a name the circuit gives an element or a node is
+bold when bare in prose; code is for what the app returns or the reader
+types.
+
+The same passage now says the second part of RM3's 9-8 runs with **SI
+prefixes** ticked, so `irl` reads −60 mA like the sentence after it
+(Roberto: *"currently it says 0.06 and then 60m. Make both 60m"*); the
+entry's `si:` is on to match.
+
+---
+
+## #301 — a problem's later runs link from the solution, not the head — **done and live (web), 7 Sep 2026**
+
+Roberto, 7 Sep 2026, on RM3's Example 9-8: *"When you have multiple links
+like here, put the second onwards at the right place of the solution as
+opposed to the top."* #297's directive, applied as a rule: the first
+entry's pair stays under the title; every later one is placed with
+`::: applink` where the solution reaches that run.
+
+Thirty-five problems had more than one pair at the head, 39 extra runs
+between them (Lesson 6 alone has 24 problems whose DC pass for the
+initial condition precedes the TR). For 32 of them the runs line up with
+the problem's **Circuit Description** boxes one for one, so a script
+(`place_links.py`, kept in the session's scratch, not the tree) put the
+k-th entry after the k-th box; the three whose runs are not boxes were
+placed by hand -- B11's 6.22 *(Partial reduction)* after its answer,
+RM3's 9-8 *(with the load)* after the edited equivalent, and AS2's 5.7's
+*(the v2 factor)* after its result panel and *(checking the design)*
+after the verification circuit. A recount over the built tree finds no
+problem with more than one head link. `build.py --check` clean: every
+placed title names an entry.
+
 ## #298 — the five `out` fences a version 9 reader saw as calculator text — **done and live (web), 7 Sep 2026**
 
 Roberto, 7 Sep 2026, on Lesson 6's `t^2/4`: *"Make sure to show these

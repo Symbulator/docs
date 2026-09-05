@@ -551,6 +551,8 @@ r4,a,o,r4
 o,0,a,o
 rl,o,0,1
 ```
+::: applink TR5's Example 4-14 (Inverting, the quicker way)
+:::
 
 When we evaluate `vo/v1`, both approaches get the same answer:
 
@@ -814,6 +816,8 @@ e,1,0,vs
 r1,1,2,r1
 r2,2,0,r2
 ```
+::: applink TR5's Example 4-13 (the left half)
+:::
 
 ::: only 9
 Ask **Evaluate** for:
@@ -850,6 +854,8 @@ o,2,3,o
 r3,o,3,r3
 r4,3,0,r4
 ```
+::: applink TR5's Example 4-13 (the right half)
+:::
 
 ::: only 9
 Ask **Evaluate** for:
@@ -974,10 +980,12 @@ rs,1,2,2'k
 o,2,o,o
 rl,o,0,1'k
 ```
+::: applink TR5's Figure 4-32 (Voltage Follower, buffered)
+:::
 
 ::: only 9
 The answer you want is `prl`, in **Results** — the power consumed by the
-load resistor `rl`.
+load resistor **rl**.
 :::
 
 The answer, **.00225**, is correct. The apparent paradox — the load in (a)
@@ -1470,6 +1478,9 @@ v_{o} = \frac{r_{4} \left(r_{1} + r_{2}\right)} {r_{1} \left(r_{3} + r_{4}\right
 
 which is equivalent to the book's expression, and it is that which has to
 equal 3.
+
+::: applink AS2's Example 5.7 (the v2 factor)
+:::
 :::
 
 ::: only 7,8
@@ -1517,7 +1528,7 @@ $$
 r_{4} = r_{3}
 $$
 
-Put the book's `r1` = 10 kΩ and `r3` = 20 kΩ into it and you get {{o:50}} kΩ
+Put the book's **r1** = 10 kΩ and **r3** = 20 kΩ into it and you get {{o:50}} kΩ
 and {{o:20}} kΩ.
 :::
 
@@ -1548,6 +1559,9 @@ r2,a,o,50'k
 r4,b,0,20'k
 o,b,a,o
 ```
+
+::: applink AS2's Example 5.7 (checking the design)
+:::
 
 ::: only 7,8
 Evaluating `vo` gives us the desired output, **3\*v2-5\*v1**. The resistor

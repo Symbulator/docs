@@ -140,7 +140,7 @@ values as RMS.
 
 There are **three** impedances in each line here: one inside the generator, one
 for the transmission line, and one for the load. The node names below say which
-is which — `ag` in the generator, `as` on the supply side, `ad` on the demand
+is which — **ag** in the generator, **as** on the supply side, **ad** on the demand
 side.
 
 ```sym 7
