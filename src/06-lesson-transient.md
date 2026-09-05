@@ -500,7 +500,7 @@ c,3,0,1/12,8
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `vc`, `ic` and `v2`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -586,7 +586,7 @@ c,2,0,1/10,6
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `vc`, `ic` and `v1`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -703,7 +703,7 @@ r2,2,0,r
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answer you want is `il`, in **Results**.
+The answer you want is in **Results**:
 :::
 
 ::: only 7,8
@@ -779,7 +779,7 @@ r12,2,0,12
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `il`, `vl` and `ir4`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -830,7 +830,7 @@ l,v,0,l,5
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answer you want is `il`, in **Results**.
+The answer you want is in **Results**:
 :::
 
 ::: only 7,8
@@ -903,7 +903,7 @@ ed,3,0,3*vr8
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `il` and `vl`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -983,7 +983,7 @@ o,0,1,o
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `vc`, `ic` and `vo`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -1066,7 +1066,7 @@ r2,1,0,2
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `vc`, `ic` and `vo`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -1149,7 +1149,7 @@ r4,1,0,4
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `vc` and `ic`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -1270,7 +1270,7 @@ l,1,0,6,3
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `il` and `vl`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -1316,7 +1316,7 @@ l,1,0,6,.055
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `il` and `vl`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -1469,7 +1469,7 @@ r2,3,0,2
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `il`, `vl` and `v2`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -1520,7 +1520,7 @@ r,1,0,r
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `v1`, `ir` and `ic`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -1572,7 +1572,7 @@ r1,2,0,1
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `vc`, `ic` and `vo`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -1623,7 +1623,7 @@ o,0,2,o
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `vc`, `ic` and `vo`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -1908,7 +1908,7 @@ j,0,2,2*ir3
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answer you want is `vc`, in **Results**.
+The answer you want is in **Results**:
 :::
 
 ::: only 7,8
@@ -2005,7 +2005,7 @@ r1,2,0,1
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answer you want is `vc`, in **Results**.
+The answer you want is in **Results**:
 :::
 
 ::: only 7,8
@@ -2119,7 +2119,7 @@ r1,2,0,1
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `vc`, `ic` and `vo`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -2165,7 +2165,7 @@ l,1,0,l,0
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `il` and `vl`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -2208,7 +2208,7 @@ r1,2,0,1
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `vc` and `ic`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -2253,7 +2253,7 @@ l,1,0,2,0
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `il` and `vl`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -2295,7 +2295,7 @@ l,1,0,2,0
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `il` and `vl`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -2340,7 +2340,7 @@ j,0,2,2*ir3
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `vc` and `ir3`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8
@@ -2382,7 +2382,7 @@ r1,2,0,1
 ::: only 9
 Set **Analysis** to *TR — transient / time domain*.
 
-The answers you want are `vc` and `ic`, in **Results**.
+The answers you want are in **Results**:
 :::
 
 ::: only 7,8

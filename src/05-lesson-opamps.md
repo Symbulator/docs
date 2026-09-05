@@ -1243,7 +1243,7 @@ o,b,a,o
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+The answer you want is in **Results**:
 :::
 
 
