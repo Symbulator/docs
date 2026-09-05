@@ -8,6 +8,32 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #312 — one sun-and-moon in the split view — **done and live (web), 7 Sep 2026; the app's half awaits Roberto's pull**
+
+Roberto, 7 Sep 2026: *"We get duplicate dark mode toggle buttons now on
+the app side of split. Can you think of a way of solving that
+duplication?"* #310 gave the shell a toggle for the docs pane; #311 then
+uncovered the app's own, in the ribbon it keeps when framed.
+
+One toggle, the shell's, driving both panes. The docs pane is
+same-origin and is set directly, as before. The app pane is another
+origin, so it is *told*: the shell posts `{ from: 'symbulator-split',
+type: 'theme', dark }` on every click and once more on each load of the
+pane, so an entry opened later matches too; the app, when framed, hides
+its sun-and-moon and applies a theme message that comes from
+`learn.symbulator.com` (or its own origin, which is how the dev server is
+tested), storing it like a click so the app opened on its own later
+remembers the choice. This is the one message the app pane receives;
+the protocol comment at the head of `split/index.php` and the root
+`CLAUDE.md` say so, where they used to say it was never messaged at all.
+
+Verified on the dev server by framing the app inside itself: the framed
+copy's toggle is `display: none`, a theme message from the parent sets
+and stores dark then light, and the same message posted to a top-level
+page is ignored. The shell's half is live; the app's half rides Roberto's
+next pull, and until then the split view shows the shell's toggle beside
+the app's own, harmlessly.
+
 ## #310 — light and dark in the split view — **done and live, 7 Sep 2026**
 
 Roberto, 7 Sep 2026: *"I don't see the light dark mode toggle on the doc

@@ -268,12 +268,19 @@ function asset(string $name): string {
 //     Sent on load, so the shell knows the pane can be spoken to and
 //     which chapter it settled on.
 //
+//   shell -> app pane    { from: 'symbulator-split', type: 'theme',
+//                          dark: true }
+//     #312: the one message the app pane receives. Sent on every click
+//     of the shell's sun-and-moon and once more each time the pane
+//     loads, so both panes and the shell show the same mode; the app
+//     hides its own toggle when framed. Addressed to the app's origin.
+//
 // The docs pane is same-origin with this shell -- both are served by
 // learn.symbulator.com -- so messages to it are addressed to
 // location.origin rather than '*', and messages from it are accepted
 // only when they arrive from that frame's own window. The app pane is a
-// different origin and is never messaged at all: it is driven by its
-// src, which is the whole reason a click reloads it.
+// different origin and, the theme aside, is never messaged: it is driven
+// by its src, which is the whole reason a click reloads it.
 // -------------------------------------------------------------------------
 (function () {
   'use strict';
@@ -521,13 +528,25 @@ function asset(string $name): string {
       btn.title = label;
     }
     sync();
+    // #312: the app pane is another origin, so it is told rather than set.
+    function tellApp() {
+      try {
+        appFrame.contentWindow.postMessage(
+          { from: 'symbulator-split', type: 'theme', dark: isDark() },
+          APP.replace(/\/$/, ''));
+      } catch (e) {}
+    }
     btn.addEventListener('click', function () {
       var dark = !isDark();
       apply(document.documentElement, dark);
       try { apply(docsFrame.contentDocument && docsFrame.contentDocument.documentElement, dark); } catch (e) {}
       try { localStorage.setItem('symbulator-docs-theme', dark ? 'dark' : 'light'); } catch (e) {}
       sync();
+      tellApp();
     });
+    // Every load of the pane -- the first, and each entry opened after --
+    // starts from the app's own stored theme; say ours as soon as it is up.
+    appFrame.addEventListener('load', tellApp);
   })();
 
   // ---- opening state ----------------------------------------------------
