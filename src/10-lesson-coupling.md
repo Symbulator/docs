@@ -225,10 +225,14 @@ t1,[1,3],[2,4],[80,800]
 
 That is a primary between nodes **1** and **3**, a secondary between nodes
 **2** and **4**, 80 and 800 turns. The dots sit at the two top nodes, as
-before. A side that has no path of its own to ground is reported as floating,
-because an ideal transformer conducts nothing from one side to the other; give
-that side a ground somewhere. Either terminal of a pair may be `0`, so
-`t1,[1,0],[2,0],[80,800]` is the two-node form written out.
+before. An ideal transformer conducts nothing from one side to the other, so a
+side with no path of its own to ground is an island: Symbulator takes one of
+its nodes — the winding's lower terminal — as that side's own reference, holds
+it at 0, and says so in a note under the results. Every current and every
+voltage difference on that side is the same whichever node is chosen; only
+its absolute potentials depend on it, and they have no meaning anyway. Either
+terminal of a pair may be `0`, so `t1,[1,0],[2,0],[80,800]` is the two-node
+form written out.
 :::
 
 **What answers do you get?** The voltages at the live nodes, as for any node
@@ -521,15 +525,253 @@ i_{t5} = \dfrac{5}{101}
 :::
 
 and `ir5` is {{o:0}}: the secondary's current circulates through the load
-alone, and the resistor to ground carries nothing. It is not useless,
-though. An ideal transformer conducts nothing from one winding to the
-other, so without it the secondary side would have no reference at all —
-delete `r5` and Symbulator stops with *Node(s) 3, 5 have no path to the
-reference node 0; that part of the circuit is floating and its voltages are
-undefined.* A side that is isolated from ground must be given a ground
-somewhere, as it would be on a real bench.
+alone, and the resistor to ground carries nothing. What it does is give the
+secondary side a reference. An ideal transformer conducts nothing from one
+winding to the other, so without `r5` that side would have no path to node
+**0** at all — delete it and Symbulator still solves, taking node **5** as
+the side's own reference and saying so in a note: *Node(s) 5, 3 have no path
+to node 0 (they lie behind a port or a coupling), so their voltages are
+measured against 5, taken as 0.* The currents and `v3 − v5` come out the same
+either way; only the two absolute potentials differ, and on a real bench they
+would be whatever the wiring made them.
 :::
 :::
 :::
 
+:::
+
+::: only 9
+## Switching with coupled coils {#coupled-switching}
+
+Four problems from Nilsson and Riedel's *Electric Circuits* (11th edition),
+each with a switch that moves at t = 0 and a pair of coupled coils on the far
+side of it. The method is the one Lesson 6 uses for every switch: a DC solve
+before the switch gives the coil currents, and those become the initial
+conditions of a transient solve after it. The coupled side has no ground of
+its own in any of them, and none is needed: a coupling conducts nothing
+across, so Symbulator takes one node of that side as its reference and says
+so. The variable asked for is the one the book marks in blue.
+
+::: problem NR11's 60 V source and coupled 2 H and 8 H coils
+A 60 V source feeds a 9 Ω resistor and, through a switch at **a**, a 3 Ω
+resistor in series with a 2 H coil. The coil is coupled, M = 2 H, to an 8 H
+coil closed on 2 Ω and 10 Ω. The switch has been at **a** a long time and
+moves to **b** at t = 0, shorting the 3 Ω and the 2 H together. Find
+{{var:i_1}} in the 2 H coil and {{var:i_2}} in the 8 H coil for t > 0. Both
+dots are at the coils' upper ends.
+
+::: figure assets/circuit/sym_nr11_coupled_60v.png
+The circuit after the switch, drawn by Symbulator
+:::
+
+::: answer
+Before the switch, in DC, with the source in and the switch at **a**:
+
+```field 9 Circuit Description
+e,1,0,60
+r9,1,a,9
+r3,a,2,3
+l1,2,0,2
+l2,3,4,8
+r2,3,5,2
+r10,5,4,10
+m,l1,l2,2
+```
+::: applink NR11's 60 V source and coupled 2 H and 8 H coils (DC, t < 0)
+:::
+
+Both coils are shorts in DC, so `il1` = {{o:5}} A (60 V over 9 + 3 Ω) and
+`il2` = {{o:0}}. The secondary has no path to node **0**, and the results say
+so in a note: its voltages are measured against node **4**.
+
+After the switch the source is gone and the 3 Ω and the 2 H are shorted
+through **b**; the 5 A is the coil's initial condition. In TR:
+
+```field 9 Circuit Description
+r3,0,2,3
+l1,2,0,2,5
+l2,3,4,8,0
+r2,3,5,2
+r10,5,4,10
+m,l1,l2,2
+```
+::: applink NR11's 60 V source and coupled 2 H and 8 H coils (TR, t > 0)
+:::
+
+::: result current through l1
+i_{l1} = \dfrac{5}{2}\left(e^{-t} + e^{-3t}\right)\ \mathrm{A}
+:::
+::: result current through l2
+i_{l2} = \dfrac{5}{4}\left(e^{-t} - e^{-3t}\right)\ \mathrm{A}
+:::
+
+Two modes, at 1 and 3 per second: {{var:i_1}} starts from 5 A and
+{{var:i_2}} from 0, and both vanish. Both satisfy the pair of coil equations
+exactly, which is how they were checked.
+:::
+:::
+
+::: problem NR11's two switches and coupled 3 H and 15 H coils
+On the left, a 24 V source and 120 Ω feed a 3 H coil through switch **1**,
+which has been open a long time and closes at t = 0. On the right, a 15 H
+coil, coupled to the first by M = 3 H, is connected through switch **2** to
+either **a** — a 10 Ω resistor and a 20 V source — or **b**, a 360 Ω
+resistor. Switch 2 has been at **a** a long time and moves to **b** at t = 0.
+Find {{var:i_1}} for t > 0. The dot of the 3 H coil is at its upper end, the
+dot of the 15 H coil at its lower end.
+
+::: figure assets/circuit/sym_nr11_coupled_two_switches.png
+The circuit after the switches, drawn by Symbulator
+:::
+
+::: answer
+Before the switches there is no primary current at all, and the 20 V drives
+2 A through the 10 Ω and down through the 15 H coil. In DC:
+
+```field 9 Circuit Description
+e,a,0,20
+r10,a,c,10
+l2,d,c,15
+```
+::: applink NR11's two switches and coupled 3 H and 15 H coils (DC, t < 0)
+:::
+
+The dot of the 15 H coil is at its bottom, so its first node is **d**, the
+bottom, and the current from **d** to **c** reads `il2` = {{o:-2}} A.
+
+After the switches the 24 V drives the primary from rest and the secondary,
+starting at 2 A, decays through the 360 Ω. In TR, ticking **Do you want to
+limit the results to save time?** and asking for the one current:
+
+```field 9 What results are you after? List the variables here
+il1
+```
+
+```field 9 Circuit Description
+e1,1,0,24
+r120,1,2,120
+l1,2,0,3,0
+l2,d,c,15,-2
+r360,c,d,360
+m,l1,l2,3
+```
+::: applink NR11's two switches and coupled 3 H and 15 H coils (TR, t > 0)
+:::
+
+::: result current through l1
+i_{l1} = \dfrac{1}{5} - \dfrac{31}{20}\,e^{-20t} + \dfrac{27}{20}\,e^{-60t}\ \mathrm{A}
+:::
+
+It starts from 0, settles at 24/120 = 0.2 A, and its two modes are at 20 and
+60 per second. The dots are at opposite ends, which is why the secondary is
+written bottom node first with a positive M; writing it top node first with
+M = −3 gives the same answer.
+:::
+:::
+
+::: problem NR11's 90 V source and coupled 3 H and 2 H coils
+A 90 V source and 5 Ω feed, through a switch at **a**, a 3 H coil whose far
+end joins a 2 H coil and a 10 Ω resistor to ground; the coils are coupled,
+M = 1 H, dots at both upper ends. The switch has been at **a** a long time
+and moves to **b** at t = 0, replacing the source by a 20 Ω resistor. Find
+{{var:i_o}}, the current into the 3 H coil, for t > 0.
+
+::: figure assets/circuit/sym_nr11_coupled_90v.png
+The circuit after the switch, drawn by Symbulator
+:::
+
+::: answer
+Before the switch both coils are shorts in DC, and the 2 H shorts the 10 Ω:
+
+```field 9 Circuit Description
+e,1,0,90
+r5,1,t,5
+l1,t,m,3
+l2,m,0,2
+r10,m,0,10
+m,l1,l2,1
+```
+::: applink NR11's 90 V source and coupled 3 H and 2 H coils (DC, t < 0)
+:::
+
+`il1` = {{o:18}} A, `il2` = {{o:18}} A and `ir10` = {{o:0}}: all of it goes
+through the coils.
+
+After the switch, in TR, asking only for `il1` in the same way:
+
+```field 9 Circuit Description
+r20,t,0,20
+l1,t,m,3,18
+l2,m,0,2,18
+r10,m,0,10
+m,l1,l2,1
+```
+::: applink NR11's 90 V source and coupled 3 H and 2 H coils (TR, t > 0)
+:::
+
+::: result current through l1
+i_{l1} = 12\,e^{-2t} + 6\,e^{-20t}\ \mathrm{A}
+:::
+
+From 18 A to zero, with modes at 2 and 20 per second.
+:::
+:::
+
+::: problem NR11's capacitor shorted by a switch and coupled 0.8 H and 1.6 H coils
+A 48 V source feeds a 10 mF capacitor, a 4 Ω resistor and a 0.8 H coil in
+series. A switch across the capacitor has been closed a long time and opens
+at t = 0. The coil is coupled, M = 0.8 H, to a 1.6 H coil across a 20 Ω
+resistor; both dots are at the upper ends. Find {{var:v_o}}, the voltage
+across the 20 Ω, for t > 0.
+
+::: figure assets/circuit/sym_nr11_coupled_capacitor.png
+The circuit after the switch opens, drawn by Symbulator
+:::
+
+::: answer
+Before the switch the capacitor is shorted, so it is left out of the DC
+picture:
+
+```field 9 Circuit Description
+e,1,0,48
+r4,1,3,4
+l1,3,0,0.8
+l2,4,5,1.6
+r20,4,5,20
+m,l1,l2,0.8
+```
+::: applink NR11's capacitor shorted by a switch and coupled 0.8 H and 1.6 H coils (DC, t < 0)
+:::
+
+`il1` = {{o:12}} A and `il2` = {{o:0}}.
+
+After the switch opens the capacitor enters the loop, uncharged, with the
+coil carrying its 12 A. In TR, and then in **Evaluate**:
+
+```field 9 Evaluate
+v4-v5
+```
+
+```field 9 Circuit Description
+e,1,0,48
+c,1,2,10'm,0
+r4,2,3,4
+l1,3,0,0.8,12
+l2,4,5,1.6,0
+r20,4,5,20
+m,l1,l2,0.8
+```
+::: applink NR11's capacitor shorted by a switch and coupled 0.8 H and 1.6 H coils (TR, t > 0)
+:::
+
+$$
+v_o = e^{-5t}\left(60\cos 10t - 120\sin 10t\right) - 60\,e^{-25t}\ \mathrm{V}
+$$
+
+A damped oscillation at 10 rad/s, the primary's series RLC, plus the
+secondary's own mode at 25 per second; it starts from 0 and returns to 0.
+Since the secondary's reference is node **5**, `v4` alone reads the same
+thing.
+:::
+:::
 :::
