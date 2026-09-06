@@ -8,6 +8,8 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #315 — claimed by the app tree, 6 Sep 2026: the package in a notebook. Write-up in `Application/v9/repos/local/NEXT.md`; no docs work, by Roberto's decision (the notebook use is documented in the solver's README and a quickstart notebook, not here)
+
 ## #314 — the docs' half: the four-terminal forms, the transformer's two currents, Example 13.11 restored, and five worked examples for the new forms — **done and live on learn, web and PDFs, 6 Sep 2026**
 
 The app's half is #314 in `Application/v9/repos/local/NEXT.md`. Four
