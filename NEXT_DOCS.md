@@ -8,9 +8,9 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #313 — a Copy button on every typed-input box — **done and live, 7 Sep 2026**
+## #313 — a Copy button on every typed-input box — **done and live, 5 Sep 2026**
 
-Roberto, 7 Sep 2026: *"Thinking about a easy way to pass the transfer
+Roberto, 5 Sep 2026: *"Thinking about a easy way to pass the transfer
 functions from the documentation to the app, could we offer a 'copy with
 a click' option on the documentation for these transfer functions?"*
 
@@ -40,9 +40,9 @@ Worth knowing: a *programmatic* click fails both routes and shows
 script's `click()` does not carry -- so an automated check of this button
 has to press it with the mouse.
 
-## #312 — one sun-and-moon in the split view — **done and live, 7 Sep 2026, both halves**
+## #312 — one sun-and-moon in the split view — **done and live, 5 Sep 2026, both halves**
 
-Roberto, 7 Sep 2026: *"We get duplicate dark mode toggle buttons now on
+Roberto, 5 Sep 2026: *"We get duplicate dark mode toggle buttons now on
 the app side of split. Can you think of a way of solving that
 duplication?"* #310 gave the shell a toggle for the docs pane; #311 then
 uncovered the app's own, in the ribbon it keeps when framed.
@@ -66,9 +66,9 @@ page is ignored. The shell's half is live; the app's half rides Roberto's
 next pull, and until then the split view shows the shell's toggle beside
 the app's own, harmlessly.
 
-## #310 — light and dark in the split view — **done and live, 7 Sep 2026**
+## #310 — light and dark in the split view — **done and live, 5 Sep 2026**
 
-Roberto, 7 Sep 2026: *"I don't see the light dark mode toggle on the doc
+Roberto, 5 Sep 2026: *"I don't see the light dark mode toggle on the doc
 side of the split view."* The docs page hides its whole ribbon when
 embedded (`html.embedded .topbar, .subbar { display: none }`, #224), and
 its sun-and-moon lives in that ribbon; the shell read the stored theme
@@ -86,9 +86,9 @@ keeps its own toggle.
 Verified live: both roots go dark and back together, the stored key
 follows, the button's label flips between the two modes.
 
-## #306 — a Contents button for the phone layout — **done and live, 7 Sep 2026**
+## #306 — a Contents button for the phone layout — **done and live, 5 Sep 2026**
 
-Roberto, 7 Sep 2026: *"it is important for the user in mobile using
+Roberto, 5 Sep 2026: *"it is important for the user in mobile using
 split view to have a way to navigate the lessons. How about we add, in
 the space between the Symbulator 9 text and the Docs button, a Contents
 button that deploys the menu?"* #304's menu hung off the position badge,
@@ -109,9 +109,9 @@ fifteen items inside the viewport; choosing Lesson 11 loads
 `/9/lesson-bode` on the left and `?lesson=11&entry=1` on the right and
 closes the menu.
 
-## #304 — a lesson menu in the split view's bar — **done and live, 7 Sep 2026**
+## #304 — a lesson menu in the split view's bar — **done and live, 5 Sep 2026**
 
-Roberto, 7 Sep 2026: *"There's no table of content in split, so how about
+Roberto, 5 Sep 2026: *"There's no table of content in split, so how about
 we make a drop down menu for all the lessons, visible when one clicks
 here"* -- the position badge (*Lesson 4b · entry 31*).
 
@@ -133,9 +133,9 @@ Lesson 6 loads `/9/lesson-transient` on the left, `?lesson=6a&entry=1` on
 the right, the URL `?page=lesson-transient`, the badge *Transient
 analysis*.
 
-## #303 — a placed link scrolls the split view to itself — **done and live, 7 Sep 2026**
+## #303 — a placed link scrolls the split view to itself — **done and live, 5 Sep 2026**
 
-Roberto, 7 Sep 2026, on the placed pairs: *"when that link is clicked,
+Roberto, 5 Sep 2026, on the placed pairs: *"when that link is clicked,
 the documentation scrolls up to where it used to be. You need to add new
 anchors in the new locations for those links, each one linking to its own
 location's anchor."*
@@ -150,9 +150,9 @@ link whose row follows the problem title scrolls to the problem as
 before, and any other scrolls to its own row. One function, in the docs
 page; the shell and the protocol are unchanged.
 
-## #302 — element names set as element names, not as answers — **done and live (web), 7 Sep 2026**
+## #302 — element names set as element names, not as answers — **done and live (web), 5 Sep 2026**
 
-Roberto, 7 Sep 2026, on Lesson 4's *The current through `rl`, `irl`, reads
+Roberto, 5 Sep 2026, on Lesson 4's *The current through `rl`, `irl`, reads
 −0.06 A*: *"rl appears as if it was an answer variable, in the same
 format as irl. However, rl is not such a thing. Instead, rl is the name
 of an element, so show it in regular text but bold, as other element
@@ -179,9 +179,9 @@ entry's `si:` is on to match.
 
 ---
 
-## #301 — a problem's later runs link from the solution, not the head — **done and live (web), 7 Sep 2026**
+## #301 — a problem's later runs link from the solution, not the head — **done and live (web), 5 Sep 2026**
 
-Roberto, 7 Sep 2026, on RM3's Example 9-8: *"When you have multiple links
+Roberto, 5 Sep 2026, on RM3's Example 9-8: *"When you have multiple links
 like here, put the second onwards at the right place of the solution as
 opposed to the top."* #297's directive, applied as a rule: the first
 entry's pair stays under the title; every later one is placed with
@@ -200,9 +200,9 @@ after the verification circuit. A recount over the built tree finds no
 problem with more than one head link. `build.py --check` clean: every
 placed title names an entry.
 
-## #298 — the five `out` fences a version 9 reader saw as calculator text — **done and live (web), 7 Sep 2026**
+## #298 — the five `out` fences a version 9 reader saw as calculator text — **done and live (web), 5 Sep 2026**
 
-Roberto, 7 Sep 2026, on Lesson 6's `t^2/4`: *"Make sure to show these
+Roberto, 5 Sep 2026, on Lesson 6's `t^2/4`: *"Make sure to show these
 expressions mathematically."* A sweep of every ```` ```out ```` fence
 visible in version 9 (a script over the `only`/`not` nesting and the
 fence's version list) found five: that one, and four complex answers in
@@ -224,9 +224,9 @@ end of the session** (Roberto: *"build, commit, and upload everything,
 including the PDFs"*): rebuilt and deployed at v7 **234** / v8 **221** /
 v9 **278** pages, carrying #293–#304, the white-text check clean.
 
-## #297 — `::: applink`: a run's app links beside the run — **done and live (web), 7 Sep 2026**
+## #297 — `::: applink`: a run's app links beside the run — **done and live (web), 5 Sep 2026**
 
-Roberto, 7 Sep 2026, on AS7's Example 16.1: *"Having four sets of links
+Roberto, 5 Sep 2026, on AS7's Example 16.1: *"Having four sets of links
 at the top of this problem is confusing. Please insert these pairs of
 links at the location of the solution where they are logically
 related."* That problem is four app entries -- TR in one step, FD with
@@ -257,9 +257,9 @@ problem". `SPEC.md` has the row and the paragraph.
 
 ---
 
-## #296 — Lesson 11's transfer functions shown, and the plots as pictures — **done and live (web; PDFs held), 7 Sep 2026**
+## #296 — Lesson 11's transfer functions shown, and the plots as pictures — **done and live (web; PDFs held), 5 Sep 2026**
 
-Roberto, 7 Sep 2026: *"In the Bode lesson, the transfer functions for
+Roberto, 5 Sep 2026: *"In the Bode lesson, the transfer functions for
 the problems are not shown. Please make sure the functions are shown and
 also include as images the resulting graphs."* The six practice problems
 (AS7's Examples 14.3, 14.4, 14.5 and the three Practice Problems) said
@@ -296,9 +296,9 @@ The transformer passage in Lesson 10 (AS7's Figure 13.33) also moved to
 result panels the same evening, at Roberto's ask -- `v_{th} = vs_{2}/n`,
 `R_{eq} = z_{2}/n^{2}` -- the same rule as #294.
 
-## #293 — Lesson 4's Thévenin-with-a-load material, rewritten around the app's own load answers — **done and live (web; PDFs held), 7 Sep 2026**
+## #293 — Lesson 4's Thévenin-with-a-load material, rewritten around the app's own load answers — **done and live (web; PDFs held), 5 Sep 2026**
 
-Roberto, 7 Sep 2026: *"The features of the th() tool of Symbulator were
+Roberto, 5 Sep 2026: *"The features of the th() tool of Symbulator were
 not properly ported from v8 to v9. And the documentation for v9 for
 thevenin equivalents, as a consequence, are full of material made up by
 the AI. We need to correct that."*
@@ -356,9 +356,9 @@ first.
 
 ---
 
-## #294 — symbolic answers on their own lines, as mathematics — **done and live (web; PDFs held), 7 Sep 2026**
+## #294 — symbolic answers on their own lines, as mathematics — **done and live (web; PDFs held), 5 Sep 2026**
 
-Roberto, 7 Sep 2026, three asks in one:
+Roberto, 5 Sep 2026, three asks in one:
 
 1. *"format these expressions as single line preceded by their variable:
    'The answers we get, {vs*µ/(µ+1),ro/(µ+1)}, are correct,'"* -- TR5's

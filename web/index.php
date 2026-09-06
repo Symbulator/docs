@@ -615,7 +615,7 @@ document.addEventListener('click', function (ev) {
   function goTo(anchor) {
     var el = document.getElementById(anchor);
     if (!el) { return; }
-    // #303 (Roberto, 7 Sep 2026): a link at the problem's head scrolls to
+    // #303 (Roberto, 5 Sep 2026): a link at the problem's head scrolls to
     // the problem, so the title is in view; a link placed in the solution
     // (#297, #301) scrolls to its own row, which is where the run it opens
     // is described. Before this every entry anchor scrolled to the head,

@@ -617,7 +617,7 @@ em.var { font-weight: 600; font-style: italic; }
 /* One element per line is the point, so lines must not be re-wrapped: a
    wrapped element would read as two. */
 .code.field code { white-space: pre; }
-/* #313 (Roberto, 7 Sep 2026): copy what the box shows, in one click, for
+/* #313 (Roberto, 5 Sep 2026): copy what the box shows, in one click, for
    pasting into the app's field. Sits where the type/returns label sits on
    the other panels, in the field's own label row. */
 .code.field .copy {

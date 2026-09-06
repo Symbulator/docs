@@ -885,7 +885,7 @@ class HtmlRenderer:
             return (f'<p class="address"><a href="{html.escape(href)}">'
                     f'{html.escape(text)}</a></p>')
         if k == "applink":
-            # #297 (Roberto, 7 Sep 2026): a problem solved as several runs
+            # #297 (Roberto, 5 Sep 2026): a problem solved as several runs
             # had every run's link pair stacked under its title -- four
             # rows on AS7's Example 16.1, two of them labelled alike. This
             # places one pair where the solution reaches that run. The

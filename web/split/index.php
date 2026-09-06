@@ -114,7 +114,7 @@ function asset(string $name): string {
     color: var(--ink); cursor: pointer; white-space: nowrap;
     overflow: hidden; text-overflow: ellipsis;
   }
-  /* #306 (Roberto, 7 Sep 2026): on a phone the badge is hidden, so a
+  /* #306 (Roberto, 5 Sep 2026): on a phone the badge is hidden, so a
      Contents button between the wordmark and the tabs opens the same
      menu. Drawn like the tabs' buttons, and only where the badge is not. */
   .splitbar .contents {
@@ -428,7 +428,7 @@ function asset(string $name): string {
   }
 
   // ---- #304: the lesson menu --------------------------------------------
-  // Roberto, 7 Sep 2026: "There's no table of content in split, so how
+  // Roberto, 5 Sep 2026: "There's no table of content in split, so how
   // about we make a drop down menu for all the lessons, visible when one
   // clicks here" -- the position badge. Picking a chapter does what the
   // ribbon's Split View link does for it (showPage): the left pane opens
