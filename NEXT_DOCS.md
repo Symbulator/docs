@@ -8,7 +8,7 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #320 — the docs' half: Lesson 13 says a port may be a `[top,bottom]` pair, and gains the three problems a reader sent — **DOCS_STATUS**
+## #320 — the docs' half: Lesson 13 says a port may be a `[top,bottom]` pair, and gains the three problems a reader sent — **done and live 7 Sep 2026, web and PDFs (v7 235 / v8 222 / v9 289 pages); six problems in all, 19.17, 19.63 and 19.71 added the same morning**
 
 The section's sentence *the two bottom nodes are always assumed to be
 ground* is now a version span: true of 7 and 8, and version 9 says a
