@@ -8,10 +8,43 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #314 — the docs' half: the four-terminal forms, the transformer's two currents, and Example 13.11 restored — **written and built (web) 6 Sep 2026; not deployed, by Roberto's order of work: the drawings and the package come first, then a documentation pass for both elements**
+## #314 — the docs' half: the four-terminal forms, the transformer's two currents, Example 13.11 restored, and five worked examples for the new forms — **done and live on learn, web and PDFs, 6 Sep 2026**
 
-The app's half is #314 in `Application/v9/repos/local/NEXT.md`. Three
-things here.
+The app's half is #314 in `Application/v9/repos/local/NEXT.md`. Four
+things here; the fourth came after the drawings and the package, in the
+order Roberto set (*"Once you are done with the drawings, and we publish
+that package, I want you to update the documentation for both
+transformers and two-ports"*, then *"add the new features and create
+examples for the new things. Also add them to the built in examples
+input files"*).
+
+**The five examples, all version 9 only** (`::: only 9` around each
+problem, the precedent being Lesson 2's Showing-off Problem). In the
+coupling lesson: *The autotransformer as one tapped winding*
+(`t,[1,0],[2,1],[80,120]` -- the second winding's bottom is the first's
+top, and it gives Example 13.11's answers to the digit from a description
+that looks like the circuit); *A transformer whose primary is not
+grounded* (the 8 Ω load reflected as 32 Ω, 5/18 A in the primary, the
+current at each of the three live terminals); and *Both windings between
+live nodes, and why a side needs a ground* (the referencing resistor
+carries nothing, and deleting it produces the floating message, quoted).
+In the two-port lesson: *An h-parameter model with a resistor under its
+common terminal* (emitter degeneration: gain −16.45 against −97.56 with
+the common terminal grounded, which the two-node form cannot express)
+and *A z-block with its second port lifted off ground* (`iz2` and `iz3`
+equal and opposite, node 3 below ground). Every number was read off the
+app through the dev server before it was typed, and each problem has an
+entry of the same title in `Lesson_10.cir` or `Lesson_13.cir`, so the
+app links resolve (`app_links.py`: 314 of 316). **Their figures are the
+app's own drawings**: `tools`-free -- rendered by `symbulator.schematic`
+through headless Chrome at 2×, cropped, and saved as
+`assets/circuit/sym_*.png` (ASCII names), the way #296 used the app's
+Bode plots; `measure_figures.py` re-run, 328 figures.
+
+**Deployed.** The web pages at the end of the app's release train, and
+the PDFs after the examples, since both the restored 13.11 and the new
+problems change the typeset text -- the standing `--web` default lifted
+for the reason it exists to be lifted.
 
 **The answer paragraph said one current; version 8 gave two.** The
 coupling lesson's *What answers do you get?* is shared text for 7, 8 and

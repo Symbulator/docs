@@ -671,3 +671,83 @@ gain {{var:A_p}} {{o:8}}, and the input impedance {{var:Z_i}} {{o:1}} Ω.
 These are correct.
 :::
 :::
+
+::: only 9
+::: problem An h-parameter model with a resistor under its common terminal
+A transistor stage described by its hybrid parameters, {{var:h_ie}} = 1 kΩ,
+{{var:h_re}} = 2.5 × 10⁻⁴, {{var:h_fe}} = 100 and {{var:h_oe}} = 25 µS, is
+driven by a 10 mV source through a 1 kΩ resistor and loaded by 2 kΩ. Its
+common terminal is not grounded: a 100 Ω resistor sits between it and
+ground. Find the output voltage, and compare it with the same stage with the
+common terminal grounded.
+
+::: figure assets/circuit/sym_h_common_terminal.png
+An h-parameter model with a resistor under its common terminal, drawn by
+Symbulator
+:::
+
+::: answer
+The two-node form cannot describe this: it grounds both bottom terminals,
+and the whole point is the resistor under them. With the four-terminal form
+each port is a pair, and both pairs share node **3**, the common terminal.
+
+```field 9 Circuit Description
+e,1,0,0.01
+rs,1,2,1000
+h,[2,3],[4,3],[1000,2.5e-4,100,25e-6]
+re,3,0,100
+rc,4,0,2000
+```
+
+DC. **Results** gives `v4` = {{o:-0.1645}} V, a voltage gain of
+{{o:-16.45}}, and under **h** the three currents entering the block:
+`ih2` = {{o:0.8657}} µA at the input, `ih4` = {{o:82.25}} µA at the output,
+and `ih3` = {{o:-83.12}} µA at the common terminal — the sum of the other
+two, leaving the block, which is the current through the 100 Ω resistor.
+
+Ground the common terminal instead, `h,2,4,[1000,2.5e-4,100,25e-6]` with
+no `re`, and `v4` is {{o:-0.9756}} V, a gain of {{o:-97.56}}. The resistor
+under the common terminal costs a factor of six in gain, which is what
+emitter degeneration does.
+:::
+:::
+
+::: problem A z-block with its second port lifted off ground
+A z-parameter block, {{var:z}} = [100, 10, 20, 50], is driven at its first
+port by a 10 V source. Its second port feeds a 200 Ω load, but the port's
+lower terminal is not ground: it reaches ground through a 20 Ω resistor.
+Find the currents into the block and the voltage at its lower terminal.
+
+::: figure assets/circuit/sym_z_lifted_port.png
+A z-block with its second port lifted off ground, drawn by Symbulator
+:::
+
+::: answer
+Port 1 is the pair `[1,0]`, grounded as before; port 2 is the pair `[2,3]`.
+
+```field 9 Circuit Description
+e,1,0,10
+z,[1,0],[2,3],[100,10,20,50]
+rl,2,0,200
+r3,3,0,20
+```
+
+DC. **Results** gives, under **z**,
+
+::: result current into port at node 1
+i_{z1} = \dfrac{27}{268}
+:::
+::: result current into port at node 2
+i_{z2} = -\dfrac{1}{134}
+:::
+::: result current into port at node 3
+i_{z3} = \dfrac{1}{134}
+:::
+
+and `v3` is {{o:-10/67}} V. The second port's current leaves the block at
+node **2**, goes down through the load to ground, and comes back up through
+the 20 Ω resistor into node **3** — which is why `iz2` and `iz3` are equal
+and opposite, and why node **3** sits below ground.
+:::
+:::
+:::

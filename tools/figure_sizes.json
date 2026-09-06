@@ -416,6 +416,36 @@
    "text_px": 33.0,
    "w": 644
   },
+  "circuit/sym_auto_tapped.png": {
+   "h": 434,
+   "n_words": 11,
+   "text_px": 18.0,
+   "w": 903
+  },
+  "circuit/sym_h_common_terminal.png": {
+   "h": 657,
+   "n_words": 23,
+   "text_px": 18.0,
+   "w": 1456
+  },
+  "circuit/sym_t_live_pairs.png": {
+   "h": 657,
+   "n_words": 22,
+   "text_px": 18.0,
+   "w": 1971
+  },
+  "circuit/sym_t_live_primary.png": {
+   "h": 657,
+   "n_words": 19,
+   "text_px": 18.0,
+   "w": 1443
+  },
+  "circuit/sym_z_lifted_port.png": {
+   "h": 434,
+   "n_words": 20,
+   "text_px": 18.0,
+   "w": 1193
+  },
   "photo/roberto_2000_ti89.jpg": {
    "h": 332,
    "n_words": 6,

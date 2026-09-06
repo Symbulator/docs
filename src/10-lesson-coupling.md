@@ -404,4 +404,132 @@ All three are correct.
 :::
 :::
 
+::: only 9
+::: problem The autotransformer as one tapped winding
+The same autotransformer, described as what it physically is: one winding
+with a tap. The lower section, 80 turns, runs from the tap to ground; the
+upper section, 120 turns, runs from the top of the winding down to the tap.
+Find {{var:I_1}} and {{var:I_2}} again.
+
+::: figure assets/circuit/sym_auto_tapped.png
+The autotransformer as one tapped winding, drawn by Symbulator
+:::
+
+::: answer
+The second winding's bottom terminal is the first winding's top, node
+**1**, so this needs the four-terminal form: the first winding is the pair
+`[1,0]`, the second the pair `[2,1]`.
+
+```field 9 Circuit Description
+e,1,0,(120∠30°)
+t,[1,0],[2,1],[80,120]
+rl,2,0,8+6j
+```
+
+AC, with **RMS phasors** ticked. **Results** gives, under **t**,
+
+::: result current into port at node 1
+i_{t1} = 75∠-6.87°
+:::
+::: result current into port at node 2
+i_{t2} = 30∠173.13°
+:::
+
+Node **1** is a terminal of both windings, so `it1` is the total entering
+the transformer there, which is the source current {{var:I_1}},
+{{o:75}}∠{{o:-6.87}}° A; and {{var:I_2}} is the opposite of `it2`,
+{{o:30}}∠{{o:-6.87}}° A. The same answers as with the two-node description
+above, from a description that looks like the circuit.
+:::
+:::
+
+::: problem A transformer whose primary is not grounded
+A 10 V source feeds a 1 Ω resistor and then the primary of a 2:1 ideal
+transformer; the far end of the primary returns to ground through a 3 Ω
+resistor. The secondary is grounded and drives an 8 Ω load. Find the load
+current and the current into each terminal of the transformer.
+
+::: figure assets/circuit/sym_t_live_primary.png
+A transformer whose primary is not grounded, drawn by Symbulator
+:::
+
+::: answer
+The primary sits between nodes **2** and **3**, neither of them ground, so
+it is written as the pair `[2,3]`; the secondary's bottom is ground, and the
+pair `[4,0]` says so.
+
+```field 9 Circuit Description
+e,1,0,10
+r1,1,2,1
+t,[2,3],[4,0],[2,1]
+r3,3,0,3
+rl,4,0,8
+```
+
+DC. **Results** gives, under **t**,
+
+::: result current into port at node 2
+i_{t2} = \dfrac{5}{18}
+:::
+::: result current into port at node 3
+i_{t3} = -\dfrac{5}{18}
+:::
+::: result current into port at node 4
+i_{t4} = -\dfrac{5}{9}
+:::
+
+and `irl` is {{o:5/9}} A. Check: the 8 Ω load reflects to the primary as
+8 × (2/1)² = 32 Ω, in series with 1 + 3 Ω, so the primary current is 10/36
+= 5/18 A, entering at node **2** and leaving at node **3**; the 2:1 ratio
+doubles it on the secondary, where `it4` is negative because that current
+is leaving the transformer into the load.
+:::
+:::
+
+::: problem Both windings between live nodes, and why a side needs a ground
+The same 2:1 transformer, now with its secondary between two live nodes as
+well: the 100 Ω load sits across the secondary, and node **5** is tied to
+ground through a 7 Ω resistor. Find the currents.
+
+::: figure assets/circuit/sym_t_live_pairs.png
+Both windings between live nodes, drawn by Symbulator
+:::
+
+::: answer
+```field 9 Circuit Description
+e,1,0,10
+r0,1,2,1
+t,[2,4],[3,5],[2,1]
+r4,4,0,3
+rl,3,5,100
+r5,5,0,7
+```
+
+DC. **Results** gives, under **t**,
+
+::: result current into port at node 2
+i_{t2} = \dfrac{5}{202}
+:::
+::: result current into port at node 4
+i_{t4} = -\dfrac{5}{202}
+:::
+::: result current into port at node 3
+i_{t3} = -\dfrac{5}{101}
+:::
+::: result current into port at node 5
+i_{t5} = \dfrac{5}{101}
+:::
+
+and `ir5` is {{o:0}}: the secondary's current circulates through the load
+alone, and the resistor to ground carries nothing. It is not useless,
+though. An ideal transformer conducts nothing from one winding to the
+other, so without it the secondary side would have no reference at all —
+delete `r5` and Symbulator stops with *Node(s) 3, 5 have no path to the
+reference node 0; that part of the circuit is floating and its voltages are
+undefined.* A side that is isolated from ground must be given a ground
+somewhere, as it would be on a real bench.
+:::
+:::
+:::
+
 :::
