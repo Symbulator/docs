@@ -47,7 +47,7 @@ name with a hyphen, as a dot-com address, like so: rxxxxxx@pxxxx-fxxxxx.cxx
 Over the past decades, many people have made Symbulator better
 through their suggestions and corrections, on both the software and the
 documentation. Many were complete strangers at first and became dear friends
-through our exchanges.
+through our exchanges. Others were dear friends that became collaborators.
 
 Among them are: José Vega (Panama), Tim Hutcheson (USA), Lars Frederiksen (Denmark), Joe Riel
 (USA), Arne Harstad (Norway), Erwin Baert (Belgium), Charles 'Chuck' Ware
@@ -57,7 +57,7 @@ Among them are: José Vega (Panama), Tim Hutcheson (USA), Lars Frederiksen (Denm
 Nevin McChesney (USA), Ivan Oro Yu (Panama), Pepe Iborra (Spain), Dave Conklin
 (USA), Carlos Perez Ortega (Chile), Qifan Wang (China) and Antony García (Panama).
 
-My thanks to all of them.
+My thanks to all of them. I truly am in their debt.
 
 ### Technology
 
