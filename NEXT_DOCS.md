@@ -8,6 +8,22 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #319 — the monograph's pseudo-code updated for the four-terminal forms of #314 — **open, Roberto's ask at the close of 6 Sep 2026: "remind me to ask you"**
+
+The monograph (`Documentation/paper/symbulator_monograph.tex`, *The
+Internal Logic of Symbulator*) gives the solver's complete logic in
+annotated pseudo-code. Since #314 (solver 0.5.27–0.5.29, 6 Sep 2026)
+a transformer or two-port may name all four terminals as bracketed
+pairs, `t,[tl,bl],[tr,br],[N1,N2]` and `z,[tl,bl],[tr,br][,[…]]`, and
+every live terminal reports its current; the pseudo-code still
+describes the two-node forms that ground the other two terminals.
+Bring the stamping and the current-reporting sections up to the
+0.5.29 engine (`repos/solver/symbulator/engine.py`, `_stamp_t` and
+`_stamp_two_port`, and `Circuit.internal` for the tapped
+autotransformer's internal unknown), rebuild with `xelatex` twice, and
+redeploy `learn`. Appendix B is unaffected. Not started; waiting for
+Roberto to raise it.
+
 ## #318 — claimed by the app tree, 6 Sep 2026: decimal rounding in the package and, pending, the app; no docs work -- the tutorial prints the book's values, which are the correct ones. Write-up in `Application/v9/repos/local/NEXT.md`
 
 ## #317 — documentation for using symbulator in Jupyter — **deferred by Roberto, 6 Sep 2026, until the app's documentation is ready**; the entry is in `Application/v9/repos/local/NEXT.md`
