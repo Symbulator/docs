@@ -8,6 +8,23 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #320 — the docs' half: Lesson 13 says a port may be a `[top,bottom]` pair, and gains the three problems a reader sent — **DOCS_STATUS**
+
+The section's sentence *the two bottom nodes are always assumed to be
+ground* is now a version span: true of 7 and 8, and version 9 says a
+port whose lower terminal is not ground is written as a pair in its
+node box, and that a side with no path to node 0 is measured against a
+reference of its own. Three problems appended in a `::: only 9` block
+after the #314 ones: AS7's Problem 19.2 (z of the two-rail ladder,
+41/15 and 1/15, with what grounding the bottoms would have given),
+19.19 (y in s, as an aligned display) and 19.70 (g of the
+parallel-series connection, 0.06 S, -1.3, 0.7, 23.5 Ω, and the note the
+plain solve carries). Their figures are the app's own drawings; the
+first two show **f** as the reference the tool takes and the captions
+say so. Each problem's title matches its entry in `Lesson_13.cir`, so
+`app_links.py` reports 317 of 319. The app write-up is #320–#322 in
+`Application/v9/repos/local/NEXT.md`.
+
 ## #319 — the monograph's pseudo-code updated for the four-terminal forms of #314 — **open, Roberto's ask at the close of 6 Sep 2026: "remind me to ask you"**
 
 The monograph (`Documentation/paper/symbulator_monograph.tex`, *The
