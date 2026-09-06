@@ -874,4 +874,100 @@ description with a 1 V source at **p** and the answers carry a note saying
 which node was taken as 0, and `v_m` reads 0.
 :::
 :::
+
+::: problem AS7's Problem 19.17
+Determine the z and y parameters of the lattice: 8 Ω across the top, 12 Ω
+across the bottom, 4 Ω and 16 Ω on the two diagonals.
+
+::: figure assets/circuit/sym_as7_p1917.png
+AS7's Problem 19.17, drawn by Symbulator with **f** as the reference the tool
+takes
 :::
+
+::: answer
+Both ports float: `[a,f]` on the left, `[c,d]` on the right.
+
+```field 9 Circuit Description
+r8,a,c,8
+r12,f,d,12
+r4,a,d,4
+r16,f,c,16
+```
+
+*z — impedance*, DC. **Results** gives `z11` = {{o:9.6}} Ω, `z12` = `z21` =
+{{o:-0.8}} Ω and `z22` = {{o:8.4}} Ω. The first is the two paths from **a**
+to **f** with port 2 open, 24 Ω and 16 Ω, in parallel; the last the two from
+**c** to **d**, 12 Ω and 28 Ω.
+
+Run it again with *y — admittance* and the four are {{o:0.105}} S,
+{{o:0.01}} S, {{o:0.01}} S and {{o:0.12}} S — the inverse of the z matrix,
+as they must be.
+:::
+:::
+
+::: problem AS7's Problem 19.63
+Determine the z parameters of an ideal 1:3 transformer with 4 Ω across its
+primary and 9 Ω across its secondary.
+
+::: figure assets/circuit/sym_as7_p1963.png
+AS7's Problem 19.63, drawn by Symbulator with **b** as the reference the tool
+takes
+:::
+
+::: answer
+The ports are the two windings' own terminal pairs, so the transformer is
+written in its four-terminal form and neither port is grounded.
+
+```field 9 Circuit Description
+r4,a,b,4
+t,[a,b],[c,d],[1,3]
+r9,c,d,9
+```
+
+*z — impedance*, with `[a,b]` and `[c,d]` in the node boxes. DC. **Results**
+gives `z11` = {{o:0.8}} Ω, `z12` = `z21` = {{o:2.4}} Ω and `z22` = {{o:7.2}} Ω:
+4 Ω in parallel with the 9 Ω referred to the primary, 9/3² = 1 Ω; 9 Ω in
+parallel with the 4 Ω referred to the secondary, 36 Ω; and the transfer terms
+three times and a third of those.
+
+Each side is an island — a transformer conducts nothing across — so the tool
+takes **b** and **d** as the two references, one per side.
+:::
+:::
+
+::: problem AS7's Problem 19.71
+Determine the z parameters of the network of Figure 19.118: 8 Ω and 6 Ω along
+the top with 10 Ω hanging from their junction, 4 Ω from the upper-left
+terminal to the foot of that 10 Ω, a 5 Ω and a 2 Ω below, and a 1:2
+transformer whose secondary is the right-hand port.
+
+::: figure assets/circuit/sym_as7_p1971.png
+AS7's Problem 19.71 as read from the book's drawing, drawn by Symbulator with
+**q** as the reference the tool takes
+:::
+
+::: answer
+As read from the figure: the upper-left terminal **t1** feeds the 8 Ω and,
+through the 4 Ω, the node **p** where the 10 Ω, the 5 Ω and the primary's
+top meet; the lower-left terminal is **q**, the foot of the 5 Ω, which
+reaches the primary's bottom **r** through the 2 Ω; the secondary runs from
+the upper-right terminal **t2**, beyond the 6 Ω, to the lower-right terminal
+**b2**, both dots up.
+
+```field 9 Circuit Description
+r8,t1,j,8
+r10,j,p,10
+r4,t1,p,4
+r5,p,q,5
+r2,q,r,2
+r6,j,t2,6
+t,[p,r],[t2,b2],[1,2]
+```
+
+*z — impedance*, with `[t1,q]` and `[t2,b2]` in the node boxes. DC.
+**Results** gives `z11` = {{o:8.273}} Ω (exactly 91/11), `z12` = `z21` =
+{{o:10}} Ω and `z22` = {{o:28}} Ω.
+:::
+:::
+:::
+
