@@ -8,6 +8,8 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #318 — claimed by the app tree, 6 Sep 2026: decimal rounding in the package and, pending, the app; no docs work -- the tutorial prints the book's values, which are the correct ones. Write-up in `Application/v9/repos/local/NEXT.md`
+
 ## #317 — documentation for using symbulator in Jupyter — **deferred by Roberto, 6 Sep 2026, until the app's documentation is ready**; the entry is in `Application/v9/repos/local/NEXT.md`
 
 ## #316 — the docs' half: `build.py` ships `monograph.ipynb` beside `monograph.pdf` and the landing page links it — **done and live 6 Sep 2026**
