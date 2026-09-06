@@ -19,8 +19,13 @@ circuit.{{i:two-port}}
 
 {{v7,8|The tool is called **port**.}}{{v9|Set **Type of analysis** to *Find
 equivalent* and **Type of equivalent** to *Two-port parameters*.}} It takes the network and the two **top** nodes of the
-pair of terminals you want to reduce. The two bottom nodes are always assumed
-to be ground.
+pair of terminals you want to reduce. {{v7,8|The two bottom nodes are always assumed
+to be ground.}}{{v9|The two bottom nodes are ground unless you say otherwise: a
+port whose lower terminal is not ground is written as a pair, `[top,bottom]`,
+in its node box — the same spelling a two-port *element* uses for its own
+ports. A side of the circuit with no path to node **0** at all, the far side of
+a block or a whole network with no ground, is measured against a reference of
+its own, and the answers say which node that is.}}
 
 There are six kinds of parameters — z, y, h, g, a and b — and you choose which
 you want.
@@ -748,6 +753,125 @@ and `v3` is {{o:-10/67}} V. The second port's current leaves the block at
 node **2**, goes down through the load to ground, and comes back up through
 the 20 Ω resistor into node **3** — which is why `iz2` and `iz3` are equal
 and opposite, and why node **3** sits below ground.
+:::
+:::
+:::
+
+::: only 9
+Three problems from Alexander and Sadiku's Chapter 19 in which **no port is
+grounded** — the case the pair spelling exists for. In each, grounding the
+bottoms instead would solve a different circuit and hand back plausible,
+wrong numbers.
+
+::: problem AS7's Problem 19.2
+Determine the equivalent impedance parameters of the ladder: four 1 Ω
+resistors in the upper rail, four in the lower, three 1 Ω rungs.
+
+::: figure assets/circuit/sym_as7_p1902.png
+AS7's Problem 19.2, drawn by Symbulator with **f** as the reference the tool
+takes
+:::
+
+::: answer
+Neither rail is ground, so each port is a pair: port 1 is `[a,f]`, port 2 is
+`[e,j]`.
+
+```field 9 Circuit Description
+r1,a,b,1
+r2,b,c,1
+r3,c,d,1
+r4,d,e,1
+r5,f,g,1
+r6,g,h,1
+r7,h,i,1
+r8,i,j,1
+r9,b,g,1
+r10,c,h,1
+r11,d,i,1
+```
+
+*z — impedance*, with `[a,f]` and `[e,j]` in the two node boxes. DC.
+**Results** gives `z11` = `z22` = {{o:2.733}} Ω and `z12` = `z21` =
+{{o:0.06667}} Ω — exactly 41/15 and 1/15. Symmetric, as the drawing is, and
+small in transfer: three shunt ohms bleed nearly everything to the far rail.
+
+The network has no node **0** anywhere. The tool takes each port's lower
+terminal as the reference for its own measurement, which is what the
+definition of the parameters does. Type **a** and **e** instead, with the
+lower rail grounded, and the answer is 11/5 and 3/5 — the parameters of a
+different circuit, the lower rail's resistors shorted out.
+:::
+:::
+
+::: problem AS7's Problem 19.19
+Determine the y parameters of the two-port in terms of s: 1 Ω in each rail,
+then a 1 F capacitor and a 1 H inductor side by side between the rails.
+
+::: figure assets/circuit/sym_as7_p1919.png
+AS7's Problem 19.19, drawn by Symbulator with **f** as the reference the tool
+takes
+:::
+
+::: answer
+Port 2 is the pair of junctions, `[x,y]`; port 1 the pair of outer ends,
+`[a,f]`. Neither is grounded.
+
+```field 9 Circuit Description
+r1,a,x,1
+r2,f,y,1
+c,x,y,1
+l,x,y,1
+```
+
+*y — admittance*, FD. The four come back as
+
+$$
+\begin{aligned}
+y_{11} &= \dfrac{1}{2}, & y_{12} &= -\dfrac{1}{2}, \\[0.6em]
+y_{21} &= -\dfrac{1}{2}, & y_{22} &= s + \dfrac{1}{2} + \dfrac{1}{s},
+\end{aligned}
+$$
+
+all in siemens. With port 2 shorted the capacitor and inductor are shorted
+with it, so port 1 sees the two series ohms and returns all of that current
+through the short; with port 1 shorted, port 2 sees the capacitor and inductor
+in parallel, `s + 1/s`, plus the two ohms in series through the short.
+:::
+:::
+
+::: problem AS7's Problem 19.70
+Two two-ports given by their z parameters, {{var:z_A}} = [25, 20, 5, 10] Ω
+and {{var:z_B}} = [50, 25, 25, 30] Ω, are joined in a parallel-series
+connection: their input ports in parallel, their output ports in series. Find
+the g parameters of the whole.
+
+::: figure assets/circuit/sym_as7_p1970.png
+AS7's Problem 19.70, drawn by Symbulator
+:::
+
+::: answer
+Type each block as a four-terminal `z` element with its parameters. The
+inputs share the pair `[p,0]`; block A's lower output terminal, **m**, is
+block B's upper one; the output port is **q** to **n**.
+
+```field 9 Circuit Description
+za,[p,0],[q,m],[25,20,5,10]
+zb,[p,0],[m,n],[50,25,25,30]
+```
+
+*g — inverse hybrid*, with **p** and `[q,n]` in the node boxes. DC. **Results**
+gives `g11` = {{o:0.06}} S, `g12` = {{o:-1.3}}, `g21` = {{o:0.7}} and `g22` =
+{{o:23.5}} Ω.
+
+That is the sum of the two blocks' own g matrices — each block's g follows
+from its z, and a parallel-series connection adds them — so the tool has
+done the textbook's rule for you.
+
+The output side has no path to node **0**: a block conducts nothing across
+its ports, so **q**, **m** and **n** are an island. The tool takes **n**, the
+output port's lower terminal, as that side's reference. Solve the same
+description with a 1 V source at **p** and the answers carry a note saying
+which node was taken as 0, and `v_m` reads 0.
 :::
 :::
 :::
