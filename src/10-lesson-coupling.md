@@ -212,10 +212,30 @@ the two turn counts negative: `t,a,b,1,-5`
 It does not matter which of the two you make negative, as long as one of them
 is.
 
-**What answers do you get?** The voltages at the two live nodes, as for any
-node in the circuit, and the current entering the transformer, named with the
-transformer and the node — for a transformer `t` on node **2**, that is
-`it2`.
+::: only 9
+**The turns may be written as a pair in brackets**, `t1,1,2,[80,800]`, which
+means exactly the same as the five-field form.
+
+**All four terminals.** When neither bottom terminal is ground, write each
+side as a bracketed pair, top node then bottom node, and the turns as a pair:
+
+```field 9 Circuit Description
+t1,[1,3],[2,4],[80,800]
+```
+
+That is a primary between nodes **1** and **3**, a secondary between nodes
+**2** and **4**, 80 and 800 turns. The dots sit at the two top nodes, as
+before. A side that has no path of its own to ground is reported as floating,
+because an ideal transformer conducts nothing from one side to the other; give
+that side a ground somewhere. Either terminal of a pair may be `0`, so
+`t1,[1,0],[2,0],[80,800]` is the two-node form written out.
+:::
+
+**What answers do you get?** The voltages at the live nodes, as for any node
+in the circuit, and **the current entering the transformer at each of its
+live nodes**, named with the transformer and the node — for a transformer
+`t` on nodes **1** and **2**, that is `it1` and `it2`.{{v9| With all four
+terminals named, there are four such currents, one per node.}}
 
 ## Instructive t problems {#practice-transformer}
 
@@ -313,6 +333,71 @@ Three conversions in a row is the point at which the setting is less work
 than the tool: tick **Show AC answers as polar phasors** in **Settings** and
 the first two are already in that form when the circuit solves. The third
 still wants *aa*, because `-se` is an expression rather than an answer.
+:::
+
+All three are correct.
+:::
+:::
+
+::: problem AS7's Example 13.11
+Refer to the autotransformer circuit. Calculate {{var:I_1}}, {{var:I_2}} and
+{{var:I_o}} if {{var:Z_L}} = 8 + j6 Ω, and the complex power supplied to the
+load.
+
+::: figure assets/circuit/as7e1311.png
+AS7's Example 13.11
+:::
+
+::: answer
+Symbulator has no dedicated element for an autotransformer. The same **t**
+element does it: the input is node **1**, the output is node **2**, and the
+turns are the 80 of the lower winding and the 80 + 120 of the whole.
+
+```sym 7
+true→s\rms:"e,1,0,(120.∠30°):t,1,2,80,80+120:rl,2,0,8.+𝐢6."→cir:s\ac(cir,ω)
+```
+```sym 8
+true→userms:"e,1,0,(120.∠30°):t,1,2,80,80+120:rl,2,0,8.+𝐢6."→cir:s\ac(cir,ω)
+```
+```field 9 Circuit Description
+e,1,0,(120∠30°)
+t,1,2,80,80+120
+rl,2,0,8+6j
+```
+
+::: only 9
+AC, with **RMS phasors** ticked.
+:::
+
+This is how the three currents come out of the two the transformer
+reports:
+
+- {{var:I_1}} is the current entering the transformer at node **1**, `it1`.
+- {{var:I_2}} is the opposite of the current entering it at node **2**, `it2`.
+- {{var:I_o}} is the opposite of the sum of the two, since what enters the
+  transformer at its two live nodes leaves it through the common one.
+
+```sym 7,8
+{s\aa(it1),s\aa(–it2),s\aa(–it1-it2)}
+```
+
+```out 7,8
+{"75.00ᴇ0∠-6.87°","30.00ᴇ0∠-6.87°","45.00ᴇ0∠173.13°"}
+```
+
+::: only 9
+**Results** gives, under **t**,
+
+::: result current into port at node 1
+i_{t1} = 75∠-6.87°
+:::
+::: result current into port at node 2
+i_{t2} = 30∠173.13°
+:::
+
+so {{var:I_1}} is {{o:75}}∠{{o:-6.87}}° A, {{var:I_2}} is the opposite of
+`it2`, {{o:30}}∠{{o:-6.87}}° A, and {{var:I_o}}, read with *aa* on
+`-it1-it2`, is {{o:45}}∠{{o:173.13}}° A.
 :::
 
 All three are correct.

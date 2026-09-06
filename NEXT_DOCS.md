@@ -8,6 +8,45 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #314 — the docs' half: the four-terminal forms, the transformer's two currents, and Example 13.11 restored — **written and built (web) 6 Sep 2026; not deployed, by Roberto's order of work: the drawings and the package come first, then a documentation pass for both elements**
+
+The app's half is #314 in `Application/v9/repos/local/NEXT.md`. Three
+things here.
+
+**The answer paragraph said one current; version 8 gave two.** The
+coupling lesson's *What answers do you get?* is shared text for 7, 8 and
+9, and it read *the current entering the transformer, named with the
+transformer and the node -- for a transformer `t` on node 2, that is
+`it2`*. The 2023 page for version 8 says *each of the two non-ground
+nodes* and names `ita1` and `ita2`. The port had lost the secondary
+and the conversion had followed the port rather than the original; the
+paragraph now says two currents for all three versions, with a version 9
+span adding that four named terminals give four.
+
+**Example 13.11, the autotransformer, is back.** It was in the 2023
+page and absent from the lesson -- the one problem whose answers read
+`it2` and `-it1-it2`, which version 9 could not produce until now. It
+is restored from the original as written: 7 and 8 fences verbatim, the
+version 9 field, the three currents explained as *what enters at node
+1*, *the opposite of what enters at node 2* and *the opposite of their
+sum*, and a version 9 result panel pair reading `75∠-6.87°` and
+`30∠173.13°`, measured through the app. Its figure was in neither the
+docs tree nor on the live site (`symbulator.com/circuit/as7e1311.png`
+is a 404); it was recovered from the 2023 website's master folder on
+OneDrive, where it is `as7ex1311.png`, and copied in under the
+sibling-consistent ASCII name `as7e1311.png`; `tools/measure_figures.py`
+re-run, 323 figures measured. An entry in `Lesson_10.cir` gives it its
+app link.
+
+**The paired forms, version 9 only.** The coupling lesson's syntax
+section gains the bracketed turns, `t1,1,2,[80,800]`, and the
+four-terminal form `t1,[1,3],[2,4],[80,800]`, with the floating rule
+and the note that either node of a pair may be 0; the two-port lesson's
+*Use two-ports as elements* gains `z,[1,3],[2,4]` and its answers, `iz1`
+to `iz4`, under the element's own name. Both as `::: only 9` blocks, so
+7 and 8 keep the calculator's account. The full documentation pass for
+both elements, with the drawings, is the item after the drawer.
+
 ## #313 — a Copy button on every typed-input box — **done and live, 5 Sep 2026**
 
 Roberto, 5 Sep 2026: *"Thinking about a easy way to pass the transfer

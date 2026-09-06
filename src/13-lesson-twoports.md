@@ -98,6 +98,27 @@ z,1,2
 That is a z-type two-port between nodes **1** and **2**.{{v9| An optional fourth
 term carries its four parameters — see below.}}
 
+::: only 9
+**All four terminals.** When a bottom node is not ground, write each port as a
+bracketed pair, top node then bottom node:
+
+```field 9 Circuit Description
+z,[1,3],[2,4]
+```
+
+That is port 1 between nodes **1** and **3** and port 2 between nodes **2**
+and **4**; the parameter term, when there is one, follows as before,
+`z,[1,3],[2,4],[40,20j,30j,50]`. Either node of a pair may be `0`, so
+`z,[1,0],[2,0]` is the two-node form written out. A two-port conducts
+nothing from one port to the other, so a side of the circuit with no path of
+its own to ground is reported as floating; give it a ground somewhere. A port
+whose two nodes are the same is refused.
+
+**Its answers** are the current entering the two-port at each of its live
+nodes, named with the element and the node — `iz1`, `iz2`, `iz3`, `iz4` for
+the example above — shown under the element's own name in the results.
+:::
+
 ### Giving it its four parameters
 
 ::: only 7,8
