@@ -8,6 +8,23 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #317 — documentation for using symbulator in Jupyter — **deferred by Roberto, 6 Sep 2026, until the app's documentation is ready**; the entry is in `Application/v9/repos/local/NEXT.md`
+
+## #316 — the docs' half: `build.py` ships `monograph.ipynb` beside `monograph.pdf` and the landing page links it — **done and live 6 Sep 2026**
+
+Two edits. `build.py` copies
+`Application/v9/repos/solver/notebooks/the_monograph.ipynb` into
+`build/web/monograph.ipynb`, reaching across into the app tree the way
+it does for `banner.css`, and raises `SystemExit` naming the layout
+when the file is absent -- the landing page would otherwise carry a
+dead link. `landing/index.html` gained one line in the monograph card:
+*Its exemplar circuits as a Jupyter notebook: download or open in
+Colab*, the first link with the `download` attribute, the second the
+Colab-on-GitHub form. `Deploy/deploy_targets.ini`'s `learn` target
+verifies the new file by hash. `build.py --web`, then `learn` and
+`landing` deployed and verified; the app write-up is #316 in
+`Application/v9/repos/local/NEXT.md`.
+
 ## #315 — claimed by the app tree, 6 Sep 2026: the package in a notebook. Write-up in `Application/v9/repos/local/NEXT.md`; no docs work, by Roberto's decision (the notebook use is documented in the solver's README and a quickstart notebook, not here)
 
 ## #314 — the docs' half: the four-terminal forms, the transformer's two currents, Example 13.11 restored, and five worked examples for the new forms — **done and live on learn, web and PDFs, 6 Sep 2026**
