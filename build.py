@@ -1517,6 +1517,22 @@ def build_web(book: Book, versions: list[int]):
             "Documentation/paper/ (twice, for the TOC), or the site would "
             "ship a dead link.")
     shutil.copy2(symbook, os.path.join(outroot, "book.pdf"))
+    # The monograph's exemplars as a Jupyter notebook (#316): built and
+    # executed in the solver repository from the same `.cir` file the
+    # app's menu and Appendix B are generated from, and offered as a
+    # download beside the PDF on the landing page. Read across from
+    # the app tree, as banner.css is, and missing is a hard failure
+    # for the same reason -- the landing page would carry a dead link.
+    notebook = os.path.join(os.path.dirname(ROOT), "Application", "v9",
+                            "repos", "solver", "notebooks",
+                            "the_monograph.ipynb")
+    if not os.path.isfile(notebook):
+        raise SystemExit(
+            f"build.py: {notebook} is missing. It is built by "
+            "notebooks/build_monograph.py in the solver repository "
+            "(see the top-level CLAUDE.md for the layout); without it "
+            "the landing page's download link would be dead.")
+    shutil.copy2(notebook, os.path.join(outroot, "monograph.ipynb"))
     if os.path.isdir(ASSETS):
         shutil.copytree(ASSETS, os.path.join(outroot, "assets"),
                         dirs_exist_ok=True)
