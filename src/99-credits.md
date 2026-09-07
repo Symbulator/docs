@@ -63,7 +63,7 @@ Versions 7 and 8 received feedback and suggestions from Carlos Perez Ortega
 
 Version 9 benefited from feedback and excellent suggestions from my dear old
 friend Antony García (Panama, currently in Massachusetts), who is not only
-one hell of an engineer and a consumate circuits theoretician, but also
+one hell of an engineer and a consummate circuits theoretician, but also
 taught for many years the same Circuits class at UTP as Prof Eliane Boulet.
 
 My thanks to all of them. I truly am in their debt.
