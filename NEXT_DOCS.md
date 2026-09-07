@@ -8,6 +8,15 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #323 — the docs' half: *Switching with coupled coils* in Lesson 10 (four Nilsson & Riedel problems, version 9), and the three passages that still said a floating side stops the solver — **done and live 7 Sep 2026, web and PDFs**
+
+Write-up in `Application/v9/repos/local/NEXT.md` under #323. The four
+problems are credited to Nilsson and Riedel's *Electric Circuits*, 11th
+edition, without problem numbers (Roberto has none), and each carries
+its DC-then-TR pair of app links. The field labels follow the app's
+own -- *Do you want to limit the results to save time?* and the
+*What results are you after?* box, and an **Evaluate** box for `v4-v5`.
+
 ## #320 — the docs' half: Lesson 13 says a port may be a `[top,bottom]` pair, and gains the three problems a reader sent — **done and live 7 Sep 2026, web and PDFs (v7 235 / v8 222 / v9 289 pages); six problems in all, 19.17, 19.63 and 19.71 added the same morning**
 
 The section's sentence *the two bottom nodes are always assumed to be
