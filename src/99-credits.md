@@ -49,13 +49,22 @@ through their suggestions and corrections, on both the software and the
 documentation. Many were complete strangers at first and became dear friends
 through our exchanges. Others were dear friends that became collaborators.
 
-Among them are: José Vega (Panama), Tim Hutcheson (USA), Lars Frederiksen (Denmark), Joe Riel
-(USA), Arne Harstad (Norway), Erwin Baert (Belgium), Charles 'Chuck' Ware
-(USA), Doug Burkett (USA), Reinhard Willinski (Germany), Kamil Malinski
-(Austria), Jake Adams (USA), Daniele Martini (Italy), Rozgonyi Szabolcs
-(Hungary), Michael Rans (UK), Alex Astashyn (Russia), Al Charpentier (USA),
-Nevin McChesney (USA), Ivan Oro Yu (Panama), Pepe Iborra (Spain), Dave Conklin
-(USA), Carlos Perez Ortega (Chile), Qifan Wang (China) and Antony García (Panama).
+Versions 1 through 6 received feedback and suggestions from José Vega
+(Panama), Tim Hutcheson (USA), Lars Frederiksen (Denmark), Joe Riel (USA),
+Arne Harstad (Norway), Erwin Baert (Belgium), Charles 'Chuck' Ware (USA),
+Doug Burkett (USA), Reinhard Willinski (Germany), Kamil Malinski (Austria),
+Jake Adams (USA), Daniele Martini (Italy), Rozgonyi Szabolcs (Hungary),
+Michael Rans (UK), Alex Astashyn (Russia), Al Charpentier (USA), Nevin
+McChesney (USA), Ivan Oro Yu (Panama), Pepe Iborra (Spain), and Dave Conklin
+(USA).
+
+Versions 7 and 8 received feedback and suggestions from Carlos Perez Ortega
+(Chile) and Qifan Wang (China).
+
+Version 9 benefited from feedback and excellent suggestions from my dear old
+friend Antony García (Panama, currently in Massachusetts), who is not only
+one hell of an engineer and a consumate circuits theoretician, but also
+taught for many years the same Circuits class at UTP as Prof Eliane Boulet.
 
 My thanks to all of them. I truly am in their debt.
 
