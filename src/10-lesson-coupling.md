@@ -543,14 +543,16 @@ would be whatever the wiring made them.
 ::: only 9
 ## Switching with coupled coils {#coupled-switching}
 
-Four problems from Nilsson and Riedel's *Electric Circuits* (11th edition),
-each with a switch that moves at t = 0 and a pair of coupled coils on the far
-side of it. The method is the one Lesson 6 uses for every switch: a DC solve
-before the switch gives the coil currents, and those become the initial
-conditions of a transient solve after it. The coupled side has no ground of
-its own in any of them, and none is needed: a coupling conducts nothing
-across, so Symbulator takes one node of that side as its reference and says
-so. The variable asked for is the one the book marks in blue.
+Seven problems from Nilsson and Riedel's *Electric Circuits*: four from the
+11th edition, each with a switch that moves at t = 0 and a pair of coupled
+coils on the far side of it, and three from the 12th, in which a switch closes
+onto a source with nothing stored. The method is the one Lesson 6 uses for
+every switch: a DC solve before the switch gives the coil currents, and those
+become the initial conditions of a transient solve after it — or simply zeros,
+when the book says no energy is stored. In the first four the coupled side has
+no ground of its own, and none is needed: a coupling conducts nothing across,
+so Symbulator takes one node of that side as its reference and says so. The
+variable asked for is the one the book marks in blue.
 
 ::: problem NR11's 60 V source and coupled 2 H and 8 H coils
 A 60 V source feeds a 9 Ω resistor and, through a switch at **a**, a 3 Ω
@@ -774,4 +776,112 @@ Since the secondary's reference is node **5**, `v4` alone reads the same
 thing.
 :::
 :::
+
+::: problem NR12's Problem 7.68
+There is no energy stored in the circuit when the switch closes at t = 0. A
+200 V source and 50 Ω feed a 4 H coil in series with an 8 H coil, coupled by
+M = 5 H; the 4 H coil's dot is at its left end, the 8 H coil's at its bottom.
+Find {{var:i}}(t), {{var:v_1}}(t) across the 4 H and {{var:v_2}}(t) across the
+8 H, and say whether the answers make sense.
+
+::: figure assets/circuit/sym_nr12_p0768.png
+NR12's Problem 7.68, drawn by Symbulator
 :::
+
+::: answer
+The current enters the 4 H at its dot and the 8 H at its undotted end, so the
+8 H is written bottom node first and the pair opposes:
+
+```field 9 Circuit Description
+e,1,0,200
+r50,1,2,50
+l1,2,3,4,0
+l2,0,3,8,0
+m,l1,l2,5
+```
+::: applink NR12's Problem 7.68
+:::
+
+In TR, with the fifth field of each coil, the initial current, at 0:
+
+::: result current through l1
+i_{l1} = 4 - 4\,e^{-25t}\ \mathrm{A}
+:::
+::: result voltage at node 3
+v_{3} = 300\,e^{-25t}\ \mathrm{V}
+:::
+
+and **Evaluate** with `v2-v3` gives {{var:v_1}} = $-100\,e^{-25t}$ V. The pair
+reduces to 4 + 8 − 2·5 = 2 H, whence the 25 per second (2 H over 50 Ω), and
+{{var:v_1}} is *negative* because the 5 H coupling outweighs the coil's own
+4 H; the two voltages still add to $200\,e^{-25t}$, which is 200 − 50 {{var:i}}.
+:::
+:::
+
+::: problem NR12's Problem 7.70
+There is no energy stored when the switch closes. A 10 V source and 250 Ω feed
+a 0.5 H coil and a 0.25 H coil in parallel, coupled by M = 0.25 H; the
+0.5 H coil's dot is at its top, the 0.25 H coil's at its bottom. Find
+{{var:i_o}}, {{var:v_o}}, {{var:i_1}} and {{var:i_2}}, both branch currents
+taken downward.
+
+::: figure assets/circuit/sym_nr12_p0770.png
+NR12's Problem 7.70, drawn by Symbulator
+:::
+
+::: answer
+The 0.25 H coil is written bottom node first, since that is its dotted end:
+
+```field 9 Circuit Description
+e,1,0,10
+r250,1,a,250
+l1,a,0,0.5,0
+l2,0,a,0.25,0
+m,l1,l2,0.25
+```
+::: applink NR12's Problem 7.70
+:::
+
+TR. **Results** gives `ir250` = {{var:i_o}} = $0.04(1 -\,e^{-5000t})$ A, `va` =
+{{var:v_o}} = $10\,e^{-5000t}$ V and `il1` = {{var:i_1}} = $0.016(1 -\,e^{-5000t})$ A;
+{{var:i_2}} is downward, the opposite of `il2`, so **Evaluate** with `-il2`
+reads $0.024(1 -\,e^{-5000t})$ A. The parallel pair opposes and reduces to
+(0.5·0.25 − 0.25²)/(0.5 + 0.25 + 2·0.25) = 0.05 H, whence the 5000 per second
+with 250 Ω.
+:::
+:::
+
+::: problem NR12's Problem 7.71
+There is no energy stored when the switch closes. A 15 V source and 75 Ω feed
+an 8 mH coil and a 20 mH coil in parallel, coupled by M = 10 mH, both dots at
+the top. Find {{var:i_o}}, {{var:v_o}}, {{var:i_1}} and {{var:i_2}}.
+
+::: figure assets/circuit/sym_nr12_p0771.png
+NR12's Problem 7.71, drawn by Symbulator
+:::
+
+::: answer
+Both coils are written top node first:
+
+```field 9 Circuit Description
+e,1,0,15
+r75,1,a,75
+l1,a,0,8'm,0
+l2,a,0,20'm,0
+m,l1,l2,10'm
+```
+::: applink NR12's Problem 7.71
+:::
+
+TR. **Results** gives `ir75` = {{var:i_o}} = $0.2(1 -\,e^{-10000t})$ A, `va` =
+{{var:v_o}} = $15\,e^{-10000t}$ V, `il1` = {{var:i_1}} = $0.25(1 -\,e^{-10000t})$ A and
+`il2` = {{var:i_2}} = $-0.05(1 -\,e^{-10000t})$ A. The pair aids and reduces to
+(160 − 100)/(28 − 20) mH = 7.5 mH, whence the 10 000 per second with 75 Ω.
+The backwards {{var:i_2}} is the part worth a second look: with both coils
+shorts at the end, the split between the branches is set by their flux
+linkages rather than by resistance, and 0.25 − 0.05 is the 0.2 A the 75 Ω
+allows.
+:::
+:::
+:::
+
