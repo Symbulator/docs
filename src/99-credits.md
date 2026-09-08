@@ -65,6 +65,13 @@ Version 9 benefited from feedback and excellent suggestions from my dear old
 friend Antony García (Panama, currently in Massachusetts), who is not only
 one hell of an engineer and a consummate circuits theoretician, but also
 taught for many years the same Circuits class at UTP as Prof Eliane Boulet.
+I met Antony in 2013, while he was a student at UTP Azuero in the same major
+that I had completed twelve years before. I was immediately struck by his
+brilliance. After I shared an early version of Symbulator 9 with Antony, he
+provided me with a series of fantastic recommendations — from his vantage
+point as both a student and a teacher of circuits theory — regarding
+features he would like to see in Symbulator. I then worked with Claude to
+turn those suggestions into reality.
 
 My thanks to all of them. I truly am in their debt.
 
