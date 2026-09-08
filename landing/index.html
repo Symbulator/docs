@@ -204,11 +204,6 @@
             transformers.</dd>
         </div>
         <div>
-          <dt>Plots</dt>
-          <dd>Time-domain plots, and Bode gain and phase against frequency on a
-            logarithmic axis.</dd>
-        </div>
-        <div>
           <dt>Expert mode</dt>
           <dd>Hand it the extra equations a problem gives you — a known current, a
             power to be delivered — and it solves for the component values you
@@ -231,8 +226,157 @@
     </div>
   </section>
 
+  <!-- ============ exploring the answer ============ -->
+  <!-- Roberto's grouping: the plotting tools, the Numerical Solver and
+       By-Hand Equations are aids for a student to explore the result of
+       a simulation, so they belong together. Plots moved here out of
+       the capability list above, where it sat among the things
+       Symbulator computes rather than the ways of looking at them. -->
+  <section id="explore">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">More than the answer</p>
+        <h2>Push at the answer until you understand it.</h2>
+        <p class="sub">A number on its own teaches nothing. Symbulator 9 will plot
+          it, take the whole system apart with you, and write out the equations
+          your own course would have written.</p>
+      </div>
+
+      <dl class="cap-list">
+        <div>
+          <dt>Plotting tools</dt>
+          <dd>Time-domain plots, Bode gain and phase on a logarithmic axis, and a
+            sweep of any variable against any other — of an answer, or of a
+            transfer function you type yourself.</dd>
+        </div>
+        <div>
+          <dt>Numerical solver</dt>
+          <dd>Hand the whole system to a numerical sheet: untick an equation, turn
+            a known into an unknown, and watch every answer follow. Ask when a
+            waveform reaches a value, rather than what it is at a given moment.</dd>
+        </div>
+        <div>
+          <dt>By-hand equations</dt>
+          <dd>The system as your course teaches it: Kirchhoff's current law at each
+            node, with supernodes, or his voltage law around each mesh, with
+            supermeshes. Written out, solved on its own, and checked against the
+            engine — for the moment your homework disagrees with the machine and
+            you need to see where.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
+  <!-- ============ learning it ============ -->
+  <!-- The two documentation cards moved here out of "Start here",
+       where they sat under a heading that promised ways to run the
+       program. They belong with the worked problems built into the
+       app: same subject, one band. -->
+  <section class="band" id="learn">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Learn it</p>
+        <h2>A course, not a manual.</h2>
+        <p class="sub">Symbulator is taught the way it was meant to be used —
+          against real problems out of real textbooks, worked through from the
+          first circuit description to two-port parameters.</p>
+      </div>
+
+        <ul class="ways">
+          <li class="way way-wide">
+            <div>
+              <p class="way-kicker">Thirteen lessons, with worked problems</p>
+              <h3><a href="https://learn.symbulator.com">Read the documentation</a></h3>
+            </div>
+            <div>
+              <p class="way-text">From describing your first circuit to transient
+                analysis, three-phase and two-ports — every lesson worked through
+                against real textbook problems.</p>
+              <p class="way-url">learn.symbulator.com</p>
+            </div>
+          </li>
+          <!-- #234: the split view (#224), offered beside the documentation
+               rather than buried in it. Second on purpose (Roberto, 3 Sep
+               2026): reading the documentation is the plain way in, and
+               this is the one that wants a sentence of explanation. Same
+               way/way-wide pattern as its neighbour, so it needs no CSS --
+               .ways is a single-column grid and the two simply stack. -->
+          <li class="way way-wide">
+            <div>
+              <p class="way-kicker">The documentation and the app, side by side</p>
+              <h3><a href="https://learn.symbulator.com/split/">Read and run at the same time</a></h3>
+            </div>
+            <div>
+              <p class="way-text">Every lesson on the left, the live app on the
+                right. Each worked problem carries a link that loads that exact
+                circuit into the app — read the explanation, then run it without
+                typing a character.</p>
+              <p class="way-url">learn.symbulator.com/split/</p>
+            </div>
+          </li>
+
+          <li class="way way-wide">
+            <div>
+              <p class="way-kicker">Three hundred and fifty-four of them, built in</p>
+              <h3><a href="https://symbulator.pythonanywhere.com/?lesson=1&amp;entry=1">Open a worked problem</a></h3>
+            </div>
+            <div>
+              <p class="way-text">Every problem in the tutorial is inside the app
+                already, from twenty textbooks — its question, the figure it was
+                printed with, and the answers to check yours against. Each one has
+                a link of its own, so a problem can be sent to a classmate exactly
+                as you are looking at it.</p>
+              <p class="way-url">symbulator.pythonanywhere.com/?lesson=1&amp;entry=1</p>
+            </div>
+          </li>
+        </ul>
+    </div>
+  </section>
+
+  <!-- ============ how it fits ============ -->
+  <section id="fits">
+    <div class="wrap">
+      <div class="sec-head">
+        <p class="eyebrow">Made to fit</p>
+        <h2>Your circuit, your language, your machine.</h2>
+        <p class="sub">What you type, what you keep, and the tongue you think in.</p>
+      </div>
+
+      <dl class="cap-list">
+        <div>
+          <dt>Schematics</dt>
+          <dd>Type the circuit and see it drawn — proper symbols, reference marks,
+            polarity dots, and the mesh currents of your own working — laid out
+            from the description alone.</dd>
+        </div>
+        <div>
+          <dt>SPICE</dt>
+          <dd>Translate a circuit to a SPICE netlist and back, so what you solved
+            here runs in the tools everyone else uses.</dd>
+        </div>
+        <div>
+          <dt>Input files</dt>
+          <dd>Save a problem — the circuit, the settings, the plot you set up — as
+            one file, to open again or send to someone.</dd>
+        </div>
+        <div>
+          <dt>In your language</dt>
+          <dd>Thirteen languages, chosen from the ribbon: Spanish, Portuguese,
+            French, German, Chinese, Japanese, Korean, Indonesian, Hindi, Bengali,
+            Ukrainian and Esperanto, beside English.</dd>
+        </div>
+        <div>
+          <dt>Yours to keep</dt>
+          <dd>Install it from the browser or download the zip, and it runs entirely
+            on your own machine — no server, no account, nothing to sign in to.
+            Fifteen colour themes, light and dark.</dd>
+        </div>
+      </dl>
+    </div>
+  </section>
+
   <!-- ============ the ways in ============ -->
-  <section id="start">
+  <section class="band" id="start">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">Start here</p>
@@ -283,47 +427,11 @@
         </ul>
       </div>
 
-      <div class="cluster">
-        <p class="cluster-label">Learn it</p>
-        <ul class="ways">
-          <li class="way way-wide">
-            <div>
-              <p class="way-kicker">Thirteen lessons, with worked problems</p>
-              <h3><a href="https://learn.symbulator.com">Read the documentation</a></h3>
-            </div>
-            <div>
-              <p class="way-text">From describing your first circuit to transient
-                analysis, three-phase and two-ports — every lesson worked through
-                against real textbook problems.</p>
-              <p class="way-url">learn.symbulator.com</p>
-            </div>
-          </li>
-          <!-- #234: the split view (#224), offered beside the documentation
-               rather than buried in it. Second on purpose (Roberto, 3 Sep
-               2026): reading the documentation is the plain way in, and
-               this is the one that wants a sentence of explanation. Same
-               way/way-wide pattern as its neighbour, so it needs no CSS --
-               .ways is a single-column grid and the two simply stack. -->
-          <li class="way way-wide">
-            <div>
-              <p class="way-kicker">The documentation and the app, side by side</p>
-              <h3><a href="https://learn.symbulator.com/split/">Read and run at the same time</a></h3>
-            </div>
-            <div>
-              <p class="way-text">Every lesson on the left, the live app on the
-                right. Each worked problem carries a link that loads that exact
-                circuit into the app — read the explanation, then run it without
-                typing a character.</p>
-              <p class="way-url">learn.symbulator.com/split/</p>
-            </div>
-          </li>
-        </ul>
-      </div>
     </div>
   </section>
 
   <!-- ============ for developers ============ -->
-  <section class="band" id="build">
+  <section id="build">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">For developers</p>
@@ -338,6 +446,10 @@
           <p><code>pip install symbulator</code> — the core of Symbulator: the
             description parser, the stamping engine and the solver. It is what powers
             the app, exposed as a library you can import and call directly.</p>
+          <p>It works in a Jupyter notebook too: <code>pip install
+            symbulator[notebook]</code> adds cell magics — <code>%%dc</code>,
+            <code>%%ac</code>, <code>%%fd</code>, <code>%%tr</code> — that take a
+            circuit description and set the answers as mathematics.</p>
         </li>
         <li>
           <h3><a href="https://github.com/Symbulator">The source, on GitHub</a></h3>
@@ -351,7 +463,7 @@
   </section>
 
   <!-- ============ older calculators ============ -->
-  <section id="calculators">
+  <section class="band" id="calculators">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">On a calculator</p>
@@ -393,7 +505,7 @@
     </div>
   </section>
   <!-- ============ the logic and its history ============ -->
-  <section class="band" id="logic">
+  <section id="logic">
     <div class="wrap">
       <div class="sec-head">
         <p class="eyebrow">The logic and its history</p>

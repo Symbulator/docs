@@ -63,7 +63,7 @@ Versions 7 and 8 received feedback and suggestions from Carlos Perez Ortega
 
 Version 9 benefited from feedback and excellent suggestions from my dear old
 friend Antony García (Panama, currently in Massachusetts), who is not only
-one hell of an engineer and a consummate circuits theoretician, but also
+one hell of an engineer and a consummate circuits theoretician, but who also
 taught for many years the same Circuits class at UTP as Prof Eliane Boulet.
 I met Antony in 2013, while he was a student at UTP Azuero in the same major
 that I had completed twelve years before. I was immediately struck by his
@@ -93,6 +93,16 @@ Symbulator 9 runs on Python and is powered by the algebraic capabilities of **Sy
 I am thankful to the creators of such wonderful open-source software, and to the 
 maintainers who keep their development going. I am proud to honour the open-source
 community by making Symbulator free and open-source software, from 2026.
+
+Symbulator 9's answers have also been checked, all through its development,
+against **ahkab**, an independent circuit simulator written in Python by
+Giuseppe Venturini and his collaborators. Every circuit that Symbulator's SPICE
+translator exports is solved a second time by ahkab, and the two must agree
+before a release goes out — a habit that has caught more than one convention I
+had taken for granted. None of ahkab's code is part of Symbulator, and it is
+not needed to run it: it is a second opinion, kept at arm's length, and a
+valuable one. My thanks to Giuseppe and his team for building such a tool and
+sharing it freely.
 
 ### AI collaborator
 
