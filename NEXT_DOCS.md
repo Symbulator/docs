@@ -33,10 +33,21 @@ cannot see why. Both systems name the same quantities the same way, so
 the two pages can be laid side by side and the line where they part
 company found — usually a sign.
 
-A heading inside `::: only 9` has no precedent in this tree, so this is a
-`tip` box, which does (Lesson 2's rounding note). Checked in the build:
-present in v9, absent from v7 and v8, subscripts rendered. Live and
-verified by fetching.
+It is a **section of its own**, `## Comparing it with your own working
+{#by-hand-equations}`, inside the `::: only 9` block -- it renders as
+**1.6**, between the first worked problem and the practice section.
+
+It was briefly a `tip` box instead, on the reasoning that a grep found no
+heading inside an `only` block anywhere in `src/`. Roberto: *"You can use
+a heading inside an only block."* Worth keeping as a lesson about this
+tree rather than about markup: **no existing instance is not the same as
+not supported**, and the build would have said so in a second. Ask the
+build, or ask him; do not infer a rule from a grep.
+
+Checked: present in v9, absent from v7 and v8, `h2` with its anchor,
+numbered in sequence. The anchor draws no sidebar link, and neither do
+`run-dc` or `practice-dc` -- the nav is built from `toc.json`, which
+lists chapters, not sections. Live and verified by fetching.
 
 ## #323 — the docs' half: *Switching with coupled coils* in Lesson 10 (four Nilsson & Riedel problems, version 9), and the three passages that still said a floating side stops the solver — **done and live 7 Sep 2026, web and PDFs**
 

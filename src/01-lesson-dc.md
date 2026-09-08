@@ -628,7 +628,7 @@ problem in Symbulator.
 :::
 
 ::: only 9
-::: tip Comparing it with the way you were taught
+## Comparing it with your own working {#by-hand-equations}
 
 You have just watched Symbulator solve a circuit, and you may have noticed
 that it did not do it the way your course does. It writes one equation for
@@ -664,7 +664,6 @@ has no mesh current to write, and coupled coils belong to mesh rather than to
 nodal — the card says so, and points you at the one that does apply. And if
 the two ever disagree, the answers above are the ones to trust: they come from
 the engine that has been solving these circuits since 1999.
-:::
 :::
 
 ## Instructive numerical examples, solved {#practice-dc}
