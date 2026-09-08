@@ -8,6 +8,36 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #333 — Lesson 1 introduces the By-Hand Equations card, once, where the reader has just finished their first solved problem — **done 8 Sep 2026, live on learn (web; the PDFs take it at their next build)**
+
+Roberto's call, 8 Sep 2026: *"since now there's a single button and
+several by hand methods selected automatically, it is not worth to add a
+comment to each problem. Instead, add a note that introduces the feature,
+at a pertinent location, such as after the first problem solved."*
+
+That replaced the earlier plan of a generated line on every problem —
+which #331 made redundant: with one button that works out the method for
+you, there is nothing per-problem left to say.
+
+So: one `::: tip` inside `::: only 9`, placed immediately after *B11's
+Example 5.7* closes ("your first ever problem in Symbulator") and before
+the practice section. Five short paragraphs: why Symbulator's equations
+look unfamiliar (it stamps every element and every node at once and never
+picks a method), what the card does instead, how to reach it, what it
+draws on the circuit, and the two caveats — not every method suits every
+circuit, and the classic answers are the ones to trust.
+
+The homework framing is the point of it, in Roberto's words: it is for
+the moment a reader's own answer disagrees with Symbulator's and they
+cannot see why. Both systems name the same quantities the same way, so
+the two pages can be laid side by side and the line where they part
+company found — usually a sign.
+
+A heading inside `::: only 9` has no precedent in this tree, so this is a
+`tip` box, which does (Lesson 2's rounding note). Checked in the build:
+present in v9, absent from v7 and v8, subscripts rendered. Live and
+verified by fetching.
+
 ## #323 — the docs' half: *Switching with coupled coils* in Lesson 10 (four Nilsson & Riedel problems, version 9), and the three passages that still said a floating side stops the solver — **done and live 7 Sep 2026, web and PDFs**
 
 Write-up in `Application/v9/repos/local/NEXT.md` under #323. The four

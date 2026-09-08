@@ -627,6 +627,46 @@ problem in Symbulator.
 :::
 :::
 
+::: only 9
+::: tip Comparing it with the way you were taught
+
+You have just watched Symbulator solve a circuit, and you may have noticed
+that it did not do it the way your course does. It writes one equation for
+every element and one for every node, hands the whole system to its algebra
+engine at once, and reads the answers back. It never chooses a mesh, never
+draws a supernode, and never stops to ask which method would be quicker. That
+is why the equations it shows look nothing like the ones in your notebook.
+
+The **By-Hand Equations** card, below the results, does the other thing. Ask
+it, and it writes out the system *you* would write — Kirchhoff's current law
+at each node, with a supernode where a voltage source sits between two of
+them, or Kirchhoff's voltage law around each mesh, with a supermesh where a
+current source is shared. It then solves that system on its own and checks
+its answers against the ones above, and tells you whether the two agree.
+
+To use it, solve the circuit first, then open the card and press **Write the
+equations**. You do not have to pick a method: it works out which ones apply
+to your circuit, shows the one that needs fewer equations, and offers you the
+other if both apply. It draws your working on the circuit as well — a ring
+round every node whose equation is being written, a dashed line round each
+supernode or supermesh, and the mesh currents *I*~1~, *I*~2~, *I*~3~ curling
+round their own loops.
+
+It is meant for exactly the moment when your homework answer disagrees with
+Symbulator's and you cannot see why. Both systems use the same names for the
+same quantities — **v_2** is still the voltage at node 2, **i_r3** is still
+the current through **r3** — so you can put your own page beside the card's
+and find the line where you and it parted company. That is usually a sign
+somewhere, and it is much easier to spot in one equation than in an answer.
+
+Two things to keep in mind. Not every method suits every circuit: an op-amp
+has no mesh current to write, and coupled coils belong to mesh rather than to
+nodal — the card says so, and points you at the one that does apply. And if
+the two ever disagree, the answers above are the ones to trust: they come from
+the engine that has been solving these circuits since 1999.
+:::
+:::
+
 ## Instructive numerical examples, solved {#practice-dc}
 
 ::: practice
