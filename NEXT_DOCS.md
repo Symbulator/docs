@@ -8,6 +8,35 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #342 — the documentation's browser tab says *Documentation* — **built 9 Sep 2026, unbuilt and undeployed, awaiting Roberto's go**
+
+The docs half of #342 (the app half, and the reasoning, are in
+`Application/v9/repos/local/NEXT.md`). The tab read `Symbulator 9`, which
+is what the app's tab read too; a reader with both open could not tell
+them apart. It now reads **Symbulator 9 Documentation**, and a chapter
+reads *Direct current analysis — Symbulator 9 Documentation*. Versions 7
+and 8 say their own numbers — the suffix is appended to `$toc['name']`,
+not hard-coded.
+
+Two files, because **the site's `<head>` has two authors.**
+`web/index.php` serves it and `tools/static_preview.py` writes its own
+markup for `build/preview/` — the trap this tree already learned once,
+when a fixed banner in `index.php` did nothing to the preview for a day.
+Both now build the name from one place in their own file (`$siteName`,
+`site_name`) with a comment in each pointing at the other.
+
+Checked by running the preview generator: `v9-home.html`,
+`v9-lesson-dc.html` and `v9-index.html` carry the three forms above.
+`index.php` cannot be run here — there is no PHP on this machine — so it
+is the identical expression to the generator's, and verifying it is a
+matter of fetching a page after the deploy.
+
+The landing page (`landing/index.html`, no build step) reads **Symbulator
+9 Welcome!**. Its `og:title` is left as the sentence it is: that is a
+shared-link preview, not a tab.
+
+---
+
 ## #333 — Lesson 1 introduces the By-Hand Equations card, once, where the reader has just finished their first solved problem — **done 8 Sep 2026, live on learn (web; the PDFs take it at their next build)**
 
 Roberto's call, 8 Sep 2026: *"since now there's a single button and

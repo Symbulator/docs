@@ -67,9 +67,14 @@ $pos = array_search($page, $ids, true);
 $prev = ($pos !== false && $pos > 0) ? $toc['chapters'][$pos - 1] : null;
 $next = ($pos !== false && $pos < count($ids) - 1) ? $toc['chapters'][$pos + 1] : null;
 
-$pageTitle = $isHome ? $toc['name']
-           : ($isIndex ? 'Index — ' . $toc['name']
-                       : $current['title'] . ' — ' . $toc['name']);
+// #342: the browser tab names the property, not just the version. A bare
+// "Symbulator 9" is what the app's own tab said too, so a reader with both
+// open could not tell the two apart in the tab strip. Mirror any change
+// here in tools/static_preview.py, which writes its own <head>.
+$siteName = $toc['name'] . ' Documentation';
+$pageTitle = $isHome ? $siteName
+           : ($isIndex ? 'Index — ' . $siteName
+                       : $current['title'] . ' — ' . $siteName);
 ?>
 <!doctype html>
 <html lang="en">

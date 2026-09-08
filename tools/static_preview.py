@@ -253,6 +253,10 @@ def build():
 
     for v in book["versions"]:
         toc = json.load(open(os.path.join(WEB, "content", f"v{v}", "toc.json")))
+        # #342: the tab says which property this is, as web/index.php does.
+        # This generator writes its own <head>, so a change there has to be
+        # made here too or the preview drifts from the site again.
+        site_name = toc["name"] + " Documentation"
         ids = [c["id"] for c in toc["chapters"]]
 
         # landing page
@@ -268,7 +272,7 @@ def build():
             )
 
         cards = "".join(_card(c) for c in toc["chapters"])
-        page = (head(toc["name"], v, book["subtitle"], home=True)
+        page = (head(site_name, v, book["subtitle"], home=True)
                 + topbar(book, toc, v, "", ids)
                 + '<div class="shell"><main id="main">'
                 + f'<ol class="chapter-cards">{cards}</ol>'
@@ -298,7 +302,7 @@ def build():
                 pager += (f'<a class="pager-next" href="{link(v, next_c["id"])}">'
                           f'<span>Next</span>{e(next_c["title"])}</a>')
             pager += "</nav>"
-            page = (head(c["title"] + " — " + toc["name"], v, book["subtitle"])
+            page = (head(c["title"] + " — " + site_name, v, book["subtitle"])
                     + topbar(book, toc, v, c["id"], ids)
                     + '<div class="shell">' + sidebar(toc, v, c["id"])
                     + f'<main id="main"><article class="chapter">{body}</article>'
@@ -316,7 +320,7 @@ def build():
             "".join(f'<a href="{link(v, spot.split("#")[0])}#{spot.split("#")[1]}">'
                     f'{n + 1}</a>' for n, spot in enumerate(spots)) + "</li>"
             for term, spots in toc["index"].items()) or "<li>No entries yet.</li>"
-        page = (head("Index — " + toc["name"], v, book["subtitle"])
+        page = (head("Index — " + site_name, v, book["subtitle"])
                 + topbar(book, toc, v, "index", ids)
                 + '<div class="shell">' + sidebar(toc, v, "index")
                 + '<main id="main"><article class="chapter">'
