@@ -3,9 +3,9 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
-## #362 — a pair of symbolic answers stacks instead of running off a phone — **done 10 Sep 2026, source only**
+## #362 — a pair of symbolic answers stacks instead of running off a phone — **done 9 Sep 2026, source only**
 
-Roberto, 10 Sep 2026, reading Lesson 2 on his phone: the two power answers
+Roberto, 9 Sep 2026, reading Lesson 2 on his phone: the two power answers
 above *It is this ability to simulate symbolically* were one display joined
 by `\quad\text{and}\quad`, and too wide to fit. *"Since they are two,
 there's no obligation to have them in the same line."*
@@ -30,9 +30,9 @@ has the same `\quad\text{and}\quad` construction, but it sits inside
 version 9 reader ever meets it.
 
 
-## #361 — a button is not a field: the app's vocabulary grows a third tier — **done 10 Sep 2026, source only**
+## #361 — a button is not a field: the app's vocabulary grows a third tier — **done 9 Sep 2026, source only**
 
-Roberto, 10 Sep 2026: *"I think buttons should use a different colour in
+Roberto, 9 Sep 2026: *"I think buttons should use a different colour in
 the text ... the Run Symbulator text should be different. Maybe salmon?"*
 
 `{{btn:Run Symbulator}}` joins `{{card:}}` and `{{ui:}}` from #357, with

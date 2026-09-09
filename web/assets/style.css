@@ -555,7 +555,7 @@ em.var { font-weight: 600; font-style: italic; }
 .ui-ctl  { color: var(--ui-control); font-weight: 600; }
 /* #361: a button you press, as against a field you set. Warm on purpose
    -- the blue and teal tiers are places and settings, this one is an
-   action. Salmon is Roberto's pick of 10 Sep 2026 from a rendered strip,
+   action. Salmon is Roberto's pick of 9 Sep 2026 from a rendered strip,
    made knowing the risk: in dark mode --answer is #ff9c9c and this is
    #ffab91, so a returned value and a button are close there. Kept apart
    by weight and by company -- an answer is set in the sans face, a button

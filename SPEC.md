@@ -176,7 +176,7 @@ inside the *Analysis & Settings* card and *Results* is a card in its own
 right, and they take the same colour, because the reader goes to both the
 same way. #357 cut it by depth instead and the cost showed up at once:
 *"Open the Expert Mode box and tick Enable Expert Mode"* put a place and
-a switch in one colour, in one sentence (Roberto, 10 Sep 2026).
+a switch in one colour, in one sentence (Roberto, 9 Sep 2026).
 
 The same question settles a new word without a vote: *is this somewhere I
 go, something I set, or something I press?*
