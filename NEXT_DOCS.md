@@ -142,7 +142,7 @@ say so. Each problem's title matches its entry in `Lesson_13.cir`, so
 `app_links.py` reports 317 of 319. The app write-up is #320–#322 in
 `Application/v9/repos/local/NEXT.md`.
 
-## #319 — the monograph brought up to solver 0.6.2 — **built and verified 9 Sep 2026; undeployed, awaiting Roberto's go**
+## #319 — the monograph brought up to solver 0.6.2 — **done, live on `learn.symbulator.com/monograph.pdf` 9 Sep 2026**
 
 Roberto's ask of 6 Sep 2026 (*"remind me to ask you"*) was the
 four-terminal forms alone; he widened it on 9 Sep to *"update anything
@@ -227,9 +227,18 @@ four-terminal `z` block, and both by-hand systems of the worked
 example. `xelatex` twice, 0 errors, 0 undefined references, the same
 3 pre-existing overfull boxes.
 
-**Deploy**: `py build.py --web` then `py Deploy\deploy_symbulator.py
-learn` puts the new `monograph.pdf` on `learn.symbulator.com`. Nothing
-else moves — no app build, no cache bump, no solver release.
+### Deployed
+
+`py build.py --web` then `py Deploy\deploy_symbulator.py learn`, on
+Roberto's go the same day. **Exactly one file moved** — `monograph.pdf`,
+1,057,743 b — with 689 of the 690 already identical, which is the
+check that this was a monograph-only change: no app build, no cache
+bump, no solver release, and the three tutorial PDFs (rebuilt that
+morning for #343) untouched. Verified twice over: the deploy's own
+hash check against the served bytes, then the file fetched back from
+`https://learn.symbulator.com/monograph.pdf` and its MD5 compared to
+the local build (`efe15b7f…`, equal) and its table of contents read to
+confirm §4.5.6 is there.
 
 ## #318 — claimed by the app tree, 6 Sep 2026: decimal rounding in the package and, pending, the app; no docs work -- the tutorial prints the book's values, which are the correct ones. Write-up in `Application/v9/repos/local/NEXT.md`
 
