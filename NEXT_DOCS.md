@@ -142,21 +142,94 @@ say so. Each problem's title matches its entry in `Lesson_13.cir`, so
 `app_links.py` reports 317 of 319. The app write-up is #320–#322 in
 `Application/v9/repos/local/NEXT.md`.
 
-## #319 — the monograph's pseudo-code updated for the four-terminal forms of #314 — **open, Roberto's ask at the close of 6 Sep 2026: "remind me to ask you"**
+## #319 — the monograph brought up to solver 0.6.2 — **built and verified 9 Sep 2026; undeployed, awaiting Roberto's go**
 
-The monograph (`Documentation/paper/symbulator_monograph.tex`, *The
-Internal Logic of Symbulator*) gives the solver's complete logic in
-annotated pseudo-code. Since #314 (solver 0.5.27–0.5.29, 6 Sep 2026)
-a transformer or two-port may name all four terminals as bracketed
-pairs, `t,[tl,bl],[tr,br],[N1,N2]` and `z,[tl,bl],[tr,br][,[…]]`, and
-every live terminal reports its current; the pseudo-code still
-describes the two-node forms that ground the other two terminals.
-Bring the stamping and the current-reporting sections up to the
-0.5.29 engine (`repos/solver/symbulator/engine.py`, `_stamp_t` and
-`_stamp_two_port`, and `Circuit.internal` for the tapped
-autotransformer's internal unknown), rebuild with `xelatex` twice, and
-redeploy `learn`. Appendix B is unaffected. Not started; waiting for
-Roberto to raise it.
+Roberto's ask of 6 Sep 2026 (*"remind me to ask you"*) was the
+four-terminal forms alone; he widened it on 9 Sep to *"update anything
+else in the monograph that feels outdated."* The monograph was
+anchored on **0.5.19** and the engine is on **0.6.2**, so this is
+eight releases of drift, not one item. **45 pages → 51.**
+
+### The four-terminal forms (the original ask)
+
+A new §2.2.2, *Ports of two terminals*, states the shapes
+(`t,[tl,bl],[tr,br],[N1,N2]`, `z,[tl,bl],[tr,br],[p11,…]`), the rules
+that keep them unambiguous (both node terms bare or both paired;
+paired nodes force paired turns; a port whose terminals are one node
+is a short), and — the point worth making once — that there is **no
+second stamping rule**: `port_nodes` hands every port back as a
+(top, bottom) pair with `0` for the classic form's bottoms, so the
+equations collapse term for term onto the calculator's. The element
+catalog now writes ports as `P₁, P₂` with the caption defining `P`,
+and the two-port row carries its optional parameter list.
+
+`Stamp-DC` (Alg. 2) reads a port voltage as `u_k = v_{a_k} - v_{b_k}`
+and hands its four (node, current) pairs to a new **Alg. 3,
+`Port-Currents`**: drop terminals on a reference, sum pairs sharing a
+node, emit one named answer apiece. The notation section gained
+`(a₁,b₁)`, `(a₂,b₂)`, `u_k` and `R`. The answer-inventory section
+gained the per-terminal rule, the shared-node sum, and the **internal
+unknown** the tapped autotransformer forces the transformer's free
+current into (`Circuit.internal`) — the one solved quantity a reader
+never sees.
+
+**#322/#323 came with it**, and they change a check the monograph
+stated as absolute. `Parse-and-Validate` (Alg. 1) now returns
+`(E, R)`: union-find, then one reference per **island** that holds a
+port terminal or a coupled coil's, chosen preferred → first port
+bottom → first node, and *reported* rather than taken silently; an
+island of ordinary elements is still refused by name. §2.1's
+one-sentence version of the same check was corrected too, and
+"ground never gets a symbol" became "a reference never gets a symbol,
+for every n ∈ R".
+
+### What else was outdated
+
+- **The by-hand equations (#329, #332) had no section at all** —
+  the largest gap. New §4.5, six subsections: the subordination
+  (never fed by the classic solve; three verdicts, not two),
+  **Alg. 9 `Read-Branches`** (Z and E by differentiating the engine's
+  own equation — the discipline being that a second reading is
+  *derived*, never written beside the first), **Alg. 10
+  `By-Hand-Nodal`**, mesh in prose, a worked five-element example
+  showing nodal's 3 rows against mesh's 2 with the supermesh, the
+  **augmented method** and why coupled coils go to mesh and
+  transformers/two-ports to nodal, and the 194/143 and 319/247 sweep.
+  §2.1's *"It never uses mesh analysis"* now says that is still true
+  of the solve and points here.
+- **The SPICE translator (#160–#163)** was unmentioned; a paragraph in
+  §4.4, including the `1'M`/`1M`/`1MEG` trap and that an
+  untranslatable element is omitted-and-named, never a failure.
+- **Brackets (#165)** — the value-language bullet still said `[…]`
+  means `pr` everywhere. It is positional now: `pr` in a resistor's
+  value, structure on a port element, refused elsewhere.
+- **Decimal rounding (#318)** — a note in §4.4 on why `sp.N(x, n)` is
+  not decimal rounding, with the −36.20493° case.
+- **The abstract** names the by-hand systems; the `ch:tools` intro
+  notes the last tool states no physics either.
+- Header comment `0.5.19` → `0.6.2`.
+
+### Appendix B *was* affected after all
+
+The old entry said it was not. It was: `schematic.py` moved on
+8 Sep (#322 parameter lanes, #337/#338 the op-amp routing and its
+name on the hypotenuse), and the figures were 1 Sep. `py
+paper/render_exemplars.py` re-run; all eight SVGs changed.
+
+### Verified, not assumed
+
+All three worked exemplars re-run against 0.6.2 and unchanged:
+`v_th = vs2/n`, `z_eq = z2/n²`; the coupled coils' `(e^-t ± e^-3t)/2`
+and `3(e^-3t − e^-t)/2`; `v_o = vs(g1−g2)/(g3−g4)`. Every new claim
+about the four-terminal forms was run first, not read off the source:
+the floating-primary transformer, the tapped autotransformer, the
+four-terminal `z` block, and both by-hand systems of the worked
+example. `xelatex` twice, 0 errors, 0 undefined references, the same
+3 pre-existing overfull boxes.
+
+**Deploy**: `py build.py --web` then `py Deploy\deploy_symbulator.py
+learn` puts the new `monograph.pdf` on `learn.symbulator.com`. Nothing
+else moves — no app build, no cache bump, no solver release.
 
 ## #318 — claimed by the app tree, 6 Sep 2026: decimal rounding in the package and, pending, the app; no docs work -- the tutorial prints the book's values, which are the correct ones. Write-up in `Application/v9/repos/local/NEXT.md`
 

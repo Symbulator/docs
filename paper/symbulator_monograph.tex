@@ -7,7 +7,7 @@
 % Build:  xelatex symbulator_monograph.tex   (run twice for TOC/refs)
 %
 % Sources: the solver as implemented in Symbulator 9 (repos/solver,
-% symbulator 0.5.19), presenting the staged algorithm of the classic
+% symbulator 0.6.2), presenting the staged algorithm of the classic
 % calculator versions as the conceptual core. The central historical
 % source is Roberto Perez-Franco's 2000--2001 graduation thesis (references/
 % 2000_thesis/, 12 chapters + 4 appendices); around it, the 1999
@@ -111,7 +111,11 @@ chapter of variations covers how AC, FD, and TR analyses differ from
 the DC template, the historical \emph{Impala} mode, and the expert
 mode, including multiple solutions. A further chapter presents the
 equivalence tools (Th\'evenin/Norton, equivalent resistance, two-port
-extraction, and gain) as thin orchestrations of the same engine. The
+extraction, and gain) as thin orchestrations of the same engine, and
+the by-hand systems---nodal with supernodes, mesh with supermeshes---%
+which the same engine writes out the way a first course teaches them,
+solves separately, and checks against its own answers without ever
+being fed by them. The
 monograph closes with worked exemplars of difficult circuits---one of
 them solved identically, to the third decimal place, by the 2001
 calculator and the 2026 port---and with the voices of Symbulator's
@@ -401,7 +405,11 @@ and with those two laws alone it analyzes circuits using nodal
 analysis exclusively. It never uses mesh analysis; and ``although it
 does not know Kirchhoff's voltage law, it always satisfies it,
 because that law is satisfied automatically when the other two
-are.'' KVL, in other words, is \emph{emergent} in this architecture:
+are.'' That is still true of the solve itself. Version~9 can also
+\emph{write out} a mesh system, supermeshes and all, but only as a
+second reading offered to the reader and checked against the answers,
+never as the route to them (\S\ref{sec:byhand}). KVL, in other words,
+is \emph{emergent} in this architecture:
 every voltage is expressed from the start as a node potential (or a
 difference of two), so no loop sum can ever fail to close. A second
 principle governs the input side~\cite[\S1.8.1]{thesis2000}: ``the
@@ -416,7 +424,9 @@ a number, a symbol, or an expression; a dependent source is simply a
 source whose value names another answer. Reading ends with validation:
 the description must name a reference node, no element may have both
 its terminals on the same node, and every node must have a conduction
-path to the reference.
+path to a reference---to ground, or else to the one that a side of the
+circuit reachable only through a transformer, a parameter block or a
+magnetic coupling is given for itself (\S\ref{sec:validation}).
 
 \emph{Writing down the equations} is called \emph{stamping}: one pass
 over the element list in which each element contributes its own
@@ -513,7 +523,10 @@ name selects the element's type. Table~\ref{tab:elements} gives the
 complete catalog.
 
 \begin{table}[htbp]
-\caption{Element catalog. The first letter of the name selects the type.}
+\caption{Element catalog. The first letter of the name selects the type.
+$P_1$ and $P_2$ are \emph{ports}: each is one node, its other terminal
+implicitly ground, or a bracketed pair naming both terminals
+(\S\ref{sec:fourterminal}).}
 \label{tab:elements}
 \centering
 \begin{tabular}{@{}lll@{}}
@@ -528,8 +541,10 @@ Letter & Element & Fields after the name \\
 \code{o} & ideal op-amp (nullor) & $n_+$, $n_-$, $n_\mathrm{out}$ \\
 \code{m} & mutual inductance & $L_\mathrm{name1}$, $L_\mathrm{name2}$, $M$ \\
 \code{s} & short circuit & $n_1$, $n_2$ \\
-\code{t} & ideal transformer & $n_1$, $n_2$, $N_1$, $N_2$ \\
-\code{z y h g a b} & grounded two-port & $n_1$, $n_2$ \\
+\code{t} & ideal transformer & $P_1$, $P_2$, $N_1$, $N_2$\ \ or
+  $P_1$, $P_2$, $[N_1,N_2]$ \\
+\code{z y h g a b} & two-port block & $P_1$, $P_2$
+  [, $[p_{11},p_{12},p_{21},p_{22}]$] \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -551,8 +566,53 @@ only by the FD and TR analyses and treated as zero when absent.
 \code{m} is unusual in that it couples two \emph{elements} (named
 inductors, or, in AC, elements holding impedances) rather than two
 nodes. The six two-port letters denote a black box characterized only
-by its four $z$/$y$/$h$/$g$/$a$/$b$ parameters, each port's second
-terminal being implicitly ground.
+by its four $z$/$y$/$h$/$g$/$a$/$b$ parameters, which may be written on
+the element itself as a bracketed four-term list
+(\code{z,1,2,[100,10,20,50]}) or left symbolic---\code{z11},
+\code{z12}, \ldots---to be referenced by another element, constrained
+by a condition, or solved for.
+
+\subsection{Ports of two terminals}
+\label{sec:fourterminal}
+
+The transformer and the two-port block are the only elements whose
+terminals do not come in a single pair, and they are the one place
+where the description language has genuinely grown since the
+calculators. The classic form names one node per port and grounds the
+other terminal implicitly: \code{t,2,3,1,n} is a transformer whose
+primary runs from node~2 to ground and whose secondary runs from
+node~3 to ground. That form is unchanged, and it remains the common
+case. But a transformer whose primary does not sit on ground---an
+autotransformer, a floating winding, a block cascaded into
+another---cannot be written that way at all, and the calculator's only
+answer was to make the user redraw the circuit.
+
+Since solver 0.5.27, either node term may instead be a \emph{bracketed
+pair} naming both terminals of that port, top first:
+
+\begin{quote}
+\code{t,[tl,bl],[tr,br],[N1,N2]} \qquad
+\code{z,[tl,bl],[tr,br],[p11,p12,p21,p22]}
+\end{quote}
+
+\noindent The two shapes do not mix: both node terms are bare names or
+both are pairs, and paired nodes require the turns as a pair too, so
+the four-terminal form is written exactly one way. A port whose two
+terminals name the same node is a short, refused like a self-looped
+resistor.
+
+Underneath there is no second stamping rule. The parser hands back
+every port as a $(\mathrm{top},\mathrm{bottom})$ pair, with \code{0}
+for the bottoms of the classic form, and the stamps of
+Algorithm~\ref{alg:stampdc} read a port voltage as the difference
+across its own pair and drive that port's current \emph{into} its top
+terminal and out of its bottom one. Put the bottoms on ground and
+every equation collapses, term for term, onto the one the calculator
+wrote. What the four-terminal form does change lies elsewhere: the
+answer inventory grows a current per live terminal
+(\S\ref{sec:names}), and the connectivity check has to admit a side of
+the circuit that reaches no ground at all (\S\ref{sec:validation}).
+Each is treated where it belongs.
 
 \subsection{Sign conventions}
 \label{sec:signs}
@@ -616,11 +676,28 @@ power (DC) & absorbed by $e$ & \code{p\_$e$} & \code{p$e$} \\
 complex power (AC) & absorbed by $e$ & \code{s\_$e$} / \code{ap\_$e$} & \code{s$e$} \\
 seen resistance & looking out from source $e$ & \code{r\_$e$} & \code{r$e$} \\
 seen impedance (AC) & looking out from source $e$ & \code{z\_$e$} & \code{z$e$} \\
-transformer current & into winding at node $n$ & \code{i\_$t$$n$} & \code{i$t$$n$} \\
-two-port current & into port at node $n$ & \code{i\_$p$$n$} & \code{i$p$$n$} \\
+transformer current & into $t$ at node $n$ & \code{i\_$t$$n$} & \code{i$t$$n$} \\
+two-port current & into $p$ at node $n$ & \code{i\_$p$$n$} & \code{i$p$$n$} \\
 \bottomrule
 \end{tabular}
 \end{table}
+
+The last two rows are per \emph{terminal}, not per port, and since
+solver 0.5.27 every live terminal of a transformer or a parameter
+block carries one---four on a fully floating block, two on the classic
+grounded form, which is the pair those elements have always reported.
+A terminal on ground reports nothing: the reference has no KCL, and a
+current into it is nobody's answer. A node named at more than one
+terminal reports \emph{one} answer, the total entering the element
+there; that is what makes the tapped autotransformer
+\code{t,[1,0],[2,1],[80,120]} readable, its two windings meeting at
+node~1. In that case the free unknown the transformer stamp needs
+cannot also be node~1's answer---the answer is a sum---so it steps
+aside into an \emph{internal} name, solved with the rest of the system
+and then withheld from the answers. Internal unknowns are the one
+category of solved quantity a reader never sees, and the only reason
+they exist is to keep an answer's name meaning what the reader thinks
+it means.
 
 Since solver 0.5.19, the two spelling traditions are formally
 \emph{one namespace}. Each circuit builds an alias map from its own
@@ -673,7 +750,16 @@ arguments all pass through one expression reader, which accepts:
 \item \textbf{The parallel shortcut} \code{[a,b,\ldots]}, expanded to
   $\mathrm{pr}(a,b,\ldots)$, the parallel combination
   $(\sum_k 1/z_k)^{-1}$ with the convention that a zero branch
-  dominates ($\mathrm{pr}=0$).
+  dominates ($\mathrm{pr}=0$). Brackets are \emph{positional}: this
+  reading holds in a resistor's value and nowhere else. On a
+  transformer or a two-port block a bracketed term is structure
+  instead---a port's two terminals, a transformer's turns, or a
+  block's four parameters (\S\ref{sec:fourterminal})---and anywhere
+  else at all a bracket is refused with a message. It used not to be:
+  every bracket went silently to $\mathrm{pr}$, which quietly turned
+  \code{e1,1,0,[4,4]} into a 2\,V source. A typed \code{pr(\ldots)}
+  remains a plain function call and is allowed wherever an expression
+  is.
 \item \textbf{Braces} \code{\{expr\}} in FD source values, meaning
   ``this value is written in the time domain; transform it,'' i.e.\
   $\mathcal{L}\{\mathrm{expr}\}$.
@@ -691,25 +777,53 @@ never an internal object of the algebra system).
 Before any equation is written, the parsed element list is validated
 (Algorithm~\ref{alg:validate}). Names and node labels are
 case-insensitive and fold to lower case; duplicate names are refused.
-Each element must have exactly the field count its type demands (one
-more is allowed on \code{l}/\code{c}, for the initial condition). The
-whole-circuit checks then enforce three properties that the solver
+Each element must have exactly the field count its type demands, with
+three exceptions, each of them an optional trailing term: one more on
+\code{l}/\code{c} for the initial condition, one more on a two-port
+for its four parameters, and one \emph{fewer} on \code{t} when the
+turns are written as a pair. The whole-circuit checks then enforce
+three properties that the solver
 depends on: a reference node exists; no element has both its
 terminals on the same node---a rule that binds even the short
 circuit, whose job is to join two \emph{distinct} nodes: a true
 self-loop would leave its own current indeterminate, entering and
 leaving the same KCL sum; and every node has a conduction path to
-the reference. The last check matters more than it may appear: a
+a reference. The last check matters more than it may appear: a
 floating sub-circuit has no defined voltages, and without the check
 the solver would quietly return its voltages parametrized in one
 another ($v_2 = v_3$) rather than flag the mistake.
+
+That last check needs one qualification, and it is the price of the
+four-terminal forms of \S\ref{sec:fourterminal}. A transformer and a
+parameter block conduct nothing from one side to the other---each port
+joins its own two terminals and neither joins the other---so a
+secondary that touches nothing else has no path to ground. Nor does
+the far side of a magnetically coupled pair, whose only link to the
+rest of the circuit is the flux. Such a piece is not a mistake: its
+currents and its voltage \emph{differences} are perfectly well
+defined, and only its absolute potentials are not. Since solver
+0.5.32---0.5.33 for the coupled case---the connectivity pass therefore
+partitions the circuit into \emph{islands}, the connected pieces
+holding no reference, and gives every island that contains a port
+terminal a reference of its own, held at zero exactly as node
+\code{0} is. Which node is taken is chosen in a fixed order: the
+caller's own preferred node if it lies in that island (the two-port
+extraction tool of \S\ref{sec:port} names the bottoms of the ports it
+is driving), else the first port bottom the island mentions, else its
+first node. The choice is \emph{reported} rather than made silently,
+because it decides the offset of every voltage on that side: the
+answers carry the reference map, and the reader is told in a note
+which nodes were measured against which. An island holding no port
+terminal at all---\code{r1,2,3,1} hanging on its own---is the original
+mistake still, and is refused by name.
 
 \begin{algorithm}[htbp]
 \caption{\kw{Parse-and-Validate}: description text to element list}
 \label{alg:validate}
 \begin{algorithmic}[1]
 \Require description text $D$
-\Ensure element list $\mathcal{E}$, or an error naming the problem
+\Ensure element list $\mathcal{E}$ and reference nodes $\mathcal{R}$,
+  or an error naming the problem
 \State split $D$ into element strings (on newlines or colons)
 \ForAll{element string $x$}
   \State expand notation shorthands in $x$
@@ -718,8 +832,11 @@ another ($v_2 = v_3$) rather than flag the mistake.
   \State fold name and node fields to lower case
   \State \textbf{check} first letter of name is a known type
   \State \textbf{check} name not already used; field count fits type
+  \State \textbf{check} node terms are both bare or both pairs
+    \Comment{a port is written one way or the other}
   \State append \code{Element}(name, kind, fields) to $\mathcal{E}$
 \EndFor
+\State $\mathcal{R} \gets \{\code{0}\}$
 \State \textbf{check} some element touches node \code{0}
   \Comment{a reference exists}
 \ForAll{$e \in \mathcal{E}$ with two terminals}
@@ -727,10 +844,19 @@ another ($v_2 = v_3$) rather than flag the mistake.
     \Comment{no self-loop: both terminals on one node}
 \EndFor
 \State union-find over terminals: each element joins its nodes
-  \Comment{op-amps join all three; grounded two-ports join theirs to \code{0}}
-\State \textbf{check} every node is connected to \code{0}
-  \Comment{no floating sub-circuit}
-\State \Return $\mathcal{E}$
+  \Comment{an op-amp joins all three; each port joins its own two,
+    never one port to the other}
+\ForAll{island $I$: a piece with no node in $\mathcal{R}$}
+  \If{$I$ holds a port terminal or a coupled coil's}
+    \State $\mathcal{R} \gets \mathcal{R} \cup \{\,\mathrm{ref}(I)\,\}$;\
+      note the choice
+    \Comment{the far side of a port: legitimate}
+  \Else
+    \State \textbf{error} naming $I$'s nodes
+    \Comment{a floating sub-circuit}
+  \EndIf
+\EndFor
+\State \Return $\mathcal{E}$, $\mathcal{R}$
 \end{algorithmic}
 \end{algorithm}
 
@@ -738,9 +864,15 @@ another ($v_2 = v_3$) rather than flag the mistake.
 
 Throughout, $n_1, n_2$ denote an element's two terminals as written in
 the description, node \code{0} is the reference (ground), $v_n$ is the
-voltage of node $n$ with $v_0 \equiv 0$, and $i_e$ is the current
+voltage of node $n$ with $v_n \equiv 0$ for every $n \in \mathcal{R}$,
+and $i_e$ is the current
 through element $e$, defined positive when flowing from $n_1$ to $n_2$
-\emph{through the element}. In pseudo-code, $\mathcal{E}$ is the
+\emph{through the element}. For the two elements that have four
+terminals, $(a_1, b_1)$ and $(a_2, b_2)$ are the top and bottom of the
+first and second port, $b_k = \code{0}$ in the classic two-node form,
+and $u_k = v_{a_k} - v_{b_k}$ is that port's voltage. In pseudo-code,
+$\mathcal{R}$ is the set of reference nodes---node \code{0} and one
+per island (\S\ref{sec:validation})---$\mathcal{E}$ is the
 parsed element list, $\Sigma$ the equation system under construction,
 $\mathcal{U}$ the list of unknowns, and $\mathcal{K}$ the map of
 \emph{known} quantities (named answers that never become unknowns).
@@ -779,8 +911,11 @@ a node's voltage ($v(n)$ in the pseudo-code) is what \emph{creates}
 the node: it registers $v_n$ as a first-level unknown and opens the
 node's KCL sum, so even a node touched only through a voltage relation
 (an op-amp input, say) still ends the pass with a KCL row. Second,
-ground never gets a symbol: $v(\code{0})$ is the constant~$0$, so the
-reference is built into every equation rather than solved for.
+a reference never gets a symbol: $v(n)$ is the constant~$0$ for every
+$n \in \mathcal{R}$---ground always, and an island's own reference
+where there is one---so it is built into every equation rather than
+solved for, and it writes no KCL of its own, current being free to
+enter and leave it.
 
 \begin{algorithm}[p]
 \caption{\kw{Stamp-DC}: element list to equation system (DC rules)}
@@ -835,25 +970,48 @@ reference is built into every equation rather than solved for.
       add $i_e$ to $\mathcal{U}$;\quad
       adds $i_e$ at $n_1$, $-i_e$ at $n_2$
   \CaseLine{\code{t} (ideal transformer, turns $N_1, N_2$):}
-    \State \kw{emit} $v_{n_1}/N_1 = v_{n_2}/N_2$;\quad
+    \State \kw{emit} $u_1/N_1 = u_2/N_2$;\quad
       add $i_1$ to $\mathcal{U}$
       \Comment{voltages by the turns ratio}
-    \State adds $i_1$ at $n_1$ and $-i_1 N_1/N_2$ at $n_2$
+    \State \kw{Port-Currents}$\bigl(e,\ [(a_1, i_1),\ (b_1, -i_1),\
+      (a_2, -i_1 N_1/N_2),\ (b_2, i_1 N_1/N_2)]\bigr)$
       \Comment{currents by the inverse ratio: power in $=$ power out}
   \CaseLine{\code{z y h g a b} (two-port, parameters $p_{11..22}$):}
     \State solve the family's two defining equations for
-      $(i_1, i_2)$ in terms of $(v_{n_1}, v_{n_2})$
+      $(i_1, i_2)$ in terms of $(u_1, u_2)$
       \Comment{e.g.\ for \code{z}: invert the $2\times2$ matrix}
-    \State add $i_1, i_2$ to $\mathcal{U}$; \kw{emit} their defining
-      equations; adds $i_1$ at $n_1$, $i_2$ at $n_2$
+    \State \kw{Port-Currents}$\bigl(e,\ [(a_1, i_1),\ (b_1, -i_1),\
+      (a_2, i_2),\ (b_2, -i_2)]\bigr)$
   \EndSwitch
 \EndFor
-\ForAll{registered node $n \ne \code{0}$}
+\ForAll{registered node $n \notin \mathcal{R}$}
   \State \kw{emit} $\mathrm{sum}[n] = 0$
     \Comment{KCL: one equation per non-reference node}
 \EndFor
 \State \kw{Close-Known-References}($\Sigma$, $\mathcal{K}$)
   \Comment{\S\ref{sec:closure}}
+\end{algorithmic}
+\end{algorithm}
+
+\begin{algorithm}[htbp]
+\caption{\kw{Port-Currents}$(e, T)$: one answer per live terminal}
+\label{alg:portcurrents}
+\begin{algorithmic}[1]
+\Require element $e$; terminals $T$ as (node, current entering there)
+\State drop every pair whose node is in $\mathcal{R}$
+  \Comment{a reference has no KCL, and no answer to carry}
+\State add up the expressions of pairs sharing a node, keeping first
+  mention order
+  \Comment{a node named twice gets one answer: its total}
+\ForAll{surviving node $n$, with total $i$}
+  \If{$i$ \emph{is} the unknown $i_{en}$ already}
+    \State adds $i_{en}$ at $n$
+    \Comment{the transformer's primary: nothing to say}
+  \Else
+    \State add $i_{en}$ to $\mathcal{U}$;\quad \kw{emit} $i_{en} = i$;\quad
+      adds $i_{en}$ at $n$
+  \EndIf
+\EndFor
 \end{algorithmic}
 \end{algorithm}
 
@@ -879,7 +1037,25 @@ is a free unknown. A \emph{two-port block} is a black box of four
 parameters (given numerically, or left symbolic to be referenced or
 solved for); whatever the family, its two defining equations are
 rearranged at stamp time into the form KCL wants---port currents in
-terms of port voltages. Finally, every \emph{zero-valued}
+terms of port voltages.
+
+Those last two are the only elements that reach
+\kw{Port-Currents} (Algorithm~\ref{alg:portcurrents}), and it is where
+the four-terminal forms of \S\ref{sec:fourterminal} are absorbed. Its
+job is small but exacting: a port's current enters at the top terminal
+and leaves at the bottom, so each element offers four (node, current)
+pairs; terminals on a reference are dropped, pairs sharing a node are
+summed, and what survives becomes one named answer apiece, bound by
+its own equation and stamped into that node's KCL. The one pair
+exempted from an equation is the transformer's primary, whose
+expression \emph{is} the free unknown the stamp just created---unless
+that node is also another terminal of the same element, when its
+answer becomes a sum and the free unknown steps aside into an internal
+name (\S\ref{sec:names}). Set every bottom to \code{0} and the whole
+procedure reduces to what the calculator did: two currents added at
+two nodes.
+
+Finally, every \emph{zero-valued}
 voltage-defining element (0\,$\Omega$, 0\,H, 0\,V) collapses to the
 short-circuit rule; a 0\,F capacitor, by contrast, is already an open
 circuit under the capacitor rule, with no special case needed.
@@ -1386,7 +1562,10 @@ the ordinary analysis, and reads the desired figure off the answers.
 This design---tools as thin clients of one trusted engine---is worth
 imitating: every tool automatically works in every domain the engine
 supports, with symbolic values, dependent sources, op-amps, and expert
-extras, because it is the same code path throughout.
+extras, because it is the same code path throughout. The last tool in
+the chapter (\S\ref{sec:byhand}) states no circuit physics either, for
+the same reason by a different route: it reads the physics back out of
+the equations the engine has already written.
 
 \section{Th\'evenin and Norton equivalents}
 \label{sec:th}
@@ -1549,12 +1728,295 @@ inventory. \code{absang}---also Baert's in origin, reworked by the
 author---printed any complex answer in polar form regardless of how
 the calculator's display modes were set, the universal answer to
 ``the book wants magnitude and angle''~\cite[\S6.1.2]{thesis2000};
-version~9's polar display option is its descendant. And the
+version~9's polar display option is its descendant, and it and every
+other rounded display share one routine, for a reason worth the
+warning: asking the algebra system to evaluate an expression \emph{to}
+$n$ digits is not the same as rounding it \emph{in decimal} to $n$
+digits. The first works at a binary precision of about that size, and
+the last digit can land either side---the wye--delta line current's
+angle, $-36.20493^\circ$, printed as $-36.21$ where the book and the
+arithmetic both say $-36.20$. The rule is therefore: evaluate at full
+precision first, then round each number in decimal, ties away from
+zero, as a textbook prints them. Ties to even, the language's own
+default, moved ten of the tutorial's printed answers when it was
+tried. And the
 \code{bode} and \code{plot} tools turned an FD or TR answer into a
 graph on the calculator screen---the thesis demonstrates each on a
 problem from a professor at the author's own university
 (\S\ref{sec:amplifier}, \S\ref{sec:boulet}), and version~9's plot
 menu covers the same ground with the host platform's graphics.
+
+One tool has no classic ancestor at all. Since solver 0.5.20 a
+description translates to a generic SPICE netlist and back, which
+matters for a program whose founding premise is that a numerical
+simulator cannot follow a student into a symbolic problem: a reader
+who wants the numerical answer \emph{as well} should not have to
+retype the circuit to get it. Every element type exports---an op-amp
+as a gain-$10^9$ VCVS, an ideal transformer as its exact
+controlled-source pair, a parameter block through the engine's own
+admittance reduction into grounded current sources---and the linear
+subset comes back the other way. Two things about it are worth
+stating. An untranslatable element is never a failure: it is left out,
+as a comment, and named in the warnings, so the reader always receives
+the part that did translate. And the one notational trap is spelled
+out in both directions rather than inferred---Symbulator's \code{1'M}
+is mega, while SPICE's \code{1M} is \emph{milli} and mega is
+\code{1MEG}.
+
+\section{The by-hand equations}
+\label{sec:byhand}
+
+Every tool so far has taken the engine's answers and asked a further
+question of them. The last one asks a different kind of question
+altogether, and it is the only part of Symbulator that is not, in the
+end, about getting an answer: \emph{write the system a student would
+write}. Since solver 0.6.0 a run may also produce the node-voltage
+system, with supernodes, and the mesh-current system, with
+supermeshes, in the form and the order a first course teaches them,
+and then check both against the classic solve.
+
+The subordination is total and deliberate. The classic solve has
+twenty-seven years behind it and remains the authority: the by-hand
+system is a \emph{second} system, solved separately, and nothing in it
+can reach an answer, an export, or a plot. It is never fed by the
+classic solve either, or the check would be circular. When the two
+disagree, the by-hand side is the one declared at fault. The verdict
+accordingly has three states and not two---\emph{agrees},
+\emph{differs}, \emph{unsure}---because a symbolic circuit can leave
+the algebra unable to close a difference, and reporting that as a
+disagreement would accuse a correct system of being wrong; a numeric
+spot check is the tie-breaker before \emph{differs} is ever shown.
+
+\subsection{Reading the branches back out of the equations}
+\label{sec:branches}
+
+Both methods need every branch in the one form
+$v_{n_1} - v_{n_2} = Z i + E$: an impedance and a source term in
+series with it. The obvious way to get there is to write out, a second
+time, that a resistor's drop is $Ri$, a capacitor's $i/(j\omega C)$,
+an inductor's in FD $sLi - Li(0)$, and so on. That is a second copy of
+the stamping rules of Chapter~\ref{ch:logic}, and it would drift from
+the first the moment either moved.
+
+So the branch reader states no component rule at all. It runs the real
+\kw{Stamp-DC} (or its AC or FD variant) and reads each branch's
+relation back \emph{out} of the equation the engine wrote, by
+differentiation.
+
+\begin{algorithm}[htbp]
+\caption{\kw{Read-Branches}: every branch as $v_{n_1} - v_{n_2}
+  = Z i + E$}
+\label{alg:branches}
+\begin{algorithmic}[1]
+\Require the stamped circuit, and which equation each element wrote
+\ForAll{element $e$ with an equation of its own}
+  \State $f(u, i) \gets \mathrm{lhs} - \mathrm{rhs}$, in the branch
+    drop $u$ and current $i$
+    \Comment{linear in both, whatever the domain}
+  \State $Z \gets -\,(\partial f/\partial i)\,/\,(\partial f/\partial u)$;
+    \quad $E \gets -\,f(0,0)\,/\,(\partial f/\partial u)$
+\EndFor
+\ForAll{element with no equation---a capacitor, a current source}
+  \State read the same two from $\mathcal{K}$, on the admittance side
+    \Comment{their current is stamped directly}
+\EndFor
+\end{algorithmic}
+\end{algorithm}
+
+Nothing in Algorithm~\ref{alg:branches} knows what domain it is in.
+Add a rule to the engine and it appears here for free; change one and
+it changes here too. Three distinctions inside it are easy to get
+wrong by hand, and each cost a real bug before it was written down. A
+component depends on its terminals \emph{as their difference}: a
+voltage-controlled current source between the same two nodes may
+depend on only one of them, which looks exactly like an admittance
+until the difference is asked for---such an element is a source, not
+an impedance. A terminal on a reference node carries no coefficient,
+its voltage being the literal $0$, so that test does not apply to it.
+And whatever dependence is left over once the drop is accounted for
+belongs in the source term $E$, not in a refusal.
+
+\subsection{Nodal, with supernodes}
+
+\begin{algorithm}[htbp]
+\caption{\kw{By-Hand-Nodal}: the node-voltage system}
+\label{alg:bhnodal}
+\begin{algorithmic}[1]
+\Require branches from Alg.~\ref{alg:branches}; the stamped KCL sums
+\ForAll{branch $b$ that is not a source of fixed current}
+  \If{$b$ is an ideal voltage source}
+    \State set it aside
+    \Comment{no $i = (u - E)/Z$ exists: its current is free}
+  \Else
+    \State $i_b \gets (v_{n_1} - v_{n_2} - E_b)/Z_b$
+    \Comment{the substitution that makes the method nodal}
+  \EndIf
+\EndFor
+\State union-find: each set-aside source joins its two nodes
+  \Comment{the supernodes}
+\ForAll{group $G$ of nodes so joined, or single node, $G \cap
+  \mathcal{R} = \emptyset$}
+  \State \kw{write} $\sum_{n \in G} \mathrm{sum}[n] = 0$, with every
+    $i_b$ substituted
+  \Comment{KCL at a node, or round the supernode}
+\EndFor
+\ForAll{set-aside source}
+  \State \kw{write} its own equation in the node voltages
+  \Comment{the constraint that replaces the KCL given up}
+\EndFor
+\ForAll{op-amp, output node $n_\mathrm{out}$}
+  \State drop $n_\mathrm{out}$'s KCL; \kw{write} $v_{n_+} = v_{n_-}$
+  \Comment{the output supplies whatever it must}
+\EndFor
+\State \kw{Augment} (\S\ref{sec:augmented})
+\State \kw{write} the \emph{bridge}: each answer name in the
+  unknowns, $i_{r3} = (v_1 - v_2)/r_3$
+\end{algorithmic}
+\end{algorithm}
+
+A voltage source between two non-reference nodes is the whole
+difficulty of Algorithm~\ref{alg:bhnodal}, and the supernode is the
+textbook's answer to it: the
+source has no $v$--$i$ relation to substitute---its current is
+whatever the rest of the circuit demands---so the two nodes are
+enclosed together, one KCL is written for the enclosure, and the
+source's own equation is written as the constraint that replaces the
+one given up. A source with one end \emph{on} a reference needs no KCL
+at all: that node's voltage is known outright.
+
+\subsection{Mesh, with supermeshes}
+
+The mesh system is the dual, and its one structural decision is what
+counts as a mesh. The meshes are taken as a minimum-weight cycle basis
+of the branch graph; for a planar circuit that basis \emph{is} the set
+of bounded faces, which is what a student draws. Each branch current
+is then the signed sum of the mesh currents running through it, and a
+KVL is written round each loop.
+
+A current source is the dual difficulty. Its drop is unknown, so it is
+carried as a symbol; a source shared by two meshes therefore appears
+in both KVLs with opposite signs, and adding those two loops together
+cancels it---that is the \emph{supermesh}, and the source's own value
+supplies the constraint that replaces the equation given up. A source
+lying on only one mesh needs no supermesh: it fixes that mesh current
+outright. Two refusals belong to mesh alone. An op-amp is refused
+because its output current is supplied by the amplifier rather than
+running round any loop. And a source controlled by a \emph{node
+voltage} cannot be written in mesh currents at all---mesh analysis has
+no node voltages---so those are recovered where they can be, by
+walking from the reference and adding the drops along the way, and
+the system is refused by name where they cannot.
+
+\subsection{Both systems, on one circuit}
+
+A five-element circuit is enough to show the pair, and to show why a
+first course teaches both. A 20\,V source drives \code{r1} into a node
+where a 1\,A source pulls current to ground, with \code{r2} and
+\code{r3} completing the second loop:
+
+\begin{quote}
+\begin{tabbing}
+\code{e1,1,0,20}xxx\=\kill
+\code{e1,1,0,20}   \> \code{r1,1,2,2} \\
+\code{j1,2,0,1}    \> \emph{the current source, shared by both meshes} \\
+\code{r2,2,3,4}    \> \code{r3,3,0,6}
+\end{tabbing}
+\end{quote}
+
+\noindent Nodal writes three rows---two KCLs and the source's own
+constraint, node~1 sitting on a source to the reference and so needing
+no KCL of its own:
+\begin{align*}
+-\tfrac12 v_1 + \tfrac34 v_2 - \tfrac14 v_3 + 1 &= 0 &&
+  \text{KCL at node 2} \\
+-\tfrac14 v_2 + \tfrac{5}{12} v_3 &= 0 &&
+  \text{KCL at node 3} \\
+v_1 &= 20 &&
+  \text{\code{e1} fixes node 1 against the reference}
+\end{align*}
+Mesh writes two, because \code{j1} is shared by both loops and adding
+them cancels its unknown drop:
+\begin{align*}
+2 I_1 + 10 I_2 + 20 &= 0 &&
+  \text{KVL round the supermesh of } I_1, I_2 \\
+-I_1 + I_2 &= 1 &&
+  \text{\code{j1} sets the current in its branch}
+\end{align*}
+Solving gives $v_1, v_2, v_3 = 20, 15, 9$ and $I_1, I_2 =
+-\tfrac52, -\tfrac32$; the bridge rows---$i_{r1} = (v_1 - v_2)/2$ on
+one side, $i_{r1} = -I_1$ on the other---turn both into the same
+$i_{r1} = \tfrac52$~A that the classic solve reports. Every run builds
+\emph{both} systems even though it shows one, since building is cheap
+and only the solve is not, and says which is the shorter route: here,
+\emph{mesh needs 2, nodal 3}. That question---which method to reach
+for---is one a first course spends real time on, and until the two
+systems were written side by side there was no way for the program to
+answer it.
+
+\subsection{The augmented method}
+\label{sec:augmented}
+
+Neither method, as taught, handles a transformer, a two-port
+parameter block, or a magnetically coupled pair: their constraints
+couple more than one branch and are not a branch $v$--$i$ relation at
+all. Since solver 0.6.1 those are carried the way a textbook carries
+them, under one rule that does not care which element it is looking
+at:
+
+\begin{quote}
+\emph{A current that cannot be written in the method's own unknowns is
+carried as an extra unknown, and its element's own relation stands as
+an extra equation.}
+\end{quote}
+
+\noindent One extra equation per extra unknown, so the system stays
+square, and the relation added is the engine's own---not a restatement
+of it. The division of labour between the two methods is not
+arbitrary, and it is the same one every textbook makes. \emph{Coupled
+coils go to mesh}: the engine writes the coupled inductor as
+$v_{n_1} - v_{n_2} = j\omega(L\,i_e + M\,i_{e'})$, which is the drop
+already expressed as a function of currents---exactly what a KVL
+wants. Only nodal would need it inverted, and a coupled pair cannot be
+inverted one coil at a time. That is precisely why coupled coils are
+taught in the mesh chapter, and nodal now says so instead of trying.
+\emph{Transformers and two-port blocks go to nodal}: their terminal
+currents become the extra unknowns and their defining relations the
+extra rows, and this works for the four-terminal forms of
+\S\ref{sec:fourterminal} exactly as for the classic two-node ones,
+since \kw{Port-Currents} has already given every live terminal a named
+current and an equation binding it. Mesh refuses them, and says to use
+nodal: a winding is not a branch that one mesh current runs round, so
+a mesh system would need the winding voltages as further unknowns.
+That is a real limitation of the method rather than a missing feature,
+and the refusal says which method to reach for instead.
+
+\subsection{The check, and what it is worth}
+
+The last line of either method is the \emph{bridge}---$i_{r3} = I_1 -
+I_2$ for mesh, $i_{r3} = (v_1 - v_2)/r_3$ for nodal---which is the
+last step of the method as taught, and also the route the comparison
+runs through: it is what turns the method's own unknowns back into the
+circuit's answer names, where the classic solve's values are waiting
+to be compared against. Over the built-in example books, both methods
+were run on every entry that admits one: 194 nodal systems and 143
+mesh systems in each entry's own domain, and 319 and 247 respectively
+under a wider sweep that runs every circuit and takes the transient
+entries in FD. All of them agree with the classic solve, and none
+differ. That sweep is what promoted the feature from an experiment to
+part of the program.
+
+Two things are worth taking from this beyond the feature itself. The
+first is the discipline of Algorithm~\ref{alg:branches}: a second
+reading of a circuit should be \emph{derived} from the first, never
+written beside it, or the two will drift and the agreement between
+them will stop meaning anything. The second is what the check actually
+tests. Nodal and mesh are duals; the engine's own method is neither,
+being a direct stamping of element laws and KCL. Three independent
+routes to the same answers, agreeing to the last symbol on several
+hundred circuits, is a stronger statement about the engine than any
+one of them could make alone---and it is the same habit of
+\emph{verification by re-derivation} that the thesis practised on the
+\kw{port} tool a quarter of a century earlier (\S\ref{sec:port}).
 
 \section{What the port to version 9 changed}
 \label{sec:portchanges}
@@ -1602,6 +2064,14 @@ each is instructive.
   be declared; the port passes extras through the tools' rounds and
   adopts new symbols automatically, with the explicit list still
   winning.
+\item \textbf{A port may float.} On the calculator a transformer or a
+  parameter block named one node per port and grounded the other
+  terminal implicitly; a circuit that did not fit had to be redrawn.
+  Version~9 keeps that form and adds the bracketed pair
+  (\S\ref{sec:fourterminal}), which cost one stamping change and two
+  consequences elsewhere---a current answer per live terminal, and a
+  connectivity check that admits a side of the circuit with no path to
+  ground and gives it a reference of its own.
 \item \textbf{The two spelling traditions were reunified.} Version~9
   introduced underscored answer names (\code{i\_r1}) for
   machine-readability, which briefly split every answer's identity in
