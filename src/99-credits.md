@@ -49,33 +49,33 @@ through their suggestions and corrections, on both the software and the
 documentation. Many were complete strangers at first and became dear friends
 through our exchanges. Others were dear friends that became collaborators.
 
-Versions 1 through 6 received feedback and suggestions from José Vega
+**Versions 1 through 6** received feedback and suggestions from José Vega
 (Panama), Tim Hutcheson (USA), Lars Frederiksen (Denmark), Joe Riel (USA),
 Arne Harstad (Norway), Erwin Baert (Belgium), Charles 'Chuck' Ware (USA),
 Doug Burkett (USA), Reinhard Willinski (Germany), Kamil Malinski (Austria),
 Jake Adams (USA), Daniele Martini (Italy), Rozgonyi Szabolcs (Hungary),
 Michael Rans (UK), Alex Astashyn (Russia), Al Charpentier (USA), Nevin
 McChesney (USA), Ivan Oro Yu (Panama), Pepe Iborra (Spain), and Dave Conklin
-(USA).
+(USA). **Versions 7 and 8** received feedback and suggestions from Carlos
+Perez Ortega (Chile) and Qifan Wang (China).
 
-Versions 7 and 8 received feedback and suggestions from Carlos Perez Ortega
-(Chile) and Qifan Wang (China).
-
-Version 9 benefited from feedback and excellent suggestions from my dear old
-friend Antony García (Panama, currently in Massachusetts), who is not only
-one hell of an engineer and a consummate circuits theoretician, but who also
-taught for many years the same Circuits class at UTP as Prof Eliane Boulet.
-I met Antony in 2013, while he was a student at UTP Azuero in the same major
-that I had completed twelve years before. I was immediately struck by his
-brilliance. After I shared an early version of Symbulator 9 with Antony, he
-provided me with a series of fantastic recommendations — from his vantage
-point as both a student and a teacher of circuits theory — regarding
-features he would like to see in Symbulator. I then worked with Claude to
-turn those suggestions into reality.
+**Version 9** benefited from feedback and excellent suggestions from my dear
+old friend Antony García (Panama), who is not only one hell of an engineer
+and a consummate circuit theorist, but who also taught the same Circuits
+class at UTP as Prof. Eliane Boulet for many years. I met Antony in May
+2013, while he was a student at UTP Azuero in the same major that I had
+completed more than a dozen years earlier. I was immediately struck by his
+brilliance, and we became friends. In August 2026, I shared an early version
+of Symbulator 9 with Antony while he was a PhD candidate in the ECE Department
+at WPI (MA, USA).
+Antony generously provided me with a series of fantastic recommendations —
+from his vantage point as both a student and a teacher of circuit theory —
+regarding features he would like to see in Symbulator. I worked with Claude
+over a few weeks in September to turn them into reality.
 
 My thanks to all of them. I truly am in their debt.
 
-### Technology
+### Software I relied on
 
 ::: only 7
 Symbulator 7 relies on **DiffEq**, by Lars Frederiksen, for its Laplace
@@ -89,19 +89,20 @@ TI-Nspire by Philippe Fortin. I have renamed that file **LF** here, in homage
 to Lars.
 :::
 ::: only 9
-Symbulator 9 runs on Python and is powered by the algebraic capabilities of **SymPy**.
+Symbulator 9 runs on **Python** and is powered by the algebraic capabilities
+of **SymPy** and the numerical prowess of **NumPy**.
 I am thankful to the creators of such wonderful open-source software, and to the 
 maintainers who keep their development going. I am proud to honour the open-source
 community by making Symbulator free and open-source software, from 2026.
 
-Symbulator 9's answers have also been checked, all through its development,
+Throughout its development, Symbulator 9's answers were checked
 against **ahkab**, an independent circuit simulator written in Python by
-Giuseppe Venturini and his collaborators. Every circuit that Symbulator's SPICE
+Giuseppe Venturini. Every circuit that Symbulator's SPICE
 translator exports is solved a second time by ahkab, and the two must agree
 before a release goes out — a habit that has caught more than one convention I
 had taken for granted. None of ahkab's code is part of Symbulator, and it is
 not needed to run it: it is a second opinion, kept at arm's length, and a
-valuable one. My thanks to Giuseppe and his team for building such a tool and
+valuable one. My thanks to Giuseppe for building such a tool and
 sharing it freely.
 
 ### AI collaborator

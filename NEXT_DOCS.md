@@ -8,6 +8,44 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
+## #343 — Roberto's credits revision, and the PDFs rebuilt for it — **done 9 Sep 2026, live on learn, web and PDFs**
+
+Roberto rewrote the human-collaborators and technology sections of
+`src/99-credits.md` himself, after a proofread: the Antony García
+paragraph expanded (May 2013, the WPI PhD candidacy, *"and we became
+friends"*), the three version cohorts set in bold and the first two
+merged into one paragraph, *Technology* retitled **Software I relied
+on**, NumPy named beside Python and SymPy, and the ahkab paragraph
+tightened to Giuseppe Venturini alone.
+
+Three corrections made on the fly under the standing instruction, all
+his wording otherwise untouched: **NumPy** for *Numpy* (the project's
+own capitalisation, and what this tree's prose already used),
+**Throughout its development** for *Through its development*, and three
+lines rewrapped from 86–97 columns to the paragraph's 76.
+
+**This is the exception to `--web`, and it is the shape to watch for.**
+The credits chapter is in all three books, so a web-only build would
+have left the PDFs printing the old paragraph — the half of the site
+nobody notices is stale. Full `python build.py`, with `build/tex/`
+deleted first so a truncated `.aux` could not fail the run silently.
+
+Pagination did not move: v9 **297**, v7 **236**, v8 **223**, the same as
+the 8 Sep build. All three fetched back from the host and hashed against
+the local build (`24457c5d…`, `4121cf24…`, `f302e1d6…`, all matching),
+and `learn.symbulator.com/9/credits` serves every changed phrase.
+
+One thing worth keeping from verifying it. **Grepping the built PDF for
+those phrases reports misses that are not misses.** pypdf's extraction
+drops the spaces out of justified lines — *ofJuniorChamberInternational*
+— and XeLaTeX hyphenates across line ends, so *circuit theorist* is
+*consummate cir-/cuit theorist* in the file and matches nothing. Four of
+seven probes came back MISS on a book that was completely correct. Read
+the extracted page, do not trust the probe; the same lesson as the Ω and
+∠ re-encoding trap under #221/#222.
+
+---
+
 ## #342 — the documentation's browser tab says *Documentation* — **done 9 Sep 2026, live on learn and the landing page**
 
 The docs half of #342 (the app half, and the reasoning, are in
