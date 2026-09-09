@@ -1998,12 +1998,16 @@ last step of the method as taught, and also the route the comparison
 runs through: it is what turns the method's own unknowns back into the
 circuit's answer names, where the classic solve's values are waiting
 to be compared against. Over the built-in example books, both methods
-were run on every entry that admits one: 194 nodal systems and 143
-mesh systems in each entry's own domain, and 319 and 247 respectively
-under a wider sweep that runs every circuit and takes the transient
-entries in FD. All of them agree with the classic solve, and none
-differ. That sweep is what promoted the feature from an experiment to
-part of the program.
+are run on every entry that admits one---some two hundred nodal
+systems and around a hundred and fifty mesh ones in each entry's own
+domain, and substantially more under a wider sweep that runs every
+circuit and takes the transient entries in FD. \emph{Every system built agrees
+with the classic solve, and none differs.} That sweep is what promoted
+the feature from an experiment to part of the program, and it is a
+standing check rather than a one-off: the counts climb whenever an
+example book gains an entry or a refusal becomes support, and the
+figure that matters is not either count but the zero beside
+\emph{differs}.
 
 Two things are worth taking from this beyond the feature itself. The
 first is the discipline of Algorithm~\ref{alg:branches}: a second

@@ -194,7 +194,8 @@ for every n ∈ R".
   `By-Hand-Nodal`**, mesh in prose, a worked five-element example
   showing nodal's 3 rows against mesh's 2 with the supermesh, the
   **augmented method** and why coupled coils go to mesh and
-  transformers/two-ports to nodal, and the 194/143 and 319/247 sweep.
+  transformers/two-ports to nodal, and the standing sweep — written
+  *without* the counts, deliberately, see the correction below.
   §2.1's *"It never uses mesh analysis"* now says that is still true
   of the solve and points here.
 - **The SPICE translator (#160–#163)** was unmentioned; a paragraph in
@@ -226,6 +227,30 @@ the floating-primary transformer, the tapped autotransformer, the
 four-terminal `z` block, and both by-hand systems of the worked
 example. `xelatex` twice, 0 errors, 0 undefined references, the same
 3 pre-existing overfull boxes.
+
+### A correction, caught the same day by re-running the check
+
+The section was first written quoting #329's table — *194 nodal and
+143 mesh systems, 319 and 247 under `--cover`*. Re-running
+`repos/server/tools/check_byhand.py` to confirm those figures before
+leaving them in a published document returned **204 and 149**, and
+`--cover` **333 and 262** — all four still 100% agreeing, with 0
+differing, 0 unsure and 0 unsolved. Every one of the four had moved in
+the day since #329's own sweep; #332 turned refusals into support, so
+more systems build. Two of them moved by more than the eye would
+guess: `--cover` nodal 319 → 333 and mesh 247 → 262.
+
+Nothing was wrong with the *claim* (every system built agrees, none
+differs); what was wrong was pinning it to a snapshot. So neither the
+monograph nor `byhand.py`'s docstring quotes a pair of counts any
+more — both name the tool and say the figure that matters is the zero
+beside *differs*. Same lesson the project keeps relearning elsewhere:
+a number restated in a second file is a number that goes quietly
+stale.
+
+**This correction is one paragraph in §4.5.6 and is not yet on
+`learn`** — the live PDF still carries the two snapshot figures. It
+rides the next `learn` deploy.
 
 ### Deployed
 
