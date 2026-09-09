@@ -32,6 +32,7 @@
   --answer:     #a13030;   /* a value the software returned            */
   --ui-card:    #24487e;   /* a card in the app (#357)                 */
   --ui-control: #0f6b5c;   /* a control inside a card (#357)           */
+  --ui-button:  #c9614f;   /* a button you press (#361)               */
   --lcd:        #f2f6fc;   /* the input panel, tinted toward the accent */
   --lcd-edge:   #dbe4f2;
 
@@ -84,6 +85,7 @@ html[data-theme="dark"] {
   --answer:     #ff9c9c;
   --ui-card:    #7fb0e8;
   --ui-control: #5fd3bd;
+  --ui-button:  #ffab91;
   --lcd:        #182534;
   --lcd-edge:   #2f5170;
   --inverse-bg:  #303c4e;
@@ -551,6 +553,15 @@ em.var { font-weight: 600; font-style: italic; }
    these are words in the sentence rather than a value standing apart. */
 .ui-card { color: var(--ui-card); font-weight: 600; }
 .ui-ctl  { color: var(--ui-control); font-weight: 600; }
+/* #361: a button you press, as against a field you set. Warm on purpose
+   -- the blue and teal tiers are places and settings, this one is an
+   action. Salmon is Roberto's pick of 10 Sep 2026 from a rendered strip,
+   made knowing the risk: in dark mode --answer is #ff9c9c and this is
+   #ffab91, so a returned value and a button are close there. Kept apart
+   by weight and by company -- an answer is set in the sans face, a button
+   is in the body text -- and by never sitting inside one another. If it
+   ever does read as one thing, this token is the single place to move. */
+.ui-btn  { color: var(--ui-button); font-weight: 600; }
 .ans-math .katex { font-size: 1.06em; }
 
 .xref { color: var(--accent); text-decoration-color: rgba(15, 107, 92, 0.4); }

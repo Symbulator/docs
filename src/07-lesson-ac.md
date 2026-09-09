@@ -107,7 +107,7 @@ answer at a time. You will see it used throughout this lesson.
 
 ::: only 9
 Symbulator answers in rectangular form unless you ask otherwise. In
-{{ui:Settings}}, under *Display*, tick {{ui:Show AC answers as polar phasors}} and
+{{card:Settings}}, under *Display*, tick {{ui:Show AC answers as polar phasors}} and
 every answer is shown as an amplitude and an angle. The circuit is re-solved
 as soon as you tick it.
 

@@ -100,7 +100,7 @@ the transmission lines:}}
 ```
 
 ::: only 9
-Tick {{ui:Show AC answers as polar phasors}} in {{ui:Settings}} and each line
+Tick {{ui:Show AC answers as polar phasors}} in {{card:Settings}} and each line
 impedance's *current through* reads straight off:
 
 - `irat` = {{o:6.809}}∠{{o:-21.8}}° A
@@ -685,7 +685,7 @@ AS7's Practice Problem 12.10
 
 ::: answer
 These values are RMS, so {{v7,8|set the flag}}{{v9|tick {{ui:RMS phasors}} in
-{{ui:Settings}}}} — this one does ask for power.
+{{card:Settings}}}} — this one does ask for power.
 
 ```sym 7
 true→s\rms

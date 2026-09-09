@@ -1917,7 +1917,7 @@ r6,5,0,10'k
 
 ::: only 9
 Ask {{card:Evaluate}} for `expand(vo)` with {{ui:Rounding}} set to *approx (full precision)* in
-{{ui:Settings}}. The answer is arranged differently from the book's, which is a matter of presentation rather than of arithmetic.
+{{card:Settings}}. The answer is arranged differently from the book's, which is a matter of presentation rather than of arithmetic.
 :::
 
 ::: only 7,8

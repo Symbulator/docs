@@ -3,6 +3,64 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #362 — a pair of symbolic answers stacks instead of running off a phone — **done 10 Sep 2026, source only**
+
+Roberto, 10 Sep 2026, reading Lesson 2 on his phone: the two power answers
+above *It is this ability to simulate symbolically* were one display joined
+by `\quad\text{and}\quad`, and too wide to fit. *"Since they are two,
+there's no obligation to have them in the same line."*
+
+Now an `aligned` block, stacked and lined up on the `=`. The word *and*
+goes with the change: the prose above already introduces them one at a
+time (*to find the power consumed... to find the power delivered...*), so
+it was carrying nothing the reader needed.
+
+**Not a new construct.** `\begin{aligned}` is already used in Lesson 6 and
+Lesson 13, seven blocks between them, and it was checked on the live site
+rather than assumed — `learn.symbulator.com/9/lesson-twoports` renders its
+`g_{11}` block through KaTeX at 143px tall, which is the several rows.
+
+The display is not inside a version wrapper, so 7 and 8 take it too. That
+is the #260 shape: layout only, not a word changed, and the two books
+showed the same over-wide line.
+
+**The sibling pair one screen earlier was left alone on purpose.** Line 130
+has the same `\quad\text{and}\quad` construction, but it sits inside
+`::: only 7,8` — version 9 shows `::: result` panels there instead, so no
+version 9 reader ever meets it.
+
+
+## #361 — a button is not a field: the app's vocabulary grows a third tier — **done 10 Sep 2026, source only**
+
+Roberto, 10 Sep 2026: *"I think buttons should use a different colour in
+the text ... the Run Symbulator text should be different. Maybe salmon?"*
+
+`{{btn:Run Symbulator}}` joins `{{card:}}` and `{{ui:}}` from #357, with
+its own `ui-button` token through all three copies of the palette and a
+`\uibtn` macro for the PDFs. **35 spans over 19 labels**, promoted out of
+`{{ui:}}`; version 9 now renders 274 cards, 318 controls and 35 buttons,
+and versions 7 and 8 still render none of any tier.
+
+**The sorting rule:** a button is something you *press* and it acts — *Run
+Symbulator*, *Download*, *Add equation(s)*, *Write the equations*. A field,
+checkbox or menu option is something you *set* and then read — *Type of
+analysis*, *Rounding*, *Show equations* — and stays teal. The italic menu
+*values* (*DC — direct current*) were already a fourth thing and are
+untouched.
+
+**Salmon was asked for and not shipped, for a reason worth keeping.** The
+answer colour in dark mode is `--answer: #ff9c9c`, which *is* a salmon. A
+salmon button beside it would have said that the button and the value
+`0.006` are the same kind of thing — the exact distinction these colours
+exist to draw. The warmth was kept and pulled toward orange: **`#b0561a`**
+light, **`#f0a868`** dark. Roberto was sent both, side by side in both
+themes, with the clash visible in the dark salmon row rather than described.
+
+One label needed a second pass: *Write the equations* wraps across a line
+break in the source, so a whole-string replace missed it while every other
+label matched. Any future sweep over these commands wants the same warning
+— a brace command is not confined to one line.
+
 ## #358 — brace commands may nest — **done 9 Sep 2026, source only**
 
 Roberto, 9 Sep 2026, after #357 had to leave 44 sites in plain bold:

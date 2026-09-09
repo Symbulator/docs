@@ -131,7 +131,7 @@ in normal values (also called magnitude values) and in RMS. Working in RMS
 simply means every current and voltage in the analysis is taken to be RMS.
 That's it.
 
-The switch is in {{ui:Settings}}, under **AC power convention**: tick
+The switch is in {{card:Settings}}, under **AC power convention**: tick
 {{ui:RMS phasors}}. Off means peak amplitude, the convention with the divide-by-two,
 and the setting affects AC power only. It is always in view, so it cannot be
 left set from a problem you finished an hour ago.
@@ -167,7 +167,7 @@ r3,2,0,4
 
 ::: only 9
 AC, with `omega` typed into the ω box, and {{ui:RMS phasors}} ticked in
-{{ui:Settings}}.
+{{card:Settings}}.
 :::
 
 Or, if you want to simplify the impedances, the resistors can be collapsed into
@@ -325,7 +325,7 @@ AS7's Practice Problem 11.10
 
 ::: answer
 The values are RMS, so {{v7,8|set `true→s\rms`}}{{v9|tick {{ui:RMS phasors}} in
-{{ui:Settings}}}}.
+{{card:Settings}}}}.
 
 ```sym 7
 true→s\rms:"e,1,0,165.:r,1,0,10.+[𝐢4.,8.-𝐢6.]"→cir:s\ac(cir,ω)

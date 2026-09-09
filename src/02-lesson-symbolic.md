@@ -6,12 +6,12 @@ updated: 2026-09-06
 summary: >
   Learn how to solve different types of *symbolic* circuits in Symbulator. Use
   {{v7,8|the solve command on}}{{v9|{{card:Solve}} in}} Symbulator. And explore
-  {{v7,8|**ex**, }}the powerful {{v7,8|*expert mode*}}{{v9|{{ui:Expert Mode}}}}, for the ambitious user.
+  {{v7,8|**ex**, }}the powerful {{v7,8|*expert mode*}}{{v9|{{card:Expert Mode}}}}, for the ambitious user.
 ---
 
 Here you will learn about the types of symbolic circuits and how to solve
 them in Symbulator, using {{v7,8|the solve command}}{{v9|{{card:Solve}}}} when needed, and — for the more
-adventurous — the powerful {{v7,8|*expert mode*}}{{v9|{{ui:Expert Mode}}}}.
+adventurous — the powerful {{v7,8|*expert mode*}}{{v9|{{card:Expert Mode}}}}.
 
 ## About symbolic problems {#about-symbolic}
 
@@ -48,7 +48,7 @@ Numerical-from-symbolic problems can be solved in two ways. If they are simple
 quicker to simulate the circuit symbolically and then solve for the numerical
 answers with the {{v7,8|**solve** command of the
 calculator}}{{v9|{{card:Solve}} card, under the results}}. If they are not simple, it is easier to use
-{{v7,8|**expert mode**}}{{v9|{{ui:Expert Mode}}, in the {{ui:Expert Mode}} box}}.
+{{v7,8|**expert mode**}}{{v9|{{card:Expert Mode}}}}.
 
 Let's see an example of each.
 
@@ -59,7 +59,8 @@ about solving a purely symbolic problem. The only limitation comes from the
 computing capacity of {{v7,8|the calculator}}{{v9|your device}}: {{v7,8|while small circuits can be
 solved relatively fast, larger circuits may be too slow to solve and may cause
 a memory error}}{{v9|while small circuits are solved almost instantly, large
-symbolic circuits can produce expressions too large to be useful}}.
+symbolic circuits can take longer to solve, and on top of that, they may
+produce expressions too large to be useful to a human}}.
 
 Let's see a simple purely symbolic problem, from *Fundamentals of Electric
 Circuits* by Alexander and Sadiku (5th edition), from now on referred to as
@@ -96,7 +97,7 @@ s\dc(cir)
 ::: only 9
 ::: tip Turn rounding back to exact for this lesson
 {{ref:lesson-dc}} had you set {{ui:Rounding}} to *approx to n digits*. There is
-nothing to round here, so open {{ui:Settings}} and put it back to *exact*. The
+nothing to round here, so open {{card:Settings}} and put it back to *exact*. The
 {{ui:Use SI prefixes}} tick clears itself: a prefix has no place in an answer
 like
 
@@ -114,7 +115,7 @@ r2,c,0,r2
 ```
 
 Leave {{ui:Type of analysis}} on *Solve circuit*, set {{ui:Analysis}} to
-*DC — direct current*, and press {{ui:Run Symbulator}}.
+*DC — direct current*, and press {{btn:Run Symbulator}}.
 :::
 
 {{v7|This simulation took 15 seconds in my calculator.}}{{v8|This simulation
@@ -144,7 +145,10 @@ To find the power consumed in r2, we {{v7,8|ask for `pr2`}}{{v9|read `pr2`}}. To
 source, we {{v7,8|ask for the negative of `pev`}}{{v9|switch the sign of `pev`}}.
 
 $$
-p_{r2} = \dfrac{r_{2}\,v^2}{(r_{1} + r_{2})^2} \quad\text{and}\quad -p_{ev} = \dfrac{v^2}{r_{1} + r_{2}}
+\begin{aligned}
+p_{r2} &= \dfrac{r_{2}\,v^2}{(r_{1} + r_{2})^2} \\[0.6em]
+-p_{ev} &= \dfrac{v^2}{r_{1} + r_{2}}
+\end{aligned}
 $$
 
 It is this ability to simulate symbolically, as if it were nothing, that puts
@@ -156,7 +160,7 @@ take no extra effort.
 ## Numerical from symbolic, with {{v7,8|solve}}{{v9|**Solve**}} {#with-solve}
 
 Getting numerical answers from a symbolic circuit, on the other hand, takes an
-extra step: {{v7,8|the solve command}}{{v9|{{card:Solve}}}}, as in this next example, or {{v7,8|expert mode}}{{v9|{{ui:Expert Mode}}}}, as in
+extra step: {{v7,8|the solve command}}{{v9|{{card:Solve}}}}, as in this next example, or {{v7,8|expert mode}}{{v9|{{card:Expert Mode}}}}, as in
 the one after.
 
 ::: problem B11's Example 5.6, with {{v7,8|solve}}{{v9|{{card:Solve}}}}
@@ -277,7 +281,7 @@ e
 r1
 ```
 
-Then press {{ui:Solve equations}}.
+Then press {{btn:Solve equations}}.
 :::
 
 ::: only 7,8
@@ -374,19 +378,19 @@ the circuit been larger, the saving would be clear.
 
 ::: only 9
 Symbulator's true strength is seen in numerical-from-symbolic problems like the
-one we solved above, when we use its {{ui:Expert Mode}} of simulation.{{i:expert mode}}
-{{ui:Expert Mode}} cracks these problems open in a single call, and gives fully
+one we solved above, when we use its {{card:Expert Mode}} of simulation.{{i:expert mode}}
+{{card:Expert Mode}} cracks these problems open in a single call, and gives fully
 numerical answers whenever the problem provides as many answers as it hides
 values.
 
-{{ui:Expert Mode}} takes extra equations, unknowns and conditions in three boxes.
-Open the {{ui:Expert Mode}} box and tick {{ui:Enable Expert Mode}} to see them:
+{{card:Expert Mode}} takes extra equations, unknowns and conditions in three boxes.
+Open the {{card:Expert Mode}} box and tick {{ui:Enable Expert Mode}} to see them:
 
-- {{ui:Add equation(s)}} — one or many, separated by `and` or one per line, written in the names the results use.
-- {{ui:Add unknown(s)}} — one or many, separated by commas or one per line.
-- {{ui:Add condition(s)}} — one or many, separated by `and` or one per line, for narrowing a solution down, which we will use later.
+- {{btn:Add equation(s)}} — one or many, separated by `and` or one per line, written in the names the results use.
+- {{btn:Add unknown(s)}} — one or many, separated by commas or one per line.
+- {{btn:Add condition(s)}} — one or many, separated by `and` or one per line, for narrowing a solution down, which we will use later.
 
-They apply to whatever analysis you run, so {{ui:Expert Mode}} works the same way in
+They apply to whatever analysis you run, so {{card:Expert Mode}} works the same way in
 DC, AC, FD and TR.
 
 ::: problem B11's Example 5.6, using ex
@@ -415,12 +419,12 @@ e, r1
 
 Run it in DC. This time everything comes back numerical: the node voltages
 read v{{sub:1}} = 72 V, v{{sub:2}} = 60 V and v{{sub:3}} = 36 V, and at the
-foot of {{ui:Results by element}} are the two unknowns, listed like any other
+foot of {{card:Results by element}} are the two unknowns, listed like any other
 answer: **e** = {{o:72}} and **r1** = {{o:2000}}. Both are right, and the whole circuit was
 solved with them in one step.
 
-The speed advantage of {{ui:Expert Mode}} is not necessarily evident in this
-simple problem. But it does give you an idea of what {{ui:Expert Mode}} is all about:
+The speed advantage of {{card:Expert Mode}} is not necessarily evident in this
+simple problem. But it does give you an idea of what {{card:Expert Mode}} is all about:
 you get to hand Symbulator extra information before it solves, rather than
 after. Had this circuit been larger, the benefit in computation time would be
 clear.
@@ -432,7 +436,9 @@ sees, `re` or `ze`. The one exception is AC power (`s`, `p` and `ap` in an AC
 analysis), which involves a complex conjugate and cannot be solved for;
 Symbulator says so, and you can restate the constraint in voltages and
 currents.
+:::
 
+::: tip Why you may get two answers
 A quantity that is quadratic in an unknown, such as a power, can be satisfied
 by two values. Symbulator returns multiple solutions when they exist.
 :::
@@ -513,7 +519,7 @@ to answer the two questions we have been asked.
 :::
 
 This problem, having three unknown element values and three known answers, is
-a perfect candidate for {{v7,8|the expert mode}}{{v9|{{ui:Expert Mode}}}}. Below is my circuit description.
+a perfect candidate for {{v7,8|the expert mode}}{{v9|{{card:Expert Mode}}}}. Below is my circuit description.
 
 ```sym 7
 s\ex("e,1,0,e:r1,1,0,2'k:r2,1,0,r2:r3,1,0,r3")
@@ -593,7 +599,7 @@ supply. Can 2W resistors be used?
 
 :::
 
-This problem is also perfect for {{v7,8|the expert mode}}{{v9|{{ui:Expert Mode}}}}, because: (a) the target is
+This problem is also perfect for {{v7,8|the expert mode}}{{v9|{{card:Expert Mode}}}}, because: (a) the target is
 to obtain numerical values, and (b) we have N unknown element values, and in
 turn we are given N numerical answers. Here is how I solved it:
 
@@ -671,64 +677,4 @@ design.
 
 :::
 
-::: only 9
-::: problem The Showing-off Problem (Expert)
-
-In 2014, I invented a problem to showcase how easy it is to describe
-dependent sources in Symbulator.
-
-Question: Find positive values for {{var:V_s}} and {{var:I_s}} that will result in 80W
-delivered by the VCCS and 0W dissipated in the CCVS.
-
-::: figure assets/practice/the-showing-off-problem-expert-4.png
-
-:::
-
-Use this circuit description and equations:
-
-```field 9 Circuit Description
-es,e,0,vs
-js,0,d,is
-r1,e,m,10
-r2,a,e,20
-r3,m,0,30
-r4,b,m,40
-r5,n,m,50
-r6,c,d,60
-r7,n,d,70
-jd1,a,b,0.2*v_r7
-ed2,c,b,0.1*i_r5
-jd3,n,c,2*i_r1
-ed4,0,n,0.7*v_r6
-```
-
-Symbulator reports the power *consumed* by each element, so delivering
-80W is consuming −80W. In {{ui:Expert Mode}}:
-
-```field 9 Add equation(s)
-pjd1 = -80 and ped2 = 0
-```
-
-```field 9 Add unknown(s)
-vs, is
-```
-
-The problem asks for *positive* values, which is what the conditions are
-for: the two power equations are quadratic, so four solutions fit, and the
-conditions pick the one meant:
-
-```field 9 Add condition(s)
-is > 0 and vs > 0
-```
-
-Run it in DC, with {{ui:Rounding}} at 4 significant digits. Everything
-comes back numerical: {{var:v_s}} = {{o:17.61}} V and
-{{var:i_s}} = {{o:0.3973}} A.
-
-The answers also show *how* the CCVS dissipates nothing: i{{sub:R5}} comes
-back exactly {{o:0}} A, and its voltage is 0.1 i{{sub:R5}}, so the source
-itself is zero.
-
-:::
-:::
 :::

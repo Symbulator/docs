@@ -626,6 +626,8 @@ def parse_brace(inner: str) -> Node:
         return Node("answer_span", text=inner[2:].strip())
     if inner.startswith("card:"):       # a card in the app (#357)
         return Node("uicard", text=inner[5:].strip())
+    if inner.startswith("btn:"):        # a button you press (#361)
+        return Node("uibtn", text=inner[4:].strip())
     if inner.startswith("ui:"):         # a control inside a card (#357)
         return Node("uictl", text=inner[3:].strip())
     if inner.startswith("var:"):        # a problem's own variable (#261)
@@ -812,12 +814,13 @@ class HtmlRenderer:
             if ltx:
                 return f'<span class="ans ans-math">\\({ltx}\\)</span>'
             return f'<span class="ans">{html.escape(n.text)}</span>'
-        if n.kind in ("uicard", "uictl"):
+        if n.kind in ("uicard", "uictl", "uibtn"):
             # #357: the app's own vocabulary, in two tiers -- the card
             # the reader is sent to, and the control inside it. Bold
             # alone could not carry either: the book bolds node and
             # element names too (#267, #302).
-            cls = "ui-card" if n.kind == "uicard" else "ui-ctl"
+            cls = {"uicard": "ui-card", "uictl": "ui-ctl",
+                   "uibtn": "ui-btn"}[n.kind]
             return f'<span class="{cls}">{html.escape(n.text)}</span>'
         if n.kind == "var":
             # #261: a variable the problem itself names -- I_s, v_o, R_L --
@@ -1202,8 +1205,9 @@ class TexRenderer:
             if ltx:
                 return r"\ansmath{" + ltx + "}"
             return r"\ans{" + tex_escape(n.text) + "}"
-        if n.kind in ("uicard", "uictl"):    # #357, see the HTML side
-            cmd = r"\uicard{" if n.kind == "uicard" else r"\uictl{"
+        if n.kind in ("uicard", "uictl", "uibtn"):  # #357/#361
+            cmd = {"uicard": r"\uicard{", "uictl": r"\uictl{",
+                   "uibtn": r"\uibtn{"}[n.kind]
             return cmd + tex_escape(n.text) + "}"
         if n.kind == "var":                  # #261, see the HTML side
             base, _, sb = n.text.partition("_")

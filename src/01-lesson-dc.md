@@ -21,7 +21,7 @@ type this:}}{{v8|I want you to create a new document in your calculator, or to
 delete all variables you don't need from your current one (ideally, the current
 document should be empty), and type this:}}{{v9|Open Symbulator 9 — the local app if you have it installed, otherwise the
 **[online app](https://symbulator.pythonanywhere.com/)** in a browser. Click
-{{ui:Clear all inputs}}, at the top right, so every input field is empty. Then
+{{btn:Clear all inputs}}, at the top right, so every input field is empty. Then
 type this into the {{card:Circuit Description}} box, one element per line:}}
 
 ```sym 7
@@ -43,7 +43,7 @@ Now I want you to press ENTER.
 ::: only 9
 Scroll down to {{card:Analysis & Settings}} (if it is collapsed, open it with the
 blue triangle to its left). Set {{ui:Type of analysis}} to *Solve circuit* and
-{{ui:Analysis}} to *DC — direct current*. Then click {{ui:Run Symbulator}}.
+{{ui:Analysis}} to *DC — direct current*. Then click {{btn:Run Symbulator}}.
 :::
 
 ::: only 7
@@ -61,7 +61,7 @@ short Done.
 :::
 ::: only 9
 The button reads *Solving…* for a moment, then *Solved!*. Scroll down to
-{{card:Results}}, under {{ui:OUTPUTS}}: there is an answer for every node and every
+{{card:Results}}, under {{card:OUTPUTS}}: there is an answer for every node and every
 element of the circuit.
 :::
 
@@ -267,12 +267,12 @@ exact and the other two as approximate.
 
 After the simulation in DC is complete, Symbulator {{v7,8|stores a series of
 answers in the calculator's memory, labelled with easy to remember names for
-your convenience}}{{v9|fills in the {{card:Results}} section under {{ui:OUTPUTS}} with every answer it
+your convenience}}{{v9|fills in the {{card:Results}} section under {{card:OUTPUTS}} with every answer it
 worked out}}.
 
 ::: only 9
-The results are arranged in groups: {{ui:Node voltages}} first, one per
-node, and then {{ui:Results by element}}, one group per element, headed by its
+The results are arranged in groups: {{card:Node voltages}} first, one per
+node, and then {{card:Results by element}}, one group per element, headed by its
 name and its kind — **r1** *resistor*, **e** *voltage source*.
 
 Every answer is written the way you would write it by hand, as a named quantity
@@ -282,7 +282,7 @@ and its value: v{{sub:1}} = 36 V, i{{sub:r1}} = 6 mA.
 By default, Symbulator answers *exactly*: it works symbolically, so a current
 comes back as 3/500 A rather than a decimal. That is what you want for
 symbolic results. For numerical work like the example in this lesson, decimals read better. Open the
-{{ui:Settings}} card and set {{ui:Rounding}} to *approx to n digits*
+{{card:Settings}} card and set {{ui:Rounding}} to *approx to n digits*
 with **n** = 3, then tick {{ui:Use SI prefixes in answers}}. The current above
 then reads 6 mA instead of 3/500 A.
 
@@ -299,7 +299,7 @@ so when a change is needed.
 
 Symbulator calculates for each node a voltage with reference to ground, which is {{v7,8|stored in a variable called v plus the name of
 the node. For example, for a node called **1**, its voltage is stored in a variable
-called v1}}{{v9|shown under {{ui:Node voltages}} as `v` plus the node's name: node **1**'s
+called v1}}{{v9|shown under {{card:Node voltages}} as `v` plus the node's name: node **1**'s
 voltage is `v1`}}.
 
 ### Answers for each resistor
@@ -485,7 +485,7 @@ s\dc(cir)
 - {{ui:Type of analysis}} → *Solve circuit*
 - {{ui:Analysis}} → *DC — direct current*
 
-Then press {{ui:Run Symbulator}}.
+Then press {{btn:Run Symbulator}}.
 :::
 
 ::: only 7
@@ -507,7 +507,7 @@ what happened: *DC analysis · 16 result(s)*, and how long it took.
 For a DC analysis, these answers are as follows:
 
 - The **voltage of each node**, so the voltages of nodes **1**, **2** and **3** are in
-  {{v7,8|v1, v2 and v3}}{{v9|`v1`, `v2` and `v3`, under {{ui:Node voltages}}}}.
+  {{v7,8|v1, v2 and v3}}{{v9|`v1`, `v2` and `v3`, under {{card:Node voltages}}}}.
 - The **current through each element**. The direction of the current is defined
   as going from the first node in the element's description to the second.
 - The **voltage drop in each element**, defined as the difference in voltage
@@ -547,7 +547,7 @@ re
 ```
 
 ::: only 9
-Nothing to compute: in {{ui:Results by element}}, the resistance seen by the
+Nothing to compute: in {{card:Results by element}}, the resistance seen by the
 source reads `re` = {{o:6}} kΩ. Correct.
 :::
 
@@ -653,7 +653,7 @@ back. It never chooses a mesh, never draws a supernode, and never stops to ask
 which method would be quicker.
 
 You have not seen that system yet, and it is worth looking at once before
-reading on. Open the {{ui:Settings}} card and tick {{ui:Show equations}}. An
+reading on. Open the {{card:Settings}} card and tick {{ui:Show equations}}. An
 {{card:Equations}} card appears just above {{card:Results}}, open and listing every
 equation Symbulator assembled for the circuit you have just solved. You do
 not need to run the analysis again — the system is already there from the
@@ -671,7 +671,7 @@ them, or Kirchhoff's voltage law around each mesh, with a supermesh where a
 current source is shared. It then solves that system on its own and checks
 its answers against the ones above, and tells you whether the two agree.
 
-To use it, solve the circuit first, then open the card and press {{ui:Write the
+To use it, solve the circuit first, then open the card and press {{btn:Write the
 equations}}. You do not have to pick a method: it works out which ones apply
 to your circuit, shows the one that needs fewer equations, and offers you the
 other if both apply. It draws your working on the circuit as well — a ring

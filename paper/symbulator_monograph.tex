@@ -2168,12 +2168,12 @@ showcasing the powerful simplicity of Symbulator. The circuit
 contains one dependent source of each of the four species---a VCCS
 ($0.2\,v_{R7}$), a CCVS ($0.1\,i_{R5}$), a CCCS ($2\,i_{R1}$), and a
 VCVS ($0.7\,v_{R6}$)---woven through seven resistors, with an
-independent voltage source $E_s$ and an independent current source
-$J_s$ left symbolic. The question inverts the usual direction of
+independent voltage source $V_s$ and an independent current source
+$I_s$ left symbolic. The question inverts the usual direction of
 analysis:
 
 \begin{quote}
-\emph{Find positive values of $E_s$ and $J_s$ such that the VCCS
+\emph{Find positive values of $V_s$ and $I_s$ such that the VCCS
 delivers 80~W and the CCVS dissipates 0~W.}
 \end{quote}
 
@@ -2187,8 +2187,8 @@ their labels:
 \begin{quote}
 \begin{tabbing}
 \code{jd1,a,b,0.2vr7}xxx\=\kill
-\code{es,e,0,es}          \> \emph{the voltage source, symbolic} \\
-\code{js,0,d,js}          \> \emph{the current source, symbolic} \\
+\code{es,e,0,vs}          \> \emph{the voltage source, symbolic} \\
+\code{js,0,d,is}          \> \emph{the current source, symbolic} \\
 \code{r1,e,m,10}          \> \emph{the seven resistors\ldots} \\
 \code{r2,a,e,20} \\
 \code{r3,m,0,30} \\
@@ -2206,20 +2206,20 @@ their labels:
 \noindent with expert equations \code{pjd1 = -80} (the solver's $p$
 is power \emph{consumed}, so delivering 80~W is consuming $-80$) and
 \code{ped2 = 0},
-unknowns \code{es}, \code{js}---each source's value named after the
-source it belongs to\footnote{They were \code{vs} and \code{is} when
-this chapter was first drafted, and the name \code{is} is worth a
-footnote of its own. Version~9 refused it: \code{is} is a reserved word
-of Python, and the port's expression reader---which parses values
-through Python's own grammar---let that refusal leak through to the
-circuits user, for whom \code{is} is the most natural name a source
-current could have. The drafting of this monograph exposed the wrinkle,
-and solver 0.5.19 removed it: Python keywords used as bare names are
-now shielded from the language's parser and become ordinary symbols, so
-\code{is} works everywhere a name can appear. Which name the example
-ships under is therefore a matter of taste, not of what the reader may
-write.}---and the positivity written
-directly as \emph{conditions}: \code{es > 0}, \code{js > 0}.
+unknowns \code{vs}, \code{is}---each source's value named as the
+drawing labels it\footnote{The name \code{is} is worth a footnote of its
+own. To a circuits reader it is the most natural name a source current
+could have; to Python it is a reserved word, and version~9 refused it at
+first---not by any decision of the simulator's, but because the port's
+expression reader parses values through Python's own grammar and let the
+language's objection reach the user. The drafting of this monograph is
+what exposed the leak, and solver 0.5.19 closed it: a keyword used as a
+bare name is now shielded from that parser and becomes an ordinary
+symbol, so \code{is} works wherever a name may appear. This example is
+where the fix shows. It is written with \code{vs} and \code{is} because
+that is how the drawing labels the two sources, and the reader who copies
+what they see is no longer told that one of the names is unavailable.}---and the positivity written
+directly as \emph{conditions}: \code{vs > 0}, \code{is > 0}.
 
 Every piece of Chapter~\ref{ch:logic} participates. The dependent
 values name answers on both sides of the solve: $i_{R1}$ and
@@ -2235,9 +2235,9 @@ inequality conditions act exactly as the calculator's
 $\mid$~operator did (\S\ref{sec:expert}): they filter the solve's
 results, and the single call returns the one solution that survives:
 \[
-E_s = \frac{3490}{\sqrt{39259}} \approx 17.614~\mathrm{V},
+V_s = \frac{3490}{\sqrt{39259}} \approx 17.614~\mathrm{V},
 \qquad
-J_s = \frac{551}{7\sqrt{39259}} \approx 0.39727~\mathrm{A}.
+I_s = \frac{551}{7\sqrt{39259}} \approx 0.39727~\mathrm{A}.
 \]
 (Without the conditions, all four solutions come back, ranked with
 the all-positive pair first, per \S\ref{sec:multiple}---either road

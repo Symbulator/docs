@@ -129,8 +129,9 @@ what a person writing a quotation types anyway.
 | `{{sub:R1}}` | subscript — `I{{sub:R1}}` renders as I with a subscript R1 |
 | `{{var:I_s}}` | a variable the problem itself names — set bold italic; `_` starts a subscript, so this is *I* with s below. Not for Symbulator's own names (`ir3`), which stay in code |
 | `{{o:1.2}}` | a value the software returned |
-| `{{card:Results}}` | a card in the app |
-| `{{ui:Show equations}}` | a control inside a card — field, button, checkbox, menu option |
+| `{{card:Results}}` | a place in the app you open and look inside |
+| `{{ui:Show equations}}` | a control you set and then read |
+| `{{btn:Run Symbulator}}` | a button you press |
 
 ::: note A version span may contain other brace commands
 Since #358 the inline parser counts brace depth, so `{{v9|tick
@@ -157,6 +158,28 @@ with no matching `}}`, which would swallow the rest of the file. It reads
 whole files, not single lines, because a span routinely wraps across a line
 break — an earlier per-line version of the check missed six for exactly
 that reason.
+:::
+
+::: note Which of the three the app's own words take
+The cut is **what the reader does with it**, not where it sits in the
+markup:
+
+| you | tier | examples |
+|---|---|---|
+| open it and look inside | `{{card:}}` | Results, Input File, Settings, Expert Mode, Define, OUTPUTS |
+| set it, then read it | `{{ui:}}` | Type of analysis, Rounding, Show equations, Enable Expert Mode |
+| press it, and it acts | `{{btn:}}` | Run Symbulator, Download, Add equation(s) |
+| choose it from a menu | `*italic*` | *DC — direct current*, *Solve circuit* |
+
+**Nesting depth is deliberately not the test.** *Settings* is a section
+inside the *Analysis & Settings* card and *Results* is a card in its own
+right, and they take the same colour, because the reader goes to both the
+same way. #357 cut it by depth instead and the cost showed up at once:
+*"Open the Expert Mode box and tick Enable Expert Mode"* put a place and
+a switch in one colour, in one sentence (Roberto, 10 Sep 2026).
+
+The same question settles a new word without a vote: *is this somewhere I
+go, something I set, or something I press?*
 :::
 
 Never write raw HTML. `<sub>r1</sub>` is escaped by the build and appears on

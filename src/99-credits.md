@@ -31,7 +31,7 @@ for all the years my mind was focused on coding and documenting. *Mi reina*, my 
 was elsewhere, but my heart was always with you.
 
 The second is my late father **Tito**, who invested time and money in my
-education and bought me every gadget and widget I needed or wanted for my studies, 
+education and bought me every gadget and every book I needed or wanted for my studies, 
 with a blind faith that one day something good would come of it. I'm happy to know
 that I made you proud, Dad, and I miss you every day.
 
@@ -85,9 +85,12 @@ I was unable to find the time to do in two decades: to port Symbulator to Python
 
 ::: warning Use AI responsibly 
 AI is not without risks, and needs careful policies and regulatory oversight on fronts like ethics, 
-systemic biases, its impact on labour, and its voracious use of water and energy. I believe there
-is a right way to deploy this technology, and — after working on Symbulator 9 with Claude — I am now convinced that AI will revolutionise the way we work. We just need to do it the right way.
+systemic biases, its impact on labour, and its voracious use of water and energy.
 :::
+
+I believe there is a right way to deploy this technology, and — after working
+on Symbulator 9 with Claude — I am now convinced that AI will revolutionise the
+way we work. We just need to do it the right way.
 :::
 
 ### Software I relied on

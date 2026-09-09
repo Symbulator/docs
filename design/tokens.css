@@ -32,6 +32,7 @@
   --answer:     #a13030;   /* a value the software returned              */
   --ui-card:    #24487e;   /* a card in the app                          */
   --ui-control: #0f6b5c;   /* a control inside a card                    */
+  --ui-button:  #c9614f;   /* a button you press                         */
 
   /* --- highlight ------------------------------------------------------
      Gold, for "new" and nothing else. Deliberately not --amber: amber is
@@ -89,6 +90,7 @@ html[data-theme="dark"] {
   --answer:     #ff9c9c;
   --ui-card:    #7fb0e8;
   --ui-control: #5fd3bd;
+  --ui-button:  #ffab91;
   --lcd:        #182534;
   --lcd-edge:   #2f5170;
   --inverse-bg:  #303c4e;

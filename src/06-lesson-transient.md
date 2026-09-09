@@ -269,7 +269,7 @@ and fill in four things:
 - {{ui:Points}}: how finely to sample it; 300 is the default and is usually
   plenty
 
-Press {{ui:Run}} and the curve appears under the card.
+Press {{btn:Run}} and the curve appears under the card.
 
 The variable must be an answer's name, not an expression, and one this
 circuit has, as {{card:Results}} spells it: `v2` or `ir1`.
@@ -3654,7 +3654,7 @@ the problem up - is a living legend among circuit students at UTP.
 
 The **expert** tool can be very useful in transient analysis. Using it,
 however, requires some knowledge. Here’s two things you need to know in order
-to use {{v7,8|`ex`}}{{v9|{{ui:Expert Mode}}}} like a boss:
+to use {{v7,8|`ex`}}{{v9|{{card:Expert Mode}}}} like a boss:
 
 First, when Symbulator solves a problem using TR, it follows these general
 steps:
@@ -3702,7 +3702,7 @@ current through the capacitor and the value of the source.
 This problem is a match made in heaven for the **expert** tool, because we
 have one unknown value in the circuit (i.e. the value of the step source) and
 we have one known answer (i.e. the voltage drop in the capacitor.) So, the
-game plan here is to run this circuit through Symbulator’s {{v7,8|expert mode}}{{v9|{{ui:Expert Mode}}}}, add
+game plan here is to run this circuit through Symbulator’s {{v7,8|expert mode}}{{v9|{{card:Expert Mode}}}}, add
 one new equation and one new unknown, and then solve. First, let’s generate
 the new equation.
 
@@ -3715,7 +3715,7 @@ DiffEq’s Laplace Transform to do so: `s\t2s`.
 :::
 
 ::: only 9
-The new equation is simply `1-e^(-t/2) = vc`: {{ui:Expert Mode}} reads it in the
+The new equation is simply `1-e^(-t/2) = vc`: {{card:Expert Mode}} reads it in the
 time domain, like the answers on screen.
 
 If you would rather convert by hand, **t2s** is still there and an equation
@@ -3739,7 +3739,7 @@ s\t2s(1-e^(–t/2))=vc
 will want to paste it in the Expert window. }}Now let’s run the Expert
 simulation of the circuit. Let’s define the value of the source as `a*u(t)`,
 since we know it’s a step source; the variable `a` will serve as the unknown
-value, for which we will solve in {{v7,8|the Expert mode}}{{v9|{{ui:Expert Mode}}}}.
+value, for which we will solve in {{v7,8|the Expert mode}}{{v9|{{card:Expert Mode}}}}.
 
 ```sym 7
 s\ex("e,1,0,a*u(t):r,1,2,2:c,2,0,1,0")
@@ -3759,7 +3759,7 @@ Expert prompt. In the equations field, paste the new equation, adding the
 word` and `first:
 :::
 ::: only 9
-Choose TR, then open {{ui:Expert Mode}}. {{ui:Add equation(s)}} takes one per line:
+Choose TR, then open {{card:Expert Mode}}. {{btn:Add equation(s)}} takes one per line:
 
 ```field 9 Add equation(s)
 1-e^(-t/2) = vc
@@ -3777,7 +3777,7 @@ and 1/s-2/(2*s+1)=vc
 In the unknown field, add the variable a, preceded by a comma:
 :::
 ::: only 9
-{{ui:Add unknown(s)}} takes the name:
+{{btn:Add unknown(s)}} takes the name:
 
 ```field 9 Add unknown(s)
 a
@@ -3895,7 +3895,7 @@ When prompted, select TR. In the equations field, add the new equation you
 found:
 :::
 ::: only 9
-Choose TR, and put `vs` in {{ui:Add unknown(s)}} beside the equation above.
+Choose TR, and put `vs` in {{btn:Add unknown(s)}} beside the equation above.
 :::
 
 ```sym 7
@@ -4008,7 +4008,7 @@ l,2,0,1,0
 Choose TR, and add `,vs` to the unknowns and the following to the equations
 :::
 ::: only 9
-Choose TR, put `vs` in {{ui:Add unknown(s)}}, and give {{ui:Add equation(s)}} the
+Choose TR, put `vs` in {{btn:Add unknown(s)}}, and give {{btn:Add equation(s)}} the
 answer you know — in time, as always here:
 
 ```field 9 Add equation(s)

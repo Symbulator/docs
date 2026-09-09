@@ -198,7 +198,7 @@ approx(req)
 ::: only 9
 Set {{ui:Type of analysis}} to *Find equivalent*, {{ui:Type of equivalent}} to
 *Resistance / impedance*, and the two node boxes to **0** and **c**. Leave
-{{ui:Analysis}} on *DC — direct current* and press {{ui:Run Symbulator}}.
+{{ui:Analysis}} on *DC — direct current* and press {{btn:Run Symbulator}}.
 
 {{card:Results}} looks different from a normal solve: instead of the node and
 element listing there is a single answer, headed **equivalent resistance**:
@@ -269,7 +269,7 @@ r2,2,0,24
 Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to
 *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in
 the second — the pair of terminals you are looking into. Leave {{ui:Analysis}} on
-*DC — direct current* and press {{ui:Run Symbulator}}.
+*DC — direct current* and press {{btn:Run Symbulator}}.
 :::
 
 ::: only 7,8
@@ -400,7 +400,7 @@ this in a single push, or separately. Here I find them in one go:}}
 ```
 ::: only 9
 Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 2, in
-{{ui:Settings}}, so the answers read as the book prints them; exact, the
+{{card:Settings}}, so the answers read as the book prints them; exact, the
 third would come back as 1/17. Then ask {{card:Evaluate}} for `irl`, with the
 load's value in the {{ui:Conditions}} box:
 
@@ -453,10 +453,10 @@ with a symbolic value of **load**, in ohms.
 ::: only 9
 To help you in those cases, Symbulator writes that circuit for you. With
 the load question ticked, a button appears at the foot of {{card:Results}},
-under the equivalent's answers: {{ui:Load circuit equivalent?}} It is live
+under the equivalent's answers: {{btn:Load circuit equivalent?}} It is live
 once the equivalent has been found, and goes dead again if you change any
 input until you run again. Press it and it warns you first: the equivalent circuit will
-overwrite the {{card:Circuit Description}}, {{ui:Define}} and {{ui:Expert Mode}} fields
+overwrite the {{card:Circuit Description}}, {{card:Define}} and {{card:Expert Mode}} fields
 and switch the analysis to *Solve circuit*, so a circuit you have not saved
 yet can be saved before it goes. Proceed, and the description becomes
 
@@ -466,7 +466,7 @@ rE,n,0,rEq
 rL,n,0,load
 ```
 
-with {{ui:Define}} holding the values of `iNo` and `rEq` that {{card:Results}}
+with {{card:Define}} holding the values of `iNo` and `rEq` that {{card:Results}}
 found, exact rather than rounded, and a value for `load` if you had given
 it one. It is the Norton equivalent connected, between nodes **n** and
 **0**, to a load called **rL** with the symbolic value **load**, in ohms.
@@ -528,7 +528,7 @@ current source. We have to run a new simulation.
 {{v7,8|The fastest way is to start from the equivalent circuit description:}}{{v9|The
 fastest way is the button at the foot of {{card:Results}}, **Load circuit
 equivalent?** Proceed past its warning and the description is replaced by
-the equivalent, with `iNo` and `rEq` already in {{ui:Define}}:}}
+the equivalent, with `iNo` and `rEq` already in {{card:Define}}:}}
 
 ```out 7,8
 "jN,0,n,iNo:rE,n,0,rEq:rL,n,0,L"
@@ -565,7 +565,7 @@ j,0,n,180'm
 
 ::: only 9
 The analysis is already *Solve circuit*; run it in DC, with **SI prefixes**
-ticked in {{ui:Settings}}. The current through **rl**, `irl`, reads {{o:-60}} mA.
+ticked in {{card:Settings}}. The current through **rl**, `irl`, reads {{o:-60}} mA.
 :::
 
 Correct: there is a current of 60 mA flowing through {{var:R_L}} from 0 to n.

@@ -151,7 +151,7 @@ You can use Symbulator 9 in two ways:
 
 The easiest way to start is the **[online app](https://symbulator.pythonanywhere.com/)**.
 
-To run it offline on your own device, follow the instructions at the bottom of the online app, under {{ui:Run Symbulator 9 locally}}.
+To run it offline on your own device, follow the instructions at the bottom of the online app, under {{btn:Run Symbulator 9 locally}}.
 
 :::
 
@@ -162,7 +162,7 @@ including but not limited to the warranty of fitness for a particular
 purpose. You use it at your own risk.
 :::
 
-Please report any problems to help@symbulator.com
+Please report any problems to help [at] symbulator [dot] com
 
 ::: only 7,8
 ## {{v7|Install}}{{v8|Before you start}} {#install}
@@ -241,15 +241,15 @@ simply shown together.
 The two halves are connected. On the website, every worked problem carries two
 links under its title:
 
-- {{ui:Open in app ↗}} loads that circuit, with its analysis and settings, ready to run.
+- {{btn:Open in app ↗}} loads that circuit, with its analysis and settings, ready to run.
 
-- {{ui:Open in split view}} does the same, but in the split view, on the problem you were reading.
+- {{btn:Open in split view}} does the same, but in the split view, on the problem you were reading.
 
-Inside the split view, {{ui:Open in app ↗}} loads the circuit into the right-hand
+Inside the split view, {{btn:Open in app ↗}} loads the circuit into the right-hand
 pane instead of a new tab, and the second link is not shown.
 
 ::: warning Loading a problem starts the app fresh
-{{ui:Open in app ↗}} reloads the app with the circuit you asked for, replacing
+{{btn:Open in app ↗}} reloads the app with the circuit you asked for, replacing
 anything you had typed there. To keep your own work, save it to an entry and
 download the file **before** you click the next problem. {{ref:input-files}}
 explains how.

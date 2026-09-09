@@ -334,7 +334,7 @@ Three readings from {{card:Mini-Tools}} with *aa*: `ir1` is
 by the source — is {{o:1331}}∠{{o:-33.69}}° VA.
 
 Three conversions in a row is the point at which the setting is less work
-than the tool: tick {{ui:Show AC answers as polar phasors}} in {{ui:Settings}} and
+than the tool: tick {{ui:Show AC answers as polar phasors}} in {{card:Settings}} and
 the first two are already in that form when the circuit solves. The third
 still wants *aa*, because `-se` is an expression rather than an answer.
 :::

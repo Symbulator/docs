@@ -66,7 +66,7 @@ r1,1,0,20'k
 
 ::: only 9
 Two lines, two elements. Leave {{ui:Type of analysis}} on *Solve circuit*, set
-{{ui:Analysis}} to *DC — direct current*, and click {{ui:Run Symbulator}}. The
+{{ui:Analysis}} to *DC — direct current*, and click {{btn:Run Symbulator}}. The
 circuit is numerical, so set {{ui:Rounding}} to *approx to n digits* with
 **n** = 3 and tick {{ui:Use SI prefixes}}, as in {{ref:lesson-dc}}.
 :::
@@ -124,7 +124,7 @@ r13,1,3,1/2
 j32,3,2,3
 ```
 
-{{v7,8|We ask for these answers:}}{{v9|Run it in DC. The answers are under {{ui:Node voltages}}:}}
+{{v7,8|We ask for these answers:}}{{v9|Run it in DC. The answers are under {{card:Node voltages}}:}}
 
 ```sym 7
 approx({v1,v2,v3})
@@ -270,13 +270,10 @@ circuit descriptions whenever we feel it is appropriate.
 :::
 
 ::: only 9
-Symbulator has a tool for reducing resistors in parallel, `pr`, and you can
-use it in two places.{{i:parallel resistors}}
+Symbulator has a tool for reducing resistors in
+parallel, `pr`.{{i:parallel resistors}}
 
-Inside a circuit description, write it where a value goes — that is what the
-`re,3,0,[6,3]` shorthand below does, and `pr(6,3)` means the same thing.
-
-On its own, type it into the {{card:Evaluate}} card. To reduce three resistors in
+Type it into the {{card:Evaluate}} card. To reduce three resistors in
 parallel with values of 10 Ω, 20 Ω and 30 Ω:
 
 ```field 9 Evaluate
@@ -342,6 +339,9 @@ in the practice problems of {{ref:lesson-dc}}. It makes sense to reduce {{var:R_
 {{var:R_5}} to an equivalent resistor, since we do not need to know their individual
 currents or power use:
 
+Inside a circuit description, `pr` goes where a value goes. The
+`[6,3]` below is its shorthand, and `pr(6,3)` means the same thing.
+
 ```field 9 Circuit Description
 e,1,0,16.8
 r1,1,2,9
@@ -377,7 +377,7 @@ or the power consumed by, either of them individually. Reduce only the ones the
 problem does not ask about.
 :::
 
-::: note One difference worth knowing
+::: tip One difference worth knowing
 Where doing the reciprocal arithmetic by hand would divide by zero,
 Symbulator's `pr` checks for it: if any of the values you give it is exactly
 zero, the combination is zero, because a short circuit across a parallel
@@ -641,7 +641,7 @@ rx,3,4,rx
 ```
 
 ::: only 9
-Set {{ui:Analysis}} to *DC — direct current*. This one needs {{ui:Enable Expert Mode}} ticked in the {{ui:Expert Mode}} box; the equations and unknowns go in the fields it reveals.
+Set {{ui:Analysis}} to *DC — direct current*. This one needs {{ui:Enable Expert Mode}} ticked in the {{card:Expert Mode}} box; the equations and unknowns go in the fields it reveals.
 
 The answers you want are `ir1` and `vrx`, in {{card:Results}}.
 :::
@@ -1129,7 +1129,7 @@ j,0,3,ix
 ```
 
 ::: only 9
-Set {{ui:Analysis}} to *DC — direct current*. This one needs {{ui:Enable Expert Mode}} ticked in the {{ui:Expert Mode}} box; the equations and unknowns go in the fields it reveals.
+Set {{ui:Analysis}} to *DC — direct current*. This one needs {{ui:Enable Expert Mode}} ticked in the {{card:Expert Mode}} box; the equations and unknowns go in the fields it reveals.
 
 The answers you want are `ix` and `v3`, in {{card:Results}}.
 :::
@@ -1205,8 +1205,8 @@ Select DC, and press Enter. Add equation `ir2=2'm.` Add unknown `is`. Run the
 simulation.
 :::
 ::: only 9
-Choose DC. Open {{ui:Expert Mode}}, put `ir2 = 2'm` in {{ui:Add equation(s)}} and
-`is` in {{ui:Add unknown(s)}}, then {{ui:Run Symbulator}}.
+Choose DC. Open {{card:Expert Mode}}, put `ir2 = 2'm` in {{btn:Add equation(s)}} and
+`is` in {{btn:Add unknown(s)}}, then {{btn:Run Symbulator}}.
 :::
 
 ::: only 7,8
@@ -1936,7 +1936,7 @@ r4,1,2,4
 ```
 
 ::: only 9
-Set {{ui:Analysis}} to *DC — direct current*. This one needs {{ui:Enable Expert Mode}} ticked in the {{ui:Expert Mode}} box; the equations and unknowns go in the fields it reveals.
+Set {{ui:Analysis}} to *DC — direct current*. This one needs {{ui:Enable Expert Mode}} ticked in the {{card:Expert Mode}} box; the equations and unknowns go in the fields it reveals.
 
 The answers you want are `ir1`, `vjd` and `vs`, in {{card:Results}}; {{var:i_s}} is
 the opposite of `ies`.
@@ -2388,5 +2388,66 @@ calculator-based program that was able to provide this kind of purely
 symbolic answer to a circuit simulator back in 1999 when I made Symbulator.
 As a matter of fact, even today – a quarter of a century later - I know of no
 other calculator-based simulator that can do this.}}
+
+::: only 9
+::: problem The Showing-off Problem (Expert)
+
+In 2013, I invented a problem to showcase how easy it is to describe
+dependent sources in Symbulator.
+
+Question: Find positive values for {{var:V_s}} and {{var:I_s}} that will result in 80W
+delivered by the VCCS and 0W dissipated in the CCVS.
+
+::: figure assets/practice/the-showing-off-problem-expert-4.png
+
+:::
+
+Use this circuit description and equations:
+
+```field 9 Circuit Description
+es,e,0,vs
+js,0,d,is
+r1,e,m,10
+r2,a,e,20
+r3,m,0,30
+r4,b,m,40
+r5,n,m,50
+r6,c,d,60
+r7,n,d,70
+jd1,a,b,0.2*v_r7
+ed2,c,b,0.1*i_r5
+jd3,n,c,2*i_r1
+ed4,0,n,0.7*v_r6
+```
+
+Symbulator reports the power *consumed* by each element, so delivering
+80W is consuming −80W. In {{card:Expert Mode}}:
+
+```field 9 Add equation(s)
+pjd1 = -80 and ped2 = 0
+```
+
+```field 9 Add unknown(s)
+vs, is
+```
+
+The problem asks for *positive* values, which is what the conditions are
+for: the two power equations are quadratic, so four solutions fit, and the
+conditions pick the one meant:
+
+```field 9 Add condition(s)
+is > 0 and vs > 0
+```
+
+Run it in DC, with {{ui:Rounding}} at 4 significant digits. Everything
+comes back numerical: {{var:v_s}} = {{o:17.61}} V and
+{{var:i_s}} = {{o:0.3973}} A.
+
+The answers also show *how* the CCVS dissipates nothing: i{{sub:R5}} comes
+back exactly {{o:0}} A, and its voltage is 0.1 i{{sub:R5}}, so the source
+itself is zero.
+
+:::
+:::
 
 :::

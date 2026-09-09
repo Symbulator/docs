@@ -52,6 +52,7 @@
 \definecolor{answer}{HTML}{A13030}
 \definecolor{uicard}{HTML}{24487E}
 \definecolor{uicontrol}{HTML}{0F6B5C}
+\definecolor{uibutton}{HTML}{C9614F}
 \definecolor{lcd}{HTML}{F2F6FC}
 \definecolor{panel}{HTML}{F4F6FA}
 
@@ -225,6 +226,7 @@
 \newcommand{\ans}[1]{{\bfseries\color{answer}#1}}
 \newcommand{\uicard}[1]{{\bfseries\color{uicard}#1}}
 \newcommand{\uictl}[1]{{\bfseries\color{uicontrol}#1}}
+\newcommand{\uibtn}[1]{{\bfseries\color{uibutton}#1}}
 % An answer that is a symbolic expression: same answer colour, but set as
 % mathematics rather than bold text (build.py's answer_math decides which).
 \newcommand{\ansmath}[1]{{\color{answer}\(\displaystyle #1\)}}
