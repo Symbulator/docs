@@ -52,6 +52,8 @@ CLS_TO_TOKEN = {
     "danger": "danger",
     "dangerbg": "danger-bg",
     "answer": "answer",
+    "uicard": "ui-card",
+    "uicontrol": "ui-control",
     "lcd": "lcd",
     "panel": "paper-2",     # renamed in the class
 }

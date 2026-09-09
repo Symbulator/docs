@@ -71,7 +71,7 @@ rb0,bd,0,10+8j
 rc0,cd,0,10+8j
 ```
 
-AC, with **RMS phasors** ticked. Every value is already an impedance, so
+AC, with {{ui:RMS phasors}} ticked. Every value is already an impedance, so
 the frequency is asked for but never used.
 :::
 
@@ -100,7 +100,7 @@ the transmission lines:}}
 ```
 
 ::: only 9
-Tick **Show AC answers as polar phasors** in **Settings** and each line
+Tick {{ui:Show AC answers as polar phasors}} in {{ui:Settings}} and each line
 impedance's *current through* reads straight off:
 
 - `irat` = {{o:6.809}}∠{{o:-21.8}}° A
@@ -169,7 +169,7 @@ rc0,cd,0,24+19j
 ```
 
 ::: only 9
-AC, with **RMS phasors** ticked. Every value is already an impedance, so the
+AC, with {{ui:RMS phasors}} ticked. Every value is already an impedance, so the
 frequency is asked for but never used.
 :::
 
@@ -187,7 +187,7 @@ For the answers the textbook wants, ask for these:
 ```
 
 ::: only 9
-In **Mini-Tools** with *aa*:
+In {{card:Mini-Tools}} with *aa*:
 
 - `aa(vag-vbg)` = {{o:207.8}}∠{{o:60.00}}° V
 - `aa(vbg-vcg)` = {{o:207.8}}∠{{o:-60.00}}° V
@@ -307,7 +307,7 @@ rc,c,n,-10j
 ```
 
 ::: only 9
-AC, with **RMS phasors** ticked.
+AC, with {{ui:RMS phasors}} ticked.
 :::
 
 ```sym 7
@@ -382,7 +382,7 @@ rc,c,n,6-8j
 ```
 
 ::: only 9
-AC, with **RMS phasors** left unticked this time.
+AC, with {{ui:RMS phasors}} left unticked this time.
 :::
 
 ```sym 7
@@ -684,8 +684,8 @@ AS7's Practice Problem 12.10
 :::
 
 ::: answer
-These values are RMS, so {{v7,8|set the flag}}{{v9|tick **RMS phasors** in
-**Settings**}} — this one does ask for power.
+These values are RMS, so {{v7,8|set the flag}}{{v9|tick {{ui:RMS phasors}} in
+{{ui:Settings}}}} — this one does ask for power.
 
 ```sym 7
 true→s\rms
@@ -720,7 +720,7 @@ rca,cd,ad,10
 The three line currents read {{o:64.00}}∠{{o:80.1}}°,
 {{o:38.11}}∠{{o:-60}}° and {{o:42.50}}∠{{o:-135}}° A.
 
-For the power, add the three loads' consumption in **Evaluate**:
+For the power, add the three loads' consumption in {{card:Evaluate}}:
 
 ```field 9 Evaluate
 prca+prab+prbc
@@ -795,7 +795,7 @@ s\aa(–(ie0a+ieb0)/3)
 ```
 
 ::: only 9
-`-(ie0a+ieb0)/3` in **Mini-Tools** with *aa*, which takes an expression as
+`-(ie0a+ieb0)/3` in {{card:Mini-Tools}} with *aa*, which takes an expression as
 readily as a name and answers with the magnitude and the angle.
 :::
 

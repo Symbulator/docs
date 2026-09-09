@@ -64,7 +64,7 @@ replaced by `x` at that point, so every graph option — minimum, maximum, zero,
 trace — works normally. Just remember that `x` means your variable.
 :::
 ::: only 9
-Symbulator draws it in the **Plotting Tools** card below the results. Solve
+Symbulator draws it in the {{card:Plotting Tools}} card below the results. Solve
 the circuit first, then set **Plot type** to *Bode plot of a variable (FD)*;
 the two time boxes become frequencies.
 
@@ -74,9 +74,9 @@ r1,1,2,1000
 c1,2,0,1e-6
 ```
 
-- **Variable to plot**: `v2`
-- **Start frequency (Hz)** and **End frequency (Hz)**: 10 and 100000
-- **Points**: 300
+- {{ui:Variable to plot}}: `v2`
+- {{ui:Start frequency (Hz)}} and {{ui:End frequency (Hz)}}: 10 and 100000
+- {{ui:Points}}: 300
 
 Both curves appear together, magnitude in decibels above and phase in degrees
 below. For this low-pass RC that is the rolloff you would expect: flat at low
@@ -84,7 +84,7 @@ frequency, falling 20 dB per decade after the corner, with the phase heading
 for −90°.
 
 ::: warning The variable, not an expression
-The box takes an answer's *name*, as **Results** spells it, not a formula. A
+The box takes an answer's *name*, as {{card:Results}} spells it, not a formula. A
 formula belongs in the transfer-function plot type, next.
 
 Solving in AC and plotting against frequency would not work: an AC result is
@@ -96,7 +96,7 @@ one phasor at one ω. The plot re-solves the circuit at every frequency.
 The textbook often hands you the transfer function and no circuit. Symbulator
 takes it directly: set **Plot
 type** to *Bode plot of a transfer function H(s) (FD)*, and the variable box
-becomes **Transfer function H(s)**. Type the function there; the Circuit
+becomes {{ui:Transfer function H(s)}}. Type the function there; the Circuit
 Description is ignored for this plot type, so it works on an empty page.
 
 - Write the function **in terms of `s`**. A textbook function of jω becomes
@@ -178,7 +178,7 @@ sweep of 0.1 to 300 rad/s is about 0.016 to 48 Hz.
 200*s/((s+2)*(s+10))
 ```
 
-- **Start frequency (Hz)** and **End frequency (Hz)**: 0.016 and 48
+- {{ui:Start frequency (Hz)}} and {{ui:End frequency (Hz)}}: 0.016 and 48
 
 ::: figure assets/plot/as7e1403-bode.png
 AS7's Example 14.3: the Bode plot Symbulator draws
@@ -218,7 +218,7 @@ and sweep. The sweep of 0.1 to 100 rad/s is about 0.016 to 16 Hz.
 5*(s+2)/(s*(s+10))
 ```
 
-- **Start frequency (Hz)** and **End frequency (Hz)**: 0.016 and 16
+- {{ui:Start frequency (Hz)}} and {{ui:End frequency (Hz)}}: 0.016 and 16
 
 ::: figure assets/plot/as7pp1403-bode.png
 AS7's Practice Problem 14.3: the Bode plot Symbulator draws
@@ -254,7 +254,7 @@ the function written in terms of `s`.
 (s+10)/(s*(s+5)^2)
 ```
 
-- **Start frequency (Hz)** and **End frequency (Hz)**: 0.016 and 16
+- {{ui:Start frequency (Hz)}} and {{ui:End frequency (Hz)}}: 0.016 and 16
 
 ::: figure assets/plot/as7e1404-bode.png
 AS7's Example 14.4: the Bode plot Symbulator draws
@@ -285,7 +285,7 @@ ask for.
 50*s/((s+4)*(s+10)^2)
 ```
 
-- **Start frequency (Hz)** and **End frequency (Hz)**: 0.016 and 16
+- {{ui:Start frequency (Hz)}} and {{ui:End frequency (Hz)}}: 0.016 and 16
 
 ::: figure assets/plot/as7pp1404-bode.png
 AS7's Practice Problem 14.4: the Bode plot Symbulator draws
@@ -328,7 +328,7 @@ symbol other than `s` slips in, the error names it.
 (s+1)/(s^2+12*s+100)
 ```
 
-- **Start frequency (Hz)** and **End frequency (Hz)**: 0.016 and 16
+- {{ui:Start frequency (Hz)}} and {{ui:End frequency (Hz)}}: 0.016 and 16
 
 ::: figure assets/plot/as7e1405-bode.png
 AS7's Example 14.5: the Bode plot Symbulator draws
@@ -359,7 +359,7 @@ terms of `s`, both curves drawn together.
 10/(s*(s^2+80*s+400))
 ```
 
-- **Start frequency (Hz)** and **End frequency (Hz)**: 0.016 and 16
+- {{ui:Start frequency (Hz)}} and {{ui:End frequency (Hz)}}: 0.016 and 16
 
 ::: figure assets/plot/as7pp1405-bode.png
 AS7's Practice Problem 14.5: the Bode plot Symbulator draws
@@ -381,7 +381,7 @@ put the condition to the calculator's **Numeric Solver** (APPS, then 9), or to
 :::
 ::: only 9
 There is no dedicated tool, and none is needed: solve the circuit in AC with
-`w` in the **ω — angular frequency** box, then put the condition to the **Solve** card.
+`w` in the {{ui:ω — angular frequency}} box, then put the condition to the {{card:Solve}} card.
 
 Two things make it work, and both are easy to leave out:
 
@@ -452,7 +452,7 @@ Set up for the upper bandwidth frequency
 ω{{sub:2}} is 51010 rad/s.
 :::
 ::: only 9
-Put `w` in the ω box and solve in AC. Then, in the **Solve** card:
+Put `w` in the ω box and solve in AC. Then, in the {{card:Solve}} card:
 
 ```field 9 Equation(s) to solve in terms of the results
 im(ze) = 0
@@ -466,7 +466,7 @@ w
 w>0
 ```
 
-with **real solutions only** ticked. It gives ω{{sub:0}} = {{o:50000}} rad/s.
+with {{ui:real solutions only}} ticked. It gives ω{{sub:0}} = {{o:50000}} rad/s.
 
 The bandwidth frequencies are the half-power points, where the impedance
 magnitude is √2 times its resistance. Same circuit, different equation:
@@ -532,7 +532,7 @@ example's equation and change the bounds:
 im(ie) = 0
 ```
 
-with `w>0` and **real solutions only**, giving ω{{sub:0}} = {{o:25000}} rad/s.
+with `w>0` and {{ui:real solutions only}}, giving ω{{sub:0}} = {{o:25000}} rad/s.
 
 Symbulator 9 solves this symbolically rather than by searching, so the sharp
 peak costs it nothing. The alternative equation is still worth knowing: at
@@ -573,7 +573,7 @@ nSolve(imag(v1)=0,ω)|ω>0
 im(v1) = 0
 ```
 
-with `w>0` and **real solutions only**.
+with `w>0` and {{ui:real solutions only}}.
 :::
 
 ω{{sub:0}} is {{o:2}} rad/s. Correct.

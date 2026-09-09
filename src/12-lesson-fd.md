@@ -151,7 +151,7 @@ gives you both directions.{{i:Laplace transform}}
 into its s-domain equivalent, and **s\s2t(expression)** converts back.}}{{v9|`t2s(expression)`
 converts an expression that is a function of time into its s-domain
 equivalent, and `s2t(expression)` converts back. Both work wherever you can
-write an expression: in a source value, in **Evaluate**, and in the **Solve**
+write an expression: in a source value, in {{card:Evaluate}}, and in the {{card:Solve}}
 card.}}
 
 ::: only 7,8
@@ -179,7 +179,7 @@ l,o,0,1,0
 
 ::: only 9
 Run that in FD, then put the answer back into the time domain from
-**Evaluate**:
+{{card:Evaluate}}:
 
 ```field 9 Evaluate
 s2t(vo)
@@ -219,7 +219,7 @@ Either way, the same answer.
 
 Wrap the value in curly brackets — `{u(t)}` — and FD reads it as `t2s(u(t))`.
 It works only inside a circuit description, so the answer still needs `s2t(...)` when you ask for it
-in **Evaluate**.
+in {{card:Evaluate}}.
 :::
 
 ## Instructive FD problems {#practice-fd}
@@ -252,7 +252,7 @@ r2,o,0,3
 ```
 
 ::: only 9
-FD, then `s2t(vo)` in **Evaluate**.
+FD, then `s2t(vo)` in {{card:Evaluate}}.
 :::
 :::
 :::
@@ -291,7 +291,7 @@ r2,2,o,1'k
 ```
 
 ::: only 9
-Solve in FD, then ask **Evaluate** for the ratio:
+Solve in FD, then ask {{card:Evaluate}} for the ratio:
 
 ```field 9 Evaluate
 vo/vs

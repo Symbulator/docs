@@ -148,8 +148,8 @@ analysis — in **req**. It takes three arguments: the circuit description as a
 string, and the two nodes to measure between.
 :::
 ::: only 9
-Set **Type of analysis** to *Find equivalent*, and a second menu appears,
-**Type of equivalent**, whose first entry is *Resistance / impedance*. Two
+Set {{ui:Type of analysis}} to *Find equivalent*, and a second menu appears,
+{{ui:Type of equivalent}}, whose first entry is *Resistance / impedance*. Two
 node boxes appear with it, for the terminals you are measuring between.
 Symbulator does the 1 A trick internally and reports the answer.
 :::
@@ -196,11 +196,11 @@ approx(req)
 ```
 :::
 ::: only 9
-Set **Type of analysis** to *Find equivalent*, **Type of equivalent** to
+Set {{ui:Type of analysis}} to *Find equivalent*, {{ui:Type of equivalent}} to
 *Resistance / impedance*, and the two node boxes to **0** and **c**. Leave
-**Analysis** on *DC — direct current* and press **Run Symbulator**.
+{{ui:Analysis}} on *DC — direct current* and press {{ui:Run Symbulator}}.
 
-**Results** looks different from a normal solve: instead of the node and
+{{card:Results}} looks different from a normal solve: instead of the node and
 element listing there is a single answer, headed **equivalent resistance**:
 
 **Req** = {{o:2.89}} Ω
@@ -237,7 +237,7 @@ node and the second node.
 :::
 ::: only 9
 An easier way is to let Symbulator do exactly that automatically:{{i:th script}}
-set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
+set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to
 *Thévenin / Norton*, and give it the two nodes.
 :::
 
@@ -266,10 +266,10 @@ r2,2,0,24
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to
 *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in
-the second — the pair of terminals you are looking into. Leave **Analysis** on
-*DC — direct current* and press **Run Symbulator**.
+the second — the pair of terminals you are looking into. Leave {{ui:Analysis}} on
+*DC — direct current* and press {{ui:Run Symbulator}}.
 :::
 
 ::: only 7,8
@@ -289,7 +289,7 @@ the Norton current and the equivalent resistance. In this case, {{var:V_TH}} = {
 
 {{v7,8|When you press ENTER, Symbulator asks whether you are running a
 problem with a load connected to this equivalent circuit. For now, say No. The
-script then stores these variables:}}{{v9|**Results** replaces the node-and-element listing with a single group
+script then stores these variables:}}{{v9|{{card:Results}} replaces the node-and-element listing with a single group
 headed **Thévenin / Norton equivalent**, holding four answers:}}
 
 - **vth** has the Thévenin voltage
@@ -329,7 +329,7 @@ very typical case, as functions of the **load** variable:
 Since this is such a typical problem, Symbulator makes provision for it.
 When the equivalent asked for is *Thévenin / Norton*, a question appears
 under the two node boxes: **Are you running a problem with a load connected
-to this equivalent circuit?** Tick it, and **Results** adds three answers
+to this equivalent circuit?** Tick it, and {{card:Results}} adds three answers
 under the four, each an expression in the variable **load**, the value of
 the load resistor:
 
@@ -337,8 +337,8 @@ the load resistor:
 - **vrl** has the voltage drop in the load
 - **prl** has the power consumed in the load
 
-To read one of them at a given load, ask **Evaluate** for its name and put
-the load's value in the **Conditions** box, as in `load = 2`. Untick the
+To read one of them at a given load, ask {{card:Evaluate}} for its name and put
+the load's value in the {{ui:Conditions}} box, as in `load = 2`. Untick the
 question and the four answers are all you see.
 :::
 
@@ -366,11 +366,11 @@ r2,2,0,6
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to
 *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0**
 in the second. Tick the question about the load. Choose *DC* and run it.
 
-**Results** gives:
+{{card:Results}} gives:
 
 ::: result
 v_{th} = 6\ \mathrm{V}
@@ -399,10 +399,10 @@ this in a single push, or separately. Here I find them in one go:}}
 {irL|Load=2.,irL|Load=10.,irL|Load=100.}
 ```
 ::: only 9
-Here we use **Rounding** — *approx to n digits*, with **n** = 2, in
-**Settings**, so the answers read as the book prints them; exact, the
-third would come back as 1/17. Then ask **Evaluate** for `irl`, with the
-load's value in the **Conditions** box:
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 2, in
+{{ui:Settings}}, so the answers read as the book prints them; exact, the
+third would come back as 1/17. Then ask {{card:Evaluate}} for `irl`, with the
+load's value in the {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 irl
@@ -452,11 +452,11 @@ with a symbolic value of **load**, in ohms.
 :::
 ::: only 9
 To help you in those cases, Symbulator writes that circuit for you. With
-the load question ticked, a button appears at the foot of **Results**,
-under the equivalent's answers: **Load circuit equivalent?** It is live
+the load question ticked, a button appears at the foot of {{card:Results}},
+under the equivalent's answers: {{ui:Load circuit equivalent?}} It is live
 once the equivalent has been found, and goes dead again if you change any
 input until you run again. Press it and it warns you first: the equivalent circuit will
-overwrite the **Circuit Description**, **Define** and **Expert Mode** fields
+overwrite the {{card:Circuit Description}}, {{ui:Define}} and {{ui:Expert Mode}} fields
 and switch the analysis to *Solve circuit*, so a circuit you have not saved
 yet can be saved before it goes. Proceed, and the description becomes
 
@@ -466,7 +466,7 @@ rE,n,0,rEq
 rL,n,0,load
 ```
 
-with **Define** holding the values of `iNo` and `rEq` that **Results**
+with {{ui:Define}} holding the values of `iNo` and `rEq` that {{card:Results}}
 found, exact rather than rounded, and a value for `load` if you had given
 it one. It is the Norton equivalent connected, between nodes **n** and
 **0**, to a load called **rL** with the symbolic value **load**, in ohms.
@@ -506,7 +506,7 @@ the load question ticked.
 ```
 
 ::: only 9
-**Results** gives:
+{{card:Results}} gives:
 
 ::: result
 i_{no} = -0.36\ \mathrm{A}
@@ -526,9 +526,9 @@ only thing connected to the terminals of the equivalent: there is also a
 current source. We have to run a new simulation.
 
 {{v7,8|The fastest way is to start from the equivalent circuit description:}}{{v9|The
-fastest way is the button at the foot of **Results**, **Load circuit
+fastest way is the button at the foot of {{card:Results}}, **Load circuit
 equivalent?** Proceed past its warning and the description is replaced by
-the equivalent, with `iNo` and `rEq` already in **Define**:}}
+the equivalent, with `iNo` and `rEq` already in {{ui:Define}}:}}
 
 ```out 7,8
 "jN,0,n,iNo:rE,n,0,rEq:rL,n,0,L"
@@ -565,7 +565,7 @@ j,0,n,180'm
 
 ::: only 9
 The analysis is already *Solve circuit*; run it in DC, with **SI prefixes**
-ticked in **Settings**. The current through **rl**, `irl`, reads {{o:-60}} mA.
+ticked in {{ui:Settings}}. The current through **rl**, `irl`, reads {{o:-60}} mA.
 :::
 
 Correct: there is a current of 60 mA flowing through {{var:R_L}} from 0 to n.
@@ -618,7 +618,7 @@ Run the **er** script, giving it as arguments the circuit and the nodes:
 evaluate `approx(req)` The value is {{o:2.89}} Ω.
 :::
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to
 *Resistance / impedance*, with nodes **0** and **c**, in DC. The answer is `req` =
 {{o:2.889}} Ω.
 :::
@@ -982,7 +982,7 @@ r2,1,a,2
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `vth` we find {{var:V_TH}} = {{o:48}} V. Via `req` we find
@@ -1012,7 +1012,7 @@ r2,2,0,6
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `ino` we find {{var:I_NO}} = {{o:3}} A. Via `req` we find
@@ -1042,7 +1042,7 @@ e,1,x,2*vx
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **x** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **x** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `ino` we find {{var:I_NO}} = {{o:10}} A. Via `req` we find
@@ -1072,7 +1072,7 @@ j,1,2,10
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `ino` we find {{var:I_NO}} = {{o:5.56}} A. Via `req` we find
@@ -1101,7 +1101,7 @@ e,1,2,100
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `vth` we find {{var:V_TH}} = {{o:125}} V. Via `req` we find
@@ -1131,7 +1131,7 @@ j,0,2,vx/4000
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **x** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **x** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Via `vth` we find {{var:V_TH}} = {{o:8}} V. Via `req` we find {{var:R_EQ}} =
@@ -1165,7 +1165,7 @@ e,0,1,8
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `vth` we get {{var:V_TH}}= {{o:-4.8}} V. Via `req` we get
@@ -1195,7 +1195,7 @@ r2,1,0,6
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `ino` we find {{var:I_NO}} = {{o:-4}} A. Via `req` we find
@@ -1225,7 +1225,7 @@ r3,2,0,3
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `ino` we find {{var:I_NO}} = {{o:8}} A. Via `req` we find
@@ -1255,7 +1255,7 @@ r6,a,b,6
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `vth` we find {{var:V_TH}} = {{o:24}} V. Via `req` we find
@@ -1285,7 +1285,7 @@ j,0,a,2*irx
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `ino` we find {{var:I_NO}} = {{o:7}} A. Via `req` we find
@@ -1321,7 +1321,7 @@ r4,2,1,1.4'k
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `vth` we find {{var:V_TH}} = {{o:-3}} V. Via `req` we find
@@ -1353,7 +1353,7 @@ r4,0,a,4
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **b** in the first and **a** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **b** in the first and **a** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `vth` we find {{var:V_TH}} = {{o:6}} V. Via `req` we find
@@ -1385,7 +1385,7 @@ r4,3,1,5
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **1** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **1** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `ino` we find {{var:I_NO}} = {{o:1}} A. Via `req` we find
@@ -1416,7 +1416,7 @@ e5,3,4,50
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **4** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **4** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `vth` we find {{var:V_TH}} = {{o:130}} V. Via `req` we find
@@ -1446,7 +1446,7 @@ j4,0,1,4
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `ino` we find {{var:I_NO}} = {{o:8}} A. Via `req` we find
@@ -1477,7 +1477,7 @@ r4,3,0,4
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `vth` we find {{var:V_TH}} = {{o:5.33}} V. Via `req` we find
@@ -1509,7 +1509,7 @@ e,1,0,2*vrx
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `vth` we find {{var:V_TH}} = {{o:20}} V. Via `req` we find
@@ -1541,7 +1541,7 @@ r2,2,3,2
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `vth` we find {{var:V_TH}} = {{o:2}} V. Via `req` we find
@@ -1571,7 +1571,7 @@ r2,a,0,6
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 Choose DC. Via `ino` we find {{var:I_NO}} = {{o:-6.25}} A. Via `req` we find
@@ -1612,7 +1612,7 @@ j,2,b,3*ir8
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
 :::
 
 {{v7,8|You choose DC, press Enter and wait. Symbulator reports the
@@ -1643,7 +1643,7 @@ j,2,b,x*ir8
 :::
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
 :::
 
 Now it solves. The expression for `ino` is fine, but the one for `req`,
@@ -1667,7 +1667,7 @@ Via `Define x=3: {ino,req} `we find that {{var:I_NO}} = {{o:1}} A, and
 :::
 ::: only 9
 The equivalent is in terms of x, so nothing needs running again. Put `ino`
-in **Evaluate** with `x = 3` in its **Conditions** box: {{var:I_NO}} = {{o:1}} A.
+in {{card:Evaluate}} with `x = 3` in its {{ui:Conditions}} box: {{var:I_NO}} = {{o:1}} A.
 Ask for `req` the same way: infinite, the denominator being zero.
 :::
 
@@ -1703,7 +1703,7 @@ jd,a,0,3*x*ir1
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **a** in the first and **b** in the second — the pair of terminals you are looking into.
 :::
 
 Exploring the answers, we see that the denominator of the expression for
@@ -1714,7 +1714,7 @@ Via `1→x:{ino,req} `we find that {{var:I_NO}} = {{o:-3}}A, and {{var:R_EQ}} is
 undefined or, for practical purposes, infinite.
 :::
 ::: only 9
-Put `ino` in the **Evaluate** card with `x = 1` in its **Conditions** box:
+Put `ino` in the {{card:Evaluate}} card with `x = 1` in its {{ui:Conditions}} box:
 {{var:I_NO}} = {{o:-3}} A. Ask for `req` the same way and the answer is
 infinite, so {{var:R_EQ}} is undefined at that value.
 :::
@@ -1745,7 +1745,7 @@ ed,2,0,μ*vrf
 ```
 
 ::: only 9
-The answer you want is `rei`, in **Results**.
+The answer you want is `rei`, in {{card:Results}}.
 :::
 
 We get `rf*(µ+1)`, which is correct. The textbook's answers are shown right
@@ -1768,9 +1768,9 @@ ed,2,0,μ*vrf
 :::
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **t** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **t** in the first and **0** in the second — the pair of terminals you are looking into.
 
-The answers you want are `vth` and `req`, in **Results**.
+The answers you want are `vth` and `req`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -1787,7 +1787,7 @@ which is correct, as can be seen in the textbook's answers for {{var:v_T}}
 and {{var:R_T}}, shown right of the circuit schematic above.
 :::
 ::: only 9
-**Results** gives
+{{card:Results}} gives
 
 ::: result Thevenin voltage
 v_{th} = \dfrac{vs\,\mu}{\mu + 1}
@@ -1844,9 +1844,9 @@ ro,b,1,ro
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **b** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **b** in the first and **0** in the second — the pair of terminals you are looking into.
 
-The answers you want are `vth` and `req`, in **Results**.
+The answers you want are `vth` and `req`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -1862,7 +1862,7 @@ $$
 are correct, as can be seen by comparing them to those in the book:
 :::
 ::: only 9
-The answers we get in **Results**,
+The answers we get in {{card:Results}},
 
 ::: result Thevenin voltage
 v_{th} = \dfrac{vs\,\mu}{\mu + 1}
@@ -1913,11 +1913,11 @@ r1,2,3,1
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `vth` and `req`, in **Results**, and under them the load answers.
+The answers you want are `vth` and `req`, in {{card:Results}}, and under them the load answers.
 
-Ask **Evaluate** for `irl`, with the load in the **Conditions** box:
+Ask {{card:Evaluate}} for `irl`, with the load in the {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 irl
@@ -1967,11 +1967,11 @@ j,2,0,v1/2
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `ino` and `req`, in **Results**, and under them the load answers.
+The answers you want are `ino` and `req`, in {{card:Results}}, and under them the load answers.
 
-Ask **Evaluate** for `vrl`, then for `irl`, with the load in the **Conditions** box each time:
+Ask {{card:Evaluate}} for `vrl`, then for `irl`, with the load in the {{ui:Conditions}} box each time:
 
 ```field 9 Evaluate
 vrl
@@ -2020,11 +2020,11 @@ r2,2,0,2'k
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `ino` and `req`, in **Results**, and under them the load answers.
+The answers you want are `ino` and `req`, in {{card:Results}}, and under them the load answers.
 
-Ask **Evaluate** for `irl`, with the load in the **Conditions** box:
+Ask {{card:Evaluate}} for `irl`, with the load in the {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 irl
@@ -2078,11 +2078,11 @@ r40,4,0,5
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `ino` and `req`, in **Results**, and under them the load answers.
+The answers you want are `ino` and `req`, in {{card:Results}}, and under them the load answers.
 
-Ask **Evaluate** for `vrl`, with the load in the **Conditions** box:
+Ask {{card:Evaluate}} for `vrl`, with the load in the {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 vrl
@@ -2135,11 +2135,11 @@ e3,2,4,80
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `vth` and `req`, in **Results**, and under them the load answers.
+The answers you want are `vth` and `req`, in {{card:Results}}, and under them the load answers.
 
-Ask **Evaluate** for `irl`, with the load in the **Conditions** box:
+Ask {{card:Evaluate}} for `irl`, with the load in the {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 irl
@@ -2188,11 +2188,11 @@ j30,3,0,15
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `vth` and `req`, in **Results**, and under them the load answers.
+The answers you want are `vth` and `req`, in {{card:Results}}, and under them the load answers.
 
-Ask **Evaluate** for `vrl`, with the load in the **Conditions** box:
+Ask {{card:Evaluate}} for `vrl`, with the load in the {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 vrl
@@ -2244,11 +2244,11 @@ r2,2,3,2
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `vth` and `req`, in **Results**, and under them the load answers.
+The answers you want are `vth` and `req`, in {{card:Results}}, and under them the load answers.
 
-Ask **Evaluate** for `vrl`, with the load in the **Conditions** box:
+Ask {{card:Evaluate}} for `vrl`, with the load in the {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 vrl
@@ -2295,11 +2295,11 @@ r3,2,4,30'k
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **4** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **4** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `ino` and `req`, in **Results**, and under them the load answers.
+The answers you want are `ino` and `req`, in {{card:Results}}, and under them the load answers.
 
-Ask **Evaluate** for `irl`, with the load in the **Conditions** box:
+Ask {{card:Evaluate}} for `irl`, with the load in the {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 irl
@@ -2356,11 +2356,11 @@ r2,3,4,2
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **4** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **4** in the first and **0** in the second — the pair of terminals you are looking into.
 
-The answers you want are `req` and `pmax`, in **Results**.
+The answers you want are `req` and `pmax`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -2403,11 +2403,11 @@ r4,2,3,4
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
 
-The answers you want are `req` and `pmax`, in **Results**.
+The answers you want are `req` and `pmax`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -2447,12 +2447,12 @@ rs,1,0,40'k
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **1** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answers you want are `req` and `pmax`, in **Results**, and under them the
+The answers you want are `req` and `pmax`, in {{card:Results}}, and under them the
 load answers.
 
-Ask **Evaluate** for `prl`, with the load in the **Conditions** box:
+Ask {{card:Evaluate}} for `prl`, with the load in the {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 prl
@@ -2515,11 +2515,11 @@ e,3,4,68
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **4** in the first and **1** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **4** in the first and **1** in the second — the pair of terminals you are looking into.
 
-The answers you want are `req` and `pmax`, in **Results**.
+The answers you want are `req` and `pmax`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8

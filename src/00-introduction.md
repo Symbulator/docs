@@ -2,7 +2,7 @@
 id: introduction
 kind: front
 title: Introduction
-updated: 2026-09-05
+updated: 2026-09-09
 summary: >
   Learn about Symbulator and how it can help you focus on learning how circuits work, instead of struggling with math. Get the latest version of Symbulator and get ready to roll.
 ---
@@ -13,7 +13,7 @@ Symbulator is a program to solve linear electric circuits symbolically and
 numerically {{v7,8|in a calculator}}{{v9|on your device}}. It takes numerical and symbolic
 values, and returns numerical and symbolic results. The odd-sounding name is a portmanteau of *"**symb**olic sim**ulator**"*.
 Symbulator is widely regarded as the best symbolic simulator of linear
-electric circuits ever {{v7,8|made for a calculator}}{{v9|capable of running on a handheld device}}.
+electric circuits ever {{v7,8|made for a calculator}}{{v9|to run on a handheld device}}.
 
 ### What analyses can it do?
 
@@ -69,7 +69,7 @@ circuit analysis rather than on the mathematics of solving it.
 
 ### Symbulator is free!
 
-Symbulator has always been free of cost, and always will be.
+Symbulator has always been free of charge, and always will be.
 *(You are welcome!)* Since 2026, Symbulator is also open source under the MIT licence. You are free to use it,
 change it and port it to other platforms; all the licence asks is that the
 copyright notice and the attribution to the original author travel with it.
@@ -151,17 +151,18 @@ You can use Symbulator 9 in two ways:
 
 The easiest way to start is the **[online app](https://symbulator.pythonanywhere.com/)**.
 
-To run it offline on your own device, follow the instructions at the bottom of the online app, under **Run Symbulator 9 locally**.
+To run it offline on your own device, follow the instructions at the bottom of the online app, under {{ui:Run Symbulator 9 locally}}.
 
 :::
 
 ::: danger Use at your own risk!
-Every effort has been made in the development of this software, and there are
-no known bugs in it. However, Symbulator is provided "as is", without warranty
-of any kind, express or implied, including but not limited to the warranty of
-fitness for a particular purpose. Every time you use Symbulator, you do so at
-your own risk. Please report any problems to help@symbulator.com
+Every effort has gone into Symbulator, and it has no known bugs. Even so, it
+is provided "as is", without warranty of any kind, express or implied,
+including but not limited to the warranty of fitness for a particular
+purpose. You use it at your own risk.
 :::
+
+Please report any problems to help@symbulator.com
 
 ::: only 7,8
 ## {{v7|Install}}{{v8|Before you start}} {#install}
@@ -217,67 +218,15 @@ simulation left behind before trying again.
 
 ::: only 9
 
-## Input files and entries {#input-files}
+## Built-in examples {#built-in-examples}
 
-Everything you type into Symbulator — circuit, analysis, settings, the
-**Evaluate** and **Solve** cards — can be saved and reused. Two words matter
-here.
+You do not have to type the tutorial's circuits. The **Built-in
+examples** list at the top of the app holds an entry for every
+simulation in every lesson; click a title to load one and solve it as if
+you had typed it yourself.
 
-- An **entry** is one named set of inputs: a circuit, the analysis to run on it, and the settings.
-
-- An **input file** is a named collection of entries, such as *Circuits for Lesson 1 of the Tutorial*.
-
-Input files are plain text with the extension **`.cir`**. They are optional. The buttons to load, download and create them are in the **Input File** card at the top of the app.
-
-### Loading input files
-
-Symbulator comes with an input file for each lesson of this tutorial, holding
-an entry for every simulation in it. A problem that takes more than one
-simulation has an entry for each, so a lesson file may hold more entries than
-the lesson has problems. With them you can follow the whole tutorial without
-typing a circuit.
-
-**Built-in examples** lists them; click a title to load it. These files are
-**read-only**: change a loaded one as much as you like, but you cannot write
-back to it.
-
-To open your own input file, click **Upload** and choose the `.cir` file. The dropdown beneath then reads *Entries in* and the file's name.
-Choosing an entry fills in every box on the page. Solve it as if you had just
-typed it.
-
-Saving an entry while a read-only file is loaded, or clicking **Create new**, starts a blank input file of your own.
-
-### Saving your work
-
-Two links under the circuit box appear when they apply:
-
-- **Save inputs to new entry** adds what is on screen as a new entry and asks
-  for a name.
-- **Update inputs in this entry** writes your changes back into the loaded
-  entry. It appears once you have changed something.
-
-Beside the dropdown, **Rename** and **Delete** act on the entry itself.
-Neither is offered for the built-in examples, since they are read-only.
-
-::: warning Nothing reaches your disk until you press Download
-Saving an entry writes it into the file open **in your browser**. Only
-**Download** produces a `.cir` on your device.
-
-Your work is mirrored into the browser's storage, so closing the tab does not
-lose it, and you are warned before anything replaces a file with entries you
-have not downloaded. Still, download when you are done.
-:::
-
-### What an entry remembers
-
-An entry keeps everything you typed, not just the circuit: the analysis and
-what it needs (the frequency, the nodes of an equivalent, the kind of
-two-port), the **Expert Mode** equations, unknowns and conditions, everything in
-**Settings**, **Evaluate** and its **Conditions**, the **Solve** card, the
-**Plotting Tools** inputs, and a note of your own shown when the entry is
-loaded. Load one a year later and you are back where you left off.
-
-The **About input file (.cir) format** section inside the **Input File** card explains what input files carry, in detail.
+{{ref:input-files}} explains how to load them, save your own work, and
+download it to your device.
 
 ## Reading and running side by side {#split-view}
 
@@ -292,15 +241,15 @@ simply shown together.
 The two halves are connected. On the website, every worked problem carries two
 links under its title:
 
-- **Open in app ↗** loads that circuit, with its analysis and settings, ready to run.
+- {{ui:Open in app ↗}} loads that circuit, with its analysis and settings, ready to run.
 
-- **Open in split view** does the same, but in the split view, on the problem you were reading.
+- {{ui:Open in split view}} does the same, but in the split view, on the problem you were reading.
 
-Inside the split view, **Open in app ↗** loads the circuit into the right-hand
+Inside the split view, {{ui:Open in app ↗}} loads the circuit into the right-hand
 pane instead of a new tab, and the second link is not shown.
 
 ::: warning Loading a problem starts the app fresh
-**Open in app ↗** reloads the app with the circuit you asked for, replacing
+{{ui:Open in app ↗}} reloads the app with the circuit you asked for, replacing
 anything you had typed there. To keep your own work, save it to an entry and
 download the file **before** you click the next problem. {{ref:input-files}}
 explains how.

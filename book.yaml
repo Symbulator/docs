@@ -45,6 +45,7 @@ terms:
 
 chapters:
   - 00-introduction.md
+  - 00b-input-files.md
   - 01-lesson-dc.md
   - 02-lesson-symbolic.md
   - 03-lesson-sources.md

@@ -5,13 +5,13 @@ title: Symbolic circuits and {{v7,8|expert mode}}{{v9|Expert Mode}}
 updated: 2026-09-06
 summary: >
   Learn how to solve different types of *symbolic* circuits in Symbulator. Use
-  {{v7,8|the solve command on}}{{v9|**Solve** in}} Symbulator. And explore
-  {{v7,8|**ex**, }}the powerful {{v7,8|*expert mode*}}{{v9|**Expert Mode**}}, for the ambitious user.
+  {{v7,8|the solve command on}}{{v9|{{card:Solve}} in}} Symbulator. And explore
+  {{v7,8|**ex**, }}the powerful {{v7,8|*expert mode*}}{{v9|{{ui:Expert Mode}}}}, for the ambitious user.
 ---
 
 Here you will learn about the types of symbolic circuits and how to solve
-them in Symbulator, using {{v7,8|the solve command}}{{v9|**Solve**}} when needed, and — for the more
-adventurous — the powerful {{v7,8|*expert mode*}}{{v9|**Expert Mode**}}.
+them in Symbulator, using {{v7,8|the solve command}}{{v9|{{card:Solve}}}} when needed, and — for the more
+adventurous — the powerful {{v7,8|*expert mode*}}{{v9|{{ui:Expert Mode}}}}.
 
 ## About symbolic problems {#about-symbolic}
 
@@ -47,8 +47,8 @@ Numerical-from-symbolic problems can be solved in two ways. If they are simple
 — one or two unknown values, one or two numerical answers wanted — it is
 quicker to simulate the circuit symbolically and then solve for the numerical
 answers with the {{v7,8|**solve** command of the
-calculator}}{{v9|**Solve** card, under the results}}. If they are not simple, it is easier to use
-{{v7,8|**expert mode**}}{{v9|**Expert Mode**, in the **Expert Mode** box}}.
+calculator}}{{v9|{{card:Solve}} card, under the results}}. If they are not simple, it is easier to use
+{{v7,8|**expert mode**}}{{v9|{{ui:Expert Mode}}, in the {{ui:Expert Mode}} box}}.
 
 Let's see an example of each.
 
@@ -95,9 +95,9 @@ s\dc(cir)
 
 ::: only 9
 ::: tip Turn rounding back to exact for this lesson
-{{ref:lesson-dc}} had you set **Rounding** to *approx to n digits*. There is
-nothing to round here, so open **Settings** and put it back to *exact*. The
-**Use SI prefixes** tick clears itself: a prefix has no place in an answer
+{{ref:lesson-dc}} had you set {{ui:Rounding}} to *approx to n digits*. There is
+nothing to round here, so open {{ui:Settings}} and put it back to *exact*. The
+{{ui:Use SI prefixes}} tick clears itself: a prefix has no place in an answer
 like
 
 $$
@@ -113,8 +113,8 @@ r1,a,c,r1
 r2,c,0,r2
 ```
 
-Leave **Type of analysis** on *Solve circuit*, set **Analysis** to
-*DC — direct current*, and press **Run Symbulator**.
+Leave {{ui:Type of analysis}} on *Solve circuit*, set {{ui:Analysis}} to
+*DC — direct current*, and press {{ui:Run Symbulator}}.
 :::
 
 {{v7|This simulation took 15 seconds in my calculator.}}{{v8|This simulation
@@ -156,10 +156,10 @@ take no extra effort.
 ## Numerical from symbolic, with {{v7,8|solve}}{{v9|**Solve**}} {#with-solve}
 
 Getting numerical answers from a symbolic circuit, on the other hand, takes an
-extra step: {{v7,8|the solve command}}{{v9|**Solve**}}, as in this next example, or {{v7,8|expert mode}}{{v9|**Expert Mode**}}, as in
+extra step: {{v7,8|the solve command}}{{v9|{{card:Solve}}}}, as in this next example, or {{v7,8|expert mode}}{{v9|{{ui:Expert Mode}}}}, as in
 the one after.
 
-::: problem B11's Example 5.6, with {{v7,8|solve}}{{v9|**Solve**}}
+::: problem B11's Example 5.6, with {{v7,8|solve}}{{v9|{{card:Solve}}}}
 ::: figure assets/circuit/b11e0506.jpg
 B11's Example 5.6
 :::
@@ -244,10 +244,10 @@ solve(re=12000 and ir3=.006,{e,r1})
 ```
 
 ::: only 9
-That is what the **Solve** card, under the results beside **Evaluate**, is
+That is what the {{card:Solve}} card, under the results beside {{card:Evaluate}}, is
 for. It has two boxes.
 
-In the first box, headed **Equation(s) to solve in terms of the results**, write the equationse, using the same names the results use.
+In the first box, headed {{ui:Equation(s) to solve in terms of the results}}, write the equationse, using the same names the results use.
 
 The shorthand works in these boxes too, so `re = 12'k` reads as 12000.
 
@@ -264,7 +264,7 @@ re = 12'k
 ir3 = 6'm
 ```
 
-In the second box, headed **Unknown(s) to solve for**, name what you want found. You can write the unknowns separated by commas, like this:
+In the second box, headed {{ui:Unknown(s) to solve for}}, name what you want found. You can write the unknowns separated by commas, like this:
 
 ```field 9 Unknown(s) to solve for
 e, r1
@@ -277,7 +277,7 @@ e
 r1
 ```
 
-Then press **Solve equations**.
+Then press {{ui:Solve equations}}.
 :::
 
 ::: only 7,8
@@ -374,19 +374,19 @@ the circuit been larger, the saving would be clear.
 
 ::: only 9
 Symbulator's true strength is seen in numerical-from-symbolic problems like the
-one we solved above, when we use its **Expert Mode** of simulation.{{i:expert mode}}
-**Expert Mode** cracks these problems open in a single call, and gives fully
+one we solved above, when we use its {{ui:Expert Mode}} of simulation.{{i:expert mode}}
+{{ui:Expert Mode}} cracks these problems open in a single call, and gives fully
 numerical answers whenever the problem provides as many answers as it hides
 values.
 
-**Expert Mode** takes extra equations, unknowns and conditions in three boxes.
-Open the **Expert Mode** box and tick **Enable Expert Mode** to see them:
+{{ui:Expert Mode}} takes extra equations, unknowns and conditions in three boxes.
+Open the {{ui:Expert Mode}} box and tick {{ui:Enable Expert Mode}} to see them:
 
-- **Add equation(s)** — one or many, separated by `and` or one per line, written in the names the results use.
-- **Add unknown(s)** — one or many, separated by commas or one per line.
-- **Add condition(s)** — one or many, separated by `and` or one per line, for narrowing a solution down, which we will use later.
+- {{ui:Add equation(s)}} — one or many, separated by `and` or one per line, written in the names the results use.
+- {{ui:Add unknown(s)}} — one or many, separated by commas or one per line.
+- {{ui:Add condition(s)}} — one or many, separated by `and` or one per line, for narrowing a solution down, which we will use later.
 
-They apply to whatever analysis you run, so **Expert Mode** works the same way in
+They apply to whatever analysis you run, so {{ui:Expert Mode}} works the same way in
 DC, AC, FD and TR.
 
 ::: problem B11's Example 5.6, using ex
@@ -415,12 +415,12 @@ e, r1
 
 Run it in DC. This time everything comes back numerical: the node voltages
 read v{{sub:1}} = 72 V, v{{sub:2}} = 60 V and v{{sub:3}} = 36 V, and at the
-foot of **Results by element** are the two unknowns, listed like any other
+foot of {{ui:Results by element}} are the two unknowns, listed like any other
 answer: **e** = {{o:72}} and **r1** = {{o:2000}}. Both are right, and the whole circuit was
 solved with them in one step.
 
-The speed advantage of **Expert Mode** is not necessarily evident in this
-simple problem. But it does give you an idea of what **Expert Mode** is all about:
+The speed advantage of {{ui:Expert Mode}} is not necessarily evident in this
+simple problem. But it does give you an idea of what {{ui:Expert Mode}} is all about:
 you get to hand Symbulator extra information before it solves, rather than
 after. Had this circuit been larger, the benefit in computation time would be
 clear.
@@ -484,7 +484,7 @@ solve(ir5=12,vx)
 ```
 
 ::: only 9
-Solve it in DC, then use the **Solve** card:
+Solve it in DC, then use the {{card:Solve}} card:
 
 ```field 9 Equation(s) to solve in terms of the results
 ir5 = 12
@@ -513,7 +513,7 @@ to answer the two questions we have been asked.
 :::
 
 This problem, having three unknown element values and three known answers, is
-a perfect candidate for {{v7,8|the expert mode}}{{v9|**Expert Mode**}}. Below is my circuit description.
+a perfect candidate for {{v7,8|the expert mode}}{{v9|{{ui:Expert Mode}}}}. Below is my circuit description.
 
 ```sym 7
 s\ex("e,1,0,e:r1,1,0,2'k:r2,1,0,r2:r3,1,0,r3")
@@ -593,7 +593,7 @@ supply. Can 2W resistors be used?
 
 :::
 
-This problem is also perfect for {{v7,8|the expert mode}}{{v9|**Expert Mode**}}, because: (a) the target is
+This problem is also perfect for {{v7,8|the expert mode}}{{v9|{{ui:Expert Mode}}}}, because: (a) the target is
 to obtain numerical values, and (b) we have N unknown element values, and in
 turn we are given N numerical answers. Here is how I solved it:
 
@@ -703,7 +703,7 @@ ed4,0,n,0.7*v_r6
 ```
 
 Symbulator reports the power *consumed* by each element, so delivering
-80W is consuming −80W. In **Expert Mode**:
+80W is consuming −80W. In {{ui:Expert Mode}}:
 
 ```field 9 Add equation(s)
 pjd1 = -80 and ped2 = 0
@@ -721,7 +721,7 @@ conditions pick the one meant:
 is > 0 and vs > 0
 ```
 
-Run it in DC, with **Rounding** at 4 significant digits. Everything
+Run it in DC, with {{ui:Rounding}} at 4 significant digits. Everything
 comes back numerical: {{var:v_s}} = {{o:17.61}} V and
 {{var:i_s}} = {{o:0.3973}} A.
 

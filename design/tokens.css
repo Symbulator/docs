@@ -30,6 +30,8 @@
   --danger:     #a13030;   /* caution, errors                            */
   --danger-bg:  #fdf1f1;
   --answer:     #a13030;   /* a value the software returned              */
+  --ui-card:    #24487e;   /* a card in the app                          */
+  --ui-control: #0f6b5c;   /* a control inside a card                    */
 
   /* --- highlight ------------------------------------------------------
      Gold, for "new" and nothing else. Deliberately not --amber: amber is
@@ -85,6 +87,8 @@ html[data-theme="dark"] {
   --danger:     #ff9c9c;
   --danger-bg:  #3a1f21;
   --answer:     #ff9c9c;
+  --ui-card:    #7fb0e8;
+  --ui-control: #5fd3bd;
   --lcd:        #182534;
   --lcd-edge:   #2f5170;
   --inverse-bg:  #303c4e;

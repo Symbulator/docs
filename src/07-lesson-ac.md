@@ -42,14 +42,14 @@ of them.
 ::: only 9
 ### The AC analysis
 
-Set **Analysis** to *AC — alternating current*. Unlike DC and TR, it needs
+Set {{ui:Analysis}} to *AC — alternating current*. Unlike DC and TR, it needs
 one more input: the frequency in radians per second, typed into the
-**ω — angular frequency** box beside the menu.
+{{ui:ω — angular frequency}} box beside the menu.
 
 ### AC mode in the other tools
 
 The equivalence tools work in AC the same way: choose *Find equivalent* as
-usual, set **Analysis** to *AC — alternating current*, and give the ω box a
+usual, set {{ui:Analysis}} to *AC — alternating current*, and give the ω box a
 frequency where the circuit needs one.
 :::
 
@@ -107,7 +107,7 @@ answer at a time. You will see it used throughout this lesson.
 
 ::: only 9
 Symbulator answers in rectangular form unless you ask otherwise. In
-**Settings**, under *Display*, tick **Show AC answers as polar phasors** and
+{{ui:Settings}}, under *Display*, tick {{ui:Show AC answers as polar phasors}} and
 every answer is shown as an amplitude and an angle. The circuit is re-solved
 as soon as you tick it.
 
@@ -178,7 +178,7 @@ c,2,0,.1
 ```
 
 ::: only 9
-Choose *AC — alternating current*, and put **4** in the **ω — angular frequency** box that
+Choose *AC — alternating current*, and put **4** in the {{ui:ω — angular frequency}} box that
 appears beside it.
 :::
 
@@ -218,7 +218,7 @@ s\aa(ir1)
 ```
 :::
 ::: only 9
-If we want to see them as an amplitude and angle, open the **Mini-Tools**
+If we want to see them as an amplitude and angle, open the {{card:Mini-Tools}}
 card under the results, leave the tool set to *aa — amplitude and angle*,
 and give it the answer's name:{{i:aa tool}}
 
@@ -278,7 +278,7 @@ l,2,0,.2
 The source is given in polar form and typed as written: magnitude, the angle
 sign, then degrees.
 
-Then AC, with **10** for ω. **Mini-Tools** with *aa* reads
+Then AC, with **10** for ω. {{card:Mini-Tools}} with *aa* reads
 `ir1` as {{o:4.472}}∠{{o:3.43}}° A and `vl` as {{o:8.944}}∠{{o:93.43}}° V.
 Both are correct.
 :::
@@ -318,7 +318,7 @@ r2,4,0,8
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to
 *Resistance / impedance*, with nodes **1** and **0**, in AC at ω **50**. The answer
 is called `zeq`.
 :::
@@ -378,7 +378,7 @@ l,3,0,20'm
 ```
 
 ::: only 9
-AC, with **ω — angular frequency** set to **200**.
+AC, with {{ui:ω — angular frequency}} set to **200**.
 :::
 
 ::: only 7
@@ -402,7 +402,7 @@ We get {{o:4.789}}∠{{o:-16.7}}° A.
 :::
 
 ::: only 9
-Read it with **Mini-Tools** set to *aa*: `aa(ir)` gives
+Read it with {{card:Mini-Tools}} set to *aa*: `aa(ir)` gives
 {{o:4.789}}∠{{o:-16.70}}° A. Correct.
 :::
 
@@ -505,7 +505,7 @@ We get {{o:414.5}}∠{{o:-71.6}}° mA.
 :::
 
 ::: only 9
-Put the whole thing in **Mini-Tools** with *aa*: `aa(12/(4+20j+pr(16,-14j+25j)))` gives
+Put the whole thing in {{card:Mini-Tools}} with *aa*: `aa(12/(4+20j+pr(16,-14j+25j)))` gives
 {{o:0.4145}}∠{{o:-71.60}}° A. Correct.
 :::
 
@@ -560,7 +560,7 @@ r14,1,4,-4j
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to
 *Resistance / impedance*, with nodes **1** and **0**, in AC. The answer is called `zeq`.
 :::
 
@@ -618,7 +618,7 @@ l2,3,0,.5
 ```
 
 ::: only 9
-AC, with **ω — angular frequency** set to **4**.
+AC, with {{ui:ω — angular frequency}} set to **4**.
 :::
 
 ```sym 7
@@ -670,7 +670,7 @@ e,3,0,3*vrx
 ```
 
 ::: only 9
-AC, with **ω — angular frequency** set to **2**.
+AC, with {{ui:ω — angular frequency}} set to **2**.
 :::
 
 ```sym 7
@@ -725,7 +725,7 @@ ro,3,0,2'k
 ```
 
 ::: only 9
-AC, with **ω — angular frequency** set to **1000**.
+AC, with {{ui:ω — angular frequency}} set to **1000**.
 :::
 
 ```sym 7
@@ -872,7 +872,7 @@ solve(imag(zeq)=0,c)
 solve(imag(zeq)=0,c)
 ```
 ::: only 9
-Now open the **Solve** card and ask for the capacitance that leaves no
+Now open the {{card:Solve}} card and ask for the capacitance that leaves no
 imaginary part:
 
 ```field 9 Equation(s) to solve in terms of the results
@@ -883,7 +883,7 @@ im(zeq) = 0
 c
 ```
 
-Tick **real solutions only** before running it. Without it the answer comes back
+Tick {{ui:real solutions only}} before running it. Without it the answer comes back
 carrying an `im(c)` term, because nothing has told Symbulator that a
 capacitance is a real number.
 :::
@@ -912,13 +912,13 @@ l,2,0,5'm
 
 *Find equivalent*, *Resistance / impedance*, nodes **1** and **0**, in AC at ω
 **2000**. That gives `zeq` = {{o:500j/(-c + 25 + 25j)}}, and the condition
-goes to the **Solve** card:
+goes to the {{card:Solve}} card:
 
 ```field 9 Equation(s) to solve in terms of the results
 im(zeq) = 0
 ```
 
-with `c` as the unknown and **real solutions only** ticked — the same
+with `c` as the unknown and {{ui:real solutions only}} ticked — the same
 equation as before, now against the new `zeq` — which answers
 `c` = {{o:25}}.
 :::

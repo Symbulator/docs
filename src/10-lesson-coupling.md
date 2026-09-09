@@ -92,8 +92,8 @@ r4,3,0,12
 ```
 
 ::: only 9
-AC, and leave **RMS phasors** unticked. Then read the two currents with
-**Mini-Tools** set to *aa*:
+AC, and leave {{ui:RMS phasors}} unticked. Then read the two currents with
+{{card:Mini-Tools}} set to *aa*:
 :::
 
 ```sym 7
@@ -278,7 +278,7 @@ e2,4,0,vs2
 ```
 
 ::: only 9
-**Results** gives
+{{card:Results}} gives
 
 ::: result Thevenin voltage
 v_{th} = \dfrac{vs_{2}}{n}
@@ -319,7 +319,7 @@ ro,3,0,20
 ```
 
 ::: only 9
-AC, with **RMS phasors** ticked this time — the question asks for complex
+AC, with {{ui:RMS phasors}} ticked this time — the question asks for complex
 power, and that is the convention it wants.
 :::
 
@@ -328,13 +328,13 @@ power, and that is the convention it wants.
 ```
 
 ::: only 9
-Three readings from **Mini-Tools** with *aa*: `ir1` is
+Three readings from {{card:Mini-Tools}} with *aa*: `ir1` is
 {{o:11.09}}∠{{o:33.69}}° A, `vro` is {{o:110.9}}∠{{o:-146.31}}° V, and
 `-se` — the complex power *supplied*, so the opposite of the power consumed
 by the source — is {{o:1331}}∠{{o:-33.69}}° VA.
 
 Three conversions in a row is the point at which the setting is less work
-than the tool: tick **Show AC answers as polar phasors** in **Settings** and
+than the tool: tick {{ui:Show AC answers as polar phasors}} in {{ui:Settings}} and
 the first two are already in that form when the circuit solves. The third
 still wants *aa*, because `-se` is an expression rather than an answer.
 :::
@@ -370,7 +370,7 @@ rl,2,0,8+6j
 ```
 
 ::: only 9
-AC, with **RMS phasors** ticked.
+AC, with {{ui:RMS phasors}} ticked.
 :::
 
 This is how the three currents come out of the two the transformer
@@ -390,7 +390,7 @@ reports:
 ```
 
 ::: only 9
-**Results** gives, under **t**,
+{{card:Results}} gives, under **t**,
 
 ::: result current into port at node 1
 i_{t1} = 75∠-6.87°
@@ -430,7 +430,7 @@ t,[1,0],[2,1],[80,120]
 rl,2,0,8+6j
 ```
 
-AC, with **RMS phasors** ticked. **Results** gives, under **t**,
+AC, with {{ui:RMS phasors}} ticked. {{card:Results}} gives, under **t**,
 
 ::: result current into port at node 1
 i_{t1} = 75∠-6.87°
@@ -470,7 +470,7 @@ r3,3,0,3
 rl,4,0,8
 ```
 
-DC. **Results** gives, under **t**,
+DC. {{card:Results}} gives, under **t**,
 
 ::: result current into port at node 2
 i_{t2} = \dfrac{5}{18}
@@ -509,7 +509,7 @@ rl,3,5,100
 r5,5,0,7
 ```
 
-DC. **Results** gives, under **t**,
+DC. {{card:Results}} gives, under **t**,
 
 ::: result current into port at node 2
 i_{t2} = \dfrac{5}{202}
@@ -748,7 +748,7 @@ m,l1,l2,0.8
 `il1` = {{o:12}} A and `il2` = {{o:0}}.
 
 After the switch opens the capacitor enters the loop, uncharged, with the
-coil carrying its 12 A. In TR, and then in **Evaluate**:
+coil carrying its 12 A. In TR, and then in {{card:Evaluate}}:
 
 ```field 9 Evaluate
 v4-v5
@@ -811,7 +811,7 @@ i_{l1} = 4 - 4\,e^{-25t}\ \mathrm{A}
 v_{3} = 300\,e^{-25t}\ \mathrm{V}
 :::
 
-and **Evaluate** with `v2-v3` gives {{var:v_1}} = $-100\,e^{-25t}$ V. The pair
+and {{card:Evaluate}} with `v2-v3` gives {{var:v_1}} = $-100\,e^{-25t}$ V. The pair
 reduces to 4 + 8 − 2·5 = 2 H, whence the 25 per second (2 H over 50 Ω), and
 {{var:v_1}} is *negative* because the 5 H coupling outweighs the coil's own
 4 H; the two voltages still add to $200\,e^{-25t}$, which is 200 − 50 {{var:i}}.
@@ -842,9 +842,9 @@ m,l1,l2,0.25
 ::: applink NR12's Problem 7.70
 :::
 
-TR. **Results** gives `ir250` = {{var:i_o}} = $0.04(1 -\,e^{-5000t})$ A, `va` =
+TR. {{card:Results}} gives `ir250` = {{var:i_o}} = $0.04(1 -\,e^{-5000t})$ A, `va` =
 {{var:v_o}} = $10\,e^{-5000t}$ V and `il1` = {{var:i_1}} = $0.016(1 -\,e^{-5000t})$ A;
-{{var:i_2}} is downward, the opposite of `il2`, so **Evaluate** with `-il2`
+{{var:i_2}} is downward, the opposite of `il2`, so {{card:Evaluate}} with `-il2`
 reads $0.024(1 -\,e^{-5000t})$ A. The parallel pair opposes and reduces to
 (0.5·0.25 − 0.25²)/(0.5 + 0.25 + 2·0.25) = 0.05 H, whence the 5000 per second
 with 250 Ω.
@@ -873,7 +873,7 @@ m,l1,l2,10'm
 ::: applink NR12's Problem 7.71
 :::
 
-TR. **Results** gives `ir75` = {{var:i_o}} = $0.2(1 -\,e^{-10000t})$ A, `va` =
+TR. {{card:Results}} gives `ir75` = {{var:i_o}} = $0.2(1 -\,e^{-10000t})$ A, `va` =
 {{var:v_o}} = $15\,e^{-10000t}$ V, `il1` = {{var:i_1}} = $0.25(1 -\,e^{-10000t})$ A and
 `il2` = {{var:i_2}} = $-0.05(1 -\,e^{-10000t})$ A. The pair aids and reduces to
 (160 − 100)/(28 − 20) mH = 7.5 mH, whence the 10 000 per second with 75 Ω.

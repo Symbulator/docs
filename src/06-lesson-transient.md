@@ -82,7 +82,7 @@ basically becomes a short circuit.
 You will learn the subtleties of transient simulations through a series of
 examples. For now, to run one
 {{v7,8|we use an access program called **s\tr**, which takes one argument: the circuit
-description in string form}}{{v9|set **Analysis** to *TR — transient / time
+description in string form}}{{v9|set {{ui:Analysis}} to *TR — transient / time
 domain*}}.
 
 ::: only 7
@@ -142,7 +142,7 @@ vc|t=2
 vc|t=2
 ```
 ::: only 9
-Say "given" in the **Evaluate** card's **Conditions** box:
+Say "given" in the {{card:Evaluate}} card's {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 vc
@@ -258,26 +258,26 @@ s\plot()
 ```
 :::
 ::: only 9
-Symbulator draws plots in the **Plotting Tools** card below the results.
+Symbulator draws plots in the {{card:Plotting Tools}} card below the results.
 Solve the circuit first, since the plot is of an answer, then open the card
 and fill in four things:
 
 - **Plot type**: *Plot a function of time (TR)*
-- **Variable to plot**: the answer you want, such as `v2`
-- **Start time (s)** and **End time (s)**: the window, for example 0 and
+- {{ui:Variable to plot}}: the answer you want, such as `v2`
+- {{ui:Start time (s)}} and {{ui:End time (s)}}: the window, for example 0 and
   0.005
-- **Points**: how finely to sample it; 300 is the default and is usually
+- {{ui:Points}}: how finely to sample it; 300 is the default and is usually
   plenty
 
-Press **Run** and the curve appears under the card.
+Press {{ui:Run}} and the curve appears under the card.
 
 The variable must be an answer's name, not an expression, and one this
-circuit has, as **Results** spells it: `v2` or `ir1`.
+circuit has, as {{card:Results}} spells it: `v2` or `ir1`.
 
 ::: warning A curve the inverse Laplace could not find
 When the inverse Laplace transform cannot produce an expression, Symbulator
 samples the s-domain answer numerically, so the plot still appears even when
-**Results** shows nothing for that variable. A blank plot usually means a
+{{card:Results}} shows nothing for that variable. A blank plot usually means a
 misspelled variable.
 :::
 :::
@@ -378,7 +378,7 @@ c,1,0,1/12
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 v_{c} = 6\ \mathrm{V}
@@ -422,9 +422,9 @@ c,1,0,1/12,vc0
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are `vc` and `ic`, in **Results**.
+The answers you want are `vc` and `ic`, in {{card:Results}}.
 :::
 
 When the simulation is *Done*, we get the expressions below. They are right.
@@ -471,7 +471,7 @@ c,3,0,1/12
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 v_{c} = 8\ \mathrm{V}
@@ -509,9 +509,9 @@ c,3,0,1/12,8
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -561,7 +561,7 @@ c,2,0,1/10
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 v_{c} = 6\ \mathrm{V}
@@ -597,9 +597,9 @@ c,2,0,1/10,6
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -647,9 +647,9 @@ r,1,0,r
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are `vl`, `il` and `vr`, in **Results**.
+The answers you want are `vl`, `il` and `vr`, in {{card:Results}}.
 :::
 
 We get the right answers:
@@ -697,7 +697,7 @@ r2,2,0,r
 ```
 
 ::: only 9
-The answer you want is `il`, in **Results**.
+The answer you want is `il`, in {{card:Results}}.
 :::
 
 For **t ≥ 0s**, simulate in TR, giving the inductor its initial condition.
@@ -716,9 +716,9 @@ r2,2,0,r
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answer you want is in **Results**:
+The answer you want is in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -758,7 +758,7 @@ r12,2,0,12
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 i_{l} = 2\ \mathrm{A}
@@ -794,9 +794,9 @@ r12,2,0,12
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -845,9 +845,9 @@ l,v,0,l,5
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answer you want is in **Results**:
+The answer you want is in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -889,7 +889,7 @@ ed,3,0,3*vr8
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 i_{l} = 2\ \mathrm{A}
@@ -920,9 +920,9 @@ ed,3,0,3*vr8
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -967,7 +967,7 @@ o,0,1,o
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 v_{c} = 10\ \mathrm{V}
@@ -1002,9 +1002,9 @@ o,0,1,o
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1052,7 +1052,7 @@ r2,1,0,2
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 v_{c} = 10\ \mathrm{V}
@@ -1087,9 +1087,9 @@ r2,1,0,2
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1140,7 +1140,7 @@ r4,1,0,4
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 v_{c} = 8\ \mathrm{V}
@@ -1172,9 +1172,9 @@ r4,1,0,4
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1265,7 +1265,7 @@ l,2,0,6
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 i_{l} = 3\ \mathrm{A}
@@ -1297,9 +1297,9 @@ l,1,0,6,3
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1345,9 +1345,9 @@ l,1,0,6,.055
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1395,9 +1395,9 @@ c,2,0,c,0
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are `vc`, `vr` and `ic`, in **Results**.
+The answers you want are `vc`, `vr` and `ic`, in {{card:Results}}.
 :::
 
 There is no need to ask for {{var:i_R}}, since {{var:i_R}}={{var:i_C}}. We get
@@ -1445,9 +1445,9 @@ r,2,0,r
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are `vl`, `vr` and `il`, in **Results**.
+The answers you want are `vl`, `vr` and `il`, in {{card:Results}}.
 :::
 
 There is no need to ask for {{var:i_R}}, since in a series circuit it will be
@@ -1498,9 +1498,9 @@ r2,3,0,2
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1549,9 +1549,9 @@ r,1,0,r
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1601,9 +1601,9 @@ r1,2,0,1
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1652,9 +1652,9 @@ o,0,2,o
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1704,9 +1704,9 @@ c,2,0,c,0
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answer you want is `vc`, in **Results**.
+The answer you want is `vc`, in {{card:Results}}.
 :::
 
 The expression for the capacitor's voltage drop in the first interval is:
@@ -1734,7 +1734,7 @@ vc|t=to
 ```
 
 ::: only 9
-Put `vc` in the **Evaluate** card and write `t = to` in its **Conditions**
+Put `vc` in the {{card:Evaluate}} card and write `t = to` in its {{ui:Conditions}}
 box, to evaluate this expression under this condition. The answer comes back {{o:V - V*exp(-to/(c*r))}}.
 :::
 
@@ -1767,9 +1767,9 @@ c,2,0,c,v-e^(-to/(c*r))*v
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answer you want is `vc`, in **Results**.
+The answer you want is `vc`, in {{card:Results}}.
 :::
 
 This is the expression for the capacitor's voltage drop in the second
@@ -1804,9 +1804,9 @@ r,2,0,r
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answer you want is `il`, in **Results**.
+The answer you want is `il`, in {{card:Results}}.
 :::
 
 The expression for the inductor's current in the first interval is:
@@ -1834,7 +1834,7 @@ il|t=to
 ```
 
 ::: only 9
-Put `il` in the **Evaluate** card and write `t = to` in its **Conditions**
+Put `il` in the {{card:Evaluate}} card and write `t = to` in its {{ui:Conditions}}
 box. The answer comes back {{o:V/r - V*exp(-r*to/l)/r}}, which is the same
 expression gathered differently.
 :::
@@ -1868,9 +1868,9 @@ r,2,0,r
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answer you want is `il`, in **Results**.
+The answer you want is `il`, in {{card:Results}}.
 :::
 
 To put this in terms of the same t as the first interval, we replace **t**
@@ -1918,7 +1918,7 @@ j,0,2,2*ir3
 ```
 
 ::: only 9
-The answer you want is `vc`, in **Results**.
+The answer you want is `vc`, in {{card:Results}}.
 :::
 
 2
@@ -1943,9 +1943,9 @@ j,0,2,2*ir3
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answer you want is in **Results**:
+The answer you want is in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1981,7 +1981,7 @@ s\only("vc")
 ```
 
 ::: only 9
-Optional in Symbulator 9, which solves quickly enough: if you want to, tick **Do you want to limit the results to save time?** under the analysis menus and list `vc` in the field it reveals.
+Optional in Symbulator 9, which solves quickly enough: if you want to, tick {{ui:Do you want to limit the results to save time?}} under the analysis menus and list `vc` in the field it reveals.
 :::
 
 Then we run the simulation for the first interval, just as we did before, but
@@ -2002,7 +2002,7 @@ r1,2,0,1
 ```
 
 ::: only 9
-The answer you want is `vc`, in **Results**.
+The answer you want is `vc`, in {{card:Results}}.
 :::
 
 -2
@@ -2019,7 +2019,7 @@ s\only("vc")
 ```
 
 ::: only 9
-Optional in Symbulator 9, which solves quickly enough: if you want to, tick **Do you want to limit the results to save time?** under the analysis menus and list `vc` in the field it reveals.
+Optional in Symbulator 9, which solves quickly enough: if you want to, tick {{ui:Do you want to limit the results to save time?}} under the analysis menus and list `vc` in the field it reveals.
 :::
 
 Then we run the simulation for the second interval, just as we did before,
@@ -2042,9 +2042,9 @@ r1,2,0,1
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answer you want is in **Results**:
+The answer you want is in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -2110,7 +2110,7 @@ i_{c} = (-i/(c r))e^{(-t/(c r))}
 :::
 
 ::: only 9
-They are already in **Results**: `vc` is {{o:i*exp(-t/(c*r))/c}} and `ic`
+They are already in {{card:Results}}: `vc` is {{o:i*exp(-t/(c*r))/c}} and `ic`
 is {{o:i*DiracDelta(t) - i*exp(-t/(c*r))/(c*r)}}.
 
 The impulse survives in the capacitor's current, which is right — the
@@ -2156,9 +2156,9 @@ r1,2,0,1
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -2202,9 +2202,9 @@ l,1,0,l,0
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -2245,9 +2245,9 @@ r1,2,0,1
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -2290,9 +2290,9 @@ l,1,0,2,0
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -2332,9 +2332,9 @@ l,1,0,2,0
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -2377,9 +2377,9 @@ j,0,2,2*ir3
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -2419,9 +2419,9 @@ r1,2,0,1
 ```
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -2468,7 +2468,7 @@ r3,2,0,2
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 v_{c} = 2\ \mathrm{V}
@@ -2542,7 +2542,7 @@ and wait a little. The graph of the voltage drop in the capacitor between
 time 0 and 1.5 seconds should appear in the screen.
 :::
 ::: only 9
-Open the **Plotting Tools** card, leave **Plot type** on *Plot a function of
+Open the {{card:Plotting Tools}} card, leave **Plot type** on *Plot a function of
 time (TR)*, and give it `vc` as the variable, `0` as the start and `1.5` as
 the end. The graph appears beneath.
 :::
@@ -2581,7 +2581,7 @@ c,2,0,1/3
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 v_{c} = 2\ \mathrm{V}
@@ -2600,7 +2600,7 @@ for t≥0.
 
 ::: only 9
 The answers are `vc` = {{o:3*exp(-2*t) - exp(-6*t)}} and `il` =
-{{o:2*exp(-6*t) - 2*exp(-2*t)}}, both in **Results**.
+{{o:2*exp(-6*t) - 2*exp(-2*t)}}, both in {{card:Results}}.
 :::
 
 ```sym 7
@@ -2707,7 +2707,7 @@ r2,2,0,1/6
 ```
 
 ::: only 9
-The answer you want is `vc`, in **Results**.
+The answer you want is `vc`, in {{card:Results}}.
 :::
 
 -7/50
@@ -2728,7 +2728,7 @@ e2,4,0,3
 :::
 
 ::: only 9
-The answer you want is `il`, in **Results**.
+The answer you want is `il`, in {{card:Results}}.
 :::
 
 1
@@ -2825,7 +2825,7 @@ j,0,3,1
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 v_{c} = 2\ \mathrm{V}
@@ -2908,7 +2908,7 @@ c,1,0,1/8
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 i_{l} = 2\ \mathrm{A}
@@ -2999,9 +2999,9 @@ c,1,0,1/8,0
 :::
 
 ::: only 9
-Set **Analysis** to *FD — complex frequency domain*.
+Set {{ui:Analysis}} to *FD — complex frequency domain*.
 
-The answer you want is `vc`, in **Results**.
+The answer you want is `vc`, in {{card:Results}}.
 :::
 
 -16\*l/(l\*s^2+8\*l\*s+8)
@@ -3014,7 +3014,7 @@ solve(–16/(s+4)^2=–16*l/(l*s^2+8*l*s+8),l)
 ```
 
 ::: only 9
-That is what the **Solve** card is for — a system that is not a circuit:
+That is what the {{card:Solve}} card is for — a system that is not a circuit:
 
 ```field 9 Equation(s) to solve in terms of the results
 -16/(s+4)^2 = -16*l/(l*s^2+8*l*s+8)
@@ -3054,7 +3054,7 @@ l2,2,0,4
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 i_{l1} = 2\ \mathrm{A}
@@ -3127,7 +3127,7 @@ o,0,2,o
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 v_{ca} = 0\ \mathrm{V}
@@ -3237,7 +3237,7 @@ i_{l} = (1/20)e^{-3t}\sin(4t)
 
 These are the right answers. {{v7,8|To plot them, run the `plot` tool, thus:
 s\plot(). Once the plot window opens, enter `vc` as function, `0` as minimal
-time and `1.5` as maximal time.}}{{v9|To plot them, open **Plotting Tools**,
+time and `1.5` as maximal time.}}{{v9|To plot them, open {{card:Plotting Tools}},
 enter `vc` as the variable, `0` as the start and `1.5` as the end.}} Compare
 to the graph from the book. Repeat the plot for `il`, and compare that one to
 the book's graph too.
@@ -3338,7 +3338,7 @@ s1,3,0
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 i_{l} = 4\ \mathrm{A}
@@ -3370,7 +3370,7 @@ c,3,0,1'µ,0
 :::
 
 Finally, {{v7,8|run `s\plot()` and enter `vl` as function, `0` as minimal time and
-`0.005` as maximal time}}{{v9|plot `vl` in **Plotting Tools** from `0` to
+`0.005` as maximal time}}{{v9|plot `vl` in {{card:Plotting Tools}} from `0` to
 `0.005` s}}. In the resulting plot you will see something
 outstanding: around t = 1.57 ms, the voltage drop across the inductor is 3991
 volts!
@@ -3538,7 +3538,7 @@ cb,2,0,1/3
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 
 ::: result
 v_{ca} = 9\ \mathrm{V}
@@ -3582,7 +3582,7 @@ j,0,2,10e^(-t)*sin(2t+30*pi/180)
 :::
 
 ::: only 9
-Set **Analysis** to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 :::
 
 {{v7,8|Be patient. This took 78 seconds in my calculator, including over half
@@ -3628,7 +3628,7 @@ v_{2} &= (-2453/34-20/17)e^{-t} \cos(2t) \\
 
 ::: only 9
 Symbulator 9 answers this one in about a second; `v1` and `v2` are in
-**Results**.
+{{card:Results}}.
 :::
 
 ```sym 7
@@ -3654,7 +3654,7 @@ the problem up - is a living legend among circuit students at UTP.
 
 The **expert** tool can be very useful in transient analysis. Using it,
 however, requires some knowledge. Here’s two things you need to know in order
-to use {{v7,8|`ex`}}{{v9|**Expert Mode**}} like a boss:
+to use {{v7,8|`ex`}}{{v9|{{ui:Expert Mode}}}} like a boss:
 
 First, when Symbulator solves a problem using TR, it follows these general
 steps:
@@ -3702,7 +3702,7 @@ current through the capacitor and the value of the source.
 This problem is a match made in heaven for the **expert** tool, because we
 have one unknown value in the circuit (i.e. the value of the step source) and
 we have one known answer (i.e. the voltage drop in the capacitor.) So, the
-game plan here is to run this circuit through Symbulator’s {{v7,8|expert mode}}{{v9|**Expert Mode**}}, add
+game plan here is to run this circuit through Symbulator’s {{v7,8|expert mode}}{{v9|{{ui:Expert Mode}}}}, add
 one new equation and one new unknown, and then solve. First, let’s generate
 the new equation.
 
@@ -3715,7 +3715,7 @@ DiffEq’s Laplace Transform to do so: `s\t2s`.
 :::
 
 ::: only 9
-The new equation is simply `1-e^(-t/2) = vc`: **Expert Mode** reads it in the
+The new equation is simply `1-e^(-t/2) = vc`: {{ui:Expert Mode}} reads it in the
 time domain, like the answers on screen.
 
 If you would rather convert by hand, **t2s** is still there and an equation
@@ -3739,7 +3739,7 @@ s\t2s(1-e^(–t/2))=vc
 will want to paste it in the Expert window. }}Now let’s run the Expert
 simulation of the circuit. Let’s define the value of the source as `a*u(t)`,
 since we know it’s a step source; the variable `a` will serve as the unknown
-value, for which we will solve in {{v7,8|the Expert mode}}{{v9|**Expert Mode**}}.
+value, for which we will solve in {{v7,8|the Expert mode}}{{v9|{{ui:Expert Mode}}}}.
 
 ```sym 7
 s\ex("e,1,0,a*u(t):r,1,2,2:c,2,0,1,0")
@@ -3759,7 +3759,7 @@ Expert prompt. In the equations field, paste the new equation, adding the
 word` and `first:
 :::
 ::: only 9
-Choose TR, then open **Expert Mode**. **Add equation(s)** takes one per line:
+Choose TR, then open {{ui:Expert Mode}}. {{ui:Add equation(s)}} takes one per line:
 
 ```field 9 Add equation(s)
 1-e^(-t/2) = vc
@@ -3777,7 +3777,7 @@ and 1/s-2/(2*s+1)=vc
 In the unknown field, add the variable a, preceded by a comma:
 :::
 ::: only 9
-**Add unknown(s)** takes the name:
+{{ui:Add unknown(s)}} takes the name:
 
 ```field 9 Add unknown(s)
 a
@@ -3807,7 +3807,7 @@ vc
 1-e{{sup:-t/2}}
 :::
 ::: only 9
-`vc` in **Results** reads {{o:1 - exp(-t/2)}}, which it does.
+`vc` in {{card:Results}} reads {{o:1 - exp(-t/2)}}, which it does.
 :::
 
 ::: only 7,8
@@ -3895,7 +3895,7 @@ When prompted, select TR. In the equations field, add the new equation you
 found:
 :::
 ::: only 9
-Choose TR, and put `vs` in **Add unknown(s)** beside the equation above.
+Choose TR, and put `vs` in {{ui:Add unknown(s)}} beside the equation above.
 :::
 
 ```sym 7
@@ -4008,7 +4008,7 @@ l,2,0,1,0
 Choose TR, and add `,vs` to the unknowns and the following to the equations
 :::
 ::: only 9
-Choose TR, put `vs` in **Add unknown(s)**, and give **Add equation(s)** the
+Choose TR, put `vs` in {{ui:Add unknown(s)}}, and give {{ui:Add equation(s)}} the
 answer you know — in time, as always here:
 
 ```field 9 Add equation(s)
@@ -4024,7 +4024,7 @@ and il=1/s-1/(s+2)
 ```
 
 {{v7,8|And solve. When done, ask for the sanity check:}}{{v9|Run it,
-then put the sanity check into **Evaluate**:}}
+then put the sanity check into {{card:Evaluate}}:}}
 
 ```sym 7
 il

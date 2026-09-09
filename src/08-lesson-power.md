@@ -5,13 +5,13 @@ title: Power in AC circuits
 updated: 2023-07-08
 summary: >
   Learn to solve *average power* and *complex power* problems in AC. Learn how
-  you can use RMS values in Symbulator with {{v7,8|the **rms** flag}}{{v9|the **RMS phasors** setting}}. Solve power
+  you can use RMS values in Symbulator with {{v7,8|the **rms** flag}}{{v9|the {{ui:RMS phasors}} setting}}. Solve power
   factor problems using the **pf** tool.
 ---
 
 In this lesson you will learn how to run more advanced *alternating current*
 simulations. You will learn how to solve *average power* problems, when and how
-to use {{v7,8|the **rms** flag}}{{v9|the **RMS phasors** setting}}, and how to solve *complex power* problems.
+to use {{v7,8|the **rms** flag}}{{v9|the {{ui:RMS phasors}} setting}}, and how to solve *complex power* problems.
 
 ## Average power {#average-power}
 
@@ -88,7 +88,7 @@ It is the same answer.
 
 ::: only 9
 In AC, `pmax` is the *average* maximum power, computed from the real part of
-the equivalent impedance: **Results** shows `pmax` = {{o:2.367}} W, the power
+the equivalent impedance: {{card:Results}} shows `pmax` = {{o:2.367}} W, the power
 delivered when the load is the conjugate of `zeq`.
 :::
 :::
@@ -98,7 +98,7 @@ delivered when the load is the conjugate of `zeq`.
 
 In the previous lesson we mentioned that after an AC simulation you also get
 the complex power consumed. How to read these values depends on {{v7,8|a flag called
-the RMS flag}}{{v9|the **RMS phasors** setting}}.{{i:RMS}}
+the RMS flag}}{{v9|the {{ui:RMS phasors}} setting}}.{{i:RMS}}
 
 ::: only 7,8
 ### The {{v7|s\rms}}{{v8|userms}} flag
@@ -131,8 +131,8 @@ in normal values (also called magnitude values) and in RMS. Working in RMS
 simply means every current and voltage in the analysis is taken to be RMS.
 That's it.
 
-The switch is in **Settings**, under **AC power convention**: tick
-**RMS phasors**. Off means peak amplitude, the convention with the divide-by-two,
+The switch is in {{ui:Settings}}, under **AC power convention**: tick
+{{ui:RMS phasors}}. Off means peak amplitude, the convention with the divide-by-two,
 and the setting affects AC power only. It is always in view, so it cannot be
 left set from a problem you finished an hour ago.
 :::
@@ -166,8 +166,8 @@ r3,2,0,4
 ```
 
 ::: only 9
-AC, with `omega` typed into the ω box, and **RMS phasors** ticked in
-**Settings**.
+AC, with `omega` typed into the ω box, and {{ui:RMS phasors}} ticked in
+{{ui:Settings}}.
 :::
 
 Or, if you want to simplify the impedances, the resistors can be collapsed into
@@ -224,7 +224,7 @@ which. That second form works only if the expression can be evaluated
 numerically.
 :::
 ::: only 9
-The tool is in the **Mini-Tools** card. Choose *pf — power factor*; it asks
+The tool is in the {{card:Mini-Tools}} card. Choose *pf — power factor*; it asks
 for the voltage and the current:{{i:power factor}}
 
 ```field 9 Voltage
@@ -285,7 +285,7 @@ r2,2,0,15-10j
 ```
 
 ::: only 9
-Again AC with `omega` and **RMS phasors** ticked.
+Again AC with `omega` and {{ui:RMS phasors}} ticked.
 :::
 
 The complex power absorbed in the source, line and load are in
@@ -302,7 +302,7 @@ The complex power absorbed in the source, line and load are in
 ```
 
 ::: only 9
-**Results** shows:
+{{card:Results}} shows:
 
 - `-se` = {{o:2163.8}} − {{o:911.1}}𝐢 VA
 - `sr1` = {{o:455.5}} + {{o:227.8}}𝐢 VA
@@ -324,8 +324,8 @@ AS7's Practice Problem 11.10
 :::
 
 ::: answer
-The values are RMS, so {{v7,8|set `true→s\rms`}}{{v9|tick **RMS phasors** in
-**Settings**}}.
+The values are RMS, so {{v7,8|set `true→s\rms`}}{{v9|tick {{ui:RMS phasors}} in
+{{ui:Settings}}}}.
 
 ```sym 7
 true→s\rms:"e,1,0,165.:r,1,0,10.+[𝐢4.,8.-𝐢6.]"→cir:s\ac(cir,ω)
@@ -346,7 +346,7 @@ Written out as four elements rather than one, which is clearer and costs
 nothing here. The average power supplied is the opposite of the power the
 source consumes, `pe`: {{o:2007.1}} W.
 
-For the power factor, use **Mini-Tools** with *pf*, giving it the source's
+For the power factor, use {{card:Mini-Tools}} with *pf*, giving it the source's
 voltage and the current it delivers — which is the opposite of the current
 through the source element:
 
@@ -394,7 +394,7 @@ rl2,3,0,.1+1j
 ```
 
 ::: only 9
-AC with **RMS phasors** ticked. The power consumed `prl` reads {{o:573.2}} W.
+AC with {{ui:RMS phasors}} ticked. The power consumed `prl` reads {{o:573.2}} W.
 :::
 
 ```out 7,8
@@ -434,7 +434,7 @@ r3,1,0,60
 consumes: {{v7,8|`-se`}}{{v9|the opposite of `se`}} gives
 {{o:1835.9}} − {{o:114.7}}j VA.
 
-**(b)** The power factor, from {{v7,8|`s\pf("e")`}}{{v9|*pf* in **Mini-Tools**
+**(b)** The power factor, from {{v7,8|`s\pf("e")`}}{{v9|*pf* in {{card:Mini-Tools}}
 with `ve` and `-ie`}}, is {{o:0.99805}} leading.
 
 **(c)** This one needs a frequency, because it needs a capacitor. Add one in
@@ -462,8 +462,8 @@ c,1,0,x
 :::
 
 ::: only 9
-Put `2*pi*50` in the **ω — angular frequency** box — it takes an expression.
-Then ask the **Solve** card for the value of `x` that leaves no reactive
+Put `2*pi*50` in the {{ui:ω — angular frequency}} box — it takes an expression.
+Then ask the {{card:Solve}} card for the value of `x` that leaves no reactive
 power:
 
 ```field 9 Equation(s) to solve in terms of the results
@@ -474,7 +474,7 @@ im(se) = 0
 x
 ```
 
-Tick **real solutions only**.
+Tick {{ui:real solutions only}}.
 :::
 
 ```out 7,8

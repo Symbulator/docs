@@ -514,11 +514,53 @@ INLINE_RE = re.compile(
 )
 
 
+def brace_end(text: str, start: int) -> int:
+    """Index just past the `}}` closing the `{{` at `start`, or -1.
+
+    Depth-counted, so one brace command may contain another:
+    `{{v9|tick {{ui:Show equations}}}}` (#358). Until then INLINE_RE's
+    brace group stopped at the first `}}`, which truncated the outer span
+    and leaked the rest of it onto the page as literal markup -- a trap
+    documented in SPEC.md and policed by a check rather than fixed, and
+    the reason #357 had to leave 44 sites in plain bold.
+    """
+    depth, i, n = 0, start, len(text)
+    while i < n - 1:
+        two = text[i:i + 2]
+        if two == "{{":
+            depth += 1
+            i += 2
+        elif two == "}}":
+            depth -= 1
+            i += 2
+            if depth == 0:
+                return i
+        else:
+            i += 1
+    return -1
+
+
 def parse_inline(text: str) -> list[Node]:
-    out, pos = [], 0
-    for m in INLINE_RE.finditer(text):
-        if m.start() > pos:
-            out.append(Node("text", text=text[pos:m.start()]))
+    out, pos, i, n = [], 0, 0, len(text)
+    while i < n:
+        # Braces first, and by depth rather than by regex: they are the one
+        # inline construct that nests. An unbalanced `{{` falls through to
+        # INLINE_RE, which still matches the flat form, so a damaged source
+        # degrades exactly as it used to instead of eating the paragraph.
+        if text.startswith("{{", i):
+            end = brace_end(text, i)
+            if end > 0:
+                if i > pos:
+                    out.append(Node("text", text=text[pos:i]))
+                out.append(parse_brace(text[i + 2:end - 2]))
+                pos = i = end
+                continue
+        m = INLINE_RE.match(text, i)
+        if not m:
+            i += 1
+            continue
+        if i > pos:
+            out.append(Node("text", text=text[pos:i]))
         kind = m.lastgroup
         s = m.group()
         if kind == "esc":
@@ -537,8 +579,8 @@ def parse_inline(text: str) -> list[Node]:
             out.append(Node("strong", children=parse_inline(s[2:-2])))
         elif kind == "em":
             out.append(Node("em", children=parse_inline(s[1:-1])))
-        pos = m.end()
-    if pos < len(text):
+        pos = i = m.end()
+    if pos < n:
         out.append(Node("text", text=text[pos:]))
     return out
 
@@ -582,6 +624,10 @@ def parse_brace(inner: str) -> Node:
         return Node("ref", text=inner[4:].strip())
     if inner.startswith("o:"):          # an answer the software gave back
         return Node("answer_span", text=inner[2:].strip())
+    if inner.startswith("card:"):       # a card in the app (#357)
+        return Node("uicard", text=inner[5:].strip())
+    if inner.startswith("ui:"):         # a control inside a card (#357)
+        return Node("uictl", text=inner[3:].strip())
     if inner.startswith("var:"):        # a problem's own variable (#261)
         return Node("var", text=inner[4:].strip())
     if inner.startswith("sub:"):
@@ -766,6 +812,13 @@ class HtmlRenderer:
             if ltx:
                 return f'<span class="ans ans-math">\\({ltx}\\)</span>'
             return f'<span class="ans">{html.escape(n.text)}</span>'
+        if n.kind in ("uicard", "uictl"):
+            # #357: the app's own vocabulary, in two tiers -- the card
+            # the reader is sent to, and the control inside it. Bold
+            # alone could not carry either: the book bolds node and
+            # element names too (#267, #302).
+            cls = "ui-card" if n.kind == "uicard" else "ui-ctl"
+            return f'<span class="{cls}">{html.escape(n.text)}</span>'
         if n.kind == "var":
             # #261: a variable the problem itself names -- I_s, v_o, R_L --
             # as distinct from the name Symbulator files the answer under
@@ -1149,6 +1202,9 @@ class TexRenderer:
             if ltx:
                 return r"\ansmath{" + ltx + "}"
             return r"\ans{" + tex_escape(n.text) + "}"
+        if n.kind in ("uicard", "uictl"):    # #357, see the HTML side
+            cmd = r"\uicard{" if n.kind == "uicard" else r"\uictl{"
+            return cmd + tex_escape(n.text) + "}"
         if n.kind == "var":                  # #261, see the HTML side
             base, _, sb = n.text.partition("_")
             sb = r"\textsubscript{" + tex_escape(sb) + "}" if sb else ""
@@ -1683,7 +1739,7 @@ def check(book: Book, versions: list[int], verbose: bool = False) -> int:
     # A heredoc-eaten backslash is invisible in an editor and
     # survives every other check; chapter 9 shipped with one.
     problems.extend(check_control_chars())
-    problems.extend(check_nested_version_spans())
+    problems.extend(check_brace_balance())
     problems.extend(check_buried_v9())
     # The sidebar search is three pieces in three files with nothing else
     # tying them together -- the index this file writes, the markup and
@@ -1809,36 +1865,39 @@ def check_buried_v9() -> list[str]:
     return out
 
 
-def check_nested_version_spans() -> list[str]:
-    """A {{v7,8|...}} span must not contain another {{...}}.
+def check_brace_balance() -> list[str]:
+    """Every `{{` must have its `}}`.
 
-    The inline parser closes a version span at the first `}}` it meets, so a
-    nested `{{o:...}}` or `{{sub:x}}` ends it early and the remainder leaks
-    into the page as literal markup -- `{{v7,8|The calculator returns` and all.
-    It renders, it builds, it passes every other check, and it is visible only
-    if someone reads that paragraph on that one version.
+    Until #358 this function banned the opposite thing -- a brace command
+    nested inside a version span -- because the parser closed a span at the
+    first `}}` it met, so `{{v7,8|... {{o:4.77}} ...}}` truncated and leaked
+    `{{v7,8|The calculator returns` onto the page. Found on 24 Aug 2026 in
+    three passages; #357 tripped it 36 more times and that is what finally
+    got the parser fixed instead of policed.
 
-    Found on 24 Aug 2026 in three passages, all written the same day. Use
-    `::: only 7,8` and `::: only 9` blocks instead when either half needs
-    inline markup of its own."""
+    Nesting is legal now, so what is left to catch is an opener with no
+    closer, which the depth walk reports where it starts. Whole files, not
+    single lines: a span routinely wraps across a line break, and six hid
+    from an earlier per-line version of this check for exactly that reason.
+    """
     import glob as _glob
-    opener = re.compile(r"\{\{(?:v(?:7|8|9|7,8|7,9|8,9)|web|pdf)\|")
     out = []
     for path in sorted(_glob.glob(os.path.join(SRC, "*.md"))):
-        # Whole file, not line by line: a version span routinely wraps across
-        # a line break, and six of these hid from an earlier per-line version
-        # of this check for exactly that reason.
         text = open(path, encoding="utf-8").read()
-        for m in opener.finditer(text):
-            rest = text[m.end():]
-            close = rest.find("}}")
-            inner = rest if close == -1 else rest[:close]
-            if "{{" in inner:
-                line_no = text.count(chr(10), 0, m.start()) + 1
-                out.append(
-                    f"{os.path.basename(path)}:{line_no}: a version span "
-                    f"contains nested {{{{...}}}} markup, which closes it "
-                    f"early -- use ::: only blocks instead")
+        i, n = 0, len(text)
+        while i < n - 1:
+            if text[i:i + 2] == "{{":
+                end = brace_end(text, i)
+                if end < 0:
+                    line_no = text.count(chr(10), 0, i) + 1
+                    out.append(
+                        f"{os.path.basename(path)}:{line_no}: a {{{{ has no "
+                        f"matching }}}} -- the rest of the file would be "
+                        f"swallowed by it")
+                    break
+                i = end
+            else:
+                i += 1
     return out
 
 

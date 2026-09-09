@@ -129,15 +129,19 @@ what a person writing a quotation types anyway.
 | `{{sub:R1}}` | subscript — `I{{sub:R1}}` renders as I with a subscript R1 |
 | `{{var:I_s}}` | a variable the problem itself names — set bold italic; `_` starts a subscript, so this is *I* with s below. Not for Symbulator's own names (`ir3`), which stay in code |
 | `{{o:1.2}}` | a value the software returned |
+| `{{card:Results}}` | a card in the app |
+| `{{ui:Show equations}}` | a control inside a card — field, button, checkbox, menu option |
 
-::: warning A version span cannot contain another brace command
-The inline parser closes a `{{v9|...}}` span at the **first** `}}` it meets.
-Nest anything inside it — `{{sub:r5}}`, `{{o:0.006}}`, `{{t:machine}}` — and
-the span ends early, and the rest of it leaks onto the page as literal
-markup: `{{v7,8|The calculator returns` and all. It builds, it renders, and
-it is visible only if you read that paragraph on that one version.
+::: note A version span may contain other brace commands
+Since #358 the inline parser counts brace depth, so `{{v9|tick
+{{ui:Show equations}}}}` works, and so does a nested `{{sub:r5}}`,
+`{{o:0.006}}` or `{{t:machine}}`. Before it, a span closed at the **first**
+`}}` it met: the span ended early and the rest of it leaked onto the page as
+literal markup — `{{v7,8|The calculator returns` and all — visible only to
+whoever read that paragraph on that one version.
 
-Where either half needs markup of its own, use block directives instead:
+Block directives are still the clearer choice when either half needs much
+markup of its own:
 
 ```
 ::: only 7,8
@@ -148,10 +152,11 @@ Reading the **current through** line: I{{sub:R1}} = 4.77 A.
 :::
 ```
 
-`build.py --check` fails on a nested span, so this is caught rather than
-shipped. It reads whole files, not single lines, because a span routinely
-wraps across a line break — an earlier per-line version of the check missed
-six of them for exactly that reason.
+What `build.py --check` polices now is the failure that is left: a `{{`
+with no matching `}}`, which would swallow the rest of the file. It reads
+whole files, not single lines, because a span routinely wraps across a line
+break — an earlier per-line version of the check missed six for exactly
+that reason.
 :::
 
 Never write raw HTML. `<sub>r1</sub>` is escaped by the build and appears on

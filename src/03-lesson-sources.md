@@ -65,10 +65,10 @@ r1,1,0,20'k
 ```
 
 ::: only 9
-Two lines, two elements. Leave **Type of analysis** on *Solve circuit*, set
-**Analysis** to *DC — direct current*, and click **Run Symbulator**. The
-circuit is numerical, so set **Rounding** to *approx to n digits* with
-**n** = 3 and tick **Use SI prefixes**, as in {{ref:lesson-dc}}.
+Two lines, two elements. Leave {{ui:Type of analysis}} on *Solve circuit*, set
+{{ui:Analysis}} to *DC — direct current*, and click {{ui:Run Symbulator}}. The
+circuit is numerical, so set {{ui:Rounding}} to *approx to n digits* with
+**n** = 3 and tick {{ui:Use SI prefixes}}, as in {{ref:lesson-dc}}.
 :::
 
 ::: only 7,8
@@ -124,7 +124,7 @@ r13,1,3,1/2
 j32,3,2,3
 ```
 
-{{v7,8|We ask for these answers:}}{{v9|Run it in DC. The answers are under **Node voltages**:}}
+{{v7,8|We ask for these answers:}}{{v9|Run it in DC. The answers are under {{ui:Node voltages}}:}}
 
 ```sym 7
 approx({v1,v2,v3})
@@ -276,14 +276,14 @@ use it in two places.{{i:parallel resistors}}
 Inside a circuit description, write it where a value goes — that is what the
 `re,3,0,[6,3]` shorthand below does, and `pr(6,3)` means the same thing.
 
-On its own, type it into the **Evaluate** card. To reduce three resistors in
+On its own, type it into the {{card:Evaluate}} card. To reduce three resistors in
 parallel with values of 10 Ω, 20 Ω and 30 Ω:
 
 ```field 9 Evaluate
 pr(10, 20, 30)
 ```
 
-You get {{o:60/11}} Ω with **Rounding** on *exact*, or {{o:5.45}} Ω
+You get {{o:60/11}} Ω with {{ui:Rounding}} on *exact*, or {{o:5.45}} Ω
 approximately. It nests as deeply as you like, as the two problems below
 show, and it works on symbols: `pr(r1, r2)` gives
 
@@ -300,7 +300,7 @@ AS7's Example 2.10
 
 ::: answer
 No simulation needed: the whole reduction is one nested expression in
-**Evaluate**, from the far end of the ladder outward:
+{{card:Evaluate}}, from the far end of the ladder outward:
 
 ```field 9 Evaluate
 10 + pr(3, 6, 1 + pr(12, 4, 1 + 5))
@@ -332,7 +332,7 @@ The answer is {{o:19}} Ω. This is correct.
 
 Inside a circuit description there is a shorthand: values in square
 brackets, such as `[10,20,30]` or `[r1,r2,r3,r4]`, are read as input to `pr`.
-The brackets work in **Evaluate** too, but this book writes `pr(...)` there,
+The brackets work in {{card:Evaluate}} too, but this book writes `pr(...)` there,
 where brackets are easy to misread as a list.
 
 ### When to reduce resistors
@@ -470,7 +470,7 @@ r1,1,0,4
 ```
 
 ::: only 9
-The answers you want are `v1`, `ie` and `ir1`, in **Results**.
+The answers you want are `v1`, `ie` and `ir1`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -510,9 +510,9 @@ j8,2,0,8
 ```
 
 ::: only 9
-The answers you want are `ir2`, `ir6` and `ir8`, in **Results**.
+The answers you want are `ir2`, `ir6` and `ir8`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -553,7 +553,7 @@ j2,2,0,2
 ```
 
 ::: only 9
-The answers you want are `v1`, `v2`, `ir1`, `ir2` and `ir3`, in **Results**.
+The answers you want are `v1`, `v2`, `ir1`, `ir2` and `ir3`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -596,9 +596,9 @@ j03,0,3,2
 ```
 
 ::: only 9
-The answers you want are `v1`, `v2` and `v3`, in **Results**.
+The answers you want are `v1`, `v2` and `v3`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -641,9 +641,9 @@ rx,3,4,rx
 ```
 
 ::: only 9
-Set **Analysis** to *DC — direct current*. This one needs **Enable Expert Mode** ticked in the **Expert Mode** box; the equations and unknowns go in the fields it reveals.
+Set {{ui:Analysis}} to *DC — direct current*. This one needs {{ui:Enable Expert Mode}} ticked in the {{ui:Expert Mode}} box; the equations and unknowns go in the fields it reveals.
 
-The answers you want are `ir1` and `vrx`, in **Results**.
+The answers you want are `ir1` and `vrx`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -683,7 +683,7 @@ r30,3,0,1/5
 ```
 
 ::: only 9
-The answers you want are `v1`, `v2` and `v3`, in **Results**.
+The answers you want are `v1`, `v2` and `v3`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -748,10 +748,10 @@ r13,1,3,1/2
 ```
 
 ::: only 9
-The answers you want are `v1`, `v2` and `v3`, in **Results**; {{var:i}} is
+The answers you want are `v1`, `v2` and `v3`, in {{card:Results}}; {{var:i}} is
 the opposite of `ie`.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -791,9 +791,9 @@ j2,2,0,4
 ```
 
 ::: only 9
-The answers you want are `v1` and `v2`, in **Results**.
+The answers you want are `v1` and `v2`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -865,9 +865,9 @@ e2,0,3,12
 ```
 
 ::: only 9
-The answers you want are `ir2` and `ir3`, in **Results**.
+The answers you want are `ir2` and `ir3`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -914,9 +914,9 @@ r3,2,0,10
 ```
 
 ::: only 9
-The answers you want are `v1`, `v2`, `ir1`, `ir2` and `ir3`, in **Results**.
+The answers you want are `v1`, `v2`, `ir1`, `ir2` and `ir3`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -962,9 +962,9 @@ r3,a,b,60
 ```
 
 ::: only 9
-The answer you want is `ir3`, in **Results**.
+The answer you want is `ir3`, in {{card:Results}}.
 
-Ask **Evaluate** for:
+Ask {{card:Evaluate}} for:
 
 ```field 9 Evaluate
 va-vb
@@ -997,7 +997,7 @@ Notice that both the voltage drop (given by va-vb) and the current (given by
 by voltage drop:
 
 ::: only 9
-Either equation goes in the **Solve** card:
+Either equation goes in the {{card:Solve}} card:
 
 ```field 9 Equation(s) to solve in terms of the results
 va-vb = 12
@@ -1047,9 +1047,9 @@ e2,b,2,8
 ```
 
 ::: only 9
-The answers you want are `ir2` and `ir3`, in **Results**.
+The answers you want are `ir2` and `ir3`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -1090,7 +1090,7 @@ e,2,0,20
 ```
 
 ::: only 9
-The answers you want are `v1` and `ir1`, in **Results**.
+The answers you want are `v1` and `ir1`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -1129,9 +1129,9 @@ j,0,3,ix
 ```
 
 ::: only 9
-Set **Analysis** to *DC — direct current*. This one needs **Enable Expert Mode** ticked in the **Expert Mode** box; the equations and unknowns go in the fields it reveals.
+Set {{ui:Analysis}} to *DC — direct current*. This one needs {{ui:Enable Expert Mode}} ticked in the {{ui:Expert Mode}} box; the equations and unknowns go in the fields it reveals.
 
-The answers you want are `ix` and `v3`, in **Results**.
+The answers you want are `ix` and `v3`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -1205,8 +1205,8 @@ Select DC, and press Enter. Add equation `ir2=2'm.` Add unknown `is`. Run the
 simulation.
 :::
 ::: only 9
-Choose DC. Open **Expert Mode**, put `ir2 = 2'm` in **Add equation(s)** and
-`is` in **Add unknown(s)**, then **Run Symbulator**.
+Choose DC. Open {{ui:Expert Mode}}, put `ir2 = 2'm` in {{ui:Add equation(s)}} and
+`is` in {{ui:Add unknown(s)}}, then {{ui:Run Symbulator}}.
 :::
 
 ::: only 7,8
@@ -1244,7 +1244,7 @@ r2,1,0,5
 ```
 
 ::: only 9
-The answers you want are `ir1`, `v1` and `ir2`, in **Results**.
+The answers you want are `ir1`, `v1` and `ir2`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -1280,7 +1280,7 @@ r8,o,0,8
 ```
 
 ::: only 9
-The answers you want are `vo` and `iro`, in **Results**.
+The answers you want are `vo` and `iro`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -1315,7 +1315,7 @@ ra,0,3,15
 
 ::: only 9
 The power each source delivers is the opposite of `pei` and of `ped`. For the
-resistors together, ask **Evaluate** for:
+resistors together, ask {{card:Evaluate}} for:
 
 ```field 9 Evaluate
 pr1+pra
@@ -1356,7 +1356,7 @@ ro,1,2,5
 ```
 
 ::: only 9
-The answers you want are `vx` and `vro`, in **Results**.
+The answers you want are `vx` and `vro`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -1390,7 +1390,7 @@ r2,3,0,1/5
 ```
 
 ::: only 9
-The answers you want are `ir1`, `vr1` and `vr2`, in **Results**.
+The answers you want are `ir1`, `vr1` and `vr2`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -1427,7 +1427,7 @@ ro,o,0,6
 ```
 
 ::: only 9
-The answers you want are `vo` and `iri`, in **Results**.
+The answers you want are `vo` and `iri`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -1464,9 +1464,9 @@ ed,3,0,4*vx
 ```
 
 ::: only 9
-The answers you want are `pr1`, `pei`, `pr2`, `pr3` and `ped`, in **Results**.
+The answers you want are `pr1`, `pei`, `pr2`, `pr3` and `ped`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -1522,9 +1522,9 @@ ed,c,0,4*iro
 ```
 
 ::: only 9
-The answer you want is `iro`, in **Results**.
+The answer you want is `iro`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 The answer, {{o:1.5}} A, is correct.
@@ -1562,7 +1562,7 @@ ed,2,3,ir1/2
 ```
 
 ::: only 9
-The answers you want are `ir1`, `vr3` and `ied`, in **Results**.
+The answers you want are `ir1`, `vr3` and `ied`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -1602,9 +1602,9 @@ r4b,2,0,4
 ```
 
 ::: only 9
-The answers you want are `v1`, `v2` and `v3`, in **Results**.
+The answers you want are `v1`, `v2` and `v3`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -1656,9 +1656,9 @@ r1,4,0,1
 ```
 
 ::: only 9
-The answers you want are `v1`, `v2`, `v3` and `v4`, in **Results**.
+The answers you want are `v1`, `v2`, `v3` and `v4`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -1720,7 +1720,7 @@ r4,3,0,1
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1770,7 +1770,7 @@ ed,4,0,2*vr4
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1825,7 +1825,7 @@ r2,2,4,1/2
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1877,9 +1877,9 @@ jr,0,x,2
 ```
 
 ::: only 9
-The answers you want are `ira`, `ijb` and `ir9`, in **Results**.
+The answers you want are `ira`, `ijb` and `ir9`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -1936,9 +1936,9 @@ r4,1,2,4
 ```
 
 ::: only 9
-Set **Analysis** to *DC — direct current*. This one needs **Enable Expert Mode** ticked in the **Expert Mode** box; the equations and unknowns go in the fields it reveals.
+Set {{ui:Analysis}} to *DC — direct current*. This one needs {{ui:Enable Expert Mode}} ticked in the {{ui:Expert Mode}} box; the equations and unknowns go in the fields it reveals.
 
-The answers you want are `ir1`, `vjd` and `vs`, in **Results**; {{var:i_s}} is
+The answers you want are `ir1`, `vjd` and `vs`, in {{card:Results}}; {{var:i_s}} is
 the opposite of `ies`.
 :::
 
@@ -1984,9 +1984,9 @@ j,4,0,vr10/15
 ```
 
 ::: only 9
-The answers you want are `vr10`, `ir2` and `vj`, in **Results**.
+The answers you want are `vr10`, `ir2` and `vj`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -2027,7 +2027,7 @@ ro,o,0,500
 ```
 
 ::: only 9
-The answers you want are `vo` and `iro`, in **Results**.
+The answers you want are `vo` and `iro`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -2071,9 +2071,9 @@ j,0,o,100'm*vr2
 ```
 
 ::: only 9
-The answers you want are `vo` and `re`, in **Results**.
+The answers you want are `vo` and `re`, in {{card:Results}}.
 
-Here we use **Rounding** — *approx to n digits*, with **n** = 3.
+Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
 
 ::: only 7,8
@@ -2118,9 +2118,9 @@ ro,o,0,500
 ```
 
 ::: only 9
-The answers you want are `iro`, `vo` and `pro`, in **Results**.
+The answers you want are `iro`, `vo` and `pro`, in {{card:Results}}.
 
-Ask **Evaluate** for:
+Ask {{card:Evaluate}} for:
 
 ```field 9 Evaluate
 pro/(-pjs)
@@ -2159,7 +2159,7 @@ rl,o,0,rl
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+The answer you want is `vo`, in {{card:Results}}.
 :::
 
 The answer, shown first below, is correct. The textbook's answer follows it.
@@ -2219,7 +2219,7 @@ rl,2,0,rl
 ```
 
 ::: only 9
-The answer you want is `v2`, in **Results**.
+The answer you want is `v2`, in {{card:Results}}.
 :::
 
 {{v7,8|The simulation took 25 seconds. }}The answer I got is shown first
@@ -2266,7 +2266,7 @@ rl,b,0,rl
 ```
 
 ::: only 9
-The answer you want is `rji`, in **Results**.
+The answer you want is `rji`, in {{card:Results}}.
 :::
 
 The answer we get — {{v7,8|`re*(β+1)`}}{{v9|`re1*(β+1)`}} — is correct, as can be seen by comparing it to
@@ -2309,7 +2309,7 @@ rl,o,0,1/gl
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+The answer you want is `vo`, in {{card:Results}}.
 :::
 
 This is the answer we get. It is correct. Compare it with the textbook's
@@ -2360,7 +2360,7 @@ j,c,e,β*irb
 ```
 
 ::: only 9
-The answer you want is `irb`, in **Results**.
+The answer you want is `irb`, in {{card:Results}}.
 :::
 
 Compare my answer, first below, to the book's answer beneath it.

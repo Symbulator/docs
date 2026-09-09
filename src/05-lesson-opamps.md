@@ -75,7 +75,7 @@ as trivial by the calculator, and this leaves Symbulator one equation short.
 :::
 :::
 ::: only 9
-In Symbulator 9 the two cannot collide: **Results** lists node voltages and
+In Symbulator 9 the two cannot collide: {{card:Results}} lists node voltages and
 element quantities separately, so a node called **o** and an op amp called **o** never
 share a name.
 
@@ -111,7 +111,7 @@ r3o,3,o,20'k
 o,3,2,o
 ```
 
-{{v7,8|We ask for the values of the variables `vo` and `po`:}}{{v9|Read `vo` and `po` in **Results**:}}
+{{v7,8|We ask for the values of the variables `vo` and `po`:}}{{v9|Read `vo` and `po` in {{card:Results}}:}}
 
 ```sym 7
 {vo,po}
@@ -163,7 +163,7 @@ o,1,2,3
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **3** in the first and **0** in the second — the pair of terminals you are looking into.
 :::
 
 ::: only 7,8
@@ -239,7 +239,7 @@ o,2,1,o
 ```
 
 ::: only 9
-The answers you want are `vo` and `io`, in **Results**.
+The answers you want are `vo` and `io`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -274,7 +274,7 @@ o,1,0,o
 ```
 
 ::: only 9
-Ask **Evaluate** for:
+Ask {{card:Evaluate}} for:
 
 ```field 9 Evaluate
 vo/vs
@@ -319,7 +319,7 @@ o,0,1,o
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+The answer you want is `vo`, in {{card:Results}}.
 :::
 
 This problem is almost identical to the one above. The answer we get is
@@ -359,7 +359,7 @@ o,0,1,o
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -407,7 +407,7 @@ o,0,2,o
 ```
 
 ::: only 9
-Put `vo` in **Evaluate** and the given value in its **Conditions** box:
+Put `vo` in {{card:Evaluate}} and the given value in its {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 vo
@@ -499,7 +499,7 @@ o,a,b,o
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+The answer you want is `vo`, in {{card:Results}}.
 :::
 
 The answer, {{o:-6}}, is correct.
@@ -598,7 +598,7 @@ o,0,1,o
 ```
 
 ::: only 9
-Ask **Evaluate** for:
+Ask {{card:Evaluate}} for:
 
 ```field 9 Evaluate
 vo/is1
@@ -649,7 +649,7 @@ Asking:
 gets **-r1\*r3/r2-r1-r3**, which is equivalent to the book's answer.
 :::
 ::: only 9
-Ask **Evaluate** for `vo/is1`. It gives
+Ask {{card:Evaluate}} for `vo/is1`. It gives
 
 $$
 \dfrac{v_{o}}{is_{1}} = -r_{1} - \dfrac{r_{1}\,r_{3}}{r_{2}} - r_{3}
@@ -687,7 +687,7 @@ o,p,1,o
 ```
 
 ::: only 9
-Ask **Evaluate** for:
+Ask {{card:Evaluate}} for:
 
 ```field 9 Evaluate
 vo/v1
@@ -731,7 +731,7 @@ o,2,1,o
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+The answer you want is `vo`, in {{card:Results}}.
 :::
 
 We get the right answer (below), an expression equivalent to the book's
@@ -776,7 +776,7 @@ r4,3,0,r4
 ```
 
 ::: only 9
-Ask **Evaluate** for:
+Ask {{card:Evaluate}} for:
 
 ```field 9 Evaluate
 vo/vs
@@ -820,7 +820,7 @@ r2,2,0,r2
 :::
 
 ::: only 9
-Ask **Evaluate** for:
+Ask {{card:Evaluate}} for:
 
 ```field 9 Evaluate
 v2/vs
@@ -858,7 +858,7 @@ r4,3,0,r4
 :::
 
 ::: only 9
-Ask **Evaluate** for:
+Ask {{card:Evaluate}} for:
 
 ```field 9 Evaluate
 vo/v2
@@ -904,7 +904,7 @@ o,1,o,o
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+The answer you want is `vo`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -945,11 +945,11 @@ rs,1,2,2'k
 ```
 
 ::: only 9
-Set **Type of analysis** to *Find equivalent* and **Type of equivalent** to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
+Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to *Thévenin / Norton*. Two node boxes appear: put **2** in the first and **0** in the second — the pair of terminals you are looking into. Tick the question about the load, choose *DC* and run it.
 
-The answer you want is `pmax`, in **Results**, and under it `prl`, the power
-in the load as {{ref:lesson-equivalents}} describes. Ask **Evaluate** for it
-with the load in the **Conditions** box:
+The answer you want is `pmax`, in {{card:Results}}, and under it `prl`, the power
+in the load as {{ref:lesson-equivalents}} describes. Ask {{card:Evaluate}} for it
+with the load in the {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 prl
@@ -984,7 +984,7 @@ rl,o,0,1'k
 :::
 
 ::: only 9
-The answer you want is `prl`, in **Results** — the power consumed by the
+The answer you want is `prl`, in {{card:Results}} — the power consumed by the
 load resistor **rl**.
 :::
 
@@ -1019,7 +1019,7 @@ o,b,a,o
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+The answer you want is `vo`, in {{card:Results}}.
 :::
 
 The answer, {{o:-1}}, is correct.
@@ -1077,7 +1077,7 @@ o,0,1,o
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**:
+The answer you want is `vo`, in {{card:Results}}:
 
 ::: result voltage of node o
 v_{o} = -\dfrac{r_{2}}{r_{1}}\,(va + vb)
@@ -1124,7 +1124,7 @@ o,0,a,o
 ```
 
 ::: only 9
-Ask **Evaluate** for `expand(vo)`. It gives
+Ask {{card:Evaluate}} for `expand(vo)`. It gives
 
 $$
 v_{o} = -\dfrac{rf\,v_{1}}{r_{1}} - \dfrac{rf\,v_{2}}{r_{2}} - \dfrac{rf\,v_{3}}{r_{3}}
@@ -1170,7 +1170,7 @@ o,0,a,o
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1219,7 +1219,7 @@ o,0,8,o
 ```
 
 ::: only 9
-The answers you want are in **Results**:
+The answers you want are in {{card:Results}}:
 :::
 
 ::: only 7,8
@@ -1350,7 +1350,7 @@ o,b,a,o
 ```
 
 ::: only 9
-The answer you want is in **Results**:
+The answer you want is in {{card:Results}}:
 :::
 
 
@@ -1389,8 +1389,8 @@ expand(vo)|r2=r1 and r3=r4
 ```
 
 ::: only 9
-Ask **Evaluate** for `expand(vo)` and give it both equalities in the
-**Conditions** box:
+Ask {{card:Evaluate}} for `expand(vo)` and give it both equalities in the
+{{ui:Conditions}} box:
 
 ```field 9 Conditions
 r2 = r1
@@ -1443,7 +1443,7 @@ which is equivalent to the book's expression, and it is that which has to
 equal −5.
 
 Symbulator will not always arrange an expression the way the book does. To
-rearrange it, **Evaluate** takes `simplify()`, `collect()`, `expand()`,
+rearrange it, {{card:Evaluate}} takes `simplify()`, `collect()`, `expand()`,
 `factor()` and `apart()`.
 :::
 
@@ -1510,7 +1510,7 @@ solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=20000
 ```
 
 ::: only 9
-Write the two equations out in the **Solve** card, which solves a system
+Write the two equations out in the {{card:Solve}} card, which solves a system
 that is not a circuit:
 
 ```field 9 Equation(s) to solve in terms of the results
@@ -1620,7 +1620,7 @@ solve(ans(1) and ans(2),{r2,r4})|r1=10000 and r3=10000
 ```
 
 ::: only 9
-In the **Solve** card:
+In the {{card:Solve}} card:
 
 ```field 9 Equation(s) to solve in terms of the results
 -r2/r1 = -4
@@ -1676,7 +1676,7 @@ r5,o,0,10'k
 ```
 
 ::: only 9
-The answer you want is `ir5`, in **Results**.
+The answer you want is `ir5`, in {{card:Results}}.
 :::
 
 In the schematic, the current {{var:i_o}} corresponds to `ir5`. The answer,
@@ -1836,7 +1836,7 @@ r6,3,o,6'k
 ```
 
 ::: only 9
-The answers you want are `vo` and `iro`, in **Results**.
+The answers you want are `vo` and `iro`, in {{card:Results}}.
 :::
 
 ::: only 7,8
@@ -1879,7 +1879,7 @@ o3,0,6,o
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+The answer you want is `vo`, in {{card:Results}}.
 :::
 
 The answer, {{o:9}}, is correct.
@@ -1916,8 +1916,8 @@ r6,5,0,10'k
 ```
 
 ::: only 9
-Ask **Evaluate** for `expand(vo)` with **Rounding** set to *approx (full precision)* in
-**Settings**. The answer is arranged differently from the book's, which is a matter of presentation rather than of arithmetic.
+Ask {{card:Evaluate}} for `expand(vo)` with {{ui:Rounding}} set to *approx (full precision)* in
+{{ui:Settings}}. The answer is arranged differently from the book's, which is a matter of presentation rather than of arithmetic.
 :::
 
 ::: only 7,8
@@ -1963,7 +1963,7 @@ o2,0,7,o
 ```
 
 ::: only 9
-Ask **Evaluate** for `expand(vo)`.
+Ask {{card:Evaluate}} for `expand(vo)`.
 :::
 
 ::: only 7,8
@@ -2041,7 +2041,7 @@ o2,4,6,o
 ```
 
 ::: only 9
-The answer you want is `vo`, in **Results**.
+The answer you want is `vo`, in {{card:Results}}.
 :::
 
 We get the right answer. Let's compare it with the book's answer.
@@ -2127,7 +2127,7 @@ This is exactly the answer from the book:
 
 If you are ever in doubt whether two expressions are the same,
 {{v7,8|enter them both separately into the calculator and compare them with
-the equality sign. If the answer is '**true**', they are the same.}}{{v9|subtract one from the other in **Evaluate**: if the answer is `0`, they
+the equality sign. If the answer is '**true**', they are the same.}}{{v9|subtract one from the other in {{card:Evaluate}}: if the answer is `0`, they
 are the same.}}
 
 :::

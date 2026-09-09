@@ -17,8 +17,8 @@ circuit.{{i:two-port}}
 
 ## Find two-port equivalents {#port-script}
 
-{{v7,8|The tool is called **port**.}}{{v9|Set **Type of analysis** to *Find
-equivalent* and **Type of equivalent** to *Two-port parameters*.}} It takes the network and the two **top** nodes of the
+{{v7,8|The tool is called **port**.}}{{v9|Set {{ui:Type of analysis}} to *Find
+equivalent* and {{ui:Type of equivalent}} to *Two-port parameters*.}} It takes the network and the two **top** nodes of the
 pair of terminals you want to reduce. {{v7,8|The two bottom nodes are always assumed
 to be ground.}}{{v9|The two bottom nodes are ground unless you say otherwise: a
 port whose lower terminal is not ground is written as a pair, `[top,bottom]`,
@@ -69,7 +69,7 @@ reserve `z11`, `z12`, `z21` and `z22`, so the two-port can simply be called
 `z`.
 :::
 ::: only 9
-*Find equivalent*, then *Two-port parameters*, with **Parameters** set to
+*Find equivalent*, then *Two-port parameters*, with {{ui:Parameters}} set to
 *z — impedance* and **1** and **3** in the two node boxes. In DC.
 
 There is no name to invent: the four come back as `z11`, `z12`, `z21` and `z22`.
@@ -80,7 +80,7 @@ z11 is 60, z12 is 40, z21 is 40, z22 is 70
 ```
 
 ::: only 9
-**Results** gives `z11` = {{o:60}} Ω, `z12` = {{o:40}} Ω, `z21` = {{o:40}} Ω
+{{card:Results}} gives `z11` = {{o:60}} Ω, `z12` = {{o:40}} Ω, `z21` = {{o:40}} Ω
 and `z22` = {{o:70}} Ω.
 :::
 
@@ -175,7 +175,7 @@ Define any subset and the rest stay symbolic.
 **Leave them undefined**, in which case they stay symbolic and appear in the
 answers as `z11`, `z12`, `z21` and `z22`. That is often what you want —
 the answer as a formula in the parameters. (Pinning them afterwards in
-**Expert Mode**'s **Add equation(s)** still works too, in a plain solve, and an
+{{ui:Expert Mode}}'s {{ui:Add equation(s)}} still works too, in a plain solve, and an
 equation or condition there overrides the description's own values.)
 
 ::: note How the variables are named
@@ -388,8 +388,8 @@ formulas instead:
 v_{th} = \dfrac{-60\,h_{21}}{h_{11}h_{22} - h_{12}h_{21} + 40\,h_{22}}
 :::
 
-which is useful in its own right: put `vth` in **Evaluate** with the four
-parameters in its **Conditions** box, and the same number falls out.
+which is useful in its own right: put `vth` in {{card:Evaluate}} with the four
+parameters in its {{ui:Conditions}} box, and the same number falls out.
 :::
 
 ```out 7,8
@@ -528,7 +528,7 @@ Correct.
 
 Network problems ask for gains: voltage gain, current gain, power gain, and
 the impedance seen at the input. {{v7,8|Symbulator has a tool for that, called
-**gain**.}}{{v9|Symbulator has a tool for that, in the **Mini-Tools** card:
+**gain**.}}{{v9|Symbulator has a tool for that, in the {{card:Mini-Tools}} card:
 choose *gain*.}}{{i:gain tool}}
 
 It wants four values — the voltage and current at the input, then the voltage
@@ -561,7 +561,7 @@ y,1,2,[0.4,-0.002,-5,0.04]
 ```
 
 ::: only 9
-Solve in DC, then open **Mini-Tools**, choose *gain*, and give it the four:
+Solve in DC, then open {{card:Mini-Tools}}, choose *gain*, and give it the four:
 :::
 
 ```sym 7
@@ -632,7 +632,7 @@ can store the parameters in variables beforehand or type them when asked.
 :::
 
 ::: only 9
-Solve in DC, then open **Mini-Tools**, choose *gain*, and give it the four:
+Solve in DC, then open {{card:Mini-Tools}}, choose *gain*, and give it the four:
 :::
 
 ```sym 7
@@ -705,7 +705,7 @@ re,3,0,100
 rc,4,0,2000
 ```
 
-DC. **Results** gives `v4` = {{o:-0.1645}} V, a voltage gain of
+DC. {{card:Results}} gives `v4` = {{o:-0.1645}} V, a voltage gain of
 {{o:-16.45}}, and under **h** the three currents entering the block:
 `ih2` = {{o:0.8657}} µA at the input, `ih4` = {{o:82.25}} µA at the output,
 and `ih3` = {{o:-83.12}} µA at the common terminal — the sum of the other
@@ -738,7 +738,7 @@ rl,2,0,200
 r3,3,0,20
 ```
 
-DC. **Results** gives, under **z**,
+DC. {{card:Results}} gives, under **z**,
 
 ::: result current into port at node 1
 i_{z1} = \dfrac{27}{268}
@@ -792,7 +792,7 @@ r11,d,i,1
 ```
 
 *z — impedance*, with `[a,f]` and `[e,j]` in the two node boxes. DC.
-**Results** gives `z11` = `z22` = {{o:2.733}} Ω and `z12` = `z21` =
+{{card:Results}} gives `z11` = `z22` = {{o:2.733}} Ω and `z12` = `z21` =
 {{o:0.06667}} Ω — exactly 41/15 and 1/15. Symmetric, as the drawing is, and
 small in transfer: three shunt ohms bleed nearly everything to the far rail.
 
@@ -860,7 +860,7 @@ za,[p,0],[q,m],[25,20,5,10]
 zb,[p,0],[m,n],[50,25,25,30]
 ```
 
-*g — inverse hybrid*, with **p** and `[q,n]` in the node boxes. DC. **Results**
+*g — inverse hybrid*, with **p** and `[q,n]` in the node boxes. DC. {{card:Results}}
 gives `g11` = {{o:0.06}} S, `g12` = {{o:-1.3}}, `g21` = {{o:0.7}} and `g22` =
 {{o:23.5}} Ω.
 
@@ -895,7 +895,7 @@ r4,a,d,4
 r16,f,c,16
 ```
 
-*z — impedance*, DC. **Results** gives `z11` = {{o:9.6}} Ω, `z12` = `z21` =
+*z — impedance*, DC. {{card:Results}} gives `z11` = {{o:9.6}} Ω, `z12` = `z21` =
 {{o:-0.8}} Ω and `z22` = {{o:8.4}} Ω. The first is the two paths from **a**
 to **f** with port 2 open, 24 Ω and 16 Ω, in parallel; the last the two from
 **c** to **d**, 12 Ω and 28 Ω.
@@ -925,7 +925,7 @@ t,[a,b],[c,d],[1,3]
 r9,c,d,9
 ```
 
-*z — impedance*, with `[a,b]` and `[c,d]` in the node boxes. DC. **Results**
+*z — impedance*, with `[a,b]` and `[c,d]` in the node boxes. DC. {{card:Results}}
 gives `z11` = {{o:0.8}} Ω, `z12` = `z21` = {{o:2.4}} Ω and `z22` = {{o:7.2}} Ω:
 4 Ω in parallel with the 9 Ω referred to the primary, 9/3² = 1 Ω; 9 Ω in
 parallel with the 4 Ω referred to the secondary, 36 Ω; and the transfer terms
@@ -966,7 +966,7 @@ t,[p,r],[t2,b2],[1,2]
 ```
 
 *z — impedance*, with `[t1,q]` and `[t2,b2]` in the node boxes. DC.
-**Results** gives `z11` = {{o:8.273}} Ω (exactly 91/11), `z12` = `z21` =
+{{card:Results}} gives `z11` = {{o:8.273}} Ω (exactly 91/11), `z12` = `z21` =
 {{o:10}} Ω and `z22` = {{o:28}} Ω.
 :::
 :::

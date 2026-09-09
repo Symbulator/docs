@@ -30,6 +30,8 @@
   --danger:     #a13030;
   --danger-bg:  #fdf1f1;
   --answer:     #a13030;   /* a value the software returned            */
+  --ui-card:    #24487e;   /* a card in the app (#357)                 */
+  --ui-control: #0f6b5c;   /* a control inside a card (#357)           */
   --lcd:        #f2f6fc;   /* the input panel, tinted toward the accent */
   --lcd-edge:   #dbe4f2;
 
@@ -80,6 +82,8 @@ html[data-theme="dark"] {
   --danger:     #ff9c9c;
   --danger-bg:  #3a1f21;
   --answer:     #ff9c9c;
+  --ui-card:    #7fb0e8;
+  --ui-control: #5fd3bd;
   --lcd:        #182534;
   --lcd-edge:   #2f5170;
   --inverse-bg:  #303c4e;
@@ -541,6 +545,12 @@ code {
    loaded, so browsers slanted the semibold roman -- the "chubby" mark he
    saw. index.php now loads ital,wght 1,600, so this is the real cut. */
 em.var { font-weight: 600; font-style: italic; }
+/* #357: the app's own vocabulary, in two tiers -- the card the reader is
+   sent to, and the control inside it. Same weight the plain **bold** had,
+   so only the colour changes; the body face is kept, unlike .ans, because
+   these are words in the sentence rather than a value standing apart. */
+.ui-card { color: var(--ui-card); font-weight: 600; }
+.ui-ctl  { color: var(--ui-control); font-weight: 600; }
 .ans-math .katex { font-size: 1.06em; }
 
 .xref { color: var(--accent); text-decoration-color: rgba(15, 107, 92, 0.4); }

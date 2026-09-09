@@ -3,6 +3,307 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #358 — brace commands may nest — **done 9 Sep 2026, source only**
+
+Roberto, 9 Sep 2026, after #357 had to leave 44 sites in plain bold:
+*"Option A, and fix the parser."*
+
+`INLINE_RE`'s brace group matched `{{`, then anything without braces, then
+the first `}}`. So `{{v9|tick {{ui:Show equations}}}}` ended at the inner
+closer: the version span was truncated and the rest of it reached the page
+as literal markup. The trap was found on 24 Aug 2026, and the response then
+was to document it in `SPEC.md` and write a check that banned nesting —
+which is why it was still there to bite #357 thirty-six times.
+
+`parse_inline` now scans instead of pattern-matching for braces: a new
+`brace_end()` counts depth and returns the real closer. Everything else
+still goes through `INLINE_RE`, and an **unbalanced** `{{` falls through to
+it, so a damaged source degrades exactly as it used to rather than
+swallowing the paragraph.
+
+**The guard was inverted rather than deleted.**
+`check_nested_version_spans()` banned the thing that is now legal;
+`check_brace_balance()` takes its place and reports an opener with no
+closer, at the line where it starts. Both directions were proved rather
+than assumed:
+
+* a synthetic `{{v7,8|the calculator's {{ui:Settings}} menu}}{{v9|the
+  {{card:Results}} card}}` renders as *the calculator's Settings menu* in 7
+  and *the Results card* in 9, each with its inner span intact;
+* `parse_inline` returns one `vspan` where it used to return a truncated
+  one plus leaked text;
+* the new guard goes **red** on a temporary file holding an unclosed `{{`,
+  and clean on the real tree;
+* `brace_end` returns the end index on a nested span and -1 on an unclosed
+  one.
+
+The `SPEC.md` warning box that told authors not to nest is now a note
+saying they may.
+
+**What this unlocks beyond #357:** `{{o:}}`, `{{sub:}}`, `{{var:}}` and
+`{{t:}}` can all live inside a version span now. Several passages were
+split into `::: only` blocks purely to work around this, and they can be
+folded back if anyone wants the prose tighter — not done here, since it
+would touch text for no visible gain.
+
+## #357 — the app's own vocabulary gets its own colour, in two tiers — **done 9 Sep 2026, source only**
+
+Roberto, 9 Sep 2026: *"everything that is in bold because it is a feature
+could benefit of having a slightly different colour of text... I love how the
+answers pop up because of the different colour."* Then, unprompted: *"If you
+want to use one colour for card names, and another colour for features inside
+those cards, that's good."*
+
+**Why it could not be a stylesheet rule.** Bold was doing two unrelated jobs:
+the app's vocabulary, and node names, element names, symbolic values and
+unknowns, which #267 and #302 deliberately set bold. Colouring `strong` would
+have lit up **r1**, **0** and **e** as though they were buttons. Measured
+before deciding: 1,470 bold spans in `src/`, 378 distinct.
+
+So two new inline commands, `{{card:Results}}` and `{{ui:Show equations}}`,
+rendering `.ui-card` and `.ui-ctl` on the web and `\uicard` / `\uictl` in the
+PDFs. Two new tokens through all three copies of the palette — `ui-card`
+`#24487e` / `#7fb0e8` and `ui-control` `#0f6b5c` / `#5fd3bd` — plus the
+`CLS_TO_TOKEN` entries, so `check_palette.py` guards them like every other
+colour. Same weight the bold had; only the colour is new.
+
+**The card list is not a judgement call — it was read off the app.** Every
+`div.card` summary in `repos/server/templates/index.html`: Input File,
+Circuit Description, Analysis & Settings, Equations, Results, Evaluate,
+Solve, Mini-Tools, Plotting Tools, By-Hand Equations. That is also what
+settles the awkward ones — **Settings** and **Expert Mode** *look* like
+cards in the prose but are `summary` sections nested inside Analysis &
+Settings, so they are controls.
+
+**The colours are Roberto's pick from a rendered strip**, and the first
+pair lost: teal cards with violet controls read as two unrelated hues
+against a page whose links are blue. He asked for the theme's own family
+instead — *"colours more in line with the blue palette of the default
+theme"* — so cards took the deep blue `#24487e` and controls the teal
+that had been the cards'. The sample he chose from carried a link in every
+paragraph, because the risk with a blue is that a card name reads as
+something clickable; bold and unlinked is what separates them.
+
+627 spans converted over 61 names: 273 cards and 354 controls in the
+rendered version 9 pages, 0 in versions 7 and 8, which name calculator
+functions rather than app controls and were measured at **zero** feature
+bolds before a line was touched.
+
+**44 sites could not take the colour at first**, and that is what became
+#358. They sat inside a `{{v9|...}}` version span, which the inline parser
+closed at the first `}}` it met, so a brace command nested in one
+truncated it and leaked markup onto the page. They were reverted to bold
+by walking the real brace depth, Roberto was given the choice between
+living with them and fixing the parser, and he chose the parser. All 44
+are converted now.
+
+Three heading occurrences (Solve twice, Expert Mode once) were left bold on
+purpose: `slugify` strips brace commands, and an anchor is not worth the
+risk.
+
+**Unverified until a PDF build:** the `\uicard` / `\uictl` macros are in
+`symbulator.cls` and the TeX renderer emits them, but no PDF has been built
+since — the PDFs are held.
+
+## #356 — Lesson 1 §1.6's heading — **done 9 Sep 2026, source only**
+
+Roberto, 9 Sep 2026: *"I don't like this wording: 1.6 Comparing it with your
+own working. Maybe: 1.6 Compare with your work"* — and, in the same breath,
+an instruction worth keeping: *"feel free to push back on any of my
+suggestions that you think is wrong."*
+
+Shipped as **Compare it with your own work** — his imperative and his *work*,
+with two words of his cut restored, and he was told which and why:
+
+* **it** — the object. Without it the heading does not say what is being
+  compared, and this section compares *Symbulator's system of equations*
+  with the reader's own method, not the reader's work with anything.
+* **own** — the contrast. *Your work* on its own can read as *your job*;
+  *your own work* can only mean the working the reader did.
+
+The imperative was the right instinct and matches §1.1, *Run a direct current
+analysis*. What went was *working*, correct British usage for the steps of a
+calculation but narrower than the book's readership; *work* costs nothing
+here.
+
+Version 9 only — the section is inside `::: only 9`, so 7 and 8 do not have
+it at all. The anchor `{#by-hand-equations}` is untouched, so the section
+keeps its number: `Book.labels` computes *section 1.6* from position, never
+from the title.
+
+## #355 — Lesson 1's three steps stand on their own line — **done 9 Sep 2026, source only**
+
+Roberto, 9 Sep 2026. The three run-in labels of *A numerical DC simulation,
+step by step* were bold sentences with the prose continuing straight after
+them; each is now a line of its own, with the paragraph beginning below:
+
+    **Step 1: Describe the circuit.** Description starts with **naming the nodes**...
+    **Step 1: Describe the circuit**
+
+    Description starts with **naming the nodes**...
+
+The trailing full stop goes with the split — a label on its own line is not a
+sentence. Same for steps 2 and 3.
+
+**They are still bold paragraphs, not headings.** That is what was asked for,
+and it is also the safe reading: a `####` would have put three new anchors
+into `Book.labels` and into the chapter's contents list for a passage that
+reads as one continuous walkthrough.
+
+**Step 2's line is a version span across a line break** — `{{v7,8|We can now
+ask Symbulator to simulate this circuit in direct current:}}{{v9|Under the
+box, choose the simulation:}}` — so the rewrap had to leave the braces
+unbroken. `build.py --check` reads whole files rather than single lines for
+exactly this, and it passes.
+
+None of the three is inside a version wrapper, so **all three books** take the
+change.
+
+## #354 — Lesson 1's two-spellings sentence says what the two ways are — **done 9 Sep 2026, source only**
+
+Roberto, 9 Sep 2026, revising the opening line of the passage #347 added, in
+three passes — *these names* to *these answers*, then *the name of any of
+Symbulator's answers*, then the clause that says what the choice is:
+
+    You may write any of these names two ways.
+    You may write the name of any of Symbulator's answers in two ways: with or without an underscore.
+
+The two substantive gains: the sentence no longer says *names* where the list
+above it gives **answers** (`vr5`, `irx`, `pr12`), and the reader is told what
+the two ways *are* in the same breath, instead of inferring it from the `ir1`
+/ `i_r1` example that follows.
+
+On the *in*: both forms are grammatical — *write it two ways* is an adverbial
+noun phrase, *write it in two ways* the standard form — but with a long object
+(*the name of any of Symbulator's answers*) the bare version briefly reads as
+though *two ways* were a second object, so the preposition earns its place.
+
+**And the clause the new opening made redundant is gone.** The next sentence
+had gone on to say *"the underscore between the prefix and the name it
+belongs to is optional"*, which *with or without an underscore* now says
+first; it was flagged as a judgement call and Roberto took it out the same
+hour. The sentence reads *"…`v2` and `v_2` the same voltage; capitals make
+no difference either"*, the colon becoming a semicolon now that nothing is
+being introduced.
+
+**Nothing was lost with it.** Where the underscore goes is no longer stated,
+but the four examples show it — `ir1` / `i_r1` and `v2` / `v_2` — and *either*
+still has its antecedent in the opening sentence's *with or without an
+underscore*, which is why that clause could go and the *capitals* one could
+not.
+
+A fourth pass the same hour rewrote the passage's closing sentence, which had
+been both incomplete and too broad:
+
+    …in **Evaluate**, in a condition, or as an element's value, Symbulator recognises both.
+    …in **Evaluate**, in **Solve**, in a condition, or (in the case of dependent sources) as part of an element's value, Symbulator recognises both formats.
+
+**Solve** is bolded to match **Evaluate**, per #269. Both halves of the claim
+were checked in `repos/server/symbulator_ui.py` rather than taken on trust:
+`prepare_inputs` rewrites sans-underscore names in the description's
+**values** with names and nodes left untouched — which is exactly a dependent
+source referring to another element's answer, and nothing else — and the
+comment at the expert-mode branch says outright that this happens *"the same
+way Evaluate and the Solve panel already do"*. So the parenthetical narrows a
+claim that had been wider than the code, and *in Solve* adds one that was
+true and unstated.
+
+Version 9 only — the passage is inside `::: only 9`, so 7 and 8 are untouched.
+`01-lesson-dc.md` is **CRLF** where `00-introduction.md` is LF; the edit was
+made line-ending-aware and the file is still 0 bare LF, because a whole-file
+ending flip would have shown up as a 1,400-line diff.
+
+## #352 — the *Use at your own risk* box shortened, and the report address moved out of it — **done 9 Sep 2026, source only**
+
+Roberto, 9 Sep 2026: shorten it, and *"maybe move the 'Please report' email to
+be in the regular text below the caution."*
+
+75 words to 43. **What was cut is the padding, not the disclaimer.** *"as
+is"*, *express or implied* and *including but not limited to the warranty of
+fitness for a particular purpose* all survive verbatim, because shortening
+those narrows what the notice covers. What went was the throat-clearing
+(*Every effort has been made in the development of this software, and there
+are no known bugs in it*) and a restatement the box's own title already makes
+(*Every time you use Symbulator, you do so at your own risk*).
+
+`Please report any problems to help@symbulator.com` is now a plain paragraph
+under the box. It is the only address in `src/`, and the house style is plain
+text rather than a `mailto:` link — left as found.
+
+**The box is not inside a version wrapper**, so 7 and 8 take the change too.
+That is right: it is the same licence disclaimer in all three books.
+
+## #351 — *Input files and entries* leaves the Introduction and becomes a chapter — **done 9 Sep 2026, source only**
+
+Roberto, 9 Sep 2026: *"On the one hand, it is important. On the other hand, it
+feels heavy, premature and out of place."*
+
+The useful diagnosis is sharper than length: it was **reference material in a
+narrative chapter** — sixty lines on saving, updating, renaming and
+downloading, read before the reader has typed a circuit to save.
+
+**The test that decides where such a section belongs: does the reader need it
+*before* Lesson 1, or *at a moment during* the work?** *Input files* fails it
+— nothing in it matters until the reader first saves something, and Lesson 1
+already names both words in two sentences at exactly that point
+(`01-lesson-dc.md:147`). Keep the test; it is what settled the split-view
+question below without a second argument.
+
+So: a new `src/00b-input-files.md`, *Working with input files*, listed in
+`book.yaml` after the Introduction, carrying the original text **verbatim** —
+the two definitions, the `.cir` lead-in, and *Loading input files* / *Saving
+your work* / *What an entry remembers*, promoted `###` to `##`. The
+Introduction keeps five lines under **Built-in examples**: the tutorial's
+circuits are already in the app, click a title to load one.
+
+**The build already supported all of this; `build.py` did not change.**
+
+* `versions: [9]` in the front matter, and `Book.for_version` drops the
+  chapter for 7 and 8 outright — no empty page, no `absent_note` placeholder.
+* `kind: front`, **not** `lesson`, so the numbering counter never sees it and
+  v9 still numbers its lessons **1–13**, the same as 7 and 8. `kind: lesson`
+  here would have shifted every lesson number in one version only.
+* The chapter id is `input-files`, which is what the old section's anchor
+  was. `Book.labels` keys chapter ids and section anchors into **one flat
+  dict**, so the Introduction's surviving heading had to be renamed —
+  `{#built-in-examples}` — or the two would have collided silently. Both
+  existing `{{ref:input-files}}` calls (the new stub's, and the split-view
+  warning's) now resolve to the chapter and render as its title.
+
+Verified by loading the book through `build.py`'s own API rather than by
+reading the front matter and believing it: v7 and v8 list fourteen chapters
+and no `input-files`; v9 lists it unnumbered between `introduction` and
+`lesson-dc`; lessons are 1–13 in all three; `ref:input-files` resolves to
+`('Working with input files', 'input-files', '')`. `build.py --check` clean.
+
+**The split view stays in the Introduction.** Asked separately the same day,
+and it passes the test above: it answers *how am I meant to read this book*,
+which is wanted before Lesson 1, not during. 294 words, most of them working.
+Its warning about losing typed work now points at a chapter that explains
+saving, instead of at a section forty lines further up the same page.
+
+## #350 — *ever capable of running on a handheld device* — **done 9 Sep 2026, source only**
+
+Roberto, 9 Sep 2026, asking whether it should read *"ever made that is
+capable"*.
+
+Neither. After a superlative, `ever` wants a verb to attach to — *the best
+film ever made*, *the first person ever to walk on the moon*. `capable` is an
+adjective, so the span read as *at all times capable*.
+
+`00-introduction.md:16` is a version span, and **only the v9 half moved**:
+
+    ever {{v7,8|made for a calculator}}{{v9|capable of running on a handheld device}}
+    ever {{v7,8|made for a calculator}}{{v9|to run on a handheld device}}
+
+7 and 8 were already idiomatic, and their text is frozen besides. The
+*capability* sense was kept rather than borrowed from the app's *made for a
+handheld device*: version 9 is not made for handhelds, it runs on one, which
+is what the original was reaching for.
+
+The app's paragraph is a **different sentence** that happens to make the same
+claim — that one is #353, in `NEXT.md`.
+
 ## #349 — the credits put the AI collaborator above the software — **done and live on the web 9 Sep 2026; the three PDFs deliberately skipped**
 
 Roberto, 9 Sep 2026: *"In the credits, move the AI collaborator part to
