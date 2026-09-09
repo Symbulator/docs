@@ -75,6 +75,21 @@ over a few weeks in September to turn them into reality.
 
 My thanks to all of them. I truly am in their debt.
 
+::: only 9
+### AI collaborator
+
+I also want to acknowledge that porting Symbulator to Python/SymPy, creating
+its interface and websites and updating its documentation, would not have been possible without the coding prowess of Anthropic's
+artificial intelligence assistant. Claude allowed me to do in two weeks something that 
+I was unable to find the time to do in two decades: to port Symbulator to Python.
+
+::: warning Use AI responsibly 
+AI is not without risks, and needs careful policies and regulatory oversight on fronts like ethics, 
+systemic biases, its impact on labour, and its voracious use of water and energy. I believe there
+is a right way to deploy this technology, and — after working on Symbulator 9 with Claude — I am now convinced that AI will revolutionise the way we work. We just need to do it the right way.
+:::
+:::
+
 ### Software I relied on
 
 ::: only 7
@@ -104,19 +119,6 @@ had taken for granted. None of ahkab's code is part of Symbulator, and it is
 not needed to run it: it is a second opinion, kept at arm's length, and a
 valuable one. My thanks to Giuseppe for building such a tool and
 sharing it freely.
-
-### AI collaborator
-
-I also want to acknowledge that porting Symbulator to Python/SymPy, creating
-its interface and websites and updating its documentation, would not have been possible without the coding prowess of Anthropic's
-artificial intelligence assistant. Claude allowed me to do in two weeks something that 
-I was unable to find the time to do in two decades: to port Symbulator to Python.
-
-::: warning Use AI responsibly 
-AI is not without risks, and needs careful policies and regulatory oversight on fronts like ethics, 
-systemic biases, its impact on labour, and its voracious use of water and energy. I believe there
-is a right way to deploy this technology, and — after working on Symbulator 9 with Claude — I am now convinced that AI will revolutionise the way we work. We just need to do it the right way.
-:::
 :::
 
 ## Problem credits {#problem-credits}

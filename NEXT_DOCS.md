@@ -3,6 +3,33 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #349 — the credits put the AI collaborator above the software — **done and live on the web 9 Sep 2026; the three PDFs deliberately skipped**
+
+Roberto, 9 Sep 2026: *"In the credits, move the AI collaborator part to
+appear above the Software I rely on."*
+
+Under **Acknowledgements** the order is now **Human collaborators → AI
+collaborator → Software I relied on**.
+
+**The trap was the version scoping, not the move.** *AI collaborator* was
+`###` nested *inside* the `::: only 9` block that wraps the Python / SymPy /
+ahkab paragraphs. Lifting it out naively would have carried v9-only content
+into the Symbulator 7 and 8 books, where it makes no sense at all. It now has
+an `::: only 9` block of its own and the original closes after the ahkab
+paragraph. Verified in the builds and then live: v7 and v8 still show
+*Human collaborators → Software I relied on* and no AI section; only v9 has
+all three.
+
+**Moved by slicing the file's own bytes, never retyped.** The prose is
+Roberto's and carries em dashes and trailing spaces; retyping is how a word
+changes in transit. The diff is the same lines out and the same lines in,
+with `prose unchanged: True`, the `:::` count 10 → 12 for the one new block,
+and `::: only 9` 1 → 2. The *Use AI responsibly* callout came across intact.
+
+**Note for whoever ships the next PDF build:** the credits chapter is in
+**all three** books, so this is the #343 shape — a `--web` deploy leaves v7,
+v8 *and* v9 printing the old order, not just v9.
+
 ## #347 — Lesson 1 says that an answer's name may be written either way, and §1.6 drops its underscores — **done and live on the web 9 Sep 2026; PDFs deliberately skipped**
 
 Roberto, 9 Sep 2026, two comments on §1.6's use of `v_2` and `i_r3`.

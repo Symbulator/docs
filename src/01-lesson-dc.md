@@ -650,9 +650,9 @@ which method would be quicker.
 
 You have not seen that system yet, and it is worth looking at once before
 reading on. Open the **Settings** card and tick **Show equations**. An
-**Equations** card appears just above **Results**; open it, and it lists
-every equation Symbulator assembled for the circuit you have just solved. You
-do not need to run the analysis again — the system is already there from the
+**Equations** card appears just above **Results**, open and listing every
+equation Symbulator assembled for the circuit you have just solved. You do
+not need to run the analysis again — the system is already there from the
 last solve, so the card fills in as soon as you tick the box.
 
 It is off until you ask for it because on anything larger than a teaching
