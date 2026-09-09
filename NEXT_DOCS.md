@@ -8,7 +8,7 @@ Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.
 
 ---
 
-## #342 — the documentation's browser tab says *Documentation* — **built 9 Sep 2026, unbuilt and undeployed, awaiting Roberto's go**
+## #342 — the documentation's browser tab says *Documentation* — **done 9 Sep 2026, live on learn and the landing page**
 
 The docs half of #342 (the app half, and the reasoning, are in
 `Application/v9/repos/local/NEXT.md`). The tab read `Symbulator 9`, which
