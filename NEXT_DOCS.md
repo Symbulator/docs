@@ -2,6 +2,73 @@
 
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
+
+## #347 — Lesson 1 says that an answer's name may be written either way, and §1.6 drops its underscores — **done and live on the web 9 Sep 2026; PDFs deliberately skipped**
+
+Roberto, 9 Sep 2026, two comments on §1.6's use of `v_2` and `i_r3`.
+
+**The rule had never been stated.** The tutorial teaches the naming scheme in
+Lesson 1 — *Answers for each node*, *Answers for each resistor* — and then
+uses the flat spelling everywhere, but nothing told the reader that the
+underscored form exists or that it is the same name. The note goes exactly
+there, at the end of those two lists, which is where the question arises and
+before any name is used in anger: `ir1` and `i_r1` are the same current,
+`v2` and `v_2` the same voltage, capitals make no difference, version 9 added
+the longer form so machine-written output reads back unambiguously, and the
+two can be mixed freely. Inside `::: only 9` — the calculators never had the
+underscored spelling — and confirmed absent from the v7 and v8 builds.
+
+**Checked against the app before it was written down, and the first check was
+wrong.** `Result["IR1"]` raises `KeyError`, so the monograph's
+"case-insensitive" claim does *not* hold for the Python API's dict lookup.
+On the path a reader actually uses — Evaluate, conditions, Define, an
+element's value, all through the same canonicaliser — `ir1`, `i_r1`, `IR1`,
+`I_R1` and `Ir1` all resolve. Proving that took a second attempt: the first
+used a dependent source with a coefficient of `0`, which would have "passed"
+whatever the answer was.
+
+**§1.6's underscores removed**: `**v_2**` → `**v2**`, `**i_r3**` → `**ir3**`.
+That was the only place in Lesson 1 where an *app variable* carried an
+underscore, so the tutorial is now uniformly on the short spelling and the
+new note's closing claim is true rather than aspirational. The two
+`\dfrac{v_1 - v_2}{I_T}` fractions are **mathematics, not app variables**,
+and were left alone — verified still present and identical in all three
+version builds.
+
+## #346 — Lesson 1 §1.6 shows the reader Symbulator's own equations before it mentions the by-hand ones — **done and live on the web 9 Sep 2026; PDFs deliberately skipped**
+
+Roberto, 9 Sep 2026: *"Its first paragraph assumes that the user knows what
+Symbulator's equations look like. However, nothing in the documentation
+before that point asks the users to examine the equations that Symbulator
+generated."*
+
+Two things were wrong in that paragraph, not one. It said *"you may have
+noticed that it did not do it the way your course does"* — the reader could
+not have noticed — and then *"the equations it shows"*, which they had never
+seen, the **Show equations** setting being off by default. The opening now
+states plainly that Symbulator does not solve the way the course does, and a
+new passage sends the reader to look before the by-hand card is mentioned at
+all: open **Settings**, tick **Show equations**, and an **Equations** card
+appears (just above **Results** since #345); open it and it lists the system.
+It also says no second solve is needed, and why the setting is off by default.
+
+**Two claims measured rather than asserted.** *No re-solve* — the change
+handler re-renders from the cached system and its own comment says so; I had
+assumed the opposite first. *"Short enough to read line by line"* — Lesson
+1's circuit was driven through the live site and produces **7 rows**: four
+element equations and three KCL, which is exactly the "one per element and
+one per node" the next paragraph claims, so the example demonstrates the
+point rather than merely asserting it.
+
+Written as flowing prose. I first added two `###` subheadings and took them
+back out: they restructure the section and the sidebar, which was not asked
+for.
+
+**The PDFs are stale on purpose.** #346 and #347 both change typeset text, so
+`--web` leaves `symbulator-v9.pdf` on `learn` saying *"the equations it
+shows"* and printing `v_2` / `i_r3`. Roberto, 9 Sep 2026: *"Skip the pdfs for
+now."* v7 and v8 are unaffected — everything here is inside `::: only 9`.
+A later `python build.py` (no `--web`) and a `learn` deploy clears it.
 Nothing here is numbered twice and the sequence never restarts.
 
 Opened 26 Aug 2026, from the integrity pass over the version 9 rewrite.

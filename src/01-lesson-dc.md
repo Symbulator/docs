@@ -314,6 +314,18 @@ Symbulator calculates for each resistor the following answers:
 - The power consumed by the resistor, in watts. For a resistor called **r12**, this
   is {{v7,8|stored in}}{{v9|given in}} `pr12`.
 
+::: only 9
+You may write any of these names two ways. `ir1` and `i_r1` are the same
+current, `v2` and `v_2` the same voltage: the underscore between the prefix
+and the name it belongs to is optional, and capitals make no difference
+either. Version 9 added the longer spelling so that a name written out by a
+machine reads back without ambiguity; the shorter one is what the calculators
+used, and it is what this tutorial uses throughout. Neither is more correct
+than the other, and you can mix them freely — wherever you type an answer's
+name, in **Evaluate**, in a condition, or as an element's value, Symbulator
+recognises both.
+:::
+
 By now you should understand the description of the second, third and fourth
 elements in our example.
 
@@ -630,12 +642,28 @@ problem in Symbulator.
 ::: only 9
 ## Comparing it with your own working {#by-hand-equations}
 
-You have just watched Symbulator solve a circuit, and you may have noticed
-that it did not do it the way your course does. It writes one equation for
-every element and one for every node, hands the whole system to its algebra
-engine at once, and reads the answers back. It never chooses a mesh, never
-draws a supernode, and never stops to ask which method would be quicker. That
-is why the equations it shows look nothing like the ones in your notebook.
+You have just watched Symbulator solve a circuit, but not the way your course
+does it. It writes one equation for every element and one for every node,
+hands the whole system to its algebra engine at once, and reads the answers
+back. It never chooses a mesh, never draws a supernode, and never stops to ask
+which method would be quicker.
+
+You have not seen that system yet, and it is worth looking at once before
+reading on. Open the **Settings** card and tick **Show equations**. An
+**Equations** card appears just above **Results**; open it, and it lists
+every equation Symbulator assembled for the circuit you have just solved. You
+do not need to run the analysis again — the system is already there from the
+last solve, so the card fills in as soon as you tick the box.
+
+It is off until you ask for it because on anything larger than a teaching
+circuit the system is a page of algebra, and most of the time the answers are
+what you came for. On the circuit above it is short enough to read line by
+line.
+
+Read it beside your own working and the difference is plain: one equation per
+element and one per node, in no particular order, with not a mesh or a
+supernode anywhere. That is why these equations look nothing like the ones in
+your notebook — and it is the reason for the card that comes next.
 
 The **By-Hand Equations** card, below the results, does the other thing. Ask
 it, and it writes out the system *you* would write — Kirchhoff's current law
@@ -654,7 +682,7 @@ round their own loops.
 
 It is meant for exactly the moment when your homework answer disagrees with
 Symbulator's and you cannot see why. Both systems use the same names for the
-same quantities — **v_2** is still the voltage at node 2, **i_r3** is still
+same quantities — **v2** is still the voltage at node 2, **ir3** is still
 the current through **r3** — so you can put your own page beside the card's
 and find the line where you and it parted company. That is usually a sign
 somewhere, and it is much easier to spot in one equation than in an answer.
