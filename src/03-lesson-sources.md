@@ -2377,12 +2377,39 @@ Compare my answer, first below, to the book's answer beneath it.
 
 ::: only 9
 ::: result
-i_{rb} = \dfrac{vcc + v\gamma}{re_{1}\,\beta + re_{1} + rb}
+i_{rb} = \dfrac{vcc + v\gamma}{r_{e1}\,\beta + r_{e1} + rb}
 :::
 :::
 
 ::: figure assets/practice/tr5s-example-4-5-symbolic-52.jpg
 
+:::
+
+::: only 9
+The answer given by the book uses variables with subscripts, which look
+very elegant. If you want your symbolic answers to look like that in
+Symbulator, there is a very simple trick you can use: put an underscore in
+your symbolic variable names. The text after the underscore will be shown
+as a subscript.
+
+For example, if you were to repeat the simulation for this problem, using
+this circuit description instead:
+
+```field 9 Circuit Description
+e1,1,0,v_cc
+rb,1,b,r_b
+e2,e,b,v_γ
+re1,e,0,r_e1
+rc,1,c,r_c
+j,c,e,β*irb
+```
+
+then your symbolic answers would also look very elegant with their
+subscripts, like those in the book:
+
+::: result
+i_{rb} = \dfrac{v_{cc} + v_{\gamma}}{r_{b} + r_{e1}\,\beta + r_{e1}}
+:::
 :::
 
 :::

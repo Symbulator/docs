@@ -56,6 +56,47 @@ three; `check_pdfs.py` proves they differ in the two axes they should.
 
 ## #363 — claimed by the app tree, 10 Sep 2026: Lesson 5's Practice Problem 5.7 gets the app entry it never had, so the chapter's only link-less problem carries **Open in app** and **Open in split view** like its neighbours. No docs source changes — the links row is generated from the title match, so the fix is one entry in `Application/v9/repos/server/examples/Lesson_05b.cir` and the page gains its row on the next build. Write-up in `Application/v9/repos/local/NEXT.md`
 
+## #370 — the underscore trick, and a result panel that disagreed with the app — **done 10 Sep 2026**
+
+Roberto, 10 Sep 2026, reading Lesson 3 entry 48 on the live app: *"the
+answers in the Results section would look more similar to the answers in
+the book if the symbolic variables used in the description carried an
+underscore. This is a nice tip."*
+
+So TR5's Example 4.5 (Symbolic) keeps its own description and gains a
+closing note, version 9 only: put an underscore in a symbolic value's
+name and everything after it is set as a subscript. The note carries the
+alternative description as a **Circuit Description** box — `v_cc`, `r_b`,
+`v_γ`, `r_e1`, `r_c` — and the answer it produces as a result panel.
+
+Version 9 alone, because the trick is about *typesetting* an answer, which
+is the thing the calculator books cannot do.
+
+**The answer in that panel was solved, not transcribed.** Roberto sent a
+screenshot; the underscored description was driven through `/api/solve`
+and the LaTeX the card returns was read back. It matched the screenshot,
+denominator order included — but running the *chapter's own* description
+at the same time is what found the real bug.
+
+**The result panel already on that problem disagreed with the app.** It
+read `re_{1}\,\beta + re_{1} + rb`, subscripting the `1` onto `re`; the
+app returns `r_{e1} \beta + r_{e1} + rb`, subscripting `e1` onto `r`.
+Roberto ruled: *"re_{1} was wrong, r_e1 was right."* Corrected.
+
+**Why it matters beyond one panel.** #276's rule is that a `::: result`
+panel shows the card answer *as the app shows it*, and the panel is
+hand-written LaTeX — so nothing checks it. This one had been wrong since
+it was written, and it was found only because a note about something else
+made someone run the circuit. A sweep for the same shape
+(`re_{1}`, `rb_{1}`, `rc_{1}`) across all fourteen chapters found no
+others.
+
+**Worth knowing about the cause:** the value is spelled `re1` and the
+element is *also* named `re1`, so the symbol reaches the answer through
+the answer-name canonicaliser as `r_e1`. That is why the app prints an
+underscore the description never had — and it is why the underscore trick
+reads so naturally here in the first place.
+
 ## #369 — the two notes that were rules, applied as rules — **done 10 Sep 2026**
 
 Roberto, 10 Sep 2026, after #368 shipped: *"For the comments that are
