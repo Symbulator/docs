@@ -24,9 +24,9 @@ AS7's Example 11.5
 :::
 
 ::: answer
-{{v7,8|Symbulator's **th** tool}}{{v9|*Thévenin / Norton*}} helps us find all the answers we need. Notice this
+{{v7,8|Symbulator's {{tool:th}} tool}}{{v9|*Thévenin / Norton*}} helps us find all the answers we need. Notice this
 circuit description does not include the load, because it is not needed{{v7,8| as
-input to th}}.
+input to {{tool:th}}}}.
 
 ```sym 7
 "e,1,0,10:r1,1,2,4:r2,2,0,8-6𝐢:r3,2,3,5𝐢"→cir

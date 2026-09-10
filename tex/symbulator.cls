@@ -53,6 +53,7 @@
 \definecolor{uicard}{HTML}{24487E}
 \definecolor{uicontrol}{HTML}{0F6B5C}
 \definecolor{uibutton}{HTML}{C9614F}
+\definecolor{uitool}{HTML}{7C4D9A}
 \definecolor{lcd}{HTML}{F2F6FC}
 \definecolor{panel}{HTML}{F4F6FA}
 
@@ -227,6 +228,7 @@
 \newcommand{\uicard}[1]{{\bfseries\color{uicard}#1}}
 \newcommand{\uictl}[1]{{\bfseries\color{uicontrol}#1}}
 \newcommand{\uibtn}[1]{{\bfseries\color{uibutton}#1}}
+\newcommand{\uitool}[1]{{\bfseries\color{uitool}#1}}
 % An answer that is a symbolic expression: same answer colour, but set as
 % mathematics rather than bold text (build.py's answer_math decides which).
 \newcommand{\ansmath}[1]{{\color{answer}\(\displaystyle #1\)}}
@@ -380,7 +382,7 @@
 \newenvironment{problem}[1]
   {\par\addvspace{4mm}{\color{rule}\hrule height 0.8pt}%
    \vspace{1.5mm}%
-   {\sffamily\bfseries\fontsize{11.5}{14}\selectfont #1\par}\vspace{0.5mm}}
+   {\sffamily\bfseries\fontsize{13}{15.5}\selectfont #1\par}\vspace{0.5mm}}
   {\par\addvspace{3mm}}
 
 \newenvironment{solution}

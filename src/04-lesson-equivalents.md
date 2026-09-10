@@ -5,13 +5,13 @@ title: Shorts, equivalent resistance and Thévenin/Norton
 updated: 2023-07-08
 summary: >
   Learn how to describe a *short circuit* using the **s** element. Learn how to
-  find *equivalent resistances*{{v7,8| using the **er** script}}, and *Thevenin and
-  Norton equivalents*{{v7,8| using the **th** script}}.
+  find *equivalent resistances*{{v7,8| using the {{tool:er}} script}}, and *Thevenin and
+  Norton equivalents*{{v7,8| using the {{tool:th}} script}}.
 ---
 
 In this lesson you will learn how to describe a *short circuit* with the
-**s** element, how to find *equivalent resistances*{{v7,8| with the **er** script}},
-and *Thévenin and Norton equivalents*{{v7,8| with the **th** script}}.
+**s** element, how to find *equivalent resistances*{{v7,8| with the {{tool:er}} script}},
+and *Thévenin and Norton equivalents*{{v7,8| with the {{tool:th}} script}}.
 
 ## How to describe a short circuit {#describe-short}
 
@@ -142,7 +142,7 @@ way.
 An easier way is to let Symbulator do that for us.{{i:er script}}
 
 ::: only 7,8
-Just run the **er** script and it does the same thing automatically. It finds
+Just run the {{tool:er}} script and it does the same thing automatically. It finds
 the equivalent resistance of a passive circuit and stores it — for a DC
 analysis — in **req**. It takes three arguments: the circuit description as a
 string, and the two nodes to measure between.
@@ -215,7 +215,7 @@ element listing there is a single answer, headed **equivalent resistance**:
 That example was made of resistors only. {{v7,8|The er script}}{{v9|*Resistance / impedance*}} also handles a second
 kind of passive circuit: one with resistors and dependent sources, but no
 independent sources. Such a circuit can only be reduced to an equivalent
-resistance, not to a Thévenin or Norton equivalent, so {{v7,8|er is the script to use
+resistance, not to a Thévenin or Norton equivalent, so {{v7,8|{{tool:er}} is the script to use
 — in exactly the same way}}{{v9|it is found in exactly the same way}}, provided the dependent sources are described
 properly.
 
@@ -231,7 +231,7 @@ short between those nodes for the current through it (the Norton current,
 {{var:I_NO}}). {{var:R_EQ}} is then {{var:V_TH}}/{{var:I_NO}}. That is the manual way.
 
 ::: only 7,8
-An easier way is the **th** script,{{i:th script}} which does exactly that
+An easier way is the {{tool:th}} script,{{i:th script}} which does exactly that
 automatically. It takes three arguments: the circuit description, the first
 node and the second node.
 :::
@@ -317,7 +317,7 @@ current and/or power consumed in the load resistor {{var:R_L}} if its value is
 ::: only 7,8
 Since this is such a typical problem, I've made some provisions in Symbulator
 to help you solve them. Right after a Thévenin or Norton equivalent is found,
-the th script asks whether you are planning to connect a load. The default is
+the {{tool:th}} script asks whether you are planning to connect a load. The default is
 No, but if you select Yes, Symbulator will save some special answers for that
 very typical case, as functions of the **load** variable:
 
@@ -330,7 +330,8 @@ Since this is such a typical problem, Symbulator makes provision for it.
 When the equivalent asked for is *Thévenin / Norton*, a question appears
 under the two node boxes: **Are you running a problem with a load connected
 to this equivalent circuit?** Tick it, and {{card:Results}} adds three answers
-under the four, each an expression in the variable **load**, the value of
+under the four, each an expression in terms of the variable
+{{var:load}}, the value of
 the load resistor:
 
 - **irl** has the current in the load
@@ -379,7 +380,7 @@ v_{th} = 6\ \mathrm{V}
 R_{eq} = 2\ \Omega
 :::
 
-and, because the load question is ticked, under `pmax`:
+and, because the load question is ticked:
 
 ::: result current in load
 i_{rl} = \dfrac{6}{load + 2}
@@ -442,7 +443,7 @@ want to solve includes something more complicated, you will have to run your
 own simulation.
 
 ::: only 7,8
-To help you in those cases, let me show you one more goody of the th script, at
+To help you in those cases, let me show you one more goody of the {{tool:th}} script, at
 risk of promoting vagrancy among EE students: once it has found the Norton
 equivalent of a circuit, it will automatically write for you the circuit
 description of that Norton equivalent connected to a load, and store it in a
@@ -613,7 +614,7 @@ ra,b,c,3
 ```
 
 ::: only 7,8
-Run the **er** script, giving it as arguments the circuit and the nodes:
+Run the {{tool:er}} script, giving it as arguments the circuit and the nodes:
 `s\er(cir,0,c)` When prompted, choose DC as analysis type. Once it is done,
 evaluate `approx(req)` The value is {{o:2.89}} Ω.
 :::

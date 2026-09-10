@@ -55,6 +55,7 @@ CLS_TO_TOKEN = {
     "uicard": "ui-card",
     "uicontrol": "ui-control",
     "uibutton": "ui-button",
+    "uitool": "ui-tool",
     "lcd": "lcd",
     "panel": "paper-2",     # renamed in the class
 }

@@ -4,7 +4,7 @@ kind: lesson
 title: The complex frequency domain
 updated: 2023-07-08
 summary: >
-  Learn to solve *complex-frequency domain* problems using **fd**. Move between
+  Learn to solve *complex-frequency domain* problems using {{tool:fd}}. Move between
   the time domain and the s-domain with the **t2s** and **s2t** shortcuts. Learn
   to solve transfer function problems.
 ---
@@ -17,7 +17,7 @@ in.{{i:frequency domain}}
 
 ## s-domain analysis {#s-domain}
 
-{{v7,8|Symbulator has a tool called **fd**}}{{v9|Symbulator has an analysis
+{{v7,8|Symbulator has a tool called {{tool:fd}}}}{{v9|Symbulator has an analysis
 type called *FD — complex frequency domain*}} that solves a circuit in the
 domain of complex frequency, where $s = j\omega$.
 

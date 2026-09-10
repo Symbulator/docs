@@ -132,6 +132,7 @@ what a person writing a quotation types anyway.
 | `{{card:Results}}` | a place in the app you open and look inside |
 | `{{ui:Show equations}}` | a control you set and then read |
 | `{{btn:Run Symbulator}}` | a button you press |
+| `{{tool:pr}}` | a tool or analysis you run — `dc`, `ac`, `pr`, `th` |
 
 ::: note A version span may contain other brace commands
 Since #358 the inline parser counts brace depth, so `{{v9|tick
@@ -169,6 +170,7 @@ markup:
 | open it and look inside | `{{card:}}` | Results, Input File, Settings, Expert Mode, Define, OUTPUTS |
 | set it, then read it | `{{ui:}}` | Type of analysis, Rounding, Show equations, Enable Expert Mode |
 | press it, and it acts | `{{btn:}}` | Run Symbulator, Download, Add equation(s) |
+| run it, by name | `{{tool:}}` | dc, ac, fd, tr, pr, th, er, port, plot |
 | choose it from a menu | `*italic*` | *DC — direct current*, *Solve circuit* |
 
 **Nesting depth is deliberately not the test.** *Settings* is a section

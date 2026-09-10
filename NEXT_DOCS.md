@@ -56,6 +56,165 @@ three; `check_pdfs.py` proves they differ in the two axes they should.
 
 ## #363 — claimed by the app tree, 10 Sep 2026: Lesson 5's Practice Problem 5.7 gets the app entry it never had, so the chapter's only link-less problem carries **Open in app** and **Open in split view** like its neighbours. No docs source changes — the links row is generated from the title match, so the fix is one entry in `Application/v9/repos/server/examples/Lesson_05b.cir` and the page gains its row on the next build. Write-up in `Application/v9/repos/local/NEXT.md`
 
+## #369 — the two notes that were rules, applied as rules — **done 10 Sep 2026**
+
+Roberto, 10 Sep 2026, after #368 shipped: *"For the comments that are
+generalisable to rules that apply across the whole documentation, did you
+do that? I didn't mean for them to be specific for those passages."* He
+was right about two of the eight, and the answer was no.
+
+**A tool gets its own tier.** `{{tool:pr}}` joins #357's places and
+controls and #361's buttons, with a `ui-tool` token through all three
+copies of the palette and a `\uitool` macro. **Violet**, `#7c4d9a` light
+and `#c9a3e8` dark — the fourth hue, clear of the blue places, the teal
+settings, the salmon buttons and the red answers.
+
+**The measurement changed the job.** The first scan said 66 bare `port`s,
+20 `th`s and so on; almost all of it was noise. Stripping bold as well as
+code showed what was really there: **the book already had a convention**,
+a tool name set `**bold**`, used consistently — and #368 had broken it by
+setting Lesson 3's two mentions as `` `pr` `` in code, a third style.
+What was genuinely unformatted was **six** mentions in the whole book.
+
+So the conversion is **27 bold names** plus **11 unformatted or
+miscoded** ones. Bold was the right instinct and the wrong marker: it is
+also what a node name, an element name and a symbolic value wear (#267,
+#302), so *run **dc** on **r1*** said the two were the same kind of word.
+
+**Where the tier actually lands, measured per version:**
+
+| | spans | |
+|---|---|---|
+| 7 and 8 | 32 each | `th` 9, `er` 7, `pr` 5, then `dc`, `ac`, `fd`, `port`, `solve`, `tr`, `plot` |
+| 9 | **11** | `pr` 6, `ac` 2, `dc` 1, `pr()` 1, `fd` 1 |
+
+**That inversion is deliberate and Roberto checked it on purpose.** Every
+other tier is version 9 only; this one is three times commoner in the
+older books, because *script* is calculator language — *"An easier way is
+the **th** script"* renders 5 times in 7 and 8 and **zero** times in 9.
+He asked exactly that question and accepted the answer: *"I have
+absolutely no problem with the higher frequency in v7 and 8. I just
+wanted to make sure that v9 was not using those words."*
+
+**Version 9's *"Run it in DC"* stays plain**, five times over. That names
+the analysis in prose rather than calling the tool, and it is the main
+reason version 9's count is low. Revisit only if the distinction stops
+reading.
+
+**A caution about the sample that sold it.** The strip sent for approval
+put four tiers in one sentence — *"the **th** script: open **Settings**,
+tick **Show equations** …"* — which is 7/8 wording stitched to version
+9's UI names, a sentence neither book contains. Roberto spotted it in two
+questions. **A colour sample should be built from a real paragraph**, not
+a composed one; the composition is what hid the version split until he
+asked.
+
+**Every problem named in prose links back to it.** The rule he meant in
+#368, applied to the book: **12 mentions** in three chapters, ten of them
+in Lesson 6. The scan sorted 95 candidates into three kinds and only one
+was the rule:
+
+| | count | what happened |
+|---|---|---|
+| figure captions, a bare line naming the example | 83 | left alone; the caption is the label |
+| prose cross-references | 4 | bold and linked |
+| the opening line of a problem, restating the textbook's question | 8 | bold and linked, at his word |
+
+The second scan is the one to keep: the first counted a caption as a
+prose mention and reported 95 sites, which would have put a link inside
+every figure label in the book.
+
+**A reference now reads as the prose does.** A problem's title often
+carries a qualifier the chapter added — *(Op Amp)*, *(Exponential)*,
+*(Hidden source)* — and the prose never repeats it. So a problem
+reference drops a trailing parenthetical, **unless dropping it would make
+two problems read the same**. Measured first: 296 problem titles, exactly
+one collision (AS2's Figure 5.24, once *(Subtractor)* and once
+*(Difference or Differential)*), and that pair keeps its qualifiers.
+
+Zero plain prose mentions remain, by the same scan that found them.
+
+**Numbering:** this item and #368 were first written as #364 and #365,
+which the app tree had already spent that morning (#363–#367). Renumbered
+before anything shipped. The sequence is shared between the trees and
+this is the second time it has collided — read both files' heads before
+taking a number.
+
+## #368 — a subsection and a worked example can be linked to — **done 10 Sep 2026, source only**
+
+Roberto, 10 Sep 2026, with eight notes on Lessons 3 and 4. The one that
+needed building: *"make the example name bold and include a link to that
+problem. If you have not done so already, create an anchor in each
+section, subsection and example."*
+
+**The anchors already existed; nothing could reach them.** Every heading
+gets an anchor at parse time and every `::: problem` has carried a
+`prob-<slug>` id since #224 — but `Book.labels`, which is what `{{ref:}}`
+resolves against, registered chapters and `##` headings and nothing else.
+So the markup could point at a lesson or a section and never at a
+subsection or an example.
+
+`labels` now registers `###` headings and every problem. A problem's
+display name is its own title with the version spans resolved, so
+`{{ref:prob-b11s-example-74}}` prints *B11's Example 7.4* and links to it
+across chapters.
+
+**The bug on the way in, and what it says about `walk`.** The first cut
+registered the two subsection headings and **none** of the problems.
+`walk()` flattens the version and medium wrappers but hands back every
+other block whole, and a worked problem lives inside a `::: practice`
+block — so a flat walk never meets one. `walk_deep()` descends, in
+document order, which is the order the renderer's `prob-` counters
+follow.
+
+**Two anchor computations now have to agree**, `labels`' and the HTML
+renderer's, and they are the same three lines over the same order. The
+one thing that could split them is a problem visible in one medium only,
+which would shift every counter after it — so `check_problem_media()`
+bans that shape, and goes red on a temporary file that has one. Then the
+agreement was measured rather than argued: **841 `prob-` ids across the
+three rendered versions, 0 not in `labels`.**
+
+**Print needed more than the web did.** A reference resolves through
+`\pageref{lbl:<anchor>}`, and only chapters and headings emitted a
+matching `\label` — a problem reference would have printed `??` and left
+a warning nobody reads. `TexRenderer` now emits one per problem, on the
+same counter (48 in Lesson 3 alone).
+
+The other seven notes, all Lesson 3 unless said otherwise: `pr` described
+as reducing resistors **and impedances**, named `pr()`, and said to work
+in both places; the shorthand callout rewritten to cover both places and
+its heading shortened; a colon that introduced nothing turned into a full
+stop; `pr` set as code wherever it was bare prose; the example titles a
+point and a half taller (`1.125rem` on the web, `\fontsize{13}{15.5}` in
+print); and in Lesson 4, *an expression in terms of the variable
+{{var:load}}* and the dropped *under `pmax`*.
+
+**The linking found a reference to a problem that does not exist.** The
+sentence naming the case where `pr` makes no sense pointed at *B11's
+Example 8.3*, and the book has no such problem — 8.1, 8.2, 8.5, 8.10,
+8.15, 8.21, 8.22, 8.24, 8.26 and 8.30 exist, and 8.3 never did. It had
+read that way since the chapter was written; nothing could have caught it
+before, because a name in prose was not a reference to anything.
+**Roberto's replacement is *B11's Example 6.13*** (10 Sep 2026), and it
+is the better example on its own merits: a 24 V source with three
+resistors in parallel across it, and the problem asks for all three
+branch currents, which is exactly what reducing them would erase. The
+reason clause moved with it, from *the current through R₁* to **the
+current through each resistor**.
+
+**The correction was made in all three books** at his word, and the
+reference resolves per version — `/7/`, `/8/` and `/9/lesson-dc#prob-
+b11s-example-613` — Example 6.13 being a problem all three share. Only
+the wrong reference and its reason were touched in 7 and 8: `pr` stays
+bare there, and *Example 7.4* and *6.22* are still plain text in the
+older books, which is the frozen-prose rule and not an oversight.
+
+**The full title stands where a reference prints one.** The 6.22 link
+reads *B11's Example 6.22 (Hidden source)* rather than the bare number
+the prose used, because a reference renders what its target is called;
+Roberto looked and left it (10 Sep 2026).
+
 ## #362 — a pair of symbolic answers stacks instead of running off a phone — **done 9 Sep 2026, source only**
 
 Roberto, 9 Sep 2026, reading Lesson 2 on his phone: the two power answers

@@ -5,14 +5,14 @@ title: Alternating current analysis
 updated: 2023-07-08
 summary: >
   Learn how to run an *alternating current* analysis (via phasor analysis)
-  using **ac**. Learn how to describe capacitors, inductors, *impedances and
+  using {{tool:ac}}. Learn how to describe capacitors, inductors, *impedances and
   admittances*, and sources for AC analysis.
 ---
 
-In this lesson you will learn how to use the **ac** {{v7,8|program}}{{v9|analysis}}
+In this lesson you will learn how to use the {{tool:ac}} {{v7,8|program}}{{v9|analysis}}
 to solve AC circuits in Symbulator. You will also learn how to describe the
-elements you already know so they suit AC analysis, and how to {{v7,8|use **er** and
-**th** in their AC mode}}{{v9|find equivalents in AC}}.
+elements you already know so they suit AC analysis, and how to {{v7,8|use {{tool:er}} and
+{{tool:th}} in their AC mode}}{{v9|find equivalents in AC}}.
 
 ## AC analysis in Symbulator {#ac-analysis}
 
@@ -299,7 +299,7 @@ AS7's Example 9.10
 :::
 
 ::: answer
-Since this is a passive circuit, to reduce it we {{v7,8|will use the **er** tool}}{{v9|find its equivalent impedance}}.
+Since this is a passive circuit, to reduce it we {{v7,8|will use the {{tool:er}} tool}}{{v9|find its equivalent impedance}}.
 
 ```sym 7
 "ca,1,2,2'm:r1,2,3,3:cb,3,0,10'm:l1,2,4,.2:r2,4,0,8"→cir

@@ -4,7 +4,7 @@ kind: lesson
 title: Two-ports
 updated: 2026-08-29
 summary: >
-  Find the *two-port equivalent* of a network{{v7,8| using the **port** script}}. Learn
+  Find the *two-port equivalent* of a network{{v7,8| using the {{tool:port}} script}}. Learn
   how to include *two-ports* in your circuit using the **z**, **y**, **h**,
   **g**, **a** and **b** elements. Calculate gains with the **gain** tool.
 ---
@@ -17,7 +17,7 @@ circuit.{{i:two-port}}
 
 ## Find two-port equivalents {#port-script}
 
-{{v7,8|The tool is called **port**.}}{{v9|Set {{ui:Type of analysis}} to *Find
+{{v7,8|The tool is called {{tool:port}}.}}{{v9|Set {{ui:Type of analysis}} to *Find
 equivalent* and {{ui:Type of equivalent}} to *Two-port parameters*.}} It takes the network and the two **top** nodes of the
 pair of terminals you want to reduce. {{v7,8|The two bottom nodes are always assumed
 to be ground.}}{{v9|The two bottom nodes are ground unless you say otherwise: a

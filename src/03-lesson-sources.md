@@ -5,12 +5,12 @@ title: Current sources, conductances and dependent sources
 updated: 2023-07-08
 summary: >
   Learn how to describe a *current source* using the **j** element. Simplify
-  *parallel resistors* using the **pr** tool and its shorthand. Learn to
+  *parallel resistors* using the {{tool:pr}} tool and its shorthand. Learn to
   describe *conductances* and *dependent sources*.
 ---
 
 In this lesson you will learn how to describe a *current source* with the
-**j** element, and a trick to simplify *parallel resistors* with the **pr**
+**j** element, and a trick to simplify *parallel resistors* with the {{tool:pr}}
 tool or its shorthand. You will also learn to describe *conductance* and
 *dependent sources* using elements you already know.
 
@@ -144,7 +144,7 @@ That indicates **v1** = {{o:–1.3}} V, **v2** = {{o:.34}} V, **v3** = {{o:–1.
 
 ::: only 7,8
 Symbulator can reduce resistors connected in parallel to their
-equivalent. The function is called **pr**,{{i:pr tool}} and you can use it on
+equivalent. The function is called {{tool:pr}},{{i:pr tool}} and you can use it on
 its own or inside a circuit description. There is a shorthand too, to save you
 typing.
 
@@ -241,7 +241,7 @@ circuit description passed to Symbulator.
 
 ### When to reduce resistors
 
-A simulation where it makes sense to use pr is B11's Example 7.4, which you saw
+A simulation where it makes sense to use {{tool:pr}} is **{{ref:prob-b11s-example-74}}**, which you saw
 in the practice problems of {{ref:lesson-dc}}. It makes sense to reduce {{var:R_4}} and
 {{var:R_5}} to an equivalent resistor, since we do not need to know their individual
 currents or power use:
@@ -252,11 +252,12 @@ s\dc("e,1,0,16.8:r1,1,2,9:r2,1,2,6:r3,2,3,4:re,3,0,[6,3]:r6,2,0,3")
 ```sym 8
 s\dc("e,1,0,16.8:r1,1,2,9:r2,1,2,6:r3,2,3,4:re,3,0,[6,3]:r6,2,0,3")
 ```
-An example where using pr makes no sense is B11's Example 8.3, because you need
-to know the value of the current through {{var:R_1}}.
+An example where using {{tool:pr}} makes no sense is
+**{{ref:prob-b11s-example-613}}**, because you need to know the current
+through each resistor.
 
-Finally, a simulation where you can reduce part of the resistors is B11's
-Example 6.22. We must leave {{var:R_1}} alone, because we need the current through it,
+Finally, a simulation where you can reduce part of the resistors is
+**{{ref:prob-b11s-example-622-hidden-source}}**. We must leave {{var:R_1}} alone, because we need the current through it,
 but we can reduce {{var:R_2}} and {{var:R_3}}:
 
 ```sym 7
@@ -270,11 +271,12 @@ circuit descriptions whenever we feel it is appropriate.
 :::
 
 ::: only 9
-Symbulator has a tool for reducing resistors in
-parallel, `pr`.{{i:parallel resistors}}
+Symbulator has a tool for reducing resistors (and impedances) in
+parallel, called {{tool:pr()}}. You can use it in the circuit description and
+in the {{card:Evaluate}} area.{{i:parallel resistors}}
 
-Type it into the {{card:Evaluate}} card. To reduce three resistors in
-parallel with values of 10 Ω, 20 Ω and 30 Ω:
+To reduce three resistors in parallel with values of 10 Ω, 20 Ω and
+30 Ω:
 
 ```field 9 Evaluate
 pr(10, 20, 30)
@@ -325,22 +327,22 @@ The answer is {{o:19}} Ω. This is correct.
 :::
 :::
 
-### The [r,r,r…] shorthand for descriptions
+### The [r,r,r…] shorthand
 
-Inside a circuit description there is a shorthand: values in square
-brackets, such as `[10,20,30]` or `[r1,r2,r3,r4]`, are read as input to `pr`.
-The brackets work in {{card:Evaluate}} too, but this book writes `pr(...)` there,
-where brackets are easy to misread as a list.
+There is a shorthand to invoke the {{tool:pr}} tool: put the resistor values in
+square brackets, separated by commas. Expressions like `[10,20,30]` or
+`[r1,r2,r3,r4]` are read as inputs to {{tool:pr}}, both in the
+{{card:Evaluate}} area or in the circuit description.
 
 ### When to reduce resistors
 
-A simulation where it makes sense to use pr is B11's Example 7.4, which you saw
-in the practice problems of {{ref:lesson-dc}}. It makes sense to reduce {{var:R_4}} and
-{{var:R_5}} to an equivalent resistor, since we do not need to know their individual
-currents or power use:
+A simulation where it makes sense to use {{tool:pr}} is
+**{{ref:prob-b11s-example-74}}**, which you saw in the practice problems
+of {{ref:lesson-dc}}. It makes sense to reduce {{var:R_4}} and
+{{var:R_5}} to an equivalent resistor, since we do not need to know their
+individual currents or power use.
 
-Inside a circuit description, `pr` goes where a value goes. The
-`[6,3]` below is its shorthand, and `pr(6,3)` means the same thing.
+The `[6,3]` below is the shorthand at work:
 
 ```field 9 Circuit Description
 e,1,0,16.8
@@ -354,12 +356,14 @@ r6,2,0,3
 Run it in DC. The current the source delivers is the opposite of `ie`:
 {{o:3}} A.
 
-An example where using pr makes no sense is B11's Example 8.3, because you need
-to know the value of the current through {{var:R_1}}.
+An example where using {{tool:pr}} makes no sense is
+**{{ref:prob-b11s-example-613}}**, because you need to know the current
+through each resistor.
 
-Finally, a simulation where you can reduce part of the resistors is B11's
-Example 6.22. We must leave {{var:R_1}} alone, because we need the current through it,
-but we can reduce {{var:R_2}} and {{var:R_3}}:
+Finally, a simulation where you can reduce part of the resistors is
+**{{ref:prob-b11s-example-622-hidden-source}}**. We must leave
+{{var:R_1}} alone, because we need the current through it, but we can
+reduce {{var:R_2}} and {{var:R_3}}:
 
 ```field 9 Circuit Description
 jt,0,1,12'm

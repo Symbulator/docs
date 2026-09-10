@@ -167,7 +167,7 @@ Set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} t
 :::
 
 ::: only 7,8
-The **th** script tells us it found the Thévenin voltage, but could not find
+The {{tool:th}} script tells us it found the Thévenin voltage, but could not find
 the Norton current. This is not a surprise, since an ideal op amp has zero
 output resistance and a fixed voltage, an infinite current when
 short-circuited. So the Thévenin equivalent is given by {{var:V_TH}} and no

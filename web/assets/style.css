@@ -33,6 +33,7 @@
   --ui-card:    #24487e;   /* a card in the app (#357)                 */
   --ui-control: #0f6b5c;   /* a control inside a card (#357)           */
   --ui-button:  #c9614f;   /* a button you press (#361)               */
+  --ui-tool:    #7c4d9a;   /* a tool you run (#369)                   */
   --lcd:        #f2f6fc;   /* the input panel, tinted toward the accent */
   --lcd-edge:   #dbe4f2;
 
@@ -86,6 +87,7 @@ html[data-theme="dark"] {
   --ui-card:    #7fb0e8;
   --ui-control: #5fd3bd;
   --ui-button:  #ffab91;
+  --ui-tool:    #c9a3e8;
   --lcd:        #182534;
   --lcd-edge:   #2f5170;
   --inverse-bg:  #303c4e;
@@ -562,6 +564,12 @@ em.var { font-weight: 600; font-style: italic; }
    is in the body text -- and by never sitting inside one another. If it
    ever does read as one thing, this token is the single place to move. */
 .ui-btn  { color: var(--ui-button); font-weight: 600; }
+/* #369: an analysis or a little tool -- dc, ac, pr, th, er. The book
+   set these bold, which is also what a node name and an element name
+   wear, so `run **dc** on **r1**` said the two were the same kind of
+   word. Violet: the fourth hue, clear of the blue places, the teal
+   settings, the salmon buttons and the red answers. */
+.ui-tool { color: var(--ui-tool); font-weight: 600; }
 .ans-math .katex { font-size: 1.06em; }
 
 .xref { color: var(--accent); text-decoration-color: rgba(15, 107, 92, 0.4); }
@@ -744,7 +752,9 @@ em.var { font-weight: 600; font-style: italic; }
 }
 .problem-title {
   margin: 0 0 0.7rem !important;
-  font-family: var(--sans); font-weight: 600; font-size: 1rem;
+  /* #368: a point and a half taller than body text, not a heading --
+     the title names the example and the reader scans for it. */
+  font-family: var(--sans); font-weight: 600; font-size: 1.125rem;
 }
 /* #224: the links that open a worked problem in the app. Sized and
    coloured as a caption rather than as body text -- a problem carries up

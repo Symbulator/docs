@@ -5,7 +5,7 @@ title: Direct current analysis
 updated: 2026-09-05
 summary: >
   Learn to describe a circuit in Symbulator, and how to run a *direct current*
-  analysis using **dc**. Learn how to describe a *voltage source* using **e**,
+  analysis using {{tool:dc}}. Learn how to describe a *voltage source* using **e**,
   and a *resistor* using **r**.
 ---
 
@@ -73,14 +73,14 @@ Let's now go over what we just did, one piece at a time.
 
 ::: only 7
 To analyse a direct current circuit in Symbulator, we use a program called
-**s\dc()**. The program itself is called **dc**, but since it is found in the
+**s\dc()**. The program itself is called {{tool:dc}}, but since it is found in the
 Symbulator folder **s**, we have to refer to it as **s\dc**, so the calculator
 knows exactly what we want. And because it is a program, it carries the
 parenthesis **()** after its name.
 :::
 ::: only 8
 To analyse a direct current circuit in Symbulator, we use a program called
-**s\dc()**. The program itself is called **dc**, but since it is found in the
+**s\dc()**. The program itself is called {{tool:dc}}, but since it is found in the
 Symbulator library **s**, we have to refer to it as **s\dc**, so the calculator
 knows exactly what we want. And because it is a program, it carries the
 parenthesis **()** after its name.

@@ -169,11 +169,26 @@ def title_for(ch, v) -> str:
     resolved; a title is printed raw everywhere (the h1, the sidebar's
     toc.json, the search index, the PDF's \\lesson and running foot),
     so no other markup belongs in one -- bold included."""
+    return resolve_vspans(ch.title, v)
+
+
+def _unqualified(title: str) -> str:
+    """A problem's title without a trailing (qualifier)."""
+    return re.sub(r"\s*\([^()]*\)\s*$", "", title).strip() or title
+
+
+def resolve_vspans(text: str, v: int) -> str:
+    """Version spans resolved inside a plain string.
+
+    Split out of title_for for #368: a worked problem's title may carry
+    the same spans a chapter title may, and a cross-reference to that
+    problem has to print the version the reader is on rather than the
+    raw markup."""
     def pick(m):
         neg, vers = m.group(1), [int(x) for x in m.group(2).split(",")]
         hit = v in vers
         return m.group(3) if hit != bool(neg) else ""
-    return re.sub(r"\{\{(!?)v([\d,]+)\|([^}]*)\}\}", pick, ch.title)
+    return re.sub(r"\{\{(!?)v([\d,]+)\|([^}]*)\}\}", pick, text)
 
 
 @dataclass
@@ -626,6 +641,8 @@ def parse_brace(inner: str) -> Node:
         return Node("answer_span", text=inner[2:].strip())
     if inner.startswith("card:"):       # a card in the app (#357)
         return Node("uicard", text=inner[5:].strip())
+    if inner.startswith("tool:"):       # a tool you run (#369)
+        return Node("uitool", text=inner[5:].strip())
     if inner.startswith("btn:"):        # a button you press (#361)
         return Node("uibtn", text=inner[4:].strip())
     if inner.startswith("ui:"):         # a control inside a card (#357)
@@ -674,19 +691,66 @@ class Book:
     def labels(self, v: int) -> dict:
         """id -> (display name, chapter id, anchor) for cross-references."""
         lab = {}
+        # #369: a problem reference reads as the prose does, so a
+        # trailing qualifier the chapter added comes off -- but only
+        # where two problems would not then read the same.
+        bare: dict = {}
+        for ch, _n, present in self.for_version(v):
+            if not present:
+                continue
+            for b in walk_deep(ch.blocks, v):
+                if b.kind == "problem":
+                    full = resolve_vspans(b.arg, v)
+                    bare.setdefault(_unqualified(full), set()).add(full)
         for ch, number, present in self.for_version(v):
             name = f"Lesson {number}" if number else title_for(ch, v)
             lab[ch.id] = (name, ch.id, "")
             if not present:
                 continue
             sect = 0
-            for b in walk(ch.blocks, v):
+            # #368: the problem ids are worked out the same way the HTML
+            # renderer works them out -- slugify the source title, then
+            # a counter for a repeat -- over the same walk(blocks, v), so
+            # the two cannot disagree. check_problem_media() below bans
+            # the one thing that could make them: a problem inside a
+            # ::: web or ::: pdf block, which this walk keeps and the
+            # renderer's medium-filtered walk might drop.
+            seen: set = set()
+            for b in walk_deep(ch.blocks, v):
                 if b.kind == "heading" and b.meta["level"] == 2:
                     sect += 1
                     disp = (f"section {number}.{sect}" if number
                             else f"“{b.text}”")
                     lab[b.meta["anchor"]] = (disp, ch.id, b.meta["anchor"])
+                elif b.kind == "heading" and b.meta["level"] == 3:
+                    lab[b.meta["anchor"]] = (f"“{b.text}”", ch.id,
+                                            b.meta["anchor"])
+                elif b.kind == "problem":
+                    base = slugify(b.arg)
+                    pid, i = f"prob-{base}", 2
+                    while pid in seen:
+                        pid, i = f"prob-{base}-{i}", i + 1
+                    seen.add(pid)
+                    full = resolve_vspans(b.arg, v)
+                    short = _unqualified(full)
+                    disp = full if len(bare.get(short, ())) > 1 else short
+                    lab[pid] = (disp, ch.id, pid)
         return lab
+
+
+def walk_deep(blocks: list[Node], v: int):
+    """walk(), and then into every block's children as well.
+
+    #368: walk() flattens the version and medium wrappers but hands
+    back every other block whole, so a worked problem -- which lives
+    inside a `::: practice` block, and often has an `::: answer`
+    inside it in turn -- is never reached by a flat walk. Depth-first
+    in document order, which is the order the renderer meets them in
+    and therefore the order its `prob-` counters follow."""
+    for b in walk(blocks, v):
+        yield b
+        if b.children:
+            yield from walk_deep(b.children, v)
 
 
 def keep(node: Node, v: int) -> bool:
@@ -814,13 +878,13 @@ class HtmlRenderer:
             if ltx:
                 return f'<span class="ans ans-math">\\({ltx}\\)</span>'
             return f'<span class="ans">{html.escape(n.text)}</span>'
-        if n.kind in ("uicard", "uictl", "uibtn"):
+        if n.kind in ("uicard", "uictl", "uibtn", "uitool"):
             # #357: the app's own vocabulary, in two tiers -- the card
             # the reader is sent to, and the control inside it. Bold
             # alone could not carry either: the book bolds node and
             # element names too (#267, #302).
             cls = {"uicard": "ui-card", "uictl": "ui-ctl",
-                   "uibtn": "ui-btn"}[n.kind]
+                   "uibtn": "ui-btn", "uitool": "ui-tool"}[n.kind]
             return f'<span class="{cls}">{html.escape(n.text)}</span>'
         if n.kind == "var":
             # #261: a variable the problem itself names -- I_s, v_o, R_L --
@@ -1205,9 +1269,9 @@ class TexRenderer:
             if ltx:
                 return r"\ansmath{" + ltx + "}"
             return r"\ans{" + tex_escape(n.text) + "}"
-        if n.kind in ("uicard", "uictl", "uibtn"):  # #357/#361
+        if n.kind in ("uicard", "uictl", "uibtn", "uitool"):  # #357/#361/#369
             cmd = {"uicard": r"\uicard{", "uictl": r"\uictl{",
-                   "uibtn": r"\uibtn{"}[n.kind]
+                   "uibtn": r"\uibtn{", "uitool": r"\uitool{"}[n.kind]
             return cmd + tex_escape(n.text) + "}"
         if n.kind == "var":                  # #261, see the HTML side
             base, _, sb = n.text.partition("_")
@@ -1365,8 +1429,14 @@ class TexRenderer:
             # page. The plain \\needspace, not the starred
             # \\Needspace*: the starred one fills out the page it breaks
             # from, which only moves the blank from the foot to the middle.
+            base = slugify(b.arg)
+            pid, i = f"prob-{base}", 2
+            while pid in self.problem_ids:
+                pid, i = f"prob-{base}-{i}", i + 1
+            self.problem_ids.add(pid)
             return (f"\\needspace{{{self._problem_need(b):.0f}mm}}\n"
                     f"\\begin{{problem}}{{{self.inline(b.arg)}}}\n"
+                    f"\\label{{lbl:{pid}}}\n"
                     f"{self.blocks(b.children)}\n\\end{{problem}}")
         if k == "answer":
             return (f"\\begin{{solution}}\n{self.blocks(b.children)}\n"
@@ -1381,6 +1451,10 @@ class TexRenderer:
 
     def chapter(self, ch: Chapter, number, present: bool) -> str:
         self.chapter_no = number
+        # #368: worked out exactly as the HTML renderer and
+        # Book.labels work it out -- slugify, then a counter for a
+        # repeat -- so one reference resolves the same way in both.
+        self.problem_ids: set = set()
         head = []
         if number:
             head.append(f"\\lesson{{{number}}}{{{tex_escape(title_for(ch, self.v))}}}")
@@ -1744,6 +1818,7 @@ def check(book: Book, versions: list[int], verbose: bool = False) -> int:
     # survives every other check; chapter 9 shipped with one.
     problems.extend(check_control_chars())
     problems.extend(check_brace_balance())
+    problems.extend(check_problem_media())
     problems.extend(check_buried_v9())
     # The sidebar search is three pieces in three files with nothing else
     # tying them together -- the index this file writes, the markup and
@@ -1902,6 +1977,41 @@ def check_brace_balance() -> list[str]:
                 i = end
             else:
                 i += 1
+    return out
+
+
+def check_problem_media() -> list[str]:
+    """No worked problem may sit inside a `::: web` or `::: pdf` block.
+
+    #368. A problem's anchor is `prob-` plus its slugified title, with a
+    counter when two problems slugify the same. The HTML renderer works
+    that out as it renders, over a medium-filtered walk;
+    `Book.labels` works it out over an unfiltered one, so that a
+    cross-reference resolves in both media. The two agree for every
+    problem in the book -- and can only stop agreeing if a problem is
+    hidden from one medium, which would shift every counter after it.
+
+    Rather than render the whole book twice on every check, this bans
+    the shape that could break it. Nothing in the book wants a
+    problem in one medium only; if something ever does, the honest fix
+    is to give the two walks one shared anchor pass, not to lift this.
+    """
+    import glob as _glob
+    out = []
+
+    def scan(blocks, path, inside):
+        for b in blocks:
+            here = inside or (b.kind in MEDIA)
+            if b.kind == "problem" and here:
+                out.append(
+                    f"{os.path.basename(path)}: the problem {b.arg!r} is "
+                    f"inside a ::: web or ::: pdf block, which would put "
+                    f"its anchor out of step between the two media")
+            if b.children:
+                scan(b.children, path, here)
+
+    for path in sorted(_glob.glob(os.path.join(SRC, "*.md"))):
+        scan(parse_chapter(path).blocks, path, False)
     return out
 
 

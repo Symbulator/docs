@@ -46,7 +46,7 @@ I find it useful to distinguish between two types of symbolic problems:
 Numerical-from-symbolic problems can be solved in two ways. If they are simple
 — one or two unknown values, one or two numerical answers wanted — it is
 quicker to simulate the circuit symbolically and then solve for the numerical
-answers with the {{v7,8|**solve** command of the
+answers with the {{v7,8|{{tool:solve}} command of the
 calculator}}{{v9|{{card:Solve}} card, under the results}}. If they are not simple, it is easier to use
 {{v7,8|**expert mode**}}{{v9|{{card:Expert Mode}}}}.
 
@@ -174,7 +174,7 @@ numbers because, although it hides two values from us (the source **E** and the
 resistor {{var:R_1}}), it gives us in exchange two answers (the equivalent resistance {{var:R_T}}
 and the current {{var:I_3}}) to solve for them with.
 
-Since this circuit is structurally identical to B11's Example 5.7 solved in
+Since this circuit is structurally identical to **{{ref:prob-b11s-example-57}}** solved in
 {{ref:lesson-dc}}, we will use the same names for the nodes. The description is
 identical except for the values. Symbulator accepts numbers, variables or even
 algebraic expressions as values. Here I use **e** for source **e**, and **r1** for

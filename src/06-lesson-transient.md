@@ -4,9 +4,9 @@ kind: lesson
 title: Transient analysis
 updated: 2026-08-29
 summary: >
-  Learn to run a *transient* time-domain analysis{{v7,8| with **tr**}}. Learn to
+  Learn to run a *transient* time-domain analysis{{v7,8| with {{tool:tr}}}}. Learn to
   describe *capacitors* with **c** and *inductors* with **l**. {{v7,8|Save time with
-  the **only** tool. Plot expressions in time with the **plot** tool.}}{{v9|Limit
+  the **only** tool. Plot expressions in time with the {{tool:plot}} tool.}}{{v9|Limit
   the results, and plot answers in time.}}
 ---
 
@@ -196,8 +196,8 @@ t, this variable must be understood as the time elapsed since the start of
 
 This is a distinction without a difference as long as the interval we simulate
 starts at t=0, which is most often the case. However, sometimes problems have
-switch changes at other times — Bo2's Example 5.6, where a switch closes at
-t=1 s, and Bo2's Drill Exercise 5.6, where one closes at t=2 s, are examples in
+switch changes at other times — **{{ref:prob-bo2s-example-56}}**, where a switch closes at
+t=1 s, and **{{ref:prob-bo2s-drill-exercise-56}}**, where one closes at t=2 s, are examples in
 the solved problems.
 
 ## Two useful tools {#tr-tools}
@@ -1967,7 +1967,7 @@ This is the expression for the voltage drop in the capacitor after t=0.
 
 ::: problem Bo2's Drill Exercise 5.11
 
-For the circuit of Bo2's Example 5.7, change the value of the capacitor to ¼
+For the circuit of **{{ref:prob-bo2s-example-57-op-amp}}**, change the value of the capacitor to ¼
 F. Find {{var:v_C}}(t) for the case that the source is {{var:v_S}}(t)=1 V for
 t<0 and 3V for t≥0.
 
@@ -2135,7 +2135,7 @@ ic
 
 ::: problem Bo2's Drill Exercise 5.13 (Impulse)
 
-For the circuit of Bo2's Example 5.7, find {{var:v_C}}(t), {{var:i_C}}(t) and
+For the circuit of **{{ref:prob-bo2s-example-57-op-amp}}**, find {{var:v_C}}(t), {{var:i_C}}(t) and
 {{var:v_o}}(t) due to an impulse voltage source of {{var:v_S}}(t)= δ(t) (that
 is to say, a 1V impulse in t=0.)
 
@@ -2225,7 +2225,7 @@ v_{l} = i l(1-e^{((-r t)/l)})
 
 ::: problem Bo2's Drill Exercise 5.14 (Ramp)
 
-For the circuit of Bo2's Example 5.7, find {{var:v_C}}(t) and {{var:i_C}}(t)
+For the circuit of **{{ref:prob-bo2s-example-57-op-amp}}**, find {{var:v_C}}(t) and {{var:i_C}}(t)
 due to a ramp input voltage of {{var:v_S}}(t)= r(t).
 
 Nothing new here. The {{v7,8|command}}{{v9|description}} below should be clear to you by now.
@@ -2313,7 +2313,7 @@ v_{l} = 48 e^{-4t}-36 e^{-3t}
 
 ::: problem Bo2's p265 (Exponential)
 
-Repeat Bo2's Example 5.12 if the current source is now {{var:i_S}}(t) = 2 *e*
+Repeat **{{ref:prob-bo2s-example-512-exponential}}** if the current source is now {{var:i_S}}(t) = 2 *e*
 {{sup:-3t}} A.
 
 All we do is change one digit in the circuit description: replace `4` with
@@ -2400,7 +2400,7 @@ i_{r3} = (3/2) e^{(-t/2)}-(1/2)e^{(-t/6)}
 
 ::: problem Bo2's Drill Exercise 5.16 (Exponential)
 
-For the circuit of Bo2's Example 5.7, find {{var:v_C}}(t) and {{var:i_C}}(t)
+For the circuit of **{{ref:prob-bo2s-example-57-op-amp}}**, find {{var:v_C}}(t) and {{var:i_C}}(t)
 for the case when the source's value is {{var:v_S}}(t)= 2 *e* {{sup:-4t}}. As
 before, assume initial conditions are zero.
 
@@ -2521,7 +2521,7 @@ here.}}
 
 ### {{v7,8|The plot tool}}{{v9|Plotting an answer}}
 
-Imagine, for example, that in Bo2's Example 6.1 we are asked to plot {{var:i}}(t) and
+Imagine, for example, that in **{{ref:prob-bo2s-example-61}}** we are asked to plot {{var:i}}(t) and
 {{var:v}}(t) for times between 0 s and 1.5 s.{{v7,8| The first step is to run the `plot`
 tool:}}
 
@@ -3250,7 +3250,7 @@ the book's graph too.
 
 ::: problem Bo2's Drill Exercise 6.7
 
-For the circuit in Bo2's Example 6.5, use {{var:v_S}}=3V, {{var:R}}=5Ω, {{var:L}}=1/2H and
+For the circuit in **{{ref:prob-bo2s-example-65-plot}}**, use {{var:v_S}}=3V, {{var:R}}=5Ω, {{var:L}}=1/2H and
 {{var:C}}=1/8F. Find {{var:v}}(t) and {{var:i}}(t).
 
 ```sym 7
@@ -3284,7 +3284,7 @@ i_{l} = e^{-2t}-e^{-8t}
 
 ::: problem Bo2's Drill Exercise 6.8 (Ramp)
 
-For the circuit in Bo2's Drill Exercise 6.7, find the voltage drop in the
+For the circuit in **{{ref:prob-bo2s-drill-exercise-67}}**, find the voltage drop in the
 capacitor {{var:v}}(t) if the source has a value {{var:v_S}}(t) = 3 r(t).
 
 ```sym 7
