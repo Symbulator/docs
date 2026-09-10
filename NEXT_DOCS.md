@@ -3,6 +3,8 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #364 — claimed by the app tree, 10 Sep 2026: a tools housekeeping item — `review_schematics.py` took `--help` as its output directory and had committed 3.5 MB into a folder of that name. No docs work. Write-up in `Application/v9/repos/local/NEXT.md`
+
 ## #363 — claimed by the app tree, 10 Sep 2026: Lesson 5's Practice Problem 5.7 gets the app entry it never had, so the chapter's only link-less problem carries **Open in app** and **Open in split view** like its neighbours. No docs source changes — the links row is generated from the title match, so the fix is one entry in `Application/v9/repos/server/examples/Lesson_05b.cir` and the page gains its row on the next build. Write-up in `Application/v9/repos/local/NEXT.md`
 
 ## #362 — a pair of symbolic answers stacks instead of running off a phone — **done 9 Sep 2026, source only**
