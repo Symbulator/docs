@@ -43,8 +43,11 @@ def parse():
             entries = [" ".join(e.split()) for e in ENTRY.findall(body)]
             stores = {}
             for e in entries:
-                for value, name in STORE.findall(e):
-                    stores.setdefault(name, value)
+                # `var`, not `name`: `name` is the chapter filename in the
+                # enclosing loop, and shadowing it made every problem after
+                # the first store report its chapter as "zp22".
+                for value, var in STORE.findall(e):
+                    stores.setdefault(var, value)
             nets = []
             for e in entries:
                 sq = SQ.search(e)

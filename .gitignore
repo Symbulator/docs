@@ -24,3 +24,8 @@ Thumbs.db
 # thesis_circuits/build_thesis_pdfs.py. They are output: rebuild rather
 # than trust one on disk.
 paper/build_thesis/
+
+# Regenerable by thesis_circuits/carve_png.py and render_v9.py; see the
+# README there for the order.
+paper/thesis_circuits/thesis_png/
+paper/thesis_circuits/v9_svg/
