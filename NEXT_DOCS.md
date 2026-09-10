@@ -3,6 +3,55 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #365 — the Book gets its figures, and `book.pdf` on the site with them — **done 10 Sep 2026, live on `learn.symbulator.com/book.pdf`**
+
+Roberto, 10 Sep 2026: *"I had not realised that the PDF has no images."*
+It had none by design -- the Book's own *Note on this Edition* said the
+figures "are not reproduced in this edition", on the reasoning that a
+problem's circuit is fully defined by its description. He reversed that,
+so the note was rewritten as well; leaving it would have had the book
+contradicting itself in print.
+
+**The figures were never lost.** They are embedded in the original Word
+chapters under `paper/references/2000_thesis/`, and `carve_png.py` pulls
+them out signature-to-`IEND`, so the extent of each is exact: **150
+images, none corrupt**, splitting cleanly into 60 calculator screens
+(59 at exactly 164x104) and 90 drawings. 93 figures now sit in the Book,
+one per problem that has one.
+
+**Five problems have none, and the thesis says so itself** -- 048, 057,
+059, 060 and 072 each open *"Este problema no tiene figura."* That is the
+whole gap; nothing is missing that the source has.
+
+**Edited the source, not the PDF.** `build.py` copies
+`paper/the_symbulator_book.pdf` to the site as `book.pdf`, so uploading a
+rebuilt PDF alone would have been undone by the next `xelatex` --
+the generated-files-are-not-source trap this file's parent `CLAUDE.md`
+already names. `thesis_circuits/illustrate_book.py` puts the figures into
+`paper/book/ch*.tex` and the packages into the main file, once, and
+refuses to run twice.
+
+**The pairing is the delicate part, and it was wrong three times**, each
+found by Roberto reading the comparison sheet rather than by any check of
+mine. All three are written up in `paper/thesis_circuits/README.md`; the
+short form is that Word stores a picture per *appearance*, so counts lie:
+a figure embedded twice ate a problem's slot; a caption the matcher could
+not see (the extraction spaces characters out, `F i g u r a 4 1 .`) hid
+**14** figures; and classifying screens by an open-ended word list meant
+every word missed stole a circuit's slot. The last one is the lesson:
+**key on the closed set.** The thesis always writes *"Circuito para el
+Problema N NNN"*, and everything else is a screen.
+
+Verified by fetching: `learn.symbulator.com/book.pdf` is **143 pages with
+93 images**, sha256-identical to the local build, and its editorial note
+reads *"are reproduced in this edition"*. It was 117 pages and zero.
+
+Two companion editions exist but are **not deployed and not linked**:
+one with every description converted to version 9 notation (for Antony
+Garcia), and one with every circuit redrawn by the v9 schematic engine
+for comparison. `py thesis_circuits/build_thesis_pdfs.py` rebuilds all
+three; `check_pdfs.py` proves they differ in the two axes they should.
+
 ## #364 — claimed by the app tree, 10 Sep 2026: a tools housekeeping item — `review_schematics.py` took `--help` as its output directory and had committed 3.5 MB into a folder of that name. No docs work. Write-up in `Application/v9/repos/local/NEXT.md`
 
 ## #363 — claimed by the app tree, 10 Sep 2026: Lesson 5's Practice Problem 5.7 gets the app entry it never had, so the chapter's only link-less problem carries **Open in app** and **Open in split view** like its neighbours. No docs source changes — the links row is generated from the title match, so the fix is one entry in `Application/v9/repos/server/examples/Lesson_05b.cir` and the page gains its row on the next build. Write-up in `Application/v9/repos/local/NEXT.md`

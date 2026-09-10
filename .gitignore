@@ -19,3 +19,8 @@ __pycache__/
 Thumbs.db
 *.swp
 *~
+
+# The three illustrated thesis editions are built from the Book source by
+# thesis_circuits/build_thesis_pdfs.py. They are output: rebuild rather
+# than trust one on disk.
+paper/build_thesis/
