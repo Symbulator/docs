@@ -3,6 +3,81 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #425 — Select problems from Nilsson & Riedel 12ed — **live 13 Sep 2026**
+
+A chapter of **43 worked examples** from *Electric Circuits*, 12th edition,
+each described in Symbulator and **checked against the answer the book
+prints**: `/9/nr12-sampler`, `kind: back`, version 9 only. DC 16, TR 14,
+AC 8, FD 5 — the four analyses were a requirement of the brief, not an
+accident of what was easy.
+
+**The selection is the point.** These are the problems where the distance
+between *describing* a circuit and *solving it by hand* is widest: a delta
+that must be transformed (3.11, 9.10), a supermesh (4.8), a dependent
+source three steps from its controlling current (4.4, 4.7, 9.12, 9.14), a
+linear transformer (9.15), a switch that opens twice (7.11), an impulse
+(13.13), the full three-phase circuit rather than the single-phase
+equivalent the book has to build first (11.1), cascaded two-ports (18.6).
+{card:Expert Mode} appears twice, where the thing you know is an answer
+and the thing you want is a component: the Wheatstone balance (3.10,
+`i_rg = 0` → `rx = 4*r3`) and a saturating summing amplifier's feedback
+resistor (5.3c, `v_4 = -12` → 40 kΩ).
+
+**The join to the app.** Every circuit ships as a built-in book,
+`examples/Nilsson_Riedel.cir`, so the app now carries **399 entries across
+21 books** (measured with `grep -c '^\[' *.cir`, not quoted). Each problem
+carries the usual *Open in app* / *Open in split view* pair. That needed
+three things changed together, and they must stay together:
+
+  * `openFromUrl()` in the app's template gains `?lesson=nr12`;
+  * `app_links.py` gains a `NAMED_BOOKS` table for books with no lesson
+    number, and `"nr12-sampler": ["nr12"]` in `CHAPTER_BOOKS`, which is
+    also what writes the split view's `lessons.json` in both directions;
+  * the problem titles are **short** — `NR12's Example 4.4` — because
+    `parse_book` truncates an entry name at 80 characters and the join is
+    on the title. The book's own descriptive title moved into the body.
+
+All 43 resolve, no loose ends; the coverage report reads 377 of 379.
+
+**The textbook code is NR12**, the credits table's own, matching the
+`NR11's …` entries already in the app. It said `N&R's` for one deploy;
+the session working on the documentation caught it.
+
+**Four things measured rather than asserted.**
+
+  * Every answer compared with the book's printed one — 43 of 43 — and
+    twice the book's *text layer* misled: it renders `v = 24(2) = 48 V` as
+    `v 24 24 8V`, and two wrong expectations were written from it before
+    Symbulator disagreed. That disagreement is the whole value of checking
+    against a printed answer instead of one's own reading of it.
+  * Every entry run through the **real app** with `verify_lesson.py`, not
+    just through the solver API. That is what caught 9.15, which passed
+    `th()` and failed the app outright — see #426.
+  * The figures: 41 crops from the PDF, taken by clustering the vector ink
+    above each `Figure N.M ▲` caption. Three needed a hand-set top where
+    the cluster swept in a formula or a line of prose.
+  * The op-amp problems answer **every lettered part** (5.1, 5.3, 5.3c,
+    5.5). They first stated the formula and left (b) and (c) to the reader,
+    which Roberto rejected: *"Make sure you answer each part, separately."*
+
+**Fair use**, in the credits chapter's own words: *for the purpose of
+teaching students how to use Symbulator, these diagrams are reproduced
+under the principle of fair use. No copyright infringement is intended.*
+
+**The PDFs were rebuilt** — the documented exception to the `--web`
+default, since a whole chapter had moved: v9 **347** pages, v7 **235**,
+v8 **223**, the Manual **39** (shipped at Roberto's word). Versions 7 and
+8 were proved unmoved across the deploy over eight pages, compared
+semantically — byte identity is unreachable while a shared stylesheet
+carries a content hash.
+
+**A build warning worth keeping.** The first full run printed **NO PDF
+PRODUCED for v7, v9** while in fact writing and copying all four PDFs
+correctly; a re-run with no source change was clean. MiKTeX fetching a
+package on first use is the likely cause. `build.py` is right to treat the
+message as fatal and the right response is to re-run — never to ship the
+files a failed run disowned.
+
 ## #424 — the Course read as a version 9 book — **live 13 Sep 2026**
 
 **Deployed at Roberto's "ship it" on 13 Sep 2026, both passes together,
