@@ -830,8 +830,29 @@ figcaption {
 .chapter-cards {
   list-style: none; margin: 0 auto; padding: 0; max-width: 66rem;
   display: grid; gap: 1px;
-  grid-template-columns: repeat(auto-fill, minmax(17rem, 1fr));
+  /* Six columns, and a card spans two, three or six (#381). Six divides
+     by both three and two, which is what lets the last row always fill:
+     a lone card spans six, a pair spans three each. `auto-fill` left the
+     remainder of a partial row as empty track, and since the grid paints
+     `--rule` behind the 1px gaps, an empty cell showed as a grey block. */
+  grid-template-columns: repeat(6, 1fr);
   background: var(--rule); border: 1px solid var(--rule);
+}
+/* One up, the narrow default. */
+.chapter-cards > li { grid-column: span 6; }
+/* Two up. A range, not a min-width: the orphan rule below must not
+   survive into the three-up layout, where fifteen cards end on an odd
+   child and would have stretched a row that was already full. */
+@media (min-width: 34rem) and (max-width: 50.99rem) {
+  .chapter-cards > li { grid-column: span 3; }
+  .chapter-cards > li:last-child:nth-child(2n + 1) { grid-column: span 6; }
+}
+/* Three up. One left over spans the row; two left over split it. */
+@media (min-width: 51rem) {
+  .chapter-cards > li { grid-column: span 2; }
+  .chapter-cards > li:last-child:nth-child(3n + 1) { grid-column: span 6; }
+  .chapter-cards > li:nth-last-child(2):nth-child(3n + 1),
+  .chapter-cards > li:last-child:nth-child(3n + 2) { grid-column: span 3; }
 }
 .chapter-cards li { background: var(--paper); }
 .chapter-cards a {
@@ -868,13 +889,13 @@ figcaption {
   letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3);
 }
 .tn-cards { margin-top: 0; }
-/* With fewer notes than columns the grid's rule-coloured background
-   showed through the empty cells as a grey void -- which the lessons
-   grid never hits, being always full. A lone note spans the row and
-   reads as a wide card; two split the row; three or more tile as the
-   lessons do. */
-.tn-cards li:only-child { grid-column: 1 / -1; }
-.tn-cards:has(li:nth-child(2):last-child) { grid-template-columns: 1fr 1fr; }
+/* The partial-row rules that used to live here were special cases of
+   what `.chapter-cards` now does for every grid, so they are gone (#381)
+   rather than kept as a second way of saying the same thing. */
+/* The lessons carry the same label as the notes, so the two sections are
+   named alike. No rule above this one: the nav band's border already
+   closes the space, and a second line under it read as a double rule. */
+.tn-divider.tn-first { border-top: 0; margin-top: 0.4rem; }
 /* The same grouping in the sidebar's Contents list, so a note is not
    wedged between two lessons there either. */
 .tn-sep {

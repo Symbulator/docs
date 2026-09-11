@@ -1503,9 +1503,25 @@ class TexRenderer:
 # Drivers
 # --------------------------------------------------------------------------
 
+#: Where each kind of chapter sits, whatever order `book.yaml` lists them
+#: in. Technical notes follow the lessons and precede the back matter
+#: (#381); within a group the author's order is kept.
+KIND_ORDER = {"front": 0, "lesson": 0, "note": 1, "back": 2}
+
+
 def load_book() -> Book:
     meta = yaml.safe_load(open(os.path.join(ROOT, "book.yaml"), encoding="utf-8"))
     chapters = [parse_chapter(os.path.join(SRC, f)) for f in meta["chapters"]]
+    # `kind` decides the section, so it has to decide the order too --
+    # otherwise it grouped the home page cards (that loop filters) while
+    # the sidebar, the Previous/Next pager and the printed books all
+    # followed `book.yaml` literally. A note listed before Lesson 1 would
+    # have printed there, and the sidebar would have opened with a
+    # "Technical Notes" separator above the Introduction, that separator
+    # being emitted at the first note the loop meets.
+    #
+    # `sorted` is stable, so this reorders the groups and nothing else.
+    chapters.sort(key=lambda ch: KIND_ORDER.get(ch.kind, 0))
     return Book(meta, chapters)
 
 

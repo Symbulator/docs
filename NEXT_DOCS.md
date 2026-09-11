@@ -3,6 +3,63 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #381 — a heading over the lessons, and no partial row anywhere — **done 11 Sep 2026, live on `learn.symbulator.com`**
+
+Two asks from Roberto after seeing #380 live.
+
+**A heading for the tutorial.** The lessons carry the same small-caps
+label the notes do — **Symbulator Tutorial** — so the two sections are
+named the same way. No rule above it: the nav band's own border already
+closes the space, and a second line 1.4rem under it read as a double
+rule. All three versions get it; only version 9 has notes below.
+
+**Every row fills.** Roberto: *"if there is only one box in a line, it
+expands to occupy the full line … make sure that it's always like
+that."* The grid now has **six** columns and a card spans two, three or
+six by breakpoint. Six divides by both three and two, so an orphan spans
+the row and a pair splits it — which `span 1.5` could not. Which card
+stretches is `:nth-child` arithmetic on the count, so it needs nothing
+from PHP and stays right when the column count changes under a media
+query. The two-up breakpoint is a **range**, not a `min-width`: with
+fifteen cards the last is an odd child, and a stray
+`:last-child:nth-child(2n + 1)` would have stretched a row that was
+already full. The `:only-child` and `:has()` special cases #380 added are
+gone — they were special cases of this rule.
+
+**`kind` decides the order now, not `book.yaml`.** Roberto asked whether a
+note listed before Lesson 1 would still render at the end. It would not
+have: `kind` grouped the home page cards, because that loop filters,
+while the sidebar, the Previous/Next pager and the three PDFs followed
+`book.yaml` literally — a note listed first would have **printed** first,
+and the sidebar would have opened with a "Technical Notes" separator
+above the Introduction, that separator being emitted at the first note
+the loop meets. Chapters are sorted by kind once at load time now,
+stably, so the author's order within each group is kept and the answer
+to his question is yes. Proved by listing the note first and rebuilding:
+the rendered order came back unchanged.
+
+**How the grid was tested, since `index.php` cannot be rendered here.**
+The rule is pure CSS, so it was exercised directly: every card count
+from 1 to 9 and 13 to 17, at each layout, asking of the **laid-out
+boxes** whether the last row's widths sum to the grid's own. Two
+attempts before one meant anything:
+
+* the first resized the pane, which does not reach the page here — every
+  probe reported `innerWidth: 980`, so it measured the three-up layout
+  three times and called it three breakpoints;
+* the second put the layouts side by side in narrow columns, which made
+  the **control** degenerate: at 300px the old `auto-fill` rule yields a
+  single column, where every row is trivially full, so the known-bad
+  case passed.
+
+Full width, one layout per page, the control finally failed as it
+should. **The old rule leaves a partial row on 10 of the 14 counts**,
+short by 631px where one card is left over and 316px where two are; the
+new rule leaves none. A control that cannot fail proves nothing about
+the test.
+
+---
+
 ## #380 — Technical Notes: a section of their own, under the lessons — **done 11 Sep 2026, live on `learn.symbulator.com`, all three PDFs rebuilt**
 
 Roberto, 11 Sep 2026: *"there are some topics that are optional and can

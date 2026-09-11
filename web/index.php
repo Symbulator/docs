@@ -425,6 +425,9 @@ function asset(string $name): string {
     $noteCards = array_values(array_filter($toc['chapters'],
       function ($c) { return ($c['kind'] ?? '') === 'note'; }));
   ?>
+  <div class="tn-divider tn-first">
+    <h2 class="tn-heading">Symbulator Tutorial</h2>
+  </div>
   <ol class="chapter-cards">
     <?php foreach ($mainCards as $c): ?>
       <li<?= $c['present'] ? '' : ' class="is-absent"' ?>>
