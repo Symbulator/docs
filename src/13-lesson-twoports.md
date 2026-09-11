@@ -117,7 +117,7 @@ and **4**; the parameter term, when there is one, follows as before,
 `z,[1,0],[2,0]` is the two-node form written out. A two-port conducts
 nothing from one port to the other, so a side of the circuit with no path of
 its own to ground is an island: Symbulator takes the port's lower terminal
-as that side's own reference and says so in a note under the results. A port
+as that side's own reference and says so in a note above the results. A port
 whose two nodes are the same is refused.
 
 **Its answers** are the current entering the two-port at each of its live

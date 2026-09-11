@@ -228,7 +228,7 @@ That is a primary between nodes **1** and **3**, a secondary between nodes
 before. An ideal transformer conducts nothing from one side to the other, so a
 side with no path of its own to ground is an island: Symbulator takes one of
 its nodes — the winding's lower terminal — as that side's own reference, holds
-it at 0, and says so in a note under the results. Every current and every
+it at 0, and says so in a note above the results. Every current and every
 voltage difference on that side is the same whichever node is chosen; only
 its absolute potentials depend on it, and they have no meaning anyway. Either
 terminal of a pair may be `0`, so `t1,[1,0],[2,0],[80,800]` is the two-node

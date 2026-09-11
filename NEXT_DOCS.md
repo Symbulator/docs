@@ -3,6 +3,12 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #394 — claimed by the app tree, 11 Sep 2026: the Numerical Solver is wider (92rem, was 76) and the equations column takes the larger share of the split, with the stack breakpoint raised to 68rem. Roberto while testing #391: *"Feel free to make the equations card/column wider. You can even put them equations above and results below."* Kept side by side, because the page's loop is ticking an equation and watching the variables answer. No docs work. Write-up in `Application/v9/repos/local/NEXT.md`
+
+## #393 — claimed by the app tree, 11 Sep 2026: every equation handed to the Numerical Solver carries a label saying what it is — *nodal equation for node 3*, *element equation for voltage source e1*, *power equation for resistor r1*, *expert mode equation* — so the checkbox list distinguishes the stamped system from the expert extras from the third level. Roberto's ask while testing #391. Needs the engine to record each stamped equation's provenance, which it does not today. No docs work until it ships. Write-up in `Application/v9/repos/local/NEXT.md`
+
+## #392 — claimed by the app tree, 11 Sep 2026: a chained comparison — `7 > x > 3`, the way anyone writes a range — is accepted wherever conditions are typed (Expert Mode, the Solve card, the Evaluate card). All three parsers split on the first operator they met, so the second half reached a value parser that refuses comparisons. One splitter in the solver now, imported by the other two. **Solver change, so a release**. No docs work unless a chapter states the old limitation — worth a grep for condition syntax before the next docs pass. Write-up in `Application/v9/repos/local/NEXT.md`
+
 ## #391 — claimed by the app tree, 11 Sep 2026: the third level crosses into the Numerical Solver — the defining equations for power, branch voltage and a source's seen resistance, behind a checkbox on the app's Numerical Solver card (off by default). No docs work now; **a follow-up may be wanted once it ships**, since the Manual's Numerical Solver part names that card's controls. Write-up in `Application/v9/repos/local/NEXT.md`
 
 ## #390 — the Manual: a second book on version 9 — **done 11 Sep 2026, live on `learn.symbulator.com`**
