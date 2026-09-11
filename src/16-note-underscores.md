@@ -40,6 +40,14 @@ That is all there is to it. `v_cc` prints as {{var:v_cc}}, `r_e1` as
 symbolic result that much easier to compare with the page you are
 working from.
 
+**One difference from the section above, and it is the only trap here.**
+In an answer's name the underscore is optional; in a symbolic variable it
+is *part of the name*. Rename `vcc` to `v_cc` everywhere and nothing
+changes but the typesetting — but write `v_cc` in the circuit and `vcc`
+in a condition and you have named two variables, not one, and Symbulator
+will treat them as two. Pick a spelling for each symbol and stay with
+it.
+
 ::: problem TR5's Example 4.5 (Symbolic)
 The same circuit twice: once with plain names, once with subscripted
 ones, so the difference is only in how the answer reads.
