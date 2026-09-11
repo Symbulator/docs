@@ -3,7 +3,21 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
-## #422 — the index, rebuilt for version 9's three books — **built 12 Sep 2026, not deployed**
+## #422 — the index, rebuilt for version 9's three books — **live 12 Sep 2026**
+
+**Deployed at Roberto's "Ship it!" the same evening and verified by
+fetching, not by the upload log:** 37 files moved (35 version 9 pages
+and `toc.json`, `index.php`, `assets/style.css`; 675 already identical).
+`/9/index` serves 122 terms, 213 book labels and 240 anchor links; two
+targets fetched at random -- `ix-si-prefixes-1` on Tech Note E and
+`ix-numerical-solver-0` on the Manual's toolbox part -- are each present
+exactly once on their page. `/7/index` and `/8/index` were captured
+before the deploy and re-fetched after: identical once whitespace and
+the `style.css?v=` hash are normalised, 34 and 32 terms as before. The
+dry run caught one thing worth keeping: a scratch copy of the old page,
+`build/web/index_old.php`, left there for the rendering comparison,
+would have gone up as a new file. **`build/web` is what a `learn` deploy
+uploads, so nothing may be parked in it, however briefly.**
 
 Roberto: *"There is an index in Symbulator's documentation, but it is not
 good. I want to replace it with a proper index."* And, mid-way: *"I'm

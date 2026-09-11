@@ -30,6 +30,7 @@ for path in (SOLVER, SERVER):
     sys.path.insert(0, path)
 
 from symbulator.schematic import to_svg          # noqa: E402
+import symbulator.schematic as sch               # noqa: E402
 from circuitbook import parse_book               # noqa: E402
 from svglib.svglib import svg2rlg                # noqa: E402
 from reportlab.graphics import renderPDF         # noqa: E402
@@ -89,8 +90,11 @@ def descriptions():
 # and the sloped quantity letters arrived with #212 and #213; svglib
 # reads neither a <style> block nor a class, so both have to become
 # attributes on the tspan before it will see them.
-LABEL_PT = 13.0
-SUB_SCALE = 0.72
+# Read from the drawer rather than restated here: a number restated in
+# a second file goes stale (this one said 13 and 0.72 until #422 moved
+# the drawing to the book's 14 and 0.7).
+LABEL_PT = float(sch.LABEL_PX)
+SUB_SCALE = sch.SUB_SCALE
 
 
 # The label face. Helvetica is a Type 1 font in WinAnsi: it has no
@@ -104,7 +108,11 @@ SUB_SCALE = 0.72
 # face, but svglib will not honour a per-tspan `font-family` switch, so
 # splitting the runs out into Symbol drew blanks instead of bars: no
 # better.) A real Unicode TTF, embedded, is the fix.
-DEJAVU = "DejaVuSans"
+# DejaVu *Serif* since #422 (12 Sep 2026): the drawing's labels are a
+# Times face now, as the book's are, and DejaVu Serif is the serif that
+# ships with matplotlib and carries every glyph a label can hold. Times
+# New Roman itself is not embedded here because it has no angle sign.
+DEJAVU = "DejaVuSerif"
 # style -> the face name svglib registered it under, filled in by
 # `register_fonts` and read by everything that measures or draws text.
 FACES = {}
@@ -135,8 +143,8 @@ def register_fonts():
     face is a hard stop with the reason rather than a fall back to
     Helvetica -- which is exactly how the missing omegas shipped."""
     from svglib.svglib import register_font
-    faces = [("normal", "DejaVuSans.ttf"),
-             ("italic", "DejaVuSans-Oblique.ttf")]
+    faces = [("normal", "DejaVuSerif.ttf"),
+             ("italic", "DejaVuSerif-Italic.ttf")]
     for style, filename in faces:
         for d in _FONT_DIRS:
             path = os.path.join(d, filename)
@@ -160,8 +168,9 @@ def register_fonts():
     return FACES
 
 
+# `lbl ref` is a reference label, set in the book's blue (#422).
 _TEXT_RE = re.compile(
-    r'<text class="lbl" x="(?P<x>[-\d.]+)" y="(?P<y>[-\d.]+)" '
+    r'<text class="lbl(?P<ref> ref)?" x="(?P<x>[-\d.]+)" y="(?P<y>[-\d.]+)" '
     r'text-anchor="(?P<anchor>\w+)">(?P<inner>.*?)</text>')
 _TSPAN_RE = re.compile(
     r'<tspan(?P<attrs>[^>]*)>(?P<txt>[^<]*)</tspan>')
@@ -226,6 +235,7 @@ def _lay_out_labels(svg: str) -> str:
         else:
             cursor = x
         out, shift = [], 0.0
+        colour = sch.REF_COLOUR if m.group("ref") else "#000000"
         for (_txt, font, size, dy), txt, w, lead in zip(
                 runs, texts, widths, leads):
             shift += dy
@@ -233,9 +243,10 @@ def _lay_out_labels(svg: str) -> str:
             if drawn:
                 out.append(
                     '<text x="%.3f" y="%.3f" font-family="%s" '
-                    'font-size="%g" fill="#000000" stroke="none" '
+                    'font-size="%g" fill="%s" stroke="none" '
                     'text-anchor="start">%s</text>'
-                    % (cursor + lead, y + shift, font, size, _escape(drawn)))
+                    % (cursor + lead, y + shift, font, size, colour,
+                       _escape(drawn)))
             cursor += w
         return "".join(out)
 
@@ -252,12 +263,18 @@ def flatten_for_svglib(svg: str) -> str:
     subscript in the wrong place even once it is -- so they are laid
     out here instead, absolutely, by `_lay_out_labels`."""
     svg = svg.replace('stroke="currentColor"', 'stroke="#000000"')
+    svg = svg.replace('fill="currentColor"', 'fill="#000000"')
+    # The reference marks' classes, resolved to the book's blue (#422);
+    # a symbol body's own heavier `stroke-width` is already an attribute.
+    svg = svg.replace('class="refk"', 'stroke="%s"' % sch.REF_COLOUR)
+    svg = svg.replace('class="refh"',
+                      'fill="%s" stroke="none"' % sch.REF_COLOUR)
     svg = re.sub(r"<style>.*?</style>", "", svg, flags=re.S)
     svg = _lay_out_labels(svg)
     m = re.match(r"(<svg[^>]*>)(.*)(</svg>)", svg, flags=re.S)
     head, body, tail = m.groups()
-    wrap = ('<g fill="none" stroke="#000000" stroke-width="1.7" '
-            'stroke-linecap="round" stroke-linejoin="round">')
+    wrap = ('<g fill="none" stroke="#000000" stroke-width="%g" '
+            'stroke-linecap="round" stroke-linejoin="round">' % sch.STROKE)
     return head + wrap + body + "</g>" + tail
 
 
