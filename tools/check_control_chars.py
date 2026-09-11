@@ -40,8 +40,13 @@ def check_control_chars() -> list[str]:
     # as vulnerable to a heredoc eating an escape as a chapter is, and
     # rather more quietly: a mangled regex still compiles and simply
     # stops matching (#230).
+    # The notes files too (#380). Two `\a` escapes had been sitting
+    # in NEXT_DOCS.md as BEL since they were written, because the
+    # scan stopped at `src/`: the blind spot this checker exists to
+    # warn about, in its own tree.
     targets = (sorted(glob.glob(os.path.join(ROOT, "src", "*.md")))
                + [os.path.join(ROOT, "build.py")]
+               + sorted(glob.glob(os.path.join(ROOT, "*.md")))
                + sorted(glob.glob(os.path.join(ROOT, "tools", "*.py"))))
     for path in targets:
         if not os.path.isfile(path):

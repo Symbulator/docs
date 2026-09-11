@@ -354,7 +354,17 @@ function asset(string $name): string {
       aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8"
       stroke-linecap="round" stroke-linejoin="round"><path d="M4 6.5 8 10.5l4-4"/></svg></summary>
   <ol class="chapters">
-    <?php foreach ($toc['chapters'] as $c): ?>
+    <?php
+      /* #380: technical notes are grouped under their own label rather
+         than sitting in the run of lessons. Ordered as book.yaml orders
+         them -- after the lessons, before the credits -- so the printed
+         book and this list read the same. */
+      $tnShown = false;
+      foreach ($toc['chapters'] as $c):
+        $isNote = (($c['kind'] ?? '') === 'note');
+        if ($isNote && !$tnShown): $tnShown = true; ?>
+          <li class="tn-sep"><span>Technical Notes</span></li>
+    <?php endif; ?>
       <li class="<?= $c['id'] === $page ? 'is-current' : '' ?><?= $c['present'] ? '' : ' is-absent' ?>">
         <a href="<?= url($v, $c['id']) ?>">
           <?php /* Introduction and the credits have no lesson number, so no
@@ -405,8 +415,18 @@ function asset(string $name): string {
 <main id="main">
 <?php if ($isHome): ?>
 
+  <?php
+    /* #380: the lessons tile on their own and the technical notes sit
+       below a rule. Splitting them is also what closes the lessons'
+       rectangle: with the note among them the grid ran to sixteen cards
+       and left the credits alone on a line of their own. */
+    $mainCards = array_values(array_filter($toc['chapters'],
+      function ($c) { return ($c['kind'] ?? '') !== 'note'; }));
+    $noteCards = array_values(array_filter($toc['chapters'],
+      function ($c) { return ($c['kind'] ?? '') === 'note'; }));
+  ?>
   <ol class="chapter-cards">
-    <?php foreach ($toc['chapters'] as $c): ?>
+    <?php foreach ($mainCards as $c): ?>
       <li<?= $c['present'] ? '' : ' class="is-absent"' ?>>
         <a href="<?= url($v, $c['id']) ?>">
           <?php if ($c['eyebrow']): ?>
@@ -418,6 +438,22 @@ function asset(string $name): string {
       </li>
     <?php endforeach; ?>
   </ol>
+  <?php if ($noteCards): ?>
+    <div class="tn-divider"><h2 class="tn-heading">Technical Notes</h2></div>
+    <ol class="chapter-cards tn-cards">
+      <?php foreach ($noteCards as $c): ?>
+        <li<?= $c['present'] ? '' : ' class="is-absent"' ?>>
+          <a href="<?= url($v, $c['id']) ?>">
+            <?php if ($c['eyebrow']): ?>
+              <p class="card-eyebrow"><?= e($c['eyebrow']) ?></p>
+            <?php endif; ?>
+            <h2><?= e($c['title']) ?></h2>
+            <p class="card-summary"><?= strip_tags($c['summary'], '<em><strong><code>') ?></p>
+          </a>
+        </li>
+      <?php endforeach; ?>
+    </ol>
+  <?php endif; ?>
 
 <?php elseif ($isIndex): ?>
 

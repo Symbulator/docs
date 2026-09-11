@@ -191,6 +191,22 @@ def resolve_vspans(text: str, v: int) -> str:
     return re.sub(r"\{\{(!?)v([\d,]+)\|([^}]*)\}\}", pick, text)
 
 
+def eyebrow_for(ch, number) -> str:
+    """The small line above a chapter title.
+
+    "Lesson 3" for a lesson, "Tech Note A" for a technical note, and
+    nothing for the Introduction or the credits -- a chapter with no
+    label printed its title twice when this fell back to the title.
+
+    One function because three renderers ask: the HTML chapter head, the
+    TeX one, and `toc.json`, which the home page cards and the sidebar
+    are both built from.
+    """
+    if ch.kind == "note":
+        return f"Tech Note {ch.note_letter}" if ch.note_letter else ""
+    return f"Lesson {number}" if number else ""
+
+
 @dataclass
 class Chapter:
     id: str
@@ -201,6 +217,7 @@ class Chapter:
     updated: str = ""
     summary: str = ""
     blocks: list = field(default_factory=list)
+    note_letter: str = ""      # set per version by `for_version`
 
 
 class SourceError(Exception):
@@ -676,7 +693,7 @@ class Book:
 
     def for_version(self, v: int):
         """Chapters present in version v, with display numbers assigned."""
-        out, n = [], 0
+        out, n, k = [], 0, 0
         for ch in self.chapters:
             present = v in ch.versions
             if not present and not ch.absent_note:
@@ -685,6 +702,14 @@ class Book:
             if ch.kind == "lesson":
                 n += 1
                 number = n
+            # A technical note is lettered rather than numbered (#380):
+            # the notes have no reading order, and a number implies one.
+            # Assigned here, beside the lesson numbers, so the two
+            # sequences cannot drift and both are per-version.
+            ch.note_letter = ""
+            if ch.kind == "note":
+                k += 1
+                ch.note_letter = chr(ord("A") + k - 1) if k <= 26 else str(k)
             out.append((ch, number, present))
         return out
 
@@ -1143,7 +1168,7 @@ class HtmlRenderer:
         # falling back to the title printed it twice: "Introduction /
         # Introduction", "Roll the credits / Roll the credits", on the
         # chapter page, in the sidebar and on the home page cards.
-        eyebrow = f"Lesson {number}" if number else ""
+        eyebrow = eyebrow_for(ch, number)
         parts = ['<header class="chapter-head">']
         if eyebrow:
             parts.append(f'<p class="eyebrow">{html.escape(eyebrow)}</p>')
@@ -1458,6 +1483,9 @@ class TexRenderer:
         head = []
         if number:
             head.append(f"\\lesson{{{number}}}{{{tex_escape(title_for(ch, self.v))}}}")
+        elif ch.kind == "note" and ch.note_letter:
+            head.append(f"\\technote{{{ch.note_letter}}}"
+                        f"{{{tex_escape(title_for(ch, self.v))}}}")
         else:
             head.append(f"\\frontchapter{{{tex_escape(title_for(ch, self.v))}}}")
         head.append(f"\\label{{lbl:{ch.id}}}")
@@ -1559,7 +1587,8 @@ def build_web(book: Book, versions: list[int]):
             toc.append({"id": ch.id, "title": title_for(ch, v),
                         # Empty, not the title -- see the note above. Every
                         # consumer of toc.json must skip an empty eyebrow.
-                        "eyebrow": f"Lesson {number}" if number else "",
+                        "eyebrow": eyebrow_for(ch, number),
+                        "kind": ch.kind,
                         "number": number,
                         # Rendered, not raw: the chapter opener runs the
                         # summary through inline() (see HtmlRenderer.chapter),

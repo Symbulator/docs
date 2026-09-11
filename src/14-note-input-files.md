@@ -1,6 +1,6 @@
 ---
 id: input-files
-kind: front
+kind: note
 title: Working with input files
 versions: [9]
 updated: 2026-09-09

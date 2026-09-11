@@ -3,6 +3,76 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #380 — Technical Notes: a section of their own, under the lessons — **done 11 Sep 2026, live on `learn.symbulator.com`, all three PDFs rebuilt**
+
+Roberto, 11 Sep 2026: *"there are some topics that are optional and can
+be dry, but need to be covered in the documentation ... that category
+could be called Technical Notes"*, and on the symptom: the *Working with
+input files* chapter *"sits awkwardly as a pseudo-lesson between the
+Introduction and Lesson 1 ... it's ruining the symmetry of the rectangle
+where lessons are kept, because it pushes all the lessons and the
+credits end up on a line of their own."*
+
+**The grid was doing arithmetic, and it backed him up.** The home page
+tiles `repeat(auto-fill, minmax(17rem, 1fr))` in a 66rem container --
+three columns at full width. Versions 7 and 8 have 15 chapters, which is
+3 x 5 exactly; version 9 had 16, and the sixteenth left the credits
+alone on the last row. **7 and 8 were the control group**: the same
+stylesheet, one card fewer, no complaint.
+
+**What shipped.** A third `kind`. Every chapter already declared `front`,
+`lesson` or `back` and `build.py` already parsed it -- the only reason
+the page could not group by it is that `kind` was never copied into
+`toc.json`. Notes are ordered in `book.yaml` after the lessons and before
+the credits, so **the printed book, the sidebar and the home page all
+read in one order** and the grouping is purely a rendering concern.
+
+* `src/00b-input-files.md` -> `src/14-note-input-files.md`, `kind: note`.
+* `build.py`: one `eyebrow_for()` that three renderers ask -- the HTML
+  chapter head, the TeX one and `toc.json`. Notes are **lettered, not
+  numbered** (Roberto's call): they have no reading order and a number
+  would imply one. `for_version` assigns the letter beside the lesson
+  number so the two sequences cannot drift.
+* `tex/symbulator.cls`: a `\technote` macro -- unnumbered like a front
+  chapter, but labelled in the accent small caps a lesson number wears,
+  and carrying "Tech Note A" into the contents and the running head.
+* `web/index.php`: both loops split on the kind; the notes render under a
+  rule on the home page and under a labelled separator in the sidebar.
+
+**The wrinkle only a rendered mock could show.** With fewer notes than
+columns, the card grid's rule-coloured background showed through the
+empty cells as a **grey void** -- which the lessons grid never hits,
+being always full. A lone note now spans the row and reads as a wide
+card; two split it; three or more tile as the lessons do. That was
+invisible in the markup and obvious in the picture.
+
+**Verified live by fetching**: v9's main grid is **15 cards** with the
+Technical Notes section below it and `Tech Note A` on the card; v7 and v8
+are 15 cards with no section and no separator; `/9/input-files` carries
+the eyebrow and its pager now runs Two-ports -> Working with input files
+-> Roll the credits. All three PDFs were rebuilt -- **this changes what
+the typeset text says, so it was a full `python build.py`, not `--web`**
+-- and each is byte-identical live to the local build. Page counts are
+unmoved at v7 **235**, v8 **223**, v9 **300**: the chapter travelled, it
+did not grow.
+
+**One honest limit.** The 3 x 5 is a desktop-width property. Below about
+51rem the grid drops to two columns and 15 leaves an orphan anyway. The
+durable win is that nothing dry sits between the Introduction and Lesson
+1 and the lessons form a block of their own.
+
+**A note for the next one.** There is no `php` on this machine, so
+`index.php` cannot be linted before a deploy, and a parse error there
+500s every page on the site. What stood in for it:
+`scratchpad/check_php.py`, a balance count of the alternative-syntax
+`foreach`/`endforeach` and `if`/`endif`. **Three versions of it read the
+committed file as unbalanced before one read it correctly** -- and a
+checker that cannot see the known-good file as good is measuring
+something other than balance. Run it against `HEAD` as well as the
+working tree, every time.
+
+---
+
 ## #365 — the Book gets its figures, and `book.pdf` on the site with them — **done 10 Sep 2026, live on `learn.symbulator.com/book.pdf`**
 
 Roberto, 10 Sep 2026: *"I had not realised that the PDF has no images."*
@@ -3999,7 +4069,7 @@ hazard the shared `out 7,8` blocks were always going to carry:
   and in Practice Problem 10.1 — because version 8 reserves `r` as a resistor
   name, as lesson 1 says in its own words. The conversion gave both versions
   page 7's `r`, so version 8 was shown a description its own machine refuses,
-  and asked for `sa(ir)` instead of `sa(ir1)`. Both restored.
+  and asked for `s\aa(ir)` instead of `s\aa(ir1)`. Both restored.
 * Problem 10.77 lost its `sym 8` fences entirely. Page 8 carries the problem
   with the same description and the same ask; a version 8 reader was shown the
   circuit in prose with nothing to type. Restored.

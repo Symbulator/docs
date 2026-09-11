@@ -184,6 +184,16 @@
 % colour leak described at the problem box below -- a chapter must never
 % inherit whatever colour the previous page's last box left behind.
 \newcommand{\lesson}[2]{\color{ink}\setcounter{secnumdepth}{1}\chapter{#2}}
+% A technical note (#380): unnumbered like a front chapter, but labelled
+% "Tech Note A" in the same accent small caps a lesson number wears, and
+% carrying that label into the contents and the running head, so a reader
+% who lands mid-book knows which kind of chapter they are in.
+\newcommand{\technote}[2]{%
+  \color{ink}\setcounter{secnumdepth}{0}%
+  \chapter*{#2}\addcontentsline{toc}{chapter}{Tech Note #1 --- #2}%
+  \markboth{Tech Note #1}{#2}%
+  \vspace{-7mm}{\sffamily\bfseries\fontsize{11}{13}\selectfont
+   \color{accent}\MakeUppercase{Tech Note #1}\par}\vspace{5mm}}
 \newcommand{\frontchapter}[1]{%
   \color{ink}\setcounter{secnumdepth}{0}%
   \chapter*{#1}\addcontentsline{toc}{chapter}{#1}%

@@ -45,7 +45,6 @@ terms:
 
 chapters:
   - 00-introduction.md
-  - 00b-input-files.md
   - 01-lesson-dc.md
   - 02-lesson-symbolic.md
   - 03-lesson-sources.md
@@ -59,4 +58,5 @@ chapters:
   - 11-lesson-bode.md
   - 12-lesson-fd.md
   - 13-lesson-twoports.md
+  - 14-note-input-files.md
   - 99-credits.md

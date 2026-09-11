@@ -851,6 +851,38 @@ figcaption {
 }
 .card-summary { margin: 0; font-size: 0.92rem; color: var(--ink-2); line-height: 1.5; }
 .chapter-cards li.is-absent .card-eyebrow { color: var(--ink-3); }
+
+/* ---------------------------------------------------------- #380 ----
+   Technical notes: optional, reference-shaped chapters, grouped under
+   a rule below the lessons rather than sitting in the run of them.
+   Splitting them is also what closes the lessons' rectangle -- with a
+   note among them the grid ran to sixteen cards at three columns and
+   left the credits alone on a line of their own. */
+.tn-divider {
+  max-width: 66rem; margin: 3.2rem auto 0;
+  border-top: 1px solid var(--rule);
+}
+.tn-heading {
+  margin: 1.4rem 0 1rem;
+  font-family: var(--sans); font-size: 0.78rem; font-weight: 600;
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3);
+}
+.tn-cards { margin-top: 0; }
+/* With fewer notes than columns the grid's rule-coloured background
+   showed through the empty cells as a grey void -- which the lessons
+   grid never hits, being always full. A lone note spans the row and
+   reads as a wide card; two split the row; three or more tile as the
+   lessons do. */
+.tn-cards li:only-child { grid-column: 1 / -1; }
+.tn-cards:has(li:nth-child(2):last-child) { grid-template-columns: 1fr 1fr; }
+/* The same grouping in the sidebar's Contents list, so a note is not
+   wedged between two lessons there either. */
+.tn-sep {
+  list-style: none; margin: 1.1rem 0 0.4rem; padding: 0.7rem 0 0;
+  border-top: 1px solid var(--rule);
+  font-family: var(--sans); font-size: 0.68rem; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-3);
+}
 .chapter-cards li.is-absent h2 { color: var(--ink-3); }
 
 /* --------------------------------------------------------------- index --- */
