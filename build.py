@@ -1624,8 +1624,16 @@ def build_web(book: Book, versions: list[int]):
                 for b in walk(ch.blocks, v, "web"):
                     if b.kind == "heading" and b.meta["level"] == 2:
                         n += 1
+                        # #424: resolve the version spans before dropping
+                        # the other brace commands, and drop emphasis. The
+                        # flat strip had been emptying every spanned heading
+                        # in the sidebar -- "Finding the equivalent
+                        # resistance" listed as "", "with **Solve**" as
+                        # "with " -- in all three versions.
                         sections.append({"anchor": b.meta["anchor"],
-                                         "title": re.sub(r"\{\{[^}]*\}\}", "", b.text),
+                                         "title": re.sub(r"\*+", "", re.sub(
+                                             r"\{\{[^}]*\}\}", "",
+                                             resolve_vspans(b.text, v))).strip(),
                                          "number": f"{number}.{n}" if number else ""})
             toc.append({"id": ch.id, "title": title_for(ch, v),
                         # Empty, not the title -- see the note above. Every

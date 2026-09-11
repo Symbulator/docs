@@ -94,6 +94,18 @@ had. And a `{{v7|…}}` span in Lesson 11's summary left a hole for version
 page although it has no Bode lesson: `{{v7,8|…}}` is right there even
 though the chapter is `versions: [7, 9]`.
 
+**And one the comparison found that predates this round.** The sidebar's
+section list is built from each `h2` by stripping every brace command,
+so a heading written in two versions has been listed truncated or empty
+in the Contents column of **all three versions** since the day it was
+split: Lesson 4's two main sections as *nothing at all*, Lesson 2's as
+*"Numerical from symbolic, with"*, the Introduction's *Install* as "".
+`build_web()` now resolves the version's span first
+(`resolve_vspans(b.text, v)`) and drops emphasis marks. The 7 and 8
+sidebars change on those pages — from broken to right — and that is the
+second thing this round alters in what they show; both are listed for
+Roberto's veto in the PDF.
+
 **Not done, deliberately, and for Roberto's ruling.** The 300 worked
 problems still carry the calculator-era rhythm in places — "ask for",
 "we get", "This is correct" after every answer — which the 3 Sep 2026
