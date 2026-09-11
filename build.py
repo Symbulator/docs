@@ -1502,6 +1502,9 @@ class TexRenderer:
         elif ch.kind == "note" and ch.note_letter:
             head.append(f"\\technote{{{ch.note_letter}}}"
                         f"{{{tex_escape(title_for(ch, self.v))}}}")
+        elif ch.kind == "manual" and ch.part_number:
+            head.append(f"\\manualpart{{{ch.part_number}}}"
+                        f"{{{tex_escape(title_for(ch, self.v))}}}")
         else:
             head.append(f"\\frontchapter{{{tex_escape(title_for(ch, self.v))}}}")
         head.append(f"\\label{{lbl:{ch.id}}}")
@@ -1788,6 +1791,45 @@ def build_tex(book: Book, versions: list[int], run_pdf=True) -> list[int]:
             if not compile_pdf(texdir, f"symbulator-v{v}", pdfdir):
                 failed.append(v)
 
+    # #392: the Manual, as its own document. A fourth *book*, not a
+    # fourth version -- the same renderer at version 9, given exactly the
+    # chapters the three tutorial PDFs leave out. Built only when 9 is in
+    # the list, since 7 and 8 have no Manual to render.
+    if 9 in versions:
+        vm = book.meta["versions"][9]
+        r = TexRenderer(book, 9)
+        parts = [(ch, n, p) for ch, n, p in book.for_version(9)
+                 if ch.book == "manual"]
+        if not parts:
+            print("tex:  no Manual chapters; skipping symbulator-manual",
+                  file=sys.stderr)
+        else:
+            mbody = "\n\n\\clearpage\n\n".join(
+                r.chapter(ch, n, p) for ch, n, p in parts)
+            mdoc = "\n".join([
+                r"\documentclass{symbulator}",
+                f"\\booktitle{{{tex_escape(book.meta['title'])}}}",
+                f"\\booksubtitle{{{tex_escape(book.meta['subtitle'])}}}",
+                # The title page names the book, not just the version:
+                # two PDFs for version 9 sit in the same folder and on the
+                # same shelf, and "Symbulator 9" on both is how a reader
+                # opens the wrong one.
+                f"\\bookversion{{{tex_escape(vm['name'] + ' Manual')}}}",
+                f"\\bookplatform{{{tex_escape(vm['platform'])}}}",
+                f"\\bookauthor{{{tex_escape(book.meta['author'])}}}",
+                r"\begin{document}",
+                r"\maketitlepage",
+                r"\tableofcontents",
+                mbody,
+                r"\printtheindex",
+                r"\end{document}", ""])
+            mpath = os.path.join(texdir, "symbulator-manual.tex")
+            open(mpath, "w", encoding="utf-8").write(mdoc)
+            print(f"tex:  {mpath}  ({len(parts)} parts)")
+            if run_pdf and not compile_pdf(texdir, "symbulator-manual",
+                                           pdfdir):
+                failed.append("manual")
+
     if failed:
         missing = ", ".join(f"v{v}" for v in failed)
         print(f"\nNO PDF PRODUCED for {missing}. Anything already in "
@@ -1801,6 +1843,12 @@ def build_tex(book: Book, versions: list[int], run_pdf=True) -> list[int]:
     # not silently promote the previous build's PDF.
     webdir = os.path.join(BUILD, "web")
     if run_pdf and os.path.isdir(webdir):
+        if "manual" not in failed:
+            mbuilt = os.path.join(pdfdir, "symbulator-manual.pdf")
+            if os.path.isfile(mbuilt):
+                shutil.copy2(mbuilt, os.path.join(webdir,
+                                                  "symbulator-manual.pdf"))
+                print(f"web:  {os.path.join(webdir, 'symbulator-manual.pdf')}")
         for v in versions:
             if v in failed:
                 continue

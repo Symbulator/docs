@@ -198,7 +198,11 @@ function asset(string $name): string {
            visible thing making this page look unrelated to symbulator.com.
            The styling comes from the shared banner.css. -->
       <nav>
-        <a href="/symbulator-v<?= e($v) ?>.pdf">Download as PDF</a>
+        <?php /* #392: the PDF follows the book. $inManual is false in
+                 versions 7 and 8 by construction, so their link is
+                 unchanged. */ ?>
+        <a href="<?= $inManual ? '/symbulator-manual.pdf'
+                               : '/symbulator-v' . e($v) . '.pdf' ?>">Download as PDF</a>
         <a href="https://symbulator.pythonanywhere.com">Online App</a>
 <?php if ($v === '9'): ?>
         <!-- #226: the split view, opened on the page being read -- the

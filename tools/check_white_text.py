@@ -21,6 +21,7 @@ Usage: check_white_text(pdf_path) -> list of bad page numbers, or run
 """
 import glob
 import os
+import re
 import shutil
 import subprocess
 import sys
@@ -54,9 +55,19 @@ def check_white_text(pdf):
                 txt = reader.pages[n - 1].extract_text() or ""
             except Exception:                           # noqa: BLE001
                 txt = ""
+            # A contents page defeats the ratio below honestly: its dot
+            # leaders are hundreds of characters of text layer and almost
+            # no ink, so a *sparse* contents page -- the last one, mostly
+            # blank -- reads as a page of unpainted text. That refused the
+            # Manual's PDF on a page that renders perfectly (#393). A
+            # leader is not prose; collapse a run of three or more dots
+            # before measuring. Narrowed here rather than by loosening the
+            # threshold, which would blunt the guard on every page to fix
+            # it on one.
+            prose = re.sub(r"(?:\.\s*){3,}", " ", txt)
             # 20 dpi ink pixels run ~1-3x the character count on a normal
             # page; a page of text under 0.15x is not being painted.
-            if len(txt) > 300 and ink < 0.15 * len(txt):
+            if len(prose) > 300 and ink < 0.15 * len(prose):
                 bad.append(n)
     return bad
 

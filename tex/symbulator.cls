@@ -194,6 +194,15 @@
   \markboth{Tech Note #1}{#2}%
   \vspace{-7mm}{\sffamily\bfseries\fontsize{11}{13}\selectfont
    \color{accent}\MakeUppercase{Tech Note #1}\par}\vspace{5mm}}
+% The Manual's parts (#392). Mirrors \technote: same \color{ink}
+% re-assertion -- the guard against the box-colour leak -- same contents
+% line, same running head, same accent eyebrow.
+\newcommand{\manualpart}[2]{%
+  \color{ink}\setcounter{secnumdepth}{0}%
+  \chapter*{#2}\addcontentsline{toc}{chapter}{Part #1 --- #2}%
+  \markboth{Part #1}{#2}%
+  \vspace{-7mm}{\sffamily\bfseries\fontsize{11}{13}\selectfont
+   \color{accent}\MakeUppercase{Part #1}\par}\vspace{5mm}}
 \newcommand{\frontchapter}[1]{%
   \color{ink}\setcounter{secnumdepth}{0}%
   \chapter*{#1}\addcontentsline{toc}{chapter}{#1}%

@@ -79,7 +79,7 @@ In Symbulator 9 the two cannot collide: {{card:Results}} lists node voltages and
 element quantities separately, so a node called **o** and an op amp called **o** never
 share a name.
 
-::: danger Never describe a source as e,#,0,v_#
+::: danger Never describe a source as e,#,0,v#
 If you describe a source as `e1,1,0,v1`, you are declaring the voltage of node
 1 to be the voltage of node **1**. The resulting equation, v1 = v1, is trivially
 true and carries no information, which leaves the system one equation short.
@@ -195,7 +195,7 @@ R_{eq} = 0
 p_{max} = \infty
 :::
 
-with a note under the answers: the short-circuit current is unbounded, so
+with a note above the answers: the short-circuit current is unbounded, so
 the equivalent is a voltage source with nothing in series.
 
 That is not a failure to solve. An ideal op amp holds its output voltage
