@@ -23,6 +23,19 @@ WEB = os.path.join(ROOT, "build", "web")
 OUT = os.path.join(ROOT, "build", "preview")
 
 
+
+def _mark(toc):
+    """The property mark, matching web/index.php's `$propertyMark` (#389).
+
+    Version 9 will carry two books and names the one you are in; 7 and 8
+    have a single book and keep saying Documentation. Mirrored here
+    because this generator writes its own banner and reads nothing from
+    index.php -- the drift that left it showing a superseded header for a
+    day.
+    """
+    return "Course" if str(toc["label"]) == "9" else "Documentation"
+
+
 def e(s):
     return html.escape(str(s), quote=True)
 
@@ -167,9 +180,9 @@ def topbar(book, toc, v, page, ids):
             '<p class="brand-sub">the best portable symbolic simulator of linear circuits</p>'
             # The property mark (#135): one word, two spellings,
             # exactly one shown -- see banner.css.
-            '<p class="property-mark property-mark-slot">Documentation</p>'
+            f'<p class="property-mark property-mark-slot">{_mark(toc)}</p>'
             '</a></div>'
-            '<span class="property-mark property-mark-top">Documentation</span>'
+            f'<span class="property-mark property-mark-top">{_mark(toc)}</span>'
             '</div></header>'
             f'<div class="subbar"><div class="subbar-inner">{ribbon}'
             f'<details class="versions" id="version-picker">'
@@ -256,7 +269,7 @@ def build():
         # #342: the tab says which property this is, as web/index.php does.
         # This generator writes its own <head>, so a change there has to be
         # made here too or the preview drifts from the site again.
-        site_name = toc["name"] + " Documentation"
+        site_name = toc["name"] + " " + _mark(toc)
         ids = [c["id"] for c in toc["chapters"]]
 
         # landing page

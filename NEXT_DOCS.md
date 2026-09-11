@@ -3,6 +3,83 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #389 — version 9's book is the Course — **built, deliberately not deployed**
+
+Roberto, 11 Sep 2026, deciding the names for a second, shorter book: the
+tutorial becomes the **Course** and the concentrated guide will be the
+**Manual**. His landing page had already drawn the line — *"A course, not
+a manual."* — three weeks before he asked for one.
+
+The hard constraint came with it: *"Nothing here should be reflected or
+break 7/8, which remain parallel versions of the tutorial."*
+
+**Measuring first turned this from a rename into three conditionals.** All
+three naming sites were version-blind: 7, 8 and 9 served the same
+*Symbulator Tutorial* heading and the same *Documentation* property mark,
+verified by fetching all three live pages. Two variables now carry it,
+computed once near the top of `web/index.php` so a later edit cannot move
+one site and miss the others:
+
+    $bookName     = ($v === '9') ? 'Course' : 'Tutorial';
+    $propertyMark = ($v === '9') ? $bookName : 'Documentation';
+
+Four sites read them: the tab title, both spellings of the property mark,
+and the section heading. The Manual does not exist yet, so version 9 says
+*Course* everywhere; `$bookName` is the single place that learns to tell
+the two apart when it does.
+
+**What did not need touching, measured rather than assumed:** `book.yaml`'s
+title is plain *Symbulator*, so the three PDF covers name no tutorial and
+no PDF is version-gated; the app's ribbon link is keyed
+`documentationdocs.2612` and says *Documentation* in all thirteen
+languages, so there is no i18n work and no app work; and the `learn`
+target's `verify_pages` markers are stylesheet paths, `class="shell"` and
+*Symbulator 8*, none of which this touches.
+
+**`tools/static_preview.py` was mirrored, because its own comments say to.**
+It writes its own `<head>` and its own banner and reads nothing from
+`index.php` — the drift that once left the preview showing a superseded
+header for a day. It carries a `_mark(toc)` helper now. It does not render
+the section heading at all, which is a pre-existing gap from #380/#381 and
+is left alone.
+
+**The thing to know before deploying this: it cannot be tested here.**
+`index.php` is PHP, this machine has none, and the file ships verbatim into
+`build/web` — so the build-and-diff trick that proved versions 7 and 8
+unmoved on #386 would pass trivially and prove nothing. What was done
+instead:
+
+* the **Python mirror** was run, and it is the same condition: the preview
+  builds *Symbulator 7 Documentation* / *Symbulator 8 Documentation* /
+  *Symbulator 9 Course*, with the marks to match;
+* the PHP **tag balance** was compared before and against after — 99 opens
+  and 99 closes before, 102 and 102 after, the delta exactly the three
+  `<?= e(...) ?>` added. The before-count matters as much as the after: a
+  balance checker that cannot see the known-good file as good is measuring
+  something else, which cost three readings on an earlier item;
+* the three insertions were compared against the **53 interpolations
+  already in the file** and are byte-identical in form to `<?= e($v) ?>`.
+
+**The guard for the eventual deploy** is capture-and-compare, and it runs
+after the change is live because nothing else can: fetch and store `/7/`,
+`/8/`, `/7/lesson-dc` and `/8/lesson-dc` before deploying, fetch the same
+four after, and diff byte for byte. Identical or revert — not "one blank
+line", since none of their sources change at all.
+
+**Not deployed, at Roberto's word:** *"Nobody uses the website yet, so
+rename now and ship later."* It ships with the Manual.
+
+**Still to come, and deliberately not built yet:** the chooser, first thing
+on `/9/`, in his words — *The Manual, you already know circuit simulation;
+The Course, you are new to circuits or to simulation.* A chooser with one
+live option is worse than no chooser, so it waits for the Manual. The
+coverage inventory behind all of this is the artifact published the same
+day: 59 theory topics, 52 within version 9's reach, and four features that
+ship and are named nowhere — the Numerical Solver, the SPICE Translator,
+multiple solutions, and the DC sweep plot.
+
+---
+
 ## #388 — Tech Note F, every control in the Settings card — **built, not deployed**
 
 Roberto, 11 Sep 2026: *"A5. … the Settings card to another technical

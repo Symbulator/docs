@@ -71,7 +71,15 @@ $next = ($pos !== false && $pos < count($ids) - 1) ? $toc['chapters'][$pos + 1] 
 // "Symbulator 9" is what the app's own tab said too, so a reader with both
 // open could not tell the two apart in the tab strip. Mirror any change
 // here in tools/static_preview.py, which writes its own <head>.
-$siteName = $toc['name'] . ' Documentation';
+// #389: version 9 will carry two books -- the Course and the Manual --
+// so its pages name the book they are part of, in the tab and in the
+// property mark. Versions 7 and 8 have one book and keep every word they
+// had: the section heading still says Tutorial and the mark still says
+// Documentation. Both are computed here, once, so that a later change
+// cannot move one of the three sites and leave the others behind.
+$bookName     = ($v === '9') ? 'Course' : 'Tutorial';
+$propertyMark = ($v === '9') ? $bookName : 'Documentation';
+$siteName = $toc['name'] . ' ' . $propertyMark;
 $pageTitle = $isHome ? $siteName
            : ($isIndex ? 'Index — ' . $siteName
                        : $current['title'] . ' — ' . $siteName);
@@ -158,10 +166,10 @@ function asset(string $name): string {
         <!-- The property mark (#135): one word, two spellings, exactly
              one shown -- the top form on wide screens, this slot form
              on phones. Styled by the shared banner.css. -->
-        <p class="property-mark property-mark-slot">Documentation</p>
+        <p class="property-mark property-mark-slot"><?= e($propertyMark) ?></p>
       </a>
     </div>
-    <span class="property-mark property-mark-top">Documentation</span>
+    <span class="property-mark property-mark-top"><?= e($propertyMark) ?></span>
   </div>
 </header>
 
@@ -426,7 +434,7 @@ function asset(string $name): string {
       function ($c) { return ($c['kind'] ?? '') === 'note'; }));
   ?>
   <div class="tn-divider tn-first">
-    <h2 class="tn-heading">Symbulator Tutorial</h2>
+    <h2 class="tn-heading">Symbulator <?= e($bookName) ?></h2>
   </div>
   <ol class="chapter-cards">
     <?php foreach ($mainCards as $c): ?>
