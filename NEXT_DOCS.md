@@ -3,6 +3,35 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #382 — the Introduction points at Tech Note A, and says it is optional — **done 11 Sep 2026, live on `learn.symbulator.com`, all three PDFs rebuilt**
+
+Roberto, 11 Sep 2026: *"find a pertinent place in the documentation … to
+tell the reader to go read the Technical Note A if they are interested in
+learning how to use input files. Make sure you mention it is optional."*
+
+The place chose itself. The Introduction's **Built-in examples** section
+already handed off to that chapter — it is where a reader first meets
+loading an example — but it said nothing about the chapter being
+optional, and since #380 it is not a pseudo-lesson between the
+Introduction and Lesson 1 any more but a note in a section of its own.
+
+Both are said now: that it is a technical note, in the section of that
+name at the end of the tutorial, and that **nothing in the lessons
+depends on it** — every lesson can be followed without saving a file.
+
+**The letter is deliberately not in the prose.** `{{ref:}}` renders a note
+by its title, and the letter is assigned by position, so "Tech Note A"
+written into a sentence goes stale the day a note is inserted before it.
+The *section* is named instead.
+
+It sits inside the existing `::: only 9` block, so versions 7 and 8 —
+which have no technical notes — are untouched, and the built v7 page
+carries no mention of it. One added sentence changes the typeset text, so
+this was a full `python build.py` and a PDF redeploy, not `--web`; all three
+are byte-identical live to the local build.
+
+---
+
 ## #381 — a heading over the lessons, and no partial row anywhere — **done 11 Sep 2026, live on `learn.symbulator.com`**
 
 Two asks from Roberto after seeing #380 live.

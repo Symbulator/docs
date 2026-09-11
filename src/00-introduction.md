@@ -226,7 +226,10 @@ simulation in every lesson; click a title to load one and solve it as if
 you had typed it yourself.
 
 {{ref:input-files}} explains how to load them, save your own work, and
-download it to your device.
+download it to your device. It is a **technical note**, in the section of
+that name at the end of this tutorial: optional reading, there when you
+want it. Nothing in the lessons depends on it — you can follow every one
+of them without saving a file.
 
 ## Reading and running side by side {#split-view}
 
