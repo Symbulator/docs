@@ -1,13 +1,13 @@
 ---
 id: nr12-sampler
 kind: back
-title: A sampler of problems from Nilsson & Riedel 12ed
+title: Select problems from Nilsson & Riedel 12ed
 versions: [9]
 updated: 2026-09-12
 summary: >
-  Forty-three worked examples from *Electric Circuits*, twelfth edition, each
-  described in Symbulator and checked against the answer the book prints. DC, AC,
-  TR and FD, with Expert Mode and symbolic answers where they earn their place.
+  Forty-three worked examples from *Electric Circuits*, each described in
+  Symbulator and checked against the answer the book prints. DC, AC, TR and FD,
+  with Expert Mode and symbolic answers where they earn their place.
 ---
 
 Nilsson and Riedel's *Electric Circuits* is the book a great many
@@ -1179,7 +1179,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 9.15
 :::
 
 ::: answer
-A transformer's secondary has no galvanic path to its primary, so it needs a reference of its own; naming node 0 at the foot of the secondary says so, and cannot change the answer because nothing else joins the two sides. Self-impedance, reflected impedance and the scaling factor are all steps the book needs and this does not.
+A linear transformer isolates nothing: the figure's bottom rail runs unbroken from the source through b and on through d, so both coils return to the same node and both feet are node 0. Self-impedance, reflected impedance and the scaling factor by which the secondary reflects into the primary are four of the book's seven parts; name the load's two terminals and the tool answers the last of them outright.
 
 ```field 9 Circuit Description
 e,1,0,300
