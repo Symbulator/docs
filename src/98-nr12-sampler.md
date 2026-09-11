@@ -1179,7 +1179,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 9.15
 :::
 
 ::: answer
-A linear transformer isolates nothing: the figure's bottom rail runs unbroken from the source through b and on through d, so both coils return to the same node and both feet are node 0. Self-impedance, reflected impedance and the scaling factor by which the secondary reflects into the primary are four of the book's seven parts; name the load's two terminals and the tool answers the last of them outright.
+The primary is grounded and the secondary is not: its foot is node **d**, a name like any other. Nothing conducts from one winding to the other, so the secondary's absolute potentials are undefined — its currents and its voltage differences are not — and Symbulator says so in a note, measuring that side against d. Self-impedance, reflected impedance and the scaling factor are three of the book's seven parts; name the load's two terminals and the tool answers the last outright.
 
 ```field 9 Circuit Description
 e,1,0,300
@@ -1188,11 +1188,11 @@ r2,2,a,100j
 r3,a,p,200
 r4,p,0,3600j
 m,r4,r5,1200j
-r5,q,0,1600j
+r5,q,d,1600j
 r6,q,c,100
 ```
 
-Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **c** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Every impedance is given in ohms, so the frequency never enters: leave **omega** in the {{ui:ω — angular frequency}} box. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms.
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **c** and **d**. Set {{ui:Analysis}} to *AC — alternating current*. Every impedance is given in ohms, so the frequency never enters: leave **omega** in the {{ui:ω — angular frequency}} box. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms.
 
 Symbulator returns `vth` = {{o:93.9351 + 17.7715j}} V ({{o:95.60}}∠{{o:10.71}}°) and `z` = {{o:171.086 + 1224.26j}} Ω ({{o:1236}}∠{{o:82.04}}°) — the same answers the book prints.
 
