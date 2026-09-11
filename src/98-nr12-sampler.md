@@ -369,7 +369,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 5.1
 :::
 
 ::: answer
-Left symbolic, one run answers all three parts: vo = 5vb — 4va gives -4 V, then 6 V, and the saturation range falls straight out of the formula.
+An ideal op amp does not know its supplies exist — it will report an output of 200 V as readily as 2 V — so saturation is a question you ask of the answer rather than something the solve enforces. Leave both inputs symbolic and one run gives the formula every part is then read off.
 
 ```field 9 Circuit Description
 ea,1,0,va
@@ -384,6 +384,12 @@ Set {{ui:Analysis}} to *DC — direct current*.
 ::: result voltage at node 3
 v_{3} = - 4 va + 5 vb\,\mathrm{V}
 :::
+
+**a)** With {{var:v_a}} = 1 V and {{var:v_b}} = 0 V the formula gives {{var:v_o}} = 5(0) − 4(1) = {{o:-4}} V. That is inside the supplies, so the op amp is in its linear region and -4 V is the answer.
+
+**b)** With {{var:v_a}} = 1 V and {{var:v_b}} = 2 V, {{var:v_o}} = 5(2) − 4(1) = {{o:6}} V. Inside the supplies again, so the op amp is still linear.
+
+**c)** With {{var:v_a}} = 1.5 V the formula becomes {{var:v_o}} = 5{{var:v_b}} − 6. The op amp stays linear while that lies between the rails, so Symbulator is asked the question directly — put `v_3 = 10` in {{card:Expert Mode}} with `vb` as the unknown, then again with `v_3 = -10`. The rails are reached at {{var:v_b}} = {{o:3.2}} V and {{var:v_b}} = {{o:-0.8}} V, so the range is {{o:-0.8}} V ≤ {{var:v_b}} ≤ {{o:3.2}} V.
 
 :::
 :::
@@ -417,6 +423,10 @@ Set {{ui:Analysis}} to *DC — direct current*.
 ::: result voltage at node 4
 v_{4} = - 4 va - vb - 5 vc\,\mathrm{V}
 :::
+
+**a)** The summing-amplifier formula is {{var:v_o}} = -({{var:R_f}}/{{var:R_a}}){{var:v_a}} — ({{var:R_f}}/{{var:R_b}}){{var:v_b}} — ({{var:R_f}}/{{var:R_c}}){{var:v_c}}, so with a 20 kΩ feedback resistor the three input resistors are {{var:R_a}} = 20k/4 = {{o:5}} kΩ, {{var:R_b}} = 20k/1 = {{o:20}} kΩ and {{var:R_c}} = 20k/5 = {{o:4}} kΩ. Running that circuit returns the very formula the design was asked to hit, which is the check.
+
+**b)** With {{var:v_a}} = 2 V and {{var:v_c}} = -1 V the output collapses to {{var:v_o}} = -{{var:v_b}} − 3. Asking {{card:Expert Mode}} for the {{var:v_b}} that puts `v_4` on each rail gives {{o:9}} V at -12 V and {{o:-15}} V at +12 V, so the op amp stays linear for {{o:-15}} V ≤ {{var:v_b}} ≤ {{o:9}} V.
 
 :::
 :::
@@ -457,6 +467,8 @@ Set {{ui:Analysis}} to *DC — direct current*. This one needs {{ui:Enable Exper
 
 Symbulator returns `rf` = {{o:40000}} — the same answers the book prints.
 
+**c)** With {{var:v_a}} = 2 V, {{var:v_b}} = 3 V and {{var:v_c}} = -1 V the three input currents sum to a positive number, so the output swings negative and it is the -12 V rail that is reached first. Leave the feedback resistor as the symbol `rf`, put `v_4 = -12` in {{card:Expert Mode}} and name `rf` the unknown: the answer is {{o:40}} kΩ. Any larger and the op amp saturates.
+
 :::
 :::
 
@@ -488,6 +500,10 @@ Set {{ui:Analysis}} to *DC — direct current*.
 ::: result voltage at node 3
 v_{3} = - 8 va + 8 vb\,\mathrm{V}
 :::
+
+**a)** The simplified difference-amplifier formula is {{var:v_o}} = ({{var:R_b}}/{{var:R_a}})({{var:v_b}} − {{var:v_a}}), so a gain of 8 wants two resistors in the ratio 8: {{var:R_a}} = {{var:R_c}} = {{o:1.5}} kΩ and {{var:R_b}} = {{var:R_d}} = {{o:12}} kΩ. The formula also requires {{var:R_a}}/{{var:R_b}} = {{var:R_c}}/{{var:R_d}}, which those four satisfy. The run returns exactly 8({{var:v_b}} − {{var:v_a}}).
+
+**b)** With {{var:v_a}} = 1 V the output is {{var:v_o}} = 8{{var:v_b}} − 8, which reaches +8 V at {{var:v_b}} = {{o:2}} V and -8 V at {{var:v_b}} = {{o:0}} V. So the op amp remains in its linear region for {{o:0}} V ≤ {{var:v_b}} ≤ {{o:2}} V.
 
 :::
 :::
