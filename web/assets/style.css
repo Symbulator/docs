@@ -335,7 +335,17 @@ body.home .sidebar { display: none; }
 @media (prefers-reduced-motion: reduce) { .toc-chev { transition: none; } }
 
 /* Folded away, Contents should not go on holding a 17rem column open. */
-.shell:has(.toc:not([open])) { grid-template-columns: max-content minmax(0, 1fr); }
+/* #396: scoped away from the pages that have no sidebar. `:has()` takes
+   its argument's specificity, so this selector is (0,3,0) and outranked
+   `body.home .shell` (0,2,1) -- the rule that collapses the layout to one
+   column. On a home or shelf page `main` therefore landed in the
+   `max-content` track and sized to the card grid's own 66rem, 62px wider
+   than the shell's content box, and the page scrolled sideways by 19px.
+   Only when the reader's Contents panel was closed, which is what this
+   tests, which is why it was intermittent and long-lived. */
+body:not(.home) .shell:has(.toc:not([open])) {
+  grid-template-columns: max-content minmax(0, 1fr);
+}
 
 /* ---------------------------------------------------------- search (#87) --
    The one piece of furniture only this site has, so it is styled here and
