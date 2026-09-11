@@ -18,7 +18,7 @@ electric circuits ever {{v7,8|made for a calculator}}{{v9|to run on a handheld d
 ### What analyses can it do?
 
 Symbulator can solve circuits using four types of analysis: direct current (DC), alternating current (AC), transient time-domain (TR), and complex
-frequency-domain (FD). It analyses numerical and, more importantly, symbolic linear circuits,
+frequency-domain (FD).{{v9|{{i:analyses (DC, AC, TR, FD)}}}} It analyses numerical and, more importantly, symbolic linear circuits,
 returning the voltages in all nodes and the currents, voltage drops and power
 in all elements. It also finds the passive, Thévenin / Norton and two-port
 equivalent of a circuit, and draws time domain{{!v8| and Bode}} plots.
@@ -27,7 +27,7 @@ equivalent of a circuit, and draws time domain{{!v8| and Bode}} plots.
 
 Symbulator accepts elements such as resistors, inductors, mutual inductance,
 capacitors, independent and dependent current and voltage sources, ideal
-operational amplifiers, ideal transformers and six types of two-ports.
+operational amplifiers, ideal transformers and six types of two-ports.{{v9|{{i:element types}}}}
 
 ### Where does it run?
 
@@ -63,7 +63,7 @@ circuit analysis rather than on the mathematics of solving it.
 
 ### Limitations
 
-- Does not simulate non-linear elements, such as diodes and transistors.
+- Does not simulate non-linear elements, such as diodes and transistors.{{v9|{{i:nonlinear devices}}}}
 - Will not answer under-defined problems that rely on applying formulas selectively rather than solving a circuit completely.
 - Is not a replacement for your brain or an excuse to not study. You must understand circuit theory to use it.
 
@@ -72,7 +72,7 @@ circuit analysis rather than on the mathematics of solving it.
 Symbulator has always been free of charge, and always will be.
 *(You are welcome!)* Since 2026, Symbulator is also open source under the MIT licence. You are free to use it,
 change it and port it to other platforms; all the licence asks is that the
-copyright notice and the attribution to the original author travel with it.
+copyright notice and the attribution to the original author travel with it.{{v9|{{i:MIT licence}}}}
 
 ::: only 7
 ## Download {#download}
@@ -151,7 +151,7 @@ You can use Symbulator 9 in two ways:
 
 The easiest way to start is the **[online app](https://symbulator.pythonanywhere.com/)**.
 
-To run it offline on your own device, follow the instructions at the bottom of the online app, under {{btn:Run Symbulator 9 locally}}.
+To run it offline on your own device, follow the instructions at the bottom of the online app, under {{btn:Run Symbulator 9 locally}}.{{i:getting Symbulator (online, offline, local)}}
 
 :::
 
@@ -162,7 +162,7 @@ including but not limited to the warranty of fitness for a particular
 purpose. You use it at your own risk.
 :::
 
-Please report any problems to help [at] symbulator [dot] com
+Please report any problems to help [at] symbulator [dot] com{{v9|{{i:reporting problems}}}}
 
 ::: only 7,8
 ## {{v7|Install}}{{v8|Before you start}} {#install}
@@ -223,7 +223,7 @@ simulation left behind before trying again.
 You do not have to type the tutorial's circuits. The **Built-in
 examples** list at the top of the app holds an entry for every
 simulation in every lesson; click a title to load one and solve it as if
-you had typed it yourself.
+you had typed it yourself.{{i:built-in examples}}
 
 {{ref:input-files}} explains how to load them, save your own work, and
 download it to your device. It is a **technical note**, in the section of
@@ -239,7 +239,7 @@ are running. Two windows work. There is a tidier way.
 The **[split view](/split/)** puts both in one window: the documentation on
 the left, the live app on the right. Drag the divider to resize them; on a
 phone or a narrow window they become two tabs. Both halves are the real thing,
-simply shown together.
+simply shown together.{{i:split view}}
 
 The two halves are connected. On the website, every worked problem carries two
 links under its title:

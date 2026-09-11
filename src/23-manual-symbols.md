@@ -10,7 +10,7 @@ summary: >
 ---
 
 This is the part that is not SPICE. Any value may be a symbol, and the
-answer is an expression rather than a number.
+answer is an expression rather than a number.{{i:symbolic circuit}}
 
 ```field 9 Circuit Description
 e,1,0,vs
@@ -28,7 +28,7 @@ none were needed.
 ## Define
 
 {{card:Define}} gives values to symbols without editing the description.
-One per line, `name = value`:
+One per line, `name = value`:{{i:Define card}}
 
 ```field 9 Define
 ra = 4'k
@@ -47,7 +47,7 @@ component is the unknown.
 ## Evaluate
 
 {{card:Evaluate}} takes expressions over the answers, one per line, after
-the solve:
+the solve:{{i:Evaluate card}}
 
 ```field 9 Evaluate
 vr1/ir1
@@ -55,12 +55,12 @@ pr1 + pr2
 ```
 
 {{ui:Conditions}} constrain the evaluation without changing the circuit —
-`ra = rb`, say, to see what the divider does when the two are equal.
+`ra = rb`, say, to see what the divider does when the two are equal.{{i:Conditions (Evaluate)}}
 
 ## Solve
 
 {{card:Solve}} goes the other way. Give it an equation over the answers and
-an unknown, and it finds the value that satisfies it.
+an unknown, and it finds the value that satisfies it.{{i:Solve card}}
 
 ```field 9 Solve
 vr2 = 7
@@ -74,16 +74,16 @@ An equation on a power or on a product of answers is quadratic in its
 unknown, so it can have two roots, and both may be physical. Symbulator
 returns every root and offers a picker under the outputs. It does not
 choose for you, and the first one shown is not more correct than the
-second — read the picker before quoting an answer.
+second — read the picker before quoting an answer.{{i:multiple solutions}}
 :::
 
 **Real solutions only** is a tick on the same card. Leave it on unless a
-complex root is meaningful in your problem.
+complex root is meaningful in your problem.{{i:real solutions only}}
 
 ## Expert Mode
 
 Expert Mode adds to the system the solver assembles, rather than working on
-its answers afterwards. Three boxes:
+its answers afterwards. Three boxes:{{i:Expert Mode}}
 
 - **equations** — extra relations, one per line or separated by `and`
 - **unknowns** — extra symbols to solve for
@@ -101,5 +101,5 @@ works and a bare `4.7k` does not.
 ::: tip See what was assembled
 Tick {{ui:Show equations}} in {{card:Settings}} and an {{card:Equations}}
 card appears with the system the solver actually built — the fastest way to
-find out why an Expert Mode run did not do what you expected.
+find out why an Expert Mode run did not do what you expected.{{i:Equations card}}
 :::

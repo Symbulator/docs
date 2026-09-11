@@ -12,13 +12,13 @@ summary: >
 The underscore does two different jobs in Symbulator, and it is worth
 knowing which is which. In the name of an **answer** it is optional and
 changes nothing. In the **value** you give an element, it changes how the
-answer is typeset.
+answer is typeset.{{i:underscore}}
 
 ## In an answer's name, it is optional
 
 You may write the name of any of Symbulator's answers in two ways: with
 or without an underscore. `ir1` and `i_r1` are the same current, `v2` and
-`v_2` the same voltage; capitals make no difference either.
+`v_2` the same voltage; capitals make no difference either.{{i:answer names}}
 
 Version 9 added the longer spelling so that a name written out by a
 machine reads back without ambiguity; the shorter one is what the
@@ -33,7 +33,7 @@ value, Symbulator recognises both formats.
 Textbooks set their symbols with subscripts: {{var:v_cc}}, {{var:r_b}},
 {{var:i_rb}}. Symbolic answers can be made to read the same way, and the
 trick is very simple: **put an underscore in your symbolic variable
-names.** The text after the underscore is set as a subscript.
+names.** The text after the underscore is set as a subscript.{{i:subscripts in answers}}
 
 That is all there is to it. `v_cc` prints as {{var:v_cc}}, `r_e1` as
 {{var:r_e1}}. It costs nothing, it changes no answer, and it makes a

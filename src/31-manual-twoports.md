@@ -11,7 +11,7 @@ summary: >
 
 ## Finding the parameters
 
-*Find equivalent → Two-port parameters*, two nodes, and a kind:
+*Find equivalent → Two-port parameters*, two nodes, and a kind:{{i:two-port parameters (z, y, h, g, a, b)}}
 
 | | |
 |---|---|
@@ -53,7 +53,7 @@ Run it again with **y** and you get the inverse matrix, as you should.
 ## A two-port as an element
 
 The same six letters are element types. Give the block its four parameters
-in brackets and it behaves as that two-port:
+in brackets and it behaves as that two-port:{{i:two-port}}
 
 ```field 9 Circuit Description
 e,1,0,10
@@ -75,12 +75,12 @@ and `iz1b`. With four terminals named, it reports four.
 `z1,[tl,bl],[tr,br],[…]` when neither port sits on ground — the same form
 as the transformer in {{ref:manual-coupling}}. A port whose far side floats
 gets its own reference automatically, and Symbulator says so in the notes
-rather than refusing.
+rather than refusing.{{i:floating section (island)}}
 
 ## The gain tool
 
 {{tool:gain}} takes a two-port and a load and returns what a cascade
-designer actually wants:
+designer actually wants:{{i:gain tool}}
 
 | | |
 |---|---|
@@ -95,5 +95,5 @@ you type rather than needing a circuit.
 ::: tip Interconnections are wiring, not formulas
 Series, parallel and cascade combinations have no tool. Wire two blocks
 together in one description and solve — the combination falls out, and you
-never have to remember which interconnection adds which matrix.
+never have to remember which interconnection adds which matrix.{{i:interconnected two-ports}}
 :::

@@ -12,7 +12,7 @@ summary: >
 Lesson 4's load answers — `irl`, `vrl`, `prl` and `pmax` — are formulas, and
 they hold only when a load is the one thing connected to the equivalent
 circuit. Connect anything else to those terminals and none of them applies
-any more, and the problem has to be run as a circuit again.
+any more, and the problem has to be run as a circuit again.{{i:load problems (irl, vrl, prl)}}
 
 Symbulator will write that circuit for you, so you are adding to it rather
 than typing it out.
@@ -22,7 +22,7 @@ than typing it out.
 With the load question ticked, a button appears at the foot of
 {{card:Results}}, under the equivalent's answers:
 {{btn:Load circuit equivalent?}} It is live once the equivalent has been
-found, and goes dead again if you change any input until you run again.
+found, and goes dead again if you change any input until you run again.{{i:equivalent circuit button}}
 
 Press it and it warns you first: the equivalent circuit will overwrite the
 {{card:Circuit Description}}, {{card:Define}} and {{card:Expert Mode}} fields

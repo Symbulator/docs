@@ -10,7 +10,7 @@ summary: >
 
 An SI prefix in an element's value, preceded by an apostrophe, multiplies
 that value by the corresponding factor, exactly. `8'k` is 8000, and it is
-8000 exactly, not 8000 to some number of figures.
+8000 exactly, not 8000 to some number of figures.{{i:SI prefixes}}
 
 Eleven prefixes are accepted:
 
@@ -42,7 +42,7 @@ and mean the same thing here. All of them are lower case.
 
 A prefixed value is exact, and so is a plain integer. A decimal point or an
 exponent makes a value approximate instead. So an 8 kΩ resistor can be
-written four ways that are not quite the same thing:
+written four ways that are not quite the same thing:{{i:exact and approximate values}}
 
 - `8000` — exact
 - `8'k` — exact
@@ -57,7 +57,7 @@ not come out even. `8000` and `8'k` let Symbulator keep a current as 3/500 A;
 
 The table above is about what you *type*. Symbulator will also write its
 answers with prefixes: tick {{ui:Use SI prefixes in answers}} in
-{{card:Settings}}, and a current of 3/500 A reads 6 mA instead.
+{{card:Settings}}, and a current of 3/500 A reads 6 mA instead.{{i:SI prefixes}}
 
 Ticking it moves {{ui:Rounding}} off *exact* by itself, since a prefixed
 value is a decimal, and choosing *exact* again switches the prefixes off.

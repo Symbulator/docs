@@ -10,7 +10,7 @@ summary: >
 ---
 
 One element per line. The first character of the name picks the type; the
-fields that follow are positional and comma-separated.
+fields that follow are positional and comma-separated.{{i:circuit description}}
 
 ```field 9 Circuit Description
 e1,1,0,12
@@ -19,11 +19,11 @@ r2,2,0,2'k
 ```
 
 That is a 12 V source across a 1 kΩ and a 2 kΩ in series. **Node `0` is
-ground**, always, and every circuit needs one.
+ground**, always, and every circuit needs one.{{i:ground node}}{{i:reference node}}
 
 ## The fifteen letters
 
-`name` is always the first field. Everything else is positional.
+`name` is always the first field. Everything else is positional.{{i:element types}}
 
 | | Element | Fields after the name |
 |---|---|---|
@@ -44,7 +44,7 @@ read by FD and TR and ignored by DC and AC.
 Note what **m** takes: the *names of two inductors*, not nodes. Node order
 on those inductors is the dot convention — the first node you name in each
 coupled element is its dotted end. Get it backwards and every current comes
-back wrong, looking right.
+back wrong, looking right.{{i:dot convention}}
 
 An **m** has no answers of its own. It is a statement about two other
 elements, and its effect shows up in their currents.
@@ -59,7 +59,7 @@ the element's node order.
 ## Names
 
 Letters, digits and underscores. The first character sets the type, so
-`rload` is a resistor and `r_b` is a resistor.
+`rload` is a resistor and `r_b` is a resistor.{{i:names of elements and nodes}}
 
 A name must be identifier-safe. `r-x` looks reasonable and is refused,
 because `2*i_r-x` would silently read as `2*i_r` minus `x`.
@@ -86,7 +86,7 @@ appear in any value. That is how all four dependent-source types are
 written, and why there is no separate letter for them.
 
 An underscore in a symbol makes a subscript in the typeset answer, and
-nothing else. {{ref:underscores}} has it.
+nothing else. {{ref:underscores}} has it.{{i:underscore}}
 
 ### SI prefixes
 
@@ -98,11 +98,11 @@ Eleven prefixes, peta down to atto; the full table is in
 {{ref:si-prefixes}}. Two things to know here: **case matters** — `'m` is
 milli and `'M` is mega — and **a prefixed value is exact**, as is a plain
 integer. `8000` and `8'k` are exact; `8000.` and `8E3` are approximate, and
-that difference shows up the moment an answer is symbolic.
+that difference shows up the moment an answer is symbolic.{{i:SI prefixes}}{{i:exact and approximate values}}
 
 ## Brackets
 
-Brackets mean exactly three things.
+Brackets mean exactly three things.{{i:brackets}}
 
 **A parallel group, in a resistor's value only.** `[r1,r2,r3]` is those three
 in parallel:
@@ -135,4 +135,4 @@ Anywhere else, a bracket is an error rather than a guess.
 
 A line each is the readable form. A colon does the same job on one line —
 `e,1,0,12:r1,1,2,1'k` — and both are accepted everywhere, including in a
-saved file.
+saved file.{{i:separators (newline or colon)}}

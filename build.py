@@ -30,6 +30,7 @@ sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "too
 from check_palette import check_palette  # noqa: E402  (needs sys.path set first)
 from stamp_assets import check_asset_stamps  # noqa: E402
 from check_control_chars import check_control_chars  # noqa: E402
+from check_index import check_index  # noqa: E402  (#422: the back-of-book index)
 import app_links  # noqa: E402  (#224: the app link on every worked problem)
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -1642,8 +1643,23 @@ def build_web(book: Book, versions: list[int]):
                         # reader sees the literal *asterisks* of the source.
                         "summary": r.inline(ch.summary),
                         "present": present, "sections": sections})
-        meta = {"version": v, "chapters": toc,
-                "index": {k: sorted(set(vals)) for k, vals in sorted(r.index.items())},
+        # #422: the index in reading order and in dictionary order. The
+        # spots stay as the renderer met them -- document order, which is
+        # how the numbers beside a term read on the page -- rather than
+        # sorted, which had put `lesson-ac` ahead of `lesson-sources` and
+        # would put a tenth spot ahead of a second. The terms sort with
+        # accents folded and case ignored, so "Thévenin" sits under T and
+        # "Bode plot" does not lead the whole list because it is capitalised.
+        # Version 9 only: 7 and 8 are frozen, and the order of their index
+        # page is visible, so they keep the byte order they have had (Roberto,
+        # 12 Sep 2026: "Feel free to exclude versions 7 and 8"). Lifting that
+        # is deleting the `if`.
+        if v == 9:
+            index = {k: list(dict.fromkeys(r.index[k]))
+                     for k in sorted(r.index, key=lambda t: (_ascii(t).lower(), t))}
+        else:
+            index = {k: sorted(set(vals)) for k, vals in sorted(r.index.items())}
+        meta = {"version": v, "chapters": toc, "index": index,
                 **{k: val for k, val in book.meta["versions"][v].items()}}
         json.dump(meta, open(os.path.join(vdir, "toc.json"), "w",
                              encoding="utf-8"), indent=1)
@@ -1950,6 +1966,10 @@ def check(book: Book, versions: list[int], verbose: bool = False) -> int:
     problems.extend(check_manual_circuits())
     problems.extend(check_problem_media())
     problems.extend(check_buried_v9())
+    # The back-of-book index (#422): a marker in the wrong place renders or
+    # breaks a block, a dangling target is invisible from the source, and a
+    # term naming a calculator tool in version 9 is what #409 was.
+    problems.extend(check_index(versions, slugify))
     # The sidebar search is three pieces in three files with nothing else
     # tying them together -- the index this file writes, the markup and
     # script in web/index.php, and the rules in web/assets/style.css.

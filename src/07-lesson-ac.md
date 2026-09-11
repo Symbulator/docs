@@ -22,7 +22,7 @@ the output.
 
 ::: danger Symbulator does not understand sinusoids
 You should not feed Symbulator any sinusoids, or expect any sinusoid answers
-from it. Any conversion to and from sinusoids has to be done by you.
+from it. Any conversion to and from sinusoids has to be done by you.{{v9|{{i:sinusoids}}}}
 :::
 
 ::: only 7,8
@@ -44,7 +44,7 @@ of them.
 
 Set {{ui:Analysis}} to *AC — alternating current*. Unlike DC and TR, it needs
 one more input: the frequency in radians per second, typed into the
-{{ui:ω — angular frequency}} box beside the menu.
+{{ui:ω — angular frequency}} box beside the menu.{{i:AC analysis}}{{i:angular frequency (ω)}}
 
 ### AC mode in the other tools
 
@@ -80,7 +80,7 @@ When the problem gives us the values of capacitors and inductors in ohms, we
 **must** describe them as impedances. If a capacitor has its value in farads,
 describe it with **c**. If an inductor has its value in henries, describe it
 with **l**. But anything that has its value in ohms — resistor, impedance,
-capacitor or inductor — must be described using **r**.
+capacitor or inductor — must be described using **r**.{{v9|{{i:reactances given in ohms}}}}
 :::
 
 The values of all of these elements can use SI prefixes.
@@ -89,7 +89,7 @@ The values of all of these elements can use SI prefixes.
 
 You get the same answers you did in DC, except that now they are phasors. The
 one difference is that now, besides the real power consumed, you also get the
-complex power consumed. We will discuss this in {{ref:lesson-power}}.
+complex power consumed. We will discuss this in {{ref:lesson-power}}.{{v9|{{i:complex power}}{{i:average power}}}}
 
 ### Rectangular or polar {#polar-phasors}
 
@@ -134,7 +134,7 @@ has no closed form to preserve.
 
 The **aa** tool is still the better choice for converting one value, or an
 expression that is not an answer by itself, such as a difference between two
-node voltages. {{ref:lesson-threephase}} uses it that way throughout.
+node voltages. {{ref:lesson-threephase}} uses it that way throughout.{{i:aa tool}}
 :::
 
 ## Solved numerical examples {#ac-numerical}

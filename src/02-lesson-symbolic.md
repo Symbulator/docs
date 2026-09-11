@@ -31,7 +31,7 @@ and so is any reference built from a name: `2*VR1`, `2*vr1` and `2*v_r1`
 all mean r1's voltage drop. A variable that names nothing in the circuit
 is different: `e,1,2,c` and `e,1,2,C` are two *different* symbolic
 sources, and telling Symbulator that `c = 5` says nothing about `C`.
-Pick one spelling for each unknown and keep it.
+Pick one spelling for each unknown and keep it.{{v9|{{i:case sensitivity}}}}
 :::
 
 I find it useful to distinguish between two types of symbolic problems:
@@ -41,7 +41,7 @@ I find it useful to distinguish between two types of symbolic problems:
   Symbulator is as straightforward as solving numerical problems.
 - **Numerical-from-symbolic problems** start with a symbolic circuit but ask
   for numerical answers. That is possible when the problem gives us more
-  information about the circuit.
+  information about the circuit.{{v9|{{i:numerical-from-symbolic problems}}}}
 
 Numerical-from-symbolic problems can be solved in two ways. If they are simple
 — one or two unknown values, one or two numerical answers wanted — it is
@@ -249,7 +249,7 @@ solve(re=12000 and ir3=.006,{e,r1})
 
 ::: only 9
 That is what the {{card:Solve}} card, under the results beside {{card:Evaluate}}, is
-for. It has two boxes.
+for. It has two boxes.{{i:Solve card}}
 
 In the first box, headed {{ui:Equation(s) to solve in terms of the results}}, write the equationse, using the same names the results use.
 
@@ -378,7 +378,7 @@ the circuit been larger, the saving would be clear.
 
 ::: only 9
 Symbulator's true strength is seen in numerical-from-symbolic problems like the
-one we solved above, when we use its {{card:Expert Mode}} of simulation.{{i:expert mode}}
+one we solved above, when we use its {{card:Expert Mode}} of simulation.{{i:Expert Mode}}
 {{card:Expert Mode}} cracks these problems open in a single call, and gives fully
 numerical answers whenever the problem provides as many answers as it hides
 values.
@@ -440,7 +440,7 @@ currents.
 
 ::: tip Why you may get two answers
 A quantity that is quadratic in an unknown, such as a power, can be satisfied
-by two values. Symbulator returns multiple solutions when they exist.
+by two values. Symbulator returns multiple solutions when they exist.{{i:multiple solutions}}
 :::
 :::
 :::

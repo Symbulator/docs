@@ -14,7 +14,7 @@ solving it. Both take a pair of nodes.
 
 ## Equivalent resistance
 
-*Find equivalent → Resistance / impedance*, with the two nodes.
+*Find equivalent → Resistance / impedance*, with the two nodes.{{i:equivalent resistance}}
 
 ```field 9 Circuit Description
 r1,1,2,100
@@ -34,14 +34,14 @@ this is a question about the network, not about a circuit that runs.
 **If the circuit does contain independent sources**, they are suppressed
 first — voltage sources shorted, current sources opened — which is the
 textbook procedure. Dependent sources are not suppressed, because they are
-part of the network's behaviour.
+part of the network's behaviour.{{i:passive circuit}}
 
 In AC the same tool returns an impedance, and the menu says so.
 
 ## Thévenin and Norton
 
 *Find equivalent → Thévenin / Norton*, with the two nodes. One run returns
-both forms, because they are the same two numbers.
+both forms, because they are the same two numbers.{{i:Thévenin equivalent}}
 
 ```field 9 Circuit Description
 e,1,0,20
@@ -63,7 +63,7 @@ i_{no} = \dfrac{2}{5}\,\mathrm{A}
 
 **The Norton current is reported in the direction it actually flows**, from
 the first node to the second. Carry the sign through rather than assuming a
-positive value.
+positive value.{{i:Norton equivalent}}
 
 A fourth answer comes with those three, unasked:
 
@@ -72,13 +72,13 @@ p_{max} = \dfrac{3}{2}\,\mathrm{W}
 :::
 
 `pmax` is the maximum power transfer result — the power delivered when the
-load equals `R_eq`, which for this circuit is 15²/(4×37.5).
+load equals `R_eq`, which for this circuit is 15²/(4×37.5).{{i:maximum power transfer}}
 
 ## The load question
 
 Under the two node boxes is a tick: **Are you running a problem with a load
 connected to this equivalent circuit?** It adds three more answers, each an
-expression in a symbol `load`:
+expression in a symbol `load`:{{i:load problems (irl, vrl, prl)}}
 
 | | |
 |---|---|

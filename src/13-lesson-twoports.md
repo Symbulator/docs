@@ -28,7 +28,7 @@ a block or a whole network with no ground, is measured against a reference of
 its own, and the answers say which node that is.}}
 
 There are six kinds of parameters — z, y, h, g, a and b — and you choose which
-you want.
+you want.{{v9|{{i:two-port parameters (z, y, h, g, a, b)}}}}
 
 ::: problem AS7's Example 19.1
 Determine the z parameters for the circuit.
@@ -94,7 +94,7 @@ A two-port can be an element in a bigger circuit. Its description is three
 fields: a name whose first letter says which kind it is, then the **top left**
 node and the **top right** node. Both bottom nodes are ground, always —
 which is why neither top node may be `0`, and the two may not be the same
-node; Symbulator stops with a message if they are.
+node; Symbulator stops with a message if they are.{{v9|{{i:two-port}}}}
 
 ```field 9 Circuit Description
 z,1,2
@@ -118,7 +118,7 @@ and **4**; the parameter term, when there is one, follows as before,
 nothing from one port to the other, so a side of the circuit with no path of
 its own to ground is an island: Symbulator takes the port's lower terminal
 as that side's own reference and says so in a note above the results. A port
-whose two nodes are the same is refused.
+whose two nodes are the same is refused.{{i:four-terminal form}}{{i:floating section (island)}}
 
 **Its answers** are the current entering the two-port at each of its live
 nodes, named with the element and the node — `iz1`, `iz2`, `iz3`, `iz4` for

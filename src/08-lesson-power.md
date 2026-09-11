@@ -89,7 +89,7 @@ It is the same answer.
 ::: only 9
 In AC, `pmax` is the *average* maximum power, computed from the real part of
 the equivalent impedance: {{card:Results}} shows `pmax` = {{o:2.367}} W, the power
-delivered when the load is the conjugate of `zeq`.
+delivered when the load is the conjugate of `zeq`.{{i:maximum power transfer}}
 :::
 :::
 :::
@@ -225,7 +225,7 @@ numerically.
 :::
 ::: only 9
 The tool is in the {{card:Mini-Tools}} card. Choose *pf — power factor*; it asks
-for the voltage and the current:{{i:power factor}}
+for the voltage and the current:{{i:power factor}}{{i:pf tool}}
 
 ```field 9 Voltage
 ve
@@ -289,7 +289,7 @@ Again AC with `omega` and {{ui:RMS phasors}} ticked.
 :::
 
 The complex power absorbed in the source, line and load are in
-{{v7,8|`-se1`, `sr1` and `sr2`}}{{v9|`-se`, `sr1` and `sr2`}}:
+{{v7,8|`-se1`, `sr1` and `sr2`}}{{v9|`-se`, `sr1` and `sr2`}}:{{v9|{{i:complex power}}}}
 
 ```sym 7
 {-se1,sr1,sr2}

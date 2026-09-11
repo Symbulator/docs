@@ -106,14 +106,14 @@ Full detail in {{ref:settings}}.
 A `.cir` entry carries **32 fields**: the description, the analysis and its
 settings, Define, Evaluate and its conditions, Solve, Expert Mode's three
 boxes, the plot's five, the display settings, a note and an image. Saving
-and reloading returns you to the run, not just the circuit.
+and reloading returns you to the run, not just the circuit.{{i:input files (.cir)}}
 {{ref:input-files}} has the format.
 
 ## Outside the tool
 
 Fourier series and transforms · convolution · energy · nonlinear devices ·
-transmission lines · noise and tolerance analysis.
+transmission lines · noise and tolerance analysis.{{i:Fourier series and transforms}}{{i:convolution}}{{i:energy}}{{i:nonlinear devices}}{{i:transmission lines}}{{i:noise and tolerance analysis}}
 
 Supported but not automated, because each is something you do *to* the
 circuit and then solve: superposition · source transformation ·
-power-factor correction · pole-zero work · magnitude and frequency scaling.
+power-factor correction · pole-zero work · magnitude and frequency scaling.{{i:superposition}}{{i:source transformation}}{{i:power-factor correction}}{{i:poles and zeros}}

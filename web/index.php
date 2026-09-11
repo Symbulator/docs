@@ -634,12 +634,35 @@ function asset(string $name): string {
       <p class="eyebrow">Index</p>
       <h1>Index</h1>
     </header>
+    <?php
+      // #422: version 9's index reaches into three books, so each number
+      // says which one it opens -- "Thévenin equivalent  COURSE 1 2  MANUAL 3"
+      // -- and carries the chapter's title as a tooltip. A version with one
+      // shelf (7 and 8) keeps the bare numbers it always had, byte for byte.
+      $ixShelf = array(); $ixTitle = array(); $ixShelves = array();
+      foreach ($toc['chapters'] as $c) {
+          $ixShelf[$c['id']] = shelf_of($c);
+          $ixTitle[$c['id']] = $c['title'];
+          if ($c['present']) { $ixShelves[shelf_of($c)] = true; }
+      }
+      $ixMulti = count($ixShelves) > 1;
+      $IX_BOOK = array('course' => 'Course', 'manual' => 'Manual', 'notes' => 'Notes');
+    ?>
     <ul class="book-index">
       <?php foreach ($toc['index'] as $term => $spots): ?>
         <li><span class="ix-term"><?= e($term) ?></span>
+          <?php if (!$ixMulti): ?>
           <?php foreach ($spots as $i => $spot):
                   [$cid, $anchor] = explode('#', $spot); ?>
             <a href="<?= url($v, $cid) . '#' . e($anchor) ?>"><?= $i + 1 ?></a><?php endforeach; ?>
+          <?php else: $n = 0; foreach (array_keys($IX_BOOK) as $sh):
+                  $group = array_values(array_filter($spots, function ($s) use ($ixShelf, $sh) {
+                      return ($ixShelf[explode('#', $s)[0]] ?? 'course') === $sh; }));
+                  if (!$group) { continue; } ?>
+            <span class="ix-book"><?= e($IX_BOOK[$sh]) ?></span><?php foreach ($group as $spot):
+                  $n++; [$cid, $anchor] = explode('#', $spot); ?>
+            <a href="<?= url($v, $cid) . '#' . e($anchor) ?>" title="<?= e($ixTitle[$cid] ?? $cid) ?>"><?= $n ?></a><?php endforeach; ?>
+          <?php endforeach; endif; ?>
         </li>
       <?php endforeach; ?>
       <?php if (!$toc['index']): ?><li>No entries yet.</li><?php endif; ?>

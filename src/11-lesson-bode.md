@@ -66,7 +66,7 @@ trace — works normally. Just remember that `x` means your variable.
 ::: only 9
 Symbulator draws it in the {{card:Plotting Tools}} card below the results. Solve
 the circuit first, then set **Plot type** to *Bode plot of a variable (FD)*;
-the two time boxes become frequencies.
+the two time boxes become frequencies.{{i:Bode plot}}
 
 ```field 9 Circuit Description
 e,1,0,1
@@ -97,7 +97,7 @@ The textbook often hands you the transfer function and no circuit. Symbulator
 takes it directly: set **Plot
 type** to *Bode plot of a transfer function H(s) (FD)*, and the variable box
 becomes {{ui:Transfer function H(s)}}. Type the function there; the Circuit
-Description is ignored for this plot type, so it works on an empty page.
+Description is ignored for this plot type, so it works on an empty page.{{i:Bode plot of a transfer function H(s)}}
 
 - Write the function **in terms of `s`**. A textbook function of jω becomes
   one of s by writing `s` wherever jω appears — a Bode plot sweeps the
@@ -387,7 +387,7 @@ Two things make it work, and both are easy to leave out:
 
 - **Tick *real solutions only*.** Solving `im(ze) = 0` over the complex field returns
   answers written in terms of `re(w)` and `im(w)` rather than `w` — useless.
-  Declaring the unknown real is what makes it solvable.
+  Declaring the unknown real is what makes it solvable.{{i:real solutions only}}
 - **Add `w > 0` as a condition.** The algebra gives ± the frequency, and only
   one of the two is a frequency.
 :::

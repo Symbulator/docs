@@ -16,7 +16,7 @@ or an alternating current analysis it costs almost nothing.
 **Transient analysis is the exception.** Each TR answer is found by
 inverting a Laplace transform, and that is the slow step. A circuit with
 a dozen elements has several dozen answers, and you are very often after
-one of them.
+one of them.{{i:limiting the results (TR)}}
 
 ## Asking for a few answers
 

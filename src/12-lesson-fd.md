@@ -13,7 +13,7 @@ Every analysis so far has answered in the same domain you asked in. This one
 does not, and that is the point of it: the complex frequency domain, or
 s-domain, is where a differential equation becomes an algebraic one. Symbulator
 will do the algebra; your job is to be clear about which domain each number is
-in.{{i:frequency domain}}
+in.{{i:frequency domain}}{{v9|{{i:s-domain}}}}
 
 ## s-domain analysis {#s-domain}
 
@@ -30,7 +30,7 @@ same value given to **TR** is read as a function of time.
 A source value of `1` in FD is not the same thing as a source value of `1` in
 TR. In FD it is an impulse; in TR it is a constant. Neither is wrong — they are
 answers to different questions — but they are not interchangeable, and nothing
-will warn you.
+will warn you.{{v9|{{i:impulse δ(t)}}}}
 :::
 
 The same applies to what comes back: **FD answers in s**. Voltages and currents
@@ -137,7 +137,7 @@ v_o(s) = \dfrac{3}{s^2 + 8s + 18}
 $$
 
 Note the source: `1/s`, not `1`. The unit step is `1/s` in the s-domain, and
-writing `1` there would have described an impulse instead.
+writing `1` there would have described an impulse instead.{{v9|{{i:unit step u(t)}}}}
 :::
 :::
 
@@ -152,7 +152,7 @@ into its s-domain equivalent, and **s\s2t(expression)** converts back.}}{{v9|`t2
 converts an expression that is a function of time into its s-domain
 equivalent, and `s2t(expression)` converts back. Both work wherever you can
 write an expression: in a source value, in {{card:Evaluate}}, and in the {{card:Solve}}
-card.}}
+card.{{i:t2s and s2t}}}}
 
 ::: only 7,8
 These are wrappers around {{t:laplace}}'s Laplace and inverse Laplace
@@ -219,7 +219,7 @@ Either way, the same answer.
 
 Wrap the value in curly brackets — `{u(t)}` — and FD reads it as `t2s(u(t))`.
 It works only inside a circuit description, so the answer still needs `s2t(...)` when you ask for it
-in {{card:Evaluate}}.
+in {{card:Evaluate}}.{{i:curly-bracket shorthand}}
 :::
 
 ## Instructive FD problems {#practice-fd}
@@ -262,7 +262,7 @@ FD, then `s2t(vo)` in {{card:Evaluate}}.
 ## Transfer function problems {#transfer-functions}
 
 A transfer function is a ratio of two answers, so there is nothing new to
-learn: solve the circuit with a symbolic source, then divide.
+learn: solve the circuit with a symbolic source, then divide.{{v9|{{i:transfer function}}}}
 
 Because both answers are functions of s, so is their ratio — which is exactly
 what a transfer function is meant to be.

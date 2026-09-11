@@ -87,7 +87,7 @@ parenthesis **()** after its name.
 :::
 ::: only 9
 The two menus in {{card:Analysis & Settings}} tell Symbulator what to do (in this case, solve
-the circuit) and which analysis to run (in this case, in direct current). Everything else there
+the circuit) and which analysis to run (in this case, in direct current).{{i:DC analysis}} Everything else there
 is optional; later lessons introduce it, and until then leave it as it is.
 :::
 
@@ -129,7 +129,7 @@ r3,3,0,2'k
 ::: only 9
 Using one line per element keeps a long circuit readable,
 and it makes mistakes easier to find. But it is not the only option: Symbulator
-also accepts a colon as a separator. For example, this is the same circuit, described in one line: 
+also accepts a colon as a separator. For example, this is the same circuit, described in one line:{{i:separators (newline or colon)}} 
 :::
 
 ```field 9 Circuit Description
@@ -145,7 +145,7 @@ see both ways used throughout.
 
 ::: only 9
 To reuse this circuit later, save it as an **entry** in an **input file**. You
-will be asked to name both. Input files must have the `.cir` extension.
+will be asked to name both. Input files must have the `.cir` extension.{{i:input files (.cir)}}
 :::
 
 ### Look at the elements
@@ -183,7 +183,7 @@ of **300** Ω, is described `r1,a,b,300`
 
 Every resistor must have a name. As long as it starts with the letter **r**
 and is unique, it can be whatever you want. *Unique* means no other element or
-node has the same name.
+node has the same name.{{v9|{{i:names of elements and nodes}}}}
 
 ::: only 7
 With one exception: `rc` is reserved in the TI-89 calculator, and cannot name
@@ -270,7 +270,7 @@ worked out}}.
 ::: only 9
 The results are arranged in groups: {{card:Node voltages}} first, one per
 node, and then {{card:Results by element}}, one group per element, headed by its
-name and its kind — **r1** *resistor*, **e** *voltage source*.
+name and its kind — **r1** *resistor*, **e** *voltage source*.{{i:Results card}}
 
 Every answer is written the way you would write it by hand, as a named quantity
 and its value: v{{sub:1}} = 36 V, i{{sub:r1}} = 6 mA.
@@ -281,7 +281,7 @@ comes back as 3/500 A rather than a decimal. That is what you want for
 symbolic results. For numerical work like the example in this lesson, decimals read better. Open the
 {{card:Settings}} card and set {{ui:Rounding}} to *approx to n digits*
 with **n** = 3, then tick {{ui:Use SI prefixes in answers}}. The current above
-then reads 6 mA instead of 3/500 A.
+then reads 6 mA instead of 3/500 A.{{i:Rounding setting}}
 
 Ticking the prefix box moves {{ui:Rounding}} off *exact* by itself, since a
 prefixed value is a decimal, and choosing *exact* again switches the prefixes
@@ -293,7 +293,7 @@ so when a change is needed.
 
 The card holds a few more controls than these two, and the lessons reach for
 them as they come up. {{ref:settings}} is the whole card in one place —
-optional reading, and nothing here waits on it.
+optional reading, and nothing here waits on it.{{i:Settings card}}
 :::
 
 ### Answer for each node
@@ -301,7 +301,7 @@ optional reading, and nothing here waits on it.
 Symbulator calculates for each node a voltage with reference to ground, which is {{v7,8|stored in a variable called v plus the name of
 the node. For example, for a node called **1**, its voltage is stored in a variable
 called v1}}{{v9|shown under {{card:Node voltages}} as `v` plus the node's name: node **1**'s
-voltage is `v1`}}.
+voltage is `v1`}}.{{v9|{{i:answer names}}}}
 
 ### Answers for each resistor
 
@@ -321,7 +321,7 @@ or without an underscore. `ir1` and `i_r1` are the same current, `v2` and
 `v_2` the same voltage; capitals make no difference either. This tutorial
 uses the shorter spelling throughout. {{ref:underscores}} says why both
 exist, and what an underscore does in a *value*, which is a different
-thing entirely — optional reading.
+thing entirely — optional reading.{{i:underscore}}
 :::
 
 By now you should understand the description of the second, third and fourth
@@ -362,9 +362,9 @@ For each voltage source, the following answers are calculated:
   second, in amperes. For a source called **ex**, `iex`.
 - The power consumed — attention: not delivered, but consumed — by the source,
   in watts. For a source called **e12**, `pe12`. If we want the power delivered, we ask for the
-  negative of this value.
+  negative of this value.{{v9|{{i:power consumed and delivered}}}}
 - The equivalent resistance of the rest of the circuit, as seen by the source.
-  For a source called **e2**, `re2`.
+  For a source called **e2**, `re2`.{{v9|{{i:resistance seen by a source}}}}
 
 ::: note For sources only
 The equivalent resistance is a property of the *view from a source*, not for every element. It exists only for sources.
@@ -517,7 +517,7 @@ For a DC analysis, these answers are as follows:
   circuit **as seen by that source**.
 
 ::: note The sign is in the details
-To read the signs of your answers correctly, mind the details:
+To read the signs of your answers correctly, mind the details:{{v9|{{i:sign conventions}}}}
 
 - The current in the elements is defined as going through the element from the
   first node to the second node.
@@ -627,7 +627,7 @@ true
 
 ::: only 9
 If the resistors consume exactly what the source delivers, the four powers
-add up to zero. In {{card:Evaluate}}:
+add up to zero. In {{card:Evaluate}}:{{i:Evaluate card}}
 
 ```field 9 Evaluate
 pr1 + pr2 + pr3 + pe
@@ -655,7 +655,7 @@ reading on. Open the {{card:Settings}} card and tick {{ui:Show equations}}. An
 {{card:Equations}} card appears just above {{card:Results}}, open and listing every
 equation Symbulator assembled for the circuit you have just solved. You do
 not need to run the analysis again — the system is already there from the
-last solve, so the card fills in as soon as you tick the box.
+last solve, so the card fills in as soon as you tick the box.{{i:Equations card}}
 
 Read it beside your own working and the difference is plain: one equation per
 element and one per node, in no particular order, with not a mesh or a
@@ -667,7 +667,7 @@ things differently. It writes out the system *you* would write — Kirchhoff's c
 at each node, with a supernode where a voltage source sits between two of
 them, or Kirchhoff's voltage law around each mesh, with a supermesh where a
 current source is shared. It then solves that system on its own and checks
-its answers against the ones above, and tells you whether the two agree.
+its answers against the ones above, and tells you whether the two agree.{{i:By-Hand Equations card}}{{i:nodal and mesh analysis}}{{i:supernodes and supermeshes}}
 
 To use it, solve the circuit first, then open the card and press {{btn:Write the
 equations}}. You do not have to pick a method: it works out which ones apply

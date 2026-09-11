@@ -11,7 +11,7 @@ summary: >
 
 ## m — mutual inductance
 
-`m` names **two inductors**, not two nodes:
+`m` names **two inductors**, not two nodes:{{i:mutual inductance}}
 
 ```
 m1,l1,l2,0.01
@@ -28,7 +28,7 @@ elements; its effect turns up in their currents.
 
 Symbulator cannot draw a dot, so **the first node you name in each coupled
 inductor is its dotted end.** That is the whole convention, and it is the
-one most likely to hand you a correct-looking wrong answer.
+one most likely to hand you a correct-looking wrong answer.{{i:dot convention}}
 
 ```field 9 Circuit Description
 e,1,0,10
@@ -58,7 +58,7 @@ t1,n1,n2,turns1,turns2
 ```
 
 The two-node form names the top terminal of each side and grounds the other
-two:
+two:{{i:transformer}}
 
 ```field 9 Circuit Description
 e,1,0,120
@@ -86,7 +86,7 @@ t1,[tl,bl],[tr,br],[10,1]
 
 `[tl,bl]` is the left port, top terminal first; `[tr,br]` the right. The
 turns must then be bracketed too. The two-node form is exactly this with
-both bottoms on `0`.
+both bottoms on `0`.{{i:four-terminal form}}
 
 A transformer reports **a current at each live terminal** rather than one
 current, since the two sides carry different ones. The names are the

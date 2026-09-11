@@ -23,7 +23,7 @@ When describing an ideal capacitor for the purpose of a transient analysis, we
 need five pieces of information, separated by commas: a unique name to identify
 the capacitor (must start with the letter **c**), the names of its first and
 second nodes, its value in farads (F), and its initial condition in volts,
-understood as the voltage in the first node minus the voltage in the second.
+understood as the voltage in the first node minus the voltage in the second.{{v9|{{i:initial conditions}}}}
 
 For example, an ideal capacitor called **ca**, connected between two nodes
 called **1** and **2**, with a capacitance of **3** F and an initial condition
@@ -83,7 +83,7 @@ You will learn the subtleties of transient simulations through a series of
 examples. For now, to run one
 {{v7,8|we use an access program called **s\tr**, which takes one argument: the circuit
 description in string form}}{{v9|set {{ui:Analysis}} to *TR — transient / time
-domain*}}.
+domain*}}.{{v9|{{i:transient analysis (TR)}}}}
 
 ::: only 7
 For transient simulations, Symbulator uses a software for Laplace transforms
@@ -165,7 +165,7 @@ source values. The only thing you must do is describe these values properly.
 **Step values: symbolic.** A source with an unknown step value starting at t=0
 is described with a variable and the step function u(t). For example, a
 voltage source **e1** between nodes **1** and **0**, of V volts starting at t=0, is
-`e1,1,0,V*u(t)`.
+`e1,1,0,V*u(t)`.{{v9|{{i:unit step u(t)}}}}
 
 **Step values: numerical.** A step source with a known numerical value can be
 described the same way, `e1,1,0,12*u(t)`. To save typing, you can skip the u(t)
@@ -175,7 +175,7 @@ results are the same.
 **Impulse values.** A source with an impulse value at t=0 is described with
 its value, symbolic or numerical, and the delta function δ(t). For example, a
 current source **j1** between nodes **0** and **1**, with an impulse of i amperes at t=0,
-is `j1,0,1,i*δ(t)`.
+is `j1,0,1,i*δ(t)`.{{v9|{{i:impulse δ(t)}}}}
 
 **Values as functions of time.** A source whose value is a function of time,
 such as a ramp, a sinusoid or an exponential, is described by writing the value
@@ -192,7 +192,7 @@ In a transient analysis, every switch opening or closing ends one time
 interval and begins another, and a simulation covers one interval only. When we
 run a TR simulation and get answers in terms of
 t, this variable must be understood as the time elapsed since the start of
-*that* interval in particular.
+*that* interval in particular.{{v9|{{i:switched circuits (two runs)}}}}
 
 This is a distinction without a difference as long as the interval we simulate
 starts at t=0, which is most often the case. However, sometimes problems have
@@ -233,7 +233,7 @@ Symbulator find the inverse Laplace of answers you do not need.
 ::: only 9
 To get only a chosen few, tick **Do you want to limit the results to save
 time?**, under the analysis menus once TR is chosen, and list them in the box
-that opens, separated by commas.
+that opens, separated by commas.{{i:limiting the results (TR)}}
 
 {{ref:limiting-results}} covers it, with the answer names you may use and
 when the tick is worth reaching for. It is optional reading — every
@@ -257,7 +257,7 @@ s\plot()
 ::: only 9
 Symbulator draws plots in the {{card:Plotting Tools}} card below the results.
 Solve the circuit first, since the plot is of an answer, then open the card
-and fill in four things:
+and fill in four things:{{i:plots (Plotting Tools card)}}
 
 - **Plot type**: *Plot a function of time (TR)*
 - {{ui:Variable to plot}}: the answer you want, such as `v2`

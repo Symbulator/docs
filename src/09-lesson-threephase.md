@@ -553,7 +553,7 @@ simulators dislike it too. **A triangle of three voltage sources cannot be
 solved.** The third source adds no information, because the first two already
 fix the voltages at all three nodes, but it does add an unknown: the current
 through it. Drop the redundant equation and the system has one unknown too
-many.
+many.{{v9|{{i:delta-connected sources}}}}
 
 ::: warning Describe a delta source with two sources, not three
 The trick is to leave one source out — the one opposite the node you chose as

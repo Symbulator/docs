@@ -11,7 +11,7 @@ summary: >
 
 Paste the description, pick an analysis, press **Run**. There is nothing to
 select first: a run returns *every* answer in the circuit, not the one you
-asked about.
+asked about.{{i:Results card}}
 
 ```field 9 Circuit Description
 e1,1,0,12
@@ -37,7 +37,7 @@ Exact, because `12`, `1'k` and `2'k` are exact. 1/250 A is 4 mA; see
 ## The answer names
 
 A node's voltage is `v` and the node's name. An element's answers are a
-letter and the element's name.
+letter and the element's name.{{i:answer names}}
 
 | Name | Answer | Where |
 |---|---|---|
@@ -52,16 +52,16 @@ letter and the element's name.
 
 *Resistance seen* and *impedance seen* are the element's own voltage over
 its own current — useful on a source, where it is the resistance the source
-is driving.
+is driving.{{i:resistance seen by a source}}
 
 **Every name has two spellings.** `ir1` and `i_r1` are the same current,
 `v2` and `v_2` the same voltage, and capitals make no difference. Use
 whichever you like, anywhere a name is accepted. {{ref:underscores}} says
-why both exist.
+why both exist.{{i:case sensitivity}}
 
 ## Signs
 
-Two sentences, and every sign in the book follows from them:
+Two sentences, and every sign in the book follows from them:{{i:sign conventions}}
 
 - A **current** is positive flowing from the element's first node toward
   its second.
@@ -69,7 +69,7 @@ Two sentences, and every sign in the book follows from them:
 
 So `e1,1,0,12` above reports `ie1 = -1/250 A`: current flows *out* of the
 source's first node into the circuit, which is negative by that rule. A
-source delivering power reports negative power consumed.
+source delivering power reports negative power consumed.{{i:power consumed and delivered}}
 
 If a sign surprises you, read the element's node order before doubting the
 answer.

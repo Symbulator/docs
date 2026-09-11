@@ -76,8 +76,8 @@ is a second opinion, kept at arm's length, and a valuable one.
 ## Licence
 
 **MIT**, since 2026. Port it anywhere you like, provided the copyright notice
-and the attribution travel with it.
+and the attribution travel with it.{{i:MIT licence}}
 
 ## Getting in touch
 
-The author can be reached at help@symbulator.com
+The author can be reached at help@symbulator.com{{i:reporting problems}}

@@ -10,7 +10,7 @@ summary: >
 ---
 
 Choose **AC** and give an **ω**. Elements keep their own units — henries and
-farads, not reactances — and the solver does the conversion.
+farads, not reactances — and the solver does the conversion.{{i:AC analysis}}{{i:angular frequency (ω)}}
 
 ```field 9 Circuit Description
 e,1,0,10
@@ -30,12 +30,12 @@ v_{l} = 5.0 + 5.0\text{j}\,\mathrm{V}
 
 You may also give reactances directly, as ohms, if that is how the problem
 is stated — a resistor-valued `l` is not a thing, so put the reactance in
-as an impedance and leave ω out of it.
+as an impedance and leave ω out of it.{{i:impedance}}{{i:reactances given in ohms}}
 
 **Rectangular or polar** is a display choice: tick {{ui:Show AC answers as
 polar phasors}} in {{card:Settings}} and `0.1 - 0.1j` reads
 `0.1414∠-45°`. Nothing about the answer changes. The {{tool:aa}} mini-tool
-does the same conversion for one value you type.
+does the same conversion for one value you type.{{i:polar phasors}}{{i:aa tool}}
 
 ## The four power answers
 
@@ -56,21 +56,21 @@ l,2,0,0.04
 
 At ω = 1000 that is 30 + 40j — a 3-4-5 triangle — and the source reports
 complex power −0.6 − 0.8j VA. So *P* = 0.6 W, *Q* = 0.8 var, |*S*| = 1.0 VA
-and the power factor is 0.6, lagging.
+and the power factor is 0.6, lagging.{{i:complex power}}
 
 **An inductor reports no average power**, only complex. That is not an
 omission: a pure reactance consumes none, and a zero printed every time
-would be noise.
+would be noise.{{i:average power}}
 
 The {{tool:pf}} mini-tool takes a complex power or an impedance and returns
-the power factor with its lead/lag sense.
+the power factor with its lead/lag sense.{{i:power factor}}{{i:pf tool}}
 
 ::: warning RMS is the one setting that changes an answer
 **RMS phasors**, in {{card:Settings}}, is not a display choice. Off means
 peak amplitude, the ÷2 convention. For the same phasor magnitudes, RMS
 reports twice the power that peak does — a 10 V source across 5 Ω gives
 10 W with the tick off and 20 W with it on, and the answer's label changes
-with it. Match the book you are working from before comparing numbers.
+with it. Match the book you are working from before comparing numbers.{{i:RMS}}
 :::
 
 ## Three-phase
@@ -79,7 +79,7 @@ There is no three-phase mode, and none is needed. A three-phase circuit is
 an AC circuit with three sources whose values carry the phase — `120`,
 `120*exp(-2j*pi/3)`, `120*exp(2j*pi/3)` — and Y or Δ is just how you wire
 the nodes. Balanced and unbalanced are the same description with different
-values.
+values.{{i:three-phase circuits}}
 
 Line and phase quantities are then read off the elements directly: there is
 no separate answer for them, because each is some element's own current or

@@ -273,7 +273,7 @@ circuit descriptions whenever we feel it is appropriate.
 ::: only 9
 Symbulator has a tool for reducing resistors (and impedances) in
 parallel, called {{tool:pr()}}. You can use it in the circuit description and
-in the {{card:Evaluate}} area.{{i:parallel resistors}}
+in the {{card:Evaluate}} area.{{i:parallel resistors}}{{i:pr tool}}
 
 To reduce three resistors in parallel with values of 10 Ω, 20 Ω and
 30 Ω:
@@ -332,7 +332,7 @@ The answer is {{o:19}} Ω. This is correct.
 There is a shorthand to invoke the {{tool:pr}} tool: put the resistor values in
 square brackets, separated by commas. Expressions like `[10,20,30]` or
 `[r1,r2,r3,r4]` are read as inputs to {{tool:pr}}, both in the
-{{card:Evaluate}} area or in the circuit description.
+{{card:Evaluate}} area or in the circuit description.{{i:brackets}}
 
 ### When to reduce resistors
 

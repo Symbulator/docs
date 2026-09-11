@@ -18,7 +18,7 @@ o1,n+,n−,nout
 No power rails, no supply, no gain figure. It is an **ideal** op amp: a
 nullor, which is the statement that the two inputs are at the same
 potential and draw no current, and that the output supplies whatever the
-rest of the circuit needs.
+rest of the circuit needs.{{i:operational amplifier}}{{i:nullor}}
 
 ```field 9 Circuit Description
 e,1,0,2
@@ -51,7 +51,7 @@ its output.
 ## When ideal is not enough
 
 There is no finite-gain op amp element. Model one as a dependent source,
-which is what a finite-gain op amp is:
+which is what a finite-gain op amp is:{{i:op amp model (finite gain)}}
 
 ```field 9 Circuit Description
 e,1,0,2

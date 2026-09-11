@@ -16,7 +16,7 @@ here.
 
 - An **input file** is a named collection of entries, such as *Circuits for Lesson 1 of the Tutorial*.
 
-Input files are plain text with the extension **`.cir`**. They are optional. The buttons to load, download and create them are in the {{card:Input File}} card at the top of the app.
+Input files are plain text with the extension **`.cir`**. They are optional. The buttons to load, download and create them are in the {{card:Input File}} card at the top of the app.{{i:input files (.cir)}}
 
 ## Loading input files
 
@@ -24,7 +24,7 @@ Symbulator comes with an input file for each lesson of this tutorial, holding
 an entry for every simulation in it. A problem that takes more than one
 simulation has an entry for each, so a lesson file may hold more entries than
 the lesson has problems. With them you can follow the whole tutorial without
-typing a circuit.
+typing a circuit.{{i:built-in examples}}
 
 {{card:Built-in examples}} lists them; click a title to load it. These files are
 **read-only**: change a loaded one as much as you like, but you cannot write

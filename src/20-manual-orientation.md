@@ -19,7 +19,7 @@ algebra you can read.
 
 ## What it solves
 
-Four analyses, on the same description:
+Four analyses, on the same description:{{i:analyses (DC, AC, TR, FD)}}
 
 | | |
 |---|---|
@@ -28,7 +28,7 @@ Four analyses, on the same description:
 | **FD** | the s-domain, initial conditions included |
 | **TR** | transient, in the time domain |
 
-Fifteen element types, listed in {{ref:manual-grammar}}. Four tools that
+Fifteen element types, listed in {{ref:manual-grammar}}.{{i:element types}} Four tools that
 answer a question about a circuit rather than solving it outright:
 equivalent resistance, Thévenin/Norton, two-port parameters, and gain.
 
@@ -41,21 +41,21 @@ Linear circuits only, lumped elements only. Nine topics from a first course
 in circuits fall outside it, and it is cheaper to say so here than to have
 you hunt:
 
-- **Fourier series and transforms.** Not implemented.
-- **Convolution.** Not implemented.
-- **Energy.** You get power; integrating it is yours.
+- **Fourier series and transforms.** Not implemented.{{i:Fourier series and transforms}}
+- **Convolution.** Not implemented.{{i:convolution}}
+- **Energy.** You get power; integrating it is yours.{{i:energy}}
 - **Nonlinear devices.** No diode curve, no transistor model. A transistor
-  enters as its small-signal equivalent, which is linear, and works.
-- **Transmission lines**, and anything distributed.
-- **Noise, tolerance, Monte Carlo.** Not a statistical simulator.
+  enters as its small-signal equivalent, which is linear, and works.{{i:nonlinear devices}}
+- **Transmission lines**, and anything distributed.{{i:transmission lines}}
+- **Noise, tolerance, Monte Carlo.** Not a statistical simulator.{{i:noise and tolerance analysis}}
 
 Four more are supported but not automated — **superposition**, **source
 transformation**, **power-factor correction** and **pole-zero work**. Each
-is a thing you do to the circuit, then solve. No tool does it for you.
+is a thing you do to the circuit, then solve. No tool does it for you.{{i:superposition}}{{i:source transformation}}{{i:power-factor correction}}{{i:poles and zeros}}
 
 ## Where it runs
 
-Three builds of one interface, and they behave identically:
+Three builds of one interface, and they behave identically:{{i:getting Symbulator (online, offline, local)}}
 
 | | |
 |---|---|
@@ -63,4 +63,4 @@ Three builds of one interface, and they behave identically:
 | **In your browser, offline** | `install.symbulator.com` — installs as an app |
 | **On your machine** | `symbulator.com/9/local.zip` — a folder and a launcher |
 
-The solver is also a Python package: `pip install symbulator`.
+The solver is also a Python package: `pip install symbulator`.{{i:Python package (pip install symbulator)}}

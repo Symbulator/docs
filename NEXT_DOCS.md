@@ -3,6 +3,160 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #422 — the index, rebuilt for version 9's three books — **built 12 Sep 2026, not deployed**
+
+Roberto: *"There is an index in Symbulator's documentation, but it is not
+good. I want to replace it with a proper index."* And, mid-way: *"I'm
+interested in an index for v9. Feel free to exclude versions 7 and 8."*
+
+**Measured before and after**, on the built `toc.json`, by
+`tools/check_index.py`:
+
+    before   v9: 33 terms,  34 locations (course 33, manual 0, notes 0)
+    after    v9: 122 terms, 240 locations (course 97, manual 101, notes 15)
+             v7: 34 terms,  35 locations -- unchanged
+             v8: 32 terms,  33 locations -- unchanged
+
+The mechanism was never the problem. `{{i:term}}` already emits an
+invisible anchor at the exact sentence, records `chapter#anchor` in
+`toc.json`, and writes `\index{}` for makeindex; `index.php` renders the
+numbers. What was missing was **the judgement**: 42 markers, all in the
+Course, none in the Manual or the Notes, several in the calculator's
+vocabulary. The job was deciding which terms and where.
+
+### The rules the terms were chosen by
+
+- **Where a thing is explained, not where it is mentioned.** *resistor*
+  appears hundreds of times and is taught once. Each term gets the place it
+  is taught (a Course lesson), the place it is stated precisely (a Manual
+  part), and a Note where one goes deeper -- and nothing else. The cap is
+  four locations, and one term reaches it (*SI prefixes*: Lesson 1, the
+  grammar part, and two places in Tech Note E).
+- **The reader's word, not the system's.** *Thévenin equivalent*, not *th
+  tool*; *operational amplifier*, with *nullor* as a secondary entry at the
+  Manual's line, not the other way about. Software names are secondary
+  entries where someone would genuinely type them -- *pf tool*, *aa tool*,
+  *pr tool*, *Solve card*, *Numerical Solver*.
+- **The concept, not every case.** *three-phase circuits*, not balanced
+  wye-wye, unbalanced wye-wye, and six more; the one three-phase entry
+  added is *delta-connected sources*, because that passage teaches a trap.
+- **Synonyms are settled by alphabetical adjacency, not by duplicate
+  entries.** *op amp model (finite gain)* sits beside *operational
+  amplifier*; *frequency domain* and *s-domain* both exist because they
+  sort far apart and both are looked up.
+- **What Symbulator will not do is indexed too.** *Fourier series and
+  transforms*, *convolution*, *energy*, *nonlinear devices*, *transmission
+  lines*, *noise and tolerance analysis* each land on the Manual's
+  Orientation, where the limits are stated, and on the Reference's last
+  section; *superposition*, *source transformation*, *power-factor
+  correction* and *poles and zeros* -- supported but not automated -- the
+  same. A reader who looks up *Fourier* and finds an entry that says "not
+  here, and here is why" is better served than one who finds nothing.
+
+The vocabulary started from the coverage inventory of 11 Sep 2026 (read
+out of `elements.py`, `__init__.py`, `circuitbook.py` and the app template,
+not out of the prose) and was placed by reading every explanatory section
+of the Course, the whole Manual and all six Notes.
+
+### Versions 7 and 8 are untouched, by construction
+
+Every new marker in shared prose is written `{{v9|{{i:term}}}}` -- the
+inline parser has counted brace depth since #358 -- so neither the anchor
+nor the entry exists in 7 or 8. Markers inside `::: only 9` blocks and in
+the version 9 chapters are bare. **Verified by measurement, not by
+reading:** the built `content/v7` and `content/v8` directories are
+byte-identical to the build of `e4523b3`, `toc.json` included, and the
+rendered `/7/index` and `/8/index` pages are identical to the old
+`index.php`'s output once whitespace between tags is normalised (the PHP
+control blocks indent differently; the markup, text and links are the
+same). The only other 7/8 change is the shared `style.css` gaining a rule
+they never trigger, which moves their cache-bust hash -- the benign
+difference #390 and #395 documented.
+
+Two things were deliberately **not** done to 7 and 8, and each is one
+line to lift: their index keeps the old byte-order sort (uppercase first,
+so *Bode plot* leads and *aa tool* follows *SI prefixes*) behind an `if v
+== 9` in `build_web()`; and the shared markers were not added there even
+where the concept is version-neutral. The existing `expert mode` marker is
+renamed *Expert Mode* in the version 9 block only; 7 and 8 keep the lower
+case they had.
+
+### What changed in the machinery
+
+- **`build.py`**: version 9's index is in reading order and dictionary
+  order. The spots were `sorted(set(...))`, which put `lesson-ac` ahead
+  of `lesson-sources` for *dependent source* and would put a tenth spot
+  ahead of a second; they now keep the order the renderer met them in.
+  The terms sort with accents folded and case ignored (`_ascii(t).lower()`),
+  so *Thévenin* files under T and a capital does not lead the list.
+- **`web/index.php`**: when a version has more than one shelf, each
+  number is preceded by the book it opens -- *SI prefixes* COURSE 1
+  MANUAL 2 NOTES 3 4 -- and carries the chapter title as a tooltip. One
+  shelf, and the markup is the old markup. Labels are Course, Manual,
+  Notes; the numbering runs on across books.
+- **`web/assets/style.css`**: one rule, `.ix-book`, in the palette's
+  `--ink-3`.
+- **`tools/check_index.py`**, wired into `build.py --check`. In the
+  source: no marker in a code fence, a heading, a table row or a
+  directive line; no term with `! @ | "` (makeindex's specials -- the
+  same markers feed the PDF's index). In the build, per version: every
+  `chapter#anchor` in `toc.json` has its `id=` in the built page, and has
+  it **once** (two terms that slugify alike -- *expert mode* / *Expert
+  Mode* -- write the same id twice on one page, and the browser scrolls
+  to the first); no version 9 term contains *script*, *command* or
+  *program* on a word boundary (#409, and "circuit de**script**ion" is
+  why the boundary matters); no term has more than four locations; and
+  version 9 reaches all three shelves. It prints the census above on
+  every run.
+
+**Proved red seven ways before being believed**, each sabotage restored
+afterwards and the tree re-checked clean: an anchor deleted from a built
+page; `{{i:th script}}` planted in an `::: only 9` block; a fifth location
+on *SI prefixes*; a marker in a heading; `{{i:expert mode}}` planted
+beside `{{i:Expert Mode}}` in the same version 9 block, caught twice over
+(the shared spot in `toc.json` and the doubled id in the page); and a
+`!` in a term. **The first attempt at the shared-anchor sabotage stayed
+green**, because it planted the twin in a different chapter from the
+original's first occurrence, which gives two different `chapter#anchor`
+strings and two different pages -- no collision anywhere, so the guard was
+right and the test was wrong. The doubled-id check was added on the back
+of that, because the id on the page is the artefact the reader's browser
+actually resolves.
+
+### How it was placed, for the record
+
+`Notes/index_markers_422.py` holds the whole table -- 177 edits across 34
+source files, each an anchor of sentence text that must occur exactly
+once in its file, and the terms to place after it. It reads the `::: only`
+blocks around each anchor and chooses bare or gated form itself; an anchor
+inside an `::: only 7,8` block is refused. Dry run by default, `--apply`
+to write. Kept so the placement can be audited or re-run, not because it
+will be needed twice.
+
+### Not done, and worth knowing
+
+- **The PDFs were not rebuilt.** The standing `--web` instruction holds;
+  the new markers add `\index{}` entries, so the next full build's
+  `symbulator-v9.pdf` index grows from 33 to 122 terms. Two things to
+  watch then: makeindex sorts by bytes, so *δ(t)* and *ω* may file oddly,
+  and its case handling differs from the web's folded sort.
+- **`tools/static_preview.py` still writes the flat numbers** with no
+  book labels. It generates its own markup and does not read `index.php`;
+  the preview is for looking at chapters, and the index page there is
+  functional but unlabelled.
+- **A sentence in shared prose says "Symbulator 9" to readers of 7 and
+  8**: `src/01-lesson-dc.md` line 68, *"You have just run your first
+  simulation in Symbulator 9."*, sits outside the `::: only 9` block above
+  it. Seen while placing markers, not touched -- frozen text, Roberto's
+  call.
+- 122 terms is a little over the 120 the brief called the noise line.
+  Thirteen candidates were cut on the way (*voltage divider*, *purely
+  symbolic problems*, *admittance*, *Mini-Tools card*, *reciprocal
+  network* and eight more); what remains is listed by the census, and
+  trimming is a matter of deleting markers.
+
+---
+
 ## #421 — PHP on the laptop, and the first executed test of `index.php` — **12 Sep 2026**
 
 For the whole life of this tree, `web/index.php` has been reviewed by

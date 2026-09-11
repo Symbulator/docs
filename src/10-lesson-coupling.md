@@ -41,7 +41,7 @@ units: all henries, or all jΩ.
 
 Every coupled-inductor problem in a textbook has a dot on each coil, marking
 the ends that share polarity. Symbulator has no way to draw a dot, so **the
-first node you name in each coupled element is its dotted end**.
+first node you name in each coupled element is its dotted end**.{{v9|{{i:dot convention}}}}
 
 That is the whole convention, and it is the thing most likely to give you a
 correct-looking wrong answer. If you list the nodes of one coil the other way
@@ -210,7 +210,7 @@ the same transformer.
 the two turn counts negative: `t,a,b,1,-5`
 
 It does not matter which of the two you make negative, as long as one of them
-is.
+is.{{v9|{{i:transformer polarity}}}}
 
 ::: only 9
 **The turns may be written as a pair in brackets**, `t1,1,2,[80,800]`, which
@@ -232,7 +232,7 @@ it at 0, and says so in a note above the results. Every current and every
 voltage difference on that side is the same whichever node is chosen; only
 its absolute potentials depend on it, and they have no meaning anyway. Either
 terminal of a pair may be `0`, so `t1,[1,0],[2,0],[80,800]` is the two-node
-form written out.
+form written out.{{i:four-terminal form}}{{i:floating section (island)}}
 :::
 
 **What answers do you get?** The voltages at the live nodes, as for any node
@@ -355,7 +355,7 @@ AS7's Example 13.11
 ::: answer
 Symbulator has no dedicated element for an autotransformer. The same **t**
 element does it: the input is node **1**, the output is node **2**, and the
-turns are the 80 of the lower winding and the 80 + 120 of the whole.
+turns are the 80 of the lower winding and the 80 + 120 of the whole.{{v9|{{i:autotransformer}}}}
 
 ```sym 7
 true→s\rms:"e,1,0,(120.∠30°):t,1,2,80,80+120:rl,2,0,8.+𝐢6."→cir:s\ac(cir,ω)

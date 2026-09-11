@@ -137,7 +137,7 @@ desired nodes. The rest of this lesson is about what to do when there is not.
 But how do we find the equivalent resistance of a **passive circuit**, one
 with no *independent* source in it? One way is to connect a 1 A current source
 between the two nodes and read the voltage drop across it. That is the manual
-way.
+way.{{v9|{{i:equivalent resistance}}}}
 
 An easier way is to let Symbulator do that for us.
 
@@ -217,7 +217,7 @@ kind of passive circuit: one with resistors and dependent sources, but no
 independent sources. Such a circuit can only be reduced to an equivalent
 resistance, not to a Thévenin or Norton equivalent, so {{v7,8|{{tool:er}} is the script to use
 — in exactly the same way}}{{v9|it is found in exactly the same way}}, provided the dependent sources are described
-properly.
+properly.{{v9|{{i:passive circuit}}}}
 
 ## {{v7,8|The Thévenin / Norton script: th}}{{v9|Finding a Thévenin / Norton equivalent}} {#th-script}
 
@@ -236,7 +236,7 @@ automatically. It takes three arguments: the circuit description, the first
 node and the second node.
 :::
 ::: only 9
-An easier way is to let Symbulator do exactly that automatically:{{i:Thévenin equivalent}}
+An easier way is to let Symbulator do exactly that automatically:{{i:Thévenin equivalent}}{{i:Norton equivalent}}
 set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to
 *Thévenin / Norton*, and give it the two nodes.
 :::
@@ -340,7 +340,7 @@ the load resistor:
 
 To read one of them at a given load, ask {{card:Evaluate}} for its name and put
 the load's value in the {{ui:Conditions}} box, as in `load = 2`. Untick the
-question and the four answers are all you see.
+question and the four answers are all you see.{{i:load problems (irl, vrl, prl)}}{{i:Conditions (Evaluate)}}
 :::
 
 ::: problem B11's Example 9.6
@@ -433,7 +433,7 @@ power transfer to a load, particularly the maximum possible. Maximum power is tr
 equivalent. {{v7,8|Symbulator's th script gives}}{{v9|Symbulator gives}} you the maximum power that can be
 delivered in {{v7,8|**pmax**}}{{v9|`pmax`}}, and the power transferred to the
 load as a function of its value in {{v7,8|**prl**}}{{v9|`prl`, once the load
-question is ticked}}.
+question is ticked}}.{{v9|{{i:maximum power transfer}}}}
 
 ### What if it's more than a load?
 
@@ -456,7 +456,7 @@ To help you in those cases, Symbulator writes that circuit for you: with the
 load question ticked, a button under the equivalent's answers drops the
 Norton equivalent, load and all, into the input fields, ready to be added
 to. {{ref:equivalent-circuit}} covers it, with a worked example — optional
-reading, and nothing else in this lesson depends on it.
+reading, and nothing else in this lesson depends on it.{{i:equivalent circuit button}}
 :::
 
 ::: only 7,8

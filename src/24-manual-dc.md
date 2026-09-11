@@ -13,7 +13,7 @@ summary: >
 
 `j` takes the same four fields as `e`, and its current flows **from the
 first node to the second, inside the element**. A source written `j,0,1`
-therefore pushes current into node 1.
+therefore pushes current into node 1.{{i:current source}}
 
 ```field 9 Circuit Description
 j,0,1,3'm
@@ -28,12 +28,12 @@ v_{r1} = \dfrac{6}{2000 g + 1}
 Two things are happening in three lines. The source drives 3 mA into node
 1; and **r1**'s value is `1/g`, so the answer comes back in terms of a
 conductance. There is no conductance element — a conductance is a
-resistance written as its reciprocal, and the algebra takes care of itself.
+resistance written as its reciprocal, and the algebra takes care of itself.{{i:conductance}}
 
 ## Dependent sources
 
 There is no letter for them. An `e` or a `j` whose value names an answer is
-dependent, and that covers all four textbook types:
+dependent, and that covers all four textbook types:{{i:dependent source}}
 
 | | Value looks like |
 |---|---|
@@ -47,7 +47,7 @@ the circuit, and it may appear inside a larger expression.
 
 ## The parallel shorthand
 
-In a **resistor's value only**, a bracketed list is that group in parallel:
+In a **resistor's value only**, a bracketed list is that group in parallel:{{i:parallel resistors}}
 
 ```field 9 Circuit Description
 e,1,0,9

@@ -16,7 +16,7 @@ documented nowhere else.
 
 Tick it and a card appears with the system a first course would have you
 write: **nodal**, with supernodes, or **mesh**, with supermeshes. It names
-the method it used and counts the supernodes or supermeshes it needed.
+the method it used and counts the supernodes or supermeshes it needed.{{i:By-Hand Equations card}}{{i:nodal and mesh analysis}}{{i:supernodes and supermeshes}}
 
 It is written independently of the classic solve and then compared with it.
 The classic solve stays the authority and is never fed by the by-hand one —
@@ -31,7 +31,7 @@ one.
 A property of its own, at `/eqsheet/`, reached from the app's **Explore
 Numerically** card. It is a TK!Solver-style equation sheet rather than a
 circuit solver: a list of equations, each variable marked **Known** or
-**Unknown**, and a numerical solve over the lot.
+**Unknown**, and a numerical solve over the lot.{{i:Numerical Solver}}
 
 Two ways in:
 
@@ -53,7 +53,7 @@ It needs SciPy, which the offline builds bundle.
 
 ## The SPICE Translator
 
-Both directions, in a card of its own.
+Both directions, in a card of its own.{{i:SPICE Translator}}
 
 **Symbulator to SPICE** returns a netlist with a title line and `.end`,
 ready to paste into ngspice or LTspice. Anything it cannot translate comes
@@ -70,14 +70,14 @@ It is a prototype, and says so on the card. Read the warnings both ways.
 Symbulator draws the circuit you described, from the description alone. It
 is worth a glance before trusting any answer: the fastest way to catch a
 node typed wrong is to see the picture disagree with the circuit in your
-head.
+head.{{i:schematic}}
 
 It is a drawing of what you *wrote*, not of what you meant — which is
 exactly what makes it useful.
 
 ## The package
 
-The solver is on PyPI and does not need the app:
+The solver is on PyPI and does not need the app:{{i:Python package (pip install symbulator)}}
 
 ```
 pip install symbulator

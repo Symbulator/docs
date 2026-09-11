@@ -995,6 +995,13 @@ figcaption {
 }
 .ix-term { margin-right: 0.4rem; }
 .book-index a { color: var(--accent); margin-right: 0.3rem; }
+/* #422: which book a number opens, when the version has more than one. */
+.ix-book {
+  font-size: 0.66rem; font-weight: 600; letter-spacing: 0.09em;
+  text-transform: uppercase; color: var(--ink-3);
+  margin: 0 0.25rem 0 0.35rem; white-space: nowrap;
+}
+.ix-term + .ix-book { margin-left: 0; }
 
 /* --------------------------------------------------------------- pager --- */
 

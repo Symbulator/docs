@@ -12,7 +12,7 @@ Nothing in {{card:Settings}} changes an answer. Every control there changes
 how an answer is *written* — how many figures it carries, whether it wears a
 unit, whether a complex number is shown as a phasor. The one exception is the
 AC power convention at the foot of the card, which changes what the average
-power in an AC circuit *means*, and is called out below.
+power in an AC circuit *means*, and is called out below.{{i:Settings card}}
 
 The lessons reach for these controls as they need them. This note is the
 whole card in one place, for when you want to know what a tick does without
@@ -21,7 +21,7 @@ hunting for the lesson that first used it.
 ## Rounding
 
 A menu of four, most exact first, with a second box for **n** that appears
-only when the choice needs one.
+only when the choice needs one.{{i:Rounding setting}}
 
 | Choice | What you get |
 |---|---|
@@ -60,17 +60,17 @@ says so on screen rather than leaving you to notice.
 **Show AC answers as polar phasors** — 3 + 4j becomes 5∠53.13°. Average
 power stays real either way, being a real quantity. This tick appears only
 in AC: in DC every answer is real, and in FD and TR the answers are
-functions of *s* or *t*, with no angle to take.
+functions of *s* or *t*, with no angle to take.{{i:polar phasors}}
 
 **Show equations** — adds an {{card:Equations}} card listing the system the
 solver assembled. Off by default, because on anything larger than a teaching
 circuit that system is a page of algebra. The card arrives open when it
-appears.
+appears.{{i:Equations card}}
 
 ## AC power convention
 
 **RMS phasors.** Off means peak amplitude — the ÷2 convention. It affects AC
-power only, so the row appears in AC and nowhere else.
+power only, so the row appears in AC and nowhere else.{{i:RMS}}
 
 This is the one setting on the card that changes an answer rather than its
 appearance. For the same phasor magnitudes, RMS reports twice what peak
