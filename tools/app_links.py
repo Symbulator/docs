@@ -58,6 +58,12 @@ APP_URL = "https://symbulator.pythonanywhere.com/"
 #: other URL this build writes.
 SPLIT_URL = "/split/"
 
+#: Books that are not lessons and so have no number to key them by. The word
+#: here is the one `?lesson=` takes in the app -- the template's openFromUrl()
+#: has the matching alias, and the two must be changed together or the links
+#: this module writes point at a book the app cannot name.
+NAMED_BOOKS = {"Nilsson_Riedel.cir": "nr12"}
+
 #: chapter id -> the `.cir` books that hold its circuits, in reading
 #: order. Four of the thirteen lessons are split across parts, and the
 #: parts are one continuous run of problems in the book.
@@ -75,6 +81,10 @@ CHAPTER_BOOKS = {
     "lesson-bode":        ["11"],
     "lesson-fd":          ["12"],
     "lesson-twoports":    ["13"],
+    # Not a lesson, but it wants the same pair of links on every problem and
+    # the split view's map is written from this table (build.py), so it is
+    # registered here rather than in the chapter's own front matter.
+    "nr12-sampler":       ["nr12"],
 }
 
 _ENTRY_RE = re.compile(r"^\[(.+?)\]\s*$", re.M)
@@ -156,9 +166,12 @@ def load_books(examples_dir: str = EXAMPLES) -> dict[str, list[Entry]]:
     books: dict[str, list[Entry]] = {}
     for name in sorted(os.listdir(examples_dir)):
         m = re.fullmatch(r"Lesson_0?(\d{1,2})([a-d]?)\.cir", name)
-        if not m:
+        if m:
+            lesson = m.group(1) + m.group(2)
+        elif name in NAMED_BOOKS:
+            lesson = NAMED_BOOKS[name]
+        else:
             continue
-        lesson = m.group(1) + m.group(2)
         text = open(os.path.join(examples_dir, name), encoding="utf-8").read()
         parts = _ENTRY_RE.split(text)[1:]
         entries = []
