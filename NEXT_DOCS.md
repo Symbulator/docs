@@ -106,15 +106,29 @@ sidebars change on those pages — from broken to right — and that is the
 second thing this round alters in what they show; both are listed for
 Roberto's veto in the PDF.
 
-**Not done, deliberately, and for Roberto's ruling.** The 300 worked
-problems still carry the calculator-era rhythm in places — "ask for",
-"we get", "This is correct" after every answer — which the 3 Sep 2026
-rulings already address for answers and which a pass over the practice
-sections could finish; this round stayed on the explanatory sections and
-the first worked problem of each. The Manual's Orientation calls gain one
-of "four tools", a sentence he may want to reword. Lesson 4's summary
-spells "Thevenin" without its accent in all three versions; frozen text,
-left. The PDFs were not rebuilt.
+**The second pass, 13 Sep 2026, at Roberto's word** (*"yes, please do
+that round now"*): the practice sections. 56 edits in
+`Notes/course_review_424b.py`, gated the same way. Twenty of them are one
+sentence of Lesson 4 written twenty times — *"Choose DC. Via `vth` we find
+V = 48 V. Via `req` we find R = 6 Ω."* — which a regex turns into *"In DC,
+`vth` gives V = 48 V and `req` gives R = 6 Ω."*; the rest are the
+calculator verbs in the worked problems: *"Select DC. Add equation. Add
+unknown. Run the simulation."* becomes *"In DC, with … in Add equation(s)
+and … in Add unknown(s), run it."*; *"ask for"* becomes *read*, *look
+for*, or names Evaluate; *"Evaluating approximately gives us"* becomes
+*"Evaluate gives"*; *"When it's done, ask for the answers we need"*,
+*"Once the simulation completes, we ask for the variables of interest"*,
+*"We get that v_x is 78 V"* and their kin are reworded. "This is
+correct." was kept: it is the author confirming against the book, and it
+restates no value. **Roberto's two rulings**: the Manual's Orientation
+now counts *three* tools (equivalent resistance, Thévenin/Norton, two-port
+parameters) and *three* mini-tools (aa, pf, gain) — it had said "four
+tools … and gain" — and the Reference's table is headed *Tools and
+mini-tools*; and "Thevenin" is spelt with its accent everywhere it lacked
+one: Lesson 4's summary (all three versions, at his word), five
+`::: result Thevenin voltage` panel labels (version 9), and one 7/8-only
+sentence in Lesson 5, a spelling correction in frozen text and flagged as
+such. The PDFs were not rebuilt.
 
 **Numbering.** This item took #423 first and found, uncommitted in the
 app tree's `NEXT.md`, the drawer restyle already holding it, so it moved

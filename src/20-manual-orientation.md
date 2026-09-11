@@ -28,9 +28,10 @@ Four analyses, on the same description:{{i:analyses (DC, AC, TR, FD)}}
 | **FD** | the s-domain, initial conditions included |
 | **TR** | transient, in the time domain |
 
-Fifteen element types, listed in {{ref:manual-grammar}}.{{i:element types}} Four tools that
-answer a question about a circuit rather than solving it outright:
-equivalent resistance, Thévenin/Norton, two-port parameters, and gain.
+Fifteen element types, listed in {{ref:manual-grammar}}.{{i:element types}} Three tools that
+answer a question about a circuit rather than solving it outright —
+equivalent resistance, Thévenin/Norton and two-port parameters — and three
+mini-tools that work on values you type: *aa*, *pf* and *gain*.
 
 Every value may be a symbol. That is the point of the thing: leave `r1` as
 `r1` and the answer comes back in terms of `r1`.

@@ -501,7 +501,7 @@ vx
 ```
 :::
 
-We get that {{var:v_x}} is {{o:78}} V, which is correct.
+{{v7,8|We get that {{var:v_x}} is {{o:78}} V, which is correct.}}{{v9|{{var:v_x}} is {{o:78}} V, which is correct.}}
 {{v7,8|Evaluating `ir6` we find}}{{v9|The current `ir6` already shows}} that
 {{var:i_x}} is {{o:3}} A. The fact that we can find numerical answers in this
 problem can be quite puzzling until one realizes that ignoring the value of
@@ -534,7 +534,7 @@ r2,1,0,r2
 r3,1,0,r3
 ```
 
-Select DC. Add these three equations:
+{{v7,8|Select DC. Add these three equations:}}{{v9|Choose DC and, in {{card:Expert Mode}}, add these three equations:}}
 
 ```sym 7
 ir1=8'm and ir2=10'm and ir3=2'm
@@ -618,7 +618,7 @@ rl1,a,0,rl1
 rl2,b,0,rl2
 ```
 
-Choose DC. Add these five equations:
+{{v7,8|Choose DC. Add these five equations:}}{{v9|Choose DC and, in {{card:Expert Mode}}, add these five equations:}}
 
 ```sym 7
 irl1=20'm and vrl1=60 and irl2=10'm and vrl2=20 and -ie=50'm

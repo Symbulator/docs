@@ -182,7 +182,7 @@ below.
 ::: only 9
 This one catches people out, and Symbulator says so:
 
-::: result Thevenin voltage
+::: result Thévenin voltage
 v_{th} = \dfrac{vs\,(r_{1} + r_{2})}{r_{1}}
 :::
 ::: result Norton current
@@ -211,7 +211,7 @@ answer.
 :::
 
 ::: only 7,8
-The Thevenin resistance, as explained above, is 0Ω.
+The Thévenin resistance, as explained above, is 0Ω.
 :::
 
 :::
@@ -554,7 +554,7 @@ rl,o,0,1
 ::: applink TR5's Example 4-14 (Inverting, the quicker way)
 :::
 
-When we evaluate `vo/v1`, both approaches get the same answer:
+{{v7,8|When we evaluate `vo/v1`, both approaches get the same answer:}}{{v9|Ask {{card:Evaluate}} for `vo/v1` and both approaches give the same answer:}}
 
 ::: only 7,8
 ::: figure assets/practice/tr5s-example-4-14-inverting-11.png

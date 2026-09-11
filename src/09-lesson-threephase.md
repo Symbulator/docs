@@ -174,7 +174,7 @@ frequency is asked for but never used.
 :::
 
 The question asks for the line voltages — the differences between the lines.
-For the answers the textbook wants, ask for these:
+{{v7,8|For the answers the textbook wants, ask for these:}}{{v9|For the answers the textbook wants, take these differences:}}
 
 ```sym 7
 {s\aa(vag-vbg),s\aa(vbg-vcg),s\aa(vcg-vag)}
@@ -198,7 +198,7 @@ In {{card:Mini-Tools}} with *aa*:
 If you ask me, that is not really the voltage between the lines, because the
 transmission line starts *after* the generator. At the start of the
 transmission line the answer is {{o:204.6}}∠{{o:60.03}}° V, and at the end of it
-{{o:198.7}}∠{{o:59.71}}° V — ask for
+{{v7,8|{{o:198.7}}∠{{o:59.71}}° V — ask for}}{{v9|{{o:198.7}}∠{{o:59.71}}° V — from}}
 {{v7,8|`s\aa(vas-vbs)`}}{{v9|`aa(vas-vbs)`}} and
 {{v7,8|`s\aa(vad-vbd)`}}{{v9|`aa(vad-vbd)`}} respectively. All three are
 different, and which one you want depends on where you are standing.

@@ -483,7 +483,7 @@ The calculator returns {{o:{12,4,3}}}, meaning {{var:V_S}} is {{o:12}}V, {{var:I
 :::
 ::: only 9
 The answers show {{var:V_S}} is {{o:12}}V, {{var:I_1}} is
-{{o:4}}A and {{var:I_2}} is {{o:3}}A. These are the correct answers.
+{{o:4}}A and {{var:I_2}} is {{o:3}}A. All correct.
 :::
 
 :::
@@ -655,7 +655,7 @@ Select DC. Add equation `ir2=4`. Add unknown `rx`. Run the simulation. The
 answer, {{o:{-8,80}}}, means that {{var:i_x}} is {{o:-8}}A and that {{var:v_x}} is {{o:80}}V.
 :::
 ::: only 9
-Select DC. Add equation `ir2=4`. Add unknown `rx`. Run the simulation. The
+In DC, with `ir2=4` in {{btn:Add equation(s)}} and `rx` in {{btn:Add unknown(s)}}, run it. The
 answer is {{var:i_x}} = {{o:-8}}A and {{var:v_x}} = {{o:80}}V.
 :::
 
@@ -1144,7 +1144,7 @@ you will get: {{o:{1,8}}}. This is correct: {{var:i_x}} is {{o:1}}A and that
 {{var:v_x}} is {{o:8}}V.
 :::
 ::: only 9
-Select DC. Add equation `ir8=5`. Add unknown `ix`. Run the simulation. The
+In DC, with `ir8=5` in {{btn:Add equation(s)}} and `ix` in {{btn:Add unknown(s)}}, run it. The
 answer is {{var:i_x}} = {{o:1}}A and {{var:v_x}} = {{o:8}}V. This is correct.
 :::
 
@@ -1174,7 +1174,7 @@ r2,1,0,10'k
 r3,1,0,22'k
 ```
 
-Looking at the value of `ir1`, we get {{var:I_1}} = {{o:10.48}} mA, which is correct.
+{{v7,8|Looking at the value of `ir1`, we get {{var:I_1}} = {{o:10.48}} mA, which is correct.}}{{v9|`ir1` gives {{var:I_1}} = {{o:10.48}} mA, which is correct.}}
 
 ::: applink B11's Example 6.22 (Partial reduction)
 :::
@@ -1952,8 +1952,7 @@ simulation. The answer, {{o:{2,-9,-3,3}}}, is correct: {{var:i}}={{o:2}}, {{var:
 and {{var:v_s}}={{o:3}}.
 :::
 ::: only 9
-Select DC, add `vr4=4` to the equations and `vs` to the unknowns. Run the
-simulation. The answer is {{var:i}}={{o:2}}, {{var:v}}={{o:-9}}, {{var:i_s}}={{o:-3}} and {{var:v_s}}={{o:3}}. This is
+In DC, add `vr4=4` to the equations and `vs` to the unknowns, and run it. The answer is {{var:i}}={{o:2}}, {{var:v}}={{o:-9}}, {{var:i_s}}={{o:-3}} and {{var:v_s}}={{o:3}}. This is
 correct.
 :::
 
@@ -2316,8 +2315,8 @@ rl,o,0,1/gl
 The answer you want is `vo`, in {{card:Results}}.
 :::
 
-This is the answer we get. It is correct. Compare it with the textbook's
-answer below it.
+{{v7,8|This is the answer we get. It is correct. Compare it with the textbook's
+answer below it.}}{{v9|The answer is correct; the textbook's follows it.}}
 
 ::: only 7,8
 ::: figure assets/practice/tr5s-exercise-4-3-symbolic-48.png

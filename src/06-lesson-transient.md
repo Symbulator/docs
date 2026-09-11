@@ -153,7 +153,7 @@ t = 2
 ```
 :::
 
-We get a value of 1 volt, which is correct.
+{{v7,8|We get a value of 1 volt, which is correct.}}{{v9|It gives 1 V, which is correct.}}
 :::
 :::
 
@@ -1407,7 +1407,7 @@ Set {{ui:Analysis}} to *TR — transient / time domain*.
 The answers you want are `vc`, `vr` and `ic`, in {{card:Results}}.
 :::
 
-There is no need to ask for {{var:i_R}}, since {{var:i_R}}={{var:i_C}}. We get
+{{v7,8|There is no need to ask for {{var:i_R}}, since {{var:i_R}}={{var:i_C}}.}}{{v9|There is no need to look for {{var:i_R}}, since {{var:i_R}}={{var:i_C}}.}} We get
 the following expressions:
 
 ::: only 7,8
@@ -1457,7 +1457,7 @@ Set {{ui:Analysis}} to *TR — transient / time domain*.
 The answers you want are `vl`, `vr` and `il`, in {{card:Results}}.
 :::
 
-There is no need to ask for {{var:i_R}}, since in a series circuit it will be
+{{v7,8|There is no need to ask for {{var:i_R}}, since in a series circuit it will be}}{{v9|There is no need to look for {{var:i_R}}, since in a series circuit it will be}}
 identical to {{var:i_L}}.
 
 ::: only 7,8
@@ -2093,7 +2093,7 @@ c,1,0,c,0
 r,1,0,r
 ```
 
-Once the simulation completes, we ask for the variables of interest:
+{{v7,8|Once the simulation completes, we ask for the variables of interest:}}{{v9|Once it has run, the answers we want are:}}
 
 ::: only 7,8
 $$

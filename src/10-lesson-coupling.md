@@ -280,7 +280,7 @@ e2,4,0,vs2
 ::: only 9
 {{card:Results}} gives
 
-::: result Thevenin voltage
+::: result Thévenin voltage
 v_{th} = \dfrac{vs_{2}}{n}
 :::
 ::: result equivalent resistance

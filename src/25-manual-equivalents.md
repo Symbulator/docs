@@ -51,7 +51,7 @@ r2,2,0,150
 
 Across **2** and **0**:
 
-::: result Thevenin voltage
+::: result Thévenin voltage
 v_{th} = 15\,\mathrm{V}
 :::
 ::: result equivalent resistance

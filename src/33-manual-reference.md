@@ -67,7 +67,7 @@ Case matters everywhere but kilo. `8000` and `8'k` are exact; `8000.` and
 | **FD** | s-domain | initial conditions included |
 | **TR** | time domain | answers in `t`, valid for t ≥ 0 |
 
-## Tools
+## Tools and mini-tools
 
 | Tool | Takes | Returns |
 |---|---|---|

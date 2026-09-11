@@ -204,8 +204,9 @@ appears beside it.
 :::
 
 Notice that, in our circuit description, the order we give to the nodes of the
-resistor and the capacitor is chosen to be convenient for the answers we will
-ask for.
+{{v7,8|resistor and the capacitor is chosen to be convenient for the answers we will
+ask for.}}{{v9|resistor and the capacitor is chosen to be convenient for the answers we will
+read.}}
 
 *Step 4: read the answers.* Once Symbulator is done, you should take a look at
 what it found:
@@ -220,8 +221,9 @@ what it found:
 - the *equivalent impedance* of the rest of the circuit as seen by the source,
   in {{v7,8|`ze`}}{{v9|`ze`}}
 
-To get the answers we need for this problem in particular, we ask for `ir1` and
-`vc`. It is likely that {{v7,8|the calculator}}{{v9|Symbulator}} will give you the answers in
+{{v7,8|To get the answers we need for this problem in particular, we ask for `ir1` and
+`vc`.}}{{v9|The answers this problem wants are `ir1` and
+`vc`.}} It is likely that {{v7,8|the calculator}}{{v9|Symbulator}} will give you the answers in
 rectangular form, with a real part and an imaginary part.
 
 ::: only 7,8
@@ -993,7 +995,7 @@ The ω box takes a name as readily as a number: type `omega` into it and
 the answers come back as functions of it.
 :::
 
-We ask for `vo/vs` and get −c·ω·r·𝐢, which is correct.
+{{v7,8|We ask for `vo/vs` and get −c·ω·r·𝐢, which is correct.}}{{v9|{{card:Evaluate}} gives `vo/vs` as −c·ω·r·𝐢, which is correct.}}
 :::
 :::
 
@@ -1053,7 +1055,7 @@ r2,3,o,r2
 {{v7,8|Notice `ca` and `cb`: `c1` and `c2` are reserved variables on the
 calculator.}}
 
-Then ask for the ratio:
+{{v7,8|Then ask for the ratio:}}{{v9|Then ask {{card:Evaluate}} for the ratio:}}
 
 ```sym 7
 vo/vs
