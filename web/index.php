@@ -384,17 +384,16 @@ function asset(string $name): string {
          than sitting in the run of lessons. Ordered as book.yaml orders
          them -- after the lessons, before the credits -- so the printed
          book and this list read the same. */
+      /* #391: only the book you are in. $sameBook is the same filter the
+         pager uses, so the two cannot disagree about which chapters
+         belong together. With the list filtered, the Manual needs no rule
+         of its own inside it -- in the Course view it could never fire,
+         and in the Manual view it would label a list that is all Manual. */
       $tnShown = false;
-      $mnShown = false;
-      foreach ($toc['chapters'] as $c):
+      foreach ($sameBook as $c):
         $isNote = (($c['kind'] ?? '') === 'note');
-        $isMan  = (($c['book'] ?? 'course') === 'manual');
         if ($isNote && !$tnShown): $tnShown = true; ?>
           <li class="tn-sep"><span>Technical Notes</span></li>
-    <?php endif; ?>
-    <?php /* #390: and the Manual under its own rule, same device. */ ?>
-    <?php if ($isMan && !$mnShown): $mnShown = true; ?>
-          <li class="tn-sep"><span>The Manual</span></li>
     <?php endif; ?>
       <li class="<?= $c['id'] === $page ? 'is-current' : '' ?><?= $c['present'] ? '' : ' is-absent' ?>">
         <a href="<?= url($v, $c['id']) ?>">
@@ -417,6 +416,26 @@ function asset(string $name): string {
         <?php endif; ?>
       </li>
     <?php endforeach; ?>
+      <?php
+        /* Filtering the list takes away the only route from one book to
+           the other short of going home, so the other book is named at
+           the foot of it. Version 9 only -- 7 and 8 have one book, and
+           `$other` stays empty there. */
+        $other = null;
+        if ($v === '9') {
+          $want = ($thisBook === 'manual') ? 'course' : 'manual';
+          foreach ($toc['chapters'] as $oc) {
+            if (($oc['book'] ?? 'course') === $want) { $other = $oc; break; }
+          }
+        }
+      ?>
+      <?php if ($other): ?>
+        <li class="tn-sep other-book">
+          <a href="<?= url($v, $other['id']) ?>"><?=
+            $thisBook === 'manual' ? 'The Course' : 'The Manual'
+          ?></a>
+        </li>
+      <?php endif; ?>
     <li class="<?= $isIndex ? 'is-current' : '' ?>">
       <a href="<?= url($v, 'index') ?>"><span class="ch-title">Index</span></a>
     </li>

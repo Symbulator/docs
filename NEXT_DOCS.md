@@ -3,6 +3,8 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #391 — claimed by the app tree, 11 Sep 2026: the third level crosses into the Numerical Solver — the defining equations for power, branch voltage and a source's seen resistance, behind a checkbox on the app's Numerical Solver card (off by default). No docs work now; **a follow-up may be wanted once it ships**, since the Manual's Numerical Solver part names that card's controls. Write-up in `Application/v9/repos/local/NEXT.md`
+
 ## #390 — the Manual: a second book on version 9 — **done 11 Sep 2026, live on `learn.symbulator.com`**
 
 Fourteen parts, 6,384 words, 22 circuits. The Course is 49,712 words and

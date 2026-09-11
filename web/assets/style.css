@@ -873,6 +873,15 @@ figcaption {
 .card-summary { margin: 0; font-size: 0.92rem; color: var(--ink-2); line-height: 1.5; }
 .chapter-cards li.is-absent .card-eyebrow { color: var(--ink-3); }
 
+/* The sidebar's link to the other book (#391). It sits in a `.tn-sep`
+   for the rule and the spacing above it, but a separator is a label and
+   this one is a way out, so it reads as a link rather than as a heading. */
+.other-book a {
+  color: var(--accent); text-decoration: none;
+  letter-spacing: 0.14em; text-transform: uppercase;
+}
+.other-book a:hover { text-decoration: underline; }
+
 /* ---------------------------------------------------------- #390 ----
    The chooser: two books on one site, at the top of the version 9 home
    page. Deliberately not cards -- border, fill and radius each say
