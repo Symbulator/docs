@@ -32,7 +32,7 @@ p_{r1} = \dfrac{2}{125}\,\mathrm{W}
 :::
 
 Exact, because `12`, `1'k` and `2'k` are exact. 1/250 A is 4 mA; see
-{{ref:manual-settings}} for how to be shown the decimal instead.
+{{ref:settings}} for how to be shown the decimal instead.
 
 ## The answer names
 

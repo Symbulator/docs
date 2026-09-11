@@ -24,16 +24,26 @@ OUT = os.path.join(ROOT, "build", "preview")
 
 
 
-def _mark(toc):
-    """The property mark, matching web/index.php's `$propertyMark` (#389).
+def _mark(toc, page=""):
+    """The property mark, matching web/index.php's `$propertyMark`.
 
-    Version 9 will carry two books and names the one you are in; 7 and 8
-    have a single book and keep saying Documentation. Mirrored here
-    because this generator writes its own banner and reads nothing from
-    index.php -- the drift that left it showing a superseded header for a
-    day.
+    Versions 7 and 8 have one book and say Documentation (#389). Version 9
+    carries two and names the one this page is in (#390), read from the
+    same `book` field in toc.json that index.php splits on. The home page
+    is the chooser and belongs to neither, so it keeps the generic mark.
+
+    Mirrored here because this generator writes its own banner and its own
+    <head> and reads nothing from index.php -- the drift that left it
+    showing a superseded header for a day, and that marked every Manual
+    part COURSE until someone looked at one.
     """
-    return "Course" if str(toc["label"]) == "9" else "Documentation"
+    if str(toc["label"]) != "9":
+        return "Documentation"
+    for c in toc.get("chapters", []):
+        if c.get("id") == page:
+            return ("Manual" if (c.get("book") or "course") == "manual"
+                    else "Course")
+    return "Documentation"
 
 
 def e(s):
@@ -180,9 +190,9 @@ def topbar(book, toc, v, page, ids):
             '<p class="brand-sub">the best portable symbolic simulator of linear circuits</p>'
             # The property mark (#135): one word, two spellings,
             # exactly one shown -- see banner.css.
-            f'<p class="property-mark property-mark-slot">{_mark(toc)}</p>'
+            f'<p class="property-mark property-mark-slot">{_mark(toc, page)}</p>'
             '</a></div>'
-            f'<span class="property-mark property-mark-top">{_mark(toc)}</span>'
+            f'<span class="property-mark property-mark-top">{_mark(toc, page)}</span>'
             '</div></header>'
             f'<div class="subbar"><div class="subbar-inner">{ribbon}'
             f'<details class="versions" id="version-picker">'
@@ -269,7 +279,11 @@ def build():
         # #342: the tab says which property this is, as web/index.php does.
         # This generator writes its own <head>, so a change there has to be
         # made here too or the preview drifts from the site again.
-        site_name = toc["name"] + " " + _mark(toc)
+        # Per page, not per version: which book a page is in decides it.
+        def site_name_for(page_id=""):
+            return toc["name"] + " " + _mark(toc, page_id)
+
+        site_name = site_name_for()
         ids = [c["id"] for c in toc["chapters"]]
 
         # landing page
@@ -315,7 +329,8 @@ def build():
                 pager += (f'<a class="pager-next" href="{link(v, next_c["id"])}">'
                           f'<span>Next</span>{e(next_c["title"])}</a>')
             pager += "</nav>"
-            page = (head(c["title"] + " — " + site_name, v, book["subtitle"])
+            page = (head(c["title"] + " — " + site_name_for(c["id"]),
+                         v, book["subtitle"])
                     + topbar(book, toc, v, c["id"], ids)
                     + '<div class="shell">' + sidebar(toc, v, c["id"])
                     + f'<main id="main"><article class="chapter">{body}</article>'

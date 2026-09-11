@@ -62,10 +62,20 @@ function url($v, $p = '') {
 }
 function e($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
 
-// previous / next, for the footer pager
-$pos = array_search($page, $ids, true);
-$prev = ($pos !== false && $pos > 0) ? $toc['chapters'][$pos - 1] : null;
-$next = ($pos !== false && $pos < count($ids) - 1) ? $toc['chapters'][$pos + 1] : null;
+// previous / next, for the footer pager -- within the current book only
+// (#390). The flat list runs the Course and then the Manual, so without
+// this the credits' "next" turned the page into Part 1 of a different
+// book, and Part 1's "previous" turned back into the credits.
+$thisBook = $current ? ($current['book'] ?? 'course') : 'course';
+$sameBook = array_values(array_filter($toc['chapters'],
+  function ($c) use ($thisBook) {
+    return ($c['book'] ?? 'course') === $thisBook;
+  }));
+$bookIds = array_map(function ($c) { return $c['id']; }, $sameBook);
+$pos = array_search($page, $bookIds, true);
+$prev = ($pos !== false && $pos > 0) ? $sameBook[$pos - 1] : null;
+$next = ($pos !== false && $pos < count($bookIds) - 1)
+      ? $sameBook[$pos + 1] : null;
 
 // #342: the browser tab names the property, not just the version. A bare
 // "Symbulator 9" is what the app's own tab said too, so a reader with both
@@ -77,8 +87,15 @@ $next = ($pos !== false && $pos < count($ids) - 1) ? $toc['chapters'][$pos + 1] 
 // had: the section heading still says Tutorial and the mark still says
 // Documentation. Both are computed here, once, so that a later change
 // cannot move one of the three sites and leave the others behind.
-$bookName     = ($v === '9') ? 'Course' : 'Tutorial';
-$propertyMark = ($v === '9') ? $bookName : 'Documentation';
+// #390: version 9 carries two books now, so the mark names the one this
+// page belongs to. `$current` is null on the home page, which is the
+// chooser and belongs to neither -- it keeps the generic mark.
+$inManual = ($v === '9') && $current
+            && (($current['book'] ?? 'course') === 'manual');
+$bookName     = ($v === '9') ? ($inManual ? 'Manual' : 'Course') : 'Tutorial';
+$propertyMark = ($v === '9')
+              ? ($isHome ? 'Documentation' : $bookName)
+              : 'Documentation';
 $siteName = $toc['name'] . ' ' . $propertyMark;
 $pageTitle = $isHome ? $siteName
            : ($isIndex ? 'Index — ' . $siteName
@@ -368,10 +385,16 @@ function asset(string $name): string {
          them -- after the lessons, before the credits -- so the printed
          book and this list read the same. */
       $tnShown = false;
+      $mnShown = false;
       foreach ($toc['chapters'] as $c):
         $isNote = (($c['kind'] ?? '') === 'note');
+        $isMan  = (($c['book'] ?? 'course') === 'manual');
         if ($isNote && !$tnShown): $tnShown = true; ?>
           <li class="tn-sep"><span>Technical Notes</span></li>
+    <?php endif; ?>
+    <?php /* #390: and the Manual under its own rule, same device. */ ?>
+    <?php if ($isMan && !$mnShown): $mnShown = true; ?>
+          <li class="tn-sep"><span>The Manual</span></li>
     <?php endif; ?>
       <li class="<?= $c['id'] === $page ? 'is-current' : '' ?><?= $c['present'] ? '' : ' is-absent' ?>">
         <a href="<?= url($v, $c['id']) ?>">
@@ -428,11 +451,39 @@ function asset(string $name): string {
        below a rule. Splitting them is also what closes the lessons'
        rectangle: with the note among them the grid ran to sixteen cards
        and left the credits alone on a line of their own. */
+    /* #390: three groups now. A manual chapter is filtered out of the
+       first two by its book, not by its kind, so the technical notes
+       keep behaving exactly as they did. */
+    $isMan = function ($c) { return ($c['book'] ?? 'course') === 'manual'; };
     $mainCards = array_values(array_filter($toc['chapters'],
-      function ($c) { return ($c['kind'] ?? '') !== 'note'; }));
+      function ($c) use ($isMan) {
+        return ($c['kind'] ?? '') !== 'note' && !$isMan($c);
+      }));
     $noteCards = array_values(array_filter($toc['chapters'],
-      function ($c) { return ($c['kind'] ?? '') === 'note'; }));
+      function ($c) use ($isMan) {
+        return ($c['kind'] ?? '') === 'note' && !$isMan($c);
+      }));
+    $manCards = array_values(array_filter($toc['chapters'], $isMan));
   ?>
+  <?php if ($manCards): ?>
+    <div class="chooser">
+      <div>
+        <p class="chooser-q">Already know your way around circuit
+          simulation?</p>
+        <p>You need to know what Symbulator does and how to ask for it.
+          That is <a href="<?= url($v, $manCards[0]['id']) ?>"><strong>the
+          Manual</strong></a> &mdash; every feature once, with a reference
+          at the back.</p>
+      </div>
+      <div>
+        <p class="chooser-q">New to circuits, or to simulation?</p>
+        <p>Start with <a href="<?= url($v, $mainCards[0]['id']) ?>"><strong>the
+          Course</strong></a> &mdash; thirteen lessons worked against real
+          problems from real textbooks, from your first circuit description
+          to two-port parameters.</p>
+      </div>
+    </div>
+  <?php endif; ?>
   <div class="tn-divider tn-first">
     <h2 class="tn-heading">Symbulator <?= e($bookName) ?></h2>
   </div>
@@ -453,6 +504,22 @@ function asset(string $name): string {
     <div class="tn-divider"><h2 class="tn-heading">Technical Notes</h2></div>
     <ol class="chapter-cards tn-cards">
       <?php foreach ($noteCards as $c): ?>
+        <li<?= $c['present'] ? '' : ' class="is-absent"' ?>>
+          <a href="<?= url($v, $c['id']) ?>">
+            <?php if ($c['eyebrow']): ?>
+              <p class="card-eyebrow"><?= e($c['eyebrow']) ?></p>
+            <?php endif; ?>
+            <h2><?= e($c['title']) ?></h2>
+            <p class="card-summary"><?= strip_tags($c['summary'], '<em><strong><code>') ?></p>
+          </a>
+        </li>
+      <?php endforeach; ?>
+    </ol>
+  <?php endif; ?>
+  <?php if ($manCards): ?>
+    <div class="tn-divider"><h2 class="tn-heading">The Manual</h2></div>
+    <ol class="chapter-cards tn-cards">
+      <?php foreach ($manCards as $c): ?>
         <li<?= $c['present'] ? '' : ' class="is-absent"' ?>>
           <a href="<?= url($v, $c['id']) ?>">
             <?php if ($c['eyebrow']): ?>

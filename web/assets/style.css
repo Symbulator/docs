@@ -873,6 +873,22 @@ figcaption {
 .card-summary { margin: 0; font-size: 0.92rem; color: var(--ink-2); line-height: 1.5; }
 .chapter-cards li.is-absent .card-eyebrow { color: var(--ink-3); }
 
+/* ---------------------------------------------------------- #390 ----
+   The chooser: two books on one site, at the top of the version 9 home
+   page. Deliberately not cards -- border, fill and radius each say
+   "separate object", and these are a question and its two answers, not
+   two more chapters. In cards they would read as the first two entries
+   of the grid below them. */
+.chooser {
+  max-width: 66rem; margin: 0.4rem auto 0; padding-bottom: 0.4rem;
+  display: grid; gap: 1.4rem 2.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(19rem, 1fr));
+}
+.chooser p { margin: 0 0 0.5rem; }
+.chooser-q {
+  font-family: var(--sans); font-weight: 600; color: var(--ink);
+}
+
 /* ---------------------------------------------------------- #380 ----
    Technical notes: optional, reference-shaped chapters, grouped under
    a rule below the lessons rather than sitting in the run of them.

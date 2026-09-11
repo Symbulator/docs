@@ -3,6 +3,88 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #390 — the Manual: a second book on version 9 — **built, not deployed**
+
+Fourteen parts, 6,384 words, 22 circuits. The Course is 49,712 words and
+297 worked problems, so the Manual is about an eighth the length and a
+thirteenth the examples, over the same ground plus four features the
+Course never mentions.
+
+**The architecture, and why it is not a fourth version.** `build.py` has
+thought in versions since it was written, and the routing is hard-wired to
+`^([789])`. A fourth pseudo-version would have to pass through every
+`versions:` check and every `{{v7,8|…}}` span — exactly the machinery that
+must not break 7 and 8. So a chapter names its book in front matter,
+`book: manual`, defaulting to `course`, and the split happens in the
+renderers. **Versions 7 and 8 are untouched by construction**, not by
+care: every Manual chapter is `versions: [9]`, so `for_version(7)` never
+sees one. Measured — v9's toc carries 21 course chapters and 14 manual;
+v7 and v8 carry 15 course and zero manual.
+
+**The change that would have bitten.** Nothing stopped the Manual's
+fourteen parts from being swept into `symbulator-v9.pdf`: the TeX renderer
+walks `for_version(9)` and takes what it finds, and the Manual is version
+9 material. The three tutorial PDFs are filtered to the Course now — 21
+chapters of 35 — and the Manual gets a PDF of its own when Roberto calls
+it final.
+
+**The pager was the same shape of bug, found by asking what the flat list
+does at a boundary.** The credits' *next* turned the page into Part 1 of a
+different book and Part 1's *previous* turned back into the credits. It
+stays inside its book now.
+
+**Invented examples needed a guard.** The Course's 297 answers are checked
+against printed textbook answers; an invented circuit has nothing behind
+it but whoever typed it. `tools/check_manual_examples.py` requires every
+```field 9 Circuit Description fence in a `book: manual` chapter to parse
+and to solve, and `build.py --check` runs it, because a guard nobody runs
+is not a guard. Every printed `::: result` panel was *generated* from
+`symbulator_ui` and pasted, not typed.
+
+**Proved red, and the failures were instructive.** A grammar sabotage was
+caught immediately. The solve half took three attempts, and the first two
+"misses" were the test asserting the wrong thing rather than the guard
+failing: renaming a node to 9 only makes an island, which the solver gives
+its own reference on purpose since #320; and a voltage source in parallel
+with a resistor and a current source is an ordinary solvable circuit. The
+third case was verified unsolvable in all four domains *before* being used
+as a test, which is the order it should have been done in.
+
+**What the writing itself caught**, all by running rather than re-reading:
+the load control is *"Are you running a problem with a load connected to
+this equivalent circuit?"*, not the wording invented for it; `pmax` is one
+of the Thévenin tool's four base answers, not one of the three the load
+tick adds; a transformer's terminal currents are `it11` and `it12`, the
+element name then the node name; a two-port's are `iz1a` and `iz1b`.
+
+**And one claim about the build that was wrong twice before it was
+checked.** A manual chapter was never going to render as "Lesson 14":
+`for_version` numbers only `kind == "lesson"`, so `number` stays None and
+`eyebrow_for` returns an empty string. They carry *Part 1* … *Part 14*
+now, numbered in their own sequence beside the lesson numbers and the note
+letters.
+
+**`static_preview.py` drifted again**, exactly as its own comment warns in
+capitals: it writes its own banner and its own `<head>` and reads nothing
+from `index.php`, so every Manual part was marked COURSE and titled
+*Symbulator 9 Course*. Caught by looking at a rendered page. Its `_mark`
+takes the page id now. Verified on four cases: a Manual page says Manual,
+a Course page Course, a version 7 page Documentation, and the chooser —
+which is in neither book — Documentation.
+
+**What cannot be verified here.** The chooser, the three-group home page
+and the sidebar's Manual rule all live in `index.php`, and there is no PHP
+on this machine. Tag balance was compared across the edit (102/102 before,
+120/120 after) and the logic was exercised through the Python mirror, but
+the rendering is unproven until it is served. The deploy guard is the one
+#389 describes: capture `/7/` and `/8/` before, diff byte for byte after,
+identical or revert.
+
+**Not done, deliberately:** the Manual's own PDF, which Roberto asked for
+*when it is final*.
+
+---
+
 ## #389 — version 9's book is the Course — **built, deliberately not deployed**
 
 Roberto, 11 Sep 2026, deciding the names for a second, shorter book: the

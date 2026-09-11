@@ -204,6 +204,8 @@ def eyebrow_for(ch, number) -> str:
     """
     if ch.kind == "note":
         return f"Tech Note {ch.note_letter}" if ch.note_letter else ""
+    if ch.kind == "manual":
+        return f"Part {ch.part_number}" if ch.part_number else ""
     return f"Lesson {number}" if number else ""
 
 
@@ -218,7 +220,9 @@ class Chapter:
     summary: str = ""
     blocks: list = field(default_factory=list)
     note_letter: str = ""      # set per version by `for_version`
+    part_number: int = 0       # the Manual's own sequence (#390)
     books: list = field(default_factory=list)  # example books (#383)
+    book: str = "course"      # which book this chapter is in (#390)
 
 
 class SourceError(Exception):
@@ -324,6 +328,7 @@ def parse_chapter(path: str) -> Chapter:
         title=meta.get("title", "Untitled"),
         kind=meta.get("kind", "lesson"),
         books=[str(x) for x in (meta.get("books") or [])],
+        book=str(meta.get("book", "course")).strip() or "course",
         versions=meta.get("versions", [7, 8, 9]),
         absent_note=(meta.get("absent_note") or "").strip(),
         updated=str(meta.get("updated", "")),
@@ -695,7 +700,7 @@ class Book:
 
     def for_version(self, v: int):
         """Chapters present in version v, with display numbers assigned."""
-        out, n, k = [], 0, 0
+        out, n, k, m = [], 0, 0, 0
         for ch in self.chapters:
             present = v in ch.versions
             if not present and not ch.absent_note:
@@ -712,6 +717,13 @@ class Book:
             if ch.kind == "note":
                 k += 1
                 ch.note_letter = chr(ord("A") + k - 1) if k <= 26 else str(k)
+            # The Manual's parts are numbered in their own sequence (#390),
+            # assigned here beside the lesson numbers and the note letters
+            # so that all three are per-version and cannot drift apart.
+            ch.part_number = 0
+            if ch.kind == "manual":
+                m += 1
+                ch.part_number = m
             out.append((ch, number, present))
         return out
 
@@ -1510,7 +1522,9 @@ class TexRenderer:
 #: Where each kind of chapter sits, whatever order `book.yaml` lists them
 #: in. Technical notes follow the lessons and precede the back matter
 #: (#381); within a group the author's order is kept.
-KIND_ORDER = {"front": 0, "lesson": 0, "note": 1, "back": 2}
+# The Course first, in its own order, then the Manual (#390).
+KIND_ORDER = {"front": 0, "lesson": 0, "note": 1, "back": 2,
+              "manual": 3}
 
 
 def load_book() -> Book:
@@ -1609,6 +1623,10 @@ def build_web(book: Book, versions: list[int]):
                         # consumer of toc.json must skip an empty eyebrow.
                         "eyebrow": eyebrow_for(ch, number),
                         "kind": ch.kind,
+                        # #390: which book, so index.php can split the
+                        # sidebar and the home grid without knowing the
+                        # kinds. Defaults to "course".
+                        "book": ch.book,
                         "number": number,
                         # Rendered, not raw: the chapter opener runs the
                         # summary through inline() (see HtmlRenderer.chapter),
@@ -1742,8 +1760,14 @@ def build_tex(book: Book, versions: list[int], run_pdf=True) -> list[int]:
     for v in versions:
         vm = book.meta["versions"][v]
         r = TexRenderer(book, v)
+        # #390: the three tutorial PDFs are the *Course*. Nothing else
+        # stopped the Manual's parts from being swept into
+        # symbulator-v9.pdf -- this renderer takes whatever
+        # `for_version` hands it, and the Manual is version 9 material.
+        # The Manual gets a PDF of its own when it is finished.
         body = "\n\n\\clearpage\n\n".join(
-            r.chapter(ch, n, p) for ch, n, p in book.for_version(v))
+            r.chapter(ch, n, p) for ch, n, p in book.for_version(v)
+            if ch.book != "manual")
         doc = "\n".join([
             r"\documentclass{symbulator}",
             f"\\booktitle{{{tex_escape(book.meta['title'])}}}",
@@ -1867,6 +1891,10 @@ def check(book: Book, versions: list[int], verbose: bool = False) -> int:
     # survives every other check; chapter 9 shipped with one.
     problems.extend(check_control_chars())
     problems.extend(check_brace_balance())
+    # The Manual's examples are invented, so unlike the Course's they have
+    # no printed answer behind them and nothing else would catch a typo in
+    # one. A guard nobody runs is not a guard (#390).
+    problems.extend(check_manual_circuits())
     problems.extend(check_problem_media())
     problems.extend(check_buried_v9())
     # The sidebar search is three pieces in three files with nothing else
@@ -2063,6 +2091,44 @@ def check_problem_media() -> list[str]:
         scan(parse_chapter(path).blocks, path, False)
     return out
 
+
+
+def check_manual_circuits() -> list[str]:
+    """Every circuit in a `book: manual` chapter must parse and solve.
+
+    Delegates to tools/check_manual_examples.py, which owns the rule and
+    can also be run on its own with --show. Imported lazily because it
+    reaches into the application tree for `symbulator_ui`, and a docs
+    build on a machine without that tree should still check everything
+    else rather than refusing outright.
+    """
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "tools"))
+        import check_manual_examples as cme
+    except SystemExit as e:
+        return [f"manual examples: {e}"]
+    except Exception as e:                        # pragma: no cover
+        return [f"manual examples: could not run the check -- {e}"]
+    out = []
+    for f in cme.manual_chapters():
+        text = open(os.path.join(SRC, f), encoding="utf-8").read()
+        for m in cme.FENCE.finditer(text):
+            desc = m.group(1).strip()
+            line = text[:m.start()].count("\n") + 1
+            try:
+                cme.parse_circuit(desc)
+            except Exception as e:
+                out.append(f"{f}:{line}: circuit does not parse -- {e}")
+                continue
+            one = desc.replace("\n", ":")
+            for dom, om in (("dc", ""), ("ac", "1000"), ("fd", ""),
+                            ("tr", "")):
+                r = cme.solve(one, dom, om)
+                if r.get("ok"):
+                    break
+            else:
+                out.append(f"{f}:{line}: circuit solves in no domain")
+    return out
 
 def check_shared_banner() -> list[str]:
     """The banner is one file -- banner.css in the app repository
