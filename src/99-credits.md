@@ -138,7 +138,9 @@ are reproduced here as they appear in the source.
 | **B11** | *Introductory Circuit Analysis* (11th ed.), Robert L. Boylestad, Pearson – Prentice Hall, 2007 |
 | **Bo2** | *Elementary Linear Circuit Analysis* (2nd ed.), Leonard S. Bobrow, Oxford, 1987 |
 | **HK5** | *Engineering Circuit Analysis* (5th ed.), William H. Hayt Jr. and Jack E. Kemmerly, McGraw-Hill, 1993 |
-| **NR11** | *Electric Circuits* (11th ed.), James W. Nilsson and Susan A. Riedel, Pearson, 2020 |
+| **NR9** | *Electric Circuits* (9th ed.), James W. Nilsson and Susan A. Riedel, Prentice Hall, 2011 |
+| **NR11** | *Electric Circuits* (11th ed.), Nilsson and Riedel, Pearson, 2020 |
+| **NR12** | *Electric Circuits* (12th ed.), Nilsson and Riedel, Pearson, 2023 |
 | **RM3** | *Circuit Analysis: Theory and Practice* (3rd ed.), Allan H. Robbins and Wilhelm C. Miller, Thomson – Delmar Learning, 2004 |
 | **TR5** | *The Analysis and Design of Linear Circuits* (5th ed.), Roland E. Thomas and Albert J. Rosa, Wiley, 2006 |
 
