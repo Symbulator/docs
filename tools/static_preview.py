@@ -28,9 +28,16 @@ def _mark(toc, page=""):
     """The property mark, matching web/index.php's `$propertyMark`.
 
     Versions 7 and 8 have one book and say Documentation (#389). Version 9
-    carries two and names the one this page is in (#390), read from the
-    same `book` field in toc.json that index.php splits on. The home page
-    is the chooser and belongs to neither, so it keeps the generic mark.
+    carries three and names the one this page is in (#390, #395), read
+    from the same `book` and `kind` fields in toc.json that index.php
+    splits on. The home page is the chooser and belongs to none of them,
+    so it keeps the generic mark.
+
+    #420: a technical note says Technical Notes. There was no notes branch
+    here at all, so every note page was marked COURSE -- the same bug, in
+    this same function, that marked every Manual part COURSE. index.php
+    shows a short "Notes" in the top band under 700px; the preview has no
+    such breakpoint and always spells it out.
 
     Mirrored here because this generator writes its own banner and its own
     <head> and reads nothing from index.php -- the drift that left it
@@ -41,8 +48,11 @@ def _mark(toc, page=""):
         return "Documentation"
     for c in toc.get("chapters", []):
         if c.get("id") == page:
-            return ("Manual" if (c.get("book") or "course") == "manual"
-                    else "Course")
+            if (c.get("book") or "course") == "manual":
+                return "Manual"
+            if c.get("kind") == "note":
+                return "Technical Notes"
+            return "Course"
     return "Documentation"
 
 

@@ -3,6 +3,167 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #421 — PHP on the laptop, and the first executed test of `index.php` — **12 Sep 2026**
+
+For the whole life of this tree, `web/index.php` has been reviewed by
+reading. The notes said *"there is no PHP on this machine"* — and the
+wording was the problem: Roberto read *this machine* as a data centre
+somewhere and had no idea the missing piece was on his own laptop, which
+he could have fixed in a minute at any point. **Say whose machine.**
+
+He installed it the moment it was clear:
+
+    winget install --id PHP.PHP.8.4 --exact --source winget
+
+PHP **8.4.24**, ZTS, and `json_decode` is compiled in, so no `php.ini` is
+needed — `index.php` uses no extension beyond it (checked by grepping for
+`mb_*`, `iconv`, `curl_*`, `simplexml` and friends: two `json_decode`
+calls and nothing else). winget installs to
+
+    C:\Users\perez\AppData\Local\Microsoft\WinGet\Packages\PHP.PHP.8.4_Microsoft.Winget.Source_8wekyb3d8bbwe\php.exe
+
+and **does not put it on the PATH that Bash or PowerShell see in this
+session** — call it by that full path, or open a fresh login shell.
+
+What it buys, immediately:
+
+    php -l web/index.php                          syntax, before a deploy
+    php -S 127.0.0.1:8099 -t build/web            the real site, locally
+
+`php -S` ignores `.htaccess`, so pretty URLs do not route — but
+`index.php` reads `$_GET['v']` and `$_GET['p']` directly, so
+`?v=9&p=notes` reaches every branch the pretty URL would. That is enough
+to test all of it.
+
+**This is the guard the three bugs of 11 Sep would have failed against** —
+`$thisShelf` used before it was defined, `$pageTitle` dereferencing a null
+chapter, and the sidebar duplicating its own grid. All three were found by
+reading, after they were written, and any of them would have been a blank
+page or a fatal on the first request here.
+
+---
+
+## #420 — the ribbon stops guessing which book you are in — **12 Sep 2026**
+
+Roberto, across five messages while looking at the live site. Three books
+have made two ribbon links ambiguous and one mark too short.
+
+**The two links.** *Download as PDF* and *Split View* both name a book.
+On a page that belongs to no book they had to guess, and both guessed the
+Course: the home page offered `symbulator-v9.pdf` and a split view opened
+on `introduction` — to a reader who had not yet chosen a book, on the very
+page whose job is that choice. The Technical Notes shelf had the same
+shape, handing over the Course's 309 pages.
+
+One predicate rather than three patches:
+
+    $bookless = ($v === '9') && ($isHome || $shelf === 'notes');
+
+and both links sit behind it. Everything else keeps both, and they were
+already right:
+
+| page | PDF | Split View |
+|---|---|---|
+| `/9/` | — | — |
+| `/9/course`, a lesson | `symbulator-v9.pdf` | that page |
+| `/9/manual`, a manual part | `symbulator-manual.pdf` | that page |
+| `/9/notes` | — | — |
+| a technical note | `symbulator-v9.pdf` | that page |
+| versions 7 and 8 | their own | *How it works* |
+
+A **technical note is not bookless**: the six notes are printed inside
+`symbulator-v9.pdf` at their own page numbers, so a note page's PDF link
+is correct. Only the shelf, which is a contents page for a book that has
+no PDF of its own, loses it.
+
+Two things that would have gone wrong silently. The version test and the
+7/8 test are an `if/else`, so widening the *outer* condition with
+`&& !$isHome` would have dropped a version 9 reader into the else arm and
+printed versions 7 and 8's *How it works* on version 9's home page; the
+home test is nested inside instead. And `$isHome` is true on 7 and 8's
+home pages too, so `$bookless` names the version — those have one book,
+the link is unambiguous, and their pages must not move.
+
+**`/9/manual` needed no change at all.** Roberto asked for the Manual's
+PDF and a split view onto the Manual there; both were already correct,
+verified by fetching the live ribbon and by driving
+`/split/?page=manual`, which loads the Manual in the left pane with its
+fourteen parts and the MANUAL mark.
+
+**The mark reads Technical Notes.** It said *Notes*, on a comment's
+assurance that TECHNICAL NOTES "cannot be measured from here." It can:
+
+| viewport | band | long form | clearance from the wordmark |
+|---|---|---|---|
+| 1200 | top | 165.1px | 430px |
+| 860 | top | 165.1px | 142px |
+| 700 | top | 165.1px | 24px |
+| 680 / 660 / 645 | top | 165.1px | 24px |
+| 600 | top | 121.9px | 24px |
+| 320 | slot | 121.9px | in a 155px slot, one line, unclipped |
+
+It never collides — but below 700 the 24px stops closing, which means the
+*wordmark* is giving up room instead. So the top band takes the short
+spelling under 700px and the long one above it; the phone slot sits below
+the wordmark, competes with nothing, and stays long. Both spellings are
+emitted with one shown, the idiom the banner already uses for
+`.vkey-full`/`.vkey-num`. **The rule lives in learn's own `style.css`,
+not the shared `banner.css`** — no other property has this mark, and the
+shared file would have to be propagated to the landing page and the app
+for nothing.
+
+Only the Technical Notes emit two spans; Course and Manual are one word
+and render as plain text.
+
+**The landing page still sold one book**, and its section heading was by
+then a flat denial of the Manual: *"A course, not a manual."* It now reads
+*"A course, a manual, and the fine print."*, the Course's card is named
+(*Read the documentation* no longer names one thing) and the Manual has a
+card of its own, with the Technical Notes in its last sentence. The blurbs
+are lifted from the live chooser rather than invented, so the landing and
+the front door describe each book the same way. All 21 outbound links were
+fetched: every one 200, including the two new shelf URLs. The two 404s are
+bare `preconnect` origins, which is what they are meant to be.
+
+### What was measured, and the three instruments that lied
+
+Every claim above is a measurement, and **three of the first attempts were
+wrong in the instrument rather than the subject** — which is now five
+instances in two days.
+
+1. Reading the mark's width with `getBoundingClientRect()` returned
+   **155px for both spellings**: the slot is a block filling its parent
+   and its box says nothing about its glyphs. A `Range` over the text node
+   is what measures text.
+2. Sweeping widths by setting `documentElement.style.width` produced
+   seventeen identical rows. **Media queries key off the viewport**, not
+   an element's width, so the sweep re-measured one emulation seventeen
+   times. Real `resize_window` calls were needed.
+3. Every screenshot came back a flat dark rectangle while the DOM read
+   back perfectly. **The Browser pane was hidden** — and a hidden pane
+   does not paint and does not fire `requestAnimationFrame`, which is also
+   why a perfectly ordinary `await` in a probe timed out at 45 seconds.
+
+### The check
+
+`tools/check_ribbon.py` — ten pages through a real PHP server, asserting
+each one's PDF target, third link and property mark. Proved red three
+ways before being believed: `$bookless` forced false (2 failures),
+forced true (8), and `$inManual` forced false (2); the restored copy is
+green. It needs PHP, so it is opt-in rather than wired into
+`build.py --check`, which must keep running on a machine without it.
+
+### Numbering
+
+Written as #410 throughout and renumbered before commit: the root
+`CLAUDE.md` records the app tree's Numerical Solver round as **#391–#419**,
+so #410 was inside a range another session already holds — and
+`NEXT.md` does not spell those numbers out as headings, so a grep for
+`#410` came back clean in *both* trees. **Grep the prose and the ranges,
+not just the headings.**
+
+---
+
 ## #409 — version 9's index spoke the calculator's vocabulary, and the fix reached 7 and 8 — **fixed 12 Sep 2026, live**
 
 Roberto: *"That index is bad, by the way. In v9 it talks of the 'th

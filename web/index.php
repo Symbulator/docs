@@ -133,16 +133,44 @@ $next = ($pos !== false && $pos < count($bookIds) - 1)
    them, so it keeps the generic mark. Versions 7 and 8 never reach any of
    this: they have one book and `$thisShelf` is always `course` there. */
 $inManual = ($v === '9') && $thisShelf === 'manual';
+/* #420: a page that belongs to no book of its own offers neither the
+   book's PDF nor a split view onto it. Two pages in version 9: the home
+   page, which is the chooser and belongs to none of the three; and the
+   Technical Notes shelf, whose notes are printed inside symbulator-v9.pdf
+   rather than in a book of their own, so "Download as PDF" there handed
+   the reader the Course. Named on the version, so versions 7 and 8 -- one
+   book, no ambiguity -- keep every link they have. An individual note
+   page is a chapter and is not bookless: it prints in symbulator-v9.pdf
+   at its own page and opens in the split view correctly. */
+$bookless = ($v === '9') && ($isHome || $shelf === 'notes');
 $bookName = ($v === '9') ? $SHELF_NAME[$thisShelf] : 'Tutorial';
-/* The property mark is spaced capitals in a narrow band, so it takes the
-   short name: TECHNICAL NOTES would be the longest mark on any of the five
-   sites and cannot be measured from here. The shelf page still says
-   Technical Notes in its heading. */
-$MARK_NAME = array('course' => 'Course', 'manual' => 'Manual',
-                   'notes'  => 'Notes');
+/* The property mark is spaced capitals in a narrow band. It used to take
+   the short name "Notes" on the grounds that TECHNICAL NOTES "cannot be
+   measured from here" -- #420 measured it on the live page instead, at
+   real viewport widths, and the long form never collides: 165px wide with
+   430px of clearance at 1200 and 24px at 700, and 121.9px inside the
+   155px subtitle slot at 320. Below 700 that 24px stops closing and the
+   *wordmark* gives up room instead, so the top band swaps to the short
+   form there. The slot sits under the wordmark and competes with nothing,
+   so it stays long. Both spellings are emitted and the stylesheet shows
+   one, the same idiom as .vkey-full/.vkey-num. */
+$MARK_NAME  = array('course' => 'Course', 'manual' => 'Manual',
+                    'notes'  => 'Technical Notes');
+$MARK_SHORT = array('course' => 'Course', 'manual' => 'Manual',
+                    'notes'  => 'Notes');
 $propertyMark = ($v === '9')
               ? ($isHome ? 'Documentation' : $MARK_NAME[$thisShelf])
               : 'Documentation';
+$propertyMarkShort = ($v === '9')
+                   ? ($isHome ? 'Documentation' : $MARK_SHORT[$thisShelf])
+                   : 'Documentation';
+/* One mark, two spellings, exactly one shown -- see $MARK_NAME above. A
+   mark whose two spellings are the same emits plain text, so nothing but
+   the Technical Notes carries the extra markup. */
+$markHtml = ($propertyMark === $propertyMarkShort)
+          ? e($propertyMark)
+          : '<span class="mark-long">' . e($propertyMark) . '</span>'
+          . '<span class="mark-short">' . e($propertyMarkShort) . '</span>';
 $siteName = $toc['name'] . ' ' . $propertyMark;
 /* #395: a shelf page has no `$current`, so it names itself. Without this
    the title fell through to `$current['title']` on null. */
@@ -233,10 +261,10 @@ function asset(string $name): string {
         <!-- The property mark (#135): one word, two spellings, exactly
              one shown -- the top form on wide screens, this slot form
              on phones. Styled by the shared banner.css. -->
-        <p class="property-mark property-mark-slot"><?= e($propertyMark) ?></p>
+        <p class="property-mark property-mark-slot"><?= $markHtml ?></p>
       </a>
     </div>
-    <span class="property-mark property-mark-top"><?= e($propertyMark) ?></span>
+    <span class="property-mark property-mark-top"><?= $markHtml ?></span>
   </div>
 </header>
 
@@ -250,23 +278,42 @@ function asset(string $name): string {
       <nav>
         <?php /* #392: the PDF follows the book. $inManual is false in
                  versions 7 and 8 by construction, so their link is
-                 unchanged. */ ?>
+                 unchanged.
+
+                 #420: and no PDF link on a bookless page -- see
+                 $bookless, defined above. */ ?>
+<?php if (!$bookless): ?>
         <a href="<?= $inManual ? '/symbulator-manual.pdf'
                                : '/symbulator-v' . e($v) . '.pdf' ?>">Download as PDF</a>
+<?php endif; ?>
         <a href="https://symbulator.pythonanywhere.com">Online App</a>
 <?php if ($v === '9'): ?>
+<?php if (!$bookless): ?>
         <!-- #226: the split view, opened on the page being read -- the
              reader has not picked a problem, they have asked to see this
              chapter beside the app, so the link carries ?page= rather
-             than a lesson and an entry. On the home page there is no
-             chapter to carry, so it opens on the introduction.
+             than a lesson and an entry.
 
              Version 9 only, and it replaces "How it works" rather than
              joining it. There is no split view for 7 and 8: the app is
              version 9, so the link would quietly move a version 7 reader
              onto version 9's documentation -- the opposite of "the same
-             page where they are". Those two keep the old link. -->
+             page where they are". Those two keep the old link.
+
+             #420: and not on a bookless page (see $bookless above).
+             On the home page it used to fall back to the introduction,
+             which was fair when the introduction was the only way in;
+             with three books that picks the Course for a reader who has
+             not chosen it. The Course and Manual shelves still carry it
+             -- `$page` is the shelf's own slug and the split view opens
+             on that shelf, verified live with `?page=manual`.
+
+             The home test is nested *inside* the version test on purpose:
+             widening the condition above would drop a version 9 reader
+             into the else arm and put "How it works" on version 9's home
+             page. -->
         <a href="/split/?page=<?= rawurlencode($page ?: 'introduction') ?>">Split View</a>
+<?php endif; ?>
 <?php else: ?>
         <!-- Version-independent on purpose: the monograph documents the
              solver logic every version shares. Points at the landing

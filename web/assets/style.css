@@ -1061,3 +1061,23 @@ figcaption {
   }
 }
 
+/* #420: the Technical Notes mark, long where there is room.
+
+   The mark carries both spellings and this shows one. Measured on the
+   live page at real viewport widths (a sweep that fakes the width by
+   setting documentElement.style.width measures nothing -- media queries
+   key off the viewport): the long form is 165px wide with 430px of
+   clearance at 1200 and 24px at 700, and below 700 that gap stops closing
+   because the wordmark starts giving up room instead. So the top band
+   takes the short form under 700px. The slot form sits below the wordmark
+   on phones, where 121.9px of text has a 155px slot to itself, and keeps
+   the long name.
+
+   Only the Technical Notes emit the two spans; Course and Manual are one
+   word and render as plain text. Lives here rather than in the shared
+   banner.css because no other property has this mark. */
+.property-mark .mark-short { display: none; }
+@media (max-width: 700px) {
+  .property-mark-top .mark-long  { display: none; }
+  .property-mark-top .mark-short { display: inline; }
+}
