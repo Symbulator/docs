@@ -3,7 +3,28 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
-## #424 — the Course read as a version 9 book — **built 12 Sep 2026, not deployed**
+## #424 — the Course read as a version 9 book — **live 13 Sep 2026**
+
+**Deployed at Roberto's "ship it" on 13 Sep 2026, both passes together,
+and verified by fetching**: `/9/lesson-equivalents` carries the twenty
+"In DC, `vth` gives …" sentences and no "Via"; `/9/lesson-ac` the
+*Mini-Tools card* subsection; `/9/lesson-power` the heading *The pf
+mini-tool*; `/9/manual-orientation` *Three tools*; `/7/lesson-dc` "your
+first simulation in Symbulator."; `/7/lesson-equivalents` a sidebar
+listing *The equivalent resistance script: er* where it listed nothing.
+**The deploy was built from a clean `git worktree` of HEAD, not from the
+working tree**, with a junction beside it so `build.py` could reach the
+app tree: the working tree carries #423's uncommitted work and the
+Nilsson & Riedel sampler chapter that Roberto is having written
+(*"Do not include that one in your revision"*). The sampler's 47 asset
+files were already on the server from that session and its chapter is
+not in the live `toc.json`, so the clean build changed nothing about it.
+23 files moved. **What did not deploy:** the `.cir` fix, which wants
+Roberto's pull on `symbulator.pythonanywhere.com` (no pip) and the
+offline pair's next `build_local.py` train — not run, because that train
+would copy the drawer session's uncommitted template. The summary PDF is
+`Notes/course_review_424.pdf`, copied to
+`C:\Users\perez\Downloads\Symbulator_Course_review_424.pdf`.
 
 Roberto: *"Can you read the Course and identify its shortcomings? For
 example, I just noticed that it mentions the aa tool in passing without
