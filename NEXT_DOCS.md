@@ -3,6 +3,119 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #424 — the Course read as a version 9 book — **built 12 Sep 2026, not deployed**
+
+Roberto: *"Can you read the Course and identify its shortcomings? For
+example, I just noticed that it mentions the aa tool in passing without
+having introduced it first. And it calls it a tool, not a mini-tool
+(which would be the right term). … the current Course for v9 was adapted
+in a series of pushes from the v7/v8 documentation, and it does not read
+yet as a 'native for v9' Course."* Summary for his review in
+`Notes/course_review_424.pdf`; the edits as one table in
+`Notes/course_review_424.py`.
+
+**How it was read.** Version 9's view of every chapter, with source line
+numbers, through `tools/v9_lines.py` — 6,274 lines across the
+Introduction, the thirteen lessons and the credits — then a regex sweep
+for the calculator's vocabulary over the same view. The sweep is worth a
+warning: `v9_lines.py` strips spans with a flat regex, so a nested span
+shows as a fragment (`answers with the  command of the calculator}}`) and
+reads like a leftover when the build handles it perfectly. Check the
+source before believing the tool.
+
+**What was wrong, by kind.**
+
+- *Tool for mini-tool.* aa, pf and gain are the three entries of the
+  {{card:Mini-Tools}} card and the app calls them mini-tools; the Course
+  called all three "tools", in two headings, three chapter summaries,
+  the index and the prose. And `pr()` is neither: it is a function,
+  usable in a value or in {{card:Evaluate}}.
+- *aa used before it was introduced.* Lesson 7 mentioned "the aa tool"
+  twice in its *Rectangular or polar* section and then used it in the
+  first worked example, with no sentence anywhere saying what the
+  Mini-Tools card is. **A short subsection, *The Mini-Tools card*, now
+  sits in Lesson 7 before the first AC problem**, naming the card, the
+  three mini-tools, what each takes, and which lesson introduces each;
+  Lessons 8 and 13 refer back to it.
+- *Calculator habits in shared prose the adaptation never split.*
+  "evaluate the negative of that power", "store this value in a
+  variable", "when the simulation is *Done*", "stored in the memory",
+  "in variables that should be familiar", "sets Symbulator apart from
+  other programs", "cSolve", "Expert" for Expert Mode in three headings
+  and sentences, "the computer". Each is now a `{{v7,8|…}}{{v9|…}}` pair.
+- *The wrong version number for 7 and 8.* Lesson 1's "your first
+  simulation in Symbulator 9" was shared prose, so the 2023 pages have
+  been telling calculator readers they ran version 9. **This is the one
+  edit that changes what 7 and 8 render**: the 2023 original reads
+  "Symbulator" (checked in `originals/docs-page7.html` and `-page8`), and
+  that is what they say again, with `{{v9| 9}}` for version 9.
+- *A worked example that cannot give its printed answer.* Bo2's Drill
+  Exercise 5.1 (TR) in Lesson 6 uses `vc0` as the capacitor's initial
+  condition; the calculator text stores it with `vc→vc0`, the version 9
+  text said nothing, and the built-in entry in
+  `Application/v9/repos/server/examples/Lesson_06a.cir` had no Define
+  either — so the app answered `i_c = -vc0·e^{-4t}/3` where the note
+  promises `-2e^{-4t}`. Version 9 now shows a {{card:Define}} field with
+  `vc0 = 6` and says so; **the `.cir` entry gains `defines: vc0=6`**,
+  checked through the solver (`i_c = -2*exp(-4*t)`) and through
+  `circuitbook.parse_book`. That is the one app-tree change and it rides
+  the next app deploy.
+- *Gaps a version 9 reader saw.* "We can use its exact value, , but the
+  textbook prefers…" — the exact value was in 7- and 8-only spans; a
+  `{{v9|8*exp(-1)}}` fills it. Three bare answer lines (`.055`, `2`,
+  `-2`) followed 7/8-only code with nothing in version 9 to introduce
+  them; a version 9 sentence now leads into each.
+- *Small things.* "equationse"; a leading space before a paragraph;
+  "Say 'given' in Evaluate's Conditions box" (the calculator's `|`
+  operator, meaningless here); "It returns the value and the verbal
+  description together, in one string"; "Store them in Define";
+  "the best symbolic simulator … ever to run on a handheld device" for
+  a version that runs in a browser; "Symbulator is a program".
+
+**Measured, not asserted.** 62 scripted edits across 11 source files,
+nine index-term and heading edits by hand, four heading anchors. The
+built `content/v7` and `content/v8` are byte-identical to the pre-edit
+build **except `lesson-dc.html`**, whose one difference is the word "9"
+removed from that sentence; their `toc.json` (index and chapters) is
+identical. Version 9 changed in eleven Course pages and two Manual pages.
+`build.py --check` clean, the index guard clean (123 terms, one more than
+#422 left: *Mini-Tools card*, on the new subsection; *aa mini-tool*, *pf
+mini-tool*, *gain mini-tool* and *pr function* replace the four "tool"
+terms), `check_against_originals.py` 81 blocks
+verified as before.
+
+**The trap this one walked into.** Splitting a heading into spans moves
+its anchor: `slugify()` drops every `{{…}}`, so "The pf
+{{v7,8|tool}}{{v9|mini-tool}}" became `id="the-pf"` and the 7/8 markup
+moved on three pages. The byte comparison caught it; the three headings
+carry explicit anchors (`{#the-pf-tool}` and kin) that keep the ids they
+had. And a `{{v7|…}}` span in Lesson 11's summary left a hole for version
+8, which renders that chapter's summary on its "not in this version"
+page although it has no Bode lesson: `{{v7,8|…}}` is right there even
+though the chapter is `versions: [7, 9]`.
+
+**Not done, deliberately, and for Roberto's ruling.** The 300 worked
+problems still carry the calculator-era rhythm in places — "ask for",
+"we get", "This is correct" after every answer — which the 3 Sep 2026
+rulings already address for answers and which a pass over the practice
+sections could finish; this round stayed on the explanatory sections and
+the first worked problem of each. The Manual's Orientation calls gain one
+of "four tools", a sentence he may want to reword. Lesson 4's summary
+spells "Thevenin" without its accent in all three versions; frozen text,
+left. The PDFs were not rebuilt.
+
+**Numbering.** This item took #423 first and found, uncommitted in the
+app tree's `NEXT.md`, the drawer restyle already holding it, so it moved
+to #424; the app session was writing to the same `Documentation` tree at
+the same time (the monograph figures, a Nilsson & Riedel sampler chapter),
+so every commit here names its files rather than using `-a`. **One of the
+#422 commits did not**: `d60cabd` swept that session's uncommitted
+`paper/render_exemplars.py` in under the #422 message. Nothing is lost —
+the file is what that session wrote — but the history attributes it to
+the wrong item.
+
+---
+
 ## #423 — claimed by the app tree, 12 Sep 2026: **the schematic drawer restyled on Nilsson & Riedel 12e** — symbols, stroke weights, label face and colours measured from the book's own vector figures. The docs side of it is the monograph's Appendix B, re-rendered by `paper/render_exemplars.py` (now embedding DejaVu Serif) and the book rebuilt. Write-up in `Application/v9/repos/local/NEXT.md`
 
 ## #422 — the index, rebuilt for version 9's three books — **live 12 Sep 2026**

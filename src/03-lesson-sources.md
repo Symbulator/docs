@@ -5,13 +5,13 @@ title: Current sources, conductances and dependent sources
 updated: 2023-07-08
 summary: >
   Learn how to describe a *current source* using the **j** element. Simplify
-  *parallel resistors* using the {{tool:pr}} tool and its shorthand. Learn to
+  *parallel resistors* using the {{tool:pr}} {{v7,8|tool}}{{v9|function}} and its shorthand. Learn to
   describe *conductances* and *dependent sources*.
 ---
 
 In this lesson you will learn how to describe a *current source* with the
 **j** element, and a trick to simplify *parallel resistors* with the {{tool:pr}}
-tool or its shorthand. You will also learn to describe *conductance* and
+{{v7,8|tool}}{{v9|function}} or its shorthand. You will also learn to describe *conductance* and
 *dependent sources* using elements you already know.
 
 ## How to describe a current source {#describe-current-source}
@@ -271,9 +271,9 @@ circuit descriptions whenever we feel it is appropriate.
 :::
 
 ::: only 9
-Symbulator has a tool for reducing resistors (and impedances) in
-parallel, called {{tool:pr()}}. You can use it in the circuit description and
-in the {{card:Evaluate}} area.{{i:parallel resistors}}{{i:pr tool}}
+Symbulator has a function for reducing resistors (and impedances) in
+parallel, {{tool:pr()}}. You can use it in the circuit description and
+in the {{card:Evaluate}} area.{{i:parallel resistors}}{{i:pr function}}
 
 To reduce three resistors in parallel with values of 10 Ω, 20 Ω and
 30 Ω:
@@ -329,7 +329,7 @@ The answer is {{o:19}} Ω. This is correct.
 
 ### The [r,r,r…] shorthand
 
-There is a shorthand to invoke the {{tool:pr}} tool: put the resistor values in
+There is a shorthand for {{tool:pr}}: put the resistor values in
 square brackets, separated by commas. Expressions like `[10,20,30]` or
 `[r1,r2,r3,r4]` are read as inputs to {{tool:pr}}, both in the
 {{card:Evaluate}} area or in the circuit description.{{i:brackets}}
@@ -371,7 +371,7 @@ r1,1,0,1'k
 re,1,0,[10'k,22'k]
 ```
 
-Moving forward, we will use the `pr(,,)` tool, or its shorthand `[,,]`, in
+Moving forward, we will use `pr(,,)`, or its shorthand `[,,]`, in
 circuit descriptions whenever we feel it is appropriate.
 
 ::: note Reduce only what you don't need to see
@@ -406,7 +406,7 @@ voltage, current or combination of them as easily as a 12 V source.
 Here is what you need to know for simulating dependent
 sources{{i:dependent source}} in Symbulator: nothing. There is nothing special
 to it at all. Just write the value as a function of the circuit's answers,
-using the variables you know by now, and run the simulation like it's nobody's
+using the {{v7,8|variables}}{{v9|answer names}} you know by now, and run the simulation like it's nobody's
 business. For example:
 
 ::: only 7,8
@@ -435,7 +435,7 @@ dependent sources, thinking: *"You have nothing!"* Booyah!
 
 ::: tip Dependent sources are just sources
 For Symbulator, dependent sources are just sources and need no special
-notation. State the expression that describes the value, using variables
+notation. State the expression that describes the value, using {{v7,8|variables}}{{v9|answer names}}
 Symbulator knows and minding their polarity, and you are off to the races.
 :::
 
@@ -1189,7 +1189,7 @@ Determine {{var:I_S}}, {{var:I_1}} and {{var:I_3}}.
 
 :::
 
-This ‘hidden source' problem is perfect for Expert. My solution:
+This ‘hidden source' problem is perfect for {{v7,8|Expert}}{{v9|{{card:Expert Mode}}}}. My solution:
 
 ```sym 7
 s\ex("js,0,1,is:r1,1,0,6:r2,1,0,3:r3,1,0,1"):approx({is,ir1,ir3})
@@ -1918,7 +1918,7 @@ Determine {{var:i}}, {{var:v}}, {{var:i_s}} and {{var:v_s}}.
 :::
 
 With one unknown value and one known solution, this problem is a job for
-Expert.
+{{v7,8|Expert}}{{v9|{{card:Expert Mode}}}}.
 
 Determine {{var:i}}, {{var:v}}, {{var:i_s}} and {{var:v_s}}.
 

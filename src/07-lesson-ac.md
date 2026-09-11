@@ -4,8 +4,8 @@ kind: lesson
 title: Alternating current analysis
 updated: 2023-07-08
 summary: >
-  Learn how to run an *alternating current* analysis (via phasor analysis)
-  using {{tool:ac}}. Learn how to describe capacitors, inductors, *impedances and
+  Learn how to run an *alternating current* analysis (via phasor analysis){{v7,8| using {{tool:ac}}}}.
+  Learn how to describe capacitors, inductors, *impedances and
   admittances*, and sources for AC analysis.
 ---
 
@@ -51,6 +51,27 @@ one more input: the frequency in radians per second, typed into the
 The equivalence tools work in AC the same way: choose *Find equivalent* as
 usual, set {{ui:Analysis}} to *AC — alternating current*, and give the ω box a
 frequency where the circuit needs one.
+
+### The Mini-Tools card
+
+One more thing before the first AC problem, because AC is where it earns its
+place. Under the results sits the {{card:Mini-Tools}} card: three small
+calculators that work on values you type rather than on the circuit, and are
+ready before and after any solve. Choose one in its {{ui:Tool}} menu, fill in
+the boxes it shows, and press {{btn:Run}}:
+
+- **aa — amplitude and angle** turns a complex value into polar form. It
+  takes one value: an answer's name, such as `ir1`, or any expression, such as
+  `v1 - v2`. This lesson uses it throughout.
+- **pf — power factor** takes a voltage and a current and answers with the
+  power factor and whether it leads or lags. {{ref:lesson-power}} introduces it.
+- **gain — voltage, current and power gain** takes the voltage and current
+  at a two-port's input and at its output. {{ref:lesson-twoports}} introduces
+  it.
+
+They are mini-tools, not analyses: none of them solves the circuit, and none
+needs the circuit to have been solved, though an answer's name only means
+something once there are answers to read.{{i:Mini-Tools card}}
 :::
 
 ### Describing elements for AC
@@ -122,7 +143,7 @@ Three things it leaves alone:
   functions of *t* or *s*. The checkbox greys out there.
 
 An answer that happens to be real still gets its angle, 0° or 180°, as the
-**aa** tool does.
+*aa* mini-tool does.
 
 ::: tip It combines with SI prefixes
 With SI prefixes on too, the amplitude carries the prefix and the angle
@@ -132,9 +153,9 @@ A polar answer is always a decimal, even under *exact*: an angle in degrees
 has no closed form to preserve.
 :::
 
-The **aa** tool is still the better choice for converting one value, or an
+The *aa* mini-tool is still the better choice for converting one value, or an
 expression that is not an answer by itself, such as a difference between two
-node voltages. {{ref:lesson-threephase}} uses it that way throughout.{{i:aa tool}}
+node voltages. {{ref:lesson-threephase}} uses it that way throughout.{{i:aa mini-tool}}
 :::
 
 ## Solved numerical examples {#ac-numerical}
@@ -190,7 +211,7 @@ ask for.
 what it found:
 
 - the usual voltages in the nodes, voltage drops in the elements, and currents
-  through the elements, in variables that should be familiar by now
+  through the elements, {{v7,8|in variables}}{{v9|under the names}} that should be familiar by now
 - the *average power consumed* in the source and the resistor, in
   {{v7,8|`ape` and `apr1`}}{{v9|`ape` and `apr1`}}. None is given
   for the capacitor, since capacitors and inductors do not consume real power.
@@ -219,8 +240,8 @@ s\aa(ir1)
 :::
 ::: only 9
 If we want to see them as an amplitude and angle, open the {{card:Mini-Tools}}
-card under the results, leave the tool set to *aa — amplitude and angle*,
-and give it the answer's name:{{i:aa tool}}
+card, leave the mini-tool set to *aa — amplitude and angle*,
+and give it the answer's name:{{i:aa mini-tool}}
 
 ```field 9 Value
 ir1
@@ -891,8 +912,10 @@ capacitance is a real number.
 The answer is **c** = {{o:0.000001235}}, or 1.235 µF. This is not the answer the book
 gives.
 
-I first used cSolve here, which also works, but my friend Qifan Wang — who
-verified my answers — pointed out, correctly, that it is not necessary:
+{{v7,8|I first used cSolve here, which also works, but my friend Qifan Wang — who
+verified my answers — pointed out, correctly, that it is not necessary:}}{{v9|I first solved this over the complex numbers, which also works, but my friend
+Qifan Wang — who verified my answers — pointed out, correctly, that it is not
+necessary:}}
 focusing on the imaginary part removes every reference to the complex operator,
 so we are solving an equation in real terms only.
 

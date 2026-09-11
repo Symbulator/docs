@@ -9,11 +9,13 @@ summary: >
 
 ## What is Symbulator {#what-is-symbulator}
 
-Symbulator is a program to solve linear electric circuits symbolically and
-numerically {{v7,8|in a calculator}}{{v9|on your device}}. It takes numerical and symbolic
+{{v7,8|Symbulator is a program to solve linear electric circuits symbolically and
+numerically in a calculator.}}{{v9|Symbulator is an app that solves linear electric circuits symbolically and
+numerically, on any device with a browser.}} It takes numerical and symbolic
 values, and returns numerical and symbolic results. The odd-sounding name is a portmanteau of *"**symb**olic sim**ulator**"*.
-Symbulator is widely regarded as the best symbolic simulator of linear
-electric circuits ever {{v7,8|made for a calculator}}{{v9|to run on a handheld device}}.
+{{v7,8|Symbulator is widely regarded as the best symbolic simulator of linear
+electric circuits ever made for a calculator.}}{{v9|Symbulator is widely regarded as the best portable symbolic simulator of
+linear electric circuits.}}
 
 ### What analyses can it do?
 

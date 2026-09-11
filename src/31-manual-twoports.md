@@ -77,10 +77,10 @@ as the transformer in {{ref:manual-coupling}}. A port whose far side floats
 gets its own reference automatically, and Symbulator says so in the notes
 rather than refusing.{{i:floating section (island)}}
 
-## The gain tool
+## The gain mini-tool
 
 {{tool:gain}} takes a two-port and a load and returns what a cascade
-designer actually wants:{{i:gain tool}}
+designer actually wants:{{i:gain mini-tool}}
 
 | | |
 |---|---|

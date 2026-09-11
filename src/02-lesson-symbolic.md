@@ -23,7 +23,7 @@ A circuit with one or more elements whose value we do not know is a
 **symbolic circuit**.{{i:symbolic circuit}} A *symbolic
 problem* is one that involves a symbolic circuit. It gives me great joy when I
 encounter a symbolic problem, because the ability to simulate symbolic circuits
-is what sets Symbulator apart from other programs.
+is what sets Symbulator apart from other {{v7,8|programs}}{{v9|simulators}}.
 
 ::: note Variables are case-sensitive; names are not
 Element and node names ignore case — **R1** and **r1** are the same resistor,
@@ -251,11 +251,11 @@ solve(re=12000 and ir3=.006,{e,r1})
 That is what the {{card:Solve}} card, under the results beside {{card:Evaluate}}, is
 for. It has two boxes.{{i:Solve card}}
 
-In the first box, headed {{ui:Equation(s) to solve in terms of the results}}, write the equationse, using the same names the results use.
+In the first box, headed {{ui:Equation(s) to solve in terms of the results}}, write the equations, using the same names the results use.
 
 The shorthand works in these boxes too, so `re = 12'k` reads as 12000.
 
- You can write the equations separated by `and`, like this:
+You can write the equations separated by `and`, like this:
 
 ```field 9 Equation(s) to solve in terms of the results
 re = 12'k and ir3 = 6'm
@@ -510,7 +510,7 @@ to answer the two questions we have been asked.
 
 :::
 
-### Numeric-from-symbolic, with Expert
+### Numeric-from-symbolic, {{v7,8|with Expert}}{{v9|in **Expert Mode**}} {#numeric-from-symbolic-with-expert}
 
 ::: problem B11's Example 6.19 (Expert)
 

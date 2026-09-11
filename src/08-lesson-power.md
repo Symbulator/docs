@@ -6,7 +6,7 @@ updated: 2023-07-08
 summary: >
   Learn to solve *average power* and *complex power* problems in AC. Learn how
   you can use RMS values in Symbulator with {{v7,8|the **rms** flag}}{{v9|the {{ui:RMS phasors}} setting}}. Solve power
-  factor problems using the **pf** tool.
+  factor problems using the **pf** {{v7,8|tool}}{{v9|mini-tool}}.
 ---
 
 In this lesson you will learn how to run more advanced *alternating current*
@@ -54,12 +54,13 @@ problem is next. You don't have to answer Yes, but I invite you to, because I
 want to show you something cool.
 :::
 
-{{v7,8|The **s\th** tool}}{{v9|*Thévenin / Norton*}} saves the equivalent impedance in `zeq`, which
-evaluates approximately to 2.933 + j4.467. The load that will deliver the
+{{v7,8|The **s\th** tool saves the equivalent impedance in `zeq`, which
+evaluates approximately to 2.933 + j4.467.}}{{v9|*Thévenin / Norton* reports the
+equivalent impedance, `zeq`, as 2.933 + j4.467.}} The load that will deliver the
 maximum power is its conjugate, 2.933 − j4.467.
 
-The average maximum power delivered by the circuit is in
-{{v7,8|`apmax`}}{{v9|`pmax`}}, which evaluates to 2.3674 W.
+The average maximum power delivered by the circuit is {{v7,8|in
+`apmax`, which evaluates to}}{{v9|`pmax` =}} 2.3674 W.
 
 ::: only 7,8
 Now, here's the cool part: when you answer Yes to the load question, Symbulator
@@ -173,12 +174,14 @@ AC, with `omega` typed into the ω box, and {{ui:RMS phasors}} ticked in
 Or, if you want to simplify the impedances, the resistors can be collapsed into
 a single parallel combination.
 
-The average power *consumed* by the source is in `pe`. To get the average power
-*delivered*, we ask for the negative of it, which gives us 125.4 W.
+{{v7,8|The average power *consumed* by the source is in `pe`. To get the average power
+*delivered*, we ask for the negative of it, which gives us 125.4 W.}}{{v9|The average
+power *consumed* by the source is `pe`; the power *delivered* is its opposite,
+125.4 W.}}
 :::
 :::
 
-### The pf tool
+### The pf {{v7,8|tool}}{{v9|mini-tool}} {#the-pf-tool}
 
 ::: only 7,8
 To find the power factor of an element answer, we can use the **s\pf**
@@ -224,8 +227,9 @@ which. That second form works only if the expression can be evaluated
 numerically.
 :::
 ::: only 9
-The tool is in the {{card:Mini-Tools}} card. Choose *pf — power factor*; it asks
-for the voltage and the current:{{i:power factor}}{{i:pf tool}}
+*pf* is the second of the mini-tools {{ref:lesson-ac}} introduced. In the
+{{card:Mini-Tools}} card choose *pf — power factor*; it asks for the voltage
+and the current:{{i:power factor}}{{i:pf mini-tool}}
 
 ```field 9 Voltage
 ve
@@ -237,12 +241,12 @@ ve
 
 It answers {{o:0.97342}} leading.
 
-It returns the value and the verbal description together, in one string.
+It answers with the value and the word together.
 
 ::: warning Mind the sign for a source
 The minus sign in front of `ie` is not a typo, and leaving it out gives you
 the wrong word. Symbulator reports the current *consumed by* each element,
-source or not, so `ie` runs into the source. The pf tool is given two bare
+source or not, so `ie` runs into the source. The mini-tool is given two bare
 phasors and cannot know that one belongs to a source. Call it with `-ie`, the
 current the source *delivers*, and you get {{o:0.97342}} leading; with `ie` you
 get 0.97342 lagging, the same magnitude and the wrong answer.

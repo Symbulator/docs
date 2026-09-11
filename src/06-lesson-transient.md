@@ -121,8 +121,8 @@ The source has four terms: name (starting with j), first node, second node,
 and value — here t. The capacitor has five: name, first node, second node,
 value in farads, and initial condition in volts — here 0 volts.
 
-Once the simulation is complete, ask for the value of the voltage, `vc`. We get
-this value, which is correct:
+{{v7,8|Once the simulation is complete, ask for the value of the voltage, `vc`. We get
+this value, which is correct:}}{{v9|Run it in TR and read the capacitor's voltage, `vc`, in {{card:Results}}:}}
 
 ```out 7,8
 t^2/4
@@ -142,7 +142,7 @@ vc|t=2
 vc|t=2
 ```
 ::: only 9
-Say "given" in the {{card:Evaluate}} card's {{ui:Conditions}} box:
+Put `vc` in {{card:Evaluate}} and the time in its {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 vc
@@ -200,13 +200,13 @@ switch changes at other times — **{{ref:prob-bo2s-example-56}}**, where a swit
 t=1 s, and **{{ref:prob-bo2s-drill-exercise-56}}**, where one closes at t=2 s, are examples in
 the solved problems.
 
-## Two useful tools {#tr-tools}
+## Two useful {{v7,8|tools}}{{v9|time-savers}} {#tr-tools}
 
 ### {{v7,8|The only tool}}{{v9|Limiting the results}}
 
 Unless you say otherwise, a Symbulator simulation gives you the whole set of
 answers: voltages in all nodes, and voltage drops, currents and power consumed
-in all elements. When the expressions are complicated, storing them all takes
+in all elements. When the expressions are complicated, {{v7,8|storing}}{{v9|finding}} them all takes
 time.
 
 ::: only 7,8
@@ -314,8 +314,9 @@ c,2,0,c
 r,2,0,r
 ```
 
-When the simulation is *Done*, we ask for `vc`, the voltage in the capacitor
-**c**. We get the expression shown below, which is correct.
+{{v7,8|When the simulation is *Done*, we ask for `vc`, the voltage in the capacitor
+**c**. We get the expression shown below, which is correct.}}{{v9|Run it in DC and read `vc`, the voltage in the capacitor **c**. It is the
+expression shown below, which is correct.}}
 
 For the second interval, when **0s ≤ t**, we do a transient simulation. We
 give the capacitor as initial condition its voltage from the previous
@@ -334,8 +335,9 @@ r,2,0,r
 ::: applink Bo2's Example 5.1 (TR)
 :::
 
-When the simulation is *Done*, we ask for `vc` again. We get the expression
-below, which is correct.
+{{v7,8|When the simulation is *Done*, we ask for `vc` again. We get the expression
+below, which is correct.}}{{v9|Run it in TR and read `vc` again. It is the expression below, which is
+correct.}}
 
 ::: only 7,8
 $$
@@ -389,9 +391,11 @@ i_{c} = 0\ \mathrm{A}
 { 6 , 0 }
 ```
 
-So the voltage in the capacitor is 6V. We store this value in a variable
+So the voltage in the capacitor is 6V. {{v7,8|We store this value in a variable
 called **vc**{{sub:0}}, to use it as initial condition of the capacitor for
-the second interval.
+the second interval.}}{{v9|We give this value the name **vc**{{sub:0}} in
+{{card:Define}}, to use it as the initial condition of the capacitor for the
+second interval.}}
 
 ```sym 7
 vc→vc0
@@ -415,6 +419,9 @@ j,0,1,0
 r,1,0,3
 c,1,0,1/12,vc0
 ```
+```field 9 Define
+vc0 = 6
+```
 ::: applink Bo2's Drill Exercise 5.1 (TR)
 :::
 
@@ -424,7 +431,7 @@ Set {{ui:Analysis}} to *TR — transient / time domain*.
 The answers you want are `vc` and `ic`, in {{card:Results}}.
 :::
 
-When the simulation is *Done*, we get the expressions below. They are right.
+{{v7,8|When the simulation is *Done*, we get the expressions below. They are right.}}{{v9|Run it, and the two answers are the expressions below. They are right.}}
 
 ::: only 7,8
 $$
@@ -1190,7 +1197,7 @@ i_{c} = -2 e^{-t}
 
 The capacitor's voltage at the end of this second interval is the initial
 condition for the third. We can use its exact value,
-{{v7|`8*e^-1`}}{{v8|`8*e^–1`}}, but the textbook prefers using its approximate value, i.e. `2.943`.
+{{v7|`8*e^-1`}}{{v8|`8*e^–1`}}{{v9|`8*exp(-1)`}}, but the textbook prefers using its approximate value, i.e. `2.943`.
 
 The third interval corresponds to t > 1 second. We simulate in TR. To make
 things easier for Symbulator, we replace the resistors by their equivalent.
@@ -1322,6 +1329,9 @@ iL|t=2.
 ```sym 8
 iL|t=2.
 ```
+::: only 9
+Put `il` in {{card:Evaluate}} with `t = 2` in its {{ui:Conditions}} box. It reads
+:::
 
 .055
 
@@ -1915,7 +1925,7 @@ j,0,2,2*ir3
 ```
 
 ::: only 9
-The answer you want is `vc`, in {{card:Results}}.
+The answer you want is `vc`, in {{card:Results}}. It reads
 :::
 
 2
@@ -1968,7 +1978,7 @@ For the circuit of **{{ref:prob-bo2s-example-57-op-amp}}**, change the value of 
 F. Find {{var:v_C}}(t) for the case that the source is {{var:v_S}}(t)=1 V for
 t<0 and 3V for t≥0.
 
-We let Symbulator know that we are only interested in one variable: vc.
+{{v7,8|We let Symbulator know that we are only interested in one variable: vc.}}{{v9|We can tell Symbulator that we are only interested in one answer, `vc`.}}
 
 ```sym 7
 s\only("vc")
@@ -1999,14 +2009,15 @@ r1,2,0,1
 ```
 
 ::: only 9
-The answer you want is `vc`, in {{card:Results}}.
+The answer you want is `vc`, in {{card:Results}}. It reads
 :::
 
 -2
 
-This is the initial condition for the next interval. Before we run the
+This is the initial condition for the next interval. {{v7,8|Before we run the
 simulation for the second interval, we let Symbulator know, again, that we
-are only interested in one variable: vc.
+are only interested in one variable: vc.}}{{v9|Again, we can limit the results to
+the one answer, `vc`.}}
 
 ```sym 7
 s\only("vc")
@@ -3647,9 +3658,9 @@ the problem up - is a living legend among circuit students at UTP.
 
 :::
 
-### Advanced use of Expert in TR
+### Advanced use of {{v7,8|Expert}}{{v9|Expert Mode}} in TR {#advanced-use-of-expert-in-tr}
 
-The **expert** tool can be very useful in transient analysis. Using it,
+{{v7,8|The **expert** tool}}{{v9|{{card:Expert Mode}}}} can be very useful in transient analysis. Using it,
 however, requires some knowledge. Here’s two things you need to know in order
 to use {{v7,8|`ex`}}{{v9|{{card:Expert Mode}}}} like a boss:
 
@@ -3667,7 +3678,7 @@ steps:
 - Convert the answers back to the time domain.
 :::
 
-Second, when Symbulator solves a problem using the expert tool, it freezes
+Second, when Symbulator solves a problem {{v7,8|using the expert tool}}{{v9|in {{card:Expert Mode}}}}, it freezes
 this process halfway between steps 1 and 2, so that you can tinker with the
 equations and unknowns before they are solved.
 

@@ -81,7 +81,7 @@ Some observations about my description:
   This is something you can do only in the case of balanced Y-Y systems, not
   for other configurations and not for unbalanced systems.
 - Since Symbulator does not differentiate between lower and upper case
-  variables, nodes called **a** and **A** would be considered the same node. Instead,
+  {{v7,8|variables}}{{v9|in names}}, nodes called **a** and **A** would be considered the same node. Instead,
   we use the names **ag** and **ad**, where the g reminds us a node is on the
   generation side and the d reminds us it is on the demand side.
 

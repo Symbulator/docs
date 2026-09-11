@@ -6,7 +6,7 @@ updated: 2026-08-29
 summary: >
   Find the *two-port equivalent* of a network{{v7,8| using the {{tool:port}} script}}. Learn
   how to include *two-ports* in your circuit using the **z**, **y**, **h**,
-  **g**, **a** and **b** elements. Calculate gains with the **gain** tool.
+  **g**, **a** and **b** elements. Calculate gains with the **gain** {{v7,8|tool}}{{v9|mini-tool}}.
 ---
 
 A two-port is a network you have stopped caring about the inside of. What is
@@ -161,7 +161,7 @@ Prefer this way: the parameters travel with the circuit, into links, files
 and every analysis, the equivalent tools included. The entries can be
 numbers, SI-prefixed values or expressions.
 
-**Store them in Define**, and keep the description bare:
+**Give them values in {{card:Define}}**, and keep the description bare:
 
 ```field 9 Define
 z11 = 40
@@ -524,12 +524,12 @@ Correct.
 
 :::
 
-## The gain tool {#gain-tool}
+## The gain {{v7,8|tool}}{{v9|mini-tool}} {#gain-tool}
 
 Network problems ask for gains: voltage gain, current gain, power gain, and
 the impedance seen at the input. {{v7,8|Symbulator has a tool for that, called
-**gain**.}}{{v9|Symbulator has a tool for that, in the {{card:Mini-Tools}} card:
-choose *gain*.}}{{i:gain tool}}
+**gain**.}}{{v9|Symbulator has a mini-tool for that — the third in the {{card:Mini-Tools}}
+card {{ref:lesson-ac}} introduced: choose *gain*.}}{{v7,8|{{i:gain tool}}}}{{v9|{{i:gain mini-tool}}}}
 
 It wants four values — the voltage and current at the input, then the voltage
 and current at the output — and answers with all four figures at once.

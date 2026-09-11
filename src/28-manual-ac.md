@@ -35,7 +35,7 @@ as an impedance and leave ω out of it.{{i:impedance}}{{i:reactances given in oh
 **Rectangular or polar** is a display choice: tick {{ui:Show AC answers as
 polar phasors}} in {{card:Settings}} and `0.1 - 0.1j` reads
 `0.1414∠-45°`. Nothing about the answer changes. The {{tool:aa}} mini-tool
-does the same conversion for one value you type.{{i:polar phasors}}{{i:aa tool}}
+does the same conversion for one value you type.{{i:polar phasors}}{{i:aa mini-tool}}
 
 ## The four power answers
 
@@ -63,7 +63,7 @@ omission: a pure reactance consumes none, and a zero printed every time
 would be noise.{{i:average power}}
 
 The {{tool:pf}} mini-tool takes a complex power or an impedance and returns
-the power factor with its lead/lag sense.{{i:power factor}}{{i:pf tool}}
+the power factor with its lead/lag sense.{{i:power factor}}{{i:pf mini-tool}}
 
 ::: warning RMS is the one setting that changes an answer
 **RMS phasors**, in {{card:Settings}}, is not a display choice. Off means

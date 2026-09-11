@@ -5,7 +5,7 @@ title: Direct current analysis
 updated: 2026-09-05
 summary: >
   Learn to describe a circuit in Symbulator, and how to run a *direct current*
-  analysis using {{tool:dc}}. Learn how to describe a *voltage source* using **e**,
+  analysis{{v7,8| using {{tool:dc}}}}. Learn how to describe a *voltage source* using **e**,
   and a *resistor* using **r**.
 ---
 
@@ -65,7 +65,7 @@ The button reads *Solving…* for a moment, then *Solved!*. Scroll down to
 element of the circuit.
 :::
 
-Congratulations! You have just run your first simulation in Symbulator 9.
+Congratulations! You have just run your first simulation in Symbulator{{v9| 9}}.
 
 ### How does it work
 
@@ -497,8 +497,8 @@ Symbulator says Done when a simulation completes. It took my calculator under
 each in a memorably named variable in the current document.
 :::
 ::: only 9
-The page fills in below — this circuit takes under a second on a computer,
-and maybe a bit more on a mobile — and a line at the foot of {{card:Results}} says
+The page fills in below — this circuit takes under a second on a laptop,
+a little more on a phone — and a note at the foot of {{card:Results}} says
 what happened: *DC analysis · 16 result(s)*, and how long it took.
 :::
 
@@ -524,7 +524,7 @@ To read the signs of your answers correctly, mind the details:{{v9|{{i:sign conv
 - The voltage drop is defined as the voltage of the first node minus the
   voltage of the second node.
 - The power given is the power consumed. So, if you want power delivered,
-  evaluate the negative of that power.
+  {{v7,8|evaluate the negative of that power}}{{v9|switch its sign}}.
 :::
 
 **Step 3: Get the answers**
@@ -555,7 +555,7 @@ That is 6 kΩ. Correct.
 
 *Answer to question (b).* Current {{var:I_s}} is defined in the schematic as the current
 flowing through the source, in the direction that goes from node **0** to node **1**.
-One way to find this value is evaluating the negative of the current through
+One way to find this value is {{v7,8|evaluating the negative of}}{{v9|switching the sign of}} the current through
 the source, which {{v7,8|as you know flows}}{{v9|we defined as flowing}} in the opposite direction:
 
 ```sym 7

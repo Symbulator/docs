@@ -10,7 +10,7 @@ absent_note: >
   is covered in the lesson on the complex frequency domain.
 summary: >
   Learn to do gain and phase *Bode plots* for transfer functions of ω and s
-  with the **bode** tool. Find the *resonant frequency* of an answer by solving
+  {{v7,8|with the **bode** tool}}{{v9|in the {{card:Plotting Tools}} card}}. Find the *resonant frequency* of an answer by solving
   for the frequency at which the reactance vanishes.
 ---
 

@@ -1324,8 +1324,8 @@ v_{o} = 3\,v_{2} - 4\,v_{1}
 
 ::: problem AS2's Figure 5.24 (Difference or Differential)
 
-Find {{var:v_o}}. (And keep it in the memory, for you will use it in the next
-three problems.)
+Find {{var:v_o}}. ({{v7,8|And keep it in the memory, for you will use it in the next
+three problems.}}{{v9|And keep the answer on screen: the next three problems reuse it.}})
 
 ::: figure assets/practice/as2s-figure-5-24-difference-or-differential-34.jpg
 
@@ -1378,8 +1378,9 @@ This expression is equivalent to the book's answer.
 For the same circuit of the previous problem, find {{var:v_o}} when
 {{var:R_1}}={{var:R_2}} and {{var:R_3}}={{var:R_4}}.
 
-Since we already have the expression for vo stored in the memory, we only do
-this:
+{{v7,8|Since we already have the expression for vo stored in the memory, we only do
+this:}}{{v9|The expression for `vo` is still in {{card:Results}} from the previous
+problem, so we only do this:}}
 
 ```sym 7
 expand(vo)|r2=r1 and r3=r4
@@ -2105,7 +2106,7 @@ r2,c,d,r2
 r3,d,e,r3
 ```
 
-To find vo, we ask for `vb-ve`. We get an expression that can easily be
+To find vo, we ask {{v9|{{card:Evaluate}} }}for `vb-ve`. We get an expression that can easily be
 rearranged to look like this:
 
 ::: only 7,8
