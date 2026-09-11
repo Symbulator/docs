@@ -915,14 +915,21 @@ figcaption {
 .cover:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 .cover-the {
   font-family: var(--sans); font-size: 0.72rem; font-weight: 600;
-  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-3);
+  letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-2);
 }
 .cover-name {
   font-family: var(--serif); font-size: 1.9rem; line-height: 1.12;
-  color: var(--navy); margin: 0.15rem 0 0.7rem; text-wrap: balance;
+  /* #398: --ink, not --navy. `--navy` is deliberately the same in both
+     themes (it is the topbar's fixed band), so it was 1.56:1 on the dark
+     cover ground -- unreadable. --ink is 14.74:1 there and is what the
+     chapter-card headings already use; the stripe above the cover carries
+     the colour that tells the three books apart. */
+  color: var(--ink); margin: 0.15rem 0 0.7rem; text-wrap: balance;
 }
 .cover-meta {
-  font-family: var(--sans); font-size: 0.78rem; color: var(--ink-3);
+  /* #398: --ink-3 measured 3.99:1 in dark and 3.09:1 in light, which
+     fails for text this size in either theme. */
+  font-family: var(--sans); font-size: 0.78rem; color: var(--ink-2);
   border-top: 1px solid var(--rule); padding-top: 0.6rem;
 }
 /* The stripe is the only thing that differs, and it is the one place the

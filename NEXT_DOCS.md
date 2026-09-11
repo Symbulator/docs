@@ -3,6 +3,159 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #409 — version 9's index spoke the calculator's vocabulary, and the fix reached 7 and 8 — **fixed 12 Sep 2026, live**
+
+Roberto: *"That index is bad, by the way. In v9 it talks of the 'th
+script', which doesn't exist in v9."*
+
+**How it got there is the part worth keeping.** The version 9 wording pass
+(#251–#254) rewrote the prose to drop *script*, *command* and the rest of
+the calculator's words — but an `{{i:}}` marker is not prose. Nobody
+re-read the markers, and nothing checks them. Three of them in
+`src/04-lesson-equivalents.md`:
+
+| line | block | marker | |
+|---|---|---|---|
+| 234 | `::: only 7,8` | `{{i:th script}}` | correct there |
+| 239 | `::: only 9` | `{{i:th script}}` | wrong |
+| 142 | **shared prose** | `{{i:er script}}` | wrong in 9 — and one term serves all three versions |
+
+**The first fix was a breach, and the guard caught it.** Re-terming all
+three to *equivalent resistance* and *Thévenin equivalent* reads as an
+improvement and is one for version 9. But the shared marker is read by
+versions 7 and 8, and the marker at 234 sits inside *their* block, so
+their index lost two terms that are **correct for them** — those versions
+really do have an `er` script and a `th` script. That is frozen text,
+changed without asking.
+
+`v78_semantic.py` fired on `/7/lesson-equivalents` and
+`/8/lesson-equivalents`. Note what it could and could not see: the
+**visible text on those two pages was identical**, so only the normalised
+markup diff showed anything at all, and the actual damage was on a third
+page, `/7/index`, which was not in the capture set.
+
+**The fix is to gate the markers, not to re-word them.** Shared prose now
+carries none; `{{i:er script}}` sits inside the `::: only 7,8` block,
+`{{i:equivalent resistance}}` inside `::: only 9`, and `{{i:th script}}`
+is restored at 234. Measured on the live site afterwards, not asserted:
+
+    v7: 34 terms, 'er script' and 'th script' both present
+    v8: 32 terms, 'er script' and 'th script' both present
+    v9: 33 terms, no term naming a script or a command
+
+**One residue, and it is benign — but know what it is before the next
+deploy.** The two lesson pages still report DIFFERS in the semantic
+guard's markup column with their visible text identical. The whole
+difference, all seven chunks, is the invisible anchor
+
+    <span class="ix" id="ix-er-script-0"></span>
+
+moving one sentence later: out of the shared paragraph and into the
+only-7,8 block, which is precisely what gating the marker means.
+**An index anchor's position is part of 7 and 8's markup even when the
+term is unchanged**, so the guard reports a moved marker exactly as
+loudly as a changed one. Read the diff before reverting on its word.
+
+**And the check was wrong before the subject was, again.** The first
+script written to read the live index pages matched `class="ixterm"`;
+the class is `ix-term`. It returned **0 terms for all three versions** —
+including version 9, which certainly has an index. A zero that spans the
+control is the instrument, not the specimen.
+
+---
+
+## #408 — the Manual's credits — **done 12 Sep 2026, live**
+
+Roberto: *"I think we need an equivalent of 'Roll the credits' for the
+Manual. Boil it down to the essentials."* Then, on reading the draft:
+*"You need to add the acknowledgements."*
+
+`src/34-manual-credits.md`, `kind: manual-back`, `book: manual`. The
+author and the dates in two paragraphs, then all **23 named
+collaborators** across versions 1–6, 7–8 and 9; the Claude section
+carrying the `::: warning Use AI responsibly` box in Roberto's own words;
+the software it stands on, with ahkab described the way the standing rule
+requires — a second opinion, at arm's length, no code taken; and the MIT
+licence.
+
+The contact section is a role address, not a riddle: **`help@symbulator.com`**.
+The Course's credits obfuscate Roberto's personal address by describing
+it; a role address needs no such thing. The `::: tip The long version`
+that pointed back at the Course went with it — the Manual's own last page
+does not need to end by sending the reader elsewhere.
+
+Two things bit on the way, both in tooling rather than in prose:
+
+- **`tools/static_preview.py` marked every Manual part COURSE.** Its
+  `_mark` helper took the version and nothing else, so it could not know
+  which book a page belonged to. It takes the page id now.
+- **The white-text guard refused the Manual's PDF** on the contents page,
+  honestly and wrongly: dot leaders are *text*, so a sparse page of
+  chapter titles and leaders reads as a very high text-to-ink ratio. The
+  guard strips runs of three or more dots before measuring.
+
+---
+
+## #407 — the home page is a choice between three books, not a list of 35 — **done 12 Sep 2026, live**
+
+Roberto: *"I don't like the cluttered look of the current
+learn.symbulator.com page… we should not have all three books there with
+all their chapters. Instead… a box or card for each, that — when clicked
+takes the user to that 'landing' page where the layout of the chapters is
+presented."* And: move the chooser text **above** each card, and write one
+for the Technical Notes.
+
+`/9/` is three covers now. Each has its own landing page —
+**`/9/course`, `/9/manual`, `/9/notes`** — recognised as virtual slugs
+before the 404 fallback, so no `.htaccess` rule was needed and the
+routing stays `^([789])`. One function decides where a chapter lives:
+
+    function shelf_of($c) {
+        if (($c['book'] ?? 'course') === 'manual') { return 'manual'; }
+        if (($c['kind'] ?? '') === 'note')         { return 'notes'; }
+        return 'course';
+    }
+
+The sidebar reads it too, so a reader in the Manual sees the Manual's
+parts and not 35 entries from three books (Roberto: *"I think the sidebar
+should only show the chapters for the relevant book"*). Four near-copies
+of the card grid collapsed into one `$renderGrid` closure.
+
+**`web/index.php` cannot be run on this machine, so it was reviewed by
+reading — and reading found three real bugs** that a browser would have
+found in seconds: `$thisShelf` was used by the pager before it was
+defined, `$pageTitle` dereferenced a null chapter on a shelf page, and
+the sidebar duplicated the grid it sat beside. Worth remembering as the
+cost of a PHP page with no local runtime: the review has to be as careful
+as a test suite, because it *is* the test suite.
+
+Then the fine tuning, all Roberto's:
+
+- **Dark-mode contrast on the cover titles**, reported with a screenshot.
+  The cause is deliberate and easy to walk into again: `--navy` is a
+  fixed brand colour that the dark theme **never overrides**, so the
+  title sat at **1.56:1** on the dark ground. Titles take `var(--ink)`
+  now and the eyebrow and meta lines `var(--ink-2)`.
+- **19px of horizontal overflow** on every page without a sidebar. The
+  shell's first grid track was sized from content that was no longer
+  there:
+
+      body:not(.home) .shell:has(.toc:not([open])) {
+        grid-template-columns: max-content minmax(0, 1fr);
+      }
+
+  `:has()` takes the specificity of its argument, which is what makes
+  this rule win where a plainer one had not.
+- **The Notes heading.** My proposal was rejected on the substance —
+  *"the notes don't cover every 'something', only a small set of obscure
+  somethings"* — and he chose **"Want the detail the lessons leave out?"**
+  The blurb under it is his wording too.
+
+**On the numbers:** two commits in this round are labelled #395 and #396,
+which the app tree also used the same day. Roberto, asked: *"Do not worry
+about the numbers."* Recorded rather than tidied, since the commits are
+pushed; the write-ups above carry the numbers that are actually free.
+
 ## #406 - claimed by the app tree, 11 Sep 2026: a range's two ends move into a popover, so the Restriction column stops reserving room for fields almost no row uses. Roberto's design, and it supersedes three rounds of shrinking those boxes (#391 grew them, #404 shrank them twice) - all of which treated the symptom. At rest the cell is the menu alone plus a compact chip of the values; editing happens in the popover. No docs work. Write-up in `Application/v9/repos/local/NEXT.md`
 
 ## #404 - claimed by the app tree, 11 Sep 2026: the Numerical Solver's number fields are sized so the Restriction column stays on screen. In Complex mode a row carries two boxes and a Domain menu, which pushed Restriction off the right edge; the pair drop to 4.8rem and the range's ends to 4rem, with the j kept beside its box rather than stacked above it. Both reported from the live site with screengrabs, and both measured rather than eyeballed: Complex with a range open went from 37px of overflow to none at 950px. Partly walks back #391, which had grown the range ends to a full value box when Restriction still had the row to itself. No docs work. Write-up in `Application/v9/repos/local/NEXT.md`

@@ -53,6 +53,13 @@ $courseCards = on_shelf($toc['chapters'], 'course');
 $manCards    = on_shelf($toc['chapters'], 'manual');
 $noteCards   = on_shelf($toc['chapters'], 'notes');
 
+/* The Manual's cover counts its numbered Parts. `manual-back` -- the
+   credits -- sits on the Manual's shelf but carries no Part number, so
+   counting the shelf made the cover say 15 where the eyebrows stop at
+   Part 14 (#399). */
+$manualParts = count(array_filter($manCards,
+    function ($c) { return ($c['kind'] ?? '') === 'manual'; }));
+
 $SHELF_NAME = array('course' => 'Course', 'manual' => 'Manual',
                     'notes'  => 'Technical Notes');
 
@@ -537,18 +544,18 @@ function asset(string $name): string {
                     . 'problems from real textbooks, from your first '
                     . 'circuit description to two-port parameters.'),
       array('id' => 'manual', 'name' => 'Manual',
-            'meta' => count($manCards) . ' parts',
+            'meta' => $manualParts . ' parts',
             'lede' => 'Already know your way around circuit simulation?',
             'body' => 'You need to know what Symbulator does and how to '
                     . 'ask for it. Every feature once, with a reference '
                     . 'at the back.'),
       array('id' => 'notes', 'name' => 'Technical Notes',
             'meta' => count($noteCards) . ' notes',
-            'lede' => 'Looking up one particular thing?',
-            'body' => 'Short notes, each on a single topic that would '
-                    . 'slow a lesson down &mdash; input files, SI '
-                    . 'prefixes, every control in Settings. Optional '
-                    . 'reading; nothing else depends on them.'),
+            'lede' => 'Want the detail the lessons leave out?',
+            'body' => 'Short notes, each on a single topic &mdash; '
+                    . 'input files, SI prefixes, every control in '
+                    . 'Settings. Optional reading; nothing else depends '
+                    . 'on them.'),
     );
   ?>
   <div class="shelves">

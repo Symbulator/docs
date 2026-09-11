@@ -139,10 +139,10 @@ with no *independent* source in it? One way is to connect a 1 A current source
 between the two nodes and read the voltage drop across it. That is the manual
 way.
 
-An easier way is to let Symbulator do that for us.{{i:er script}}
+An easier way is to let Symbulator do that for us.
 
 ::: only 7,8
-Just run the {{tool:er}} script and it does the same thing automatically. It finds
+Just run the {{tool:er}} script and it does the same thing automatically.{{i:er script}} It finds
 the equivalent resistance of a passive circuit and stores it — for a DC
 analysis — in **req**. It takes three arguments: the circuit description as a
 string, and the two nodes to measure between.
@@ -151,7 +151,7 @@ string, and the two nodes to measure between.
 Set {{ui:Type of analysis}} to *Find equivalent*, and a second menu appears,
 {{ui:Type of equivalent}}, whose first entry is *Resistance / impedance*. Two
 node boxes appear with it, for the terminals you are measuring between.
-Symbulator does the 1 A trick internally and reports the answer.
+Symbulator does the 1 A trick internally and reports the answer.{{i:equivalent resistance}}
 :::
 
 ::: problem B11's Example 8.29
@@ -236,7 +236,7 @@ automatically. It takes three arguments: the circuit description, the first
 node and the second node.
 :::
 ::: only 9
-An easier way is to let Symbulator do exactly that automatically:{{i:th script}}
+An easier way is to let Symbulator do exactly that automatically:{{i:Thévenin equivalent}}
 set {{ui:Type of analysis}} to *Find equivalent* and {{ui:Type of equivalent}} to
 *Thévenin / Norton*, and give it the two nodes.
 :::

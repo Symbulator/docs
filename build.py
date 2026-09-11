@@ -1527,7 +1527,12 @@ class TexRenderer:
 #: (#381); within a group the author's order is kept.
 # The Course first, in its own order, then the Manual (#390).
 KIND_ORDER = {"front": 0, "lesson": 0, "note": 1, "back": 2,
-              "manual": 3}
+              "manual": 3,
+              # The Manual's own back matter, after its parts. A separate
+              # kind rather than "back" so it sorts with the Manual, and
+              # rather than "manual" so for_version gives it no Part
+              # number -- credits are not a part (#397).
+              "manual-back": 4}
 
 
 def load_book() -> Book:
