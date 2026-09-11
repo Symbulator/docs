@@ -72,8 +72,8 @@ def manual_chapters() -> list[str]:
     return out
 
 
-def solve(desc: str, domain: str = "dc"):
-    return symbulator_ui.solve_ui(desc, domain, "", None, "solve",
+def solve(desc: str, domain: str = "dc", omega: str = ""):
+    return symbulator_ui.solve_ui(desc, domain, omega, None, "solve",
                                   "", "", "z", None, None, None)
 
 
@@ -109,15 +109,29 @@ def main() -> int:
                 print(f"  {line:>5}  PARSE FAILED  {e}")
                 continue
 
-            out = solve(one)
+            # A page's circuit belongs to whatever analysis that page is
+            # about, and the page says so in prose the checker cannot
+            # read. Solving everything in DC therefore failed the
+            # coupling example honestly and wrongly: in DC an inductor is
+            # a short, so a source across one is a real contradiction --
+            # of a circuit that is correct in AC, which is where the page
+            # runs it. The claim worth making is that the description is
+            # a solvable circuit in *some* domain.
+            for dom, om in (("dc", ""), ("ac", "1000"), ("fd", ""),
+                            ("tr", "")):
+                out = solve(one, dom, om)
+                if out.get("ok"):
+                    break
             if not out.get("ok"):
                 failed += 1
-                problems.append(f"{key}: does not solve -- {out.get('error')}")
+                problems.append(f"{key}: solves in no domain -- "
+                                f"{out.get('error')}")
                 print(f"  {line:>5}  SOLVE FAILED  {out.get('error')}")
                 continue
 
             solved += 1
-            print(f"  {line:>5}  ok  {len(els)} elements")
+            note = "" if dom == "dc" else f"  ({dom})"
+            print(f"  {line:>5}  ok  {len(els)} elements{note}")
             if show:
                 for row in out.get("elements") or []:
                     for it in row["items"]:
