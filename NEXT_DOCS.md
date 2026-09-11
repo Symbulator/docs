@@ -3,7 +3,7 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
-## #390 — the Manual: a second book on version 9 — **built, not deployed**
+## #390 — the Manual: a second book on version 9 — **done 11 Sep 2026, live on `learn.symbulator.com`**
 
 Fourteen parts, 6,384 words, 22 circuits. The Course is 49,712 words and
 297 worked problems, so the Manual is about an eighth the length and a
@@ -79,6 +79,33 @@ on this machine. Tag balance was compared across the edit (102/102 before,
 the rendering is unproven until it is served. The deploy guard is the one
 #389 describes: capture `/7/` and `/8/` before, diff byte for byte after,
 identical or revert.
+
+**Live, and verified by fetching.** All fourteen parts return 200 in
+version 9 and 404 in both 7 and 8; the chooser, the three headings and the
+per-book property mark are all served as intended — a Manual page says
+Manual, a Course page Course, and the chooser, which is in neither book,
+Documentation. The three card grids fill with no short row: 15 cards in 5
+rows, 6 in 2, 14 in 5, measured on the live page.
+
+**Versions 7 and 8 were proved unmoved, and the rule needed refining.**
+Six pages were captured before the deploy and re-fetched after. They are
+*not* byte-identical, and the guard was right to say so. Two differences,
+both benign and both worth knowing:
+
+* the shared `style.css` is cache-busted by content hash, so adding the
+  chooser's rules changed the query string on **every page of every
+  version**;
+* the sidebar's HTML indentation shifted where the Manual's `<?php ?>`
+  block went in.
+
+Normalised for whitespace and that hash, all six pages are identical; the
+visible text is identical; and the word *chooser* appears nowhere in a
+version 7 or 8 page.
+
+**So the standard is "semantically identical", not "byte-identical".** A
+byte diff is still the right first test — it is what surfaced both of
+these — but a shared stylesheet makes zero unreachable, and a rule that
+can never be met is one that gets waived rather than applied.
 
 **Not done, deliberately:** the Manual's own PDF, which Roberto asked for
 *when it is final*.
