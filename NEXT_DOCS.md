@@ -3,6 +3,8 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #423 — claimed by the app tree, 12 Sep 2026: **the schematic drawer restyled on Nilsson & Riedel 12e** — symbols, stroke weights, label face and colours measured from the book's own vector figures. The docs side of it is the monograph's Appendix B, re-rendered by `paper/render_exemplars.py` (now embedding DejaVu Serif) and the book rebuilt. Write-up in `Application/v9/repos/local/NEXT.md`
+
 ## #422 — the index, rebuilt for version 9's three books — **live 12 Sep 2026**
 
 **Deployed at Roberto's "Ship it!" the same evening and verified by
