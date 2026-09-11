@@ -26,9 +26,39 @@ $toc = json_decode(
 
 $page = isset($_GET['p']) ? preg_replace('/[^a-z0-9\-]/', '', $_GET['p']) : '';
 $ids = array_column($toc['chapters'], 'id');
+
+/* #395: version 9 carries three books, and each has a page of its own
+   listing its chapters -- /9/course, /9/manual, /9/notes. They are not
+   chapters, so they are recognised here, before the unknown-slug 404.
+   No .htaccess rule is needed: the rewrite already routes any slug to
+   `p=`, and no chapter owns these three names. Versions 7 and 8 have one
+   book and no shelf pages. */
+$SHELVES = array('course', 'manual', 'notes');
+$shelf = ($v === '9' && in_array($page, $SHELVES, true)) ? $page : '';
+
+/* Which shelf a chapter sits on. The technical notes are `book: course`
+   and `kind: note`, and Roberto made them a top-level book, so this reads
+   both fields. One function for the covers, the shelf pages, the sidebar,
+   the pager and the property mark, so none of them can disagree. */
+function shelf_of($c) {
+    if (($c['book'] ?? 'course') === 'manual') { return 'manual'; }
+    if (($c['kind'] ?? '') === 'note')         { return 'notes'; }
+    return 'course';
+}
+function on_shelf($chapters, $name) {
+    return array_values(array_filter($chapters,
+        function ($c) use ($name) { return shelf_of($c) === $name; }));
+}
+$courseCards = on_shelf($toc['chapters'], 'course');
+$manCards    = on_shelf($toc['chapters'], 'manual');
+$noteCards   = on_shelf($toc['chapters'], 'notes');
+
+$SHELF_NAME = array('course' => 'Course', 'manual' => 'Manual',
+                    'notes'  => 'Technical Notes');
+
 $isHome = ($page === '');
 $isIndex = ($page === 'index');
-if (!$isHome && !$isIndex && !in_array($page, $ids, true)) {
+if (!$isHome && !$isIndex && !$shelf && !in_array($page, $ids, true)) {
     http_response_code(404);
     $page = '';
     $isHome = true;
@@ -39,6 +69,11 @@ $current = null;
 foreach ($toc['chapters'] as $c) {
     if ($c['id'] === $page) { $current = $c; }
 }
+
+/* Which shelf this page belongs to: a chapter's own, or the shelf page's,
+   or `course` on the home page and in versions 7 and 8. Defined here
+   because the pager below reads it (#395). */
+$thisShelf = $current ? shelf_of($current) : ($shelf ?: 'course');
 
 function url($v, $p = '') {
     // Root-absolute, and pretty: /9/lesson-dc, not ?v=9&p=lesson-dc.
@@ -66,11 +101,7 @@ function e($s) { return htmlspecialchars($s, ENT_QUOTES, 'UTF-8'); }
 // (#390). The flat list runs the Course and then the Manual, so without
 // this the credits' "next" turned the page into Part 1 of a different
 // book, and Part 1's "previous" turned back into the credits.
-$thisBook = $current ? ($current['book'] ?? 'course') : 'course';
-$sameBook = array_values(array_filter($toc['chapters'],
-  function ($c) use ($thisBook) {
-    return ($c['book'] ?? 'course') === $thisBook;
-  }));
+$sameBook = on_shelf($toc['chapters'], $thisShelf);
 $bookIds = array_map(function ($c) { return $c['id']; }, $sameBook);
 $pos = array_search($page, $bookIds, true);
 $prev = ($pos !== false && $pos > 0) ? $sameBook[$pos - 1] : null;
@@ -90,16 +121,28 @@ $next = ($pos !== false && $pos < count($bookIds) - 1)
 // #390: version 9 carries two books now, so the mark names the one this
 // page belongs to. `$current` is null on the home page, which is the
 // chooser and belongs to neither -- it keeps the generic mark.
-$inManual = ($v === '9') && $current
-            && (($current['book'] ?? 'course') === 'manual');
-$bookName     = ($v === '9') ? ($inManual ? 'Manual' : 'Course') : 'Tutorial';
+/* #395: the mark names the shelf this page belongs to -- a chapter's own,
+   or the shelf page's. The home page is the chooser and belongs to none of
+   them, so it keeps the generic mark. Versions 7 and 8 never reach any of
+   this: they have one book and `$thisShelf` is always `course` there. */
+$inManual = ($v === '9') && $thisShelf === 'manual';
+$bookName = ($v === '9') ? $SHELF_NAME[$thisShelf] : 'Tutorial';
+/* The property mark is spaced capitals in a narrow band, so it takes the
+   short name: TECHNICAL NOTES would be the longest mark on any of the five
+   sites and cannot be measured from here. The shelf page still says
+   Technical Notes in its heading. */
+$MARK_NAME = array('course' => 'Course', 'manual' => 'Manual',
+                   'notes'  => 'Notes');
 $propertyMark = ($v === '9')
-              ? ($isHome ? 'Documentation' : $bookName)
+              ? ($isHome ? 'Documentation' : $MARK_NAME[$thisShelf])
               : 'Documentation';
 $siteName = $toc['name'] . ' ' . $propertyMark;
-$pageTitle = $isHome ? $siteName
+/* #395: a shelf page has no `$current`, so it names itself. Without this
+   the title fell through to `$current['title']` on null. */
+$pageTitle = $shelf ? ($SHELF_NAME[$shelf] . ' — ' . $toc['name'])
+           : ($isHome ? $siteName
            : ($isIndex ? 'Index — ' . $siteName
-                       : $current['title'] . ' — ' . $siteName);
+                       : $current['title'] . ' — ' . $siteName));
 ?>
 <!doctype html>
 <html lang="en">
@@ -146,7 +189,7 @@ function asset(string $name): string {
 <link rel="stylesheet" href="<?= asset('style.css') ?>">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
 </head>
-<body class="v<?= e($v) ?><?= $isHome ? ' home' : '' ?>" data-chapter="<?= e($page) ?>">
+<body class="v<?= e($v) ?><?= ($isHome || $shelf) ? ' home' : '' ?>" data-chapter="<?= e($page) ?>">
 
 <a class="skip" href="#main">Skip to content</a>
 
@@ -420,26 +463,6 @@ function asset(string $name): string {
         <?php endif; ?>
       </li>
     <?php endforeach; ?>
-      <?php
-        /* Filtering the list takes away the only route from one book to
-           the other short of going home, so the other book is named at
-           the foot of it. Version 9 only -- 7 and 8 have one book, and
-           `$other` stays empty there. */
-        $other = null;
-        if ($v === '9') {
-          $want = ($thisBook === 'manual') ? 'course' : 'manual';
-          foreach ($toc['chapters'] as $oc) {
-            if (($oc['book'] ?? 'course') === $want) { $other = $oc; break; }
-          }
-        }
-      ?>
-      <?php if ($other): ?>
-        <li class="tn-sep other-book">
-          <a href="<?= url($v, $other['id']) ?>"><?=
-            $thisBook === 'manual' ? 'The Course' : 'The Manual'
-          ?></a>
-        </li>
-      <?php endif; ?>
     <li class="<?= $isIndex ? 'is-current' : '' ?>">
       <a href="<?= url($v, 'index') ?>"><span class="ch-title">Index</span></a>
     </li>
@@ -467,94 +490,88 @@ function asset(string $name): string {
 </script>
 
 <main id="main">
-<?php if ($isHome): ?>
+<?php
+  /* One grid renderer for every place that draws chapter cards (#395):
+     the three shelf pages and versions 7 and 8's home page. The file had
+     grown four near-copies of this markup. */
+  $renderGrid = function ($cards) use ($v) {
+    echo '<ol class="chapter-cards">';
+    foreach ($cards as $c) {
+      $absent = $c['present'] ? '' : ' class="is-absent"';
+      echo '<li' . $absent . '><a href="' . url($v, $c['id']) . '">';
+      if ($c['eyebrow']) {
+        echo '<p class="card-eyebrow">' . e($c['eyebrow']) . '</p>';
+      }
+      echo '<h2>' . e($c['title']) . '</h2>';
+      echo '<p class="card-summary">'
+         . strip_tags($c['summary'], '<em><strong><code>')
+         . '</p></a></li>';
+    }
+    echo '</ol>';
+  };
+?>
 
+<?php if ($shelf): ?>
   <?php
-    /* #380: the lessons tile on their own and the technical notes sit
-       below a rule. Splitting them is also what closes the lessons'
-       rectangle: with the note among them the grid ran to sixteen cards
-       and left the credits alone on a line of their own. */
-    /* #390: three groups now. A manual chapter is filtered out of the
-       first two by its book, not by its kind, so the technical notes
-       keep behaving exactly as they did. */
-    $isMan = function ($c) { return ($c['book'] ?? 'course') === 'manual'; };
-    $mainCards = array_values(array_filter($toc['chapters'],
-      function ($c) use ($isMan) {
-        return ($c['kind'] ?? '') !== 'note' && !$isMan($c);
-      }));
-    $noteCards = array_values(array_filter($toc['chapters'],
-      function ($c) use ($isMan) {
-        return ($c['kind'] ?? '') === 'note' && !$isMan($c);
-      }));
-    $manCards = array_values(array_filter($toc['chapters'], $isMan));
+    /* A shelf page: one book, its chapters, nothing else. */
+    $cards = $shelf === 'manual' ? $manCards
+           : ($shelf === 'notes' ? $noteCards : $courseCards);
   ?>
-  <?php if ($manCards): ?>
-    <div class="chooser">
-      <div>
-        <p class="chooser-q">Already know your way around circuit
-          simulation?</p>
-        <p>You need to know what Symbulator does and how to ask for it.
-          That is <a href="<?= url($v, $manCards[0]['id']) ?>"><strong>the
-          Manual</strong></a> &mdash; every feature once, with a reference
-          at the back.</p>
-      </div>
-      <div>
-        <p class="chooser-q">New to circuits, or to simulation?</p>
-        <p>Start with <a href="<?= url($v, $mainCards[0]['id']) ?>"><strong>the
-          Course</strong></a> &mdash; thirteen lessons worked against real
-          problems from real textbooks, from your first circuit description
-          to two-port parameters.</p>
-      </div>
-    </div>
-  <?php endif; ?>
+  <div class="tn-divider tn-first">
+    <h2 class="tn-heading">
+      <?= $shelf === 'course' ? 'Symbulator Course' : e($SHELF_NAME[$shelf]) ?>
+    </h2>
+  </div>
+  <?php $renderGrid($cards); ?>
+
+<?php elseif ($isHome && $v === '9'): ?>
+  <?php
+    /* #395: three texts and three covers. The chapters live on the shelf
+       pages now -- listing all 35 here is the clutter Roberto asked to
+       be rid of. */
+    $shelves = array(
+      array('id' => 'course', 'name' => 'Course',
+            'meta' => count($courseCards) . ' chapters',
+            'lede' => 'New to circuits, or to simulation?',
+            'body' => 'Start here. Thirteen lessons worked against real '
+                    . 'problems from real textbooks, from your first '
+                    . 'circuit description to two-port parameters.'),
+      array('id' => 'manual', 'name' => 'Manual',
+            'meta' => count($manCards) . ' parts',
+            'lede' => 'Already know your way around circuit simulation?',
+            'body' => 'You need to know what Symbulator does and how to '
+                    . 'ask for it. Every feature once, with a reference '
+                    . 'at the back.'),
+      array('id' => 'notes', 'name' => 'Technical Notes',
+            'meta' => count($noteCards) . ' notes',
+            'lede' => 'Looking up one particular thing?',
+            'body' => 'Short notes, each on a single topic that would '
+                    . 'slow a lesson down &mdash; input files, SI '
+                    . 'prefixes, every control in Settings. Optional '
+                    . 'reading; nothing else depends on them.'),
+    );
+  ?>
+  <div class="shelves">
+    <?php foreach ($shelves as $sh): ?>
+      <section class="shelf">
+        <p class="shelf-lede"><?= e($sh['lede']) ?></p>
+        <p class="shelf-body"><?= $sh['body'] ?></p>
+        <a class="cover cover-<?= e($sh['id']) ?>"
+           href="<?= url($v, $sh['id']) ?>">
+          <span class="cover-the">The</span>
+          <span class="cover-name"><?= e($sh['name']) ?></span>
+          <span class="cover-meta"><?= e($sh['meta']) ?></span>
+        </a>
+      </section>
+    <?php endforeach; ?>
+  </div>
+
+<?php elseif ($isHome): ?>
+  <?php /* Versions 7 and 8: one book, listed as it always has been. */ ?>
   <div class="tn-divider tn-first">
     <h2 class="tn-heading">Symbulator <?= e($bookName) ?></h2>
   </div>
-  <ol class="chapter-cards">
-    <?php foreach ($mainCards as $c): ?>
-      <li<?= $c['present'] ? '' : ' class="is-absent"' ?>>
-        <a href="<?= url($v, $c['id']) ?>">
-          <?php if ($c['eyebrow']): ?>
-            <p class="card-eyebrow"><?= e($c['eyebrow']) ?></p>
-          <?php endif; ?>
-          <h2><?= e($c['title']) ?></h2>
-          <p class="card-summary"><?= strip_tags($c['summary'], '<em><strong><code>') ?></p>
-        </a>
-      </li>
-    <?php endforeach; ?>
-  </ol>
-  <?php if ($noteCards): ?>
-    <div class="tn-divider"><h2 class="tn-heading">Technical Notes</h2></div>
-    <ol class="chapter-cards tn-cards">
-      <?php foreach ($noteCards as $c): ?>
-        <li<?= $c['present'] ? '' : ' class="is-absent"' ?>>
-          <a href="<?= url($v, $c['id']) ?>">
-            <?php if ($c['eyebrow']): ?>
-              <p class="card-eyebrow"><?= e($c['eyebrow']) ?></p>
-            <?php endif; ?>
-            <h2><?= e($c['title']) ?></h2>
-            <p class="card-summary"><?= strip_tags($c['summary'], '<em><strong><code>') ?></p>
-          </a>
-        </li>
-      <?php endforeach; ?>
-    </ol>
-  <?php endif; ?>
-  <?php if ($manCards): ?>
-    <div class="tn-divider"><h2 class="tn-heading">The Manual</h2></div>
-    <ol class="chapter-cards tn-cards">
-      <?php foreach ($manCards as $c): ?>
-        <li<?= $c['present'] ? '' : ' class="is-absent"' ?>>
-          <a href="<?= url($v, $c['id']) ?>">
-            <?php if ($c['eyebrow']): ?>
-              <p class="card-eyebrow"><?= e($c['eyebrow']) ?></p>
-            <?php endif; ?>
-            <h2><?= e($c['title']) ?></h2>
-            <p class="card-summary"><?= strip_tags($c['summary'], '<em><strong><code>') ?></p>
-          </a>
-        </li>
-      <?php endforeach; ?>
-    </ol>
-  <?php endif; ?>
+  <?php $renderGrid($toc['chapters']); ?>
 
 <?php elseif ($isIndex): ?>
 
