@@ -452,28 +452,14 @@ equivalent connected, between nodes **n** and **0**, to a load called **rl**
 with a symbolic value of **load**, in ohms.
 :::
 ::: only 9
-To help you in those cases, Symbulator writes that circuit for you. With
-the load question ticked, a button appears at the foot of {{card:Results}},
-under the equivalent's answers: {{btn:Load circuit equivalent?}} It is live
-once the equivalent has been found, and goes dead again if you change any
-input until you run again. Press it and it warns you first: the equivalent circuit will
-overwrite the {{card:Circuit Description}}, {{card:Define}} and {{card:Expert Mode}} fields
-and switch the analysis to *Solve circuit*, so a circuit you have not saved
-yet can be saved before it goes. Proceed, and the description becomes
-
-```field 9 Circuit Description
-jN,0,n,iNo
-rE,n,0,rEq
-rL,n,0,load
-```
-
-with {{card:Define}} holding the values of `iNo` and `rEq` that {{card:Results}}
-found, exact rather than rounded, and a value for `load` if you had given
-it one. It is the Norton equivalent connected, between nodes **n** and
-**0**, to a load called **rL** with the symbolic value **load**, in ohms.
-You can use it as a starting point.
+To help you in those cases, Symbulator writes that circuit for you: with the
+load question ticked, a button under the equivalent's answers drops the
+Norton equivalent, load and all, into the input fields, ready to be added
+to. {{ref:equivalent-circuit}} covers it, with a worked example — optional
+reading, and nothing else in this lesson depends on it.
 :::
 
+::: only 7,8
 ::: problem RM3's Example 9-8
 Find the Norton equivalent of the circuit left of a-b; then find the current
 through {{var:R_L}}.
@@ -491,35 +477,9 @@ s\th("e,1,0,24:r1,1,2,120:r2,2,0,280:j,2,0,560'm",2,0):{ino,req}
 ```sym 8
 s\th("e,1,0,24:r1,1,2,120:r2,2,0,280:j,2,0,560'm",2,0):{ino,req}
 ```
-```field 9 Circuit Description
-e,1,0,24
-r1,1,2,120
-r2,2,0,280
-j,2,0,560'm
-```
-
-::: only 9
-*Find equivalent*, *Thévenin / Norton*, nodes **2** and **0**, in DC, with
-the load question ticked.
-:::
 ```out 7,8
 {.36, 84.}
 ```
-
-::: only 9
-{{card:Results}} gives:
-
-::: result
-i_{no} = -0.36\ \mathrm{A}
-:::
-::: result
-R_{eq} = 84\ \Omega
-:::
-
-The Norton current is reported in the direction it actually flows, from the
-first node to the second. Carry the sign through and the load current below
-comes out the same.
-:::
 
 Correct. Now to the second part of the question. In order to find the current
 through {{var:R_L}}, we cannot use the load expressions, because now the load is not the
@@ -534,12 +494,6 @@ the equivalent, with `iNo` and `rEq` already in {{card:Define}}:}}
 ```out 7,8
 "jN,0,n,iNo:rE,n,0,rEq:rL,n,0,L"
 ```
-```field 9 Circuit Description
-jN,0,n,iNo
-rE,n,0,rEq
-rL,n,0,load
-```
-
 We change the value of the load to 168 Ω, and add the 180 mA source flowing
 from node **0** to node **n**. Then we run a dc simulation and ask for the current in
 the load:
@@ -550,29 +504,15 @@ s\dc("jN,0,n,iNo:rE,n,0,rEq:rL,n,0,168:j,0,n,180'm"):irL
 ```sym 8
 s\dc("jN,0,n,iNo:rE,n,0,rEq:rL,n,0,168:j,0,n,180'm"):irL
 ```
-```field 9 Circuit Description
-jN,0,n,iNo
-rE,n,0,rEq
-rL,n,0,168
-j,0,n,180'm
-```
-
-::: applink RM3's Example 9-8 (with the load)
-:::
-
 ```out 7,8
 –.06
 ```
-
-::: only 9
-The analysis is already *Solve circuit*; run it in DC, with **SI prefixes**
-ticked in {{card:Settings}}. The current through **rl**, `irl`, reads {{o:-60}} mA.
-:::
 
 Correct: there is a current of 60 mA flowing through {{var:R_L}} from 0 to n.
 
 Using the equivalent circuit description is meant to save you time. If you find
 it confusing to use, just don't use it.
+:::
 :::
 :::
 

@@ -184,7 +184,13 @@ def resolve_chapter(chapter_id: str, problems: list, books=None) -> list:
     """
     books = load_books() if books is None else books
     pool: list[Entry] = []
-    for key in CHAPTER_BOOKS.get(chapter_id, []):
+    # `chapter_id` may be a chapter id to look up in the map, or the book
+    # keys themselves -- a technical note names its own in front matter
+    # (#383), since the note is the thing that moves and a map entry left
+    # behind would drop its links without a word.
+    keys_in = (chapter_id if isinstance(chapter_id, (list, tuple))
+               else CHAPTER_BOOKS.get(chapter_id, []))
+    for key in keys_in:
         pool += books.get(key, [])
     found: list[list[Entry]] = [[] for _ in problems]
     if not pool:
@@ -330,21 +336,37 @@ def _self_check() -> int:
     claimed = 0
     gaps = []
     book = build.load_book()
+    # A chapter's own `books:` wins over the map, as it does in build.py
+    # (#383) -- a technical note carrying worked examples names its books
+    # in front matter and is absent from CHAPTER_BOOKS entirely.
+    chapters = []
     for ch in book.chapters:
-        if ch.id not in CHAPTER_BOOKS:
-            continue
+        keys = getattr(ch, "books", None) or CHAPTER_BOOKS.get(ch.id, [])
+        if keys:
+            chapters.append((ch, keys))
+
+    # The same book may now be claimed from two chapters -- Lesson 4 and
+    # the note that took its equivalent-circuit example -- so an entry is
+    # unclaimed only when *no* chapter claimed it. Gathering first, then
+    # reporting, is what keeps the second chapter from being blamed for
+    # the first one's entries.
+    seen_all = set()
+    for ch, keys in chapters:
         problems = chapter_problems(ch, 9)
-        got = resolve_chapter(ch.id, problems, books)
+        got = resolve_chapter(keys, problems, books)
         for (title, _), entries in zip(problems, got):
             claimed += len(entries)
             if not entries:
                 gaps.append(f"{ch.id}: PROBLEM {title} -- no entry")
-        seen = {e for es in got for e in es}
-        for key in CHAPTER_BOOKS[ch.id]:
+        seen_all |= {e for es in got for e in es}
+
+    for ch, keys in chapters:
+        for key in keys:
             for e in books[key]:
-                if e not in seen:
+                if e not in seen_all:
                     gaps.append(f"{ch.id}: ENTRY {e.lesson}#{e.index} "
                                 f"{e.title} -- claimed by no problem")
+                    seen_all.add(e)   # report a shared book's gap once
     for line in gaps:
         print("  " + line)
     print(f"app_links: {claimed} of {total} entries linked, "

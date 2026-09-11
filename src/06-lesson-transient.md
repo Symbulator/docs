@@ -233,14 +233,11 @@ Symbulator find the inverse Laplace of answers you do not need.
 ::: only 9
 To get only a chosen few, tick **Do you want to limit the results to save
 time?**, under the analysis menus once TR is chosen, and list them in the box
-that opens, separated by commas:
+that opens, separated by commas.
 
-```field 9 What results are you after? List the variables here
-v2
-```
-
-Each TR answer costs an inverse Laplace transform, so asking for one instead
-of a dozen is the easiest speed-up there is.
+{{ref:limiting-results}} covers it, with the answer names you may use and
+when the tick is worth reaching for. It is optional reading — every
+problem in this lesson solves without it.
 :::
 
 ### {{v7,8|The plot tool}}{{v9|Plotting an answer}}

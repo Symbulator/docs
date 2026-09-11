@@ -3,6 +3,192 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #388 — Tech Note F, every control in the Settings card — **built, not deployed**
+
+Roberto, 11 Sep 2026: *"A5. … the Settings card to another technical
+note."*
+
+**This one is new writing, not a move, and that was flagged before it was
+written.** {{card:Settings}} is named in eight chapters and always in
+situ — one control at a time, where that control is first needed. There
+was no block to lift out, and taking those mentions away would leave a
+lesson saying "open Settings" with no idea what is in it.
+
+So the note is the *whole card in one place*, written from the app's own
+markup rather than from the chapters' prose: `templates/index.html`'s
+Settings `<details>` for the controls and their defaults, and
+`syncSettings()` for why the two AC controls disappear outside AC and
+keep their values while hidden.
+
+Two claims in the draft were checked rather than asserted, and both
+needed correcting:
+
+* **The RMS convention.** The draft said the two conventions differ by a
+  factor of two and did not say which way. Solved both ways through
+  `symbulator_ui` on `e,1,0,10:r1,1,0,5` at 1 krad/s: peak reports 10 W,
+  RMS 20 W. The answer's *label* moves too — *average power* with the
+  tick off, *power consumed* with it on — which no lesson says and which
+  a reference page is exactly the place for.
+* **Micro.** The solver takes three spellings, not the two the table
+  prints: `'u`, MICRO SIGN `'µ` and GREEK SMALL LETTER MU `'μ`
+  (`si_prefix.py`'s `_SI_PREFIXES`). The last two are indistinguishable
+  on screen, so listing all three in a table would read as a typo; both
+  notes say instead that either mu works.
+
+Lesson 1 gained a pointer where a reader first opens the card. Nothing
+was removed from any lesson.
+
+---
+
+## #387 — Tech Note E, the SI prefixes — **built, not deployed**
+
+Roberto, 11 Sep 2026: *"A5. Move the SI prefix table to a technical
+note."*
+
+The eleven-row table moves. What stays in Lesson 1 is the sentence
+saying what the apostrophe shorthand *is*, and the `::: tip` beside it —
+both shared with versions 7 and 8, and both load-bearing: the very next
+circuit description in that lesson contains `1'k`. It is the *list* that
+is reference material, not the idea.
+
+The four spellings of 8 kΩ went with it, but only for version 9: the
+sentence is now `::: only 7,8` as it stood plus an `::: only 9` rewrite
+that points at the note, so 7 and 8 read exactly what they read before.
+
+The table was checked against `symbolator/si_prefix.py`'s
+`_SI_PREFIXES` — eleven prefixes, peta to atto, kilo taking `'k` or
+`'K` — rather than copied forward on trust.
+
+---
+
+## #386 — Tech Note D, the equivalent circuit and its example — **built, not deployed**
+
+Roberto, 11 Sep 2026: *"A4. Keep the checkbox but move the 'equivalent
+circuit', with its example, to the technical note."*
+
+The checkbox stays: the load question is what produces `irl`, `vrl`,
+`prl` and `pmax`, and those are core Lesson 4. What moved is the
+{{btn:Load circuit equivalent?}} button under the answers, and RM3's
+Example 9-8, which exists to demonstrate it.
+
+**The 7/8 copy could not move and did not.** A note is `versions: [9]`,
+and the calculator's `eqcir` string is versions 7 and 8's own feature,
+described in their own words. So the worked problem was wrapped in
+`::: only 7,8` rather than deleted — 7 and 8 keep it exactly as it
+reads today, and version 9 meets it in the note.
+
+**The build caught the half-done state, by line number.** Wrapping the
+problem left six pieces of version 9 material stranded inside it —
+three `::: only 9` blocks, two `field 9` fences and an `::: applink` —
+and `build.py --check` named every one: *a ```field 9 panel is inside an
+::: only 7,8 block, so version 9 never sees it*. That guard is the
+reason this restructure was safe to attempt at all.
+
+---
+
+## #385 — Tech Note C, the two jobs of the underscore — **built, not deployed**
+
+Roberto, 11 Sep 2026: *"A2. Move it to a technical note"*, and then
+*"you can move the 'underscores for pretty print that matches the look
+of the book' example to the technical note."*
+
+Same character, two meanings, two chapters, and neither chapter was
+about notation: Lesson 1 said an answer's name may carry an underscore
+or not, Lesson 3 said an underscore in a *symbolic value* makes a
+subscript. Both move; each lesson keeps a pointer, and Lesson 3's sits
+where the aside was, at the problem whose printed answer prompted it.
+
+**Both `::: result` panels were checked against the app.** A result panel
+is hand-written LaTeX and nothing in the build compares it with what
+Symbulator returns — which is how TR5's Example 4.5 printed a wrong
+subscript for as long as it existed (#370), and this note's whole subject
+is how an answer is spelled. Both circuits were solved through
+`symbulator_ui.solve_ui` and both panels match, once the book's `\beta`
+and the app's literal `β` are normalised against each other.
+
+The comparison also turned up something the note had not said: in the
+*plain* circuit `re1` still prints as *r*<sub>e1</sub>, because trailing
+digits are subscripted anyway (#274). A reader holding the two panels
+side by side would have seen a subscript in the one that is supposed to
+have none and concluded the note was wrong about its own subject. It is
+named in one sentence now.
+
+**A first attempt at the Lesson 3 cut left an unclosed directive.** The
+end of the block was computed by counting `:::` lines forward from the
+result panel; the block ends with three of them and the arithmetic took
+the wrong one. `build.py` refused the build. The replacement matches the
+whole block verbatim instead, so there is nothing to count — and the same
+rule was applied to #386's much larger cut.
+
+---
+
+## #384 — `--check` read a nested version wrapper as if it were in every version — **fixed**
+
+Found by #385, and it had been true since version filtering existed.
+
+`check()` filters the top level with `walk(ch.blocks, v)`, which drops an
+`only`/`not` wrapper whose versions do not include `v`. `_check_block`
+then recursed with a bare `for c in b.children`, and *that* recursion knew
+nothing about versions. So the moment a version wrapper sat inside another
+directive, everything in it was checked against all three books.
+
+The symptom was a cross-reference. Lesson 1's `{{ref:underscores}}` is in
+a top-level `::: only 9` and passed; Lesson 3's identical pointer is in an
+`::: only 9` inside a `::: problem`, and was reported as an unknown label
+for v7 and v8 — where the reference does not exist and neither does the
+note.
+
+Version wrappers are dropped on the way down now. **Code fences
+deliberately stay unfiltered:** the unknown-version guard above them must
+run wherever the fence is, and a fence tagged `10` is kept by no version
+at all, so filtering it there would have retired that guard silently —
+the narrowing would have been invisible.
+
+**Proved red on purpose, three ways**, since `check: clean` is also what a
+checker that has stopped looking prints. A bogus reference planted inside
+a `::: problem`: bare, it must be caught in 7, 8 and 9; inside `only 9`,
+in 9 alone; inside `only 7,8`, in 7 and 8 alone. All three came back
+exactly right, and the file was restored afterwards and re-checked clean.
+
+---
+
+## #383 — a technical note may carry worked examples — **done**
+
+Roberto, 11 Sep 2026: *"May be good to give all technical notes the
+ability, in principle, to carry examples."*
+
+A chapter's worked problems get their **Open in app** links by matching
+each problem's title against the entries of that chapter's example
+book(s). Which books those were was a hard-coded map keyed on chapter id,
+`CHAPTER_BOOKS`, listing the thirteen lessons — so a note's problems found
+no pool and rendered without links, **silently**, which is the part that
+made this worth fixing before writing any note that needed it.
+
+A chapter may now name its own books in front matter:
+
+    books: [4a, 4b]
+
+The map stays as the default for the lessons, where thirteen ids beside
+thirteen books reads best. A note says it in its own file, which is where
+*that* reads best — the note is the thing that moves, and a note moved
+away from a map entry would lose its links without a word.
+
+**The coverage report needed the same change and did not get it at
+first.** `app_links.py --self-check` still walked `CHAPTER_BOOKS` alone,
+so the two entries Tech Note D links came back as *claimed by no problem*
+while the built page carried working links to both. That is the worse
+half of a stale guard — not a miss but a false alarm, and a report with
+known-wrong lines in it stops being read. It reads a chapter's own
+`books:` now, and pools claims across chapters, since a book can be
+claimed from two places and an entry claimed by either is claimed.
+Coverage went from *331 of 336* to *334 of 336*; the three are the
+entries the notes took.
+
+The change was proved behaviour-neutral for the lessons before anything
+depended on it: the per-lesson app-link counts were unchanged.
+
+---
+
 ## #382 — the Introduction points at Tech Note A, and says it is optional — **done 11 Sep 2026, live on `learn.symbulator.com`, all three PDFs rebuilt**
 
 Roberto, 11 Sep 2026: *"find a pertinent place in the documentation … to

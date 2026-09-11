@@ -237,21 +237,10 @@ for them: an SI prefix in an element's value, preceded by an apostrophe,
 multiplies it by the corresponding factor, exactly.{{i:SI prefixes}}
 
 ::: only 9
-The prefixes Symbulator accepts:
-
-| Prefix | Shorthand | Factor |
-|---|---|---|
-| peta | `'P` | 10{{sup:15}} |
-| tera | `'T` | 10{{sup:12}} |
-| giga | `'G` | 10{{sup:9}} |
-| mega | `'M` | 10{{sup:6}} |
-| kilo | `'k` or `'K` | 10{{sup:3}} |
-| milli | `'m` | 10{{sup:-3}} |
-| micro | `'u` or `'µ` | 10{{sup:-6}} |
-| nano | `'n` | 10{{sup:-9}} |
-| pico | `'p` | 10{{sup:-12}} |
-| femto | `'f` | 10{{sup:-15}} |
-| atto | `'a` | 10{{sup:-18}} |
+Eleven prefixes are accepted, from peta down to atto.
+{{ref:si-prefixes}} lists them all with their factors, and covers the two
+where case matters — optional reading; `'k` and `'m` are the two this
+lesson uses.
 :::
 
 ::: tip Prefixes welcome!
@@ -259,9 +248,17 @@ You can use SI prefixes, preceded by an apostrophe, in the values of
 elements.
 :::
 
+::: only 7,8
 For example, an 8 kΩ resistor can be entered in many ways: `8000`, `8'k`,
 `8000.` and `8E3` are all equivalent, except that the first two are treated as
 exact and the other two as approximate.
+:::
+::: only 9
+For example, an 8 kΩ resistor can be entered as `8000` or as `8'k`, and both
+are exact. `8000.` and `8E3` are the same resistance approximately, which is
+a real difference once an answer is symbolic; {{ref:si-prefixes}} sets the
+four side by side.
+:::
 
 ## What answers do you get {#dc-answers}
 
@@ -293,6 +290,10 @@ off. Symbulator says so on screen when it does.
 In this tutorial, numerical examples assume approximate answers to three or
 four figures with prefixes on, and symbolic ones assume *exact*. The text says
 so when a change is needed.
+
+The card holds a few more controls than these two, and the lessons reach for
+them as they come up. {{ref:settings}} is the whole card in one place —
+optional reading, and nothing here waits on it.
 :::
 
 ### Answer for each node
@@ -317,13 +318,10 @@ Symbulator calculates for each resistor the following answers:
 ::: only 9
 You may write the name of any of Symbulator's answers in two ways: with
 or without an underscore. `ir1` and `i_r1` are the same current, `v2` and
-`v_2` the same voltage; capitals make no difference either. Version 9 added
-the longer spelling so that a name written out by a machine reads back
-without ambiguity; the shorter one is what the calculators used, and it is
-what this tutorial uses throughout. Neither is more correct than the other,
-and you can mix them freely — wherever you type an answer's name, in
-{{card:Evaluate}}, in {{card:Solve}}, in a condition, or (in the case of dependent
-sources) as part of an element's value, Symbulator recognises both formats.
+`v_2` the same voltage; capitals make no difference either. This tutorial
+uses the shorter spelling throughout. {{ref:underscores}} says why both
+exist, and what an underscore does in a *value*, which is a different
+thing entirely — optional reading.
 :::
 
 By now you should understand the description of the second, third and fourth

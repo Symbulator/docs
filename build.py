@@ -218,6 +218,7 @@ class Chapter:
     summary: str = ""
     blocks: list = field(default_factory=list)
     note_letter: str = ""      # set per version by `for_version`
+    books: list = field(default_factory=list)  # example books (#383)
 
 
 class SourceError(Exception):
@@ -322,6 +323,7 @@ def parse_chapter(path: str) -> Chapter:
         id=meta.get("id") or os.path.splitext(os.path.basename(path))[0],
         title=meta.get("title", "Untitled"),
         kind=meta.get("kind", "lesson"),
+        books=[str(x) for x in (meta.get("books") or [])],
         versions=meta.get("versions", [7, 8, 9]),
         absent_note=(meta.get("absent_note") or "").strip(),
         updated=str(meta.get("updated", "")),
@@ -1154,9 +1156,11 @@ class HtmlRenderer:
         # here is the order the renderer will meet them in.
         self.problem_no, self.problem_ids, self.entries = 0, set(), []
         self.entry_by_title, self.placed = {}, set()
-        if self.v == 9 and present and ch.id in app_links.CHAPTER_BOOKS:
+        # A chapter's own `books:` wins; otherwise the lessons' map.
+        _keys = ch.books or app_links.CHAPTER_BOOKS.get(ch.id, [])
+        if self.v == 9 and present and _keys:
             self.entries = app_links.resolve_chapter(
-                ch.id, app_links.chapter_problems(ch, self.v), self.books)
+                _keys, app_links.chapter_problems(ch, self.v), self.books)
             # #297: which entries the body places itself, so the problem
             # head can leave them out. Read before any block is rendered,
             # because the head comes first and the directive later.
@@ -2107,6 +2111,13 @@ def _check_block(b: Node, v, ch, labels, terms, known_versions, problems):
         for n in parse_inline(t or ""):
             _check_inline(n, v, ch, labels, terms, known_versions, problems)
     for c in b.children:
+        # #383: a version wrapper nested inside another directive was
+        # walked into regardless of `v`, so an `::: only 9` block inside
+        # a `::: problem` had its references and terms checked against
+        # v7 and v8 as well. Code fences deliberately stay unfiltered --
+        # the unknown-version guard above them must run everywhere.
+        if c.kind in ("only", "not") and not keep(c, v):
+            continue
         _check_block(c, v, ch, labels, terms, known_versions, problems)
 
 
