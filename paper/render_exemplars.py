@@ -91,7 +91,7 @@ def descriptions():
 # reads neither a <style> block nor a class, so both have to become
 # attributes on the tspan before it will see them.
 # Read from the drawer rather than restated here: a number restated in
-# a second file goes stale (this one said 13 and 0.72 until #422 moved
+# a second file goes stale (this one said 13 and 0.72 until #423 moved
 # the drawing to the book's 14 and 0.7).
 LABEL_PT = float(sch.LABEL_PX)
 SUB_SCALE = sch.SUB_SCALE
@@ -108,7 +108,7 @@ SUB_SCALE = sch.SUB_SCALE
 # face, but svglib will not honour a per-tspan `font-family` switch, so
 # splitting the runs out into Symbol drew blanks instead of bars: no
 # better.) A real Unicode TTF, embedded, is the fix.
-# DejaVu *Serif* since #422 (12 Sep 2026): the drawing's labels are a
+# DejaVu *Serif* since #423 (12 Sep 2026): the drawing's labels are a
 # Times face now, as the book's are, and DejaVu Serif is the serif that
 # ships with matplotlib and carries every glyph a label can hold. Times
 # New Roman itself is not embedded here because it has no angle sign.
@@ -129,7 +129,7 @@ _FONT_DIRS += [r"C:\Windows\Fonts",
 
 
 def register_fonts():
-    """Embed DejaVu Sans, upright and oblique, for the labels.
+    """Embed DejaVu Serif, upright and italic, for the labels.
 
     Through `svglib.register_font`, not reportlab's `registerFont`.
     Registering with reportlab alone does nothing here: svglib keeps its
@@ -168,7 +168,7 @@ def register_fonts():
     return FACES
 
 
-# `lbl ref` is a reference label, set in the book's blue (#422).
+# `lbl ref` is a reference label, set in the book's blue (#423).
 _TEXT_RE = re.compile(
     r'<text class="lbl(?P<ref> ref)?" x="(?P<x>[-\d.]+)" y="(?P<y>[-\d.]+)" '
     r'text-anchor="(?P<anchor>\w+)">(?P<inner>.*?)</text>')
@@ -264,7 +264,7 @@ def flatten_for_svglib(svg: str) -> str:
     out here instead, absolutely, by `_lay_out_labels`."""
     svg = svg.replace('stroke="currentColor"', 'stroke="#000000"')
     svg = svg.replace('fill="currentColor"', 'fill="#000000"')
-    # The reference marks' classes, resolved to the book's blue (#422);
+    # The reference marks' classes, resolved to the book's blue (#423);
     # a symbol body's own heavier `stroke-width` is already an attribute.
     svg = svg.replace('class="refk"', 'stroke="%s"' % sch.REF_COLOUR)
     svg = svg.replace('class="refh"',
