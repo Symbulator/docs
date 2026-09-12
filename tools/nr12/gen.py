@@ -216,6 +216,12 @@ def render(s, vals):
     # moves, run in DC for the initial condition the main run then carries in
     # a fifth field. Nothing arrives from thin air -- a value that is not in
     # the problem statement is found on the page (Roberto, 12 Sep 2026).
+    # The app links follow the Course's rule (Roberto, 12 Sep 2026): a
+    # problem's first run links from the head, under the title, and only a
+    # *later* run gets a placed link beside its own description. So a
+    # one-run problem carries no applink at all, and a two-run problem
+    # places the second.
+    runs = 0
     for pre in s.get("pre", []):
         L.append(polish(pre["text"]))
         L.append("")
@@ -223,9 +229,11 @@ def render(s, vals):
         L.extend(split_desc(pre["desc"]))
         L.append("```")
         L.append("")
-        L.append("::: applink %s" % entry_name(s, pre["tag"]))
-        L.append(":::")
-        L.append("")
+        if runs:
+            L.append("::: applink %s" % entry_name(s, pre["tag"]))
+            L.append(":::")
+            L.append("")
+        runs += 1
         L.append(settings_line(pre_spec(s, pre)))
         L.append("")
         _panels, numeric = answer_blocks(pre_spec(s, pre), pre_values(s, pre))
@@ -237,9 +245,10 @@ def render(s, vals):
     L.extend(split_desc(s["desc"]))
     L.append("```")
     L.append("")
-    L.append("::: applink %s" % entry_name(s, main_tag(s)))
-    L.append(":::")
-    L.append("")
+    if runs:
+        L.append("::: applink %s" % entry_name(s, main_tag(s)))
+        L.append(":::")
+        L.append("")
     if s.get("equations"):
         L.append("```field 9 Add equation(s)")
         L.extend(s["equations"])

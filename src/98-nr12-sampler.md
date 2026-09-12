@@ -83,9 +83,6 @@ r6,4,0,30
 r7,1,0,24
 ```
 
-::: applink NR12's Example 3.7 (DC)
-:::
-
 Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_r7` = {{o:2}} A (the book's $i_o$) and `v_r6` = {{o:18}} V (the book's $v_o$).
@@ -112,9 +109,6 @@ rg,a,b,rg
 r3,a,0,r3
 rx,b,0,rx
 ```
-
-::: applink NR12's Example 3.10 (DC, Expert Mode)
-:::
 
 ```field 9 Add equation(s)
 i_rg = 0
@@ -158,9 +152,6 @@ r5,3,0,40
 r6,4,0,37.5
 ```
 
-::: applink NR12's Example 3.11 (DC)
-:::
-
 Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `-i_e` = {{o:0.5}} A and `-p_e` = {{o:20}} W.
@@ -189,9 +180,6 @@ r5,3,4,2
 e2,4,0,8*ir3
 ```
 
-::: applink NR12's Example 4.4 (DC)
-:::
-
 Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `p_r3` = {{o:7.2}} W.
@@ -219,9 +207,6 @@ r4,2,0,20
 e2,3,0,15*ir4
 ```
 
-::: applink NR12's Example 4.7 (DC)
-:::
-
 Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `p_r3` = {{o:16}} W.
@@ -247,9 +232,6 @@ r2,2,0,10
 r3,2,0,40
 j,0,2,3
 ```
-
-::: applink NR12's Example 4.8 (DC)
-:::
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
@@ -280,9 +262,6 @@ r5,2,3,5
 r6,3,0,15
 ```
 
-::: applink NR12's Example 4.13 (DC)
-:::
-
 Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `v_r4` = {{o:20}} V (the book's $v_o$), `-p_e` = {{o:2800}} W and `-p_j` = {{o:480}} W.
@@ -306,9 +285,6 @@ e,1,0,360
 r1,1,2,30
 r2,2,0,150
 ```
-
-::: applink NR12's Example 4.21 (Thévenin)
-:::
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **2** and **0**.
 
@@ -338,9 +314,6 @@ j2,b,a,0.4*vr3
 e2,0,c,2*ir1
 ```
 
-::: applink NR12's Example 4.23 (DC)
-:::
-
 Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `v_r2` = {{o:24}} V (the book's $v_o$).
@@ -366,9 +339,6 @@ r2,2,3,100'k
 eb,4,0,vb
 o,4,2,3
 ```
-
-::: applink NR12's Example 5.1 (DC)
-:::
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
@@ -409,9 +379,6 @@ rf,n,4,20'k
 o,0,n,4
 ```
 
-::: applink NR12's Example 5.3 (DC)
-:::
-
 Set {{ui:Analysis}} to *DC — direct current*.
 
 ::: result voltage at node 4
@@ -448,9 +415,6 @@ r3,3,n,4'k
 rf,n,4,rf
 o,0,n,4
 ```
-
-::: applink NR12's Example 5.3 part c (DC, Expert Mode)
-:::
 
 ```field 9 Add equation(s)
 v_4 = -12
@@ -490,9 +454,6 @@ rd,p,0,12'k
 o,p,n,3
 ```
 
-::: applink NR12's Example 5.5 (DC)
-:::
-
 Set {{ui:Analysis}} to *DC — direct current*.
 
 ::: result voltage at node 3
@@ -529,9 +490,6 @@ ro,4,3,7.5'k
 ea,4,0,50000*(vp-vn)
 ```
 
-::: applink NR12's Example 5.7 (DC)
-:::
-
 Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `v_3/vg` = {{o:5.9988}} (the book's $v_o/v_g$).
@@ -555,9 +513,6 @@ r5,1,2,5
 r20,1,0,20
 r15,2,0,15
 ```
-
-::: applink NR12's Example 18.1 (z parameters)
-:::
 
 Open {{card:Find equivalent}}, choose *Two-port parameters*, kind **z**, with the ports at **1** and **2**.
 
@@ -584,9 +539,6 @@ h1,a,b,[1000,0.0015,100,0.0001]
 h2,b,c,[1000,0.0015,100,0.0001]
 rl,c,0,10'k
 ```
-
-::: applink NR12's Example 18.6 (DC)
-:::
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
@@ -625,9 +577,6 @@ r1,1,2,2
 r2,2,0,10
 r3,2,0,40
 ```
-
-::: applink NR12's Example 7.1 (DC, before the switch opens)
-:::
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
@@ -681,9 +630,6 @@ r0,1,2,10'k
 c,2,0,0.5'u
 ```
 
-::: applink NR12's Example 7.3 (DC, before the switch moves)
-:::
-
 Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `v_2` = {{o:100}} V (the book's $v_C(0)$).
@@ -735,9 +681,6 @@ j,1,0,8
 r,1,0,10
 l,1,0,0.2
 ```
-
-::: applink NR12's Example 7.5 (DC, at position a)
-:::
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
@@ -796,9 +739,6 @@ l2,2,0,15
 m,l1,l2,6
 ```
 
-::: applink NR12's Example 7.10 (TR)
-:::
-
 Set {{ui:Analysis}} to *TR — transient / time domain*.
 
 ::: result current through r1
@@ -842,9 +782,6 @@ r3,2,3,3
 l,3,0,0.15
 r18,3,0,18
 ```
-
-::: applink NR12's Example 7.11 to 35 ms (DC, both switches closed)
-:::
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
@@ -902,9 +839,6 @@ r3,2,3,3
 l,3,0,0.15,6*exp(-1.4)
 ```
 
-::: applink NR12's Example 7.11 after 35 ms (TR)
-:::
-
 Set {{ui:Analysis}} to *TR — transient / time domain*.
 
 ::: result current through l
@@ -933,9 +867,6 @@ r1,1,0,10'k
 r2,1,0,20'k
 j,0,1,7*ir2
 ```
-
-::: applink NR12's Example 7.13 (TR)
-:::
 
 Set {{ui:Analysis}} to *TR — transient / time domain*.
 
@@ -966,9 +897,6 @@ c,1,0,0.2'u,12
 l,1,0,50'm,0.03
 r,1,0,200
 ```
-
-::: applink NR12's Example 8.2 (TR)
-:::
 
 Set {{ui:Analysis}} to *TR — transient / time domain*.
 
@@ -1006,9 +934,6 @@ l,1,0,8,-0.01225
 r,1,0,20'k
 ```
 
-::: applink NR12's Example 8.4 (TR)
-:::
-
 Set {{ui:Analysis}} to *TR — transient / time domain*.
 
 ::: result voltage at node 1
@@ -1038,9 +963,6 @@ c,1,0,0.1'u,100
 l,2,1,0.1
 r,2,0,560
 ```
-
-::: applink NR12's Example 8.11 (TR)
-:::
 
 Set {{ui:Analysis}} to *TR — transient / time domain*.
 
@@ -1075,9 +997,6 @@ r,2,3,1250
 c,3,0,0.4'u
 ```
 
-::: applink NR12's Example 8.12 (TR)
-:::
-
 Set {{ui:Analysis}} to *TR — transient / time domain*.
 
 ::: result voltage at node 3
@@ -1107,9 +1026,6 @@ r1,2,0,42
 l2,2,3,10
 r2,3,0,48
 ```
-
-::: applink NR12's Example 13.5 (TR)
-:::
 
 Set {{ui:Analysis}} to *TR — transient / time domain*.
 
@@ -1147,9 +1063,6 @@ l2,q,d,8
 r2b,q,c,2
 r10,c,d,10
 ```
-
-::: applink NR12's Example 13.7 (DC, at position a)
-:::
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
@@ -1198,9 +1111,6 @@ l1,2,0,3
 r2,0,4,15
 l2,4,0,2
 ```
-
-::: applink NR12's Example 13.13 (DC, switch closed)
-:::
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
@@ -1265,9 +1175,6 @@ l,2,0,40'u
 c,1,0,1'u
 ```
 
-::: applink NR12's Example 9.9 (AC)
-:::
-
 Set {{ui:Analysis}} to *AC — alternating current*. Put **200000** in the {{ui:ω — angular frequency}} box.
 
 Symbulator returns `v_1` = {{o:32 - 24j}} V ({{o:40.00}}∠{{o:-36.87}}°, the book's $V$) and `i_r2` = {{o:-4j}} A ({{o:4.000}}∠{{o:-90.00}}°, the book's $I$).
@@ -1305,9 +1212,6 @@ r4,b,0,20+60j
 r5,c,0,-20j
 ```
 
-::: applink NR12's Example 9.10 (AC)
-:::
-
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
 
 Symbulator returns `-i_e` = {{o:2.4 + 3.2j}} A ({{o:4.000}}∠{{o:53.13}}°, the book's $I_0$), `i_r1` = {{o:2 + 2.66667j}} A ({{o:3.333}}∠{{o:53.13}}°, the book's $I_1$), `i_r2` = {{o:0.4 + 0.533333j}} A ({{o:0.6667}}∠{{o:53.13}}°, the book's $I_2$), `i_r3` = {{o:1.33333 + 4.26667j}} A ({{o:4.470}}∠{{o:72.65}}°, the book's $I_3$), `i_r4` = {{o:0.666667 - 1.6j}} A ({{o:1.733}}∠{{o:-67.38}}°, the book's $I_4$), `i_r5` = {{o:1.73333 + 4.8j}} A ({{o:5.103}}∠{{o:70.14}}°, the book's $I_5$), `v_b` = {{o:109.333 + 8j}} V ({{o:109.6}}∠{{o:4.185}}°, the book's $V_1$) and `v_c` = {{o:96 - 34.6667j}} V ({{o:102.1}}∠{{o:-19.86}}°, the book's $V_2$).
@@ -1334,9 +1238,6 @@ r3,2,9,-40j
 e2,3,0,10*v2
 r4,3,9,120
 ```
-
-::: applink NR12's Example 9.12 (Thévenin)
-:::
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **9** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
 
@@ -1367,9 +1268,6 @@ r6,4,b,3j
 e2,b,0,39*ir3
 ```
 
-::: applink NR12's Example 9.14 (AC)
-:::
-
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
 
 Symbulator returns `v_1 - v_a` = {{o:78 - 104j}} V ({{o:130.0}}∠{{o:-53.13}}°, the book's $V_1$), `v_a` = {{o:72 + 104j}} V ({{o:126.5}}∠{{o:55.30}}°, the book's $V_2$) and `v_a - v_b` = {{o:150 - 130j}} V ({{o:198.5}}∠{{o:-40.91}}°, the book's $V_3$).
@@ -1398,9 +1296,6 @@ m,r4,r5,1200j
 r5,q,d,1600j
 r6,q,c,100
 ```
-
-::: applink NR12's Example 9.15 (Thévenin)
-:::
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **c** and **d**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms.
 
@@ -1431,9 +1326,6 @@ r6,4,b,3j
 e2,b,0,39*ir3
 ```
 
-::: applink NR12's Example 10.8 (AC)
-:::
-
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
 
 Symbulator returns `s_r1 + s_r2` = {{o:1690 + 3380j}} VA ({{o:3779}}∠{{o:63.43}}°), `s_r3 + s_r4` = {{o:240 - 320j}} VA ({{o:400.0}}∠{{o:-53.13}}°), `s_r5 + s_r6` = {{o:1970 + 5910j}} VA ({{o:6230}}∠{{o:71.57}}°), `s_e` = {{o:1950 - 3900j}} VA ({{o:4360}}∠{{o:-63.43}}°), `s_e2` = {{o:-5850 - 5070j}} VA ({{o:7741}}∠{{o:-139.1}}°) and the sum of all eight = {{o:0}} VA.
@@ -1458,9 +1350,6 @@ r60,1,p,60
 t,[p,x],[x,a],[4,1]
 r20,x,0,20
 ```
-
-::: applink NR12's Example 10.12 (Thévenin)
-:::
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms.
 
@@ -1494,9 +1383,6 @@ rfa,pa,nn,39+28j
 rfb,pb,nn,39+28j
 rfc,pc,nn,39+28j
 ```
-
-::: applink NR12's Example 11.1 (AC)
-:::
 
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
 
@@ -1532,9 +1418,6 @@ e,1,0,100
 r0,1,2,10'k
 c,2,0,0.5'u
 ```
-
-::: applink NR12's Example 13.2 (DC, before the switch moves)
-:::
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
@@ -1583,9 +1466,6 @@ l,1,0,25'm,0.029
 r,1,0,500
 ```
 
-::: applink NR12's Example 13.3 (FD)
-:::
-
 Set {{ui:Analysis}} to *FD — complex frequency domain*.
 
 ::: result voltage at node 1
@@ -1614,9 +1494,6 @@ r1,1,2,20
 l,2,0,0.002
 r2,2,a,60
 ```
-
-::: applink NR12's Example 13.6 (Thévenin)
-:::
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Analysis}} to *FD — complex frequency domain*.
 
@@ -1652,9 +1529,6 @@ l,3,0,50'm
 c,2,0,1'u
 ```
 
-::: applink NR12's Example 13.9 (FD)
-:::
-
 Set {{ui:Analysis}} to *FD — complex frequency domain*.
 
 ::: result transfer function
@@ -1683,9 +1557,6 @@ rr,1,2,R
 c,2,0,C
 l,2,0,L
 ```
-
-::: applink NR12's Example 14.6 (FD)
-:::
 
 Set {{ui:Analysis}} to *FD — complex frequency domain*.
 
