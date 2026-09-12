@@ -723,12 +723,20 @@ dict(num="3.10", title="Using a Wheatstone Bridge to Measure Resistance",
      desc="e,1,0,vs:r1,1,a,1'k:r2,1,b,4'k:rg,a,b,500:r3,a,0,r3:rx,b,0,rx",
      equations=["i_rg = 0"], unknowns=["rx"],
      expect={"rx": "4*r3"},
-     shows="Balance is a statement about an answer — no current in the detector, `rg` — "
-           "rather than a value the reader supplies, so it goes into {{card:Expert Mode}} as "
-           "the equation `i_rg = 0`, and the unknown is the resistor being measured. The "
-           "source is left as the symbol `vs`, because the balance does not depend on it, and "
-           "the answer comes back symbolic too: `rx = 4*r3`. The book's range is that one "
-           "line read at each end of the dial — 10 Ω to 2 kΩ gives 40 Ω to 8 kΩ."),
+     shows="A Wheatstone bridge measures a resistance nobody knows, $R_x$, by comparing it "
+           "with resistances that are known. The adjustable resistor $R_3$ is turned until "
+           "the detector between the two arms of the bridge — here the 500 Ω resistor `rg` — "
+           "carries no current, and at that setting the unknown can be read off the others. "
+           "So the circuit is described with two resistances left as symbols rather than "
+           "numbers, `r3` for the adjustable one and `rx` for the unknown; the source is a "
+           "symbol too, `vs`, because its value plays no part at balance. The balance "
+           "condition itself, *no current through the detector*, is not a value that can be "
+           "typed into any element, so it is given to Symbulator as an equation in "
+           "{{card:Expert Mode}}, `i_rg = 0`, with `rx` named as the unknown to solve for.",
+     after="That formula answers the question. The bridge reads four times whatever "
+           "{{var:R_3}} is set to, so with {{var:R_3}} at its lowest, 10 Ω, the bridge reads "
+           "{{o:40}} Ω, and at its highest, 2 kΩ, it reads {{o:8}} kΩ: the range of "
+           "resistances this bridge can measure is 40 Ω to 8 kΩ."),
 
 dict(num="14.6", title="Designing a Parallel RLC Bandpass Filter",
      ask="a) Show that the RLC circuit in Fig. 14.22 is a bandpass filter by deriving an "

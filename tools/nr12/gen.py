@@ -245,6 +245,12 @@ def render(s, vals):
     for letter, text in s.get("parts", []):
         L.append("**%s)** %s" % (letter, polish(text)))
         L.append("")
+    # `after`: what follows from the answers -- a range read off a formula, a
+    # value at t = 0 -- which belongs after the run, not in the paragraph
+    # above it (Roberto, 12 Sep 2026: no results before the student finds them)
+    if s.get("after"):
+        L.append(polish(s["after"]))
+        L.append("")
     L.append(":::")
     L.append(":::")
     return "\n".join(L)
