@@ -3,6 +3,8 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #433 — claimed by the app tree, 12 Sep 2026: **the Solve card's conditions and equations behave like Expert Mode's** — an equality condition on a symbol substitutes, and an equation that names none of the unknowns is solved rather than dropped; found by Roberto solving NR12's Example 3.10 with the Solve card. Nothing in the docs tree changes for it. Write-up in `Application/v9/repos/local/NEXT.md`
+
 ## #431 — no underscores in the interface's example variables (app side) — **live 13 Sep 2026; the write-up is in `Application/v9/repos/local/NEXT.md`**. Nothing in the docs tree changed; the sampler's own `i_l1` spellings are prose about the package's names and were left as they are.
 
 ## #432 — Roberto's Course review round of 13 Sep 2026 — **live 13 Sep 2026, web only**
