@@ -3,6 +3,10 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #430 — the pf tool as version 8 has it: one value, a power or a name (docs half) — **claimed 13 Sep 2026, in progress**
+
+Claimed in both trees before use; the app half is in `Application/v9/repos/local/NEXT.md`. Write-up follows.
+
 ## #429 — the Nilsson & Riedel sampler, made to read well — **live 12 Sep 2026** (learn, PDFs and the offline pair at cache v206; the server awaits its pull)
 
 **Deployed in full at Roberto's word, 12 Sep 2026, after the review round
