@@ -94,8 +94,14 @@ below.** `learn` carries the chapter and the four rebuilt PDFs — v9
 six captured version 7 and 8 pages byte-identical across the deploy. The
 offline pair is at cache **v206** with the ZIP at **32,004,118 b**; the
 install host serves the 50-entry book and `sw.js` at v206, checked by
-fetching. **Both PythonAnywhere accounts want a pull and a Reload**, no
-`pip`, for the template's build stamp and the book.
+fetching. **Both PythonAnywhere accounts took their pulls the same
+evening** (version 9 on build `2026-09-12 10:24 UTC`, X on `10:27 UTC`),
+each verified by fetching its `/api/examples?file=Nilsson_Riedel.cir`:
+the first runs and `rg,a,b,rg` are served by both. The chapter was then
+retitled *Examples from Nilsson & Riedel 12e* (web only; the PDFs keep
+the old title until the next full build, at Roberto's word), and the
+app's book keeps its own title, *Problems from Nilsson & Riedel 12ed*,
+in the picker — a one-line change in `gen.py`'s `main()` when wanted.
 
 A readability pass over `/9/nr12-sampler`, prose only: every circuit,
 setting and expected answer is untouched, and `runner.check` still reads
