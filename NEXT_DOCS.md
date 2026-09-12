@@ -43,6 +43,14 @@ Gates: runner **63 ok**, `app_links` 384 of 386, `build.py --check`
 clean, `verify_lesson.py Nilsson_Riedel` clean on all 50. The app's
 book changed only in its `rounding:` lines, so it rides the v218 train.
 
+**Example 5.3, an hour later (cache v219).** Roberto: part (a) should
+not ask the reader to design what the page then verifies — it reads
+*"a) You have designed a summing amplifier, as per the problem's
+specifications. Verify that its output voltage is …"*, the description
+paragraph says *verify a design made for the gains given*, and the
+part (a) answer *verifies the three resistor values*. The `.cir` note
+carries the same words, so it took a second app train.
+
 ## #434 and #435 — claimed by the app tree, 13 Sep 2026: **a source's card reads the power it delivers** (`-pe1 = 10 W`, labelled *power delivered*; in AC the average power delivered and the delivered power's **power factor** as a row) and ***real solutions only* ticked by default in DC and TR**. The docs moved with #434: the Manual's *Signs* paragraph, Lesson 2's *power delivered* line, Lesson 3's Drill Problem 1.11 panels, and the sampler's 3.11 and 4.13, which read the card instead of Evaluate with a minus sign. **The sampler's questions also lost the book's method** the same day (*"Use the node-voltage method to find…"* is *"Find…"*, in fourteen entries; the chapter opening says once that the book prescribes one), at Roberto's word. Write-ups in `Application/v9/repos/local/NEXT.md`
 
 ## #433 — claimed by the app tree, 12 Sep 2026: **the Solve card's conditions and equations behave like Expert Mode's** — an equality condition on a symbol substitutes, and an equation that names none of the unknowns is solved rather than dropped; found by Roberto solving NR12's Example 3.10 with the Solve card. Nothing in the docs tree changes for it. Write-up in `Application/v9/repos/local/NEXT.md`
