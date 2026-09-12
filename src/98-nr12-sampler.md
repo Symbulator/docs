@@ -99,13 +99,13 @@ Nilsson & Riedel, 12th edition — the circuit for Example 3.10
 :::
 
 ::: answer
-A Wheatstone bridge measures a resistance nobody knows, $R_x$, by comparing it with resistances that are known. The adjustable resistor $R_3$ is turned until the detector between the two arms of the bridge — here the 500 Ω resistor `rg` — carries no current, and at that setting the unknown can be read off the others. So the circuit is described with two resistances left as symbols rather than numbers, `r3` for the adjustable one and `rx` for the unknown; the source is a symbol too, `vs`, because its value plays no part at balance. The balance condition itself, *no current through the detector*, is not a value that can be typed into any element, so it is given to Symbulator as an equation in {{card:Expert Mode}}, `i_rg = 0`, with `rx` named as the unknown to solve for.
+A Wheatstone bridge measures a resistance nobody knows, $R_x$, by comparing it with resistances that are known. The adjustable resistor $R_3$ is turned until the galvanometer between the two arms of the bridge carries no current, and at that setting the unknown can be read off the others. So the circuit is described with the two resistances the question leaves open as symbols rather than numbers, `r3` for the adjustable one and `rx` for the unknown. The galvanometer is a resistor named `rg`; the figure gives it no value, and none is needed, because at balance no current flows through it, so its resistance is a symbol as well. So is the source, `vs`, whose value plays no part at balance either. The balance condition itself, *no current through the galvanometer*, is not a value that can be typed into any element, so it is given to Symbulator as an equation in {{card:Expert Mode}}, `i_rg = 0`, with `rx` named as the unknown to solve for.
 
 ```field 9 Circuit Description
 e,1,0,vs
 r1,1,a,1'k
 r2,1,b,4'k
-rg,a,b,500
+rg,a,b,rg
 r3,a,0,r3
 rx,b,0,rx
 ```
