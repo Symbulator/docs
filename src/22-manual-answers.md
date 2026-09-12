@@ -50,8 +50,8 @@ letter and the element's name.{{i:answer names}}
 | `ir1` | current through **r1** | every element |
 | `vr1` | voltage drop across **r1** | every element |
 | `pr1` | power consumed by **r1** | every element |
-| `apr1` | average power | AC |
-| `sr1` | complex power | AC |
+| `apr1` | real power consumed | AC |
+| `sr1` | complex power consumed | AC |
 | `zr1` | impedance seen | AC, FD |
 | `rr1` | resistance seen | DC |
 

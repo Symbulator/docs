@@ -139,6 +139,26 @@ answer, `evals` with conditions, `solveq` runs, several roots):
     only source. And the figure is "the figure", never the book's
     `Fig. 4.42`, since the page does not use the book's numbering.
 
+**Two more, 13 Sep 2026:**
+
+19. **Rounding at n = 3 or 4, unless the book asks for more.** Every
+    problem runs at {{ui:Rounding}} *approx to n digits*, **n** = 4 by
+    default (`DIGITS` in `gen.py`); a spec whose book answers carry more
+    figures says so with `digits=` (5.7, 8.4 and 11.1 at 5, 18.6 at 7).
+    The settings line names the setting, the `.cir` entries carry it as
+    `rounding:`, and every value on the page -- the panels, the returns
+    sentence, Evaluate and Solve card outputs, the polar forms -- is
+    printed at that n, so the page shows what the card shows. Under
+    *approx* only an integer stays exact: 66600/709 reads 93.94 at 4.
+20. **The Find equivalent card's answers by the card's names.** `req` in
+    DC and `zeq` otherwise, never `z` (Roberto: "the card never reports
+    the equivalent resistance as z"); typeset `R_{eq}`, `Z_{eq}`,
+    `v_{th}`, `i_{no}`, `p_{max}`, labelled *equivalent resistance*,
+    *equivalent impedance*, *Thevenin voltage*, *Norton current*,
+    *maximum deliverable power* -- `symbulator_ui._TOOL_LABELS` and the
+    template's `TEXNAME`, verbatim. The runner still keys the equivalent
+    as `z`, `th()`'s own attribute; `fmt.tool_name()` does the mapping.
+
 The reader-facing fields of a spec:
 
 - `ask` — the book's question, as the book words it. Also becomes the
@@ -171,6 +191,8 @@ The reader-facing fields of a spec:
   at Roberto's word (13 Sep 2026): the Solve card *"is more representative
   of the exploratory way a student would follow"* than Expert Mode.
 - `after` — what follows from the answers, last of all.
+- `digits` — the Rounding setting the problem runs at (rule 19); 4 unless
+  the book prints more figures.
 
 `gen.py`'s `polish()` applies house typography to `ask`, `shows` and
 `parts`: em dashes, Ω after a number, µ, ≥, the accent on Thévenin, and

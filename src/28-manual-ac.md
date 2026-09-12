@@ -49,10 +49,14 @@ In AC an element reports more than in DC:
 
 | | |
 |---|---|
-| `ap` | average power, in watts — the real power |
-| `s` | complex power, **S** = *P* + j*Q*, in VA |
+| `ap` | real power consumed, in watts — the average power |
+| `s` | complex power consumed, **S** = *P* + j*Q*, in VA |
 | `p` | the power answer, labelled by the convention in force |
 | `z` | impedance seen |
+
+A source's card shows the delivered forms of the first two, `-ape` and
+`-se`, and the power factor of the power it delivers; the answers `ape`
+and `se` are the consumed values all the same.
 
 The same shape with a 30 Ω resistor and a 40 mH inductor, at 1000 rad/s
 again, so that the impedance is 30 + 40j, a 3-4-5 triangle:
@@ -63,17 +67,17 @@ r,1,2,30
 l,2,0,0.04
 ```
 
-Run in AC at ω = 1000, the source's complex power comes back as
+Run in AC at ω = 1000, the source's card reads
 
-::: result complex power in e
-s_{e} = -0.6 - 0.8\text{j}\,\mathrm{VA}
+::: result complex power delivered by e
+-s_{e} = 0.6 + 0.8\text{j}\,\mathrm{VA}
 :::
 
-negative because it is power *consumed* by the source, which is
-delivering. So *P* = 0.6 W, *Q* = 0.8 var, |*S*| = 1.0 VA and the power
-factor is 0.6, lagging.{{i:complex power}}
+the negative of `se`, since a source's card shows what it delivers. So
+*P* = 0.6 W, *Q* = 0.8 var, |*S*| = 1.0 VA, and the card's last row gives
+the power factor of that delivered power, 0.6 lagging.{{i:complex power}}
 
-**An inductor reports no average power**, only complex. That is not an
+**An inductor reports no real power**, only complex. That is not an
 omission: a pure reactance consumes none, and a zero printed every time
 would be noise.{{i:average power}}
 

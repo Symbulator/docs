@@ -132,7 +132,7 @@ dict(num="4.21", title="Calculating the Condition for Maximum Power Transfer",
            "*Thévenin / Norton* chosen and those two terminals named, reduces the circuit "
            "to its Thévenin equivalent and reports beside it the load that would draw the "
            "most power and how much that is: by the maximum power theorem that load equals "
-           "the Thévenin resistance, which the card reports as `z`, and the power it "
+           "the Thévenin resistance, which the card reports as `req`, and the power it "
            "reports as `pmax`."),
 ]
 
@@ -362,7 +362,7 @@ dict(num="5.5", title="Designing a Difference Amplifier",
            "op amp's two input nodes **p** and **n** and its output node **3**. The run "
            "checks the design."),
 
-dict(num="5.7", title="Analyzing a Noninverting-Amplifier Circuit Using a Realistic Op Amp Model",
+dict(num="5.7", digits=5, title="Analyzing a Noninverting-Amplifier Circuit Using a Realistic Op Amp Model",
      ask="Analyze the noninverting amplifier of Example 5.4 using the realistic op amp model, "
          "with open-loop gain $A$ = 50,000, input resistance $R_i$ = 100 kΩ and output "
          "resistance $R_o$ = 7.5 kΩ; there is no load resistance at the output. Find the "
@@ -619,8 +619,9 @@ dict(num="8.4", title="Finding the Underdamped Natural Response of a Parallel RL
      desc="c,1,0,125'n,0:l,1,0,8,-0.01225:r,1,0,20'k",
      expect={"v_1": "100*exp(-200*t)*sin(979.80*t)"}, tol=3e-4,
      booknames={"v_1": "v"},
+     digits=5,
      after="The book prints the amplitude as 100 and the frequency of the sine as 979.80, "
-           "both rounded; at six digits the run shows 100.021 and 979.796 for the same "
+           "both rounded; at five digits the run shows 100.02 and 979.80 for the same "
            "expression.",
      shows="The same three elements in parallel with different values, an initial "
            "current in the inductor and none on the capacitor; the question wants the "
@@ -809,13 +810,14 @@ dict(num="10.8", title="Balancing Power Delivered with Power Absorbed in an AC C
      desc="e1,1,0,150:r1,1,2,1:r2,2,a,2j:r3,a,c,12:r4,c,0,-16j:r5,a,4,1:r6,4,b,3j:"
           "e2,b,0,39*ir3",
      expect={"@s_r1+s_r2": 1690 + 3380j, "@s_r3+s_r4": 240 - 320j,
-             "@s_r5+s_r6": 1970 + 5910j, "s_e1": 1950 - 3900j, "s_e2": -5850 - 5070j,
+             "@s_r5+s_r6": 1970 + 5910j, "@-s_e1": -1950 + 3900j, "@-s_e2": 5850 + 5070j,
              "@s_e1+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6": 0},
      shownames={"@s_r1+s_r2": "s_r1 + s_r2", "@s_r3+s_r4": "s_r3 + s_r4",
-                "@s_r5+s_r6": "s_r5 + s_r6",
+                "@s_r5+s_r6": "s_r5 + s_r6", "@-s_e1": "-s_e1", "@-s_e2": "-s_e2",
                 "@s_e1+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6": "the sum of all eight"},
      booknames={"@s_r1+s_r2": "S_1", "@s_r3+s_r4": "S_2", "@s_r5+s_r6": "S_3",
-                "s_e1": "S_{source}", "s_e2": "S_{dep}"},
+                },
+     delivered=["@-s_e1", "@-s_e2"],
      shows="The circuit of Example 9.14, which we describe the same way, asked a "
            "question about power: how much average and reactive power each of its three "
            "impedances takes, how much each source supplies, and whether the two sides "
@@ -825,7 +827,9 @@ dict(num="10.8", title="Balancing Power Delivered with Power Absorbed in an AC C
      interpret="Each impedance in the figure is two elements in our description, a "
            "resistor and a reactance in series, so the power delivered to an impedance is "
            "the sum of two `s` answers, which we read in the {{card:Evaluate}} card; the "
-           "balance of part (c) is the sum of all eight, read the same way."),
+           "balance of part (c) is the sum of all eight, read the same way. Each source's "
+           "card reports the complex power it *delivers*, `-se1` and `-se2`, the "
+           "negatives of the `s` answers that balance sums."),
 
 dict(num="10.12", title="Finding Maximum Power Transfer in a Circuit with an Ideal Transformer",
      ask="The variable resistor in the circuit in the figure is adjusted until maximum "
@@ -845,10 +849,10 @@ dict(num="10.12", title="Finding Maximum Power Transfer in a Circuit with an Ide
            "terminals, node **a** and ground, to the {{card:Find equivalent}} card with "
            "*Thévenin / Norton* chosen, which reports the load that would draw the most "
            "average power from those terminals and how much: by the maximum power "
-           "theorem that load is the Thévenin impedance, reported as `z`, and the power "
+           "theorem that load is the Thévenin impedance, reported as `zeq`, and the power "
            "is `pmax`."),
 
-dict(num="11.1", title="Analyzing a Wye-Wye Circuit",
+dict(num="11.1", digits=5, title="Analyzing a Wye-Wye Circuit",
      ask="A balanced, positive-sequence Y-connected generator with an internal impedance of "
          "$0.2 + j0.5$ Ω per phase and an internal voltage of 120 V per phase feeds a "
          "balanced Y-connected load of $39 + j28$ Ω per phase over a line of $0.8 + j1.5$ Ω "
@@ -1193,7 +1197,7 @@ dict(num="18.1", title="Finding the z Parameters of a Two-Port Circuit",
            "with *Two-port parameters* chosen and the kind set to **z**; it returns the "
            "four parameters, named `z11` to `z22`."),
 
-dict(num="18.6", title="Analyzing Cascaded Two-Port Circuits",
+dict(num="18.6", digits=7, title="Analyzing Cascaded Two-Port Circuits",
      ask="Two identical amplifiers are connected in cascade. Each is described by its h "
          "parameters: $h_{11}$ = 1000 Ω, $h_{12}$ = 0.0015, $h_{21}$ = 100, $h_{22}$ = "
          "100 µS. The source has 500 Ω of internal resistance and the load is 10 kΩ. Find "

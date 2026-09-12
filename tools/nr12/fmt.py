@@ -29,14 +29,41 @@ def elements(desc):
         if nm and re.match(r"^[A-Za-z][A-Za-z0-9_]*$", nm): out.append(nm)
     return out
 
+# The Find equivalent card's answers, as the card itself names, labels and
+# typesets them (symbulator_ui._TOOL_LABELS and the template's TEXNAME).
+# The runner keys the equivalent as `z`, th()'s own attribute; the page
+# never shows that key (Roberto, 13 Sep 2026: "the card never reports the
+# equivalent resistance as z. Even in AC, it is reported as zeq. But in
+# DC, it is req.").
+TOOL_LABELS = {"vth": "Thevenin voltage", "ino": "Norton current",
+               "req": "equivalent resistance", "zeq": "equivalent impedance",
+               "pmax": "maximum deliverable power"}
+TOOL_TEX = {"vth": "v_{th}", "ino": "i_{no}", "req": "R_{eq}", "zeq": "Z_{eq}",
+            "pmax": "p_{max}"}
+
+
+def tool_name(key, spec):
+    """The name the card prints for a Find equivalent answer, or None
+    when the key is not one of the card's."""
+    key = key.lstrip("@")
+    if key == "z":
+        return "req" if spec.get("domain", "dc") == "dc" else "zeq"
+    return key if key in TOOL_LABELS else None
+
+
+def shown_name(key, spec):
+    """The name an answer is called in prose: the spec's own spelling,
+    the card's name for a tool answer, else the key."""
+    if spec.get("shownames", {}).get(key): return spec["shownames"][key]
+    return tool_name(key, spec) or (key[1:] if key.startswith("@") else key)
+
+
 def label_for(key, desc, spec):
     """The small label a result panel carries, in the app's own words."""
     if spec.get("labels", {}).get(key): return spec["labels"][key]
+    tn = tool_name(key, spec)
+    if tn: return TOOL_LABELS[tn]
     key = key.lstrip("@")
-    if key in ("vth",):  return "Thevenin voltage"
-    if key in ("ino",):  return "Norton current"
-    if key == "z":       return "Thevenin impedance"
-    if key == "pmax":    return "maximum power"
     if key in ("11", "12", "21", "22"):
         return "%s parameter z%s" % ("open-circuit", key)
     m = re.match(r"^(ap|[vipzrs])_(.+)$", key)
@@ -72,11 +99,9 @@ def unit_for(key, spec):
 def tex_name(key, spec):
     """The answer's name, set the way the app prints it."""
     if spec.get("texnames", {}).get(key): return spec["texnames"][key]
+    tn = tool_name(key, spec)
+    if tn: return TOOL_TEX[tn]
     key = key.lstrip("@")
-    if key == "vth": return "V_{Th}"
-    if key == "ino": return "I_{N}"
-    if key == "z":   return "Z_{Th}"
-    if key == "pmax": return "p_{max}"
     if key in ("11", "12", "21", "22"): return "z_{%s}" % key
     m = re.match(r"^(ap|[vipzrs])_(.+)$", key)
     if not m: return sp.latex(sp.Symbol(key))
@@ -93,7 +118,7 @@ def tex_value(val, digits=6):
 def _round(e, digits=6):
     """Round a number, real or complex, keeping a tidy Rational tidy."""
     e = sp.sympify(e)
-    if e.is_Rational and abs(e.p) < 10**6 and abs(e.q) < 10**4: return e
+    if e.is_Integer: return e
     try:
         re_, im_ = sp.re(e), sp.im(e)
     except Exception:
@@ -111,9 +136,13 @@ def _r1(x, digits=6):
     from symbulator._display import round_sig
     x = sp.sympify(x)
     if x == 0: return sp.Integer(0)
-    if x.is_Rational and abs(x.p) < 10**6 and abs(x.q) < 10**4: return x
+    if x.is_Integer: return x
     try:
         r = round_sig(x, digits)
+        # round_sig returns a Float carrying only `digits` of *binary*
+        # precision, so float(r) and "%.6g" print its noise -- 2.66699
+        # for 2.667. Read it back through its decimal string (#391).
+        r = sp.Float(sp.sstr(r), 15)
     except Exception:
         return x
     # `r == int(r)` is False for a rounded Float: it carries only `digits` of
@@ -132,25 +161,28 @@ def plain_value(val, digits=6):
     e = sp.sympify(val)
     if e.free_symbols: return sp.sstr(_round(e, digits))
     re_, im_ = sp.re(e), sp.im(e)
-    if im_ == 0: return _dec(_r1(re_, digits))
-    im_txt = _dec(_r1(abs(im_), digits))
+    if im_ == 0: return _dec(_r1(re_, digits), digits)
+    im_txt = _dec(_r1(abs(im_), digits), digits)
     if im_txt == "1": im_txt = ""
     if re_ == 0:                       # a pure imaginary reads -4j, not 0 - 4j
         return ("-" if im_ < 0 else "") + im_txt + "j"
     sign = "+" if im_ >= 0 else "-"
-    return "%s %s %sj" % (_dec(_r1(re_, digits)), sign, im_txt)
+    return "%s %s %sj" % (_dec(_r1(re_, digits), digits), sign, im_txt)
 
 
-def _dec(x):
-    """A rounded SymPy number as a plain decimal string, no exponent noise."""
+def _dec(x, digits=6):
+    """A rounded SymPy number as a plain decimal string at `digits`
+    significant figures, written out in full -- no exponent, no binary
+    noise, no trailing zeros: 33333.33 at 7, 0.0002026 at 4."""
+    import math
     if x.is_Integer: return str(int(x))
-    if x.is_Rational and abs(x.q) <= 10000:
-        f = float(x)
-        if abs(f - round(f)) < 1e-12: return str(int(round(f)))
-        return ("%.6g" % f)
     try:
-        return ("%.6g" % float(x))
+        f = float(x)
     except Exception:
-        pass
-    txt = sp.sstr(x)
+        txt = sp.sstr(x)
+        return txt.rstrip("0").rstrip(".") if "." in txt else txt
+    if f == 0: return "0"
+    if abs(f - round(f)) < 1e-9 * max(1.0, abs(f)): return str(int(round(f)))
+    exp = math.floor(math.log10(abs(f)))
+    txt = "%.*f" % (max(digits - 1 - exp, 0), f)
     return txt.rstrip("0").rstrip(".") if "." in txt else txt

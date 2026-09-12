@@ -104,7 +104,7 @@ def run_one(sp_):
 SERVER = os.path.join(_ROOT, "Application", "v9", "repos", "server")
 
 
-def app_values(s):
+def app_values(s, digits=6):
     """The circuit's answers as the page holds them -- `values`, keyed by
     name, from the real app's `solve_ui` -- which is what the Solve card
     is fed. Imported from the app tree, as build.py --check does."""
@@ -116,20 +116,20 @@ def app_values(s):
         if s.get("domain") == "ac" else ""
     r = ui.solve_ui(s["desc"], s.get("domain", "dc"), omega, [], "solve", "", "", "z",
                     list(s.get("equations", [])), list(s.get("unknowns", [])), [],
-                    digits=6, approx=True, units=True, use_rms=bool(s.get("rms")))
+                    digits=digits, approx=True, units=True, use_rms=bool(s.get("rms")))
     assert r.get("ok"), r
     return r["values"]
 
 
-def app_solveq(s, sq, values=None):
+def app_solveq(s, sq, values=None, digits=6):
     """One Solve-card run of a spec, through the real app's `solveq_ui`:
     {name: plain} of the first solution, and the raw reply."""
     if SERVER not in sys.path:
         sys.path.insert(0, SERVER)
     import symbulator_ui as ui
-    values = values if values is not None else app_values(s)
+    values = values if values is not None else app_values(s, digits)
     r = ui.solveq_ui(list(sq["equations"]), list(sq.get("unknowns", [])), values,
-                     digits=6, approx=True, units=True,
+                     digits=digits, approx=True, units=True,
                      real_only=sq.get("real_only", True),
                      conditions=list(sq.get("conditions", [])),
                      domain=s.get("domain", "dc"))
@@ -148,14 +148,14 @@ def number_of(plain):
     return num, sp.sympify(num.replace("j", "*I"))
 
 
-def app_evaluate(s, expr, conditions=(), values=None):
+def app_evaluate(s, expr, conditions=(), values=None, digits=6):
     """One Evaluate-card step of a spec, through the real app's
     `evaluate_ui`: the plain string the card shows."""
     if SERVER not in sys.path:
         sys.path.insert(0, SERVER)
     import symbulator_ui as ui
-    values = values if values is not None else app_values(s)
-    r = ui.evaluate_ui(expr, values, digits=6, approx=True,
+    values = values if values is not None else app_values(s, digits)
+    r = ui.evaluate_ui(expr, values, digits=digits, approx=True,
                        domain=s.get("domain", "dc"), conditions=list(conditions) or None)
     assert r.get("ok"), r
     return r["plain"]

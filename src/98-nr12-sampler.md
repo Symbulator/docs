@@ -87,7 +87,7 @@ r6,4,0,30
 r7,1,0,24
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `i_r7` = {{o:2}} A (the book's $i_o$) and `v_r6` = {{o:18}} V (the book's $v_o$).
 
@@ -114,7 +114,7 @@ r3,a,0,R_3
 rx,b,0,R_x
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 With the results on screen, we open the {{card:Solve}} card under them and ask the question the way the bridge is used. The balance condition, no current through the galvanometer, is the equation `isg=0`; the resistance we want is the unknown, `R_x`; and the setting of the dial is a condition, first at its lowest, 10 Ω:
 
@@ -170,7 +170,7 @@ r5,3,0,40
 r6,4,0,37.5
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 The source's card reports the power it delivers as `-pe`, which is the power the question asks for. Its current it reports *into* the source, the same way as for every other element, so the current it supplies is the negative of that, which we read with a minus sign in the {{card:Evaluate}} card.
 
@@ -208,7 +208,7 @@ r5,3,4,2
 e2,4,0,8*ir3
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `p_r3` = {{o:7.2}} W (the book's $p$).
 
@@ -235,7 +235,7 @@ r4,2,0,20
 e2,3,0,15*ir4
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `p_r3` = {{o:16}} W (the book's $p$).
 
@@ -261,7 +261,7 @@ r3,2,0,40
 j,0,2,3
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `i_r1` = {{o:2}} A (the book's $i_a$), `i_r2` = {{o:4}} A (the book's $i_b$) and `i_r3` = {{o:1}} A (the book's $i_c$).
 
@@ -290,7 +290,7 @@ r5,2,3,5
 r6,3,0,15
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 The power a source *develops* is what it delivers, which each source's card reports as `-pe` and `-pj`.
 
@@ -308,7 +308,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 4.21
 :::
 
 ::: answer
-A source and two resistors with a load $R_L$ connected across the second, and the question is which load draws the most power from those terminals, and how much. That is a question about the circuit *seen from* the load, so we describe the source and the two resistors and leave $R_L$ out, calling its terminals node **2** and ground. The {{card:Find equivalent}} card, with *Thévenin / Norton* chosen and those two terminals named, reduces the circuit to its Thévenin equivalent and reports beside it the load that would draw the most power and how much that is: by the maximum power theorem that load equals the Thévenin resistance, which the card reports as `z`, and the power it reports as `pmax`.
+A source and two resistors with a load $R_L$ connected across the second, and the question is which load draws the most power from those terminals, and how much. That is a question about the circuit *seen from* the load, so we describe the source and the two resistors and leave $R_L$ out, calling its terminals node **2** and ground. The {{card:Find equivalent}} card, with *Thévenin / Norton* chosen and those two terminals named, reduces the circuit to its Thévenin equivalent and reports beside it the load that would draw the most power and how much that is: by the maximum power theorem that load equals the Thévenin resistance, which the card reports as `req`, and the power it reports as `pmax`.
 
 ```field 9 Circuit Description
 e,1,0,360
@@ -316,9 +316,9 @@ r1,1,2,30
 r2,2,0,150
 ```
 
-Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **2** and **0**.
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **2** and **0**. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `z` = {{o:25}} Ω (the book's $R_L$) and `pmax` = {{o:900}} W (the book's $p_{max}$).
+Symbulator returns `req` = {{o:25}} Ω (the book's $R_L$) and `pmax` = {{o:900}} W (the book's $p_{max}$).
 
 :::
 :::
@@ -344,7 +344,7 @@ j2,b,a,0.4*vr3
 e2,0,c,2*ir1
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `v_r2` = {{o:24}} V (the book's $v_o$).
 
@@ -370,7 +370,7 @@ eb,4,0,vb
 o,4,2,3
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result voltage at node 3
 v_{3} = - 4 va + 5 vb\,\mathrm{V}
@@ -463,7 +463,7 @@ rf,n,4,20'k
 o,0,n,4
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result voltage at node 4
 v_{4} = - 4 va - vb - 5 vc\,\mathrm{V}
@@ -529,7 +529,7 @@ rf,n,4,rf
 o,0,n,4
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result voltage at node 4
 v_{4} = - \frac{3 rf}{10000}\,\mathrm{V}
@@ -577,7 +577,7 @@ rd,p,0,12'k
 o,p,n,3
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result voltage at node 3
 v_{3} = - 8 va + 8 vb\,\mathrm{V}
@@ -641,7 +641,7 @@ ro,4,3,7.5'k
 ea,4,0,50000*(vp-vn)
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 5.
 
 Then we type `v_3/vg` into {{card:Evaluate}}:
 
@@ -671,7 +671,7 @@ r20,1,0,20
 r15,2,0,15
 ```
 
-Open {{card:Find equivalent}}, choose *Two-port parameters*, kind **z**, with the ports at **1** and **2**.
+Open {{card:Find equivalent}}, choose *Two-port parameters*, kind **z**, with the ports at **1** and **2**. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `z11` = {{o:10}} Ω (the book's $z_{11}$), `z12` = {{o:7.5}} Ω (the book's $z_{12}$), `z21` = {{o:7.5}} Ω (the book's $z_{21}$) and `z22` = {{o:9.375}} Ω (the book's $z_{22}$).
 
@@ -697,7 +697,7 @@ h2,b,c,[1000,0.0015,100,0.0001]
 rl,c,0,10'k
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 7.
 
 Then we type `v_c/vg` into {{card:Evaluate}}:
 
@@ -705,7 +705,7 @@ Then we type `v_c/vg` into {{card:Evaluate}}:
 v_c/vg
 ```
 
-It gives {{o:33333.3}} (the book's $V_2/V_g$).
+It gives {{o:33333.33}} (the book's $V_2/V_g$).
 
 :::
 :::
@@ -741,7 +741,7 @@ r2,2,0,10
 r3,2,0,40
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `i_l` = {{o:20}} A (the book's $i_L(0)$).
 
@@ -757,7 +757,7 @@ r3,2,0,40
 ::: applink NR12's Example 7.1 (TR)
 :::
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result current through l
 i_{l} = 20 e^{- 5 t}\,\mathrm{A}
@@ -793,7 +793,7 @@ r0,1,2,10'k
 c,2,0,0.5'u
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `v_2` = {{o:100}} V (the book's $v_C(0)$).
 
@@ -809,7 +809,7 @@ r3,2,0,60'k
 ::: applink NR12's Example 7.3 (TR)
 :::
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result voltage at node 1
 v_{1} = 100 e^{- 25 t}\,\mathrm{V}
@@ -845,7 +845,7 @@ r,1,0,10
 l,1,0,0.2
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `i_l` = {{o:-8}} A (the book's $i(0)$).
 
@@ -860,7 +860,7 @@ l,2,0,0.2,-8
 ::: applink NR12's Example 7.5 (TR)
 :::
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result current through l
 i_{l} = 12 - 20 e^{- 10 t}\,\mathrm{A}
@@ -902,7 +902,7 @@ l2,2,0,15
 m,l1,l2,6
 ```
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result current through r1
 i_{r1} = 16 - 16 e^{- 5 t}\,\mathrm{A}
@@ -946,7 +946,7 @@ l,3,0,0.15
 r18,3,0,18
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `i_l` = {{o:6}} A (the book's $i_L(0)$).
 
@@ -962,7 +962,7 @@ r18,3,0,18
 ::: applink NR12's Example 7.11 to 35 ms (TR)
 :::
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result current through l
 i_{l} = 6 e^{- 40 t}\,\mathrm{A}
@@ -980,7 +980,7 @@ i_l
 t = 0.035
 ```
 
-It gives {{o:1.47958}} A (the book's $i_L(35\,\mathrm{ms})$).
+It gives {{o:1.48}} A (the book's $i_L(35\,\mathrm{ms})$).
 
 :::
 :::
@@ -1002,10 +1002,10 @@ r3,2,3,3
 l,3,0,0.15,6*exp(-1.4)
 ```
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result current through l
-i_{l} = 1.47958 e^{- 60 t}\,\mathrm{A}
+i_{l} = 1.48 e^{- 60 t}\,\mathrm{A}
 :::
 
 `i_l` is the book's $i_L$.
@@ -1031,7 +1031,7 @@ r2,1,0,20'k
 j,0,1,7*ir2
 ```
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result voltage at node 1
 v_{1} = 10 e^{40 t}\,\mathrm{V}
@@ -1051,7 +1051,7 @@ t
 
 Press {{btn:Solve equations}}.
 
-The card returns `t` = {{o:0.0677013}} s (the book's $t$).
+The card returns `t` = {{o:0.0677}} s (the book's $t$).
 
 So the capacitor short-circuits after {{o:67.7}} ms.
 
@@ -1075,7 +1075,7 @@ l,1,0,50'm,0.03
 r,1,0,200
 ```
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result voltage at node 1
 v_{1} = - 14 e^{- 5000 t} + 26 e^{- 20000 t}\,\mathrm{V}
@@ -1111,15 +1111,15 @@ l,1,0,8,-0.01225
 r,1,0,20'k
 ```
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 5.
 
 ::: result voltage at node 1
-v_{1} = 100.021 e^{- 200 t} \sin{\left(979.796 t \right)}\,\mathrm{V}
+v_{1} = 100.02 e^{- 200 t} \sin{\left(979.8 t \right)}\,\mathrm{V}
 :::
 
 `v_1` is the book's $v$.
 
-The book prints the amplitude as 100 and the frequency of the sine as 979.80, both rounded; at six digits the run shows 100.021 and 979.796 for the same expression.
+The book prints the amplitude as 100 and the frequency of the sine as 979.80, both rounded; at five digits the run shows 100.02 and 979.80 for the same expression.
 
 :::
 :::
@@ -1141,14 +1141,14 @@ l,2,1,0.1
 r,2,0,560
 ```
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result current through l
-i_{l} = - 0.104167 e^{- 2800 t} \sin{\left(9600 t \right)}\,\mathrm{A}
+i_{l} = - 0.1042 e^{- 2800 t} \sin{\left(9600 t \right)}\,\mathrm{A}
 :::
 
 ::: result voltage at node 1
-v_{1} = \left(29.1667 \sin{\left(9600 t \right)} + 100 \cos{\left(9600 t \right)}\right) e^{- 2800 t}\,\mathrm{V}
+v_{1} = \left(29.17 \sin{\left(9600 t \right)} + 100 \cos{\left(9600 t \right)}\right) e^{- 2800 t}\,\mathrm{V}
 :::
 
 Here `i_l` is the book's $i$ and `v_1` is the book's $v_C$.
@@ -1174,7 +1174,7 @@ r,2,3,1250
 c,3,0,0.4'u
 ```
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result voltage at node 3
 v_{3} = 48 - 64 e^{- 2500 t} + 16 e^{- 10000 t}\,\mathrm{V}
@@ -1204,7 +1204,7 @@ l2,2,3,10
 r2,3,0,48
 ```
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result current through l1
 i_{l1} = 15 - 14 e^{- 2 t} - e^{- 12 t}\,\mathrm{A}
@@ -1241,7 +1241,7 @@ r2b,q,c,2
 r10,c,d,10
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `i_l1` = {{o:5}} A (the book's $i_1(0)$) and `i_l2` = {{o:0}} A (the book's $i_2(0)$).
 
@@ -1259,7 +1259,7 @@ r10,c,d,10
 ::: applink NR12's Example 13.7 (TR)
 :::
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 The secondary is still not connected to ground, so its bottom is simply the node we called **d**, and Symbulator again notes that it measures that side's voltages against **d**; the currents are unaffected.
 
@@ -1291,7 +1291,7 @@ r2,0,4,15
 l2,4,0,2
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `i_l1` = {{o:10}} A (the book's $i_1(0)$) and `i_l2` = {{o:0}} A (the book's $i_2(0)$).
 
@@ -1308,7 +1308,7 @@ l2,4,0,2,0
 ::: applink NR12's Example 13.13 (TR)
 :::
 
-Set {{ui:Analysis}} to *TR — transient / time domain*.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result voltage at node 3
 v_{3} = 12 \delta\left(t\right) + 60 + 10 e^{- 5 t}\,\mathrm{V}
@@ -1354,7 +1354,7 @@ l,2,0,40'u
 c,1,0,1'u
 ```
 
-Set {{ui:Analysis}} to *AC — alternating current*. Put **200000** in the {{ui:ω — angular frequency}} box.
+Set {{ui:Analysis}} to *AC — alternating current*. Put **200000** in the {{ui:ω — angular frequency}} box. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `v_1` = {{o:32 - 24j}} V ({{o:40.00}}∠{{o:-36.87}}°, the book's $V$) and `i_r2` = {{o:-4j}} A ({{o:4.000}}∠{{o:-90.00}}°, the book's $I$).
 
@@ -1391,11 +1391,11 @@ r4,b,0,20+60j
 r5,c,0,-20j
 ```
 
-Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
+Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 The source current $I_0$ leaves the source's positive terminal, which is the opposite of how Symbulator counts a source's current, so we read it with a minus sign in the {{card:Evaluate}} card.
 
-Symbulator returns `i_r1` = {{o:2 + 2.66667j}} A ({{o:3.333}}∠{{o:53.13}}°, the book's $I_1$), `i_r2` = {{o:0.4 + 0.533333j}} A ({{o:0.6667}}∠{{o:53.13}}°, the book's $I_2$), `i_r3` = {{o:1.33333 + 4.26667j}} A ({{o:4.470}}∠{{o:72.65}}°, the book's $I_3$), `i_r4` = {{o:0.666667 - 1.6j}} A ({{o:1.733}}∠{{o:-67.38}}°, the book's $I_4$), `i_r5` = {{o:1.73333 + 4.8j}} A ({{o:5.103}}∠{{o:70.14}}°, the book's $I_5$), `v_b` = {{o:109.333 + 8j}} V ({{o:109.6}}∠{{o:4.185}}°, the book's $V_1$) and `v_c` = {{o:96 - 34.6667j}} V ({{o:102.1}}∠{{o:-19.86}}°, the book's $V_2$).
+Symbulator returns `i_r1` = {{o:2 + 2.667j}} A ({{o:3.333}}∠{{o:53.13}}°, the book's $I_1$), `i_r2` = {{o:0.4 + 0.5333j}} A ({{o:0.6667}}∠{{o:53.13}}°, the book's $I_2$), `i_r3` = {{o:1.333 + 4.267j}} A ({{o:4.470}}∠{{o:72.65}}°, the book's $I_3$), `i_r4` = {{o:0.6667 - 1.6j}} A ({{o:1.733}}∠{{o:-67.38}}°, the book's $I_4$), `i_r5` = {{o:1.733 + 4.8j}} A ({{o:5.103}}∠{{o:70.14}}°, the book's $I_5$), `v_b` = {{o:109.3 + 8j}} V ({{o:109.6}}∠{{o:4.185}}°, the book's $V_1$) and `v_c` = {{o:96 - 34.67j}} V ({{o:102.1}}∠{{o:-19.86}}°, the book's $V_2$).
 
 Then we type `-i_e` into {{card:Evaluate}}:
 
@@ -1428,9 +1428,9 @@ e2,3,0,10*v2
 r4,3,9,120
 ```
 
-Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **9** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **9** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `vth` = {{o:784 - 288j}} V ({{o:835.2}}∠{{o:-20.17}}°, the book's $V_{Th}$) and `z` = {{o:91.2 - 38.4j}} Ω ({{o:98.95}}∠{{o:-22.83}}°, the book's $Z_{Th}$).
+Symbulator returns `vth` = {{o:784 - 288j}} V ({{o:835.2}}∠{{o:-20.17}}°, the book's $V_{Th}$) and `zeq` = {{o:91.2 - 38.4j}} Ω ({{o:98.95}}∠{{o:-22.83}}°, the book's $Z_{Th}$).
 
 :::
 :::
@@ -1457,7 +1457,7 @@ r6,4,b,3j
 e2,b,0,39*ir3
 ```
 
-Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
+Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 $V_2$ is the voltage at node **a** as the run reports it; the two differences we read in the {{card:Evaluate}} card.
 
@@ -1504,11 +1504,11 @@ r5,q,d,1600j
 r6,q,c,100
 ```
 
-Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **c** and **d**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms.
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **c** and **d**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 The secondary side is not connected to ground anywhere, nothing conducts between the two windings, so its bottom is simply the node we have called **d**, and Symbulator says in a note that it has measured that side's voltages against **d**; the currents, the voltage differences and the equivalent are unaffected.
 
-Symbulator returns `vth` = {{o:93.9351 + 17.7715j}} V ({{o:95.60}}∠{{o:10.71}}°, the book's $V_{Th}$) and `z` = {{o:171.086 + 1224.26j}} Ω ({{o:1236}}∠{{o:82.04}}°, the book's $Z_{Th}$).
+Symbulator returns `vth` = {{o:93.94 + 17.77j}} V ({{o:95.60}}∠{{o:10.71}}°, the book's $V_{Th}$) and `zeq` = {{o:171.1 + 1224j}} Ω ({{o:1236}}∠{{o:82.04}}°, the book's $Z_{Th}$).
 
 :::
 :::
@@ -1535,11 +1535,11 @@ r6,4,b,3j
 e2,b,0,39*ir3
 ```
 
-Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
+Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Each impedance in the figure is two elements in our description, a resistor and a reactance in series, so the power delivered to an impedance is the sum of two `s` answers, which we read in the {{card:Evaluate}} card; the balance of part (c) is the sum of all eight, read the same way.
+Each impedance in the figure is two elements in our description, a resistor and a reactance in series, so the power delivered to an impedance is the sum of two `s` answers, which we read in the {{card:Evaluate}} card; the balance of part (c) is the sum of all eight, read the same way. Each source's card reports the complex power it *delivers*, `-se1` and `-se2`, the negatives of the `s` answers that balance sums.
 
-Symbulator returns `s_e1` = {{o:1950 - 3900j}} VA ({{o:4360}}∠{{o:-63.43}}°, the book's $S_{source}$) and `s_e2` = {{o:-5850 - 5070j}} VA ({{o:7741}}∠{{o:-139.1}}°, the book's $S_{dep}$).
+Symbulator returns `-s_e1` = {{o:-1950 + 3900j}} VA ({{o:4360}}∠{{o:116.6}}°) and `-s_e2` = {{o:5850 + 5070j}} VA ({{o:7741}}∠{{o:40.91}}°).
 
 Then we type `s_r1+s_r2` into {{card:Evaluate}}:
 
@@ -1585,7 +1585,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 10.12
 :::
 
 ::: answer
-A source feeding a load through an ideal transformer whose windings share a node; the question wants the load that draws the most average power and how much that is. An ideal transformer is the element `t`; because its primary and secondary here share a node, we write each winding as a bracketed pair of terminals, `[p,x]` for the primary and `[x,a]` for the secondary, followed by the turns ratio `[4,1]`, and we name the two resistors after their values, `r60` and `r20`. We leave the load $R_L$ out of the description and name its terminals, node **a** and ground, to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which reports the load that would draw the most average power from those terminals and how much: by the maximum power theorem that load is the Thévenin impedance, reported as `z`, and the power is `pmax`.
+A source feeding a load through an ideal transformer whose windings share a node; the question wants the load that draws the most average power and how much that is. An ideal transformer is the element `t`; because its primary and secondary here share a node, we write each winding as a bracketed pair of terminals, `[p,x]` for the primary and `[x,a]` for the secondary, followed by the turns ratio `[4,1]`, and we name the two resistors after their values, `r60` and `r20`. We leave the load $R_L$ out of the description and name its terminals, node **a** and ground, to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which reports the load that would draw the most average power from those terminals and how much: by the maximum power theorem that load is the Thévenin impedance, reported as `zeq`, and the power is `pmax`.
 
 ```field 9 Circuit Description
 e,1,0,840
@@ -1594,9 +1594,9 @@ t,[p,x],[x,a],[4,1]
 r20,x,0,20
 ```
 
-Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms.
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `z` = {{o:35}} Ω (the book's $R_L$) and `pmax` = {{o:315}} W (the book's $p_{max}$).
+Symbulator returns `zeq` = {{o:35}} Ω (the book's $R_L$) and `pmax` = {{o:315}} W (the book's $p_{max}$).
 
 :::
 :::
@@ -1627,11 +1627,11 @@ rfb,pb,nn,39+28j
 rfc,pc,nn,39+28j
 ```
 
-Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
+Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 5.
 
 The quantities asked for are ordinary results: the line current $I_{aA}$ is the current through `rla`; the phase voltage at the load, $V_{AN}$, is the voltage between **pa** and **nn**; the line voltage $V_{AB}$ is the voltage between **pa** and **pb**; and the phase voltage at the generator's terminal, $V_{An}$, is the voltage at node **a**. The book quotes the voltages by magnitude, so we read each difference's magnitude in the {{card:Evaluate}} card, as `Abs(...)`.
 
-Symbulator returns `i_rla` = {{o:1.92 - 1.44j}} A ({{o:2.400}}∠{{o:-36.87}}°, the book's $I_{aA}$), `i_rlb` = {{o:-2.20708 - 0.942769j}} A ({{o:2.400}}∠{{o:-156.9}}°, the book's $I_{bB}$) and `i_rlc` = {{o:0.287077 + 2.38277j}} A ({{o:2.400}}∠{{o:83.13}}°, the book's $I_{cC}$).
+Symbulator returns `i_rla` = {{o:1.92 - 1.44j}} A ({{o:2.4000}}∠{{o:-36.870}}°, the book's $I_{aA}$), `i_rlb` = {{o:-2.2071 - 0.94277j}} A ({{o:2.4000}}∠{{o:-156.87}}°, the book's $I_{bB}$) and `i_rlc` = {{o:0.28708 + 2.3828j}} A ({{o:2.4000}}∠{{o:83.130}}°, the book's $I_{cC}$).
 
 Then we type `Abs(v_pa-v_nn)` into {{card:Evaluate}}:
 
@@ -1639,7 +1639,7 @@ Then we type `Abs(v_pa-v_nn)` into {{card:Evaluate}}:
 Abs(v_pa-v_nn)
 ```
 
-It gives {{o:115.225}} V (the book's $|V_{AN}|$).
+It gives {{o:115.22}} V (the book's $|V_{AN}|$).
 
 Likewise `Abs(v_pa-v_pb)`:
 
@@ -1647,7 +1647,7 @@ Likewise `Abs(v_pa-v_pb)`:
 Abs(v_pa-v_pb)
 ```
 
-It gives {{o:199.576}} V (the book's $|V_{AB}|$).
+It gives {{o:199.58}} V (the book's $|V_{AB}|$).
 
 Likewise `Abs(v_a)`:
 
@@ -1655,7 +1655,7 @@ Likewise `Abs(v_a)`:
 Abs(v_a)
 ```
 
-It gives {{o:118.898}} V (the book's $|V_{An}|$).
+It gives {{o:118.9}} V (the book's $|V_{An}|$).
 
 The three line currents above have the same magnitude 120° apart, which is what a balanced circuit gives; the b- and c-phase voltages of parts (c), (d) and (e) have the same magnitudes as the a-phase ones just read, at −120° and +120° from them, and typing `Abs(v_pb-v_nn)`, `Abs(v_pb-v_pc)` and `Abs(v_b)` into {{card:Evaluate}} returns those same three magnitudes.
 
@@ -1688,7 +1688,7 @@ r0,1,2,10'k
 c,2,0,0.5'u
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `v_2` = {{o:100}} V (the book's $v_C(0)$).
 
@@ -1704,7 +1704,7 @@ r3,2,0,60'k
 ::: applink NR12's Example 13.2 (FD)
 :::
 
-Set {{ui:Analysis}} to *FD — complex frequency domain*.
+Set {{ui:Analysis}} to *FD — complex frequency domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result voltage at node 2
 v_{2} = \frac{60}{s + 25}\,\mathrm{V}
@@ -1735,7 +1735,7 @@ l,1,0,25'm,0.029
 r,1,0,500
 ```
 
-Set {{ui:Analysis}} to *FD — complex frequency domain*.
+Set {{ui:Analysis}} to *FD — complex frequency domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result voltage at node 1
 v_{1} = \frac{50 s - 200000}{s^{2} + 80000 s + 1600000000}\,\mathrm{V}
@@ -1764,17 +1764,17 @@ l,2,0,0.002
 r2,2,a,60
 ```
 
-Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Analysis}} to *FD — complex frequency domain*.
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Analysis}} to *FD — complex frequency domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result Thevenin voltage
-V_{Th} = \frac{480}{s + 10000}\,\mathrm{V}
+v_{th} = \frac{480}{s + 10000}\,\mathrm{V}
 :::
 
-::: result Thevenin impedance
-Z_{Th} = \frac{80 s + 600000}{s + 10000}\,\Omega
+::: result equivalent impedance
+Z_{eq} = \frac{80 s + 600000}{s + 10000}\,\Omega
 :::
 
-Here `vth` is the book's $V_{Th}$ and `z` is the book's $Z_{Th}$.
+Here `vth` is the book's $V_{Th}$ and `zeq` is the book's $Z_{Th}$.
 
 :::
 :::
@@ -1798,7 +1798,7 @@ l,3,0,50'm
 c,2,0,1'u
 ```
 
-Set {{ui:Analysis}} to *FD — complex frequency domain*.
+Set {{ui:Analysis}} to *FD — complex frequency domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result transfer function
 H(s) = \dfrac{v_{2}}{v_{g}} = \frac{1000 \left(s + 5000\right)}{s^{2} + 6000 s + 25000000}
@@ -1851,7 +1851,7 @@ c,2,0,C
 l,2,0,L
 ```
 
-Set {{ui:Analysis}} to *FD — complex frequency domain*.
+Set {{ui:Analysis}} to *FD — complex frequency domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 ::: result transfer function
 H(s) = \dfrac{v_{2}}{v_{i}} = \frac{L s}{C L R s^{2} + L s + R}
@@ -1880,7 +1880,7 @@ C=5'u
 
 Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
 
-The card returns `L` = {{o:0.000202642}} H (the book's $L$) and `R` = {{o:159.155}} Ω (the book's $R$).
+The card returns `L` = {{o:0.0002026}} H (the book's $L$) and `R` = {{o:159.2}} Ω (the book's $R$).
 
 That is $L$ = 202.6 µH and $R$ = 159.2 Ω.
 

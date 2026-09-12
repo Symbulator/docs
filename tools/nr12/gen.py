@@ -108,6 +108,15 @@ def split_desc(desc):
     return [x for x in out if x]
 
 
+DIGITS = 4      # Roberto, 13 Sep 2026: n = 3 or 4 unless the book asks for more
+
+
+def digits_of(s):
+    """The Rounding setting a problem runs at: the book's own precision,
+    4 unless the spec says otherwise."""
+    return int(s.get("digits", DIGITS))
+
+
 def settings_line(s):
     kind, dom = s.get("kind", "circuit"), s.get("domain", "dc")
     bits = []
@@ -133,6 +142,8 @@ def settings_line(s):
     if s.get("rms"):
         bits.append("Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source "
                     "is given in rms")
+    bits.append("Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with "
+                "**n** = %d" % digits_of(s))
     return ". ".join(bits) + "."
 
 
@@ -154,15 +165,15 @@ def answer_blocks(s, vals):
         lbl = fmt.label_for(k, s["desc"], s)
         unit = fmt.unit_for(k, s)
         if sp.sympify(got).free_symbols:
-            body = "%s = %s" % (fmt.tex_name(k, s), fmt.tex_value(got))
+            body = "%s = %s" % (fmt.tex_name(k, s), fmt.tex_value(got, digits_of(s)))
             if unit:
                 body += "\\," + (unit if unit == "\\Omega" else "\\mathrm{%s}" % unit)
             panels.append("::: result %s\n%s\n:::" % (lbl, body))
         else:
-            shown = s.get("shownames", {}).get(k, k[1:] if k.startswith("@") else k)
+            shown = fmt.shown_name(k, s)
             if k.startswith("@"):
                 s.setdefault("_evalkeys", {})[shown] = k
-            numeric.append((shown, fmt.plain_value(got), unit, polar_of(s, got),
+            numeric.append((shown, fmt.plain_value(got, digits_of(s)), unit, polar_of(s, got),
                             s.get("booknames", {}).get(k)))
     return panels, numeric
 
@@ -176,7 +187,7 @@ def polar_of(s, val):
     if e.free_symbols or sp.im(e) == 0:
         return ""
     import symbulator as S
-    p = S.polar(e, 4)
+    p = S.polar(e, digits_of(s))
     mag = str(p.magnitude).rstrip(".")      # polar() prints "1236." at 4 digits
     return "{{o:%s}}\u2220{{o:%s}}\u00b0" % (mag, str(p.angle).rstrip("."))
 
@@ -324,7 +335,7 @@ def render(s, vals):
              if k in s.get("booknames", {}) and k not in s.get("hide", ())
              and sp.sympify(vals.get(k, 0) if not k.startswith("@") else 0).free_symbols]
     if panels and named:
-        bits = ["`%s` is the book's $%s$" % (s.get("shownames", {}).get(k, k), b)
+        bits = ["`%s` is the book's $%s$" % (fmt.shown_name(k, s), b)
                 for k, b in named]
         L.append(("Here " if len(bits) > 1 else "") + (
             bits[0] if len(bits) == 1 else ", ".join(bits[:-1]) + " and " + bits[-1]) + ".")
@@ -360,7 +371,7 @@ def render(s, vals):
             L.extend(conds)
             L.append("```")
             L.append("")
-        got = runner.app_evaluate(s, ev["expr"], conds)
+        got = runner.app_evaluate(s, ev["expr"], conds, digits=digits_of(s))
         num, val = runner.number_of(got)
         unit = UNIT_WORD.get(ev.get("unit", ""), ev.get("unit", ""))
         if ev.get("expect") is not None:
@@ -376,7 +387,7 @@ def render(s, vals):
     # first run's fields travel in the problem's head entry; a later run
     # is an entry of its own, linked beside its boxes.
     if s.get("solveq"):
-        values = runner.app_values(s)
+        values = runner.app_values(s, digits=digits_of(s))
         for i, sq in enumerate(s["solveq"]):
             # A later run that only changes one box shows that box alone
             # and is not an entry of its own (Roberto, 13 Sep 2026: "just
@@ -418,7 +429,7 @@ def render(s, vals):
                 else:
                     L.append("Untick {{ui:real solutions only}} and press {{btn:Solve equations}}.")
             L.append("")
-            got, _r = runner.app_solveq(s, sq, values)
+            got, _r = runner.app_solveq(s, sq, values, digits=digits_of(s))
             sols = _r.get("solutions") or []
             units = sq.get("unit", "")
 
@@ -486,7 +497,8 @@ def pre_spec(s, pre):
     question, and the book names it carries."""
     return dict(num=s["num"], desc=pre["desc"], domain=pre.get("domain", "dc"),
                 expect=pre["expect"], booknames=pre.get("booknames", {}),
-                shownames=pre.get("shownames", {}), units=pre.get("units", {}))
+                shownames=pre.get("shownames", {}), units=pre.get("units", {}),
+                digits=digits_of(s))
 
 
 def pre_values(s, pre):
@@ -529,7 +541,7 @@ def cir_entry(s):
         L.append("note: This is the circuit after the switch has moved; its initial "
                  "condition comes from the entry before it.")
     L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(num))
-    L.append("rounding: 6")
+    L.append("rounding: %d" % digits_of(s))
     L.append("si: no")
     L.append("units: yes")
     if dom == "ac":
@@ -565,7 +577,7 @@ def cir_solveq_entry(s, sq):
     L.append("note: %s" % ask)
     L.append("note: %s" % sq["note"])
     L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(s["num"]))
-    L.append("rounding: 6")
+    L.append("rounding: %d" % digits_of(s))
     L.append("si: no")
     L.append("units: yes")
     L.append("")
@@ -584,7 +596,7 @@ def cir_pre_entry(s, pre):
     L.append("note: %s" % ask)
     L.append("note: %s" % pre["note"])
     L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(s["num"]))
-    L.append("rounding: 6")
+    L.append("rounding: %d" % digits_of(s))
     L.append("si: no")
     L.append("units: yes")
     L.append("")

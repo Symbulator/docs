@@ -3,6 +3,46 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #436 — the sampler at the book's rounding, and the Find equivalent card's own names — **live 13 Sep 2026, web only**
+
+Roberto, 13 Sep 2026: *"unless the book asks for more precision, use
+rounding at n=3 or 4 for every problem"* — and, reading Example 4.21,
+*"the card never reports the equivalent resistance as z. Even in AC, it
+is reported as zeq. But in DC, it is req."* Rules 19 and 20 in
+`tools/nr12/README.md`.
+
+**Rounding.** Every entry ran at 6, and the page said nothing about it.
+Now `gen.py` carries `DIGITS = 4`, a spec may say `digits=`, and the
+setting is threaded through everything that prints a value: the
+settings line ends *Set Rounding in Settings to approx to n digits with
+n = 4*, the `.cir` entries carry `rounding: 4`, the panels and the
+returns sentence round at n, the Evaluate and Solve card runs go
+through the real app at n, and the polar forms too. Four problems
+print more because the book does — 5.7 (5.9988), 8.4 (979.80) and 11.1
+(115.22) at 5, 18.6 (33,333.33) at 7. Two formatter faults surfaced on
+the way and are fixed in `fmt.py`: a value rounded to n came back as a
+Float with n digits of *binary* precision, so every later read printed
+its noise (2.66699 for 2.667, and a 1.6e9 coefficient in 13.9's
+transfer function as 1599995904) — it is read back through its decimal
+string now, as the app does since #391; and a non-integer Rational with
+a small denominator was kept exact and printed at six figures whatever
+n said (9.15's `66600/709` read 93.9351 under n = 4; it reads 93.94).
+Under *approx* only an integer stays exact, which is what the card does.
+
+**The card's names.** The page called the equivalent `z`, typeset it
+`Z_{Th}` and labelled it *Thevenin impedance*; the card says `req` in DC
+and `zeq` otherwise, `R_{eq}` / `Z_{eq}`, *equivalent resistance* /
+*equivalent impedance*, and `v_{th}`, `i_{no}`, *maximum deliverable
+power* for the rest — `_TOOL_LABELS` and the template's `TEXNAME`,
+which `fmt.py` now copies. The runner keeps `z` as its key, `th()`'s
+own attribute; `fmt.tool_name()` maps it. Five problems moved (4.21,
+9.12, 9.15, 10.16, 13.6) and the two maximum-power paragraphs now say
+`req` and `zeq`.
+
+Gates: runner **63 ok**, `app_links` 384 of 386, `build.py --check`
+clean, `verify_lesson.py Nilsson_Riedel` clean on all 50. The app's
+book changed only in its `rounding:` lines, so it rides the v218 train.
+
 ## #434 and #435 — claimed by the app tree, 13 Sep 2026: **a source's card reads the power it delivers** (`-pe1 = 10 W`, labelled *power delivered*; in AC the average power delivered and the delivered power's **power factor** as a row) and ***real solutions only* ticked by default in DC and TR**. The docs moved with #434: the Manual's *Signs* paragraph, Lesson 2's *power delivered* line, Lesson 3's Drill Problem 1.11 panels, and the sampler's 3.11 and 4.13, which read the card instead of Evaluate with a minus sign. **The sampler's questions also lost the book's method** the same day (*"Use the node-voltage method to find…"* is *"Find…"*, in fourteen entries; the chapter opening says once that the book prescribes one), at Roberto's word. Write-ups in `Application/v9/repos/local/NEXT.md`
 
 ## #433 — claimed by the app tree, 12 Sep 2026: **the Solve card's conditions and equations behave like Expert Mode's** — an equality condition on a symbol substitutes, and an equation that names none of the unknowns is solved rather than dropped; found by Roberto solving NR12's Example 3.10 with the Solve card. Nothing in the docs tree changes for it. Write-up in `Application/v9/repos/local/NEXT.md`
