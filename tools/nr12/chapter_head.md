@@ -14,7 +14,10 @@ Here is a selection of problems from *Electric Circuits*, 12th edition, by
 James W. Nilsson and Susan A. Riedel (Pearson). These are not the easiest
 problems in the book, but they are well suited to showing what Symbulator
 can do, since they are the ones where the distance between *describing a
-circuit* and *solving it by hand* is widest.
+circuit* and *solving it by hand* is widest. The book works each of them by
+a named method, node voltages, mesh currents, superposition, a transform,
+and its questions say which; here each question is trimmed to what is
+asked, since Symbulator is told the circuit and never the method.
 
 ::: note What this chapter is not
 This is not a solutions manual, and it will not teach you circuit analysis.

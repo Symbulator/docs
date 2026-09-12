@@ -1468,7 +1468,8 @@ ed,3,0,4*vx
 ```
 
 ::: only 9
-The answers you want are `pr1`, `pei`, `pr2`, `pr3` and `ped`, in {{card:Results}}.
+The answers you want are `pr1`, `pr2` and `pr3` in {{card:Results}}, and for
+the two sources the *power delivered* row of each card, `-pei` and `-ped`.
 
 Here we use {{ui:Rounding}} — *approx to n digits*, with **n** = 3.
 :::
@@ -1482,8 +1483,8 @@ The answers are:
 ::: result
 p_{r1} = .768\ \mathrm{W}
 :::
-::: result
-p_{ei} = 1.92\ \mathrm{W}
+::: result power delivered by ei
+-p_{ei} = -1.92\ \mathrm{W}
 :::
 ::: result
 p_{r2} = .2048\ \mathrm{W}
@@ -1491,11 +1492,12 @@ p_{r2} = .2048\ \mathrm{W}
 ::: result
 p_{r3} = .1792\ \mathrm{W}
 :::
-::: result
-p_{ed} = -3.072\ \mathrm{W}
+::: result power delivered by ed
+-p_{ed} = 3.072\ \mathrm{W}
 :::
 
-This is correct.
+This is correct: the source **ei** delivers a negative power, which is to
+say it absorbs 1.92 W, and **ed** delivers 3.072 W.
 :::
 
 :::

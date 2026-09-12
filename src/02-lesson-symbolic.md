@@ -142,7 +142,7 @@ v_{r2} = \dfrac{r_{2}\,v}{r_{1} + r_{2}}
 which is the voltage divider you would have written by hand.
 
 To find the power consumed in r2, we {{v7,8|ask for `pr2`}}{{v9|read `pr2`}}. To find the power delivered by the
-source, we {{v7,8|ask for the negative of `pev`}}{{v9|switch the sign of `pev`}}.
+source, we {{v7,8|ask for the negative of `pev`}}{{v9|read the *power delivered* row of the source's card, `-pev`}}.
 
 $$
 \begin{aligned}

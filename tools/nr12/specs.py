@@ -58,8 +58,7 @@ SPECS = []
 
 SPECS += [
 dict(num="3.7", title="Using Voltage Division and Current Division to Solve a Circuit",
-     ask="Use current division to find the current $i_o$ and use voltage division to find "
-         "the voltage $v_o$ for the circuit in the figure.",
+     ask="Find the current $i_o$ and the voltage $v_o$ for the circuit in the figure.",
      page=95, fig=(95, "3.22"), domain="dc",
      desc="j,0,1,8:r1,1,2,36:r2,2,0,44:r3,1,0,10:r4,1,3,40:r5,3,4,10:r6,4,0,30:r7,1,0,24",
      expect={"i_r7": 2, "v_r6": 18},
@@ -76,21 +75,22 @@ dict(num="3.11", title="Applying a Delta-to-Wye Transform",
      ask="Find the current and power supplied by the 40 V source in the circuit shown in the figure.",
      page=103, fig=(103, "3.35"), domain="dc",
      desc="e,1,0,40:r1,1,2,5:r2,2,3,100:r3,2,4,125:r4,3,4,25:r5,3,0,40:r6,4,0,37.5",
-     expect={"@-i_e": 0.5, "@-p_e": 20},
+     expect={"@-p_e": 20, "@-i_e": 0.5},
      shownames={"@-i_e": "-i_e", "@-p_e": "-p_e"},
      booknames={"@-i_e": "i", "@-p_e": "p"},
+     delivered=["@-p_e"],
      shows="A bridge: five resistors in a diamond with a sixth across the middle, fed by "
            "one source, and the question wants what that source delivers, its current and "
            "its power. We write the bridge as it is drawn, naming the source `e` and the "
            "six resistors `r1` to `r6`.",
-     interpret="One thing to know before reading the results: Symbulator reports a "
-           "source's current and power *into* the source, the same way as for every other "
-           "element, so what the source *supplies* is the negative of what it reports, and "
-           "we read the two answers with a minus sign in the {{card:Evaluate}} card."),
+     interpret="The source's card reports the power it delivers as `-pe`, which is the "
+           "power the question asks for. Its current it reports *into* the source, the "
+           "same way as for every other element, so the current it supplies is the "
+           "negative of that, which we read with a minus sign in the {{card:Evaluate}} "
+           "card."),
 
 dict(num="4.4", title="Using the Node-Voltage Method with Dependent Sources",
-     ask="Use the node-voltage method to find the power dissipated in the 5 Ω resistor "
-         "in the circuit shown in the figure.",
+     ask="Find the power dissipated in the 5 Ω resistor in the circuit shown in the figure.",
      page=125, fig=(125, "4.10"), domain="dc",
      desc="e1,1,0,20:r1,1,2,2:r2,2,0,20:r3,2,3,5:r4,3,0,10:r5,3,4,2:e2,4,0,8*ir3",
      expect={"p_r3": 7.2},
@@ -105,8 +105,7 @@ dict(num="4.4", title="Using the Node-Voltage Method with Dependent Sources",
            "is then `pr3`, the power consumed by `r3`."),
 
 dict(num="4.7", title="Using the Mesh-Current Method with Dependent Sources",
-     ask="Use the mesh-current method to find the power dissipated in the 4 Ω resistor "
-         "in the circuit shown in the figure.",
+     ask="Find the power dissipated in the 4 Ω resistor in the circuit shown in the figure.",
      page=133, fig=(133, "4.23"), domain="dc",
      desc="e1,1,0,50:r1,1,3,1:r2,1,2,5:r3,2,3,4:r4,2,0,20:e2,3,0,15*ir4",
      expect={"p_r3": 16},
@@ -139,8 +138,8 @@ dict(num="4.21", title="Calculating the Condition for Maximum Power Transfer",
 
 SPECS += [
 dict(num="4.8", title="A Special Case in the Mesh-Current Method",
-     ask="Use the mesh-current method to find branch currents $i_a$, $i_b$ and $i_c$ "
-         "in the circuit for Example 4.3, repeated here in the figure.",
+     ask="Find the branch currents $i_a$, $i_b$ and $i_c$ in the circuit for Example 4.3, "
+         "repeated here in the figure.",
      page=134, fig=(134, "4.25"), domain="dc",
      desc="e,1,0,50:r1,1,2,5:r2,2,0,10:r3,2,0,40:j,0,2,3",
      expect={"i_r1": 2, "i_r2": 4, "i_r3": 1},
@@ -156,8 +155,8 @@ dict(num="4.8", title="A Special Case in the Mesh-Current Method",
            "$i_b$ is `ir2` and $i_c$ is `ir3`."),
 
 dict(num="4.13", title="Using Special Source Transformation Techniques",
-     ask="a) Use source transformations to find the voltage $v_o$ in the circuit shown in "
-         "the figure. b) Find the power developed by the 250 V voltage source. "
+     ask="a) Find the voltage $v_o$ in the circuit shown in the figure. b) Find the power "
+         "developed by the 250 V voltage source. "
          "c) Find the power developed by the 8 A current source.",
      page=143, fig=(143, "4.42"), domain="dc",
      desc="e,1,0,250:r1,1,0,125:r2,1,2,25:j,2,9,8:r3,9,0,10:r4,2,0,100:r5,2,3,5:r6,3,0,15",
@@ -172,12 +171,12 @@ dict(num="4.13", title="Using Special Source Transformation Techniques",
            "current source's arrow points down, from node 2 towards the 10 Ω, so we write "
            "its nodes in that order, `j,2,9,8`, calling the node between the source and "
            "the resistor **9**. $v_o$ is the voltage across `r4`.",
-     interpret="The power a source *develops* is what it supplies, the negative of the "
-           "power Symbulator reports it consuming, so parts (b) and (c) are read with a "
-           "minus sign in the {{card:Evaluate}} card."),
+     delivered=["@-p_e", "@-p_j"],
+     interpret="The power a source *develops* is what it delivers, which each source's "
+           "card reports as `-pe` and `-pj`."),
 
 dict(num="4.23", title="Using Superposition to Solve a Circuit with Dependent Sources",
-     ask="Use the principle of superposition to find $v_o$ in the circuit shown in the figure.",
+     ask="Find $v_o$ in the circuit shown in the figure.",
      page=156, fig=(156, "4.71"), domain="dc",
      desc="e1,1,c,10:r1,1,a,5:r2,a,c,20:r3,b,0,10:j1,0,b,5:j2,b,a,0.4*vr3:e2,0,c,2*ir1",
      expect={"v_r2": 24},
@@ -705,8 +704,8 @@ dict(num="9.9", title="Combining Impedances in Series and in Parallel",
            "node 1 and $I$ the current through `r2`."),
 
 dict(num="9.10", title="Using a Delta-to-Wye Transform in the Frequency Domain",
-     ask="Use a delta-to-wye impedance transformation to find $I_0$, $I_1$, $I_2$, $I_3$, "
-         "$I_4$, $I_5$, $V_1$ and $V_2$ in the circuit in the figure.",
+     ask="Find $I_0$, $I_1$, $I_2$, $I_3$, $I_4$, $I_5$, $V_1$ and $V_2$ in the circuit "
+         "in the figure.",
      page=365, fig=(365, "9.23"), domain="ac", omega=W,
      desc="e,a,0,120:r1,a,b,-4j:r2,a,c,63.2+2.4j:r3,b,c,10:r4,b,0,20+60j:r5,c,0,-20j",
      shownames={"@-i_e": "-i_e"},
@@ -747,8 +746,7 @@ dict(num="9.12", title="Finding a Thevenin Equivalent in the Frequency Domain",
            "circuit is no obstacle to it."),
 
 dict(num="9.14", title="Using the Mesh-Current Method in the Frequency Domain",
-     ask="Use the mesh-current method to find the voltages $V_1$, $V_2$ and $V_3$ in the "
-         "circuit shown in the figure.",
+     ask="Find the voltages $V_1$, $V_2$ and $V_3$ in the circuit shown in the figure.",
      page=372, fig=(372, "9.39"), domain="ac", omega=W,
      desc="e1,1,0,150:r1,1,2,1:r2,2,a,2j:r3,a,c,12:r4,c,0,-16j:r5,a,4,1:r6,4,b,3j:"
           "e2,b,0,39*ir3",
@@ -896,8 +894,7 @@ dict(num="11.1", title="Analyzing a Wye-Wye Circuit",
 
 SPECS += [
 dict(num="13.2", title="The Natural Response of an RC Circuit",
-     ask="The circuit in the figure was analyzed in Example 7.3 using first-order circuit "
-         "analysis techniques. Use the Laplace transform method to find $v_o(t)$ for "
+     ask="The circuit in the figure is the circuit of Example 7.3. Find $v_o(t)$ for "
          "$t$ ≥ 0+.",
      page=515, fig=(515, "13.11"), domain="fd",
      pre=[dict(
@@ -928,9 +925,8 @@ dict(num="13.2", title="The Natural Response of an RC Circuit",
 
 dict(num="13.3", title="The Step Response of an RLC Circuit",
      ask="Consider the circuit in the figure, where the initial current in the inductor is "
-         "29 mA and the initial voltage across the capacitor is 50 V. This circuit was "
-         "analyzed in Example 8.10 using second-order circuit analysis techniques. Use the "
-         "Laplace transform method to find $v(t)$ for $t$ ≥ 0.",
+         "29 mA and the initial voltage across the capacitor is 50 V. Find $v(t)$ for "
+         "$t$ ≥ 0.",
      page=515, fig=(515, "13.13"), domain="fd",
      desc="j,0,1,0.024/s:c,1,0,25'n,50:l,1,0,25'm,0.029:r,1,0,500",
      expect={"v_1": "(50*s - 200000)/(s**2 + 80000*s + 1600000000)"},
@@ -948,7 +944,7 @@ dict(num="13.3", title="The Step Response of an RLC Circuit",
 
 dict(num="13.5", title="Analyzing a Circuit with Multiple Meshes",
      ask="The circuit in the figure has no initial stored energy. At $t$ = 0 the switch "
-         "closes. Use Laplace methods to find $i_1(t)$ and $i_2(t)$ for $t$ ≥ 0.",
+         "closes. Find $i_1(t)$ and $i_2(t)$ for $t$ ≥ 0.",
      page=519, fig=(519, "13.17"), domain="tr",
      desc="e,1,0,336:l1,1,2,8.4:r1,2,0,42:l2,2,3,10:r2,3,0,48",
      expect={"i_l1": "15 - 14*exp(-2*t) - exp(-12*t)",
@@ -967,7 +963,7 @@ dict(num="13.5", title="Analyzing a Circuit with Multiple Meshes",
 dict(num="13.6", title="Creating a Thevenin Equivalent in the s Domain",
      ask="The circuit in the figure has no initial stored energy, and at $t$ = 0 the switch "
          "closes. Find the Thevenin equivalent for the circuit to the left of the terminals "
-         "a and b in the s domain, using Laplace methods.",
+         "a and b in the s domain.",
      page=521, fig=(521, "13.20"), kind="th", n1="a", n2="0", domain="fd",
      desc="e,1,0,480/s:r1,1,2,20:l,2,0,0.002:r2,2,a,60",
      expect={"vth": "480/(s + 10000)", "z": "80*(s + 7500)/(s + 10000)"},
@@ -984,8 +980,8 @@ dict(num="13.6", title="Creating a Thevenin Equivalent in the s Domain",
 
 dict(num="13.7", title="Analyzing a Circuit with Mutual Inductance",
      ask="The make-before-break switch in the circuit in the figure has been in position a "
-         "for a long time. At $t$ = 0 it moves instantaneously to position b. Use Laplace "
-         "methods to find $i_2(t)$ for $t$ ≥ 0.",
+         "for a long time. At $t$ = 0 it moves instantaneously to position b. Find $i_2(t)$ "
+         "for $t$ ≥ 0.",
      page=523, fig=(523, "13.23"), domain="tr",
      pre=[dict(
         text="Two coupled coils, the primary fed from a source through a switch and the "
@@ -1060,8 +1056,8 @@ dict(num="13.9", title="Deriving the Transfer Function of a Circuit",
 
 dict(num="13.13", title="A Series Inductor Circuit with an Impulsive Response",
      ask="The switch in the circuit shown in the figure has been closed for a long time. At "
-         "$t$ = 0 it opens. Use Laplace methods to find the output voltage $v_o$ and the "
-         "current in the 3 H inductor, $i_1$.",
+         "$t$ = 0 it opens. Find the output voltage $v_o$ and the current in the 3 H "
+         "inductor, $i_1$.",
      page=541, fig=(541, "13.50"), domain="tr",
      pre=[dict(
         text="Two inductors, one carrying a current from a source and the other idle "

@@ -73,8 +73,14 @@ Two sentences, and every sign in the book follows from them:{{i:sign conventions
 - A **voltage drop** is the first node's potential minus the second's.
 
 So `e1,1,0,12` above reports `ie1 = -1/250 A`: current flows *out* of the
-source's first node into the circuit, which is negative by that rule. A
-source delivering power reports negative power consumed.{{i:power consumed and delivered}}
+source's first node into the circuit, which is negative by that rule.
+Power follows the same rule, so a source delivering power *consumes* a
+negative one — and because that is the number nobody wants, a source's
+card shows the **power delivered** instead, as `-pe1`, labelled so. The
+answer `pe1` itself is unchanged: `p` is always power consumed, in
+{{card:Evaluate}}, in {{card:Solve}} and in every saved file, and the card
+merely shows its negative. In AC a source's card also carries the power
+factor of the power it delivers.{{i:power consumed and delivered}}
 
 If a sign surprises you, read the element's node order before doubting the
 answer.

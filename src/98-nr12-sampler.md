@@ -14,7 +14,10 @@ Here is a selection of problems from *Electric Circuits*, 12th edition, by
 James W. Nilsson and Susan A. Riedel (Pearson). These are not the easiest
 problems in the book, but they are well suited to showing what Symbulator
 can do, since they are the ones where the distance between *describing a
-circuit* and *solving it by hand* is widest.
+circuit* and *solving it by hand* is widest. The book works each of them by
+a named method, node voltages, mesh currents, superposition, a transform,
+and its questions say which; here each question is trimmed to what is
+asked, since Symbulator is told the circuit and never the method.
 
 ::: note What this chapter is not
 This is not a solutions manual, and it will not teach you circuit analysis.
@@ -64,7 +67,7 @@ final chapter.
 
 ::: problem NR12's Example 3.7
 
-Use current division to find the current $i_o$ and use voltage division to find the voltage $v_o$ for the circuit in the figure.
+Find the current $i_o$ and the voltage $v_o$ for the circuit in the figure.
 
 ::: figure assets/circuit/nr12-ex3-7.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 3.7
@@ -127,7 +130,7 @@ R_x
 R_3=10
 ```
 
-Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+Press {{btn:Solve equations}}.
 
 The card returns `R_x` = {{o:40}} Ω (the book's $R_x$).
 
@@ -169,7 +172,9 @@ r6,4,0,37.5
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
-One thing to know before reading the results: Symbulator reports a source's current and power *into* the source, the same way as for every other element, so what the source *supplies* is the negative of what it reports, and we read the two answers with a minus sign in the {{card:Evaluate}} card.
+The source's card reports the power it delivers as `-pe`, which is the power the question asks for. Its current it reports *into* the source, the same way as for every other element, so the current it supplies is the negative of that, which we read with a minus sign in the {{card:Evaluate}} card.
+
+Symbulator returns `-p_e` = {{o:20}} W (the book's $p$).
 
 Then we type `-i_e` into {{card:Evaluate}}:
 
@@ -179,20 +184,12 @@ Then we type `-i_e` into {{card:Evaluate}}:
 
 It gives {{o:0.5}} A (the book's $i$).
 
-Likewise `-p_e`:
-
-```field 9 Evaluate
--p_e
-```
-
-It gives {{o:20}} W (the book's $p$).
-
 :::
 :::
 
 ::: problem NR12's Example 4.4
 
-Use the node-voltage method to find the power dissipated in the 5 Ω resistor in the circuit shown in the figure.
+Find the power dissipated in the 5 Ω resistor in the circuit shown in the figure.
 
 ::: figure assets/circuit/nr12-ex4-4.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 4.4
@@ -220,7 +217,7 @@ Symbulator returns `p_r3` = {{o:7.2}} W (the book's $p$).
 
 ::: problem NR12's Example 4.7
 
-Use the mesh-current method to find the power dissipated in the 4 Ω resistor in the circuit shown in the figure.
+Find the power dissipated in the 4 Ω resistor in the circuit shown in the figure.
 
 ::: figure assets/circuit/nr12-ex4-7.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 4.7
@@ -247,7 +244,7 @@ Symbulator returns `p_r3` = {{o:16}} W (the book's $p$).
 
 ::: problem NR12's Example 4.8
 
-Use the mesh-current method to find branch currents $i_a$, $i_b$ and $i_c$ in the circuit for Example 4.3, repeated here in the figure.
+Find the branch currents $i_a$, $i_b$ and $i_c$ in the circuit for Example 4.3, repeated here in the figure.
 
 ::: figure assets/circuit/nr12-ex4-8.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 4.8
@@ -273,7 +270,7 @@ Symbulator returns `i_r1` = {{o:2}} A (the book's $i_a$), `i_r2` = {{o:4}} A (th
 
 ::: problem NR12's Example 4.13
 
-a) Use source transformations to find the voltage $v_o$ in the circuit shown in the figure. b) Find the power developed by the 250 V voltage source. c) Find the power developed by the 8 A current source.
+a) Find the voltage $v_o$ in the circuit shown in the figure. b) Find the power developed by the 250 V voltage source. c) Find the power developed by the 8 A current source.
 
 ::: figure assets/circuit/nr12-ex4-13.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 4.13
@@ -295,25 +292,9 @@ r6,3,0,15
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
-The power a source *develops* is what it supplies, the negative of the power Symbulator reports it consuming, so parts (b) and (c) are read with a minus sign in the {{card:Evaluate}} card.
+The power a source *develops* is what it delivers, which each source's card reports as `-pe` and `-pj`.
 
-Symbulator returns `v_r4` = {{o:20}} V (the book's $v_o$).
-
-Then we type `-p_e` into {{card:Evaluate}}:
-
-```field 9 Evaluate
--p_e
-```
-
-It gives {{o:2800}} W (the book's $p_{250\,V}$).
-
-Likewise `-p_j`:
-
-```field 9 Evaluate
--p_j
-```
-
-It gives {{o:480}} W (the book's $p_{8\,A}$).
+Symbulator returns `v_r4` = {{o:20}} V (the book's $v_o$), `-p_e` = {{o:2800}} W (the book's $p_{250\,V}$) and `-p_j` = {{o:480}} W (the book's $p_{8\,A}$).
 
 :::
 :::
@@ -344,7 +325,7 @@ Symbulator returns `z` = {{o:25}} Ω (the book's $R_L$) and `pmax` = {{o:900}} W
 
 ::: problem NR12's Example 4.23
 
-Use the principle of superposition to find $v_o$ in the circuit shown in the figure.
+Find $v_o$ in the circuit shown in the figure.
 
 ::: figure assets/circuit/nr12-ex4-23.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 4.23
@@ -437,7 +418,7 @@ vb
 va=1.5
 ```
 
-Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+Press {{btn:Solve equations}}.
 
 The card returns `vb` = {{o:3.2}} V (the book's $v_b$).
 
@@ -505,7 +486,7 @@ va=2
 vc=-1
 ```
 
-Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+Press {{btn:Solve equations}}.
 
 The card returns `vb` = {{o:9}} V (the book's $v_b$).
 
@@ -566,7 +547,7 @@ v_4=-12
 rf
 ```
 
-Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+Press {{btn:Solve equations}}.
 
 The card returns `rf` = {{o:40000}} Ω (the book's $R_f$).
 
@@ -618,7 +599,7 @@ vb
 va=1
 ```
 
-Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+Press {{btn:Solve equations}}.
 
 The card returns `vb` = {{o:2}} V (the book's $v_b$).
 
@@ -1068,7 +1049,7 @@ v_1=150
 t
 ```
 
-Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+Press {{btn:Solve equations}}.
 
 The card returns `t` = {{o:0.0677013}} s (the book's $t$).
 
@@ -1206,7 +1187,7 @@ v_{3} = 48 - 64 e^{- 2500 t} + 16 e^{- 10000 t}\,\mathrm{V}
 
 ::: problem NR12's Example 13.5
 
-The circuit in the figure has no initial stored energy. At $t$ = 0 the switch closes. Use Laplace methods to find $i_1(t)$ and $i_2(t)$ for $t$ ≥ 0.
+The circuit in the figure has no initial stored energy. At $t$ = 0 the switch closes. Find $i_1(t)$ and $i_2(t)$ for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex13-5.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.5
@@ -1240,7 +1221,7 @@ Here `i_l1` is the book's $i_1$ and `i_l2` is the book's $i_2$.
 
 ::: problem NR12's Example 13.7
 
-The make-before-break switch in the circuit in the figure has been in position a for a long time. At $t$ = 0 it moves instantaneously to position b. Use Laplace methods to find $i_2(t)$ for $t$ ≥ 0.
+The make-before-break switch in the circuit in the figure has been in position a for a long time. At $t$ = 0 it moves instantaneously to position b. Find $i_2(t)$ for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex13-7.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.7
@@ -1293,7 +1274,7 @@ i_{l2} = \frac{\left(5 e^{2 t} - 5\right) e^{- 3 t}}{4}\,\mathrm{A}
 
 ::: problem NR12's Example 13.13
 
-The switch in the circuit shown in the figure has been closed for a long time. At $t$ = 0 it opens. Use Laplace methods to find the output voltage $v_o$ and the current in the 3 H inductor, $i_1$.
+The switch in the circuit shown in the figure has been closed for a long time. At $t$ = 0 it opens. Find the output voltage $v_o$ and the current in the 3 H inductor, $i_1$.
 
 ::: figure assets/circuit/nr12-ex13-13.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.13
@@ -1392,7 +1373,7 @@ Part (e) is the two phasors written back as functions of time at the source's fr
 
 ::: problem NR12's Example 9.10
 
-Use a delta-to-wye impedance transformation to find $I_0$, $I_1$, $I_2$, $I_3$, $I_4$, $I_5$, $V_1$ and $V_2$ in the circuit in the figure.
+Find $I_0$, $I_1$, $I_2$, $I_3$, $I_4$, $I_5$, $V_1$ and $V_2$ in the circuit in the figure.
 
 ::: figure assets/circuit/nr12-ex9-10.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 9.10
@@ -1456,7 +1437,7 @@ Symbulator returns `vth` = {{o:784 - 288j}} V ({{o:835.2}}∠{{o:-20.17}}°, the
 
 ::: problem NR12's Example 9.14
 
-Use the mesh-current method to find the voltages $V_1$, $V_2$ and $V_3$ in the circuit shown in the figure.
+Find the voltages $V_1$, $V_2$ and $V_3$ in the circuit shown in the figure.
 
 ::: figure assets/circuit/nr12-ex9-14.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 9.14
@@ -1692,7 +1673,7 @@ inverts back into time, are in the TR section above.
 
 ::: problem NR12's Example 13.2
 
-The circuit in the figure was analyzed in Example 7.3 using first-order circuit analysis techniques. Use the Laplace transform method to find $v_o(t)$ for $t$ ≥ 0+.
+The circuit in the figure is the circuit of Example 7.3. Find $v_o(t)$ for $t$ ≥ 0+.
 
 ::: figure assets/circuit/nr12-ex13-2.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.2
@@ -1738,7 +1719,7 @@ That is the transform of the answer Example 7.3 found in the time domain, $60e^{
 
 ::: problem NR12's Example 13.3
 
-Consider the circuit in the figure, where the initial current in the inductor is 29 mA and the initial voltage across the capacitor is 50 V. This circuit was analyzed in Example 8.10 using second-order circuit analysis techniques. Use the Laplace transform method to find $v(t)$ for $t$ ≥ 0.
+Consider the circuit in the figure, where the initial current in the inductor is 29 mA and the initial voltage across the capacitor is 50 V. Find $v(t)$ for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex13-3.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.3
@@ -1767,7 +1748,7 @@ v_{1} = \frac{50 s - 200000}{s^{2} + 80000 s + 1600000000}\,\mathrm{V}
 
 ::: problem NR12's Example 13.6
 
-The circuit in the figure has no initial stored energy, and at $t$ = 0 the switch closes. Find the Thévenin equivalent for the circuit to the left of the terminals a and b in the s domain, using Laplace methods.
+The circuit in the figure has no initial stored energy, and at $t$ = 0 the switch closes. Find the Thévenin equivalent for the circuit to the left of the terminals a and b in the s domain.
 
 ::: figure assets/circuit/nr12-ex13-6.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.6

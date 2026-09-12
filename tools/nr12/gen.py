@@ -192,7 +192,9 @@ def evaluated_blocks(s, numeric):
     for item in numeric:
         name, val, unit, pol, book = item
         key = s.get("_evalkeys", {}).get(name)
-        if key is None:
+        if key is None or key in s.get("delivered", ()):
+            # #434: a source's card shows its delivered power as `-pe`, so
+            # that answer is read straight off the card, no Evaluate step
             direct.append(item)
             continue
         typed = key[1:].replace(" ", "")
@@ -404,8 +406,17 @@ def render(s, vals):
             if "press" in sq:
                 L.append(polish(sq["press"]))
             else:
-                L.append(("Tick {{ui:real solutions only}} and press {{btn:Solve equations}}."
-                          if sq.get("real_only", True) else "Press {{btn:Solve equations}}."))
+                # #435: the tick is on by default in DC and TR and off in AC
+                # and FD, so the line names it only when the run wants it
+                # the other way.
+                default_on = s.get("domain", "dc") in ("dc", "tr")
+                want = sq.get("real_only", True)
+                if want == default_on:
+                    L.append("Press {{btn:Solve equations}}.")
+                elif want:
+                    L.append("Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.")
+                else:
+                    L.append("Untick {{ui:real solutions only}} and press {{btn:Solve equations}}.")
             L.append("")
             got, _r = runner.app_solveq(s, sq, values)
             sols = _r.get("solutions") or []
