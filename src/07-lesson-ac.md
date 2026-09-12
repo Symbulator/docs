@@ -365,7 +365,7 @@ Z_{eq} = 3.22 - 11.07\,\text{j}\ \Omega
 :::
 :::
 
-That is 3.22 − j11.07 Ω, which is correct.
+{{v7,8|That is 3.22 − j11.07 Ω, which is correct.}}{{v9|This is correct.}}
 
 ::: tip The pr tool only reduces impedances
 In case you were tempted to reduce this circuit by hand instead of simulating
@@ -484,7 +484,7 @@ $$
 $$
 :::
 
-That is 0.25 − j0.025 S, which is correct.
+{{v7,8|That is 0.25 − j0.025 S, which is correct.}}{{v9|This is correct.}}
 :::
 :::
 
@@ -564,8 +564,8 @@ AS7's Problem 9.73
 
 ::: answer
 Eight impedances and no source: a job for *Find equivalent* rather than a
-solve. The names carry the two nodes each element bridges, a convenience
-only.
+solve. The names carry the two nodes each element bridges, {{v7,8|a convenience
+only}}{{v9|for convenience}}.
 
 ```sym 7
 "r10,1,0,𝐢6:r20,2,0,𝐢8:r30,3,0,𝐢8:r40,4,0,𝐢12:r12,1,2,2:r23,2,3,-𝐢6:r34,3,4,4:r14,1,4,-𝐢4"→cir
@@ -731,7 +731,8 @@ The book wants its answers in terms of cosine rather than sine, so the source
 is taken as 8 cos(1000t − 40°) — as a phasor, `(8∠-40°)`.
 
 Note the decimal points on the values. They make the arithmetic approximate,
-which here is what you want: an exact solve of this circuit carries surds
+which here is what you want: an exact solve of this circuit carries {{v7,8|surds}}{{v9|unresolved
+square roots}}
 through every step for no benefit.
 
 ```sym 7
@@ -1098,7 +1099,7 @@ it fails altogether unless the source is reduced to a nominal 1 V.
 :::
 ::: only 9
 This circuit takes Symbulator 9 about ten seconds, with every value
-symbolic.
+symbolic — and about twice that on a phone.
 :::
 :::
 :::

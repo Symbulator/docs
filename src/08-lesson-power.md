@@ -133,9 +133,30 @@ simply means every current and voltage in the analysis is taken to be RMS.
 That's it.
 
 The switch is in {{card:Settings}}, under **AC power convention**: tick
-{{ui:RMS phasors}}. Off means peak amplitude, the convention with the divide-by-two,
-and the setting affects AC power only. It is always in view, so it cannot be
-left set from a problem you finished an hour ago.
+{{ui:RMS phasors}}.
+
+With the tick **off**, Symbulator takes every phasor you type as a *peak*
+value — the amplitude the sinusoid rises to — and the average power in an
+element is computed with the factor of one half that peak values require:
+
+$$
+P = \tfrac{1}{2}\,V_{\text{peak}}\,I_{\text{peak}}\cos\theta
+$$
+
+With the tick **on**, it takes every phasor you type as an *RMS* value, and
+the half disappears:
+
+$$
+P = V_{\text{rms}}\,I_{\text{rms}}\cos\theta
+$$
+
+That is the whole difference. The currents and voltages you get back are
+in whatever convention you typed the sources in, unchanged; only the power
+answers — `p`, `ap` and `s` — depend on the tick. So for the same numbers
+typed in, RMS on reports twice the power that RMS off does, and neither is
+wrong: they answer different questions. Match the book you are working
+from. The setting is always in view, so it is easier for you to notice
+whether it is on or off.
 :::
 
 ::: problem AS7's Example 11.10
@@ -335,8 +356,10 @@ r2,2,0,15-10j
 Again AC with `omega` and {{ui:RMS phasors}} ticked.
 :::
 
-The complex power absorbed in the source, line and load are in
-{{v7,8|`-se1`, `sr1` and `sr2`}}{{v9|`-se`, `sr1` and `sr2`}}:{{v9|{{i:complex power}}}}
+{{v7,8|The complex power absorbed in the source, line and load are in
+`-se1`, `sr1` and `sr2`:}}{{v9|The complex power *delivered* by the source is
+the opposite of the power it consumes, `-se`; the complex power *absorbed*
+in the line and in the load are `sr1` and `sr2`:{{i:complex power}}}}
 
 ```sym 7
 {-se1,sr1,sr2}
@@ -391,7 +414,8 @@ r4,3,0,-6j
 ::: only 9
 Written out as four elements rather than one, which is clearer and costs
 nothing here. The average power supplied is the opposite of the power the
-source consumes, `pe`: {{o:2007.1}} W.
+source consumes: `pe` reads {{o:-2007.1}} W, so the source supplies
+{{o:2007.1}} W.
 
 For the power factor, use {{card:Mini-Tools}} with *pf*, giving it the
 source's name, so that the reading is of the circuit the source sees:

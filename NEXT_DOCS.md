@@ -3,6 +3,19 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #431 — no underscores in the interface's example variables (app side) — **claimed 13 Sep 2026; the write-up is in `Application/v9/repos/local/NEXT.md`**
+
+## #432 — Roberto's Course review round of 13 Sep 2026 — **live 13 Sep 2026, web only**
+
+Seven wording fixes from Roberto reading Lessons 7 and 8 on the web after #430, each applied to the version 9 pages alone by `{{v7,8|…}}{{v9|…}}` spans or inside an existing `::: only 9` block, so versions 7 and 8 stay as written -- captured before the deploy and proved unmoved after, six pages.
+
+  * Lesson 7: *That is 3.22 − j11.07 Ω, which is correct* and its 0.25 − j0.025 S twin are just *This is correct* -- the value is shown above; *a convenience only* is *for convenience*; *carries surds through every step* is *carries unresolved square roots through every step* (Roberto: *what is surds?* -- the old textbook word for a root left as a radical, which is exactly the kind of word the seven rules forbid); the ten-second solve says *and about twice that on a phone*.
+  * Lesson 8: the RMS setting's one-line explanation (*Off means peak amplitude, the convention with the divide-by-two*) is now two short paragraphs with the two formulas as display maths -- peak values carry the factor of one half, RMS values do not, only the power answers depend on the tick, and the same numbers typed in report twice the power with the tick on. *The complex power absorbed in the source, line and load are in `-se`* was wrong: `-se` is the power *delivered*; the sentence now says so and keeps *absorbed* for the line and the load. *The average power supplied is the opposite of the power the source consumes, `pe`: 2007.1 W* implied `pe` was positive; it now reads *`pe` reads −2007.1 W, so the source supplies 2007.1 W*, on the model of the sentence Roberto liked (*the opposite of `se` gives*). And *always in view, so it cannot be left set from a problem you finished an hour ago* claimed more than being in view can deliver; it is now *so it is easier for you to notice whether it is on or off*.
+
+**A sanity sweep at Roberto's ask, over every sentence that reads a sign off `se`, `pe` or `ape`** -- the Course's AC lessons, the Manual, the sampler and the example books' notes: every *delivered* or *supplied* power is the opposite of the variable, every unnegated variable is called consumed or absorbed, and Lesson 9's three-phase page reasons it out in words. Nothing further to fix; the two sentences above were the confusions.
+
+**Web only, at Roberto's word** (*except the PDFs*): `build.py --web` and a `learn` deploy. The PDFs live on `learn` are this morning's #430 build and now lag these seven fixes and the two RMS formulas; the next full `python build.py` clears that.
+
 ## #430 — the pf tool as version 8 has it: one value, a power or a name (docs half) — **live, 13 Sep 2026**
 
 **Deployed in full at Roberto's word, 13 Sep 2026** — a full `python
