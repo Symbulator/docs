@@ -126,12 +126,15 @@ spelled as his file spells them, and its answer read from the real
 app's `solveq_ui`. A `solveq` field on the spec carries it (see
 `tools/nr12/README.md`); the runner checks each run, so it reads **52
 ok**. The head entry carries the first run's Solve fields exactly as
-his own file had them, the second run is an entry of its own, and the
-app's book has **51 entries**, the app **407 across 21 books**. Expert
+his own file had them; the second run is not an entry of its own — at
+his word, the page just tells the student what to change in the
+Conditions box and shows that box alone — so the app's book keeps **50
+entries**, the app **406 across 21 books**. Expert
 Mode remains on 5.3c alone, and the DC intro says so. Live on `learn`
 (web only, the PDFs still held) and on the offline pair at cache
-**v212** (v211 went up an hour earlier with spaces round the `=`; his
-file has none); the version 9 account wants a pull and a Reload for
+**v213** (v211 and v212 went up in the hour before, the first with spaces
+round the `=`, which his file has not, the second with the other end as
+an entry of its own); the version 9 account wants a pull and a Reload for
 the book, no `pip`.
 
 **Roberto's review, 12 Sep 2026 — seven rules, applied to all 43.** He

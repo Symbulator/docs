@@ -131,24 +131,13 @@ Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
 
 The card returns `R_x` = {{o:40}} Ω (the book's $R_x$).
 
-Then the same equation and unknown with the dial at its highest, 2 kΩ, written with the usual shorthand:
-
-```field 9 Equation(s) to solve in terms of the results
-isg=0
-```
-
-```field 9 Unknown(s) to solve for
-R_x
-```
+For the other end of the dial we keep the equation and the unknown as they are and change only the condition, to the highest setting, 2 kΩ, written with the usual shorthand:
 
 ```field 9 Conditions
 R_3=2'k
 ```
 
-::: applink NR12's Example 3.10 (DC, Solve at R_3 = 2k)
-:::
-
-Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+Then press {{btn:Solve equations}} again.
 
 The card returns `R_x` = {{o:8000}} Ω (the book's $R_x$).
 

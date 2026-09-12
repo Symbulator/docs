@@ -949,13 +949,13 @@ dict(num="3.10", title="Using a Wheatstone Bridge to Measure Resistance",
                 "a condition, first at its lowest, 10 Ω:",
            equations=["isg=0"], unknowns=["R_x"], conditions=["R_3=10"],
            real_only=True, expect={"R_x": 40}, unit="\\Omega", book={"R_x": "R_x"}),
-      dict(tag="DC, Solve at R_3 = 2k",
-           text="Then the same equation and unknown with the dial at its highest, 2 kΩ, "
+      dict(tag="DC, Solve at R_3 = 2k", entry=False, boxes=("conditions",),
+           text="For the other end of the dial we keep the equation and the unknown as "
+                "they are and change only the condition, to the highest setting, 2 kΩ, "
                 "written with the usual shorthand:",
+           press="Then press {{btn:Solve equations}} again.",
            equations=["isg=0"], unknowns=["R_x"], conditions=["R_3=2'k"],
-           real_only=True, expect={"R_x": 8000}, unit="\\Omega", book={"R_x": "R_x"},
-           note="The same circuit with the Solve card filled in for the other end of the "
-                "dial, R_3 = 2 kΩ."),
+           real_only=True, expect={"R_x": 8000}, unit="\\Omega", book={"R_x": "R_x"}),
      ],
      after="So the smallest resistance the bridge can measure is {{o:40}} Ω and the "
            "largest {{o:8000}} Ω: its range is 40 Ω to 8 kΩ.",

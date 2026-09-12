@@ -273,27 +273,36 @@ def render(s, vals):
     if s.get("solveq"):
         values = runner.app_values(s)
         for i, sq in enumerate(s["solveq"]):
+            # A later run that only changes one box shows that box alone
+            # and is not an entry of its own (Roberto, 13 Sep 2026: "just
+            # mention to the student what to change in the Conditions").
+            boxes = sq.get("boxes", ("equations", "unknowns", "conditions"))
             L.append(polish(sq["text"]))
             L.append("")
-            L.append("```field 9 Equation(s) to solve in terms of the results")
-            L.extend(sq["equations"])
-            L.append("```")
-            L.append("")
-            L.append("```field 9 Unknown(s) to solve for")
-            L.append(", ".join(sq.get("unknowns", [])))
-            L.append("```")
-            L.append("")
-            if sq.get("conditions"):
+            if "equations" in boxes:
+                L.append("```field 9 Equation(s) to solve in terms of the results")
+                L.extend(sq["equations"])
+                L.append("```")
+                L.append("")
+            if "unknowns" in boxes:
+                L.append("```field 9 Unknown(s) to solve for")
+                L.append(", ".join(sq.get("unknowns", [])))
+                L.append("```")
+                L.append("")
+            if "conditions" in boxes and sq.get("conditions"):
                 L.append("```field 9 Conditions")
                 L.extend(sq["conditions"])
                 L.append("```")
                 L.append("")
-            if i:
+            if i and sq.get("entry", True):
                 L.append("::: applink %s" % entry_name(s, sq["tag"]))
                 L.append(":::")
                 L.append("")
-            L.append(("Tick {{ui:real solutions only}} and press {{btn:Solve equations}}."
-                      if sq.get("real_only", True) else "Press {{btn:Solve equations}}."))
+            if "press" in sq:
+                L.append(polish(sq["press"]))
+            else:
+                L.append(("Tick {{ui:real solutions only}} and press {{btn:Solve equations}}."
+                          if sq.get("real_only", True) else "Press {{btn:Solve equations}}."))
             L.append("")
             got, _r = runner.app_solveq(s, sq, values)
             parts = []
@@ -517,7 +526,8 @@ def main():
                     cir.append(cir_pre_entry(s, pre))
                 cir.append(cir_entry(s))
                 for sq in s.get("solveq", [])[1:]:
-                    cir.append(cir_solveq_entry(s, sq))
+                    if sq.get("entry", True):
+                        cir.append(cir_solveq_entry(s, sq))
     # The book ships with the app: repos/server/examples is the source, and
     # build_local.py generates the repos/local copy from it.
     io.open(os.path.join(EXAMPLES, "Nilsson_Riedel.cir"), "w",

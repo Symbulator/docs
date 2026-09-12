@@ -119,7 +119,9 @@ The reader-facing fields of a spec:
   does). The runner checks each run's `expect` too, so *ok* counts them.
   The first run's fields ride in the problem's head entry, as Roberto's
   own file had it (`solve_equations:` and kin); a later run is an entry of
-  its own, linked beside its boxes. Example 3.10 is the one that uses it,
+  its own, linked beside its boxes, unless it says `entry=False`, in which
+  case it shows only the boxes named in `boxes` and its own `press` line —
+  "change the condition and press Solve equations again". Example 3.10 is the one that uses it,
   at Roberto's word (13 Sep 2026): the Solve card *"is more representative
   of the exploratory way a student would follow"* than Expert Mode.
 - `after` — what follows from the answers, last of all.
