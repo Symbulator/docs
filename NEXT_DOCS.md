@@ -51,6 +51,25 @@ paragraph says *verify a design made for the gains given*, and the
 part (a) answer *verifies the three resistor values*. The `.cir` note
 carries the same words, so it took a second app train.
 
+**And a rule, an hour later (cache v221).** Roberto: 5.5 needs the same
+fix, and it is a rule for the chapter — **rule 21** in the nr12 README,
+*a design is verified, not made*: where the book says *Design a…* the
+page reads *You have designed a…, as per the problem's specifications.
+Verify that…*, since the reader types the book's finished values and
+the run checks them. 5.3 and 5.5 are the two; 14.6's part (d) genuinely
+computes `R` and `L` in the Solve card and keeps its wording.
+
+**Rule 22, from 18.1 (web only, no `.cir` change).** Roberto: *"When
+both Symbulator and the book use the same variable name for an answer,
+there is no need to reiterate the name of the variable given by the
+book"* — `z11` = 10 Ω *(the book's $z_{11}$)* said it twice. `gen.py`'s
+`same_name()` compares the app's name and the book's symbol with
+underscores, braces and case stripped, and every site that writes the
+aside skips it when they agree: twenty sentences lost theirs (the Solve
+card's `vb`, `rf`, `t`, `R_x`, `L`, `R`; the two-port's four; `vth` and
+`pmax`), while `req` beside $R_L$, `zeq` beside $Z_{Th}$ and `v_4` beside
+$v_o$ keep it, those being different names.
+
 ## #434 and #435 — claimed by the app tree, 13 Sep 2026: **a source's card reads the power it delivers** (`-pe1 = 10 W`, labelled *power delivered*; in AC the average power delivered and the delivered power's **power factor** as a row) and ***real solutions only* ticked by default in DC and TR**. The docs moved with #434: the Manual's *Signs* paragraph, Lesson 2's *power delivered* line, Lesson 3's Drill Problem 1.11 panels, and the sampler's 3.11 and 4.13, which read the card instead of Evaluate with a minus sign. **The sampler's questions also lost the book's method** the same day (*"Use the node-voltage method to find…"* is *"Find…"*, in fourteen entries; the chapter opening says once that the book prescribes one), at Roberto's word. Write-ups in `Application/v9/repos/local/NEXT.md`
 
 ## #433 — claimed by the app tree, 12 Sep 2026: **the Solve card's conditions and equations behave like Expert Mode's** — an equality condition on a symbol substitutes, and an equation that names none of the unknowns is solved rather than dropped; found by Roberto solving NR12's Example 3.10 with the Solve card. Nothing in the docs tree changes for it. Write-up in `Application/v9/repos/local/NEXT.md`

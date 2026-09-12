@@ -323,7 +323,8 @@ dict(num="5.3c", title="Designing a Summing Amplifier - part (c), in Expert Mode
            "that the run returns the output as a formula in `rf`."),
 
 dict(num="5.5", title="Designing a Difference Amplifier",
-     ask="a) Design a difference amplifier that amplifies the difference between two input "
+     ask="a) You have designed a difference amplifier, as per the problem's "
+         "specifications. Verify that it amplifies the difference between two input "
          "voltages by a gain of 8, using an ideal op amp and ±8 V power supplies. "
          "b) Suppose $v_a$ = 1 V. What range of $v_b$ keeps the op amp linear?",
      page=189, fig=(189, "5.16"), domain="dc",
@@ -346,13 +347,13 @@ dict(num="5.5", title="Designing a Difference Amplifier",
      ],
      parts=[
       ("a", "The run returns exactly 8({{var:v_b}} − {{var:v_a}}), the gain the design "
-            "was asked for."),
+            "was to produce, which verifies it."),
       ("b", "The output reaches +8 V at {{var:v_b}} = {{o:2}} V and −8 V at "
             "{{var:v_b}} = {{o:0}} V, so the op amp remains linear for "
             "{{o:0}} V ≤ {{var:v_b}} ≤ {{o:2}} V."),
      ],
      shows="A difference amplifier amplifies the difference between its two inputs; the "
-           "question asks us to choose its four resistors for a gain of 8, then to find "
+           "question asks us to verify a design made for a gain of 8, then to find "
            "the range of one input that keeps it linear. Its output is $v_o = "
            "(R_b/R_a)(v_b - v_a)$, provided the four resistors satisfy $R_a/R_b = "
            "R_c/R_d$, so a gain of 8 needs $R_b$ eight times $R_a$ and $R_d$ eight times "

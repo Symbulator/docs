@@ -218,11 +218,26 @@ def evaluated_blocks(s, numeric):
         lines.append("```")
         lines.append("")
         u = UNIT_WORD.get(unit, unit)
-        aside = [x for x in (pol, ("the book's $%s$" % book) if book else "") if x]
+        aside = [x for x in (pol, book_aside(name, book)) if x]
         lines.append("It gives {{o:%s}}%s%s." % (val, (" " + u) if u else "",
                      (" (%s)" % ", ".join(aside)) if aside else ""))
         lines.append("")
     return direct, lines
+
+
+def same_name(app, book):
+    """True when the app's name and the book's symbol are one name in two
+    typesettings -- `z11` and `z_{11}`, `vb` and `v_b`, `t` and `t` -- so
+    naming the book's beside the value would be redundant (rule 22)."""
+    if not app or not book:
+        return False
+    strip = lambda x: re.sub(r"[\s_{}$\\]", "", x).lower()
+    return strip(app) == strip(book)
+
+
+def book_aside(app, book):
+    """The "the book's $…$" aside, or nothing when the names agree."""
+    return ("the book's $%s$" % book) if book and not same_name(app, book) else ""
 
 
 def numeric_sentence(numeric):
@@ -244,7 +259,7 @@ def numeric_sentence(numeric):
         # the answer is named against the book's own symbol *here*, beside
         # the value, and not in the paragraph above the run: a reader meets
         # an answer where the simulation finds it (Roberto, 12 Sep 2026)
-        aside = [x for x in (pol, ("the book's $%s$" % book) if book else "") if x]
+        aside = [x for x in (pol, book_aside(name, book)) if x]
         if aside:
             txt += " (%s)" % ", ".join(aside)
         parts.append(txt)
@@ -333,6 +348,7 @@ def render(s, vals):
     # under the panels, the way a numeric answer is named beside its value
     named = [(k, s["booknames"][k]) for k in s["expect"]
              if k in s.get("booknames", {}) and k not in s.get("hide", ())
+             and not same_name(fmt.shown_name(k, s), s["booknames"][k])
              and sp.sympify(vals.get(k, 0) if not k.startswith("@") else 0).free_symbols]
     if panels and named:
         bits = ["`%s` is the book's $%s$" % (fmt.shown_name(k, s), b)
@@ -378,7 +394,8 @@ def render(s, vals):
             assert runner.close(val, ev["expect"], 0.006), \
                 "Evaluate %s at %s: got %s, book says %s" % (ev["expr"], ev.get("at"), got, ev["expect"])
         L.append("It gives {{o:%s}}%s%s." % (tidy(num), (" " + unit) if unit else "",
-                 (" (the book's $%s$)" % ev["book"]) if ev.get("book") else ""))
+                 (" (the book's $%s$)" % ev["book"])
+                 if ev.get("book") and not same_name(ev["expr"], ev["book"]) else ""))
         L.append("")
     # Solve card runs (Roberto, 13 Sep 2026: "my approach with Solve, which
     # is more representative of the exploratory way a student would
@@ -438,7 +455,7 @@ def render(s, vals):
                 u = UNIT_WORD.get(u, u)
                 shown = tidy(runner.number_of(plain)[0])
                 txt = "`%s` = {{o:%s}}%s" % (k, shown, (" " + u) if u else "")
-                if sq.get("book", {}).get(k):
+                if sq.get("book", {}).get(k) and not same_name(k, sq["book"][k]):
                     txt += " (the book's $%s$)" % sq["book"][k]
                 return txt
             for k in sq["expect"]:

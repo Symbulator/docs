@@ -132,7 +132,7 @@ R_3=10
 
 Press {{btn:Solve equations}}.
 
-The card returns `R_x` = {{o:40}} Ω (the book's $R_x$).
+The card returns `R_x` = {{o:40}} Ω.
 
 For the other end of the dial we keep the equation and the unknown as they are and change only the condition, to the highest setting, 2 kΩ, written with the usual shorthand:
 
@@ -142,7 +142,7 @@ R_3=2'k
 
 Then press {{btn:Solve equations}} again.
 
-The card returns `R_x` = {{o:8000}} Ω (the book's $R_x$).
+The card returns `R_x` = {{o:8000}} Ω.
 
 So the smallest resistance the bridge can measure is {{o:40}} Ω and the largest {{o:8000}} Ω: its range is 40 Ω to 8 kΩ.
 
@@ -318,7 +318,7 @@ r2,2,0,150
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **2** and **0**. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `req` = {{o:25}} Ω (the book's $R_L$) and `pmax` = {{o:900}} W (the book's $p_{max}$).
+Symbulator returns `req` = {{o:25}} Ω (the book's $R_L$) and `pmax` = {{o:900}} W.
 
 :::
 :::
@@ -420,7 +420,7 @@ va=1.5
 
 Press {{btn:Solve equations}}.
 
-The card returns `vb` = {{o:3.2}} V (the book's $v_b$).
+The card returns `vb` = {{o:3.2}} V.
 
 For the lower rail we keep the unknown and the condition and change only the equation:
 
@@ -430,7 +430,7 @@ v_3=-10
 
 Then press {{btn:Solve equations}} again.
 
-The card returns `vb` = {{o:-0.8}} V (the book's $v_b$).
+The card returns `vb` = {{o:-0.8}} V.
 
 **a)** So {{var:v_o}} = {{o:-4}} V, inside the ±10 V supplies: the op amp is in its linear region and that is the answer.
 
@@ -488,7 +488,7 @@ vc=-1
 
 Press {{btn:Solve equations}}.
 
-The card returns `vb` = {{o:9}} V (the book's $v_b$).
+The card returns `vb` = {{o:9}} V.
 
 For the upper rail we change only the equation:
 
@@ -498,7 +498,7 @@ v_4=12
 
 Then press {{btn:Solve equations}} again.
 
-The card returns `vb` = {{o:-15}} V (the book's $v_b$).
+The card returns `vb` = {{o:-15}} V.
 
 **a)** The run returns exactly the formula the design was to produce, which verifies the three resistor values.
 
@@ -549,7 +549,7 @@ rf
 
 Press {{btn:Solve equations}}.
 
-The card returns `rf` = {{o:40000}} Ω (the book's $R_f$).
+The card returns `rf` = {{o:40000}} Ω.
 
 **c)** So the feedback resistor can be as large as {{o:40000}} Ω, 40 kΩ. Any larger and the output would have to go beyond −12 V, which it cannot: the op amp saturates.
 
@@ -558,14 +558,14 @@ The card returns `rf` = {{o:40000}} Ω (the book's $R_f$).
 
 ::: problem NR12's Example 5.5
 
-a) Design a difference amplifier that amplifies the difference between two input voltages by a gain of 8, using an ideal op amp and ±8 V power supplies. b) Suppose $v_a$ = 1 V. What range of $v_b$ keeps the op amp linear?
+a) You have designed a difference amplifier, as per the problem's specifications. Verify that it amplifies the difference between two input voltages by a gain of 8, using an ideal op amp and ±8 V power supplies. b) Suppose $v_a$ = 1 V. What range of $v_b$ keeps the op amp linear?
 
 ::: figure assets/circuit/nr12-ex5-5.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 5.5
 :::
 
 ::: answer
-A difference amplifier amplifies the difference between its two inputs; the question asks us to choose its four resistors for a gain of 8, then to find the range of one input that keeps it linear. Its output is $v_o = (R_b/R_a)(v_b - v_a)$, provided the four resistors satisfy $R_a/R_b = R_c/R_d$, so a gain of 8 needs $R_b$ eight times $R_a$ and $R_d$ eight times $R_c$; one choice, the book's, is $R_a$ = $R_c$ = 1.5 kΩ and $R_b$ = $R_d$ = 12 kΩ. We describe the circuit with those values, naming the resistors `ra` to `rd` after the book's, write the two inputs as sources with the symbolic values `va` and `vb` so that the output comes back as a formula, and call the op amp's two input nodes **p** and **n** and its output node **3**. The run checks the design.
+A difference amplifier amplifies the difference between its two inputs; the question asks us to verify a design made for a gain of 8, then to find the range of one input that keeps it linear. Its output is $v_o = (R_b/R_a)(v_b - v_a)$, provided the four resistors satisfy $R_a/R_b = R_c/R_d$, so a gain of 8 needs $R_b$ eight times $R_a$ and $R_d$ eight times $R_c$; one choice, the book's, is $R_a$ = $R_c$ = 1.5 kΩ and $R_b$ = $R_d$ = 12 kΩ. We describe the circuit with those values, naming the resistors `ra` to `rd` after the book's, write the two inputs as sources with the symbolic values `va` and `vb` so that the output comes back as a formula, and call the op amp's two input nodes **p** and **n** and its output node **3**. The run checks the design.
 
 ```field 9 Circuit Description
 ea,1,0,va
@@ -601,7 +601,7 @@ va=1
 
 Press {{btn:Solve equations}}.
 
-The card returns `vb` = {{o:2}} V (the book's $v_b$).
+The card returns `vb` = {{o:2}} V.
 
 For the lower rail we change only the equation:
 
@@ -611,9 +611,9 @@ v_3=-8
 
 Then press {{btn:Solve equations}} again.
 
-The card returns `vb` = {{o:0}} V (the book's $v_b$).
+The card returns `vb` = {{o:0}} V.
 
-**a)** The run returns exactly 8({{var:v_b}} − {{var:v_a}}), the gain the design was asked for.
+**a)** The run returns exactly 8({{var:v_b}} − {{var:v_a}}), the gain the design was to produce, which verifies it.
 
 **b)** The output reaches +8 V at {{var:v_b}} = {{o:2}} V and −8 V at {{var:v_b}} = {{o:0}} V, so the op amp remains linear for {{o:0}} V ≤ {{var:v_b}} ≤ {{o:2}} V.
 
@@ -673,7 +673,7 @@ r15,2,0,15
 
 Open {{card:Find equivalent}}, choose *Two-port parameters*, kind **z**, with the ports at **1** and **2**. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `z11` = {{o:10}} Ω (the book's $z_{11}$), `z12` = {{o:7.5}} Ω (the book's $z_{12}$), `z21` = {{o:7.5}} Ω (the book's $z_{21}$) and `z22` = {{o:9.375}} Ω (the book's $z_{22}$).
+Symbulator returns `z11` = {{o:10}} Ω, `z12` = {{o:7.5}} Ω, `z21` = {{o:7.5}} Ω and `z22` = {{o:9.375}} Ω.
 
 :::
 :::
@@ -771,7 +771,7 @@ i_{r3} = - 4 e^{- 5 t}\,\mathrm{A}
 v_{2} = - 160 e^{- 5 t}\,\mathrm{V}
 :::
 
-Here `i_l` is the book's $i_L$, `i_r3` is the book's $i_o$ and `v_2` is the book's $v_o$.
+Here `i_r3` is the book's $i_o$ and `v_2` is the book's $v_o$.
 
 :::
 :::
@@ -968,8 +968,6 @@ Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in 
 i_{l} = 6 e^{- 40 t}\,\mathrm{A}
 :::
 
-`i_l` is the book's $i_L$.
-
 This run holds until switch 2 opens at 35 ms, and the inductor's current at that instant is where the third interval starts. We read it from the answer with {{card:Evaluate}}, giving the instant in seconds:
 
 ```field 9 Evaluate
@@ -1007,8 +1005,6 @@ Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in 
 ::: result current through l
 i_{l} = 1.48 e^{- 60 t}\,\mathrm{A}
 :::
-
-`i_l` is the book's $i_L$.
 
 :::
 :::
@@ -1051,7 +1047,7 @@ t
 
 Press {{btn:Solve equations}}.
 
-The card returns `t` = {{o:0.0677}} s (the book's $t$).
+The card returns `t` = {{o:0.0677}} s.
 
 So the capacitor short-circuits after {{o:67.7}} ms.
 
@@ -1089,7 +1085,7 @@ i_{r} = - 0.07 e^{- 5000 t} + 0.13 e^{- 20000 t}\,\mathrm{A}
 i_{l} = 0.056 e^{- 5000 t} - 0.026 e^{- 20000 t}\,\mathrm{A}
 :::
 
-Here `v_1` is the book's $v$, `i_r` is the book's $i_R$ and `i_l` is the book's $i_L$.
+`v_1` is the book's $v$.
 
 :::
 :::
@@ -1430,7 +1426,7 @@ r4,3,9,120
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **9** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `vth` = {{o:784 - 288j}} V ({{o:835.2}}∠{{o:-20.17}}°, the book's $V_{Th}$) and `zeq` = {{o:91.2 - 38.4j}} Ω ({{o:98.95}}∠{{o:-22.83}}°, the book's $Z_{Th}$).
+Symbulator returns `vth` = {{o:784 - 288j}} V ({{o:835.2}}∠{{o:-20.17}}°) and `zeq` = {{o:91.2 - 38.4j}} Ω ({{o:98.95}}∠{{o:-22.83}}°, the book's $Z_{Th}$).
 
 :::
 :::
@@ -1508,7 +1504,7 @@ Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two ter
 
 The secondary side is not connected to ground anywhere, nothing conducts between the two windings, so its bottom is simply the node we have called **d**, and Symbulator says in a note that it has measured that side's voltages against **d**; the currents, the voltage differences and the equivalent are unaffected.
 
-Symbulator returns `vth` = {{o:93.94 + 17.77j}} V ({{o:95.60}}∠{{o:10.71}}°, the book's $V_{Th}$) and `zeq` = {{o:171.1 + 1224j}} Ω ({{o:1236}}∠{{o:82.04}}°, the book's $Z_{Th}$).
+Symbulator returns `vth` = {{o:93.94 + 17.77j}} V ({{o:95.60}}∠{{o:10.71}}°) and `zeq` = {{o:171.1 + 1224j}} Ω ({{o:1236}}∠{{o:82.04}}°, the book's $Z_{Th}$).
 
 :::
 :::
@@ -1596,7 +1592,7 @@ r20,x,0,20
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `zeq` = {{o:35}} Ω (the book's $R_L$) and `pmax` = {{o:315}} W (the book's $p_{max}$).
+Symbulator returns `zeq` = {{o:35}} Ω (the book's $R_L$) and `pmax` = {{o:315}} W.
 
 :::
 :::
@@ -1774,7 +1770,7 @@ v_{th} = \frac{480}{s + 10000}\,\mathrm{V}
 Z_{eq} = \frac{80 s + 600000}{s + 10000}\,\Omega
 :::
 
-Here `vth` is the book's $V_{Th}$ and `zeq` is the book's $Z_{Th}$.
+`zeq` is the book's $Z_{Th}$.
 
 :::
 :::
@@ -1826,7 +1822,7 @@ s+5000=0
 
 Press {{btn:Solve equations}} again.
 
-The card returns `s` = {{o:-5000}} (the book's $s$).
+The card returns `s` = {{o:-5000}}.
 
 So the transfer function has poles at $s = -3000 \pm j4000$ and a zero at $s = -5000$.
 
@@ -1880,7 +1876,7 @@ C=5'u
 
 Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
 
-The card returns `L` = {{o:0.0002026}} H (the book's $L$) and `R` = {{o:159.2}} Ω (the book's $R$).
+The card returns `L` = {{o:0.0002026}} H and `R` = {{o:159.2}} Ω.
 
 That is $L$ = 202.6 µH and $R$ = 159.2 Ω.
 

@@ -158,6 +158,20 @@ answer, `evals` with conditions, `solveq` runs, several roots):
     *maximum deliverable power* -- `symbulator_ui._TOOL_LABELS` and the
     template's `TEXNAME`, verbatim. The runner still keys the equivalent
     as `z`, `th()`'s own attribute; `fmt.tool_name()` does the mapping.
+21. **A design is verified, not made.** Where the book says *Design a…*,
+    the page's question reads *You have designed a…, as per the problem's
+    specifications. Verify that…* — the reader types the book's finished
+    values and the run checks them; the `shows` paragraph says *verify a
+    design made for…* and the part's answer says the run *verifies* it
+    (Roberto, 13 Sep 2026, on 5.3 and 5.5). A part that genuinely
+    computes values, like 14.6's (d), is not a design instruction and
+    keeps its wording.
+22. **No "the book's" aside when the names agree.** `z11` = 10 Ω (the
+    book's $z_{11}$) says the name twice; the aside is for `v_4` being the
+    book's $v_o$, not for a typesetting difference. `gen.py`'s
+    `same_name()` compares the two with underscores, braces and case
+    stripped, at every site that writes the aside (Roberto, 13 Sep 2026,
+    on 18.1).
 
 The reader-facing fields of a spec:
 
