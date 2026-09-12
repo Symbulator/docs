@@ -1,7 +1,7 @@
 ---
 id: nr12-sampler
 kind: back
-title: Select problems from Nilsson & Riedel 12ed
+title: Examples from Nilsson & Riedel 12e
 versions: [9]
 updated: 2026-09-12
 summary: >
