@@ -7,7 +7,7 @@ updated: 2026-09-12
 summary: >
   Forty-three worked examples from *Electric Circuits*, each described in
   Symbulator and checked against the answer the book prints. DC, AC, TR and FD,
-  with Expert Mode and symbolic answers where they earn their place.
+  with Expert Mode and symbolic answers.
 ---
 
 Here is a selection of problems from *Electric Circuits*, 12th edition, by
