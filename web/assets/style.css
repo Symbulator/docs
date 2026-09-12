@@ -1037,8 +1037,16 @@ figcaption {
     border-bottom: 1px solid var(--rule);
   }
   /* One column here regardless: the max-content track above is a desktop
-     idea, and :has() outranks the plain .shell rule on specificity. */
-  .shell:has(.toc:not([open])) { grid-template-columns: minmax(0, 1fr); }
+     idea, and :has() outranks the plain .shell rule on specificity.
+     #428: this must carry `body:not(.home)` too. A media query adds no
+     specificity, so the desktop rule above -- (0,4,1) once #396 scoped it
+     away from the home page -- outranked this one at (0,3,0) and won on a
+     phone whenever Contents was folded, which is its default there. The
+     sidebar then took a max-content track and the chapter was left 141px
+     of a 385px screen. Keep the two selectors the same shape. */
+  body:not(.home) .shell:has(.toc:not([open])) {
+    grid-template-columns: minmax(0, 1fr);
+  }
   .sidebar:has(.toc:not([open])) { padding-bottom: 0.9rem; margin-bottom: 1.1rem; }
   .toc:not([open]) > summary.sidebar-title { margin-bottom: 0; }
   .chapter { max-width: none; }

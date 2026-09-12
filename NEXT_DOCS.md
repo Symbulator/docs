@@ -3,6 +3,40 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #428 — Contents goes back above the chapter on a phone — **live 13 Sep 2026**
+
+On a phone the sidebar sat *beside* the chapter instead of above it, and
+took more of the screen than the text: measured at a 385px viewport,
+**170px of sidebar against 141px of chapter**, every line wrapping after
+two or three words.
+
+**A specificity collision, and #396's own comment is the clue.** The
+mobile block collapses the layout with
+
+    .shell:has(.toc:not([open])) { grid-template-columns: minmax(0, 1fr); }
+
+at (0,3,0). #396 had scoped the desktop rule away from the home page to
+stop a 19px sideways scroll, making it
+
+    body:not(.home) .shell:has(.toc:not([open])) { ... max-content ... }
+
+at (0,4,1). **A media query adds no specificity**, so the desktop rule won
+inside the mobile block — but only when Contents was folded, which is its
+default on a phone and not on a desktop. That is why it survived: the
+desktop layout it was written for never showed it.
+
+The fix is to give the mobile rule the same shape, `body:not(.home)`
+included, so the two selectors match and the later one wins. Measured
+after: **one column, 335px of chapter on a 375px screen, sidebar above**,
+with Contents open and closed alike; desktop unchanged at 170+843 folded
+and 272+741 open; and no sideways scroll on the home page at either width,
+so #396 stays fixed.
+
+**The lesson is the one #396 half-learned.** When two rules differ only by
+a scoping prefix, changing one changes which media queries can still beat
+it. Keep the pair the same shape, or the narrower one silently stops
+applying.
+
 ## #425 — Select problems from Nilsson & Riedel 12ed — **live 13 Sep 2026**
 
 A chapter of **43 worked examples** from *Electric Circuits*, 12th edition,
