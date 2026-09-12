@@ -3,7 +3,7 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
-## #431 — no underscores in the interface's example variables (app side) — **claimed 13 Sep 2026; the write-up is in `Application/v9/repos/local/NEXT.md`**
+## #431 — no underscores in the interface's example variables (app side) — **live 13 Sep 2026; the write-up is in `Application/v9/repos/local/NEXT.md`**. Nothing in the docs tree changed; the sampler's own `i_l1` spellings are prose about the package's names and were left as they are.
 
 ## #432 — Roberto's Course review round of 13 Sep 2026 — **live 13 Sep 2026, web only**
 
