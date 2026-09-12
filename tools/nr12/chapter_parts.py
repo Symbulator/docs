@@ -31,8 +31,7 @@ engineers learned this material from, and its worked examples are unusually
 well suited to showing what Symbulator is for: each one states a circuit,
 states a question, and then prints the answer. That last part is what makes
 this chapter checkable rather than merely illustrative — **every answer below
-was compared against the number the book prints**, and the page says so
-example by example.
+was compared with the one the book prints.**
 
 The selection is deliberate. These are not the easiest problems in the book;
 they are the ones where the distance between *describing a circuit* and
@@ -60,10 +59,22 @@ copyright infringement is intended.
 
 Each entry gives the book's question, the book's own figure, the Symbulator
 description, the analysis to choose, and the answers. Where an answer is a
-number it is quoted in prose, and the sentence says that it is the book's
-number too. Where an answer is an *expression* — a function of *t*, a
-transfer function in *s*, a formula in the circuit's own symbols — it is shown
-in a results panel exactly as the app prints it.
+number it is quoted in a sentence; where it is an *expression* — a function of
+$t$, a transfer function in $s$, a formula in the circuit's own symbols — it is
+shown in a results panel, as the app prints it. Between the figure and the
+description, a short paragraph says what the book does with the problem and
+what Symbulator does instead: that paragraph is the reason the example is here.
+
+**Every value on the page, in a panel or in a sentence, was compared with the
+answer the book prints, and they agree.** Where the two are written differently
+— the book rounds an amplitude, or asks for the current a source *supplies*
+where Symbulator reports what it *consumes* — the entry's paragraph says so.
+
+The names are the app's own. `i_r3` is the current through the element called
+`r3`, `v_2` the voltage at node 2, `p_e` the power consumed by the source called
+`e`, and `v_r6` the voltage across `r6`. The book names its quantities
+differently — $i_o$, $v_o$, $V_{Th}$ — so each entry says which of the app's
+answers is which of the book's.
 
 Four things recur, and they are the reason these particular examples were
 chosen:
@@ -94,27 +105,35 @@ Pick one, press {{btn:Run Symbulator}}, and the answers below are what you get.
 """
 
 INTROS = {
-    "DC": """Sixteen resistive problems, and the running theme is that the book's
+    "DC": """Sixteen resistive problems. The running theme is that the book's
 *method* — node voltages, mesh currents, source transformations, superposition,
-a delta-to-wye — is a way of getting an answer by hand, not a property of the
-answer. Symbulator is told the circuit and never told the method. Two of these
-run in {{card:Expert Mode}}, and two are two-port problems.""",
+a delta-to-wye transform — is a way of getting an answer by hand, not a property
+of the answer. Symbulator is told the circuit and never told the method, so the
+same kind of description serves whichever chapter a problem came from. Five of
+these are op-amp problems with lettered parts, two run in {{card:Expert Mode}},
+and the last two are two-port problems from the book's final chapter.""",
 
-    "TR": """Fourteen transient problems. The pattern is always the same and always
-the one you would follow by hand: run the *t* < 0 circuit in DC to read the
-capacitor voltages and inductor currents, put those numbers in the fifth field
-of the `c` and `l` lines, and run the *t* ≥ 0 circuit in TR. No time constant
-is ever computed, no solution form is ever selected, and a sequential-switching
-problem is simply one more run.""",
+    "TR": """Fourteen transient problems, three of them from the book's Laplace
+chapter. The pattern is the one you would follow by hand: run the circuit as it
+was before the switch moved in DC, read off the capacitor voltages and inductor
+currents, put those numbers in the fifth field of the `c` and `l` lines, and run
+the circuit as it is afterwards in TR. No time constant is computed, no solution
+form is selected, and sequential switching is simply one more run. The
+Laplace-chapter problems are no different: TR transforms, solves and inverts,
+so what the book does in $s$ the solver does out of sight.""",
 
-    "AC": """Eight problems in the sinusoidal steady state. Impedances given in
-ohms go in as they are written, complex ones included, and then the frequency
-never enters — which is why several of these leave **omega** as a symbol.
-Where the book gives henries and farads instead, the frequency goes in the
-{{ui:ω — angular frequency}} box and the conversion is the solver's.""",
+    "AC": """Eight problems in the sinusoidal steady state. Where the book gives
+its impedances in ohms they go in as written, complex ones included, and the
+frequency never enters: **omega** is left as a symbol in the
+{{ui:ω — angular frequency}} box and nothing depends on it. Where the book gives
+henries and farads instead, the frequency goes in that box and the conversion to
+impedance is the solver's. Two of the eight state their source in rms, and say
+so in {{card:Settings}}.""",
 
-    "FD": """Five problems in the *s* domain. FD returns every answer as a function
-of *s*, initial conditions included, which makes a transfer function nothing
-more than the answer with the source left as a symbol. Nothing on this page is
-labelled *filter* or *transfer function*, because nothing needs to be.""",
+    "FD": """Five problems in the $s$ domain. FD returns every answer as a
+function of $s$, initial conditions included, so a transfer function is nothing
+more than the answer with the source left as a symbol — two of these are exactly
+that. Nothing on this page is labelled *filter* or *transfer function*, because
+nothing needs to be. The book's other Laplace-chapter examples, the ones it
+inverts back into time, are in the TR section above.""",
 }

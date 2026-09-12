@@ -71,11 +71,49 @@ Each spec carries three reader-facing fields:
 - `parts` — for a problem with lettered parts, one entry per part,
   answered separately (the four op-amp problems have these).
 
-`gen.py`'s `polish()` applies house typography to `ask` and `shows`: em
-dashes, Ω, µ, ≥, the accent on Thévenin, and `{{var:}}` around a bare
-variable like `R1`. It skips `code spans` and `$maths$`, so a name that
-must stay literal belongs in backticks. **Arithmetic minus signs must be
-written as U+2212 (−)**, or `polish()` reads ` - ` as an em dash.
+`gen.py`'s `polish()` applies house typography to `ask`, `shows` and
+`parts`: em dashes, Ω after a number, µ, ≥, the accent on Thévenin, and
+`{{var:}}` around a bare variable like `R1`. **Every rule skips `code
+spans` and `$maths$`** — since #429; before it only the variable rule did,
+and the em-dash rule ran over the whole string afterwards, which turned
+Example 5.3's `$v_o = -4v_a - v_b - 5v_c$` into dashes and nobody saw it
+until the page was read. So: the book's own symbols go in `$…$` (`$i_o$`,
+`$v_C(t)$`, `$0.2 + j0.5$` — bare, `j0.5` is read as a variable named `j`
+with subscript 0), an app name goes in backticks, and **an arithmetic minus
+in plain prose is U+2212 (−)**, because ` - ` still becomes an em dash
+there. The bare word *ohms* stays a word (`in ohms`); only `10 ohm` becomes
+`10 Ω`.
+
+`cir_entry()` unwraps the maths for the `.cir` note — `$h_{11}$` becomes
+`h_11` — so anything inside `$…$` in an `ask` must still read as plain text
+without its dollars: no `\mathbf`, no `\geq`. Write `$t$ ≥ 0`, with the sign
+outside.
+
+**The numeric closing sentence carries no claim.** It reads *Symbulator
+returns …* and stops; the statement that every value was compared with the
+book is made once, in the chapter's *How to read an entry*, and an entry
+whose answer needs a word about it — a sign convention, a rounding — says so
+in its own `shows` paragraph. (It used to end *— the same answers the book
+prints* forty-three times.)
+
+Each section's intro opens with its count in words, and `gen.py` asserts
+that word against the specs it introduces, so adding a DC example without
+changing *Sixteen* fails the build rather than printing a stale number.
+
+## Checking an `ask` against the book
+
+`Other/NR12.pdf` is on this machine (not in the repo). Its text layer
+scrambles the maths — `v = 24(2) = 48 V` comes out as `v 24 24 8V` — but
+the **question prose is readable**, and `page` in each spec is the 1-based
+PDF page. `fitz` (PyMuPDF) extracts it:
+
+    import fitz; doc = fitz.open(r"...\Other\NR12.pdf"); print(doc[page - 1].get_text())
+
+The #429 pass checked all 43 that way and found an `ask` that carried a
+sentence the book never asks (7.13), one that had dropped the sentence that
+explains its initial condition (7.5, make-before-break), and two whose
+cross-references to earlier examples turned out to be the book's own words
+(13.2, 13.3). Read the book before rewording.
 
 ## The figures
 

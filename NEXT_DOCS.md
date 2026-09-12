@@ -3,6 +3,84 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #429 — the Nilsson & Riedel sampler, made to read well — **built 12 Sep 2026, not deployed**
+
+A readability pass over `/9/nr12-sampler`, prose only: every circuit,
+setting and expected answer is untouched, and `runner.check` still reads
+**43 ok, 0 bad**. The edits are in `tools/nr12/specs.py` (`ask`, `shows`,
+`parts`), `chapter_parts.py` and `gen.py`; the chapter and the app's
+`examples/Nilsson_Riedel.cir` are regenerated from them, never edited.
+
+**The questions were checked against the book itself**, page by page,
+from `Other/NR12.pdf`'s text layer (readable for prose, scrambled for
+maths). What that found: 7.13's `ask` carried a sentence that is not the
+book's question and lacked its part (b); 7.5 had dropped the sentence
+that explains why an initial current can be given (the switch is
+make-before-break); 13.6 had been cut to a bare "find the Thévenin
+equivalent"; 13.9's two parts and 13.13's second unknown were missing;
+and the references in 13.2 and 13.3 to Examples 7.3 and 8.10 are the
+book's own words, so they stay in the `ask`. Every book symbol that had
+been flattened by stripping the LaTeX — `vC(t)`, `iL`, `io`, `V2/Vg` — is
+maths again.
+
+**Seven things wrong on the generated page, found by reading it:**
+
+  * `polish()`'s em-dash rule ran over the whole string *after* the
+    code/maths split, so Example 5.3's question rendered as
+    `v_o = −4v_a — v_b — 5v_c`. Every rule now skips the kept spans.
+  * The bare-variable rule read `j8`, `j5`, `j0.5` and `j28` as variables
+    named *j*, so 9.9's paragraph said *{{var:j_8}}* and 11.1's question
+    read *0.2 + j₀.5 Ω*. Those are maths now.
+  * The bare word *ohms* became Ω: *"What is the value of R_L in Ω?"*.
+    Only a number followed by *ohm* is a unit now.
+  * 18.1's four answers were named `11`, `12`, `21`, `22`; the app names
+    them `z11` to `z22`, and so does the page.
+  * 5.3c's answer had no unit (`rf = 40000`).
+  * 4.21 said the tool "answers all three parts" of a question the page
+    stated in two; the book's (c) is now named and answered.
+  * 4.8's "special case" was described as a current source shared by no
+    other mesh. The book's special case is the **supermesh** — a source
+    shared by *two* meshes.
+
+**The closing sentence.** *— the same answers the book prints* ran
+forty-three times and read as boilerplate by the tenth. It is gone: the
+sentence reads *Symbulator returns …* and stops, the claim is made once
+and in bold in *How to read an entry*, and the entries whose answers need
+a word — the negated `-i_e` and `-p_e` where the book asks what a source
+*supplies* (3.11, 4.13), the book's rounded amplitude (8.4), drops
+printed as node differences (9.14), magnitudes only (11.1) — say it in
+their own paragraph, where it is information rather than a refrain.
+
+**Every `shows` paragraph was rewritten** to the same shape: what the
+book does with the problem, what Symbulator does instead, and which app
+answer is which book quantity (`v_r6` is the book's $v_o$). The facts
+added were checked rather than recalled: 4.21's part (c), 35.7%, by a DC
+solve with the 25 Ω load in place (900 W of 2520 W); 7.13's 67.7 ms and
+13.9's poles $-3000 \pm j4000$ and zero $-5000$ by algebra on the
+verified expressions; 14.6's 159.2 Ω and 202.6 µH by hand from
+$\omega_0$ and $\beta$; 7.10's 1.5 H equivalent and 7.11b's 1.48 A the
+same way. The section intros gained the context the old ones assumed —
+that three TR entries are Laplace-chapter problems, that two AC entries
+are rms — and `gen.py` now asserts each intro's opening count against the
+specs it introduces.
+
+**Gates**, all green on the regenerated tree: `runner` 43 ok;
+`app_links.py` **377 of 379** with no `nr12-sampler` loose end;
+`build.py --check` clean; `verify_lesson.py Nilsson_Riedel` **0 entries
+with a problem** over all 43; and the chapter served locally through
+`php -S` — 43 problems, **0 KaTeX errors**, the maths in the questions
+rendering. The Browser pane could not screenshot it (`innerWidth` 0, the
+pane hidden — the zero-measurement trap again), so the check was made on
+the DOM's text instead.
+
+**Not deployed, at the brief's word.** The `.cir` moved — every `ask`
+is also an entry's `note:` — so this is a docs *and* app round when
+Roberto gives it: a full `python build.py` (the prose is typeset) and the
+`learn` deploy; then a cache bump in `repos/local/sw.js`, `build_local.py`,
+`build_zip.py --assets ../../local`, `stage_install_site.py`, the `install`
+and `zip` deploys, and a pull plus Reload on **both** PythonAnywhere
+accounts. No solver change, so no `pip`. Capture `/7/` and `/8/` first.
+
 ## #428 — Contents goes back above the chapter on a phone — **live 13 Sep 2026**
 
 On a phone the sidebar sat *beside* the chapter instead of above it, and

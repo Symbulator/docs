@@ -35,29 +35,37 @@ def _subscripts(chunk):
     return _VAR.sub(lambda m: "{{var:%s_%s}}" % (m.group(1), m.group(2)), chunk)
 
 
-def polish(txt):
-    """House typography: em dashes, ohms, micro, the accent on Thevenin, and a
-    problem's own variables set as variables (#261) -- but never inside a code
-    span or a maths span, where `ir3` and $i_L$ mean what they say."""
-    out = txt
-    parts, last = [], 0
-    for m in _KEEP.finditer(out):
-        parts.append(_subscripts(out[last:m.start()]))
-        parts.append(m.group(0))
-        last = m.end()
-    parts.append(_subscripts(out[last:]))
-    out = "".join(parts)
+def _house(chunk):
+    """The typography applied to one stretch of ordinary prose."""
+    out = _subscripts(chunk)
     out = re.sub(r"(?<= )-(?= )", "—", out)          # " - " -> em dash
     out = out.replace(">=", "≥").replace("<=", "≤")
     out = re.sub(r"\bThevenin\b", "Thévenin", out)
     out = re.sub(r"(\d)\s*kilohms?\b", r"\1 kΩ", out, flags=re.I)
-    out = re.sub(r"\bkilohms?\b", "kΩ", out, flags=re.I)
+    # "ohm" after a number is a unit and becomes the sign; the bare word --
+    # "in ohms", "given in ohms" -- stays a word, since "in Ω" is not English.
     out = re.sub(r"(\d)\s*ohms?\b", r"\1 Ω", out, flags=re.I)
-    out = re.sub(r"\bohms?\b", "Ω", out, flags=re.I)
     out = re.sub(r"(\d)\s*uF\b", r"\1 µF", out)
     out = re.sub(r"(\d)\s*uS\b", r"\1 µS", out)
     out = re.sub(r"(\d)\s*uH\b", r"\1 µH", out)
     return out
+
+
+def polish(txt):
+    """House typography: em dashes, ohms, micro, the accent on Thevenin, and a
+    problem's own variables set as variables (#261) -- but never inside a code
+    span or a maths span, where `ir3` and $i_L$ mean what they say.
+
+    Every rule skips the kept spans, not only the variable one: the em-dash
+    rule used to run over the whole string afterwards and turned the minus
+    signs inside Example 5.3's $v_o = -4v_a - v_b - 5v_c$ into dashes."""
+    parts, last = [], 0
+    for m in _KEEP.finditer(txt):
+        parts.append(_house(txt[last:m.start()]))
+        parts.append(m.group(0))
+        last = m.end()
+    parts.append(_house(txt[last:]))
+    return "".join(parts)
 
 
 def sortkey(s):
@@ -109,8 +117,8 @@ def settings_line(s):
     if dom == "ac":
         w = s.get("omega")
         if w is None or isinstance(w, sp.Symbol):
-            bits.append("Every impedance is given in ohms, so the frequency never enters: "
-                        "leave **omega** in the {{ui:\u03c9 \u2014 angular frequency}} box")
+            bits.append("Leave **omega** in the {{ui:\u03c9 \u2014 angular frequency}} box; "
+                        "nothing here depends on the frequency")
         else:
             bits.append("Put **%s** in the {{ui:\u03c9 \u2014 angular frequency}} box"
                         % fmt.plain_value(sp.sympify(w)))
@@ -161,17 +169,26 @@ def polar_of(s, val):
 
 
 def numeric_sentence(numeric):
+    """The numeric answers, as one plain sentence.
+
+    It used to end "-- the same answers the book prints", forty-three times.
+    The claim is made once instead, in the chapter's *How to read an entry*,
+    and an entry whose answer needs a word about it (a sign, a rounding)
+    says so in its own paragraph."""
     if not numeric:
         return ""
     parts = []
     for name, val, unit, pol in numeric:
         u = UNIT_WORD.get(unit, unit)
-        txt = "`%s` = {{o:%s}}%s" % (name, val, (" " + u) if u else "")
+        # a shown name is code unless it is a phrase -- "the sum of all eight"
+        prose = " " in name and "_" not in name
+        shown = name if prose else "`%s`" % name
+        txt = "%s = {{o:%s}}%s" % (shown, val, (" " + u) if u else "")
         if pol:
             txt += " (%s)" % pol
         parts.append(txt)
     body = parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]
-    return "Symbulator returns " + body + " \u2014 the same answers the book prints."
+    return "Symbulator returns " + body + "."
 
 
 def render(s, vals):
@@ -262,8 +279,10 @@ def cir_entry(s):
     if s.get("unknowns"):
         L.append("unknowns: %s" % ", ".join(s["unknowns"]))
     ask = re.sub(r"\s+", " ", s["ask"]).strip()
-    # the note is plain text in a .cir, so unwrap the page's inline maths
+    # the note is plain text in a .cir, so unwrap the page's inline maths,
+    # and a braced subscript with it: $h_{11}$ reads as h_11 in a note
     ask = re.sub(r"\$([^$]*)\$", r"\1", ask)
+    ask = re.sub(r"_\{([^}]*)\}", r"_\1", ask)
     L.append("note: %s. %s" % (s["title"], ask))
     L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(num))
     L.append("rounding: 6")
@@ -305,8 +324,16 @@ def main():
                 body.append("")
     import chapter_parts as CP
     text = CP.FRONT + "\n" + CP.OPENING + "\n" + "\n".join(body)
+    # Each section's intro opens with its count in words. Counts restated in
+    # prose go stale (root CLAUDE.md, "A number restated in a second file"),
+    # so the intro is checked against the specs it introduces.
+    words = {5: "Five", 8: "Eight", 14: "Fourteen", 16: "Sixteen"}
     for g in ORDER:
-        text = text.replace("@@INTRO_%s@@" % g.upper(), CP.INTROS[g.upper()].strip())
+        n = sum(1 for s in rows if s.get("domain", "dc") == g)
+        intro = CP.INTROS[g.upper()].strip()
+        assert intro.startswith(words.get(n, "%d " % n)), \
+            "the %s intro says a different count from the %d specs it introduces" % (g, n)
+        text = text.replace("@@INTRO_%s@@" % g.upper(), intro)
     text = re.sub(r"\n{4,}", "\n\n\n", text).rstrip() + "\n"
     out = os.path.join(DOCS, "src", "98-nr12-sampler.md")
     io.open(out, "w", encoding="utf-8", newline="\n").write(text)
