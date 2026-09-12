@@ -132,6 +132,8 @@ def answer_blocks(s, vals):
     """Result panels for answers that are expressions, prose for the numbers."""
     panels, numeric = [], []
     for k in s["expect"]:
+        if k in s.get("hide", ()):      # verified by the runner, shown elsewhere
+            continue
         if k.startswith("@"):
             try:
                 got = sp.sympify(k[1:], locals=dict(vals))
@@ -210,11 +212,33 @@ def render(s, vals):
     L.append(":::")
     L.append("")
     L.append("::: answer")
+    # A first run, when the problem needs one: the circuit before the switch
+    # moves, run in DC for the initial condition the main run then carries in
+    # a fifth field. Nothing arrives from thin air -- a value that is not in
+    # the problem statement is found on the page (Roberto, 12 Sep 2026).
+    for pre in s.get("pre", []):
+        L.append(polish(pre["text"]))
+        L.append("")
+        L.append("```field 9 Circuit Description")
+        L.extend(split_desc(pre["desc"]))
+        L.append("```")
+        L.append("")
+        L.append("::: applink %s" % entry_name(s, pre["tag"]))
+        L.append(":::")
+        L.append("")
+        L.append(settings_line(pre_spec(s, pre)))
+        L.append("")
+        _panels, numeric = answer_blocks(pre_spec(s, pre), pre_values(s, pre))
+        L.append(numeric_sentence(numeric))
+        L.append("")
     L.append(polish(s["shows"]))
     L.append("")
     L.append("```field 9 Circuit Description")
     L.extend(split_desc(s["desc"]))
     L.append("```")
+    L.append("")
+    L.append("::: applink %s" % entry_name(s, main_tag(s)))
+    L.append(":::")
     L.append("")
     if s.get("equations"):
         L.append("```field 9 Add equation(s)")
@@ -235,9 +259,46 @@ def render(s, vals):
     for p in panels:
         L.append(p)
         L.append("")
+    # a panel's answer is named against the book's symbol in a sentence
+    # under the panels, the way a numeric answer is named beside its value
+    named = [(k, s["booknames"][k]) for k in s["expect"]
+             if k in s.get("booknames", {}) and k not in s.get("hide", ())
+             and sp.sympify(vals.get(k, 0) if not k.startswith("@") else 0).free_symbols]
+    if panels and named:
+        bits = ["`%s` is the book's $%s$" % (s.get("shownames", {}).get(k, k), b)
+                for k, b in named]
+        L.append(("Here " if len(bits) > 1 else "") + (
+            bits[0] if len(bits) == 1 else ", ".join(bits[:-1]) + " and " + bits[-1]) + ".")
+        L.append("")
     sent = numeric_sentence(numeric)
     if sent:
         L.append(sent)
+        L.append("")
+    # An Evaluate step: a value the question wants at one instant, read off
+    # the answer the way the Course does it -- the answer's name in the
+    # Evaluate box and the instant in Conditions (Lesson 6, Example 4.15).
+    for ev in s.get("evals", []):
+        L.append(polish(ev["text"]))
+        L.append("")
+        L.append("```field 9 Evaluate")
+        L.append(ev["expr"])
+        L.append("```")
+        L.append("")
+        if ev.get("at"):
+            L.append("```field 9 Conditions")
+            L.extend("%s = %s" % (k, v) for k, v in ev["at"].items())
+            L.append("```")
+            L.append("")
+        import symbulator as S
+        expr = sp.sympify(ev["expr"], locals=dict(vals))
+        val = expr.subs({S.t: v for k, v in ev.get("at", {}).items() if k == "t"})
+        unit = UNIT_WORD.get(ev.get("unit", ""), ev.get("unit", ""))
+        got = fmt.plain_value(val)
+        if ev.get("expect") is not None:
+            assert runner.close(val, ev["expect"], 0.006), \
+                "Evaluate %s at %s: got %s, book says %s" % (ev["expr"], ev["at"], got, ev["expect"])
+        L.append("It gives {{o:%s}}%s%s." % (got, (" " + unit) if unit else "",
+                 (" (the book's $%s$)" % ev["book"]) if ev.get("book") else ""))
         L.append("")
     # A problem with lettered parts gets each one answered, separately. The
     # page used to state the formula and leave (b) and (c) to the reader,
@@ -256,9 +317,9 @@ def render(s, vals):
     return "\n".join(L)
 
 
-def cir_entry(s):
-    num, dom = s["num"], s.get("domain", "dc")
-    kind = s.get("kind", "circuit")
+def main_tag(s):
+    """The parenthetical of the main run's entry: (DC), (Th\u00e9venin), (TR, Expert Mode)."""
+    dom, kind = s.get("domain", "dc"), s.get("kind", "circuit")
     tag = {"dc": "DC", "ac": "AC", "tr": "TR", "fd": "FD"}[dom]
     if kind == "th":
         tag = "Th\u00e9venin"
@@ -266,11 +327,35 @@ def cir_entry(s):
         tag = "%s parameters" % s["ptype"]
     if s.get("equations"):
         tag += ", Expert Mode"
+    return tag
+
+
+def entry_name(s, tag):
     # The name is the page's problem title plus a parenthetical saying which
     # run this is -- the shape app_links' stage 4 claims. parse_book cuts a
     # name at 80 characters, so this must stay short.
-    name = "%s (%s)" % (titles.short_title(num), tag)
+    name = "%s (%s)" % (titles.short_title(s["num"]), tag)
     assert len(name) <= 80, "entry name too long, parse_book would cut it: " + name
+    return name
+
+
+def pre_spec(s, pre):
+    """A first run as a spec of its own: a plain DC circuit, the problem's
+    question, and the book names it carries."""
+    return dict(num=s["num"], desc=pre["desc"], domain=pre.get("domain", "dc"),
+                expect=pre["expect"], booknames=pre.get("booknames", {}),
+                shownames=pre.get("shownames", {}), units=pre.get("units", {}))
+
+
+def pre_values(s, pre):
+    _r, vals = runner.run_one(pre_spec(s, pre))
+    return vals
+
+
+def cir_entry(s):
+    num, dom = s["num"], s.get("domain", "dc")
+    kind = s.get("kind", "circuit")
+    name = entry_name(s, main_tag(s))
     L = ["[%s]" % name, ""]
     L.extend(split_desc(s["desc"]))
     L.append("")
@@ -294,6 +379,9 @@ def cir_entry(s):
     ask = re.sub(r"\$([^$]*)\$", r"\1", ask)
     ask = re.sub(r"_\{([^}]*)\}", r"_\1", ask)
     L.append("note: %s" % ask)      # the question alone; the book's title names its method
+    if s.get("pre"):
+        L.append("note: This is the circuit after the switch has moved; its initial "
+                 "condition comes from the entry before it.")
     L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(num))
     L.append("rounding: 6")
     L.append("si: no")
@@ -301,6 +389,25 @@ def cir_entry(s):
     if dom == "ac":
         L.append("rms: %s" % ("yes" if s.get("rms") else "no"))
         L.append("polar: yes")
+    L.append("")
+    return "\n".join(L)
+
+
+def cir_pre_entry(s, pre):
+    """A first run as an entry of its own, just before the main one."""
+    ask = re.sub(r"\s+", " ", s["ask"]).strip()
+    ask = re.sub(r"\$([^$]*)\$", r"\1", ask)
+    ask = re.sub(r"_\{([^}]*)\}", r"_\1", ask)
+    L = ["[%s]" % entry_name(s, pre["tag"]), ""]
+    L.extend(split_desc(pre["desc"]))
+    L.append("")
+    L.append("analysis: %s" % pre.get("domain", "dc"))
+    L.append("note: %s" % ask)
+    L.append("note: %s" % pre["note"])
+    L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(s["num"]))
+    L.append("rounding: 6")
+    L.append("si: no")
+    L.append("units: yes")
     L.append("")
     return "\n".join(L)
 
@@ -316,6 +423,8 @@ def main():
     for grp in ORDER:
         for s in rows:
             if s.get("domain", "dc") == grp:
+                for pre in s.get("pre", []):
+                    cir.append(cir_pre_entry(s, pre))
                 cir.append(cir_entry(s))
     # The book ships with the app: repos/server/examples is the source, and
     # build_local.py generates the repos/local copy from it.

@@ -12,23 +12,67 @@ setting and expected answer is untouched, and `runner.check` still reads
 chapter and the app's `examples/Nilsson_Riedel.cir` are regenerated from
 them, never edited.
 
-**Roberto's review, in progress from Example 3.7 (12 Sep 2026).** His
-rules so far, each applied through `gen.py` so they hold for all 43: the
-book's title is not shown at all (it names the book's method, which is
-not how the reader will solve the problem), and the `.cir` note is the
-question alone; the paragraph above the run states no answer — *"do not
-show results before they are found by the student"* — so the mapping of
-an app name to the book's symbol moved into the answer sentence, as
-*`i_r7` = 2 A (the book's $i_o$)*, through a `booknames` field on the
-spec; and an entry reports only what the question asks, so 3.7 lost its
-`r_j` and `v_r7`. A brief, neutral sentence on what the book does is
-fine in the paragraph; he supplied 3.7's himself. The rules are being
-applied problem by problem as he reads, and **`learn` is deployed after
-each round so he reads them live** — web only, the PDFs to follow when
-the review is done. The chapter's hand-written prose moved out of Python
-into `chapter_head.md` and `intro_*.md` at his ask, so he can edit the
-top matter directly; `gen.py` reproduced the chapter byte for byte from
-the moved files before `chapter_parts.py` was deleted.
+**Roberto's review, 12 Sep 2026 — seven rules, applied to all 43.** He
+read Examples 3.7 and 3.10 and derived rules; the rules were then
+applied down the page while he walked. They are listed in
+`tools/nr12/README.md` and stand as the chapter's editorial standard:
+no book title; the paragraph above the run compares nothing with the
+book's method and states no result; only what the question asks is
+reported; explain as to someone who does not know; what follows from an
+answer comes after it; **nothing from thin air**; and **fact or choice**
+— what the statement, the diagram or circuit theory gives is stated as
+fact, every decision of ours (a name, a node, a symbol left open, a
+source's node order) is stated as a choice, in the first person plural
+the Course uses.
+
+**What "nothing from thin air" did to the page.** Seven switched circuits
+had been carrying an initial condition in a fifth field — 20 A, 100 V,
+−8 A, 6 A, 5 A and 0, 10 A and 0 — that the book finds from the circuit
+before the switch moves and the page had simply asserted. Each now has a
+**first run** on the page: the pre-switch circuit described, run in DC,
+its answer read, and only then written into the fifth field of the
+second run, the way Lesson 6 does it. Each first run is its own app
+entry (*NR12's Example 7.1 (DC, before the switch opens)*), so the
+app's book has **50 entries** where it had 43, every one placed beside
+its run with `::: applink`; `app_links.py` reads **384 of 386**, no
+`nr12-sampler` loose end. Two values at an instant — 7.5's inductor
+voltage at $t$ = 0 and 7.11a's current at 35 ms — are read with an
+**Evaluate step** on the page (the answer's name in Evaluate, the
+instant in Conditions), and 7.11b's fifth field is the exact expression
+`6*exp(-1.4)` rather than a rounded number. 9.9's admittance is
+`1/z_j` in Evaluate, 9.15's coil reactances are worked out from 9 H, 4 H,
+$k$ and 400 rad/s in the text, the two op-amp designs do their resistor
+arithmetic before the description, and 13.9's poles and zeros and 14.6's
+$R$ and $L$ are arithmetic on the returned expression, after it.
+
+**The galvanometer.** Roberto asked where 3.10's *500 Ω resistor `rg`*
+came from. Not from the book: Fig. 3.30 gives the galvanometer no value,
+and the 500 was the Assessment Problem printed beneath the example. It
+was invented when the circuit was modelled and presented as the book's.
+It is a symbol now (`rg,a,b,rg`; the answer is unchanged, since no
+current flows through it at balance), and a sweep of every number in
+every description against the book's own pages found no other invented
+value — the only mismatches are the book's numbers in other units
+(12.25 mA as 0.01225, 100 µS as 0.0001) and 7.11b's carried-over
+current.
+
+**Rule 3 trimmed the answer sets**: `r_e` from 3.11, node voltages and
+currents where only a power was asked (4.4, 4.7), `v_2` from 4.8, `-i_e`
+from 4.13, `vth` from 4.21 and 10.12, `i_r3` from 9.14, `v_nn` from
+11.1, `v_1` from 13.2 and `i_l1` from 13.7. Two answers the book asks for
+were **added**: 8.11's $v_C(t)$ and 9.10's $I_2$, both verified.
+
+**The mechanism**, all in `gen.py` and `runner.py`: `pre` (first runs,
+rendered, written to the `.cir`, and verified by the runner as specs of
+their own — *50 ok* is 43 + 7), `evals` (Evaluate steps, their value
+computed from the run and asserted against the book), `booknames` (the
+book's symbol beside each value, or in a sentence under result panels),
+`hide` (verified but shown another way) and `after`. The chapter's own
+prose moved out of Python into `chapter_head.md` and `intro_*.md` at
+Roberto's ask, so he edits the top matter as markdown; his rewrite of it
+is in. **`learn` was deployed after each round so he could read it
+live**, web only; the PDFs and the app train (cache bump, the offline
+pair, both PythonAnywhere pulls for the 50-entry book) wait for his word.
 
 **The questions were checked against the book itself**, page by page,
 from `Other/NR12.pdf`'s text layer (readable for prose, scrambled for

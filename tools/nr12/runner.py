@@ -98,9 +98,24 @@ def run_one(sp_):
     return r, dict(r.values)
 
 def check(specs, only=None, verbose=True):
+    """Every spec, and every first run a spec carries in `pre`, solved and
+    compared with the book. A first run is checked as a spec of its own, so
+    the initial condition the main run carries is proved to be what the
+    circuit before the switch actually gives."""
+    expanded = []
+    for s in specs:
+        for i, pre in enumerate(s.get("pre", [])):
+            expanded.append(dict(num="%s pre%d" % (s["num"], i + 1), title="first run",
+                                 desc=pre["desc"], domain=pre.get("domain", "dc"),
+                                 expect=pre["expect"]))
+        expanded.append(s)
+    return _check(expanded, only, verbose)
+
+
+def _check(specs, only=None, verbose=True):
     bad, ok = [], 0
     for s in specs:
-        if only and s["num"] not in only: continue
+        if only and s["num"].split(" ")[0] not in only: continue
         tol = s.get("tol", 0.006)
         try:
             r, vals = run_one(s)

@@ -63,14 +63,54 @@ Example 9.15, which passed the solver API and failed the app outright.
 
 ## Editing the prose
 
-Each spec carries three reader-facing fields:
+**Roberto's seven rules, from his review of 12 Sep 2026** — every entry
+follows them, and `gen.py` enforces the mechanical ones:
+
+1. **No book title.** The book's example title names the book's method,
+   which is not how the reader solves the problem. Neither the page nor
+   the `.cir` note shows it.
+2. **The paragraph above the run compares nothing with the book's method
+   and states no result.** It says how *we* describe the circuit and what
+   the settings mean.
+3. **Only what the question asks is reported.** Trim `expect`; an answer
+   the runner should still verify but the page shows another way goes in
+   `hide`.
+4. **Explain as to someone who does not know** — name the thing in the
+   figure and what the question wants before saying how the description
+   expresses it.
+5. **What follows from an answer comes after it**: a range read off a
+   formula, a value at an instant, a lettered part (`after`, `evals`,
+   `parts`), never in the paragraph above the run.
+6. **Nothing from thin air.** A value that is not in the problem statement
+   is found on the page — an initial condition by a first DC run of the
+   circuit before the switch moves (`pre`), a value at an instant by an
+   Evaluate step (`evals`), a design value by arithmetic written in full.
+   The sweep of 12 Sep 2026 found one invented value on the page, a 500 Ω
+   galvanometer; it is a symbol now.
+7. **Fact or choice.** What the statement, the diagram or circuit theory
+   gives is stated as fact; every decision of ours — a name, a node, a
+   symbol left open, the order of a source's nodes — is stated as a
+   choice, in the first person plural the Course uses: *we name the
+   galvanometer `rg`*, never *the galvanometer is a resistor named `rg`*.
+
+The reader-facing fields of a spec:
 
 - `ask` — the book's question, as the book words it. Also becomes the
   `.cir` entry's `note:`, with `$…$` maths unwrapped.
-- `shows` — one paragraph on what the example demonstrates. This is the
-  editorial voice of the page.
-- `parts` — for a problem with lettered parts, one entry per part,
-  answered separately (the four op-amp problems have these).
+- `shows` — the paragraph above the run (rules 2, 4 and 7).
+- `pre` — first runs, each `{text, desc, tag, expect, booknames, note}`,
+  rendered before the main description as text, description, settings
+  and answers, and written to the `.cir` as an entry of their own just
+  before the main one (rule 6). The runner verifies each first run's
+  `expect` as a spec of its own — *50 ok* is 43 examples and 7 first runs.
+- `booknames` — answer name → the book's symbol, set beside the value:
+  *`i_r7` = 2 A (the book's $i_o$)*, or under the result panels.
+- `parts` — a lettered part answered in prose, after the results.
+- `evals` — Evaluate steps after the results: the answer's name in the
+  Evaluate box and the instant in Conditions, the way Lesson 6 does it;
+  `gen.py` computes the value from the run and asserts it against
+  `expect`, so an Evaluate step is verified too.
+- `after` — what follows from the answers, last of all.
 
 `gen.py`'s `polish()` applies house typography to `ask`, `shows` and
 `parts`: em dashes, Ω after a number, µ, ≥, the accent on Thévenin, and
