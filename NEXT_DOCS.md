@@ -3,7 +3,17 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
-## #429 — the Nilsson & Riedel sampler, made to read well — **built 12 Sep 2026, not deployed**
+## #429 — the Nilsson & Riedel sampler, made to read well — **live 12 Sep 2026** (learn, PDFs and the offline pair at cache v206; the server awaits its pull)
+
+**Deployed in full at Roberto's word, 12 Sep 2026, after the review round
+below.** `learn` carries the chapter and the four rebuilt PDFs — v9
+**353** pages (347 before; the six are the first runs), v7 **235**, v8
+**223** and the Manual **39**, all served at the local byte counts, the
+six captured version 7 and 8 pages byte-identical across the deploy. The
+offline pair is at cache **v206** with the ZIP at **32,004,118 b**; the
+install host serves the 50-entry book and `sw.js` at v206, checked by
+fetching. **Both PythonAnywhere accounts want a pull and a Reload**, no
+`pip`, for the template's build stamp and the book.
 
 A readability pass over `/9/nr12-sampler`, prose only: every circuit,
 setting and expected answer is untouched, and `runner.check` still reads
