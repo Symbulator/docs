@@ -58,8 +58,9 @@ Sixteen resistive problems. The running theme is that the book's
 a delta-to-wye transform — is a way of getting an answer by hand, not a property
 of the answer. Symbulator is told the circuit and never told the method, so the
 same kind of description serves whichever chapter a problem came from. Five of
-these are op-amp problems with lettered parts, two run in {{card:Expert Mode}},
-and the last two are two-port problems from the book's final chapter.
+these are op-amp problems with lettered parts, one runs in {{card:Expert Mode}},
+one is answered from the {{card:Solve}} card, and the last two are two-port
+problems from the book's final chapter.
 
 ::: problem NR12's Example 3.7
 
@@ -99,34 +100,59 @@ Nilsson & Riedel, 12th edition — the circuit for Example 3.10
 :::
 
 ::: answer
-A Wheatstone bridge measures a resistance nobody knows, $R_x$, by comparing it with resistances that are known. The adjustable resistor $R_3$ is turned until the galvanometer between the two arms of the bridge carries no current, and at that setting the unknown can be read off the others. So we describe the circuit with the two resistances the question leaves open as symbols rather than numbers, which we name `r3` for the adjustable one and `rx` for the unknown, after the book's $R_3$ and $R_x$; we name the two known resistors `r1` and `r2`, and call the two arms' midpoints **a** and **b**. We describe the galvanometer as a resistor, which we name `rg`; the figure gives it no value, and none is needed, because at balance no current flows through it, so we leave its resistance as a symbol as well. We leave the source as a symbol too, `vs`, since its value plays no part at balance. The balance condition itself, no current through the galvanometer, is not a value that can be typed into any element, so we give it to Symbulator as an equation in {{card:Expert Mode}}, `i_rg = 0`, and name `rx` as the unknown to solve for.
+A Wheatstone bridge measures a resistance nobody knows, $R_x$, by comparing it with resistances that are known. The adjustable resistor $R_3$ is turned until the galvanometer between the two arms of the bridge carries no current, and at that setting the unknown can be read off the others. So we describe the circuit with the two resistances the question leaves open as symbols rather than numbers, which we name `R_3` for the adjustable one and `R_x` for the unknown, after the book's; we name the two known resistors `r1` and `r2`, and call the two arms' midpoints **a** and **b**. We describe the galvanometer as a short circuit, the element `s`, which we name `sg`: the figure gives it no resistance, and what we will need from it is its current, which a short reports as `isg`. We leave the source as a symbol too, `V_s`, since its value plays no part at balance. We run this as it stands, in DC, and every answer comes back as a formula in the three symbols.
 
 ```field 9 Circuit Description
-e,1,0,vs
+e,1,0,V_s
 r1,1,a,1'k
 r2,1,b,4'k
-rg,a,b,rg
-r3,a,0,r3
-rx,b,0,rx
+sg,a,b
+r3,a,0,R_3
+rx,b,0,R_x
 ```
 
-```field 9 Add equation(s)
-i_rg = 0
+Set {{ui:Analysis}} to *DC — direct current*.
+
+With the results on screen, we open the {{card:Solve}} card under them and ask the question the way the bridge is used. The balance condition, no current through the galvanometer, is the equation `isg=0`; the resistance we want is the unknown, `R_x`; and the setting of the dial is a condition, first at its lowest, 10 Ω:
+
+```field 9 Equation(s) to solve in terms of the results
+isg=0
 ```
 
-```field 9 Add unknown(s)
-rx
+```field 9 Unknown(s) to solve for
+R_x
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. This one needs {{ui:Enable Expert Mode}} ticked in the {{card:Expert Mode}} box; the equations and unknowns go in the fields it reveals.
+```field 9 Conditions
+R_3=10
+```
 
-::: result rx
-rx = 4 r_{3}
+Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+
+The card returns `R_x` = {{o:40}} Ω (the book's $R_x$).
+
+Then the same equation and unknown with the dial at its highest, 2 kΩ, written with the usual shorthand:
+
+```field 9 Equation(s) to solve in terms of the results
+isg=0
+```
+
+```field 9 Unknown(s) to solve for
+R_x
+```
+
+```field 9 Conditions
+R_3=2'k
+```
+
+::: applink NR12's Example 3.10 (DC, Solve at R_3 = 2k)
 :::
 
-`rx` is the book's $R_x$.
+Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
 
-That formula answers the question. The bridge reads four times whatever {{var:R_3}} is set to, so with {{var:R_3}} at its lowest, 10 Ω, the bridge reads {{o:40}} Ω, and at its highest, 2 kΩ, it reads {{o:8}} kΩ: the range of resistances this bridge can measure is 40 Ω to 8 kΩ.
+The card returns `R_x` = {{o:8000}} Ω (the book's $R_x$).
+
+So the smallest resistance the bridge can measure is {{o:40}} Ω and the largest {{o:8000}} Ω: its range is 40 Ω to 8 kΩ.
 
 :::
 :::

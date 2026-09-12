@@ -110,6 +110,18 @@ The reader-facing fields of a spec:
   Evaluate box and the instant in Conditions, the way Lesson 6 does it;
   `gen.py` computes the value from the run and asserts it against
   `expect`, so an Evaluate step is verified too.
+- `solveq` — Solve card runs, each `{tag, text, equations, unknowns,
+  conditions, real_only, expect, unit, book, note}`, shown after the
+  settings line with the card's three boxes and the button, and answered
+  from the **real app**: `runner.app_values` runs `solve_ui` for the
+  values the page holds and `runner.app_solveq` runs `solveq_ui` on them
+  (the docs build imports the app tree, as `build.py --check` already
+  does). The runner checks each run's `expect` too, so *ok* counts them.
+  The first run's fields ride in the problem's head entry, as Roberto's
+  own file had it (`solve_equations:` and kin); a later run is an entry of
+  its own, linked beside its boxes. Example 3.10 is the one that uses it,
+  at Roberto's word (13 Sep 2026): the Solve card *"is more representative
+  of the exploratory way a student would follow"* than Expert Mode.
 - `after` — what follows from the answers, last of all.
 
 `gen.py`'s `polish()` applies house typography to `ask`, `shows` and

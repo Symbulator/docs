@@ -938,29 +938,40 @@ dict(num="3.10", title="Using a Wheatstone Bridge to Measure Resistance",
      ask="For the Wheatstone bridge in Fig. 3.30, $R_3$ can be varied from 10 Ω to 2 kΩ. "
          "What range of resistor values can this bridge measure?",
      page=101, fig=(101, "3.30"), domain="dc",
-     desc="e,1,0,vs:r1,1,a,1'k:r2,1,b,4'k:rg,a,b,rg:r3,a,0,r3:rx,b,0,rx",
-     equations=["i_rg = 0"], unknowns=["rx"],
-     expect={"rx": "4*r3"},
-     booknames={"rx": "R_x"},
+     desc="e,1,0,V_s:r1,1,a,1'k:r2,1,b,4'k:sg,a,b:r3,a,0,R_3:rx,b,0,R_x",
+     expect={},
+     solveq=[
+      dict(tag="DC, Solve at R_3 = 10",
+           text="With the results on screen, we open the {{card:Solve}} card under them "
+                "and ask the question the way the bridge is used. The balance condition, "
+                "no current through the galvanometer, is the equation `isg=0`; the "
+                "resistance we want is the unknown, `R_x`; and the setting of the dial is "
+                "a condition, first at its lowest, 10 Ω:",
+           equations=["isg=0"], unknowns=["R_x"], conditions=["R_3=10"],
+           real_only=True, expect={"R_x": 40}, unit="\\Omega", book={"R_x": "R_x"}),
+      dict(tag="DC, Solve at R_3 = 2k",
+           text="Then the same equation and unknown with the dial at its highest, 2 kΩ, "
+                "written with the usual shorthand:",
+           equations=["isg=0"], unknowns=["R_x"], conditions=["R_3=2'k"],
+           real_only=True, expect={"R_x": 8000}, unit="\\Omega", book={"R_x": "R_x"},
+           note="The same circuit with the Solve card filled in for the other end of the "
+                "dial, R_3 = 2 kΩ."),
+     ],
+     after="So the smallest resistance the bridge can measure is {{o:40}} Ω and the "
+           "largest {{o:8000}} Ω: its range is 40 Ω to 8 kΩ.",
      shows="A Wheatstone bridge measures a resistance nobody knows, $R_x$, by comparing it "
            "with resistances that are known. The adjustable resistor $R_3$ is turned until "
            "the galvanometer between the two arms of the bridge carries no current, and at "
            "that setting the unknown can be read off the others. So we describe the "
            "circuit with the two resistances the question leaves open as symbols rather "
-           "than numbers, which we name `r3` for the adjustable one and `rx` for the "
-           "unknown, after the book's $R_3$ and $R_x$; we name the two known resistors "
-           "`r1` and `r2`, and call the two arms' midpoints **a** and **b**. We describe "
-           "the galvanometer as a resistor, which we name `rg`; the figure gives it no "
-           "value, and none is needed, because at balance no current flows through it, so "
-           "we leave its resistance as a symbol as well. We leave the source as a symbol "
-           "too, `vs`, since its value plays no part at balance. The balance condition "
-           "itself, no current through the galvanometer, is not a value that can be typed "
-           "into any element, so we give it to Symbulator as an equation in "
-           "{{card:Expert Mode}}, `i_rg = 0`, and name `rx` as the unknown to solve for.",
-     after="That formula answers the question. The bridge reads four times whatever "
-           "{{var:R_3}} is set to, so with {{var:R_3}} at its lowest, 10 Ω, the bridge reads "
-           "{{o:40}} Ω, and at its highest, 2 kΩ, it reads {{o:8}} kΩ: the range of "
-           "resistances this bridge can measure is 40 Ω to 8 kΩ."),
+           "than numbers, which we name `R_3` for the adjustable one and `R_x` for the "
+           "unknown, after the book's; we name the two known resistors `r1` and `r2`, and "
+           "call the two arms' midpoints **a** and **b**. We describe the galvanometer as "
+           "a short circuit, the element `s`, which we name `sg`: the figure gives it no "
+           "resistance, and what we will need from it is its current, which a short "
+           "reports as `isg`. We leave the source as a symbol too, `V_s`, since its value "
+           "plays no part at balance. We run this as it stands, in DC, and every answer "
+           "comes back as a formula in the three symbols."),
 
 dict(num="14.6", title="Designing a Parallel RLC Bandpass Filter",
      ask="a) Show that the RLC circuit in Fig. 14.22 is a bandpass filter by deriving an "

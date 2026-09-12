@@ -264,6 +264,50 @@ def render(s, vals):
              if s.get("equations") else "")
     L.append(settings_line(s) + extra)
     L.append("")
+    # Solve card runs (Roberto, 13 Sep 2026: "my approach with Solve, which
+    # is more representative of the exploratory way a student would
+    # follow"). Each is shown with its own boxes and its own answer, read
+    # from the real app's solveq_ui on the values the page holds. The
+    # first run's fields travel in the problem's head entry; a later run
+    # is an entry of its own, linked beside its boxes.
+    if s.get("solveq"):
+        values = runner.app_values(s)
+        for i, sq in enumerate(s["solveq"]):
+            L.append(polish(sq["text"]))
+            L.append("")
+            L.append("```field 9 Equation(s) to solve in terms of the results")
+            L.extend(sq["equations"])
+            L.append("```")
+            L.append("")
+            L.append("```field 9 Unknown(s) to solve for")
+            L.append(", ".join(sq.get("unknowns", [])))
+            L.append("```")
+            L.append("")
+            if sq.get("conditions"):
+                L.append("```field 9 Conditions")
+                L.extend(sq["conditions"])
+                L.append("```")
+                L.append("")
+            if i:
+                L.append("::: applink %s" % entry_name(s, sq["tag"]))
+                L.append(":::")
+                L.append("")
+            L.append(("Tick {{ui:real solutions only}} and press {{btn:Solve equations}}."
+                      if sq.get("real_only", True) else "Press {{btn:Solve equations}}."))
+            L.append("")
+            got, _r = runner.app_solveq(s, sq, values)
+            parts = []
+            for k, want in sq["expect"].items():
+                assert k in got, "Solve card run %d of %s did not return %s: %s" % (i + 1, s["num"], k, got)
+                shown = got[k].split()[0] if got[k].split() else got[k]
+                unit = UNIT_WORD.get(sq.get("unit", ""), sq.get("unit", ""))
+                txt = "`%s` = {{o:%s}}%s" % (k, shown, (" " + unit) if unit else "")
+                if sq.get("book", {}).get(k):
+                    txt += " (the book's $%s$)" % sq["book"][k]
+                parts.append(txt)
+            L.append("The card returns " + (parts[0] if len(parts) == 1 else
+                     ", ".join(parts[:-1]) + " and " + parts[-1]) + ".")
+            L.append("")
     panels, numeric = answer_blocks(s, vals)
     for p in panels:
         L.append(p)
@@ -382,6 +426,10 @@ def cir_entry(s):
         L.append("equations: %s" % eq)
     if s.get("unknowns"):
         L.append("unknowns: %s" % ", ".join(s["unknowns"]))
+    # the first Solve card run rides in the head entry, as Roberto's own
+    # file had it; later runs are entries of their own (cir_solveq_entry)
+    if s.get("solveq"):
+        L.extend(solveq_fields(s["solveq"][0]))
     ask = re.sub(r"\s+", " ", s["ask"]).strip()
     # the note is plain text in a .cir, so unwrap the page's inline maths,
     # and a braced subscript with it: $h_{11}$ reads as h_11 in a note
@@ -398,6 +446,39 @@ def cir_entry(s):
     if dom == "ac":
         L.append("rms: %s" % ("yes" if s.get("rms") else "no"))
         L.append("polar: yes")
+    L.append("")
+    return "\n".join(L)
+
+
+def solveq_fields(sq):
+    """A Solve card run as .cir fields, the keys the app's own export writes."""
+    L = ["solve_equations: %s" % eq for eq in sq["equations"]]
+    if sq.get("unknowns"):
+        L.append("solve_unknowns: %s" % ", ".join(sq["unknowns"]))
+    L.extend("solve_conditions: %s" % c for c in sq.get("conditions", []))
+    if sq.get("real_only", True):
+        L.append("solve_real_only: yes")
+    return L
+
+
+def cir_solveq_entry(s, sq):
+    """A later Solve card run as an entry of its own, just after the main
+    one: the same circuit, the Solve card filled for this run."""
+    dom = s.get("domain", "dc")
+    ask = re.sub(r"\s+", " ", s["ask"]).strip()
+    ask = re.sub(r"\$([^$]*)\$", r"\1", ask)
+    ask = re.sub(r"_\{([^}]*)\}", r"_\1", ask)
+    L = ["[%s]" % entry_name(s, sq["tag"]), ""]
+    L.extend(split_desc(s["desc"]))
+    L.append("")
+    L.append("analysis: %s" % dom)
+    L.extend(solveq_fields(sq))
+    L.append("note: %s" % ask)
+    L.append("note: %s" % sq["note"])
+    L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(s["num"]))
+    L.append("rounding: 6")
+    L.append("si: no")
+    L.append("units: yes")
     L.append("")
     return "\n".join(L)
 
@@ -435,6 +516,8 @@ def main():
                 for pre in s.get("pre", []):
                     cir.append(cir_pre_entry(s, pre))
                 cir.append(cir_entry(s))
+                for sq in s.get("solveq", [])[1:]:
+                    cir.append(cir_solveq_entry(s, sq))
     # The book ships with the app: repos/server/examples is the source, and
     # build_local.py generates the repos/local copy from it.
     io.open(os.path.join(EXAMPLES, "Nilsson_Riedel.cir"), "w",

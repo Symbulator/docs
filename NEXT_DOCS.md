@@ -112,6 +112,28 @@ setting and expected answer is untouched, and `runner.check` still reads
 chapter and the app's `examples/Nilsson_Riedel.cir` are regenerated from
 them, never edited.
 
+**Example 3.10 answered from the Solve card, 13 Sep 2026.** Roberto's
+ruling, after #433 made it work: *"Use my approach with Solve, which is
+more representative of the exploratory way a student would follow. Show
+explicitly the evaluation of both end values of the variable
+resistance"*, then *"Use the underscores as well. And put the value of
+r3 as a condition, not an equation … use the prefix like so: R_3=2'k."*
+The page now describes the galvanometer as a short `sg`, leaves `V_s`,
+`R_3` and `R_x` as symbols, runs the circuit in DC, and shows the
+{{card:Solve}} card twice — `isg=0`, unknown `R_x`, condition `R_3=10`
+giving 40 Ω, then `R_3=2'k` giving 8000 Ω — each with its three boxes,
+spelled as his file spells them, and its answer read from the real
+app's `solveq_ui`. A `solveq` field on the spec carries it (see
+`tools/nr12/README.md`); the runner checks each run, so it reads **52
+ok**. The head entry carries the first run's Solve fields exactly as
+his own file had them, the second run is an entry of its own, and the
+app's book has **51 entries**, the app **407 across 21 books**. Expert
+Mode remains on 5.3c alone, and the DC intro says so. Live on `learn`
+(web only, the PDFs still held) and on the offline pair at cache
+**v212** (v211 went up an hour earlier with spaces round the `=`; his
+file has none); the version 9 account wants a pull and a Reload for
+the book, no `pip`.
+
 **Roberto's review, 12 Sep 2026 — seven rules, applied to all 43.** He
 read Examples 3.7 and 3.10 and derived rules; the rules were then
 applied down the page while he walked. They are listed in

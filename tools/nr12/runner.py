@@ -97,11 +97,47 @@ def run_one(sp_):
     else: raise ValueError(dom)
     return r, dict(r.values)
 
+SERVER = os.path.join(_ROOT, "Application", "v9", "repos", "server")
+
+
+def app_values(s):
+    """The circuit's answers as the page holds them -- `values`, keyed by
+    name, from the real app's `solve_ui` -- which is what the Solve card
+    is fed. Imported from the app tree, as build.py --check does."""
+    if SERVER not in sys.path:
+        sys.path.insert(0, SERVER)
+    import symbulator_ui as ui
+    r = ui.solve_ui(s["desc"], s.get("domain", "dc"), "", [], "solve", "", "", "z",
+                    [], [], [], digits=6, approx=True, units=True)
+    assert r.get("ok"), r
+    return r["values"]
+
+
+def app_solveq(s, sq, values=None):
+    """One Solve-card run of a spec, through the real app's `solveq_ui`:
+    {name: plain} of the first solution, and the raw reply."""
+    if SERVER not in sys.path:
+        sys.path.insert(0, SERVER)
+    import symbulator_ui as ui
+    values = values if values is not None else app_values(s)
+    r = ui.solveq_ui(list(sq["equations"]), list(sq.get("unknowns", [])), values,
+                     digits=6, approx=True, units=True,
+                     real_only=sq.get("real_only", True),
+                     conditions=list(sq.get("conditions", [])),
+                     domain=s.get("domain", "dc"))
+    assert r.get("ok"), r
+    sols = r.get("solutions") or []
+    return ({v["name"]: v["plain"] for v in sols[0]} if sols else {}), r
+
+
 def check(specs, only=None, verbose=True):
-    """Every spec, and every first run a spec carries in `pre`, solved and
-    compared with the book. A first run is checked as a spec of its own, so
-    the initial condition the main run carries is proved to be what the
-    circuit before the switch actually gives."""
+    """Every spec, every first run a spec carries in `pre`, and every Solve
+    card run it carries in `solveq`, solved and compared with the book. A
+    first run is checked as a spec of its own, so the initial condition the
+    main run carries is proved to be what the circuit before the switch
+    actually gives; a Solve card run goes through the real app's `solveq_ui`
+    on the values the page holds, so what the page prints for it is what
+    the card prints."""
     expanded = []
     for s in specs:
         for i, pre in enumerate(s.get("pre", [])):
@@ -109,10 +145,37 @@ def check(specs, only=None, verbose=True):
                                  desc=pre["desc"], domain=pre.get("domain", "dc"),
                                  expect=pre["expect"]))
         expanded.append(s)
-    return _check(expanded, only, verbose)
+    bad, ok = _check(expanded, only, verbose, summary=False)
+    for s in specs:
+        if only and s["num"] not in only: continue
+        if not s.get("solveq"): continue
+        values = app_values(s)
+        for i, sq in enumerate(s.get("solveq", [])):
+            label = "%s solveq%d" % (s["num"], i + 1)
+            got, _r = app_solveq(s, sq, values)
+            fails = []
+            for key, want in sq["expect"].items():
+                if key not in got:
+                    fails.append((key, "MISSING (have %s)" % sorted(got))); continue
+                txt = got[key].split()[0] if got[key].split() else got[key]
+                try:
+                    good = close(sp.sympify(txt), want, s.get("tol", 0.006))
+                except Exception as e:
+                    fails.append((key, "CMP %s (got %r)" % (e, got[key]))); continue
+                if not good:
+                    fails.append((key, "got %s  want %s" % (got[key], want)))
+            if fails:
+                bad.append((label, fails))
+                print("XX %-6s Solve card run %d" % (s["num"], i + 1))
+                for k, m in fails: print("        %-10s %s" % (k, m))
+            else:
+                ok += 1
+                if verbose: print("ok %-6s Solve card run %d" % (s["num"], i + 1))
+    print("\n--- %d ok, %d bad ---" % (ok, len(bad)))
+    return bad
 
 
-def _check(specs, only=None, verbose=True):
+def _check(specs, only=None, verbose=True, summary=True):
     bad, ok = [], 0
     for s in specs:
         if only and s["num"].split(" ")[0] not in only: continue
@@ -149,6 +212,8 @@ def _check(specs, only=None, verbose=True):
         else:
             ok += 1
             if verbose: print("ok %-6s %s" % (s["num"], s.get("title","")[:60]))
+    if not summary:
+        return bad, ok
     print("\n--- %d ok, %d bad ---" % (ok, len(bad)))
     return bad
 
