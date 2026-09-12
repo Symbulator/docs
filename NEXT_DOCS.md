@@ -112,6 +112,26 @@ setting and expected answer is untouched, and `runner.check` still reads
 chapter and the app's `examples/Nilsson_Riedel.cir` are regenerated from
 them, never edited.
 
+**Roberto's second read, 13 Sep 2026 — three more rules (16–18 in
+`tools/nr12/README.md`).** Nothing the reader already knows from earlier
+entries or from the settings line is said again (3.11 lost its "each
+between the two nodes it joins … nothing has to be simplified first",
+and every "we set the analysis to …" and "we leave omega as a symbol"
+that the line under the description repeats is gone); a consideration
+about how to read the results — the sign of what a source *supplies*,
+the solver's note on a floating secondary, which answer is which — comes
+*after* the sentence that runs the simulation, through a new `interpret`
+field (3.11, 4.13, 9.10, 9.14, 9.15, 10.8, 11.1, 13.7); a single-letter
+name is used only for the only element of its type, so the six entries
+that had `e` beside `e2` (4.4, 4.7, 4.23, 9.12, 9.14, 10.8) now say `e1`,
+their `.cir` entries with them; and the book's figure numbers are gone
+from every question, `Fig. 4.42` reading *the figure*, since the page
+does not use the book's numbering — 34 of them. Checked on the way: the
+book does say *power developed* in Example 4.13, verbatim. Gates as
+before, 63 ok, 50 of 50 through the app, 384 of 386 linked; live on
+`learn` and the offline pair at cache **v215**, the version 9 account
+wanting its pull, no `pip`.
+
 **The fifteen rules applied to the Manual, 13 Sep 2026.** The eleven
 Manual chapters with worked circuits (`21-manual-grammar` to
 `31-manual-twoports`, 22 circuits) were revised the same way, by hand,

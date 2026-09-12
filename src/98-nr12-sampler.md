@@ -64,7 +64,7 @@ final chapter.
 
 ::: problem NR12's Example 3.7
 
-Use current division to find the current $i_o$ and use voltage division to find the voltage $v_o$ for the circuit in Fig. 3.22.
+Use current division to find the current $i_o$ and use voltage division to find the voltage $v_o$ for the circuit in the figure.
 
 ::: figure assets/circuit/nr12-ex3-7.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 3.7
@@ -93,7 +93,7 @@ Symbulator returns `i_r7` = {{o:2}} A (the book's $i_o$) and `v_r6` = {{o:18}} V
 
 ::: problem NR12's Example 3.10
 
-For the Wheatstone bridge in Fig. 3.30, $R_3$ can be varied from 10 Ω to 2 kΩ. What range of resistor values can this bridge measure?
+For the Wheatstone bridge in the figure, $R_3$ can be varied from 10 Ω to 2 kΩ. What range of resistor values can this bridge measure?
 
 ::: figure assets/circuit/nr12-ex3-10.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 3.10
@@ -148,14 +148,14 @@ So the smallest resistance the bridge can measure is {{o:40}} Ω and the largest
 
 ::: problem NR12's Example 3.11
 
-Find the current and power supplied by the 40 V source in the circuit shown in Fig. 3.35.
+Find the current and power supplied by the 40 V source in the circuit shown in the figure.
 
 ::: figure assets/circuit/nr12-ex3-11.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 3.11
 :::
 
 ::: answer
-A bridge: five resistors in a diamond with a sixth across the middle, fed by one source, and the question wants what that source delivers, its current and its power. We write the bridge as it is drawn, naming the source `e` and the six resistors `r1` to `r6`, each between the two nodes it joins, with the source's lower end as ground; nothing has to be simplified first. One thing to know before reading the results: Symbulator reports a source's current and power *into* the source, the same way as for every other element, so what the source *supplies* is the negative of what it reports, and we will read the two answers with a minus sign in the {{card:Evaluate}} card.
+A bridge: five resistors in a diamond with a sixth across the middle, fed by one source, and the question wants what that source delivers, its current and its power. We write the bridge as it is drawn, naming the source `e` and the six resistors `r1` to `r6`.
 
 ```field 9 Circuit Description
 e,1,0,40
@@ -168,6 +168,8 @@ r6,4,0,37.5
 ```
 
 Set {{ui:Analysis}} to *DC — direct current*.
+
+One thing to know before reading the results: Symbulator reports a source's current and power *into* the source, the same way as for every other element, so what the source *supplies* is the negative of what it reports, and we read the two answers with a minus sign in the {{card:Evaluate}} card.
 
 Then we type `-i_e` into {{card:Evaluate}}:
 
@@ -190,7 +192,7 @@ It gives {{o:20}} W (the book's $p$).
 
 ::: problem NR12's Example 4.4
 
-Use the node-voltage method to find the power dissipated in the 5 Ω resistor in the circuit shown in Fig. 4.10.
+Use the node-voltage method to find the power dissipated in the 5 Ω resistor in the circuit shown in the figure.
 
 ::: figure assets/circuit/nr12-ex4-4.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 4.4
@@ -200,7 +202,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 4.4
 A resistive circuit with a dependent voltage source at its far end: its value is eight times $i_\phi$, the current through the 5 Ω resistor, and the question wants the power that resistor dissipates. In Symbulator a dependent source needs no special element; it is a source whose value names another answer. We name the 5 Ω resistor `r3`, so its current is `ir3`, and write the dependent source as `e2` with the value `8*ir3`; we number the nodes 1 to 4 from the source rightward, with the bottom rail as ground. The power asked for is then `pr3`, the power consumed by `r3`.
 
 ```field 9 Circuit Description
-e,1,0,20
+e1,1,0,20
 r1,1,2,2
 r2,2,0,20
 r3,2,3,5
@@ -218,7 +220,7 @@ Symbulator returns `p_r3` = {{o:7.2}} W (the book's $p$).
 
 ::: problem NR12's Example 4.7
 
-Use the mesh-current method to find the power dissipated in the 4 Ω resistor in the circuit shown in Fig. 4.23.
+Use the mesh-current method to find the power dissipated in the 4 Ω resistor in the circuit shown in the figure.
 
 ::: figure assets/circuit/nr12-ex4-7.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 4.7
@@ -228,7 +230,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 4.7
 Again a dependent voltage source, this time worth fifteen times $i_\phi$, the current in the 20 Ω resistor, and again the question wants one resistor's power, the 4 Ω's. We name the 20 Ω `r4`, so its current is `ir4` and the source `e2` has the value `15*ir4`; the 4 Ω we name `r3`, and its power is `pr3`. We number the nodes 1 to 3 with the bottom rail as ground.
 
 ```field 9 Circuit Description
-e,1,0,50
+e1,1,0,50
 r1,1,3,1
 r2,1,2,5
 r3,2,3,4
@@ -245,7 +247,7 @@ Symbulator returns `p_r3` = {{o:16}} W (the book's $p$).
 
 ::: problem NR12's Example 4.8
 
-Use the mesh-current method to find branch currents $i_a$, $i_b$ and $i_c$ in the circuit for Example 4.3, repeated here as Fig. 4.25.
+Use the mesh-current method to find branch currents $i_a$, $i_b$ and $i_c$ in the circuit for Example 4.3, repeated here in the figure.
 
 ::: figure assets/circuit/nr12-ex4-8.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 4.8
@@ -271,14 +273,14 @@ Symbulator returns `i_r1` = {{o:2}} A (the book's $i_a$), `i_r2` = {{o:4}} A (th
 
 ::: problem NR12's Example 4.13
 
-a) Use source transformations to find the voltage $v_o$ in the circuit shown in Fig. 4.42. b) Find the power developed by the 250 V voltage source. c) Find the power developed by the 8 A current source.
+a) Use source transformations to find the voltage $v_o$ in the circuit shown in the figure. b) Find the power developed by the 250 V voltage source. c) Find the power developed by the 8 A current source.
 
 ::: figure assets/circuit/nr12-ex4-13.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 4.13
 :::
 
 ::: answer
-Two sources, one of voltage and one of current, and six resistors; the question wants the voltage across the 100 Ω, and the power each source develops. We write every element as it stands in the figure, the 125 Ω across the voltage source and the 10 Ω under the current source included, naming the resistors `r1` to `r6` from left to right and the sources `e` and `j`. The current source's arrow points down, from node 2 towards the 10 Ω, so we write its nodes in that order, `j,2,9,8`, calling the node between the source and the resistor **9**. $v_o$ is the voltage across `r4`. The power a source *develops* is what it supplies, the negative of the power Symbulator reports it consuming, so parts (b) and (c) are read with a minus sign in the {{card:Evaluate}} card.
+Two sources, one of voltage and one of current, and six resistors; the question wants the voltage across the 100 Ω, and the power each source develops. We write every element as it stands in the figure, the 125 Ω across the voltage source and the 10 Ω under the current source included, naming the resistors `r1` to `r6` from left to right and the sources `e` and `j`. The current source's arrow points down, from node 2 towards the 10 Ω, so we write its nodes in that order, `j,2,9,8`, calling the node between the source and the resistor **9**. $v_o$ is the voltage across `r4`.
 
 ```field 9 Circuit Description
 e,1,0,250
@@ -292,6 +294,8 @@ r6,3,0,15
 ```
 
 Set {{ui:Analysis}} to *DC — direct current*.
+
+The power a source *develops* is what it supplies, the negative of the power Symbulator reports it consuming, so parts (b) and (c) are read with a minus sign in the {{card:Evaluate}} card.
 
 Symbulator returns `v_r4` = {{o:20}} V (the book's $v_o$).
 
@@ -316,7 +320,7 @@ It gives {{o:480}} W (the book's $p_{8\,A}$).
 
 ::: problem NR12's Example 4.21
 
-a) For the circuit shown in Fig. 4.65, find the value of $R_L$ that results in maximum power being transferred to $R_L$. b) Calculate the maximum power that can be delivered to $R_L$.
+a) For the circuit shown in the figure, find the value of $R_L$ that results in maximum power being transferred to $R_L$. b) Calculate the maximum power that can be delivered to $R_L$.
 
 ::: figure assets/circuit/nr12-ex4-21.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 4.21
@@ -340,7 +344,7 @@ Symbulator returns `z` = {{o:25}} Ω (the book's $R_L$) and `pmax` = {{o:900}} W
 
 ::: problem NR12's Example 4.23
 
-Use the principle of superposition to find $v_o$ in the circuit shown in Fig. 4.71.
+Use the principle of superposition to find $v_o$ in the circuit shown in the figure.
 
 ::: figure assets/circuit/nr12-ex4-23.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 4.23
@@ -350,7 +354,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 4.23
 Two independent sources, two dependent ones and three resistors, and the question wants the voltage across the 20 Ω. We name the 5 Ω resistor `r1`, the 20 Ω `r2` and the 10 Ω `r3`. The dependent current source is worth $0.4v_\Delta$, and $v_\Delta$ is the voltage across the 10 Ω, so we write its value as `0.4*vr3`; the dependent voltage source is worth $2i_\Delta$, and $i_\Delta$ is the current through the 5 Ω, so we write its value as `2*ir1`. We write each source's nodes in the order its arrow or its polarity marks give, name the three inner nodes **a**, **b** and **c**, and take the bottom-right node as ground. $v_o$ is the voltage across `r2`.
 
 ```field 9 Circuit Description
-e,1,c,10
+e1,1,c,10
 r1,1,a,5
 r2,a,c,20
 r3,b,0,10
@@ -368,7 +372,7 @@ Symbulator returns `v_r2` = {{o:24}} V (the book's $v_o$).
 
 ::: problem NR12's Example 5.1
 
-The op amp in the circuit shown in Fig. 5.7 is ideal. a) Calculate $v_o$ if $v_a$ = 1 V and $v_b$ = 0 V. b) Repeat (a) for $v_a$ = 1 V and $v_b$ = 2 V. c) If $v_a$ = 1.5 V, specify the range of $v_b$ that avoids amplifier saturation.
+The op amp in the circuit shown in the figure is ideal. a) Calculate $v_o$ if $v_a$ = 1 V and $v_b$ = 0 V. b) Repeat (a) for $v_a$ = 1 V and $v_b$ = 2 V. c) If $v_a$ = 1.5 V, specify the range of $v_b$ that avoids amplifier saturation.
 
 ::: figure assets/circuit/nr12-ex5-1.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 5.1
@@ -671,7 +675,7 @@ It gives {{o:5.9988}} (the book's $v_o/v_g$).
 
 ::: problem NR12's Example 18.1
 
-Find the z parameters for the circuit shown in Fig. 18.3.
+Find the z parameters for the circuit shown in the figure.
 
 ::: figure assets/circuit/nr12-ex18-1.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 18.1
@@ -738,7 +742,7 @@ so what the book does in $s$ the solver does out of sight.
 
 ::: problem NR12's Example 7.1
 
-The switch in the circuit shown in Fig. 7.6 has been closed for a long time before it is opened at $t$ = 0. Find a) $i_L(t)$ for $t$ ≥ 0, b) $i_o(t)$ for $t$ ≥ 0+, c) $v_o(t)$ for $t$ ≥ 0+.
+The switch in the circuit shown in the figure has been closed for a long time before it is opened at $t$ = 0. Find a) $i_L(t)$ for $t$ ≥ 0, b) $i_o(t)$ for $t$ ≥ 0+, c) $v_o(t)$ for $t$ ≥ 0+.
 
 ::: figure assets/circuit/nr12-ex7-1.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 7.1
@@ -760,7 +764,7 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l` = {{o:20}} A (the book's $i_L(0)$).
 
-Opening the switch disconnects the source and the 0.1 Ω resistor and leaves the inductor to release its energy through the three resistors. That is the circuit for the second interval, $t$ ≥ 0, and we describe it with the same names, dropping `j` and `r0`. The inductor now starts with the 20 A just found, which we write into its line as a fifth field, after the inductance. We set the analysis to TR, and the answers come back as functions of $t$: $i_L$ is the current through `l`, $i_o$ the current through `r3`, and $v_o$ the voltage at node 2.
+Opening the switch disconnects the source and the 0.1 Ω resistor and leaves the inductor to release its energy through the three resistors. That is the circuit for the second interval, $t$ ≥ 0, and we describe it with the same names, dropping `j` and `r0`. The inductor now starts with the 20 A just found, which we write into its line as a fifth field, after the inductance. The answers come back as functions of $t$: $i_L$ is the current through `l`, $i_o$ the current through `r3`, and $v_o$ the voltage at node 2.
 
 ```field 9 Circuit Description
 l,1,0,2,20
@@ -793,7 +797,7 @@ Here `i_l` is the book's $i_L$, `i_r3` is the book's $i_o$ and `v_2` is the book
 
 ::: problem NR12's Example 7.3
 
-The switch in the circuit shown in Fig. 7.15 has been in position x for a long time. At $t$ = 0 it moves instantaneously to position y. Find a) $v_C(t)$ for $t$ ≥ 0, b) $v_o(t)$ for $t$ ≥ 0+, and c) $i_o(t)$ for $t$ ≥ 0+.
+The switch in the circuit shown in the figure has been in position x for a long time. At $t$ = 0 it moves instantaneously to position y. Find a) $v_C(t)$ for $t$ ≥ 0, b) $v_o(t)$ for $t$ ≥ 0+, and c) $i_o(t)$ for $t$ ≥ 0+.
 
 ::: figure assets/circuit/nr12-ex7-3.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 7.3
@@ -845,7 +849,7 @@ Here `v_1` is the book's $v_C$, `v_2` is the book's $v_o$ and `i_r3` is the book
 
 ::: problem NR12's Example 7.5
 
-The switch in the circuit shown in Fig. 7.21 has been in position a for a long time. At $t$ = 0 it moves from position a to position b. The switch is a make-before-break type, so the inductor current is continuous. a) Find the expression for $i(t)$ for $t$ ≥ 0. b) What is the initial voltage across the inductor just after the switch has been moved to position b?
+The switch in the circuit shown in the figure has been in position a for a long time. At $t$ = 0 it moves from position a to position b. The switch is a make-before-break type, so the inductor current is continuous. a) Find the expression for $i(t)$ for $t$ ≥ 0. b) What is the initial voltage across the inductor just after the switch has been moved to position b?
 
 ::: figure assets/circuit/nr12-ex7-5.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 7.5
@@ -900,7 +904,7 @@ It gives {{o:40}} V (the book's $v(0^+)$).
 
 ::: problem NR12's Example 7.10
 
-There is no energy stored in the circuit in Fig. 7.37 at the time the switch is closed. Find the solutions for $i_o$, $v_o$, $i_1$ and $i_2$.
+There is no energy stored in the circuit in the figure at the time the switch is closed. Find the solutions for $i_o$, $v_o$, $i_1$ and $i_2$.
 
 ::: figure assets/circuit/nr12-ex7-10.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 7.10
@@ -942,7 +946,7 @@ Here `i_r1` is the book's $i_o$, `v_2` is the book's $v_o$, `i_l1` is the book's
 
 ::: problem NR12's Example 7.11 to 35 ms
 
-The two switches in the circuit shown in Fig. 7.39 have been closed for a long time. At $t$ = 0 switch 1 is opened; then, 35 ms later, switch 2 is opened. a) Find $i_L(t)$ for 0 ≤ $t$ ≤ 35 ms.
+The two switches in the circuit shown in the figure have been closed for a long time. At $t$ = 0 switch 1 is opened; then, 35 ms later, switch 2 is opened. a) Find $i_L(t)$ for 0 ≤ $t$ ≤ 35 ms.
 
 ::: figure assets/circuit/nr12-ex7-11.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 7.11
@@ -965,7 +969,7 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l` = {{o:6}} A (the book's $i_L(0)$).
 
-In the second interval switch 1 has opened, which disconnects the 60 V source and the 4 Ω and 12 Ω resistors. We describe what remains, the 6 Ω, the 3 Ω, the inductor and the 18 Ω, with the same names, and give the inductor the 6 A just found as its fifth field. We set the analysis to TR; $i_L$ is the current through `l`.
+In the second interval switch 1 has opened, which disconnects the 60 V source and the 4 Ω and 12 Ω resistors. We describe what remains, the 6 Ω, the 3 Ω, the inductor and the 18 Ω, with the same names, and give the inductor the 6 A just found as its fifth field. $i_L$ is the current through `l`.
 
 ```field 9 Circuit Description
 r6,2,0,6
@@ -1030,7 +1034,7 @@ i_{l} = 1.47958 e^{- 60 t}\,\mathrm{A}
 
 ::: problem NR12's Example 7.13
 
-a) When the switch is closed in the circuit shown in Fig. 7.45, the voltage on the capacitor is 10 V. Find the expression for $v_o$ for $t$ ≥ 0. b) Assume that the capacitor short-circuits when its terminal voltage reaches 150 V. How many milliseconds elapse before the capacitor short-circuits?
+a) When the switch is closed in the circuit shown in the figure, the voltage on the capacitor is 10 V. Find the expression for $v_o$ for $t$ ≥ 0. b) Assume that the capacitor short-circuits when its terminal voltage reaches 150 V. How many milliseconds elapse before the capacitor short-circuits?
 
 ::: figure assets/circuit/nr12-ex7-13.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 7.13
@@ -1075,14 +1079,14 @@ So the capacitor short-circuits after {{o:67.7}} ms.
 
 ::: problem NR12's Example 8.2
 
-For the circuit in Fig. 8.6, $v(0^+)$ = 12 V and $i_L(0^+)$ = 30 mA. Find the expression for $v(t)$. (Example 8.3 asks the same circuit for its three branch currents.)
+For the circuit in the figure, $v(0^+)$ = 12 V and $i_L(0^+)$ = 30 mA. Find the expression for $v(t)$. (Example 8.3 asks the same circuit for its three branch currents.)
 
 ::: figure assets/circuit/nr12-ex8-2.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 8.2
 :::
 
 ::: answer
-A capacitor, an inductor and a resistor in parallel with no source, holding an initial voltage and an initial current; the question wants the voltage across the three as a function of time, and the following example wants the three branch currents. We write each element as a line between node 1 and ground, naming them `c`, `l` and `r`, and put the two initial conditions the question gives in the fifth fields: 12 V on the capacitor and 30 mA, written 0.03, on the inductor. The run is the circuit releasing the energy it holds. We set the analysis to TR; $v$ is the voltage at node 1, and $i_R$ and $i_L$ the currents through `r` and `l`.
+A capacitor, an inductor and a resistor in parallel with no source, holding an initial voltage and an initial current; the question wants the voltage across the three as a function of time, and the following example wants the three branch currents. We write each element as a line between node 1 and ground, naming them `c`, `l` and `r`, and put the two initial conditions the question gives in the fifth fields: 12 V on the capacitor and 30 mA, written 0.03, on the inductor. The run is the circuit releasing the energy it holds. $v$ is the voltage at node 1, and $i_R$ and $i_L$ the currents through `r` and `l`.
 
 ```field 9 Circuit Description
 c,1,0,0.2'u,12
@@ -1111,7 +1115,7 @@ Here `v_1` is the book's $v$, `i_r` is the book's $i_R$ and `i_l` is the book's 
 
 ::: problem NR12's Example 8.4
 
-In the circuit shown in Fig. 8.8, $V_0$ = 0 and $I_0$ = $-$12.25 mA. Calculate the voltage response for $t$ ≥ 0.
+In the circuit shown in the figure, $V_0$ = 0 and $I_0$ = $-$12.25 mA. Calculate the voltage response for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex8-4.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 8.4
@@ -1141,7 +1145,7 @@ The book prints the amplitude as 100 and the frequency of the sine as 979.80, bo
 
 ::: problem NR12's Example 8.11
 
-The 0.1 µF capacitor in the circuit shown in Fig. 8.17 is charged to 100 V. At $t$ = 0 the capacitor is discharged through a series combination of a 100 mH inductor and a 560 Ω resistor. a) Find $i(t)$ for $t$ ≥ 0. b) Find $v_C(t)$ for $t$ ≥ 0.
+The 0.1 µF capacitor in the circuit shown in the figure is charged to 100 V. At $t$ = 0 the capacitor is discharged through a series combination of a 100 mH inductor and a 560 Ω resistor. a) Find $i(t)$ for $t$ ≥ 0. b) Find $v_C(t)$ for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex8-11.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 8.11
@@ -1173,7 +1177,7 @@ Here `i_l` is the book's $i$ and `v_1` is the book's $v_C$.
 
 ::: problem NR12's Example 8.12
 
-No energy is stored in the 100 mH inductor or the 0.4 µF capacitor when the switch in the circuit shown in Fig. 8.18 is closed. Find $v_C(t)$ for $t$ ≥ 0.
+No energy is stored in the 100 mH inductor or the 0.4 µF capacitor when the switch in the circuit shown in the figure is closed. Find $v_C(t)$ for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex8-12.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 8.12
@@ -1202,14 +1206,14 @@ v_{3} = 48 - 64 e^{- 2500 t} + 16 e^{- 10000 t}\,\mathrm{V}
 
 ::: problem NR12's Example 13.5
 
-The circuit in Fig. 13.17 has no initial stored energy. At $t$ = 0 the switch closes. Use Laplace methods to find $i_1(t)$ and $i_2(t)$ for $t$ ≥ 0.
+The circuit in the figure has no initial stored energy. At $t$ = 0 the switch closes. Use Laplace methods to find $i_1(t)$ and $i_2(t)$ for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex13-5.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.5
 :::
 
 ::: answer
-Two loops sharing a resistor, each with an inductor, switched onto a source at $t$ = 0 with no energy stored; the question wants the two loop currents as functions of time. No energy is stored, so we write the two inductors without fifth fields, and the switch closing at $t$ = 0 onto the 336 V source needs no element of its own: in TR a numerical source value is a step that begins at $t$ = 0. We name the inductors `l1` and `l2` after the book's $i_1$ and $i_2$, which are the currents through them, and the resistors `r1` and `r2`. We set the analysis to TR, which returns the two currents as functions of $t$; the Laplace transform and its inversion happen inside the solver.
+Two loops sharing a resistor, each with an inductor, switched onto a source at $t$ = 0 with no energy stored; the question wants the two loop currents as functions of time. No energy is stored, so we write the two inductors without fifth fields, and the switch closing at $t$ = 0 onto the 336 V source needs no element of its own: in TR a numerical source value is a step that begins at $t$ = 0. We name the inductors `l1` and `l2` after the book's $i_1$ and $i_2$, which are the currents through them, and the resistors `r1` and `r2`. TR returns the two currents as functions of $t$; the Laplace transform and its inversion happen inside the solver.
 
 ```field 9 Circuit Description
 e,1,0,336
@@ -1236,7 +1240,7 @@ Here `i_l1` is the book's $i_1$ and `i_l2` is the book's $i_2$.
 
 ::: problem NR12's Example 13.7
 
-The make-before-break switch in the circuit in Fig. 13.23 has been in position a for a long time. At $t$ = 0 it moves instantaneously to position b. Use Laplace methods to find $i_2(t)$ for $t$ ≥ 0.
+The make-before-break switch in the circuit in the figure has been in position a for a long time. At $t$ = 0 it moves instantaneously to position b. Use Laplace methods to find $i_2(t)$ for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex13-7.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.7
@@ -1260,7 +1264,7 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l1` = {{o:5}} A (the book's $i_1(0)$) and `i_l2` = {{o:0}} A (the book's $i_2(0)$).
 
-At $t$ = 0 the switch moves to b, which takes the source and the 9 Ω out and closes the primary on the 3 Ω alone. We describe that circuit with the same names and the two currents just found as the coils' fifth fields, 5 and 0. The secondary is still not connected to ground, so its bottom is simply the node we called **d**, and Symbulator again notes that it measures that side's voltages against **d**; the currents are unaffected. We set the analysis to TR; $i_2$ is the current through `l2`.
+At $t$ = 0 the switch moves to b, which takes the source and the 9 Ω out and closes the primary on the 3 Ω alone. We describe that circuit with the same names and the two currents just found as the coils' fifth fields, 5 and 0. $i_2$ is the current through `l2`.
 
 ```field 9 Circuit Description
 r3,0,p,3
@@ -1276,6 +1280,8 @@ r10,c,d,10
 
 Set {{ui:Analysis}} to *TR — transient / time domain*.
 
+The secondary is still not connected to ground, so its bottom is simply the node we called **d**, and Symbulator again notes that it measures that side's voltages against **d**; the currents are unaffected.
+
 ::: result current through l2
 i_{l2} = \frac{\left(5 e^{2 t} - 5\right) e^{- 3 t}}{4}\,\mathrm{A}
 :::
@@ -1287,7 +1293,7 @@ i_{l2} = \frac{\left(5 e^{2 t} - 5\right) e^{- 3 t}}{4}\,\mathrm{A}
 
 ::: problem NR12's Example 13.13
 
-The switch in the circuit shown in Fig. 13.50 has been closed for a long time. At $t$ = 0 it opens. Use Laplace methods to find the output voltage $v_o$ and the current in the 3 H inductor, $i_1$.
+The switch in the circuit shown in the figure has been closed for a long time. At $t$ = 0 it opens. Use Laplace methods to find the output voltage $v_o$ and the current in the 3 H inductor, $i_1$.
 
 ::: figure assets/circuit/nr12-ex13-13.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.13
@@ -1308,7 +1314,7 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l1` = {{o:10}} A (the book's $i_1(0)$) and `i_l2` = {{o:0}} A (the book's $i_2(0)$).
 
-Opening the switch removes that wire, so the two inductors are now in series with the 15 Ω between them. We describe that circuit with the 10 A and 0 just found as their fifth fields, numbering the nodes 1 to 4 from the source. We set the analysis to TR; $v_o$ is the voltage at node 3, the top of the 15 Ω and $L_2$, and $i_1$ the current through `l1`.
+Opening the switch removes that wire, so the two inductors are now in series with the 15 Ω between them. We describe that circuit with the 10 A and 0 just found as their fifth fields, numbering the nodes 1 to 4 from the source. $v_o$ is the voltage at node 3, the top of the 15 Ω and $L_2$, and $i_1$ the current through `l1`.
 
 ```field 9 Circuit Description
 e,1,0,100
@@ -1350,14 +1356,14 @@ so in {{card:Settings}}.
 
 ::: problem NR12's Example 9.9
 
-The sinusoidal current source in the circuit shown in Fig. 9.20 produces the current $i_s$ = 8 cos 200,000$t$ A. b) Find the equivalent admittance to the right of the current source. c) Find the phasor voltage $V$. d) Find the phasor current $I$. e) Find the steady-state expressions for $v$ and $i$.
+The sinusoidal current source in the circuit shown in the figure produces the current $i_s$ = 8 cos 200,000$t$ A. b) Find the equivalent admittance to the right of the current source. c) Find the phasor voltage $V$. d) Find the phasor current $I$. e) Find the steady-state expressions for $v$ and $i$.
 
 ::: figure assets/circuit/nr12-ex9-9.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 9.9
 :::
 
 ::: answer
-A sinusoidal current source at 200,000 rad/s feeding a resistor, a capacitor, and a branch of a resistor and an inductor; the question wants the admittance the source sees, the voltage across it and the current in the inductive branch as phasors, and those two as functions of time. The inductor and the capacitor are given as an inductance and a capacitance, and we write them as they are, `l,2,0,40'u` and `c,1,0,1'u`, putting the source's frequency, 200,000 rad/s, in the {{ui:ω — angular frequency}} box; the conversion to impedances is done inside the solver. We write the current source as `j,0,1,8`, its arrow pointing up into node 1, with its 8 A as the amplitude, which is what the book's phasors carry too, and name the resistors `r1` and `r2`. We set the analysis to AC, and each answer is a phasor, printed both as a complex number and as an amplitude with an angle: $V$ is the voltage at node 1 and $I$ the current through `r2`.
+A sinusoidal current source at 200,000 rad/s feeding a resistor, a capacitor, and a branch of a resistor and an inductor; the question wants the admittance the source sees, the voltage across it and the current in the inductive branch as phasors, and those two as functions of time. The inductor and the capacitor are given as an inductance and a capacitance, and we write them as they are, `l,2,0,40'u` and `c,1,0,1'u`, putting the source's frequency, 200,000 rad/s, in the {{ui:ω — angular frequency}} box; the conversion to impedances is done inside the solver. We write the current source as `j,0,1,8`, its arrow pointing up into node 1, with its 8 A as the amplitude, which is what the book's phasors carry too, and name the resistors `r1` and `r2`. In AC each answer is a phasor, printed both as a complex number and as an amplitude with an angle: $V$ is the voltage at node 1 and $I$ the current through `r2`.
 
 ```field 9 Circuit Description
 j,0,1,8
@@ -1386,14 +1392,14 @@ Part (e) is the two phasors written back as functions of time at the source's fr
 
 ::: problem NR12's Example 9.10
 
-Use a delta-to-wye impedance transformation to find $I_0$, $I_1$, $I_2$, $I_3$, $I_4$, $I_5$, $V_1$ and $V_2$ in the circuit in Fig. 9.23.
+Use a delta-to-wye impedance transformation to find $I_0$, $I_1$, $I_2$, $I_3$, $I_4$, $I_5$, $V_1$ and $V_2$ in the circuit in the figure.
 
 ::: figure assets/circuit/nr12-ex9-10.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 9.10
 :::
 
 ::: answer
-A bridge of five impedances fed by one source, every impedance given in ohms and several of them complex; the question wants the current in every branch and the voltage at two nodes. We write each impedance exactly as given, `-4j`, `63.2+2.4j`, `20+60j`, as a resistor with a complex value, naming the five `r1` to `r5` in the order of the book's $I_1$ to $I_5$, and we write each one's nodes in the direction of the figure's arrow, so that its current is counted as the book counts it. Nothing depends on the frequency, so we leave **omega** as a symbol in the {{ui:ω — angular frequency}} box. We keep the figure's letters for the nodes, with **d** as ground, so $V_1$ and $V_2$ are the voltages at **b** and **c**. The source current $I_0$ leaves the source's positive terminal, which is the opposite of how Symbulator counts a source's current, so we will read it with a minus sign in the {{card:Evaluate}} card. We set the analysis to AC.
+A bridge of five impedances fed by one source, every impedance given in ohms and several of them complex; the question wants the current in every branch and the voltage at two nodes. We write each impedance exactly as given, `-4j`, `63.2+2.4j`, `20+60j`, as a resistor with a complex value, naming the five `r1` to `r5` in the order of the book's $I_1$ to $I_5$, and we write each one's nodes in the direction of the figure's arrow, so that its current is counted as the book counts it. We keep the figure's letters for the nodes, with **d** as ground, so $V_1$ and $V_2$ are the voltages at **b** and **c**.
 
 ```field 9 Circuit Description
 e,a,0,120
@@ -1405,6 +1411,8 @@ r5,c,0,-20j
 ```
 
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
+
+The source current $I_0$ leaves the source's positive terminal, which is the opposite of how Symbulator counts a source's current, so we read it with a minus sign in the {{card:Evaluate}} card.
 
 Symbulator returns `i_r1` = {{o:2 + 2.66667j}} A ({{o:3.333}}∠{{o:53.13}}°, the book's $I_1$), `i_r2` = {{o:0.4 + 0.533333j}} A ({{o:0.6667}}∠{{o:53.13}}°, the book's $I_2$), `i_r3` = {{o:1.33333 + 4.26667j}} A ({{o:4.470}}∠{{o:72.65}}°, the book's $I_3$), `i_r4` = {{o:0.666667 - 1.6j}} A ({{o:1.733}}∠{{o:-67.38}}°, the book's $I_4$), `i_r5` = {{o:1.73333 + 4.8j}} A ({{o:5.103}}∠{{o:70.14}}°, the book's $I_5$), `v_b` = {{o:109.333 + 8j}} V ({{o:109.6}}∠{{o:4.185}}°, the book's $V_1$) and `v_c` = {{o:96 - 34.6667j}} V ({{o:102.1}}∠{{o:-19.86}}°, the book's $V_2$).
 
@@ -1421,17 +1429,17 @@ It gives {{o:2.4 + 3.2j}} A ({{o:4.000}}∠{{o:53.13}}°, the book's $I_0$).
 
 ::: problem NR12's Example 9.12
 
-Find the Thévenin equivalent circuit with respect to terminals a,b for the circuit shown in Fig. 9.32.
+Find the Thévenin equivalent circuit with respect to terminals a,b for the circuit shown in the figure.
 
 ::: figure assets/circuit/nr12-ex9-12.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 9.12
 :::
 
 ::: answer
-An AC circuit with a dependent source inside it, and the question wants its Thévenin equivalent, a voltage and an impedance, seen from two terminals. The dependent voltage source is worth ten times $V_x$, the voltage across the 60 Ω resistor; we name that resistor `r2` and place it between node 2 and ground, so that $V_x$ is the voltage at node 2 and the source's value is `10*v2`. We call the terminals a and b nodes **9** and **0**, and name them to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which returns the equivalent's voltage and impedance; a dependent source in the circuit is no obstacle to it. The impedances are in ohms and nothing depends on the frequency, so we leave **omega** as a symbol. We set the analysis to AC.
+An AC circuit with a dependent source inside it, and the question wants its Thévenin equivalent, a voltage and an impedance, seen from two terminals. The dependent voltage source is worth ten times $V_x$, the voltage across the 60 Ω resistor; we name that resistor `r2` and place it between node 2 and ground, so that $V_x$ is the voltage at node 2 and the source's value is `10*v2`. We call the terminals a and b nodes **9** and **0**, and name them to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which returns the equivalent's voltage and impedance; a dependent source in the circuit is no obstacle to it.
 
 ```field 9 Circuit Description
-e,1,0,120
+e1,1,0,120
 r1,1,2,12
 r2,2,0,60
 r3,2,9,-40j
@@ -1448,17 +1456,17 @@ Symbulator returns `vth` = {{o:784 - 288j}} V ({{o:835.2}}∠{{o:-20.17}}°, the
 
 ::: problem NR12's Example 9.14
 
-Use the mesh-current method to find the voltages $V_1$, $V_2$ and $V_3$ in the circuit shown in Fig. 9.39.
+Use the mesh-current method to find the voltages $V_1$, $V_2$ and $V_3$ in the circuit shown in the figure.
 
 ::: figure assets/circuit/nr12-ex9-14.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 9.14
 :::
 
 ::: answer
-An AC circuit of two loops with a dependent voltage source in the far one, worth 39 times $I_x$, the current down through the middle branch; the question wants three voltages marked across three parts of the circuit. We name the 12 Ω `r3`, so its current is `ir3` and the source's value is `39*ir3`; we name the other impedances `r1` to `r6`, and call the top of the middle branch node **a**, the far side of the −{{var:j_16}} Ω node **c** and the dependent source's top node **b**. The three voltages are then: $V_1$, across the 1 Ω and {{var:j_2}} Ω on the left, the difference between the voltages at node 1 and node **a**; $V_2$, across the middle branch, the voltage at node **a** itself; and $V_3$, across the 1 Ω and {{var:j_3}} Ω on the right, the difference between nodes **a** and **b**. The two differences we will read in the {{card:Evaluate}} card. Nothing depends on the frequency, so we leave **omega** as a symbol; we set the analysis to AC.
+An AC circuit of two loops with a dependent voltage source in the far one, worth 39 times $I_x$, the current down through the middle branch; the question wants three voltages marked across three parts of the circuit. We name the 12 Ω `r3`, so its current is `ir3` and the source's value is `39*ir3`; we name the other impedances `r1` to `r6`, and call the top of the middle branch node **a**, the far side of the −{{var:j_16}} Ω node **c** and the dependent source's top node **b**. The three voltages are then: $V_1$, across the 1 Ω and {{var:j_2}} Ω on the left, the difference between the voltages at node 1 and node **a**; $V_2$, across the middle branch, the voltage at node **a** itself; and $V_3$, across the 1 Ω and {{var:j_3}} Ω on the right, the difference between nodes **a** and **b**.
 
 ```field 9 Circuit Description
-e,1,0,150
+e1,1,0,150
 r1,1,2,1
 r2,2,a,2j
 r3,a,c,12
@@ -1469,6 +1477,8 @@ e2,b,0,39*ir3
 ```
 
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
+
+$V_2$ is the voltage at node **a** as the run reports it; the two differences we read in the {{card:Evaluate}} card.
 
 Symbulator returns `v_a` = {{o:72 + 104j}} V ({{o:126.5}}∠{{o:55.30}}°, the book's $V_2$).
 
@@ -1500,7 +1510,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 9.15
 :::
 
 ::: answer
-A linear transformer, two coupled coils each with its own winding resistance, between a source with an internal impedance and a load; the question wants the Thévenin equivalent seen from the load's terminals. The coils are given as inductances and the frequency is given, so we work out their impedances first: $j\omega L_1$ = $j$400 × 9 = $j$3600 Ω and $j\omega L_2$ = $j$400 × 4 = $j$1600 Ω, and the coupling from $k$: the mutual inductance is $M = k\sqrt{L_1 L_2}$ = 0.5 × 6 = 3 H, so $j\omega M$ = $j$1200 Ω. We then write each coil as an impedance, `r4` and `r5`, and the coupling between them as the `m` line naming the two and their mutual impedance, `m,r4,r5,1200j`; the winding resistances $R_1$ and $R_2$ we name `r3` and `r6`, and the source's internal impedance `r1` and `r2`. We leave the load out, because the question asks for the equivalent seen from its terminals, which we call nodes **c** and **d** and name to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen. Two things about the secondary side. It is not connected to ground anywhere, nothing conducts between the two windings, so its bottom is simply the node we have called **d**, and Symbulator says in a note that it has measured that side's voltages against **d**; the currents, the voltage differences and the equivalent are unaffected. And the source is given in rms, so we tick {{ui:RMS phasors}} in {{card:Settings}}. Every value is in ohms already, so we leave **omega** as a symbol; we set the analysis to AC.
+A linear transformer, two coupled coils each with its own winding resistance, between a source with an internal impedance and a load; the question wants the Thévenin equivalent seen from the load's terminals. The coils are given as inductances and the frequency is given, so we work out their impedances first: $j\omega L_1$ = $j$400 × 9 = $j$3600 Ω and $j\omega L_2$ = $j$400 × 4 = $j$1600 Ω, and the coupling from $k$: the mutual inductance is $M = k\sqrt{L_1 L_2}$ = 0.5 × 6 = 3 H, so $j\omega M$ = $j$1200 Ω. We then write each coil as an impedance, `r4` and `r5`, and the coupling between them as the `m` line naming the two and their mutual impedance, `m,r4,r5,1200j`; the winding resistances $R_1$ and $R_2$ we name `r3` and `r6`, and the source's internal impedance `r1` and `r2`. We leave the load out, because the question asks for the equivalent seen from its terminals, which we call nodes **c** and **d** and name to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen.
 
 ```field 9 Circuit Description
 e,1,0,300
@@ -1515,6 +1525,8 @@ r6,q,c,100
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **c** and **d**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms.
 
+The secondary side is not connected to ground anywhere, nothing conducts between the two windings, so its bottom is simply the node we have called **d**, and Symbulator says in a note that it has measured that side's voltages against **d**; the currents, the voltage differences and the equivalent are unaffected.
+
 Symbulator returns `vth` = {{o:93.9351 + 17.7715j}} V ({{o:95.60}}∠{{o:10.71}}°, the book's $V_{Th}$) and `z` = {{o:171.086 + 1224.26j}} Ω ({{o:1236}}∠{{o:82.04}}°, the book's $Z_{Th}$).
 
 :::
@@ -1522,17 +1534,17 @@ Symbulator returns `vth` = {{o:93.9351 + 17.7715j}} V ({{o:95.60}}∠{{o:10.71}}
 
 ::: problem NR12's Example 10.8
 
-a) Calculate the total average and reactive power delivered to each impedance in the circuit shown in Fig. 10.18. b) Calculate the average and reactive powers associated with each source. c) Verify that the average power delivered equals the average power absorbed, and likewise for the reactive power.
+a) Calculate the total average and reactive power delivered to each impedance in the circuit shown in the figure. b) Calculate the average and reactive powers associated with each source. c) Verify that the average power delivered equals the average power absorbed, and likewise for the reactive power.
 
 ::: figure assets/circuit/nr12-ex10-8.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 10.8
 :::
 
 ::: answer
-The circuit of Example 9.14, which we describe the same way, asked a question about power: how much average and reactive power each of its three impedances takes, how much each source supplies, and whether the two sides balance. Symbulator reports every element's complex power as `s` followed by the element's name, its real part the average power and its imaginary part the reactive power, so all three parts are read from one run. Each impedance in the figure is two elements in our description, a resistor and a reactance in series, so the power delivered to an impedance is the sum of two `s` answers, which we will read in the {{card:Evaluate}} card; the balance of part (c) is the sum of all eight, read the same way. Nothing depends on the frequency, so we leave **omega** as a symbol; we set the analysis to AC.
+The circuit of Example 9.14, which we describe the same way, asked a question about power: how much average and reactive power each of its three impedances takes, how much each source supplies, and whether the two sides balance. Symbulator reports every element's complex power as `s` followed by the element's name, its real part the average power and its imaginary part the reactive power, so all three parts are read from one run.
 
 ```field 9 Circuit Description
-e,1,0,150
+e1,1,0,150
 r1,1,2,1
 r2,2,a,2j
 r3,a,c,12
@@ -1544,7 +1556,9 @@ e2,b,0,39*ir3
 
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
 
-Symbulator returns `s_e` = {{o:1950 - 3900j}} VA ({{o:4360}}∠{{o:-63.43}}°, the book's $S_{source}$) and `s_e2` = {{o:-5850 - 5070j}} VA ({{o:7741}}∠{{o:-139.1}}°, the book's $S_{dep}$).
+Each impedance in the figure is two elements in our description, a resistor and a reactance in series, so the power delivered to an impedance is the sum of two `s` answers, which we read in the {{card:Evaluate}} card; the balance of part (c) is the sum of all eight, read the same way.
+
+Symbulator returns `s_e1` = {{o:1950 - 3900j}} VA ({{o:4360}}∠{{o:-63.43}}°, the book's $S_{source}$) and `s_e2` = {{o:-5850 - 5070j}} VA ({{o:7741}}∠{{o:-139.1}}°, the book's $S_{dep}$).
 
 Then we type `s_r1+s_r2` into {{card:Evaluate}}:
 
@@ -1570,10 +1584,10 @@ s_r5+s_r6
 
 It gives {{o:1970 + 5910j}} VA ({{o:6230}}∠{{o:71.57}}°, the book's $S_3$).
 
-Likewise `s_e+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6`:
+Likewise `s_e1+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6`:
 
 ```field 9 Evaluate
-s_e+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6
+s_e1+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6
 ```
 
 It gives {{o:0}} VA.
@@ -1583,14 +1597,14 @@ It gives {{o:0}} VA.
 
 ::: problem NR12's Example 10.12
 
-The variable resistor in the circuit in Fig. 10.25 is adjusted until maximum average power is delivered to $R_L$. a) What is the value of $R_L$ in ohms? b) What is the maximum average power delivered to $R_L$?
+The variable resistor in the circuit in the figure is adjusted until maximum average power is delivered to $R_L$. a) What is the value of $R_L$ in ohms? b) What is the maximum average power delivered to $R_L$?
 
 ::: figure assets/circuit/nr12-ex10-12.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 10.12
 :::
 
 ::: answer
-A source feeding a load through an ideal transformer whose windings share a node; the question wants the load that draws the most average power and how much that is. An ideal transformer is the element `t`; because its primary and secondary here share a node, we write each winding as a bracketed pair of terminals, `[p,x]` for the primary and `[x,a]` for the secondary, followed by the turns ratio `[4,1]`, and we name the two resistors after their values, `r60` and `r20`. We leave the load $R_L$ out of the description and name its terminals, node **a** and ground, to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which reports the load that would draw the most average power from those terminals and how much: by the maximum power theorem that load is the Thévenin impedance, reported as `z`, and the power is `pmax`. The source is given as 840 V rms, so we tick {{ui:RMS phasors}} in {{card:Settings}}; there is no reactance anywhere, so we leave **omega** as a symbol. We set the analysis to AC.
+A source feeding a load through an ideal transformer whose windings share a node; the question wants the load that draws the most average power and how much that is. An ideal transformer is the element `t`; because its primary and secondary here share a node, we write each winding as a bracketed pair of terminals, `[p,x]` for the primary and `[x,a]` for the secondary, followed by the turns ratio `[4,1]`, and we name the two resistors after their values, `r60` and `r20`. We leave the load $R_L$ out of the description and name its terminals, node **a** and ground, to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which reports the load that would draw the most average power from those terminals and how much: by the maximum power theorem that load is the Thévenin impedance, reported as `z`, and the power is `pmax`.
 
 ```field 9 Circuit Description
 e,1,0,840
@@ -1615,7 +1629,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 11.1
 :::
 
 ::: answer
-A three-phase generator, a three-phase line and a three-phase load, all Y-connected and all balanced; the question wants the three line currents and the phase and line voltages at the load and at the generator. We describe the whole circuit, one phase at a time: three sources at the generator's internal nodes, which we call **ga**, **gb** and **gc**, each carrying its phase in its value, `120*exp(-2j*pi/3)` being 120 V at −120°; then the generator's, the line's and the load's impedance in each phase, all in ohms, which we name `rga`, `rla` and `rfa` for the a phase and likewise for b and c. We take the generator's neutral as ground and call the load's neutral **nn**; the generator's terminals we call **a**, **b** and **c** and the load's **pa**, **pb** and **pc**. Nothing depends on the frequency, so we leave **omega** as a symbol. The quantities asked for are then ordinary results: the line current $I_{aA}$ is the current through `rla`; the phase voltage at the load, $V_{AN}$, is the voltage between **pa** and **nn**; the line voltage $V_{AB}$ is the voltage between **pa** and **pb**; and the phase voltage at the generator's terminal, $V_{An}$, is the voltage at node **a**. The book quotes the voltages by magnitude, so we will read each difference's magnitude in the {{card:Evaluate}} card, as `Abs(...)`. We set the analysis to AC.
+A three-phase generator, a three-phase line and a three-phase load, all Y-connected and all balanced; the question wants the three line currents and the phase and line voltages at the load and at the generator. We describe the whole circuit, one phase at a time: three sources at the generator's internal nodes, which we call **ga**, **gb** and **gc**, each carrying its phase in its value, `120*exp(-2j*pi/3)` being 120 V at −120°; then the generator's, the line's and the load's impedance in each phase, all in ohms, which we name `rga`, `rla` and `rfa` for the a phase and likewise for b and c. We take the generator's neutral as ground and call the load's neutral **nn**; the generator's terminals we call **a**, **b** and **c** and the load's **pa**, **pb** and **pc**.
 
 ```field 9 Circuit Description
 ea,ga,0,120
@@ -1633,6 +1647,8 @@ rfc,pc,nn,39+28j
 ```
 
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
+
+The quantities asked for are ordinary results: the line current $I_{aA}$ is the current through `rla`; the phase voltage at the load, $V_{AN}$, is the voltage between **pa** and **nn**; the line voltage $V_{AB}$ is the voltage between **pa** and **pb**; and the phase voltage at the generator's terminal, $V_{An}$, is the voltage at node **a**. The book quotes the voltages by magnitude, so we read each difference's magnitude in the {{card:Evaluate}} card, as `Abs(...)`.
 
 Symbulator returns `i_rla` = {{o:1.92 - 1.44j}} A ({{o:2.400}}∠{{o:-36.87}}°, the book's $I_{aA}$), `i_rlb` = {{o:-2.20708 - 0.942769j}} A ({{o:2.400}}∠{{o:-156.9}}°, the book's $I_{bB}$) and `i_rlc` = {{o:0.287077 + 2.38277j}} A ({{o:2.400}}∠{{o:83.13}}°, the book's $I_{cC}$).
 
@@ -1676,7 +1692,7 @@ inverts back into time, are in the TR section above.
 
 ::: problem NR12's Example 13.2
 
-The circuit in Fig. 13.11 was analyzed in Example 7.3 using first-order circuit analysis techniques. Use the Laplace transform method to find $v_o(t)$ for $t$ ≥ 0+.
+The circuit in the figure was analyzed in Example 7.3 using first-order circuit analysis techniques. Use the Laplace transform method to find $v_o(t)$ for $t$ ≥ 0+.
 
 ::: figure assets/circuit/nr12-ex13-2.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.2
@@ -1722,7 +1738,7 @@ That is the transform of the answer Example 7.3 found in the time domain, $60e^{
 
 ::: problem NR12's Example 13.3
 
-Consider the circuit in Fig. 13.13, where the initial current in the inductor is 29 mA and the initial voltage across the capacitor is 50 V. This circuit was analyzed in Example 8.10 using second-order circuit analysis techniques. Use the Laplace transform method to find $v(t)$ for $t$ ≥ 0.
+Consider the circuit in the figure, where the initial current in the inductor is 29 mA and the initial voltage across the capacitor is 50 V. This circuit was analyzed in Example 8.10 using second-order circuit analysis techniques. Use the Laplace transform method to find $v(t)$ for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex13-3.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.3
@@ -1751,7 +1767,7 @@ v_{1} = \frac{50 s - 200000}{s^{2} + 80000 s + 1600000000}\,\mathrm{V}
 
 ::: problem NR12's Example 13.6
 
-The circuit in Fig. 13.20 has no initial stored energy, and at $t$ = 0 the switch closes. Find the Thévenin equivalent for the circuit to the left of the terminals a and b in the s domain, using Laplace methods.
+The circuit in the figure has no initial stored energy, and at $t$ = 0 the switch closes. Find the Thévenin equivalent for the circuit to the left of the terminals a and b in the s domain, using Laplace methods.
 
 ::: figure assets/circuit/nr12-ex13-6.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.6
@@ -1784,14 +1800,14 @@ Here `vth` is the book's $V_{Th}$ and `z` is the book's $Z_{Th}$.
 
 ::: problem NR12's Example 13.9
 
-The voltage source $v_g$ drives the circuit shown in Fig. 13.31. The output signal is the voltage across the capacitor, $v_o$. a) Find the transfer function for this circuit. b) Calculate the numerical values for the poles and zeros of the transfer function.
+The voltage source $v_g$ drives the circuit shown in the figure. The output signal is the voltage across the capacitor, $v_o$. a) Find the transfer function for this circuit. b) Calculate the numerical values for the poles and zeros of the transfer function.
 
 ::: figure assets/circuit/nr12-ex13-9.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 13.9
 :::
 
 ::: answer
-A source driving a resistor, a capacitor and an inductive branch, with the capacitor's voltage as the output; the question wants the transfer function from source to output, and its poles and zeros. A transfer function is the ratio of an output to the input that produced it, as functions of $s$, so we leave the source as the symbol `vg`, so that the output comes back as a multiple of it, and set the analysis to FD. We number the nodes from the source, so the output, the capacitor's voltage, is the voltage at node 2, and the transfer function is that voltage divided by `vg`, which we will read in the {{card:Evaluate}} card.
+A source driving a resistor, a capacitor and an inductive branch, with the capacitor's voltage as the output; the question wants the transfer function from source to output, and its poles and zeros. A transfer function is the ratio of an output to the input that produced it, as functions of $s$, so we leave the source as the symbol `vg`, so that the output comes back as a multiple of it. We number the nodes from the source, so the output, the capacitor's voltage, is the voltage at node 2, and the transfer function is that voltage divided by `vg`, which we will read in the {{card:Evaluate}} card.
 
 ```field 9 Circuit Description
 e,1,0,vg
@@ -1838,7 +1854,7 @@ So the transfer function has poles at $s = -3000 \pm j4000$ and a zero at $s = -
 
 ::: problem NR12's Example 14.6
 
-a) Show that the RLC circuit in Fig. 14.22 is a bandpass filter by deriving an expression for the transfer function $H(s)$. b) Compute the centre frequency. c) Calculate the cutoff frequencies, the bandwidth and $Q$. d) Compute $R$ and $L$ for a centre frequency of 5 kHz and a bandwidth of 200 Hz, using a 5 µF capacitor.
+a) Show that the RLC circuit in the figure is a bandpass filter by deriving an expression for the transfer function $H(s)$. b) Compute the centre frequency. c) Calculate the cutoff frequencies, the bandwidth and $Q$. d) Compute $R$ and $L$ for a centre frequency of 5 kHz and a bandwidth of 200 Hz, using a 5 µF capacitor.
 
 ::: figure assets/circuit/nr12-ex14-6.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 14.6

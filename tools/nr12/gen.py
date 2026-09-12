@@ -305,6 +305,13 @@ def render(s, vals):
              if s.get("equations") else "")
     L.append(settings_line(s) + extra)
     L.append("")
+    # Rule 16 (Roberto, 13 Sep 2026): a consideration about how to read the
+    # results -- a sign convention, a note the solver will print, which
+    # answer is which -- comes after the sentence that runs the simulation,
+    # not in the paragraph that describes the circuit.
+    if s.get("interpret"):
+        L.append(polish(s["interpret"]))
+        L.append("")
     panels, numeric = answer_blocks(s, vals)
     for p in panels:
         L.append(p)

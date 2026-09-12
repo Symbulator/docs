@@ -123,6 +123,22 @@ answer, `evals` with conditions, `solveq` runs, several roots):
     things, the app's exact labels for its controls, the app's answer
     names in code.
 
+**Three more from Roberto's second read, 13 Sep 2026:**
+
+16. **Say nothing the reader already knows from the entries before.** No
+    "each between the two nodes it joins" or "with the bottom rail as
+    ground" past the first entries that established it, and nothing the
+    settings line under the description says again ("we set the analysis
+    to DC", "we leave omega as a symbol").
+17. **How to read the results comes after the run.** A sign convention, a
+    note the solver will print, which answer is which: the `interpret`
+    field, rendered after the settings line and before the results — not
+    in the paragraph that describes the circuit.
+18. **A single-letter name only when it is the only element of its type.**
+    `e1` and `e2`, never `e` and `e2`; `e` alone is fine when it is the
+    only source. And the figure is "the figure", never the book's
+    `Fig. 4.42`, since the page does not use the book's numbering.
+
 The reader-facing fields of a spec:
 
 - `ask` — the book's question, as the book words it. Also becomes the

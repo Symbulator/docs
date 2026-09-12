@@ -59,7 +59,7 @@ SPECS = []
 SPECS += [
 dict(num="3.7", title="Using Voltage Division and Current Division to Solve a Circuit",
      ask="Use current division to find the current $i_o$ and use voltage division to find "
-         "the voltage $v_o$ for the circuit in Fig. 3.22.",
+         "the voltage $v_o$ for the circuit in the figure.",
      page=95, fig=(95, "3.22"), domain="dc",
      desc="j,0,1,8:r1,1,2,36:r2,2,0,44:r3,1,0,10:r4,1,3,40:r5,3,4,10:r6,4,0,30:r7,1,0,24",
      expect={"i_r7": 2, "v_r6": 18},
@@ -73,7 +73,7 @@ dict(num="3.7", title="Using Voltage Division and Current Division to Solve a Ci
            "voltage in the circuit, those two among them."),
 
 dict(num="3.11", title="Applying a Delta-to-Wye Transform",
-     ask="Find the current and power supplied by the 40 V source in the circuit shown in Fig. 3.35.",
+     ask="Find the current and power supplied by the 40 V source in the circuit shown in the figure.",
      page=103, fig=(103, "3.35"), domain="dc",
      desc="e,1,0,40:r1,1,2,5:r2,2,3,100:r3,2,4,125:r4,3,4,25:r5,3,0,40:r6,4,0,37.5",
      expect={"@-i_e": 0.5, "@-p_e": 20},
@@ -82,18 +82,17 @@ dict(num="3.11", title="Applying a Delta-to-Wye Transform",
      shows="A bridge: five resistors in a diamond with a sixth across the middle, fed by "
            "one source, and the question wants what that source delivers, its current and "
            "its power. We write the bridge as it is drawn, naming the source `e` and the "
-           "six resistors `r1` to `r6`, each between the two nodes it joins, with the "
-           "source's lower end as ground; nothing has to be simplified first. One thing to "
-           "know before reading the results: Symbulator reports a source's current and "
-           "power *into* the source, the same way as for every other element, so what the "
-           "source *supplies* is the negative of what it reports, and we will read the two "
-           "answers with a minus sign in the {{card:Evaluate}} card."),
+           "six resistors `r1` to `r6`.",
+     interpret="One thing to know before reading the results: Symbulator reports a "
+           "source's current and power *into* the source, the same way as for every other "
+           "element, so what the source *supplies* is the negative of what it reports, and "
+           "we read the two answers with a minus sign in the {{card:Evaluate}} card."),
 
 dict(num="4.4", title="Using the Node-Voltage Method with Dependent Sources",
      ask="Use the node-voltage method to find the power dissipated in the 5 Ω resistor "
-         "in the circuit shown in Fig. 4.10.",
+         "in the circuit shown in the figure.",
      page=125, fig=(125, "4.10"), domain="dc",
-     desc="e,1,0,20:r1,1,2,2:r2,2,0,20:r3,2,3,5:r4,3,0,10:r5,3,4,2:e2,4,0,8*ir3",
+     desc="e1,1,0,20:r1,1,2,2:r2,2,0,20:r3,2,3,5:r4,3,0,10:r5,3,4,2:e2,4,0,8*ir3",
      expect={"p_r3": 7.2},
      booknames={"p_r3": "p"},
      shows="A resistive circuit with a dependent voltage source at its far end: its value "
@@ -107,9 +106,9 @@ dict(num="4.4", title="Using the Node-Voltage Method with Dependent Sources",
 
 dict(num="4.7", title="Using the Mesh-Current Method with Dependent Sources",
      ask="Use the mesh-current method to find the power dissipated in the 4 Ω resistor "
-         "in the circuit shown in Fig. 4.23.",
+         "in the circuit shown in the figure.",
      page=133, fig=(133, "4.23"), domain="dc",
-     desc="e,1,0,50:r1,1,3,1:r2,1,2,5:r3,2,3,4:r4,2,0,20:e2,3,0,15*ir4",
+     desc="e1,1,0,50:r1,1,3,1:r2,1,2,5:r3,2,3,4:r4,2,0,20:e2,3,0,15*ir4",
      expect={"p_r3": 16},
      booknames={"p_r3": "p"},
      shows="Again a dependent voltage source, this time worth fifteen times $i_\\phi$, the "
@@ -119,7 +118,7 @@ dict(num="4.7", title="Using the Mesh-Current Method with Dependent Sources",
            "`pr3`. We number the nodes 1 to 3 with the bottom rail as ground."),
 
 dict(num="4.21", title="Calculating the Condition for Maximum Power Transfer",
-     ask="a) For the circuit shown in Fig. 4.65, find the value of $R_L$ that results in "
+     ask="a) For the circuit shown in the figure, find the value of $R_L$ that results in "
          "maximum power being transferred to $R_L$. b) Calculate the maximum power that can "
          "be delivered to $R_L$.",
      page=153, fig=(153, "4.65"), kind="th", n1="2", n2="0", domain="dc",
@@ -141,7 +140,7 @@ dict(num="4.21", title="Calculating the Condition for Maximum Power Transfer",
 SPECS += [
 dict(num="4.8", title="A Special Case in the Mesh-Current Method",
      ask="Use the mesh-current method to find branch currents $i_a$, $i_b$ and $i_c$ "
-         "in the circuit for Example 4.3, repeated here as Fig. 4.25.",
+         "in the circuit for Example 4.3, repeated here in the figure.",
      page=134, fig=(134, "4.25"), domain="dc",
      desc="e,1,0,50:r1,1,2,5:r2,2,0,10:r3,2,0,40:j,0,2,3",
      expect={"i_r1": 2, "i_r2": 4, "i_r3": 1},
@@ -158,7 +157,7 @@ dict(num="4.8", title="A Special Case in the Mesh-Current Method",
 
 dict(num="4.13", title="Using Special Source Transformation Techniques",
      ask="a) Use source transformations to find the voltage $v_o$ in the circuit shown in "
-         "Fig. 4.42. b) Find the power developed by the 250 V voltage source. "
+         "the figure. b) Find the power developed by the 250 V voltage source. "
          "c) Find the power developed by the 8 A current source.",
      page=143, fig=(143, "4.42"), domain="dc",
      desc="e,1,0,250:r1,1,0,125:r2,1,2,25:j,2,9,8:r3,9,0,10:r4,2,0,100:r5,2,3,5:r6,3,0,15",
@@ -172,15 +171,15 @@ dict(num="4.13", title="Using Special Source Transformation Techniques",
            "resistors `r1` to `r6` from left to right and the sources `e` and `j`. The "
            "current source's arrow points down, from node 2 towards the 10 Ω, so we write "
            "its nodes in that order, `j,2,9,8`, calling the node between the source and "
-           "the resistor **9**. $v_o$ is the voltage across `r4`. The power a source "
-           "*develops* is what it supplies, the negative of the power Symbulator reports "
-           "it consuming, so parts (b) and (c) are read with a minus sign in the "
-           "{{card:Evaluate}} card."),
+           "the resistor **9**. $v_o$ is the voltage across `r4`.",
+     interpret="The power a source *develops* is what it supplies, the negative of the "
+           "power Symbulator reports it consuming, so parts (b) and (c) are read with a "
+           "minus sign in the {{card:Evaluate}} card."),
 
 dict(num="4.23", title="Using Superposition to Solve a Circuit with Dependent Sources",
-     ask="Use the principle of superposition to find $v_o$ in the circuit shown in Fig. 4.71.",
+     ask="Use the principle of superposition to find $v_o$ in the circuit shown in the figure.",
      page=156, fig=(156, "4.71"), domain="dc",
-     desc="e,1,c,10:r1,1,a,5:r2,a,c,20:r3,b,0,10:j1,0,b,5:j2,b,a,0.4*vr3:e2,0,c,2*ir1",
+     desc="e1,1,c,10:r1,1,a,5:r2,a,c,20:r3,b,0,10:j1,0,b,5:j2,b,a,0.4*vr3:e2,0,c,2*ir1",
      expect={"v_r2": 24},
      booknames={"v_r2": "v_o"},
      shows="Two independent sources, two dependent ones and three resistors, and the "
@@ -194,7 +193,7 @@ dict(num="4.23", title="Using Superposition to Solve a Circuit with Dependent So
            "bottom-right node as ground. $v_o$ is the voltage across `r2`."),
 
 dict(num="5.1", title="Analyzing an Op Amp Circuit",
-     ask="The op amp in the circuit shown in Fig. 5.7 is ideal. a) Calculate $v_o$ if "
+     ask="The op amp in the circuit shown in the figure is ideal. a) Calculate $v_o$ if "
          "$v_a$ = 1 V and $v_b$ = 0 V. b) Repeat (a) for $v_a$ = 1 V and $v_b$ = 2 V. "
          "c) If $v_a$ = 1.5 V, specify the range of $v_b$ that avoids amplifier saturation.",
      page=181, fig=(181, "5.7"), domain="dc",
@@ -389,7 +388,7 @@ dict(num="5.7", title="Analyzing a Noninverting-Amplifier Circuit Using a Realis
            "the {{card:Evaluate}} card."),
 
 dict(num="7.1", title="Determining the Natural Response of an RL Circuit",
-     ask="The switch in the circuit shown in Fig. 7.6 has been closed for a long time before "
+     ask="The switch in the circuit shown in the figure has been closed for a long time before "
          "it is opened at $t$ = 0. Find a) $i_L(t)$ for $t$ ≥ 0, b) $i_o(t)$ for "
          "$t$ ≥ 0+, c) $v_o(t)$ for $t$ ≥ 0+.",
      page=250, fig=(250, "7.6"), domain="tr",
@@ -420,14 +419,14 @@ dict(num="7.1", title="Determining the Natural Response of an RL Circuit",
            "circuit for the second interval, $t$ ≥ 0, and we describe it with the same "
            "names, dropping `j` and `r0`. The inductor now starts with the 20 A just "
            "found, which we write into its line as a fifth field, after the inductance. "
-           "We set the analysis to TR, and the answers come back as functions of $t$: "
+           "The answers come back as functions of $t$: "
            "$i_L$ is the current through `l`, $i_o$ the current through `r3`, and $v_o$ "
            "the voltage at node 2."),
 ]
 
 SPECS += [
 dict(num="7.3", title="Determining the Natural Response of an RC Circuit",
-     ask="The switch in the circuit shown in Fig. 7.15 has been in position x for a long "
+     ask="The switch in the circuit shown in the figure has been in position x for a long "
          "time. At $t$ = 0 it moves instantaneously to position y. Find a) $v_C(t)$ for "
          "$t$ ≥ 0, b) $v_o(t)$ for $t$ ≥ 0+, and c) $i_o(t)$ for $t$ ≥ 0+.",
      page=256, fig=(256, "7.15"), domain="tr",
@@ -459,7 +458,7 @@ dict(num="7.3", title="Determining the Natural Response of an RC Circuit",
            "and $i_o$ the current through `r3`."),
 
 dict(num="7.5", title="Determining the Step Response of an RL Circuit",
-     ask="The switch in the circuit shown in Fig. 7.21 has been in position a for a long "
+     ask="The switch in the circuit shown in the figure has been in position a for a long "
          "time. At $t$ = 0 it moves from position a to position b. The switch is a "
          "make-before-break type, so the inductor current is continuous. a) Find the "
          "expression for $i(t)$ for $t$ ≥ 0. b) What is the initial voltage across the "
@@ -500,7 +499,7 @@ dict(num="7.5", title="Determining the Step Response of an RL Circuit",
            "the analysis to TR. $i$ is the current through `l`."),
 
 dict(num="7.10", title="Determining the Step Response of a Circuit with Magnetically Coupled Coils",
-     ask="There is no energy stored in the circuit in Fig. 7.37 at the time the switch is "
+     ask="There is no energy stored in the circuit in the figure at the time the switch is "
          "closed. Find the solutions for $i_o$, $v_o$, $i_1$ and $i_2$.",
      page=271, fig=(271, "7.37"), domain="tr",
      desc="e,1,0,120:r1,1,2,7.5:l1,2,0,3:l2,2,0,15:m,l1,l2,6",
@@ -521,7 +520,7 @@ dict(num="7.10", title="Determining the Step Response of a Circuit with Magnetic
            "2, and $i_1$ and $i_2$ the currents through `l1` and `l2`."),
 
 dict(num="7.11a", title="Analyzing an RL Circuit That Has Sequential Switching (0 to 35 ms)",
-     ask="The two switches in the circuit shown in Fig. 7.39 have been closed for a long "
+     ask="The two switches in the circuit shown in the figure have been closed for a long "
          "time. At $t$ = 0 switch 1 is opened; then, 35 ms later, switch 2 is opened. "
          "a) Find $i_L(t)$ for 0 ≤ $t$ ≤ 35 ms.",
      page=273, fig=(273, "7.39"), domain="tr",
@@ -549,7 +548,7 @@ dict(num="7.11a", title="Analyzing an RL Circuit That Has Sequential Switching (
      shows="In the second interval switch 1 has opened, which disconnects the 60 V source "
            "and the 4 Ω and 12 Ω resistors. We describe what remains, the 6 Ω, the 3 Ω, "
            "the inductor and the 18 Ω, with the same names, and give the inductor the 6 A "
-           "just found as its fifth field. We set the analysis to TR; $i_L$ is the "
+           "just found as its fifth field. $i_L$ is the "
            "current through `l`."),
 
 dict(num="7.11b", title="Analyzing an RL Circuit That Has Sequential Switching (after 35 ms)",
@@ -568,7 +567,7 @@ dict(num="7.11b", title="Analyzing an RL Circuit That Has Sequential Switching (
            "this run's $t$ = 0 is the instant switch 2 opens. The analysis is TR."),
 
 dict(num="7.13", title="Finding the Unbounded Response in an RC Circuit",
-     ask="a) When the switch is closed in the circuit shown in Fig. 7.45, the voltage on the "
+     ask="a) When the switch is closed in the circuit shown in the figure, the voltage on the "
          "capacitor is 10 V. Find the expression for $v_o$ for $t$ ≥ 0. b) Assume that the "
          "capacitor short-circuits when its terminal voltage reaches 150 V. How many "
          "milliseconds elapse before the capacitor short-circuits?",
@@ -595,7 +594,7 @@ dict(num="7.13", title="Finding the Unbounded Response in an RC Circuit",
            "analysis to TR; $v_o$ is the voltage at node 1."),
 
 dict(num="8.2", title="Finding the Overdamped Natural Response of a Parallel RLC Circuit",
-     ask="For the circuit in Fig. 8.6, $v(0^+)$ = 12 V and $i_L(0^+)$ = 30 mA. Find the "
+     ask="For the circuit in the figure, $v(0^+)$ = 12 V and $i_L(0^+)$ = 30 mA. Find the "
          "expression for $v(t)$. (Example 8.3 asks the same circuit for its three branch "
          "currents.)",
      page=306, fig=(306, "8.6"), domain="tr",
@@ -611,11 +610,11 @@ dict(num="8.2", title="Finding the Overdamped Natural Response of a Parallel RLC
            "ground, naming them `c`, `l` and `r`, and put the two initial conditions the "
            "question gives in the fifth fields: 12 V on the capacitor and 30 mA, written "
            "0.03, on the inductor. The run is the circuit releasing the energy it holds. "
-           "We set the analysis to TR; $v$ is the voltage at node 1, and $i_R$ and $i_L$ "
+           "$v$ is the voltage at node 1, and $i_R$ and $i_L$ "
            "the currents through `r` and `l`."),
 
 dict(num="8.4", title="Finding the Underdamped Natural Response of a Parallel RLC Circuit",
-     ask="In the circuit shown in Fig. 8.8, $V_0$ = 0 and $I_0$ = $-$12.25 mA. Calculate "
+     ask="In the circuit shown in the figure, $V_0$ = 0 and $I_0$ = $-$12.25 mA. Calculate "
          "the voltage response for $t$ ≥ 0.",
      page=310, fig=(310, "8.8"), domain="tr", at_t=[1e-4, 5e-4, 1e-3, 3e-3],
      desc="c,1,0,125'n,0:l,1,0,8,-0.01225:r,1,0,20'k",
@@ -632,7 +631,7 @@ dict(num="8.4", title="Finding the Underdamped Natural Response of a Parallel RL
            "analysis to TR; $v$ is the voltage at node 1."),
 
 dict(num="8.11", title="Finding the Natural Response of a Series RLC Circuit",
-     ask="The 0.1 µF capacitor in the circuit shown in Fig. 8.17 is charged to 100 V. At "
+     ask="The 0.1 µF capacitor in the circuit shown in the figure is charged to 100 V. At "
          "$t$ = 0 the capacitor is discharged through a series combination of a 100 mH "
          "inductor and a 560 Ω resistor. a) Find $i(t)$ for $t$ ≥ 0. b) Find $v_C(t)$ for "
          "$t$ ≥ 0.",
@@ -654,7 +653,7 @@ dict(num="8.11", title="Finding the Natural Response of a Series RLC Circuit",
 
 dict(num="8.12", title="Finding the Step Response of a Series RLC Circuit",
      ask="No energy is stored in the 100 mH inductor or the 0.4 µF capacitor when the switch "
-         "in the circuit shown in Fig. 8.18 is closed. Find $v_C(t)$ for $t$ ≥ 0.",
+         "in the circuit shown in the figure is closed. Find $v_C(t)$ for $t$ ≥ 0.",
      page=328, fig=(328, "8.18"), domain="tr",
      desc="e,1,0,48:l,1,2,0.1:r,2,3,1250:c,3,0,0.4'u",
      expect={"v_3": "48 + 16*exp(-10000*t) - 64*exp(-2500*t)"},
@@ -675,7 +674,7 @@ W = _sp.Symbol("omega")
 
 SPECS += [
 dict(num="9.9", title="Combining Impedances in Series and in Parallel",
-     ask="The sinusoidal current source in the circuit shown in Fig. 9.20 produces the "
+     ask="The sinusoidal current source in the circuit shown in the figure produces the "
          "current $i_s$ = 8 cos 200,000$t$ A. b) Find the equivalent admittance to the right "
          "of the current source. c) Find the phasor voltage $V$. d) Find the phasor current "
          "$I$. e) Find the steady-state expressions for $v$ and $i$.",
@@ -701,13 +700,13 @@ dict(num="9.9", title="Combining Impedances in Series and in Parallel",
            "impedances is done inside the solver. We write the current source as "
            "`j,0,1,8`, its arrow pointing up into node 1, with its 8 A as the amplitude, "
            "which is what the book's phasors carry too, and name the resistors `r1` and "
-           "`r2`. We set the analysis to AC, and each answer is a phasor, printed both as "
+           "`r2`. In AC each answer is a phasor, printed both as "
            "a complex number and as an amplitude with an angle: $V$ is the voltage at "
            "node 1 and $I$ the current through `r2`."),
 
 dict(num="9.10", title="Using a Delta-to-Wye Transform in the Frequency Domain",
      ask="Use a delta-to-wye impedance transformation to find $I_0$, $I_1$, $I_2$, $I_3$, "
-         "$I_4$, $I_5$, $V_1$ and $V_2$ in the circuit in Fig. 9.23.",
+         "$I_4$, $I_5$, $V_1$ and $V_2$ in the circuit in the figure.",
      page=365, fig=(365, "9.23"), domain="ac", omega=W,
      desc="e,a,0,120:r1,a,b,-4j:r2,a,c,63.2+2.4j:r3,b,c,10:r4,b,0,20+60j:r5,c,0,-20j",
      shownames={"@-i_e": "-i_e"},
@@ -724,19 +723,17 @@ dict(num="9.10", title="Using a Delta-to-Wye Transform in the Frequency Domain",
            "`-4j`, `63.2+2.4j`, `20+60j`, as a resistor with a complex value, naming the "
            "five `r1` to `r5` in the order of the book's $I_1$ to $I_5$, and we write each "
            "one's nodes in the direction of the figure's arrow, so that its current is "
-           "counted as the book counts it. Nothing depends on the frequency, so we leave "
-           "**omega** as a symbol in the {{ui:ω — angular frequency}} box. We keep the "
-           "figure's letters for the nodes, with **d** as ground, so $V_1$ and $V_2$ are "
-           "the voltages at **b** and **c**. The source current $I_0$ leaves the source's "
-           "positive terminal, which is the opposite of how Symbulator counts a source's "
-           "current, so we will read it with a minus sign in the {{card:Evaluate}} card. "
-           "We set the analysis to AC."),
+           "counted as the book counts it. We keep the figure's letters for the nodes, "
+           "with **d** as ground, so $V_1$ and $V_2$ are the voltages at **b** and **c**.",
+     interpret="The source current $I_0$ leaves the source's positive terminal, which is "
+           "the opposite of how Symbulator counts a source's current, so we read it with "
+           "a minus sign in the {{card:Evaluate}} card."),
 
 dict(num="9.12", title="Finding a Thevenin Equivalent in the Frequency Domain",
      ask="Find the Thevenin equivalent circuit with respect to terminals a,b for the "
-         "circuit shown in Fig. 9.32.",
+         "circuit shown in the figure.",
      page=368, fig=(368, "9.32"), kind="th", n1="9", n2="0", domain="ac", omega=W,
-     desc="e,1,0,120:r1,1,2,12:r2,2,0,60:r3,2,9,-40j:e2,3,0,10*v2:r4,3,9,120",
+     desc="e1,1,0,120:r1,1,2,12:r2,2,0,60:r3,2,9,-40j:e2,3,0,10*v2:r4,3,9,120",
      expect={"vth": 784 - 288j, "z": 91.2 - 38.4j},
      booknames={"vth": "V_{Th}", "z": "Z_{Th}"},
      shows="An AC circuit with a dependent source inside it, and the question wants its "
@@ -747,15 +744,13 @@ dict(num="9.12", title="Finding a Thevenin Equivalent in the Frequency Domain",
            "`10*v2`. We call the terminals a and b nodes **9** and **0**, and name them "
            "to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which "
            "returns the equivalent's voltage and impedance; a dependent source in the "
-           "circuit is no obstacle to it. The impedances are in ohms and nothing depends "
-           "on the frequency, so we leave **omega** as a symbol. We set the analysis to "
-           "AC."),
+           "circuit is no obstacle to it."),
 
 dict(num="9.14", title="Using the Mesh-Current Method in the Frequency Domain",
      ask="Use the mesh-current method to find the voltages $V_1$, $V_2$ and $V_3$ in the "
-         "circuit shown in Fig. 9.39.",
+         "circuit shown in the figure.",
      page=372, fig=(372, "9.39"), domain="ac", omega=W,
-     desc="e,1,0,150:r1,1,2,1:r2,2,a,2j:r3,a,c,12:r4,c,0,-16j:r5,a,4,1:r6,4,b,3j:"
+     desc="e1,1,0,150:r1,1,2,1:r2,2,a,2j:r3,a,c,12:r4,c,0,-16j:r5,a,4,1:r6,4,b,3j:"
           "e2,b,0,39*ir3",
      shownames={"@v_1-v_a": "v_1 - v_a", "@v_a-v_b": "v_a - v_b"},
      expect={"@v_1-v_a": 78 - 104j, "v_a": 72 + 104j, "@v_a-v_b": 150 - 130j},
@@ -770,9 +765,9 @@ dict(num="9.14", title="Using the Mesh-Current Method in the Frequency Domain",
            "across the 1 Ω and j2 Ω on the left, the difference between the voltages at "
            "node 1 and node **a**; $V_2$, across the middle branch, the voltage at node "
            "**a** itself; and $V_3$, across the 1 Ω and j3 Ω on the right, the difference "
-           "between nodes **a** and **b**. The two differences we will read in the "
-           "{{card:Evaluate}} card. Nothing depends on the frequency, so we leave "
-           "**omega** as a symbol; we set the analysis to AC."),
+           "between nodes **a** and **b**.",
+     interpret="$V_2$ is the voltage at node **a** as the run reports it; the two "
+           "differences we read in the {{card:Evaluate}} card."),
 
 dict(num="9.15", title="Analyzing a Linear Transformer in the Frequency Domain",
      ask="A linear transformer has $R_1$ = 200 Ω, $R_2$ = 100 Ω, $L_1$ = 9 H, $L_2$ = 4 H "
@@ -798,47 +793,44 @@ dict(num="9.15", title="Analyzing a Linear Transformer in the Frequency Domain",
            "`r3` and `r6`, and the source's internal impedance `r1` and `r2`. We leave "
            "the load out, because the question asks for the equivalent seen from its "
            "terminals, which we call nodes **c** and **d** and name to the "
-           "{{card:Find equivalent}} card with *Thévenin / Norton* chosen. Two things "
-           "about the secondary side. It is not connected to ground anywhere, nothing "
-           "conducts between the two windings, so its bottom is simply the node we have "
-           "called **d**, and Symbulator says in a note that it has measured that side's "
-           "voltages against **d**; the currents, the voltage differences and the "
-           "equivalent are unaffected. And the source is given in rms, so we tick "
-           "{{ui:RMS phasors}} in {{card:Settings}}. Every value is in ohms already, so we "
-           "leave **omega** as a symbol; we set the analysis to AC."),
+           "{{card:Find equivalent}} card with *Thévenin / Norton* chosen.",
+     interpret="The secondary side is not connected to ground anywhere, nothing conducts "
+           "between the two windings, so its bottom is simply the node we have called "
+           "**d**, and Symbulator says in a note that it has measured that side's voltages "
+           "against **d**; the currents, the voltage differences and the equivalent are "
+           "unaffected."),
 ]
 
 SPECS += [
 dict(num="10.8", title="Balancing Power Delivered with Power Absorbed in an AC Circuit",
      ask="a) Calculate the total average and reactive power delivered to each impedance in "
-         "the circuit shown in Fig. 10.18. b) Calculate the average and reactive powers "
+         "the circuit shown in the figure. b) Calculate the average and reactive powers "
          "associated with each source. c) Verify that the average power delivered equals the "
          "average power absorbed, and likewise for the reactive power.",
      page=417, fig=(417, "10.18"), domain="ac", omega=W,
-     desc="e,1,0,150:r1,1,2,1:r2,2,a,2j:r3,a,c,12:r4,c,0,-16j:r5,a,4,1:r6,4,b,3j:"
+     desc="e1,1,0,150:r1,1,2,1:r2,2,a,2j:r3,a,c,12:r4,c,0,-16j:r5,a,4,1:r6,4,b,3j:"
           "e2,b,0,39*ir3",
      expect={"@s_r1+s_r2": 1690 + 3380j, "@s_r3+s_r4": 240 - 320j,
-             "@s_r5+s_r6": 1970 + 5910j, "s_e": 1950 - 3900j, "s_e2": -5850 - 5070j,
-             "@s_e+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6": 0},
+             "@s_r5+s_r6": 1970 + 5910j, "s_e1": 1950 - 3900j, "s_e2": -5850 - 5070j,
+             "@s_e1+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6": 0},
      shownames={"@s_r1+s_r2": "s_r1 + s_r2", "@s_r3+s_r4": "s_r3 + s_r4",
                 "@s_r5+s_r6": "s_r5 + s_r6",
-                "@s_e+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6": "the sum of all eight"},
+                "@s_e1+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6": "the sum of all eight"},
      booknames={"@s_r1+s_r2": "S_1", "@s_r3+s_r4": "S_2", "@s_r5+s_r6": "S_3",
-                "s_e": "S_{source}", "s_e2": "S_{dep}"},
+                "s_e1": "S_{source}", "s_e2": "S_{dep}"},
      shows="The circuit of Example 9.14, which we describe the same way, asked a "
            "question about power: how much average and reactive power each of its three "
            "impedances takes, how much each source supplies, and whether the two sides "
            "balance. Symbulator reports every element's complex power as `s` followed by "
            "the element's name, its real part the average power and its imaginary part "
-           "the reactive power, so all three parts are read from one run. Each impedance "
-           "in the figure is two elements in our description, a resistor and a reactance "
-           "in series, so the power delivered to an impedance is the sum of two `s` "
-           "answers, which we will read in the {{card:Evaluate}} card; the balance of "
-           "part (c) is the sum of all eight, read the same way. Nothing depends on the "
-           "frequency, so we leave **omega** as a symbol; we set the analysis to AC."),
+           "the reactive power, so all three parts are read from one run.",
+     interpret="Each impedance in the figure is two elements in our description, a "
+           "resistor and a reactance in series, so the power delivered to an impedance is "
+           "the sum of two `s` answers, which we read in the {{card:Evaluate}} card; the "
+           "balance of part (c) is the sum of all eight, read the same way."),
 
 dict(num="10.12", title="Finding Maximum Power Transfer in a Circuit with an Ideal Transformer",
-     ask="The variable resistor in the circuit in Fig. 10.25 is adjusted until maximum "
+     ask="The variable resistor in the circuit in the figure is adjusted until maximum "
          "average power is delivered to $R_L$. a) What is the value of $R_L$ in ohms? "
          "b) What is the maximum average power delivered to $R_L$?",
      page=423, fig=(423, "10.25"), kind="th", n1="a", n2="0", domain="ac", omega=W, rms=True,
@@ -856,9 +848,7 @@ dict(num="10.12", title="Finding Maximum Power Transfer in a Circuit with an Ide
            "*Thévenin / Norton* chosen, which reports the load that would draw the most "
            "average power from those terminals and how much: by the maximum power "
            "theorem that load is the Thévenin impedance, reported as `z`, and the power "
-           "is `pmax`. The source is given as 840 V rms, so we tick {{ui:RMS phasors}} in "
-           "{{card:Settings}}; there is no reactance anywhere, so we leave **omega** as a "
-           "symbol. We set the analysis to AC."),
+           "is `pmax`."),
 
 dict(num="11.1", title="Analyzing a Wye-Wye Circuit",
      ask="A balanced, positive-sequence Y-connected generator with an internal impedance of "
@@ -894,20 +884,19 @@ dict(num="11.1", title="Analyzing a Wye-Wye Circuit",
            "which we name `rga`, `rla` and `rfa` for the a phase and likewise for b and "
            "c. We take the generator's neutral as ground and call the load's neutral "
            "**nn**; the generator's terminals we call **a**, **b** and **c** and the "
-           "load's **pa**, **pb** and **pc**. Nothing depends on the frequency, so we "
-           "leave **omega** as a symbol. The quantities asked for are then ordinary "
-           "results: the line current $I_{aA}$ is the current through `rla`; the phase "
-           "voltage at the load, $V_{AN}$, is the voltage between **pa** and **nn**; the "
-           "line voltage $V_{AB}$ is the voltage between **pa** and **pb**; and the phase "
-           "voltage at the generator's terminal, $V_{An}$, is the voltage at node **a**. "
-           "The book quotes the voltages by magnitude, so we will read each difference's "
-           "magnitude in the {{card:Evaluate}} card, as `Abs(...)`. We set the analysis "
-           "to AC."),
+           "load's **pa**, **pb** and **pc**.",
+     interpret="The quantities asked for are ordinary results: the line current $I_{aA}$ "
+           "is the current through `rla`; the phase voltage at the load, $V_{AN}$, is the "
+           "voltage between **pa** and **nn**; the line voltage $V_{AB}$ is the voltage "
+           "between **pa** and **pb**; and the phase voltage at the generator's terminal, "
+           "$V_{An}$, is the voltage at node **a**. The book quotes the voltages by "
+           "magnitude, so we read each difference's magnitude in the {{card:Evaluate}} "
+           "card, as `Abs(...)`."),
 ]
 
 SPECS += [
 dict(num="13.2", title="The Natural Response of an RC Circuit",
-     ask="The circuit in Fig. 13.11 was analyzed in Example 7.3 using first-order circuit "
+     ask="The circuit in the figure was analyzed in Example 7.3 using first-order circuit "
          "analysis techniques. Use the Laplace transform method to find $v_o(t)$ for "
          "$t$ ≥ 0+.",
      page=515, fig=(515, "13.11"), domain="fd",
@@ -938,7 +927,7 @@ dict(num="13.2", title="The Natural Response of an RC Circuit",
            "already inside it. $V_o(s)$ is the voltage at node 2."),
 
 dict(num="13.3", title="The Step Response of an RLC Circuit",
-     ask="Consider the circuit in Fig. 13.13, where the initial current in the inductor is "
+     ask="Consider the circuit in the figure, where the initial current in the inductor is "
          "29 mA and the initial voltage across the capacitor is 50 V. This circuit was "
          "analyzed in Example 8.10 using second-order circuit analysis techniques. Use the "
          "Laplace transform method to find $v(t)$ for $t$ ≥ 0.",
@@ -958,7 +947,7 @@ dict(num="13.3", title="The Step Response of an RLC Circuit",
            "$v(t)$, from the same description."),
 
 dict(num="13.5", title="Analyzing a Circuit with Multiple Meshes",
-     ask="The circuit in Fig. 13.17 has no initial stored energy. At $t$ = 0 the switch "
+     ask="The circuit in the figure has no initial stored energy. At $t$ = 0 the switch "
          "closes. Use Laplace methods to find $i_1(t)$ and $i_2(t)$ for $t$ ≥ 0.",
      page=519, fig=(519, "13.17"), domain="tr",
      desc="e,1,0,336:l1,1,2,8.4:r1,2,0,42:l2,2,3,10:r2,3,0,48",
@@ -972,11 +961,11 @@ dict(num="13.5", title="Analyzing a Circuit with Multiple Meshes",
            "no element of its own: in TR a numerical source value is a step that begins "
            "at $t$ = 0. We name the inductors `l1` and `l2` after the book's $i_1$ and "
            "$i_2$, which are the currents through them, and the resistors `r1` and `r2`. "
-           "We set the analysis to TR, which returns the two currents as functions of "
+           "TR returns the two currents as functions of "
            "$t$; the Laplace transform and its inversion happen inside the solver."),
 
 dict(num="13.6", title="Creating a Thevenin Equivalent in the s Domain",
-     ask="The circuit in Fig. 13.20 has no initial stored energy, and at $t$ = 0 the switch "
+     ask="The circuit in the figure has no initial stored energy, and at $t$ = 0 the switch "
          "closes. Find the Thevenin equivalent for the circuit to the left of the terminals "
          "a and b in the s domain, using Laplace methods.",
      page=521, fig=(521, "13.20"), kind="th", n1="a", n2="0", domain="fd",
@@ -994,7 +983,7 @@ dict(num="13.6", title="Creating a Thevenin Equivalent in the s Domain",
            "the terminals, since the question asks for the equivalent seen from them."),
 
 dict(num="13.7", title="Analyzing a Circuit with Mutual Inductance",
-     ask="The make-before-break switch in the circuit in Fig. 13.23 has been in position a "
+     ask="The make-before-break switch in the circuit in the figure has been in position a "
          "for a long time. At $t$ = 0 it moves instantaneously to position b. Use Laplace "
          "methods to find $i_2(t)$ for $t$ ≥ 0.",
      page=523, fig=(523, "13.23"), domain="tr",
@@ -1024,13 +1013,13 @@ dict(num="13.7", title="Analyzing a Circuit with Mutual Inductance",
      shows="At $t$ = 0 the switch moves to b, which takes the source and the 9 Ω out and "
            "closes the primary on the 3 Ω alone. We describe that circuit with the same "
            "names and the two currents just found as the coils' fifth fields, 5 and 0. "
-           "The secondary is still not connected to ground, so its bottom is simply the "
-           "node we called **d**, and Symbulator again notes that it measures that side's "
-           "voltages against **d**; the currents are unaffected. We set the analysis to "
-           "TR; $i_2$ is the current through `l2`."),
+           "$i_2$ is the current through `l2`.",
+     interpret="The secondary is still not connected to ground, so its bottom is simply "
+           "the node we called **d**, and Symbulator again notes that it measures that "
+           "side's voltages against **d**; the currents are unaffected."),
 
 dict(num="13.9", title="Deriving the Transfer Function of a Circuit",
-     ask="The voltage source $v_g$ drives the circuit shown in Fig. 13.31. The output signal "
+     ask="The voltage source $v_g$ drives the circuit shown in the figure. The output signal "
          "is the voltage across the capacitor, $v_o$. a) Find the transfer function for this "
          "circuit. b) Calculate the numerical values for the poles and zeros of the transfer "
          "function.",
@@ -1064,13 +1053,13 @@ dict(num="13.9", title="Deriving the Transfer Function of a Circuit",
            "from source to output, and its poles and zeros. A transfer function is the "
            "ratio of an output to the input that produced it, as functions of $s$, so we "
            "leave the source as the symbol `vg`, so that the output comes back as a "
-           "multiple of it, and set the analysis to FD. We number the nodes from the "
+           "multiple of it. We number the nodes from the "
            "source, so the output, the capacitor's voltage, is the voltage at node 2, and "
            "the transfer function is that voltage divided by `vg`, which we will read in "
            "the {{card:Evaluate}} card."),
 
 dict(num="13.13", title="A Series Inductor Circuit with an Impulsive Response",
-     ask="The switch in the circuit shown in Fig. 13.50 has been closed for a long time. At "
+     ask="The switch in the circuit shown in the figure has been closed for a long time. At "
          "$t$ = 0 it opens. Use Laplace methods to find the output voltage $v_o$ and the "
          "current in the 3 H inductor, $i_1$.",
      page=541, fig=(541, "13.50"), domain="tr",
@@ -1102,14 +1091,14 @@ dict(num="13.13", title="A Series Inductor Circuit with an Impulsive Response",
            "what it takes to bring $L_2$'s current from 0 to the 6 A the pair settle on.",
      shows="Opening the switch removes that wire, so the two inductors are now in series "
            "with the 15 Ω between them. We describe that circuit with the 10 A and 0 just "
-           "found as their fifth fields, numbering the nodes 1 to 4 from the source. We "
-           "set the analysis to TR; $v_o$ is the voltage at node 3, the top of the 15 Ω "
+           "found as their fifth fields, numbering the nodes 1 to 4 from the source. "
+           "$v_o$ is the voltage at node 3, the top of the 15 Ω "
            "and $L_2$, and $i_1$ the current through `l1`."),
 ]
 
 SPECS += [
 dict(num="3.10", title="Using a Wheatstone Bridge to Measure Resistance",
-     ask="For the Wheatstone bridge in Fig. 3.30, $R_3$ can be varied from 10 Ω to 2 kΩ. "
+     ask="For the Wheatstone bridge in the figure, $R_3$ can be varied from 10 Ω to 2 kΩ. "
          "What range of resistor values can this bridge measure?",
      page=101, fig=(101, "3.30"), domain="dc",
      desc="e,1,0,V_s:r1,1,a,1'k:r2,1,b,4'k:sg,a,b:r3,a,0,R_3:rx,b,0,R_x",
@@ -1148,7 +1137,7 @@ dict(num="3.10", title="Using a Wheatstone Bridge to Measure Resistance",
            "comes back as a formula in the three symbols."),
 
 dict(num="14.6", title="Designing a Parallel RLC Bandpass Filter",
-     ask="a) Show that the RLC circuit in Fig. 14.22 is a bandpass filter by deriving an "
+     ask="a) Show that the RLC circuit in the figure is a bandpass filter by deriving an "
          "expression for the transfer function $H(s)$. b) Compute the centre frequency. "
          "c) Calculate the cutoff frequencies, the bandwidth and $Q$. d) Compute $R$ and $L$ "
          "for a centre frequency of 5 kHz and a bandwidth of 200 Hz, using a 5 µF capacitor.",
@@ -1194,7 +1183,7 @@ dict(num="14.6", title="Designing a Parallel RLC Bandpass Filter",
            "it comes back in terms of the three symbols."),
 
 dict(num="18.1", title="Finding the z Parameters of a Two-Port Circuit",
-     ask="Find the z parameters for the circuit shown in Fig. 18.3.",
+     ask="Find the z parameters for the circuit shown in the figure.",
      page=724, fig=(724, "18.3"), kind="port", n1="1", n2="2", ptype="z", domain="dc",
      desc="r5,1,2,5:r20,1,0,20:r15,2,0,15",
      expect={"11": 10, "12": 7.5, "21": 7.5, "22": 9.375},
