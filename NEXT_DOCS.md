@@ -3,7 +3,21 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
-## #430 — the pf tool as version 8 has it: one value, a power or a name (docs half) — **built and checked, 13 Sep 2026; not deployed**
+## #430 — the pf tool as version 8 has it: one value, a power or a name (docs half) — **live, 13 Sep 2026**
+
+**Deployed in full at Roberto's word, 13 Sep 2026** — a full `python
+build.py`, the documented exception to `--web`, since the lesson's typeset
+text changed. v9 **354** pages (353 before), v7 **235**, v8 **223**, the
+Manual **40**, all served at the local byte counts; the build printed no
+*NO PDF PRODUCED*. Six version 7 and 8 pages were captured before the
+deploy and diffed after, normalised for whitespace and the stylesheet's
+cache-bust: **unmoved**, and no version 9 wording leaked into them. After
+Roberto's review rounds (in the app half) the value form's paragraph says
+`se` reads *0.97342 lagging* with no line under it, and the paragraph
+*the same number, the opposite word* explains why that is not a
+contradiction; the Manual says a name's reading carries the words and a
+value's does not.
+
 
 The app half -- what the tool now does and why -- is #430 in
 `Application/v9/repos/local/NEXT.md`. This is what the books say about it.

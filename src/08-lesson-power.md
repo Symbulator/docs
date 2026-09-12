@@ -240,10 +240,10 @@ an impedance, an expression with symbols in it:
 se
 ```
 
-It answers {{o:0.97342}}: the absolute value of the real part divided by the
-magnitude of the whole thing, and nothing more. Under the number it says
-what it was read from: *this is the power factor for the power consumed in
-e*.
+It answers {{o:0.97342}} **lagging**: the absolute value of the real part
+divided by the magnitude of the whole thing, and the word for the value as
+given — nothing more, because by now you know what `se` is. It is the power
+the source *consumes*, and the word belongs to that power.
 
 **The name of an element.** Give it the name of an element of the circuit
 you have just solved in AC:
@@ -257,9 +257,17 @@ under them *this is the power factor for the power delivered by source e*.
 This form works only when the element's voltage and current came out as
 numbers.
 
+The same number, the opposite word. That is not a contradiction: `se` is
+the power the source consumes and `e` reads the power it delivers, and the
+two powers are opposite, so their words are. The question *what is the
+power factor of the circuit as seen by the source?* is answered by the
+name, `e`.
+
 In a nutshell: given a complex power, or any complex expression, pf returns
-the power factor but says nothing about leading or lagging. Given the name
-of an element, right after an AC solve, it returns the value and says which.
+the power factor of that value as given, with its word and no explanation.
+Given the name of an element, right after an AC solve, it reads the right
+power for that element's kind and says in words which power that was. With
+symbols in the value there is no word, only the expression.
 
 ::: note Which power the reading is taken on
 The two forms do not read the same power, and the difference is what makes
@@ -267,10 +275,12 @@ the word come out right.
 
 Given a **variable** such as `se`, `sj` or `sr1`, the calculation is done on
 the value as it stands — the complex power *consumed*, which is what
-Symbulator stores for every element, source or load alike. That cannot say
-leading from lagging, because the same complex power is consumed by one
-side of a branch and delivered by the other, and a bare number does not
-know which side it came from; so this form gives the value alone.
+Symbulator stores for every element, source or load alike — and the word
+is that value's own. For an impedance that is its own reading. For a
+source it is the reading of the power it *consumes*, which is the opposite
+of the power it delivers, so the word comes out opposite to the source's
+own. The tool cannot know better from a number alone: the same complex
+power is consumed by one side of a branch and delivered by the other.
 
 Given a **name**, the tool reads the sign convention off the element's
 kind, the way the calculator did. For an impedance — `r`, and in version 9
@@ -282,8 +292,9 @@ and the reading is that of the whole circuit the source sees. A source
 feeding an inductive load reads lagging, the same word as the load.
 
 The value is the same either way; only the word depends on it. A source
-read on its consumed power, `se`, would say the opposite word — which is
-why the tool wants the name, and does the negating itself.
+read on its consumed power, `se`, says the opposite word — which is why
+the question *as seen by the source* wants the name, and the tool does the
+negating itself.
 :::
 :::
 

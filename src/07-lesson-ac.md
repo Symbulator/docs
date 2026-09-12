@@ -63,10 +63,12 @@ the boxes it shows, and press {{btn:Run}}:
 - **aa — amplitude and angle** turns a complex value into polar form. It
   takes one value: an answer's name, such as `ir1`, or any expression, such as
   `v1 - v2`. This lesson uses it throughout.
-- **pf — power factor** takes one value. Given a complex power, such as
-  `se`, it answers with the power factor alone; given the name of an
-  element, such as `e`, it answers with the power factor and whether it
-  leads or lags. {{ref:lesson-power}} introduces it.
+- **pf — power factor** takes one value: a complex power, such as `se`,
+  read as given, or the name of an element, such as `e`, read on the power
+  a source delivers or an impedance consumes. It answers with the power
+  factor and whether it leads or lags, and for a name says which power it
+  read.
+  {{ref:lesson-power}} introduces it.
 - **gain — voltage, current and power gain** takes the voltage and current
   at a two-port's input and at its output. {{ref:lesson-twoports}} introduces
   it.
