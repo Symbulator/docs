@@ -13,13 +13,18 @@ Paste the description, pick an analysis, press **Run**. There is nothing to
 select first: a run returns *every* answer in the circuit, not the one you
 asked about.{{i:Results card}}
 
+The divider of the last chapter, the 12 V source across 1 kΩ and 2 kΩ in
+series, described as before:
+
 ```field 9 Circuit Description
 e1,1,0,12
 r1,1,2,1'k
 r2,2,0,2'k
 ```
 
-In DC that comes back as two node voltages and three answers per element:
+Set {{ui:Analysis}} to *DC — direct current* and press
+{{btn:Run Symbulator}}. It comes back as two node voltages and three
+answers per element; three of them:
 
 ::: result voltage at node 2
 v_{2} = 8\,\mathrm{V}

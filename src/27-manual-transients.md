@@ -26,11 +26,19 @@ has nothing to say.{{i:initial conditions}}
 
 Choose **TR** and the answers come back as functions of `t`.{{i:transient analysis (TR)}}
 
+A 10 V source charging a 1 µF capacitor through a 1 kΩ resistor, with
+nothing stored in the capacitor to begin with. In TR a source with a plain
+numerical value is a step that begins at $t$ = 0, so this is the source
+switched on at that instant. We name the three elements `e`, `r` and `c`,
+and write the capacitor with no fifth field:
+
 ```field 9 Circuit Description
 e,1,0,10
 r,1,2,1'k
 c,2,0,1'u
 ```
+
+Set {{ui:Analysis}} to *TR — transient / time domain* and run:
 
 ::: result voltage drop across c
 v_{c} = 10 - 10\,e^{-1000\,t}
@@ -39,7 +47,8 @@ v_{c} = 10 - 10\,e^{-1000\,t}
 The familiar step response, τ = RC = 1 ms, and derived rather than
 recalled. Answers are valid for *t* ≥ 0.{{i:step response}}
 
-Give the capacitor a starting voltage and only the coefficient changes:
+Give the capacitor a starting voltage, 4 V in its fifth field, and run
+again:
 
 ```field 9 Circuit Description
 e,1,0,10
@@ -51,16 +60,20 @@ c,2,0,1'u,4
 v_{c} = 10 - 6\,e^{-1000\,t}
 :::
 
-It starts at 4 and climbs to 10, so the swing is 6 rather than 10.
+Only the coefficient changed: it starts at 4 and climbs to 10, so the swing
+is 6 rather than 10.
 
 ## No source at all
 
-A natural response needs no source — the energy is already in the element:{{i:natural response}}
+A natural response needs no source — the energy is already in the element.
+A capacitor charged to 10 V and left across a 1 kΩ resistor:{{i:natural response}}
 
 ```field 9 Circuit Description
 r,1,0,1'k
 c,1,0,1'u,10
 ```
+
+Run in TR:
 
 ::: result voltage drop across c
 v_{c} = 10\,e^{-1000\,t}

@@ -15,20 +15,26 @@ summary: >
 first node to the second, inside the element**. A source written `j,0,1`
 therefore pushes current into node 1.{{i:current source}}
 
+A 3 mA source feeding two resistors in parallel, one of them given not as
+a resistance but as a conductance $g$. We write the source with its arrow
+pointing into node 1, `j,0,1`, name the resistors `r1` and `r2`, and give
+the first the value `1/g`, since there is no conductance element and a
+conductance is a resistance written as its reciprocal:
+
 ```field 9 Circuit Description
 j,0,1,3'm
 r1,1,0,1/g
 r2,1,0,2'k
 ```
 
+Run in DC, the voltage across the pair comes back in terms of that
+conductance:
+
 ::: result voltage drop across r1
 v_{r1} = \dfrac{6}{2000 g + 1}
 :::
 
-Two things are happening in three lines. The source drives 3 mA into node
-1; and **r1**'s value is `1/g`, so the answer comes back in terms of a
-conductance. There is no conductance element — a conductance is a
-resistance written as its reciprocal, and the algebra takes care of itself.{{i:conductance}}
+The algebra took care of the reciprocal itself.{{i:conductance}}
 
 ## Dependent sources
 
@@ -47,19 +53,23 @@ the circuit, and it may appear inside a larger expression.
 
 ## The parallel shorthand
 
-In a **resistor's value only**, a bracketed list is that group in parallel:{{i:parallel resistors}}
+In a **resistor's value only**, a bracketed list is that group in parallel.{{i:parallel resistors}}
+A 9 V source across three resistors of 1 kΩ, 2 kΩ and 2 kΩ side by side,
+the three written as one element we call `rp`:
 
 ```field 9 Circuit Description
 e,1,0,9
 rp,1,0,[1'k,2'k,2'k]
 ```
 
+Run in DC, the current through the group is
+
 ::: result current through rp
 i_{rp} = \dfrac{9}{500}\,\mathrm{A}
 :::
 
-1 kΩ ‖ 2 kΩ ‖ 2 kΩ is 500 Ω, so 18 mA. The entries may be symbols, and the
-list may be any length.
+which is 18 mA: 1 kΩ ‖ 2 kΩ ‖ 2 kΩ is 500 Ω. The entries may be symbols,
+and the list may be any length.
 
 It saves describing three elements and three nodes when the group is not
 the thing you are studying. When it *is* the thing you are studying,

@@ -16,13 +16,19 @@ solving it. Both take a pair of nodes.
 
 *Find equivalent → Resistance / impedance*, with the two nodes.{{i:equivalent resistance}}
 
+Three resistors and no source: a 100 Ω in series with a 200 Ω and a 300 Ω
+in parallel, and the question is the resistance of the whole seen from its
+two ends. We name them `r1` to `r3`, call the free end node **1** and the
+junction node **2**, and put the far end on ground:
+
 ```field 9 Circuit Description
 r1,1,2,100
 r2,2,0,200
 r3,2,0,300
 ```
 
-Across **1** and **0**:
+Open {{card:Find equivalent}}, choose *Resistance / impedance*, and give
+the two nodes **1** and **0**:
 
 ::: result equivalent resistance
 R_{eq} = 220\,\Omega
@@ -43,13 +49,19 @@ In AC the same tool returns an impedance, and the menu says so.
 *Find equivalent → Thévenin / Norton*, with the two nodes. One run returns
 both forms, because they are the same two numbers.{{i:Thévenin equivalent}}
 
+A 20 V source and a divider of 50 Ω and 150 Ω, and the question is what
+the circuit looks like from the divider's midpoint: a single source behind
+a single resistance. We describe the three elements, naming them `e`, `r1`
+and `r2`, and call the midpoint node **2**:
+
 ```field 9 Circuit Description
 e,1,0,20
 r1,1,2,50
 r2,2,0,150
 ```
 
-Across **2** and **0**:
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two
+terminals **2** and **0**:
 
 ::: result Thévenin voltage
 v_{th} = 15\,\mathrm{V}

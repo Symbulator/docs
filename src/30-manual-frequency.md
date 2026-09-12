@@ -14,11 +14,16 @@ summary: >
 Choose **FD** and the answers come back as functions of *s*, initial
 conditions included.{{i:frequency domain}}{{i:s-domain}}
 
+The RC circuit of {{ref:manual-transients}} with its source left as a
+symbol we call `vs`, a 1 kΩ resistor and a 1 µF capacitor:
+
 ```field 9 Circuit Description
 e,1,0,vs
 r,1,2,1'k
 c,2,0,1'u
 ```
+
+Set {{ui:Analysis}} to *FD — complex frequency domain* and run:
 
 ::: result voltage drop across c
 v_{c} = \dfrac{1000\,vs}{s + 1000}

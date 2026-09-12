@@ -22,13 +22,19 @@ summary: >
 | **a** | transmission |
 | **b** | inverse transmission |
 
+A T of three resistors, 10 Ω and 30 Ω along the top and 20 Ω down the
+middle, seen as a two-port with one port at each end. We name the three
+`ra`, `rb` and `rc`, call the two ends node **1** and node **3** and the
+middle node **2**, and put the bottom rail on ground:
+
 ```field 9 Circuit Description
 ra,1,2,10
 rb,2,0,20
 rc,2,3,30
 ```
 
-A T network. Ports at **1** and **3**:
+Open {{card:Find equivalent}}, choose *Two-port parameters*, set the kind
+to **z**, and give the ports as **1** and **3**:
 
 ::: result open-circuit input impedance
 z_{11} = 30\,\Omega
@@ -53,7 +59,9 @@ Run it again with **y** and you get the inverse matrix, as you should.
 ## A two-port as an element
 
 The same six letters are element types. Give the block its four parameters
-in brackets and it behaves as that two-port:{{i:two-port}}
+in brackets and it behaves as that two-port. A block known only by its z
+parameters, between a source with 50 Ω in series and a 1 kΩ load; we name
+the block `z1` and call its two ports **a** and **b**:{{i:two-port}}
 
 ```field 9 Circuit Description
 e,1,0,10

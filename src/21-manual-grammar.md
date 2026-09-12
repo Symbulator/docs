@@ -9,8 +9,15 @@ summary: >
   All fifteen element letters with their fields, the naming rules, node 0, brackets, and the SI prefix shorthand. The densest page here, and the one to come back to.
 ---
 
-One element per line. The first character of the name picks the type; the
-fields that follow are positional and comma-separated.{{i:circuit description}}
+A circuit description is one element per line. The first character of the
+name picks the type; the fields that follow are positional and
+comma-separated.{{i:circuit description}}
+
+Take the simplest circuit worth describing: a 12 V source driving a 1 kΩ
+and a 2 kΩ resistor in series. We name the source `e1` and the resistors
+`r1` and `r2`, take the source's lower end as node `0`, call its upper end
+node **1** and the junction of the two resistors node **2**, and write
+each element between the two nodes it joins:
 
 ```field 9 Circuit Description
 e1,1,0,12
@@ -18,8 +25,8 @@ r1,1,2,1'k
 r2,2,0,2'k
 ```
 
-That is a 12 V source across a 1 kΩ and a 2 kΩ in series. **Node `0` is
-ground**, always, and every circuit needs one.{{i:ground node}}{{i:reference node}}
+**Node `0` is ground**, always, and every circuit needs one; the other
+node names are ours to choose.{{i:ground node}}{{i:reference node}}
 
 ## The fifteen letters
 
@@ -69,7 +76,10 @@ reserved.
 
 ## Values
 
-A value is a number, a symbol, or an expression in either.
+A value is a number, a symbol, or an expression in either. Here is the
+divider again with its source left as a symbol we call `vs`, and beside it
+a second source, `e2`, driving a 2 kΩ resistor, whose value is five times
+the voltage at the divider's midpoint:
 
 ```field 9 Circuit Description
 e1,1,0,vs
@@ -79,7 +89,7 @@ e2,3,0,5*v2
 r3,3,0,2'k
 ```
 
-`vs` is a symbol — every answer comes back in terms of it. `e2` is a
+Because `vs` is a symbol, every answer comes back in terms of it. `e2` is a
 **dependent source**: its value names `v2`, the voltage at node 2, so it is
 five times whatever the rest of the circuit puts there. Any answer name may
 appear in any value. That is how all four dependent-source types are
@@ -105,14 +115,18 @@ that difference shows up the moment an answer is symbolic.{{i:SI prefixes}}{{i:e
 Brackets mean exactly three things.{{i:brackets}}
 
 **A parallel group, in a resistor's value only.** `[r1,r2,r3]` is those three
-in parallel:
+in parallel. Three resistors of 1 kΩ, 2 kΩ and 2 kΩ side by side between
+node 1 and ground, written as one element we call `rp`:
 
 ```field 9 Circuit Description
 rp,1,0,[1'k,2'k,2'k]
 ```
 
 **A pair of terminals**, for a transformer or a two-port, when neither side
-sits on ground. `[top,bottom]`:
+sits on ground. `[top,bottom]`. Here a two-port block, `z1`, sits between a
+source and a load with neither of its ports touching ground; we call its
+four terminals **a**, **b**, **c** and **d**, top before bottom on each
+side:
 
 ```field 9 Circuit Description
 e,1,0,10
@@ -122,9 +136,9 @@ z1,[a,b],[c,d],[100,10,20,50]
 rl,c,d,1'k
 ```
 
-Neither port of **z1** touches ground here. The two-node form `z1,1,2` is
-the same element with both bottoms on `0`, and a four-terminal block
-reports a current at each of its four terminals rather than two.
+The two-node form `z1,1,2` is the same element with both bottoms on `0`,
+and a four-terminal block reports a current at each of its four terminals
+rather than two.
 
 **A parameter set**, the four numbers of a two-port, or a transformer's two
 turns counts.

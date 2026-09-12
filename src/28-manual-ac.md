@@ -12,14 +12,20 @@ summary: >
 Choose **AC** and give an **ω**. Elements keep their own units — henries and
 farads, not reactances — and the solver does the conversion.{{i:AC analysis}}{{i:angular frequency (ω)}}
 
+A 10 V source driving a 50 Ω resistor and a 50 mH inductor in series, at
+1000 rad/s. We name the three `e`, `r` and `l`, and write the inductor as
+its inductance:
+
 ```field 9 Circuit Description
 e,1,0,10
 r,1,2,50
 l,2,0,0.05
 ```
 
-At ω = 1000 rad/s the inductor is 50 Ω of reactance, so the impedance is
-50 + 50j:
+Set {{ui:Analysis}} to *AC — alternating current*, put **1000** in the
+{{ui:ω — angular frequency}} box, and run. At that frequency the inductor
+is 50 Ω of reactance, so the loop's impedance is 50 + 50j, and the answers
+say so:
 
 ::: result current through r
 i_{r} = 0.1 - 0.1\text{j}\,\mathrm{A}
@@ -48,15 +54,24 @@ In AC an element reports more than in DC:
 | `p` | the power answer, labelled by the convention in force |
 | `z` | impedance seen |
 
+The same shape with a 30 Ω resistor and a 40 mH inductor, at 1000 rad/s
+again, so that the impedance is 30 + 40j, a 3-4-5 triangle:
+
 ```field 9 Circuit Description
 e,1,0,10
 r,1,2,30
 l,2,0,0.04
 ```
 
-At ω = 1000 that is 30 + 40j — a 3-4-5 triangle — and the source reports
-complex power −0.6 − 0.8j VA. So *P* = 0.6 W, *Q* = 0.8 var, |*S*| = 1.0 VA
-and the power factor is 0.6, lagging.{{i:complex power}}
+Run in AC at ω = 1000, the source's complex power comes back as
+
+::: result complex power in e
+s_{e} = -0.6 - 0.8\text{j}\,\mathrm{VA}
+:::
+
+negative because it is power *consumed* by the source, which is
+delivering. So *P* = 0.6 W, *Q* = 0.8 var, |*S*| = 1.0 VA and the power
+factor is 0.6, lagging.{{i:complex power}}
 
 **An inductor reports no average power**, only complex. That is not an
 omission: a pure reactance consumes none, and a zero printed every time

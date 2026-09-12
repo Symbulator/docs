@@ -20,6 +20,13 @@ nullor, which is the statement that the two inputs are at the same
 potential and draw no current, and that the output supplies whatever the
 rest of the circuit needs.{{i:operational amplifier}}{{i:nullor}}
 
+An inverting amplifier: a 2 V source into the op amp's inverting input
+through 10 kΩ, a 47 kΩ resistor feeding the output back to that input, and
+the non-inverting input on ground. We name the source `e` and the
+resistors `r1` and `r2`, call the summing junction **m** and the output
+**o**, and write the op amp's three nodes in the order the element wants,
+non-inverting input first:
+
 ```field 9 Circuit Description
 e,1,0,2
 r1,1,m,10'k
@@ -27,15 +34,14 @@ r2,m,o,47'k
 o1,0,m,o
 ```
 
-The inverting amplifier. Node **m** is the summing junction, **o** the
-output.
+Run in DC, the output is
 
-::: result voltage drop across r2
-v_{r2} = \dfrac{47}{5}\,\mathrm{V}
+::: result voltage at node o
+v_{o} = -\dfrac{47}{5}\,\mathrm{V}
 :::
 
-So the output sits at −9.4 V: a gain of −4.7, which is −47k/10k, arrived at
-from the nullor conditions rather than from the formula.
+That is −9.4 V from 2 V, a gain of −4.7, which is −47k/10k, arrived at from
+the nullor conditions rather than from the formula.
 
 Note the node order — **0** is the non-inverting input and **m** the
 inverting one. Swap them and the feedback becomes positive, which is a
@@ -51,7 +57,10 @@ its output.
 ## When ideal is not enough
 
 There is no finite-gain op amp element. Model one as a dependent source,
-which is what a finite-gain op amp is:{{i:op amp model (finite gain)}}
+which is what a finite-gain op amp is. The same amplifier, with the `o`
+element replaced by a voltage source we call `ea`, driving the output node
+with 100,000 times the voltage between the two inputs — the non-inverting
+one, at ground, minus the inverting one at **m**:{{i:op amp model (finite gain)}}
 
 ```field 9 Circuit Description
 e,1,0,2
@@ -60,11 +69,15 @@ r2,m,o,47'k
 ea,o,0,100000*(0-vm)
 ```
 
-`ea` is a VCVS of gain 10⁵ driving the output node from the differential
-input — here `0 - vm`, the non-inverting input minus the inverting one.
-Solve it and the answer differs from the ideal one in the fifth figure,
-which is the honest way to find out whether the ideal model was good enough
-for your problem.
+Run in DC, the output is now
+
+::: result voltage at node o
+v_{o} = -\dfrac{9400000}{1000057}\,\mathrm{V}
+:::
+
+which is −9.39946 V against the ideal −9.4 V: the two differ in the fifth
+figure, which is the honest way to find out whether the ideal model was
+good enough for your problem.
 
 The same shape gives you finite input impedance (a resistor across the
 inputs) and non-zero output impedance (a resistor in series with `ea`).

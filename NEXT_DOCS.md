@@ -112,6 +112,29 @@ setting and expected answer is untouched, and `runner.check` still reads
 chapter and the app's `examples/Nilsson_Riedel.cir` are regenerated from
 them, never edited.
 
+**The fifteen rules applied to the Manual, 13 Sep 2026.** The eleven
+Manual chapters with worked circuits (`21-manual-grammar` to
+`31-manual-twoports`, 22 circuits) were revised the same way, by hand,
+the Manual being hand-written markdown. Each worked circuit now opens
+with what it is before its description (rule 8), declares every name we
+chose in the first person plural (7, 9), states the analysis and the
+card in the app's own words (12, 15), and shows every number it once
+asserted as the result of a shown step (11): the Define example shows
+its 6 V as a result panel, the Solve example shows the card's two boxes
+and returns `rb` = 9333.33 Ω, the inverting amplifier shows its −9.4 V
+output as a panel and the finite-gain model its −9400000/1000057 V
+beside it, the AC power example shows `s_e` as a panel, the dot-reversed
+coil shows its negated current as a second panel, and the transformer
+shows the 12 V it had merely stated. The Expert Mode section no longer
+calls a component value its "classic case" (rule 10): that is the Solve
+card's job now, and the section says when Expert Mode is still the tool
+— when the condition must be inside the solve so every answer carries
+it. Every number was recomputed through the app before it was written
+(`scratchpad/manual_numbers.py` for the record of the run), and
+`build.py --check` solves all 22 circuits. Live on `learn`, web only;
+**the Manual's PDF is not built, at Roberto's word**, and the three
+tutorial PDFs do not contain the Manual.
+
 **The fifteen rules applied to all 43, 13 Sep 2026.** Roberto asked for
 the original Example 3.10 to be set beside its revision and rules derived
 from the difference, then said *"Apply all fifteen across the chapter and
