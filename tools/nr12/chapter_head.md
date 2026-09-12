@@ -7,7 +7,7 @@ updated: 2026-09-12
 summary: >
   Forty-three worked examples from *Electric Circuits*, each described in
   Symbulator and checked against the answer the book prints. DC, AC, TR and FD,
-  with Expert Mode and symbolic answers.
+  with the Solve card and symbolic answers.
 ---
 
 Here is a selection of problems from *Electric Circuits*, 12th edition, by
@@ -46,7 +46,7 @@ Nothing here has to be typed. All forty-three circuits ship with Symbulator as
 a built-in example book — open {{card:Built-in Examples}} and pick
 *Nilsson & Riedel 12ed* from the list of books; the entries are named for the
 example each one comes from, and each arrives with its note, its picture, its
-settings, its Expert Mode fields and the analysis it wants already set.
+settings, its Solve card fields and the analysis it wants already set.
 
 Pick one, press {{btn:Run Symbulator}}, and the answers below are what you get.
 {{ref:input-files}} explains what an entry remembers and how to save your own.

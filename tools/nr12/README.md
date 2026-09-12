@@ -93,6 +93,36 @@ follows them, and `gen.py` enforces the mechanical ones:
    choice, in the first person plural the Course uses: *we name the
    galvanometer `rg`*, never *the galvanometer is a resistor named `rg`*.
 
+**Eight more, derived on 13 Sep 2026 from the difference between the
+original Example 3.10 and its revision**, and applied to all 43 the same
+day; `gen.py` carries the mechanics (an Evaluate box for every `@`
+answer, `evals` with conditions, `solveq` runs, several roots):
+
+8. **Open with the thing, not the trick.** The first sentences say what
+   the device or circuit in the figure is for and what the question
+   wants, in words a student meeting the term for the first time can
+   follow. The app is not mentioned until that is done.
+9. **The problem's names where it gives them, ours declared.** `R_3`,
+   `R_x`, `V_s` because the figure says so; `sg`, `a`, `b` because we
+   chose them, and the sentence says so.
+10. **The ordinary route before the expert one.** Run, read the results,
+    then ask the Solve or Evaluate card; Expert Mode only where that
+    cannot answer, and the page says why. No entry needs it now.
+11. **Every value the reader sees is produced by a step the reader can
+    perform.** No number, formula or range in prose without the boxes
+    that produce it shown just above.
+12. **Exactly what is typed, in the box it is typed into**, under the
+    app's own label, spelled as the reader would spell it, and the button
+    named.
+13. **One answer per value asked.** A range, a set of cases, parts (a)
+    and (b): each its own evaluation, never a formula read twice.
+14. **One job per paragraph, in the session's order**: the thing; how we
+    describe it; the run; what we ask the card; what it returns; the
+    conclusion, last, in the problem's own terms and units.
+15. **Two vocabularies, kept apart**: the book's words for the physical
+    things, the app's exact labels for its controls, the app's answer
+    names in code.
+
 The reader-facing fields of a spec:
 
 - `ask` — the book's question, as the book words it. Also becomes the

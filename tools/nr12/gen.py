@@ -21,8 +21,16 @@ MENU = {"dc": "*DC \u2014 direct current*", "ac": "*AC \u2014 alternating curren
 GROUP = {"dc": ("dc", "Direct current"), "tr": ("tr", "Transients"),
          "ac": ("ac", "Sinusoidal steady state"), "fd": ("fd", "The s domain")}
 ORDER = ["dc", "tr", "ac", "fd"]
-UNIT_WORD = {"V": "V", "A": "A", "W": "W", "VA": "VA", "S": "S",
+UNIT_WORD = {"V": "V", "A": "A", "W": "W", "VA": "VA", "S": "S", "H": "H", "s": "s",
              "\\Omega": "\u03a9", "": ""}
+
+
+def tidy(txt):
+    """A number as the card prints it, minus the trailing zeros a fixed digit
+    count leaves: `3.20000` reads `3.2`, `-3000.0 - 4000.0j` reads
+    `-3000 - 4000j`. The digits are unchanged, only their padding."""
+    return re.sub(r"(-?\d+\.\d*?)0+(?=$|[^\d.])",
+                  lambda m: m.group(1).rstrip("."), txt)
 
 
 #: a problem's own variable written bare -- R1, V0, h11 -- outside code and maths
@@ -152,6 +160,8 @@ def answer_blocks(s, vals):
             panels.append("::: result %s\n%s\n:::" % (lbl, body))
         else:
             shown = s.get("shownames", {}).get(k, k[1:] if k.startswith("@") else k)
+            if k.startswith("@"):
+                s.setdefault("_evalkeys", {})[shown] = k
             numeric.append((shown, fmt.plain_value(got), unit, polar_of(s, got),
                             s.get("booknames", {}).get(k)))
     return panels, numeric
@@ -169,6 +179,37 @@ def polar_of(s, val):
     p = S.polar(e, 4)
     mag = str(p.magnitude).rstrip(".")      # polar() prints "1236." at 4 digits
     return "{{o:%s}}\u2220{{o:%s}}\u00b0" % (mag, str(p.angle).rstrip("."))
+
+
+def evaluated_blocks(s, numeric):
+    """Rule 11 and 12 (Roberto, 13 Sep 2026): an answer the reader gets by
+    typing an expression into Evaluate is shown as that step -- the
+    expression in the Evaluate box, as typed, and what the card gives --
+    never as if the run had returned it. Returns the lines, and the
+    numeric items that are plain results and stay in the returns sentence."""
+    direct, lines = [], []
+    first = True
+    for item in numeric:
+        name, val, unit, pol, book = item
+        key = s.get("_evalkeys", {}).get(name)
+        if key is None:
+            direct.append(item)
+            continue
+        typed = key[1:].replace(" ", "")
+        lines.append(("Then we type `%s` into {{card:Evaluate}}:" if first else
+                      "Likewise `%s`:") % typed)
+        first = False
+        lines.append("")
+        lines.append("```field 9 Evaluate")
+        lines.append(typed)
+        lines.append("```")
+        lines.append("")
+        u = UNIT_WORD.get(unit, unit)
+        aside = [x for x in (pol, ("the book's $%s$" % book) if book else "") if x]
+        lines.append("It gives {{o:%s}}%s%s." % (val, (" " + u) if u else "",
+                     (" (%s)" % ", ".join(aside)) if aside else ""))
+        lines.append("")
+    return direct, lines
 
 
 def numeric_sentence(numeric):
@@ -264,6 +305,61 @@ def render(s, vals):
              if s.get("equations") else "")
     L.append(settings_line(s) + extra)
     L.append("")
+    panels, numeric = answer_blocks(s, vals)
+    for p in panels:
+        L.append(p)
+        L.append("")
+    # a panel's answer is named against the book's symbol in a sentence
+    # under the panels, the way a numeric answer is named beside its value
+    named = [(k, s["booknames"][k]) for k in s["expect"]
+             if k in s.get("booknames", {}) and k not in s.get("hide", ())
+             and sp.sympify(vals.get(k, 0) if not k.startswith("@") else 0).free_symbols]
+    if panels and named:
+        bits = ["`%s` is the book's $%s$" % (s.get("shownames", {}).get(k, k), b)
+                for k, b in named]
+        L.append(("Here " if len(bits) > 1 else "") + (
+            bits[0] if len(bits) == 1 else ", ".join(bits[:-1]) + " and " + bits[-1]) + ".")
+        L.append("")
+    direct, eval_lines = evaluated_blocks(s, numeric)
+    sent = numeric_sentence(direct)
+    if sent:
+        L.append(sent)
+        L.append("")
+    L.extend(eval_lines)
+    # Lettered parts that are read straight off the panel come before the
+    # steps that answer the later parts (14.6: (a)-(c) from the transfer
+    # function, then (d) in the Solve card) -- rule 14, the session's order.
+    if s.get("parts_first"):
+        for letter, text in s.get("parts", []):
+            L.append("**%s)** %s" % (letter, polish(text)))
+            L.append("")
+    # An Evaluate step: a value the question wants at one instant or for
+    # one set of inputs, read off the answer the way the Course does it --
+    # the answer's name in the Evaluate box and the conditions in
+    # Conditions (Lesson 6, Example 4.15). Computed by the real app's
+    # evaluate_ui, so the page prints what the card prints.
+    for ev in s.get("evals", []):
+        L.append(polish(ev["text"]))
+        L.append("")
+        L.append("```field 9 Evaluate")
+        L.append(ev["expr"])
+        L.append("```")
+        L.append("")
+        conds = ["%s = %s" % (k, v) for k, v in ev.get("at", {}).items()]
+        if conds:
+            L.append("```field 9 Conditions")
+            L.extend(conds)
+            L.append("```")
+            L.append("")
+        got = runner.app_evaluate(s, ev["expr"], conds)
+        num, val = runner.number_of(got)
+        unit = UNIT_WORD.get(ev.get("unit", ""), ev.get("unit", ""))
+        if ev.get("expect") is not None:
+            assert runner.close(val, ev["expect"], 0.006), \
+                "Evaluate %s at %s: got %s, book says %s" % (ev["expr"], ev.get("at"), got, ev["expect"])
+        L.append("It gives {{o:%s}}%s%s." % (tidy(num), (" " + unit) if unit else "",
+                 (" (the book's $%s$)" % ev["book"]) if ev.get("book") else ""))
+        L.append("")
     # Solve card runs (Roberto, 13 Sep 2026: "my approach with Solve, which
     # is more representative of the exploratory way a student would
     # follow"). Each is shown with its own boxes and its own answer, read
@@ -305,67 +401,33 @@ def render(s, vals):
                           if sq.get("real_only", True) else "Press {{btn:Solve equations}}."))
             L.append("")
             got, _r = runner.app_solveq(s, sq, values)
-            parts = []
-            for k, want in sq["expect"].items():
-                assert k in got, "Solve card run %d of %s did not return %s: %s" % (i + 1, s["num"], k, got)
-                shown = got[k].split()[0] if got[k].split() else got[k]
-                unit = UNIT_WORD.get(sq.get("unit", ""), sq.get("unit", ""))
-                txt = "`%s` = {{o:%s}}%s" % (k, shown, (" " + unit) if unit else "")
+            sols = _r.get("solutions") or []
+            units = sq.get("unit", "")
+
+            def one(k, plain):
+                u = units.get(k, "") if isinstance(units, dict) else units
+                u = UNIT_WORD.get(u, u)
+                shown = tidy(runner.number_of(plain)[0])
+                txt = "`%s` = {{o:%s}}%s" % (k, shown, (" " + u) if u else "")
                 if sq.get("book", {}).get(k):
                     txt += " (the book's $%s$)" % sq["book"][k]
-                parts.append(txt)
-            L.append("The card returns " + (parts[0] if len(parts) == 1 else
-                     ", ".join(parts[:-1]) + " and " + parts[-1]) + ".")
+                return txt
+            for k in sq["expect"]:
+                assert k in got, "Solve card run %d of %s did not return %s: %s" % (i + 1, s["num"], k, got)
+            if len(sols) > 1:
+                # several roots: the card lists them as solution 1 of n, 2 of n
+                items = ["`%s` = {{o:%s}}" % (v["name"], tidy(runner.number_of(v["plain"])[0]))
+                         for sol in sols for v in sol]
+                L.append("The card returns %d solutions, %s." % (len(sols), " and ".join(items)))
+            else:
+                parts = [one(k, got[k]) for k in sq["expect"]]
+                L.append("The card returns " + (parts[0] if len(parts) == 1 else
+                         ", ".join(parts[:-1]) + " and " + parts[-1]) + ".")
             L.append("")
-    panels, numeric = answer_blocks(s, vals)
-    for p in panels:
-        L.append(p)
-        L.append("")
-    # a panel's answer is named against the book's symbol in a sentence
-    # under the panels, the way a numeric answer is named beside its value
-    named = [(k, s["booknames"][k]) for k in s["expect"]
-             if k in s.get("booknames", {}) and k not in s.get("hide", ())
-             and sp.sympify(vals.get(k, 0) if not k.startswith("@") else 0).free_symbols]
-    if panels and named:
-        bits = ["`%s` is the book's $%s$" % (s.get("shownames", {}).get(k, k), b)
-                for k, b in named]
-        L.append(("Here " if len(bits) > 1 else "") + (
-            bits[0] if len(bits) == 1 else ", ".join(bits[:-1]) + " and " + bits[-1]) + ".")
-        L.append("")
-    sent = numeric_sentence(numeric)
-    if sent:
-        L.append(sent)
-        L.append("")
-    # An Evaluate step: a value the question wants at one instant, read off
-    # the answer the way the Course does it -- the answer's name in the
-    # Evaluate box and the instant in Conditions (Lesson 6, Example 4.15).
-    for ev in s.get("evals", []):
-        L.append(polish(ev["text"]))
-        L.append("")
-        L.append("```field 9 Evaluate")
-        L.append(ev["expr"])
-        L.append("```")
-        L.append("")
-        if ev.get("at"):
-            L.append("```field 9 Conditions")
-            L.extend("%s = %s" % (k, v) for k, v in ev["at"].items())
-            L.append("```")
-            L.append("")
-        import symbulator as S
-        expr = sp.sympify(ev["expr"], locals=dict(vals))
-        val = expr.subs({S.t: v for k, v in ev.get("at", {}).items() if k == "t"})
-        unit = UNIT_WORD.get(ev.get("unit", ""), ev.get("unit", ""))
-        got = fmt.plain_value(val)
-        if ev.get("expect") is not None:
-            assert runner.close(val, ev["expect"], 0.006), \
-                "Evaluate %s at %s: got %s, book says %s" % (ev["expr"], ev["at"], got, ev["expect"])
-        L.append("It gives {{o:%s}}%s%s." % (got, (" " + unit) if unit else "",
-                 (" (the book's $%s$)" % ev["book"]) if ev.get("book") else ""))
-        L.append("")
     # A problem with lettered parts gets each one answered, separately. The
     # page used to state the formula and leave (b) and (c) to the reader,
     # which is not answering the question (Roberto, 12 Sep 2026).
-    for letter, text in s.get("parts", []):
+    for letter, text in ([] if s.get("parts_first") else s.get("parts", [])):
         L.append("**%s)** %s" % (letter, polish(text)))
         L.append("")
     # `after`: what follows from the answers -- a range read off a formula, a

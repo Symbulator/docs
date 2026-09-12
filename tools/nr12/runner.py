@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 """Run every spec through Symbulator and compare with the book's printed answer."""
-import sys, io, os, cmath, importlib
+import sys, io, os, re, cmath, importlib
 sys.stdout.reconfigure(encoding="utf-8", errors="replace")
 import sympy as sp
 import symbulator as S
@@ -53,8 +53,12 @@ def close(got, want, tol):
     if isinstance(want, str):                       # symbolic equality
         # sympify with Symbulator's own t and s: a plain sympify would make a
         # *different* t (theirs is declared nonnegative) and nothing cancels.
+        # And with the answer's own symbols by name: `rf` on its own is
+        # SymPy's rising factorial, not the feedback resistor.
         L = {"t": S.t, "s": S.s}
-        g, w = sp.sympify(got, locals=L), sp.sympify(want, locals=L)
+        g = sp.sympify(got, locals=L)
+        L.update({str(x): x for x in getattr(g, "free_symbols", ())})
+        w = sp.sympify(want, locals=L)
         d = sp.simplify(sp.expand(g - w))
         if d == 0: return True
         if not d.free_symbols:
@@ -107,8 +111,12 @@ def app_values(s):
     if SERVER not in sys.path:
         sys.path.insert(0, SERVER)
     import symbulator_ui as ui
-    r = ui.solve_ui(s["desc"], s.get("domain", "dc"), "", [], "solve", "", "", "z",
-                    [], [], [], digits=6, approx=True, units=True)
+    w = s.get("omega")
+    omega = ("omega" if (w is None or isinstance(w, sp.Symbol)) else str(sp.sympify(w))) \
+        if s.get("domain") == "ac" else ""
+    r = ui.solve_ui(s["desc"], s.get("domain", "dc"), omega, [], "solve", "", "", "z",
+                    list(s.get("equations", [])), list(s.get("unknowns", [])), [],
+                    digits=6, approx=True, units=True, use_rms=bool(s.get("rms")))
     assert r.get("ok"), r
     return r["values"]
 
@@ -128,6 +136,29 @@ def app_solveq(s, sq, values=None):
     assert r.get("ok"), r
     sols = r.get("solutions") or []
     return ({v["name"]: v["plain"] for v in sols[0]} if sols else {}), r
+
+
+def number_of(plain):
+    """The number in a card's plain string, and its SymPy value: `0.16 + 0.12j`
+    and `-3000.0 - 4000.0j` are one number each, not a number and some
+    words, and a trailing unit (`40 Ω`, `2.5 mA`) is dropped."""
+    txt = plain.strip()
+    m = re.match(r"^(-?[\d.]+(?:[eE][-+]?\d+)?(?:\s*[-+]\s*[\d.]+(?:[eE][-+]?\d+)?j)?j?)", txt)
+    num = m.group(1) if m else txt.split()[0]
+    return num, sp.sympify(num.replace("j", "*I"))
+
+
+def app_evaluate(s, expr, conditions=(), values=None):
+    """One Evaluate-card step of a spec, through the real app's
+    `evaluate_ui`: the plain string the card shows."""
+    if SERVER not in sys.path:
+        sys.path.insert(0, SERVER)
+    import symbulator_ui as ui
+    values = values if values is not None else app_values(s)
+    r = ui.evaluate_ui(expr, values, digits=6, approx=True,
+                       domain=s.get("domain", "dc"), conditions=list(conditions) or None)
+    assert r.get("ok"), r
+    return r["plain"]
 
 
 def check(specs, only=None, verbose=True):
@@ -154,12 +185,23 @@ def check(specs, only=None, verbose=True):
             label = "%s solveq%d" % (s["num"], i + 1)
             got, _r = app_solveq(s, sq, values)
             fails = []
+            allsols = _r.get("solutions") or []
             for key, want in sq["expect"].items():
                 if key not in got:
                     fails.append((key, "MISSING (have %s)" % sorted(got))); continue
-                txt = got[key].split()[0] if got[key].split() else got[key]
+                if isinstance(want, (list, tuple)):
+                    # several roots: every one the book prints must be among the card's
+                    plains = [v["plain"] for sol in allsols for v in sol if v["name"] == key]
+                    for w in want:
+                        try:
+                            hit = any(close(number_of(p)[1], w, s.get("tol", 0.006)) for p in plains)
+                        except Exception as e:
+                            fails.append((key, "CMP %s" % e)); hit = True
+                        if not hit:
+                            fails.append((key, "root %s not among %s" % (w, plains)))
+                    continue
                 try:
-                    good = close(sp.sympify(txt), want, s.get("tol", 0.006))
+                    good = close(number_of(got[key])[1], want, s.get("tol", 0.006))
                 except Exception as e:
                     fails.append((key, "CMP %s (got %r)" % (e, got[key]))); continue
                 if not good:

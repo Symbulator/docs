@@ -7,7 +7,7 @@ updated: 2026-09-12
 summary: >
   Forty-three worked examples from *Electric Circuits*, each described in
   Symbulator and checked against the answer the book prints. DC, AC, TR and FD,
-  with Expert Mode and symbolic answers.
+  with the Solve card and symbolic answers.
 ---
 
 Here is a selection of problems from *Electric Circuits*, 12th edition, by
@@ -46,7 +46,7 @@ Nothing here has to be typed. All forty-three circuits ship with Symbulator as
 a built-in example book — open {{card:Built-in Examples}} and pick
 *Nilsson & Riedel 12ed* from the list of books; the entries are named for the
 example each one comes from, and each arrives with its note, its picture, its
-settings, its Expert Mode fields and the analysis it wants already set.
+settings, its Solve card fields and the analysis it wants already set.
 
 Pick one, press {{btn:Run Symbulator}}, and the answers below are what you get.
 {{ref:input-files}} explains what an entry remembers and how to save your own.
@@ -58,9 +58,9 @@ Sixteen resistive problems. The running theme is that the book's
 a delta-to-wye transform — is a way of getting an answer by hand, not a property
 of the answer. Symbulator is told the circuit and never told the method, so the
 same kind of description serves whichever chapter a problem came from. Five of
-these are op-amp problems with lettered parts, one runs in {{card:Expert Mode}},
-one is answered from the {{card:Solve}} card, and the last two are two-port
-problems from the book's final chapter.
+these are op-amp problems with lettered parts, five are finished in the
+{{card:Solve}} card, and the last two are two-port problems from the book's
+final chapter.
 
 ::: problem NR12's Example 3.7
 
@@ -71,7 +71,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 3.7
 :::
 
 ::: answer
-We describe the circuit as it is drawn, naming the current source `j` and the resistors `r1` to `r7`, with the bottom rail as ground. Symbulator solves the whole circuit at once and both answers are among the results.
+A current source feeding a ladder of seven resistors; the question wants the current in one branch, $i_o$ in the 24 Ω resistor, and the voltage across another, $v_o$ across the 30 Ω. We describe the circuit as it is drawn, naming the source `j` and the resistors `r1` to `r7` from left to right, and taking the bottom rail as ground, so $i_o$ is the current through `r7` and $v_o$ the voltage across `r6`. One run in DC returns every current and voltage in the circuit, those two among them.
 
 ```field 9 Circuit Description
 j,0,1,8
@@ -155,7 +155,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 3.11
 :::
 
 ::: answer
-We write the bridge as it is drawn, naming the source `e` and the six resistors `r1` to `r6`, each between the two nodes it joins, with the source's lower end as ground; nothing has to be simplified first. One thing to know when reading the results: Symbulator reports the current through a source and the power it *consumes*, both counted into the source, whereas the question asks what the source *supplies*. The two differ only in sign, so the answers to the question are the negatives of `i_e` and `p_e`, which we type into {{card:Evaluate}} as `-i_e` and `-p_e`.
+A bridge: five resistors in a diamond with a sixth across the middle, fed by one source, and the question wants what that source delivers, its current and its power. We write the bridge as it is drawn, naming the source `e` and the six resistors `r1` to `r6`, each between the two nodes it joins, with the source's lower end as ground; nothing has to be simplified first. One thing to know before reading the results: Symbulator reports a source's current and power *into* the source, the same way as for every other element, so what the source *supplies* is the negative of what it reports, and we will read the two answers with a minus sign in the {{card:Evaluate}} card.
 
 ```field 9 Circuit Description
 e,1,0,40
@@ -169,7 +169,21 @@ r6,4,0,37.5
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
-Symbulator returns `-i_e` = {{o:0.5}} A and `-p_e` = {{o:20}} W.
+Then we type `-i_e` into {{card:Evaluate}}:
+
+```field 9 Evaluate
+-i_e
+```
+
+It gives {{o:0.5}} A (the book's $i$).
+
+Likewise `-p_e`:
+
+```field 9 Evaluate
+-p_e
+```
+
+It gives {{o:20}} W (the book's $p$).
 
 :::
 :::
@@ -183,7 +197,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 4.4
 :::
 
 ::: answer
-The circuit has a dependent voltage source, whose value is eight times the current $i_\phi$ through the 5 Ω resistor. In Symbulator a dependent source needs no special element: it is a source whose value names another result. We name the 5 Ω resistor `r3`, so its current is `ir3`, and we write the dependent source as `e2` with the value `8*ir3`; we number the nodes 1 to 4 from the source rightward, with the bottom rail as ground. The power the question asks for is then the power consumed by `r3`.
+A resistive circuit with a dependent voltage source at its far end: its value is eight times $i_\phi$, the current through the 5 Ω resistor, and the question wants the power that resistor dissipates. In Symbulator a dependent source needs no special element; it is a source whose value names another answer. We name the 5 Ω resistor `r3`, so its current is `ir3`, and write the dependent source as `e2` with the value `8*ir3`; we number the nodes 1 to 4 from the source rightward, with the bottom rail as ground. The power asked for is then `pr3`, the power consumed by `r3`.
 
 ```field 9 Circuit Description
 e,1,0,20
@@ -197,7 +211,7 @@ e2,4,0,8*ir3
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
-Symbulator returns `p_r3` = {{o:7.2}} W.
+Symbulator returns `p_r3` = {{o:7.2}} W (the book's $p$).
 
 :::
 :::
@@ -211,7 +225,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 4.7
 :::
 
 ::: answer
-Again a dependent voltage source, this time worth fifteen times the current $i_\phi$ in the 20 Ω resistor. We name that resistor `r4`, so its current is `ir4` and we write the source as `e2` with the value `15*ir4`; the 4 Ω resistor whose power is asked for we name `r3`.
+Again a dependent voltage source, this time worth fifteen times $i_\phi$, the current in the 20 Ω resistor, and again the question wants one resistor's power, the 4 Ω's. We name the 20 Ω `r4`, so its current is `ir4` and the source `e2` has the value `15*ir4`; the 4 Ω we name `r3`, and its power is `pr3`. We number the nodes 1 to 3 with the bottom rail as ground.
 
 ```field 9 Circuit Description
 e,1,0,50
@@ -224,7 +238,7 @@ e2,3,0,15*ir4
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
-Symbulator returns `p_r3` = {{o:16}} W.
+Symbulator returns `p_r3` = {{o:16}} W (the book's $p$).
 
 :::
 :::
@@ -238,7 +252,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 4.8
 :::
 
 ::: answer
-A voltage source, three resistors and a current source. We name them `e`, `r1` to `r3` and `j`, and take the bottom rail as ground. A current source is written like a voltage source — name, two nodes, value — and its current flows through it from the first node to the second, so we write the 3 A source, whose arrow points up from the bottom rail into node 2, as `j,0,2,3`. The three branch currents the question names are the currents through the three resistors, each counted in the direction of the figure's arrow, which is the order we write each resistor's nodes in.
+A voltage source and a current source feeding three resistors, and the question wants the current in each of the three branches. We name the sources `e` and `j` and the resistors `r1` to `r3`, and take the bottom rail as ground. A current source is written like a voltage source, name, two nodes, value, and its current flows through it from the first node to the second; the 3 A source's arrow points up from the bottom rail into node 2, so we write it `j,0,2,3`. We write each resistor's nodes in the direction of the figure's arrow, so that its current is counted as the book counts it: $i_a$ is `ir1`, $i_b$ is `ir2` and $i_c$ is `ir3`.
 
 ```field 9 Circuit Description
 e,1,0,50
@@ -264,7 +278,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 4.13
 :::
 
 ::: answer
-We write every element as it stands in the figure, the 125 Ω across the source and the 10 Ω under the current source included, naming the resistors `r1` to `r6` from left to right. The current source's arrow points down, from node 2 towards the 10 Ω, so we write its nodes in that order, `j,2,9,8`, calling the node between the source and the resistor **9**. The *power developed* by a source is the power it supplies, and Symbulator reports the power each element consumes, so parts (b) and (c) are the negatives of `p_e` and `p_j`, which we type into {{card:Evaluate}} as `-p_e` and `-p_j`. The question's $v_o$ is the voltage across the 100 Ω, `r4`.
+Two sources, one of voltage and one of current, and six resistors; the question wants the voltage across the 100 Ω, and the power each source develops. We write every element as it stands in the figure, the 125 Ω across the voltage source and the 10 Ω under the current source included, naming the resistors `r1` to `r6` from left to right and the sources `e` and `j`. The current source's arrow points down, from node 2 towards the 10 Ω, so we write its nodes in that order, `j,2,9,8`, calling the node between the source and the resistor **9**. $v_o$ is the voltage across `r4`. The power a source *develops* is what it supplies, the negative of the power Symbulator reports it consuming, so parts (b) and (c) are read with a minus sign in the {{card:Evaluate}} card.
 
 ```field 9 Circuit Description
 e,1,0,250
@@ -279,7 +293,23 @@ r6,3,0,15
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
-Symbulator returns `v_r4` = {{o:20}} V (the book's $v_o$), `-p_e` = {{o:2800}} W and `-p_j` = {{o:480}} W.
+Symbulator returns `v_r4` = {{o:20}} V (the book's $v_o$).
+
+Then we type `-p_e` into {{card:Evaluate}}:
+
+```field 9 Evaluate
+-p_e
+```
+
+It gives {{o:2800}} W (the book's $p_{250\,V}$).
+
+Likewise `-p_j`:
+
+```field 9 Evaluate
+-p_j
+```
+
+It gives {{o:480}} W (the book's $p_{8\,A}$).
 
 :::
 :::
@@ -293,7 +323,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 4.21
 :::
 
 ::: answer
-The circuit to the left of $R_L$ is a source and two resistors. We describe those three and leave $R_L$ out, because the question is about what to connect at its terminals, and we call those terminals node **2** and ground. The {{card:Find equivalent}} card with *Thévenin / Norton* chosen and the two terminals named reduces the circuit to its Thévenin equivalent, and reports with it the load that would draw the most power from those terminals and how much that power is. By the maximum power theorem that load equals the Thévenin resistance, which the card reports as `z`; the power it reports as `pmax`.
+A source and two resistors with a load $R_L$ connected across the second, and the question is which load draws the most power from those terminals, and how much. That is a question about the circuit *seen from* the load, so we describe the source and the two resistors and leave $R_L$ out, calling its terminals node **2** and ground. The {{card:Find equivalent}} card, with *Thévenin / Norton* chosen and those two terminals named, reduces the circuit to its Thévenin equivalent and reports beside it the load that would draw the most power and how much that is: by the maximum power theorem that load equals the Thévenin resistance, which the card reports as `z`, and the power it reports as `pmax`.
 
 ```field 9 Circuit Description
 e,1,0,360
@@ -317,7 +347,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 4.23
 :::
 
 ::: answer
-Two independent sources and two dependent ones. We name the 5 Ω resistor `r1`, the 20 Ω `r2` and the 10 Ω `r3`. The dependent current source is worth $0.4v_\Delta$, and $v_\Delta$ is the voltage across the 10 Ω, so we write its value as `0.4*vr3`; the dependent voltage source is worth $2i_\Delta$, and $i_\Delta$ is the current through the 5 Ω, so we write its value as `2*ir1`. We write each source's nodes in the order its arrow or its polarity marks give, and we take the bottom-right node as ground. The question's $v_o$ is the voltage across the 20 Ω, `r2`.
+Two independent sources, two dependent ones and three resistors, and the question wants the voltage across the 20 Ω. We name the 5 Ω resistor `r1`, the 20 Ω `r2` and the 10 Ω `r3`. The dependent current source is worth $0.4v_\Delta$, and $v_\Delta$ is the voltage across the 10 Ω, so we write its value as `0.4*vr3`; the dependent voltage source is worth $2i_\Delta$, and $i_\Delta$ is the current through the 5 Ω, so we write its value as `2*ir1`. We write each source's nodes in the order its arrow or its polarity marks give, name the three inner nodes **a**, **b** and **c**, and take the bottom-right node as ground. $v_o$ is the voltage across `r2`.
 
 ```field 9 Circuit Description
 e,1,c,10
@@ -345,7 +375,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 5.1
 :::
 
 ::: answer
-An ideal op amp is the element `o`, whose three nodes are its non-inverting input, its inverting input and its output, in that order. We choose to write the circuit's two inputs as voltage sources with the symbolic values `va` and `vb` rather than the numbers in the question, so that a single run returns the output as a formula in both and each part can be read off it afterwards; we name those sources `ea` and `eb`, the two resistors `r1` and `r2`, and number the nodes from the $v_a$ input. Symbulator's ideal op amp has no supplies: it reports whatever output the inputs demand, so whether the amplifier is saturated is checked afterwards against the ±10 V supplies in the figure.
+An op amp with two inputs, $v_a$ into the inverting side through a 25 kΩ resistor and $v_b$ straight into the non-inverting side, with a 100 kΩ feedback resistor; the question wants the output for two pairs of input values, and then the range of one input that keeps the amplifier out of saturation. An ideal op amp is the element `o`, whose three nodes are its non-inverting input, its inverting input and its output, in that order. We choose to write the two inputs as voltage sources with the symbolic values `va` and `vb` rather than the numbers in the question, so that one run returns the output as a formula in both, and each part can then be asked of that formula; we name the sources `ea` and `eb`, the resistors `r1` and `r2`, and number the nodes from the $v_a$ input, the output being node **3**. Symbulator's ideal op amp has no supplies, so it reports whatever output the inputs demand; whether that output is within the ±10 V supplies of the figure is something we check afterwards.
 
 ```field 9 Circuit Description
 ea,1,0,va
@@ -363,11 +393,65 @@ v_{3} = - 4 va + 5 vb\,\mathrm{V}
 
 `v_3` is the book's $v_o$.
 
-**a)** With {{var:v_a}} = 1 V and {{var:v_b}} = 0 V the formula gives {{var:v_o}} = 5(0) − 4(1) = {{o:-4}} V. That is inside the ±10 V supplies, so the op amp is in its linear region and −4 V is the answer.
+Part (a) is that formula at $v_a$ = 1 V and $v_b$ = 0 V. We type the output's name into {{card:Evaluate}} and the two values into its {{ui:Conditions}} box:
 
-**b)** With {{var:v_a}} = 1 V and {{var:v_b}} = 2 V, {{var:v_o}} = 5(2) − 4(1) = {{o:6}} V. Inside the supplies again, so the op amp is still linear.
+```field 9 Evaluate
+v_3
+```
 
-**c)** With {{var:v_a}} = 1.5 V the formula becomes {{var:v_o}} = 5{{var:v_b}} − 6. The op amp stays linear while that lies between the rails: 5{{var:v_b}} − 6 = 10 gives {{var:v_b}} = {{o:3.2}} V, and 5{{var:v_b}} − 6 = −10 gives {{var:v_b}} = {{o:-0.8}} V, so the range is {{o:-0.8}} V ≤ {{var:v_b}} ≤ {{o:3.2}} V.
+```field 9 Conditions
+va = 1
+vb = 0
+```
+
+It gives {{o:-4}} V (the book's $v_o$).
+
+Part (b) changes only the second condition:
+
+```field 9 Evaluate
+v_3
+```
+
+```field 9 Conditions
+va = 1
+vb = 2
+```
+
+It gives {{o:6}} V (the book's $v_o$).
+
+Part (c) asks where saturation begins. The op amp is linear while its output lies between the supply rails, which the figure gives as ±10 V, so the question is which $v_b$ puts the output exactly on a rail. That is a question for the {{card:Solve}} card: the output on the upper rail is the equation, $v_b$ the unknown, and $v_a$ = 1.5 V a condition:
+
+```field 9 Equation(s) to solve in terms of the results
+v_3=10
+```
+
+```field 9 Unknown(s) to solve for
+vb
+```
+
+```field 9 Conditions
+va=1.5
+```
+
+Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+
+The card returns `vb` = {{o:3.2}} V (the book's $v_b$).
+
+For the lower rail we keep the unknown and the condition and change only the equation:
+
+```field 9 Equation(s) to solve in terms of the results
+v_3=-10
+```
+
+Then press {{btn:Solve equations}} again.
+
+The card returns `vb` = {{o:-0.8}} V (the book's $v_b$).
+
+**a)** So {{var:v_o}} = {{o:-4}} V, inside the ±10 V supplies: the op amp is in its linear region and that is the answer.
+
+**b)** {{var:v_o}} = {{o:6}} V, inside the supplies again.
+
+**c)** The output reaches +10 V at {{var:v_b}} = {{o:3.2}} V and −10 V at {{var:v_b}} = {{o:-0.8}} V, so the op amp avoids saturation for {{o:-0.8}} V ≤ {{var:v_b}} ≤ {{o:3.2}} V.
 
 :::
 :::
@@ -381,7 +465,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 5.3
 :::
 
 ::: answer
-The output of a summing amplifier with feedback resistor $R_f$ and input resistors $R_a$, $R_b$ and $R_c$ is $v_o = -(R_f/R_a)v_a - (R_f/R_b)v_b - (R_f/R_c)v_c$. The question fixes $R_f$ at 20 kΩ and asks for gains of 4, 1 and 5, so the input resistors are $R_a$ = 20/4 = 5 kΩ, $R_b$ = 20/1 = 20 kΩ and $R_c$ = 20/5 = 4 kΩ. That is the design, and the run is its check. We describe the circuit with those four resistors, naming them `r1`, `r2`, `r3` and `rf`; we write the three inputs as sources `ea`, `eb` and `ec` with the symbolic values `va`, `vb` and `vc`, so that the output comes back as a formula; and we write the op amp `o` with its non-inverting input at ground, its inverting input at a node we call **n**, and its output at node **4**.
+A summing amplifier adds several input voltages, each with its own gain, and inverts the sum; the question asks us to choose its resistors for the gains given, then to find the range of one input that keeps it linear. The output of a summing amplifier with feedback resistor $R_f$ and input resistors $R_a$, $R_b$ and $R_c$ is $v_o = -(R_f/R_a)v_a - (R_f/R_b)v_b - (R_f/R_c)v_c$, so with $R_f$ fixed at 20 kΩ the gains of 4, 1 and 5 want $R_a$ = 20/4 = 5 kΩ, $R_b$ = 20/1 = 20 kΩ and $R_c$ = 20/5 = 4 kΩ. That is the design, and the run checks it. We describe the circuit with those four resistors, which we name `r1`, `r2`, `r3` and `rf`; we write the three inputs as sources `ea`, `eb` and `ec` with the symbolic values `va`, `vb` and `vc`, so that the output comes back as a formula; and we write the op amp `o` with its non-inverting input at ground, its inverting input at a node we call **n**, and its output at node **4**.
 
 ```field 9 Circuit Description
 ea,1,0,va
@@ -402,9 +486,38 @@ v_{4} = - 4 va - vb - 5 vc\,\mathrm{V}
 
 `v_4` is the book's $v_o$.
 
-**a)** The run returns exactly the formula the design was asked for, which is the check that the resistor values are right.
+Part (b) fixes two of the inputs and asks for the range of the third that keeps the output between the ±12 V rails. In the {{card:Solve}} card we put the output on the lower rail as the equation, name $v_b$ as the unknown, and give the two fixed inputs as conditions:
 
-**b)** With {{var:v_a}} = 2 V and {{var:v_c}} = −1 V the formula becomes {{var:v_o}} = −4(2) − {{var:v_b}} − 5(−1) = −{{var:v_b}} − 3. The output reaches the −12 V rail when −{{var:v_b}} − 3 = −12, at {{var:v_b}} = {{o:9}} V, and the +12 V rail when −{{var:v_b}} − 3 = 12, at {{var:v_b}} = {{o:-15}} V. So the op amp stays linear for {{o:-15}} V ≤ {{var:v_b}} ≤ {{o:9}} V.
+```field 9 Equation(s) to solve in terms of the results
+v_4=-12
+```
+
+```field 9 Unknown(s) to solve for
+vb
+```
+
+```field 9 Conditions
+va=2
+vc=-1
+```
+
+Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+
+The card returns `vb` = {{o:9}} V (the book's $v_b$).
+
+For the upper rail we change only the equation:
+
+```field 9 Equation(s) to solve in terms of the results
+v_4=12
+```
+
+Then press {{btn:Solve equations}} again.
+
+The card returns `vb` = {{o:-15}} V (the book's $v_b$).
+
+**a)** The run returns exactly the formula the design was asked for, which is the check that the three resistor values are right.
+
+**b)** The output sits on the −12 V rail at {{var:v_b}} = {{o:9}} V and on the +12 V rail at {{var:v_b}} = {{o:-15}} V, so the op amp remains linear for {{o:-15}} V ≤ {{var:v_b}} ≤ {{o:9}} V.
 
 :::
 :::
@@ -418,7 +531,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 5.3
 :::
 
 ::: answer
-Part (c) keeps the input resistors found in part (a) but asks a different kind of question. The inputs are now the numbers 2 V, 3 V and −1 V, and the unknown is the feedback resistor. With these inputs the summing amplifier's output is negative, so the rail it can reach is −12 V, and the largest feedback resistor is the one that puts the output exactly there. In Symbulator that is a question for {{card:Expert Mode}}: we write the feedback resistor as the symbol `rf` instead of a number, we write the output at the rail as the equation `v_4 = -12`, and we name `rf` as the unknown to solve for.
+The same summing amplifier with the three inputs now given as numbers, and the question turned round: not the output for a given feedback resistor, but the largest feedback resistor for which the output stays within the rails. We describe the circuit as in part (a), the inputs as sources of 2, 3 and −1 V, and leave the feedback resistor as the symbol `rf` instead of a number, so that the run returns the output as a formula in `rf`.
 
 ```field 9 Circuit Description
 ea,1,0,2
@@ -431,19 +544,29 @@ rf,n,4,rf
 o,0,n,4
 ```
 
-```field 9 Add equation(s)
-v_4 = -12
+Set {{ui:Analysis}} to *DC — direct current*.
+
+::: result voltage at node 4
+v_{4} = - \frac{3 rf}{10000}\,\mathrm{V}
+:::
+
+`v_4` is the book's $v_o$.
+
+The output is negative for any feedback resistor, so the rail it can reach is −12 V, and the largest feedback resistor is the one that puts the output exactly there. In the {{card:Solve}} card that is one equation and one unknown:
+
+```field 9 Equation(s) to solve in terms of the results
+v_4=-12
 ```
 
-```field 9 Add unknown(s)
+```field 9 Unknown(s) to solve for
 rf
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. This one needs {{ui:Enable Expert Mode}} ticked in the {{card:Expert Mode}} box; the equations and unknowns go in the fields it reveals.
+Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
 
-Symbulator returns `rf` = {{o:40000}} Ω (the book's $R_f$).
+The card returns `rf` = {{o:40000}} Ω (the book's $R_f$).
 
-**c)** So the feedback resistor can be as large as {{o:40}} kΩ. Any larger and the output would have to go beyond −12 V, which it cannot: the op amp saturates.
+**c)** So the feedback resistor can be as large as {{o:40000}} Ω, 40 kΩ. Any larger and the output would have to go beyond −12 V, which it cannot: the op amp saturates.
 
 :::
 :::
@@ -457,7 +580,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 5.5
 :::
 
 ::: answer
-A difference amplifier's output is $v_o = (R_b/R_a)(v_b - v_a)$, provided the four resistors satisfy $R_a/R_b = R_c/R_d$. A gain of 8 therefore needs $R_b$ eight times $R_a$ and $R_d$ eight times $R_c$; one choice, the book's, is $R_a$ = $R_c$ = 1.5 kΩ and $R_b$ = $R_d$ = 12 kΩ. We describe the circuit with those values, naming the resistors `ra` to `rd` after the book's, and we write the two inputs as sources with the symbolic values `va` and `vb`, so that the output comes back as a formula; the run checks the design.
+A difference amplifier amplifies the difference between its two inputs; the question asks us to choose its four resistors for a gain of 8, then to find the range of one input that keeps it linear. Its output is $v_o = (R_b/R_a)(v_b - v_a)$, provided the four resistors satisfy $R_a/R_b = R_c/R_d$, so a gain of 8 needs $R_b$ eight times $R_a$ and $R_d$ eight times $R_c$; one choice, the book's, is $R_a$ = $R_c$ = 1.5 kΩ and $R_b$ = $R_d$ = 12 kΩ. We describe the circuit with those values, naming the resistors `ra` to `rd` after the book's, write the two inputs as sources with the symbolic values `va` and `vb` so that the output comes back as a formula, and call the op amp's two input nodes **p** and **n** and its output node **3**. The run checks the design.
 
 ```field 9 Circuit Description
 ea,1,0,va
@@ -477,9 +600,37 @@ v_{3} = - 8 va + 8 vb\,\mathrm{V}
 
 `v_3` is the book's $v_o$.
 
+Part (b) fixes $v_a$ and asks for the range of $v_b$ that keeps the output between the ±8 V rails. In the {{card:Solve}} card, the output on the upper rail is the equation, $v_b$ the unknown and $v_a$ = 1 V a condition:
+
+```field 9 Equation(s) to solve in terms of the results
+v_3=8
+```
+
+```field 9 Unknown(s) to solve for
+vb
+```
+
+```field 9 Conditions
+va=1
+```
+
+Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+
+The card returns `vb` = {{o:2}} V (the book's $v_b$).
+
+For the lower rail we change only the equation:
+
+```field 9 Equation(s) to solve in terms of the results
+v_3=-8
+```
+
+Then press {{btn:Solve equations}} again.
+
+The card returns `vb` = {{o:0}} V (the book's $v_b$).
+
 **a)** The run returns exactly 8({{var:v_b}} − {{var:v_a}}), the gain the design was asked for.
 
-**b)** With {{var:v_a}} = 1 V the output is {{var:v_o}} = 8{{var:v_b}} − 8, which reaches +8 V when 8{{var:v_b}} − 8 = 8, at {{var:v_b}} = {{o:2}} V, and −8 V when 8{{var:v_b}} − 8 = −8, at {{var:v_b}} = {{o:0}} V. So the op amp remains in its linear region for {{o:0}} V ≤ {{var:v_b}} ≤ {{o:2}} V.
+**b)** The output reaches +8 V at {{var:v_b}} = {{o:2}} V and −8 V at {{var:v_b}} = {{o:0}} V, so the op amp remains linear for {{o:0}} V ≤ {{var:v_b}} ≤ {{o:2}} V.
 
 :::
 :::
@@ -493,7 +644,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 5.7
 :::
 
 ::: answer
-The realistic op amp in the figure is not the `o` element but three ordinary ones: the input resistance $R_i$ between the two inputs, the output resistance $R_o$ in series with the output, and a dependent voltage source whose value is the open-loop gain times the voltage between the inputs, $A(v_p - v_n)$. We call the two input nodes **p** and **n**, write the input resistance as `ri` between them, the output resistance as `ro`, and the dependent source as `ea` with the value `50000*(vp-vn)`. We leave the source as the symbol `vg`, so that the output voltage comes back as a multiple of `vg`; the gain asked for is that multiple, which we type into {{card:Evaluate}} as `v_3/vg`.
+A noninverting amplifier built not round an ideal op amp but round a realistic model of one: a dependent voltage source with a large but finite gain, an input resistance between its two inputs, and an output resistance in series with its output. The question wants the gain of the whole amplifier, output over source. We write the model as those three ordinary elements: we call the op amp's two input nodes **p** and **n**, write the input resistance as `ri` between them, the output resistance as `ro`, and the dependent source as `ea` with the value `50000*(vp-vn)`, the open-loop gain times the voltage between the inputs, $A(v_p - v_n)$; the other three resistors are `rg`, `rs` and `rf`. We leave the source as the symbol `vg`, so that the output comes back as a multiple of it; the gain is that multiple, which we will read in the {{card:Evaluate}} card.
 
 ```field 9 Circuit Description
 eg,1,0,vg
@@ -507,7 +658,13 @@ ea,4,0,50000*(vp-vn)
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
-Symbulator returns `v_3/vg` = {{o:5.9988}} (the book's $v_o/v_g$).
+Then we type `v_3/vg` into {{card:Evaluate}}:
+
+```field 9 Evaluate
+v_3/vg
+```
+
+It gives {{o:5.9988}} (the book's $v_o/v_g$).
 
 :::
 :::
@@ -521,7 +678,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 18.1
 :::
 
 ::: answer
-A two-port is a circuit seen from two pairs of terminals, and its z parameters are the four numbers that relate the two voltages to the two currents at those pairs. We take port 1 as node **1** with ground and port 2 as node **2** with ground, write the three resistors between those nodes, naming each after its value, and name the two ports to the {{card:Find equivalent}} card with *Two-port parameters* chosen and the kind set to **z**; it returns the four parameters, named `z11` to `z22`.
+A T of three resistors seen as a two-port, and the question wants its z parameters: the four numbers that relate the two port voltages to the two port currents. We take port 1 as node **1** with ground and port 2 as node **2** with ground, write the three resistors between those nodes, naming each after its value, and name the two ports to the {{card:Find equivalent}} card with *Two-port parameters* chosen and the kind set to **z**; it returns the four parameters, named `z11` to `z22`.
 
 ```field 9 Circuit Description
 r5,1,2,5
@@ -545,7 +702,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 18.6
 :::
 
 ::: answer
-A two-port that is known only by its parameters is an element of its own. Since these are h parameters we use the element `h`, and write the four values after the two nodes as a bracketed term, `[1000,0.0015,100,0.0001]`, the 100 µS written as 0.0001. We write the two amplifiers in cascade as two such lines, `h1` and `h2`, sharing a node we call **b**, between the source's 500 Ω and the 10 kΩ load; we leave the source as the symbol `vg`, so that the output comes back as a multiple of it, and the gain asked for is that multiple, which we type into {{card:Evaluate}} as `v_c/vg`.
+Two identical amplifiers, each known only by its four h parameters, one feeding the other between a source with an internal resistance and a load; the question wants the voltage gain of the pair. A two-port known only by its parameters is an element of its own: since these are h parameters we use the element `h`, and write the four values after the two nodes as a bracketed term, `[1000,0.0015,100,0.0001]`, the 100 µS written as 0.0001. We write the two amplifiers as two such lines, `h1` and `h2`, sharing a node we call **b**, between the source's 500 Ω and the 10 kΩ load; we leave the source as the symbol `vg`, so that the output comes back as a multiple of it, and the gain is that multiple, which we will read in the {{card:Evaluate}} card.
 
 ```field 9 Circuit Description
 e,1,0,vg
@@ -557,7 +714,13 @@ rl,c,0,10'k
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
-Symbulator returns `v_c/vg` = {{o:33333.3}} (the book's $V_2/V_g$).
+Then we type `v_c/vg` into {{card:Evaluate}}:
+
+```field 9 Evaluate
+v_c/vg
+```
+
+It gives {{o:33333.3}} (the book's $V_2/V_g$).
 
 :::
 :::
@@ -582,7 +745,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 7.1
 :::
 
 ::: answer
-There are two intervals. Before $t$ = 0 the switch has been closed for a long time, so any transient has died away and every current is steady; in a steady circuit an inductor carries its current with no voltage across it, which is to say it behaves as a wire. So we describe the circuit as it stands before the switch opens — the 20 A source, the 0.1 Ω resistor, the inductor and the three resistors beyond it — and run it in DC to find the inductor's current. We name the source `j`, the inductor `l` and the resistors `r0` to `r3`, and we write the inductor with no fifth field, since nothing about its past is being told:
+An inductor that has been fed by a current source for a long time, and a switch that then cuts the source off and leaves the inductor to discharge through three resistors; the question wants the inductor's current and two other quantities afterwards, as functions of time. There are two intervals, and two runs. Before $t$ = 0 the switch has been closed for a long time, so any transient has died away and every current is steady; in a steady circuit an inductor carries its current with no voltage across it, which is to say it behaves as a wire. So we describe the circuit as it stands before the switch opens, the 20 A source, the 0.1 Ω resistor, the inductor and the three resistors beyond it, and run it in DC to find the inductor's current. We name the source `j`, the inductor `l` and the resistors `r0` to `r3`, and write the inductor with no fifth field, since nothing about its past is being told:
 
 ```field 9 Circuit Description
 j,0,1,20
@@ -597,7 +760,7 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l` = {{o:20}} A (the book's $i_L(0)$).
 
-Opening the switch disconnects the source and the 0.1 Ω resistor, and leaves the inductor to release its energy through the three resistors. That is the circuit for the second interval, $t$ ≥ 0, and we describe it with the same names, dropping `j` and `r0`. The inductor now starts with the 20 A just found, which we write into its line as a fifth field, after the inductance. We set the analysis to TR, and the answers come back as functions of $t$.
+Opening the switch disconnects the source and the 0.1 Ω resistor and leaves the inductor to release its energy through the three resistors. That is the circuit for the second interval, $t$ ≥ 0, and we describe it with the same names, dropping `j` and `r0`. The inductor now starts with the 20 A just found, which we write into its line as a fifth field, after the inductance. We set the analysis to TR, and the answers come back as functions of $t$: $i_L$ is the current through `l`, $i_o$ the current through `r3`, and $v_o$ the voltage at node 2.
 
 ```field 9 Circuit Description
 l,1,0,2,20
@@ -637,7 +800,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 7.3
 :::
 
 ::: answer
-Two intervals again. At position x the capacitor has been connected to the 100 V source through the 10 kΩ resistor for a long time, and a capacitor in a steady circuit carries no current, so nothing flows in the 10 kΩ and the capacitor sits at the voltage of the source. We describe that circuit — the source, the 10 kΩ, which we name `r0`, and the capacitor, written without a fifth field — and run it in DC to find the capacitor's voltage:
+A capacitor charged from one source, then switched over to a set of resistors to discharge; the question wants its voltage and two other quantities after the switch moves. Two intervals, two runs. At position x the capacitor has been connected to the 100 V source through the 10 kΩ resistor for a long time, and a capacitor in a steady circuit carries no current, so nothing flows in the 10 kΩ and the capacitor sits at the voltage of the source. We describe that circuit, the source, the 10 kΩ, which we name `r0`, and the capacitor, written without a fifth field, and run it in DC to find the capacitor's voltage:
 
 ```field 9 Circuit Description
 e,1,0,100
@@ -649,7 +812,7 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `v_2` = {{o:100}} V (the book's $v_C(0)$).
 
-At position y the capacitor is connected instead to the 32 kΩ resistor and the two beyond it, and discharges through them. We describe that second circuit with the 100 V just found as the capacitor's fifth field, naming the three resistors `r1` to `r3` and the capacitor's node **1**, and set the analysis to TR.
+At position y the capacitor is connected instead to the 32 kΩ resistor and the two beyond it, and discharges through them. We describe that second circuit with the 100 V just found as the capacitor's fifth field, naming the three resistors `r1` to `r3` and the capacitor's node **1**, and set the analysis to TR. $v_C$ is the voltage at node 1, $v_o$ the voltage at node 2, and $i_o$ the current through `r3`.
 
 ```field 9 Circuit Description
 c,1,0,0.5'u,100
@@ -689,7 +852,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 7.5
 :::
 
 ::: answer
-With the switch at position a, the inductor has been in parallel with the 10 Ω resistor and the 8 A source for a long time. In that steady state the inductor is a wire, so the whole 8 A flows through it and none through the resistor. The direction matters: the source's arrow points down through the source, so its current comes up through the inductor, against the book's arrow for $i$. We write the source as `j,1,0,8`, its current flowing from node 1 down to ground, and the inductor as `l,1,0,0.2`, so that its current is counted downward like the book's $i$; a DC run then gives the current with its sign:
+An inductor that has been carrying a current from one source and is switched, without a break, onto another; the question wants its current afterwards and the voltage across it the instant after the switch moves. Two intervals, two runs. With the switch at position a, the inductor has been in parallel with the 10 Ω resistor and the 8 A source for a long time; in that steady state the inductor is a wire, so the whole 8 A flows through it and none through the resistor. The direction matters: the source's arrow points down through the source, so its current comes up through the inductor, against the book's arrow for $i$. We write the source as `j,1,0,8`, its current flowing from node 1 down to ground, and the inductor as `l,1,0,0.2`, so that its current is counted downward like the book's $i$; a DC run then gives the current with its sign:
 
 ```field 9 Circuit Description
 j,1,0,8
@@ -701,7 +864,7 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l` = {{o:-8}} A (the book's $i(0)$).
 
-Moving the switch to b connects the inductor, through the 2 Ω resistor, to the 24 V source instead. Because the switch is make-before-break, the inductor's current does not jump at the switching: it starts at the −8 A just found. We describe the second circuit with that −8 as the inductor's fifth field, sign included, naming the source `e` and the resistor `r1`, and set the analysis to TR.
+Moving the switch to b connects the inductor, through the 2 Ω resistor, to the 24 V source instead. Because the switch is make-before-break, the inductor's current does not jump at the switching: it starts at the −8 A just found. We describe the second circuit with that −8 as the inductor's fifth field, sign included, naming the source `e` and the resistor `r1`, and set the analysis to TR. $i$ is the current through `l`.
 
 ```field 9 Circuit Description
 e,1,0,24
@@ -744,7 +907,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 7.10
 :::
 
 ::: answer
-Two coils wound on one core, both fed from the same node. We write each coil as an inductor line of its own, `l1` and `l2`, and the coupling between them as the `m` line, which names the two coils and their mutual inductance, 6 H. No energy is stored, so we write neither inductor with a fifth field. The switch closing at $t$ = 0 needs no element: in TR a source with a plain numerical value is a step that begins at $t$ = 0, which is exactly what closing the switch on the 120 V source does. We name the source `e` and the resistor `r1`, and set the analysis to TR.
+Two coils wound on one core, both fed from the same node through one resistor, and a switch that connects the source at $t$ = 0; the question wants the source's current, the voltage across the coils and the current in each, all as functions of time. We write each coil as an inductor line of its own, `l1` and `l2`, and the coupling between them as the `m` line, which names the two coils and their mutual inductance, 6 H. No energy is stored, so we write neither inductor with a fifth field. The switch closing at $t$ = 0 needs no element: in TR a source with a plain numerical value is a step that begins at $t$ = 0, which is exactly what closing the switch on the 120 V source does. We name the source `e` and the resistor `r1`, and set the analysis to TR. $i_o$ is the current through `r1`, $v_o$ the voltage at node 2, and $i_1$ and $i_2$ the currents through `l1` and `l2`.
 
 ```field 9 Circuit Description
 e,1,0,120
@@ -786,7 +949,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 7.11
 :::
 
 ::: answer
-Three intervals this time, and three runs. In the first, both switches have been closed for a long time, the circuit is steady, and the inductor is a wire in parallel with the 18 Ω resistor. We describe the whole circuit — the 60 V source, the 4 Ω, 12 Ω, 6 Ω and 3 Ω resistors, the inductor and the 18 Ω — naming each resistor after its value, and run it in DC for the inductor's current:
+An inductor in a circuit with two switches that open one after the other; the question wants its current between the two openings. Three intervals this time, and three runs. In the first, both switches have been closed for a long time, the circuit is steady, and the inductor is a wire in parallel with the 18 Ω resistor. We describe the whole circuit, the 60 V source, the 4 Ω, 12 Ω, 6 Ω and 3 Ω resistors, the inductor and the 18 Ω, naming each resistor after its value, and run it in DC for the inductor's current:
 
 ```field 9 Circuit Description
 e,1,0,60
@@ -802,7 +965,7 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l` = {{o:6}} A (the book's $i_L(0)$).
 
-In the second interval switch 1 has opened, which disconnects the 60 V source and the 4 Ω and 12 Ω resistors. We describe what remains — the 6 Ω, the 3 Ω, the inductor and the 18 Ω, with the same names — and give the inductor the 6 A just found as its fifth field. We set the analysis to TR.
+In the second interval switch 1 has opened, which disconnects the 60 V source and the 4 Ω and 12 Ω resistors. We describe what remains, the 6 Ω, the 3 Ω, the inductor and the 18 Ω, with the same names, and give the inductor the 6 A just found as its fifth field. We set the analysis to TR; $i_L$ is the current through `l`.
 
 ```field 9 Circuit Description
 r6,2,0,6
@@ -846,7 +1009,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 7.11
 :::
 
 ::: answer
-In the third interval switch 2 has opened too, removing the 18 Ω resistor, so the inductor now discharges through the 3 Ω and 6 Ω alone. We describe that circuit with the 18 Ω dropped, and give the inductor as its fifth field the current found at the end of the previous entry, $6e^{-40 \times 0.035} = 6e^{-1.4}$, about 1.48 A; we write it as the expression `6*exp(-1.4)`, which is exact. We measure time from the second switching, as the book does, so this run's $t$ = 0 is the instant switch 2 opens. The analysis is TR.
+The third interval of the same problem: switch 2 has opened too, removing the 18 Ω resistor, so the inductor now discharges through the 3 Ω and 6 Ω alone, and the question wants its current from that moment on. We describe that circuit with the 18 Ω dropped, and give the inductor as its fifth field the current found at the end of the previous entry, $6e^{-40 \times 0.035} = 6e^{-1.4}$, about 1.48 A; we write it as the expression `6*exp(-1.4)`, which is exact. We measure time from the second switching, as the book does, so this run's $t$ = 0 is the instant switch 2 opens. The analysis is TR.
 
 ```field 9 Circuit Description
 r6,2,0,6
@@ -874,7 +1037,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 7.13
 :::
 
 ::: answer
-The capacitor's 10 V is given in the question, and we write it into the capacitor's fifth field. The dependent current source is worth seven times the current $i_\Delta$ in the 20 kΩ resistor; we name that resistor `r2`, so the source's value is `7*ir2`, and since its arrow points up into node 1 we write it as `j,0,1,7*ir2`. We set the analysis to TR.
+A charged capacitor across two resistors and a dependent current source whose value is seven times the current in one of the resistors; the question wants the capacitor's voltage as a function of time, and then how long it takes to reach 150 V. The 10 V on the capacitor is given, and we write it into the capacitor's fifth field. We name the 20 kΩ resistor `r2`, so its current is `ir2` and the dependent source's value is `7*ir2`; the source's arrow points up into node 1, so we write it `j,0,1,7*ir2`. We set the analysis to TR; $v_o$ is the voltage at node 1.
 
 ```field 9 Circuit Description
 c,1,0,5'u,10
@@ -891,7 +1054,21 @@ v_{1} = 10 e^{40 t}\,\mathrm{V}
 
 `v_1` is the book's $v_o$.
 
-The exponent is positive, so the voltage grows instead of decaying: the dependent source feeds the capacitor faster than the resistors drain it. Part (b) is read off the answer: $10e^{40t}$ = 150 when $e^{40t}$ = 15, that is when $t = (\ln 15)/40$ = {{o:0.0677}} s, so the capacitor short-circuits after {{o:67.7}} ms.
+The exponent is positive, so the voltage grows instead of decaying: the dependent source feeds the capacitor faster than the resistors drain it. Part (b) asks when it reaches 150 V, which is a question for the {{card:Solve}} card, with the time as the unknown:
+
+```field 9 Equation(s) to solve in terms of the results
+v_1=150
+```
+
+```field 9 Unknown(s) to solve for
+t
+```
+
+Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+
+The card returns `t` = {{o:0.0677013}} s (the book's $t$).
+
+So the capacitor short-circuits after {{o:67.7}} ms.
 
 :::
 :::
@@ -905,7 +1082,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 8.2
 :::
 
 ::: answer
-A capacitor, an inductor and a resistor in parallel. We write each as a line between node 1 and ground, naming them `c`, `l` and `r`, and put the two initial conditions the question gives in the fifth fields: 12 V on the capacitor and 30 mA, written 0.03, on the inductor. There is no source; the run is the circuit releasing the energy it holds. We set the analysis to TR.
+A capacitor, an inductor and a resistor in parallel with no source, holding an initial voltage and an initial current; the question wants the voltage across the three as a function of time, and the following example wants the three branch currents. We write each element as a line between node 1 and ground, naming them `c`, `l` and `r`, and put the two initial conditions the question gives in the fifth fields: 12 V on the capacitor and 30 mA, written 0.03, on the inductor. The run is the circuit releasing the energy it holds. We set the analysis to TR; $v$ is the voltage at node 1, and $i_R$ and $i_L$ the currents through `r` and `l`.
 
 ```field 9 Circuit Description
 c,1,0,0.2'u,12
@@ -941,7 +1118,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 8.4
 :::
 
 ::: answer
-The same three elements in parallel, and we describe them the same way. $V_0$ = 0 goes in the capacitor's fifth field and $I_0$ = −12.25 mA in the inductor's, written −0.01225 with the sign the question gives it. We set the analysis to TR.
+The same three elements in parallel with different values, an initial current in the inductor and none on the capacitor; the question wants the voltage across them as a function of time. We describe them as before: $V_0$ = 0 goes in the capacitor's fifth field and $I_0$ = −12.25 mA in the inductor's, written −0.01225 with the sign the question gives it. We set the analysis to TR; $v$ is the voltage at node 1.
 
 ```field 9 Circuit Description
 c,1,0,125'n,0
@@ -971,7 +1148,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 8.11
 :::
 
 ::: answer
-We write the charged capacitor as the capacitor line with 100 V as its fifth field, and the inductor and the resistor after it round the loop, naming the three `c`, `l` and `r`. We write the inductor's nodes as 2 then 1 on purpose, so that its current is counted in the direction of the book's arrow for $i$; written the other way round the answer would come back with its sign reversed. The capacitor's voltage $v_C$ is then the voltage at node 1. We set the analysis to TR.
+A charged capacitor discharging round a loop through an inductor and a resistor; the question wants the loop current and the capacitor's voltage as functions of time. We write the capacitor with 100 V as its fifth field, and the inductor and the resistor after it round the loop, naming the three `c`, `l` and `r`. We write the inductor's nodes as 2 then 1 on purpose, so that its current is counted in the direction of the book's arrow for $i$; written the other way round the answer would come back with its sign reversed. We set the analysis to TR; $i$ is the current through `l` and $v_C$ the voltage at node 1.
 
 ```field 9 Circuit Description
 c,1,0,0.1'u,100
@@ -1003,7 +1180,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 8.12
 :::
 
 ::: answer
-A single loop: the 48 V source, which in TR is a step beginning at $t$ = 0 and so stands for the switch closing, then the inductor, the resistor and the capacitor. We write them in that order, numbering the nodes 1 to 3 round the loop; neither the inductor nor the capacitor stores energy, so we write both without a fifth field. $v_C$ is then the voltage at node 3, the capacitor's upper end. We set the analysis to TR.
+A source switched at $t$ = 0 onto a loop of an inductor, a resistor and a capacitor, none of them holding any energy; the question wants the capacitor's voltage as a function of time. In TR a source with a plain numerical value is a step beginning at $t$ = 0, which is what the switch closing does, so the switch needs no element. We write the 48 V source and then the three elements in order round the loop, numbering the nodes 1 to 3, and write the inductor and the capacitor without a fifth field, since neither stores energy. We set the analysis to TR; $v_C$ is the voltage at node 3, the capacitor's upper end.
 
 ```field 9 Circuit Description
 e,1,0,48
@@ -1032,7 +1209,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.5
 :::
 
 ::: answer
-No energy is stored, so we write the two inductors without fifth fields, and the switch closing at $t$ = 0 onto the 336 V source needs no element of its own: in TR a numerical source value is a step that begins at $t$ = 0. We name the inductors `l1` and `l2` after the book's $i_1$ and $i_2$, which are the currents through them, and the resistors `r1` and `r2`. The question comes from the book's Laplace chapter, but we set the analysis to TR, which returns the two currents as functions of $t$; the transform and its inversion happen inside the solver.
+Two loops sharing a resistor, each with an inductor, switched onto a source at $t$ = 0 with no energy stored; the question wants the two loop currents as functions of time. No energy is stored, so we write the two inductors without fifth fields, and the switch closing at $t$ = 0 onto the 336 V source needs no element of its own: in TR a numerical source value is a step that begins at $t$ = 0. We name the inductors `l1` and `l2` after the book's $i_1$ and $i_2$, which are the currents through them, and the resistors `r1` and `r2`. We set the analysis to TR, which returns the two currents as functions of $t$; the Laplace transform and its inversion happen inside the solver.
 
 ```field 9 Circuit Description
 e,1,0,336
@@ -1066,7 +1243,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.7
 :::
 
 ::: answer
-Two intervals. With the switch at position a the primary side has been steady for a long time: the 60 V source drives a constant current through the 9 Ω, the 3 Ω and the 2 H coil, which in a steady circuit is a wire. The secondary has no source of its own, and a constant current in the primary induces nothing in it, so its current is zero. We describe the whole circuit, naming the resistors after their values, `r9`, `r3`, `r2b` and `r10`, the coils `l1` and `l2`, and the coupling as the `m` line with their mutual inductance, 2 H; we call the secondary's nodes **q**, **c** and **d**. A DC run gives both currents; it also notes that the secondary has no path to ground, which is true of the figure and changes nothing:
+Two coupled coils, the primary fed from a source through a switch and the secondary closed on two resistors; the switch takes the source out at $t$ = 0, and the question wants the secondary's current afterwards. Two intervals, two runs. With the switch at position a the primary side has been steady for a long time: the 60 V source drives a constant current through the 9 Ω, the 3 Ω and the 2 H coil, which in a steady circuit is a wire. The secondary has no source of its own, and a constant current in the primary induces nothing in it, so its current is zero. We describe the whole circuit, naming the resistors after their values, `r9`, `r3`, `r2b` and `r10`, the coils `l1` and `l2`, and the coupling as the `m` line with their mutual inductance, 2 H; we call the secondary's nodes **q**, **c** and **d**. A DC run gives both currents; it also notes that the secondary has no path to ground, which is true of the figure and changes nothing:
 
 ```field 9 Circuit Description
 e,1,0,60
@@ -1083,7 +1260,7 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l1` = {{o:5}} A (the book's $i_1(0)$) and `i_l2` = {{o:0}} A (the book's $i_2(0)$).
 
-At $t$ = 0 the switch moves to b, which takes the source and the 9 Ω out and closes the primary on the 3 Ω alone. We describe that circuit with the same names and the two currents just found as the coils' fifth fields, 5 and 0. The secondary is still not connected to ground, so its bottom is simply the node we called **d**, and Symbulator again notes that it measures that side's voltages against **d**; the currents are unaffected. We set the analysis to TR, and $i_2$ is the current through `l2`.
+At $t$ = 0 the switch moves to b, which takes the source and the 9 Ω out and closes the primary on the 3 Ω alone. We describe that circuit with the same names and the two currents just found as the coils' fifth fields, 5 and 0. The secondary is still not connected to ground, so its bottom is simply the node we called **d**, and Symbulator again notes that it measures that side's voltages against **d**; the currents are unaffected. We set the analysis to TR; $i_2$ is the current through `l2`.
 
 ```field 9 Circuit Description
 r3,0,p,3
@@ -1117,7 +1294,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.13
 :::
 
 ::: answer
-Two intervals. While the switch is closed it is a wire from the junction after $L_1$ down to the bottom rail, so the circuit that has been steady for a long time is the 100 V source, the 10 Ω and $L_1$ in a loop through that wire, with the 15 Ω and $L_2$ hanging across a short circuit and carrying nothing. We describe that circuit and run it in DC for the two inductor currents; we write the closed switch by giving both its ends the same node, ground, and name the inductors `l1` and `l2` after the book's $L_1$ and $L_2$:
+Two inductors, one carrying a current from a source and the other idle behind a closed switch that shorts it out; opening the switch at $t$ = 0 forces the two into series, and the question wants the voltage across the second and the current in the first afterwards. Two intervals, two runs. While the switch is closed it is a wire from the junction after $L_1$ down to the bottom rail, so the circuit that has been steady for a long time is the 100 V source, the 10 Ω and $L_1$ in a loop through that wire, with the 15 Ω and $L_2$ hanging across a short circuit and carrying nothing. We describe that circuit and run it in DC for the two inductor currents; we write the closed switch by giving both its ends the same node, ground, and name the inductors `l1` and `l2` after the book's $L_1$ and $L_2$:
 
 ```field 9 Circuit Description
 e,1,0,100
@@ -1131,7 +1308,7 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l1` = {{o:10}} A (the book's $i_1(0)$) and `i_l2` = {{o:0}} A (the book's $i_2(0)$).
 
-Opening the switch removes that wire, so the two inductors are now in series with the 15 Ω between them. We describe that circuit with the 10 A and 0 just found as their fifth fields, numbering the nodes 1 to 4 from the source. The output voltage $v_o$ is then the voltage at node 3, the top of the 15 Ω and $L_2$, and $i_1$ is the current through `l1`. We set the analysis to TR.
+Opening the switch removes that wire, so the two inductors are now in series with the 15 Ω between them. We describe that circuit with the 10 A and 0 just found as their fifth fields, numbering the nodes 1 to 4 from the source. We set the analysis to TR; $v_o$ is the voltage at node 3, the top of the 15 Ω and $L_2$, and $i_1$ the current through `l1`.
 
 ```field 9 Circuit Description
 e,1,0,100
@@ -1180,7 +1357,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 9.9
 :::
 
 ::: answer
-The inductor and the capacitor are given as an inductance and a capacitance, and we write them as they are, `l,2,0,40'u` and `c,1,0,1'u`, putting the source's frequency, 200,000 rad/s, in the {{ui:ω — angular frequency}} box; the conversion to impedances is done inside the solver. We write the current source as `j,0,1,8`, its arrow pointing up into node 1, with its 8 A as the amplitude, which is what the book's phasors carry too, and we name the resistors `r1` and `r2`. We set the analysis to AC, and each answer is a phasor, printed both as a complex number and as an amplitude with an angle.
+A sinusoidal current source at 200,000 rad/s feeding a resistor, a capacitor, and a branch of a resistor and an inductor; the question wants the admittance the source sees, the voltage across it and the current in the inductive branch as phasors, and those two as functions of time. The inductor and the capacitor are given as an inductance and a capacitance, and we write them as they are, `l,2,0,40'u` and `c,1,0,1'u`, putting the source's frequency, 200,000 rad/s, in the {{ui:ω — angular frequency}} box; the conversion to impedances is done inside the solver. We write the current source as `j,0,1,8`, its arrow pointing up into node 1, with its 8 A as the amplitude, which is what the book's phasors carry too, and name the resistors `r1` and `r2`. We set the analysis to AC, and each answer is a phasor, printed both as a complex number and as an amplitude with an angle: $V$ is the voltage at node 1 and $I$ the current through `r2`.
 
 ```field 9 Circuit Description
 j,0,1,8
@@ -1202,7 +1379,7 @@ Part (b) asks for the admittance the source sees. Symbulator reports the impedan
 
 It gives {{o:0.16 + 0.12j}} S (the book's $Y$).
 
-Part (e) is the two phasors written back as functions of time at the source's frequency: $v$ = 40 cos(200,000$t$ − 36.87°) V and $i$ = 4 cos(200,000$t$ − 90°) A.
+Part (e) is the two phasors written back as functions of time at the source's frequency, which is circuit theory rather than a run: $v$ = 40 cos(200,000$t$ − 36.87°) V and $i$ = 4 cos(200,000$t$ − 90°) A.
 
 :::
 :::
@@ -1216,7 +1393,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 9.10
 :::
 
 ::: answer
-Every impedance in this circuit is given in ohms, some purely reactive and some complex. We write each exactly as given — `-4j`, `63.2+2.4j`, `20+60j` — as a resistor with a complex value, naming the five `r1` to `r5` in the order of the book's $I_1$ to $I_5$, and we write each one's nodes in the direction of the figure's arrow, so that its current is counted as the book counts it. Nothing depends on the frequency, so we leave **omega** as a symbol in the {{ui:ω — angular frequency}} box. We keep the figure's letters for the nodes, with **d** as ground, so $V_1$ and $V_2$ are the voltages at **b** and **c**. The source current $I_0$ leaves the source's positive terminal, which is the opposite of how Symbulator counts a source's current, so it is `-i_e`, which we type into {{card:Evaluate}}. We set the analysis to AC.
+A bridge of five impedances fed by one source, every impedance given in ohms and several of them complex; the question wants the current in every branch and the voltage at two nodes. We write each impedance exactly as given, `-4j`, `63.2+2.4j`, `20+60j`, as a resistor with a complex value, naming the five `r1` to `r5` in the order of the book's $I_1$ to $I_5$, and we write each one's nodes in the direction of the figure's arrow, so that its current is counted as the book counts it. Nothing depends on the frequency, so we leave **omega** as a symbol in the {{ui:ω — angular frequency}} box. We keep the figure's letters for the nodes, with **d** as ground, so $V_1$ and $V_2$ are the voltages at **b** and **c**. The source current $I_0$ leaves the source's positive terminal, which is the opposite of how Symbulator counts a source's current, so we will read it with a minus sign in the {{card:Evaluate}} card. We set the analysis to AC.
 
 ```field 9 Circuit Description
 e,a,0,120
@@ -1229,7 +1406,15 @@ r5,c,0,-20j
 
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
 
-Symbulator returns `-i_e` = {{o:2.4 + 3.2j}} A ({{o:4.000}}∠{{o:53.13}}°, the book's $I_0$), `i_r1` = {{o:2 + 2.66667j}} A ({{o:3.333}}∠{{o:53.13}}°, the book's $I_1$), `i_r2` = {{o:0.4 + 0.533333j}} A ({{o:0.6667}}∠{{o:53.13}}°, the book's $I_2$), `i_r3` = {{o:1.33333 + 4.26667j}} A ({{o:4.470}}∠{{o:72.65}}°, the book's $I_3$), `i_r4` = {{o:0.666667 - 1.6j}} A ({{o:1.733}}∠{{o:-67.38}}°, the book's $I_4$), `i_r5` = {{o:1.73333 + 4.8j}} A ({{o:5.103}}∠{{o:70.14}}°, the book's $I_5$), `v_b` = {{o:109.333 + 8j}} V ({{o:109.6}}∠{{o:4.185}}°, the book's $V_1$) and `v_c` = {{o:96 - 34.6667j}} V ({{o:102.1}}∠{{o:-19.86}}°, the book's $V_2$).
+Symbulator returns `i_r1` = {{o:2 + 2.66667j}} A ({{o:3.333}}∠{{o:53.13}}°, the book's $I_1$), `i_r2` = {{o:0.4 + 0.533333j}} A ({{o:0.6667}}∠{{o:53.13}}°, the book's $I_2$), `i_r3` = {{o:1.33333 + 4.26667j}} A ({{o:4.470}}∠{{o:72.65}}°, the book's $I_3$), `i_r4` = {{o:0.666667 - 1.6j}} A ({{o:1.733}}∠{{o:-67.38}}°, the book's $I_4$), `i_r5` = {{o:1.73333 + 4.8j}} A ({{o:5.103}}∠{{o:70.14}}°, the book's $I_5$), `v_b` = {{o:109.333 + 8j}} V ({{o:109.6}}∠{{o:4.185}}°, the book's $V_1$) and `v_c` = {{o:96 - 34.6667j}} V ({{o:102.1}}∠{{o:-19.86}}°, the book's $V_2$).
+
+Then we type `-i_e` into {{card:Evaluate}}:
+
+```field 9 Evaluate
+-i_e
+```
+
+It gives {{o:2.4 + 3.2j}} A ({{o:4.000}}∠{{o:53.13}}°, the book's $I_0$).
 
 :::
 :::
@@ -1243,7 +1428,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 9.12
 :::
 
 ::: answer
-The dependent voltage source is worth ten times $V_x$, the voltage across the 60 Ω resistor. We name that resistor `r2` and place it between node 2 and ground, so that $V_x$ is the voltage at node 2 and we can write the source's value as `10*v2`. We call the question's terminals a and b nodes **9** and **0**, and name them to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which returns the equivalent's voltage and impedance; a dependent source in the circuit is no obstacle to it. The impedances are in ohms and nothing depends on the frequency, so we leave **omega** as a symbol. We set the analysis to AC.
+An AC circuit with a dependent source inside it, and the question wants its Thévenin equivalent, a voltage and an impedance, seen from two terminals. The dependent voltage source is worth ten times $V_x$, the voltage across the 60 Ω resistor; we name that resistor `r2` and place it between node 2 and ground, so that $V_x$ is the voltage at node 2 and the source's value is `10*v2`. We call the terminals a and b nodes **9** and **0**, and name them to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which returns the equivalent's voltage and impedance; a dependent source in the circuit is no obstacle to it. The impedances are in ohms and nothing depends on the frequency, so we leave **omega** as a symbol. We set the analysis to AC.
 
 ```field 9 Circuit Description
 e,1,0,120
@@ -1270,7 +1455,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 9.14
 :::
 
 ::: answer
-The dependent source is worth 39 times $I_x$, the current down through the middle branch, the 12 Ω and −{{var:j_16}} Ω in series. We name the 12 Ω `r3`, so its current is `ir3` and we write the source's value as `39*ir3`; we name the other impedances `r1` to `r6`, and call the top of the middle branch node **a**, the far side of the −{{var:j_16}} Ω node **c** and the dependent source's top node **b**. The three voltages asked for are marked across three parts of the circuit in the figure: $V_1$ across the 1 Ω and {{var:j_2}} Ω on the left, which is the difference between the voltages at node 1 and node **a**; $V_2$ across the middle branch, which is the voltage at node **a** itself; and $V_3$ across the 1 Ω and {{var:j_3}} Ω on the right, the difference between nodes **a** and **b**. We type the two differences into {{card:Evaluate}} as `v_1 - v_a` and `v_a - v_b`. Nothing depends on the frequency, so we leave **omega** as a symbol; we set the analysis to AC.
+An AC circuit of two loops with a dependent voltage source in the far one, worth 39 times $I_x$, the current down through the middle branch; the question wants three voltages marked across three parts of the circuit. We name the 12 Ω `r3`, so its current is `ir3` and the source's value is `39*ir3`; we name the other impedances `r1` to `r6`, and call the top of the middle branch node **a**, the far side of the −{{var:j_16}} Ω node **c** and the dependent source's top node **b**. The three voltages are then: $V_1$, across the 1 Ω and {{var:j_2}} Ω on the left, the difference between the voltages at node 1 and node **a**; $V_2$, across the middle branch, the voltage at node **a** itself; and $V_3$, across the 1 Ω and {{var:j_3}} Ω on the right, the difference between nodes **a** and **b**. The two differences we will read in the {{card:Evaluate}} card. Nothing depends on the frequency, so we leave **omega** as a symbol; we set the analysis to AC.
 
 ```field 9 Circuit Description
 e,1,0,150
@@ -1285,7 +1470,23 @@ e2,b,0,39*ir3
 
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
 
-Symbulator returns `v_1 - v_a` = {{o:78 - 104j}} V ({{o:130.0}}∠{{o:-53.13}}°, the book's $V_1$), `v_a` = {{o:72 + 104j}} V ({{o:126.5}}∠{{o:55.30}}°, the book's $V_2$) and `v_a - v_b` = {{o:150 - 130j}} V ({{o:198.5}}∠{{o:-40.91}}°, the book's $V_3$).
+Symbulator returns `v_a` = {{o:72 + 104j}} V ({{o:126.5}}∠{{o:55.30}}°, the book's $V_2$).
+
+Then we type `v_1-v_a` into {{card:Evaluate}}:
+
+```field 9 Evaluate
+v_1-v_a
+```
+
+It gives {{o:78 - 104j}} V ({{o:130.0}}∠{{o:-53.13}}°, the book's $V_1$).
+
+Likewise `v_a-v_b`:
+
+```field 9 Evaluate
+v_a-v_b
+```
+
+It gives {{o:150 - 130j}} V ({{o:198.5}}∠{{o:-40.91}}°, the book's $V_3$).
 
 :::
 :::
@@ -1299,7 +1500,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 9.15
 :::
 
 ::: answer
-The transformer's two coils are given as inductances, and the frequency is given, so we work out their impedances first: $j\omega L_1$ = $j$400 × 9 = $j$3600 Ω and $j\omega L_2$ = $j$400 × 4 = $j$1600 Ω. The coupling is set by $k$: the mutual inductance is $M = k\sqrt{L_1 L_2}$ = 0.5 × 6 = 3 H, so $j\omega M$ = $j$1200 Ω. We then write each coil as an impedance, `r4` and `r5`, and the coupling between them as the `m` line naming the two and their mutual impedance, `m,r4,r5,1200j`; we name the winding resistances $R_1$ and $R_2$ `r3` and `r6`, and the source's internal impedance `r1` and `r2`. We leave the load out, because the question asks for the equivalent seen from its terminals, which we call nodes **c** and **d** and name to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen. Two things about the secondary side. It is not connected to ground anywhere — nothing conducts between the two windings — so its bottom is simply the node we have called **d**, and Symbulator says in a note that it has measured that side's voltages against **d**; the currents, the voltage differences and the equivalent are unaffected. And the source is given in rms, so we tick {{ui:RMS phasors}} in {{card:Settings}}. Every value is in ohms already, so we leave **omega** as a symbol; we set the analysis to AC.
+A linear transformer, two coupled coils each with its own winding resistance, between a source with an internal impedance and a load; the question wants the Thévenin equivalent seen from the load's terminals. The coils are given as inductances and the frequency is given, so we work out their impedances first: $j\omega L_1$ = $j$400 × 9 = $j$3600 Ω and $j\omega L_2$ = $j$400 × 4 = $j$1600 Ω, and the coupling from $k$: the mutual inductance is $M = k\sqrt{L_1 L_2}$ = 0.5 × 6 = 3 H, so $j\omega M$ = $j$1200 Ω. We then write each coil as an impedance, `r4` and `r5`, and the coupling between them as the `m` line naming the two and their mutual impedance, `m,r4,r5,1200j`; the winding resistances $R_1$ and $R_2$ we name `r3` and `r6`, and the source's internal impedance `r1` and `r2`. We leave the load out, because the question asks for the equivalent seen from its terminals, which we call nodes **c** and **d** and name to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen. Two things about the secondary side. It is not connected to ground anywhere, nothing conducts between the two windings, so its bottom is simply the node we have called **d**, and Symbulator says in a note that it has measured that side's voltages against **d**; the currents, the voltage differences and the equivalent are unaffected. And the source is given in rms, so we tick {{ui:RMS phasors}} in {{card:Settings}}. Every value is in ohms already, so we leave **omega** as a symbol; we set the analysis to AC.
 
 ```field 9 Circuit Description
 e,1,0,300
@@ -1328,7 +1529,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 10.8
 :::
 
 ::: answer
-The circuit of Example 9.14, which we describe the same way, asked a different question. Symbulator reports every element's complex power as `s_` followed by the element's name: its real part is the average power and its imaginary part the reactive power, so parts (a) and (b) are all read from one run. Each impedance in the figure is two elements in our description, a resistor and a reactance in series, so the power delivered to the impedance is the sum of their two `s` answers, which we type into {{card:Evaluate}} as `s_r1 + s_r2`. The balance of part (c) is the sum of all eight, typed the same way. Nothing depends on the frequency, so we leave **omega** as a symbol; we set the analysis to AC.
+The circuit of Example 9.14, which we describe the same way, asked a question about power: how much average and reactive power each of its three impedances takes, how much each source supplies, and whether the two sides balance. Symbulator reports every element's complex power as `s` followed by the element's name, its real part the average power and its imaginary part the reactive power, so all three parts are read from one run. Each impedance in the figure is two elements in our description, a resistor and a reactance in series, so the power delivered to an impedance is the sum of two `s` answers, which we will read in the {{card:Evaluate}} card; the balance of part (c) is the sum of all eight, read the same way. Nothing depends on the frequency, so we leave **omega** as a symbol; we set the analysis to AC.
 
 ```field 9 Circuit Description
 e,1,0,150
@@ -1343,7 +1544,39 @@ e2,b,0,39*ir3
 
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
 
-Symbulator returns `s_r1 + s_r2` = {{o:1690 + 3380j}} VA ({{o:3779}}∠{{o:63.43}}°), `s_r3 + s_r4` = {{o:240 - 320j}} VA ({{o:400.0}}∠{{o:-53.13}}°), `s_r5 + s_r6` = {{o:1970 + 5910j}} VA ({{o:6230}}∠{{o:71.57}}°), `s_e` = {{o:1950 - 3900j}} VA ({{o:4360}}∠{{o:-63.43}}°), `s_e2` = {{o:-5850 - 5070j}} VA ({{o:7741}}∠{{o:-139.1}}°) and the sum of all eight = {{o:0}} VA.
+Symbulator returns `s_e` = {{o:1950 - 3900j}} VA ({{o:4360}}∠{{o:-63.43}}°, the book's $S_{source}$) and `s_e2` = {{o:-5850 - 5070j}} VA ({{o:7741}}∠{{o:-139.1}}°, the book's $S_{dep}$).
+
+Then we type `s_r1+s_r2` into {{card:Evaluate}}:
+
+```field 9 Evaluate
+s_r1+s_r2
+```
+
+It gives {{o:1690 + 3380j}} VA ({{o:3779}}∠{{o:63.43}}°, the book's $S_1$).
+
+Likewise `s_r3+s_r4`:
+
+```field 9 Evaluate
+s_r3+s_r4
+```
+
+It gives {{o:240 - 320j}} VA ({{o:400.0}}∠{{o:-53.13}}°, the book's $S_2$).
+
+Likewise `s_r5+s_r6`:
+
+```field 9 Evaluate
+s_r5+s_r6
+```
+
+It gives {{o:1970 + 5910j}} VA ({{o:6230}}∠{{o:71.57}}°, the book's $S_3$).
+
+Likewise `s_e+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6`:
+
+```field 9 Evaluate
+s_e+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6
+```
+
+It gives {{o:0}} VA.
 
 :::
 :::
@@ -1357,7 +1590,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 10.12
 :::
 
 ::: answer
-An ideal transformer is the element `t`. Its primary and secondary here share a node, so we write each winding as a bracketed pair of terminals, `[p,x]` for the primary and `[x,a]` for the secondary, followed by the turns ratio `[4,1]`; we name the two resistors after their values, `r60` and `r20`. We leave the load $R_L$ out of the description and name its terminals, node **a** and ground, to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which reports the load that would draw the most average power from those terminals and how much. By the maximum power theorem that load is the Thévenin impedance, reported as `z`, and the power is `pmax`. The source is given as 840 V rms, so we tick {{ui:RMS phasors}} in {{card:Settings}}; there is no reactance anywhere, so we leave **omega** as a symbol. We set the analysis to AC.
+A source feeding a load through an ideal transformer whose windings share a node; the question wants the load that draws the most average power and how much that is. An ideal transformer is the element `t`; because its primary and secondary here share a node, we write each winding as a bracketed pair of terminals, `[p,x]` for the primary and `[x,a]` for the secondary, followed by the turns ratio `[4,1]`, and we name the two resistors after their values, `r60` and `r20`. We leave the load $R_L$ out of the description and name its terminals, node **a** and ground, to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which reports the load that would draw the most average power from those terminals and how much: by the maximum power theorem that load is the Thévenin impedance, reported as `z`, and the power is `pmax`. The source is given as 840 V rms, so we tick {{ui:RMS phasors}} in {{card:Settings}}; there is no reactance anywhere, so we leave **omega** as a symbol. We set the analysis to AC.
 
 ```field 9 Circuit Description
 e,1,0,840
@@ -1382,7 +1615,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 11.1
 :::
 
 ::: answer
-We describe the whole three-phase circuit, one phase at a time: three sources at the generator's internal nodes, which we call **ga**, **gb** and **gc**, each carrying its phase in its value — `120*exp(-2j*pi/3)` is 120 V at −120° — then the generator's, the line's and the load's impedance in each phase, all in ohms, which we name `rga`, `rla` and `rfa` for the a phase and likewise for b and c. We take the generator's neutral as ground and call the load's neutral **nn**; we call the generator's terminals **a**, **b** and **c** and the load's **pa**, **pb** and **pc**. Nothing depends on the frequency, so we leave **omega** as a symbol. The question's quantities are then ordinary results: the a-phase line current $I_{aA}$ is the current through the line impedance `rla`; the phase voltage at the load, $V_{AN}$, is the voltage between **pa** and **nn**; the line voltage $V_{AB}$ is the voltage between **pa** and **pb**; and the phase voltage at the generator's terminal, $V_{An}$, is the voltage at node **a**. We type each difference into {{card:Evaluate}} as `v_pa - v_nn`, and its magnitude as `Abs(v_pa - v_nn)`, since the book quotes the voltages by magnitude. We set the analysis to AC.
+A three-phase generator, a three-phase line and a three-phase load, all Y-connected and all balanced; the question wants the three line currents and the phase and line voltages at the load and at the generator. We describe the whole circuit, one phase at a time: three sources at the generator's internal nodes, which we call **ga**, **gb** and **gc**, each carrying its phase in its value, `120*exp(-2j*pi/3)` being 120 V at −120°; then the generator's, the line's and the load's impedance in each phase, all in ohms, which we name `rga`, `rla` and `rfa` for the a phase and likewise for b and c. We take the generator's neutral as ground and call the load's neutral **nn**; the generator's terminals we call **a**, **b** and **c** and the load's **pa**, **pb** and **pc**. Nothing depends on the frequency, so we leave **omega** as a symbol. The quantities asked for are then ordinary results: the line current $I_{aA}$ is the current through `rla`; the phase voltage at the load, $V_{AN}$, is the voltage between **pa** and **nn**; the line voltage $V_{AB}$ is the voltage between **pa** and **pb**; and the phase voltage at the generator's terminal, $V_{An}$, is the voltage at node **a**. The book quotes the voltages by magnitude, so we will read each difference's magnitude in the {{card:Evaluate}} card, as `Abs(...)`. We set the analysis to AC.
 
 ```field 9 Circuit Description
 ea,ga,0,120
@@ -1401,9 +1634,33 @@ rfc,pc,nn,39+28j
 
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency.
 
-Symbulator returns `i_rla` = {{o:1.92 - 1.44j}} A ({{o:2.400}}∠{{o:-36.87}}°, the book's $I_{aA}$), `|v_pa - v_nn|` = {{o:115.225}} V (the book's $|V_{AN}|$), `|v_pa - v_pb|` = {{o:199.576}} V (the book's $|V_{AB}|$) and `|v_a|` = {{o:118.898}} V (the book's $|V_{An}|$).
+Symbulator returns `i_rla` = {{o:1.92 - 1.44j}} A ({{o:2.400}}∠{{o:-36.87}}°, the book's $I_{aA}$), `i_rlb` = {{o:-2.20708 - 0.942769j}} A ({{o:2.400}}∠{{o:-156.9}}°, the book's $I_{bB}$) and `i_rlc` = {{o:0.287077 + 2.38277j}} A ({{o:2.400}}∠{{o:83.13}}°, the book's $I_{cC}$).
 
-The question asks for all three phases of each quantity. In a balanced circuit the b and c phases carry the same magnitudes as the a phase, at −120° and +120° from it, and the run's `i_rlb` and `i_rlc`, `v_pb` and `v_pc` bear that out.
+Then we type `Abs(v_pa-v_nn)` into {{card:Evaluate}}:
+
+```field 9 Evaluate
+Abs(v_pa-v_nn)
+```
+
+It gives {{o:115.225}} V (the book's $|V_{AN}|$).
+
+Likewise `Abs(v_pa-v_pb)`:
+
+```field 9 Evaluate
+Abs(v_pa-v_pb)
+```
+
+It gives {{o:199.576}} V (the book's $|V_{AB}|$).
+
+Likewise `Abs(v_a)`:
+
+```field 9 Evaluate
+Abs(v_a)
+```
+
+It gives {{o:118.898}} V (the book's $|V_{An}|$).
+
+The three line currents above have the same magnitude 120° apart, which is what a balanced circuit gives; the b- and c-phase voltages of parts (c), (d) and (e) have the same magnitudes as the a-phase ones just read, at −120° and +120° from them, and typing `Abs(v_pb-v_nn)`, `Abs(v_pb-v_pc)` and `Abs(v_b)` into {{card:Evaluate}} returns those same three magnitudes.
 
 :::
 :::
@@ -1426,7 +1683,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.2
 :::
 
 ::: answer
-The circuit is Example 7.3's, and so is its first interval: before the switch moves the capacitor has sat across the 100 V source through the 10 kΩ for a long time, carrying no current. We describe that circuit as before and run it in DC for the capacitor's voltage:
+The circuit of Example 7.3, a capacitor charged from one source and switched over to a set of resistors, asked again with the answer wanted as a Laplace transform. Its first interval is the same: before the switch moves the capacitor has sat across the 100 V source through the 10 kΩ for a long time, carrying no current. We describe that circuit as before and run it in DC for the capacitor's voltage:
 
 ```field 9 Circuit Description
 e,1,0,100
@@ -1438,7 +1695,7 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `v_2` = {{o:100}} V (the book's $v_C(0)$).
 
-The second interval is the same description as Example 7.3's second run, the 100 V in the capacitor's fifth field, with one difference: we set the analysis to FD instead of TR. FD returns each answer as a function of $s$, the Laplace transform of the answer in time, with the initial condition already inside it.
+The second interval is the same description as Example 7.3's second run, the 100 V in the capacitor's fifth field, with one difference: we set the analysis to FD instead of TR. FD returns each answer as a function of $s$, the Laplace transform of the answer in time, with the initial condition already inside it. $V_o(s)$ is the voltage at node 2.
 
 ```field 9 Circuit Description
 c,1,0,0.5'u,100
@@ -1458,7 +1715,7 @@ v_{2} = \frac{60}{s + 25}\,\mathrm{V}
 
 `v_2` is the book's $V_o(s)$.
 
-That is the transform of the answer Example 7.3 found in the time domain, $60e^{-25t}$: FD returns the transform, TR its inverse, for the same description.
+That is the transform of the answer Example 7.3 found in the time domain, $60e^{-25t}$: for the same description FD returns the transform and TR its inverse.
 
 :::
 :::
@@ -1472,7 +1729,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.3
 :::
 
 ::: answer
-The 24 mA source is a constant current switched on at $t$ = 0. In the $s$ domain a constant $I$ switched on at $t$ = 0 has the transform $I/s$, so we write the source's value as `0.024/s`. We put the two initial conditions the question gives in the fifth fields of the capacitor and the inductor, 50 V and 29 mA written 0.029, and name the four elements `j`, `c`, `l` and `r`. We set the analysis to FD, and the answer is the transform $V(s)$ of the voltage the question asks for; the book inverts it into $v(t)$ by hand, and choosing TR instead would do that inversion in the same run.
+A parallel RLC circuit holding an initial current and an initial voltage, with a constant current source switched on at $t$ = 0; the question wants the voltage across it, worked in the $s$ domain. In the $s$ domain a constant $I$ switched on at $t$ = 0 has the transform $I/s$, so we write the 24 mA source's value as `0.024/s`. We put the two initial conditions the question gives in the fifth fields of the capacitor and the inductor, 50 V and 29 mA written 0.029, and name the four elements `j`, `c`, `l` and `r`. We set the analysis to FD, and the answer is the transform $V(s)$ of the voltage asked for, the voltage at node 1; choosing TR instead would return its inverse, $v(t)$, from the same description.
 
 ```field 9 Circuit Description
 j,0,1,0.024/s
@@ -1501,7 +1758,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.6
 :::
 
 ::: answer
-The 480 V source switched on at $t$ = 0 is a step, whose transform is $480/s$, so we write its value as `480/s`. We call the terminals a and b node **a** and ground, and name them to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen; the card works in FD as it does in DC and AC, and returns the equivalent's voltage and impedance as functions of $s$. We leave out the capacitor to the right of the terminals, since the question asks for the equivalent seen from them.
+A source switched at $t$ = 0 onto two resistors and an inductor, and the question wants the Thévenin equivalent of that part of the circuit, seen from two terminals, as functions of $s$. The 480 V source switched on at $t$ = 0 is a step, whose transform is $480/s$, so we write its value as `480/s`. We call the terminals a and b node **a** and ground, and name them to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen; the card works in FD as it does in DC and AC, and returns the equivalent's voltage and impedance as functions of $s$. We leave out the capacitor to the right of the terminals, since the question asks for the equivalent seen from them.
 
 ```field 9 Circuit Description
 e,1,0,480/s
@@ -1534,7 +1791,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.9
 :::
 
 ::: answer
-A transfer function is the ratio of an output to the input that produced it, as functions of $s$. We therefore leave the source as the symbol `vg`, so that the output comes back as a multiple of it, and set the analysis to FD. We number the nodes from the source, so the output, the capacitor's voltage, is the voltage at node 2, and the transfer function is `v_2/vg`, which we type into {{card:Evaluate}}.
+A source driving a resistor, a capacitor and an inductive branch, with the capacitor's voltage as the output; the question wants the transfer function from source to output, and its poles and zeros. A transfer function is the ratio of an output to the input that produced it, as functions of $s$, so we leave the source as the symbol `vg`, so that the output comes back as a multiple of it, and set the analysis to FD. We number the nodes from the source, so the output, the capacitor's voltage, is the voltage at node 2, and the transfer function is that voltage divided by `vg`, which we will read in the {{card:Evaluate}} card.
 
 ```field 9 Circuit Description
 e,1,0,vg
@@ -1550,7 +1807,31 @@ Set {{ui:Analysis}} to *FD — complex frequency domain*.
 H(s) = \dfrac{v_{2}}{v_{g}} = \frac{1000 \left(s + 5000\right)}{s^{2} + 6000 s + 25000000}
 :::
 
-Part (b): the poles are the roots of the denominator, $s^2 + 6000s + 25{,}000{,}000 = 0$, which are $s = -3000 \pm j4000$; the zero is the root of the numerator, $s = -5000$.
+Part (b): the poles of a transfer function are the values of $s$ that make its denominator zero, and the zeros those that make its numerator zero. Both are questions for the {{card:Solve}} card with $s$ as the unknown, and since a pole may be complex we leave {{ui:real solutions only}} unticked. The denominator first:
+
+```field 9 Equation(s) to solve in terms of the results
+s**2+6000*s+25000000=0
+```
+
+```field 9 Unknown(s) to solve for
+s
+```
+
+Press {{btn:Solve equations}}.
+
+The card returns 2 solutions, `s` = {{o:-3000 - 4000j}} and `s` = {{o:-3000 + 4000j}}.
+
+Then the numerator:
+
+```field 9 Equation(s) to solve in terms of the results
+s+5000=0
+```
+
+Press {{btn:Solve equations}} again.
+
+The card returns `s` = {{o:-5000}} (the book's $s$).
+
+So the transfer function has poles at $s = -3000 \pm j4000$ and a zero at $s = -5000$.
 
 :::
 :::
@@ -1564,7 +1845,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 14.6
 :::
 
 ::: answer
-Nothing in this question is a number until part (d), so we leave the three elements as the symbols `R`, `L` and `C` and the source as `vi`, naming the resistor `rr` to keep its name apart from its value; we set the analysis to FD, and the transfer function is the output voltage, at node 2, divided by the input, which we type into {{card:Evaluate}} as `v_2/vi`. The run returns it in terms of the three symbols, and parts (a) to (d) are read off that one expression.
+A series resistor feeding a parallel inductor and capacitor, with the voltage across the pair as the output; the question wants its transfer function shown to be a bandpass, its centre frequency, bandwidth and $Q$ in general, and then the resistor and inductor for a given centre frequency and bandwidth. Nothing in the question is a number until part (d), so we leave the three elements as the symbols `R`, `L` and `C` and the source as `vi`, naming the resistor `rr` to keep its name apart from its value. We set the analysis to FD; the transfer function is the output voltage, at node 2, divided by the input, which we will read in the {{card:Evaluate}} card, and it comes back in terms of the three symbols.
 
 ```field 9 Circuit Description
 e,1,0,vi
@@ -1579,7 +1860,32 @@ Set {{ui:Analysis}} to *FD — complex frequency domain*.
 H(s) = \dfrac{v_{2}}{v_{i}} = \frac{L s}{C L R s^{2} + L s + R}
 :::
 
-Dividing numerator and denominator by $RLC$ puts it in the standard form $H(s) = \dfrac{s/RC}{s^2 + s/RC + 1/LC}$, which is a bandpass, part (a). Part (b): the centre frequency is $\omega_0 = 1/\sqrt{LC}$. Part (c): the bandwidth is $\beta = 1/RC$, the cutoff frequencies are $\omega_{c} = \mp\beta/2 + \sqrt{(\beta/2)^2 + \omega_0^2}$, and $Q = \omega_0/\beta$. Part (d): with $C$ = 5 µF, a centre frequency of 5 kHz is $\omega_0$ = 2π × 5000 rad/s, so $L = 1/(\omega_0^2 C)$ = {{o:202.6}} µH, and a bandwidth of 200 Hz is $\beta$ = 2π × 200 rad/s, so $R = 1/(\beta C)$ = {{o:159.2}} Ω.
+**a)** Dividing numerator and denominator by $RLC$ puts the transfer function in the standard form $H(s) = \dfrac{s/RC}{s^2 + s/RC + 1/LC}$: a first-order numerator in $s$ over a second-order denominator, which is the shape of a bandpass filter.
+
+**b)** The centre frequency is the $\omega_0$ of that denominator, $\omega_0 = 1/\sqrt{LC}$.
+
+**c)** The bandwidth is the coefficient of $s$ in the denominator, $\beta = 1/RC$; the cutoff frequencies are $\omega_{c} = \mp\beta/2 + \sqrt{(\beta/2)^2 + \omega_0^2}$, and $Q = \omega_0/\beta$.
+
+Part (d) gives the centre frequency, the bandwidth and the capacitor and asks for $R$ and $L$. Those are two equations in two unknowns, which the {{card:Solve}} card takes as they stand: $\omega_0 = 1/\sqrt{LC}$ at 2π × 5000 rad/s and $\beta = 1/RC$ at 2π × 200 rad/s, with the capacitor as a condition:
+
+```field 9 Equation(s) to solve in terms of the results
+1/sqrt(L*C)=2*pi*5000
+1/(R*C)=2*pi*200
+```
+
+```field 9 Unknown(s) to solve for
+L, R
+```
+
+```field 9 Conditions
+C=5'u
+```
+
+Tick {{ui:real solutions only}} and press {{btn:Solve equations}}.
+
+The card returns `L` = {{o:0.000202642}} H (the book's $L$) and `R` = {{o:159.155}} Ω (the book's $R$).
+
+That is $L$ = 202.6 µH and $R$ = 159.2 Ω.
 
 :::
 :::

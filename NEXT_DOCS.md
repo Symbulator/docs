@@ -112,6 +112,39 @@ setting and expected answer is untouched, and `runner.check` still reads
 chapter and the app's `examples/Nilsson_Riedel.cir` are regenerated from
 them, never edited.
 
+**The fifteen rules applied to all 43, 13 Sep 2026.** Roberto asked for
+the original Example 3.10 to be set beside its revision and rules derived
+from the difference, then said *"Apply all fifteen across the chapter and
+then the Manual, but do them yourself all. We will go over the results
+together."* The eight new rules (8–15) are listed in `tools/nr12/README.md`
+beside the first seven. What they did to the page, measured: every `shows`
+paragraph now opens with what the circuit is and what the question wants
+before any mention of the app (rule 8), and runs in the session's order
+(14); every answer the reader gets by typing into Evaluate is shown as
+its box and its result — 16 such boxes where there had been none, the
+`-i_e`, `-p_e`, `v_1 - v_a`, `Abs(...)`, `1/z_j` and `v_3/vg` answers
+among them (rules 11, 12); every range and every lettered part is
+answered once per value in the Solve card or the Evaluate card, with
+conditions — 5.1's parts (a) and (b) by Evaluate with `va = 1`, `vb = 0`,
+its part (c) and 5.3's and 5.5's ranges by two Solve card runs each,
+one per rail, 7.13's time to 150 V and 13.9's poles and zero by the
+Solve card with `t` and `s` as unknowns, 14.6's $R$ and $L$ by the Solve
+card from the two design equations (rules 11, 13); and **Expert Mode
+appears on no entry now** — 5.3c, the last, is the Solve card with `rf`
+as the unknown, the ordinary route answering it (rule 10). 4.21 lost a
+sentence answering a part the page does not ask. The generator computes
+every Evaluate and Solve card step through the real app's `evaluate_ui`
+and `solveq_ui`, and the runner checks them all: **63 ok** — 43
+examples, 7 first runs, 13 card runs. `verify_lesson.py` 50 of 50, the
+link join 384 of 386. The chapter summary and the DC intro no longer
+name Expert Mode. Live on `learn` (web only, the PDFs still held) and on
+the offline pair at cache **v214**; the version 9 account wants a pull
+and a Reload, no `pip`. **A caution earned on the way:** an hour went on
+a solver bug that did not exist — the op-amp of 5.1 "could not be solved"
+through every path tried, because the description had been *retyped* into
+the test script with one node wrong; the spec's own description solved
+at once. Copy a description from its source, never retype it.
+
 **Example 3.10 answered from the Solve card, 13 Sep 2026.** Roberto's
 ruling, after #433 made it work: *"Use my approach with Solve, which is
 more representative of the exploratory way a student would follow. Show
