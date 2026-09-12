@@ -10,48 +10,28 @@ summary: >
   with Expert Mode and symbolic answers where they earn their place.
 ---
 
-Nilsson and Riedel's *Electric Circuits* is the book a great many
-engineers learned this material from, and its worked examples are unusually
-well suited to showing what Symbulator is for: each one states a circuit,
-states a question, and then prints the answer. That last part is what makes
-this chapter checkable rather than merely illustrative — **every answer below
-was compared with the one the book prints.**
-
-The selection is deliberate. These are not the easiest problems in the book;
-they are the ones where the distance between *describing a circuit* and
-*solving it by hand* is widest — a delta that has to be transformed, a
-supermesh, a dependent source whose controlling current is three steps away, a
-transformer whose secondary floats, a switch that opens twice. The book meets
-each with a method. Symbulator meets all of them with the same six words:
-describe the circuit, choose an analysis.
+Here is a selection of problems from *Electric Circuits*, 12th edition, by
+James W. Nilsson and Susan A. Riedel (Pearson). These are not the easiest
+problems in the book, but they are well suited to showing what Symbulator
+can do, since they are the ones where the distance between *describing a
+circuit* and *solving it by hand* is widest.
 
 ::: note What this chapter is not
-It is not a solutions manual, and it will not teach you circuit analysis.
+This is not a solutions manual, and it will not teach you circuit analysis.
 Every example here is worked in full in the book itself, and the book's
-derivation is the part worth reading — {{ref:lesson-dc}} onward is where
-Symbulator is taught. This is a demonstration, aimed at someone who already
-knows the material and wants to see what the software does with it.
-
-The circuits are reproduced from *Electric Circuits*, 12th edition, by
-James W. Nilsson and Susan A. Riedel (Pearson), and are the authors' and
-publisher's property. For the purpose of teaching students how to use
-Symbulator, these diagrams are reproduced under the principle of fair use. No
-copyright infringement is intended.
+derivation is the part worth reading. This is a demonstration, aimed at someone who already
+knows the material and wants to see how the software deals with it.
 :::
+
+The problems and diagrams are reproduced for the purpose of teaching students how to use
+Symbulator, under the principle of fair use. No copyright infringement is intended.
 
 ## How to read an entry {#nr12-how}
 
 Each entry gives the book's question, the book's own figure, the Symbulator
-description, the analysis to choose, and the answers. Where an answer is a
-number it is quoted in a sentence; where it is an *expression* — a function of
-$t$, a transfer function in $s$, a formula in the circuit's own symbols — it is
-shown in a results panel, as the app prints it. Between the figure and the
-description, a short paragraph says what the book does with the problem and
-what Symbulator does instead: that paragraph is the reason the example is here.
-
-**Every value on the page, in a panel or in a sentence, was compared with the
-answer the book prints, and they agree.** Where the two are written differently
-— the book rounds an amplitude, or asks for the current a source *supplies*
+description, the analysis to choose, and the answers. Every value on the page,
+in a panel or in a sentence, was compared with the answer the book prints, and
+they agree. Where the two are written differently — the book rounds an amplitude, or asks for the current a source *supplies*
 where Symbulator reports what it *consumes* — the entry's paragraph says so.
 
 The names are the app's own. `i_r3` is the current through the element called
@@ -59,22 +39,6 @@ The names are the app's own. `i_r3` is the current through the element called
 `e`, and `v_r6` the voltage across `r6`. The book names its quantities
 differently — $i_o$, $v_o$, $V_{Th}$ — so each entry says which of the app's
 answers is which of the book's.
-
-Four things recur, and they are the reason these particular examples were
-chosen:
-
-- **A dependent source is a value, not a device.** Write `8*ir3` in a source's
-  value field and the controlling current is named; there is no constraint
-  equation to write and none to get wrong.
-- **The case is never chosen by anyone.** Overdamped, critically damped and
-  underdamped are the same three lines with different numbers, and the algebra
-  decides which one comes out.
-- **A symbol left in the circuit stays in the answer.** That is how a design
-  problem gets checked, how a transfer function appears without being asked
-  for, and how one run answers all three parts of a question.
-- **{{card:Expert Mode}} turns a question inside out.** When the thing you know
-  is an answer and the thing you want is a component value, state the answer as
-  an equation and name the component as the unknown.
 
 ### Every circuit is in the app already {#nr12-entries}
 
@@ -86,3 +50,4 @@ settings, its Expert Mode fields and the analysis it wants already set.
 
 Pick one, press {{btn:Run Symbulator}}, and the answers below are what you get.
 {{ref:input-files}} explains what an entry remembers and how to save your own.
+
