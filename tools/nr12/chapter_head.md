@@ -1,19 +1,4 @@
-import sys
-import os
-
-# --- paths, resolved from this file rather than hardcoded -------------------
-# tools/nr12 -> tools -> Documentation -> the project root.
-_HERE = os.path.dirname(os.path.abspath(__file__))
-_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(_HERE)))
-DOCS = os.path.join(_ROOT, "Documentation")
-EXAMPLES = os.path.join(_ROOT, "Application", "v9", "repos", "server", "examples")
-PDF = os.path.join(_ROOT, "Other", "NR12.pdf")
-if _HERE not in sys.path:
-    sys.path.insert(0, _HERE)
-# -*- coding: utf-8 -*-
-"""The hand-written prose of the sampler chapter: front matter, opening, section heads."""
-
-FRONT = """---
+---
 id: nr12-sampler
 kind: back
 title: Select problems from Nilsson & Riedel 12ed
@@ -24,9 +9,8 @@ summary: >
   Symbulator and checked against the answer the book prints. DC, AC, TR and FD,
   with Expert Mode and symbolic answers where they earn their place.
 ---
-"""
 
-OPENING = """Nilsson and Riedel's *Electric Circuits* is the book a great many
+Nilsson and Riedel's *Electric Circuits* is the book a great many
 engineers learned this material from, and its worked examples are unusually
 well suited to showing what Symbulator is for: each one states a circuit,
 states a question, and then prints the answer. That last part is what makes
@@ -102,38 +86,3 @@ settings, its Expert Mode fields and the analysis it wants already set.
 
 Pick one, press {{btn:Run Symbulator}}, and the answers below are what you get.
 {{ref:input-files}} explains what an entry remembers and how to save your own.
-"""
-
-INTROS = {
-    "DC": """Sixteen resistive problems. The running theme is that the book's
-*method* — node voltages, mesh currents, source transformations, superposition,
-a delta-to-wye transform — is a way of getting an answer by hand, not a property
-of the answer. Symbulator is told the circuit and never told the method, so the
-same kind of description serves whichever chapter a problem came from. Five of
-these are op-amp problems with lettered parts, two run in {{card:Expert Mode}},
-and the last two are two-port problems from the book's final chapter.""",
-
-    "TR": """Fourteen transient problems, three of them from the book's Laplace
-chapter. The pattern is the one you would follow by hand: run the circuit as it
-was before the switch moved in DC, read off the capacitor voltages and inductor
-currents, put those numbers in the fifth field of the `c` and `l` lines, and run
-the circuit as it is afterwards in TR. No time constant is computed, no solution
-form is selected, and sequential switching is simply one more run. The
-Laplace-chapter problems are no different: TR transforms, solves and inverts,
-so what the book does in $s$ the solver does out of sight.""",
-
-    "AC": """Eight problems in the sinusoidal steady state. Where the book gives
-its impedances in ohms they go in as written, complex ones included, and the
-frequency never enters: **omega** is left as a symbol in the
-{{ui:ω — angular frequency}} box and nothing depends on it. Where the book gives
-henries and farads instead, the frequency goes in that box and the conversion to
-impedance is the solver's. Two of the eight state their source in rms, and say
-so in {{card:Settings}}.""",
-
-    "FD": """Five problems in the $s$ domain. FD returns every answer as a
-function of $s$, initial conditions included, so a transfer function is nothing
-more than the answer with the source left as a symbol — two of these are exactly
-that. Nothing on this page is labelled *filter* or *transfer function*, because
-nothing needs to be. The book's other Laplace-chapter examples, the ones it
-inverts back into time, are in the TR section above.""",
-}

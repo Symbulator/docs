@@ -99,8 +99,6 @@ and the last two are two-port problems from the book's final chapter.
 
 ::: problem NR12's Example 3.7
 
-**Using Voltage Division and Current Division to Solve a Circuit.**
-
 Use current division to find the current $i_o$ and use voltage division to find the voltage $v_o$ for the circuit in Fig. 3.22.
 
 ::: figure assets/circuit/nr12-ex3-7.jpg
@@ -108,7 +106,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 3.7
 :::
 
 ::: answer
-The book applies two division formulas, one for the current and one for the voltage, after first reducing the circuit to find the 6 Ω the source sees. Symbulator solves the whole circuit at once and both answers are among the results: the book's $i_o$ is the current through `r7`, the 24 Ω resistor, and its $v_o$ the voltage across `r6`, the 30 Ω one. The 6 Ω is there too, as `r_j`, the resistance seen by the source — worked out by hand in the book, reported as a matter of course here.
+The book applies two division formulas, one for the current and one for the voltage, after first reducing the circuit to find the equivalent resistance the source sees. Symbulator solves the whole circuit at once and both answers are among the results.
 
 ```field 9 Circuit Description
 j,0,1,8
@@ -123,14 +121,12 @@ r7,1,0,24
 
 Set {{ui:Analysis}} to *DC — direct current*.
 
-Symbulator returns `i_r7` = {{o:2}} A, `v_r6` = {{o:18}} V, `v_r7` = {{o:48}} V and `r_j` = {{o:6}} Ω.
+Symbulator returns `i_r7` = {{o:2}} A (the book's $i_o$) and `v_r6` = {{o:18}} V (the book's $v_o$).
 
 :::
 :::
 
 ::: problem NR12's Example 3.10
-
-**Using a Wheatstone Bridge to Measure Resistance.**
 
 For the Wheatstone bridge in Fig. 3.30, $R_3$ can be varied from 10 Ω to 2 kΩ. What range of resistor values can this bridge measure?
 
@@ -169,8 +165,6 @@ rx = 4 r_{3}
 
 ::: problem NR12's Example 3.11
 
-**Applying a Delta-to-Wye Transform.**
-
 Find the current and power supplied by the 40 V source in the circuit shown in Fig. 3.35.
 
 ::: figure assets/circuit/nr12-ex3-11.jpg
@@ -198,8 +192,6 @@ Symbulator returns `-i_e` = {{o:0.5}} A, `-p_e` = {{o:20}} W and `r_e` = {{o:80}
 :::
 
 ::: problem NR12's Example 4.4
-
-**Using the Node-Voltage Method with Dependent Sources.**
 
 Use the node-voltage method to find the power dissipated in the 5 Ω resistor in the circuit shown in Fig. 4.10.
 
@@ -229,8 +221,6 @@ Symbulator returns `v_2` = {{o:16}} V, `v_3` = {{o:10}} V, `i_r3` = {{o:1.2}} A 
 
 ::: problem NR12's Example 4.7
 
-**Using the Mesh-Current Method with Dependent Sources.**
-
 Use the mesh-current method to find the power dissipated in the 4 Ω resistor in the circuit shown in Fig. 4.23.
 
 ::: figure assets/circuit/nr12-ex4-7.jpg
@@ -258,8 +248,6 @@ Symbulator returns `i_r4` = {{o:1.6}} A, `i_r3` = {{o:2}} A and `p_r3` = {{o:16}
 
 ::: problem NR12's Example 4.8
 
-**A Special Case in the Mesh-Current Method.**
-
 Use the mesh-current method to find branch currents $i_a$, $i_b$ and $i_c$ in the circuit for Example 4.3, repeated here as Fig. 4.25.
 
 ::: figure assets/circuit/nr12-ex4-8.jpg
@@ -285,8 +273,6 @@ Symbulator returns `i_r1` = {{o:2}} A, `i_r2` = {{o:4}} A, `i_r3` = {{o:1}} A an
 :::
 
 ::: problem NR12's Example 4.13
-
-**Using Special Source Transformation Techniques.**
 
 a) Use source transformations to find the voltage $v_o$ in the circuit shown in Fig. 4.42. b) Find the power developed by the 250 V voltage source. c) Find the power developed by the 8 A current source.
 
@@ -317,8 +303,6 @@ Symbulator returns `v_r4` = {{o:20}} V, `-i_e` = {{o:11.2}} A, `-p_e` = {{o:2800
 
 ::: problem NR12's Example 4.21
 
-**Calculating the Condition for Maximum Power Transfer.**
-
 a) For the circuit shown in Fig. 4.65, find the value of $R_L$ that results in maximum power being transferred to $R_L$. b) Calculate the maximum power that can be delivered to $R_L$.
 
 ::: figure assets/circuit/nr12-ex4-21.jpg
@@ -342,8 +326,6 @@ Symbulator returns `vth` = {{o:300}} V, `z` = {{o:25}} Ω and `pmax` = {{o:900}}
 :::
 
 ::: problem NR12's Example 4.23
-
-**Using Superposition to Solve a Circuit with Dependent Sources.**
 
 Use the principle of superposition to find $v_o$ in the circuit shown in Fig. 4.71.
 
@@ -372,8 +354,6 @@ Symbulator returns `v_r2` = {{o:24}} V, `v_r3` = {{o:10}} V and `i_r1` = {{o:-2.
 :::
 
 ::: problem NR12's Example 5.1
-
-**Analyzing an Op Amp Circuit.**
 
 The op amp in the circuit shown in Fig. 5.7 is ideal. a) Calculate $v_o$ if $v_a$ = 1 V and $v_b$ = 0 V. b) Repeat (a) for $v_a$ = 1 V and $v_b$ = 2 V. c) If $v_a$ = 1.5 V, specify the range of $v_b$ that avoids amplifier saturation.
 
@@ -409,8 +389,6 @@ v_{3} = - 4 va + 5 vb\,\mathrm{V}
 
 ::: problem NR12's Example 5.3
 
-**Designing a Summing Amplifier.**
-
 a) Design a summing amplifier whose output voltage is $v_o = -4v_a - v_b - 5v_c$, using an ideal op amp with ±12 V power supplies and a 20 kΩ feedback resistor. b) Suppose $v_a$ = 2 V and $v_c$ = $-$1 V. What range of input voltages for $v_b$ allows the op amp to remain linear?
 
 ::: figure assets/circuit/nr12-ex5-3.jpg
@@ -445,8 +423,6 @@ v_{4} = - 4 va - vb - 5 vc\,\mathrm{V}
 :::
 
 ::: problem NR12's Example 5.3 part c
-
-**Designing a Summing Amplifier — part (c), in Expert Mode.**
 
 c) Suppose $v_a$ = 2 V, $v_b$ = 3 V and $v_c$ = $-$1 V. Using the input resistor values found in part (a), how large can the feedback resistor be before the op amp saturates?
 
@@ -487,8 +463,6 @@ Symbulator returns `rf` = {{o:40000}} Ω.
 
 ::: problem NR12's Example 5.5
 
-**Designing a Difference Amplifier.**
-
 a) Design a difference amplifier that amplifies the difference between two input voltages by a gain of 8, using an ideal op amp and ±8 V power supplies. b) Suppose $v_a$ = 1 V. What range of $v_b$ keeps the op amp linear?
 
 ::: figure assets/circuit/nr12-ex5-5.jpg
@@ -523,8 +497,6 @@ v_{3} = - 8 va + 8 vb\,\mathrm{V}
 
 ::: problem NR12's Example 5.7
 
-**Analyzing a Noninverting-Amplifier Circuit Using a Realistic Op Amp Model.**
-
 Analyze the noninverting amplifier of Example 5.4 using the realistic op amp model, with open-loop gain $A$ = 50,000, input resistance $R_i$ = 100 kΩ and output resistance $R_o$ = 7.5 kΩ; there is no load resistance at the output. Find the gain $v_o/v_g$.
 
 ::: figure assets/circuit/nr12-ex5-7.jpg
@@ -553,8 +525,6 @@ Symbulator returns `v_3/vg` = {{o:5.9988}}.
 
 ::: problem NR12's Example 18.1
 
-**Finding the z Parameters of a Two-Port Circuit.**
-
 Find the z parameters for the circuit shown in Fig. 18.3.
 
 ::: figure assets/circuit/nr12-ex18-1.jpg
@@ -578,8 +548,6 @@ Symbulator returns `z11` = {{o:10}} Ω, `z12` = {{o:7.5}} Ω, `z21` = {{o:7.5}} 
 :::
 
 ::: problem NR12's Example 18.6
-
-**Analyzing Cascaded Two-Port Circuits.**
 
 Two identical amplifiers are connected in cascade. Each is described by its h parameters: $h_{11}$ = 1000 Ω, $h_{12}$ = 0.0015, $h_{21}$ = 100, $h_{22}$ = 100 µS. The source has 500 Ω of internal resistance and the load is 10 kΩ. Find the voltage gain $V_2/V_g$.
 
@@ -618,8 +586,6 @@ so what the book does in $s$ the solver does out of sight.
 
 ::: problem NR12's Example 7.1
 
-**Determining the Natural Response of an RL Circuit.**
-
 The switch in the circuit shown in Fig. 7.6 has been closed for a long time before it is opened at $t$ = 0. Find a) $i_L(t)$ for $t$ ≥ 0, b) $i_o(t)$ for $t$ ≥ 0+, c) $v_o(t)$ for $t$ ≥ 0+.
 
 ::: figure assets/circuit/nr12-ex7-1.jpg
@@ -654,8 +620,6 @@ v_{2} = - 160 e^{- 5 t}\,\mathrm{V}
 :::
 
 ::: problem NR12's Example 7.3
-
-**Determining the Natural Response of an RC Circuit.**
 
 The switch in the circuit shown in Fig. 7.15 has been in position x for a long time. At $t$ = 0 it moves instantaneously to position y. Find a) $v_C(t)$ for $t$ ≥ 0, b) $v_o(t)$ for $t$ ≥ 0+, and c) $i_o(t)$ for $t$ ≥ 0+.
 
@@ -692,8 +656,6 @@ i_{r3} = 0.001 e^{- 25 t}\,\mathrm{A}
 
 ::: problem NR12's Example 7.5
 
-**Determining the Step Response of an RL Circuit.**
-
 The switch in the circuit shown in Fig. 7.21 has been in position a for a long time. At $t$ = 0 it moves from position a to position b. The switch is a make-before-break type, so the inductor current is continuous. a) Find the expression for $i(t)$ for $t$ ≥ 0. b) What is the initial voltage across the inductor just after the switch has been moved to position b?
 
 ::: figure assets/circuit/nr12-ex7-5.jpg
@@ -723,8 +685,6 @@ v_{2} = 40 e^{- 10 t}\,\mathrm{V}
 :::
 
 ::: problem NR12's Example 7.10
-
-**Determining the Step Response of a Circuit with Magnetically Coupled Coils.**
 
 There is no energy stored in the circuit in Fig. 7.37 at the time the switch is closed. Find the solutions for $i_o$, $v_o$, $i_1$ and $i_2$.
 
@@ -766,8 +726,6 @@ i_{l2} = -8 + 8 e^{- 5 t}\,\mathrm{A}
 
 ::: problem NR12's Example 7.11 to 35 ms
 
-**Analyzing an RL Circuit That Has Sequential Switching (0 to 35 ms).**
-
 The two switches in the circuit shown in Fig. 7.39 have been closed for a long time. At $t$ = 0 switch 1 is opened; then, 35 ms later, switch 2 is opened. a) Find $i_L(t)$ for 0 ≤ $t$ ≤ 35 ms.
 
 ::: figure assets/circuit/nr12-ex7-11.jpg
@@ -795,8 +753,6 @@ i_{l} = 6 e^{- 40 t}\,\mathrm{A}
 
 ::: problem NR12's Example 7.11 after 35 ms
 
-**Analyzing an RL Circuit That Has Sequential Switching (after 35 ms).**
-
 b) Find $i_L(t)$ for $t$ ≥ 35 ms. (Time is measured from the second switching.)
 
 ::: figure assets/circuit/nr12-ex7-11.jpg
@@ -822,8 +778,6 @@ i_{l} = 1.47961 e^{- 60 t}\,\mathrm{A}
 :::
 
 ::: problem NR12's Example 7.13
-
-**Finding the Unbounded Response in an RC Circuit.**
 
 a) When the switch is closed in the circuit shown in Fig. 7.45, the voltage on the capacitor is 10 V. Find the expression for $v_o$ for $t$ ≥ 0. b) Assume that the capacitor short-circuits when its terminal voltage reaches 150 V. How many milliseconds elapse before the capacitor short-circuits?
 
@@ -851,8 +805,6 @@ v_{1} = 10 e^{40 t}\,\mathrm{V}
 :::
 
 ::: problem NR12's Example 8.2
-
-**Finding the Overdamped Natural Response of a Parallel RLC Circuit.**
 
 For the circuit in Fig. 8.6, $v(0^+)$ = 12 V and $i_L(0^+)$ = 30 mA. Find the expression for $v(t)$. (Example 8.3 asks the same circuit for its three branch currents.)
 
@@ -888,8 +840,6 @@ i_{l} = 0.056 e^{- 5000 t} - 0.026 e^{- 20000 t}\,\mathrm{A}
 
 ::: problem NR12's Example 8.4
 
-**Finding the Underdamped Natural Response of a Parallel RLC Circuit.**
-
 In the circuit shown in Fig. 8.8, $V_0$ = 0 and $I_0$ = $-$12.25 mA. Calculate the voltage response for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex8-4.jpg
@@ -915,8 +865,6 @@ v_{1} = 100.021 e^{- 200 t} \sin{\left(979.796 t \right)}\,\mathrm{V}
 :::
 
 ::: problem NR12's Example 8.11
-
-**Finding the Natural Response of a Series RLC Circuit.**
 
 The 0.1 µF capacitor in the circuit shown in Fig. 8.17 is charged to 100 V. At $t$ = 0 the capacitor is discharged through a series combination of a 100 mH inductor and a 560 Ω resistor. a) Find $i(t)$ for $t$ ≥ 0. b) Find $v_C(t)$ for $t$ ≥ 0.
 
@@ -944,8 +892,6 @@ i_{l} = - 0.104167 e^{- 2800 t} \sin{\left(9600 t \right)}\,\mathrm{A}
 
 ::: problem NR12's Example 8.12
 
-**Finding the Step Response of a Series RLC Circuit.**
-
 No energy is stored in the 100 mH inductor or the 0.4 µF capacitor when the switch in the circuit shown in Fig. 8.18 is closed. Find $v_C(t)$ for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex8-12.jpg
@@ -972,8 +918,6 @@ v_{3} = 48 - 64 e^{- 2500 t} + 16 e^{- 10000 t}\,\mathrm{V}
 :::
 
 ::: problem NR12's Example 13.5
-
-**Analyzing a Circuit with Multiple Meshes.**
 
 The circuit in Fig. 13.17 has no initial stored energy. At $t$ = 0 the switch closes. Use Laplace methods to find $i_1(t)$ and $i_2(t)$ for $t$ ≥ 0.
 
@@ -1007,8 +951,6 @@ i_{l2} = 7 - 8.4 e^{- 2 t} + 1.4 e^{- 12 t}\,\mathrm{A}
 
 ::: problem NR12's Example 13.7
 
-**Analyzing a Circuit with Mutual Inductance.**
-
 The make-before-break switch in the circuit in Fig. 13.23 has been in position a for a long time. At $t$ = 0 it moves instantaneously to position b. Use Laplace methods to find $i_2(t)$ for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex13-7.jpg
@@ -1041,8 +983,6 @@ i_{l1} = \frac{5 \left(e^{2 t} + 1\right) e^{- 3 t}}{2}\,\mathrm{A}
 :::
 
 ::: problem NR12's Example 13.13
-
-**A Series Inductor Circuit with an Impulsive Response.**
 
 The switch in the circuit shown in Fig. 13.50 has been closed for a long time. At $t$ = 0 it opens. Use Laplace methods to find the output voltage $v_o$ and the current in the 3 H inductor, $i_1$.
 
@@ -1086,8 +1026,6 @@ so in {{card:Settings}}.
 
 ::: problem NR12's Example 9.9
 
-**Combining Impedances in Series and in Parallel.**
-
 The sinusoidal current source in the circuit shown in Fig. 9.20 produces the current $i_s$ = 8 cos 200,000$t$ A. b) Find the equivalent admittance to the right of the current source. c) Find the phasor voltage $V$. d) Find the phasor current $I$. e) Find the steady-state expressions for $v$ and $i$.
 
 ::: figure assets/circuit/nr12-ex9-9.jpg
@@ -1113,8 +1051,6 @@ Symbulator returns `v_1` = {{o:32 - 24j}} V ({{o:40.00}}∠{{o:-36.87}}°) and `
 :::
 
 ::: problem NR12's Example 9.10
-
-**Using a Delta-to-Wye Transform in the Frequency Domain.**
 
 Use a delta-to-wye impedance transformation to find $I_0$, $I_1$, $I_2$, $I_3$, $I_4$, $I_5$, $V_1$ and $V_2$ in the circuit in Fig. 9.23.
 
@@ -1143,8 +1079,6 @@ Symbulator returns `-i_e` = {{o:2.4 + 3.2j}} A ({{o:4.000}}∠{{o:53.13}}°), `i
 
 ::: problem NR12's Example 9.12
 
-**Finding a Thévenin Equivalent in the Frequency Domain.**
-
 Find the Thévenin equivalent circuit with respect to terminals a,b for the circuit shown in Fig. 9.32.
 
 ::: figure assets/circuit/nr12-ex9-12.jpg
@@ -1171,8 +1105,6 @@ Symbulator returns `vth` = {{o:784 - 288j}} V ({{o:835.2}}∠{{o:-20.17}}°) and
 :::
 
 ::: problem NR12's Example 9.14
-
-**Using the Mesh-Current Method in the Frequency Domain.**
 
 Use the mesh-current method to find the voltages $V_1$, $V_2$ and $V_3$ in the circuit shown in Fig. 9.39.
 
@@ -1203,8 +1135,6 @@ Symbulator returns `v_1 - v_a` = {{o:78 - 104j}} V ({{o:130.0}}∠{{o:-53.13}}°
 
 ::: problem NR12's Example 9.15
 
-**Analyzing a Linear Transformer in the Frequency Domain.**
-
 A linear transformer has $R_1$ = 200 Ω, $R_2$ = 100 Ω, $L_1$ = 9 H, $L_2$ = 4 H and $k$ = 0.5, and couples a load of an 800 Ω resistor in series with a 1 µF capacitor to a 300 V (rms) source of internal impedance $500 + j100$ Ω at 400 rad/s. g) Calculate the Thévenin equivalent with respect to the terminals of the load impedance.
 
 ::: figure assets/circuit/nr12-ex9-15.jpg
@@ -1233,8 +1163,6 @@ Symbulator returns `vth` = {{o:93.9351 + 17.7715j}} V ({{o:95.60}}∠{{o:10.71}}
 :::
 
 ::: problem NR12's Example 10.8
-
-**Balancing Power Delivered with Power Absorbed in an AC Circuit.**
 
 a) Calculate the total average and reactive power delivered to each impedance in the circuit shown in Fig. 10.18. b) Calculate the average and reactive powers associated with each source. c) Verify that the average power delivered equals the average power absorbed, and likewise for the reactive power.
 
@@ -1265,8 +1193,6 @@ Symbulator returns `s_r1 + s_r2` = {{o:1690 + 3380j}} VA ({{o:3779}}∠{{o:63.43
 
 ::: problem NR12's Example 10.12
 
-**Finding Maximum Power Transfer in a Circuit with an Ideal Transformer.**
-
 The variable resistor in the circuit in Fig. 10.25 is adjusted until maximum average power is delivered to $R_L$. a) What is the value of $R_L$ in ohms? b) What is the maximum average power delivered to $R_L$?
 
 ::: figure assets/circuit/nr12-ex10-12.jpg
@@ -1291,8 +1217,6 @@ Symbulator returns `vth` = {{o:-210}} V, `z` = {{o:35}} Ω and `pmax` = {{o:315}
 :::
 
 ::: problem NR12's Example 11.1
-
-**Analyzing a Wye-Wye Circuit.**
 
 A balanced, positive-sequence Y-connected generator with an internal impedance of $0.2 + j0.5$ Ω per phase and an internal voltage of 120 V per phase feeds a balanced Y-connected load of $39 + j28$ Ω per phase over a line of $0.8 + j1.5$ Ω per phase; the a-phase internal voltage is the reference. b) Calculate the three line currents. c) Calculate the phase voltages at the load. d) Calculate the line voltages at the load. e) Calculate the phase voltages at the generator terminals.
 
@@ -1336,8 +1260,6 @@ inverts back into time, are in the TR section above.
 
 ::: problem NR12's Example 13.2
 
-**The Natural Response of an RC Circuit.**
-
 The circuit in Fig. 13.11 was analyzed in Example 7.3 using first-order circuit analysis techniques. Use the Laplace transform method to find $v_o(t)$ for $t$ ≥ 0+.
 
 ::: figure assets/circuit/nr12-ex13-2.jpg
@@ -1369,8 +1291,6 @@ v_{2} = \frac{60}{s + 25}\,\mathrm{V}
 
 ::: problem NR12's Example 13.3
 
-**The Step Response of an RLC Circuit.**
-
 Consider the circuit in Fig. 13.13, where the initial current in the inductor is 29 mA and the initial voltage across the capacitor is 50 V. This circuit was analyzed in Example 8.10 using second-order circuit analysis techniques. Use the Laplace transform method to find $v(t)$ for $t$ ≥ 0.
 
 ::: figure assets/circuit/nr12-ex13-3.jpg
@@ -1397,8 +1317,6 @@ v_{1} = \frac{50 s - 200000}{s^{2} + 80000 s + 1600000000}\,\mathrm{V}
 :::
 
 ::: problem NR12's Example 13.6
-
-**Creating a Thévenin Equivalent in the s Domain.**
 
 The circuit in Fig. 13.20 has no initial stored energy, and at $t$ = 0 the switch closes. Find the Thévenin equivalent for the circuit to the left of the terminals a and b in the s domain, using Laplace methods.
 
@@ -1431,8 +1349,6 @@ Z_{Th} = \frac{80 s + 600000}{s + 10000}\,\Omega
 
 ::: problem NR12's Example 13.9
 
-**Deriving the Transfer Function of a Circuit.**
-
 The voltage source $v_g$ drives the circuit shown in Fig. 13.31. The output signal is the voltage across the capacitor, $v_o$. a) Find the transfer function for this circuit. b) Calculate the numerical values for the poles and zeros of the transfer function.
 
 ::: figure assets/circuit/nr12-ex13-9.jpg
@@ -1460,8 +1376,6 @@ H(s) = \dfrac{v_{2}}{v_{g}} = \frac{1000 \left(s + 5000\right)}{s^{2} + 6000 s +
 :::
 
 ::: problem NR12's Example 14.6
-
-**Designing a Parallel RLC Bandpass Filter.**
 
 a) Show that the RLC circuit in Fig. 14.22 is a bandpass filter by deriving an expression for the transfer function $H(s)$. b) Compute the centre frequency. c) Calculate the cutoff frequencies, the bandwidth and $Q$. d) Compute $R$ and $L$ for a centre frequency of 5 kHz and a bandwidth of 200 Hz, using a 5 µF capacitor.
 

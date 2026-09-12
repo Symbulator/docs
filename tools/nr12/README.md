@@ -5,7 +5,7 @@ hand:**
 
 | generated | from |
 |---|---|
-| `Documentation/src/98-nr12-sampler.md` | `specs.py` + `chapter_parts.py`, rendered by `gen.py` |
+| `Documentation/src/98-nr12-sampler.md` | `specs.py` + `chapter_head.md` + `intro_*.md`, rendered by `gen.py` |
 | `Application/v9/repos/server/examples/Nilsson_Riedel.cir` | the same `specs.py`, rendered by `gen.py` |
 
 Editing either by hand works right up until the next `gen.py`, which
@@ -26,7 +26,8 @@ appear.
 | | |
 |---|---|
 | `specs.py` | **the data.** One dict per example: the book's question, the Symbulator description, the analysis, the answers to check against, and the prose. 43 of them |
-| `chapter_parts.py` | the chapter's own prose — front matter, opening, the four section intros |
+| `chapter_head.md` | **hand-editable markdown**: the front matter, the opening and *How to read an entry* — everything before the first section heading. `gen.py` copies it verbatim to the top of the chapter |
+| `intro_dc.md`, `intro_tr.md`, `intro_ac.md`, `intro_fd.md` | **hand-editable markdown**: the paragraph under each section heading. Each must open with its count in words (*Sixteen*, *Fourteen*…), which `gen.py` asserts against the specs |
 | `titles.py` | the short problem titles. **Load-bearing — see below** |
 | `gen.py` | renders both outputs |
 | `fmt.py` | rounding and LaTeX for the answers |

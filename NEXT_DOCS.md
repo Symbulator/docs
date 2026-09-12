@@ -8,8 +8,27 @@ Numbered on the running sequence shared with
 A readability pass over `/9/nr12-sampler`, prose only: every circuit,
 setting and expected answer is untouched, and `runner.check` still reads
 **43 ok, 0 bad**. The edits are in `tools/nr12/specs.py` (`ask`, `shows`,
-`parts`), `chapter_parts.py` and `gen.py`; the chapter and the app's
-`examples/Nilsson_Riedel.cir` are regenerated from them, never edited.
+`parts`), `chapter_head.md`, the four `intro_*.md` files and `gen.py`; the
+chapter and the app's `examples/Nilsson_Riedel.cir` are regenerated from
+them, never edited.
+
+**Roberto's review, in progress from Example 3.7 (12 Sep 2026).** His
+rules so far, each applied through `gen.py` so they hold for all 43: the
+book's title is not shown at all (it names the book's method, which is
+not how the reader will solve the problem), and the `.cir` note is the
+question alone; the paragraph above the run states no answer — *"do not
+show results before they are found by the student"* — so the mapping of
+an app name to the book's symbol moved into the answer sentence, as
+*`i_r7` = 2 A (the book's $i_o$)*, through a `booknames` field on the
+spec; and an entry reports only what the question asks, so 3.7 lost its
+`r_j` and `v_r7`. A brief, neutral sentence on what the book does is
+fine in the paragraph; he supplied 3.7's himself. The rules are being
+applied problem by problem as he reads, and **`learn` is deployed after
+each round so he reads them live** — web only, the PDFs to follow when
+the review is done. The chapter's hand-written prose moved out of Python
+into `chapter_head.md` and `intro_*.md` at his ask, so he can edit the
+top matter directly; `gen.py` reproduced the chapter byte for byte from
+the moved files before `chapter_parts.py` was deleted.
 
 **The questions were checked against the book itself**, page by page,
 from `Other/NR12.pdf`'s text layer (readable for prose, scrambled for

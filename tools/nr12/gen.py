@@ -150,7 +150,8 @@ def answer_blocks(s, vals):
             panels.append("::: result %s\n%s\n:::" % (lbl, body))
         else:
             shown = s.get("shownames", {}).get(k, k[1:] if k.startswith("@") else k)
-            numeric.append((shown, fmt.plain_value(got), unit, polar_of(s, got)))
+            numeric.append((shown, fmt.plain_value(got), unit, polar_of(s, got),
+                            s.get("booknames", {}).get(k)))
     return panels, numeric
 
 
@@ -178,14 +179,18 @@ def numeric_sentence(numeric):
     if not numeric:
         return ""
     parts = []
-    for name, val, unit, pol in numeric:
+    for name, val, unit, pol, book in numeric:
         u = UNIT_WORD.get(unit, unit)
         # a shown name is code unless it is a phrase -- "the sum of all eight"
         prose = " " in name and "_" not in name
         shown = name if prose else "`%s`" % name
         txt = "%s = {{o:%s}}%s" % (shown, val, (" " + u) if u else "")
-        if pol:
-            txt += " (%s)" % pol
+        # the answer is named against the book's own symbol *here*, beside
+        # the value, and not in the paragraph above the run: a reader meets
+        # an answer where the simulation finds it (Roberto, 12 Sep 2026)
+        aside = [x for x in (pol, ("the book's $%s$" % book) if book else "") if x]
+        if aside:
+            txt += " (%s)" % ", ".join(aside)
         parts.append(txt)
     body = parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]
     return "Symbulator returns " + body + "."
@@ -194,10 +199,9 @@ def numeric_sentence(numeric):
 def render(s, vals):
     num = s["num"]
     L = ["::: problem %s" % titles.short_title(num), ""]
-    # the book's own title for the example, which used to be in the heading:
-    # it has to leave, because the heading is now the key app_links joins on.
-    L.append("**%s.**" % polish(s["title"]))
-    L.append("")
+    # The book's own title ("Using Voltage Division and Current Division to
+    # Solve a Circuit") is not shown: it names the book's method, which is
+    # not how the reader will solve the problem (Roberto, 12 Sep 2026).
     L.append(polish(s["ask"]))
     L.append("")
     L.append("::: figure assets/circuit/%s" % figname(num))
@@ -283,7 +287,7 @@ def cir_entry(s):
     # and a braced subscript with it: $h_{11}$ reads as h_11 in a note
     ask = re.sub(r"\$([^$]*)\$", r"\1", ask)
     ask = re.sub(r"_\{([^}]*)\}", r"_\1", ask)
-    L.append("note: %s. %s" % (s["title"], ask))
+    L.append("note: %s" % ask)      # the question alone; the book's title names its method
     L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(num))
     L.append("rounding: 6")
     L.append("si: no")
@@ -322,15 +326,20 @@ def main():
             if s.get("domain", "dc") == grp:
                 body.append(render(s, solved[s["num"]]))
                 body.append("")
-    import chapter_parts as CP
-    text = CP.FRONT + "\n" + CP.OPENING + "\n" + "\n".join(body)
+    # The chapter's own prose is markdown beside this file, hand-editable:
+    # chapter_head.md is everything before the first section (front matter,
+    # opening, "How to read an entry"), and intro_<mode>.md is the paragraph
+    # under each section heading. Roberto edits those; gen.py only assembles.
+    head = io.open(os.path.join(_HERE, "chapter_head.md"), encoding="utf-8").read()
+    text = head.rstrip("\n") + "\n\n" + "\n".join(body)
     # Each section's intro opens with its count in words. Counts restated in
     # prose go stale (root CLAUDE.md, "A number restated in a second file"),
     # so the intro is checked against the specs it introduces.
     words = {5: "Five", 8: "Eight", 14: "Fourteen", 16: "Sixteen"}
     for g in ORDER:
         n = sum(1 for s in rows if s.get("domain", "dc") == g)
-        intro = CP.INTROS[g.upper()].strip()
+        intro = io.open(os.path.join(_HERE, "intro_%s.md" % g),
+                        encoding="utf-8").read().strip()
         assert intro.startswith(words.get(n, "%d " % n)), \
             "the %s intro says a different count from the %d specs it introduces" % (g, n)
         text = text.replace("@@INTRO_%s@@" % g.upper(), intro)
