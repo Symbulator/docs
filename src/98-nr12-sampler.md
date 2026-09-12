@@ -70,7 +70,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 3.7
 :::
 
 ::: answer
-The book applies two division formulas, one for the current and one for the voltage, after first reducing the circuit to find the equivalent resistance the source sees. Symbulator solves the whole circuit at once and both answers are among the results.
+Symbulator solves the whole circuit at once and both answers are among the results.
 
 ```field 9 Circuit Description
 j,0,1,8

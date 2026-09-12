@@ -43,10 +43,8 @@ dict(num="3.7", title="Using Voltage Division and Current Division to Solve a Ci
      desc="j,0,1,8:r1,1,2,36:r2,2,0,44:r3,1,0,10:r4,1,3,40:r5,3,4,10:r6,4,0,30:r7,1,0,24",
      expect={"i_r7": 2, "v_r6": 18},
      booknames={"i_r7": "i_o", "v_r6": "v_o"},
-     shows="The book applies two division formulas, one for the current and one for the "
-           "voltage, after first reducing the circuit to find the equivalent resistance "
-           "the source sees. Symbulator solves the whole circuit at once and both answers "
-           "are among the results."),
+     shows="Symbulator solves the whole circuit at once and both answers are among the "
+           "results."),
 
 dict(num="3.11", title="Applying a Delta-to-Wye Transform",
      ask="Find the current and power supplied by the 40 V source in the circuit shown in Fig. 3.35.",
