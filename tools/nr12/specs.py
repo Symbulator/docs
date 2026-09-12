@@ -249,9 +249,10 @@ dict(num="5.1", title="Analyzing an Op Amp Circuit",
 
 SPECS += [
 dict(num="5.3", title="Designing a Summing Amplifier",
-     ask="a) Design a summing amplifier whose output voltage is "
-         "$v_o = -4v_a - v_b - 5v_c$, using an ideal op amp with ±12 V power supplies "
-         "and a 20 kΩ feedback resistor. b) Suppose $v_a$ = 2 V and $v_c$ = $-$1 V. "
+     ask="a) You have designed a summing amplifier, as per the problem's specifications. "
+         "Verify that its output voltage is $v_o = -4v_a - v_b - 5v_c$, using an ideal "
+         "op amp with ±12 V power supplies and a 20 kΩ feedback resistor. b) Suppose "
+         "$v_a$ = 2 V and $v_c$ = $-$1 V. "
          "What range of input voltages for $v_b$ allows the op amp to remain linear?",
      page=185, fig=(185, "5.12"), domain="dc",
      desc="ea,1,0,va:eb,2,0,vb:ec,3,0,vc:r1,1,n,5'k:r2,2,n,20'k:r3,3,n,4'k:rf,n,4,20'k:o,0,n,4",
@@ -272,14 +273,14 @@ dict(num="5.3", title="Designing a Summing Amplifier",
            real_only=True, expect={"vb": -15}, unit="V", book={"vb": "v_b"}),
      ],
      parts=[
-      ("a", "The run returns exactly the formula the design was asked for, which is "
-            "the check that the three resistor values are right."),
+      ("a", "The run returns exactly the formula the design was to produce, which "
+            "verifies the three resistor values."),
       ("b", "The output sits on the −12 V rail at {{var:v_b}} = {{o:9}} V and on the "
             "+12 V rail at {{var:v_b}} = {{o:-15}} V, so the op amp remains linear for "
             "{{o:-15}} V ≤ {{var:v_b}} ≤ {{o:9}} V."),
      ],
      shows="A summing amplifier adds several input voltages, each with its own gain, and "
-           "inverts the sum; the question asks us to choose its resistors for the gains "
+           "inverts the sum; the question asks us to verify a design made for the gains "
            "given, then to find the range of one input that keeps it linear. The output "
            "of a summing amplifier with feedback resistor $R_f$ and input resistors $R_a$, "
            "$R_b$ and $R_c$ is $v_o = -(R_f/R_a)v_a - (R_f/R_b)v_b - (R_f/R_c)v_c$, so "
