@@ -227,31 +227,63 @@ which. That second form works only if the expression can be evaluated
 numerically.
 :::
 ::: only 9
-*pf* is the second of the mini-tools {{ref:lesson-ac}} introduced. In the
-{{card:Mini-Tools}} card choose *pf — power factor*; it asks for the voltage
-and the current:{{i:power factor}}{{i:pf mini-tool}}
+*pf* is the second of the mini-tools {{ref:lesson-ac}} introduced, and it
+works as the calculator's did. In the {{card:Mini-Tools}} card choose
+*pf — power factor*; it asks for one value, and there are two things you
+can give it.{{i:power factor}}{{i:pf mini-tool}}
 
-```field 9 Voltage
-ve
+**A complex power.** Give it the name of a complex power answer, such as
+`se`, or any complex expression — a number in rectangular or polar form,
+an impedance, an expression with symbols in it:
+
+```field 9 Value
+se
 ```
 
-```field 9 Current
--ie
+It answers {{o:0.97342}}: the absolute value of the real part divided by the
+magnitude of the whole thing, and nothing more. Under the number it says
+what it was read from: *this is the power factor for the power consumed in
+e*.
+
+**The name of an element.** Give it the name of an element of the circuit
+you have just solved in AC:
+
+```field 9 Value
+e
 ```
 
-It answers {{o:0.97342}} leading.
+It answers {{o:0.97342}} **leading**: the value and the word together, and
+under them *this is the power factor for the power delivered by source e*.
+This form works only when the element's voltage and current came out as
+numbers.
 
-It answers with the value and the word together.
+In a nutshell: given a complex power, or any complex expression, pf returns
+the power factor but says nothing about leading or lagging. Given the name
+of an element, right after an AC solve, it returns the value and says which.
 
-::: warning Mind the sign for a source
-The minus sign in front of `ie` is not a typo, and leaving it out gives you
-the wrong word. Symbulator reports the current *consumed by* each element,
-source or not, so `ie` runs into the source. The mini-tool is given two bare
-phasors and cannot know that one belongs to a source. Call it with `-ie`, the
-current the source *delivers*, and you get {{o:0.97342}} leading; with `ie` you
-get 0.97342 lagging, the same magnitude and the wrong answer.
+::: note Which power the reading is taken on
+The two forms do not read the same power, and the difference is what makes
+the word come out right.
 
-The rule of thumb: negate the current for a source, leave it alone for a load.
+Given a **variable** such as `se`, `sj` or `sr1`, the calculation is done on
+the value as it stands — the complex power *consumed*, which is what
+Symbulator stores for every element, source or load alike. That cannot say
+leading from lagging, because the same complex power is consumed by one
+side of a branch and delivered by the other, and a bare number does not
+know which side it came from; so this form gives the value alone.
+
+Given a **name**, the tool reads the sign convention off the element's
+kind, the way the calculator did. For an impedance — `r`, and in version 9
+`l` and `c` as well — the angle is taken between the element's voltage and
+the current it *consumes*, so the reading is the element's own: an
+inductive load reads lagging. For a source — `e` or `j` — the current is
+negated first, so the angle is taken on the power the source *delivers*,
+and the reading is that of the whole circuit the source sees. A source
+feeding an inductive load reads lagging, the same word as the load.
+
+The value is the same either way; only the word depends on it. A source
+read on its consumed power, `se`, would say the opposite word — which is
+why the tool wants the name, and does the negating itself.
 :::
 :::
 
@@ -350,16 +382,11 @@ Written out as four elements rather than one, which is clearer and costs
 nothing here. The average power supplied is the opposite of the power the
 source consumes, `pe`: {{o:2007.1}} W.
 
-For the power factor, use {{card:Mini-Tools}} with *pf*, giving it the source's
-voltage and the current it delivers — which is the opposite of the current
-through the source element:
+For the power factor, use {{card:Mini-Tools}} with *pf*, giving it the
+source's name, so that the reading is of the circuit the source sees:
 
-```field 9 Voltage
-ve
-```
-
-```field 9 Current
--ie
+```field 9 Value
+e
 ```
 :::
 
@@ -439,7 +466,7 @@ consumes: {{v7,8|`-se`}}{{v9|the opposite of `se`}} gives
 {{o:1835.9}} − {{o:114.7}}j VA.
 
 **(b)** The power factor, from {{v7,8|`s\pf("e")`}}{{v9|*pf* in {{card:Mini-Tools}}
-with `ve` and `-ie`}}, is {{o:0.99805}} leading.
+given the source's name, `e`}}, is {{o:0.99805}} leading.
 
 **(c)** This one needs a frequency, because it needs a capacitor. Add one in
 parallel with a symbolic value (let's say x), and run at the stated 50 Hz —
@@ -467,8 +494,11 @@ c,1,0,x
 
 ::: only 9
 Put `2*pi*50` in the {{ui:ω — angular frequency}} box — it takes an expression.
-Then ask the {{card:Solve}} card for the value of `x` that leaves no reactive
-power:
+Give *pf* the complex power `se` now and it answers with an expression in
+`x`: the power factor as a function of the capacitance, which is what the
+calculator solved for 1. In version 9, ask the {{card:Solve}} card instead
+for the value of `x` that leaves no reactive power, which is the same
+condition:
 
 ```field 9 Equation(s) to solve in terms of the results
 im(se) = 0

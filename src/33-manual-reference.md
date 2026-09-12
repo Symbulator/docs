@@ -75,7 +75,7 @@ Case matters everywhere but kilo. `8000` and `8'k` are exact; `8000.` and
 | Thévenin / Norton | two nodes | `vth`, `ino`, `req`, `pmax` |
 | …with the load tick | | plus `irl`, `vrl`, `prl` |
 | Two-port parameters | two nodes, a kind | four parameters of that kind |
-| {{tool:pf}} | complex power or impedance | power factor, with lead/lag |
+| {{tool:pf}} | a complex power, or an element's name | power factor; with lead/lag for a name |
 | {{tool:gain}} | parameters and a load | *G*ᵥ, *G*ᵢ, *G*ₚ, *Z*ᵢₙ |
 | {{tool:aa}} | a complex value | amplitude and angle |
 

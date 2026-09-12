@@ -62,8 +62,28 @@ and the power factor is 0.6, lagging.{{i:complex power}}
 omission: a pure reactance consumes none, and a zero printed every time
 would be noise.{{i:average power}}
 
-The {{tool:pf}} mini-tool takes a complex power or an impedance and returns
-the power factor with its lead/lag sense.{{i:power factor}}{{i:pf mini-tool}}
+The {{tool:pf}} mini-tool takes one value, and which of two things it is
+decides what comes back.{{i:power factor}}{{i:pf mini-tool}} Given a complex
+power such as `se` — or any complex value, an impedance, an expression with
+symbols in it — it returns the power factor alone, |*P*|/|*S*|, symbolic if
+the value is. Given the **name** of an element of the AC solve, `e` or `r1`,
+it returns the power factor with its lead/lag sense, and it works only when
+that element's voltage and current came out as numbers.
+
+**The two forms read different powers, and that is what makes the word
+right.** A variable such as `se`, `sj` or `sr1` is read as it stands: the
+complex power *consumed*, which is what every element stores, source or
+load. That cannot tell leading from lagging — the same power is consumed
+by one side of a branch and delivered by the other — so the variable form
+gives the value alone. A name is read by the element's kind, as the
+calculator read it: an impedance (`r`, `l`, `c`) on the power it
+*consumes*, so an inductive load reads lagging; a source (`e`, `j`) on the
+power it *delivers*, the current negated first, so a source reads the
+circuit it sees, and a source feeding an inductive load says lagging like
+the load. The value is the same either way; only the word depends on it,
+and a source read on `se` would say the opposite word. The tool says which
+under every reading: *the power consumed in e* for `se`, *the power
+delivered by source e* or *the power consumed by impedance r1* for a name.
 
 ::: warning RMS is the one setting that changes an answer
 **RMS phasors**, in {{card:Settings}}, is not a display choice. Off means

@@ -3,9 +3,60 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
-## #430 — the pf tool as version 8 has it: one value, a power or a name (docs half) — **claimed 13 Sep 2026, in progress**
+## #430 — the pf tool as version 8 has it: one value, a power or a name (docs half) — **built and checked, 13 Sep 2026; not deployed**
 
-Claimed in both trees before use; the app half is in `Application/v9/repos/local/NEXT.md`. Write-up follows.
+The app half -- what the tool now does and why -- is #430 in
+`Application/v9/repos/local/NEXT.md`. This is what the books say about it.
+
+**The rule the pages now state, in Roberto's words of 13 Sep 2026.** When
+the *variable* of the power is given -- `se`, `sj`, `sr` -- the
+calculation is done on the complex power *consumed*, regardless of
+whether the element is a source or an impedance, and the answer is the
+value alone. When the *name* of the element is given, a source (`e`, `j`)
+is read on the power it **delivers** and an impedance (`r`) on the power
+it **consumes**, and that is what decides leading or lagging. *This is
+crucial and should be in the documentation.* It is now in three places,
+each in its own register.
+
+  * **`08-lesson-power.md`, *The pf mini-tool*, version 9 pages only.**
+    Rewritten around the two forms, each with its one `Value` field box
+    (`se`, then `e`), the reading each gives, and the line the tool prints
+    under it. The *Mind the sign for a source* warning box is gone -- it
+    documented the workaround the old port needed -- and in its place a
+    `::: note` box, *Which power the reading is taken on*, carries the
+    rule above with the reasons: why a variable cannot say the word, why
+    a name can, and that the value is the same either way. The
+    version 7 and 8 text is untouched.
+  * **Practice Problem 11.10 and Problem 11.75 (b)**: the version 9 answer
+    gives *pf* the source's name instead of `ve` and `-ie`. 11.75 (c)
+    gains one sentence: *pf* given `se` now answers with an expression in
+    `x`, which is what the calculator solved for 1, and the {{card:Solve}}
+    card's `im(se) = 0` is the same condition.
+  * **`07-lesson-ac.md`**, the Mini-Tools card list: *pf* takes one value,
+    a complex power for the factor alone or a name for the factor and the
+    word.
+  * **`28-manual-ac.md`**: the one-line description becomes two
+    paragraphs -- what each form takes and returns, then the rule, ending
+    with the three lines the tool prints. **`33-manual-reference.md`**:
+    the table row reads *a complex power, or an element's name* ->
+    *power factor; with lead/lag for a name*.
+  * **`examples/Lesson_08.cir`** (the app tree): the three notes that said
+    *pf with ve and -ie* now say *pf given the source's name, e*, and
+    Example 11.10's says why.
+
+**Checked.** `build.py --check` clean; `app_links.py` 384 of 386 as
+before (no entry was renamed); `build.py --web` run and
+`?v=9&p=lesson-power` read back through the local PHP server -- the
+section, the note box (`callout note`), the two problems and the
+11.75 (c) sentence all render as written, and nothing of it appears
+under `?v=7` or `?v=8` because every change is inside `::: only 9` or a
+`{{v9|...}}` span, bar the Lesson 8 heading's existing version span.
+
+**Not deployed, and the PDFs are affected.** The lesson's typeset text
+changed, so this is the documented exception to `--web`: when Roberto
+says go it is a full `python build.py` and a `learn` deploy, and the
+version 7 and 8 pages should be captured before and diffed after as
+usual.
 
 ## #429 — the Nilsson & Riedel sampler, made to read well — **live 12 Sep 2026** (learn, PDFs and the offline pair at cache v206; the server awaits its pull)
 
