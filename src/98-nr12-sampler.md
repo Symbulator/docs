@@ -1224,7 +1224,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.7
 :::
 
 ::: answer
-Two coupled coils, the primary fed from a source through a switch and the secondary closed on two resistors; the switch takes the source out at $t$ = 0, and the question wants the secondary's current afterwards. Two intervals, two runs. With the switch at position a the primary side has been steady for a long time. We describe the whole circuit, naming the resistors after their values, `r9`, `r3`, `r2b` and `r10`, the coils `l1` and `l2`, and the coupling as the `m` line with their mutual inductance, 2 H; we call the secondary's nodes **q**, **c** and **d**. A DC run gives both currents; it also notes that the secondary has no path to ground, which is true of the figure and changes nothing:
+Two coupled coils, the primary fed from a source through a switch and the secondary closed on two resistors; the switch takes the source out at $t$ = 0, and the question wants the secondary's current afterwards. Two intervals, two runs. With the switch at position a the primary side has been steady for a long time. We describe the whole circuit, naming the resistors after their values, `r9`, `r3`, `r2b` and `r10`, the coils `l1` and `l2`, and the coupling as the `m` line with their mutual inductance, 2 H; we call the secondary's top **q** and the node between its two resistors **c**, and take its bottom as ground -- nothing conducts between the two windings, so joining their bottoms changes no current. A DC run gives both currents:
 
 ```field 9 Circuit Description
 e,1,0,60
@@ -1232,9 +1232,9 @@ r9,1,a,9
 r3,a,p,3
 l1,p,0,2
 m,l1,l2,2
-l2,q,d,8
+l2,q,0,8
 r2b,q,c,2
-r10,c,d,10
+r10,c,0,10
 ```
 
 Set {{ui:Analysis}} to *DC — direct current*.
@@ -1247,17 +1247,15 @@ At $t$ = 0 the switch moves to b, which takes the source and the 9 Ω out and cl
 r3,0,p,3
 l1,p,0,2,5
 m,l1,l2,2
-l2,q,d,8,0
+l2,q,0,8,0
 r2b,q,c,2
-r10,c,d,10
+r10,c,0,10
 ```
 
 ::: applink NR12's Example 13.7 (TR)
 :::
 
 Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
-
-The secondary is still not connected to ground, so its bottom is simply the node we called **d**, and Symbulator again notes that it measures that side's voltages against **d**; the currents are unaffected.
 
 ::: result current through l2
 i_{l2} = \frac{\left(5 e^{2 t} - 5\right) e^{- 3 t}}{4}\,\mathrm{A}
@@ -1333,14 +1331,14 @@ so in {{card:Settings}}.
 
 ::: problem NR12's Example 9.9
 
-The sinusoidal current source in the circuit shown in the figure produces the current $i_s$ = 8 cos 200,000$t$ A. b) Find the equivalent admittance to the right of the current source. c) Find the phasor voltage $V$. d) Find the phasor current $I$. e) Find the steady-state expressions for $v$ and $i$.
+The sinusoidal current source in the circuit shown in the figure produces the current $i_s$ = 8 cos 200,000$t$ A. b) Find the equivalent admittance to the right of the current source. c) Find the phasor voltage $v$. d) Find the phasor current $i$. e) Find the steady-state expressions for $v$ and $i$.
 
 ::: figure assets/circuit/nr12-ex9-9.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 9.9
 :::
 
 ::: answer
-A sinusoidal current source at 200,000 rad/s feeding a resistor, a capacitor, and a branch of a resistor and an inductor; the question wants the admittance the source sees, the voltage across it and the current in the inductive branch as phasors, and those two as functions of time. The inductor and the capacitor are given as an inductance and a capacitance, and we write them as they are, `l,2,0,40'u` and `c,1,0,1'u`, putting the source's frequency, 200,000 rad/s, in the {{ui:ω — angular frequency}} box; the conversion to impedances is done inside the solver. We write the current source as `j,0,1,8`, its arrow pointing up into node 1, with its 8 A as the amplitude, which is what the book's phasors carry too, and name the resistors `r1` and `r2`. In AC each answer is a phasor, printed both as a complex number and as an amplitude with an angle: $V$ is the voltage at node 1 and $I$ the current through `r2`.
+A sinusoidal current source at 200,000 rad/s feeding a resistor, a capacitor, and a branch of a resistor and an inductor; the question wants the admittance the source sees, the voltage across it and the current in the inductive branch as phasors, and those two as functions of time. The inductor and the capacitor are given as an inductance and a capacitance, and we write them as they are, `l,2,0,40'u` and `c,1,0,1'u`, putting the source's frequency, 200,000 rad/s, in the {{ui:ω — angular frequency}} box; the conversion to impedances is done inside the solver, so part (a), constructing the frequency-domain equivalent circuit, is out of scope for Symbulator and has been skipped. We write the current source as `j,0,1,8`, its arrow pointing up into node 1, with its 8 A as the amplitude, which is what the book's phasors carry too, and name the resistors `r1` and `r2`. In AC each answer is a phasor, printed both as a complex number and as an amplitude with an angle: $v$ is the voltage at node 1 and $i$ the current through `r2`.
 
 ```field 9 Circuit Description
 j,0,1,8
@@ -1352,7 +1350,7 @@ c,1,0,1'u
 
 Set {{ui:Analysis}} to *AC — alternating current*. Put **200000** in the {{ui:ω — angular frequency}} box. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `v_1` = {{o:32 - 24j}} V ({{o:40.00}}∠{{o:-36.87}}°, the book's $V$) and `i_r2` = {{o:-4j}} A ({{o:4.000}}∠{{o:-90.00}}°, the book's $I$).
+Symbulator returns `v_1` = {{o:32 - 24j}} V ({{o:40.00}}∠{{o:-36.87}}°, the book's $v$) and `i_r2` = {{o:-4j}} A ({{o:4.000}}∠{{o:-90.00}}°, the book's $i$).
 
 Part (b) asks for the admittance the source sees. Symbulator reports the impedance seen by each source, here `z_j`, and an admittance is the reciprocal of an impedance, so we type into {{card:Evaluate}}:
 
@@ -1413,18 +1411,18 @@ Nilsson & Riedel, 12th edition — the circuit for Example 9.12
 :::
 
 ::: answer
-An AC circuit with a dependent source inside it, and the question wants its Thévenin equivalent, a voltage and an impedance, seen from two terminals. The dependent voltage source is worth ten times $V_x$, the voltage across the 60 Ω resistor; we name that resistor `r2` and place it between node 2 and ground, so that $V_x$ is the voltage at node 2 and the source's value is `10*v2`. We call the terminals a and b nodes **9** and **0**, and name them to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which returns the equivalent's voltage and impedance; a dependent source in the circuit is no obstacle to it.
+An AC circuit with a dependent source inside it, and the question wants its Thévenin equivalent, a voltage and an impedance, seen from two terminals. The dependent voltage source is worth ten times $V_x$, the voltage across the 60 Ω resistor; we name that resistor `r2` and place it between node 2 and ground, so that $V_x$ is the voltage at node 2 and the source's value is `10*v2`. The figure names the terminals a and b; b is the bottom rail, which we take as ground, so we keep **a** as the top terminal's node and name **a** and **0** to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which returns the equivalent's voltage and impedance; a dependent source in the circuit is no obstacle to it.
 
 ```field 9 Circuit Description
 e1,1,0,120
 r1,1,2,12
 r2,2,0,60
-r3,2,9,-40j
+r3,2,a,-40j
 e2,3,0,10*v2
-r4,3,9,120
+r4,3,a,120
 ```
 
-Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **9** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `vth` = {{o:784 - 288j}} V ({{o:835.2}}∠{{o:-20.17}}°) and `zeq` = {{o:91.2 - 38.4j}} Ω ({{o:98.95}}∠{{o:-22.83}}°, the book's $Z_{Th}$).
 
@@ -1440,16 +1438,16 @@ Nilsson & Riedel, 12th edition — the circuit for Example 9.14
 :::
 
 ::: answer
-An AC circuit of two loops with a dependent voltage source in the far one, worth 39 times $I_x$, the current down through the middle branch; the question wants three voltages marked across three parts of the circuit. We name the 12 Ω `r3`, so its current is `ir3` and the source's value is `39*ir3`; we name the other impedances `r1` to `r6`, and call the top of the middle branch node **a**, the far side of the −{{var:j_16}} Ω node **c** and the dependent source's top node **b**. The three voltages are then: $V_1$, across the 1 Ω and {{var:j_2}} Ω on the left, the difference between the voltages at node 1 and node **a**; $V_2$, across the middle branch, the voltage at node **a** itself; and $V_3$, across the 1 Ω and {{var:j_3}} Ω on the right, the difference between nodes **a** and **b**.
+An AC circuit of two loops with a dependent voltage source in the far one, worth 39 times $I_x$, the current down through the middle branch; the question wants three voltages marked across three parts of the circuit. We name the 12 Ω `r3`, so its current is `ir3` and the source's value is `39*ir3`; we name the other impedances `r1` to `r6`. The nodes we name with letters rather than numbers, since $V_1$, $V_2$ and $V_3$ are the book's names for the three voltages asked and a node 1 would make `v1` read as one of them: the source's top is **p**, the node after the 1 Ω on the left **q**, the top of the middle branch **a**, the far side of the −{{var:j_16}} Ω **c**, the node after the 1 Ω on the right **d** and the dependent source's top **b**. The three voltages are then: $V_1$, across the 1 Ω and {{var:j_2}} Ω on the left, the difference between the voltages at node **p** and node **a**; $V_2$, across the middle branch, the voltage at node **a** itself; and $V_3$, across the 1 Ω and {{var:j_3}} Ω on the right, the difference between nodes **a** and **b**.
 
 ```field 9 Circuit Description
-e1,1,0,150
-r1,1,2,1
-r2,2,a,2j
+e1,p,0,150
+r1,p,q,1
+r2,q,a,2j
 r3,a,c,12
 r4,c,0,-16j
-r5,a,4,1
-r6,4,b,3j
+r5,a,d,1
+r6,d,b,3j
 e2,b,0,39*ir3
 ```
 
@@ -1459,10 +1457,10 @@ $V_2$ is the voltage at node **a** as the run reports it; the two differences we
 
 Symbulator returns `v_a` = {{o:72 + 104j}} V ({{o:126.5}}∠{{o:55.30}}°, the book's $V_2$).
 
-Then we type `v_1-v_a` into {{card:Evaluate}}:
+Then we type `v_p-v_a` into {{card:Evaluate}}:
 
 ```field 9 Evaluate
-v_1-v_a
+v_p-v_a
 ```
 
 It gives {{o:78 - 104j}} V ({{o:130.0}}∠{{o:-53.13}}°, the book's $V_1$).
@@ -1487,22 +1485,20 @@ Nilsson & Riedel, 12th edition — the circuit for Example 9.15
 :::
 
 ::: answer
-A linear transformer, two coupled coils each with its own winding resistance, between a source with an internal impedance and a load; the question wants the Thévenin equivalent seen from the load's terminals. The coils are given as inductances and the frequency is given, so we work out their impedances first: $j\omega L_1$ = $j$400 × 9 = $j$3600 Ω and $j\omega L_2$ = $j$400 × 4 = $j$1600 Ω, and the coupling from $k$: the mutual inductance is $M = k\sqrt{L_1 L_2}$ = 0.5 × 6 = 3 H, so $j\omega M$ = $j$1200 Ω. We then write each coil as an impedance, `r4` and `r5`, and the coupling between them as the `m` line naming the two and their mutual impedance, `m,r4,r5,1200j`; the winding resistances $R_1$ and $R_2$ we name `r3` and `r6`, and the source's internal impedance `r1` and `r2`. We leave the load out, because the question asks for the equivalent seen from its terminals, which we call nodes **c** and **d** and name to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen.
+A linear transformer, two coupled coils each with its own winding resistance, between a source with an internal impedance and a load; the question wants the Thévenin equivalent seen from the load's terminals. Of the book's seven parts, (a) to (f) are the steps of its own method -- the frequency-domain equivalent circuit, the two self-impedances, the reflected impedance, its scaling factor and the impedance looking into the primary -- and are skipped; only (g) asks about the circuit itself. The coils are given as inductances, so we write them as they are, `l1,p,0,9` and `l2,q,0,4`, and put the frequency, 400 rad/s, in the {{ui:ω — angular frequency}} box. The coupling the book gives as $k$, and the `m` line takes it as it is, `m,l1,l2,k=0.5`, naming the two coils; the mutual inductance is worked out inside. The winding resistances $R_1$ and $R_2$ we name `r3` and `r6`, and the source's internal impedance, given in ohms, `r1` and `r2`. We leave the load out, because the question asks for the equivalent seen from its terminals: we call the top one node **c** and take the bottom one as ground -- nothing conducts between the two windings, so joining their bottoms changes no current -- and name **c** and **0** to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen.
 
 ```field 9 Circuit Description
 e,1,0,300
 r1,1,2,500
 r2,2,a,100j
 r3,a,p,200
-r4,p,0,3600j
-m,r4,r5,1200j
-r5,q,d,1600j
+l1,p,0,9
+m,l1,l2,k=0.5
+l2,q,0,4
 r6,q,c,100
 ```
 
-Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **c** and **d**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
-
-The secondary side is not connected to ground anywhere, nothing conducts between the two windings, so its bottom is simply the node we have called **d**, and Symbulator says in a note that it has measured that side's voltages against **d**; the currents, the voltage differences and the equivalent are unaffected.
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **c** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Put **400** in the {{ui:ω — angular frequency}} box. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `vth` = {{o:93.94 + 17.77j}} V ({{o:95.60}}∠{{o:10.71}}°) and `zeq` = {{o:171.1 + 1224j}} Ω ({{o:1236}}∠{{o:82.04}}°, the book's $Z_{Th}$).
 

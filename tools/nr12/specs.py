@@ -684,12 +684,12 @@ SPECS += [
 dict(num="9.9", title="Combining Impedances in Series and in Parallel",
      ask="The sinusoidal current source in the circuit shown in the figure produces the "
          "current $i_s$ = 8 cos 200,000$t$ A. b) Find the equivalent admittance to the right "
-         "of the current source. c) Find the phasor voltage $V$. d) Find the phasor current "
-         "$I$. e) Find the steady-state expressions for $v$ and $i$.",
+         "of the current source. c) Find the phasor voltage $v$. d) Find the phasor current "
+         "$i$. e) Find the steady-state expressions for $v$ and $i$.",
      page=363, fig=(363, "9.20"), domain="ac", omega=200000,
      desc="j,0,1,8:r1,1,0,10:r2,1,2,6:l,2,0,40'u:c,1,0,1'u",
      expect={"v_1": 32 - 24j, "i_r2": -4j},
-     booknames={"v_1": "V", "i_r2": "I"},
+     booknames={"v_1": "v", "i_r2": "i"},
      evals=[dict(
         text="Part (b) asks for the admittance the source sees. Symbulator reports the "
              "impedance seen by each source, here `z_j`, and an admittance is the "
@@ -705,12 +705,14 @@ dict(num="9.9", title="Combining Impedances in Series and in Parallel",
            "capacitor are given as an inductance and a capacitance, and we write them as "
            "they are, `l,2,0,40'u` and `c,1,0,1'u`, putting the source's frequency, "
            "200,000 rad/s, in the {{ui:ω — angular frequency}} box; the conversion to "
-           "impedances is done inside the solver. We write the current source as "
+           "impedances is done inside the solver, so part (a), constructing the "
+           "frequency-domain equivalent circuit, is out of scope for Symbulator and "
+           "has been skipped. We write the current source as "
            "`j,0,1,8`, its arrow pointing up into node 1, with its 8 A as the amplitude, "
            "which is what the book's phasors carry too, and name the resistors `r1` and "
            "`r2`. In AC each answer is a phasor, printed both as "
-           "a complex number and as an amplitude with an angle: $V$ is the voltage at "
-           "node 1 and $I$ the current through `r2`."),
+           "a complex number and as an amplitude with an angle: $v$ is the voltage at "
+           "node 1 and $i$ the current through `r2`."),
 
 dict(num="9.10", title="Using a Delta-to-Wye Transform in the Frequency Domain",
      ask="Find $I_0$, $I_1$, $I_2$, $I_3$, $I_4$, $I_5$, $V_1$ and $V_2$ in the circuit "
@@ -740,8 +742,8 @@ dict(num="9.10", title="Using a Delta-to-Wye Transform in the Frequency Domain",
 dict(num="9.12", title="Finding a Thevenin Equivalent in the Frequency Domain",
      ask="Find the Thevenin equivalent circuit with respect to terminals a,b for the "
          "circuit shown in the figure.",
-     page=368, fig=(368, "9.32"), kind="th", n1="9", n2="0", domain="ac", omega=W,
-     desc="e1,1,0,120:r1,1,2,12:r2,2,0,60:r3,2,9,-40j:e2,3,0,10*v2:r4,3,9,120",
+     page=368, fig=(368, "9.32"), kind="th", n1="a", n2="0", domain="ac", omega=W,
+     desc="e1,1,0,120:r1,1,2,12:r2,2,0,60:r3,2,a,-40j:e2,3,0,10*v2:r4,3,a,120",
      expect={"vth": 784 - 288j, "z": 91.2 - 38.4j},
      booknames={"vth": "V_{Th}", "z": "Z_{Th}"},
      shows="An AC circuit with a dependent source inside it, and the question wants its "
@@ -749,28 +751,33 @@ dict(num="9.12", title="Finding a Thevenin Equivalent in the Frequency Domain",
            "dependent voltage source is worth ten times $V_x$, the voltage across the "
            "60 Ω resistor; we name that resistor `r2` and place it between node 2 and "
            "ground, so that $V_x$ is the voltage at node 2 and the source's value is "
-           "`10*v2`. We call the terminals a and b nodes **9** and **0**, and name them "
-           "to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which "
+           "`10*v2`. The figure names the terminals a and b; b is the bottom rail, which "
+           "we take as ground, so we keep **a** as the top terminal's node and name **a** "
+           "and **0** to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen, which "
            "returns the equivalent's voltage and impedance; a dependent source in the "
            "circuit is no obstacle to it."),
 
 dict(num="9.14", title="Using the Mesh-Current Method in the Frequency Domain",
      ask="Find the voltages $V_1$, $V_2$ and $V_3$ in the circuit shown in the figure.",
      page=372, fig=(372, "9.39"), domain="ac", omega=W,
-     desc="e1,1,0,150:r1,1,2,1:r2,2,a,2j:r3,a,c,12:r4,c,0,-16j:r5,a,4,1:r6,4,b,3j:"
+     desc="e1,p,0,150:r1,p,q,1:r2,q,a,2j:r3,a,c,12:r4,c,0,-16j:r5,a,d,1:r6,d,b,3j:"
           "e2,b,0,39*ir3",
-     shownames={"@v_1-v_a": "v_1 - v_a", "@v_a-v_b": "v_a - v_b"},
-     expect={"@v_1-v_a": 78 - 104j, "v_a": 72 + 104j, "@v_a-v_b": 150 - 130j},
-     booknames={"@v_1-v_a": "V_1", "v_a": "V_2", "@v_a-v_b": "V_3"},
+     shownames={"@v_p-v_a": "v_p - v_a", "@v_a-v_b": "v_a - v_b"},
+     expect={"@v_p-v_a": 78 - 104j, "v_a": 72 + 104j, "@v_a-v_b": 150 - 130j},
+     booknames={"@v_p-v_a": "V_1", "v_a": "V_2", "@v_a-v_b": "V_3"},
      shows="An AC circuit of two loops with a dependent voltage source in the far one, "
            "worth 39 times $I_x$, the current down through the middle branch; the "
            "question wants three voltages marked across three parts of the circuit. We "
            "name the 12 Ω `r3`, so its current is `ir3` and the source's value is "
-           "`39*ir3`; we name the other impedances `r1` to `r6`, and call the top of the "
-           "middle branch node **a**, the far side of the −j16 Ω node **c** and the "
-           "dependent source's top node **b**. The three voltages are then: $V_1$, "
+           "`39*ir3`; we name the other impedances `r1` to `r6`. The nodes we name with "
+           "letters rather than numbers, since $V_1$, $V_2$ and $V_3$ are the book's "
+           "names for the three voltages asked and a node 1 would make `v1` read as one "
+           "of them: the source's top is **p**, the node after the 1 Ω on the left "
+           "**q**, the top of the middle branch **a**, the far side of the −j16 Ω "
+           "**c**, the node after the 1 Ω on the right **d** and the dependent source's "
+           "top **b**. The three voltages are then: $V_1$, "
            "across the 1 Ω and j2 Ω on the left, the difference between the voltages at "
-           "node 1 and node **a**; $V_2$, across the middle branch, the voltage at node "
+           "node **p** and node **a**; $V_2$, across the middle branch, the voltage at node "
            "**a** itself; and $V_3$, across the 1 Ω and j3 Ω on the right, the difference "
            "between nodes **a** and **b**.",
      interpret="$V_2$ is the voltage at node **a** as the run reports it; the two "
@@ -782,30 +789,30 @@ dict(num="9.15", title="Analyzing a Linear Transformer in the Frequency Domain",
          "capacitor to a 300 V (rms) source of internal impedance $500 + j100$ Ω at "
          "400 rad/s. g) Calculate the Thevenin equivalent with respect to the terminals of "
          "the load impedance.",
-     page=375, fig=(376, "9.42"), kind="th", n1="c", n2="d", domain="ac", omega=W, rms=True,
-     desc="e,1,0,300:r1,1,2,500:r2,2,a,100j:r3,a,p,200:r4,p,0,3600j:m,r4,r5,1200j:"
-          "r5,q,d,1600j:r6,q,c,100",
+     page=375, fig=(376, "9.42"), kind="th", n1="c", n2="0", domain="ac", omega=400, rms=True,
+     desc="e,1,0,300:r1,1,2,500:r2,2,a,100j:r3,a,p,200:l1,p,0,9:m,l1,l2,k=0.5:"
+          "l2,q,0,4:r6,q,c,100",
      expect={"vth": 93.9351 + 17.7715j, "z": 171.086 + 1224.2595j}, tol=1e-4,
      booknames={"vth": "V_{Th}", "z": "Z_{Th}"},
      shows="A linear transformer, two coupled coils each with its own winding "
            "resistance, between a source with an internal impedance and a load; the "
-           "question wants the Thévenin equivalent seen from the load's terminals. The "
-           "coils are given as inductances and the frequency is given, so we work out "
-           "their impedances first: $j\\omega L_1$ = $j$400 × 9 = $j$3600 Ω and "
-           "$j\\omega L_2$ = $j$400 × 4 = $j$1600 Ω, and the coupling from $k$: the mutual "
-           "inductance is $M = k\\sqrt{L_1 L_2}$ = 0.5 × 6 = 3 H, so $j\\omega M$ = "
-           "$j$1200 Ω. We then write each coil as an impedance, `r4` and `r5`, and the "
-           "coupling between them as the `m` line naming the two and their mutual "
-           "impedance, `m,r4,r5,1200j`; the winding resistances $R_1$ and $R_2$ we name "
-           "`r3` and `r6`, and the source's internal impedance `r1` and `r2`. We leave "
+           "question wants the Thévenin equivalent seen from the load's terminals. Of "
+           "the book's seven parts, (a) to (f) are the steps of its own method -- the "
+           "frequency-domain equivalent circuit, the two self-impedances, the reflected "
+           "impedance, its scaling factor and the impedance looking into the primary -- "
+           "and are skipped; only (g) asks about the circuit itself. The "
+           "coils are given as inductances, so we write them as they are, `l1,p,0,9` "
+           "and `l2,q,0,4`, and put the frequency, 400 rad/s, in the {{ui:ω — angular "
+           "frequency}} box. The coupling the book gives as $k$, and the `m` line takes "
+           "it as it is, `m,l1,l2,k=0.5`, naming the two coils; the mutual inductance "
+           "is worked out inside. The winding resistances $R_1$ and "
+           "$R_2$ we name `r3` and `r6`, and the source's internal impedance, given in "
+           "ohms, `r1` and `r2`. We leave "
            "the load out, because the question asks for the equivalent seen from its "
-           "terminals, which we call nodes **c** and **d** and name to the "
-           "{{card:Find equivalent}} card with *Thévenin / Norton* chosen.",
-     interpret="The secondary side is not connected to ground anywhere, nothing conducts "
-           "between the two windings, so its bottom is simply the node we have called "
-           "**d**, and Symbulator says in a note that it has measured that side's voltages "
-           "against **d**; the currents, the voltage differences and the equivalent are "
-           "unaffected."),
+           "terminals: we call the top one node **c** and take the bottom one as "
+           "ground -- nothing conducts between the two windings, so joining their "
+           "bottoms changes no current -- and name **c** and **0** to the "
+           "{{card:Find equivalent}} card with *Thévenin / Norton* chosen."),
 ]
 
 SPECS += [
@@ -1003,25 +1010,23 @@ dict(num="13.7", title="Analyzing a Circuit with Mutual Inductance",
              "been steady for a long time. We describe the "
              "whole circuit, naming the resistors after their values, `r9`, `r3`, `r2b` "
              "and `r10`, the coils `l1` and `l2`, and the coupling as the `m` line with "
-             "their mutual inductance, 2 H; we call the secondary's nodes **q**, **c** "
-             "and **d**. A DC run gives both currents; it also notes that the secondary "
-             "has no path to ground, which is true of the figure and changes nothing:",
-        desc="e,1,0,60:r9,1,a,9:r3,a,p,3:l1,p,0,2:m,l1,l2,2:l2,q,d,8:r2b,q,c,2:r10,c,d,10",
+             "their mutual inductance, 2 H; we call the secondary's top **q** and the "
+             "node between its two resistors **c**, and take its bottom as ground -- "
+             "nothing conducts between the two windings, so joining their bottoms "
+             "changes no current. A DC run gives both currents:",
+        desc="e,1,0,60:r9,1,a,9:r3,a,p,3:l1,p,0,2:m,l1,l2,2:l2,q,0,8:r2b,q,c,2:r10,c,0,10",
         tag="DC, at position a",
         expect={"i_l1": 5, "i_l2": 0}, booknames={"i_l1": "i_1(0)", "i_l2": "i_2(0)"},
         note="This is the circuit at position a, before the switch moves, run in DC to "
              "find the two coil currents, which the next entry takes as its initial "
              "conditions.")],
-     desc="r3,0,p,3:l1,p,0,2,5:m,l1,l2,2:l2,q,d,8,0:r2b,q,c,2:r10,c,d,10",
+     desc="r3,0,p,3:l1,p,0,2,5:m,l1,l2,2:l2,q,0,8,0:r2b,q,c,2:r10,c,0,10",
      expect={"i_l2": "1.25*exp(-t) - 1.25*exp(-3*t)"},
      booknames={"i_l2": "i_2"},
      shows="At $t$ = 0 the switch moves to b, which takes the source and the 9 Ω out and "
            "closes the primary on the 3 Ω alone. We describe that circuit with the same "
            "names and the two currents just found as the coils' fifth fields, 5 and 0. "
-           "$i_2$ is the current through `l2`.",
-     interpret="The secondary is still not connected to ground, so its bottom is simply "
-           "the node we called **d**, and Symbulator again notes that it measures that "
-           "side's voltages against **d**; the currents are unaffected."),
+           "$i_2$ is the current through `l2`."),
 
 dict(num="13.9", title="Deriving the Transfer Function of a Circuit",
      ask="The voltage source $v_g$ drives the circuit shown in the figure. The output signal "

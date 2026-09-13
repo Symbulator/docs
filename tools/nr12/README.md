@@ -200,6 +200,13 @@ answer, `evals` with conditions, `solveq` runs, several roots):
     differs, the settings line says nothing about Rounding -- the app's
     default is *exact* -- and the entry says `rounding: exact`. A first
     run (`pre`) is classified on its own.
+25. **A floating side's bottom is ground.** A transformer's or coupled
+    coil's secondary with no path to the primary is written with its
+    bottom on node 0 -- one connection between two otherwise separate
+    networks carries no current, so nothing changes -- and the page says
+    so in half a sentence, instead of a node of its own plus a paragraph
+    about the island note the solver would print (Roberto, 13 Sep 2026,
+    on 13.7; 9.15 the same).
 
 The reader-facing fields of a spec:
 

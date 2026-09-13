@@ -40,7 +40,7 @@ node names are ours to choose.{{i:ground node}}{{i:reference node}}
 | **e** | voltage source | `n1,n2,value` |
 | **j** | current source | `n1,n2,value` |
 | **o** | ideal op amp | `n+,n−,nout` |
-| **m** | mutual inductance | `Lname1,Lname2,M` |
+| **m** | mutual inductance | `Lname1,Lname2,M` or `Lname1,Lname2,k=0.5` |
 | **s** | short circuit | `n1,n2` |
 | **t** | ideal transformer | `n1,n2,turns1,turns2` |
 | **z y h g a b** | two-port block | `n1,n2` *,[p11,p12,p21,p22]* |

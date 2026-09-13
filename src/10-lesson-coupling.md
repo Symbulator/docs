@@ -31,9 +31,17 @@ coupling. For example: `m1,l1,l2,1.5`
 That is a mutual inductance of 1.5 H between inductors **l1** and **l2**. In jΩ it
 looks the same, naming two **r** elements instead: `m1,r1,r2,2j`
 
+{{v9|A book that gives the coupling as a coefficient *k* rather than as an
+inductance is written as it states it, `m1,l1,l2,k=0.5`, and Symbulator
+works out *M* = *k*√(*L*₁*L*₂) itself; the same spelling works for coils
+in jΩ.{{i:coupling coefficient (k)}}}}
+
 ::: warning Don't mix the two
-`m1,l1,r1,2` couples an inductor given in henries to one given in jΩ. It will
-not be refused and it will not be right. Keep all three values in the same
+`m1,l1,r1,2` couples an inductor given in henries to one given in jΩ.
+{{v7,8|It will not be refused and it will not be right.}}{{v9|Symbulator refuses
+it, and refuses a coil or a coupling whose value is not of the right kind
+-- real and positive in henries, positive imaginary in jΩ -- or a
+coupling stronger than √(*L*₁*L*₂).}} Keep all three values in the same
 units: all henries, or all jΩ.
 :::
 

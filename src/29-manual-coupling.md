@@ -19,7 +19,31 @@ m1,l1,l2,0.01
 
 Those are the names of two `l` elements already in the circuit, and the
 last field is *M* in henries. It may be a symbol, and it may carry an SI
-prefix.
+prefix. A book that gives the coupling as a coefficient rather than an
+inductance is written as it states it:{{i:coupling coefficient (k)}}
+
+```
+m1,l1,l2,k=0.5
+```
+
+and Symbulator works out *M* = *k*√(*L*₁*L*₂) itself when it reads the
+description. *k* may be a symbol too, in which case *M* stays symbolic.
+
+The two coils may instead be written as impedances in AC, `r` elements
+with positive imaginary values, coupled by a positive imaginary *M* in
+ohms, `m1,r1,r2,2j`; `k=` works there as well, giving
+j*k*√(|*Z*₁||*Z*₂|).
+
+**The line is checked before anything runs.** Both names must be
+elements of the circuit and of one kind, two inductors in henries or
+two impedances in ohms; one of each is refused, where it used to be
+accepted and answered wrongly. A numeric value on either coil or on
+the coupling must be real and positive in henries, or positive
+imaginary in ohms, with no resistive or capacitive part; a symbol
+passes. With everything numeric the coupling may not exceed
+√(*L*₁*L*₂), which is a coefficient of 1, and a `k=` must lie between 0
+and 1. And a pair written in ohms is an AC description: in DC, TR and
+FD it is refused, and the coils are to be written in henries.{{i:mutual inductance, checks on}}
 
 **An `m` has no answers of its own.** It is a statement about two other
 elements; its effect turns up in their currents.

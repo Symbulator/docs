@@ -21,7 +21,7 @@ summary: >
 | **e** | voltage source | `n1,n2,value` | dependent if value names an answer |
 | **j** | current source | `n1,n2,value` | current flows n1 → n2 inside it |
 | **o** | ideal op amp | `n+,n−,nout` | a nullor; reports i and p, no v |
-| **m** | mutual inductance | `Lname1,Lname2,M` | names two inductors; no answers |
+| **m** | mutual inductance | `Lname1,Lname2,M` or `…,k=0.5` | names two inductors, both in henries or both in jΩ; no answers |
 | **s** | short circuit | `n1,n2` | |
 | **t** | transformer | `n1,n2,t1,t2` | or `[tl,bl],[tr,br],[t1,t2]` |
 | **z y h g a b** | two-port | `n1,n2` *,[p11,p12,p21,p22]* | or bracketed pairs |

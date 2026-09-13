@@ -3,6 +3,8 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #438 — claimed by the app tree, 13 Sep 2026: **the `m` line checked, and `k=` accepted** (solver 0.6.10). The docs moved with it: the Manual's coupling chapter gains the `k=` form and the checks, its grammar and reference tables the spelling, Lesson 10's *Don't mix the two* warning says the mixed form is refused now (version 9 only; 7 and 8 keep the old sentence), and the sampler's 9.15 reads `m,l1,l2,k=0.5`. Write-up in `Application/v9/repos/local/NEXT.md`
+
 ## #436 — the sampler at the book's rounding, and the Find equivalent card's own names — **live 13 Sep 2026; the last round at cache v222**
 
 **The evening's batch (rules 19 as split, 23, 24; cache v222).** Roberto,
