@@ -61,6 +61,16 @@ app, which is a separate and stricter test — `repos/server/tools/verify_lesson
 Nilsson_Riedel` posts every entry through the real app and is what caught
 Example 9.15, which passed the solver API and failed the app outright.
 
+## Working a feedback round
+
+Roberto reviews the chapter in rounds, across sessions. The procedure --
+batches, holding the build until his word, what each kind of change
+costs, the gates, the X merge, the notes, the handover -- is written up
+in `Notes/PROMPT_nr12_feedback_rounds.md` at the project root. Read it
+before the first item. The rules below are the product of those rounds;
+a correction that generalises becomes the next numbered rule here, in
+his words, and is applied across the chapter.
+
 ## Editing the prose
 
 **Roberto's seven rules, from his review of 12 Sep 2026** — every entry
