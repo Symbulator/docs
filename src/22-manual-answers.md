@@ -49,8 +49,8 @@ letter and the element's name.{{i:answer names}}
 | `v2` | voltage at node **2** | every node |
 | `ir1` | current through **r1** | every element |
 | `vr1` | voltage drop across **r1** | every element |
-| `pr1` | power consumed by **r1** | every element |
-| `apr1` | real power consumed | AC |
+| `pr1` | power consumed by **r1** — in AC the average (real) power | every element |
+| `qr1` | reactive power consumed | AC |
 | `sr1` | complex power consumed | AC |
 | `zr1` | impedance seen | AC, FD |
 | `rr1` | resistance seen | DC |

@@ -17,7 +17,7 @@ if _HERE not in sys.path:
     sys.path.insert(0, _HERE)
 
 UNIT = {"v": "V", "i": "A", "p": "W", "r": "\\Omega", "z": "\\Omega",
-        "s": "VA", "ap": "W"}
+        "s": "VA", "ap": "W", "q": "var"}
 
 def elements(desc):
     """Element names in a description, in order."""
@@ -66,7 +66,7 @@ def label_for(key, desc, spec):
     key = key.lstrip("@")
     if key in ("11", "12", "21", "22"):
         return "%s parameter z%s" % ("open-circuit", key)
-    m = re.match(r"^(ap|[vipzrs])_(.+)$", key)
+    m = re.match(r"^(ap|[vipqzrs])_(.+)$", key)
     if not m: return key
     kind, name = m.group(1), m.group(2)
     els = elements(desc)
@@ -74,8 +74,10 @@ def label_for(key, desc, spec):
     if kind == "v":
         return ("voltage drop across %s" % name) if is_el else ("voltage at node %s" % name)
     if kind == "i":  return "current through %s" % name
-    if kind == "p":  return "power consumed by %s" % name
-    if kind == "ap": return "average power in %s" % name
+    if kind == "p":  return ("average (real) power consumed by %s" if spec.get("domain") == "ac"
+                             else "power consumed by %s") % name
+    if kind == "ap": return "average (real) power in %s" % name
+    if kind == "q":  return "reactive power in %s" % name
     if kind == "s":  return "complex power in %s" % name
     if kind == "r":  return "resistance seen by %s" % name
     if kind == "z":  return "impedance seen by %s" % name
@@ -85,7 +87,7 @@ def unit_for(key, spec):
     if spec.get("units", {}).get(key) is not None: return spec["units"][key]
     if key.startswith("@"):
         # an expression over answers: take the unit of the first answer in it
-        m = re.search(r"\b(ap|[vipzrs])_", key)
+        m = re.search(r"\b(ap|[vipqzrs])_", key)
         return UNIT.get(m.group(1), "") if m else ""
     if key in ("vth",): return "V"
     if key in ("ino",): return "A"
@@ -93,7 +95,7 @@ def unit_for(key, spec):
     if key == "pmax":   return "W"
     if key in ("11", "12", "21", "22"):
         return "\\Omega" if spec.get("ptype") == "z" else ""
-    m = re.match(r"^(ap|[vipzrs])_", key)
+    m = re.match(r"^(ap|[vipqzrs])_", key)
     return UNIT.get(m.group(1), "") if m else ""
 
 def tex_name(key, spec):
@@ -103,7 +105,7 @@ def tex_name(key, spec):
     if tn: return TOOL_TEX[tn]
     key = key.lstrip("@")
     if key in ("11", "12", "21", "22"): return "z_{%s}" % key
-    m = re.match(r"^(ap|[vipzrs])_(.+)$", key)
+    m = re.match(r"^(ap|[vipqzrs])_(.+)$", key)
     if not m: return sp.latex(sp.Symbol(key))
     return "%s_{%s}" % (m.group(1), m.group(2).replace("_", ""))
 

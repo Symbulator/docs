@@ -152,11 +152,12 @@ $$
 
 That is the whole difference. The currents and voltages you get back are
 in whatever convention you typed the sources in, unchanged; only the power
-answers — `p` and `s` — depend on the tick, and the real power answers to
-`p` and to `ap` alike, whichever way the tick is set (the calculator named
-it `ap` with peak phasors and `p` with RMS ones); the reactive power is
-`im(se)` in {{card:Evaluate}}, the imaginary part of the complex power,
-and `re(se)` is the real power again. So for the same numbers
+answers — `p`, `q` and `s` — depend on the tick, and they keep their
+names whichever way it is set: `pe` is the average (real) power, `qe`
+the reactive power, `se` the complex power (the calculator named the
+average `ap` with peak phasors and `p` with RMS ones; `ape` still answers,
+as the same number as `pe`). With the tick on, the cards call every current and voltage
+*effective*, the RMS values being the effective values. So for the same numbers
 typed in, RMS on reports twice the power that RMS off does, and neither is
 wrong: they answer different questions. Match the book you are working
 from. The setting is always in view, so it is easier for you to notice
@@ -202,7 +203,7 @@ a single parallel combination.
 {{v7,8|The average power *consumed* by the source is in `pe`. To get the average power
 *delivered*, we ask for the negative of it, which gives us 125.4 W.}}{{v9|The average
 power *consumed* by the source is `pe`; the power *delivered* is its opposite,
-125.4 W.}}
+which the source's card reads as `-pe`, 125.4 W.}}
 :::
 :::
 
@@ -419,7 +420,7 @@ r4,3,0,-6j
 Written out as four elements rather than one, which is clearer and costs
 nothing here. The average power supplied is the opposite of the power the
 source consumes: `pe` reads {{o:-2007.1}} W, so the source supplies
-{{o:2007.1}} W.
+{{o:2007.1}} W, which its card reads as `-pe`.
 
 For the power factor, use {{card:Mini-Tools}} with *pf*, giving it the
 source's name, so that the reading is of the circuit the source sees:

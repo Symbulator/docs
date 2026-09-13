@@ -49,13 +49,16 @@ In AC an element reports more than in DC:
 
 | | |
 |---|---|
-| `p` | real power consumed, in watts — the average power; `ap` is the same answer under its older name |
+| `p` | average (real) power consumed, *P* = Re **S**, in watts — `ap` is the same answer under the calculator's name |
+| `q` | reactive power consumed, *Q* = Im **S**, in var |
 | `s` | complex power consumed, **S** = *P* + j*Q*, in VA |
 | `z` | impedance seen |
 
-A source's card shows the delivered forms of the first two, `-pe` and
-`-se`, and the power factor of the power it delivers; the answers `pe`
-and `se` are the consumed values all the same.
+The three are *P*, *Q* and **S** as every book writes them, whichever way
+the RMS setting is: RMS changes their values, not their names. A source's
+card shows the delivered forms, `-pe`, `-qe` and `-se`, and the power
+factor of the power it delivers; the answers `pe`, `qe` and `se` are the
+consumed values all the same.
 
 The same shape with a 30 Ω resistor and a 40 mH inductor, at 1000 rad/s
 again, so that the impedance is 30 + 40j, a 3-4-5 triangle:
@@ -75,13 +78,14 @@ Run in AC at ω = 1000, the source's card reads
 the negative of `se`, since a source's card shows what it delivers. So
 *P* = 0.6 W, *Q* = 0.8 var, |*S*| = 1.0 VA, and the card's last row gives
 the power factor of that delivered power, 0.6 lagging.{{i:complex power}}
-The two parts are one {{card:Evaluate}} step each, `re(-se)` for the real
-power and `im(-se)` for the reactive, and `abs(se)` is the apparent
+The card's next two rows are those two parts, `-pe` = 0.6 W and `-qe` =
+0.8 var, and `abs(se)` in {{card:Evaluate}} is the apparent
 power.{{i:reactive power}}
 
-**An inductor reports no real power**, only complex. That is not an
-omission: a pure reactance consumes none, and a zero printed every time
-would be noise.{{i:average power}}
+**An inductor or a capacitor reports only its complex power.** That is
+not an omission: a pure reactance consumes no average power, and a zero
+printed every time would be noise; its reactive power is `im(sl)` in
+{{card:Evaluate}}.{{i:average power}}
 
 The {{tool:pf}} mini-tool takes one value, and which of two things it is
 decides what comes back.{{i:power factor}}{{i:pf mini-tool}} Given a complex
@@ -112,8 +116,10 @@ value being what you gave it.
 **RMS phasors**, in {{card:Settings}}, is not a display choice. Off means
 peak amplitude, the ÷2 convention. For the same phasor magnitudes, RMS
 reports twice the power that peak does — a 10 V source across 5 Ω gives
-10 W with the tick off and 20 W with it on, and the answer's label changes
-with it. Match the book you are working from before comparing numbers.{{i:RMS}}
+10 W with the tick off and 20 W with it on. With the tick on every
+current and voltage label on the cards reads *effective*, since the
+magnitudes are then RMS values, the textbook's effective values. Match
+the book you are working from before comparing numbers.{{i:RMS}}
 :::
 
 ## Three-phase

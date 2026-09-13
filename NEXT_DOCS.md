@@ -3,6 +3,8 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #441 — claimed by the app tree, 13 Sep 2026: **the AC powers are `s`, `ap` and `q`, no `p`; *effective* under RMS** (solver 0.6.11, withdrawing #439's both-names). The docs moved with it: the Manual's AC table with three power rows and the RMS warning saying the labels turn *effective*, its answers table with `qr1`, Lesson 8's version 9 reading `ape`, the sampler's 10.16 reading `apmax`. Write-up in `Application/v9/repos/local/NEXT.md`
+
 ## #440 — the split view opens a named book's chapter — **13 Sep 2026**
 
 Roberto: *"the link to open these problems in split view is not opening
