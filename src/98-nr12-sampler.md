@@ -1438,40 +1438,19 @@ Nilsson & Riedel, 12th edition — the circuit for Example 9.14
 :::
 
 ::: answer
-An AC circuit of two loops with a dependent voltage source in the far one, worth 39 times $I_x$, the current down through the middle branch; the question wants three voltages marked across three parts of the circuit. We name the 12 Ω `r3`, so its current is `ir3` and the source's value is `39*ir3`; we name the other impedances `r1` to `r6`. The nodes we name with letters rather than numbers, since $V_1$, $V_2$ and $V_3$ are the book's names for the three voltages asked and a node 1 would make `v1` read as one of them: the source's top is **p**, the node after the 1 Ω on the left **q**, the top of the middle branch **a**, the far side of the −{{var:j_16}} Ω **c**, the node after the 1 Ω on the right **d** and the dependent source's top **b**. The three voltages are then: $V_1$, across the 1 Ω and {{var:j_2}} Ω on the left, the difference between the voltages at node **p** and node **a**; $V_2$, across the middle branch, the voltage at node **a** itself; and $V_3$, across the 1 Ω and {{var:j_3}} Ω on the right, the difference between nodes **a** and **b**.
+An AC circuit of two loops with a dependent voltage source in the far one, worth 39 times $I_x$, the current down through the middle branch; the question wants three voltages, each marked across a pair of impedances in series: $V_1$ across the 1 Ω and {{var:j_2}} Ω on the left, $V_2$ across the 12 Ω and −{{var:j_16}} Ω in the middle, $V_3$ across the 1 Ω and {{var:j_3}} Ω on the right. Nothing else connects inside a pair, so we write each pair as one impedance, `r1` worth `1+2j`, `r2` worth `12-16j` and `r3` worth `1+3j`, and each voltage asked is then that element's own drop. $I_x$ is the current through `r2`, so the dependent source's value is `39*ir2`. We name the source's top node **a**, the top of the middle branch **b** and the dependent source's top **c**.
 
 ```field 9 Circuit Description
-e1,p,0,150
-r1,p,q,1
-r2,q,a,2j
-r3,a,c,12
-r4,c,0,-16j
-r5,a,d,1
-r6,d,b,3j
-e2,b,0,39*ir3
+e1,a,0,150
+r1,a,b,1+2j
+r2,b,0,12-16j
+r3,b,c,1+3j
+e2,c,0,39*ir2
 ```
 
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-$V_2$ is the voltage at node **a** as the run reports it; the two differences we read in the {{card:Evaluate}} card.
-
-Symbulator returns `v_a` = {{o:72 + 104j}} V ({{o:126.5}}∠{{o:55.30}}°, the book's $V_2$).
-
-Then we type `v_p-v_a` into {{card:Evaluate}}:
-
-```field 9 Evaluate
-v_p-v_a
-```
-
-It gives {{o:78 - 104j}} V ({{o:130.0}}∠{{o:-53.13}}°, the book's $V_1$).
-
-Likewise `v_a-v_b`:
-
-```field 9 Evaluate
-v_a-v_b
-```
-
-It gives {{o:150 - 130j}} V ({{o:198.5}}∠{{o:-40.91}}°, the book's $V_3$).
+Symbulator returns `v_r1` = {{o:78 - 104j}} V ({{o:130.0}}∠{{o:-53.13}}°, the book's $V_1$), `v_r2` = {{o:72 + 104j}} V ({{o:126.5}}∠{{o:55.30}}°, the book's $V_2$) and `v_r3` = {{o:150 - 130j}} V ({{o:198.5}}∠{{o:-40.91}}°, the book's $V_3$).
 
 :::
 :::
@@ -1479,10 +1458,6 @@ It gives {{o:150 - 130j}} V ({{o:198.5}}∠{{o:-40.91}}°, the book's $V_3$).
 ::: problem NR12's Example 9.15
 
 A linear transformer has $R_1$ = 200 Ω, $R_2$ = 100 Ω, $L_1$ = 9 H, $L_2$ = 4 H and $k$ = 0.5, and couples a load of an 800 Ω resistor in series with a 1 µF capacitor to a 300 V (rms) source of internal impedance $500 + j100$ Ω at 400 rad/s. g) Calculate the Thévenin equivalent with respect to the terminals of the load impedance.
-
-::: figure assets/circuit/nr12-ex9-15.jpg
-Nilsson & Riedel, 12th edition — the circuit for Example 9.15
-:::
 
 ::: answer
 A linear transformer, two coupled coils each with its own winding resistance, between a source with an internal impedance and a load; the question wants the Thévenin equivalent seen from the load's terminals. Of the book's seven parts, (a) to (f) are the steps of its own method -- the frequency-domain equivalent circuit, the two self-impedances, the reflected impedance, its scaling factor and the impedance looking into the primary -- and are skipped; only (g) asks about the circuit itself. The coils are given as inductances, so we write them as they are, `l1,p,0,9` and `l2,q,0,4`, and put the frequency, 400 rad/s, in the {{ui:ω — angular frequency}} box. The coupling the book gives as $k$, and the `m` line takes it as it is, `m,l1,l2,k=0.5`, naming the two coils; the mutual inductance is worked out inside. The winding resistances $R_1$ and $R_2$ we name `r3` and `r6`, and the source's internal impedance, given in ohms, `r1` and `r2`. We leave the load out, because the question asks for the equivalent seen from its terminals: we call the top one node **c** and take the bottom one as ground -- nothing conducts between the two windings, so joining their bottoms changes no current -- and name **c** and **0** to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen.
@@ -1517,50 +1492,23 @@ Nilsson & Riedel, 12th edition — the circuit for Example 10.8
 The circuit of Example 9.14, which we describe the same way, asked a question about power: how much average and reactive power each of its three impedances takes, how much each source supplies, and whether the two sides balance. Symbulator reports every element's complex power as `s` followed by the element's name, its real part the average power and its imaginary part the reactive power, so all three parts are read from one run.
 
 ```field 9 Circuit Description
-e1,1,0,150
-r1,1,2,1
-r2,2,a,2j
-r3,a,c,12
-r4,c,0,-16j
-r5,a,4,1
-r6,4,b,3j
-e2,b,0,39*ir3
+e1,a,0,150
+r1,a,b,1+2j
+r2,b,0,12-16j
+r3,b,c,1+3j
+e2,c,0,39*ir2
 ```
 
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Each impedance in the figure is two elements in our description, a resistor and a reactance in series, so the power delivered to an impedance is the sum of two `s` answers, which we read in the {{card:Evaluate}} card; the balance of part (c) is the sum of all eight, read the same way. Each source's card reports the complex power it *delivers*, `-se1` and `-se2`, the negatives of the `s` answers that balance sums.
+Each impedance in the figure is one element in our description, so the power delivered to it is that element's `s` answer; each source's card reports the complex power it *delivers*, `-se1` and `-se2`, the negatives of the `s` answers; and the balance of part (c) is the sum of all five `s` answers, read in the {{card:Evaluate}} card.
 
-Symbulator returns `-s_e1` = {{o:-1950 + 3900j}} VA ({{o:4360}}∠{{o:116.6}}°) and `-s_e2` = {{o:5850 + 5070j}} VA ({{o:7741}}∠{{o:40.91}}°).
+Symbulator returns `s_r1` = {{o:1690 + 3380j}} VA ({{o:3779}}∠{{o:63.43}}°, the book's $S_1$), `s_r2` = {{o:240 - 320j}} VA ({{o:400.0}}∠{{o:-53.13}}°, the book's $S_2$), `s_r3` = {{o:1970 + 5910j}} VA ({{o:6230}}∠{{o:71.57}}°, the book's $S_3$), `-s_e1` = {{o:-1950 + 3900j}} VA ({{o:4360}}∠{{o:116.6}}°) and `-s_e2` = {{o:5850 + 5070j}} VA ({{o:7741}}∠{{o:40.91}}°).
 
-Then we type `s_r1+s_r2` into {{card:Evaluate}}:
-
-```field 9 Evaluate
-s_r1+s_r2
-```
-
-It gives {{o:1690 + 3380j}} VA ({{o:3779}}∠{{o:63.43}}°, the book's $S_1$).
-
-Likewise `s_r3+s_r4`:
+Then we type `s_e1+s_e2+s_r1+s_r2+s_r3` into {{card:Evaluate}}:
 
 ```field 9 Evaluate
-s_r3+s_r4
-```
-
-It gives {{o:240 - 320j}} VA ({{o:400.0}}∠{{o:-53.13}}°, the book's $S_2$).
-
-Likewise `s_r5+s_r6`:
-
-```field 9 Evaluate
-s_r5+s_r6
-```
-
-It gives {{o:1970 + 5910j}} VA ({{o:6230}}∠{{o:71.57}}°, the book's $S_3$).
-
-Likewise `s_e1+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6`:
-
-```field 9 Evaluate
-s_e1+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6
+s_e1+s_e2+s_r1+s_r2+s_r3
 ```
 
 It gives {{o:0}} VA.

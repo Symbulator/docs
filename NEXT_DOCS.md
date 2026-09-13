@@ -3,6 +3,19 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #440 — the split view opens a named book's chapter — **13 Sep 2026**
+
+Roberto: *"the link to open these problems in split view is not opening
+the documentation side of the window in the right page. I'm getting
+Lesson 1 instead of the NR chapter."* The shell's `normalise()` took a
+lesson as a number and a letter, `^0?(\d{1,2})([a-d]?)$`, so `nr12` --
+the sampler's book name since #425 -- came back as no lesson at all and
+the docs pane stayed on its default. It accepts a lowercase name now,
+and `lessons.json` already mapped `nr12` to `nr12-sampler`. Web only,
+one function in `web/split/index.php`.
+
+## #439 — claimed by the app tree, 13 Sep 2026: **in AC the real power answers to `p` and `ap` alike**, and Evaluate's `re()`/`im()` said out loud. The Manual's AC table has one power row again, its answers chapter names the functions, Lesson 8 (version 9) says the reactive power is `im(se)`. Write-up in `Application/v9/repos/local/NEXT.md`
+
 ## #438 — claimed by the app tree, 13 Sep 2026: **the `m` line checked, and `k=` accepted** (solver 0.6.10). The docs moved with it: the Manual's coupling chapter gains the `k=` form and the checks, its grammar and reference tables the spelling, Lesson 10's *Don't mix the two* warning says the mixed form is refused now (version 9 only; 7 and 8 keep the old sentence), and the sampler's 9.15 reads `m,l1,l2,k=0.5`. Write-up in `Application/v9/repos/local/NEXT.md`
 
 ## #436 — the sampler at the book's rounding, and the Find equivalent card's own names — **live 13 Sep 2026; the last round at cache v222**
@@ -77,6 +90,18 @@ own attribute; `fmt.tool_name()` maps it. Five problems moved (4.21,
 Gates: runner **63 ok**, `app_links` 384 of 386, `build.py --check`
 clean, `verify_lesson.py Nilsson_Riedel` clean on all 50. The app's
 book changed only in its `rounding:` lines, so it rides the v218 train.
+
+**The late-evening items, same day (cache v223, solver 0.6.10):** rule 25,
+a floating side's bottom is ground (13.7 and 9.15); 9.12's terminal is
+the figure's **a**, not a 9 picked to stay clear of 1–3; 9.14's nodes
+are letters, V₁, V₂ and V₃ being the book's names, and then Roberto's
+simpler description with each series pair as one impedance, so `v_r1`,
+`v_r2`, `v_r3` are the answers and 10.8 reads `s_r1`, `s_r2`, `s_r3`
+with the balance one Evaluate step; 9.9's part (a) and 9.15's (a)–(f)
+named as the book's own method and skipped; 9.15's coils in henries
+with the book's *k* on the `m` line, `m,l1,l2,k=0.5` (#438), and no
+figure, the book printing only the equivalent in ohms and the words
+being enough (`nofig` on the spec).
 
 **Example 5.3, an hour later (cache v219).** Roberto: part (a) should
 not ask the reader to design what the page then verifies — it reads

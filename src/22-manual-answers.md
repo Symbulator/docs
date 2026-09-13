@@ -91,7 +91,10 @@ The whole answer set is the point, but three cards narrow it when you want
 that:
 
 - {{card:Evaluate}} takes an expression over the answers — `vr1/ir1`, or
-  `pr1+pr2` — and can carry {{ui:Conditions}}.
+  `pr1+pr2` — and can carry {{ui:Conditions}}. The usual functions are
+  there, `sqrt`, `abs`, `exp`, the trigonometric ones, and for a complex
+  answer `re(se)` and `im(se)` give its real and imaginary parts,
+  `conj(se)` its conjugate and `arg(se)` its angle.{{i:re and im (Evaluate)}}
 - {{card:Solve}} solves equations written over the answers.
 - In TR, the results can be limited before they are computed, which saves
   real time. {{ref:limiting-results}} has it.

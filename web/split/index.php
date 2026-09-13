@@ -308,8 +308,15 @@ function asset(string $name): string {
   function normalise(lesson) {
     // The app accepts 4b, 04b, 7 and 07 alike; this page keeps the
     // short spelling so its own URLs stay tidy and predictable.
-    var m = String(lesson || '').trim().toLowerCase().match(/^0?(\d{1,2})([a-d]?)$/);
-    return m ? m[1] + m[2] : '';
+    var text = String(lesson || '').trim().toLowerCase();
+    var m = text.match(/^0?(\d{1,2})([a-d]?)$/);
+    if (m) { return m[1] + m[2]; }
+    // A book named rather than numbered -- `nr12` for the Nilsson & Riedel
+    // sampler (#425) -- is a lesson too. This was the bug Roberto found on
+    // 13 Sep 2026: the sampler's links opened the docs pane on Lesson 1,
+    // because a name fell through here as no lesson at all.
+    var n = text.match(/^[a-z][a-z0-9]{0,15}$/);
+    return n ? n[0] : '';
   }
 
   function docsUrlFor(lesson, anchor) {

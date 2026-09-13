@@ -760,28 +760,20 @@ dict(num="9.12", title="Finding a Thevenin Equivalent in the Frequency Domain",
 dict(num="9.14", title="Using the Mesh-Current Method in the Frequency Domain",
      ask="Find the voltages $V_1$, $V_2$ and $V_3$ in the circuit shown in the figure.",
      page=372, fig=(372, "9.39"), domain="ac", omega=W,
-     desc="e1,p,0,150:r1,p,q,1:r2,q,a,2j:r3,a,c,12:r4,c,0,-16j:r5,a,d,1:r6,d,b,3j:"
-          "e2,b,0,39*ir3",
-     shownames={"@v_p-v_a": "v_p - v_a", "@v_a-v_b": "v_a - v_b"},
-     expect={"@v_p-v_a": 78 - 104j, "v_a": 72 + 104j, "@v_a-v_b": 150 - 130j},
-     booknames={"@v_p-v_a": "V_1", "v_a": "V_2", "@v_a-v_b": "V_3"},
+     desc="e1,a,0,150:r1,a,b,1+2j:r2,b,0,12-16j:r3,b,c,1+3j:e2,c,0,39*ir2",
+     expect={"v_r1": 78 - 104j, "v_r2": 72 + 104j, "v_r3": 150 - 130j},
+     booknames={"v_r1": "V_1", "v_r2": "V_2", "v_r3": "V_3"},
      shows="An AC circuit of two loops with a dependent voltage source in the far one, "
            "worth 39 times $I_x$, the current down through the middle branch; the "
-           "question wants three voltages marked across three parts of the circuit. We "
-           "name the 12 Ω `r3`, so its current is `ir3` and the source's value is "
-           "`39*ir3`; we name the other impedances `r1` to `r6`. The nodes we name with "
-           "letters rather than numbers, since $V_1$, $V_2$ and $V_3$ are the book's "
-           "names for the three voltages asked and a node 1 would make `v1` read as one "
-           "of them: the source's top is **p**, the node after the 1 Ω on the left "
-           "**q**, the top of the middle branch **a**, the far side of the −j16 Ω "
-           "**c**, the node after the 1 Ω on the right **d** and the dependent source's "
-           "top **b**. The three voltages are then: $V_1$, "
-           "across the 1 Ω and j2 Ω on the left, the difference between the voltages at "
-           "node **p** and node **a**; $V_2$, across the middle branch, the voltage at node "
-           "**a** itself; and $V_3$, across the 1 Ω and j3 Ω on the right, the difference "
-           "between nodes **a** and **b**.",
-     interpret="$V_2$ is the voltage at node **a** as the run reports it; the two "
-           "differences we read in the {{card:Evaluate}} card."),
+           "question wants three voltages, each marked across a pair of impedances in "
+           "series: $V_1$ across the 1 \u03a9 and j2 \u03a9 on the left, $V_2$ across the "
+           "12 \u03a9 and \u2212j16 \u03a9 in the middle, $V_3$ across the 1 \u03a9 and j3 \u03a9 on "
+           "the right. Nothing else connects inside a pair, so we write each pair as "
+           "one impedance, `r1` worth `1+2j`, `r2` worth `12-16j` and `r3` worth "
+           "`1+3j`, and each voltage asked is then that element\'s own drop. $I_x$ is "
+           "the current through `r2`, so the dependent source\'s value is `39*ir2`. "
+           "We name the source\'s top node **a**, the top of the middle branch **b** "
+           "and the dependent source\'s top **c**."),
 
 dict(num="9.15", title="Analyzing a Linear Transformer in the Frequency Domain",
      ask="A linear transformer has $R_1$ = 200 Ω, $R_2$ = 100 Ω, $L_1$ = 9 H, $L_2$ = 4 H "
@@ -789,7 +781,7 @@ dict(num="9.15", title="Analyzing a Linear Transformer in the Frequency Domain",
          "capacitor to a 300 V (rms) source of internal impedance $500 + j100$ Ω at "
          "400 rad/s. g) Calculate the Thevenin equivalent with respect to the terminals of "
          "the load impedance.",
-     page=375, fig=(376, "9.42"), kind="th", n1="c", n2="0", domain="ac", omega=400, rms=True,
+     page=375, fig=(376, "9.42"), nofig=True, kind="th", n1="c", n2="0", domain="ac", omega=400, rms=True,
      desc="e,1,0,300:r1,1,2,500:r2,2,a,100j:r3,a,p,200:l1,p,0,9:m,l1,l2,k=0.5:"
           "l2,q,0,4:r6,q,c,100",
      expect={"vth": 93.9351 + 17.7715j, "z": 171.086 + 1224.2595j}, tol=1e-4,
@@ -822,16 +814,13 @@ dict(num="10.8", title="Balancing Power Delivered with Power Absorbed in an AC C
          "associated with each source. c) Verify that the average power delivered equals the "
          "average power absorbed, and likewise for the reactive power.",
      page=417, fig=(417, "10.18"), domain="ac", omega=W,
-     desc="e1,1,0,150:r1,1,2,1:r2,2,a,2j:r3,a,c,12:r4,c,0,-16j:r5,a,4,1:r6,4,b,3j:"
-          "e2,b,0,39*ir3",
-     expect={"@s_r1+s_r2": 1690 + 3380j, "@s_r3+s_r4": 240 - 320j,
-             "@s_r5+s_r6": 1970 + 5910j, "@-s_e1": -1950 + 3900j, "@-s_e2": 5850 + 5070j,
-             "@s_e1+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6": 0},
-     shownames={"@s_r1+s_r2": "s_r1 + s_r2", "@s_r3+s_r4": "s_r3 + s_r4",
-                "@s_r5+s_r6": "s_r5 + s_r6", "@-s_e1": "-s_e1", "@-s_e2": "-s_e2",
-                "@s_e1+s_e2+s_r1+s_r2+s_r3+s_r4+s_r5+s_r6": "the sum of all eight"},
-     booknames={"@s_r1+s_r2": "S_1", "@s_r3+s_r4": "S_2", "@s_r5+s_r6": "S_3",
-                },
+     desc="e1,a,0,150:r1,a,b,1+2j:r2,b,0,12-16j:r3,b,c,1+3j:e2,c,0,39*ir2",
+     expect={"s_r1": 1690 + 3380j, "s_r2": 240 - 320j, "s_r3": 1970 + 5910j,
+             "@-s_e1": -1950 + 3900j, "@-s_e2": 5850 + 5070j,
+             "@s_e1+s_e2+s_r1+s_r2+s_r3": 0},
+     shownames={"@-s_e1": "-s_e1", "@-s_e2": "-s_e2",
+                "@s_e1+s_e2+s_r1+s_r2+s_r3": "the sum of all five"},
+     booknames={"s_r1": "S_1", "s_r2": "S_2", "s_r3": "S_3"},
      delivered=["@-s_e1", "@-s_e2"],
      shows="The circuit of Example 9.14, which we describe the same way, asked a "
            "question about power: how much average and reactive power each of its three "
@@ -839,12 +828,11 @@ dict(num="10.8", title="Balancing Power Delivered with Power Absorbed in an AC C
            "balance. Symbulator reports every element's complex power as `s` followed by "
            "the element's name, its real part the average power and its imaginary part "
            "the reactive power, so all three parts are read from one run.",
-     interpret="Each impedance in the figure is two elements in our description, a "
-           "resistor and a reactance in series, so the power delivered to an impedance is "
-           "the sum of two `s` answers, which we read in the {{card:Evaluate}} card; the "
-           "balance of part (c) is the sum of all eight, read the same way. Each source's "
-           "card reports the complex power it *delivers*, `-se1` and `-se2`, the "
-           "negatives of the `s` answers that balance sums."),
+     interpret="Each impedance in the figure is one element in our description, so the "
+           "power delivered to it is that element's `s` answer; each source's card "
+           "reports the complex power it *delivers*, `-se1` and `-se2`, the negatives of "
+           "the `s` answers; and the balance of part (c) is the sum of all five `s` "
+           "answers, read in the {{card:Evaluate}} card."),
 
 dict(num="10.12", title="Finding Maximum Power Transfer in a Circuit with an Ideal Transformer",
      ask="The variable resistor in the circuit in the figure is adjusted until maximum "

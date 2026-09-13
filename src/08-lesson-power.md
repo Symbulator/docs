@@ -152,7 +152,11 @@ $$
 
 That is the whole difference. The currents and voltages you get back are
 in whatever convention you typed the sources in, unchanged; only the power
-answers — `p`, `ap` and `s` — depend on the tick. So for the same numbers
+answers — `p` and `s` — depend on the tick, and the real power answers to
+`p` and to `ap` alike, whichever way the tick is set (the calculator named
+it `ap` with peak phasors and `p` with RMS ones); the reactive power is
+`im(se)` in {{card:Evaluate}}, the imaginary part of the complex power,
+and `re(se)` is the real power again. So for the same numbers
 typed in, RMS on reports twice the power that RMS off does, and neither is
 wrong: they answer different questions. Match the book you are working
 from. The setting is always in view, so it is easier for you to notice

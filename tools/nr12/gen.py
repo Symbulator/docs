@@ -340,11 +340,15 @@ def render(s, vals):
     # not how the reader will solve the problem (Roberto, 12 Sep 2026).
     L.append(polish(s["ask"]))
     L.append("")
-    L.append("::: figure assets/circuit/%s" % figname(num))
-    L.append("Nilsson & Riedel, 12th edition \u2014 the circuit for Example %s"
-             % base_num(num))
-    L.append(":::")
-    L.append("")
+    # A spec with `nofig` shows no figure: the book prints none for the
+    # circuit as stated (9.15 has only its frequency-domain equivalent),
+    # and the words are enough (Roberto, 13 Sep 2026).
+    if not s.get("nofig"):
+        L.append("::: figure assets/circuit/%s" % figname(num))
+        L.append("Nilsson & Riedel, 12th edition \u2014 the circuit for Example %s"
+                 % base_num(num))
+        L.append(":::")
+        L.append("")
     L.append("::: answer")
     # A first run, when the problem needs one: the circuit before the switch
     # moves, run in DC for the initial condition the main run then carries in
@@ -622,7 +626,8 @@ def cir_entry(s):
     if s.get("pre"):
         L.append("note: This is the circuit after the switch has moved; its initial "
                  "condition comes from the entry before it.")
-    L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(num))
+    if not s.get("nofig"):
+        L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(num))
     L.append("rounding: %s" % rounding_told(s))
     L.append("si: no")
     L.append("units: yes")
@@ -658,7 +663,8 @@ def cir_solveq_entry(s, sq):
     L.extend(solveq_fields(sq))
     L.append("note: %s" % ask)
     L.append("note: %s" % sq["note"])
-    L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(s["num"]))
+    if not s.get("nofig"):
+        L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(s["num"]))
     L.append("rounding: %s" % rounding_told(s))
     L.append("si: no")
     L.append("units: yes")
@@ -677,7 +683,8 @@ def cir_pre_entry(s, pre):
     L.append("analysis: %s" % pre.get("domain", "dc"))
     L.append("note: %s" % ask)
     L.append("note: %s" % pre["note"])
-    L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(s["num"]))
+    if not s.get("nofig"):
+        L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(s["num"]))
     # the first run is classified on its own, as its page line is (rule 24)
     L.append("rounding: %s" % rounding_told(pre_spec(s, pre)))
     L.append("si: no")

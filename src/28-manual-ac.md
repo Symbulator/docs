@@ -49,13 +49,12 @@ In AC an element reports more than in DC:
 
 | | |
 |---|---|
-| `ap` | real power consumed, in watts — the average power |
+| `p` | real power consumed, in watts — the average power; `ap` is the same answer under its older name |
 | `s` | complex power consumed, **S** = *P* + j*Q*, in VA |
-| `p` | the power answer, labelled by the convention in force |
 | `z` | impedance seen |
 
-A source's card shows the delivered forms of the first two, `-ape` and
-`-se`, and the power factor of the power it delivers; the answers `ape`
+A source's card shows the delivered forms of the first two, `-pe` and
+`-se`, and the power factor of the power it delivers; the answers `pe`
 and `se` are the consumed values all the same.
 
 The same shape with a 30 Ω resistor and a 40 mH inductor, at 1000 rad/s
@@ -76,6 +75,9 @@ Run in AC at ω = 1000, the source's card reads
 the negative of `se`, since a source's card shows what it delivers. So
 *P* = 0.6 W, *Q* = 0.8 var, |*S*| = 1.0 VA, and the card's last row gives
 the power factor of that delivered power, 0.6 lagging.{{i:complex power}}
+The two parts are one {{card:Evaluate}} step each, `re(-se)` for the real
+power and `im(-se)` for the reactive, and `abs(se)` is the apparent
+power.{{i:reactive power}}
 
 **An inductor reports no real power**, only complex. That is not an
 omission: a pure reactance consumes none, and a zero printed every time
