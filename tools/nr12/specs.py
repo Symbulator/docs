@@ -401,9 +401,12 @@ dict(num="7.1", title="Determining the Natural Response of an RL Circuit",
              "and two runs. Before $t$ = 0 the switch has been closed for a long time, so "
              "any transient has died away and every current is steady; in a steady "
              "circuit an inductor carries its current with no voltage across it, which is "
-             "to say it behaves as a wire. So we describe the circuit as it stands before "
-             "the switch opens, the 20 A source, the 0.1 Ω resistor, the inductor and the "
-             "three resistors beyond it, and run it in DC to find the inductor's current. "
+             "to say it behaves as a wire. The full current of the source, 20 A, would run "
+             "through it, and should be the initial condition of the inductor. To verify "
+             "this intuition, we can run a DC simulation. Describe the circuit as it "
+             "stands before the switch opens, the 20 A source, the 0.1 Ω resistor, the "
+             "inductor and the three resistors beyond it, and run it for the inductor's "
+             "current. "
              "We name the source `j`, the inductor `l` and the resistors `r0` to `r3`, and "
              "write the inductor with no fifth field, since nothing about its past is "
              "being told:",
@@ -438,7 +441,9 @@ dict(num="7.3", title="Determining the Natural Response of an RC Circuit",
              "the capacitor has been connected to the 100 V source through the 10 kΩ "
              "resistor for a long time, and a capacitor in a steady circuit carries no "
              "current, so nothing flows in the 10 kΩ and the capacitor sits at the "
-             "voltage of the source. We describe that circuit, the source, the 10 kΩ, "
+             "voltage of the source, 100 V, which would be its initial condition for "
+             "the next interval. To confirm that intuition, we describe that circuit, "
+             "the source, the 10 kΩ, "
              "which we name `r0`, and the capacitor, written without a fifth field, and "
              "run it in DC to find the capacitor's voltage:",
         desc="e,1,0,100:r0,1,2,10'k:c,2,0,0.5'u",
@@ -470,9 +475,11 @@ dict(num="7.5", title="Determining the Step Response of an RL Circuit",
              "switched, without a break, onto another; the question wants its current "
              "afterwards and the voltage across it the instant after the switch moves. "
              "Two intervals, two runs. With the switch at position a, the inductor has "
-             "been in parallel with the 10 Ω resistor and the 8 A source for a long time; "
-             "in that steady state the inductor is a wire, so the whole 8 A flows through "
-             "it and none through the resistor. The direction matters: the source's "
+             "been in parallel with the 10 Ω resistor and the 8 A source for a long time, "
+             "so the circuit is steady; the inductor behaves as a wire, so the whole 8 A "
+             "would flow through it and none through the resistor, and that, with its "
+             "sign, should be its initial condition. To verify this intuition, we can run "
+             "a DC simulation. The direction matters: the source's "
              "arrow points down through the source, so its current comes up through the "
              "inductor, against the book's arrow for $i$. We write the source as "
              "`j,1,0,8`, its current flowing from node 1 down to ground, and the inductor "
@@ -529,8 +536,8 @@ dict(num="7.11a", title="Analyzing an RL Circuit That Has Sequential Switching (
         text="An inductor in a circuit with two switches that open one after the other; "
              "the question wants its current between the two openings. Three intervals "
              "this time, and three runs. In the first, both switches have been closed for "
-             "a long time, the circuit is steady, and the inductor is a wire in parallel "
-             "with the 18 Ω resistor. We describe the whole circuit, the 60 V source, the "
+             "a long time and the circuit is steady. We describe the whole circuit, the "
+             "60 V source, the "
              "4 Ω, 12 Ω, 6 Ω and 3 Ω resistors, the inductor and the 18 Ω, naming each "
              "resistor after its value, and run it in DC for the inductor's current:",
         desc="e,1,0,60:r4,1,2,4:r12,2,0,12:r6,2,0,6:r3,2,3,3:l,3,0,0.15:r18,3,0,18",
@@ -623,8 +630,7 @@ dict(num="8.4", title="Finding the Underdamped Natural Response of a Parallel RL
      booknames={"v_1": "v"},
      digits=5,
      after="The book prints the amplitude as 100 and the frequency of the sine as 979.80, "
-           "both rounded; at five digits the run shows 100.02 and 979.80 for the same "
-           "expression.",
+           "both rounded; to the same figures the run gives 100.02 and 979.80.",
      shows="The same three elements in parallel with different values, an initial "
            "current in the inductor and none on the capacitor; the question wants the "
            "voltage across them as a function of time. We describe them as before: "
@@ -908,7 +914,7 @@ dict(num="13.2", title="The Natural Response of an RC Circuit",
              "over to a set of resistors, asked again with the answer wanted as a Laplace "
              "transform. Its first interval is the same: before the switch moves the "
              "capacitor has sat across the 100 V source through the 10 kΩ for a long "
-             "time, carrying no current. We describe that circuit as before and run it "
+             "time, so the circuit is steady. We describe that circuit as before and run it "
              "in DC for the capacitor's voltage:",
         desc="e,1,0,100:r0,1,2,10'k:c,2,0,0.5'u",
         tag="DC, before the switch moves",
@@ -994,10 +1000,7 @@ dict(num="13.7", title="Analyzing a Circuit with Mutual Inductance",
              "secondary closed on two resistors; the switch takes the source out at "
              "$t$ = 0, and the question wants the secondary's current afterwards. Two "
              "intervals, two runs. With the switch at position a the primary side has "
-             "been steady for a long time: the 60 V source drives a constant current "
-             "through the 9 Ω, the 3 Ω and the 2 H coil, which in a steady circuit is a "
-             "wire. The secondary has no source of its own, and a constant current in the "
-             "primary induces nothing in it, so its current is zero. We describe the "
+             "been steady for a long time. We describe the "
              "whole circuit, naming the resistors after their values, `r9`, `r3`, `r2b` "
              "and `r10`, the coils `l1` and `l2`, and the coupling as the `m` line with "
              "their mutual inductance, 2 H; we call the secondary's nodes **q**, **c** "
@@ -1070,11 +1073,9 @@ dict(num="13.13", title="A Series Inductor Circuit with an Impulsive Response",
              "behind a closed switch that shorts it out; opening the switch at $t$ = 0 "
              "forces the two into series, and the question wants the voltage across the "
              "second and the current in the first afterwards. Two intervals, two runs. "
-             "While the switch is closed it is a wire from the junction after $L_1$ down "
-             "to the bottom rail, so the circuit that has been steady for a long time is "
-             "the 100 V source, the 10 Ω and $L_1$ in a loop through that wire, with the "
-             "15 Ω and $L_2$ hanging across a short circuit and carrying nothing. We "
-             "describe that circuit and run it in DC for the two inductor currents; we "
+             "While the switch is closed it joins the junction after $L_1$ to the bottom "
+             "rail, and the circuit has been steady for a long time. We describe that "
+             "circuit and run it in DC for the two inductor currents; we "
              "write the closed switch by giving both its ends the same node, ground, and "
              "name the inductors `l1` and `l2` after the book's $L_1$ and $L_2$:",
         desc="e,1,0,100:r1,1,2,10:l1,2,0,3:r2,0,4,15:l2,4,0,2",

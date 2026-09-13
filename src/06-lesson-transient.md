@@ -232,7 +232,7 @@ Symbulator find the inverse Laplace of answers you do not need.
 :::
 ::: only 9
 To get only a chosen few, tick **Do you want to limit the results to save
-time?**, under the analysis menus once TR is chosen, and list them in the box
+time?** in {{card:Settings}} once TR is chosen, and list them in the box
 that opens, separated by commas.{{i:limiting the results (TR)}}
 
 {{ref:limiting-results}} covers it, with the answer names you may use and
@@ -1988,7 +1988,7 @@ s\only("vc")
 ```
 
 ::: only 9
-Optional in Symbulator 9, which solves quickly enough: if you want to, tick {{ui:Do you want to limit the results to save time?}} under the analysis menus and list `vc` in the field it reveals.
+Optional in Symbulator 9, which solves quickly enough: if you want to, tick {{ui:Do you want to limit the results to save time?}} in {{card:Settings}} and list `vc` in the field it reveals.
 :::
 
 Then we run the simulation for the first interval, just as we did before, but
@@ -2027,7 +2027,7 @@ s\only("vc")
 ```
 
 ::: only 9
-Optional in Symbulator 9, which solves quickly enough: if you want to, tick {{ui:Do you want to limit the results to save time?}} under the analysis menus and list `vc` in the field it reveals.
+Optional in Symbulator 9, which solves quickly enough: if you want to, tick {{ui:Do you want to limit the results to save time?}} in {{card:Settings}} and list `vc` in the field it reveals.
 :::
 
 Then we run the simulation for the second interval, just as we did before,

@@ -112,9 +112,68 @@ DIGITS = 4      # Roberto, 13 Sep 2026: n = 3 or 4 unless the book asks for more
 
 
 def digits_of(s):
-    """The Rounding setting a problem runs at: the book's own precision,
-    4 unless the spec says otherwise."""
+    """The figures a problem's values are printed at: 4 unless the book
+    prints more, in which case the book's own count (`digits=`)."""
     return int(s.get("digits", DIGITS))
+
+
+def _integral(e):
+    """True when an expression has no number in it but integers, so exact
+    and approx print it alike."""
+    e = sp.sympify(e)
+    return not e.atoms(sp.Float) and all(a.is_Integer for a in e.atoms(sp.Number))
+
+
+def is_exact(s):
+    """Rule 24: True when every value the page prints for this problem
+    reads the same under *exact* -- the answer panels have only integer
+    numbers (and in AC no complex value, whose polar form is decimal),
+    and every Evaluate and Solve card step prints the same string at
+    exact as at the problem's digits. Then the reader is not told to set
+    Rounding at all, and the entry says `rounding: exact`. Cached on the
+    spec, since it runs the app."""
+    if "_exact" in s:
+        return s["_exact"]
+    ok = digits_of(s) <= DIGITS
+    if ok:
+        _r, vals = runner.run_one(s)
+        for k in s["expect"]:
+            if k in s.get("hide", ()):
+                continue
+            v = sp.sympify(k[1:], locals=dict(vals)) if k.startswith("@") else vals.get(k)
+            if v is None:
+                continue
+            if not _integral(v) or (s.get("domain") == "ac" and sp.im(sp.sympify(v)) != 0):
+                ok = False
+                break
+    if ok and s.get("evals"):
+        for ev in s["evals"]:
+            conds = ["%s = %s" % (k, v) for k, v in ev.get("at", {}).items()]
+            if runner.app_evaluate(s, ev["expr"], conds, digits=digits_of(s)) != \
+               runner.app_evaluate(s, ev["expr"], conds, digits=0, approx=False):
+                ok = False
+                break
+    if ok and s.get("solveq"):
+        for sq in s["solveq"]:
+            a, _ = runner.app_solveq(s, sq, digits=digits_of(s))
+            b, _ = runner.app_solveq(s, sq, digits=0, approx=False)
+            if a != b:
+                ok = False
+                break
+    s["_exact"] = ok
+    return ok
+
+
+def rounding_told(s):
+    """What the reader is told to set: *approx to n digits* for n up to 4,
+    *approx (full precision)* above it -- an n of 5 or 7 "comes across as
+    clairvoyant" (Roberto, 13 Sep 2026); the page still prints the
+    book's figures, and the reader will know why. Returns the .cir
+    `rounding:` value."""
+    if is_exact(s):
+        return "exact"
+    d = digits_of(s)
+    return str(d) if d <= DIGITS else "approx"
 
 
 def settings_line(s):
@@ -142,8 +201,14 @@ def settings_line(s):
     if s.get("rms"):
         bits.append("Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source "
                     "is given in rms")
-    bits.append("Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with "
-                "**n** = %d" % digits_of(s))
+    told = rounding_told(s)
+    if told == "exact":
+        pass                            # rule 24: the default shows what the page shows
+    elif told == "approx":
+        bits.append("Set {{ui:Rounding}} in {{card:Settings}} to *approx (full precision)*")
+    else:
+        bits.append("Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with "
+                    "**n** = %d" % digits_of(s))
     return ". ".join(bits) + "."
 
 
@@ -558,7 +623,7 @@ def cir_entry(s):
         L.append("note: This is the circuit after the switch has moved; its initial "
                  "condition comes from the entry before it.")
     L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(num))
-    L.append("rounding: %d" % digits_of(s))
+    L.append("rounding: %s" % rounding_told(s))
     L.append("si: no")
     L.append("units: yes")
     if dom == "ac":
@@ -594,7 +659,7 @@ def cir_solveq_entry(s, sq):
     L.append("note: %s" % ask)
     L.append("note: %s" % sq["note"])
     L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(s["num"]))
-    L.append("rounding: %d" % digits_of(s))
+    L.append("rounding: %s" % rounding_told(s))
     L.append("si: no")
     L.append("units: yes")
     L.append("")
@@ -613,7 +678,8 @@ def cir_pre_entry(s, pre):
     L.append("note: %s" % ask)
     L.append("note: %s" % pre["note"])
     L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(s["num"]))
-    L.append("rounding: %d" % digits_of(s))
+    # the first run is classified on its own, as its page line is (rule 24)
+    L.append("rounding: %s" % rounding_told(pre_spec(s, pre)))
     L.append("si: no")
     L.append("units: yes")
     L.append("")

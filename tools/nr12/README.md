@@ -141,10 +141,17 @@ answer, `evals` with conditions, `solveq` runs, several roots):
 
 **Two more, 13 Sep 2026:**
 
-19. **Rounding at n = 3 or 4, unless the book asks for more.** Every
-    problem runs at {{ui:Rounding}} *approx to n digits*, **n** = 4 by
-    default (`DIGITS` in `gen.py`); a spec whose book answers carry more
-    figures says so with `digits=` (5.7, 8.4 and 11.1 at 5, 18.6 at 7).
+19. **Rounding at n = 3 or 4, unless the book asks for more -- and two
+    things are at play** (Roberto, 13 Sep 2026): what the reader is told
+    and what the answer looks like. Every problem is told {{ui:Rounding}}
+    *approx to n digits*, **n** = 4 (`DIGITS` in `gen.py`), and its values
+    are printed at 4. Where the book prints more figures the spec says so
+    with `digits=` (5.7, 8.4 and 11.1 at 5, 18.6 at 7) and the page prints
+    that many -- *"show as many as the book; the reader will know why"* --
+    but the reader is told *approx (full precision)* and the `.cir` says
+    `rounding: approx`, never an n above 4, which "seems capricious and
+    retroactively selected"; a student does not know the answer's
+    figures before running it. `rounding_told()` in `gen.py` is the split.
     The settings line names the setting, the `.cir` entries carry it as
     `rounding:`, and every value on the page -- the panels, the returns
     sentence, Evaluate and Solve card outputs, the polar forms -- is
@@ -172,6 +179,27 @@ answer, `evals` with conditions, `solveq` runs, several roots):
     `same_name()` compares the two with underscores, braces and case
     stripped, at every site that writes the aside (Roberto, 13 Sep 2026,
     on 18.1).
+23. **An intuition is stated as one, and the run verifies it.** Where the
+    steady state before a switch can be read by inspection -- an inductor
+    as a wire carrying the source's whole 20 A, a capacitor as an open
+    sitting at the source's 100 V -- the paragraph says the deduction,
+    the value it gives and *that should be the initial condition*, then
+    *To verify this intuition, we can run a DC simulation* (Roberto's
+    words, 13 Sep 2026, for 7.1; 7.3 and 7.5 follow). Without that
+    framing the same sentence is correct but irrelevant, and a reader may
+    think they must replace the element by a short themselves. Where the
+    steady value needs a calculation (a divider, a coupled primary, two
+    inductors in a loop) the aside is dropped and the run simply finds
+    it: *the circuit has been steady for a long time*, and how a closed
+    switch is written.
+24. **No Rounding instruction where exact shows what the page shows.**
+    7.1's panels read `20 e^{-5t}` while the card at *approx to 4* prints
+    `20.0 e^{-5t}`; the reader was told a setting that does not produce
+    what they see (Roberto, 13 Sep 2026). `gen.py`'s `is_exact()` runs the
+    problem and every Evaluate and Solve step both ways; when nothing
+    differs, the settings line says nothing about Rounding -- the app's
+    default is *exact* -- and the entry says `rounding: exact`. A first
+    run (`pre`) is classified on its own.
 
 The reader-facing fields of a spec:
 

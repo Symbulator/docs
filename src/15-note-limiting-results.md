@@ -20,8 +20,8 @@ one of them.{{i:limiting the results (TR)}}
 
 ## Asking for a few answers
 
-Choose **tr** in the analysis menu, and a question appears under the
-menus:
+Choose **tr** in the analysis menu, and a question appears in
+{{card:Settings}}:
 
 > **Do you want to limit the results to save time?**
 

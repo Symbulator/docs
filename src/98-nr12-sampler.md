@@ -87,7 +87,7 @@ r6,4,0,30
 r7,1,0,24
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_r7` = {{o:2}} A (the book's $i_o$) and `v_r6` = {{o:18}} V (the book's $v_o$).
 
@@ -114,7 +114,7 @@ r3,a,0,R_3
 rx,b,0,R_x
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*.
 
 With the results on screen, we open the {{card:Solve}} card under them and ask the question the way the bridge is used. The balance condition, no current through the galvanometer, is the equation `isg=0`; the resistance we want is the unknown, `R_x`; and the setting of the dial is a condition, first at its lowest, 10 Ω:
 
@@ -235,7 +235,7 @@ r4,2,0,20
 e2,3,0,15*ir4
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `p_r3` = {{o:16}} W (the book's $p$).
 
@@ -261,7 +261,7 @@ r3,2,0,40
 j,0,2,3
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_r1` = {{o:2}} A (the book's $i_a$), `i_r2` = {{o:4}} A (the book's $i_b$) and `i_r3` = {{o:1}} A (the book's $i_c$).
 
@@ -290,7 +290,7 @@ r5,2,3,5
 r6,3,0,15
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*.
 
 The power a source *develops* is what it delivers, which each source's card reports as `-pe` and `-pj`.
 
@@ -316,7 +316,7 @@ r1,1,2,30
 r2,2,0,150
 ```
 
-Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **2** and **0**. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **2** and **0**.
 
 Symbulator returns `req` = {{o:25}} Ω (the book's $R_L$) and `pmax` = {{o:900}} W.
 
@@ -463,7 +463,7 @@ rf,n,4,20'k
 o,0,n,4
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*.
 
 ::: result voltage at node 4
 v_{4} = - 4 va - vb - 5 vc\,\mathrm{V}
@@ -641,7 +641,7 @@ ro,4,3,7.5'k
 ea,4,0,50000*(vp-vn)
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 5.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx (full precision)*.
 
 Then we type `v_3/vg` into {{card:Evaluate}}:
 
@@ -697,7 +697,7 @@ h2,b,c,[1000,0.0015,100,0.0001]
 rl,c,0,10'k
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 7.
+Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx (full precision)*.
 
 Then we type `v_c/vg` into {{card:Evaluate}}:
 
@@ -730,7 +730,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 7.1
 :::
 
 ::: answer
-An inductor that has been fed by a current source for a long time, and a switch that then cuts the source off and leaves the inductor to discharge through three resistors; the question wants the inductor's current and two other quantities afterwards, as functions of time. There are two intervals, and two runs. Before $t$ = 0 the switch has been closed for a long time, so any transient has died away and every current is steady; in a steady circuit an inductor carries its current with no voltage across it, which is to say it behaves as a wire. So we describe the circuit as it stands before the switch opens, the 20 A source, the 0.1 Ω resistor, the inductor and the three resistors beyond it, and run it in DC to find the inductor's current. We name the source `j`, the inductor `l` and the resistors `r0` to `r3`, and write the inductor with no fifth field, since nothing about its past is being told:
+An inductor that has been fed by a current source for a long time, and a switch that then cuts the source off and leaves the inductor to discharge through three resistors; the question wants the inductor's current and two other quantities afterwards, as functions of time. There are two intervals, and two runs. Before $t$ = 0 the switch has been closed for a long time, so any transient has died away and every current is steady; in a steady circuit an inductor carries its current with no voltage across it, which is to say it behaves as a wire. The full current of the source, 20 A, would run through it, and should be the initial condition of the inductor. To verify this intuition, we can run a DC simulation. Describe the circuit as it stands before the switch opens, the 20 A source, the 0.1 Ω resistor, the inductor and the three resistors beyond it, and run it for the inductor's current. We name the source `j`, the inductor `l` and the resistors `r0` to `r3`, and write the inductor with no fifth field, since nothing about its past is being told:
 
 ```field 9 Circuit Description
 j,0,1,20
@@ -757,7 +757,7 @@ r3,2,0,40
 ::: applink NR12's Example 7.1 (TR)
 :::
 
-Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
 ::: result current through l
 i_{l} = 20 e^{- 5 t}\,\mathrm{A}
@@ -785,7 +785,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 7.3
 :::
 
 ::: answer
-A capacitor charged from one source, then switched over to a set of resistors to discharge; the question wants its voltage and two other quantities after the switch moves. Two intervals, two runs. At position x the capacitor has been connected to the 100 V source through the 10 kΩ resistor for a long time, and a capacitor in a steady circuit carries no current, so nothing flows in the 10 kΩ and the capacitor sits at the voltage of the source. We describe that circuit, the source, the 10 kΩ, which we name `r0`, and the capacitor, written without a fifth field, and run it in DC to find the capacitor's voltage:
+A capacitor charged from one source, then switched over to a set of resistors to discharge; the question wants its voltage and two other quantities after the switch moves. Two intervals, two runs. At position x the capacitor has been connected to the 100 V source through the 10 kΩ resistor for a long time, and a capacitor in a steady circuit carries no current, so nothing flows in the 10 kΩ and the capacitor sits at the voltage of the source, 100 V, which would be its initial condition for the next interval. To confirm that intuition, we describe that circuit, the source, the 10 kΩ, which we name `r0`, and the capacitor, written without a fifth field, and run it in DC to find the capacitor's voltage:
 
 ```field 9 Circuit Description
 e,1,0,100
@@ -793,7 +793,7 @@ r0,1,2,10'k
 c,2,0,0.5'u
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `v_2` = {{o:100}} V (the book's $v_C(0)$).
 
@@ -837,7 +837,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 7.5
 :::
 
 ::: answer
-An inductor that has been carrying a current from one source and is switched, without a break, onto another; the question wants its current afterwards and the voltage across it the instant after the switch moves. Two intervals, two runs. With the switch at position a, the inductor has been in parallel with the 10 Ω resistor and the 8 A source for a long time; in that steady state the inductor is a wire, so the whole 8 A flows through it and none through the resistor. The direction matters: the source's arrow points down through the source, so its current comes up through the inductor, against the book's arrow for $i$. We write the source as `j,1,0,8`, its current flowing from node 1 down to ground, and the inductor as `l,1,0,0.2`, so that its current is counted downward like the book's $i$; a DC run then gives the current with its sign:
+An inductor that has been carrying a current from one source and is switched, without a break, onto another; the question wants its current afterwards and the voltage across it the instant after the switch moves. Two intervals, two runs. With the switch at position a, the inductor has been in parallel with the 10 Ω resistor and the 8 A source for a long time, so the circuit is steady; the inductor behaves as a wire, so the whole 8 A would flow through it and none through the resistor, and that, with its sign, should be its initial condition. To verify this intuition, we can run a DC simulation. The direction matters: the source's arrow points down through the source, so its current comes up through the inductor, against the book's arrow for $i$. We write the source as `j,1,0,8`, its current flowing from node 1 down to ground, and the inductor as `l,1,0,0.2`, so that its current is counted downward like the book's $i$; a DC run then gives the current with its sign:
 
 ```field 9 Circuit Description
 j,1,0,8
@@ -845,7 +845,7 @@ r,1,0,10
 l,1,0,0.2
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l` = {{o:-8}} A (the book's $i(0)$).
 
@@ -934,7 +934,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 7.11
 :::
 
 ::: answer
-An inductor in a circuit with two switches that open one after the other; the question wants its current between the two openings. Three intervals this time, and three runs. In the first, both switches have been closed for a long time, the circuit is steady, and the inductor is a wire in parallel with the 18 Ω resistor. We describe the whole circuit, the 60 V source, the 4 Ω, 12 Ω, 6 Ω and 3 Ω resistors, the inductor and the 18 Ω, naming each resistor after its value, and run it in DC for the inductor's current:
+An inductor in a circuit with two switches that open one after the other; the question wants its current between the two openings. Three intervals this time, and three runs. In the first, both switches have been closed for a long time and the circuit is steady. We describe the whole circuit, the 60 V source, the 4 Ω, 12 Ω, 6 Ω and 3 Ω resistors, the inductor and the 18 Ω, naming each resistor after its value, and run it in DC for the inductor's current:
 
 ```field 9 Circuit Description
 e,1,0,60
@@ -946,7 +946,7 @@ l,3,0,0.15
 r18,3,0,18
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l` = {{o:6}} A (the book's $i_L(0)$).
 
@@ -1107,7 +1107,7 @@ l,1,0,8,-0.01225
 r,1,0,20'k
 ```
 
-Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 5.
+Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx (full precision)*.
 
 ::: result voltage at node 1
 v_{1} = 100.02 e^{- 200 t} \sin{\left(979.8 t \right)}\,\mathrm{V}
@@ -1115,7 +1115,7 @@ v_{1} = 100.02 e^{- 200 t} \sin{\left(979.8 t \right)}\,\mathrm{V}
 
 `v_1` is the book's $v$.
 
-The book prints the amplitude as 100 and the frequency of the sine as 979.80, both rounded; at five digits the run shows 100.02 and 979.80 for the same expression.
+The book prints the amplitude as 100 and the frequency of the sine as 979.80, both rounded; to the same figures the run gives 100.02 and 979.80.
 
 :::
 :::
@@ -1224,7 +1224,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.7
 :::
 
 ::: answer
-Two coupled coils, the primary fed from a source through a switch and the secondary closed on two resistors; the switch takes the source out at $t$ = 0, and the question wants the secondary's current afterwards. Two intervals, two runs. With the switch at position a the primary side has been steady for a long time: the 60 V source drives a constant current through the 9 Ω, the 3 Ω and the 2 H coil, which in a steady circuit is a wire. The secondary has no source of its own, and a constant current in the primary induces nothing in it, so its current is zero. We describe the whole circuit, naming the resistors after their values, `r9`, `r3`, `r2b` and `r10`, the coils `l1` and `l2`, and the coupling as the `m` line with their mutual inductance, 2 H; we call the secondary's nodes **q**, **c** and **d**. A DC run gives both currents; it also notes that the secondary has no path to ground, which is true of the figure and changes nothing:
+Two coupled coils, the primary fed from a source through a switch and the secondary closed on two resistors; the switch takes the source out at $t$ = 0, and the question wants the secondary's current afterwards. Two intervals, two runs. With the switch at position a the primary side has been steady for a long time. We describe the whole circuit, naming the resistors after their values, `r9`, `r3`, `r2b` and `r10`, the coils `l1` and `l2`, and the coupling as the `m` line with their mutual inductance, 2 H; we call the secondary's nodes **q**, **c** and **d**. A DC run gives both currents; it also notes that the secondary has no path to ground, which is true of the figure and changes nothing:
 
 ```field 9 Circuit Description
 e,1,0,60
@@ -1237,7 +1237,7 @@ r2b,q,c,2
 r10,c,d,10
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l1` = {{o:5}} A (the book's $i_1(0)$) and `i_l2` = {{o:0}} A (the book's $i_2(0)$).
 
@@ -1277,7 +1277,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.13
 :::
 
 ::: answer
-Two inductors, one carrying a current from a source and the other idle behind a closed switch that shorts it out; opening the switch at $t$ = 0 forces the two into series, and the question wants the voltage across the second and the current in the first afterwards. Two intervals, two runs. While the switch is closed it is a wire from the junction after $L_1$ down to the bottom rail, so the circuit that has been steady for a long time is the 100 V source, the 10 Ω and $L_1$ in a loop through that wire, with the 15 Ω and $L_2$ hanging across a short circuit and carrying nothing. We describe that circuit and run it in DC for the two inductor currents; we write the closed switch by giving both its ends the same node, ground, and name the inductors `l1` and `l2` after the book's $L_1$ and $L_2$:
+Two inductors, one carrying a current from a source and the other idle behind a closed switch that shorts it out; opening the switch at $t$ = 0 forces the two into series, and the question wants the voltage across the second and the current in the first afterwards. Two intervals, two runs. While the switch is closed it joins the junction after $L_1$ to the bottom rail, and the circuit has been steady for a long time. We describe that circuit and run it in DC for the two inductor currents; we write the closed switch by giving both its ends the same node, ground, and name the inductors `l1` and `l2` after the book's $L_1$ and $L_2$:
 
 ```field 9 Circuit Description
 e,1,0,100
@@ -1287,7 +1287,7 @@ r2,0,4,15
 l2,4,0,2
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `i_l1` = {{o:10}} A (the book's $i_1(0)$) and `i_l2` = {{o:0}} A (the book's $i_2(0)$).
 
@@ -1304,7 +1304,7 @@ l2,4,0,2,0
 ::: applink NR12's Example 13.13 (TR)
 :::
 
-Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *TR — transient / time domain*.
 
 ::: result voltage at node 3
 v_{3} = 12 \delta\left(t\right) + 60 + 10 e^{- 5 t}\,\mathrm{V}
@@ -1590,7 +1590,7 @@ t,[p,x],[x,a],[4,1]
 r20,x,0,20
 ```
 
-Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms.
 
 Symbulator returns `zeq` = {{o:35}} Ω (the book's $R_L$) and `pmax` = {{o:315}} W.
 
@@ -1623,7 +1623,7 @@ rfb,pb,nn,39+28j
 rfc,pc,nn,39+28j
 ```
 
-Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 5.
+Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box; nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx (full precision)*.
 
 The quantities asked for are ordinary results: the line current $I_{aA}$ is the current through `rla`; the phase voltage at the load, $V_{AN}$, is the voltage between **pa** and **nn**; the line voltage $V_{AB}$ is the voltage between **pa** and **pb**; and the phase voltage at the generator's terminal, $V_{An}$, is the voltage at node **a**. The book quotes the voltages by magnitude, so we read each difference's magnitude in the {{card:Evaluate}} card, as `Abs(...)`.
 
@@ -1676,7 +1676,7 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.2
 :::
 
 ::: answer
-The circuit of Example 7.3, a capacitor charged from one source and switched over to a set of resistors, asked again with the answer wanted as a Laplace transform. Its first interval is the same: before the switch moves the capacitor has sat across the 100 V source through the 10 kΩ for a long time, carrying no current. We describe that circuit as before and run it in DC for the capacitor's voltage:
+The circuit of Example 7.3, a capacitor charged from one source and switched over to a set of resistors, asked again with the answer wanted as a Laplace transform. Its first interval is the same: before the switch moves the capacitor has sat across the 100 V source through the 10 kΩ for a long time, so the circuit is steady. We describe that circuit as before and run it in DC for the capacitor's voltage:
 
 ```field 9 Circuit Description
 e,1,0,100
@@ -1684,7 +1684,7 @@ r0,1,2,10'k
 c,2,0,0.5'u
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*.
 
 Symbulator returns `v_2` = {{o:100}} V (the book's $v_C(0)$).
 

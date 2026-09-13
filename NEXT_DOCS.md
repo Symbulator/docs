@@ -3,7 +3,40 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
-## #436 — the sampler at the book's rounding, and the Find equivalent card's own names — **live 13 Sep 2026, web only**
+## #436 — the sampler at the book's rounding, and the Find equivalent card's own names — **live 13 Sep 2026; the last round at cache v222**
+
+**The evening's batch (rules 19 as split, 23, 24; cache v222).** Roberto,
+one item at a time and then *"Run the train"*:
+
+- **Rule 19 split in two.** *"There are two things at play: what we tell
+  the user (who is going to ask himself how we knew what to tell him)
+  and what the answer looks like."* An n of 5 or 7 *"seems capricious
+  and retroactively selected"*, so the four problems whose book answers
+  carry more figures (5.7, 8.4, 11.1, 18.6) are told *approx (full
+  precision)* and their entries say `rounding: approx`, while the page
+  prints as many figures as the book -- *"the reader will know why"*.
+  `rounding_told()` in `gen.py` is the split.
+- **Rule 24.** 7.1's panels read `20 e^{-5t}` while *approx to 4* prints
+  `20.0 e^{-5t}`. `is_exact()` runs every problem and its Evaluate and
+  Solve steps both ways; where nothing differs the settings line says
+  nothing about Rounding and the entry says `rounding: exact` -- ten
+  problems and six first runs, each first run classified on its own.
+- **Rule 23.** *"In a steady circuit an inductor ... behaves as a wire"*
+  was first dropped as correct but irrelevant -- a reader may think they
+  must replace the inductor by a short -- and then, on his second look,
+  kept where it reads the initial condition by inspection and reframed
+  in his words: *The full current of the source, 20 A, would run through
+  it, and should be the initial condition of the inductor. To verify this
+  intuition, we can run a DC simulation.* 7.1, 7.3 and 7.5 carry that
+  shape; the four first runs whose steady value needs a calculation keep
+  only *the circuit has been steady for a long time*.
+- The docs' three mentions of where the *limit the results* tick is now
+  say *in Settings* (#437, app tree).
+
+Gates: runner 63 ok, `app_links` 384 of 386, `build.py --check` clean,
+`verify_lesson.py Nilsson_Riedel` clean on all 50. `learn` deployed web
+only; the book's `rounding:` lines changed, so the offline pair went to
+cache v222 and both PythonAnywhere accounts want a pull.
 
 Roberto, 13 Sep 2026: *"unless the book asks for more precision, use
 rounding at n=3 or 4 for every problem"* — and, reading Example 4.21,

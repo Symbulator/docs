@@ -107,9 +107,22 @@ def tex_name(key, spec):
     if not m: return sp.latex(sp.Symbol(key))
     return "%s_{%s}" % (m.group(1), m.group(2).replace("_", ""))
 
+def _approx_plain(e):
+    """A number at *approx (full precision)*, as the app prints it: the
+    shortest decimal that round-trips (symbulator_ui._approx_format)."""
+    if e.is_Integer: return str(e)
+    val = complex(e)
+    if abs(val.imag) < 1e-30: return repr(val.real)
+    re_t, im_t = repr(val.real), repr(abs(val.imag))
+    if abs(val.real) < 1e-30: return ("-" if val.imag < 0 else "") + im_t + "j"
+    return "%s %s %sj" % (re_t, "-" if val.imag < 0 else "+", im_t)
+
+
 def tex_value(val, digits=6):
     """A SymPy answer as LaTeX, rounded the way the app's Rounding setting would."""
     e = sp.sympify(val)
+    if not digits:                      # approx (full precision), as the app
+        return sp.latex(sp.N(e))
     if not e.free_symbols: return sp.latex(_round(e, digits))
     e = e.replace(lambda x: x.is_Float, lambda x: _r1(x, digits))
     return sp.latex(e)
@@ -159,6 +172,8 @@ def _r1(x, digits=6):
 def plain_value(val, digits=6):
     """A number as the page's prose reads it -- for {{o:...}} spans."""
     e = sp.sympify(val)
+    if not digits:
+        return sp.sstr(sp.N(e)) if e.free_symbols else _approx_plain(e)
     if e.free_symbols: return sp.sstr(_round(e, digits))
     re_, im_ = sp.re(e), sp.im(e)
     if im_ == 0: return _dec(_r1(re_, digits), digits)
