@@ -62,7 +62,7 @@ SPLIT_URL = "/split/"
 #: here is the one `?lesson=` takes in the app -- the template's openFromUrl()
 #: has the matching alias, and the two must be changed together or the links
 #: this module writes point at a book the app cannot name.
-NAMED_BOOKS = {"Nilsson_Riedel.cir": "nr12"}
+NAMED_BOOKS = {"Nilsson_Riedel.cir": "nr12", "Alexander_Sadiku.cir": "as7"}
 
 #: chapter id -> the `.cir` books that hold its circuits, in reading
 #: order. Four of the thirteen lessons are split across parts, and the
@@ -85,6 +85,7 @@ CHAPTER_BOOKS = {
     # the split view's map is written from this table (build.py), so it is
     # registered here rather than in the chapter's own front matter.
     "nr12-sampler":       ["nr12"],
+    "as7-sampler":        ["as7"],
 }
 
 _ENTRY_RE = re.compile(r"^\[(.+?)\]\s*$", re.M)

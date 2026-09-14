@@ -819,10 +819,10 @@ s\er("e,3,0,1.5is:r3,3,2,3:r2,2,0,2:s,2,1",1,0)
 s\er("e,3,0,1.5is:r3,3,2,3:r2,2,0,2:s,2,1",1,0)
 ```
 ```field 9 Circuit Description
-e,3,0,1.5*is1
+e,3,0,1.5*is
 r3,3,2,3
 r2,2,0,2
-s1,2,1
+s,2,1
 ```
 
 ::: only 7,8
@@ -831,9 +831,7 @@ Choose DC. Wait for *Done*. Evaluate `req`. The equivalent resistance is
 :::
 ::: only 9
 *Find equivalent*, *Resistance / impedance*, nodes **1** and **0**, in DC:
-`req` is {{o:0.6000}} Ω. The short is named **s1** rather than **s**, because a
-bare `s` would make its current `is`, a reserved word in Python; the dependent
-value follows it as `is1`.
+`req` is {{o:0.6000}} Ω.
 :::
 
 :::

@@ -32,4 +32,5 @@ SHORT = {
 
 def short_title(num):
     """The problem's title, and the base of its entry's name."""
-    return SHORT.get(num, "NR12's Example %s" % num)
+    import book, fmt
+    return SHORT.get(num, "%s's %s %s" % (book.ABBR, fmt.num_label(num), fmt.base_num(num)))

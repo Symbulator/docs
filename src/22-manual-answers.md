@@ -95,6 +95,8 @@ that:
   there, `sqrt`, `abs`, `exp`, the trigonometric ones, and for a complex
   answer `re(se)` and `im(se)` give its real and imaginary parts,
   `conj(se)` its conjugate and `arg(se)` its angle.{{i:re and im (Evaluate)}}
+  `limit(s*vo, s, oo)` takes a limit, and a condition at infinity, such as
+  `t = oo`, is read as one.{{i:limit (Evaluate)}}
 - {{card:Solve}} solves equations written over the answers.
 - In TR, the results can be limited before they are computed, which saves
   real time. {{ref:limiting-results}} has it.

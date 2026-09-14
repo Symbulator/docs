@@ -57,6 +57,20 @@ s2t(1000/(s + 1000))
 Curly brackets are shorthand for the same thing inside a value, so a source
 may be written in *t* and used in an FD run.{{i:curly-bracket shorthand}}
 
+## Limits
+
+{{card:Evaluate}} takes a limit over the answers as `limit(expression,
+variable, point)`. The initial- and final-value theorems are two of them:{{i:limit (Evaluate)}}{{i:initial- and final-value theorems}}
+
+```
+limit(s*vo, s, oo)
+limit(s*vo, s, 0)
+```
+
+A line in {{ui:Conditions}} at infinity is read as a limit too, so
+`omega = oo` gives a gain at high frequency and, in TR, `t = oo` a final
+value.
+
 ## The four plots
 
 The Plot card offers four, and which ones are available depends on the

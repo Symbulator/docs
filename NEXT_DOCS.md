@@ -3,6 +3,77 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #450 — claimed by the app tree, 14 Sep 2026: **a short named `s`, `limit()` in Evaluate, and `r20b`** (solver 0.6.13). The docs moved with it: Lesson 4's HK5 Figure 2-29 written with `s` and `is` as the book writes it, the Manual's answers page and a *Limits* section on its frequency page, and the AS7 sampler's 7.5 back to `s` and its four limits read with `limit()`. Write-up in `Application/v9/repos/local/NEXT.md`.
+
+## #449 — Examples from Alexander & Sadiku 7e: a second sampler — **live on learn 14 Sep 2026, cache v229**
+
+Roberto: *"select around fifty to sixty problems, like you did for NR12,
+and ... create a similar lesson ... The more difficult the problem and the
+more comprehensive is Symbulator's solution, the better."* Fifty problems
+from *Fundamentals of Electric Circuits*, 7th edition, at
+`src/97-as7-sampler.md`, generated from `tools/as7/specs.py` by the
+sampler code that now lives in `tools/sampler` and serves both books.
+**None of the fifty repeats a problem the Course's lessons already take
+from this book** (checked against all 62 `AS7's` entry titles in the
+lesson books). DC 21, TR 8, AC 15, FD 6.
+
+What the fifty show, beyond the NR12 sampler's range: the
+**By-Hand Equations** card naming mesh currents (Example 3.7, all four
+the opposite of the book's, which the entry says); the **Resistance /
+impedance** tool on a circuit with no independent source (4.10, −4 Ω);
+the **pf** mini-tool (11.14) and **pz** with a double pole (14.2, `-1 ×2`);
+a closed switch as an `s` element (7.5); coupled coils in ohms (P13.2)
+and by *k* (P13.13); an ideal transformer with opposite dots sharing a
+node (13.14); two filters whose corner frequency is found in the Solve
+card from `abs(v_2/vi)=1/sqrt(2)` (14.10, P14.10); the initial- and
+final-value theorems as `s=oo` and `s=0` in Evaluate's Conditions box
+(16.6); impulse, step and sinusoidal responses from one transfer function
+with `s2t` (16.9); and five two-ports as elements -- transmission
+parameters under the Thévenin tool (19.9, P19.9), a z-block with
+bracketed four-terminal ports in series with a resistor (19.12), and a
+transistor as an `h` element (19.17, split in two for its output
+impedance).
+
+Gates: runner **58 ok, 0 bad**; card guard **0 disagreeing**; all 50
+entries through the real app with `verify_lesson.py Alexander_Sadiku`,
+**0 with a problem**; `app_links` **437 of 439**, no loose end from the
+new chapter; `build.py --check` clean; the built page served by local PHP
+with 50 problems, 50 figures, no broken image, no KaTeX error. The NR12
+chapter and its book regenerate byte-identical after every shared change.
+
+**Things this round learned, worth keeping.** (The first two below were fixed the
+same evening as #450: `s` is accepted and Evaluate takes `limit()`. `r20b` parses too.)
+
+* **The real app refuses an element named `s`** (its current would be
+  `is`, a keyword) where the solver API accepts it. `verify_lesson.py`
+  caught it on 7.5 after the runner had passed it: *the solver's API is
+  not the app*, again. The short is `s1`.
+* **Evaluate has no `limit`.** `s=oo` in the Conditions box works when
+  the expression cancels first (16.6) and prints NaN when it does not
+  (P16.6, where the entry says so and reads $v_o(0)$ from $v_o(t)$).
+* **The By-Hand card's answers arrive exact** and the page rounds them
+  as it typesets (#359), so the runner now applies the app's own
+  `_round_expr` to a By-Hand reading, and the rule-29 exactness test
+  counts By-Hand answers. 3.7 prints −3.929, as the book does.
+* **The book's figures defeat the crop detector** on this layout (a
+  margin column, banners drawn as images, stacked (a)/(b) parts): 32 of
+  the 50 specs carry an explicit `figrect` in PDF points, read off a
+  gridded render, and `export_figs.py` honours it.
+* The pf and aa mini-tools reply with one `plain` value, not `rows`; the
+  minitool step reads that as the row `value`.
+
+Two printed answers the circuits do not reproduce, and the entries say
+so: P10.13's amplitude (536.4 mV from the book's PSpice run, 536.55 by
+the circuit) and 19.17's $V_o$ (−105.09 mV printed, −105.02 from the
+book's own gain times the input). Dropped from the selection: E8.6 and
+E8.8, whose overdamped answers the app writes as $e^{-at}(A\cosh bt +
+B\sinh bt)$ -- equal to the book's two exponentials, but unreadable
+against them; E8.9 (its printed initial condition contradicts its
+circuit); P4.13 (a unit misprint); E10.6 (superposition across three
+frequencies, three runs the generator cannot yet group).
+
+**Shipped 14 Sep 2026 with #450** at Roberto's word: `learn` web only, the PDFs held, and the example book on install and the ZIP at cache v229. The PythonAnywhere accounts take it at their pull, after solver 0.6.13 reaches PyPI.
+
 ## #448 — DC, AC, TR and FD in capitals in version 9 — **live 14 Sep 2026**
 
 Roberto: *"in the v9 documentation, find instances of fd like this ...
