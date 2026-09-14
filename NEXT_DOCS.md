@@ -3,6 +3,37 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #448 — DC, AC, TR and FD in capitals in version 9 — **live 14 Sep 2026**
+
+Roberto: *"in the v9 documentation, find instances of fd like this ...
+and please capitalise them ... Whereas the lower case is appropriate for
+v7 and v8, it is not for v9."* Every built version 9 page was scanned for
+the four names as words outside code, maths and file syntax (`analysis:
+dc` in an input file stays lowercase), and four turned up: Lesson 7's
+*use the ac analysis* and Lesson 12's summary *using fd*, both shared
+prose now split by version spans, the limiting-results note's **tr** and
+the equivalent-circuit note's *dc simulation*. A rescan finds none, and
+every version 7 and 8 page is byte-identical across the rebuild.
+
+## #447 — Lesson 10 works a coupling given as k: NR9's Assessment Problem 9.14 — **live 14 Sep 2026, cache v228**
+
+Roberto asked for an example of `m,l1,l2,k=...` in the Course, keeping
+NR12's Example 9.15 in the sampler. The 12th edition gives *k* as data in
+one other circuit, Problem 18.36, which prints no answer. It went live
+at cache v227 checked three ways (Symbulator with `k=`, with *M* = 26 mH,
+and a mesh solve by hand). Roberto then pointed at the 9th edition for a
+**solved** one, and its **Assessment Problem 9.14** replaced 18.36 within
+the hour: *k* = 0.4 at 800 rad/s, and all three printed answers match the
+real app -- the primary current `ir1` = 0.5∠−53.13° A, the secondary
+`ir2` = 0.08∠0° A, and the reflected impedance `ze − (184 + 100 + 400j)`
+= 10.24 − j7.68 Ω in Evaluate. Version 9 only, at the end of *Instructive
+m problems*, with the lesson's *k* sentence pointing at it; a figure drawn
+by Symbulator through the monograph's own pipeline
+(`paper/render_exemplars.py`'s fonts and flattening), `sym_nr9_ap0914.png`,
+and an entry in `Lesson_10.cir`. Versions 7 and 8 byte-identical.
+**`assets/circuit/sym_nr12_p1836.png` lingers on the host** from the v227
+deploy and is no longer referenced -- Roberto's typed prune.
+
 ## #445 — claimed by the app tree, 14 Sep 2026: **the `pz` mini-tool, poles and zeros**. The docs moved with it: 13.9's part (b) reads the poles and the zero off `pz` instead of two Solve card runs on polynomials copied out by hand, Lesson 7's Mini-Tools card lists four tools, and the Manual's orientation, frequency page and reference table name it. Write-up in `Application/v9/repos/local/NEXT.md`.
 
 ## #444 — 13.2 and 13.3 answer the question they ask, a function of time — **live 14 Sep 2026, cache v226**

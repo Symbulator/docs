@@ -91,7 +91,7 @@ rL,n,0,load
 ```
 
 We change the value of the load to 168 Ω, and add the 180 mA source flowing
-from node **0** to node **n**. Then we run a dc simulation and ask for the
+from node **0** to node **n**. Then we run a DC simulation and ask for the
 current in the load:
 
 ```field 9 Circuit Description

@@ -33,8 +33,9 @@ looks the same, naming two **r** elements instead: `m1,r1,r2,2j`
 
 {{v9|A book that gives the coupling as a coefficient *k* rather than as an
 inductance is written as it states it, `m1,l1,l2,k=0.5`, and Symbulator
-works out *M* = *k*√(*L*₁*L*₂) itself; the same spelling works for coils
-in jΩ.{{i:coupling coefficient (k)}}}}
+works out *M* = *k*√(*L*₁*L*₂) itself. The same spelling works for coils
+in jΩ. NR9's Assessment Problem 9.14, the last of the problems below, is
+written that way.{{i:coupling coefficient (k)}}}}
 
 ::: warning Don't mix the two
 `m1,l1,r1,2` couples an inductor given in henries to one given in jΩ.
@@ -195,6 +196,79 @@ r4,3,0,5
 :::
 
 Correct.
+:::
+:::
+
+::: only 9
+::: problem NR9's Assessment Problem 9.14
+A linear transformer couples a load of a 360 Ω resistor in series with a
+0.25 H inductor to a sinusoidal source of 245.20 V maximum at 800 rad/s,
+whose internal impedance is 184 Ω. The transformer has {{var:R_1}} = 100 Ω,
+{{var:L_1}} = 0.5 H, {{var:R_2}} = 40 Ω, {{var:L_2}} = 0.125 H and a
+coefficient of coupling *k* = 0.4, with the dots at the top of both coils.
+Calculate (a) the reflected impedance, (b) the primary current and (c) the
+secondary current.
+
+::: figure assets/circuit/sym_nr9_ap0914.png
+NR9's Assessment Problem 9.14, drawn by Symbulator
+:::
+
+::: answer
+The book gives the coupling as a coefficient, so the **m** line takes it as
+it is, `m,l1,l2,k=0.4`, and there is no mutual inductance to work out
+first. Both dots are at the top, so both coils are written top node first.
+We call the source's internal impedance `rs`, and the load's resistor and
+inductor `rl` and `ll`. The book draws the two sides on separate bottom
+rails. We join them at ground, which changes no current, because nothing
+conducts from one winding to the other.{{i:coupling coefficient (k)}}
+
+```field 9 Circuit Description
+e,1,0,245.2
+rs,1,a,184
+r1,a,p,100
+l1,p,0,0.5
+m,l1,l2,k=0.4
+l2,q,0,0.125
+r2,q,c,40
+rl,c,d,360
+ll,d,0,0.25
+```
+::: applink NR9's Assessment Problem 9.14
+:::
+
+Set {{ui:Analysis}} to *AC — alternating current* and put **800** in the
+{{ui:ω — angular frequency}} box. In {{card:Settings}}, set {{ui:Rounding}}
+to *approx to n digits* with **n** = 4 and tick
+{{ui:Show AC answers as polar phasors}}.
+
+Parts (b) and (c) are read straight off the cards. The primary current is
+the current through `r1`, and the secondary current the current through
+`r2`, each in the direction of the book's arrow:
+
+::: result current through r1
+i_{r1} = 0.5000∠-53.13°
+:::
+::: result current through r2
+i_{r2} = 0.08000∠0°
+:::
+
+So **(b)** the primary current is 0.5 cos(800*t* − 53.13°) A, and **(c)** the
+secondary current is 0.08 cos 800*t* A.
+
+**(a)** The reflected impedance is what the secondary adds to the impedance
+the source sees. The source's card reports that impedance as `ze`. Without
+the coupling it would be the source's own 184 Ω, the primary winding's
+100 Ω and the primary coil's *j*ω*L*₁ = *j*800 × 0.5 = *j*400 Ω, so we type
+the difference into {{card:Evaluate}}:
+
+```field 9 Evaluate
+ze - (184 + 100 + 400j)
+```
+
+It gives {{o:10.24 - 7.68j}} Ω. All three agree with the answers the book
+prints. The coupling written as the inductance it stands for,
+`m,l1,l2,0.1`, gives the same, since *M* = 0.4 × √(0.5 × 0.125) = 0.1 H.
+:::
 :::
 :::
 

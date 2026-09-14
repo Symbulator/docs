@@ -9,7 +9,7 @@ summary: >
   admittances*, and sources for AC analysis.
 ---
 
-In this lesson you will learn how to use the {{tool:ac}} {{v7,8|program}}{{v9|analysis}}
+In this lesson you will learn how to use the {{v7,8|{{tool:ac}} program}}{{v9|{{tool:AC}} analysis}}
 to solve AC circuits in Symbulator. You will also learn how to describe the
 elements you already know so they suit AC analysis, and how to {{v7,8|use {{tool:er}} and
 {{tool:th}} in their AC mode}}{{v9|find equivalents in AC}}.

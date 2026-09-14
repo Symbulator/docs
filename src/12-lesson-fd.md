@@ -4,7 +4,7 @@ kind: lesson
 title: The complex frequency domain
 updated: 2023-07-08
 summary: >
-  Learn to solve *complex-frequency domain* problems using {{tool:fd}}. Move between
+  Learn to solve *complex-frequency domain* problems using {{v7,8|{{tool:fd}}}}{{v9|{{tool:FD}}}}. Move between
   the time domain and the s-domain with the **t2s** and **s2t** shortcuts. Learn
   to solve transfer function problems.
 ---
