@@ -6,9 +6,7 @@ versions: [9]
 updated: 2026-09-14
 summary: >
   Fifty worked examples from *Fundamentals of Electric Circuits*, each described
-  in Symbulator and checked against the answer the book prints. DC, AC, TR and
-  FD, with two-ports, the By-Hand Equations card, the Solve card and the
-  Mini-Tools.
+  in Symbulator and checked against the answer the book prints.
 ---
 
 Here is a selection of problems from *Fundamentals of Electric Circuits*, 7th
