@@ -3,6 +3,69 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #445 — claimed by the app tree, 14 Sep 2026: **the `pz` mini-tool, poles and zeros**. The docs moved with it: 13.9's part (b) reads the poles and the zero off `pz` instead of two Solve card runs on polynomials copied out by hand, Lesson 7's Mini-Tools card lists four tools, and the Manual's orientation, frequency page and reference table name it. Write-up in `Application/v9/repos/local/NEXT.md`.
+
+## #444 — 13.2 and 13.3 answer the question they ask, a function of time — **live 14 Sep 2026, cache v226**
+
+Roberto: *"If the question asks for a voltage as a function of time, why
+use FD? Unless the question asks for both functions, of s and t. Also,
+the claim that FD returns also the answer in the time domain is
+nonsense. You need s2t for that."* Both questions ask for $v(t)$; both
+entries stopped at the transform and waved at TR (*"FD returns the
+transform and TR its inverse"*, *"Choosing TR instead would return its
+inverse"*). They keep the FD run, since the book works them by the
+Laplace method and prints the transform, and add the inversion as a step
+of its own: `s2t(v_2)` and `s2t(v_1)` in Evaluate, shown as result
+panels. The answers are the book's, 60e^−25t and (50 − 2.2×10⁶t)e^−40000t,
+checked by `gen.py` against `expect`. The FD section's intro now says
+which two of its five invert and how. `gen.py` learned to show an
+Evaluate step whose answer is an expression (`label`, `texname`), which
+it could not before: `runner.number_of` reads a leading number and took
+`(50.0` out of the second answer. **Rule 30** in `tools/nr12/README.md`.
+
+## #443 — the page prints what the card prints — **live 14 Sep 2026, cache v226**
+
+Roberto, on 13.6: *"says it uses approx but the answers it shows are
+exact. I had already reported a similar problem. Fix here and
+elsewhere."* **Measured, it was all 34 symbolic answers in the chapter,
+across 21 entries.** `gen.py` rounded a symbolic answer through its own
+`fmt.tex_value`, so the page printed `60` where the card prints `60.0`,
+`10000` where it prints `1.0 \cdot 10^{4}`, and every transient's terms
+in a different order. A panel now carries the card's own LaTeX
+(`runner.app_display`; an `@` answer, `runner.app_evaluate_display`).
+
+**The Rounding instruction was decided wrongly too, and took two
+attempts to decide rightly.** An entry is now told *exact* when every
+answer it shows reads the same at exact and at n = 4 with the numbers
+written one way (`gen._same_but_for_notation`). The first attempt asked
+instead whether exact held a number too long to read, and 14.6's Solve
+card came back `L = 1 H`: exact's answer there is `1/(500*pi**2)`, which
+holds no long number and is still not the 202.6 µH the book prints, and
+`number_of` read its leading `1`. A Solve card line now refuses to print
+an expression as its leading number. Thirty-one entries of fifty are
+*exact* now; 7.11b, 8.4, 8.11, 13.7, 14.6 and the AC entries keep n.
+Guard: `tools/nr12/check_card_truth.py` reads the BUILT chapter, asks the
+app, and is proved red by `--prove-red`. **Rule 29.**
+
+## #442 — Roberto's review round of 14 Sep 2026 — **live 14 Sep 2026, caches v225 and v226**
+
+- **10.8** reads parts (a) and (b) as `p` and `q` off the cards and (c)
+  as two sums in Evaluate, now that every AC card shows both powers.
+  `gen.py` gained `groups`, one results sentence per lettered part.
+- **Rules 26 and 27**, voice: every sentence has a verb, no semicolon
+  joins two clauses. His rewrite of 10.12 is the model. 77 semicolons in
+  44 prose fields and a verbless opener on most entries, all rewritten;
+  *We set the analysis to TR* restored where it had been cut, the
+  analysis not being a setting.
+- **10.12** writes the transformer his way, both pairs top node then
+  bottom, `t,[p,x],[a,x],[-4,1]`, with the reversed-pair form as the
+  alternative.
+- **11.1** gives its sources as phasors in degrees, `(120∠-120°)`
+  (**rule 28**; the Manual's three-phase paragraph moved the same way),
+  and answers each part under its letter, (b) to (f) and (g) in words.
+- **9.15** checked against the book at his ask: the values match; the
+  live PDF is a day behind, the PDFs being held.
+
 ## #441 — claimed by the app tree, 13 Sep 2026: **the AC powers are `s`, `ap` and `q`, no `p`; *effective* under RMS** (solver 0.6.11, withdrawing #439's both-names). The docs moved with it: the Manual's AC table with three power rows and the RMS warning saying the labels turn *effective*, its answers table with `qr1`, Lesson 8's version 9 reading `ape`, the sampler's 10.16 reading `apmax`. Write-up in `Application/v9/repos/local/NEXT.md`
 
 ## #440 — the split view opens a named book's chapter — **13 Sep 2026**

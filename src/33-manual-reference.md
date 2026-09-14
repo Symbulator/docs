@@ -78,6 +78,7 @@ Case matters everywhere but kilo. `8000` and `8'k` are exact; `8000.` and
 | {{tool:pf}} | a complex power, or an element's name | power factor with lead/lag: of the value as given, or of the power the element delivers (a source) or consumes (an impedance) |
 | {{tool:gain}} | parameters and a load | *G*ᵥ, *G*ᵢ, *G*ₚ, *Z*ᵢₙ |
 | {{tool:aa}} | a complex value | amplitude and angle |
+| {{tool:pz}} | a ratio of polynomials in *s* | poles and zeros, a common factor cancelled, a repeated root with its multiplicity |
 
 ## Plots
 
@@ -116,4 +117,4 @@ transmission lines · noise and tolerance analysis.{{i:Fourier series and transf
 
 Supported but not automated, because each is something you do *to* the
 circuit and then solve: superposition · source transformation ·
-power-factor correction · pole-zero work · magnitude and frequency scaling.{{i:superposition}}{{i:source transformation}}{{i:power-factor correction}}{{i:poles and zeros}}
+power-factor correction · magnitude and frequency scaling.{{i:superposition}}{{i:source transformation}}{{i:power-factor correction}}

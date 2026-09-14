@@ -55,7 +55,7 @@ frequency where the circuit needs one.
 ### The Mini-Tools card
 
 One more thing before the first AC problem, because AC is where it earns its
-place. Under the results sits the {{card:Mini-Tools}} card: three small
+place. Under the results sits the {{card:Mini-Tools}} card: four small
 calculators that work on values you type rather than on the circuit, and are
 ready before and after any solve. Choose one in its {{ui:Tool}} menu, fill in
 the boxes it shows, and press {{btn:Run}}:
@@ -72,6 +72,11 @@ the boxes it shows, and press {{btn:Run}}:
 - **gain — voltage, current and power gain** takes the voltage and current
   at a two-port's input and at its output. {{ref:lesson-twoports}} introduces
   it.
+- **pz — poles and zeros** takes one value: a transfer function, such as
+  `v2/vg` after an FD run with the source left as a symbol, or any ratio of
+  polynomials in *s*. It answers with the roots of the denominator, the
+  poles, and the roots of the numerator, the zeros, after cancelling any
+  factor the two share.{{i:pz mini-tool}}{{i:poles and zeros}}
 
 They are mini-tools, not analyses: none of them solves the circuit, and none
 needs the circuit to have been solved, though an answer's name only means

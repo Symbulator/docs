@@ -1,4 +1,4 @@
-Sixteen resistive problems. The running theme is that the book's
+Sixteen resistive problems open the chapter. The running theme is that the book's
 *method* — node voltages, mesh currents, source transformations, superposition,
 a delta-to-wye transform — is a way of getting an answer by hand, not a property
 of the answer. Symbulator is told the circuit and never told the method, so the

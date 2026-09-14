@@ -125,8 +125,8 @@ the book you are working from before comparing numbers.{{i:RMS}}
 ## Three-phase
 
 There is no three-phase mode, and none is needed. A three-phase circuit is
-an AC circuit with three sources whose values carry the phase — `120`,
-`120*exp(-2j*pi/3)`, `120*exp(2j*pi/3)` — and Y or Δ is just how you wire
+an AC circuit with three sources whose values carry the phase — `(120∠0°)`,
+`(120∠-120°)`, `(120∠120°)` — and Y or Δ is just how you wire
 the nodes. Balanced and unbalanced are the same description with different
 values.{{i:three-phase circuits}}
 

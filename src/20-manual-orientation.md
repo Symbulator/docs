@@ -30,8 +30,8 @@ Four analyses, on the same description:{{i:analyses (DC, AC, TR, FD)}}
 
 Fifteen element types, listed in {{ref:manual-grammar}}.{{i:element types}} Three tools that
 answer a question about a circuit rather than solving it outright —
-equivalent resistance, Thévenin/Norton and two-port parameters — and three
-mini-tools that work on values you type: *aa*, *pf* and *gain*.
+equivalent resistance, Thévenin/Norton and two-port parameters — and four
+mini-tools that work on values you type: *aa*, *pf*, *gain* and *pz*.
 
 Every value may be a symbol. That is the point of the thing: leave `r1` as
 `r1` and the answer comes back in terms of `r1`.

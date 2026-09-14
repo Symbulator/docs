@@ -16,7 +16,7 @@ problems in the book, but they are well suited to showing what Symbulator
 can do, since they are the ones where the distance between *describing a
 circuit* and *solving it by hand* is widest. The book works each of them by
 a named method, node voltages, mesh currents, superposition, a transform,
-and its questions say which; here each question is trimmed to what is
+and its questions say which. Here each question is trimmed to what is
 asked, since Symbulator is told the circuit and never the method.
 
 ::: note What this chapter is not
@@ -47,7 +47,7 @@ answers is which of the book's.
 
 Nothing here has to be typed. All forty-three circuits ship with Symbulator as
 a built-in example book — open {{card:Built-in Examples}} and pick
-*Nilsson & Riedel 12ed* from the list of books; the entries are named for the
+*Nilsson & Riedel 12ed* from the list of books. The entries are named for the
 example each one comes from, and each arrives with its note, its picture, its
 settings, its Solve card fields and the analysis it wants already set.
 

@@ -121,6 +121,52 @@ def app_values(s, digits=6, approx=True):
     return r["values"]
 
 
+def app_display(s, digits=6, approx=True):
+    """What the app's CARDS show for a circuit: {answer name: {plain, latex}},
+    keyed the way the page names an answer -- `v_2`, `i_l1`, and a Find
+    equivalent answer by the card's own name, `vth`, `zeq`, `pmax`.
+
+    `app_values` is the substitution dictionary the Evaluate card is fed and
+    ignores the Rounding setting; this is the rendered answer the reader
+    actually sees, which is what the page must reproduce (#443)."""
+    if SERVER not in sys.path:
+        sys.path.insert(0, SERVER)
+    import symbulator_ui as ui
+    w = s.get("omega")
+    omega = ("omega" if (w is None or isinstance(w, sp.Symbol)) else str(sp.sympify(w))) \
+        if s.get("domain") == "ac" else ""
+    kind = s.get("kind", "circuit")
+    tool = "th" if kind == "th" else ("port" if kind == "port" else "solve")
+    r = ui.solve_ui(s["desc"], s.get("domain", "dc"), omega, [], tool,
+                    s.get("n1", ""), s.get("n2", ""), s.get("ptype", "z"),
+                    list(s.get("equations", [])), list(s.get("unknowns", [])), [],
+                    digits=digits, approx=approx, units=True,
+                    use_rms=bool(s.get("rms")))
+    assert r.get("ok"), r.get("error")
+    out = {}
+    for n in r.get("nodes", []):
+        out["v_%s" % n["node"]] = n
+    for el in r.get("elements", []):
+        for it in el.get("items", []):
+            out["%s_%s" % (it["sym"], el["name"])] = it
+    for it in r.get("extras", []) or []:
+        if isinstance(it, dict) and "name" in it:
+            out[it["name"]] = it
+    return out
+
+
+def app_minitool(s, mt, values=None, digits=6, approx=True):
+    """One Mini-Tools step of a spec, through the real app's `mini_tool_ui`
+    on the values the page holds: the tool's reply, `rows` and all."""
+    if SERVER not in sys.path:
+        sys.path.insert(0, SERVER)
+    import symbulator_ui as ui
+    values = values if values is not None else app_values(s, digits, approx)
+    r = ui.mini_tool_ui(mt["tool"], list(mt["args"]), values, digits or 6)
+    assert r.get("ok"), r
+    return r
+
+
 def app_solveq(s, sq, values=None, digits=6, approx=True):
     """One Solve-card run of a spec, through the real app's `solveq_ui`:
     {name: plain} of the first solution, and the raw reply."""
@@ -146,6 +192,20 @@ def number_of(plain):
     m = re.match(r"^(-?[\d.]+(?:[eE][-+]?\d+)?(?:\s*[-+]\s*[\d.]+(?:[eE][-+]?\d+)?j)?j?)", txt)
     num = m.group(1) if m else txt.split()[0]
     return num, sp.sympify(num.replace("j", "*I"))
+
+
+def app_evaluate_display(s, expr, conditions=(), values=None, digits=6,
+                         approx=True):
+    """One Evaluate-card step as the card renders it: {plain, latex}."""
+    if SERVER not in sys.path:
+        sys.path.insert(0, SERVER)
+    import symbulator_ui as ui
+    values = values if values is not None else app_values(s, digits, approx)
+    r = ui.evaluate_ui(expr, values, digits=digits, approx=approx,
+                       domain=s.get("domain", "dc"),
+                       conditions=list(conditions) or None)
+    assert r.get("ok"), r
+    return r
 
 
 def app_evaluate(s, expr, conditions=(), values=None, digits=6, approx=True):
@@ -177,6 +237,21 @@ def check(specs, only=None, verbose=True):
                                  expect=pre["expect"]))
         expanded.append(s)
     bad, ok = _check(expanded, only, verbose, summary=False)
+    # Mini-Tools steps (#445): each row the page quotes, as the card prints it
+    for s in specs:
+        if only and s["num"] not in only: continue
+        for i, mt in enumerate(s.get("minitool", [])):
+            label = "%s minitool%d" % (s["num"], i + 1)
+            rows = {r["key"]: r["plain"] for r in app_minitool(s, mt, digits=4)["rows"]}
+            fails = [(k, "got %r  want %r" % (rows.get(k), w))
+                     for k, w in mt["expect"].items() if rows.get(k) != w]
+            if fails:
+                bad.append((label, fails))
+                print("XX %-6s Mini-Tools step %d" % (s["num"], i + 1))
+                for k, m in fails: print("        %-10s %s" % (k, m))
+            else:
+                ok += 1
+                if verbose: print("ok %-6s Mini-Tools step %d" % (s["num"], i + 1))
     for s in specs:
         if only and s["num"] not in only: continue
         if not s.get("solveq"): continue

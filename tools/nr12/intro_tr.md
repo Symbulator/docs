@@ -1,4 +1,4 @@
-Fourteen transient problems, three of them from the book's Laplace
+Fourteen transient problems follow, three of them from the book's Laplace
 chapter. The pattern is the one you would follow by hand: run the circuit as it
 was before the switch moved in DC, read off the capacitor voltages and inductor
 currents, put those numbers in the fifth field of the `c` and `l` lines, and run

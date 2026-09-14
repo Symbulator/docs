@@ -124,40 +124,85 @@ def _integral(e):
     return not e.atoms(sp.Float) and all(a.is_Integer for a in e.atoms(sp.Number))
 
 
+#: a number inside a rendered answer, scientific notation included
+_NUMBER_IN = re.compile(r"\d+\.\d+(?:[eE][-+]?\d+)?|\d+(?:[eE][-+]?\d+)?")
+
+
+def _canon(text):
+    """A rendered answer with every number written one way, so that two
+    printings of the same answer compare equal whatever notation they
+    used -- `2.2e+6` and `2200000.0` are one number."""
+    return _NUMBER_IN.sub(lambda m: repr(float(m.group(0))), text or "")
+
+
+def _same_but_for_notation(a, b):
+    """True when two renderings of an answer differ only in how their
+    numbers are written, not in what they say."""
+    return _canon(a) == _canon(b)
+
+
+def _symbolic_text(plain):
+    """True when a card's answer is an expression rather than a number.
+    Unparseable counts as an expression: a number always parses."""
+    try:
+        return bool(sp.sympify(plain.replace("j", "*I")).free_symbols)
+    except Exception:                                         # noqa: BLE001
+        return True
+
+
 def is_exact(s):
-    """Rule 24: True when every value the page prints for this problem
-    reads the same under *exact* -- the answer panels have only integer
-    numbers (and in AC no complex value, whose polar form is decimal),
-    and every Evaluate and Solve card step prints the same string at
-    exact as at the problem's digits. Then the reader is not told to set
-    Rounding at all, and the entry says `rounding: exact`. Cached on the
-    spec, since it runs the app."""
+    """Rule 24, as rule 29 settled it (Roberto, 13 and 14 Sep 2026): True
+    when the Rounding setting changes nothing the page shows, so the reader
+    is told to set nothing and the entry says `rounding: exact`.
+
+    Every answer the page prints is rendered by the real app twice, at the
+    problem's digits and at exact, and compared with the numbers written
+    one way -- so `1.0e+4` against `10000.0` is not a difference, while
+    `1/(500*pi**2)` against `0.0002026` is. Cached on the spec, since it
+    runs the app."""
     if "_exact" in s:
         return s["_exact"]
-    ok = digits_of(s) <= DIGITS
+    n = digits_of(s)
+    ok = n <= DIGITS
+    # An AC entry's cards carry a polar form for every complex answer, and
+    # a magnitude and an angle are decimal whatever the answer is, so
+    # exact would print them to full precision (10.8, 14 Sep 2026).
+    if s.get("domain") == "ac":
+        ok = False
     if ok:
-        _r, vals = runner.run_one(s)
+        at_n = runner.app_display(s, digits=n, approx=True)
+        at_0 = runner.app_display(s, digits=0, approx=False)
         for k in s["expect"]:
             if k in s.get("hide", ()):
                 continue
-            v = sp.sympify(k[1:], locals=dict(vals)) if k.startswith("@") else vals.get(k)
-            if v is None:
-                continue
-            if not _integral(v) or (s.get("domain") == "ac" and sp.im(sp.sympify(v)) != 0):
+            if k.startswith("@"):
+                pair = (runner.app_evaluate(s, k[1:], digits=n, approx=True),
+                        runner.app_evaluate(s, k[1:], digits=0, approx=False))
+            else:
+                name = fmt.tool_name(k, s) or k
+                if name not in at_n:
+                    continue
+                pair = (at_n[name]["plain"], at_0[name]["plain"])
+            if not _same_but_for_notation(*pair):
                 ok = False
                 break
     if ok and s.get("evals"):
         for ev in s["evals"]:
+            if "expr" not in ev:
+                continue
             conds = ["%s = %s" % (k, v) for k, v in ev.get("at", {}).items()]
-            if runner.app_evaluate(s, ev["expr"], conds, digits=digits_of(s)) != \
-               runner.app_evaluate(s, ev["expr"], conds, digits=0, approx=False):
+            if not _same_but_for_notation(
+                    runner.app_evaluate(s, ev["expr"], conds, digits=n),
+                    runner.app_evaluate(s, ev["expr"], conds, digits=0,
+                                        approx=False)):
                 ok = False
                 break
     if ok and s.get("solveq"):
         for sq in s["solveq"]:
-            a, _ = runner.app_solveq(s, sq, digits=digits_of(s))
-            b, _ = runner.app_solveq(s, sq, digits=0, approx=False)
-            if a != b:
+            at_n, _r = runner.app_solveq(s, sq, digits=n)
+            at_0, _r = runner.app_solveq(s, sq, digits=0, approx=False)
+            if set(at_n) != set(at_0) or any(
+                    not _same_but_for_notation(at_n[k], at_0[k]) for k in at_n):
                 ok = False
                 break
     s["_exact"] = ok
@@ -174,6 +219,33 @@ def rounding_told(s):
         return "exact"
     d = digits_of(s)
     return str(d) if d <= DIGITS else "approx"
+
+
+def told_digits(s):
+    """The Rounding the reader is told, as the pair `solve_ui` takes.
+    *exact* is the app's default and is digits 0 with approx off."""
+    told = rounding_told(s)
+    if told == "exact":
+        return 0, False
+    if told == "approx":
+        return 0, True
+    return int(told), True
+
+
+#: a unit the card appends to a value's LaTeX, which the page adds itself
+_CARD_UNIT = re.compile(r"\\,(?:\\mathrm\{[^}]*\}|\\Omega|var)\s*$")
+
+
+def card_latex(s):
+    """{answer name: LaTeX}, as the app's cards typeset them at the setting
+    this entry tells the reader, with the card's unit stripped (the page
+    appends its own). Cached on the spec, since it runs the app."""
+    if "_cardtex" not in s:
+        digits, approx = told_digits(s)
+        shown = runner.app_display(s, digits=digits, approx=approx)
+        s["_cardtex"] = {k: _CARD_UNIT.sub("", v.get("latex", "")).strip()
+                         for k, v in shown.items()}
+    return s["_cardtex"]
 
 
 def settings_line(s):
@@ -193,8 +265,8 @@ def settings_line(s):
     if dom == "ac":
         w = s.get("omega")
         if w is None or isinstance(w, sp.Symbol):
-            bits.append("Leave **omega** in the {{ui:\u03c9 \u2014 angular frequency}} box; "
-                        "nothing here depends on the frequency")
+            bits.append("Leave **omega** in the {{ui:\u03c9 \u2014 angular frequency}} box, "
+                        "since nothing here depends on the frequency")
         else:
             bits.append("Put **%s** in the {{ui:\u03c9 \u2014 angular frequency}} box"
                         % fmt.plain_value(sp.sympify(w)))
@@ -230,7 +302,22 @@ def answer_blocks(s, vals):
         lbl = fmt.label_for(k, s["desc"], s)
         unit = fmt.unit_for(k, s)
         if sp.sympify(got).free_symbols:
-            body = "%s = %s" % (fmt.tex_name(k, s), fmt.tex_value(got, digits_of(s)))
+            # #443: the card's own typesetting, not a second rounding of our
+            # own -- the two disagreed on every symbolic answer in the
+            # chapter (`60` against `60.0`, `10000` against `1.0 \cdot 10^{4}`,
+            # and a different term order in the transient answers).
+            if k.startswith("@"):
+                # not an answer of the run but an expression over them --
+                # a transfer function, a gain -- which the reader reads in
+                # the Evaluate card, so it is printed as that card prints it
+                digits, approx = told_digits(s)
+                got = runner.app_evaluate_display(s, k[1:], digits=digits,
+                                                  approx=approx)
+                tex = _CARD_UNIT.sub("", got["latex"]).strip()
+            else:
+                tex = card_latex(s).get(fmt.tool_name(k, s) or k)
+            assert tex, "%s: the card shows no %s" % (s["num"], k)
+            body = "%s = %s" % (fmt.tex_name(k, s), tex)
             if unit:
                 body += "\\," + (unit if unit == "\\Omega" else "\\mathrm{%s}" % unit)
             panels.append("::: result %s\n%s\n:::" % (lbl, body))
@@ -314,6 +401,37 @@ def numeric_sentence(numeric):
     says so in its own paragraph."""
     if not numeric:
         return ""
+    return "Symbulator returns " + numeric_body(numeric) + "."
+
+
+def grouped_sentences(s, direct):
+    """The returns sentence, or several of them: a spec's `groups` splits
+    the plain results into sentences of their own, each with its own lead
+    -- *For part (a), the three impedances' cards read ...* -- so a
+    question with lettered parts answers each in turn (10.8, Roberto,
+    14 Sep 2026). An answer in no group keeps the default *Symbulator
+    returns ...* sentence, after the groups."""
+    out, taken = [], set()
+    for lead, keys in s.get("groups", []):
+        names = [fmt.shown_name(k, s) for k in keys]
+        items = [it for it in direct if it[0] in names]
+        missing = set(names) - {it[0] for it in items}
+        assert not missing, "group %r names answers the page does not show: %s" % (
+            lead, sorted(missing))
+        taken.update(names)
+        if items:
+            out.append(lead + " " + numeric_body(items) + ".")
+    for ev in s.get("evals", []):
+        if "keys" in ev:
+            taken.update(fmt.shown_name(k, s) for k in ev["keys"])
+    rest = [it for it in direct if it[0] not in taken]
+    if rest:
+        out.append(numeric_sentence(rest))
+    return out
+
+
+def numeric_body(numeric):
+    """`name` = value unit (asides), joined with commas and a final *and*."""
     parts = []
     for name, val, unit, pol, book in numeric:
         u = UNIT_WORD.get(unit, unit)
@@ -328,8 +446,7 @@ def numeric_sentence(numeric):
         if aside:
             txt += " (%s)" % ", ".join(aside)
         parts.append(txt)
-    body = parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]
-    return "Symbulator returns " + body + "."
+    return parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]
 
 
 def render(s, vals):
@@ -426,8 +543,7 @@ def render(s, vals):
             bits[0] if len(bits) == 1 else ", ".join(bits[:-1]) + " and " + bits[-1]) + ".")
         L.append("")
     direct, eval_lines = evaluated_blocks(s, numeric)
-    sent = numeric_sentence(direct)
-    if sent:
+    for sent in grouped_sentences(s, direct):
         L.append(sent)
         L.append("")
     L.extend(eval_lines)
@@ -444,6 +560,17 @@ def render(s, vals):
     # Conditions (Lesson 6, Example 4.15). Computed by the real app's
     # evaluate_ui, so the page prints what the card prints.
     for ev in s.get("evals", []):
+        if "keys" in ev:
+            # A lettered part answered straight off the run, placed here
+            # so the parts keep the question's order among the Evaluate
+            # steps (11.1, Roberto, 14 Sep 2026: each question answered
+            # separately, showing what is evaluated and what is returned).
+            names = [fmt.shown_name(k, s) for k in ev["keys"]]
+            items = [it for it in direct if it[0] in names]
+            assert len(items) == len(names), (s["num"], ev["keys"])
+            L.append(polish(ev["text"]) + " " + numeric_body(items) + ".")
+            L.append("")
+            continue
         L.append(polish(ev["text"]))
         L.append("")
         L.append("```field 9 Evaluate")
@@ -456,15 +583,80 @@ def render(s, vals):
             L.extend(conds)
             L.append("```")
             L.append("")
-        got = runner.app_evaluate(s, ev["expr"], conds, digits=digits_of(s))
-        num, val = runner.number_of(got)
+        digits, approx = told_digits(s)
+        card = runner.app_evaluate_display(s, ev["expr"], conds, digits=digits,
+                                           approx=approx)
+        got = card["plain"]
+        # `number_of` reads a LEADING number and cannot be asked about an
+        # expression: on "(50.0 - 2200000.0*t)*exp(...)" it takes "(50.0"
+        # and raises. So the shape of the answer is settled first, and a
+        # symbolic one is compared whole.
+        symbolic = _symbolic_text(got)
+        num, val = ("", None) if symbolic else runner.number_of(got)
         unit = UNIT_WORD.get(ev.get("unit", ""), ev.get("unit", ""))
         if ev.get("expect") is not None:
-            assert runner.close(val, ev["expect"], 0.006), \
-                "Evaluate %s at %s: got %s, book says %s" % (ev["expr"], ev.get("at"), got, ev["expect"])
+            want = ev["expect"]
+            assert runner.close(got if symbolic else val, want, 0.006), \
+                "Evaluate %s at %s: got %s, book says %s" % (ev["expr"], ev.get("at"), got, want)
+        if symbolic:
+            # An expression, shown the way every other expression answer on
+            # the page is shown: a result panel carrying the card's own
+            # typesetting (#443).
+            tex = _CARD_UNIT.sub("", card["latex"]).strip()
+            body = "%s = %s" % (ev["texname"], tex)
+            if ev.get("unit"):
+                u = ev["unit"]
+                body += "\\," + (u if u == "\\Omega" else "\\mathrm{%s}" % u)
+            L.append("It gives:")
+            L.append("")
+            L.append("::: result %s" % ev["label"])
+            L.append(body)
+            L.append(":::")
+            L.append("")
+            continue
+        # an AC answer also reads as an amplitude and an angle, from the
+        # exact value rather than the printed one, so the last digit is
+        # the book's (199.58, not the 199.57 a rounded rectangular gives)
+        aside = []
+        if s.get("domain") == "ac" and not ev.get("at"):
+            try:
+                pol = polar_of(s, sp.sympify(ev["expr"], locals=dict(vals)))
+            except Exception:
+                pol = ""
+            if pol:
+                aside.append(pol)
+        if ev.get("book") and not same_name(ev["expr"], ev["book"]):
+            aside.append("the book's $%s$" % ev["book"])
         L.append("It gives {{o:%s}}%s%s." % (tidy(num), (" " + unit) if unit else "",
-                 (" (the book's $%s$)" % ev["book"])
-                 if ev.get("book") and not same_name(ev["expr"], ev["book"]) else ""))
+                 (" (%s)" % ", ".join(aside)) if aside else ""))
+        L.append("")
+    # A Mini-Tools step (#445): the tool chosen, the value typed into its
+    # box, and what the card answers, read from the real app's
+    # mini_tool_ui on the values the page holds. `rows` names what to
+    # quote: [(row key, the words before it)], as the card prints them.
+    for mt in s.get("minitool", []):
+        L.append(polish(mt["text"]))
+        L.append("")
+        L.append("```field 9 Value")
+        L.extend(mt["args"])
+        L.append("```")
+        L.append("")
+        L.append("Press {{btn:Run}}.")
+        L.append("")
+        digits, approx = told_digits(s)
+        got = runner.app_minitool(s, mt, digits=digits or 4, approx=True)
+        rows = {r["key"]: r["plain"] for r in got["rows"]}
+        for k, want in mt["expect"].items():
+            assert rows.get(k) == want, "%s: %s gives %s %r, the spec says %r" % (
+                s["num"], mt["tool"], k, rows.get(k), want)
+        bits = []
+        for k, words in mt["say"]:
+            values = [v.strip() for v in rows[k].split(",")]
+            shown = ["{{o:%s}}" % v for v in values]
+            bits.append("%s %s" % (words, shown[0] if len(shown) == 1 else
+                                   ", ".join(shown[:-1]) + " and " + shown[-1]))
+        L.append("The card returns " + (bits[0] if len(bits) == 1 else
+                 ", ".join(bits[:-1]) + ", and " + bits[-1]) + ".")
         L.append("")
     # Solve card runs (Roberto, 13 Sep 2026: "my approach with Solve, which
     # is more representative of the exploratory way a student would
@@ -473,7 +665,8 @@ def render(s, vals):
     # first run's fields travel in the problem's head entry; a later run
     # is an entry of its own, linked beside its boxes.
     if s.get("solveq"):
-        values = runner.app_values(s, digits=digits_of(s))
+        values = runner.app_values(s, digits=told_digits(s)[0],
+                                   approx=told_digits(s)[1])
         for i, sq in enumerate(s["solveq"]):
             # A later run that only changes one box shows that box alone
             # and is not an entry of its own (Roberto, 13 Sep 2026: "just
@@ -515,13 +708,18 @@ def render(s, vals):
                 else:
                     L.append("Untick {{ui:real solutions only}} and press {{btn:Solve equations}}.")
             L.append("")
-            got, _r = runner.app_solveq(s, sq, values, digits=digits_of(s))
+            got, _r = runner.app_solveq(s, sq, values, digits=told_digits(s)[0],
+                                        approx=told_digits(s)[1])
             sols = _r.get("solutions") or []
             units = sq.get("unit", "")
 
             def one(k, plain):
                 u = units.get(k, "") if isinstance(units, dict) else units
                 u = UNIT_WORD.get(u, u)
+                assert not _symbolic_text(plain), (
+                    "%s: the Solve card answers %s with an expression, %r, "
+                    "which this line would print as its leading number"
+                    % (s["num"], k, plain))
                 shown = tidy(runner.number_of(plain)[0])
                 txt = "`%s` = {{o:%s}}%s" % (k, shown, (" " + u) if u else "")
                 if sq.get("book", {}).get(k) and not same_name(k, sq["book"][k]):

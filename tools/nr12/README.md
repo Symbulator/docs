@@ -138,8 +138,11 @@ answer, `evals` with conditions, `solveq` runs, several roots):
 16. **Say nothing the reader already knows from the entries before.** No
     "each between the two nodes it joins" or "with the bottom rail as
     ground" past the first entries that established it, and nothing the
-    settings line under the description says again ("we set the analysis
-    to DC", "we leave omega as a symbol").
+    settings line under the description says again ("we leave omega as a
+    symbol", "we set Rounding to 4"). **The analysis is not a setting**
+    (Roberto, 14 Sep 2026: *"The type of simulation (e.g. solve circuit /
+    TR) is not part of the settings"*), so *We set the analysis to TR*
+    stays in the paragraph where an entry says it.
 17. **How to read the results comes after the run.** A sign convention, a
     note the solver will print, which answer is which: the `interpret`
     field, rendered after the settings line and before the results — not
@@ -218,6 +221,64 @@ answer, `evals` with conditions, `solveq` runs, several roots):
     about the island note the solver would print (Roberto, 13 Sep 2026,
     on 13.7; 9.15 the same).
 
+**Two on voice, from Roberto's correction of 14 Sep 2026** (*"You tend to
+use more semicolons than me, and you leave some sentences without a
+verb"*), applied to every entry, the intros and the chapter head:
+
+26. **Every sentence has a verb.** An entry opens with a full sentence
+    that names the circuit -- *The circuit consists of a source feeding a
+    load through an ideal transformer whose windings share a node.* --
+    never with a noun phrase that runs into the question after a semicolon
+    or a colon (*A source feeding a load…; the question wants…*). The same
+    for a lead into a box (*We take the denominator first:*, not *The
+    denominator first:*), a section intro (*Sixteen resistive problems
+    open the chapter.*) and a lettered answer (*Now v_o = 6 V, which is
+    inside the supplies again.*).
+27. **A semicolon does not join two clauses.** Where one did, the two are
+    two sentences: *An ideal transformer is the element `t`. Because its
+    primary and secondary here share a node, we write…* -- his own
+    rewrite of 10.12, which is the model. The census of 14 Sep 2026 found
+    77 semicolons in 44 prose fields and a verbless opener on most
+    entries; none of either remains, in the specs, the intros, the
+    chapter head or the sentences `gen.py` writes itself. An `ask` is the
+    book's own wording and keeps its punctuation (5.7, 7.11 and 11.1
+    carry one each).
+
+**One on angles, 14 Sep 2026:**
+
+28. **Angles in degrees, as a phasor.** A source with a phase is written
+    the way the book and the Course's three-phase lesson write it,
+    `(120∠-120°)`, never as a radian exponential, `120*exp(-2j*pi/3)`
+    -- unless the book itself gives the angle in radians. Roberto, on
+    11.1: *"please give the angles as degrees... please say 120° and
+    −120°"*. The Manual's three-phase paragraph was moved to the same
+    form the same day.
+
+**Two more, 14 Sep 2026, from his review of the s-domain section:**
+
+29. **The page prints what the card prints, and Rounding is named only
+    where it changes that.** Roberto, on 13.6: *"says it uses approx but
+    the answers it shows are exact. I had already reported a similar
+    problem. Fix here and elsewhere."* It was every symbolic answer in the
+    chapter, 34 of them: the page rounded them its own way (`60` for the
+    card's `60.0`, `10000` for its `1.0 \cdot 10^{4}`, a different term
+    order in every transient). A result panel now carries the card's own
+    LaTeX (`runner.app_display`), and an entry is told *exact* when every
+    answer the page shows reads the same at exact and at n = 4 with the
+    numbers written one way (`gen._same_but_for_notation`): `1.0e+4` and
+    `10000.0` are one number, `1/(500*pi**2)` and `0.0002026` are not.
+    Guard: `check_card_truth.py`, which reads the BUILT chapter and asks
+    the app, proved red with `--prove-red`.
+30. **A question in time is answered in time.** Roberto, on 13.2 and
+    13.3: *"If the question asks for a voltage as a function of time, why
+    use FD? Unless the question asks for both functions, of s and t. Also,
+    the claim that FD returns also the answer in the time domain is
+    nonsense. You need s2t for that."* Where the book works a problem by
+    the Laplace method and asks for $v(t)$, the page runs FD for the
+    transform the book prints and then inverts it with `s2t` in the
+    Evaluate card, shown as its own step. FD never returns a function of
+    $t$, and the page never says or implies that it does.
+
 The reader-facing fields of a spec:
 
 - `ask` — the book's question, as the book words it. Also becomes the
@@ -227,7 +288,8 @@ The reader-facing fields of a spec:
   rendered before the main description as text, description, settings
   and answers, and written to the `.cir` as an entry of their own just
   before the main one (rule 6). The runner verifies each first run's
-  `expect` as a spec of its own — *50 ok* is 43 examples and 7 first runs.
+  `expect` as a spec of its own — *62 ok* is 43 examples, 7 first runs
+  and 12 card runs (11 Solve card runs and 13.9's Mini-Tools step).
 - `booknames` — answer name → the book's symbol, set beside the value:
   *`i_r7` = 2 A (the book's $i_o$)*, or under the result panels.
 - `parts` — a lettered part answered in prose, after the results.
@@ -250,6 +312,23 @@ The reader-facing fields of a spec:
   at Roberto's word (13 Sep 2026): the Solve card *"is more representative
   of the exploratory way a student would follow"* than Expert Mode.
 - `after` — what follows from the answers, last of all.
+- `minitool` — Mini-Tools steps, each `{tool, args, text, expect, say}`:
+  the value typed into the card's box, run through the real app's
+  `mini_tool_ui`, and the rows named in `say` quoted as the card prints
+  them. The runner checks `expect` too. 13.9 uses it for `pz` (#445,
+  Roberto, 14 Sep 2026), which replaced two Solve card runs on
+  polynomials copied out of the transfer function by hand.
+- an `evals` item with `keys` instead of `expr` is a lettered part
+  answered straight off the run, placed among the Evaluate steps so the
+  parts keep the question's order (11.1's (b) and (e)). Its keys are
+  left out of the plain returns sentence. An Evaluate answer in AC
+  carries its polar form in the parentheses, from the exact value.
+- `groups` — the returns sentence split by lettered part: a list of
+  `(lead, keys)`, each rendered as its own sentence, *For part (a), the
+  three impedances' cards read `p_r1` = 1690 W …*; an answer in no group
+  keeps the plain *Symbulator returns …* sentence after them. 10.8 is
+  the one that uses it (Roberto, 14 Sep 2026: parts (a) and (b) read as
+  `p` and `q` off the cards, (c) as the sum of all `p` and of all `q`).
 - `digits` — the Rounding setting the problem runs at (rule 19); 4 unless
   the book prints more figures.
 

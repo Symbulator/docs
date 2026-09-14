@@ -34,8 +34,16 @@ by `vs` and you have H(s) = 1000/(s + 1000), a first-order low pass with its
 pole at −1000. Nothing is labelled "transfer function" because nothing
 needs to be — it is the answer with the input left as a symbol.{{i:transfer function}}
 
-Poles and zeros are then yours to take: factor the denominator, or hand the
-expression to SymPy, which is what the answer already is.{{i:poles and zeros}}
+The {{tool:pz}} mini-tool reads its poles and zeros. Give it the ratio:
+
+```field 9 Value
+vc/vs
+```
+
+It returns the poles, the roots of the denominator, and the zeros, the
+roots of the numerator: here one pole at {{o:-1000}} and no zero. A factor
+the numerator and the denominator share is cancelled first, and a repeated
+root is written once with its multiplicity, as in `-4 ×2`.{{i:poles and zeros}}{{i:pz mini-tool}}
 
 ## t2s and s2t
 
