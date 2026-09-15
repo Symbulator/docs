@@ -300,6 +300,29 @@ verb"*), applied to every entry, the intros and the chapter head:
     `gen.check_letters`, which fails the generation when an ask with two
     or more letters has one the page never labels; it went red on AS7's
     16.6 and NR12's 3.11, 4.13, 5.1 and 14.6 before they were fixed.
+32. **SI prefixes where the book prints them.** Roberto, 15 Sep 2026, on
+    AS7's Practice Problem 10.13, whose book answer reads mV and mA: *"Please
+    use SI prefixes whenever the book answers use it."* Such an entry sets
+    `si=True`: the page tells the reader to tick *Use SI prefixes in answers*
+    in Settings, prints each numeric answer as the card reads with that
+    setting, `(-484.6 - 230.3j) mV`, its angle form in the same unit, and an
+    Evaluate step's value the same way; the `.cir` entry carries `si: yes`.
+    The prefix is the card's choice, not the book's, so a current the book
+    gives as 1.088 mA may read 1088 µA -- the page prints the card (rule 29).
+    Symbolic answers take no prefix in the app and none on the page. Found by
+    running every entry with the setting on and reading the book at each
+    answer that took a prefix: AS7's P4.9, 4.18, 5.1, P10.13, 19.17a and
+    19.17b; AS7's 10.11 and NR12's 9.10, 9.15 and 10.8 print plain units.
+33. **A source given in time is typed in time.** Roberto, 15 Sep 2026: *"Whenever
+    an FD problem takes a source whose value is given as a function of time,
+    use the brackets shorthand for t2s when you enter the value, instead of
+    expecting the user to do the conversion beforehand."* So `{30u(t)}`, not
+    `30/s`, and a constant switched on at $t$ = 0 is a step typed the same way.
+    A prefix inside the brackets needs its multiplication sign: `{24'm*u(t)}`
+    reads, `{24'mu(t)}` is refused. AS7's 16.4, 16.6 and P16.6 and NR12's 13.3
+    follow it. **NR12's 13.6 cannot yet:** it is a Thévenin run, and in FD the
+    Find equivalent tool refuses a bracketed value that a plain solve accepts
+    (open item #458), so it keeps `480/s` until that is fixed.
 
 The reader-facing fields of a spec:
 
@@ -315,6 +338,7 @@ The reader-facing fields of a spec:
 - `booknames` — answer name → the book's symbol, set beside the value:
   *`i_r7` = 2 A (the book's $i_o$)*, or under the result panels.
 - `parts` — a lettered part answered in prose, after the results.
+- `si` — True where the book prints SI prefixes (rule 32).
 - `letters` — answer name → the letter of the part it answers (rule 31).
   The returns sentence puts the letter in bold before that answer and the
   lettered answers first; a result panel gets a sentence naming the part

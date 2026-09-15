@@ -286,9 +286,9 @@ r3,x,a,3
 r4,a,0,4
 ```
 
-Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Tick {{ui:Use SI prefixes in answers}} in {{card:Settings}}. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `vth` = {{o:5.333}} V and `req` = {{o:0.4444}} Ω (the book's $R_{Th}$).
+Symbulator returns `vth` = {{o:5.333}} V and `req` = {{o:444.4}} mΩ (the book's $R_{Th}$).
 
 :::
 :::
@@ -389,9 +389,9 @@ r600,b,0,600
 rg,a,b,40
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*. Tick {{ui:Use SI prefixes in answers}} in {{card:Settings}}. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `i_rg` = {{o:-0.07476}} A.
+Symbulator returns `i_rg` = {{o:-74.76}} mA.
 
 The value is negative, so the current flows through the galvanometer from **b** to **a**.
 
@@ -418,7 +418,7 @@ ro,m,out,50
 r20k,1,out,20'k
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx (full precision)*.
+Set {{ui:Analysis}} to *DC — direct current*. Tick {{ui:Use SI prefixes in answers}} in {{card:Settings}}. Set {{ui:Rounding}} in {{card:Settings}} to *approx (full precision)*.
 
 **(a)** The closed-loop gain is the output over the source. We type it into {{card:Evaluate}}:
 
@@ -438,7 +438,7 @@ ir20k
 vs = 2
 ```
 
-It gives {{o:0.00019999799}} A (the book's $i$).
+It gives {{o:199.99799}} µA (the book's $i$).
 
 The book prints the gain as −1.9999699 and the current as 0.19999 mA. Its gain comes from an intermediate equation whose coefficients it rounds to whole numbers, and the circuit itself gives −1.9999698. Its current is cut at five figures, where the circuit gives 0.19999799 mA.
 
@@ -668,7 +668,7 @@ h,b,c,[1000,2.5e-4,50,20'u]
 rl,c,0,1.2'k
 ```
 
-Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *DC — direct current*. Tick {{ui:Use SI prefixes in answers}} in {{card:Settings}}. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 **(a)** The voltage gain the book works out is the transistor's: its output voltage over its input voltage, the voltage at **c** over the voltage at **b**. We type that into {{card:Evaluate}}:
 
@@ -696,7 +696,7 @@ It gives {{o:985.4}} Ω (the book's $Z_{in}$).
 
 **(d)** The output impedance is the resistance seen into the output port with the load removed, so it is a run of its own, the next entry.
 
-**(e)** The output voltage $V_o$ is the voltage at **c**, read off the run: `v_c` = {{o:-0.105}} V (the book's $V_o$).
+**(e)** The output voltage $V_o$ is the voltage at **c**, read off the run: `v_c` = {{o:-105}} mV (the book's $V_o$).
 
 The book prints $V_o$ as −105.09 mV, carried through its own rounded arithmetic. The gain of the whole circuit, $V_o$ over the 3.2 mV source, is −32.82, and −32.82 times 3.2 mV is −105.02 mV, which is what the run gives.
 
@@ -720,9 +720,9 @@ rs,1,b,800
 h,b,c,[1000,2.5e-4,50,20'u]
 ```
 
-Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **c** and **0**. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **c** and **0**. Tick {{ui:Use SI prefixes in answers}} in {{card:Settings}}. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns **(d)** `req` = {{o:76600}} Ω (the book's $Z_{out}$).
+Symbulator returns **(d)** `req` = {{o:76.6}} kΩ (the book's $Z_{out}$).
 
 :::
 :::
@@ -1232,7 +1232,7 @@ Set {{ui:Analysis}} to *AC — alternating current*. Put **5** in the {{ui:ω �
 
 Symbulator returns `v_r1` = {{o:0.4878 - 2.276j}} V ({{o:2.328}}∠{{o:-77.91}}°, the book's $V_3$).
 
-Each run's phasor is one term of $v_o$, at its own frequency. Written back in time and added, $v_o$ = −1 + 2.498 cos(2$t$ − 30.78°) + 2.328 cos(5$t$ − 77.91°) V, and the last term is 2.328 sin(5$t$ + 12.09°) V. The book prints that term as 2.33 sin(5$t$ + 10°): its own expression for it gives an angle of −77.91°, not the −80° it prints. Its −30.79° for the second term rounds the last digit the other way.
+Each run's phasor is one term of $v_o$, at its own frequency. Written back in time and added, $v_o$ = −1 + 2.498 cos(2$t$ − 30.78°) + 2.328 cos(5$t$ − 77.91°) V. The book prints $v_o$ = −1 + 2.498 cos(2$t$ − 30.79°) + 2.33 sin(5$t$ + 10°) V. We believe ours is correct.
 
 :::
 :::
@@ -1277,7 +1277,7 @@ Set {{ui:Analysis}} to *AC — alternating current*. Put **10** in the {{ui:ω �
 
 Symbulator returns `v_b` = {{o:0.2069 - 3.144j}} V ({{o:3.151}}∠{{o:-86.24}}°, the book's $V_2$).
 
-The two phasors are the terms of $v_o$ at their own frequencies. Written back in time and added, $v_o$ = 11.58 cos(5$t$ − 171.1°) + 3.151 cos(10$t$ − 86.24°) V. The first term is 11.58 sin(5$t$ − 81.1°) V, the book's 11.577 sin(5$t$ − 81.12°) to four figures. The book prints the second amplitude as 3.154, where the circuit gives 3.151.
+The two phasors are the terms of $v_o$ at their own frequencies. Written back in time and added, $v_o$ = 11.58 cos(5$t$ − 171.1°) + 3.151 cos(10$t$ − 86.24°) V. The book prints $v_o$ = 11.577 sin(5$t$ − 81.12°) + 3.154 cos(10$t$ − 86.24°) V. The small differences may be due to rounding.
 
 :::
 :::
@@ -1410,9 +1410,9 @@ r3k,1,d,3'k
 e2,d,0,2*vr1k
 ```
 
-Set {{ui:Analysis}} to *AC — alternating current*. Put **3000** in the {{ui:ω — angular frequency}} box. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+Set {{ui:Analysis}} to *AC — alternating current*. Put **3000** in the {{ui:ω — angular frequency}} box. Tick {{ui:Use SI prefixes in answers}} in {{card:Settings}}. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `v_2` = {{o:-0.4846 - 0.2303j}} V ({{o:0.5365}}∠{{o:-154.6}}°, the book's $V_o$) and `i_r3k` = {{o:0.0006222 - 0.0008924j}} A ({{o:0.001088}}∠{{o:-55.12}}°, the book's $I_o$).
+Symbulator returns `v_2` = {{o:-484.6 - 230.3j}} mV ({{o:536.5}}∠{{o:-154.6}}°, the book's $V_o$) and `i_r3k` = {{o:622.2 - 892.4j}} µA ({{o:1088}}∠{{o:-55.12}}°, the book's $I_o$).
 
 As functions of time those are $v_o$ = 536.5 cos(3000$t$ − 154.6°) mV and $i_o$ = 1.088 cos(3000$t$ − 55.12°) mA. The book's answer comes from a PSpice run and prints the first amplitude as 536.4 mV. The circuit gives 536.55 mV, which is 536.5 at four digits.
 
@@ -1480,15 +1480,7 @@ abs(s_e)
 
 It gives {{o:481.6}} VA (the book's $|S|$).
 
-**(d)** The power factor is a question for the {{card:Mini-Tools}} card. We choose *pf — power factor* in its {{ui:Tool}} menu and give it the source's name, which asks for the power factor of the power the source delivers:
-
-```field 9 Value
-e
-```
-
-Press {{btn:Run}}.
-
-The card returns the power factor {{o:0.9602 lagging}}.
+**(d)** The power factor is on the same card, in its *power factor (delivered)* row, which reads {{o:0.9602 lagging}}.
 
 :::
 :::
@@ -1779,10 +1771,10 @@ Alexander & Sadiku, 7th edition — the circuit for Example 16.4
 :::
 
 ::: answer
-The circuit consists of a step source feeding a resistor, and an inductor and a capacitor in parallel, each holding an initial condition. The question wants the capacitor's voltage, and the book's chapter works it by the Laplace method, so we set the analysis to FD. A 10 V step has the transform $10/s$, which we write as the source's value, `10/s`. We put the initial conditions in the fifth fields: −1 A on the inductor, counted downward from node 2 as `l,2,0` counts it, and 5 V on the capacitor. We write the resistance and the capacitance as the fractions the book gives, `10/3` and `1/10`. The capacitor's voltage is the voltage at node 2.
+The circuit consists of a step source feeding a resistor, and an inductor and a capacitor in parallel, each holding an initial condition. The question wants the capacitor's voltage, and the book's chapter works it by the Laplace method, so we set the analysis to FD. The source is given as a function of time, $10u(t)$ V, so we type it as given inside curly brackets, `{10u(t)}`, and FD converts it to the $s$ domain. We put the initial conditions in the fifth fields: −1 A on the inductor, counted downward from node 2 as `l,2,0` counts it, and 5 V on the capacitor. We write the resistance and the capacitance as the fractions the book gives, `10/3` and `1/10`. The capacitor's voltage is the voltage at node 2.
 
 ```field 9 Circuit Description
-e,1,0,10/s
+e,1,0,{10u(t)}
 r,1,2,10/3
 l,2,0,5,-1
 c,2,0,1/10,5
@@ -1820,10 +1812,10 @@ Alexander & Sadiku, 7th edition — the circuit for Example 16.6
 :::
 
 ::: answer
-The circuit consists of a step current source, a 2 H inductor, a dependent voltage source worth twice the inductor's current, and two 5 Ω resistors. The question wants the output voltage as a function of $s$, its initial and final values, and the voltage as a function of time. We set the analysis to FD. A 10 A step has the transform $10/s$, which we write as the source's value, `j,0,a,10/s`. We call the top left node **a**, the right end of the inductor **b** and the node between the dependent source and its 5 Ω **m**. $I_x$ flows through the inductor from **a** to **b**, so it is `il` and the dependent source is `e,a,m,2*il`. We name the 5 Ω under the dependent source `r5a` and the output resistor `r5b`. $V_o$ is the voltage at node **b**.
+The circuit consists of a step current source, a 2 H inductor, a dependent voltage source worth twice the inductor's current, and two 5 Ω resistors. The question wants the output voltage as a function of $s$, its initial and final values, and the voltage as a function of time. We set the analysis to FD. The source is given as a function of time, $10u(t)$ A, so we type it as given inside curly brackets, `j,0,a,{10u(t)}`, and FD converts it to the $s$ domain. We call the top left node **a**, the right end of the inductor **b** and the node between the dependent source and its 5 Ω **m**. $I_x$ flows through the inductor from **a** to **b**, so it is `il` and the dependent source is `e,a,m,2*il`. We name the 5 Ω under the dependent source `r5a` and the output resistor `r5b`. $V_o$ is the voltage at node **b**.
 
 ```field 9 Circuit Description
-j,0,a,10/s
+j,0,a,{10u(t)}
 l,a,b,2
 e,a,m,2*il
 r5a,m,0,5
@@ -1878,10 +1870,10 @@ Alexander & Sadiku, 7th edition — the circuit for Practice Problem 16.6
 :::
 
 ::: answer
-The circuit consists of a step source, a 1 Ω resistor, a 2 Ω resistor, a 1 F capacitor and a dependent voltage source worth four times $i_x$, the current through the 1 Ω. The question wants the output as a function of $s$, its initial and final values, and the output as a function of time. We set the analysis to FD. A 30 V step has the transform $30/s$, so the source is `e1,1,0,30/s`. We call the source's top **1**, the top of the 2 Ω **m** and the top of the dependent source **r**, and name the resistors `r1` and `r2`. $i_x$ flows from node 1 to **m** through `r1`, so the dependent source is `e2,r,0,4*ir1`. $V_o$ is the voltage at node **m**.
+The circuit consists of a step source, a 1 Ω resistor, a 2 Ω resistor, a 1 F capacitor and a dependent voltage source worth four times $i_x$, the current through the 1 Ω. The question wants the output as a function of $s$, its initial and final values, and the output as a function of time. We set the analysis to FD. The source is given as a function of time, $30u(t)$ V, so we type it as given inside curly brackets, `e1,1,0,{30u(t)}`, and FD converts it to the $s$ domain. We call the source's top **1**, the top of the 2 Ω **m** and the top of the dependent source **r**, and name the resistors `r1` and `r2`. $i_x$ flows from node 1 to **m** through `r1`, so the dependent source is `e2,r,0,4*ir1`. $V_o$ is the voltage at node **m**.
 
 ```field 9 Circuit Description
-e1,1,0,30/s
+e1,1,0,{30u(t)}
 r1,1,m,1
 r2,m,0,2
 c,m,r,1

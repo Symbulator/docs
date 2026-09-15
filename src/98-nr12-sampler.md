@@ -1749,10 +1749,10 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.3
 :::
 
 ::: answer
-The circuit is a parallel RLC circuit holding an initial current and an initial voltage, with a constant current source switched on at $t$ = 0. The question wants the voltage across it, and the book works it by the Laplace method. In the $s$ domain a constant $I$ switched on at $t$ = 0 has the transform $I/s$, so we write the 24 mA source's value as `0.024/s`. We put the two initial conditions the question gives in the fifth fields of the capacitor and the inductor, 50 V and 29 mA written 0.029, and name the four elements `j`, `c`, `l` and `r`. We set the analysis to FD, which returns the transform $V(s)$ of the voltage asked for, the voltage at node 1.
+The circuit is a parallel RLC circuit holding an initial current and an initial voltage, with a constant current source switched on at $t$ = 0. The question wants the voltage across it, and the book works it by the Laplace method. A constant source switched on at $t$ = 0 is a step, $24u(t)$ mA, so we type it as a function of time inside curly brackets, `{24'm*u(t)}`, and FD converts it to the $s$ domain. We put the two initial conditions the question gives in the fifth fields of the capacitor and the inductor, 50 V and 29 mA written 0.029, and name the four elements `j`, `c`, `l` and `r`. We set the analysis to FD, which returns the transform $V(s)$ of the voltage asked for, the voltage at node 1.
 
 ```field 9 Circuit Description
-j,0,1,0.024/s
+j,0,1,{24'm*u(t)}
 c,1,0,25'n,50
 l,1,0,25'm,0.029
 r,1,0,500

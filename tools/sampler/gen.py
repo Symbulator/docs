@@ -30,6 +30,33 @@ UNIT_WORD = {"V": "V", "A": "A", "W": "W", "VA": "VA", "S": "S", "H": "H", "s": 
              "\\Omega": "\u03a9", "": ""}
 
 
+#: rule 32: the prefixes the app's *Use SI prefixes in answers* setting prints,
+#: and what each multiplies by. The card writes micro as `u`; the page as µ.
+SI_FACTOR = {"": 1, "k": 10**3, "M": 10**6, "G": 10**9,
+             "m": sp.Rational(1, 10**3), "u": sp.Rational(1, 10**6),
+             "\u00b5": sp.Rational(1, 10**6), "n": sp.Rational(1, 10**9),
+             "p": sp.Rational(1, 10**12)}
+
+
+def si_split(plain):
+    """A card's SI reading, `(-484.6 - 230.3j) mV` or `-74.76 m`, as
+    (number, prefix, unit); the prefix is empty when the card used none."""
+    m = re.match(r"^\(?(?P<num>[^()]+?)\)?\s*(?P<pfx>[kMGmu\u00b5np])?"
+                 r"(?P<unit>VA|var|V|A|W|\u03a9|S|F|H)?$", plain.strip())
+    if not m or not m.group("pfx"):
+        return plain.strip(), "", (m.group("unit") or "") if m else ""
+    return m.group("num").strip(), m.group("pfx"), m.group("unit") or ""
+
+
+def si_card(s):
+    """{answer name: plain}, as the cards print them with SI prefixes on."""
+    if "_sicard" not in s:
+        digits, approx = shown_digits(s)
+        shown = runner.app_display(s, digits=digits, approx=approx, si=True)
+        s["_sicard"] = {k: v.get("plain", "") for k, v in shown.items()}
+    return s["_sicard"]
+
+
 def tidy(txt):
     """A number as the card prints it, minus the trailing zeros a fixed digit
     count leaves: `3.20000` reads `3.2`, `-3000.0 - 4000.0j` reads
@@ -311,6 +338,9 @@ def settings_line(s):
     if s.get("rms"):
         bits.append("Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source "
                     "is given in rms")
+    if s.get("si"):
+        # rule 32: the book prints these answers with SI prefixes
+        bits.append("Tick {{ui:Use SI prefixes in answers}} in {{card:Settings}}")
     told = rounding_told(s)
     if told == "exact":
         pass                            # rule 24: the default shows what the page shows
@@ -363,8 +393,16 @@ def answer_blocks(s, vals):
             shown = fmt.shown_name(k, s)
             if k.startswith("@"):
                 s.setdefault("_evalkeys", {})[shown] = k
-            numeric.append((shown, fmt.plain_value(got, digits_of(s)), unit, polar_of(s, got),
-                            s.get("booknames", {}).get(k)))
+            value, pol = fmt.plain_value(got, digits_of(s)), polar_of(s, got)
+            if s.get("si") and not k.startswith("@"):
+                # rule 32: where the book prints a prefix the page prints the
+                # card's own SI reading, and the angle form in the same unit
+                num, pfx, _u = si_split(si_card(s).get(fmt.tool_name(k, s) or k, ""))
+                if pfx:
+                    value = tidy(num)
+                    unit = ("\u00b5" if pfx == "u" else pfx) + UNIT_WORD.get(unit, unit)
+                    pol = polar_of(s, sp.sympify(got) / SI_FACTOR[pfx])
+            numeric.append((shown, value, unit, pol, s.get("booknames", {}).get(k)))
     return panels, numeric
 
 
@@ -651,6 +689,21 @@ def render(s, vals):
     # Conditions (Lesson 6, Example 4.15). Computed by the real app's
     # evaluate_ui, so the page prints what the card prints.
     for ev in s.get("evals", []):
+        if "card" in ev:
+            # A row read straight off an element's card -- a source's power
+            # factor (AS7's 11.14, Roberto, 15 Sep 2026: the card already
+            # shows it, so no Mini-Tools step). `card` is (row, element), the
+            # value comes from the real app's card and is checked against the
+            # spec's `expect`, so the page cannot print what the card does not.
+            row, element = ev["card"]
+            digits, approx = shown_digits(s)
+            plain = runner.app_display(s, digits=digits, approx=approx).get(
+                "%s_%s" % (row, element), {}).get("plain", "")
+            assert plain == ev["expect"], "%s: card row %s of %s reads %r, not %r" % (
+                s["num"], row, element, plain, ev["expect"])
+            L.append(polish(ev["text"]) + " {{o:%s}}." % plain)
+            L.append("")
+            continue
         if "keys" in ev:
             # A lettered part answered straight off the run, placed here
             # so the parts keep the question's order among the Evaluate
@@ -678,8 +731,15 @@ def render(s, vals):
             L.append("")
         digits, approx = shown_digits(s, ev)
         card = runner.app_evaluate_display(s, ev["expr"], conds, digits=digits,
-                                           approx=approx)
+                                           approx=approx, si=bool(s.get("si")))
         got = card["plain"]
+        pfx = ""
+        if s.get("si"):
+            # rule 32: the card prints `199.99799 u`; the number is read in
+            # its prefix, and the prefix joins the unit
+            num_si, pfx, _u = si_split(got)
+            if pfx:
+                got = num_si
         # `number_of` reads a LEADING number and cannot be asked about an
         # expression: on "(50.0 - 2200000.0*t)*exp(...)" it takes "(50.0"
         # and raises. So the shape of the answer is settled first, and a
@@ -687,6 +747,9 @@ def render(s, vals):
         symbolic = _symbolic_text(got)
         num, val = ("", None) if symbolic else runner.number_of(got)
         unit = UNIT_WORD.get(ev.get("unit", ""), ev.get("unit", ""))
+        if pfx:
+            val = val * SI_FACTOR[pfx]
+            unit = ("\u00b5" if pfx == "u" else pfx) + unit
         if ev.get("expect") is not None:
             want = ev["expect"]
             assert runner.close(got if symbolic else val, want, 0.006), \
@@ -969,7 +1032,7 @@ def cir_entry(s):
     if not s.get("nofig"):
         L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(num))
     L.append("rounding: %s" % rounding_told(s))
-    L.append("si: no")
+    L.append("si: %s" % ("yes" if s.get("si") else "no"))
     L.append("units: yes")
     if dom == "ac":
         L.append("rms: %s" % ("yes" if s.get("rms") else "no"))
@@ -1006,7 +1069,7 @@ def cir_solveq_entry(s, sq):
     if not s.get("nofig"):
         L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(s["num"]))
     L.append("rounding: %s" % rounding_told(s))
-    L.append("si: no")
+    L.append("si: %s" % ("yes" if s.get("si") else "no"))
     L.append("units: yes")
     L.append("")
     return "\n".join(L)

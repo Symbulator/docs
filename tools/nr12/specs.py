@@ -1048,7 +1048,7 @@ dict(num="13.3", title="The Step Response of an RLC Circuit",
          "29 mA and the initial voltage across the capacitor is 50 V. Find $v(t)$ for "
          "$t$ ≥ 0.",
      page=515, fig=(515, "13.13"), domain="fd",
-     desc="j,0,1,0.024/s:c,1,0,25'n,50:l,1,0,25'm,0.029:r,1,0,500",
+     desc="j,0,1,{24'm*u(t)}:c,1,0,25'n,50:l,1,0,25'm,0.029:r,1,0,500",
      expect={"v_1": "(50*s - 200000)/(s**2 + 80000*s + 1600000000)"},
      booknames={"v_1": "V(s)"},
      evals=[dict(text="The question asks for $v(t)$. `s2t` inverts a function of $s$ "
@@ -1064,9 +1064,9 @@ dict(num="13.3", title="The Step Response of an RLC Circuit",
      shows="The circuit is a parallel RLC circuit holding an initial current and an "
            "initial voltage, with a constant current source switched on at $t$ = 0. "
            "The question wants the voltage across it, and the book works it by the "
-           "Laplace method. In the $s$ domain a constant $I$ switched on at $t$ = 0 "
-           "has the transform $I/s$, so we write the 24 mA source's value as "
-           "`0.024/s`. We put the two initial conditions the question gives in the "
+           "Laplace method. A constant source switched on at $t$ = 0 is a step, "
+           "$24u(t)$ mA, so we type it as a function of time inside curly brackets, "
+           "`{24'm*u(t)}`, and FD converts it to the $s$ domain. We put the two initial conditions the question gives in the "
            "fifth fields of the capacitor and the inductor, 50 V and 29 mA written "
            "0.029, and name the four elements `j`, `c`, `l` and `r`. We set the "
            "analysis to FD, which returns the transform $V(s)$ of the voltage asked "

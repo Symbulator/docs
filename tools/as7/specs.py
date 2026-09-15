@@ -152,7 +152,7 @@ dict(num="4.10", title="Thevenin equivalent of a circuit with no independent sou
            "ground up to **a**, `r2,0,a,2`, so that its current is counted upward like "
            "$i_x$, and the dependent source, whose arrow points down, as `j,a,0,2*ir2`."),
 
-dict(num="p4.9", title="Thevenin equivalent with a current-controlled current source",
+dict(num="p4.9", si=True, title="Thevenin equivalent with a current-controlled current source",
      ask="Find the Thevenin equivalent circuit of the circuit in the figure to the left of "
          "the terminals.",
      page=167, fig=(167, "4.34"), figrect=(366, 398, 522, 458), kind="th", n1="a", n2="0", domain="dc",
@@ -201,7 +201,7 @@ dict(num="4.13", title="Maximum power transfer",
            "We number the nodes **1** to **3** from the source, call terminal a **a** and "
            "take terminal b as ground, and we name the resistors after their values."),
 
-dict(num="4.18", title="An unbalanced bridge",
+dict(num="4.18", si=True, title="An unbalanced bridge",
      ask="The circuit in the figure represents an unbalanced bridge. If the galvanometer has "
          "a resistance of 40 Ω, find the current through the galvanometer.",
      page=183, fig=(183, "4.64"), domain="dc",
@@ -217,7 +217,7 @@ dict(num="4.18", title="An unbalanced bridge",
      after="The value is negative, so the current flows through the galvanometer from "
            "**b** to **a**."),
 
-dict(num="5.1", title="A non-ideal op amp", digits=8,
+dict(num="5.1", si=True, title="A non-ideal op amp", digits=8,
      ask="A 741 op amp has an open-loop voltage gain of 2 × 10⁵, input resistance of 2 MΩ, "
          "and output resistance of 50 Ω. The op amp is used in the circuit of the figure. "
          "(a) Find the closed-loop gain $v_o/v_s$. (b) Determine current $i$ when $v_s$ = 2 V.",
@@ -602,10 +602,8 @@ dict(num="10.6", title="Superposition across three frequencies",
            "frequency is 5:",
      after="Each run's phasor is one term of $v_o$, at its own frequency. Written back in "
            "time and added, $v_o$ = −1 + 2.498 cos(2$t$ − 30.78°) + 2.328 cos(5$t$ − 77.91°) "
-           "V, and the last term is 2.328 sin(5$t$ + 12.09°) V. The book prints that term as "
-           "2.33 sin(5$t$ + 10°): its own expression for it gives an angle of −77.91°, not "
-           "the −80° it prints. Its −30.79° for the second term rounds the last digit the "
-           "other way."),
+           "V. The book prints $v_o$ = −1 + 2.498 cos(2$t$ − 30.79°) + 2.33 sin(5$t$ + 10°) V. "
+           "We believe ours is correct."),
 
 dict(num="p10.6", title="Superposition across two frequencies",
      ask="Calculate $v_o$ in the circuit of the figure.",
@@ -636,9 +634,8 @@ dict(num="p10.6", title="Superposition across two frequencies",
            "plain amplitude `6`, and the voltage source gets the value 0:",
      after="The two phasors are the terms of $v_o$ at their own frequencies. Written back in "
            "time and added, $v_o$ = 11.58 cos(5$t$ − 171.1°) + 3.151 cos(10$t$ − 86.24°) V. "
-           "The first term is 11.58 sin(5$t$ − 81.1°) V, the book's 11.577 sin(5$t$ − "
-           "81.12°) to four figures. The book prints the second amplitude as 3.154, where "
-           "the circuit gives 3.151."),
+           "The book prints $v_o$ = 11.577 sin(5$t$ − 81.12°) + 3.154 cos(10$t$ − 86.24°) V. "
+           "The small differences may be due to rounding."),
 
 dict(num="10.9", title="Thevenin equivalent with a current-controlled source",
      ask="Find the Thevenin equivalent of the circuit in the figure as seen from terminals "
@@ -658,7 +655,7 @@ dict(num="10.9", title="Thevenin equivalent with a current-controlled source",
 
 dict(num="10.10", title="A branch current in a circuit with two sources",
      ask="Obtain current $I_o$ in the figure.",
-     page=453, fig=(453, "10.28"), figrect=(112, 416, 318, 517), domain="ac", omega=W,
+     page=453, fig=(453, "10.28"), figrect=(112, 422, 318, 517), domain="ac", omega=W,
      desc="r5,a,l,5:e,l,0,(40∠90°):r8,l,m,8-2j:j,m,a,3:r10,m,0,10+4j:ro,a,0,20+15j",
      expect={"i_ro": 1.1467 + 0.91178j},
      booknames={"i_ro": "I_o"},
@@ -674,7 +671,7 @@ dict(num="10.10", title="A branch current in a circuit with two sources",
 
 dict(num="10.11", title="An op amp circuit in AC",
      ask="Determine $v_o(t)$ for the op amp circuit in the figure if $v_s$ = 3 cos 1000$t$ V.",
-     page=455, fig=(455, "10.31"), figrect=(78, 244, 268, 360), domain="ac", omega=1000,
+     page=455, fig=(455, "10.31"), figrect=(78, 253, 268, 356), domain="ac", omega=1000,
      desc="e,s,0,3:r1,s,1,10'k:c1,1,0,0.2'u:r2,1,n,10'k:rf,1,out,20'k:c2,n,out,0.1'u:"
           "o,0,n,out",
      expect={"v_out": 0.52941 + 0.88235j},
@@ -691,7 +688,7 @@ dict(num="10.11", title="An op amp circuit in AC",
            "capacitors after their places: `r1` and `r2` in the input path, `rf` in "
            "feedback, `c1` to ground and `c2` from **n** to the output."),
 
-dict(num="p10.13", title="A circuit with a voltage-controlled voltage source",
+dict(num="p10.13", si=True, title="A circuit with a voltage-controlled voltage source",
      ask="Obtain $v_o$ and $i_o$ in the circuit of the figure.",
      page=458, fig=(458, "10.37"), figrect=(252, 394, 478, 491), domain="ac", omega=3000,
      desc="e,s,0,20:r2k,s,1,2'k:c,1,0,1'u:l,1,2,2:r1k,2,0,1'k:r3k,1,d,3'k:e2,d,0,2*vr1k",
@@ -739,13 +736,16 @@ dict(num="11.14", title="Complex power supplied to two loads", rms=True,
      ask="In the circuit of the figure, $Z_1$ = 60∠−30° Ω and $Z_2$ = 40∠45° Ω. Calculate "
          "the total: (a) apparent power, (b) real power, (c) reactive power, and (d) pf, "
          "supplied by the source and seen by the source.",
-     page=504, fig=(504, "11.26"), figrect=(38, 88, 198, 159), domain="ac", omega=W,
+     page=504, fig=(504, "11.26"), figrect=(51, 90, 200, 159), domain="ac", omega=W,
      desc="e,1,0,(120∠10°):r1,1,0,(60∠-30°):r2,1,0,(40∠45°)",
      expect={"@-p_e": 462.4, "@-q_e": 134.6},
      delivered=["@-p_e", "@-q_e"],
      evals=[dict(text="**(a)** The apparent power is the magnitude of the complex power the "
                       "source delivers. We type it into {{card:Evaluate}}:",
-                 expr="abs(s_e)", expect=481.59, unit="VA", book="|S|")],
+                 expr="abs(s_e)", expect=481.59, unit="VA", book="|S|"),
+            dict(text="**(d)** The power factor is on the same card, in its *power factor "
+                      "(delivered)* row, which reads", card=("pf", "e"),
+                 expect="0.9602 lagging")],
      shows="The circuit is a source feeding two impedances in parallel, each given as a "
            "magnitude and an angle, and the question wants the source's apparent, real and "
            "reactive power and its power factor. We write the two impedances as they are "
@@ -754,16 +754,7 @@ dict(num="11.14", title="Complex power supplied to two loads", rms=True,
            "source is an rms value, so we tick {{ui:RMS}}, and every power the run reports "
            "is then in terms of rms values, as the book's are.",
      interpret="**(b)** and **(c)** are read off the source's card, which reports the real "
-               "and the reactive power it delivers.",
-     minitool=[
-      dict(tool="pf", args=["e"],
-           text="**(d)** The power factor is a question for the {{card:Mini-Tools}} card. We "
-                "choose *pf \u2014 power factor* in its {{ui:Tool}} menu and give it the "
-                "source's name, which asks for the power factor of the power the source "
-                "delivers:",
-           expect={"value": "0.9602 lagging"},
-           say=[("value", "the power factor")]),
-     ]),
+               "and the reactive power it delivers."),
 
 dict(num="p13.2", title="Mesh currents with a mutual inductance",
      ask="Determine the phasor currents $I_1$ and $I_2$ in the circuit of the figure.",
@@ -908,7 +899,7 @@ dict(num="16.4", title="A capacitor voltage with two initial conditions",
          "capacitor assuming that the value of $v_s(t)$ = $10u(t)$ V and assume that at "
          "$t$ = 0, −1 A flows through the inductor and +5 V is across the capacitor.",
      page=746, fig=(746, "16.12"), figrect=(43, 370, 197, 451), domain="fd",
-     desc="e,1,0,10/s:r,1,2,10/3:l,2,0,5,-1:c,2,0,1/10,5",
+     desc="e,1,0,{10u(t)}:r,1,2,10/3:l,2,0,5,-1:c,2,0,1/10,5",
      expect={"v_2": "5*(s + 8)/((s + 1)*(s + 2))"},
      booknames={"v_2": "V_1(s)"},
      evals=[dict(text="The question asks for the voltage as a function of time. `s2t` turns a "
@@ -920,8 +911,9 @@ dict(num="16.4", title="A capacitor voltage with two initial conditions",
      shows="The circuit consists of a step source feeding a resistor, and an inductor and a "
            "capacitor in parallel, each holding an initial condition. The question wants the "
            "capacitor's voltage, and the book's chapter works it by the Laplace method, so "
-           "we set the analysis to FD. A 10 V step has the transform $10/s$, which we write "
-           "as the source's value, `10/s`. We put the initial conditions in the fifth fields: "
+           "we set the analysis to FD. The source is given as a function of time, $10u(t)$ "
+           "V, so we type it as given inside curly brackets, `{10u(t)}`, and FD converts it "
+           "to the $s$ domain. We put the initial conditions in the fifth fields: "
            "−1 A on the inductor, counted downward from node 2 as `l,2,0` counts it, and 5 V "
            "on the capacitor. We write the resistance and the capacitance as the fractions "
            "the book gives, `10/3` and `1/10`. The capacitor's voltage is the voltage at "
@@ -932,7 +924,7 @@ dict(num="16.6", title="Initial and final values of a response",
          "$t$ = 0 and that $i_s$ = $10u(t)$ A. (a) Find $V_o(s)$. (b) Apply the initial- and "
          "final-value theorems to find $v_o(0^+)$ and $v_o(\\infty)$. (c) Determine $v_o(t)$.",
      page=748, fig=(748, "16.14"), figrect=(42, 426, 186, 518), domain="fd",
-     desc="j,0,a,10/s:l,a,b,2:e,a,m,2*il:r5a,m,0,5:r5b,b,0,5",
+     desc="j,0,a,{10u(t)}:l,a,b,2:e,a,m,2*il:r5a,m,0,5:r5b,b,0,5",
      expect={"v_b": "125/(s*(s + 4))"},
      letters={"v_b": "a"},
      booknames={"v_b": "V_o(s)"},
@@ -950,9 +942,9 @@ dict(num="16.6", title="Initial and final values of a response",
      shows="The circuit consists of a step current source, a 2 H inductor, a dependent "
            "voltage source worth twice the inductor's current, and two 5 Ω resistors. The "
            "question wants the output voltage as a function of $s$, its initial and final "
-           "values, and the voltage as a function of time. We set the analysis to FD. A 10 A "
-           "step has the transform $10/s$, which we write as the source's value, "
-           "`j,0,a,10/s`. We call the top left node **a**, the right end of the inductor "
+           "values, and the voltage as a function of time. We set the analysis to FD. The "
+           "source is given as a function of time, $10u(t)$ A, so we type it as given inside "
+           "curly brackets, `j,0,a,{10u(t)}`, and FD converts it to the $s$ domain. We call the top left node **a**, the right end of the inductor "
            "**b** and the node between the dependent source and its 5 Ω **m**. $I_x$ flows "
            "through the inductor from **a** to **b**, so it is `il` and the dependent source "
            "is `e,a,m,2*il`. We name the 5 Ω under the dependent source `r5a` and the output "
@@ -1022,7 +1014,7 @@ dict(num="p16.6", title="A step response with a current-controlled source",
          "$v_s$ = $30u(t)$ V. (a) Find $V_o(s)$. (b) Apply the initial- and final-value "
          "theorems to find $v_o(0)$ and $v_o(\\infty)$. (c) Obtain $v_o(t)$.",
      page=749, fig=(749, "16.17"), figrect=(376, 594, 532, 665), domain="fd",
-     desc="e1,1,0,30/s:r1,1,m,1:r2,m,0,2:c,m,r,1:e2,r,0,4*ir1",
+     desc="e1,1,0,{30u(t)}:r1,1,m,1:r2,m,0,2:c,m,r,1:e2,r,0,4*ir1",
      expect={"v_m": "24*(s + 1/4)/(s*(s + 3/10))"},
      letters={"v_m": "a"},
      booknames={"v_m": "V_o(s)"},
@@ -1041,8 +1033,9 @@ dict(num="p16.6", title="A step response with a current-controlled source",
            "capacitor and a dependent voltage source worth four times $i_x$, the current "
            "through the 1 Ω. The question wants the output as a function of $s$, its "
            "initial and final values, and the output as a function of time. We set the "
-           "analysis to FD. A 30 V step has the transform $30/s$, so the source is "
-           "`e1,1,0,30/s`. We call the source's top **1**, the top of the 2 Ω **m** and the "
+           "analysis to FD. The source is given as a function of time, $30u(t)$ V, so we "
+           "type it as given inside curly brackets, `e1,1,0,{30u(t)}`, and FD converts it "
+           "to the $s$ domain. We call the source's top **1**, the top of the 2 Ω **m** and the "
            "top of the dependent source **r**, and name the resistors `r1` and `r2`. $i_x$ "
            "flows from node 1 to **m** through `r1`, so the dependent source is "
            "`e2,r,0,4*ir1`. $V_o$ is the voltage at node **m**."),
@@ -1162,7 +1155,7 @@ dict(num="19.12", title="Two two-ports in series",
            "back as a multiple of it. $V_2$ is marked from **b** down to ground, so it is the "
            "voltage at **b**."),
 
-dict(num="19.17a", title="A transistor amplifier described by h parameters",
+dict(num="19.17a", si=True, title="A transistor amplifier described by h parameters",
      ask="Consider the common-emitter amplifier circuit of the figure. Determine (a) the "
          "voltage gain, (b) current gain, (c) input impedance, and (d) output impedance using "
          "these h parameters: $h_{ie}$ = 1 kΩ, $h_{re}$ = 2.5 × 10⁻⁴, $h_{fe}$ = 50, "
@@ -1204,7 +1197,7 @@ dict(num="19.17a", title="A transistor amplifier described by h parameters",
            "**c**, and the two-port's card reports the current into each port, `ihb` and "
            "`ihc`."),
 
-dict(num="19.17b", title="The output impedance of the transistor amplifier",
+dict(num="19.17b", si=True, title="The output impedance of the transistor amplifier",
      ask="(d) Determine the output impedance of the amplifier.",
      page=911, fig=(911, "19.59"), kind="th", n1="c", n2="0", domain="dc",
      desc="e,1,0,3.2'm:rs,1,b,800:h,b,c,[1000,2.5e-4,50,20'u]",

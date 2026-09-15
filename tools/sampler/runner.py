@@ -129,7 +129,7 @@ def app_values(s, digits=6, approx=True):
     return r["values"]
 
 
-def app_display(s, digits=6, approx=True):
+def app_display(s, digits=6, approx=True, si=False):
     """What the app's CARDS show for a circuit: {answer name: {plain, latex}},
     keyed the way the page names an answer -- `v_2`, `i_l1`, and a Find
     equivalent answer by the card's own name, `vth`, `zeq`, `pmax`.
@@ -148,7 +148,7 @@ def app_display(s, digits=6, approx=True):
     r = ui.solve_ui(s["desc"], s.get("domain", "dc"), omega, [], tool,
                     s.get("n1", ""), s.get("n2", ""), s.get("ptype", "z"),
                     list(s.get("equations", [])), list(s.get("unknowns", [])), [],
-                    digits=digits, approx=approx, units=True,
+                    digits=digits, approx=approx, units=True, si=si,
                     use_rms=bool(s.get("rms")))
     assert r.get("ok"), r.get("error")
     out = {}
@@ -227,13 +227,13 @@ def number_of(plain):
 
 
 def app_evaluate_display(s, expr, conditions=(), values=None, digits=6,
-                         approx=True):
+                         approx=True, si=False):
     """One Evaluate-card step as the card renders it: {plain, latex}."""
     if SERVER not in sys.path:
         sys.path.insert(0, SERVER)
     import symbulator_ui as ui
     values = values if values is not None else app_values(s, digits, approx)
-    r = ui.evaluate_ui(expr, values, digits=digits, approx=approx,
+    r = ui.evaluate_ui(expr, values, digits=digits, approx=approx, si=si,
                        domain=s.get("domain", "dc"),
                        conditions=list(conditions) or None)
     assert r.get("ok"), r
