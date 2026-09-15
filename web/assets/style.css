@@ -895,8 +895,10 @@ figcaption {
   max-width: 66rem; margin: 0.6rem auto 0;
   display: grid; gap: 2.6rem 2.2rem;
   /* #456: four books, two by two -- three across left the fourth alone
-     on a row of its own. */
-  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
+     on a row of its own. `min(24rem, 100%)`: a phone in portrait is
+     narrower than 24rem, and a bare 24rem minimum pushed every cover
+     past the screen's edge (Roberto, 16 Sep 2026). */
+  grid-template-columns: repeat(auto-fit, minmax(min(24rem, 100%), 1fr));
 }
 .shelf { display: flex; flex-direction: column; }
 .shelf-lede {
