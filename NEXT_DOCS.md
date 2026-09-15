@@ -3,6 +3,32 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #460 — samplers: SI prefixes, time-domain sources, 11.14's power factor, two closing notes, crops — **live 15 Sep 2026**
+
+Roberto's round after #457, shipped with #459 at *"punch it … including the PDFs"*.
+
+- **Rule 32, SI prefixes where the book prints them** (`si=True`): AS7's
+  P4.9, 4.18, 5.1, P10.13, 19.17a/b tell the reader to tick *Use SI prefixes
+  in answers* and print the card's own reading; `gen.si_split`/`si_card` read
+  it, the Evaluate step too, and the `.cir` says `si: yes`. Found by running
+  every entry with the setting on and reading the book at each prefixed
+  answer; AS7's 10.11 and NR12's 9.10, 9.15, 10.8 print plain units.
+- **Rule 33, a source given in time is typed in curly brackets**: AS7's 16.4,
+  16.6, P16.6 and NR12's 13.3 (`{24'm*u(t)}` -- the `*` is needed, Roberto's
+  catch). NR12's 13.6 keeps `480/s`: Find equivalent refuses braces in FD,
+  open item #458.
+- **AS7's 11.14 (d)** is read off the source's card, *power factor
+  (delivered)*, a new `card=(row, element)` eval checked against the app; the
+  Mini-Tools step is gone. Roberto withdrew the "seen by the source" reading.
+- **AS7's 10.6 and P10.6** close with our answer, then the book's, then "we
+  believe ours is correct" / "the small differences may be due to rounding".
+- **Crops** for 10.10, 10.11 and 11.14 (left margin).
+
+Full build: the Course 313 pages, AS7's sampler 57, NR12's 52, Manual 46, v7
+235, v8 223, no unresolved reference; card truth 15 and 36 panels, none
+disagreeing; both example books through the real app, 0 problems. learn
+deployed, PDFs and figures hashed live, 7/8 `lesson-dc` byte-identical.
+
 ## #457 — AS7 figure crops and two printed widths — **live 15 Sep 2026**
 
 Roberto's figure round on the AS7 sampler. Five crops given explicit
