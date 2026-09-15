@@ -1972,6 +1972,8 @@
   }
  },
  "overrides": {
+  "circuit/as7-pp10-6.jpg": 135.0,
+  "circuit/as7-ex5-1.jpg": 156.0,
   "circuit/b11e0507.jpg": 135.0,
   "circuit/b11e0507b.jpg": 125.1,
   "plot/as7e1403-bode.png": 120.0,

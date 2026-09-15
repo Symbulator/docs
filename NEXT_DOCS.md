@@ -3,6 +3,35 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #457 — AS7 figure crops and two printed widths — **live 15 Sep 2026**
+
+Roberto's figure round on the AS7 sampler. Five crops given explicit
+`figrect`s in `tools/as7/specs.py`, each re-exported alone (a helper calling
+`figlib.save` exactly as `export_figs.py` does, so the other figures' bytes
+did not move) and checked by eye: **P10.13** had lost its ground rail;
+**2.15** carried the top of its caption and a page-number fragment; **10.2**
+and **10.4** had lost top and bottom; **11.4** had lost its bottom, and its
+page prints circuits (a) and (b) side by side, so the crop takes (a) and stops
+above its label. A lesson worth keeping: a `figrect` read off a gridded page
+render landed several points off in the export, so each crop was settled by
+measuring the exported image, not the grid.
+
+Two printed widths through `tools/figure_sizes.json`'s `overrides`: **5.1**
+at the full line, 156 mm (the web unchanged, the image already filling the
+column), and **P10.6** at 135 mm (from the 112 mm fallback; on the web that
+also caps it at about 470 px, a little narrower than the column it filled).
+None of the AS7 figures is in the manifest's measured table, so every one of
+them prints at the fallback 72% of the line.
+
+Full build: the Course 313 pages, AS7's sampler 57, NR12's 52, the Manual 46,
+v7 235, v8 223, no unresolved reference in any; card truth 15 and 36 panels,
+none disagreeing. Measured in the built PDF: 5.1 at 156.0 x 50.2 mm, P10.6 at
+135.0 x 38.9 mm. Deployed; the five figures and two PDFs hashed live against
+the build, version 7's and 8's `lesson-dc` byte-identical across it. Roberto's
+typed prunes were done the same hour and verified: 0.6.8–0.6.13 404 on
+install, 0.6.14 served byte-identical to `vendor/`, `sym_nr12_p1836.png` 404
+on learn.
+
 ## #456 — the Samplers, a book of their own with a PDF per textbook — **live 15 Sep 2026**
 
 Roberto: *"the samplers should be their own thing. In the learn landing page,
