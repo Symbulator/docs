@@ -61,7 +61,7 @@ def panels_by_entry(text):
 
 def wanted(spec):
     """[(label, body)] the app's cards justify for this spec, in page order."""
-    digits, approx = gen.told_digits(spec)
+    digits, approx = gen.shown_digits(spec)
     shown = runner.app_display(spec, digits=digits, approx=approx)
     _r, vals = runner.run_one(spec)
     out = []

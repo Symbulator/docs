@@ -89,17 +89,9 @@ r6,a,0,30
 
 Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-The source's card reports its current into its positive terminal, so the current $i$ the source delivers is the opposite of `ie`.
+The source's card reports the resistance the source sees, `r_e`, which is $R_{ab}$. It also reports the source's current into its positive terminal, so the current $i$ the source delivers is the opposite of `ie`.
 
-Symbulator returns `i_e` = {{o:-12.46}} A.
-
-The resistance the source sees is its voltage over the current it delivers. We type that into {{card:Evaluate}}:
-
-```field 9 Evaluate
--120/ie
-```
-
-It gives {{o:9.632}} Ω (the book's $R_{ab}$).
+Symbulator returns `i_e` = {{o:-12.46}} A and `r_e` = {{o:9.632}} Ω (the book's $R_{ab}$).
 
 So $i$ = 12.46 A, the opposite of `ie`.
 
@@ -171,10 +163,10 @@ Alexander & Sadiku, 7th edition — the circuit for Example 3.7
 :::
 
 ::: answer
-The circuit consists of an independent current source, a dependent one, a 10 V source and five resistors, and the question wants its four mesh currents, $i_1$ to $i_4$, one for each loop of the figure. The dependent source is worth three times $I_o$, the current up through the 10 V source. We name the nodes along the middle of the figure **p**, **x**, **y** and **z** from left to right, with the bottom rail as ground. The 2 Ω resistor at the top joins **p** to **x** alongside the 5 A source, and we name it `r2a` and the other 2 Ω resistor `r2b`. A source's current is counted from its first node to its second, which for `e,z,0,10` is downward, so $I_o$ is the opposite of `ie` and the dependent source is `j2,x,0,-3*ie`.
+The circuit consists of an independent current source, a dependent one, a 10 V source and five resistors, and the question wants its four mesh currents, $i_1$ to $i_4$, one for each loop of the figure, all clockwise. The dependent source is worth three times $I_o$, the current up through the 10 V source. We name the nodes along the middle of the figure **p**, **x**, **y** and **z** from left to right, with the bottom rail as ground. A mesh current is the current of any element that only its own mesh contains, so each one can be read off an element's card, as long as the element is written in the direction of the book's arrow. A current is counted from an element's first node to its second. The 2 Ω resistor at the top is in the first mesh alone, and clockwise runs from **p** to **x**, so we write it `r2a,p,x,2`. The 6 Ω resistor is in the second mesh alone, and clockwise runs up the left side, so we write it `r6,0,p,6`. The 4 Ω resistor is the third mesh's alone, `r4,x,y,4`, and the other 2 Ω resistor the fourth's, `r2b,y,z,2`. The 10 V source is written `e,z,0,10`, so its current is counted downward and $I_o$ is the opposite of `ie`, which makes the dependent source `j2,x,0,-3*ie`.
 
 ```field 9 Circuit Description
-r6,p,0,6
+r6,0,p,6
 j1,p,x,5
 r2a,p,x,2
 j2,x,0,-3*ie
@@ -186,22 +178,7 @@ e,z,0,10
 
 Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-A mesh current is not the current of any one element, and the {{card:By-Hand Equations}} card is where they are named. It finds the meshes of the circuit itself, writes the equations a first course writes for them, supermeshes included, and solves them.
-
-Press {{btn:Write the equations}} in the {{card:By-Hand Equations}} card, and choose *Mesh analysis (with supermeshes)* in its {{ui:Method}} menu. It writes the system:
-
-$$
-\begin{aligned}
-2 I_{1} + 6 I_{2} + 12 I_{3} - 8 I_{4} &= 0 \\
-- 8 I_{3} + 10 I_{4} - 10 &= 0 \\
-I_{1} - I_{2} &= 5 \\
-- I_{2} + I_{3} &= 3 I_{4}
-\end{aligned}
-$$
-
-The card returns `I1` = {{o:7.5}} A (the opposite of the book's $i_1$), `I2` = {{o:2.5}} A (the opposite of the book's $i_2$), `I3` = {{o:-3.929}} A (the opposite of the book's $i_3$) and `I4` = {{o:-2.143}} A (the opposite of the book's $i_4$).
-
-Each of the card's four meshes is one of the book's, and all four run the other way round from the book's arrows. That is why each value is the opposite of the book's.
+Symbulator returns `i_r2a` = {{o:-7.5}} A (the book's $i_1$), `i_r6` = {{o:-2.5}} A (the book's $i_2$), `i_r4` = {{o:3.929}} A (the book's $i_3$) and `i_r2b` = {{o:2.143}} A (the book's $i_4$).
 
 :::
 :::
@@ -448,7 +425,7 @@ The closed-loop gain is the output over the source. We type it into {{card:Evalu
 v_out/vs
 ```
 
-It gives {{o:-1.9999698252048888}} (the book's $v_o/v_s$).
+It gives {{o:-1.9999698}} (the book's $v_o/v_s$).
 
 The current $i$ flows from node **1** to the output through the 20 kΩ feedback resistor. We type its name into {{card:Evaluate}} and the source's value into its {{ui:Conditions}} box:
 
@@ -460,7 +437,9 @@ ir20k
 vs = 2
 ```
 
-It gives {{o:0.0001999979850053763}} A (the book's $i$).
+It gives {{o:0.00019999799}} A (the book's $i$).
+
+The book prints the gain as −1.9999699 and the current as 0.19999 mA. Its gain comes from an intermediate equation whose coefficients it rounds to whole numbers, and the circuit itself gives −1.9999698. Its current is cut at five figures, where the circuit gives 0.19999799 mA.
 
 :::
 :::
@@ -1085,13 +1064,15 @@ The run gives the output in volts. In millivolts it reads $10 - e^{-t}(10\cos 2t
 
 ## Sinusoidal steady state — AC {#as7-ac}
 
-Fifteen problems are in the sinusoidal steady state. Where the book gives its
+Seventeen problems are in the sinusoidal steady state. Where the book gives its
 impedances in ohms they go in as written, complex ones included, and the
 frequency never enters: **omega** is left as a symbol in the
 {{ui:ω — angular frequency}} box and nothing depends on it. Where the book gives
 henries and farads instead, the frequency goes in that box and the conversion to
 impedance is the solver's. Two filter problems leave the frequency as a symbol
-on purpose, and find their corner frequency in the {{card:Solve}} card. The
+on purpose, and find their corner frequency in the {{card:Solve}} card. Two
+circuits run at more than one frequency at once, and take one run per
+frequency, which is superposition done the way the book does it. The
 powers of an AC run are on every card, and a power factor is one entry in the
 {{card:Mini-Tools}} card.
 
@@ -1181,6 +1162,119 @@ rc2,c,0,-2j
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box, since nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
 Symbulator returns `v_c` = {{o:-7.214 - 6.566j}} V ({{o:9.754}}∠{{o:-137.7}}°, the book's $V_o$).
+
+:::
+:::
+
+::: problem AS7's Example 10.6
+
+Find $v_o$ of the circuit of the figure.
+
+::: figure assets/circuit/as7-ex10-6.jpg
+Alexander & Sadiku, 7th edition — the circuit for Example 10.6
+:::
+
+::: answer
+The circuit consists of three sources at three different frequencies, a 10 cos 2$t$ V source, a 2 sin 5$t$ A source and a 5 V dc source, feeding an inductor, a capacitor and two resistors. The question wants the voltage $v_o$ across the 1 Ω resistor. A DC or an AC run works at one frequency, and this circuit has three, so the answer takes one run per source. In each run the other two sources are switched off, which is what superposition does: a voltage source at zero is a short, and a current source at zero is an open. We call the top of the 10 V source **a**, the top of the current source **b**, the top of the capacitor **c** and the top of the 5 V source **d**, with the bottom rail as ground. We name the sources `e1`, `j` and `e2` and the resistors after their values, so $v_o$ is the voltage drop across `r1`. The first run keeps the 5 V source alone. DC sees the inductor as a short and the capacitor as an open, and the other two sources get the value 0:
+
+```field 9 Circuit Description
+e1,a,0,0
+l,a,b,2
+j,0,b,0
+r1,b,c,1
+c,c,0,0.1
+r4,c,d,4
+e2,d,0,5
+```
+
+Set {{ui:Analysis}} to *DC — direct current*.
+
+Symbulator returns `v_r1` = {{o:-1}} V (the book's $v_1$).
+
+The second run keeps the 10 cos 2$t$ V source alone, at its frequency of 2 rad/s. In AC a source's value is its phasor, and a cosine of amplitude 10 with no phase is `10`. The inductor and the capacitor are given in henries and farads, so the frequency goes in the {{ui:ω — angular frequency}} box. The current source and the 5 V source get the value 0:
+
+```field 9 Circuit Description
+e1,a,0,10
+l,a,b,2
+j,0,b,0
+r1,b,c,1
+c,c,0,0.1
+r4,c,d,4
+e2,d,0,0
+```
+
+::: applink AS7's Example 10.6 (AC at 2 rad/s)
+:::
+
+Set {{ui:Analysis}} to *AC — alternating current*. Put **2** in the {{ui:ω — angular frequency}} box. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+
+Symbulator returns `v_r1` = {{o:2.146 - 1.279j}} V ({{o:2.498}}∠{{o:-30.78}}°, the book's $V_2$).
+
+The third run keeps the 2 sin 5$t$ A source alone, at 5 rad/s. Phasors are measured against a cosine, and 2 sin 5$t$ is 2 cos(5$t$ − 90°), so the source's value is the phasor `(2∠-90°)`. The two voltage sources get the value 0, and the frequency is 5:
+
+```field 9 Circuit Description
+e1,a,0,0
+l,a,b,2
+j,0,b,(2∠-90°)
+r1,b,c,1
+c,c,0,0.1
+r4,c,d,4
+e2,d,0,0
+```
+
+::: applink AS7's Example 10.6 (AC at 5 rad/s)
+:::
+
+Set {{ui:Analysis}} to *AC — alternating current*. Put **5** in the {{ui:ω — angular frequency}} box. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+
+Symbulator returns `v_r1` = {{o:0.4878 - 2.276j}} V ({{o:2.328}}∠{{o:-77.91}}°, the book's $V_3$).
+
+Each run's phasor is one term of $v_o$, at its own frequency. Written back in time and added, $v_o$ = −1 + 2.498 cos(2$t$ − 30.78°) + 2.328 cos(5$t$ − 77.91°) V, and the last term is 2.328 sin(5$t$ + 12.09°) V. The book prints that term as 2.33 sin(5$t$ + 10°): its own expression for it gives an angle of −77.91°, not the −80° it prints. Its −30.79° for the second term rounds the last digit the other way.
+
+:::
+:::
+
+::: problem AS7's Practice Problem 10.6
+
+Calculate $v_o$ in the circuit of the figure.
+
+::: figure assets/circuit/as7-pp10-6.jpg
+Alexander & Sadiku, 7th edition — the circuit for Practice Problem 10.6
+:::
+
+::: answer
+The circuit consists of a 75 sin 5$t$ V source and a 6 cos 10$t$ A source, at two different frequencies, feeding an 8 Ω resistor, a 0.2 F capacitor and a 1 H inductor. The question wants the voltage $v_o$ across the capacitor. An AC run works at one frequency, so the answer takes one run per source, with the other source switched off: a voltage source at zero is a short, and a current source at zero is an open. We call the top of the voltage source **a** and the top of the capacitor **b**, with the bottom rail as ground, so $v_o$ is the voltage at node **b**. The first run keeps the voltage source alone, at 5 rad/s. Phasors are measured against a cosine, and 75 sin 5$t$ is 75 cos(5$t$ − 90°), so its value is the phasor `(75∠-90°)`. The current source gets the value 0:
+
+```field 9 Circuit Description
+e,a,0,(75∠-90°)
+r8,a,b,8
+c,b,0,0.2
+l,b,0,1
+j,0,b,0
+```
+
+Set {{ui:Analysis}} to *AC — alternating current*. Put **5** in the {{ui:ω — angular frequency}} box. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+
+Symbulator returns `v_b` = {{o:-11.44 - 1.787j}} V ({{o:11.58}}∠{{o:-171.1}}°, the book's $V_1$).
+
+The second run keeps the 6 cos 10$t$ A source alone, at 10 rad/s, its value the plain amplitude `6`, and the voltage source gets the value 0:
+
+```field 9 Circuit Description
+e,a,0,0
+r8,a,b,8
+c,b,0,0.2
+l,b,0,1
+j,0,b,6
+```
+
+::: applink AS7's Practice Problem 10.6 (AC at 10 rad/s)
+:::
+
+Set {{ui:Analysis}} to *AC — alternating current*. Put **10** in the {{ui:ω — angular frequency}} box. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
+
+Symbulator returns `v_b` = {{o:0.2069 - 3.144j}} V ({{o:3.151}}∠{{o:-86.24}}°, the book's $V_2$).
+
+The two phasors are the terms of $v_o$ at their own frequencies. Written back in time and added, $v_o$ = 11.58 cos(5$t$ − 171.1°) + 3.151 cos(10$t$ − 86.24°) V. The first term is 11.58 sin(5$t$ − 81.1°) V, the book's 11.577 sin(5$t$ − 81.12°) to four figures. The book prints the second amplitude as 3.154, where the circuit gives 3.151.
 
 :::
 :::

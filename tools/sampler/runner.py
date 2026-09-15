@@ -266,7 +266,8 @@ def check(specs, only=None, verbose=True):
         for i, pre in enumerate(s.get("pre", [])):
             expanded.append(dict(num="%s pre%d" % (s["num"], i + 1), title="first run",
                                  desc=pre["desc"], domain=pre.get("domain", "dc"),
-                                 expect=pre["expect"]))
+                                 expect=pre["expect"], omega=pre.get("omega"),
+                                 rms=pre.get("rms", False)))
         expanded.append(s)
     bad, ok = _check(expanded, only, verbose, summary=False)
     # By-Hand Equations steps: the card's unknowns, exact, against the book

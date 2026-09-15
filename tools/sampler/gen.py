@@ -246,6 +246,23 @@ def told_digits(s):
     return int(told), True
 
 
+def shown_digits(s, part=None):
+    """The Rounding a value is PRINTED at, as the pair `solve_ui` takes.
+
+    The same as `told_digits` except under *approx (full precision)*,
+    where the card prints every digit it has and the page prints the
+    book's figures instead -- rule 19, Roberto, 13 Sep 2026: "show as many
+    as the book; the reader will know why", restated 15 Sep 2026 when
+    AS7's Example 5.1 printed -1.9999698252048888 for the book's
+    -1.9999699. `part` is an Evaluate or Solve step that may carry its
+    own `digits`, for an answer the book prints to a different precision
+    from the rest of the problem (5.1's current, at 5)."""
+    told = rounding_told(s)
+    if told == "approx":
+        return (part or {}).get("digits") or digits_of(s), True
+    return told_digits(s)
+
+
 #: a unit the card appends to a value's LaTeX, which the page adds itself
 _CARD_UNIT = re.compile(r"\\,(?:\\mathrm\{[^}]*\}|\\Omega|var)\s*$")
 
@@ -255,7 +272,7 @@ def card_latex(s):
     this entry tells the reader, with the card's unit stripped (the page
     appends its own). Cached on the spec, since it runs the app."""
     if "_cardtex" not in s:
-        digits, approx = told_digits(s)
+        digits, approx = shown_digits(s)
         shown = runner.app_display(s, digits=digits, approx=approx)
         s["_cardtex"] = {k: _CARD_UNIT.sub("", v.get("latex", "")).strip()
                          for k, v in shown.items()}
@@ -331,7 +348,7 @@ def answer_blocks(s, vals):
                 # not an answer of the run but an expression over them --
                 # a transfer function, a gain -- which the reader reads in
                 # the Evaluate card, so it is printed as that card prints it
-                digits, approx = told_digits(s)
+                digits, approx = shown_digits(s)
                 got = runner.app_evaluate_display(s, k[1:], digits=digits,
                                                   approx=approx)
                 tex = _CARD_UNIT.sub("", got["latex"]).strip()
@@ -604,7 +621,7 @@ def render(s, vals):
             L.extend(conds)
             L.append("```")
             L.append("")
-        digits, approx = told_digits(s)
+        digits, approx = shown_digits(s, ev)
         card = runner.app_evaluate_display(s, ev["expr"], conds, digits=digits,
                                            approx=approx)
         got = card["plain"]
@@ -767,8 +784,8 @@ def render(s, vals):
                 else:
                     L.append("Untick {{ui:real solutions only}} and press {{btn:Solve equations}}.")
             L.append("")
-            got, _r = runner.app_solveq(s, sq, values, digits=told_digits(s)[0],
-                                        approx=told_digits(s)[1])
+            got, _r = runner.app_solveq(s, sq, values, digits=shown_digits(s, sq)[0],
+                                        approx=shown_digits(s, sq)[1])
             sols = _r.get("solutions") or []
             units = sq.get("unit", "")
 
@@ -815,6 +832,8 @@ def render(s, vals):
 
 def main_tag(s):
     """The parenthetical of the main run's entry: (DC), (Th\u00e9venin), (TR, Expert Mode)."""
+    if s.get("tag"):
+        return s["tag"]              # a spec that names its own run (10.6)
     dom, kind = s.get("domain", "dc"), s.get("kind", "circuit")
     tag = {"dc": "DC", "ac": "AC", "tr": "TR", "fd": "FD"}[dom]
     if kind == "th":
@@ -843,7 +862,10 @@ def pre_spec(s, pre):
     return dict(num=s["num"], desc=pre["desc"], domain=pre.get("domain", "dc"),
                 expect=pre["expect"], booknames=pre.get("booknames", {}),
                 shownames=pre.get("shownames", {}), units=pre.get("units", {}),
-                digits=digits_of(s))
+                digits=digits_of(s),
+                # a first run may be AC at a frequency of its own -- one
+                # of a superposition's runs, AS7's Example 10.6
+                omega=pre.get("omega"), rms=pre.get("rms", False))
 
 
 def pre_values(s, pre):
@@ -883,8 +905,11 @@ def cir_entry(s):
     ask = re.sub(r"_\{([^}]*)\}", r"_\1", ask)
     L.append("note: %s" % ask)      # the question alone; the book's title names its method
     if s.get("pre"):
-        L.append("note: This is the circuit after the switch has moved; its initial "
-                 "condition comes from the entry before it.")
+        # a problem whose first runs are not "before the switch" says what
+        # its own last run is (a superposition's third source, 10.6)
+        L.append("note: %s" % s.get("cir_note",
+                 "This is the circuit after the switch has moved; its initial "
+                 "condition comes from the entry before it."))
     if not s.get("nofig"):
         L.append("image: https://learn.symbulator.com/assets/circuit/%s" % figname(num))
     L.append("rounding: %s" % rounding_told(s))
@@ -940,6 +965,10 @@ def cir_pre_entry(s, pre):
     L.extend(split_desc(pre["desc"]))
     L.append("")
     L.append("analysis: %s" % pre.get("domain", "dc"))
+    if pre.get("domain") == "ac":
+        w = pre.get("omega")
+        L.append("omega: %s" % ("omega" if (w is None or isinstance(w, sp.Symbol))
+                                else fmt.plain_value(sp.sympify(w))))
     L.append("note: %s" % ask)
     L.append("note: %s" % pre["note"])
     if not s.get("nofig"):
@@ -948,6 +977,9 @@ def cir_pre_entry(s, pre):
     L.append("rounding: %s" % rounding_told(pre_spec(s, pre)))
     L.append("si: no")
     L.append("units: yes")
+    if pre.get("domain") == "ac":
+        L.append("rms: %s" % ("yes" if pre.get("rms") else "no"))
+        L.append("polar: yes")
     L.append("")
     return "\n".join(L)
 

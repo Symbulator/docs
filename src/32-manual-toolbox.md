@@ -17,6 +17,8 @@ documented nowhere else.
 Tick it and a card appears with the system a first course would have you
 write: **nodal**, with supernodes, or **mesh**, with supermeshes. It names
 the method it used and counts the supernodes or supermeshes it needed.{{i:By-Hand Equations card}}{{i:nodal and mesh analysis}}{{i:supernodes and supermeshes}}
+Mesh currents turn clockwise. {{ui:Flip the mesh currents}} turns them all the
+other way, arrows and signs together.{{i:mesh current direction}}
 
 It is written independently of the classic solve and then compared with it.
 The classic solve stays the authority and is never fed by the by-hand one —

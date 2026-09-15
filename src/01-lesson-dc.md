@@ -675,7 +675,9 @@ to your circuit, shows the one that needs fewer equations, and offers you the
 other if both apply. It draws your working on the circuit as well — a ring
 round every node whose equation is being written, a dashed line round each
 supernode or supermesh, and the mesh currents {{var:I_1}}, {{var:I_2}}, {{var:I_3}} curling
-round their own loops.
+round their own loops. Every mesh current turns clockwise, as textbooks draw
+them, and ticking {{ui:Flip the mesh currents}} turns them all the other way,
+which reverses the arrows and the sign of every mesh current.{{i:mesh current direction}}
 
 It is meant for exactly the moment when your homework answer disagrees with
 Symbulator's and you cannot see why. Both systems use the same names for the

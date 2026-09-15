@@ -3,6 +3,41 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #454 — AS7's Example 10.6 and Practice Problem 10.6: superposition across frequencies — **live 15 Sep 2026**
+
+Roberto asked to see 10.6, parked in #449, and then: *"Punch it. Add both
+problems if you can."* Both circuits run at several frequencies at once, and
+a DC or AC run works at one, so each is answered with one run per source and
+the other sources set to zero -- a voltage source at zero is a short, a
+current source at zero an open, which is superposition itself. 10.6 takes
+three runs (DC with the 5 V source alone, AC at 2 rad/s, AC at 5 rad/s) and
+Practice Problem 10.6 two (AC at 5 and at 10 rad/s); a sine source is its
+cosine phasor, `(2∠-90°)` and `(75∠-90°)`. The time-domain sum is stated
+after the runs, as in NR12's 9.9. **Both books slip, and the entries say
+so**: 10.6's third term is 2.328∠−77.91°, where the book prints −80°, so it
+reads 2.328 sin(5t + 12.09°) and not sin(5t + 10°), and its −30.79° rounds
+the other way (−30.78°); P10.6's second amplitude is 3.151, where the book
+prints 3.154.
+
+The generator learned three things for them, none of which moves an existing
+entry (the NR12 chapter and book regenerate unchanged): a first run may be AC
+at its own `omega` (and `rms`), carried to the settings line, the runner and
+the `.cir` entry; a spec may name its main run's `tag` (*AC at 5 rad/s*)
+rather than the analysis alone; and `cir_note` overrides the main entry's
+note, hard-coded until now to *the circuit after the switch has moved*.
+The AS7 book is 52 problems (AC 17), 57 app entries; runner 62 ok, card
+guard 0 disagreeing, `verify_lesson Alexander_Sadiku` 0 with a problem,
+`app_links` 442 of 444, `build.py --check` clean. Figures cropped by
+`figrect` and checked on a sheet.
+
+## #453 — claimed by the app tree, 15 Sep 2026: **a riser no longer climbs through a lifted body** (solver 0.6.14). Only AS7's Example 10.4's drawing moves; the monograph's Appendix B does not. Write-up in `Application/v9/repos/local/NEXT.md`.
+
+## #452 — Roberto's first review round of the AS7 sampler — **live 15 Sep 2026** (the hold lifted by *"Punch it"*)
+
+Held at his word (*"Don't rebuild the lesson until told"*). 2.15 reads $R_{ab}$ off the source's card as `r_e` instead of an Evaluate step. 3.7 reads each mesh current off the one element its mesh alone contains, written along the book's clockwise arrow (`r6,0,p,6` turned for it), with the By-Hand step gone. Figures re-cropped: 3.11 (the whole circuit), 4.12 (the line above it), 4.13 (its base), P19.9 (the matrix above it), 19.12 (its `Vs` label). **Rule 19 restored in the generator**: under *approx (full precision)* the page prints the book's figures, not the card's every digit -- `shown_digits()` in `tools/sampler/gen.py`, where rule 29's card rendering had been passing zero digits -- so 5.1 prints −1.9999698 and 0.00019999799 A, with a note on the book's own last digits. Both chapter summaries end at *prints.*, the credits sit above the two samplers, and the landing page has its *Against the textbook* section (those three are live). Mesh directions became #451.
+
+## #451 — claimed by the app tree, 15 Sep 2026: **mesh currents clockwise by default, and a flip** (solver 0.6.14). The docs moved with it: Lesson 1's By-Hand paragraph and the Manual's toolbox. Write-up in `Application/v9/repos/local/NEXT.md`.
+
 ## #450 — claimed by the app tree, 14 Sep 2026: **a short named `s`, `limit()` in Evaluate, and `r20b`** (solver 0.6.13). The docs moved with it: Lesson 4's HK5 Figure 2-29 written with `s` and `is` as the book writes it, the Manual's answers page and a *Limits* section on its frequency page, and the AS7 sampler's 7.5 back to `s` and its four limits read with `limit()`. Write-up in `Application/v9/repos/local/NEXT.md`.
 
 ## #449 — Examples from Alexander & Sadiku 7e: a second sampler — **live on learn 14 Sep 2026, cache v229**

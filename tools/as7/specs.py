@@ -20,7 +20,8 @@ dict(num="2.15", title="Equivalent resistance by delta-wye transformation",
          "to find current $i$.",
      page=80, fig=(81, "2.52"), domain="dc",
      desc="e,a,0,120:r1,a,c,12.5:r2,c,0,15:r3,a,n,10:r4,n,0,20:r5,c,n,5:r6,a,0,30",
-     expect={"i_e": -120 * 19 / 183},
+     expect={"i_e": -120 * 19 / 183, "r_e": 183 / 19},
+     booknames={"r_e": "R_{ab}"},
      shows="The circuit consists of a 120 V source feeding a network of six resistors between "
            "terminals a and b. The network is neither a series nor a parallel combination: "
            "its 5 Ω resistor bridges the two middle nodes. The question wants the "
@@ -28,11 +29,9 @@ dict(num="2.15", title="Equivalent resistance by delta-wye transformation",
            "describe the network as it is drawn, keeping the figure's letters **a**, **c** "
            "and **n** and taking terminal b as ground, node **0**. We name the resistors "
            "`r1` to `r6` in the order 12.5 Ω, 15 Ω, 10 Ω, 20 Ω, 5 Ω and 30 Ω.",
-     interpret="The source's card reports its current into its positive terminal, so the "
-               "current $i$ the source delivers is the opposite of `ie`.",
-     evals=[dict(text="The resistance the source sees is its voltage over the current it "
-                      "delivers. We type that into {{card:Evaluate}}:",
-                 expr="-120/ie", expect=183 / 19, unit="\\Omega", book="R_{ab}")],
+     interpret="The source's card reports the resistance the source sees, `r_e`, which is "
+               "$R_{ab}$. It also reports the source's current into its positive terminal, "
+               "so the current $i$ the source delivers is the opposite of `ie`.",
      after="So $i$ = 12.46 A, the opposite of `ie`."),
 
 dict(num="3.4", title="Nodal analysis with two supernodes", digits=5,
@@ -65,34 +64,29 @@ dict(num="p3.4", title="Nodal analysis with a current-controlled source", digits
 dict(num="3.7", title="Mesh analysis with two supermeshes",
      ask="For the circuit in the figure, find $i_1$ to $i_4$.",
      page=123, fig=(123, "3.24"), figrect=(78, 298, 358, 456), domain="dc",
-     desc="r6,p,0,6:j1,p,x,5:r2a,p,x,2:j2,x,0,-3*ie:r4,x,y,4:r8,y,0,8:r2b,y,z,2:e,z,0,10",
-     expect={"i_e": 15 / 7},
-     hide=["i_e"],
-     byhand=dict(method="mesh", unit="A",
-                 expect={"I1": 15 / 2, "I2": 5 / 2, "I3": -55 / 14, "I4": -15 / 7},
-                 book={"I1": "i_1", "I2": "i_2", "I3": "i_3", "I4": "i_4"},
-                 opposite=["I1", "I2", "I3", "I4"],
-                 text="A mesh current is not the current of any one element, and the "
-                      "{{card:By-Hand Equations}} card is where they are named. It finds the "
-                      "meshes of the circuit itself, writes the equations a first course "
-                      "writes for them, supermeshes included, and solves them."),
+     desc="r6,0,p,6:j1,p,x,5:r2a,p,x,2:j2,x,0,-3*ie:r4,x,y,4:r8,y,0,8:r2b,y,z,2:e,z,0,10",
+     expect={"i_r2a": -15 / 2, "i_r6": -5 / 2, "i_r4": 55 / 14, "i_r2b": 15 / 7},
+     booknames={"i_r2a": "i_1", "i_r6": "i_2", "i_r4": "i_3", "i_r2b": "i_4"},
      shows="The circuit consists of an independent current source, a dependent one, a 10 V "
            "source and five resistors, and the question wants its four mesh currents, "
-           "$i_1$ to $i_4$, one for each loop of the figure. The dependent source is worth "
-           "three times $I_o$, the current up through the 10 V source. We name the nodes "
-           "along the middle of the figure **p**, **x**, **y** and **z** from left to right, "
-           "with the bottom rail as ground. The 2 Ω resistor at the top joins **p** to "
-           "**x** alongside the 5 A source, and we name it `r2a` and the other 2 Ω resistor "
-           "`r2b`. A source's current is counted from its first node to its second, which "
-           "for `e,z,0,10` is downward, so $I_o$ is the opposite of `ie` and the dependent "
-           "source is `j2,x,0,-3*ie`.",
-     after="Each of the card's four meshes is one of the book's, and all four run the other "
-           "way round from the book's arrows. That is why each value is the opposite of the "
-           "book's."),
+           "$i_1$ to $i_4$, one for each loop of the figure, all clockwise. The dependent "
+           "source is worth three times $I_o$, the current up through the 10 V source. We "
+           "name the nodes along the middle of the figure **p**, **x**, **y** and **z** from "
+           "left to right, with the bottom rail as ground. A mesh current is the current of "
+           "any element that only its own mesh contains, so each one can be read off an "
+           "element's card, as long as the element is written in the direction of the "
+           "book's arrow. A current is counted from an element's first node to its second. "
+           "The 2 Ω resistor at the top is in the first mesh alone, and clockwise runs "
+           "from **p** to **x**, so we write it `r2a,p,x,2`. The 6 Ω resistor is in the "
+           "second mesh alone, and clockwise runs up the left side, so we write it "
+           "`r6,0,p,6`. The 4 Ω resistor is the third mesh's alone, `r4,x,y,4`, and the "
+           "other 2 Ω resistor the fourth's, `r2b,y,z,2`. The 10 V source is written "
+           "`e,z,0,10`, so its current is counted downward and $I_o$ is the opposite of "
+           "`ie`, which makes the dependent source `j2,x,0,-3*ie`."),
 
 dict(num="3.11", title="Currents in a circuit with a voltage-controlled source",
      ask="In the circuit of the figure, determine the currents $i_1$, $i_2$, and $i_3$.",
-     page=130, fig=(130, "3.34"), domain="dc",
+     page=130, fig=(130, "3.34"), figrect=(254, 553, 462, 668), domain="dc",
      desc="e1,1,0,24:r4a,1,a,4:r2a,a,0,2:r2b,a,m,2:e2,b,m,3*vr4b:r1,a,b,1:r8,b,0,8:r4b,b,0,4",
      expect={"i_r2a": 4 / 3, "i_r8": 4 / 3, "i_r4b": 8 / 3},
      booknames={"i_r2a": "i_1", "i_r8": "i_2", "i_r4b": "i_3"},
@@ -174,7 +168,7 @@ dict(num="p4.9", title="Thevenin equivalent with a current-controlled current so
 
 dict(num="4.12", title="Norton equivalent with a current-controlled current source",
      ask="Find $R_N$ and $I_N$ of the circuit in the figure at terminals a-b.",
-     page=172, fig=(172, "4.43"), figrect=(44, 84, 202, 179), kind="th", n1="a", n2="0", domain="dc",
+     page=172, fig=(172, "4.43"), figrect=(44, 86, 202, 179), kind="th", n1="a", n2="0", domain="dc",
      desc="r4,p,0,4:e,p,0,10:r5,p,a,5:j,p,a,2*ir4",
      expect={"ino": 7, "z": 5},
      booknames={"ino": "I_N", "z": "R_N"},
@@ -191,7 +185,7 @@ dict(num="4.12", title="Norton equivalent with a current-controlled current sour
 dict(num="4.13", title="Maximum power transfer",
      ask="Find the value of $R_L$ for maximum power transfer in the circuit of the figure. "
          "Find the maximum power.",
-     page=175, fig=(175, "4.50"), kind="th", n1="a", n2="0", domain="dc",
+     page=175, fig=(175, "4.50"), figrect=(110, 388, 312, 455), kind="th", n1="a", n2="0", domain="dc",
      desc="e,1,0,12:r6,1,2,6:r12,2,0,12:r3,2,3,3:j,0,3,2:r2,3,a,2",
      expect={"z": 9, "pmax": 121 / 9},
      booknames={"z": "R_L", "pmax": "p_{max}"},
@@ -220,7 +214,7 @@ dict(num="4.18", title="An unbalanced bridge",
      after="The value is negative, so the current flows through the galvanometer from "
            "**b** to **a**."),
 
-dict(num="5.1", title="A non-ideal op amp", digits=7,
+dict(num="5.1", title="A non-ideal op amp", digits=8,
      ask="A 741 op amp has an open-loop voltage gain of 2 × 10⁵, input resistance of 2 MΩ, "
          "and output resistance of 50 Ω. The op amp is used in the circuit of the figure. "
          "Find the closed-loop gain $v_o/v_s$. Determine current $i$ when $v_s$ = 2 V.",
@@ -236,6 +230,10 @@ dict(num="5.1", title="A non-ideal op amp", digits=7,
                       "the source's value into its {{ui:Conditions}} box:",
                  expr="ir20k", at={"vs": 2}, expect=2 * 266668 / 2666706867, unit="A",
                  book="i")],
+     after="The book prints the gain as −1.9999699 and the current as 0.19999 mA. Its "
+           "gain comes from an intermediate equation whose coefficients it rounds to "
+           "whole numbers, and the circuit itself gives −1.9999698. Its current is cut at five figures, where "
+           "the circuit gives 0.19999799 mA.",
      shows="An op amp can be modelled by what is inside it: a resistance between its two "
            "inputs, a dependent voltage source worth the open-loop gain times the voltage "
            "between them, and a resistance in series with its output. The question wants "
@@ -553,6 +551,88 @@ dict(num="10.4", title="Mesh analysis with a supermesh",
            "`rc4` and `rc2` for the two capacitors, `rl` for the inductor, `r8` and `r6` "
            "for the resistors. The 4 A source's arrow points up from **c** to **t**, and "
            "the 3 A source's up from ground to **r**. $V_o$ is the voltage at node **c**."),
+
+dict(num="10.6", title="Superposition across three frequencies",
+     ask="Find $v_o$ of the circuit of the figure.",
+     page=446, fig=(446, "10.13"), figrect=(238, 519, 466, 583), domain="ac", omega=5,
+     pre=[dict(
+        text="The circuit consists of three sources at three different frequencies, a "
+             "10 cos 2$t$ V source, a 2 sin 5$t$ A source and a 5 V dc source, feeding an "
+             "inductor, a capacitor and two resistors. The question wants the voltage $v_o$ "
+             "across the 1 Ω resistor. A DC or an AC run works at one frequency, and this "
+             "circuit has three, so the answer takes one run per source. In each run the other "
+             "two sources are switched off, which is what superposition does: a voltage source "
+             "at zero is a short, and a current source at zero is an open. We call the top of "
+             "the 10 V source **a**, the top of the current source **b**, the top of the "
+             "capacitor **c** and the top of the 5 V source **d**, with the bottom rail as "
+             "ground. We name the sources `e1`, `j` and `e2` and the resistors after their "
+             "values, so $v_o$ is the voltage drop across `r1`. The first run keeps the 5 V "
+             "source alone. DC sees the inductor as a short and the capacitor as an open, and "
+             "the other two sources get the value 0:",
+        desc="e1,a,0,0:l,a,b,2:j,0,b,0:r1,b,c,1:c,c,0,0.1:r4,c,d,4:e2,d,0,5",
+        tag="DC, the 5 V source alone",
+        expect={"v_r1": -1}, booknames={"v_r1": "v_1"},
+        note="This is the circuit with the 5 V source alone, the first of three runs."),
+      dict(
+        text="The second run keeps the 10 cos 2$t$ V source alone, at its frequency of "
+             "2 rad/s. In AC a source's value is its phasor, and a cosine of amplitude 10 with "
+             "no phase is `10`. The inductor and the capacitor are given in henries and "
+             "farads, so the frequency goes in the {{ui:ω — angular frequency}} box. The "
+             "current source and the 5 V source get the value 0:",
+        desc="e1,a,0,10:l,a,b,2:j,0,b,0:r1,b,c,1:c,c,0,0.1:r4,c,d,4:e2,d,0,0",
+        domain="ac", omega=2, tag="AC at 2 rad/s",
+        expect={"v_r1": 2.1461187 - 1.2785388j}, booknames={"v_r1": "V_2"},
+        note="This is the circuit with the 10 cos 2t V source alone, the second of three "
+             "runs.")],
+     desc="e1,a,0,0:l,a,b,2:j,0,b,(2∠-90°):r1,b,c,1:c,c,0,0.1:r4,c,d,4:e2,d,0,0",
+     expect={"v_r1": 0.48780488 - 2.2764228j},
+     booknames={"v_r1": "V_3"},
+     tag="AC at 5 rad/s",
+     cir_note="This is the circuit with the 2 sin 5t A source alone, the third of three "
+              "runs. The other two are the entries before it.",
+     shows="The third run keeps the 2 sin 5$t$ A source alone, at 5 rad/s. Phasors are "
+           "measured against a cosine, and 2 sin 5$t$ is 2 cos(5$t$ − 90°), so the source's "
+           "value is the phasor `(2∠-90°)`. The two voltage sources get the value 0, and the "
+           "frequency is 5:",
+     after="Each run's phasor is one term of $v_o$, at its own frequency. Written back in "
+           "time and added, $v_o$ = −1 + 2.498 cos(2$t$ − 30.78°) + 2.328 cos(5$t$ − 77.91°) "
+           "V, and the last term is 2.328 sin(5$t$ + 12.09°) V. The book prints that term as "
+           "2.33 sin(5$t$ + 10°): its own expression for it gives an angle of −77.91°, not "
+           "the −80° it prints. Its −30.79° for the second term rounds the last digit the "
+           "other way."),
+
+dict(num="p10.6", title="Superposition across two frequencies",
+     ask="Calculate $v_o$ in the circuit of the figure.",
+     page=448, fig=(448, "10.15"), figrect=(240, 372, 484, 432), domain="ac", omega=10,
+     pre=[dict(
+        text="The circuit consists of a 75 sin 5$t$ V source and a 6 cos 10$t$ A source, at "
+             "two different frequencies, feeding an 8 Ω resistor, a 0.2 F capacitor and a 1 H "
+             "inductor. The question wants the voltage $v_o$ across the capacitor. An AC run "
+             "works at one frequency, so the answer takes one run per source, with the other "
+             "source switched off: a voltage source at zero is a short, and a current source "
+             "at zero is an open. We call the top of the voltage source **a** and the top of "
+             "the capacitor **b**, with the bottom rail as ground, so $v_o$ is the voltage at "
+             "node **b**. The first run keeps the voltage source alone, at 5 rad/s. Phasors "
+             "are measured against a cosine, and 75 sin 5$t$ is 75 cos(5$t$ − 90°), so its "
+             "value is the phasor `(75∠-90°)`. The current source gets the value 0:",
+        desc="e,a,0,(75∠-90°):r8,a,b,8:c,b,0,0.2:l,b,0,1:j,0,b,0",
+        domain="ac", omega=5, tag="AC at 5 rad/s",
+        expect={"v_b": -11.439466 - 1.7874166j}, booknames={"v_b": "V_1"},
+        note="This is the circuit with the 75 sin 5t V source alone, the first of two "
+             "runs.")],
+     desc="e,a,0,0:r8,a,b,8:c,b,0,0.2:l,b,0,1:j,0,b,6",
+     expect={"v_b": 0.20686089 - 3.1442855j},
+     booknames={"v_b": "V_2"},
+     tag="AC at 10 rad/s",
+     cir_note="This is the circuit with the 6 cos 10t A source alone, the second of two "
+              "runs. The first is the entry before it.",
+     shows="The second run keeps the 6 cos 10$t$ A source alone, at 10 rad/s, its value the "
+           "plain amplitude `6`, and the voltage source gets the value 0:",
+     after="The two phasors are the terms of $v_o$ at their own frequencies. Written back in "
+           "time and added, $v_o$ = 11.58 cos(5$t$ − 171.1°) + 3.151 cos(10$t$ − 86.24°) V. "
+           "The first term is 11.58 sin(5$t$ − 81.1°) V, the book's 11.577 sin(5$t$ − "
+           "81.12°) to four figures. The book prints the second amplitude as 3.154, where "
+           "the circuit gives 3.151."),
 
 dict(num="10.9", title="Thevenin equivalent with a current-controlled source",
      ask="Find the Thevenin equivalent of the circuit in the figure as seen from terminals "
@@ -1036,7 +1116,7 @@ dict(num="19.9", title="Maximum power from a two-port given by its transmission 
 dict(num="p19.9", title="Port currents of a two-port given by its transmission parameters",
      ask="Find $I_1$ and $I_2$ if the transmission parameters for the two-port in the figure "
          "are $A$ = 5, $B$ = 10 Ω, $C$ = 0.4 S, $D$ = 1.",
-     page=895, fig=(895, "19.36"), figrect=(116, 560, 306, 630), domain="dc",
+     page=895, fig=(895, "19.36"), figrect=(116, 567, 306, 630), domain="dc",
      desc="e,1,0,14:r2,1,p,2:a,p,q,[5,10,0.4,1]:r10,q,0,10",
      expect={"i_ap": 1, "i_aq": -0.2},
      booknames={"i_ap": "I_1", "i_aq": "I_2"},
@@ -1051,7 +1131,7 @@ dict(num="p19.9", title="Port currents of a two-port given by its transmission p
 
 dict(num="19.12", title="Two two-ports in series",
      ask="Evaluate $V_2/V_s$ in the circuit of the figure.",
-     page=902, fig=(902, "19.42"), figrect=(274, 165, 458, 293), domain="dc",
+     page=902, fig=(902, "19.42"), figrect=(254, 165, 458, 293), domain="dc",
      desc="e,1,0,vs:r5,1,a,5:z,[a,m],[b,m],[12,8,8,20]:r10,m,0,10:r20,b,0,20",
      expect={"@v_b/vs": _sp.Rational(20, 57)},
      hide=["@v_b/vs"],

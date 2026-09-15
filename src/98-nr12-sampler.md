@@ -1109,7 +1109,7 @@ r,1,0,20'k
 Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in {{card:Settings}} to *approx (full precision)*.
 
 ::: result voltage at node 1
-v_{1} = 100.020831163646 e^{- 200.0 t} \sin{\left(979.795897113271 t \right)}\,\mathrm{V}
+v_{1} = 100.02 e^{- 200.0 t} \sin{\left(979.8 t \right)}\,\mathrm{V}
 :::
 
 `v_1` is the book's $v$.
@@ -1598,7 +1598,7 @@ Likewise `v_pb-v_nn`:
 v_pb-v_nn
 ```
 
-It gives {{o:-59.6784609690826 - 98.5661265159673j}} V ({{o:115.22}}∠{{o:-121.19}}°, the book's $V_{BN}$).
+It gives {{o:-59.678 - 98.566j}} V ({{o:115.22}}∠{{o:-121.19}}°, the book's $V_{BN}$).
 
 And `v_pc-v_nn`:
 
@@ -1606,7 +1606,7 @@ And `v_pc-v_nn`:
 v_pc-v_nn
 ```
 
-It gives {{o:-55.5215390309173 + 100.966126515967j}} V ({{o:115.22}}∠{{o:118.81}}°, the book's $V_{CN}$).
+It gives {{o:-55.522 + 100.97j}} V ({{o:115.22}}∠{{o:118.81}}°, the book's $V_{CN}$).
 
 **d)** The line voltages at the load are the differences between pairs of its nodes. We type `v_pa-v_pb`:
 
@@ -1614,7 +1614,7 @@ It gives {{o:-55.5215390309173 + 100.966126515967j}} V ({{o:115.22}}∠{{o:118.8
 v_pa-v_pb
 ```
 
-It gives {{o:174.8784609690826 + 96.16612651596729j}} V ({{o:199.58}}∠{{o:28.807}}°, the book's $V_{AB}$).
+It gives {{o:174.88 + 96.166j}} V ({{o:199.58}}∠{{o:28.807}}°, the book's $V_{AB}$).
 
 Likewise `v_pb-v_pc`:
 
@@ -1622,7 +1622,7 @@ Likewise `v_pb-v_pc`:
 v_pb-v_pc
 ```
 
-It gives {{o:-4.156921938165297 - 199.53225303193432j}} V ({{o:199.58}}∠{{o:-91.193}}°, the book's $V_{BC}$).
+It gives {{o:-4.1569 - 199.53j}} V ({{o:199.58}}∠{{o:-91.193}}°, the book's $V_{BC}$).
 
 And `v_pc-v_pa`:
 
@@ -1630,7 +1630,7 @@ And `v_pc-v_pa`:
 v_pc-v_pa
 ```
 
-It gives {{o:-170.7215390309173 + 103.36612651596701j}} V ({{o:199.58}}∠{{o:148.81}}°, the book's $V_{CA}$).
+It gives {{o:-170.72 + 103.37j}} V ({{o:199.58}}∠{{o:148.81}}°, the book's $V_{CA}$).
 
 **e)** The phase voltages at the generator's terminals are the voltages at nodes **a**, **b** and **c**, read off the run: `v_a` = {{o:118.9 - 0.672j}} V ({{o:118.90}}∠{{o:-0.32383}}°, the book's $V_{an}$), `v_b` = {{o:-60.03 - 102.63j}} V ({{o:118.90}}∠{{o:-120.32}}°, the book's $V_{bn}$) and `v_c` = {{o:-58.866 + 103.3j}} V ({{o:118.90}}∠{{o:119.68}}°, the book's $V_{cn}$).
 
@@ -1640,7 +1640,7 @@ It gives {{o:-170.7215390309173 + 103.36612651596701j}} V ({{o:199.58}}∠{{o:14
 v_a-v_b
 ```
 
-It gives {{o:178.9259690713431 + 101.95895640835501j}} V ({{o:205.94}}∠{{o:29.676}}°, the book's $V_{ab}$).
+It gives {{o:178.93 + 101.96j}} V ({{o:205.94}}∠{{o:29.676}}°, the book's $V_{ab}$).
 
 Likewise `v_b-v_c`:
 
@@ -1648,7 +1648,7 @@ Likewise `v_b-v_c`:
 v_b-v_c
 ```
 
-It gives {{o:-1.1639381426862059 - 205.93391281671j}} V ({{o:205.94}}∠{{o:-90.324}}°, the book's $V_{bc}$).
+It gives {{o:-1.1639 - 205.93j}} V ({{o:205.94}}∠{{o:-90.324}}°, the book's $V_{bc}$).
 
 And `v_c-v_a`:
 
@@ -1656,7 +1656,7 @@ And `v_c-v_a`:
 v_c-v_a
 ```
 
-It gives {{o:-177.76203092865688 + 103.974956408355j}} V ({{o:205.94}}∠{{o:149.68}}°, the book's $V_{ca}$).
+It gives {{o:-177.76 + 103.97j}} V ({{o:205.94}}∠{{o:149.68}}°, the book's $V_{ca}$).
 
 **g)** A negative phase sequence is the same description with the angles of `eb` and `ec` exchanged, `(120∠120°)` and `(120∠-120°)`. Running it returns the same fifteen answers with every b-phase value and c-phase value exchanged, and the line voltages now lag the phase voltages by 30° instead of leading them.
 
