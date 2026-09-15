@@ -73,11 +73,13 @@ dict(num="3.7", title="Using Voltage Division and Current Division to Solve a Ci
            "those two among them."),
 
 dict(num="3.11", title="Applying a Delta-to-Wye Transform",
-     ask="Find the current and power supplied by the 40 V source in the circuit shown in the figure.",
+     ask="Find a) the current and b) the power supplied by the 40 V source in the circuit shown in the figure.",
      page=103, fig=(103, "3.35"), domain="dc",
      desc="e,1,0,40:r1,1,2,5:r2,2,3,100:r3,2,4,125:r4,3,4,25:r5,3,0,40:r6,4,0,37.5",
      expect={"@-p_e": 20, "@-i_e": 0.5},
      shownames={"@-i_e": "-i_e", "@-p_e": "-p_e"},
+     letters={"@-i_e": "a"},
+     evals=[dict(text="**b)** The power it supplies is read off its card:", keys=["@-p_e"])],
      booknames={"@-i_e": "i", "@-p_e": "p"},
      delivered=["@-p_e"],
      shows="The circuit is a bridge: five resistors in a diamond with a sixth across "
@@ -125,6 +127,7 @@ dict(num="4.21", title="Calculating the Condition for Maximum Power Transfer",
      page=153, fig=(153, "4.65"), kind="th", n1="2", n2="0", domain="dc",
      desc="e,1,0,360:r1,1,2,30:r2,2,0,150",
      expect={"z": 25, "pmax": 900},
+     letters={"z": "a", "pmax": "b"},
      booknames={"z": "R_L", "pmax": "p_{max}"},
      shows="The circuit consists of a source and two resistors with a load $R_L$ "
            "connected across the second, and the question is which load draws the most "
@@ -166,6 +169,7 @@ dict(num="4.13", title="Using Special Source Transformation Techniques",
      desc="e,1,0,250:r1,1,0,125:r2,1,2,25:j,2,9,8:r3,9,0,10:r4,2,0,100:r5,2,3,5:r6,3,0,15",
      expect={"v_r4": 20, "@-p_e": 2800, "@-p_j": 480},
      shownames={"@-p_e": "-p_e", "@-p_j": "-p_j"},
+     letters={"v_r4": "a", "@-p_e": "b", "@-p_j": "c"},
      booknames={"v_r4": "v_o", "@-p_e": "p_{250\\,V}", "@-p_j": "p_{8\\,A}"},
      shows="The circuit consists of two sources, one of voltage and one of current, "
            "and six resistors. The question wants the voltage across the 100 Ω, and "
@@ -427,6 +431,7 @@ dict(num="7.1", title="Determining the Natural Response of an RL Circuit",
              "inductor's current, which the next entry takes as its initial condition.")],
      desc="l,1,0,2,20:r1,1,2,2:r2,2,0,10:r3,2,0,40",
      expect={"i_l": "20*exp(-5*t)", "i_r3": "-4*exp(-5*t)", "v_2": "-160*exp(-5*t)"},
+     letters={"i_l": "a", "i_r3": "b", "v_2": "c"},
      booknames={"i_l": "i_L", "i_r3": "i_o", "v_2": "v_o"},
      shows="Opening the switch disconnects the source and the 0.1 Ω resistor and leaves "
            "the inductor to release its energy through the three resistors. That is the "
@@ -465,6 +470,7 @@ dict(num="7.3", title="Determining the Natural Response of an RC Circuit",
      desc="c,1,0,0.5'u,100:r1,1,2,32'k:r2,2,0,240'k:r3,2,0,60'k",
      expect={"v_1": "100*exp(-25*t)", "v_2": "60*exp(-25*t)",
              "i_r3": "0.001*exp(-25*t)"},
+     letters={"v_1": "a", "v_2": "b", "i_r3": "c"},
      booknames={"v_1": "v_C", "v_2": "v_o", "i_r3": "i_o"},
      shows="At position y the capacitor is connected instead to the 32 kΩ resistor and "
            "the two beyond it, and discharges through them. We describe that second "
@@ -504,11 +510,12 @@ dict(num="7.5", title="Determining the Step Response of an RL Circuit",
              "condition.")],
      desc="e,1,0,24:r1,1,2,2:l,2,0,0.2,-8",
      expect={"i_l": "12 - 20*exp(-10*t)", "v_2": "40*exp(-10*t)"},
+     letters={"i_l": "a"},
      booknames={"i_l": "i"}, hide=["v_2"],
      evals=[dict(
-        text="Part (b) asks for the voltage across the inductor the instant after the "
-             "switch has moved. The inductor is between node 2 and ground, so its voltage "
-             "is `v_2`, and we read its value at $t$ = 0 with {{card:Evaluate}}:",
+        text="**b)** The inductor is between node 2 and ground, so the voltage across it is "
+             "`v_2`, and we read its value the instant after the switch has moved, at "
+             "$t$ = 0, with {{card:Evaluate}}:",
         expr="v_2", at={"t": 0}, unit="V", expect=40, book="v(0^+)")],
      shows="Moving the switch to b connects the inductor, through the 2 Ω resistor, to "
            "the 24 V source instead. Because the switch is make-before-break, the "
@@ -559,6 +566,7 @@ dict(num="7.11a", title="Analyzing an RL Circuit That Has Sequential Switching (
              "inductor's current, which the next entry takes as its initial condition.")],
      desc="r6,2,0,6:r3,2,3,3:l,3,0,0.15,6:r18,3,0,18",
      expect={"i_l": "6*exp(-40*t)"},
+     letters={"i_l": "a"},
      booknames={"i_l": "i_L"},
      evals=[dict(
         text="This run holds until switch 2 opens at 35 ms, and the inductor's current at "
@@ -576,6 +584,7 @@ dict(num="7.11b", title="Analyzing an RL Circuit That Has Sequential Switching (
      page=273, fig=(273, "7.39"), domain="tr",
      desc="r6,2,0,6:r3,2,3,3:l,3,0,0.15,6*exp(-1.4)",
      expect={"i_l": "6*exp(-1.4)*exp(-60*t)"},
+     letters={"i_l": "b"},
      booknames={"i_l": "i_L"},
      shows="This is the third interval of the same problem: switch 2 has opened too, "
            "removing the 18 Ω resistor, so the inductor now discharges through the 3 Ω "
@@ -595,12 +604,13 @@ dict(num="7.13", title="Finding the Unbounded Response in an RC Circuit",
      page=277, fig=(277, "7.45"), domain="tr",
      desc="c,1,0,5'u,10:r1,1,0,10'k:r2,1,0,20'k:j,0,1,7*ir2",
      expect={"v_1": "10*exp(40*t)"},
+     letters={"v_1": "a"},
      booknames={"v_1": "v_o"},
      solveq=[dict(
         tag="TR, Solve for the time to 150 V",
         text="The exponent is positive, so the voltage grows instead of decaying: the "
-             "dependent source feeds the capacitor faster than the resistors drain it. "
-             "Part (b) asks when it reaches 150 V, which is a question for the "
+             "dependent source feeds the capacitor faster than the resistors drain it."
+             "\n\n**b)** The time it takes to reach 150 V is a question for the "
              "{{card:Solve}} card, with the time as the unknown:",
         equations=["v_1=150"], unknowns=["t"], conditions=[],
         real_only=True, expect={"t": 0.0677}, unit="s", book={"t": "t"})],
@@ -662,6 +672,7 @@ dict(num="8.11", title="Finding the Natural Response of a Series RLC Circuit",
      expect={"i_l": "-0.1042*exp(-2800*t)*sin(9600*t)",
              "v_1": "(100*cos(9600*t) + 29.17*sin(9600*t))*exp(-2800*t)"},
      at_t=[3e-5, 1e-4, 3e-4], tol=1e-3,
+     letters={"i_l": "a", "v_1": "b"},
      booknames={"i_l": "i", "v_1": "v_C"},
      shows="The circuit is a charged capacitor discharging round a loop through an "
            "inductor and a resistor. The question wants the loop current and the "
@@ -705,11 +716,12 @@ dict(num="9.9", title="Combining Impedances in Series and in Parallel",
      expect={"v_1": 32 - 24j, "i_r2": -4j},
      booknames={"v_1": "v", "i_r2": "i"},
      evals=[dict(
-        text="Part (b) asks for the admittance the source sees. Symbulator reports the "
-             "impedance seen by each source, here `z_j`, and an admittance is the "
-             "reciprocal of an impedance, so we type into {{card:Evaluate}}:",
-        expr="1/z_j", unit="S", expect=0.16 + 0.12j, book="Y")],
-     after="Part (e) is the two phasors written back as functions of time at the source's "
+        text="**b)** Symbulator reports the impedance seen by each source, here `z_j`, "
+             "and the admittance the source sees is its reciprocal, so we type into "
+             "{{card:Evaluate}}:",
+        expr="1/z_j", unit="S", expect=0.16 + 0.12j, book="Y"),
+        dict(text="**c)** and **d)** are read off the run:", keys=["v_1", "i_r2"])],
+     after="**e)** The steady-state expressions are the two phasors written back as functions of time at the source's "
            "frequency, which is circuit theory rather than a run: $v$ = 40 cos(200,000$t$ "
            "− 36.87°) V and $i$ = 4 cos(200,000$t$ − 90°) A.",
      shows="The circuit consists of a sinusoidal current source at 200,000 rad/s "
@@ -843,9 +855,9 @@ dict(num="10.8", title="Balancing Power Delivered with Power Absorbed in an AC C
      booknames={"p_r1": "P_1", "q_r1": "Q_1", "p_r2": "P_2", "q_r2": "Q_2",
                 "p_r3": "P_3", "q_r3": "Q_3"},
      delivered=["@-p_e1", "@-q_e1", "@-p_e2", "@-q_e2"],
-     groups=[("For part (a), the three impedances\' cards read",
+     groups=[("**a)** The three impedances\' cards read",
               ["p_r1", "q_r1", "p_r2", "q_r2", "p_r3", "q_r3"]),
-             ("For part (b), the two sources\' cards read",
+             ("**b)** The two sources\' cards read",
               ["@-p_e1", "@-q_e1", "@-p_e2", "@-q_e2"])],
      shows="This entry takes the circuit of Example 9.14, which we describe the same "
            "way, and asks a question about power: how much average and reactive power "
@@ -861,7 +873,7 @@ dict(num="10.8", title="Balancing Power Delivered with Power Absorbed in an AC C
                "source cards the same way. For part (c), if every watt delivered is "
                "absorbed somewhere, the five `p` answers add to zero, and likewise the "
                "five `q`, which makes two sums in the {{card:Evaluate}} card.",
-     evals=[dict(text="For part (c), we type the sum of the five `p` answers into "
+     evals=[dict(text="**c)** We type the sum of the five `p` answers into "
                       "{{card:Evaluate}}:",
                  expr="p_e1+p_e2+p_r1+p_r2+p_r3", expect=0, unit="W"),
             dict(text="Then we do the same with the five `q`:",
@@ -879,6 +891,7 @@ dict(num="10.12", title="Finding Maximum Power Transfer in a Circuit with an Ide
      page=423, fig=(423, "10.25"), kind="th", n1="a", n2="0", domain="ac", omega=W, rms=True,
      desc="e,1,0,840:r60,1,p,60:t,[p,x],[a,x],[-4,1]:r20,x,0,20",
      expect={"z": 35, "pmax": 315},
+     letters={"z": "a", "pmax": "b"},
      booknames={"z": "R_L", "pmax": "p_{max}"},
      shows="The circuit consists of a source feeding a load through an ideal "
            "transformer whose windings share a node. The question wants the load that "
@@ -1137,12 +1150,13 @@ dict(num="13.9", title="Deriving the Transfer Function of a Circuit",
      page=527, fig=(527, "13.31"), domain="fd",
      desc="e,1,0,vg:r1,1,2,1000:r2,2,3,250:l,3,0,50'm:c,2,0,1'u",
      expect={"@v_2/vg": "1000*(s + 5000)/(s**2 + 6000*s + 25000000)"},
+     letters={"@v_2/vg": "a"},
      labels={"@v_2/vg": "transfer function"},
      texnames={"@v_2/vg": "H(s) = \\dfrac{v_{2}}{v_{g}}"},
      units={"@v_2/vg": ""},
      minitool=[
       dict(tool="pz", args=["v2/vg"],
-           text="Part (b) asks for the poles and zeros. The poles of a transfer "
+           text="**b)** The poles of a transfer "
                 "function are the values of $s$ that make its denominator zero, and "
                 "the zeros are the values that make its numerator zero. The "
                 "{{card:Mini-Tools}} card finds both at once: we choose *pz \u2014 "
@@ -1257,8 +1271,8 @@ dict(num="14.6", title="Designing a Parallel RLC Bandpass Filter",
      units={"@v_2/vi": ""},
      solveq=[dict(
         tag="FD, Solve for R and L",
-        text="Part (d) gives the centre frequency, the bandwidth and the capacitor and "
-             "asks for $R$ and $L$. Those are two equations in two unknowns, which the "
+        text="**d)** The question gives the centre frequency, the bandwidth and the "
+             "capacitor and asks for $R$ and $L$. Those are two equations in two unknowns, which the "
              "{{card:Solve}} card takes as they stand: $\\omega_0 = 1/\\sqrt{LC}$ at "
              "2π × 5000 rad/s and $\\beta = 1/RC$ at 2π × 200 rad/s, with the capacitor as "
              "a condition:",

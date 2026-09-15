@@ -150,7 +150,7 @@ So the smallest resistance the bridge can measure is {{o:40}} Ω and the largest
 
 ::: problem NR12's Example 3.11
 
-Find the current and power supplied by the 40 V source in the circuit shown in the figure.
+Find a) the current and b) the power supplied by the 40 V source in the circuit shown in the figure.
 
 ::: figure assets/circuit/nr12-ex3-11.jpg
 Nilsson & Riedel, 12th edition — the circuit for Example 3.11
@@ -173,15 +173,15 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 The source's card reports the power it delivers as `-pe`, which is the power the question asks for. Its current it reports *into* the source, the same way as for every other element, so the current it supplies is the negative of that, which we read with a minus sign in the {{card:Evaluate}} card.
 
-Symbulator returns `-p_e` = {{o:20}} W (the book's $p$).
-
-Then we type `-i_e` into {{card:Evaluate}}:
+**a)** We type `-i_e` into {{card:Evaluate}}:
 
 ```field 9 Evaluate
 -i_e
 ```
 
 It gives {{o:0.5}} A (the book's $i$).
+
+**b)** The power it supplies is read off its card: `-p_e` = {{o:20}} W (the book's $p$).
 
 :::
 :::
@@ -293,7 +293,7 @@ Set {{ui:Analysis}} to *DC — direct current*.
 
 The power a source *develops* is what it delivers, which each source's card reports as `-pe` and `-pj`.
 
-Symbulator returns `v_r4` = {{o:20}} V (the book's $v_o$), `-p_e` = {{o:2800}} W (the book's $p_{250\,V}$) and `-p_j` = {{o:480}} W (the book's $p_{8\,A}$).
+Symbulator returns **a)** `v_r4` = {{o:20}} V (the book's $v_o$), **b)** `-p_e` = {{o:2800}} W (the book's $p_{250\,V}$) and **c)** `-p_j` = {{o:480}} W (the book's $p_{8\,A}$).
 
 :::
 :::
@@ -317,7 +317,7 @@ r2,2,0,150
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **2** and **0**.
 
-Symbulator returns `req` = {{o:25}} Ω (the book's $R_L$) and `pmax` = {{o:900}} W.
+Symbulator returns **a)** `req` = {{o:25}} Ω (the book's $R_L$) and **b)** `pmax` = {{o:900}} W.
 
 :::
 :::
@@ -770,7 +770,7 @@ i_{r3} = - 4 e^{- 5 t}\,\mathrm{A}
 v_{2} = - 160 e^{- 5 t}\,\mathrm{V}
 :::
 
-Here `i_r3` is the book's $i_o$ and `v_2` is the book's $v_o$.
+**a)** is `i_l`, **b)** is `i_r3` (the book's $i_o$) and **c)** is `v_2` (the book's $v_o$).
 
 :::
 :::
@@ -822,7 +822,7 @@ v_{2} = 60.0 e^{- 25.0 t}\,\mathrm{V}
 i_{r3} = 0.001 e^{- 25.0 t}\,\mathrm{A}
 :::
 
-Here `v_1` is the book's $v_C$, `v_2` is the book's $v_o$ and `i_r3` is the book's $i_o$.
+**a)** is `v_1` (the book's $v_C$), **b)** is `v_2` (the book's $v_o$) and **c)** is `i_r3` (the book's $i_o$).
 
 :::
 :::
@@ -865,9 +865,9 @@ Set {{ui:Analysis}} to *TR — transient / time domain*.
 i_{l} = 12.0 - 20.0 e^{- 10.0 t}\,\mathrm{A}
 :::
 
-`i_l` is the book's $i$.
+**a)** is `i_l` (the book's $i$).
 
-Part (b) asks for the voltage across the inductor the instant after the switch has moved. The inductor is between node 2 and ground, so its voltage is `v_2`, and we read its value at $t$ = 0 with {{card:Evaluate}}:
+**b)** The inductor is between node 2 and ground, so the voltage across it is `v_2`, and we read its value the instant after the switch has moved, at $t$ = 0, with {{card:Evaluate}}:
 
 ```field 9 Evaluate
 v_2
@@ -967,6 +967,8 @@ Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in 
 i_{l} = 6.0 e^{- 40.0 t}\,\mathrm{A}
 :::
 
+**a)** is `i_l`.
+
 This run holds until switch 2 opens at 35 ms, and the inductor's current at that instant is where the third interval starts. We read it from the answer with {{card:Evaluate}}, giving the instant in seconds:
 
 ```field 9 Evaluate
@@ -1005,6 +1007,8 @@ Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in 
 i_{l} = 1.48 e^{- 60.0 t}\,\mathrm{A}
 :::
 
+**b)** is `i_l`.
+
 :::
 :::
 
@@ -1032,9 +1036,11 @@ Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in 
 v_{1} = 10.0 e^{40 t}\,\mathrm{V}
 :::
 
-`v_1` is the book's $v_o$.
+**a)** is `v_1` (the book's $v_o$).
 
-The exponent is positive, so the voltage grows instead of decaying: the dependent source feeds the capacitor faster than the resistors drain it. Part (b) asks when it reaches 150 V, which is a question for the {{card:Solve}} card, with the time as the unknown:
+The exponent is positive, so the voltage grows instead of decaying: the dependent source feeds the capacitor faster than the resistors drain it.
+
+**b)** The time it takes to reach 150 V is a question for the {{card:Solve}} card, with the time as the unknown:
 
 ```field 9 Equation(s) to solve in terms of the results
 v_1=150
@@ -1146,7 +1152,7 @@ i_{l} = - 0.1042 e^{- 2800.0 t} \sin{\left(9600.0 t \right)}\,\mathrm{A}
 v_{1} = \left(29.17 \sin{\left(9600.0 t \right)} + 100.0 \cos{\left(9600.0 t \right)}\right) e^{- 2800.0 t}\,\mathrm{V}
 :::
 
-Here `i_l` is the book's $i$ and `v_1` is the book's $v_C$.
+**a)** is `i_l` (the book's $i$) and **b)** is `v_1` (the book's $v_C$).
 
 :::
 :::
@@ -1349,9 +1355,7 @@ c,1,0,1'u
 
 Set {{ui:Analysis}} to *AC — alternating current*. Put **200000** in the {{ui:ω — angular frequency}} box. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `v_1` = {{o:32 - 24j}} V ({{o:40.00}}∠{{o:-36.87}}°, the book's $v$) and `i_r2` = {{o:-4j}} A ({{o:4.000}}∠{{o:-90.00}}°, the book's $i$).
-
-Part (b) asks for the admittance the source sees. Symbulator reports the impedance seen by each source, here `z_j`, and an admittance is the reciprocal of an impedance, so we type into {{card:Evaluate}}:
+**b)** Symbulator reports the impedance seen by each source, here `z_j`, and the admittance the source sees is its reciprocal, so we type into {{card:Evaluate}}:
 
 ```field 9 Evaluate
 1/z_j
@@ -1359,7 +1363,9 @@ Part (b) asks for the admittance the source sees. Symbulator reports the impedan
 
 It gives {{o:0.16 + 0.12j}} S ({{o:0.2000}}∠{{o:36.87}}°, the book's $Y$).
 
-Part (e) is the two phasors written back as functions of time at the source's frequency, which is circuit theory rather than a run: $v$ = 40 cos(200,000$t$ − 36.87°) V and $i$ = 4 cos(200,000$t$ − 90°) A.
+**c)** and **d)** are read off the run: `v_1` = {{o:32 - 24j}} V ({{o:40.00}}∠{{o:-36.87}}°, the book's $v$) and `i_r2` = {{o:-4j}} A ({{o:4.000}}∠{{o:-90.00}}°, the book's $i$).
+
+**e)** The steady-state expressions are the two phasors written back as functions of time at the source's frequency, which is circuit theory rather than a run: $v$ = 40 cos(200,000$t$ − 36.87°) V and $i$ = 4 cos(200,000$t$ − 90°) A.
 
 :::
 :::
@@ -1502,11 +1508,11 @@ Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui
 
 Every card of an AC run carries two power rows, *average (real) power*, the answer `p`, and *reactive power*, the answer `q`. On an impedance they read *consumed*, and each impedance in the figure is one element of our description, so part (a) is read straight off the three cards. On a source they read *delivered*, `-p` and `-q`, the negatives of the `p` and `q` answers, so part (b) is read off the two source cards the same way. For part (c), if every watt delivered is absorbed somewhere, the five `p` answers add to zero, and likewise the five `q`, which makes two sums in the {{card:Evaluate}} card.
 
-For part (a), the three impedances' cards read `p_r1` = {{o:1690}} W (the book's $P_1$), `q_r1` = {{o:3380}} var (the book's $Q_1$), `p_r2` = {{o:240}} W (the book's $P_2$), `q_r2` = {{o:-320}} var (the book's $Q_2$), `p_r3` = {{o:1970}} W (the book's $P_3$) and `q_r3` = {{o:5910}} var (the book's $Q_3$).
+**a)** The three impedances' cards read `p_r1` = {{o:1690}} W (the book's $P_1$), `q_r1` = {{o:3380}} var (the book's $Q_1$), `p_r2` = {{o:240}} W (the book's $P_2$), `q_r2` = {{o:-320}} var (the book's $Q_2$), `p_r3` = {{o:1970}} W (the book's $P_3$) and `q_r3` = {{o:5910}} var (the book's $Q_3$).
 
-For part (b), the two sources' cards read `-p_e1` = {{o:-1950}} W, `-q_e1` = {{o:3900}} var, `-p_e2` = {{o:5850}} W and `-q_e2` = {{o:5070}} var.
+**b)** The two sources' cards read `-p_e1` = {{o:-1950}} W, `-q_e1` = {{o:3900}} var, `-p_e2` = {{o:5850}} W and `-q_e2` = {{o:5070}} var.
 
-For part (c), we type the sum of the five `p` answers into {{card:Evaluate}}:
+**c)** We type the sum of the five `p` answers into {{card:Evaluate}}:
 
 ```field 9 Evaluate
 p_e1+p_e2+p_r1+p_r2+p_r3
@@ -1547,7 +1553,7 @@ r20,x,0,20
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box, since nothing here depends on the frequency. Tick {{ui:RMS phasors}} in {{card:Settings}}, since the book's source is given in rms. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `zeq` = {{o:35}} Ω (the book's $R_L$) and `pmax` = {{o:315}} W.
+Symbulator returns **a)** `zeq` = {{o:35}} Ω (the book's $R_L$) and **b)** `pmax` = {{o:315}} W.
 
 :::
 :::
@@ -1834,7 +1840,9 @@ Set {{ui:Analysis}} to *FD — complex frequency domain*.
 H(s) = \dfrac{v_{2}}{v_{g}} = \frac{1000 \left(s + 5000\right)}{s^{2} + 6000 s + 25000000}
 :::
 
-Part (b) asks for the poles and zeros. The poles of a transfer function are the values of $s$ that make its denominator zero, and the zeros are the values that make its numerator zero. The {{card:Mini-Tools}} card finds both at once: we choose *pz — poles and zeros* in its {{ui:Tool}} menu and give it the transfer function.
+**a)** is the transfer function above.
+
+**b)** The poles of a transfer function are the values of $s$ that make its denominator zero, and the zeros are the values that make its numerator zero. The {{card:Mini-Tools}} card finds both at once: we choose *pz — poles and zeros* in its {{ui:Tool}} menu and give it the transfer function.
 
 ```field 9 Value
 v2/vg
@@ -1879,7 +1887,7 @@ H(s) = \dfrac{v_{2}}{v_{i}} = \frac{L s}{C L R s^{2} + L s + R}
 
 **c)** The bandwidth is the coefficient of $s$ in the denominator, $\beta = 1/RC$. The cutoff frequencies are $\omega_{c} = \mp\beta/2 + \sqrt{(\beta/2)^2 + \omega_0^2}$, and $Q = \omega_0/\beta$.
 
-Part (d) gives the centre frequency, the bandwidth and the capacitor and asks for $R$ and $L$. Those are two equations in two unknowns, which the {{card:Solve}} card takes as they stand: $\omega_0 = 1/\sqrt{LC}$ at 2π × 5000 rad/s and $\beta = 1/RC$ at 2π × 200 rad/s, with the capacitor as a condition:
+**d)** The question gives the centre frequency, the bandwidth and the capacitor and asks for $R$ and $L$. Those are two equations in two unknowns, which the {{card:Solve}} card takes as they stand: $\omega_0 = 1/\sqrt{LC}$ at 2π × 5000 rad/s and $\beta = 1/RC$ at 2π × 200 rad/s, with the capacitor as a condition:
 
 ```field 9 Equation(s) to solve in terms of the results
 1/sqrt(L*C)=2*pi*5000

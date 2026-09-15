@@ -399,8 +399,13 @@ def evaluated_blocks(s, numeric):
             direct.append(item)
             continue
         typed = key[1:].replace(" ", "")
-        lines.append(("Then we type `%s` into {{card:Evaluate}}:" if first else
-                      "Likewise `%s`:") % typed)
+        label = part_letters(s).get(name)
+        if label:
+            # rule 31: the step answers a lettered part, and says which
+            lines.append("%s We type `%s` into {{card:Evaluate}}:" % (label, typed))
+        else:
+            lines.append(("Then we type `%s` into {{card:Evaluate}}:" if first else
+                          "Likewise `%s`:") % typed)
         first = False
         lines.append("")
         lines.append("```field 9 Evaluate")
@@ -430,7 +435,32 @@ def book_aside(app, book):
     return ("the book's $%s$" % book) if book and not same_name(app, book) else ""
 
 
-def numeric_sentence(numeric):
+def part_label(s, letter):
+    """A part's letter in bold, in the book's own style: *(a)* where the
+    ask writes (a), *a)* where it writes a) (rule 31)."""
+    # the first letter decides: NR12's 5.1 writes a) and then "Repeat (a)"
+    first = re.search(r"(?:^|[\s:])(\()?[a-h]\)(?=\s)", s["ask"])
+    style = "(%s)" if first and first.group(1) else "%s)"
+    return "**" + style % letter + "**"
+
+
+def part_letters(s):
+    """Shown answer name -> the bold letter of the part it answers."""
+    return {fmt.shown_name(k, s): part_label(s, v) for k, v in s.get("letters", {}).items()}
+
+
+def check_letters(s, text):
+    """Rule 31's guard: an ask with two or more lettered parts has every
+    one of them labelled on the page, in bold, where it is answered."""
+    asked = re.findall(r"(?:^|[\s:(])\(?([a-h])\)(?=\s)", s["ask"])
+    if len(set(asked)) < 2:
+        return
+    missing = [a for a in asked if part_label(s, a) not in text]
+    assert not missing, "%s: the ask letters %s but the page never labels %s" % (
+        s["num"], asked, missing)
+
+
+def numeric_sentence(numeric, letters=None):
     """The numeric answers, as one plain sentence.
 
     It used to end "-- the same answers the book prints", forty-three times.
@@ -439,7 +469,7 @@ def numeric_sentence(numeric):
     says so in its own paragraph."""
     if not numeric:
         return ""
-    return "Symbulator returns " + numeric_body(numeric) + "."
+    return "Symbulator returns " + numeric_body(numeric, letters) + "."
 
 
 def grouped_sentences(s, direct):
@@ -464,12 +494,16 @@ def grouped_sentences(s, direct):
             taken.update(fmt.shown_name(k, s) for k in ev["keys"])
     rest = [it for it in direct if it[0] not in taken]
     if rest:
-        out.append(numeric_sentence(rest))
+        out.append(numeric_sentence(rest, part_letters(s)))
     return out
 
 
-def numeric_body(numeric):
-    """`name` = value unit (asides), joined with commas and a final *and*."""
+def numeric_body(numeric, letters=None):
+    """`name` = value unit (asides), joined with commas and a final *and*.
+    An answer to a lettered part carries its letter in front, and the
+    lettered answers come first, in the question's order (rule 31)."""
+    letters = letters or {}
+    numeric = sorted(numeric, key=lambda it: (it[0] not in letters, letters.get(it[0], "")))
     parts = []
     for name, val, unit, pol, book in numeric:
         u = UNIT_WORD.get(unit, unit)
@@ -483,6 +517,8 @@ def numeric_body(numeric):
         aside = [x for x in (pol, book_aside(name, book)) if x]
         if aside:
             txt += " (%s)" % ", ".join(aside)
+        if name in letters:
+            txt = letters[name] + " " + txt
         parts.append(txt)
     return parts[0] if len(parts) == 1 else ", ".join(parts[:-1]) + " and " + parts[-1]
 
@@ -574,6 +610,23 @@ def render(s, vals):
              if k in s.get("booknames", {}) and k not in s.get("hide", ())
              and not same_name(fmt.shown_name(k, s), s["booknames"][k])
              and sp.sympify(vals.get(k, 0) if not k.startswith("@") else 0).free_symbols]
+    lettered = [k for k in s["expect"] if k in s.get("letters", {})
+                and k not in s.get("hide", ())
+                and (k.startswith("@") or sp.sympify(vals.get(k, 0)).free_symbols)]
+    if panels and lettered:
+        # rule 31: a panel that answers a lettered part says which, in the
+        # question's order -- "**a)** is `i_l` and **b)** is `i_r3` (the book's $i_o$)"
+        bits = []
+        for k in sorted(lettered, key=lambda k: s["letters"][k]):
+            name = fmt.shown_name(k, s)
+            b = s.get("booknames", {}).get(k)
+            what = ("the %s above" % fmt.label_for(k, s["desc"], s)) if k.startswith("@") else "`%s`" % name
+            if b and not k.startswith("@") and not same_name(name, b):
+                what += " (the book's $%s$)" % b
+            bits.append("%s is %s" % (part_label(s, s["letters"][k]), what))
+        L.append((bits[0] if len(bits) == 1 else ", ".join(bits[:-1]) + " and " + bits[-1]) + ".")
+        L.append("")
+        named = [(k, b) for k, b in named if k not in lettered]
     if panels and named:
         bits = ["`%s` is the book's $%s$" % (fmt.shown_name(k, s), b)
                 for k, b in named]
@@ -606,7 +659,9 @@ def render(s, vals):
             names = [fmt.shown_name(k, s) for k in ev["keys"]]
             items = [it for it in direct if it[0] in names]
             assert len(items) == len(names), (s["num"], ev["keys"])
-            L.append(polish(ev["text"]) + " " + numeric_body(items) + ".")
+            # no keys: a part answered in words alone, kept in its place
+            # among the others (19.17's output impedance, the next entry's)
+            L.append(polish(ev["text"]) + (" " + numeric_body(items) + "." if items else ""))
             L.append("")
             continue
         L.append(polish(ev["text"]))
@@ -825,6 +880,7 @@ def render(s, vals):
     if s.get("after"):
         L.append(polish(s["after"]))
         L.append("")
+    check_letters(s, "\n".join(L))
     L.append(":::")
     L.append(":::")
     return "\n".join(L)

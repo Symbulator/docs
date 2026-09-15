@@ -16,11 +16,12 @@ SPECS = [
 # ============================================================== DC ==========
 
 dict(num="2.15", title="Equivalent resistance by delta-wye transformation",
-     ask="Obtain the equivalent resistance $R_{ab}$ for the circuit in the figure and use it "
-         "to find current $i$.",
+     ask="Obtain (a) the equivalent resistance $R_{ab}$ for the circuit in the figure and (b) use "
+         "it to find current $i$.",
      page=80, fig=(81, "2.52"), domain="dc",
      desc="e,a,0,120:r1,a,c,12.5:r2,c,0,15:r3,a,n,10:r4,n,0,20:r5,c,n,5:r6,a,0,30",
      expect={"i_e": -120 * 19 / 183, "r_e": 183 / 19},
+     letters={"r_e": "a"},
      booknames={"r_e": "R_{ab}"},
      shows="The circuit consists of a 120 V source feeding a network of six resistors between "
            "terminals a and b. The network is neither a series nor a parallel combination: "
@@ -32,7 +33,7 @@ dict(num="2.15", title="Equivalent resistance by delta-wye transformation",
      interpret="The source's card reports the resistance the source sees, `r_e`, which is "
                "$R_{ab}$. It also reports the source's current into its positive terminal, "
                "so the current $i$ the source delivers is the opposite of `ie`.",
-     after="So $i$ = 12.46 A, the opposite of `ie`."),
+     after="**(b)** So $i$ = 12.46 A, the opposite of `ie`."),
 
 dict(num="3.4", title="Nodal analysis with two supernodes", digits=5,
      ask="Find the node voltages in the circuit of the figure.",
@@ -167,10 +168,11 @@ dict(num="p4.9", title="Thevenin equivalent with a current-controlled current so
            "current through `r3`, and the dependent source is `j,0,x,3*ir3/2`."),
 
 dict(num="4.12", title="Norton equivalent with a current-controlled current source",
-     ask="Find $R_N$ and $I_N$ of the circuit in the figure at terminals a-b.",
+     ask="Find (a) $R_N$ and (b) $I_N$ of the circuit in the figure at terminals a-b.",
      page=172, fig=(172, "4.43"), figrect=(44, 86, 202, 179), kind="th", n1="a", n2="0", domain="dc",
      desc="r4,p,0,4:e,p,0,10:r5,p,a,5:j,p,a,2*ir4",
      expect={"ino": 7, "z": 5},
+     letters={"z": "a", "ino": "b"},
      booknames={"ino": "I_N", "z": "R_N"},
      shows="The circuit consists of a 10 V source, a dependent current source and two "
            "resistors, and the question wants its Norton equivalent at terminals a and b: "
@@ -183,11 +185,12 @@ dict(num="4.12", title="Norton equivalent with a current-controlled current sour
            "equivalents at once."),
 
 dict(num="4.13", title="Maximum power transfer",
-     ask="Find the value of $R_L$ for maximum power transfer in the circuit of the figure. "
-         "Find the maximum power.",
+     ask="(a) Find the value of $R_L$ for maximum power transfer in the circuit of the figure. "
+         "(b) Find the maximum power.",
      page=175, fig=(175, "4.50"), figrect=(110, 388, 312, 455), kind="th", n1="a", n2="0", domain="dc",
      desc="e,1,0,12:r6,1,2,6:r12,2,0,12:r3,2,3,3:j,0,3,2:r2,3,a,2",
      expect={"z": 9, "pmax": 121 / 9},
+     letters={"z": "a", "pmax": "b"},
      booknames={"z": "R_L", "pmax": "p_{max}"},
      shows="The circuit consists of a 12 V source, a 2 A source and four resistors feeding "
            "a load $R_L$ at terminals a and b, and the question wants the load that draws "
@@ -217,15 +220,15 @@ dict(num="4.18", title="An unbalanced bridge",
 dict(num="5.1", title="A non-ideal op amp", digits=8,
      ask="A 741 op amp has an open-loop voltage gain of 2 × 10⁵, input resistance of 2 MΩ, "
          "and output resistance of 50 Ω. The op amp is used in the circuit of the figure. "
-         "Find the closed-loop gain $v_o/v_s$. Determine current $i$ when $v_s$ = 2 V.",
+         "(a) Find the closed-loop gain $v_o/v_s$. (b) Determine current $i$ when $v_s$ = 2 V.",
      page=203, fig=(203, "5.6"), domain="dc",
      desc="e1,in,0,vs:r10k,in,1,10'k:ri,0,1,2'M:e2,m,0,200000*vri:ro,m,out,50:r20k,1,out,20'k",
      expect={"@v_out/vs": -15999999800 / 8000120601},
      hide=["@v_out/vs"],
-     evals=[dict(text="The closed-loop gain is the output over the source. We type it into "
+     evals=[dict(text="**(a)** The closed-loop gain is the output over the source. We type it into "
                       "{{card:Evaluate}}:",
                  expr="v_out/vs", expect=-15999999800 / 8000120601, book="v_o/v_s"),
-            dict(text="The current $i$ flows from node **1** to the output through the "
+            dict(text="**(b)** The current $i$ flows from node **1** to the output through the "
                       "20 kΩ feedback resistor. We type its name into {{card:Evaluate}} and "
                       "the source's value into its {{ui:Conditions}} box:",
                  expr="ir20k", at={"vs": 2}, expect=2 * 266668 / 2666706867, unit="A",
@@ -290,13 +293,14 @@ dict(num="p5.13", title="Gain-setting resistor of an instrumentation amplifier",
            "amp's inputs **p** and **n** and its output **out**."),
 
 dict(num="p6.10", title="Capacitor and inductor under dc conditions",
-     ask="Determine $v_C$, $i_L$, and the energy stored in the capacitor and inductor in the "
+     ask="Determine (a) $v_C$, (b) $i_L$, and (c) the energy stored in the capacitor and inductor in the "
          "circuit of the figure under dc conditions.",
      page=254, fig=(254, "6.28"), domain="dc",
      desc="j,0,1,10:r6,1,0,6:l,1,2,6:r2,2,0,2:c,2,0,4",
      expect={"v_2": 15, "i_l": 15 / 2},
+     letters={"v_2": "a", "i_l": "b"},
      booknames={"v_2": "v_C", "i_l": "i_L"},
-     evals=[dict(text="A capacitor stores half its capacitance times the square of its "
+     evals=[dict(text="**(c)** A capacitor stores half its capacitance times the square of its "
                       "voltage. We type that into {{card:Evaluate}} with the 4 F capacitance "
                       "and node 2's voltage:",
                  expr="4*v2^2/2", expect=450, unit="J"),
@@ -353,12 +357,13 @@ dict(num="7.5", title="An RL circuit whose switch shorts the source",
 
 dict(num="7.13a", title="Sequential switching, the first four seconds",
      ask="At $t$ = 0, switch 1 in the figure is closed, and switch 2 is closed 4 s later. "
-         "Find $i(t)$ for $t$ > 0. Calculate $i$ for $t$ = 2 s and $t$ = 5 s.",
+         "(a) Find $i(t)$ for $t$ > 0. (b) Calculate $i$ for $t$ = 2 s and $t$ = 5 s.",
      page=307, fig=(307, "7.53"), domain="tr",
      desc="e1,1,0,40:r4,1,p,4:r6,p,x,6:l,x,0,5",
      expect={"i_l": "4 - 4*exp(-2*t)"},
+     letters={"i_l": "a"},
      booknames={"i_l": "i"},
-     evals=[dict(text="The question asks for $i$ at $t$ = 2 s, which falls in this interval. "
+     evals=[dict(text="**(b)** The question asks for $i$ at $t$ = 2 s, which falls in this interval. "
                       "We read it from the answer with {{card:Evaluate}}:",
                  expr="i_l", at={"t": 2}, unit="A", expect=3.9267, book="i(2)"),
             dict(text="Switch 2 closes at $t$ = 4 s, and the current at that instant is where "
@@ -377,13 +382,14 @@ dict(num="7.13a", title="Sequential switching, the first four seconds",
            "to TR. $i$ is the current through `l`."),
 
 dict(num="7.13b", title="Sequential switching, after four seconds",
-     ask="Find $i(t)$ for $t$ ≥ 4 s, and calculate $i$ for $t$ = 5 s. (Time is measured "
+     ask="(a) Find $i(t)$ for $t$ ≥ 4 s, and (b) calculate $i$ for $t$ = 5 s. (Time is measured "
          "from the closing of switch 2.)",
      page=307, fig=(307, "7.53"), domain="tr",
      desc="e1,1,0,40:r4,1,p,4:r2,p,q,2:e2,q,0,10:r6,p,x,6:l,x,0,5,4-4*exp(-8)",
      expect={"i_l": "30/11 + (14/11 - 4*exp(-8))*exp(-22*t/15)"},
+     letters={"i_l": "a"},
      booknames={"i_l": "i"},
-     evals=[dict(text="The question asks for $i$ at $t$ = 5 s, which is 1 s after switch 2 "
+     evals=[dict(text="**(b)** The question asks for $i$ at $t$ = 5 s, which is 1 s after switch 2 "
                       "closes. We read it from the answer with {{card:Evaluate}}:",
                  expr="i_l", at={"t": 1}, unit="A", expect=3.0195, book="i(5)")],
      shows="This is the second interval of the same problem. Switch 2 has closed too, "
@@ -827,13 +833,13 @@ dict(num="13.14", title="An ideal transformer with opposite dots",
            "likewise the 6 Ω and j10 Ω as `r3`."),
 
 dict(num="14.10", title="Identifying a filter and its corner frequency",
-     ask="Determine what type of filter is shown in the figure. Calculate the corner or "
+     ask="(a) Determine what type of filter is shown in the figure. (b) Calculate the corner or "
          "cutoff frequency. Take $R$ = 2 kΩ, $L$ = 2 H, and $C$ = 2 μF.",
      page=664, fig=(665, "14.39"), domain="ac", omega=W,
      desc="e,1,0,vi:l,1,2,2:rr,2,0,2'k:c,2,0,2'u",
      expect={"@v_2/vi": "250000/(-omega**2 + 250*I*omega + 250000)"},
      hide=["@v_2/vi"],
-     evals=[dict(text="A filter's type is set by how its gain behaves at the two ends of the "
+     evals=[dict(text="**(a)** A filter's type is set by how its gain behaves at the two ends of the "
                       "frequency range. The gain is the output over the input, and we type "
                       "it into {{card:Evaluate}} with the frequency at zero in its "
                       "{{ui:Conditions}} box:",
@@ -843,7 +849,7 @@ dict(num="14.10", title="Identifying a filter and its corner frequency",
                  expr="limit(v_2/vi, omega, oo)", expect=0, book="H(\\infty)")],
      solveq=[dict(tag="AC, Solve for the corner frequency",
                   text="The gain passes low frequencies and stops high ones, so this is a "
-                       "low-pass filter. Its corner frequency is where the magnitude of the "
+                       "low-pass filter.\n\n**(b)** Its corner frequency is where the magnitude of the "
                        "gain has fallen to $1/\\sqrt{2}$ of its value at zero. In the "
                        "{{card:Solve}} card that is one equation, with the frequency as the "
                        "unknown:",
@@ -864,17 +870,18 @@ dict(num="14.10", title="Identifying a filter and its corner frequency",
 
 SPECS += [
 dict(num="14.2", title="A current gain and its poles and zeros",
-     ask="For the circuit in the figure, calculate the gain $I_o(\\omega)/I_i(\\omega)$ and "
-         "its poles and zeros.",
+     ask="For the circuit in the figure, calculate (a) the gain $I_o(\\omega)/I_i(\\omega)$ and "
+         "(b) its poles and zeros.",
      page=641, fig=(641, "14.6"), figrect=(376, 289, 520, 340), domain="fd",
      desc="j,0,1,ii:r4,1,a,4:l,a,0,2:c,1,0,1/2",
      expect={"@i_c/ii": "s*(s + 2)/(s**2 + 2*s + 1)"},
+     letters={"@i_c/ii": "a"},
      labels={"@i_c/ii": "current gain"},
      texnames={"@i_c/ii": "H(s) = \\dfrac{i_{c}}{i_{i}}"},
      units={"@i_c/ii": ""},
      minitool=[
       dict(tool="pz", args=["ic/ii"],
-           text="The poles are the values of $s$ that make the gain's denominator zero, and "
+           text="**(b)** The poles are the values of $s$ that make the gain's denominator zero, and "
                 "the zeros the values that make its numerator zero. The {{card:Mini-Tools}} "
                 "card finds both at once: we choose *pz \u2014 poles and zeros* in its "
                 "{{ui:Tool}} menu and give it the gain.",
@@ -927,6 +934,7 @@ dict(num="16.6", title="Initial and final values of a response",
      page=748, fig=(748, "16.14"), figrect=(42, 426, 186, 518), domain="fd",
      desc="j,0,a,10/s:l,a,b,2:e,a,m,2*il:r5a,m,0,5:r5b,b,0,5",
      expect={"v_b": "125/(s*(s + 4))"},
+     letters={"v_b": "a"},
      booknames={"v_b": "V_o(s)"},
      evals=[dict(text="**(b)** The initial-value theorem says $v_o(0^+)$ is the limit of "
                       "$sV_o(s)$ as $s$ grows without bound. We type that limit into "
@@ -1016,6 +1024,7 @@ dict(num="p16.6", title="A step response with a current-controlled source",
      page=749, fig=(749, "16.17"), figrect=(376, 594, 532, 665), domain="fd",
      desc="e1,1,0,30/s:r1,1,m,1:r2,m,0,2:c,m,r,1:e2,r,0,4*ir1",
      expect={"v_m": "24*(s + 1/4)/(s*(s + 3/10))"},
+     letters={"v_m": "a"},
      booknames={"v_m": "V_o(s)"},
      evals=[dict(text="**(b)** The initial-value theorem gives $v_o(0)$ as the limit of "
                       "$sV_o(s)$ as $s$ grows without bound. We type that limit into "
@@ -1059,16 +1068,17 @@ dict(num="p10.9", title="Thevenin equivalent with a voltage-controlled current s
            "dependent source's up from ground to **a**, so it is `j2,0,a,vr2/5`."),
 
 dict(num="p14.10", title="A high-pass filter and its corner frequency",
-     ask="For the circuit in the figure, obtain the transfer function $V_o(\\omega)/"
-         "V_i(\\omega)$. Identify the type of filter the circuit represents and determine "
-         "the corner frequency. Take $R_1$ = 100 Ω = $R_2$, $L$ = 2 mH.",
+     ask="For the circuit in the figure, (a) obtain the transfer function $V_o(\\omega)/"
+         "V_i(\\omega)$. (b) Identify the type of filter the circuit represents and (c) "
+         "determine the corner frequency. Take $R_1$ = 100 Ω = $R_2$, $L$ = 2 mH.",
      page=665, fig=(665, "14.40"), figrect=(390, 600, 534, 658), domain="ac", omega=W,
      desc="e,1,0,vi:r1,1,o,100:l,o,0,2'm:r2,o,0,100",
      expect={"@v_o/vi": "I*omega/(2*(I*omega + 25000))"},
+     letters={"@v_o/vi": "a"},
      labels={"@v_o/vi": "transfer function"},
      texnames={"@v_o/vi": "H(\\omega) = \\dfrac{v_{o}}{v_{i}}"},
      units={"@v_o/vi": ""},
-     evals=[dict(text="A filter's type is set by how its gain behaves at the two ends of the "
+     evals=[dict(text="**(b)** A filter's type is set by how its gain behaves at the two ends of the "
                       "frequency range. We type the gain into {{card:Evaluate}} with the "
                       "frequency at zero in its {{ui:Conditions}} box:",
                  expr="v_o/vi", at={"omega": 0}, expect=0, book="H(0)"),
@@ -1077,7 +1087,7 @@ dict(num="p14.10", title="A high-pass filter and its corner frequency",
                  expr="limit(v_o/vi, omega, oo)", expect=0.5, book="H(\\infty)")],
      solveq=[dict(tag="AC, Solve for the corner frequency",
                   text="The gain stops low frequencies and passes high ones, so this is a "
-                       "high-pass filter. Its corner frequency is where the magnitude of the "
+                       "high-pass filter.\n\n**(c)** Its corner frequency is where the magnitude of the "
                        "gain has fallen to $1/\\sqrt{2}$ of its high-frequency value, 1/2. In "
                        "the {{card:Solve}} card that is one equation, with the frequency as "
                        "the unknown:",
@@ -1097,10 +1107,11 @@ dict(num="p14.10", title="A high-pass filter and its corner frequency",
 dict(num="19.9", title="Maximum power from a two-port given by its transmission parameters",
      ask="The ABCD parameters of the two-port network in the figure are $A$ = 4, $B$ = 20 Ω, "
          "$C$ = 0.1 S, $D$ = 2. The output port is connected to a variable load for maximum "
-         "power transfer. Find $R_L$ and the maximum power transferred.",
+         "power transfer. Find (a) $R_L$ and (b) the maximum power transferred.",
      page=894, fig=(894, "19.34"), figrect=(16, 464, 198, 522), kind="th", n1="q", n2="0", domain="dc",
      desc="e,1,0,50:r10,1,p,10:a,p,q,[4,20,0.1,2]",
      expect={"z": 8, "pmax": 3.125},
+     letters={"z": "a", "pmax": "b"},
      booknames={"z": "R_L", "pmax": "P"},
      shows="The circuit consists of a 50 V source with a 10 Ω resistor feeding a two-port "
            "known only by its transmission parameters, and a variable load on the output "
@@ -1152,29 +1163,34 @@ dict(num="19.12", title="Two two-ports in series",
            "voltage at **b**."),
 
 dict(num="19.17a", title="A transistor amplifier described by h parameters",
-     ask="Consider the common-emitter amplifier circuit of the figure. Determine the voltage "
-         "gain, current gain, input impedance, and output impedance using these h "
-         "parameters: $h_{ie}$ = 1 kΩ, $h_{re}$ = 2.5 × 10⁻⁴, $h_{fe}$ = 50, $h_{oe}$ = "
-         "20 μS. Find the output voltage $V_o$.",
+     ask="Consider the common-emitter amplifier circuit of the figure. Determine (a) the "
+         "voltage gain, (b) current gain, (c) input impedance, and (d) output impedance using "
+         "these h parameters: $h_{ie}$ = 1 kΩ, $h_{re}$ = 2.5 × 10⁻⁴, $h_{fe}$ = 50, "
+         "$h_{oe}$ = 20 μS. (e) Find the output voltage $V_o$.",
      page=911, fig=(911, "19.59"), figrect=(118, 476, 310, 548), domain="dc",
      desc="e,1,0,3.2'm:rs,1,b,800:h,b,c,[1000,2.5e-4,50,20'u]:rl,c,0,1.2'k",
      expect={"v_c": -0.10502, "@v_c/v_b": -59.466, "@i_hc/i_hb": 48.830,
              "@v_b/i_hb": 985.35},
      booknames={"v_c": "V_o"},
      hide=["@v_c/v_b", "@i_hc/i_hb", "@v_b/i_hb"],
-     evals=[dict(text="The voltage gain of the transistor is its output voltage over its input "
-                      "voltage, the voltage at **c** over the voltage at **b**. We type that "
-                      "into {{card:Evaluate}}:",
+     evals=[dict(text="**(a)** The voltage gain the book works out is the transistor's: its "
+                      "output voltage over its input voltage, the voltage at **c** over the "
+                      "voltage at **b**. We type that into {{card:Evaluate}}:",
                  expr="v_c/v_b", expect=-59.466, book="A_v"),
-            dict(text="The current gain is the current into the output port over the current "
-                      "into the input port:",
+            dict(text="**(b)** The current gain is the current into the output port over the "
+                      "current into the input port:",
                  expr="i_hc/i_hb", expect=48.830, book="A_i"),
-            dict(text="The input impedance is the input port's voltage over its current:",
-                 expr="v_b/i_hb", expect=985.35, unit="\\Omega", book="Z_{in}")],
+            dict(text="**(c)** The input impedance is the input port's voltage over its "
+                      "current:",
+                 expr="v_b/i_hb", expect=985.35, unit="\\Omega", book="Z_{in}"),
+            dict(text="**(d)** The output impedance is the resistance seen into the output port "
+                      "with the load removed, so it is a run of its own, the next entry.",
+                 keys=[]),
+            dict(text="**(e)** The output voltage $V_o$ is the voltage at **c**, read off the "
+                      "run:", keys=["v_c"])],
      after="The book prints $V_o$ as −105.09 mV, carried through its own rounded "
-           "arithmetic. Its gain of −32.82 times the 3.2 mV input is −105.02 mV, which is "
-           "what the run gives. The output impedance is the resistance seen into the output "
-           "port with the load removed, which is the next entry's question.",
+           "arithmetic. The gain of the whole circuit, $V_o$ over the 3.2 mV source, is "
+           "−32.82, and −32.82 times 3.2 mV is −105.02 mV, which is what the run gives.",
      shows="The circuit consists of a transistor in common-emitter connection, modelled by "
            "its four h parameters, between a 3.2 mV source with 0.8 kΩ of source resistance "
            "and a 1.2 kΩ load. The question wants the gains, the impedances and the output "
@@ -1189,13 +1205,14 @@ dict(num="19.17a", title="A transistor amplifier described by h parameters",
            "`ihc`."),
 
 dict(num="19.17b", title="The output impedance of the transistor amplifier",
-     ask="Determine the output impedance of the amplifier.",
+     ask="(d) Determine the output impedance of the amplifier.",
      page=911, fig=(911, "19.59"), kind="th", n1="c", n2="0", domain="dc",
      desc="e,1,0,3.2'm:rs,1,b,800:h,b,c,[1000,2.5e-4,50,20'u]",
      expect={"z": 76595.745},
+     letters={"z": "d"},
      booknames={"z": "Z_{out}"},
-     shows="This is the same amplifier with the load removed, and the question wants the "
-           "impedance seen looking back into the collector. That is the Thévenin resistance "
+     shows="This is the same amplifier with the load removed, and part (d) of the question "
+           "wants the impedance seen looking back into the collector. That is the Thévenin resistance "
            "at the output, so we describe the circuit without `rl` and name **c** and **0** "
            "to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen."),
 ]

@@ -278,6 +278,28 @@ verb"*), applied to every entry, the intros and the chapter head:
     transform the book prints and then inverts it with `s2t` in the
     Evaluate card, shown as its own step. FD never returns a function of
     $t$, and the page never says or implies that it does.
+31. **A question that asks for several things is lettered, and so is each
+    answer.** Roberto, on AS7's Example 19.17, 15 Sep 2026, after reading
+    only its last request and taking the three that came before it for
+    answers to questions nobody asked: *"Please add letters to the
+    questions, one letter per question, and mention those in your
+    answers."* Then: *"Please make a rule out of this and apply to the
+    rest of the problems."* An ask gets one letter per request wherever
+    it makes more than one: two sentences that each ask something, or one
+    sentence asking for things of different kinds -- a gain and an
+    impedance, a resistance and a power, a transfer function and its
+    poles. A list of values of one kind asked together (the node
+    voltages, $i_1$ to $i_4$, the voltages and currents of one run, the
+    average power of every element) is one question and stays unlettered.
+    The letters are the book's where it prints them, in its own style,
+    *(a)* in AS7 and *a)* in NR12, and the page adds them in that style
+    where it does not. The step or sentence that answers a part opens
+    with its letter in bold, **(a)** or **a)**, in the question's order
+    wherever the session allows. A part answered by another entry carries
+    its letter there (19.17b's *(d)*, 7.11b's *b)*). Guard:
+    `gen.check_letters`, which fails the generation when an ask with two
+    or more letters has one the page never labels; it went red on AS7's
+    16.6 and NR12's 3.11, 4.13, 5.1 and 14.6 before they were fixed.
 
 The reader-facing fields of a spec:
 
@@ -293,6 +315,15 @@ The reader-facing fields of a spec:
 - `booknames` — answer name → the book's symbol, set beside the value:
   *`i_r7` = 2 A (the book's $i_o$)*, or under the result panels.
 - `parts` — a lettered part answered in prose, after the results.
+- `letters` — answer name → the letter of the part it answers (rule 31).
+  The returns sentence puts the letter in bold before that answer and the
+  lettered answers first; a result panel gets a sentence naming the part
+  it answers, *(a) is `v_b` (the book's $V_o(s)$)*; an answer read in
+  Evaluate opens its step with the letter. A part answered in an
+  Evaluate, Solve or Mini-Tools step, or in `after`, writes its letter
+  into that text. An eval with `keys` and no expression places answers
+  read off the run among the steps, and with `keys=[]` a part answered
+  in words alone.
 - `evals` — Evaluate steps after the results: the answer's name in the
   Evaluate box and the instant in Conditions, the way Lesson 6 does it;
   `gen.py` computes the value from the run and asserts it against

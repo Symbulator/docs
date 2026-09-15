@@ -68,7 +68,7 @@ written as an element of its own.
 
 ::: problem AS7's Example 2.15
 
-Obtain the equivalent resistance $R_{ab}$ for the circuit in the figure and use it to find current $i$.
+Obtain (a) the equivalent resistance $R_{ab}$ for the circuit in the figure and (b) use it to find current $i$.
 
 ::: figure assets/circuit/as7-ex2-15.jpg
 Alexander & Sadiku, 7th edition — the circuit for Example 2.15
@@ -91,9 +91,9 @@ Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Se
 
 The source's card reports the resistance the source sees, `r_e`, which is $R_{ab}$. It also reports the source's current into its positive terminal, so the current $i$ the source delivers is the opposite of `ie`.
 
-Symbulator returns `i_e` = {{o:-12.46}} A and `r_e` = {{o:9.632}} Ω (the book's $R_{ab}$).
+Symbulator returns **(a)** `r_e` = {{o:9.632}} Ω (the book's $R_{ab}$) and `i_e` = {{o:-12.46}} A.
 
-So $i$ = 12.46 A, the opposite of `ie`.
+**(b)** So $i$ = 12.46 A, the opposite of `ie`.
 
 :::
 :::
@@ -318,7 +318,7 @@ Symbulator returns `req` = {{o:-4}} Ω (the book's $R_{Th}$).
 
 ::: problem AS7's Example 4.12
 
-Find $R_N$ and $I_N$ of the circuit in the figure at terminals a-b.
+Find (a) $R_N$ and (b) $I_N$ of the circuit in the figure at terminals a-b.
 
 ::: figure assets/circuit/as7-ex4-12.jpg
 Alexander & Sadiku, 7th edition — the circuit for Example 4.12
@@ -336,14 +336,14 @@ j,p,a,2*ir4
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**.
 
-Symbulator returns `ino` = {{o:7}} A (the book's $I_N$) and `req` = {{o:5}} Ω (the book's $R_N$).
+Symbulator returns **(a)** `req` = {{o:5}} Ω (the book's $R_N$) and **(b)** `ino` = {{o:7}} A (the book's $I_N$).
 
 :::
 :::
 
 ::: problem AS7's Example 4.13
 
-Find the value of $R_L$ for maximum power transfer in the circuit of the figure. Find the maximum power.
+(a) Find the value of $R_L$ for maximum power transfer in the circuit of the figure. (b) Find the maximum power.
 
 ::: figure assets/circuit/as7-ex4-13.jpg
 Alexander & Sadiku, 7th edition — the circuit for Example 4.13
@@ -363,7 +363,7 @@ r2,3,a,2
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **a** and **0**. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `req` = {{o:9}} Ω (the book's $R_L$) and `pmax` = {{o:13.44}} W.
+Symbulator returns **(a)** `req` = {{o:9}} Ω (the book's $R_L$) and **(b)** `pmax` = {{o:13.44}} W.
 
 :::
 :::
@@ -399,7 +399,7 @@ The value is negative, so the current flows through the galvanometer from **b** 
 
 ::: problem AS7's Example 5.1
 
-A 741 op amp has an open-loop voltage gain of 2 × 10⁵, input resistance of 2 MΩ, and output resistance of 50 Ω. The op amp is used in the circuit of the figure. Find the closed-loop gain $v_o/v_s$. Determine current $i$ when $v_s$ = 2 V.
+A 741 op amp has an open-loop voltage gain of 2 × 10⁵, input resistance of 2 MΩ, and output resistance of 50 Ω. The op amp is used in the circuit of the figure. (a) Find the closed-loop gain $v_o/v_s$. (b) Determine current $i$ when $v_s$ = 2 V.
 
 ::: figure assets/circuit/as7-ex5-1.jpg
 Alexander & Sadiku, 7th edition — the circuit for Example 5.1
@@ -419,7 +419,7 @@ r20k,1,out,20'k
 
 Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx (full precision)*.
 
-The closed-loop gain is the output over the source. We type it into {{card:Evaluate}}:
+**(a)** The closed-loop gain is the output over the source. We type it into {{card:Evaluate}}:
 
 ```field 9 Evaluate
 v_out/vs
@@ -427,7 +427,7 @@ v_out/vs
 
 It gives {{o:-1.9999698}} (the book's $v_o/v_s$).
 
-The current $i$ flows from node **1** to the output through the 20 kΩ feedback resistor. We type its name into {{card:Evaluate}} and the source's value into its {{ui:Conditions}} box:
+**(b)** The current $i$ flows from node **1** to the output through the 20 kΩ feedback resistor. We type its name into {{card:Evaluate}} and the source's value into its {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 ir20k
@@ -528,7 +528,7 @@ The card returns `R_G` = {{o:354.6}} Ω.
 
 ::: problem AS7's Practice Problem 6.10
 
-Determine $v_C$, $i_L$, and the energy stored in the capacitor and inductor in the circuit of the figure under dc conditions.
+Determine (a) $v_C$, (b) $i_L$, and (c) the energy stored in the capacitor and inductor in the circuit of the figure under dc conditions.
 
 ::: figure assets/circuit/as7-pp6-10.jpg
 Alexander & Sadiku, 7th edition — the circuit for Practice Problem 6.10
@@ -547,9 +547,9 @@ c,2,0,4
 
 Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `v_2` = {{o:15}} V (the book's $v_C$) and `i_l` = {{o:7.5}} A.
+Symbulator returns **(a)** `v_2` = {{o:15}} V (the book's $v_C$) and **(b)** `i_l` = {{o:7.5}} A.
 
-A capacitor stores half its capacitance times the square of its voltage. We type that into {{card:Evaluate}} with the 4 F capacitance and node 2's voltage:
+**(c)** A capacitor stores half its capacitance times the square of its voltage. We type that into {{card:Evaluate}} with the 4 F capacitance and node 2's voltage:
 
 ```field 9 Evaluate
 4*v2^2/2
@@ -570,7 +570,7 @@ It gives {{o:168.8}} J.
 
 ::: problem AS7's Example 19.9
 
-The ABCD parameters of the two-port network in the figure are $A$ = 4, $B$ = 20 Ω, $C$ = 0.1 S, $D$ = 2. The output port is connected to a variable load for maximum power transfer. Find $R_L$ and the maximum power transferred.
+The ABCD parameters of the two-port network in the figure are $A$ = 4, $B$ = 20 Ω, $C$ = 0.1 S, $D$ = 2. The output port is connected to a variable load for maximum power transfer. Find (a) $R_L$ and (b) the maximum power transferred.
 
 ::: figure assets/circuit/as7-ex19-9.jpg
 Alexander & Sadiku, 7th edition — the circuit for Example 19.9
@@ -587,7 +587,7 @@ a,p,q,[4,20,0.1,2]
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **q** and **0**.
 
-Symbulator returns `req` = {{o:8}} Ω (the book's $R_L$) and `pmax` = {{o:3.125}} W (the book's $P$).
+Symbulator returns **(a)** `req` = {{o:8}} Ω (the book's $R_L$) and **(b)** `pmax` = {{o:3.125}} W (the book's $P$).
 
 :::
 :::
@@ -651,7 +651,7 @@ It gives {{o:0.3509}} (the book's $V_2/V_s$).
 
 ::: problem AS7's Example 19.17 gains
 
-Consider the common-emitter amplifier circuit of the figure. Determine the voltage gain, current gain, input impedance, and output impedance using these h parameters: $h_{ie}$ = 1 kΩ, $h_{re}$ = 2.5 × 10⁻⁴, $h_{fe}$ = 50, $h_{oe}$ = 20 μS. Find the output voltage $V_o$.
+Consider the common-emitter amplifier circuit of the figure. Determine (a) the voltage gain, (b) current gain, (c) input impedance, and (d) output impedance using these h parameters: $h_{ie}$ = 1 kΩ, $h_{re}$ = 2.5 × 10⁻⁴, $h_{fe}$ = 50, $h_{oe}$ = 20 μS. (e) Find the output voltage $V_o$.
 
 ::: figure assets/circuit/as7-ex19-17.jpg
 Alexander & Sadiku, 7th edition — the circuit for Example 19.17
@@ -669,9 +669,7 @@ rl,c,0,1.2'k
 
 Set {{ui:Analysis}} to *DC — direct current*. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `v_c` = {{o:-0.105}} V (the book's $V_o$).
-
-The voltage gain of the transistor is its output voltage over its input voltage, the voltage at **c** over the voltage at **b**. We type that into {{card:Evaluate}}:
+**(a)** The voltage gain the book works out is the transistor's: its output voltage over its input voltage, the voltage at **c** over the voltage at **b**. We type that into {{card:Evaluate}}:
 
 ```field 9 Evaluate
 v_c/v_b
@@ -679,7 +677,7 @@ v_c/v_b
 
 It gives {{o:-59.46}} (the book's $A_v$).
 
-The current gain is the current into the output port over the current into the input port:
+**(b)** The current gain is the current into the output port over the current into the input port:
 
 ```field 9 Evaluate
 i_hc/i_hb
@@ -687,7 +685,7 @@ i_hc/i_hb
 
 It gives {{o:48.83}} (the book's $A_i$).
 
-The input impedance is the input port's voltage over its current:
+**(c)** The input impedance is the input port's voltage over its current:
 
 ```field 9 Evaluate
 v_b/i_hb
@@ -695,21 +693,25 @@ v_b/i_hb
 
 It gives {{o:985.4}} Ω (the book's $Z_{in}$).
 
-The book prints $V_o$ as −105.09 mV, carried through its own rounded arithmetic. Its gain of −32.82 times the 3.2 mV input is −105.02 mV, which is what the run gives. The output impedance is the resistance seen into the output port with the load removed, which is the next entry's question.
+**(d)** The output impedance is the resistance seen into the output port with the load removed, so it is a run of its own, the next entry.
+
+**(e)** The output voltage $V_o$ is the voltage at **c**, read off the run: `v_c` = {{o:-0.105}} V (the book's $V_o$).
+
+The book prints $V_o$ as −105.09 mV, carried through its own rounded arithmetic. The gain of the whole circuit, $V_o$ over the 3.2 mV source, is −32.82, and −32.82 times 3.2 mV is −105.02 mV, which is what the run gives.
 
 :::
 :::
 
 ::: problem AS7's Example 19.17 output impedance
 
-Determine the output impedance of the amplifier.
+(d) Determine the output impedance of the amplifier.
 
 ::: figure assets/circuit/as7-ex19-17.jpg
 Alexander & Sadiku, 7th edition — the circuit for Example 19.17
 :::
 
 ::: answer
-This is the same amplifier with the load removed, and the question wants the impedance seen looking back into the collector. That is the Thévenin resistance at the output, so we describe the circuit without `rl` and name **c** and **0** to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen.
+This is the same amplifier with the load removed, and part (d) of the question wants the impedance seen looking back into the collector. That is the Thévenin resistance at the output, so we describe the circuit without `rl` and name **c** and **0** to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen.
 
 ```field 9 Circuit Description
 e,1,0,3.2'm
@@ -719,7 +721,7 @@ h,b,c,[1000,2.5e-4,50,20'u]
 
 Open {{card:Find equivalent}}, choose *Thévenin / Norton*, and give the two terminals **c** and **0**. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-Symbulator returns `req` = {{o:76600}} Ω (the book's $Z_{out}$).
+Symbulator returns **(d)** `req` = {{o:76600}} Ω (the book's $Z_{out}$).
 
 :::
 :::
@@ -794,7 +796,7 @@ The run holds before $t$ = 0 the values the first run gave: $i$ = 2 A, $i_o$ = 0
 
 ::: problem AS7's Example 7.13 to 4 s
 
-At $t$ = 0, switch 1 in the figure is closed, and switch 2 is closed 4 s later. Find $i(t)$ for $t$ > 0. Calculate $i$ for $t$ = 2 s and $t$ = 5 s.
+At $t$ = 0, switch 1 in the figure is closed, and switch 2 is closed 4 s later. (a) Find $i(t)$ for $t$ > 0. (b) Calculate $i$ for $t$ = 2 s and $t$ = 5 s.
 
 ::: figure assets/circuit/as7-ex7-13.jpg
 Alexander & Sadiku, 7th edition — the circuit for Example 7.13
@@ -816,9 +818,9 @@ Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in 
 i_{l} = 4.0 - 4.0 e^{- 2 t}\,\mathrm{A}
 :::
 
-`i_l` is the book's $i$.
+**(a)** is `i_l` (the book's $i$).
 
-The question asks for $i$ at $t$ = 2 s, which falls in this interval. We read it from the answer with {{card:Evaluate}}:
+**(b)** The question asks for $i$ at $t$ = 2 s, which falls in this interval. We read it from the answer with {{card:Evaluate}}:
 
 ```field 9 Evaluate
 i_l
@@ -847,7 +849,7 @@ It gives {{o:3.999}} A (the book's $i(4)$).
 
 ::: problem AS7's Example 7.13 after 4 s
 
-Find $i(t)$ for $t$ ≥ 4 s, and calculate $i$ for $t$ = 5 s. (Time is measured from the closing of switch 2.)
+(a) Find $i(t)$ for $t$ ≥ 4 s, and (b) calculate $i$ for $t$ = 5 s. (Time is measured from the closing of switch 2.)
 
 ::: figure assets/circuit/as7-ex7-13.jpg
 Alexander & Sadiku, 7th edition — the circuit for Example 7.13
@@ -871,9 +873,9 @@ Set {{ui:Analysis}} to *TR — transient / time domain*. Set {{ui:Rounding}} in 
 i_{l} = - 4.0 e^{- \frac{22 t}{15} - 8} + 2.727 + 1.273 e^{- \frac{22 t}{15}}\,\mathrm{A}
 :::
 
-`i_l` is the book's $i$.
+**(a)** is `i_l` (the book's $i$).
 
-The question asks for $i$ at $t$ = 5 s, which is 1 s after switch 2 closes. We read it from the answer with {{card:Evaluate}}:
+**(b)** The question asks for $i$ at $t$ = 5 s, which is 1 s after switch 2 closes. We read it from the answer with {{card:Evaluate}}:
 
 ```field 9 Evaluate
 i_l
@@ -1592,7 +1594,7 @@ It gives {{o:-17.99 - 13.96j}} V ({{o:22.77}}∠{{o:-142.2}}°, the book's $V_2$
 
 ::: problem AS7's Example 14.10
 
-Determine what type of filter is shown in the figure. Calculate the corner or cutoff frequency. Take $R$ = 2 kΩ, $L$ = 2 H, and $C$ = 2 μF.
+(a) Determine what type of filter is shown in the figure. (b) Calculate the corner or cutoff frequency. Take $R$ = 2 kΩ, $L$ = 2 H, and $C$ = 2 μF.
 
 ::: figure assets/circuit/as7-ex14-10.jpg
 Alexander & Sadiku, 7th edition — the circuit for Example 14.10
@@ -1610,7 +1612,7 @@ c,2,0,2'u
 
 Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui:ω — angular frequency}} box, since nothing here depends on the frequency. Set {{ui:Rounding}} in {{card:Settings}} to *approx to n digits* with **n** = 4.
 
-A filter's type is set by how its gain behaves at the two ends of the frequency range. The gain is the output over the input, and we type it into {{card:Evaluate}} with the frequency at zero in its {{ui:Conditions}} box:
+**(a)** A filter's type is set by how its gain behaves at the two ends of the frequency range. The gain is the output over the input, and we type it into {{card:Evaluate}} with the frequency at zero in its {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 v_2/vi
@@ -1630,7 +1632,9 @@ limit(v_2/vi, omega, oo)
 
 It gives {{o:0}} (the book's $H(\infty)$).
 
-The gain passes low frequencies and stops high ones, so this is a low-pass filter. Its corner frequency is where the magnitude of the gain has fallen to $1/\sqrt{2}$ of its value at zero. In the {{card:Solve}} card that is one equation, with the frequency as the unknown:
+The gain passes low frequencies and stops high ones, so this is a low-pass filter.
+
+**(b)** Its corner frequency is where the magnitude of the gain has fallen to $1/\sqrt{2}$ of its value at zero. In the {{card:Solve}} card that is one equation, with the frequency as the unknown:
 
 ```field 9 Equation(s) to solve in terms of the results
 abs(v_2/vi)=1/sqrt(2)
@@ -1649,7 +1653,7 @@ The card returns 2 solutions, `omega` = {{o:-742.3}} and `omega` = {{o:742.3}}.
 
 ::: problem AS7's Practice Problem 14.10
 
-For the circuit in the figure, obtain the transfer function $V_o(\omega)/V_i(\omega)$. Identify the type of filter the circuit represents and determine the corner frequency. Take $R_1$ = 100 Ω = $R_2$, $L$ = 2 mH.
+For the circuit in the figure, (a) obtain the transfer function $V_o(\omega)/V_i(\omega)$. (b) Identify the type of filter the circuit represents and (c) determine the corner frequency. Take $R_1$ = 100 Ω = $R_2$, $L$ = 2 mH.
 
 ::: figure assets/circuit/as7-pp14-10.jpg
 Alexander & Sadiku, 7th edition — the circuit for Practice Problem 14.10
@@ -1671,7 +1675,9 @@ Set {{ui:Analysis}} to *AC — alternating current*. Leave **omega** in the {{ui
 H(\omega) = \dfrac{v_{o}}{v_{i}} = \frac{0.5 \omega}{\omega - 2.5 \cdot 10^{4} \text{j}}
 :::
 
-A filter's type is set by how its gain behaves at the two ends of the frequency range. We type the gain into {{card:Evaluate}} with the frequency at zero in its {{ui:Conditions}} box:
+**(a)** is the transfer function above.
+
+**(b)** A filter's type is set by how its gain behaves at the two ends of the frequency range. We type the gain into {{card:Evaluate}} with the frequency at zero in its {{ui:Conditions}} box:
 
 ```field 9 Evaluate
 v_o/vi
@@ -1691,7 +1697,9 @@ limit(v_o/vi, omega, oo)
 
 It gives {{o:0.5}} (the book's $H(\infty)$).
 
-The gain stops low frequencies and passes high ones, so this is a high-pass filter. Its corner frequency is where the magnitude of the gain has fallen to $1/\sqrt{2}$ of its high-frequency value, 1/2. In the {{card:Solve}} card that is one equation, with the frequency as the unknown:
+The gain stops low frequencies and passes high ones, so this is a high-pass filter.
+
+**(c)** Its corner frequency is where the magnitude of the gain has fallen to $1/\sqrt{2}$ of its high-frequency value, 1/2. In the {{card:Solve}} card that is one equation, with the frequency as the unknown:
 
 ```field 9 Equation(s) to solve in terms of the results
 abs(v_o/vi)=1/(2*sqrt(2))
@@ -1722,7 +1730,7 @@ poles and zeros are one entry in the {{card:Mini-Tools}} card.
 
 ::: problem AS7's Example 14.2
 
-For the circuit in the figure, calculate the gain $I_o(\omega)/I_i(\omega)$ and its poles and zeros.
+For the circuit in the figure, calculate (a) the gain $I_o(\omega)/I_i(\omega)$ and (b) its poles and zeros.
 
 ::: figure assets/circuit/as7-ex14-2.jpg
 Alexander & Sadiku, 7th edition — the circuit for Example 14.2
@@ -1744,7 +1752,9 @@ Set {{ui:Analysis}} to *FD — complex frequency domain*.
 H(s) = \dfrac{i_{c}}{i_{i}} = \frac{s \left(s + 2\right)}{s^{2} + 2 s + 1}
 :::
 
-The poles are the values of $s$ that make the gain's denominator zero, and the zeros the values that make its numerator zero. The {{card:Mini-Tools}} card finds both at once: we choose *pz — poles and zeros* in its {{ui:Tool}} menu and give it the gain.
+**(a)** is the current gain above.
+
+**(b)** The poles are the values of $s$ that make the gain's denominator zero, and the zeros the values that make its numerator zero. The {{card:Mini-Tools}} card finds both at once: we choose *pz — poles and zeros* in its {{ui:Tool}} menu and give it the gain.
 
 ```field 9 Value
 ic/ii
@@ -1825,7 +1835,7 @@ Set {{ui:Analysis}} to *FD — complex frequency domain*. Set {{ui:Rounding}} in
 v_{b} = \frac{125.0}{s \left(s + 4.0\right)}\,\mathrm{V}
 :::
 
-`v_b` is the book's $V_o(s)$.
+**(a)** is `v_b` (the book's $V_o(s)$).
 
 **(b)** The initial-value theorem says $v_o(0^+)$ is the limit of $sV_o(s)$ as $s$ grows without bound. We type that limit into {{card:Evaluate}}:
 
@@ -1883,7 +1893,7 @@ Set {{ui:Analysis}} to *FD — complex frequency domain*.
 v_{m} = \frac{60 \left(4 s + 1\right)}{s \left(10 s + 3\right)}\,\mathrm{V}
 :::
 
-`v_m` is the book's $V_o(s)$.
+**(a)** is `v_m` (the book's $V_o(s)$).
 
 **(b)** The initial-value theorem gives $v_o(0)$ as the limit of $sV_o(s)$ as $s$ grows without bound. We type that limit into {{card:Evaluate}}:
 

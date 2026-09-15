@@ -3,6 +3,33 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #455 — lettered questions and lettered answers, both samplers — **live 15 Sep 2026** (*"Punch it. Build everything."*)
+
+Roberto on AS7's Example 19.17: he had read only its last request, *Find
+the output voltage $V_o$*, and took the three Evaluate steps above it for
+answers to questions nobody asked. His fix: one letter per question, and
+the answers say which letter they answer; then *"make a rule out of this
+and apply to the rest of the problems."* It is rule 31 in
+`tools/nr12/README.md`, with its boundary: several requests, or one
+request for things of different kinds, are lettered; a list of values of
+one kind is one question.
+
+`sampler/gen.py` gained a spec field `letters` (answer → part), which puts
+the bold letter into the returns sentence, into a sentence under result
+panels and into an automatic Evaluate step, and `check_letters`, which
+fails generation when a lettered ask has a part the page never labels.
+
+AS7, 17 entries: 19.17a/b lettered (a)–(e), with (e) $V_o$ read off the
+run last and (d) pointing at 19.17b; letters added to 2.15, 4.12, 4.13,
+5.1, P6.10, 7.13 (both intervals), 14.10, P14.10, 14.2, 19.9; the
+answers labelled in 16.6 and P16.6, whose asks already had letters.
+11.14 and 16.9 already complied. NR12, 14 entries: 3.11 lettered a) and
+b), its power moved after the current so the parts read in order; the
+answers labelled in 4.13, 4.21, 7.1, 7.3, 7.5, 7.11a/b, 7.13, 8.11, 9.9
+(its c) and d) now after b)), 10.8, 10.12, 13.9 and 14.6, several of
+which said *Part (b) asks…*. Only the asks moved in the two `.cir`
+books, as notes. **Shipped with a full build, the PDFs included at his word**: v9 **418** pages, the Manual **46**, v7 **235** and v8 **223** unchanged; `check: clean`, card truth 15 and 36 panels with none disagreeing; `learn` deployed and verified, v9's PDF hashed live against the build and version 7's and 8's `lesson-dc` word-for-word unchanged. The offline pair at cache **v231** (ZIP 32,044,268 b), the staging copy proved the ZIP's build and the live `sw.js` and both books hashed against it. X47 pushed. Both PythonAnywhere accounts want their pulls.
+
 ## #454 — AS7's Example 10.6 and Practice Problem 10.6: superposition across frequencies — **live 15 Sep 2026**
 
 Roberto asked to see 10.6, parked in #449, and then: *"Punch it. Add both
