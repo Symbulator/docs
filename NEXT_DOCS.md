@@ -3,6 +3,44 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #456 — the Samplers, a book of their own with a PDF per textbook — **live 15 Sep 2026**
+
+Roberto: *"the samplers should be their own thing. In the learn landing page,
+they would be a fourth card: The Samplers. And they should not be part of the
+PDF of the Course."* Then, on one PDF each or one combined: *"Separate PDFs
+is good."* They had been pages 312–416 of the Course's 418, printed after the
+credits.
+
+- **The books.** Both sampler chapters carry `book: samplers` (written by
+  each `chapter_head.md`, so regeneration keeps it). `build.py`'s Course PDF
+  now takes `book == "course"` alone, and a new loop prints one PDF per
+  sampler chapter, `symbulator-<chapter id>.pdf`, with the chapter's title as
+  the subtitle, *Symbulator 9 Samplers* on the title page, and no index.
+- **References across PDFs.** `TexRenderer.in_doc` holds the chapters the
+  document prints; a `{{ref:}}` to one outside it reads *Name (in the
+  Course)* instead of a `\pageref` that printed **page ??**. The samplers'
+  heads point at *Working with input files* in the Course, and **the
+  Manual's PDF had been printing six such ??** since it was first built,
+  unnoticed. Measured over all six PDFs: none left.
+- **learn.** `index.php` has a fourth shelf: `shelf_of` knows `samplers`,
+  a fourth cover (*Working from a particular textbook?*, a teal
+  `--ui-control` stripe, *2 textbooks*), the shelf page `/9/samplers`
+  (bookless, like the Notes: no single PDF is right there), the property
+  mark *Samplers*, and a sampler page's *Download as PDF* naming its own
+  file. The covers go two by two (`minmax(24rem, 1fr)`), since three across
+  left the fourth alone on a row. The addresses `/9/as7-sampler` and
+  `/9/nr12-sampler` are unchanged, so the app links and the split view are
+  too. `static_preview.py` mirrors the mark; `check_ribbon.py` gained the
+  shelf page and a sampler page (12 of 12, locally and on the live host);
+  `Deploy/deploy_targets.ini` verifies both sampler PDFs, the shelf page and
+  the cover.
+- AS7's head said *fifty* three times; the book has fifty-two since #454.
+
+PDFs: the Course (v9) **313** pages, AS7's sampler **57**, NR12's **52**, the
+Manual **46**, v7 **235** and v8 **223** unchanged. Deployed; v9 and both
+sampler PDFs hashed live against the build; version 7's and 8's
+`lesson-dc` byte-identical across the deploy.
+
 ## #455 — lettered questions and lettered answers, both samplers — **live 15 Sep 2026** (*"Punch it. Build everything."*)
 
 Roberto on AS7's Example 19.17: he had read only its last request, *Find

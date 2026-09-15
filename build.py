@@ -1276,6 +1276,12 @@ class TexRenderer:
         self.book, self.v = book, version
         self.terms = book.meta.get("terms", {})
         self.labels = book.labels(version)
+        #: #456: the chapter ids printed in the document being rendered, or
+        #: None for "all of them". A reference to a chapter outside it names
+        #: the book instead of a page, since \pageref to a label the
+        #: document does not contain prints "page ??".
+        self.in_doc = None
+        self.book_of = {ch.id: ch.book for ch in book.chapters}
         self.chapter_no = None
         #: how many tcolorboxes deep we are. A float cannot leave one.
         self.boxdepth = 0
@@ -1305,6 +1311,11 @@ class TexRenderer:
         if n.kind == "ref":
             name, cid, anchor = self.labels.get(n.text, (n.text, "", ""))
             target = anchor or cid
+            if self.in_doc is not None and cid and cid not in self.in_doc:
+                where = {"course": "the Course", "manual": "the Manual",
+                         "samplers": "the Samplers"}.get(
+                             self.book_of.get(cid, "course"), "the Course")
+                return tex_escape(name) + " (in " + where + ")"
             return (tex_escape(name) + r"~(page~\pageref{lbl:" + target + "})")
         if n.kind == "answer_span":
             ltx = answer_math(n.text)
@@ -1792,14 +1803,17 @@ def build_tex(book: Book, versions: list[int], run_pdf=True) -> list[int]:
     for v in versions:
         vm = book.meta["versions"][v]
         r = TexRenderer(book, v)
+        r.in_doc = {ch.id for ch, n, p in book.for_version(v) if ch.book == "course"}
         # #390: the three tutorial PDFs are the *Course*. Nothing else
         # stopped the Manual's parts from being swept into
         # symbulator-v9.pdf -- this renderer takes whatever
         # `for_version` hands it, and the Manual is version 9 material.
         # The Manual gets a PDF of its own when it is finished.
+        # #456: and nothing else -- the samplers are a book of their own
+        # too, printed one PDF per textbook below.
         body = "\n\n\\clearpage\n\n".join(
             r.chapter(ch, n, p) for ch, n, p in book.for_version(v)
-            if ch.book != "manual")
+            if ch.book == "course")
         doc = "\n".join([
             r"\documentclass{symbulator}",
             f"\\booktitle{{{tex_escape(book.meta['title'])}}}",
@@ -1829,6 +1843,7 @@ def build_tex(book: Book, versions: list[int], run_pdf=True) -> list[int]:
         r = TexRenderer(book, 9)
         parts = [(ch, n, p) for ch, n, p in book.for_version(9)
                  if ch.book == "manual"]
+        r.in_doc = {ch.id for ch, n, p in parts}
         if not parts:
             print("tex:  no Manual chapters; skipping symbulator-manual",
                   file=sys.stderr)
@@ -1859,6 +1874,39 @@ def build_tex(book: Book, versions: list[int], run_pdf=True) -> list[int]:
                                            pdfdir):
                 failed.append("manual")
 
+    # #456: the Samplers, one PDF per textbook (Roberto, 15 Sep 2026: a
+    # reader who has one of the books wants that book's examples, and they
+    # were 105 of the Course PDF's 418 pages). Named after the chapter,
+    # symbulator-as7-sampler.pdf, which is what index.php links. No index:
+    # a single chapter is its own table of contents.
+    samplers = []
+    if 9 in versions:
+        vm = book.meta["versions"][9]
+        r = TexRenderer(book, 9)
+        for ch, n, p in book.for_version(9):
+            if ch.book != "samplers":
+                continue
+            stem = f"symbulator-{ch.id}"
+            r.in_doc = {ch.id}
+            sdoc = "\n".join([
+                r"\documentclass{symbulator}",
+                f"\\booktitle{{{tex_escape(book.meta['title'])}}}",
+                f"\\booksubtitle{{{tex_escape(ch.title)}}}",
+                f"\\bookversion{{{tex_escape(vm['name'] + ' Samplers')}}}",
+                f"\\bookplatform{{{tex_escape(vm['platform'])}}}",
+                f"\\bookauthor{{{tex_escape(book.meta['author'])}}}",
+                r"\begin{document}",
+                r"\maketitlepage",
+                r"\tableofcontents",
+                r.chapter(ch, n, p),
+                r"\end{document}", ""])
+            spath = os.path.join(texdir, stem + ".tex")
+            open(spath, "w", encoding="utf-8").write(sdoc)
+            print(f"tex:  {spath}")
+            samplers.append(stem)
+            if run_pdf and not compile_pdf(texdir, stem, pdfdir):
+                failed.append(stem)
+
     if failed:
         missing = ", ".join(f"v{v}" for v in failed)
         print(f"\nNO PDF PRODUCED for {missing}. Anything already in "
@@ -1878,6 +1926,11 @@ def build_tex(book: Book, versions: list[int], run_pdf=True) -> list[int]:
                 shutil.copy2(mbuilt, os.path.join(webdir,
                                                   "symbulator-manual.pdf"))
                 print(f"web:  {os.path.join(webdir, 'symbulator-manual.pdf')}")
+        for stem in samplers:
+            sbuilt = os.path.join(pdfdir, stem + ".pdf")
+            if stem not in failed and os.path.isfile(sbuilt):
+                shutil.copy2(sbuilt, os.path.join(webdir, stem + ".pdf"))
+                print(f"web:  {os.path.join(webdir, stem + '.pdf')}")
         for v in versions:
             if v in failed:
                 continue

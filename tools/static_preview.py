@@ -50,6 +50,8 @@ def _mark(toc, page=""):
         if c.get("id") == page:
             if (c.get("book") or "course") == "manual":
                 return "Manual"
+            if (c.get("book") or "course") == "samplers":
+                return "Samplers"
             if c.get("kind") == "note":
                 return "Technical Notes"
             return "Course"

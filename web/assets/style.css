@@ -894,7 +894,9 @@ figcaption {
 .shelves {
   max-width: 66rem; margin: 0.6rem auto 0;
   display: grid; gap: 2.6rem 2.2rem;
-  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  /* #456: four books, two by two -- three across left the fourth alone
+     on a row of its own. */
+  grid-template-columns: repeat(auto-fit, minmax(24rem, 1fr));
 }
 .shelf { display: flex; flex-direction: column; }
 .shelf-lede {
@@ -936,6 +938,7 @@ figcaption {
    three are told apart at a glance. */
 .cover-manual { border-top-color: var(--ui-tool); }
 .cover-notes  { border-top-color: var(--ink-3); }
+.cover-samplers { border-top-color: var(--ui-control); }
 
 /* ---------------------------------------------------------- #390 ----
    The chooser: two books on one site, at the top of the version 9 home

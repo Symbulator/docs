@@ -1,18 +1,19 @@
 ---
 id: as7-sampler
 kind: back
+book: samplers
 title: Examples from Alexander & Sadiku 7e
 versions: [9]
 updated: 2026-09-14
 summary: >
-  Fifty worked examples from *Fundamentals of Electric Circuits*, each described
+  Fifty-two worked examples from *Fundamentals of Electric Circuits*, each described
   in Symbulator and checked against the answer the book prints.
 ---
 
 Here is a selection of problems from *Fundamentals of Electric Circuits*, 7th
 edition, by Charles K. Alexander and Matthew N. O. Sadiku (McGraw-Hill). The
 Course's own lessons already draw many of their problems from this book, and
-none of the fifty here repeats one of theirs. These are not the easiest
+none of the fifty-two here repeats one of theirs. These are not the easiest
 problems in the book, but they are well suited to showing what Symbulator can
 do, since they are the ones where the distance between *describing a circuit*
 and *solving it by hand* is widest. The book works each of them by a named
@@ -45,7 +46,7 @@ book's.
 
 ### Every circuit is in the app already {#as7-entries}
 
-Nothing here has to be typed. All fifty circuits ship with Symbulator as a
+Nothing here has to be typed. All fifty-two circuits ship with Symbulator as a
 built-in example book. Open {{card:Built-in Examples}} and pick
 *Alexander & Sadiku 7ed* from the list of books. The entries are named for the
 example each one comes from, and each arrives with its note, its picture, its

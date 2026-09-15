@@ -1,6 +1,7 @@
 ---
 id: nr12-sampler
 kind: back
+book: samplers
 title: Examples from Nilsson & Riedel 12e
 versions: [9]
 updated: 2026-09-12

@@ -33,7 +33,7 @@ $ids = array_column($toc['chapters'], 'id');
    No .htaccess rule is needed: the rewrite already routes any slug to
    `p=`, and no chapter owns these three names. Versions 7 and 8 have one
    book and no shelf pages. */
-$SHELVES = array('course', 'manual', 'notes');
+$SHELVES = array('course', 'manual', 'notes', 'samplers');
 $shelf = ($v === '9' && in_array($page, $SHELVES, true)) ? $page : '';
 
 /* Which shelf a chapter sits on. The technical notes are `book: course`
@@ -42,6 +42,8 @@ $shelf = ($v === '9' && in_array($page, $SHELVES, true)) ? $page : '';
    the pager and the property mark, so none of them can disagree. */
 function shelf_of($c) {
     if (($c['book'] ?? 'course') === 'manual') { return 'manual'; }
+    /* #456: the textbook samplers, a book of their own. */
+    if (($c['book'] ?? 'course') === 'samplers') { return 'samplers'; }
     if (($c['kind'] ?? '') === 'note')         { return 'notes'; }
     return 'course';
 }
@@ -52,6 +54,7 @@ function on_shelf($chapters, $name) {
 $courseCards = on_shelf($toc['chapters'], 'course');
 $manCards    = on_shelf($toc['chapters'], 'manual');
 $noteCards   = on_shelf($toc['chapters'], 'notes');
+$samplerCards = on_shelf($toc['chapters'], 'samplers');
 
 /* The Manual's cover counts its numbered Parts. `manual-back` -- the
    credits -- sits on the Manual's shelf but carries no Part number, so
@@ -61,7 +64,7 @@ $manualParts = count(array_filter($manCards,
     function ($c) { return ($c['kind'] ?? '') === 'manual'; }));
 
 $SHELF_NAME = array('course' => 'Course', 'manual' => 'Manual',
-                    'notes'  => 'Technical Notes');
+                    'notes'  => 'Technical Notes', 'samplers' => 'Samplers');
 
 $isHome = ($page === '');
 $isIndex = ($page === 'index');
@@ -142,7 +145,10 @@ $inManual = ($v === '9') && $thisShelf === 'manual';
    book, no ambiguity -- keep every link they have. An individual note
    page is a chapter and is not bookless: it prints in symbulator-v9.pdf
    at its own page and opens in the split view correctly. */
-$bookless = ($v === '9') && ($isHome || $shelf === 'notes');
+/* #456: the Samplers shelf is bookless too -- it holds one PDF per
+   textbook, so no single "Download as PDF" is right there. */
+$bookless = ($v === '9') && ($isHome || $shelf === 'notes' || $shelf === 'samplers');
+$inSampler = ($v === '9') && $thisShelf === 'samplers' && $current;
 $bookName = ($v === '9') ? $SHELF_NAME[$thisShelf] : 'Tutorial';
 /* The property mark is spaced capitals in a narrow band. It used to take
    the short name "Notes" on the grounds that TECHNICAL NOTES "cannot be
@@ -155,9 +161,9 @@ $bookName = ($v === '9') ? $SHELF_NAME[$thisShelf] : 'Tutorial';
    so it stays long. Both spellings are emitted and the stylesheet shows
    one, the same idiom as .vkey-full/.vkey-num. */
 $MARK_NAME  = array('course' => 'Course', 'manual' => 'Manual',
-                    'notes'  => 'Technical Notes');
+                    'notes'  => 'Technical Notes', 'samplers' => 'Samplers');
 $MARK_SHORT = array('course' => 'Course', 'manual' => 'Manual',
-                    'notes'  => 'Notes');
+                    'notes'  => 'Notes', 'samplers' => 'Samplers');
 $propertyMark = ($v === '9')
               ? ($isHome ? 'Documentation' : $MARK_NAME[$thisShelf])
               : 'Documentation';
@@ -284,7 +290,8 @@ function asset(string $name): string {
                  $bookless, defined above. */ ?>
 <?php if (!$bookless): ?>
         <a href="<?= $inManual ? '/symbulator-manual.pdf'
-                               : '/symbulator-v' . e($v) . '.pdf' ?>">Download as PDF</a>
+                    : ($inSampler ? '/symbulator-' . e($current['id']) . '.pdf'
+                               : '/symbulator-v' . e($v) . '.pdf') ?>">Download as PDF</a>
 <?php endif; ?>
         <a href="https://symbulator.pythonanywhere.com">Online App</a>
 <?php if ($v === '9'): ?>
@@ -569,7 +576,8 @@ function asset(string $name): string {
   <?php
     /* A shelf page: one book, its chapters, nothing else. */
     $cards = $shelf === 'manual' ? $manCards
-           : ($shelf === 'notes' ? $noteCards : $courseCards);
+           : ($shelf === 'notes' ? $noteCards
+           : ($shelf === 'samplers' ? $samplerCards : $courseCards));
   ?>
   <div class="tn-divider tn-first">
     <h2 class="tn-heading">
@@ -603,6 +611,13 @@ function asset(string $name): string {
                     . 'input files, SI prefixes, every control in '
                     . 'Settings. Optional reading; nothing else depends '
                     . 'on them.'),
+      /* #456, Roberto, 15 Sep 2026: the samplers are their own thing. */
+      array('id' => 'samplers', 'name' => 'Samplers',
+            'meta' => count($samplerCards) . ' textbooks',
+            'lede' => 'Working from a particular textbook?',
+            'body' => 'A selection of its examples, each described in Symbulator '
+                    . 'and checked against the answer the book prints. '
+                    . 'One per textbook, each with its own PDF.'),
     );
   ?>
   <div class="shelves">
@@ -646,7 +661,7 @@ function asset(string $name): string {
           if ($c['present']) { $ixShelves[shelf_of($c)] = true; }
       }
       $ixMulti = count($ixShelves) > 1;
-      $IX_BOOK = array('course' => 'Course', 'manual' => 'Manual', 'notes' => 'Notes');
+      $IX_BOOK = array('course' => 'Course', 'manual' => 'Manual', 'notes' => 'Notes', 'samplers' => 'Samplers');
     ?>
     <ul class="book-index">
       <?php foreach ($toc['index'] as $term => $spots): ?>
