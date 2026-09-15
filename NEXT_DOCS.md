@@ -3,6 +3,8 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #461 — claimed by the app tree, 15 Sep 2026: **the collaboration dated *August and September 2026*** in the app's *About Symbulator 9* paragraph. No docs change; the credits' *"In August 2026, I shared an early version"* dates a single event and stays. Write-up in `Application/v9/repos/local/NEXT.md`.
+
 ## #460 — samplers: SI prefixes, time-domain sources, 11.14's power factor, two closing notes, crops — **live 15 Sep 2026**
 
 Roberto's round after #457, shipped with #459 at *"punch it … including the PDFs"*.
