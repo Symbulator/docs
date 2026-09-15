@@ -1096,14 +1096,15 @@ dict(num="13.6", title="Creating a Thevenin Equivalent in the s Domain",
          "closes. Find the Thevenin equivalent for the circuit to the left of the terminals "
          "a and b in the s domain.",
      page=521, fig=(521, "13.20"), kind="th", n1="a", n2="0", domain="fd",
-     desc="e,1,0,480/s:r1,1,2,20:l,2,0,0.002:r2,2,a,60",
+     desc="e,1,0,{480u(t)}:r1,1,2,20:l,2,0,0.002:r2,2,a,60",
      expect={"vth": "480/(s + 10000)", "z": "80*(s + 7500)/(s + 10000)"},
      booknames={"vth": "V_{Th}", "z": "Z_{Th}"},
      shows="The circuit is a source switched at $t$ = 0 onto two resistors and an "
            "inductor, and the question wants the Thévenin equivalent of that part of "
            "the circuit, seen from two terminals, as functions of $s$. The 480 V "
-           "source switched on at $t$ = 0 is a step, whose transform is $480/s$, so we "
-           "write its value as `480/s`. We call the terminals a and b node **a** and "
+           "source switched on at $t$ = 0 is a step, $480u(t)$ V, so we type it as a "
+           "function of time inside curly brackets, `{480u(t)}`, and FD converts it to "
+           "the $s$ domain. We call the terminals a and b node **a** and "
            "ground, and name them to the {{card:Find equivalent}} card with *Thévenin "
            "/ Norton* chosen. The card works in FD as it does in DC and AC, and "
            "returns the equivalent's voltage and impedance as functions of $s$. We "

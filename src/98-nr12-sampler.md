@@ -1792,10 +1792,10 @@ Nilsson & Riedel, 12th edition — the circuit for Example 13.6
 :::
 
 ::: answer
-The circuit is a source switched at $t$ = 0 onto two resistors and an inductor, and the question wants the Thévenin equivalent of that part of the circuit, seen from two terminals, as functions of $s$. The 480 V source switched on at $t$ = 0 is a step, whose transform is $480/s$, so we write its value as `480/s`. We call the terminals a and b node **a** and ground, and name them to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen. The card works in FD as it does in DC and AC, and returns the equivalent's voltage and impedance as functions of $s$. We leave out the capacitor to the right of the terminals, since the question asks for the equivalent seen from them.
+The circuit is a source switched at $t$ = 0 onto two resistors and an inductor, and the question wants the Thévenin equivalent of that part of the circuit, seen from two terminals, as functions of $s$. The 480 V source switched on at $t$ = 0 is a step, $480u(t)$ V, so we type it as a function of time inside curly brackets, `{480u(t)}`, and FD converts it to the $s$ domain. We call the terminals a and b node **a** and ground, and name them to the {{card:Find equivalent}} card with *Thévenin / Norton* chosen. The card works in FD as it does in DC and AC, and returns the equivalent's voltage and impedance as functions of $s$. We leave out the capacitor to the right of the terminals, since the question asks for the equivalent seen from them.
 
 ```field 9 Circuit Description
-e,1,0,480/s
+e,1,0,{480u(t)}
 r1,1,2,20
 l,2,0,0.002
 r2,2,a,60
