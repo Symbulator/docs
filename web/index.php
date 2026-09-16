@@ -966,6 +966,37 @@ document.addEventListener('click', function (ev) {
                        title: head ? head.textContent.trim() : '' }, '*');
 })();
 </script>
+<script>
+// ::: photos -- flip through a set of photographs, one shown at a time
+// (Roberto, 16 Sep 2026). Every photo and caption is in the page already,
+// all but the first hidden, so a reader with no JavaScript sees the same
+// single photograph the PDFs print and loses only the flipping.
+(function () {
+  document.querySelectorAll('figure.photos[data-photos]').forEach(function (fig) {
+    var imgs = fig.querySelectorAll('.photo-stage img');
+    var caps = fig.querySelectorAll('.photo-cap');
+    var dots = fig.querySelectorAll('.photo-dot');
+    var at = 0;
+    function show(i) {
+      at = (i + imgs.length) % imgs.length;
+      imgs.forEach(function (el, n) { el.hidden = n !== at; });
+      caps.forEach(function (el, n) { el.hidden = n !== at; });
+      dots.forEach(function (el, n) { el.classList.toggle('on', n === at); });
+    }
+    fig.querySelectorAll('.photo-step').forEach(function (b) {
+      b.addEventListener('click', function () {
+        show(at + parseInt(b.getAttribute('data-step'), 10));
+      });
+    });
+    dots.forEach(function (b) {
+      b.addEventListener('click', function () {
+        show(parseInt(b.getAttribute('data-go'), 10));
+      });
+    });
+    show(0);
+  });
+})();
+</script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"
   onload="renderMathInElement(document.body,{delimiters:[

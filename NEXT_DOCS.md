@@ -3,6 +3,78 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #463 — the credits photographs, flippable — **built, waiting on two files**
+
+Roberto, 16 Sep 2026: the credits carried one photograph, from 1999. He
+wants three — that one, his MIT graduation, and a later one — and wants
+the reader able to flip between them.
+
+**Done and driven in a browser**, with the 1999 photo copied twice as
+stand-ins (since deleted):
+
+- `::: photos` in `build.py`, one photo per line as `path | caption`. The
+  body is kept raw, the way `::: result` is.
+- The web renders the set as one figure: every photo and caption in the
+  page, all but the first `hidden`, with prev/next and a dot per photo.
+  Exactly one shown at each step, the dots tracking, wrapping both ways;
+  the stage holds a constant height so the page does not jump on a flip.
+  Without JavaScript the reader sees the first photo and loses only the
+  flipping.
+- **The PDFs print the first photograph alone** — Roberto's call: a
+  printed book cannot flip, and three portraits in all three books is
+  not worth the page.
+- **A single-photo block renders as a plain figure with no controls**, so
+  the directive degrades to `::: figure`. That is the form in the tree
+  now, which is why nothing is broken while the photographs are awaited.
+
+**#249 was live in this for one build and caught before it shipped:**
+`figure img { display: block }` is an author rule and beats the
+browser's own `[hidden] { display: none }`, so setting `img.hidden`
+would have left all three photos stacked on the page. `style.css` now
+says `display: none !important` for them, with the reason beside it.
+
+The opening paragraph lost its prose chronology at his word — the
+timeline of #462 says it all — trimmed rather than cut whole so his name
+link and the Azuero link survive.
+
+**What is left:** two files, `assets/photo/roberto_2008_mit.jpg` and
+`assets/photo/roberto_2026.jpg`, then two lines in `src/99-credits.md`,
+a full build (the credits chapter is typeset into all three PDFs) and a
+`learn` deploy. The Manual's own credits page still carries the old
+dates in prose and he has not asked for it to change.
+
+## #462 — the timeline, in both books, from one source — **live 16 Sep 2026**
+
+Every version and milestone dated, written once in `paper/timeline.tsv`
+and rendered by `tools/gen_timeline.py` into *Roll the credits* (a table
+under *A timeline*, after the opening paragraph and the photograph) and
+into the monograph's §1.8, *The dates*, closing *A history of
+Symbulator*. `build.py --check` runs the guard and was proved red on
+both renderings.
+
+**The docs markup has no comment syntax**, so an HTML marker renders on
+the page as visible `&lt;!-- … --&gt;` text — it did, for one build. The
+markdown region is delimited by its own heading and the next one; only
+the LaTeX keeps markers.
+
+Roberto is the source (his instruction): no provenance column, no
+document links. Four primary sources joined the archive the same day —
+the paper as a PDF, *El NoticIEEEro* of December 2000, *BURAN* nº 17 of
+September 2001, and the colour scan of the IEEE certificate, which is
+now what the monograph's Appendix A prints. They settle the paper's own
+chronology: written November 1999, awarded October 2000, published in
+Panama that December and in Barcelona in September 2001.
+
+**Version 3 is the one date still missing**, and no code survives to date
+it — `github.com/Symbulator/calculator` starts at v4. The two plug-in
+rows are the evidence for when the name changed: *Elect SCS* in October
+1999 is still SCS, *Power Tools* in May 2000 is Symbulator.
+
+Live: the Course 314 pages, monograph 53, v7 235, v8 223, Manual 46,
+samplers 57 and 52, all hash-verified against the local build; 7 and 8
+proved identical in markup and visible text on every page but their
+credits, which gained the table as intended.
+
 ## #461 — claimed by the app tree, 15 Sep 2026: **the collaboration dated *August and September 2026*** in the app's *About Symbulator 9* paragraph. No docs change; the credits' *"In August 2026, I shared an early version"* dates a single event and stays. Write-up in `Application/v9/repos/local/NEXT.md`.
 
 ## #460 — samplers: SI prefixes, time-domain sources, 11.14's power factor, two closing notes, crops — **live 15 Sep 2026**

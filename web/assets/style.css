@@ -833,6 +833,51 @@ figcaption {
   margin-top: 0.55rem; text-align: center;
   font-family: var(--sans); font-size: 0.78rem; color: var(--ink-3);
 }
+/* ::: photos -- a set of photographs the reader flips through, one at a
+   time (Roberto, 16 Sep 2026). The PDFs print the first alone, so this is
+   web-only furniture. The stage holds every photo stacked, one shown; it
+   keeps the height of the tallest so the page does not jump on a flip.
+   A photograph is not line art, so it takes none of the dark-mode white
+   framing the circuit figures get above. */
+figure.photos .photo-stage {
+  display: grid; justify-items: center;
+}
+figure.photos .photo-stage img {
+  grid-area: 1 / 1; border-radius: 8px;
+  max-width: min(100%, 22rem);
+}
+/* `figure img { display: block }` above is an AUTHOR rule, and an author
+   display beats the browser's own `[hidden] { display: none }` -- so
+   setting `img.hidden` in the script would leave every photo stacked on
+   screen. That is #249, which bit the app three times; the guard is
+   explicit here rather than trusted. */
+figure.photos .photo-stage img[hidden],
+figure.photos .photo-cap[hidden] { display: none !important; }
+html[data-theme="dark"] figure.photos img { background: none; padding: 0; }
+figure.photos .photo-nav {
+  display: inline-flex; align-items: center; gap: 0.3rem;
+  margin-left: 0.6rem; vertical-align: middle;
+}
+figure.photos .photo-step,
+figure.photos .photo-dot {
+  border: 0; background: none; padding: 0; cursor: pointer;
+  color: var(--accent); font-family: var(--sans);
+}
+figure.photos .photo-step {
+  font-size: 1.15rem; line-height: 1; padding: 0 0.15rem;
+}
+figure.photos .photo-step:hover { color: var(--accent-dk); }
+figure.photos .photo-dot {
+  width: 7px; height: 7px; border-radius: 50%;
+  background: var(--rule); transition: background 0.15s;
+}
+figure.photos .photo-dot.on { background: var(--accent); }
+figure.photos .photo-dot:hover { background: var(--accent-dk); }
+figure.photos .photo-step:focus-visible,
+figure.photos .photo-dot:focus-visible {
+  outline: 2px solid var(--accent); outline-offset: 2px;
+}
+
 .mathblock { margin: 1.2rem 0; overflow-x: auto; }
 
 /* ---------------------------------------------------------------- home --- */

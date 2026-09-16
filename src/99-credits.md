@@ -9,10 +9,10 @@ summary: >
 
 ## Who made Symbulator {#about-the-author}
 
-Symbulator and its documentation, in all its versions up to this date, have been made by me, [**Roberto Perez-Franco**](http://roberto.perez-franco.com). I started coding it on 30 March 1999, when I was an engineering student at the Technological University of Panama (Universidad Tecnológica de Panamá) in [Azuero](https://ls.utp.ac.pa/). The first public release, version 0.92, went onto the Internet on 2 April 1999, three days after the first line of code, and version 0.994 — the equivalent of version 1 — came out on 29 May 1999. An early version won first place at the IEEE Student Paper Contest for Latin America in 2000, and version 5 (a.k.a. Q) served as my graduation thesis in July 2001. Version 6 came in 2013, while I was a researcher at MIT in the United States. Versions 7 and 8 came a decade later, in 2023, when I was in Melbourne Australia. This version 9 was made in 2026. 
+Symbulator and its documentation, in all its versions up to this date, have been made by me, [**Roberto Perez-Franco**](http://roberto.perez-franco.com). I started coding it as an engineering student at the Technological University of Panama (Universidad Tecnológica de Panamá) in [Azuero](https://ls.utp.ac.pa/), and the timeline below has the dates.
 
-::: figure assets/photo/roberto_2000_ti89.jpg
-Roberto in 2000, with a TI-89
+::: photos
+assets/photo/roberto_2000_ti89.jpg | Roberto in 2000, with a TI-89
 :::
 
 ### A timeline

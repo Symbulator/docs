@@ -237,7 +237,24 @@ class SourceError(Exception):
 
 DIRECTIVES = {"tip", "note", "warning", "danger", "figure", "problem",
               "answer", "practice", "only", "not", "web", "pdf", "address",
-              "result", "applink"}
+              "result", "applink", "photos"}
+
+
+def photo_rows(text: str):
+    """The `path | caption` lines of a ::: photos block, in order.
+
+    The first is the one the PDF prints: a printed book cannot flip
+    (Roberto, 16 Sep 2026), so the web gets the set and the books keep
+    the single photograph they have always had.
+    """
+    rows = []
+    for line in text.splitlines():
+        line = line.strip()
+        if not line:
+            continue
+        src, _, cap = line.partition("|")
+        rows.append((src.strip(), cap.strip()))
+    return rows
 
 #: The label a ::: result panel shows over an answer, from the name in
 #: front of it (#276) -- the app's own words, from _ELEMENT_KEYS and
@@ -404,7 +421,7 @@ def parse_blocks(lines: list[str], path: str, depth: int = 0) -> list[Node]:
         if m and m.group(1) in DIRECTIVES:
             name, arg = m.group(1), m.group(2).strip()
             inner, consumed = collect_directive(lines[i + 1:], path, depth + 1)
-            if name == "result":            # #276: the body is LaTeX, kept raw
+            if name in ("result", "photos"):  # #276, and one photo per line
                 node = Node(name, arg=arg, text="\n".join(l for l in inner if l.strip()))
             else:
                 node = Node(name, arg=arg, children=parse_blocks(inner, path, depth + 1))
@@ -1085,6 +1102,39 @@ class HtmlRenderer:
             return (f'<figure><img src="{html.escape(site_path(b.arg))}"'
                     f' alt=""{style}>'
                     f'<figcaption>{cap}</figcaption></figure>')
+        if k == "photos":
+            # A set of photographs the reader flips through, one shown at a
+            # time (Roberto, 16 Sep 2026). One photo per line, `path |
+            # caption`. A single photo renders as a plain figure with no
+            # controls, so the directive degrades to `::: figure`.
+            rows = photo_rows(b.text)
+            if not rows:
+                return ""
+            imgs = "".join(
+                f'<img src="{html.escape(site_path(src))}" alt=""'
+                f'{"" if i == 0 else " hidden"}>'
+                for i, (src, _cap) in enumerate(rows))
+            caps = "".join(
+                f'<span class="photo-cap"{"" if i == 0 else " hidden"}>'
+                f'{self.inline(cap)}</span>'
+                for i, (_src, cap) in enumerate(rows))
+            if len(rows) == 1:
+                return (f'<figure class="photos">{imgs}'
+                        f'<figcaption>{caps}</figcaption></figure>')
+            dots = "".join(
+                f'<button class="photo-dot{" on" if i == 0 else ""}"'
+                f' data-go="{i}" aria-label="Photo {i + 1}"></button>'
+                for i in range(len(rows)))
+            return (f'<figure class="photos" data-photos="{len(rows)}">'
+                    f'<div class="photo-stage">{imgs}</div>'
+                    f'<figcaption><span class="photo-caps">{caps}</span>'
+                    f'<span class="photo-nav">'
+                    f'<button class="photo-step" data-step="-1"'
+                    f' aria-label="Previous photo">&#8249;</button>'
+                    f'{dots}'
+                    f'<button class="photo-step" data-step="1"'
+                    f' aria-label="Next photo">&#8250;</button>'
+                    f'</span></figcaption></figure>')
         if k == "problem":
             pid, links = self.problem_furniture(b)
             return (f'<section class="problem"{pid}><p class="problem-title">'
@@ -1478,6 +1528,26 @@ class TexRenderer:
             return (f"\\begin{{figure}}[{FIGURE_FLOAT}]\\centering\n"
                     f"{img}\n"
                     f"\\caption{{{cap}}}\n\\end{{figure}}")
+        if k == "photos":
+            # The books print the first photograph alone, as a plain
+            # figure: a PDF cannot flip, and Roberto's call (16 Sep 2026)
+            # is that the set is a web extra rather than a page of
+            # portraits in all three books.
+            rows = photo_rows(b.text)
+            if not rows:
+                return ""
+            src, cap = rows[0]
+            src = (src if src.lower().endswith((".png", ".jpg", ".jpeg"))
+                   else os.path.splitext(src)[0])
+            w_mm, _h = figure_size_mm(rows[0][0])
+            img = (f"\\symfig{{{w_mm:.1f}}}{{{src}}}" if w_mm
+                   else f"\\includegraphics[width=\\figwidth]{{{src}}}")
+            cap = self.inline(cap)
+            if self.boxdepth:
+                return ("\\begin{symfigure}\n"
+                        f"{img}\n\\caption{{{cap}}}\n\\end{{symfigure}}")
+            return (f"\\begin{{figure}}[{FIGURE_FLOAT}]\\centering\n"
+                    f"{img}\n\\caption{{{cap}}}\n\\end{{figure}}")
         if k == "problem":
             # #171: a problem's title must not be the last thing on a
             # page. The plain \\needspace, not the starred
