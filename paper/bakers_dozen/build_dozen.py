@@ -1,8 +1,8 @@
-"""The Golden Dozen (#464): twelve solved examples from the documentation
-and a bonus, laid out as HTML and printed to paper/the_golden_dozen.pdf
+"""A Baker's Dozen (#464): twelve solved examples from the documentation
+and a bonus, laid out as HTML and printed to paper/the_bakers_dozen.pdf
 by Microsoft Edge. build.py ships that PDF as learn.symbulator.com/dozen.pdf.
 
-    py paper\\golden_dozen\\build_dozen.py
+    py paper\\bakers_dozen\\build_dozen.py
 
 The circuit descriptions are read from the app tree's built-in examples,
 so they cannot drift from what the links open. The answers are written
@@ -20,7 +20,7 @@ DOCS = os.path.dirname(os.path.dirname(HERE))
 ROOT = os.path.dirname(DOCS)
 EX = os.path.join(ROOT, "Application", "v9", "repos", "server", "examples")
 ASSETS = os.path.join(DOCS, "assets")
-OUT = os.path.join(DOCS, "paper", "the_golden_dozen.pdf")
+OUT = os.path.join(DOCS, "paper", "the_bakers_dozen.pdf")
 EDGE = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 APP = "https://symbulator.pythonanywhere.com/"
 
@@ -258,7 +258,7 @@ def main():
 <section class="cover">
   <div class="logochip"><img class="logo" src="file:///{DOCS.replace(chr(92), '/')}/web/assets/logo.png"></div>
   <div class="brand">Symbulator 9</div>
-  <h1>The Golden Dozen</h1>
+  <h1>A Baker's Dozen</h1>
   <p class="sub">Twelve solved examples from the documentation, and a bonus</p>
   <p class="intro">Each of these circuits looks like an afternoon's work by hand.
   Symbulator solves each one in a single run, or in two when a switch splits
@@ -269,10 +269,10 @@ def main():
   <ol class="toc">{toc}</ol>
 </section>"""]
     for i, p in enumerate(P, 1):
-        body.append(page(p, f"Golden {i} of 12"))
+        body.append(page(p, f"Sample {i} of 12"))
     body.append(page(BONUS, "Bonus"))
     doc = f"""<!doctype html><html><head><meta charset="utf-8">
-<title>The Golden Dozen</title>
+<title>A Baker's Dozen</title>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600;700&family=IBM+Plex+Serif:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css">
 <script src="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.js"></script>
@@ -289,8 +289,8 @@ document.addEventListener("DOMContentLoaded", function () {{
 }});
 </script>
 </body></html>"""
-    tmp = tempfile.mkdtemp(prefix="golden_dozen_")
-    page_path = os.path.join(tmp, "golden.html")
+    tmp = tempfile.mkdtemp(prefix="bakers_dozen_")
+    page_path = os.path.join(tmp, "bakers.html")
     io.open(page_path, "w", encoding="utf-8").write(doc)
     if os.path.exists(OUT):
         os.remove(OUT)

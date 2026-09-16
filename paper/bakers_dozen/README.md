@@ -1,4 +1,4 @@
-# The Golden Dozen (#464)
+# A Baker's Dozen (#464)
 
 A 14-page PDF of twelve solved examples from Symbulator 9's documentation,
 plus a bonus. It is served at **https://learn.symbulator.com/dozen.pdf** and
@@ -19,8 +19,10 @@ why it is what it is.
   two when a switch splits the problem into intervals. Three intervals
   breaks the rule.
 - **No two problems of the same type.** Each one makes a different point.
-- Title *The Golden Dozen*, "even though it's 13, because mine is a bonus".
-  His problem is the bonus, titled **"A freebie, on the house"** at his
+- Title **A Baker's Dozen** (Roberto, 17 Sep 2026): thirteen, the
+  thirteenth being his. It was first titled for a plain dozen, "even though
+  it's 13, because mine is a bonus". Each page's kicker reads *Sample N of
+  12*, and the bonus page's reads *Bonus*. His problem is the bonus, titled **"A freebie, on the house"** at his
   word. The page still names it as Lesson 3's Showing-off Problem so a
   reader can find it in the Course.
 
@@ -66,7 +68,7 @@ why it is what it is.
 - `build_dozen.py` holds the whole selection: the question, the *Why it is
   here* line, the settings line and the answers for each problem. It lays
   them out as HTML in the docs palette (`style.css`) and prints
-  `paper/the_golden_dozen.pdf` through Microsoft Edge, headless. **It needs
+  `paper/the_bakers_dozen.pdf` through Microsoft Edge, headless. **It needs
   the network**, for IBM Plex and KaTeX from their CDNs.
 - **The circuit descriptions are not typed here.** They are read from the
   app tree's `.cir` entries by book and position, so they cannot drift from
@@ -85,7 +87,7 @@ why it is what it is.
 
 ## Changing the selection
 
-1. **Run `py paper\golden_dozen\check_dozen.py` first.** It fails if any
+1. **Run `py paper\bakers_dozen\check_dozen.py` first.** It fails if any
    entry has moved in its `.cir` (EXPECT pins each position to its title)
    or no longer solves. It also prints the app's answers beside the
    booklet's for a person to compare. It was proved red on 16 Sep 2026 by
@@ -96,14 +98,14 @@ why it is what it is.
    Keep the brief: one or two runs, a point no other entry makes.
 3. **If an entry moved**, fix its position in both files. Positions shift
    whenever an entry is inserted above one in a `.cir` book.
-4. **Rebuild:** `py paper\golden_dozen\build_dozen.py`, then read the pages
+4. **Rebuild:** `py paper\bakers_dozen\build_dozen.py`, then read the pages
    back (a new figure can overflow a page), then `py build.py --web` and a
    `learn` deploy.
 5. **If the page count or size changes**, update the *Get a taste* item in
    `Documentation/landing/index.html`, which says *PDF, 1.0 MB, 14 pages*,
    and deploy `landing` too.
 6. **If the count stops being twelve plus a bonus**, the title, the
-   cover's *Golden N of 12* kickers and the landing blurb all say so.
+   cover's *Sample N of 12* kickers and the landing blurb all say so.
 
 ## Things worth knowing
 

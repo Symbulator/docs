@@ -1,6 +1,6 @@
-"""Check The Golden Dozen against the app, before trusting or rebuilding it.
+"""Check A Baker's Dozen against the app, before trusting or rebuilding it.
 
-    py paper\\golden_dozen\\check_dozen.py
+    py paper\\bakers_dozen\\check_dozen.py
 
 Two things can go stale without anyone touching this folder, and this
 catches both:

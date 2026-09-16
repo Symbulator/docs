@@ -1832,14 +1832,14 @@ def build_web(book: Book, versions: list[int]):
             "Documentation/paper/ (twice, for the TOC), or the site would "
             "ship a dead link.")
     shutil.copy2(symbook, os.path.join(outroot, "book.pdf"))
-    # The Golden Dozen (#464) -- twelve solved examples and a bonus,
-    # printed by paper/golden_dozen/build_dozen.py -- ships as dozen.pdf,
+    # A Baker's Dozen (#464) -- twelve solved examples and a bonus,
+    # printed by paper/bakers_dozen/build_dozen.py -- ships as dozen.pdf,
     # and the landing page links it.
-    dozen = os.path.join(ROOT, "paper", "the_golden_dozen.pdf")
+    dozen = os.path.join(ROOT, "paper", "the_bakers_dozen.pdf")
     if not os.path.isfile(dozen):
         raise SystemExit(
             f"build.py: {dozen} is missing. Build it with "
-            "py paper/golden_dozen/build_dozen.py, or the landing page "
+            "py paper/bakers_dozen/build_dozen.py, or the landing page "
             "would carry a dead link.")
     shutil.copy2(dozen, os.path.join(outroot, "dozen.pdf"))
     # The monograph's exemplars as a Jupyter notebook (#316): built and
