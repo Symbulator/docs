@@ -1,0 +1,34 @@
+# The Symbulator timeline — the one source for both renderings.
+#
+# Two columns, tab-separated: the date as it should read, and the event.
+# `py Documentation\tools\gen_timeline.py` writes this table into both
+# books, between their TIMELINE:BEGIN / TIMELINE:END markers:
+#
+#   Documentation/src/99-credits.md      the Roll the credits chapter
+#   Documentation/paper/symbulator_monograph.tex   chapter 1's chronology
+#
+# `--check` compares the two against this file and is run by
+# `build.py --check`, so an edit here that is never regenerated fails the
+# build rather than shipping two books that disagree.
+#
+# Roberto is the source. Do not add a provenance column and do not link
+# documents from the table (his instruction, 16 Sep 2026).
+#
+30 March 1999	The first line of code, at the Technological University of Panama in Azuero.
+2 April 1999	Version 0.92, the first public release, goes onto the Internet.
+29 May 1999	Version 0.994 — the equivalent of version 1.
+19 August 1999	Version 2, presented in person for the first time, at UTP Azuero.
+October 1999	The Elect SCS plug-in. The program is still called SCS.
+November 1999	The paper is written.
+Late 1999 or early 2000	Version 3.
+14 May 2000	The Power Tools plug-in. The program is now called Symbulator.
+October 2000	First place, IEEE Region 9 Student Paper Competition.
+December 2000	The paper is published in Panama, in the bulletin of the IEEE section.
+9 January 2001	Version 4.
+30 March 2001	Version 5, called Q.
+9 July 2001	The thesis is defended, and graded 100 out of 100.
+September 2001	The paper is published in Barcelona, in the magazine of the IEEE student branch.
+June 2013	Version 6, written at MIT.
+July 2023	Versions 7 and 8, written in Melbourne.
+13 August 2026	The symbulator package goes onto PyPI.
+28 August 2026	Version 9, a public beta.

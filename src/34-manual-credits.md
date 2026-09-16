@@ -14,7 +14,9 @@ summary: >
 Symbulator and its documentation are the work of
 [**Roberto Perez-Franco**](http://roberto.perez-franco.com), begun on
 **30 March 1999** as an engineering student at the Technological University
-of Panama.
+of Panama. The first public release, version 0.92, went onto the
+Internet on 2 April 1999, and version 0.994 — the equivalent of version 1 —
+came out on 29 May 1999.
 
 An early version won first place at the IEEE Student Paper Contest for Latin
 America in 2000; version 5 was his graduation thesis in 2001. Version 6 came

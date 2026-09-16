@@ -31,6 +31,7 @@ from check_palette import check_palette  # noqa: E402  (needs sys.path set first
 from stamp_assets import check_asset_stamps  # noqa: E402
 from check_control_chars import check_control_chars  # noqa: E402
 from check_index import check_index  # noqa: E402  (#422: the back-of-book index)
+from gen_timeline import check_timeline  # noqa: E402  (the dates, in both books)
 import app_links  # noqa: E402  (#224: the app link on every worked problem)
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -2021,6 +2022,11 @@ def check(book: Book, versions: list[int], verbose: bool = False) -> int:
     # survives every other check; chapter 9 shipped with one.
     problems.extend(check_control_chars())
     problems.extend(check_brace_balance())
+    # The timeline is written once in paper/timeline.tsv and rendered into
+    # both books; edit the .tsv without regenerating and the credits chapter
+    # and the monograph print different dates. A number restated in a second
+    # file goes stale, so the two renderings are checked, never trusted.
+    problems.extend(check_timeline())
     # The Manual's examples are invented, so unlike the Course's they have
     # no printed answer behind them and nothing else would catch a typo in
     # one. A guard nobody runs is not a guard (#390).
