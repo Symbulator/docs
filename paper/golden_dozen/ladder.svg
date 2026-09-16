@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 200" width="120mm">
+<style>text{font-family:"IBM Plex Sans",sans-serif;font-size:12px;fill:#1c2330}.n{fill:#2f5fa8;font-weight:600}</style>
+<polyline fill="none" stroke="#1c2330" stroke-width="1.6" stroke-linejoin="round" points="40.0,40.0 80.0,40.0 82.5,34.0 87.5,46.0 92.5,34.0 97.5,46.0 102.5,34.0 107.5,46.0 110.0,40.0 150.0,40.0"/>
+<text x="95.0" y="28" text-anchor="middle">1 Ω</text>
+<polyline fill="none" stroke="#1c2330" stroke-width="1.6" stroke-linejoin="round" points="150.0,40.0 190.0,40.0 192.5,34.0 197.5,46.0 202.5,34.0 207.5,46.0 212.5,34.0 217.5,46.0 220.0,40.0 260.0,40.0"/>
+<text x="205.0" y="28" text-anchor="middle">1 Ω</text>
+<polyline fill="none" stroke="#1c2330" stroke-width="1.6" stroke-linejoin="round" points="260.0,40.0 300.0,40.0 302.5,34.0 307.5,46.0 312.5,34.0 317.5,46.0 322.5,34.0 327.5,46.0 330.0,40.0 370.0,40.0"/>
+<text x="315.0" y="28" text-anchor="middle">1 Ω</text>
+<polyline fill="none" stroke="#1c2330" stroke-width="1.6" stroke-linejoin="round" points="370.0,40.0 410.0,40.0 412.5,34.0 417.5,46.0 422.5,34.0 427.5,46.0 432.5,34.0 437.5,46.0 440.0,40.0 480.0,40.0"/>
+<text x="425.0" y="28" text-anchor="middle">1 Ω</text>
+<circle cx="40" cy="40" r="4" fill="#fff" stroke="#1c2330" stroke-width="1.6"/>
+<text class="n" x="28" y="44" text-anchor="middle">a</text>
+<circle cx="150" cy="40" r="2.6" fill="#1c2330"/>
+<text class="n" x="158" y="32">b</text>
+<circle cx="260" cy="40" r="2.6" fill="#1c2330"/>
+<text class="n" x="268" y="32">c</text>
+<circle cx="370" cy="40" r="2.6" fill="#1c2330"/>
+<text class="n" x="378" y="32">d</text>
+<circle cx="480" cy="40" r="4" fill="#fff" stroke="#1c2330" stroke-width="1.6"/>
+<text class="n" x="492" y="44" text-anchor="middle">e</text>
+<polyline fill="none" stroke="#1c2330" stroke-width="1.6" stroke-linejoin="round" points="40.0,160.0 80.0,160.0 82.5,154.0 87.5,166.0 92.5,154.0 97.5,166.0 102.5,154.0 107.5,166.0 110.0,160.0 150.0,160.0"/>
+<text x="95.0" y="182" text-anchor="middle">1 Ω</text>
+<polyline fill="none" stroke="#1c2330" stroke-width="1.6" stroke-linejoin="round" points="150.0,160.0 190.0,160.0 192.5,154.0 197.5,166.0 202.5,154.0 207.5,166.0 212.5,154.0 217.5,166.0 220.0,160.0 260.0,160.0"/>
+<text x="205.0" y="182" text-anchor="middle">1 Ω</text>
+<polyline fill="none" stroke="#1c2330" stroke-width="1.6" stroke-linejoin="round" points="260.0,160.0 300.0,160.0 302.5,154.0 307.5,166.0 312.5,154.0 317.5,166.0 322.5,154.0 327.5,166.0 330.0,160.0 370.0,160.0"/>
+<text x="315.0" y="182" text-anchor="middle">1 Ω</text>
+<polyline fill="none" stroke="#1c2330" stroke-width="1.6" stroke-linejoin="round" points="370.0,160.0 410.0,160.0 412.5,154.0 417.5,166.0 422.5,154.0 427.5,166.0 432.5,154.0 437.5,166.0 440.0,160.0 480.0,160.0"/>
+<text x="425.0" y="182" text-anchor="middle">1 Ω</text>
+<circle cx="40" cy="160" r="4" fill="#fff" stroke="#1c2330" stroke-width="1.6"/>
+<text class="n" x="28" y="164" text-anchor="middle">f</text>
+<circle cx="150" cy="160" r="2.6" fill="#1c2330"/>
+<text class="n" x="158" y="176">g</text>
+<circle cx="260" cy="160" r="2.6" fill="#1c2330"/>
+<text class="n" x="268" y="176">h</text>
+<circle cx="370" cy="160" r="2.6" fill="#1c2330"/>
+<text class="n" x="378" y="176">i</text>
+<circle cx="480" cy="160" r="4" fill="#fff" stroke="#1c2330" stroke-width="1.6"/>
+<text class="n" x="492" y="164" text-anchor="middle">j</text>
+<polyline fill="none" stroke="#1c2330" stroke-width="1.6" stroke-linejoin="round" points="150.0,40.0 150.0,85.0 156.0,87.5 144.0,92.5 156.0,97.5 144.0,102.5 156.0,107.5 144.0,112.5 150.0,115.0 150.0,160.0"/>
+<text x="162" y="104.0">1 Ω</text>
+<polyline fill="none" stroke="#1c2330" stroke-width="1.6" stroke-linejoin="round" points="260.0,40.0 260.0,85.0 266.0,87.5 254.0,92.5 266.0,97.5 254.0,102.5 266.0,107.5 254.0,112.5 260.0,115.0 260.0,160.0"/>
+<text x="272" y="104.0">1 Ω</text>
+<polyline fill="none" stroke="#1c2330" stroke-width="1.6" stroke-linejoin="round" points="370.0,40.0 370.0,85.0 376.0,87.5 364.0,92.5 376.0,97.5 364.0,102.5 376.0,107.5 364.0,112.5 370.0,115.0 370.0,160.0"/>
+<text x="382" y="104.0">1 Ω</text>
+</svg>

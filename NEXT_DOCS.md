@@ -3,13 +3,84 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
-## #463 — the credits photographs, flippable — **built, waiting on two files**
+## #464 — The Golden Dozen, a PDF at `learn.symbulator.com/dozen.pdf` — **live 16 Sep 2026**
 
-Roberto, 16 Sep 2026: the credits carried one photograph, from 1999. He
+> **Deployed at Roberto's word, 16 Sep 2026, and verified by fetching.**
+> `learn`: 13 files, namely `dozen.pdf` (byte-identical to
+> `paper/the_golden_dozen.pdf`, sha256 `446bc999…`), the transient lesson
+> and its search index in 7, 8 and 9, and the six PDFs from a full
+> `python build.py` (clean, no *NO PDF PRODUCED*). v7 235 pages and v8
+> 223, both unchanged, v9 314. v7, v8, v9 and the Manual were hashed live
+> against the local build and all four match. The Boulet formulas print
+> √3 in all three tutorial PDFs, read back out of the PDF text. The live
+> 7, 8 and 9 transient pages were diffed against copies fetched before
+> the deploy, and the only lines that moved are the six formula lines in
+> each. `symbulator.com`: `index.html` alone, and its diff is the kicker
+> and the new card. Roberto's typed prune of the 0.6.14 and 0.6.15 wheels
+> is done and checked: both 404, and 0.6.16 is served byte-identical to
+> `vendor/`.
+
+Roberto, 16 Sep 2026: a selection of the documentation's most impressive
+solved examples, between 10 and 20, each looking complex but solved in one
+run (two where a switch splits the intervals), no two making the same
+point, his 2013 Showing-off Problem and Prof. Boulet's transient
+grandfathered in. Twelve and a bonus, titled *The Golden Dozen* at his
+word ("even though it's 13, because mine is a bonus"): AS7 3.4, NR12 5.7,
+Bo2 3.3, AS7 9.73, AS7 10.14, AS7 12.11, AS7 PP 13.13, NR11's switched RLC
+with coupled coils, Bo2 DE 6.6, Prof. Boulet, AS7 19.2, NR12 18.6, and the
+Showing-off Problem as the bonus, retitled in the booklet *A freebie, on
+the house* at his word (the page still names it as Lesson 3's
+Showing-off Problem, so it can be found in the Course).
+
+- Source `paper/golden_dozen/build_dozen.py`: HTML in the docs palette,
+  printed by Edge to `paper/the_golden_dozen.pdf` (14 A4 pages, 1.0 MB).
+  Descriptions are read from the app tree's `.cir` entries; answers are
+  hand-set LaTeX, every one checked against the app through `/api/solve`
+  on 16 Sep 2026. It needs the network at build time (Plex and KaTeX from
+  their CDNs).
+- `build.py` copies it to `build/web/dozen.pdf` and fails hard if it is
+  missing; `Deploy/deploy_targets.ini` verifies it by hash.
+- The landing page's *Learn it* band gains a last card after *Open a
+  worked problem*: of the built-in problems, these are the thirteen to
+  open first.
+- AS7 Problem 19.2's figure is a drawing made for the booklet
+  (`ladder.svg`), the chapter's schematic being unreadable at page width.
+
+**Found on the way, and fixed at Roberto's word:** Lesson 6's v9 result
+panels for Prof. Boulet's v1 and v2 had lost every √ sign (`53/17` for
+5√3/17, `803/17` for 80√3/17, `9/2-53` for 9/2 − 5√3, and the same in
+v2), so the printed v1(0) was 108/17 rather than 9 V. The roots are
+restored. The panels were checked by parsing them out of the source and
+comparing with the app's `/api/solve` answer at five times (difference
+under 3e-15), with v1(0) = 9 and v2(0) = 9/4. **The `::: only 7,8` copies
+of the same two formulas carried the same loss**, and were restored too at
+Roberto's word ("Fix 1"), the one exception to 7 and 8 being frozen. The
+learn build moves those two pages and their search indexes and nothing
+else in 7 or 8. The typeset text changed, so the
+Course PDF prints the old panels until its next full build.
+
+The landing page's *Four hundred and fifty-nine of them* became
+*Hundreds of them* (Roberto: "No need to have an exact count"), so the
+kicker no longer goes stale as entries are added.
+
+## #463 — the credits photographs, flippable — **live 16 Sep 2026, seven photographs**
+
+> **Status corrected the same evening.** The heading below said *built,
+> waiting on two files* after the work had shipped. Commit `1df716c`
+> (16 Sep 2026, 13:35) put seven photographs in the set, not three, and
+> `learn.symbulator.com/9/credits` serves all seven (fetched 16 Sep 2026).
+> The PDFs were rebuilt at 13:33 and `symbulator-v9.pdf` is live at the
+> local byte count, printing the first photograph alone. The *What is
+> left* paragraph at the foot of this entry is history. The commit
+> message has the details, except that it dates the TI-89 photograph
+> 1999: **it is 2000** (Roberto, 16 Sep 2026), as its file name and
+> caption say.
+
+Roberto, 16 Sep 2026: the credits carried one photograph, from 2000. He
 wants three — that one, his MIT graduation, and a later one — and wants
 the reader able to flip between them.
 
-**Done and driven in a browser**, with the 1999 photo copied twice as
+**Done and driven in a browser**, with the 2000 photo copied twice as
 stand-ins (since deleted):
 
 - `::: photos` in `build.py`, one photo per line as `path | caption`. The
