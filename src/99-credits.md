@@ -13,6 +13,12 @@ Symbulator and its documentation, in all its versions up to this date, have been
 
 ::: photos
 assets/photo/roberto_2000_ti89.jpg | Roberto in 2000, with a TI-89
+assets/photo/roberto_2004_mit.jpg | Roberto and Monica, MIT 2004
+assets/photo/roberto_2006_mit.jpg | Roberto and Monica, MIT 2006
+assets/photo/roberto_2010_tito.jpg | Roberto and Tito, MIT 2010
+assets/photo/roberto_2010_portrait.jpg | Roberto, MIT 2010
+assets/photo/roberto_2017_melbourne.jpg | Roberto, Melbourne 2017
+assets/photo/roberto_2026_luna.jpg | Roberto and Luna, Melbourne 2026
 :::
 
 ### A timeline

@@ -842,9 +842,16 @@ figcaption {
 figure.photos .photo-stage {
   display: grid; justify-items: center;
 }
+/* Bounded in BOTH directions, because the set mixes orientations: the
+   1999 photograph is a portrait and the 2004 one a landscape, and a
+   width cap alone would make the portrait tower over it. Each photo
+   scales to fit inside the box on whichever side binds first, so the
+   two carry the same visual weight and the stage barely changes height
+   on a flip. */
 figure.photos .photo-stage img {
-  grid-area: 1 / 1; border-radius: 8px;
-  max-width: min(100%, 22rem);
+  grid-area: 1 / 1; border-radius: 8px; align-self: center;
+  max-width: min(100%, 24rem); max-height: 20rem;
+  width: auto; height: auto;
 }
 /* `figure img { display: block }` above is an AUTHOR rule, and an author
    display beats the browser's own `[hidden] { display: none }` -- so
