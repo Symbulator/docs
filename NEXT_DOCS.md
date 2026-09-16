@@ -41,7 +41,8 @@ Showing-off Problem, so it can be found in the Course).
 - `build.py` copies it to `build/web/dozen.pdf` and fails hard if it is
   missing; `Deploy/deploy_targets.ini` verifies it by hash.
 - **On the landing page it is the sixth item of *What it does*,** labelled
-  *A taste of Symbulator's capabilities*, beside *Expert mode* in the
+  *Get a taste* (first *A taste of Symbulator's capabilities*, shortened
+  at his word to match the other headers), beside *Expert mode* in the
   two-column list, where it fills the empty right-hand cell. That is
   Roberto's final placement of 16 Sep 2026. The same evening it went live
   as the last card in *Learn it*, was then moved to the top of that band,
