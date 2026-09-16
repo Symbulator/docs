@@ -40,9 +40,12 @@ Showing-off Problem, so it can be found in the Course).
   their CDNs).
 - `build.py` copies it to `build/web/dozen.pdf` and fails hard if it is
   missing; `Deploy/deploy_targets.ini` verifies it by hash.
-- The landing page's *Learn it* band gains a last card after *Open a
-  worked problem*: of the built-in problems, these are the thirteen to
-  open first.
+- **On the landing page it is the sixth item of *What it does*,** labelled
+  *A taste of Symbulator's capabilities*, beside *Expert mode* in the
+  two-column list, where it fills the empty right-hand cell. That is
+  Roberto's final placement of 16 Sep 2026. The same evening it went live
+  as the last card in *Learn it*, was then moved to the top of that band,
+  and was then put below *What it will not do*. Live and hash-verified.
 - AS7 Problem 19.2's figure is a drawing made for the booklet
   (`ladder.svg`), the chapter's schematic being unreadable at page width.
 
@@ -60,8 +63,10 @@ else in 7 or 8. The typeset text changed, so the
 Course PDF prints the old panels until its next full build.
 
 The landing page's *Four hundred and fifty-nine of them* became
-*Hundreds of them* (Roberto: "No need to have an exact count"), so the
-kicker no longer goes stale as entries are added.
+*Hundreds of them* (Roberto: "No need to have an exact count"), and then
+that card (*Open a worked problem*) was removed from *Learn it* at his
+word, the same evening. *Learn it* now holds the Course, the Manual and
+the split view.
 
 ## #463 — the credits photographs, flippable — **live 16 Sep 2026, seven photographs**
 
