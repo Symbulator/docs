@@ -85,6 +85,32 @@ why it is what it is.
   if it is missing, and `Deploy/deploy_targets.ini` verifies it by hash
   after a `learn` deploy.
 
+## The LaTeX version
+
+`bakers_dozen.tex` is the same booklet as a LaTeX document, made at
+Roberto's request on 17 Sep 2026 for the public repository. It is
+**generated** by `build_dozen_tex.py` from the same `P` and `BONUS` data as
+the published PDF, so the two cannot disagree. Edit `build_dozen.py`, then
+regenerate. Never edit the `.tex` by hand.
+
+    py paper\bakers_dozen\build_dozen_tex.py          # write the .tex
+    py paper\bakers_dozen\build_dozen_tex.py --pdf    # and compile it
+
+- **Compiles with XeLaTeX**: 14 A4 pages, with no overfull boxes and no
+  missing characters in the log. It needs IBM Plex Sans, Serif and Mono
+  installed, plus DejaVu Sans Mono, which ships with TeX distributions.
+- **Plex Serif and Mono have no Greek and no ∠**, so Ω, ω and Δ are set as
+  maths and ∠ in DejaVu Sans Mono, through `newunicodechar`.
+- **Figures** come from `Documentation/assets/` by relative path. They are
+  sized as the HTML booklet sizes them, at 96 px to the inch and capped at
+  62 mm tall. **AS7 Problem 19.2's ladder is drawn with circuitikz**, not
+  taken from `ladder.svg`, which XeLaTeX cannot include.
+- **`--pdf` writes `bakers_dozen_latex.pdf`** beside the source, for
+  checking. It is not committed, and the published
+  `learn.symbulator.com/dozen.pdf` is still the Edge-printed one.
+- **Run labels are not uppercased**, because *TR, t > 0* carries a
+  variable.
+
 ## Changing the selection
 
 1. **Run `py paper\bakers_dozen\check_dozen.py` first.** It fails if any
