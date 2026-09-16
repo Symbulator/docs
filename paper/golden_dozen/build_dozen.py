@@ -8,6 +8,10 @@ The circuit descriptions are read from the app tree's built-in examples,
 so they cannot drift from what the links open. The answers are written
 out below as LaTeX; they were checked against the app on 16 Sep 2026, and
 an entry that changes wants them checked again.
+
+Before changing or rebuilding anything, read README.md beside this file
+(the brief, the reasons for each pick, the reserves) and run
+check_dozen.py, which fails if an entry has moved in its .cir book.
 """
 import html, io, os, re, shutil, subprocess, tempfile, time
 
