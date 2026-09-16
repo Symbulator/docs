@@ -108,11 +108,14 @@ why it is what it is.
 ## Things worth knowing
 
 - **Entry titles over 80 characters are cut** by the app (`circuitbook.py`,
-  `MAX_NAME_LEN`). The two NR11 entries of #8 are 82 long, so the app's
-  picker shows them ending in *"(DC, t <"* and *"(TR, t >"*. `check_dozen.py`
-  compares titles the way the app reads them. Shortening those two titles is
-  an app-tree item, and the docs' app links join on the titles, so check
-  `Documentation/tools/app_links.py` if they are renamed.
+  `MAX_NAME_LEN`). The two NR11 entries of #8 were 82 long, and the app's
+  picker showed them ending in *"(DC, t <"*. At Roberto's word they were
+  renamed the same night, *"switch and coupled"* becoming *"switch,
+  coupled"* (79 characters), together with the Lesson 10 problem heading
+  and its two `::: applink` lines, which join on the title. No title in any
+  book is over 80 now. `check_dozen.py` still compares titles the way the
+  app reads them. A renamed entry changes the docs' app links, so run
+  `Documentation/tools/app_links.py` before and after.
 - **The landing item moved four times on 16 Sep 2026**: last in *Learn it*,
   then first there, then below *What it will not do*, and finally beside
   *Expert mode*. Leave it where it is unless Roberto says otherwise.

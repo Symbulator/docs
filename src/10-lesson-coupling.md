@@ -801,7 +801,7 @@ From 18 A to zero, with modes at 2 and 20 per second.
 :::
 :::
 
-::: problem NR11's capacitor shorted by a switch and coupled 0.8 H and 1.6 H coils
+::: problem NR11's capacitor shorted by a switch, coupled 0.8 H and 1.6 H coils
 A 48 V source feeds a 10 mF capacitor, a 4 Ω resistor and a 0.8 H coil in
 series. A switch across the capacitor has been closed a long time and opens
 at t = 0. The coil is coupled, M = 0.8 H, to a 1.6 H coil across a 20 Ω
@@ -824,7 +824,7 @@ l2,4,5,1.6
 r20,4,5,20
 m,l1,l2,0.8
 ```
-::: applink NR11's capacitor shorted by a switch and coupled 0.8 H and 1.6 H coils (DC, t < 0)
+::: applink NR11's capacitor shorted by a switch, coupled 0.8 H and 1.6 H coils (DC, t < 0)
 :::
 
 `il1` = {{o:12}} A and `il2` = {{o:0}}.
@@ -845,7 +845,7 @@ l2,4,5,1.6,0
 r20,4,5,20
 m,l1,l2,0.8
 ```
-::: applink NR11's capacitor shorted by a switch and coupled 0.8 H and 1.6 H coils (TR, t > 0)
+::: applink NR11's capacitor shorted by a switch, coupled 0.8 H and 1.6 H coils (TR, t > 0)
 :::
 
 $$

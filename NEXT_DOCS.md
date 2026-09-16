@@ -63,6 +63,18 @@ learn build moves those two pages and their search indexes and nothing
 else in 7 or 8. The typeset text changed, so the
 Course PDF prints the old panels until its next full build.
 
+**Two entry titles renamed, at Roberto's word, the same night.** Writing
+`check_dozen.py` showed that the app keeps 80 characters of an entry's
+title (`circuitbook.MAX_NAME_LEN`). The two NR11 entries of the dozen's #8
+were 82 long, so the picker showed *"…(DC, t <"*. *"switch and coupled"*
+became *"switch, coupled"* (79) in `Lesson_10.cir`, in Lesson 10's problem
+heading (v9 only, and nothing linked its anchor, which is now
+`prob-nr11s-capacitor-shorted-by-a-switch-coupled-08-h-and-16-h-coils`) and
+in its two `::: applink` lines. Measured before and after: `app_links.py`
+442 of 444 both times, `verify_lesson.py` clean on both entries, no title
+in any book over 80. The offline pair is at cache **v235**, and the ZIP and
+the staged install site were proved to be the same build (64 files).
+
 The landing page's *Four hundred and fifty-nine of them* became
 *Hundreds of them* (Roberto: "No need to have an exact count"), and then
 that card (*Open a worked problem*) was removed from *Learn it* at his
