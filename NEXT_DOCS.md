@@ -3,6 +3,8 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #465 — claimed by the app tree, 19 Sep 2026: Alexander & Sadiku listed below Nilsson & Riedel in the app's Built-in Examples. No docs change: the file keeps its name, so no app link moved. Write-up in `Application/v9/repos/local/NEXT.md`.
+
 ## #464 — A Baker's Dozen, a PDF at `learn.symbulator.com/dozen.pdf` — **live 16 Sep 2026**
 
 > **Deployed at Roberto's word, 16 Sep 2026, and verified by fetching.**
