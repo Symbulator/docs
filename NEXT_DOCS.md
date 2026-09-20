@@ -3,6 +3,14 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #468 — the Baker's Dozen states every setting its runs need — **live 21 Sep 2026**
+
+Antony García found that AS7 Example 12.11 in `learn.symbulator.com/dozen.pdf` gave no frequency, in the question or the settings. The Course says *The source frequency is 60 Hz*; the Dozen dropped it, and its entry solves at a symbolic ω, so a reader retyping the run had nothing to type. Fixed: the question says 60 Hz and the line says *ω = 120π (60 Hz)*.
+
+**Checked elsewhere by comparing each run's settings line with its entry, all sixteen runs.** Found and fixed: 9.73 and 10.14 stated no ω and 9.73 no rounding (both have every impedance in ohms, so *ω = 1 (any value gives the same answer)*, tested at 1, 2.5, 4, 37, 377 and 120π); 13.13 did not say *Polar phasors* (it states ω = 4, which does matter: 1.417∠15.09° at ω = 1, 2.011∠68.51° at 4); 19.2 and NR11's TR run did not say *Rounding: 4 digits*. 12.11's line voltage printed the Course's `169.94` beside *Rounding: 4 digits*; it prints `169.9`, as the app does.
+
+**The guard is permanent:** `paper/bakers_dozen/check_dozen.py` fails on an AC run whose line states no ω, on polar / RMS / SI / Rounding set by the entry and missing from the line (and the reverse), and solves each AC run at the stated ω and, where the line says *any value*, at two more, failing if a printed answer moves. Proved red on the old lines (12.11 and 9.73 and 13.13 each flagged). The notebook now runs 12.11 at `omega='120*pi'`, and reads the ω from the line, so the two cannot differ. PDF still 14 pages; PDF, `.tex` and `Bakers_Dozen.ipynb` regenerated, `learn` deployed and hash-verified (1,023,765 b). The notebook is in the solver repo and rides that repo's push; Colab reads it from GitHub.
+
 ## #467 — all the PDFs rebuilt, and the glyphs that printed as blanks — **live 20 Sep 2026**
 
 Roberto: *"Build all PDFs."* The first full build since the hold of 13 Sep, read

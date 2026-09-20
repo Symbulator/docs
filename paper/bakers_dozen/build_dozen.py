@@ -91,7 +91,9 @@ P = [
       "the circuit needs a delta-wye transformation. Find equivalent does it "
       "in one run.",
   runs=[("AC", "Lesson_07", 6, "7",
-         "Analysis: Find equivalent, Resistance / impedance, between nodes 1 and 0, in AC.",
+         "Analysis: Find equivalent, Resistance / impedance, between nodes 1 and 0, in AC. "
+         "ω = 1 (any value gives the same answer, every impedance being in ohms). "
+         "Rounding: 4 digits.",
          [r"Z_{eq} = 0.3794 + 1.46\,\mathrm{j}\ \Omega"])]),
  dict(
   title="AS7's Example 10.14", tag="Phasors with a dependent source",
@@ -100,21 +102,24 @@ P = [
   why="Nine elements, three sources, one of them controlled by the voltage "
       "across a capacitor, and complex impedances on every branch. Nodal "
       "analysis by hand means complex algebra in two unknowns.",
-  runs=[("AC", "Lesson_07", 10, "7", "Analysis: AC. Show AC answers as polar phasors.",
+  runs=[("AC", "Lesson_07", 10, "7", "Analysis: AC, ω = 1 (any value gives the same answer, every impedance "
+         "being in ohms). Rounding: 4 digits. Show AC answers as polar phasors.",
          [r"V_{1} = 2.708\angle{-56.73^\circ}\ \mathrm{V}",
           r"V_{2} = 6.914\angle{-80.70^\circ}\ \mathrm{V}"])]),
  dict(
   title="AS7's Example 12.11", tag="Three-phase wye-delta with line impedances",
   where="Course, Lesson 9 (Three-Phase)", img="circuit/as7e1211.png",
   question=r"For the balanced Y-Δ circuit, find the line current $I_{aA}$, the "
-           r"phase voltage $V_{AB}$ and the phase current $I_{AC}$.",
+           r"phase voltage $V_{AB}$ and the phase current $I_{AC}$. The source "
+           r"frequency is 60 Hz.",
   why="The textbook converts the delta to a wye and works a single-phase "
       "equivalent. Symbulator needs neither: the three sources, the three "
       "lines and the delta go in as drawn.",
   runs=[("AC", "Lesson_09", 6, "9",
-         "Analysis: AC. Rounding: 4 digits. Polar phasors. Evaluate: vna2-vnb2.",
+         "Analysis: AC, ω = 120π (60 Hz). Rounding: 4 digits. Polar phasors. "
+         "Evaluate: vna2-vnb2.",
          [r"I_{aA} = i_{raa} = 2.350\angle{-36.20^\circ}\ \mathrm{A}",
-          r"V_{AB} = v_{na2}-v_{nb2} = 169.94\angle{30.81^\circ}\ \mathrm{V}",
+          r"V_{AB} = v_{na2}-v_{nb2} = 169.9\angle{30.81^\circ}\ \mathrm{V}",
           r"I_{AC} = i_{rac} = 1.357\angle{-66.20^\circ}\ \mathrm{A}"])]),
  dict(
   title="AS7's Practice Problem 13.13", tag="Coupled coils in a tangle",
@@ -124,7 +129,7 @@ P = [
       "capacitor hung from the node the coupled coils share. The coupling is "
       "one line naming the two coils.",
   runs=[("AC", "Alexander_Sadiku", 48, "as7",
-         "Analysis: AC, ω = 4. Rounding: 4 digits.",
+         "Analysis: AC, ω = 4. Rounding: 4 digits. Polar phasors.",
          [r"i_{o} = i_{r8} = 2.011\angle{68.51^\circ}\ \mathrm{A}"])]),
  dict(
   title="NR11's switched RLC with coupled coils", tag="A transient across a coupling",
@@ -138,7 +143,7 @@ P = [
       "oscillation at 10 rad/s and a decay at 25 per second.",
   runs=[("DC, t < 0", "Lesson_10", 17, "10", "Analysis: DC.",
          [r"i_{l1} = 12\ \mathrm{A}", r"i_{l2} = 0\ \mathrm{A}"]),
-        ("TR, t > 0", "Lesson_10", 18, "10", "Analysis: TR. Evaluate: v4-v5.",
+        ("TR, t > 0", "Lesson_10", 18, "10", "Analysis: TR. Rounding: 4 digits. Evaluate: v4-v5.",
          [r"v_{o} = e^{-5t}\left(60\cos 10t - 120\sin 10t\right) - 60\,e^{-25t}\ \mathrm{V}"])]),
  dict(
   title="Bo2's Drill Exercise 6.6", tag="Two capacitors around an op amp",
@@ -182,7 +187,8 @@ P = [
       "pair of terminals, so the lower rail stays in the circuit instead of "
       "being shorted to ground.",
   runs=[("DC", "Lesson_13", 14, "13",
-         "Analysis: Find equivalent, Two-port parameters, z, between [a,f] and [e,j].",
+         "Analysis: Find equivalent, Two-port parameters, z, between [a,f] and [e,j]. "
+         "Rounding: 4 digits.",
          [r"z_{11} = z_{22} = 41/15 = 2.733\ \Omega",
           r"z_{12} = z_{21} = 1/15 = 0.06667\ \Omega"])]),
  dict(

@@ -145,9 +145,19 @@ there are, what is asked, or what the booklet prints. Never edit the
   settings line changes, check the notebook still asks.
 - **Phasors** (#5, #6, #7) are printed with `polar()` for the names
   `check_dozen.py` watches. `polar()` rounds the magnitude to the entry's
-  digits, as the app does: at Rounding 4 #6's line voltage is `169.9∠30.81°`,
-  where this booklet prints `169.94∠30.81°`. The same value to one more
-  digit.
+  digits, as the app does: at Rounding 4 #6's line voltage is
+  `169.9∠30.81°`, which is what the booklet prints since #468 (it printed
+  the Course's `169.94` beside a line saying *Rounding: 4 digits*).
+- **A run's settings line must carry every setting the entry sets**
+  (#468). Antony García found that AS7 Example 12.11 named no frequency:
+  the entry solved at a symbolic ω and the line said only *Analysis: AC*.
+  `check_dozen.py` now fails on an AC run whose line states no ω, on
+  polar / RMS / SI / Rounding that the entry sets and the line omits, and
+  on the reverse; it also solves each AC run at the ω the line states,
+  and at two others where the line says *any value*, and fails if a
+  printed answer moves. **The notebook runs at the stated ω** (12.11 at
+  `120*pi`). ω does not change 9.73, 10.14 or 12.11 (impedances in ohms),
+  and does change 13.13 (henries and farads), which is why 13.13 says 4.
 - **Checked on 20 Sep 2026** by reading every executed cell against the
   booklet's line for all thirteen. Boulet's two answers, which the booklet
   prints in a different shape from the one the solver returns, agree to

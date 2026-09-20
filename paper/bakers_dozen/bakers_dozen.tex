@@ -193,7 +193,7 @@ r34,3,4,4
 r14,1,4,-4j
 \end{Verbatim}
 \end{codebox}
-\settings{Analysis: Find equivalent, Resistance / impedance, between nodes 1 and 0, in AC.}
+\settings{Analysis: Find equivalent, Resistance / impedance, between nodes 1 and 0, in AC. ω = 1 (any value gives the same answer, every impedance being in ohms). Rounding: 4 digits.}
 \begin{answerbox}
 \adjustbox{max width=\linewidth}{$\displaystyle Z_{eq} = 0.3794 + 1.46\,\mathrm{j}\ \Omega$}
 \end{answerbox}
@@ -219,7 +219,7 @@ r6,2,3,2+2j
 e,3,0,(18∠30°)
 \end{Verbatim}
 \end{codebox}
-\settings{Analysis: AC. Show AC answers as polar phasors.}
+\settings{Analysis: AC, ω = 1 (any value gives the same answer, every impedance being in ohms). Rounding: 4 digits. Show AC answers as polar phasors.}
 \begin{answerbox}
 \adjustbox{max width=\linewidth}{$\displaystyle V_{1} = 2.708\angle{-56.73^\circ}\ \mathrm{V}$}
 \end{answerbox}
@@ -230,7 +230,7 @@ e,3,0,(18∠30°)
 \end{problem}
 
 \begin{problem}{Sample 6 of 12}{AS7's Example 12.11}{Three-phase wye-delta with line impedances}{Course, Lesson 9 (Three-Phase)}
-{\itshape For the balanced Y-Δ circuit, find the line current $I_{aA}$, the phase voltage $V_{AB}$ and the phase current $I_{AC}$.\par}
+{\itshape For the balanced Y-Δ circuit, find the line current $I_{aA}$, the phase voltage $V_{AB}$ and the phase current $I_{AC}$. The source frequency is 60 Hz.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=89.0mm,max width=\linewidth]{../../assets/circuit/as7e1211.png}\end{center}
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} The textbook converts the delta to a wye and works a single-phase equivalent. Symbulator needs neither: the three sources, the three lines and the delta go in as drawn.\end{whybox}
@@ -248,12 +248,12 @@ rcb,nc2,nb2,100+24*pi*j
 rba,nb2,na2,100+24*pi*j
 \end{Verbatim}
 \end{codebox}
-\settings{Analysis: AC. Rounding: 4 digits. Polar phasors. Evaluate: vna2-vnb2.}
+\settings{Analysis: AC, ω = 120π (60 Hz). Rounding: 4 digits. Polar phasors. Evaluate: vna2-vnb2.}
 \begin{answerbox}
 \adjustbox{max width=\linewidth}{$\displaystyle I_{aA} = i_{raa} = 2.350\angle{-36.20^\circ}\ \mathrm{A}$}
 \end{answerbox}
 \begin{answerbox}
-\adjustbox{max width=\linewidth}{$\displaystyle V_{AB} = v_{na2}-v_{nb2} = 169.94\angle{30.81^\circ}\ \mathrm{V}$}
+\adjustbox{max width=\linewidth}{$\displaystyle V_{AB} = v_{na2}-v_{nb2} = 169.9\angle{30.81^\circ}\ \mathrm{V}$}
 \end{answerbox}
 \begin{answerbox}
 \adjustbox{max width=\linewidth}{$\displaystyle I_{AC} = i_{rac} = 1.357\angle{-66.20^\circ}\ \mathrm{A}$}
@@ -281,7 +281,7 @@ r10,0,m,10
 r8,r,0,8
 \end{Verbatim}
 \end{codebox}
-\settings{Analysis: AC, ω = 4. Rounding: 4 digits.}
+\settings{Analysis: AC, ω = 4. Rounding: 4 digits. Polar phasors.}
 \begin{answerbox}
 \adjustbox{max width=\linewidth}{$\displaystyle i_{o} = i_{r8} = 2.011\angle{68.51^\circ}\ \mathrm{A}$}
 \end{answerbox}
@@ -327,7 +327,7 @@ r20,4,5,20
 m,l1,l2,0.8
 \end{Verbatim}
 \end{codebox}
-\settings{Analysis: TR. Evaluate: v4-v5.}
+\settings{Analysis: TR. Rounding: 4 digits. Evaluate: v4-v5.}
 \begin{answerbox}
 \adjustbox{max width=\linewidth}{$\displaystyle v_{o} = e^{-5t}\left(60\cos 10t - 120\sin 10t\right) - 60\,e^{-25t}\ \mathrm{V}$}
 \end{answerbox}
@@ -469,7 +469,7 @@ r10,c,h,1
 r11,d,i,1
 \end{Verbatim}
 \end{codebox}
-\settings{Analysis: Find equivalent, Two-port parameters, z, between [a,f] and [e,j].}
+\settings{Analysis: Find equivalent, Two-port parameters, z, between [a,f] and [e,j]. Rounding: 4 digits.}
 \begin{answerbox}
 \adjustbox{max width=\linewidth}{$\displaystyle z_{11} = z_{22} = 41/15 = 2.733\ \Omega$}
 \end{answerbox}

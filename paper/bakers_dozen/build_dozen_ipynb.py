@@ -107,7 +107,14 @@ def problem_cells(p: dict, label: str, first_run: int) -> tuple:
         cells.append(md("\n\n".join(s for s in sub if s)))
         cells.append(code(f"{c} = '''\n{e['desc'].strip()}\n'''"
                           + (f"\ndraw({c})" if bb.drawable(e["desc"]) else "")))
-        cells.append(code(bb.run_cell(e, c, r)))
+        run_src = bb.run_cell(e, c, r)
+        # The booklet states the frequency on the settings line (the entry
+        # may leave omega a symbol), so the cell runs at the stated one.
+        om = cd.stated_omega(settings)
+        if om and e.get("domain") == "ac":
+            arg = f"omega={om!r}" if "pi" in om else f"omega={om}"
+            run_src = re.sub(r"omega=[^,)\n]+", arg, run_src)
+        cells.append(code(run_src))
         plot = bb.plot_cell(e, c)
         if plot:
             cells.append(code(plot))

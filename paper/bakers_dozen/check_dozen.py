@@ -20,6 +20,7 @@ Exits 1 if an entry moved or a run no longer solves.
 """
 import io
 import os
+import re
 import sys
 
 HERE = os.path.dirname(os.path.abspath(__file__))
@@ -68,6 +69,42 @@ WATCH = {
 }
 
 
+def audit_settings(e, settings):
+    """What the entry sets that the run's settings line does not say.
+
+    A reader retypes the circuit and the settings line, so anything the
+    entry sets that changes the printed answer must be on that line. It
+    was not for AS7 Example 12.11: the entry solved at a symbolic omega and
+    the booklet never named the frequency (Antony Garcia, 21 Sep 2026).
+    """
+    low = settings.lower()
+    out = []
+    if e.get("domain") == "ac" and "ω =" not in settings:
+        out.append("an AC run, and the line states no ω")
+    if e.get("polar") and "polar" not in low:
+        out.append("the entry shows polar phasors and the line does not say so")
+    if not e.get("polar") and "polar" in low:
+        out.append("the line says polar phasors and the entry does not")
+    if e.get("rms") and "rms" not in low:
+        out.append("the entry is RMS and the line does not say so")
+    if e.get("si") and "si" not in low.replace("rounding", ""):
+        out.append("the entry uses SI prefixes and the line does not say so")
+    r = str(e.get("rounding") or "exact")
+    if r.isdigit() and f"Rounding: {r} digits" not in settings:
+        out.append(f"the entry rounds to {r} digits and the line does not say so")
+    if r == "approx" and "Rounding: approx" not in settings:
+        out.append("the entry is at full approx precision and the line does not say so")
+    return out
+
+
+def stated_omega(settings):
+    """The ω the line states, as text the app reads, or None."""
+    m = re.search(r"ω = ([0-9]+(?:\.[0-9]+)?)(π)?", settings)
+    if not m:
+        return None
+    return m.group(1) + ("*pi" if m.group(2) else "")
+
+
 def main():
     sys.stdout.reconfigure(encoding="utf-8", errors="replace")
     sys.path.insert(0, HERE)
@@ -90,6 +127,7 @@ def main():
     client = flask_app.app.test_client()
     books, bad = {}, 0
     for title, (label, book, n, _key, _settings, printed) in runs:
+        _settings = _settings or ""
         if book not in books:
             text = io.open(os.path.join(SERVER, "examples", book + ".cir"),
                            encoding="utf-8").read()
@@ -103,6 +141,9 @@ def main():
             print(f"   ** ENTRY MOVED: #{n} is now {e['name']!r}")
             bad += 1
             continue
+        for problem in audit_settings(e, _settings):
+            print(f"   ** SETTINGS LINE INCOMPLETE: {problem}")
+            bad += 1
         payload = {
             "desc": e["desc"], "domain": e.get("domain", "dc"),
             "omega": e.get("omega", ""), "tool": e.get("tool") or "solve",
@@ -123,6 +164,22 @@ def main():
             bad += 1
             continue
         shown = shown_answers(r)
+        if e.get("domain") == "ac":
+            # The answers the booklet prints must be the ones a reader gets
+            # at the ω the line states, and at any ω when it says "any value".
+            tries = [stated_omega(_settings)]
+            if "any value" in _settings:
+                tries += ["2.5", "37"]
+            for om in tries:
+                if om is None:
+                    continue
+                again = client.post("/api/solve", json={**payload, "omega": om}).get_json() or {}
+                got = shown_answers(again) if again.get("ok") else None
+                if got is None or any(got.get(k) != shown.get(k) for k in WATCH[(book, n)]):
+                    print(f"   ** ANSWERS CHANGE AT ω = {om}: "
+                          f"{[got.get(k) for k in WATCH[(book, n)]] if got else again.get('error')}"
+                          f" against {[shown.get(k) for k in WATCH[(book, n)]]}")
+                    bad += 1
         for name in WATCH[(book, n)]:
             print(f"   app  {name} = {shown.get(name, '(not among the answers)')}")
         if e.get("evaluate"):
