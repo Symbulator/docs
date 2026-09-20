@@ -1279,7 +1279,24 @@ GLYPHS = {"\U0001d422": r"\textbf{i}", "∠": r"\ensuremath{\angle}",
           "μ": r"\ensuremath{\mu}", "µ": r"\ensuremath{\mu}",
           # Plex Serif has superscript four but not superscript minus.
           "⁻": r"\textsuperscript{-}",
+          # The Manual's own (20 Sep 2026, from the log of the first full
+          # build after the Manual grew a Part): tau in the transients
+          # chapter, the parallel sign in two, and the subscript letters of
+          # the reference's tables. All printed as blanks until then.
+          "τ": r"\ensuremath{\tau}", "‖": r"\ensuremath{\parallel}",
+          "ᵢ": r"\textsubscript{i}", "ₚ": r"\textsubscript{p}",
+          "ₙ": r"\textsubscript{n}", "ᵥ": r"\textsubscript{v}",
           }
+
+
+def math_glyphs(s: str) -> str:
+    """A `::: result` body, which goes into display maths raw, with the two
+    signs of the app's polar form -- `75∠-6.87°` -- made maths. Both were
+    blanks in the Course's PDF (six of them, Lesson 10), the serif math font
+    having neither. The angle's value is grouped so that its minus stays a
+    sign and does not become a subtraction from the magnitude."""
+    s = re.sub(r"∠\s*(-?[\d.]+(?:[eE][-+]?\d+)?)", r"\\angle\\,{\1}", s)
+    return s.replace("∠", r"\angle{}").replace("°", r"^{\circ}")
 
 # curly punctuation: converted in prose, left alone inside code, where the
 # distinction between the negate sign and the minus sign matters
@@ -1490,7 +1507,7 @@ class TexRenderer:
             return f"\\begin{{{env}}}{head}\n{lines}\n\\end{{{env}}}"
         if k == "result":                    # #276, the PDF side
             label = tex_escape(result_label(b.text, b.arg))
-            return (f"\\begin{{symresult}}{{{label}}}\n\\[{b.text}\\]\n"
+            return (f"\\begin{{symresult}}{{{label}}}\n\\[{math_glyphs(b.text)}\\]\n"
                     f"\\end{{symresult}}")
         if k == "applink":
             return ""                        # #297: web furniture, no print form
@@ -2068,6 +2085,23 @@ def compile_pdf(texdir: str, stem: str, pdfdir: str) -> bool:
     if bad:
         print(f"{stem}.pdf has INVISIBLE TEXT on page(s) {bad} -- "
               f"see tools/check_white_text.py", file=sys.stderr)
+        return False
+    # ...nor is it a book that prints every character. A glyph the font lacks
+    # is a blank in the PDF and only a line in the log; the Manual shipped
+    # nineteen of them and the Course six until 20 Sep 2026, when the first
+    # full build after a long hold was read. Add the glyph to GLYPHS (or,
+    # inside a `::: result`, to math_glyphs) and the log goes quiet.
+    try:
+        with open(os.path.join(texdir, stem + ".log"), encoding="utf-8",
+                  errors="replace") as fh:
+            gone = sorted(set(re.findall(
+                r"Missing character: There is no (.) in font", fh.read())))
+    except OSError:
+        gone = []
+    if gone:
+        names = ", ".join(f"{c} (U+{ord(c):04X})" for c in gone)
+        print(f"{stem}.pdf prints BLANKS for {names} -- add them to GLYPHS "
+              f"in build.py", file=sys.stderr)
         return False
     shutil.copy2(built, os.path.join(pdfdir, stem + ".pdf"))
     print(f"pdf:  {os.path.join(pdfdir, stem + '.pdf')}")
