@@ -19,10 +19,13 @@ fence in a `book: manual` chapter:
 
 **What this does not do**, stated plainly because a checker that is trusted
 for more than it does is worse than none: it does not compare the printed
-`::: result` LaTeX against the solve automatically. A result panel is
-hand-written and nothing in the build checks it -- that is how TR5's
-Example 4.5 printed a wrong subscript for as long as it existed (#370).
-`--show` prints both side by side for a human to settle.
+`::: result` LaTeX against the solve. A result panel is hand-written -- that
+is how TR5's Example 4.5 printed a wrong subscript for as long as it existed
+(#370). **`check_manual_results.py` does that**, since #466: it reads every
+panel back into an expression and compares it with the package and with the
+app, using `manual_runs.py`'s record of how each circuit is run, which this
+check cannot have because the chapters do not say. `--show` here still
+prints the answers next to the panels for a person to read.
 
     py tools/check_manual_examples.py
     py tools/check_manual_examples.py --show
@@ -145,8 +148,8 @@ def main() -> int:
     print(f"\ncircuits {fences}, solved {solved}, failed {failed}")
     for p in problems:
         print("  " + p)
-    print("note: printed result panels are NOT compared automatically; "
-          "run with --show and read them.")
+    print("note: this proves each circuit parses and solves; the printed "
+          "result panels are compared by tools/check_manual_results.py.")
     return 1 if failed else 0
 
 

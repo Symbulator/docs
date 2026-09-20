@@ -222,3 +222,34 @@ itself. Rebuild it with `sh guide/build-guide.sh` after editing
 Validates cross-references, version terms, code-fence version tags and the
 figure pairs, for every version, and exits non-zero if anything is wrong. The
 same check runs at the start of every build, as a warning.
+
+### The Manual's circuits and answers
+
+The Manual's circuits are invented, so no textbook stands behind their printed
+answers, and two checks stand in for it. Both need the app and solver trees
+beside this one.
+
+    py tools\check_manual_examples.py       every circuit parses and solves
+    py tools\check_manual_results.py        every printed answer is right
+
+`check_manual_results.py` reads each `::: result` panel back into an
+expression and compares it with what the solver returns, from two independent
+sources: the package, and the real app's `/api/solve` and `/api/evaluate`
+(`--package-only` skips the app, 4 seconds against 110). `build.py --check`
+runs the package half, so a wrong digit, a wrong time constant or an
+unaccounted-for panel fails the build. `--prove-red` damages every panel and
+must report all of them; a check nobody has seen fail is not a guard.
+
+What the chapters do not say -- which analysis a circuit is run in, its
+omega, the nodes a tool is given, which panels belong to which run -- is
+written down in **`tools/manual_runs.py`**, one entry per run. Everything
+else is read from the chapters, so it cannot drift. **Adding a circuit or a
+result panel to a Manual chapter therefore needs a line there**, and the
+check says so: a fence whose first line changed, a panel no run claims, and
+a run claiming more than the chapter has all fail, each naming the run.
+
+`tools/build_manual_notebook.py` builds `Manual.ipynb` from the same table,
+into the solver repository's `notebooks/books/`: every circuit as a cell, run
+as the package call, with the Manual's own words around it and the printed
+answer under it. It executes every cell and writes the notebook only if all of
+them ran. Never edit the `.ipynb` by hand.

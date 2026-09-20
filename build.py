@@ -2111,6 +2111,10 @@ def check(book: Book, versions: list[int], verbose: bool = False) -> int:
     # no printed answer behind them and nothing else would catch a typo in
     # one. A guard nobody runs is not a guard (#390).
     problems.extend(check_manual_circuits())
+    # ...and a printed answer is hand-written LaTeX, which nothing compared
+    # with the solver until #466. Package only here (4 seconds); the app is
+    # compared by running tools/check_manual_results.py itself.
+    problems.extend(check_manual_results())
     problems.extend(check_problem_media())
     problems.extend(check_buried_v9())
     # The back-of-book index (#422): a marker in the wrong place renders or
@@ -2349,6 +2353,32 @@ def check_manual_circuits() -> list[str]:
             else:
                 out.append(f"{f}:{line}: circuit solves in no domain")
     return out
+
+def check_manual_results() -> list[str]:
+    """Every printed answer in the Manual against the solver (#466).
+
+    Delegates to tools/check_manual_results.py, which reads each
+    `::: result` panel back into an expression and compares it with what
+    the package returns, using tools/manual_runs.py's record of how each
+    circuit is run. Package only, so it costs seconds: the same check with
+    the app as a second source is run by hand, before a release. Imported
+    lazily, like check_manual_circuits, because it needs the solver tree
+    and a build without it should still check everything else."""
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "tools"))
+        import check_manual_results as cmr
+    except SystemExit as e:
+        return [f"manual results: {e}"]
+    except Exception as e:                        # pragma: no cover
+        return [f"manual results: could not run the check -- {e}"]
+    try:
+        found = cmr.run_checks(package_only=True)[0]
+    except SystemExit as e:
+        return [f"manual results: {e}"]
+    except Exception as e:                        # pragma: no cover
+        return [f"manual results: could not run the check -- {e}"]
+    return [f"manual results: {p}" for p in found]
+
 
 def check_shared_banner() -> list[str]:
     """The banner is one file -- banner.css in the app repository
