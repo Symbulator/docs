@@ -3,7 +3,7 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
-## #466 — claimed by the app tree, 19 Sep 2026: the problem sets as executed Jupyter notebooks, one per built-in book, generated from the app's `.cir` files by `repos/solver/notebooks/build_books.py` and checked against the app by `check_books.py`. **In progress, nothing deployed.** When they are served it will be from learn beside `monograph.ipynb`, which is a docs-side step (`build.py` copying them); the Manual's notebook has no `.cir` behind it and is written by hand. Write-up in `Application/v9/repos/local/NEXT.md`.
+## #466 — claimed by the app tree, 19 Sep 2026: the problem sets as executed Jupyter notebooks, one per built-in book, generated from the app's `.cir` files by `repos/solver/notebooks/build_books.py` and checked against the app by `check_books.py`. **In progress, nothing deployed.** *Baker's Dozen notebook done, 20 Sep 2026:* `paper/bakers_dozen/build_dozen_ipynb.py`, on the pattern of `build_dozen_tex.py` (reads `P` and `BONUS`), writing `Bakers_Dozen.ipynb` into the solver repo; see the Dozen's README. When they are served it will be from learn beside `monograph.ipynb`, which is a docs-side step (`build.py` copying them); the Manual's notebook has no `.cir` behind it and is written by hand. Write-up in `Application/v9/repos/local/NEXT.md`.
 
 ## #465 — claimed by the app tree, 19 Sep 2026: Alexander & Sadiku listed below Nilsson & Riedel in the app's Built-in Examples. No docs change: the file keeps its name, so no app link moved. Write-up in `Application/v9/repos/local/NEXT.md`.
 

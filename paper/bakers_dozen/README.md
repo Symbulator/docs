@@ -111,6 +111,49 @@ regenerate. Never edit the `.tex` by hand.
 - **Run labels are not uppercased**, because *TR, t > 0* carries a
   variable.
 
+## The notebook version
+
+`Application/v9/repos/solver/notebooks/books/Bakers_Dozen.ipynb` is the
+same booklet as an executed Jupyter notebook (#466, 20 Sep 2026). Like the
+`.tex` it is **generated** from the same `P` and `BONUS`, by
+`build_dozen_ipynb.py`, so the three cannot disagree about which problems
+there are, what is asked, or what the booklet prints. Never edit the
+`.ipynb` by hand.
+
+    py paper\bakers_dozen\build_dozen_ipynb.py
+
+- **Each run is the package call a person would type**, built by the
+  solver repository's `notebooks/build_books.py` from the entry the run
+  names -- the same cell the other twenty-two notebooks make for the same
+  entry -- and executed. Under it the notebook prints *The booklet prints*
+  and the answers as this folder has them, to read beside what the cell
+  computed.
+- **It refuses to build if an entry has moved**, using `check_dozen.py`'s
+  EXPECT, and stops on any cell that raises. Run `check_dozen.py` first as
+  ever; a moved entry is fixed in `build_dozen.py` and `check_dozen.py`,
+  and this follows.
+- **It needs the solver tree beside this one**
+  (`Application/v9/repos/solver`), and says so if it is not.
+- **Pictures are the ones the PDF uses, by URL** on `learn.symbulator.com`,
+  all thirteen checked to serve. The ladder of #11 is the exception: the
+  PDF's own `ladder.svg` has no web copy, so the notebook shows the entry's
+  picture, the chapter's.
+- **Two runs print a ratio the entry does not carry** (#2's
+  `Evaluate: v_3/vg`, #12's `Evaluate: v_c/vg`): the entries' Evaluate
+  boxes are empty and only this folder's settings line asks for it. The
+  generator reads the ratio out of that line, so if the wording of a
+  settings line changes, check the notebook still asks.
+- **Phasors** (#5, #6, #7) are printed with `polar()` for the names
+  `check_dozen.py` watches. `polar()` rounds the magnitude to the entry's
+  digits, as the app does: at Rounding 4 #6's line voltage is `169.9∠30.81°`,
+  where this booklet prints `169.94∠30.81°`. The same value to one more
+  digit.
+- **Checked on 20 Sep 2026** by reading every executed cell against the
+  booklet's line for all thirteen. Boulet's two answers, which the booklet
+  prints in a different shape from the one the solver returns, agree to
+  4e-15 at seven times each. The entries themselves are the ones
+  `notebooks/check_books.py` compares with the app, answer by answer.
+
 ## Changing the selection
 
 1. **Run `py paper\bakers_dozen\check_dozen.py` first.** It fails if any
