@@ -3241,7 +3241,7 @@ confirm §4.5.6 is there.
 
 ## #318 — claimed by the app tree, 6 Sep 2026: decimal rounding in the package and, pending, the app; no docs work -- the tutorial prints the book's values, which are the correct ones. Write-up in `Application/v9/repos/local/NEXT.md`
 
-## #317 — documentation for using symbulator in Jupyter — **deferred by Roberto, 6 Sep 2026, until the app's documentation is ready**; the entry is in `Application/v9/repos/local/NEXT.md`
+## #317 — documentation for using symbulator in Jupyter — **done and live 20 Sep 2026**: the Manual's Part 14, *Symbulator in a notebook* (`src/35-manual-notebook.md`), web only, the PDF held; `tools/check_manual_python.py` runs its 22 cells and compares 18 outputs, and is in `build.py --check`. Found and fixed the toolbox chapter's `r.v2` (it raises). Detail in `Application/v9/repos/local/NEXT.md`. (Deferred 6 Sep 2026 until the app's documentation was ready.)
 
 ## #316 — the docs' half: `build.py` ships `monograph.ipynb` beside `monograph.pdf` and the landing page links it — **done and live 6 Sep 2026**
 
