@@ -3,6 +3,45 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #467 — all the PDFs rebuilt, and the glyphs that printed as blanks — **live 20 Sep 2026**
+
+Roberto: *"Build all PDFs."* The first full build since the hold of 13 Sep, read
+through its logs, not just its exit code. **Two defects that had been live**:
+the Manual's PDF printed **nineteen blanks** -- `τ` in Transients, the parallel
+sign `‖` in the DC and equivalents chapters, and the subscript letters `ᵢ ₚ ₙ ᵥ`
+of the Reference's tables -- and the Course's printed **six**, the angle sign and
+the degree in Lesson 10's `::: result` panels (`75∠-6.87°`), which go into
+display maths raw and which the serif math font lacks. `GLYPHS` gains the six;
+`math_glyphs` turns the polar form's angle and degree into maths and groups the
+angle's value so its minus stays a sign, not a subtraction; and **`compile_pdf`
+now fails, naming the glyphs, when a log has a `Missing character`**, as it
+already did for invisible text -- so it cannot sit in a log unread again. Seen
+rendered: `i_t1 = 75∠−6.87°` on Course p.252, blank before.
+
+**What actually changed, by comparing every PDF's pages and extracted text with
+the live copy** (bytes cannot say, XeLaTeX stamping each build): v7 **235** pp,
+v8 **223**, both samplers **57** and **52**, and the monograph **53** are
+*text-identical* to what was live; the Course went **314** pp, three pages
+different (the `∠` panels); the Manual **46 → 54** pp (Part 14, *Symbulator in a
+notebook*, Reference now Part 15, and the six glyphs). **Only those two were
+deployed**, 28 MB, with the other five's live copies put back in `build/web` so
+the deploy moved two files and left 816 identical. Both hash-verified live.
+
+**The monograph, checked, not assumed**: its PDF was one build behind its `.tex`
+(regenerated 83 s later by the timeline commit), and its exemplar figures (12 Sep)
+were older than the drawer's last change (15 Sep). Re-rendered: every `.svg` came
+back byte-identical, so Appendix B is current in content and the rebuilt PDF
+differs from the live one by bytes only -- not deployed, and the committed copy
+restored rather than committing timestamps. The *Symbulator Book* (10 Sep) and the
+Dozen (17 Sep) are newer than their sources.
+
+**Two things worth keeping.** This build's Manual has **16 parts** on its cover
+line (fifteen numbered Parts and the credits), and the log's `Overfull` count
+is 0 for all four version 9 books. And a PDF reader here (`pypdf`) drops the
+spaces of this font's text, so a substring search of a PDF needs the spaces
+removed from both sides; a first check said the new chapter was missing when it
+was on pages 38 and 39.
+
 ## #466 (landing page, 20 Sep 2026, **live**): the notebooks have an item of their own, *Jupyter notebooks*, in `landing/index.html`'s *For developers* list, beside *The Python package* (heading linking to the notebooks folder on GitHub; moved out of the package item at Roberto's word and deployed, read back live). They were first linked from inside the package item: the quick start, the Dozen, the Manual, the monograph, the samplers and the tutorial's lessons, each opening in Colab, 25 links in all and all verified. Deployed at his word, with `learn`: `build.py --web` (11 s) and a dry run that showed exactly one file to move, `monograph.ipynb`, 816 already identical. **`learn.symbulator.com/monograph.ipynb` was the old, broken copy** -- the notebook was fixed in the solver repo (its showcase cell named `es`/`js` where the unknowns are `vs`/`is`) and `build.py` copies it from there -- and is the fixed one now, hash-verified. The PDFs were not rebuilt. Detail in `Application/v9/repos/local/NEXT.md`.
 
 ## #466 — claimed by the app tree, 19 Sep 2026: the problem sets as executed Jupyter notebooks, one per built-in book, generated from the app's `.cir` files by `repos/solver/notebooks/build_books.py` and checked against the app by `check_books.py`. **In progress, nothing deployed.** *Manual notebook done, 20 Sep 2026:* `tools/manual_runs.py` (how each of the Manual's 22 circuits is run, as data), `tools/check_manual_results.py` (every printed answer compared with the package and the app; wired into `build.py --check`, package half) and `tools/build_manual_notebook.py`; see the docs README, *The Manual's circuits and answers*. **Adding a circuit or a result panel to a Manual chapter now needs a line in `manual_runs.py`.** *Baker's Dozen notebook done, 20 Sep 2026:* `paper/bakers_dozen/build_dozen_ipynb.py`, on the pattern of `build_dozen_tex.py` (reads `P` and `BONUS`), writing `Bakers_Dozen.ipynb` into the solver repo; see the Dozen's README. When they are served it will be from learn beside `monograph.ipynb`, which is a docs-side step (`build.py` copying them); the Manual's notebook has no `.cir` behind it and is written by hand. Write-up in `Application/v9/repos/local/NEXT.md`.
