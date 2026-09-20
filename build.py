@@ -2115,6 +2115,9 @@ def check(book: Book, versions: list[int], verbose: bool = False) -> int:
     # with the solver until #466. Package only here (4 seconds); the app is
     # compared by running tools/check_manual_results.py itself.
     problems.extend(check_manual_results())
+    # ...and the chapter about the package is Python, whose printed outputs
+    # nothing ran until #317: the toolbox chapter said `r.v2` for months.
+    problems.extend(check_manual_python())
     problems.extend(check_problem_media())
     problems.extend(check_buried_v9())
     # The back-of-book index (#422): a marker in the wrong place renders or
@@ -2378,6 +2381,28 @@ def check_manual_results() -> list[str]:
     except Exception as e:                        # pragma: no cover
         return [f"manual results: could not run the check -- {e}"]
     return [f"manual results: {p}" for p in found]
+
+
+def check_manual_python() -> list[str]:
+    """Every Python cell in the Manual, run, and every output compared (#317).
+
+    Delegates to tools/check_manual_python.py, which runs each chapter's
+    `sym 9` fences as a notebook would, in one IPython shell, and compares
+    each result with the `out` fence after it. Imported lazily, like the
+    other Manual checks, because it needs the solver tree and IPython, and a
+    build without them should still check everything else."""
+    try:
+        sys.path.insert(0, os.path.join(ROOT, "tools"))
+        import check_manual_python as cmp_
+    except SystemExit as e:
+        return [f"manual python: {e}"]
+    except Exception as e:                        # pragma: no cover
+        return [f"manual python: could not run the check -- {e}"]
+    try:
+        found = cmp_.run_checks()[0]
+    except Exception as e:                        # pragma: no cover
+        return [f"manual python: could not run the check -- {e}"]
+    return [f"manual python: {p}" for p in found]
 
 
 def check_shared_banner() -> list[str]:

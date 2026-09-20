@@ -88,17 +88,10 @@ pip install symbulator
 ```
 from symbulator import dc
 r = dc("e,1,0,10:r1,1,2,1'k:r2,2,0,2'k")
-r.v2
+r["v2"]
 ```
 
 Every answer is a SymPy expression, so it substitutes, differentiates and
-lambdifies like any other. In a notebook there are `%%dc`, `%%ac`, `%%fd`
-and `%%tr` cell magics that take a circuit written one element per line,
-the way the app's input card does.
-
-::: warning `t` is nonnegative
-The symbol `t` is declared nonnegative, because a transient answer is only
-valid for *t* ≥ 0. That surprises the first person who tries to take a
-limit through zero. `from symbulator import t, s` gets you the same symbols
-the answers use.
-:::
+lambdifies like any other. {{ref:manual-notebook}} is the chapter on using it
+from a Jupyter notebook: the cell magics, the Evaluate and Solve cards as
+functions, and the notebooks to start from.

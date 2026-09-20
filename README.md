@@ -248,6 +248,17 @@ result panel to a Manual chapter therefore needs a line there**, and the
 check says so: a fence whose first line changed, a panel no run claims, and
 a run claiming more than the chapter has all fail, each naming the run.
 
+**The chapter about the package, `35-manual-notebook.md`, is Python and has
+its own guard** (#317): `tools/check_manual_python.py` runs every `sym 9` cell of
+a Manual chapter as a notebook would, in one IPython shell and in order, and
+compares each result with the `out` fence after it. A `text` fence is a
+listing and is not run. `build.py --check` runs it (10 seconds), `--prove-red`
+damages the chapter three ways and must catch all three, and it needs the
+solver tree and IPython. It found the toolbox chapter saying `r.v2`, which
+raises `AttributeError`, on its first run. **A Python example in a Manual chapter
+belongs in a `sym 9` fence with its output in an `out` fence, so that it is
+run.**
+
 `tools/build_manual_notebook.py` builds `Manual.ipynb` from the same table,
 into the solver repository's `notebooks/books/`: every circuit as a cell, run
 as the package call, with the Manual's own words around it and the printed
