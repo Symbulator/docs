@@ -306,6 +306,42 @@ def answers_expr(run: dict, r: str) -> str:
     return f"{{'req': {r}}}" if run["how"] == "er" else r
 
 
+def _drop_ends(circuit: str, name: str):
+    """(n1, n2) when `name` is the voltage drop across an element, `vc` for
+    the element `c`, else None."""
+    from symbulator.elements import parse_circuit
+
+    for el in parse_circuit(circuit.replace("\n", ":")):
+        if el.kind in "rlcejs" and name == f"v{el.name}".lower():
+            return el.n1, el.n2
+    return None
+
+
+def answer_source(run: dict, r: str, name: str, circuit: str) -> str:
+    """The cell that reads the answer a panel names from result `r`.
+
+    A TR or FD result holds node voltages and element currents and no
+    voltage drop (Roberto, 20 Sep 2026: say what is given and what is not,
+    and answer a question about a voltage drop as a difference of
+    voltages), so an element's drop is written as that difference, ground
+    counting as zero, with a comment saying which. Everything else is
+    `evaluate`. The notebook shows this text and the check executes it."""
+    if run["how"] in ("tr", "fd"):
+        ends = _drop_ends(circuit, name)
+        if ends is not None:
+            n1, n2 = ends
+            keys = [f'{r}["v_{n}"]' for n in (n1, n2)]
+            if n2 == "0":
+                expr, said = keys[0], f"node {n1} minus ground"
+            elif n1 == "0":
+                expr, said = f"-{keys[1]}", f"ground minus node {n2}"
+            else:
+                expr, said = f"{keys[0]} - {keys[1]}", \
+                    f"node {n1} minus node {n2}"
+            return f"{expr}  # {name}: {said}"
+    return f"evaluate({answers_expr(run, r)}, {name!r})"
+
+
 def tex_name(lhs: str) -> str:
     """A panel's left side as the name Evaluate reads: `v_{r2}` is `vr2`,
     `R_{eq}` is `req`, `-s_{e}` is `-se`. Lowercase, as the app writes an

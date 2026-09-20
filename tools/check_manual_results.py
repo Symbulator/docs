@@ -179,7 +179,9 @@ def run_checks(package_only: bool = False, prove: bool = False) -> tuple:
             for kind, want in attempts:
                 if want is None:
                     continue
-                pkg = ns["evaluate"](eval(mr.answers_expr(run, "r"), ns), name)
+                # the same cell the notebook shows: a TR or FD drop is a
+                # difference of node voltages, anything else is evaluate()
+                pkg = eval(mr.answer_source(run, "r", name, circuit), ns)
                 why = agree(sp, want, pkg, places)
                 if why and prove:
                     caught += 1

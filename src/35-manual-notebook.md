@@ -169,8 +169,51 @@ tr(rc).at("v2", t=0.001)
 ```
 
 The capacitor's voltage is the voltage of node 2, since its other end is
-ground. TR and FD do not store an element's voltage drop, `vc`, though the
-app shows one; {{card:Evaluate}} derives it, as the next section explains.
+ground. That is how to read any voltage that a TR or FD result does not give.
+
+**What TR and FD do not give.** A TR or FD result holds the node voltages and
+the element currents, and nothing worked out from them: no element's voltage
+drop and no element's power. DC and AC store both. TR and FD leave them out
+because every answer stored costs an inverse Laplace transform, and these are
+one subtraction and one product away from what is stored. The drop across an
+element is the difference of the node voltages at its two ends, ground
+counting as zero:{{i:voltage drops and powers in TR and FD}}
+
+```sym 9
+res = tr(rc)
+res["v1"] - res["v2"]
+```
+
+```out
+10*exp(-1000*t)
+```
+
+That is the voltage across `r`. The power it consumes is the drop times its
+current, the rule DC uses for every element:
+
+```sym 9
+(res["v1"] - res["v2"]) * res["ir"]
+```
+
+```out
+exp(-2000*t)/10
+```
+
+A source follows the same rule, and reads negative while it delivers:
+
+```sym 9
+res["v1"] * res["ie"]
+```
+
+```out
+-exp(-1000*t)/10
+```
+
+::: warning Not in FD
+In FD an answer is a transform, and the product of two transforms is not the
+transform of a product: V(s)I(s) is the transform of a convolution, not of a
+power. Take a power in TR, or in AC, where it is stored.
+:::
 
 A Thévenin equivalent comes back with its four answers as attributes:
 
@@ -214,14 +257,16 @@ evaluate(res, "v2", conditions=["vs = 10"])
 5
 ```
 
-An element's voltage drop is one more name, in any analysis:
+A voltage drop that the result does not hold is the difference of two node
+voltages, and it goes into an expression as one. The resistance of `r`, from
+its drop and its current, in TR:
 
 ```sym 9
-evaluate(tr(rc), "vc")
+evaluate(tr(rc), "(v1 - v2)/ir")
 ```
 
 ```out
-10 - 10*exp(-1000*t)
+1000
 ```
 
 The tools' own answers work the same way. A Thévenin result also answers to
@@ -322,8 +367,8 @@ SymPy plots a transient as it is, with Matplotlib behind it:
 ```sym 9
 import sympy as sp
 
-sp.plot(evaluate(tr(rc), "vc"), (t, 0, 0.005),
-        xlabel="t (s)", ylabel="vc (V)");
+sp.plot(tr(rc)["v2"], (t, 0, 0.005),
+        xlabel="t (s)", ylabel="v2 (V)");
 ```
 
 `bode_samples` and `time_samples` return arrays for a frequency response or a

@@ -108,7 +108,7 @@ def build() -> str:
         for label, tex in run["panels"]:
             name = mr.tex_name(tex.partition("=")[0])
             cells.append(code(
-                f"evaluate({mr.answers_expr(run, r)}, {name!r})"))
+                mr.answer_source(run, r, name, run["circuit"])))
             printed.append(f"**{label}**\n\n$${tex}$$")
         if printed:
             cells.append(md("**The Manual prints**\n\n" + "\n\n".join(printed)))
