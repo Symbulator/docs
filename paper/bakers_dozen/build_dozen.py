@@ -61,12 +61,12 @@ P = [
          [r"v_{1} = 26.667\ \mathrm{V}", r"v_{2} = 6.6667\ \mathrm{V}",
           r"v_{3} = 173.33\ \mathrm{V}", r"v_{4} = -46.667\ \mathrm{V}"])]),
  dict(
-  title="NR12's Example 5.7", tag="An op amp with its flaws left in",
+  title="NR12's Example 5.7", tag="A realistic op amp model",
   where="Nilsson & Riedel sampler", img="circuit/nr12-ex5-7.jpg",
   question=r"Analyze the noninverting amplifier using the realistic op amp model, "
            r"with open-loop gain $A$ = 50,000, input resistance $R_i$ = 100 kΩ and "
            r"output resistance $R_o$ = 7.5 kΩ. Find the gain $v_o/v_g$.",
-  why="No ideal op amp here. The model is a dependent source with a finite "
+  why="The model is a dependent source with a finite "
       "gain, an input resistance and an output resistance, written as three "
       "ordinary elements. The source stays a symbol, so the gain is read "
       "straight off the answer.",

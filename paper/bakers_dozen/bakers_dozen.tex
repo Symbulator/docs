@@ -77,7 +77,7 @@ Each of these circuits looks like an afternoon's work by hand. Symbulator solves
 \vspace{8mm}{\sffamily\arrayrulecolor{rule}\renewcommand{\arraystretch}{1.55}%
 \begin{tabular}{@{}p{9mm}p{72mm}p{85mm}@{}}\hline
 \textcolor{accent}{\bfseries 1} & \textbf{AS7's Example 3.4} & \textcolor{ink2}{\small Supernodes around a dependent source} \\ \hline
-\textcolor{accent}{\bfseries 2} & \textbf{NR12's Example 5.7} & \textcolor{ink2}{\small An op amp with its flaws left in} \\ \hline
+\textcolor{accent}{\bfseries 2} & \textbf{NR12's Example 5.7} & \textcolor{ink2}{\small A realistic op amp model} \\ \hline
 \textcolor{accent}{\bfseries 3} & \textbf{Bo2's Example 3.3} & \textcolor{ink2}{\small Two op amps, every conductance a symbol} \\ \hline
 \textcolor{accent}{\bfseries 4} & \textbf{AS7's Problem 9.73} & \textcolor{ink2}{\small Eight impedances that will not reduce} \\ \hline
 \textcolor{accent}{\bfseries 5} & \textbf{AS7's Example 10.14} & \textcolor{ink2}{\small Phasors with a dependent source} \\ \hline
@@ -125,11 +125,11 @@ r1,4,0,1
 \applink{https://symbulator.pythonanywhere.com/?lesson=as7&entry=2}
 \end{problem}
 
-\begin{problem}{Sample 2 of 12}{NR12's Example 5.7}{An op amp with its flaws left in}{Nilsson \& Riedel sampler}
+\begin{problem}{Sample 2 of 12}{NR12's Example 5.7}{A realistic op amp model}{Nilsson \& Riedel sampler}
 {\itshape Analyze the noninverting amplifier using the realistic op amp model, with open-loop gain $A$ = 50,000, input resistance $R_i$ = 100 kΩ and output resistance $R_o$ = 7.5 kΩ. Find the gain $v_o/v_g$.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=69.6mm,max width=\linewidth]{../../assets/circuit/nr12-ex5-7.jpg}\end{center}
-\begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} No ideal op amp here. The model is a dependent source with a finite gain, an input resistance and an output resistance, written as three ordinary elements. The source stays a symbol, so the gain is read straight off the answer.\end{whybox}
+\begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} The model is a dependent source with a finite gain, an input resistance and an output resistance, written as three ordinary elements. The source stays a symbol, so the gain is read straight off the answer.\end{whybox}
 \runhead{DC}
 \begin{codebox}
 \begin{Verbatim}[fontsize=\small]
