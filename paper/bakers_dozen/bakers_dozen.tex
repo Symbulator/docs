@@ -445,23 +445,7 @@ j,0,2,10e^(-t)*sin(2t+30*pi/180)
 \begin{problem}{Sample 11 of 12}{AS7's Problem 19.2}{A two-port with no ground}{Course, Lesson 13 (Two-Ports)}
 {\itshape Determine the impedance parameters of the ladder: four 1 Ω resistors in the upper rail, four in the lower, three 1 Ω rungs.\par}
 \vspace{1mm}
-\begin{center}
-\begin{circuitikz}[scale=0.85, transform shape, american]
-\draw (0,3) node[ocirc, label=left:\textcolor{accent}{a}]{}
-  to[R=1\,$\Omega$, -*] (2.5,3) node[above right, text=accent]{b}
-  to[R=1\,$\Omega$, -*] (5,3)   node[above right, text=accent]{c}
-  to[R=1\,$\Omega$, -*] (7.5,3) node[above right, text=accent]{d}
-  to[R=1\,$\Omega$, -o] (10,3)  node[right, text=accent]{e};
-\draw (0,0) node[ocirc, label=left:\textcolor{accent}{f}]{}
-  to[R, l_=1\,$\Omega$, -*] (2.5,0) node[below right, text=accent]{g}
-  to[R, l_=1\,$\Omega$, -*] (5,0)   node[below right, text=accent]{h}
-  to[R, l_=1\,$\Omega$, -*] (7.5,0) node[below right, text=accent]{i}
-  to[R, l_=1\,$\Omega$, -o] (10,0)  node[right, text=accent]{j};
-\draw (2.5,3) to[R=1\,$\Omega$] (2.5,0);
-\draw (5,3)   to[R=1\,$\Omega$] (5,0);
-\draw (7.5,3) to[R=1\,$\Omega$] (7.5,0);
-\end{circuitikz}
-\end{center}
+\begin{center}\includegraphics[width=145.2mm,max width=\linewidth]{../../assets/circuit/as7-prob19-2.jpg}\end{center}
 \begin{center}\includegraphics[width=132.9mm,max width=\linewidth]{../../assets/circuit/sym_as7_p1902.png}\end{center}
 {\centering\small\itshape The same circuit as Symbulator draws it. The tool takes f as the reference.\par}
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} Eleven resistors and no node 0 anywhere. Each port is written as its pair of terminals, so the lower rail stays in the circuit instead of being shorted to ground.\end{whybox}

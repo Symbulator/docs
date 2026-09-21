@@ -75,8 +75,13 @@ why it is what it is.
   what the links open.
 - **The answers are typed here**, as LaTeX. They were checked against the
   app through `/api/solve` on 16 Sep 2026.
-- **AS7 Problem 19.2's figure** is `ladder.svg`, drawn by `ladder.py`,
-  because the chapter's own schematic is unreadable at page width. The
+- **AS7 Problem 19.2's figure** is the book's own Fig. 19.66, cropped from
+  `Other/AS7.pdf` (page 918) into `assets/circuit/as7-prob19-2.jpg`, with
+  Symbulator's drawing of the same circuit (`sym_as7_p1902.png`) small
+  beneath it and captioned (#469). Until then the page carried a redrawn
+  ladder, `ladder.svg` (from `ladder.py`), because the Symbulator drawing
+  is too wide and thin to read at page width. The two files are kept, and
+  `build_dozen.py` still draws any image whose name starts `SVG:`. The
   other figures come from `Documentation/assets/`.
 - **Boulet's answers** are printed with their √3 terms. Lesson 6 had lost
   every root in all three versions until #464 restored them. Do not copy
@@ -103,8 +108,8 @@ regenerate. Never edit the `.tex` by hand.
   maths and ∠ in DejaVu Sans Mono, through `newunicodechar`.
 - **Figures** come from `Documentation/assets/` by relative path. They are
   sized as the HTML booklet sizes them, at 96 px to the inch and capped at
-  62 mm tall. **AS7 Problem 19.2's ladder is drawn with circuitikz**, not
-  taken from `ladder.svg`, which XeLaTeX cannot include.
+  62 mm tall. (A figure named `SVG:` is drawn with circuitikz in the
+  `.tex`, since XeLaTeX cannot include `ladder.svg`; none is used now.)
 - **`--pdf` writes `bakers_dozen_latex.pdf`** beside the source, for
   checking. It is not committed, and the published
   `learn.symbulator.com/dozen.pdf` is still the Edge-printed one.
@@ -135,9 +140,9 @@ there are, what is asked, or what the booklet prints. Never edit the
 - **It needs the solver tree beside this one**
   (`Application/v9/repos/solver`), and says so if it is not.
 - **Pictures are the ones the PDF uses, by URL** on `learn.symbulator.com`,
-  all thirteen checked to serve. The ladder of #11 is the exception: the
-  PDF's own `ladder.svg` has no web copy, so the notebook shows the entry's
-  picture, the chapter's.
+  all thirteen checked to serve. (Before #469 the ladder of #11 was the exception: the
+  PDF's own `ladder.svg` had no web copy, so the notebook showed the entry's
+  picture, the chapter's.)
 - **Two runs print a ratio the entry does not carry** (#2's
   `Evaluate: v_3/vg`, #12's `Evaluate: v_c/vg`): the entries' Evaluate
   boxes are empty and only this folder's settings line asks for it. The

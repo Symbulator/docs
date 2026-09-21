@@ -180,7 +180,7 @@ P = [
           r" + \left(\tfrac{5\sqrt{3}}{2}-\tfrac{9}{4}\right)e^{-t}\ \mathrm{V}\end{aligned}"])]),
  dict(
   title="AS7's Problem 19.2", tag="A two-port with no ground",
-  where="Course, Lesson 13 (Two-Ports)", img="SVG:ladder.svg",
+  where="Course, Lesson 13 (Two-Ports)", img="circuit/as7-prob19-2.jpg",
   img2="circuit/sym_as7_p1902.png",
   cap2="The same circuit as Symbulator draws it. The tool takes f as the reference.",
   question="Determine the impedance parameters of the ladder: four 1 Ω resistors "

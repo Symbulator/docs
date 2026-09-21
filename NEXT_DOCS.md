@@ -3,6 +3,10 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
+## #469 — AS7 Problem 19.2 gets the book's own figure — **live 21 Sep 2026**
+
+Roberto asked whether the Dozen had the book's schematic for 19.2. It did not, and what I first said about it was wrong: the picture the entry and the chapter used, `sym_as7_p1902.png`, is **Symbulator's own drawing** (the chapter's caption says so), not a scan of the book. He put `Other/AS7.pdf` beside the project for the real one. It is **Fig. 19.66 on PDF page 918**, cropped with `tools/sampler/figlib.py` (`figlib.save(918, "19.66", path, dpi=300, rect=(322, 585, 472, 641))`; the automatic box cut off the right-hand resistors and caught the caption) into `assets/circuit/as7-prob19-2.jpg`, 684 x 292, 30 KB. It is now the main figure of sample 11 in the PDF, with Symbulator's drawing small beneath it and captioned; the redrawn `ladder.svg` (made because the Symbulator drawing is too thin to read at page width) is no longer used and is kept. The notebook takes the entry's picture, so it shows the book's figure too, and **the entry's `image:` in `Lesson_13.cir` now names it** (`[342px]`), which is an app change: cache v238 and the ZIP. The Course chapter's own figure is untouched (its caption is about Symbulator's drawing). PDF still 14 pages, landing size 1.1 MB.
+
 ## #468 — the Baker's Dozen states every setting its runs need — **live 21 Sep 2026**
 
 Antony García found that AS7 Example 12.11 in `learn.symbulator.com/dozen.pdf` gave no frequency, in the question or the settings. The Course says *The source frequency is 60 Hz*; the Dozen dropped it, and its entry solves at a symbolic ω, so a reader retyping the run had nothing to type. Fixed: the question says 60 Hz and the line says *ω = 120π (60 Hz)*.
