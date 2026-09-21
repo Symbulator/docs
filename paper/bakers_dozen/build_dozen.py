@@ -181,6 +181,8 @@ P = [
  dict(
   title="AS7's Problem 19.2", tag="A two-port with no ground",
   where="Course, Lesson 13 (Two-Ports)", img="SVG:ladder.svg",
+  img2="circuit/sym_as7_p1902.png",
+  cap2="The same circuit as Symbulator draws it. The tool takes f as the reference.",
   question="Determine the impedance parameters of the ladder: four 1 Ω resistors "
            "in the upper rail, four in the lower, three 1 Ω rungs.",
   why="Eleven resistors and no node 0 anywhere. Each port is written as its "
@@ -237,6 +239,7 @@ def page(p, label):
            f'<div class="where">{esc(p["where"])}</div>',
            f'<p class="question">{esc(p["question"])}</p>',
            (f'<figure>{open(os.path.join(HERE, p["img"][4:]), encoding="utf-8").read()}</figure>' if p["img"].startswith("SVG:") else f'<figure><img src="{uri(p["img"])}"></figure>'),
+           (f'<figure><img src="{uri(p["img2"])}"><figcaption>{esc(p["cap2"])}</figcaption></figure>' if p.get("img2") else ""),
            f'<p class="why"><b>Why it is here.</b> {esc(p["why"])}</p>']
     two = len(p["runs"]) > 1
     out.append(f'<div class="runs{" two" if two else ""}">')

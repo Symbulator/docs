@@ -172,6 +172,8 @@ def problem(p, label):
                                                  esc(p["tag"]), esc(p["where"])),
            r"{\itshape %s\par}" % prose(p["question"]),
            r"\vspace{1mm}", figure(p["img"]),
+           (figure(p["img2"]) + "\n" + r"{\centering\small\itshape %s\par}" % esc(p["cap2"])
+            if p.get("img2") else ""),
            r"\begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} %s\end{whybox}"
            % esc(p["why"])]
     runs = p["runs"]

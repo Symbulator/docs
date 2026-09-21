@@ -95,6 +95,7 @@ Each of these circuits looks like an afternoon's work by hand. Symbulator solves
 {\itshape Find the node voltages in the circuit of the figure.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=111.5mm,max width=\linewidth]{../../assets/circuit/as7-ex3-4.jpg}\end{center}
+
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} Two voltage sources float between non-reference nodes, and one of them is worth three times the drop across a resistor. By hand that is two supernodes and a constraint equation. Here it is eight lines typed as they are drawn.\end{whybox}
 \runhead{DC}
 \begin{codebox}
@@ -129,6 +130,7 @@ r1,4,0,1
 {\itshape Analyze the noninverting amplifier using the realistic op amp model, with open-loop gain $A$ = 50,000, input resistance $R_i$ = 100 kΩ and output resistance $R_o$ = 7.5 kΩ. Find the gain $v_o/v_g$.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=69.6mm,max width=\linewidth]{../../assets/circuit/nr12-ex5-7.jpg}\end{center}
+
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} The model is a dependent source with a finite gain, an input resistance and an output resistance, written as three ordinary elements. The source stays a symbol, so the gain is read straight off the answer.\end{whybox}
 \runhead{DC}
 \begin{codebox}
@@ -153,6 +155,7 @@ ea,4,0,50000*(vp-vn)
 {\itshape Find $v_o$ in terms of the conductances and the applied voltage $v_S$.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=141.8mm,max width=\linewidth]{../../assets/practice/bo2s-example-3-3-cascade-37.jpg}\end{center}
+
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} There is not a single number in the circuit. The answer is the gain as a formula, and its shape explains the circuit: a difference of conductances over a difference of conductances.\end{whybox}
 \runhead{DC}
 \begin{codebox}
@@ -179,6 +182,7 @@ o2,0,4,o
 {\itshape Determine the equivalent impedance for the circuit.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=130.9mm,max width=\linewidth]{../../assets/circuit/as7p0973.png}\end{center}
+
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} No two of these impedances are in series or in parallel, so by hand the circuit needs a delta-wye transformation. Find equivalent does it in one run.\end{whybox}
 \runhead{AC}
 \begin{codebox}
@@ -204,6 +208,7 @@ r14,1,4,-4j
 {\itshape Find $V_1$ and $V_2$ in the circuit.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=127.1mm,max width=\linewidth]{../../assets/circuit/as7e1014.png}\end{center}
+
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} Nine elements, three sources, one of them controlled by the voltage across a capacitor, and complex impedances on every branch. Nodal analysis by hand means complex algebra in two unknowns.\end{whybox}
 \runhead{AC}
 \begin{codebox}
@@ -233,6 +238,7 @@ e,3,0,(18∠30°)
 {\itshape For the balanced Y-Δ circuit, find the line current $I_{aA}$, the phase voltage $V_{AB}$ and the phase current $I_{AC}$. The source frequency is 60 Hz.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=89.0mm,max width=\linewidth]{../../assets/circuit/as7e1211.png}\end{center}
+
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} The textbook converts the delta to a wye and works a single-phase equivalent. Symbulator needs neither: the three sources, the three lines and the delta go in as drawn.\end{whybox}
 \runhead{AC}
 \begin{codebox}
@@ -265,6 +271,7 @@ rba,nb2,na2,100+24*pi*j
 {\itshape Find $i_o$ in the circuit of the figure.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=132.2mm,max width=\linewidth]{../../assets/circuit/as7-pp13-13.jpg}\end{center}
+
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} Two coils coupled by k = 0.4, dots at opposite ends, a third coil, and a capacitor hung from the node the coupled coils share. The coupling is one line naming the two coils.\end{whybox}
 \runhead{AC}
 \begin{codebox}
@@ -292,6 +299,7 @@ r8,r,0,8
 {\itshape A 48 V source feeds a 10 mF capacitor, a 4 Ω resistor and a 0.8 H coil in series. A switch across the capacitor has been closed a long time and opens at t = 0. The coil is coupled, M = 0.8 H, to a 1.6 H coil across a 20 Ω resistor. Find $v_o$, the voltage across the 20 Ω, for t > 0.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=99.2mm,max width=\linewidth]{../../assets/circuit/sym_nr11_coupled_capacitor.png}\end{center}
+
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} A second-order primary talking to a first-order secondary through a mutual inductance. The answer carries both natural responses, an oscillation at 10 rad/s and a decay at 25 per second.\end{whybox}
 \begin{minipage}[t]{0.485\linewidth}
 \runhead{DC, t < 0}
@@ -339,6 +347,7 @@ m,l1,l2,0.8
 {\itshape In the circuit, suppose that $v_S(t) = 2 - 2u(t)$ V. Find $v_o(t)$ for t ≥ 0.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=108.9mm,max width=\linewidth]{../../assets/practice/bo2s-drill-exercise-6-6-op-amp-37.jpg}\end{center}
+
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} An active second-order circuit whose two poles land in the same place. The repeated pole shows as the t in the answer, which no hand-picked solution form has to anticipate.\end{whybox}
 \begin{minipage}[t]{0.485\linewidth}
 \runhead{DC, t < 0}
@@ -386,6 +395,7 @@ o,0,2,o
 {\itshape The circuit comes from the circuits analysis class of Professor Eliane Boulet de Cabrera, at Universidad Tecnológica de Panamá. Find $v_1$ and $v$.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=183.6mm,max width=\linewidth]{../../assets/practice/a-more-complex-problem-44.png}\end{center}
+
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} Two capacitors with their own initial conditions, and after the switch a current source that is itself a damped sinusoid. The answer holds two natural modes and a forced response. The TI calculator took 78 seconds and version 9 takes about one.\end{whybox}
 \begin{minipage}[t]{0.485\linewidth}
 \runhead{DC, t < 0}
@@ -452,6 +462,8 @@ j,0,2,10e^(-t)*sin(2t+30*pi/180)
 \draw (7.5,3) to[R=1\,$\Omega$] (7.5,0);
 \end{circuitikz}
 \end{center}
+\begin{center}\includegraphics[width=132.9mm,max width=\linewidth]{../../assets/circuit/sym_as7_p1902.png}\end{center}
+{\centering\small\itshape The same circuit as Symbulator draws it. The tool takes f as the reference.\par}
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} Eleven resistors and no node 0 anywhere. Each port is written as its pair of terminals, so the lower rail stays in the circuit instead of being shorted to ground.\end{whybox}
 \runhead{DC}
 \begin{codebox}
@@ -483,6 +495,7 @@ r11,d,i,1
 {\itshape Two identical amplifiers are connected in cascade. Each is described by its h parameters: $h_{11}$ = 1000 Ω, $h_{12}$ = 0.0015, $h_{21}$ = 100, $h_{22}$ = 100 µS. The source has 500 Ω of internal resistance and the load is 10 kΩ. Find the voltage gain $V_2/V_g$.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=139.3mm,max width=\linewidth]{../../assets/circuit/nr12-ex18-6.jpg}\end{center}
+
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} Each amplifier is a single element carrying its four parameters, and the cascade is two lines sharing a node. No matrix products, no conversions between parameter sets.\end{whybox}
 \runhead{DC}
 \begin{codebox}
@@ -505,6 +518,7 @@ rl,c,0,10'k
 {\itshape Find positive values for $V_s$ and $I_s$ that will result in 80 W delivered by the VCCS and 0 W dissipated in the CCVS.\par}
 \vspace{1mm}
 \begin{center}\includegraphics[width=82.9mm,max width=\linewidth]{../../assets/practice/the-showing-off-problem-expert-4.png}\end{center}
+
 \begin{whybox}\textbf{\sffamily\color{navy}Why it is here.} Invented by Roberto Perez-Franco in 2013 to show off. A VCCS, a CCVS, a CCCS and a VCVS woven through seven resistors, and the question runs backwards, from powers to sources. The two power conditions are quadratic, so four solutions fit, and the conditions pick the positive one. The answers also show why the CCVS dissipates nothing: its controlling current is exactly zero.\end{whybox}
 \runhead{DC, Expert Mode}
 \begin{codebox}
