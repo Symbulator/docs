@@ -43,6 +43,7 @@ assets/photo/roberto_2026_luna.jpg | Roberto and Luna, Melbourne 2026
 | **July 2023** | Versions 7 and 8, written in Melbourne. |
 | **13 August 2026** | The symbulator package goes onto PyPI. |
 | **28 August 2026** | Version 9, a public beta. |
+| **1 October 2026** | Versions 9 and 8 leave beta. |
 
 ### What Symbulator did for me
 

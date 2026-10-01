@@ -292,7 +292,6 @@ h1,h2,h3 { text-wrap:balance; margin:0; }
   padding:.16rem .45rem; border-radius:3px; white-space:nowrap;
 }
 .chip-stable { background:var(--green-bg); color:var(--green); }
-.chip-beta   { background:var(--amber-bg); color:var(--amber); }
 .legacy p { margin:0; font-size:.875rem; color:var(--ink-2); }
 .legacy .links { display:flex; flex-wrap:wrap; gap:.2rem 1rem; font-size:.875rem; }
 

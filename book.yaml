@@ -16,7 +16,7 @@ versions:
     label: "8"
     platform: TI-Nspire CX II CAS
     blurb: for the TI-Nspire CX II CAS
-    status: beta
+    status: stable
   9:
     name: Symbulator 9
     label: "9"

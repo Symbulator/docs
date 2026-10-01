@@ -107,9 +107,9 @@ transfer to your calculator.
 
 ### Symbulator
 
-The version of Symbulator for the TI-Nspire CX II CAS is called version 8 beta
-(date stamp **08 July 2023**). It may still contain the occasional bug; as bugs
-are found and fixed, we will revise and reupload, updating the date stamp.
+The version of Symbulator for the TI-Nspire CX II CAS is called version 8
+(date stamp **08 July 2023**). As bugs are found and fixed, we will revise and
+reupload, updating the date stamp.
 
 To get Symbulator 8, download this file:
 **[s.tns](https://symbulator.com/8/s.tns)**, transfer it to your
