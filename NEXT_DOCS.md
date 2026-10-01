@@ -3,9 +3,21 @@
 Numbered on the running sequence shared with
 `Application/v9/repos/local/NEXT.md`, which stood at #77 when this file started.
 
-## #471 — claimed by the app tree, 1 Oct 2026: version 9 and version 8 leave beta (the docs side: the wordmark's β in `web/index.php` and `tools/static_preview.py`, the landing page, `book.yaml`, the credits timeline). In progress; write-up in `Application/v9/repos/local/NEXT.md`.
+## #471 — versions 9 and 8 leave beta — **live 1 Oct 2026** (the docs side)
 
-## #470 — claimed by the app tree, 1 Oct 2026: the JOSS paper and the solver repository's readiness. No docs change. Write-up in `Application/v9/repos/local/NEXT.md`.
+The β is off version 9's pages (`web/index.php`, `tools/static_preview.py`);
+the landing page loses its β, *"in beta version"* and version 8's Beta chip;
+the Introduction's version 8 download section no longer says *"version 8
+beta"*; `book.yaml`'s version 8 status is `stable`; and the timeline gains
+*1 October 2026 — Versions 9 and 8 leave beta.* (`paper/timeline.tsv`, through
+`tools/gen_timeline.py`). Web only: **the PDFs lag**, printing the timeline
+without the row and version 8's *"version 8 beta"*, until a full build at
+Roberto's word. Verified by diffing six live pages' visible text before and
+after: version 7 untouched. Write-up in `Application/v9/repos/local/NEXT.md`.
+
+## #470 — the JOSS paper and the solver repository — **done 1 Oct 2026**
+
+No docs change. Write-up in `Application/v9/repos/local/NEXT.md`.
 
 ## #469 — AS7 Problem 19.2 gets the book's own figure — **live 21 Sep 2026**
 
