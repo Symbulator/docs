@@ -106,10 +106,13 @@ section { padding-block:clamp(3rem,7vw,5.5rem); }
   margin:0 0 .9rem;
 }
 .eyebrow-new { display:flex; align-items:center; gap:.55rem; flex-wrap:wrap; }
-.chip-new {
-  background:var(--gold); color:var(--gold-ink);
-  font-size:.6875rem; font-weight:700; letter-spacing:.08em;
-  text-transform:uppercase; padding:.2rem .5rem; border-radius:3px;
+/* On a phone the chip and the line stay on one row (Roberto, 7 Oct 2026):
+   tighter tracking and gap fit it at 360px and up, and the smallest phones
+   take the type down a step rather than wrap. */
+@media (max-width:480px) { .eyebrow-new { flex-wrap:nowrap; gap:.4rem; letter-spacing:.03em; } }
+@media (max-width:359px) {
+  .eyebrow-new { font-size:.6rem; letter-spacing:0; gap:.35rem; }
+  .eyebrow-new .chip { font-size:.6rem; }
 }
 h1,h2,h3 { text-wrap:balance; margin:0; }
 .sec-head { max-width:var(--measure); margin-bottom:2.4rem; }
